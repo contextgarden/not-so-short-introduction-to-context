@@ -25,28 +25,28 @@ order to increase the potential audience, a member of the [ntg-context mailing l
 
 ## Licence
 
-    The author of this text (and its English translator) authorises its
-    free distribution and use, including the right to copy and
-    redistribute this document in digital format on condition that its
-    authorship is acknowledged, and that it is not included in any
-    software package or suite, or in documentation whose conditions of
-    use or distribution do not include the free right of recipients to
-    copy and distribute.  Authorisation is likewise given for
-    translation of the document, provided that the authorship of the
-    original text is indicated, and that the translated text is
-    distributed under the FDL licence of the *Free Software
-    Foundation*, the *Creative Commons* licence that authorises
-    copying and redistribution, or a similar licence.
+The author of this text (and its English translator) authorises its
+free distribution and use, including the right to copy and
+redistribute this document in digital format on condition that its
+authorship is acknowledged, and that it is not included in any
+software package or suite, or in documentation whose conditions of
+use or distribution do not include the free right of recipients to
+copy and distribute.  Authorisation is likewise given for
+translation of the document, provided that the authorship of the
+original text is indicated, and that the translated text is
+distributed under the FDL licence of the *Free Software
+Foundation*, the *Creative Commons* licence that authorises
+copying and redistribution, or a similar licence.
 
-    The above notwithstanding, publication or marketing or translation
-    of this document in paper form will require the author's express
-    authorisation in writing.
+The above notwithstanding, publication or marketing or translation
+of this document in paper form will require the author's express
+authorisation in writing.
 
-    It is not a totally free licence since it does not allow it to be
-    marketed in paper form. The point is to pevent some "smartass"
-    from publishing this document as a book. However, apart from this
-    restriction, I believe that the licence continues to reflect quite
-    well the spirit of the FDL licence, in considerably less space.
+It is not a totally free licence since it does not allow it to be
+marketed in paper form. The point is to pevent some "smartass"
+from publishing this document as a book. However, apart from this
+restriction, I believe that the licence continues to reflect quite
+well the spirit of the FDL licence, in considerably less space.
 
 ## Version history:
 
