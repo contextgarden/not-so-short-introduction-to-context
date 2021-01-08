@@ -101,7 +101,7 @@ modifying the text, which in principle is not my intention. I do not
 exclude that there will be other versions in the future, but for the 
 moment this is not part of my plans. 
 
-### Content
+### Idea for future content
 
 And if there were other versions, 
 it would be more to add some chapter; mainly I think that
