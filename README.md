@@ -13,10 +13,9 @@ Initially written in Spanish, this document interested several people, and in
 order to increase their potential audience, a member of the [ntg-context mailing list]( https://mailman.ntg.nl/pipermail/ntg-context/)
 (native English speaker,who wishes to remain anonymous) has proceeded to translate my text into English.
 
-| [PDF Spanish version 1.6](en/introCTX_esp.pdf)                         | [PDF English version 1.6](en/introCTX_eng.pdf)                         |
-|------------------------------------------------------------------------|------------------------------------------------------------------------|
-| [![PDF Spanish version 1.6](/en/introCTX_esp.png)](en/introCTX_esp.pdf) | [![PDF Spanish version 1.6](en/introCTX_esp.png)](en/introCTX_eng.pdf) |
-
+| [PDF Spanish version 1.6](en/introCTX_esp.pdf)   | [PDF English version 1.6](en/introCTX_eng.pdf)   |
+|------------------------------------------------------------------------|----------------------------|
+| ![PDF Spanish version 1.6](/en/introCTX_esp.png) | ![PDF English version 1.6](/en/introCTX_eng.png) |
 
 ## Author
 
