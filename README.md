@@ -70,10 +70,8 @@ well the spirit of the FDL licence, in considerably less space.
 The original idea of this repository was to provide a platform that would allow 
 different collaborators to translate the text into different languages. 
 Whether or not git is the best solution for that purpose, I really don't 
-know.
-
-What I would appreciate is a guide on "how to set up a documentation 
-translation project with git?" or any other solution which may more appropriate.
+know. **What I would appreciate is a guide on "how to set up a documentation 
+translation project with git?" or any other solution which may more appropriate**.
 
 ### Principles
 
