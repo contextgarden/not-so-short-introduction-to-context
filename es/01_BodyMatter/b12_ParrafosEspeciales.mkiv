@@ -1,0 +1,2248 @@
+%%% Fichero:     b12_ParrafosEspeciales.mkiv
+%%% Autor:       Joaquín Ataz López
+%%% Inicio:      Julio 2020
+%%% Terminación: Agosto 2020
+%%% Contenido: Este capítulo es el gran cajón de sastre final. Todo lo
+%%%            que no está claramente ubicado en otro lugar, viene
+%%%            aquí. La estructura final del documento la decidió
+%%%            conforme iba redactando este capítulo, pues al empezar
+%%%            en él el tratamiento de cierta materia me daba cuenta
+%%%            de que podía tener encaje en otros lugares.
+%%%
+%%% Editado: Emacs + AuTeX - Y a veces con vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent b12_ParrafosEspeciales.mkiv
+
+\startchapter
+  [title=Construcciones y párrafos especiales]
+
+\PonIndiceCap
+
+\startsection
+  [title=Notas al pie y notas finales]
+
+Las notas son «elementos textuales secundarios que se emplean con
+diversos propósitos, como realizar una aclaración o extensión del
+texto principal, ofrecer la referencia bibliográfica de las fuentes
+citadas, incluir citas, remitir a otros documentos o fijar el sentido
+del texto» [Libro de Estilo de la Lengua española, pág. 195]. Son
+especialmente importantes en los textos de naturaleza
+académica. Pueden ubicarse en distintos puntos de la página o del
+documento. Hoy día las más extendidas son las que se ubican al pie de
+la página (llamadas, por ello, notas al pie); también se ubican a
+veces en alguno de los márgenes (notas marginales), al final de cada
+capítulo o sección, o al final del documento (notas finales). En
+documentos especialmente complejos, también puede haber distintos {\em
+  juegos} de notas: Notas del autor, notas del traductor, notas del
+anotador o actualizador, etc. En particular en las ediciones críticas
+el aparato de las notas puede llegar a ser especialmente complejo y
+pocos sistemas de composición son capaces de soportarlo. \ConTeXt\ es
+uno de ellos. En él disponemos de numerosos comandos para establecer y
+configurar diferentes tipos de notas. 
+
+Para su explicación conviene empezar señalando los distintos elementos
+que pueden intervenir en una nota:
+
+\startitemize
+
+\item {\em Marca} o {\em llamada} de la nota: El signo que se sitúa en
+  el cuerpo del texto para indicar que existe una nota vinculada a
+  él. No todos los tipos de notas tienen una {\em llamada} asociada a
+  ellos, pero cuando existe, la {\em llamada} se escribe en dos
+  lugares: en el punto del texto principal a que se refiere la nota, y
+  al principio del texto de la nota propiamente dicha. La presencia de
+  una misma marca en esos dos lugares es la que permite relacionar a
+  la nota con el texto principal.
+
+\item {\em Identificador} de la nota: La letra, número o símbolo que
+  identifica a una nota y la diferencia de otras notas. Algunas notas,
+  como, por ejemplo, las notas marginales, pueden carecer de
+  identificador. Cuando no es así, el identificador normalmente
+  coincide con la {\em llamada}.
+
+  \startLetraChica
+
+    Si pensamos exclusivamente en las notas al pie de página, no
+    veremos ninguna diferencia entre lo que acabo de llamar {\em
+      marca} y el {\em identificador}. La diferencia se ve clara
+    pensando en otros tipos de notas: Las notas lineales, por ejemplo,
+    tienen identificador, pero no marca.
+    
+  \stopLetraChica
+
+\item {\em Texto} o {\em contenido} de la nota, que se sitúa siempre
+  en un punto de la página o del documento distinto de aquel en el que
+  se encuentra el comando que genera la nota e indica cuál es su
+  contenido.
+
+\item {\em Etiqueta} asociada a la nota: Una etiqueta o nombre
+  asociado a una nota que no se muestra en el documento final, pero
+  nos permite referirnos a ella y recuperar su identificador en algún
+  otro punto del documento.
+
+\stopitemize
+
+\startsubsection
+  [title=Tipos de notas en \ConTeXt\ y comandos\\ asociados a ellas]
+
+En \ConTeXt\ disponemos de varios tipos de notas. De momento sólo los
+enumeraré, describiéndolos en líneas generales e informando de los
+comandos que las generan. Mas adelante desarrollaré las dos primeras:
+
+\startitemize
+
+\item {\bf Notas al pie:} Sin duda las más populares; hasta el punto
+  de que es corriente que para referirse genéricamente a todos los
+  tipos de notas, se hable globalmente de {\em footnotes} (que es el
+  nombre de este tipo de notas en inglés). Las notas a pie de página
+  introducen una {\em marca} con el {\em identificador} de la nota en
+  el punto del documento en el que se encuentra el comando, e insertan
+  el texto de la nota propiamente dicho al pie de la página en donde
+  aparece la marca. Se crean con el comando \tex{footnote}.
+
+\item {\bf Notas al final:} Estas notas, que se crean con el comando
+  \tex{endnote}, introducen en el punto del documento donde se
+  encuentren una marca con el identificador de la nota; pero el
+  contenido de la nota, se inserta en otro punto del documento, y la
+  inserción la produce un comando distinto (\tex{placenotes}).
+
+\item {\bf Notas al margen:} Como su propio nombre indica se escriben
+  en el margen del texto y en ellas no hay identificador ni marca o
+  llamada generada automáticamente en el cuerpo del documento. Los
+  dos comandos principales (pero no los únicos) que las crean son
+  \tex{inmargin} y \tex{margintext}.
+
+\item {\bf Notas a la línea:} Un tipo de notas propio de entornos en
+  los que las líneas están numeradas como, por ejemplo en el caso de
+  \tex{startlinenumbering ... \stoplinenumbering} (véase la
+  \in{sección}[sec:linenumbering]). La nota, que se escribe
+  habitualmente al pie, se refiere a un número concreto de línea. Se
+  generan con el comando \PonMacro{linenote}\tex{linenote} que, a su vez, se configura
+  con \PonMacro{setuplinenote}\tex{setuplinenote}. Este comando no imprime ninguna {\em marca}
+  en el cuerpo del texto, pero sí imprime en la nota propiamente dicha
+  el número de línea sobre el que recae la nota (que se usa como {\em
+    identificador}).
+
+\stopitemize
+
+A continuación desarrollaré exclusivamente los dos primeros tipos de
+notas, pues:
+
+\startitemize
+
+\item Las notas al margen se tratan en otro lugar
+  (\in{sección}[sec:margintext]).
+
+\item Las notas lineales tienen un uso fuertemente especializado
+  (sobre todo en ediciones críticas) y entiendo que en un documento
+  introductorio como el presente, basta con que el lector sepa que
+  existen.
+
+  \startLetraChica
+
+    No obstante, para el lector interesado recomiendo un vídeo (en
+    español) acompañado de un texto (también en español) sobre
+    ediciones críticas en \ConTeXt\ del que es autor Pablo Rodríguez y
+    que está disponible en \goto{este
+      enlace}[url(http://www.ediciones-criticas.tk/)]. Es también
+    bastante útil para comprender varias de las opciones de
+    configuración generales de las notas en general.
+
+  \stopLetraChica
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [title=Examen particular de las notas al pie y de las notas finales]
+  \PonMacro{footnote}\PonMacro{endnote}
+
+Notas al pie y notas finales son bastante parecidas en la sintaxis del
+comando que las crea y en el mecanismo de configuración y
+personalización, pues, en realidad, ambos tipos de notas son
+instancias particulares de una construcción más general (las notas),
+de la que es posible establecer otras instancias mediante el comando
+\tex{definenote} (véase la \in{sección}[sec:definenote]).
+
+La sintaxis de los comandos que crean cada uno de estos tipos de notas
+es la siguiente:
+
+\starttyping
+\footnote[Etiqueta]{Texto}
+\endnote[Etiqueta]{Texto}
+\stoptyping
+
+donde
+
+\startitemize
+
+\item {\em Etiqueta} es un argumento opcional que asigna a la nota
+  una etiqueta que nos permitirá referirnos a ella en otros puntos del
+  documento.
+
+\item {\em Texto} es el contenido de la nota. Puede ser todo lo largo
+  que se desee, e incluir en él párrafos y entornos especiales, si
+  bien hay que señalar que, cuando se trata de notas al pie, la
+  correcta composición de las páginas es bastante difícil en
+  documentos con notas abundante y excesivamente largas.
+
+  \startLetraChica
+
+    En principio, en el texto de una nota se puede usar cualquier
+    comando que pudiera usarse en el texto principal. No obstante, he
+    podido comprobar que ciertas construcciones y caracteres que en el
+    texto principal no plantean ningún tipo de problemas, cuando
+    tienen lugar en el texto de una nota generan un error de
+    compilación. Estos casos me los he ido encontrando conforme hacía
+    pruebas, pero no los he sistematizado.
+
+  \stopLetraChica
+
+\stopitemize
+
+Cuando se ha usado el argumento {\em Etiqueta}, estableciendo una
+etiqueta para la nota, el comando \PonMacro{note}\tex{note} nos permite recuperar el
+identificador de la nota en cuestión. Este comando imprime en el
+documento el identificador de la nota asociada a la etiqueta que
+recibe como argumento. Así, por ejemplo:
+
+\startDobleEjemplo
+\switchtobodyfont[small]
+\setupnotation[footnote][width=-1cm]
+\vbox{\starttyping
+Un día en que el Nota\footnote[lebowski]
+{Personaje de la película «El Gran Lebowski»}
+estaba dando la nota alguien dijo ¿No notas 
+al Nota\note[lebowski] dando la nota?
+\stoptyping}
+
+Un día en que el
+ Nota\footnote[lebowski]{Personaje de la
+ película «El Gran Lebowski»} estaba dando
+la nota alguien dijo ¿No notas al
+ Nota\note[lebowski] dando la nota?
+
+\stopDobleEjemplo
+
+La principal diferencia entre \tex{footnote} y \tex{endnote} estriba
+en el lugar donde se escribe el contenido de la nota:
+
+\startdescripción{\tex{footnote}}
+
+como regla imprime el texto de la nota en la parte inferior de la
+página en la que se encuentra el comando, de tal forma que la marca de
+la nota y su texto (o el principio del texto, si este se debe repartir
+entre dos páginas) aparecerán en la misma página. Para ello \ConTeXt\
+hará los ajustes necesarios para componer la página calculando el
+espacio que requiere la ubicación de la nota en la parte inferior de
+la página.
+
+\startLetraChica
+
+  Pero en algunos entornos \tex{footnote} insertará el texto de la
+  nota, no al pie de la página propiamente dicho, sino al pie del
+  entorno. Así ocurre, por ejemplo, en las tablas, o en el entorno
+  {\tt columns}. En estos casos, si queremos que las notas dentro del
+  entorno se ubiquen al pie de la página, debemos usar, en lugar de
+  \tex{footnote} el comando \tex{footnotetext} en combinación con el
+  comando \tex{note} que más arriba se ha mencionado. El primero, que
+  también admite como argumento opcional una etiqueta, imprime sólo
+  el texto de la nota, pero no la marca. Pero como \tex{note} imprime
+  sólo la marca sin el texto, la combinación de ambos nos permite
+  ubicar la nota en el punto en el que deseemos y así por ejemplo,
+  podríamos escribir dentro de una tabla o de un entorno multicolumnas
+  \tex{note[MiEtiqueta]}, y luego, una vez fuera de dicho entorno
+  \type{\footnotetext[MiEtiqueta]{Texto de la nota}}.
+
+Otro ejemplo del uso de \tex{footnotext} en combinación con \tex{note}
+sería el de las notas dentro de otras notas. Por ejemplo:
+
+\startDobleEjemplo
+%\switchtobodyfont[small]
+\setupnotation[footnote][width=-1cm]
+\starttyping
+Esta%
+\footnote{o esta\note[notaB], si lo prefieres.}%
+\footnotetext[notaB]{o posiblemente incluso esta
+otra\note[notaC].}\footnotetext[notaC]{podría
+ ser algo enteramente diferente.}
+es una frase con notas anidadas.
+\stoptyping
+
+Esta%
+\footnote{o esta\note[notaB], si lo prefieres.}%
+\footnotetext[notaB]{o posiblemente incluso esta
+otra\note[notaC].}\footnotetext[notaC]{podría
+ ser algo enteramente diferente.}
+es una frase con notas anidadas.
+
+\stopDobleEjemplo
+
+\stopLetraChica
+  
+\stopdescripción
+
+\startdescripción{\tex{endnote}}
+
+  sólo imprime, en el punto del fichero fuente en el que se encuentre,
+  la marca de llamada a la nota. El contenido propiamente dicho de la
+  nota se inserta en otro punto del documento con otro comando
+  (\PonMacro{placenotes}\tex{placenotes[endnote]}) que insertará, en
+  el punto en el que se encuentre, el contenido de {\em todas} las
+  notas finales del documento (o del capítulo o sección de que se
+  trate).
+
+\stopdescripción
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:localfootnotes,
+    title=Notas locales,
+  ]
+  \PonMacro{startlocalfootnotes}\PonMacro{placelocalfootnotes}
+
+El entorno \tex{startlocalfootnotes} hace que las notas al pie
+incluidas dentro de él se consideren notas {\em locales}, lo que
+implica que se reiniciará la numeración de las mismas y que el
+contenido de las notas no se insertará automáticamente junto con el
+resto de las notas, sino sólo en el punto del documento en el que se
+encuentre el comando \tex{placelocalfootnotes}, el cual puede, o no,
+encontrarse dentro del entorno.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:definenote,
+    title=Creación y utilización de tipos\\ personalizados de notas,
+  ]
+  \PonMacro{definenote}
+
+Podemos crear tipos especiales de notas con el comando
+\tex{definenote}. Esto puede ser útil en documentos complejos en los
+que hay notas de distintos autores, o con diferentes finalidades, para
+diferenciar gráficamente, mediante un formato distinto y una
+numeración diferente, cada uno de los tipos de notas de nuestro
+documento.
+
+La sintaxis de \tex{definenote} es la siguiente:
+
+\type{\definenote[Nombre][Modelo][Configuración]}
+
+donde
+
+\startitemize
+
+\item {\em Nombre} es el nombre que asignaremos a nuestro nuevo tipo
+  de nota.
+
+\item {\em Modelo} es el modelo de nota que se usará
+  inicialmente. Puede ser {\tt footnote} o {\tt endnote}; en el primer
+  caso nuestro modelo de nota funcionará como las notas a pie de
+  página, y en el segundo como las notas finales, si bien para
+  insertarlas en el documento no usaríamos
+  \PonMacro{placenotes}\tex{placenotes[endnote]} sino
+  \tex{placenotes[Nombre]} (el nombre que hayamos asignado a nuestro
+  tipo de notas).
+
+  \startLetraChica
+
+    En teoría este argumento es opcional, aunque en mis pruebas
+    algunas notas creadas sin él no eran visibles, y tampoco he tenido
+    paciencia para indagar cuál era la causa.
+
+\stopLetraChica
+
+
+\item {\em Configuración} es un segundo argumento opcional que permite
+  diferenciar nuestras nuevo tipo de notas de su modelo: bien
+  estableciendo un formato distinto, bien un tipo de numeración
+  diferente, bien ambas cosas.
+
+  \startLetraChica
+
+    Según el listado oficial de comandos de \ConTeXt (véase
+    \in{sección}[sec:qrc-setup-en]); la configuración que se puede
+    hacer en el momento de la creación del nuevo tipo de nota se basa
+    en la que se podría hacer después con \tex{setupnote}. Sin
+    embargo, como veremos en seguida, en realidad hay dos comandos
+    posibles para la configuración de las notas: \tex{setupnote} y
+    \cmd{setupnotation}. Por ello creo que es preferible omitir este
+    argumento en el momento de la creación del tipo de nota, y luego
+    configurar nuestras nuevas notas usando los comandos adecuados. Al
+    menos eso es más fácil de explicar.
+
+  \stopLetraChica
+
+\stopitemize
+
+Por ejemplo: el siguiente fragmento creará un nuevo tipo de notas
+llamado «NotaAzul» que será similar a las notas a pie de página, pero
+imprimirá su contenido en negrita y en color azul:
+
+\starttyping
+\definenote  [NotaAzul] [footnote]
+\setupnotation 
+  [NotaAzul] 
+  [color=blue, style=bf]
+\stoptyping
+
+Una vez que hemos creado un nuevo tipo de nota, por ejemplo {\em
+  NotaAzul} estará disponible el comando que permita usarlas. En
+nuestro ejemplo este sería \tex{NotaAzul} cuya sintaxis sería
+similar a la de \tex{footnote}:
+
+\type{\NotaAzul[Etiqueta]{Texto}}
+
+\stopsubsection
+
+\startsubsection
+  [title=Configuración de las notas]
+  \PonMacro{setupnote}\PonMacro{setupnotation}
+
+La configuración de las notas (al pie, finales, creadas con
+\tex{definenote} e incluso de las notas lineales, establecidas con
+\tex{linenote}) se realiza mediante dos comandos: \tex{setupnote} y
+\tex{setupnotation}\footnote{\tex{setupnote} dispone de 35
+  opciones {\em directas} de configuración y 45 opciones adicionales
+  heredadas de \tex{setupframed}; \tex{setupnotation} cuenta con 45
+  opciones directas de configuración y otras 23 heredadas de
+  \PonMacro{setupcounter}\tex{setupcounter}. Dado que estas opciones
+  no están documentadas y, aunque por el nombre de muchas de ellas
+  puede intuirse su utilidad, hay que comprobar si nuestra intuición
+  es o no cierta; y teniendo en cuenta también que muchas de esas
+  opciones admiten varios valores y hay que probarlos todos... Se verá
+  que para escribir esta explicación he tenido que hacer bastantes
+  pruebas; y aunque hacer una prueba es rápido, hacer muchas pruebas
+  es lento y aburrido.  Por ello espero que el lector me disculpe si
+  le digo que además de los dos comandos de configuración general de
+  notas que menciono en el texto principal, y en los que se centra la
+  explicación que sigue, existen otros cuatro posibles comandos de
+  configuración que sin embargo omitiré en mi explicación:
+
+  \startitemize
+
+  \item \PonMacro{setupnotes}\tex{setupnotes} y \PonMacro{setupnotations}\tex{setupnotations}: O sea, el mismo
+    nombre pero en plural. La wiki dice que las versiones en singular
+    y plural del comando son sinónimas, y yo me lo creo.
+
+  \item \PonMacro{setupfootnotes}\tex{setupfootnotes} y
+    \PonMacro{setupendnotes}\tex{setupendnotes}: Se supone que son
+    aplicaciones concretas para, respectivamente, las notas a pie de
+    página y las notas finales. Tal vez explicar la configuración de
+    las notas a partir de estos comandos sería más sencillo, sin
+    embargo, como la primera opción que probé en \tex{setupfootnotes},
+    que fue {\tt numberconversion}, no conseguí hacerla funcionar,
+    aunque me consta que otras opciones de estos comandos si
+    funcionan... me dio pereza añadir a las múltiples pruebas que he
+    tenido que hacer para redactar lo que sigue, las pruebas
+    necesarias para incluir en la explicación a estos dos
+    comandos.\blank[small]
+
+    Lo que sí creo (por unas pocas pruebas aleatorias) es que todo lo
+    que funciona en estos dos comandos cuya explicación omito,
+    funciona también en los comandos cuya explicación se realiza.
+
+  \stopitemize
+}. La sintaxis de ambos es similar:
+
+\starttyping
+\setupnote[TipoNota][Configuración]
+\setupnotation[TipoNota][Configuración]
+\stoptyping
+
+donde {\em TipoNota} se refiere al tipo de nota que estamos
+configurando ({\tt footnote}, {\tt endnote} o el nombre de algún tipo
+de nota creado por nosotros mismos), y {\em configuración} contiene
+las concretas opciones de configuración del comando.
+
+El problema es que el nombre de estos dos comandos no resulta muy
+clarificador para saber cuál es la diferencia entre ellos y qué
+aspectos configura cada uno; y el hecho de que gran parte de las
+opciones de estos comandos no estén documentadas no ayuda mucho. Yo
+tras muchas pruebas no he conseguido llegar a ninguna conclusión que
+permita comprender por qué ciertos aspectos se configuran con uno de
+ellos y ciertos aspectos se configuran con el otro\footnote{Hay una
+  página en la \goto{wiki de \ConTeXt}
+  [url(https://wiki.contextgarden.net/Unexpected\_behavior)], que
+  descubrí por casualidad (pues no está específicamente dedicada a las
+  notas), que cifra la diferencia en que \tex{setupnotation} controla
+  el texto de la nota que se inserta, y \tex{setupnote} el entorno de
+  la nota en el que ésta se situará (¿?). Pero esto es contradictorio
+  con el hecho de que, por ejemplo, la anchura que haya de tener el
+  texto de la nota (que tiene que ver con la {\em inserción} de la
+  misma) se controle con la opción {\tt width} de \tex{setupnote} y no
+  con la opción del mismo nombre de \tex{setupnotation} que lo que
+  controla es la anchura del espacio entre la marca y el texto de la
+  nota.}, salvo acaso la de que, por las opciones que he conseguido
+hacer funcionar, \tex{setupnotation} siempre afecta al texto de la
+nota, o al identificador que se imprime con el texto de la nota,
+mientras que \tex{setupnote} tiene alguna opción que afecta a la marca
+de la nota que se inserta en el texto principal.
+
+A continuación intento sistematizar lo que he sacado en claro tras
+hacer algunas pruebas con las diferentes opciones de ambos
+comandos. Dejo sin mencionar la mayor parte de las opciones de ambos,
+pues no están documentadas y no he podido sacar ninguna conclusión de
+para qué sirven o en qué condiciones deben utilizarse:
+
+\startitemize
+
+\head {\bf Identificador usado para la marca:} Las notas se
+  identifican siempre por un número. Lo que podemos aquí configurar es
+
+  \startitemize
+
+  \item {\em El número inicial}: Lo controla la opción {\tt start} de
+    \tex{setupnotation}. Su valor ha de ser un número entero, a partir
+    del cual se empezarán a contar las notas.
+
+  \item {\em El sistema de numeración}, el cual depende de la opción {\tt
+    numberconversion} de \tex{setupnotation}. Sus valores pueden ser:
+
+  \startitemize[packed]
+
+  \item {\em Numeración con números arábigos}: {\tt n, N} o {\tt numbers}.
+
+  \item {\em Numeración con números romanos}: {\tt I, R, Romannumerals,
+    i, r, romannumerals}. Las tres primeras usan números romanos en
+    mayúsculas y las tres últimas en minúsculas.
+
+  \item {\em Numeración con letras}: {\tt A, Character, Characters, a,
+    character, characters} según queramos que las letras sean en
+    mayúsculas (las primeras opciones) o en minúsculas (las
+    restantes).
+
+  \item {\em Numeración con palabras}. Es decir: se escribe la palabra
+    que designa al número y así, por ejemplo, «3» se convierte en
+    «tres». Admite dos modalidades. La opción {\tt Words} escribe las
+    palabras en mayúsculas y {\tt words} en minúsculas.
+
+  \item {\em Numeración con símbolos}: Puede utilizar cuatro juegos de
+    símbolos distintos según la opción elegida: {\tt set~0, set~1,
+      set~2} o {\tt set~3}. En la \at{página}[ejemplos de conversion
+      set] hay un ejemplo de los símbolos usados en cada una de estas
+    opciones.
+
+  \stopitemize
+
+\item {\em El evento que determina que se reinicie la numeración de
+  las notas}: Esto depende de la opción {\tt way} de
+  \tex{setupnotation}. Con el valor {\tt bytext} todas las notas del
+  documento se numerarán secuencialmente sin que la numeración se
+  reinicie. Con {\tt bychapter, bysection, bysubsection, etc.} se
+  reiniciará el contador de notas cada vez que se cambie,
+  respectivamente, de capítulo, sección o subsección, mientras que
+  {\tt byblock} reinicia la numeración cada vez que se cambia de
+  bloque en la macroestructura del documento (véase la
+  \in{sección}[sec:macroestructura]). El valor {\tt bypage} hace que
+  el contador de notas se reinicie cada vez que se cambia de página.
+
+  \stopitemize
+
+\head {\bf Configuración de la marca de la nota:}
+
+  \startitemize
+
+  \item Si se debe o no mostrar: opción {\tt number} de
+    \tex{setupnotation}.
+
+  \item Ubicación de la marca en relación con el texto de la nota:
+    Opción {\tt alternative} de \tex{setupnotation}: Puede asumir
+    cualquiera de los siguientes valores: {\tt left, inleft,
+      leftmargin, right, inright, rightmargin, inmargin, margin, 
+      innermargin, outermargin, serried, hanging, top, command}.
+
+  \item Formato de la marca en la nota propiamente dicha: Opción {\tt
+    numbercommand} de \tex{setupnotation}.
+    
+  \item Formato de la marca en el cuerpo del texto: Opción {\tt
+    textcommand} de \tex{setupnote}.
+
+    \startLetraChica
+      
+      Las opciones {\tt numbercommand} y {\tt textcommand} han de
+      consistir en un comando que reciba como argumento el contenido
+      de la marca. Puede ser un comando definido por nosotros
+      mismos. No obstante, he comprobado que los comandos simples de
+      cambio de formato (\tex{bf}, \tex{it}, etc.), aunque no son
+      comandos que hayan de recibir ningún argumento, funcionan.
+
+\stopLetraChica
+
+
+  \item Distancia entre la marca y el texto (en la nota propiamente
+    dicha): Opciones {\tt distance} y {\tt width} de
+    \tex{setupnotation}. No he conseguido descubrir la diferencia (si
+    la hay) entre usar una opción o la otra.
+
+  \item Existencia o no de hiperenlace que permita saltar entre la
+    marca en el texto principal y la marca en la nota propiamente
+    dicha: Opción {\tt interaction} de \tex{setupnote}. Con el valor
+    {\tt yes} habrá hiperenlace, y con {\tt no} no lo habrá.
+
+  \stopitemize
+
+\head {\bf Configuración del texto de la nota propiamente dicho.}
+  Podemos influir en los siguientes aspectos:
+
+  \startitemize
+
+  \item Ubicación: Esto depende de la opción {\tt location} de
+    \tex{setupnote}. 
+
+    \startLetraChica
+      
+      En principio ya sabemos que las notas al pie se ubican en la
+      parte inferior de la página ({\tt location=page}) y las notas
+      finales en el punto en el que se se encuentre el comando
+      \tex{placenotes[endnote]} ({\tt location=text}), sin embargo
+      podemos alterar este funcionamiento y establecer, por ejemplo,
+      para las notas a pie de página {\tt location=text} lo que hará
+      que las notas a pie funcionen de modo similar a las notas
+      finales y se se inserten en el punto del documento en el que
+      aparezca el comando \tex{placenotes[footnote]}, o el comando,
+      específico para las notas a pie de página
+      \tex{placefootnotes}. Por este procedimiento podríamos, por
+      ejemplo, imprimir las notas debajo del párrafo en el que se
+      encuentran.
+
+    \stopLetraChica
+
+  \item Separación por párrafos entre notas: Por defecto cada nota se
+    imprime en su propio párrafo, pero podemos hacer que todas las
+    notas de una misma página se impriman en un mismo párrafo
+    estableciendo la opción {\tt paragraph} de \tex{setupnote} como
+    \PalClave{yes}. 
+
+  \item Estilo en que se escribirá el texto de la nota propiamente
+    dicho: Opción {\tt style} de \tex{setupnotation}.
+
+  \item Tamaño de la letra: Opción {\tt bodyfont} de \tex{setupnote}.
+
+    \startLetraChica
+
+      Esta opción es sólo para el caso de que queramos establecer
+      manualmente un tamaño de letra para las notas a pie de
+      página. Casi nunca es buena idea hacerlo pues, por defecto,
+      \ConTeXt\ ajusta el tamaño de la letra de las notas a pie de
+      página para que sea más pequeño que el del texto principal, pero
+      con un tamaño {\em proporcionado} al del tamaño de la letra en
+      el cuerpo principal.
+
+    \stopLetraChica
+
+  \item Margen izquierdo que tendrá el texto de la nota: Opción {\tt
+    margin} de \tex{setupnotation}.
+
+  \item Anchura máxima: Opción {\tt width} de \tex{setupnote}.
+
+  \item Número de columnas: Opción {\tt n} de \tex{setupnote}
+    determina que las notas se escriban en dos o más columnas. El
+    valor de «n» ha de ser un número entero.
+
+  \stopitemize
+
+\item {\bf Separación entre las notas o separación entre las notas y
+  el texto:}. Aquí disponemos de las siguientes opciones:
+
+  \startitemize
+
+  \item {\tt rule}, de \tex{setupnote} establece si habrá o no una
+    línea de separación entre la zona de notas y la zona de la página
+    con el texto principal. Sus valores posibles son {\tt yes, on, no}
+    y {\tt off}. Los dos primeros activan la línea y los dos últimos
+    la desactivan.
+
+  \item {\tt before}, de \tex{setupnotation}: comando o comandos que
+    se deben ejecutar antes de insertar el texto de la nota. Sirve
+    para insertar espacio adicional de separación, líneas separadoras
+    entre notas, etc.
+
+  \item {\tt after}, de \tex{setupnotation}: comando o comandos que se
+    deben ejecutar tras insertar el texto de la nota.
+
+\stopitemize
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [title={Excluir de la compilación, temporalmente, las notas}]
+  \PonMacro{notesenabledfalse}\PonMacro{notesenabledtrue}
+
+Los comandos \tex{notesenabledfalse} y \tex{notesenabledtrue} indican
+a \ConTeXt, respectivamente, que inhabilite o rehabilite la
+compilación de las notas. Esta función puede ser útil si se desea
+obtener una versión sin notas de un documento con numerosas y extensas
+notas. En mi experiencia personal, por ejemplo, cuando corrijo una
+tesis doctoral, prefiero leerla la primera vez de un tirón, sin las
+notas, y luego hacer una segunda lectura con las notas incorporadas.
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:columnasmultiples,
+    title=Párrafos con múltiples columnas,
+  ]
+
+La composición del texto en más de una columna es una posibilidad que
+se puede establecer:
+
+\startitemize[a]
+
+\item Como característica general del diseño de la página.
+
+\item Como característica de ciertas construcciones tales como, por
+  ejemplo, las listas estructuradas, o las notas a pie de página o
+  finales.
+
+\item Como característica aplicada a ciertos párrafos concretos del
+  documento.
+  
+\stopitemize
+ 
+En cualquiera de estos casos, la mayor parte de los comandos y
+entornos funcionarán perfectamente aunque se trabaje con más de una
+columna. Hay no obstante algunas limitaciones; principalmente en
+relación con los objetos flotantes en general (véase la
+\in{sección}[sec:concepto_flotantes]) y con las tablas en particular
+(\in{sección}[sec:tablas]) aunque no sean flotantes.
+
+Respecto al número máximo de columnas admisibles, en teoría \ConTeXt\
+no lo limita. No obstante existen dos limitaciones físicas que hay que
+tomar en consideración:
+
+\startitemize
+
+\item La anchura del papel: Un número ilimitado de columnas exige una
+  anchura ilimitada de papel (si el documento se va a imprimir) o de
+  pantalla (si es un documento pensado para ser mostrado en
+  pantalla). En la práctica, teniendo en cuenta la anchura {\em
+    normal} de los papeles que se comercializan y con los que se
+  componen libros, y de las pantallas de dispositivos informáticos, es
+  difícil que un texto compuesto con más de cuatro o cinco columnas,
+  se vea bien.
+
+\item El tamaño de la memoria del ordenador. Al respecto señala el
+  manual de referencia de \ConTeXt\ que, en sistemas {\em normales}
+  (ni especialmente potentes ni especialmente limitados de recursos)
+  se podrán manejar entre 20 y 40 columnas.
+
+\stopitemize
+
+En la presente sección me centraré en el uso del mecanismo
+multicolumnas en párrafos o fragmentos especiales, pues
+
+\startitemize
+
+\item De las múltiples columnas como opción de diseño de página ya se
+  ha hablado (en el \in{apartado}[sec:pags-columnas] de la
+  \in{sección}[sec:pags-otras-cuestiones]).
+
+\item De la posibilidad ofrecida en ciertas construcciones como listas
+  estructuradas o notas a pie de página de componer texto en más de
+  una columna, se habla a propósito de la construcción o entorno de
+  que se trate.
+
+\stopitemize
+
+\stopcolumns
+
+\startsubsection
+  [title=El entorno \tex{startcolumns}]
+  \PonMacro{startcolumns}
+
+El procedimiento normal para insertar en el documento fragmentos
+compuestos con varias columnas consiste en usar el entorno {\tt
+  columns} cuyo formato es:
+
+\type{\startcolumns[Configuración] ... \stopcolumns}
+
+donde {\em Configuración} permite controlar numerosos aspectos del
+entorno. Podemos indicar la configuración deseada cada vez que
+invoquemos el entorno, o adaptar el funcionamiento por defecto del
+entorno para todas las invocaciones al entorno, cosa ésta última que
+se conseguiría con 
+
+\PonMacro{setupcolumns}\type{\setupcolumns[Configuración]}
+
+En uno y otro caso las opciones de configuración son las mismas. Las
+más importantes, ordenadas atendiendo a su función, son las
+siguientes:
+
+\startitemize
+
+\item {\bf Opciones que controlan el número de columnas y la
+  separación entre ellas:}
+
+  \startitemize
+    
+  \item {\tt n}: Controla el número de columnas. Si se omite esta
+    opción se generan dos columnas.
+
+  \item {\tt nleft, nright}: Estas dos opciones se usan, en documentos
+    diseñados a doble página (véase el \in{apartado}[sec:doblepágina]
+    de la \in{sección}[sec:pags-otras-cuestiones]), para establecer,
+    respectivamente, el número de columnas en las páginas izquierdas
+    (pares) y en las derechas (impares).
+
+  \item {\tt distance}: Distancia de separación entre las columnas.
+
+  \item {\tt separator}: Determina el elemento de separación entre las
+    columnas. Puede ser {\tt space} (valor por defecto) o {\tt rule}
+    en cuyo caso se generará una línea entre las columnas. En el caso
+    de que se establezca una línea de separación entre las columnas,
+    entonces ésta línea se puede a su vez configurar con las
+    siguientes dos opciones:
+
+    \startitemize
+      
+    \item {\tt rulecolor}: Color de la línea de separación.
+
+    \item {\tt rulethickness}: Grosor de la línea de separación.
+
+    \stopitemize
+
+  \item {\tt maxwidth}: Anchura máxima que pueden tener todas las
+    columnas + el espacio de separación entre ellas.
+
+  \stopitemize
+
+\item {\bf Opciones que controlan la distribución del texto en las
+  columnas:}
+
+  \startitemize
+
+  \item {\tt balance}: Por defecto \ConTeXt\ {\em balancea} las
+    columnas, es decir, reparte el texto entre ellas para que todas
+    tengan, más o menos, la misma cantidad de texto. Pero si se
+    establece esta opción con el valor «{\tt no}» el texto no empezará
+    a introducirse en una columna hasta que la anterior esté
+    totalmente llena.
+
+  \item {\tt direction}: Determina en qué dirección se distribuye el
+    texto entre las columnas. Por defecto, se sigue el orden natural
+    de lectura (de izquierda a derecha), pero dándole a esta opción el
+    valor {\tt reverse} se consigue el orden inverso.
+
+  \stopitemize
+  
+\head {\bf Opciones que afectan a la composición del texto dentro del
+  entorno:}
+
+  \startitemize
+
+    \item {\tt tolerance}: La escritura de texto en varias columnas
+      determina que la anchura de la línea, dentro de la columna, sea
+      más pequeña, lo que, tal y como se explicó al exponer el
+      mecanismo de construcción de líneas de \ConTeXt\
+      (\in{sección}[sec:lineas]), dificulta la localización de puntos
+      óptimos para insertar saltos de línea. Esta opción permite
+      alterar temporalmente, dentro del entorno, la tolerancia
+      horizontal (véase \in{sección}[sec:toleranciahorizontal]), lo
+      que puede facilitar la composición del texto.
+
+    \item {\tt align}: Controla la alineación horizontal de las líneas
+      dentro del entorno. Puede asumir cualquiera de los siguientes
+      valores: {\tt right, flushright, left, flushleft, inner,
+        flushinner, outer, flushouter, middle} o {\tt broad}. Sobre el
+      significado de estas opciones, véase la
+      \in{sección}[sec:setupalign].
+
+    \item {\tt color}: Especifica el nombre del color con que se
+      escribirá el texto dentro del entorno.
+
+  \stopitemize
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [title=Párrafos paralelos]
+  \PonMacro{defineparagraphs}\PonMacro{setupparagraphs}
+
+Una versión concreta de la composición con múltiples columnas es la de
+los párrafos paralelos.  En este tipo de construcción el texto se
+distribuye en dos columnas (normalmente, aunque a veces se usan más de
+dos), pero no se permite que fluya libremente entre ellas, sino que se
+mantiene un rígido control de lo que aparecerá en cada columna. Esto
+es muy útil, por ejemplo, para generar documentos en los que se puedan
+contrastar dos versiones de un texto, como, por ejemplo, la versión
+nueva y la versión vieja de una ley recientemente modificada, o para
+ediciones bilingües; o también para redactar glosarios de textos
+definidos, en donde el texto a definir aparece a la izquierda y la
+definición a la derecha, etc.
+
+Normalmente para procesar este tipo de párrafos se usa el mecanismo de
+las tablas; pero ello es porque la mayoría de los sistemas de
+composición de textos no son tan potentes como \ConTeXt\ donde se
+dispone de los comandos \tex{defineparagraphs} y \tex{setupparagraphs}
+que permiten construir este tipo de párrafos acudiendo al mecanismo de
+las columnas, el cual, aunque tiene limitaciones, es más flexible que
+el de las tablas.
+
+\startLetraChica
+
+  Hasta donde yo sé, este tipo de párrafos no tiene un nombre
+  especial. Los he llamado «párrafos paralelos» porque me ha parecido
+  un nombre más descriptivo que el que usa \ConTeXt\ para referirse a
+  esta construcción: «{\em paragraphs}» que significa simplemente
+  «párrafos».
+
+\stopLetraChica
+
+El comando básico aquí es \tex{defineparagraphs} cuya sintaxis es:
+
+\type{\defineparagraphs[Nombre][Configuración]}
+
+siendo {\em Nombre} el nombre que daremos a nuestra construcción, y
+{\em Configuración} las características que tendrá, las cuales también
+se pueden fijar en un momento ulterior mediante
+
+\type{\setupparagraphs[Nombre][Columna][Configuración]}
+
+donde {\em Nombre} es el nombre que se estableció en el momento de la
+creación, {\em Columna} es un argumento opcional que si se indica,
+permite configurar una columna concreta, y {\em Configuración} permite
+determinar el funcionamiento concreto.
+
+Por ejemplo:
+
+\starttyping
+\defineparagraphs
+  [HechosMurcianos]
+  [n=3, before={\blank},after={\blank}]
+
+\setupparagraphs
+  [HechosMurcianos][1]
+  [width=.1\textwidth, style=bold]
+
+\setupparagraphs
+  [HechosMurcianos][2]
+  [width=.4\textwidth]
+\stoptyping
+
+El anterior fragmento crearía un entorno de tres columnas llamado
+HechosMurcianos y luego configuraría la primera columna para que
+ocupe un 10\% del ancho de la línea y se escriba con negrita, y
+configuraría la segunda para que ocupe un 40\% del ancho de la
+línea. Como no se configura la tercera columna, está tendrá la anchura
+que queda, o sea, el 50\%.
+
+Una vez creado el entorno, podríamos escribir con él nuestra pequeña
+historia murciana:
+
+\vbox{\starttyping
+  \startHechosMurcianos
+    825
+  \HechosMurcianos
+    Se funda la ciudad de Murcia.
+  \HechosMurcianos
+    Los orígenes de la ciudad de Murcia son inciertos, pero hay
+    constancia de que fue mandada fundar con el nombre de Madina (o
+    Medina) Mursiya en el año 825 por el emir de al-Ándalus Abderramán
+    II, probablemente sobre un asentamiento muy anterior.
+  \stopHechosMurcianos
+\stoptyping}
+
+\defineparagraphs
+  [HechosMurcianos]
+  [n=3, before={\blank},after={\blank}]
+
+\setupparagraphs
+  [HechosMurcianos][1]
+  [width=.1\textwidth, style=bold]
+
+\setupparagraphs
+  [HechosMurcianos][2]
+  [width=.4\textwidth]
+
+\ejemplo{\startHechosMurcianos
+    825
+  \HechosMurcianos
+    Se funda la ciudad de Murcia.
+  \HechosMurcianos
+    Los orígenes de la ciudad de Murcia son inciertos, pero hay
+    constancia de que fue mandada fundar con el nombre de Madina (o
+    Medina) Mursiya en el año 825 por el emir de al-Ándalus Abderramán
+    II, probablemente sobre un asentamiento muy anterior.
+  \stopHechosMurcianos}
+
+Si quisiéramos seguir narrando la historia de Murcia, para el
+siguiente evento sería precisa una nueva instancia del entorno
+(\tex{startHechosMurcianos}), pues con este mecanismo no es posible
+incluir varias {\em filas}. 
+
+Del ejemplo que se acaba de poner, quisiera resaltar los siguientes
+detalles:
+
+\startitemize
+
+\item Una vez creado el entorno con, por ejemplo,
+  \tex{defineparagraphs[MariPoppins]}, este pasa a funcionar como un
+  entorno normal, que se inicia con \tex{startMariPoppins} y se
+  termina con \tex{stopMariPoppins}.
+
+\item Se crea también un comando \tex{MariPoppins} que se usa, dentro
+  del entorno para indicar cuándo hay que cambiar de columna.
+
+\stopitemize
+
+En cuanto a las opciones de configuración de los párrafos paralelos
+(\tex{setupparagraphs}), entiendo que, a estas alturas de la
+introducción, y teniendo en cuenta el ejemplo que se acaba de poner,
+el lector ya está preparado para deducir por sí mismo la finalidad de
+cada una de las opciones, por ello, a continuación, tan sólo indicaré
+el nombre y el tipo de las opciones así como, en su caso, los valores
+posibles. Recuérdese, eso sí, que
+\tex{setupparagraphs [Nombre] [Configuración]} establece configuraciones
+que afectan a todo el entorno, mientras que
+\tex{setupparagraphs [Nombre] [NumColumna] [Configuración]} aplica
+configuraciones exclusivamente a la columna que se le indique.
+
+\startitemize[columns, three, packed]\switchtobodyfont[small]
+
+\item {\tt n}: Número
+
+\item {\tt before}: Comando
+
+\item {\tt after}: Comando
+
+\item {\tt width}: Dimensión
+
+\item {\tt distance}: Dimensión
+
+\item {\tt align}: Derivado de \tex{setupalign}
+
+\item {\tt inner}: Comando
+
+\item {\tt rule}: on off
+
+\item {\tt rulethickness}: Dimensión
+
+\item {\tt rulecolor}: Color
+
+\item {\tt style}: Comando de estilo
+
+\item {\tt color}: Color
+
+\stopitemize
+
+\startLetraChica
+
+  La anterior lista de opciones no es completa; he excluido de la
+  lista de opciones las que yo normalmente no explicaría aquí. He
+  aprovechado también que estamos en el epígrafe dedicado a las
+  columnas para mostrar la lista de opciones a triple columna, aunque
+  ello no le he realizado con ninguno de los comandos que se explican
+  en esta sección, sino con la opción {\tt columns} del entorno {\tt
+    itemize}, al que se dedica el próximo epígrafe.
+
+\stopLetraChica
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:itemize,
+    title=Listas estructuradas,
+  ]
+
+Cuando la información se presenta de manera ordenada es más fácilmente
+aprehensible por el lector. Pero, a su vez, si la ordenación de la
+misma es perceptible visualmente, se acentúa para el lector la
+sensación de estar ante un texto estructurado. Por ello existen
+ciertas {\em construcciones} o {\em mecanismos} que, procuran destacar
+gráfica y visualmente la ordenación del texto, contribuyendo así a su
+estructuración. De las herramientas que \ConTeXt\ pone a disposición
+del autor para ello la más importante, objeto de esta sección, es el
+entorno {\tt itemize} que sirve para elaborar lo que podríamos llamar
+{\em listas estructuradas}.
+
+\startLetraChica
+
+  En español la construcción que se realiza mediante un entorno del
+  tipo de {\tt itemize} es llamada simplemente {\em lista}. Yo
+  prefiero hablar de «listas estructuradas» porque \ConTeXt\ denomina
+  «listas» a algunos elementos de los documentos a los que en español
+  solemos llamar «índice» (como, entre otros, el índice de imágenes o
+  el índice de tablas).
+
+\stopLetraChica
+
+Las listas consisten en una sucesión de {\em elementos de texto} (a
+los que llamaré {\em items}\footnote{Entre los distintos significados
+  que el Diccionario de la Lengua Española atribuye a {\em item} hay
+  tres que encajan con este sentido. Principalmente el cuarto
+  significado que es: «Cada uno de los elementos que forman parte de
+  un conjunto de datos».}) en la que cada uno de ellos va precedido de
+un carácter que contribuye a resaltarlo diferenciándolo de los
+restantes, y al que aquí llamaré «separador». El separador puede ser
+un número, una letra o un símbolo. Habitualmente (pero no siempre) los
+{\em items} constituyen párrafos, y la lista se formatea para
+garantizar la {\em visibilidad} del separador de cada elemento;
+normalmente mediante la aplicación de una sangría francesa que lo haga
+destacar\footnote{En tipografía se llama {\em sangría francesa} a una
+  sangría que se aplica a todas las líneas de un párrafo salvo a la
+  primera, lo que hace que la primera palabra o carácter del párrafo
+  sea fácilmente localizable.}. En el caso de listas anidadas la
+sangría de cada lista va aumentando progresivamente. Con terminología
+que creo que procede del lenguaje HTML se suele llamar {\em listas
+  ordenadas} a aquellas en las que el separador es un número o
+carácter que sigue una secuencia numérica o alfabética, de tal modo
+que cada {\em item} de la lista tendrá un separador diferente que nos
+permitirá referirnos a cada elemento por su número o identificador; y
+{\em listas no ordenadas} a aquellas otras en las que se usa como
+separador un carácter o símbolo que será el mismo para todos los
+elementos de la lista.
+
+En las listas \ConTeXt\ gestiona automáticamente la numeración o
+secuenciación alfabética del separador en listas numeradas, así como,
+en el caso de listas anidadas, la sangría que cada una de ellas debe
+tener; y, si se trata de anidamiento de listas no ordenadas, la
+selección de un carácter o símbolo diferente que permita diferenciar a
+simple vista el nivel de un {\em item} de la lista atendiendo al
+símbolo que le precede.
+
+\startLetraChica
+
+  El manual de referencia dice que el nivel máximo de anidamiento en
+  listas es de 4, pero supongo que eso era así en 2013, fecha de
+  redacción del manual. De acuerdo con mis pruebas no hay,
+  aparentemente, límite en el anidamiento de listas {\em ordenadas}
+  (en mis pruebas he llegado hasta 15 niveles de anidamiento),
+  mientras que para las listas no ordenadas, tampoco parece haber un
+  límite en el sentido de que por más anidamientos que incluyamos, no
+  se generará ningún tipo de error; pero, para listas no ordenadas
+  \ConTeXt\ sólo contempla símbolos predeterminados para los nueve
+  primeros niveles de anidamiento. 
+
+  En todo caso hay que indicar que el uso excesivo del anidamiento en
+  listas puede provocar el efecto contrario al que se pretende con
+  ellas, y es que el lector se sienta perdido, incapaz de ubicar cada
+  elemento en la estructura general del listado. Por ello
+  personalmente opino que si bien las listas son una herramienta
+  poderosa para estructurar un texto, casi nunca es buena idea ir más
+  allá del tercer nivel de anidamiento; e incluso llegar al tercer
+  nivel debe hacerse sólo en casos muy justificados.
+  
+\stopLetraChica
+
+La herramienta general para la escritura de listas en \ConTeXt\ es el
+entorno \tex{itemize} cuya sintaxis es la siguiente:
+
+\PonMacro{startitemize}\type{\startitemize[Opciones][Configuración] ... \stopitemize}
+
+donde los dos argumentos son opcionales. El primero admite como
+contenido nombres simbólicos que tienen asignada por \ConTeXt\ una
+significación precisa; el segundo argumento, que se utiliza muy
+raramente, permite asignar valores concretos a ciertas variables que
+afectan al funcionamiento del entorno.
+
+\startsubsection
+  [
+    reference=sec:itemize_seltipolista,
+    title={Selección de tipo de lista y de separador\\ entre {\em items}},
+  ]
+
+\startsubsubsection
+  [title=Listas no ordenadas]
+
+Por defecto la lista generada por {\tt itemize} es una lista no ordenada,
+en la que el separador se seleccionará automáticamente dependiendo
+del nivel de anidamiento:
+
+\startitemize[packed, columns, two]\switchtobodyfont[small]
+
+\sym{\convertnumber{set 0}{1}} Para el primer nivel de anidamiento.
+
+\sym{\convertnumber{set 0}{2}} Para el segundo nivel de anidamiento.
+
+\sym{\convertnumber{set 0}{3}} Para el tercer nivel de anidamiento.
+
+\sym{\convertnumber{set 0}{4}} Para el cuarto nivel de anidamiento.
+
+\sym{\convertnumber{set 0}{5}} Para el quinto nivel de anidamiento.
+
+\sym{\convertnumber{set 0}{6}} Para el sexto nivel de anidamiento.
+
+\sym{\convertnumber{set 0}{7}} Para el séptimo nivel de anidamiento.
+
+\sym{\convertnumber{set 0}{8}} Para el octavo nivel de anidamiento.
+
+\sym{\convertnumber{set 0}{9}} Para el noveno nivel de anidamiento.
+
+\stopitemize
+
+No obstante podemos indicar expresamente que queremos que se utilice
+el símbolo asociado a un nivel concreto simplemente pasando el número
+de nivel como argumento. Así \tex{startitemize[4]} generará una lista
+no ordenada en el que se usará como separador el carácter
+\triangleright, con independencia del nivel de anidamiento que
+tenga la lista.
+
+También podemos modificar el símbolo predeterminada para cada nivel
+mediante \PonMacro{definesymbol}\tex{definesymbol}:
+
+\type{\definesymbol[Nivel]{Símbolo asociado al nivel}}
+
+Por ejemplo
+
+\type{\definesymbol[1][\diamond]}
+
+hará que para el primer nivel de las listas no ordenadas se utilice el
+símbolo \diamond. Con este mismo comando podemos asignar algún símbolo
+a niveles de anidamiento superiores al noveno. Así, por ejemplo
+
+\type{\definesymbol[10][\copyright]}
+
+Asignará al nivel 10 de anidamiento el símbolo internacional del {\em
+  copyright}: \copyright.
+
+\stopsubsubsection
+
+\startsubsubsection
+  [title=Listas ordenadas]
+
+Para generar una lista ordenada debemos indicar a {\tt itemize} el
+tipo de ordenación que deseamos. Puede ser:
+
+\startitemize[intro, packed, 2*broad, columns, three]
+\switchtobodyfont[small]
+
+\sym{{\bf n}} 1, 2, 3, 4, ...
+
+\sym{{\bf m}} {\switchtobodyfont[antykwa]1, 2, 3, 4, ...}
+
+\sym{{\bf g}} \alpha, \beta, \gamma, \delta, ...
+
+\sym{{\bf G}} \Alpha, \Beta, \Gamma, \Delta, ...
+
+\sym{{\bf a}} a, b, c, d, ...
+
+\sym{{\bf A}} A, B, C, D, ...
+
+\sym{{\bf KA}} \cap{a, b, c, d, ...}
+
+\sym{}
+
+\sym{{\bf r}} i, ii, iii, iv, ...
+
+\sym{{\bf R}} I, II, III, IV, ...
+
+\sym{{\bf KR}} \cap{i, ii, iii, iv, ...}
+
+\stopitemize
+
+La diferencia entre {\tt n} y {\tt m} está en la fuente que se usa
+para representar el número: {\tt n} usa la fuente activa en cada
+momento, mientras que {\tt m} usa una fuente diferente, más elegante y
+casi caligráfica.
+
+\startLetraChica
+
+  No sé cuál es el nombre de la fuente que usa {\tt m}, y por ello en
+  la lista anterior no he conseguido representar con exactitud el tipo
+  de números que esta opción genera. Sugiero al lector que haga una
+  prueba para verlos por sí mismo.
+
+\stopLetraChica
+
+\stopsubsubsection
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:itemize_tipoitem,
+    title=Introducción de los elementos de la lista,
+  ]
+
+Como regla, los elementos de una lista creada mediante
+\tex{startitemize} se introducen mediante el comando
+\PonMacro{item}\tex{item} que también tiene una versión en forma de
+entorno, más adecuada al estilo de Mark~IV:
+\PonMacro{startitem}\tex{startitem ... \stopitem}. Así, el siguiente
+ejemplo:
+
+\startDobleEjemplo
+\starttyping
+\startitemize[a, packed]
+\startitem Primer elemento \stopitem
+\startitem Segundo elemento \stopitem
+\startitem Tercer elemento \stopitem
+\stopitemize
+\stoptyping
+
+\startitemize[a, packed]
+\startitem Primer elemento \stopitem
+\startitem Segundo elemento \stopitem
+\startitem Tercer elemento \stopitem
+\stopitemize
+\stopDobleEjemplo
+
+produce exactamente el mismo resultado que
+
+\startDobleEjemplo
+\starttyping
+\startitemize[a, packed]
+\item Primer elemento
+\item Segundo elemento
+\item Tercer elemento
+\stopitemize
+\stoptyping
+
+\startitemize[a, packed]
+\item Primer elemento
+\item Segundo elemento
+\item Tercer elemento
+\stopitemize
+
+\stopDobleEjemplo
+
+\tex{item} o \tex{startitem} es el comando {\em general} para
+introducir un elemento en la lista. Junto con él existen los siguientes
+comandos adiciones para cuando se quiera conseguir un resultado
+especial:
+
+\startitemize[3*broad]
+
+\sym{\PonMacro{head}\tex{head}} Este comando debe usarse, en lugar de \tex{item}
+  cuando queremos evitar que se inserte un salto de página después del
+  elemento en cuestión.
+
+  \startLetraChica
+
+    Una construcción corriente es la de inmediatamente debajo de un
+    elemento de una lista incluir una lista anidada, o un bloque de
+    texto, de tal modo que el elemento de la lista, en cierto modo,
+    funciona como {\em título} de la sublista o bloque de texto. En
+    estos casos un salto de página entre dicho elemento y los párrafos
+    posteriores estaría desaconsejado. Si usamos \tex{head} en lugar
+    de \tex{item} para introducir estos elementos \ConTeXt\ {\em
+      procurará} (en la medida de lo posible) no separar a dicho
+    elemento del bloque siguiente.
+
+  \stopLetraChica
+
+\sym{\PonMacro{sym}\tex{sym}} El comando \type{\sym{Texto}} introduce un elemento en
+  el que como {\em separador} se utiliza, no un número o símbolo, sino
+  el texto usado como argumento de \tex{sym}. Esta lista, por ejemplo,
+  se construye con elementos introducidos mediante \tex{sym} en lugar
+  de \tex{item}.
+
+\sym{\PonMacro{sub}\tex{sub}} Este comando, que se debe usar sólo en las llamadas
+  listas ordenadas (en las que cada elemento va precedido de un número
+  o letra en secuencia alfabética) provoca que el elemento introducido
+  con él conserve el número del elemento anterior, al tiempo que, para
+  indicar que el número está repetido, y que ello no es un error, a su
+  izquierda se imprime el signo «+». Esto puede ser útil si nos
+  estamos refiriendo a una lista previa, sobre la que sugerimos
+  modificaciones, pero en la que, para mayor claridad, debe mantenerse
+  la numeración de la lista original.
+
+\sym{\PonMacro{mar}\tex{mar}} Este comando mantiene la numeración de los items, pero
+  añade en el margen una letra o carácter (que se le pasa como
+  argumento, entre llaves). No estoy muy seguro de su utilidad.
+
+\stopitemize
+
+Hay dos comandos adicionales para introducir elementos, cuya
+combinación produce efectos {\em interesantes} y, si se me permite,
+creo que es mejor explicarlos con un ejemplo. se trata de \PonMacro{ran}\tex{ran}
+(diminutivo de {\em rango}) e \PonMacro{its}\tex{its}, diminutivo de {\em
+  items}. El primero recibe un argumento (entre llaves) y el segundo
+repite el símbolo usado como separador en la lista x número de veces
+(por defecto 4 veces, pero podemos alterar eso mediante la opción {\tt
+  items}). En el siguiente ejemplo se muestra cómo pueden trabajar
+juntos estos dos comandos para crear una lista que imita a un
+cuestionario:
+
+\vbox{\starttyping 
+Tras la lectura de esta introducción, “contexte”\footnote{Llámase
+  «contextar» a contestar preguntas sobre \ConTeXt.} a las siguientes
+cuestiones:
+
+\startitemize[5, packed][width=8em, distance=2em, items=5]
+\ran{No \hss Si}
+\its No usaré nunca \ConTeXt, es muy difícil.
+\its Sólo lo usaré para escribir libros largos.
+\its Lo usaré siempre.
+\its Me gusta tanto que llamaré a mi próximo hijo “Hans”, como
+  homenaje a Hans Hagen.
+\stopitemize
+\stoptyping}
+
+\startlocalfootnotes
+\ejemplo{Tras la lectura de esta introducción,
+  contexte\footnote{Llámase «contextar» a contestar preguntas sobre
+    \ConTeXt.} a las siguientes cuestiones:
+
+\startitemize[5, packed][width=8em, distance=2em, items=5]
+\ran{No \hss Si}
+\its No usaré nunca \ConTeXt, es muy difícil.
+\its Sólo lo usaré para escribir libros largos.
+\its Lo usaré siempre.
+\its Me gusta tanto que llamaré a mi próximo hijo “Hans”, como
+  homenaje a Hans Hagen.
+\stopitemize
+\placelocalfootnotes
+}
+\stoplocalfootnotes
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:itemize_arg1,
+    title=Configuración básica de las listas,
+  ]
+
+Recordemos que \PalClave{itemize} admite dos argumentos. Ya hemos
+visto como el primer argumento permite seleccionar el tipo de lista
+que deseamos. Pero también podemos indicar mediante él otras
+características de la lista, ello se hace mediante las siguientes
+opciones que se le indican a \PalClave{itemize} en su primer
+argumento:
+
+\startitemize
+
+\item {\tt columns}: Esta opción determina que la lista se componga
+  con dos o más columnas. Tras la opción columns hay que escribir con
+  letras y separado por una coma, el número de columnas deseadas: two,
+  three, four, five, six, seven, eight o nine. {\tt Columns} no seguido
+  de ningún número genera dos columnas.
+
+\item {\tt intro}: Esta opción procura no separar mediante un salto de
+  línea a la lista del párrafo que la precede.  
+
+\item {\tt continue}: En listas ordenadas (numérica o alfabéticamente)
+  esta opción hace que la lista continue la numeración de la última
+  lista numerada. Si se usa la opción {\tt continue} no es preciso
+  indicar qué tipo de lista queremos, pues se asume que será igual a
+  la última lista numerada.
+
+\item {\tt packed}: Es una de las opciones más utilizadas. Su uso
+  provoca que el espacio vertical entre los distintos {\em items} de
+  la lista se reduzca al máximo.
+
+\item {\tt nowhite:} Produce un efecto similar a {\tt packed}, pero
+  más drástico: no sólo reduce al máximo el espacio vertical entre los
+  elementos, sino también el espacio vertical entre la lista y el
+  texto que la circunda.
+
+\item {\tt broad}: Aumenta el espacio horizontal entre el separador de
+  elementos y el texto del elemento. El espacio de aumento puede
+  incrementarse multiplicando un número por {\tt broad} como en, por
+  ejemplo \type{\startitemize[2*broad]}.
+
+\item {\tt serried}: Elimina el espacio horizontal entre el separador
+  de elementos y el texto.
+
+\item {\tt intext}: Elimina de la lista la sangría francesa.
+
+\item {\tt text}: Elimina de la lista la sangría francesa y reduce el
+  espacio vertical entre elementos.
+
+\item {\tt repeat}: En listas anidadas hace que la numeración de un
+  nivel hijo {\em repita} la del nivel previo. Así tendríamos, en el
+  primer nivel: 1, 2, 3, 4; en el segundo: 1.1, 1.2, 1.3, etc. La
+  opción hay que indicarla en la lista interior, no en la exterior.
+
+\item {\tt margin, inmargin}: Por defecto el separador de la lista se
+  imprime a la izquierda, pero dentro de la zona de texto propiamente
+  dicha ({\tt atmargin}). Las opciones {\tt margin} e {\tt inmargin}
+  trasladan el separador al margen.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:itemize_arg2,
+    title=Configuración adicional de las listas,
+  ]
+
+El segundo argumento, también opcional, de \tex{startitemize} permite
+una configuración más detallada y pormenorizada de las listas.
+
+\startitemize
+
+\item {\tt before, after}: Comandos a ejecutar, respectivamente, antes
+  de iniciar o después de cerrar, el entorno itemize.
+
+\item {\tt inbetween}: Comando a ejecutar entre dos {\tt items}.
+
+\item {\tt beforehead, afterhead}: Comando a ejecutar antes o después
+  de un elemento introducido con el comando \tex{head}.
+
+\item {\tt left, right}: Carácter que se imprimirá a la izquierda o a
+  la derecha del separador. Por ejemplo, para conseguir listas
+  alfabéticas en las que las letras vayan rodeadas de paréntesis
+  habría que escribir:
+
+  \type{\startitemize[a][lef=(, right=)]}
+
+\item {\tt stopper}: Indica un carácter que se escribirá después del
+  separador. Sólo funciona en listas ordenadas.
+
+\item {\tt width, maxwidth}: Anchura del espacio reservado para el
+  separador y, por lo tanto, de la sangría francesa.
+
+\item {\tt factor}: Número representativo del factor de separación
+  entre el separador y el texto.
+
+\item {\tt distance}: Medida de la distancia entre el separador y el
+  texto.
+
+\item {\tt leftmargin, rightmargin, margin}: Margen que se añade a la
+  izquierda (leftmargin) o derecha (rightmargin) de los elementos. 
+
+\item {\tt start}: Número por el que empezará la numeración de elementos.
+
+\item {\tt symalign, itemalign, align}: alineación de los
+  elementos. Admite los mismos valores que \tex{setupalign}. {\tt
+    symalign} controla la alineación del separador; {\tt itemalign} la
+  del texto del elemento, y {\tt align} la de ambos.
+
+\item {\tt identing}: Sangría de la primera línea en los párrafos
+  dentro del entorno. Véase la \in{sección}[sec:sangría]
+
+\item {\tt indentnext}: Indica si el párrafo posterior al entorno debe
+  o no indentarse. Admite los valores {\em yes, no} y {\tt auto}.
+
+\item {\tt items}: En los elementos introducidos con \tex{its} indica
+  el número de veces que se debe reproducir el separador.
+
+\item {\tt style, color; headstyle, headcolor; marstyle, marcolor;
+  symstyle, symcolor}: Estas opciones controlan el estilo y el color
+  de los elementos según se hayan introducido en el entorno con los
+  comandos \tex{item}, \tex{head}, \tex{mar} o \tex{sym}.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:comando_items,
+    title=Listas simples con el comando \tex{items},
+  ]
+  \PonMacro{items}
+
+Una alternativa al entorno {\tt itemize} para listas no numeradas muy
+simples, en las que los elementos no sean excesivamente largos el el
+comando \tex{items} cuyo formato es:
+
+\type{\items[Configuración]{Elemento 1, Elemento 2, ..., Elemento n}}
+
+Los distintos elementos que tendrá la lista se separan unos de otros
+por comas. Por ejemplo:
+
+\startDobleEjemplo
+\startframedtext[frame=off, before=, after=]
+\starttyping
+Los ficheros gráficos pueden 
+tener, entre otras, las siguientes 
+extensiones:
+
+\items{png, jpg, tiff, bmp}    
+\stoptyping
+\stopframedtext
+
+Los ficheros gráficos pueden tener, entre otras, las siguientes
+extensiones:
+
+\items{png, jpg, tiff, bmp}
+
+\stopDobleEjemplo
+
+Las opciones de configuración que admite este comando son un
+subconjunto de las de {\tt itemize}, salvo dos opciones específicas de
+este comando: 
+
+\startitemize
+  
+\item {\tt symbol}: Esta opción determina el tipo de lista que se
+  generará. Admite los mismos valores que sirven en {\tt itemize} para
+  seleccionar algún tipo de lista.
+ 
+\item {\tt n}: Esta opción indica a partir de qué número de elemento
+  habrá separador.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:setupitemize,
+    title=Predeterminación del comportamiento de las listas y creación
+    de nuestros propios\\ tipos de lista,
+  ]
+  
+En las secciones anteriores hemos visto como indicar qué tipo de lista
+queremos y qué características debe tener. Pero hacer eso cada vez que
+se llama a una lista es poco eficiente y normalmente producirá un
+documento incoherente en el que cada lista tenga su propia apariencia,
+pero sin que las distintas apariencias respondan a algún criterio.
+
+Resulta preferible por ello:
+
+\startitemize
+
+\item Predeterminar, en el preámbulo del documento, el comportamiento
+  {\em normal} de {\tt itemize} y de \tex{items}.
+
+\item Crear nuestras propias listas personalizadas. Por ejemplo: una
+  lista numerada alfabéticamente a la que podríamos llamar {\em
+    ListaAlfa}, una lista numerada con números romanos ({\em
+    ListaRomana}), etc.
+  
+\stopitemize
+
+Lo primero se consigue mediante los comandos \tex{setupitemize} y
+\tex{setupitems}. Lo segundo requiere usar, bien el comando
+\PonMacro{defineitemgroup}\tex{defineitemgroup}, bien \PonMacro{defineitems}\tex{defineitems}. El primero creará un
+entorno de lista similar a {\tt itemize} y el segundo un comando
+similar a {\tt items}.
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [title=Descripciones y enumeraciones]
+
+Las descripciones y las enumeraciones son dos construcciones que
+permiten componer de manera consistente párrafos o grupos de párrafos
+que desarrollan, describen, o definen una frase o palabra.
+
+\startsubsection
+  [title=Descripciones]
+
+En las descripciones se diferencia entre un {\em título} y su
+explicación o desarrollo. Podemos crear una nueva descripción
+mediante:
+
+\PonMacro{definedescription}\type{\definedescription [Nombre] [Configuración]}
+
+donde {\em Nombre} es el nombre por el que esta nueva construcción
+será conocida, y Configuración controla el aspecto que tendrá nuestra
+nueva estructura. Tras la anterior sentencia dispondremos de un nuevo
+comando y de un entorno con el nombre que hayamos elegido. Así:
+
+\type{\definedescription [Concepto]}
+
+creará los comandos:
+
+\starttyping
+  \Concepto{Título}
+  \startConcepto {Título} ... \stopConcepto
+\stoptyping
+
+Usaremos el comando para el caso en el que el texto explicativo del
+título conste de un sólo párrafo, y el entorno para títulos cuya
+descripción ocupe más de un párrafo.  Cuando se usa el comando, el
+párrafo inmediatamente posterior a él es el que se considerará texto
+explicativo del título. Por el contrario cuando se usa el entorno,
+todo su contenido será formateado con el sangrado adecuado como para
+que quede clara su vinculación con el título.
+
+Por ejemplo:
+
+\starttyping
+\definedescription
+  [Concepto]
+  [alternative=left, width=1cm, headstyle=bold]
+
+\Concepto{Contextualizar}
+
+Situar algo en un determinado contexto, o componer un texto con el
+sistema de composición de textos llamado \ConTeXt. La capacidad para
+contextualizar correctamente en cualquier situación viene siendo
+considerada signo de inteligencia y sensatez.
+
+\stoptyping
+
+Esto generará el siguiente resultado:
+
+\startcolor[red]
+
+\definedescription
+  [Concepto]
+  [alternative=left, width=3cm, headstyle=bold]
+
+\Concepto{Contextualizar}
+
+Situar algo en un determinado contexto, o componer un texto con el
+sistema de composición de textos llamado \ConTeXt. La capacidad para
+contextualizar correctamente en cualquier situación viene siendo
+considerada signo de inteligencia y sensatez.
+  
+\stopcolor
+
+Como resulta habitual en \ConTeXt\ la apariencia que tendrá nuestra
+nueva construcción podemos indicarla en el momento de su creación,
+mediante el argumento {\em Configuración} o, más adelante, mediante
+\tex{setupdescription}:
+
+\PonMacro{setupdescription}\type{\setupdescription [Nombre] [Configuración]}
+
+donde {\em Nombre} es el nombre de nuestra nueva descripción, y {\em
+  Configuración} determina el aspecto de la misma. Entre las distintas
+opciones de configuración posibles destacaré:
+
+\startitemize
+
+\item {\tt alternative}: Esta opción es la que fundamentalmente
+  controla la apariencia de la construcción. Determina la colocación
+  del Título en relación con su descripción. Admite como valores
+  posibles los de {\tt left, right, inmargin, inleft, inright, margin,
+    leftmargin, rightmargin, innermargin, outermargin, serried,
+    hanging, top, empty}. La denominación de estos posibles valores
+  creo que es lo bastante clara para (si sabemos algo de inglés)
+  hacernos una idea del resultado que tendrá la misma, aunque, en caso
+  de duda, lo mejor es hacer una prueba para ver cómo queda.
+
+\item {\tt width}: Controla la anchura de la caja en la que se
+  escribirá el título. Dependiendo del valor de {\tt alternative} esa
+  distancia también formará parte del sangrado con el que se escriba
+  el texto explicativo.
+
+\item {\tt distance}: Controla la distancia entre el título y la
+  explicación del mismo.
+
+\item {\tt headstyle, headcolor, headcommand}: Afectan a la apariencia
+  que tendrá el título propiamente dicho: Estilo ({\tt headstyle}) y
+  color ({\tt headcolor}). Con headcommand podemos indicar un comando
+  al que se le pasará como argumento el texto del título. Por ejemplo:
+  {\tt headcommand=\backslash WORD} se asegurará de que el texto del
+  título se escriba totalmente en mayúsculas.
+
+\item {\tt style, color}: Controlan la apariencia del texto
+  descriptivo del título.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [title=Enumeraciones]
+
+Las enumeraciones son elementos de texto numerados y estructurados en
+varios niveles. Cada elemento se inicia con un título que consiste,
+por defecto, en el nombre de la estructura y su número, aunque podemos
+cambiar el título con la opción {\tt text}. Se parecen bastante a las
+descripciones, aunque se diferencian en que:
+
+\startitemize
+
+\item Todos los elementos de una enumeración comparten el mismo
+  título.
+
+\item Por lo tanto se diferencian unos de otros por su numeración.  
+
+\stopitemize
+
+Esta estructura puede ser muy útil, por ejemplo, para ir escribiendo
+fórmulas, problemas o ejercicios en un libro de texto, garantizando
+que estos se numerarán correctamente y se formatearán de manera
+consistente.
+
+Creamos una enumeración con
+
+\PonMacro{defineenumeration}\type{\defineenumeration [Nombre] [Configuración]}
+
+donde {\em Nombre} es el nombre de nuestra nueva construcción, y {\em
+  Configuración} controla el aspecto que tendrá la misma. 
+
+Así, en el siguiente ejemplo:
+
+\starttyping
+  \defineenumeration
+    [Ejercicio]
+    [alternative=top, before=\blank, after=\blank, between=\blank]
+\stoptyping
+
+Habremos creado una nueva estructura llamada {\em Ejercicio} y, al
+igual que ocurre en las enumeraciones, tendremos disponibles los
+siguientes nuevos comandos:
+
+\starttyping
+  \Ejercicio
+  \startEjercicio
+\stoptyping
+
+El comando se usará para {\em ejercicios} de un sólo párrafo, y el
+entorno para {\em ejercicios} de varios párrafos. Pero como las
+enumeraciones pueden llegar a tener hasta cuatro niveles de
+profundidad, se crearán también los siguientes comandos y entornos:
+
+\starttyping
+  \subEjercicio
+  \startsubEjercicio
+  \stopsubEjercicio
+  \subsubEjercicio
+  \startsubsubEjercicio
+  \stopsubsubEjercicio
+  \subsubsubEjercicio
+  \startsubsubsubEjercicio
+  \stopsubsubsubEjercicio
+\stoptyping
+
+Y, para controlar la numeración, los siguientes comandos adicionales:
+
+\startitemize
+
+\item \tex{setNombreEnumeración}: Establece el valor actual de la numeración.
+
+\item \tex{resetNombreEnumeración}: Pone a cero el contador de la enumeración.
+
+\item \tex{nextNombreEnumeración}:  Incrementa en uno el contador de
+  la enumeración.
+
+\stopitemize
+
+La apariencia de las enumeraciones se puede determinar en el momento
+de su creación o más tarde con \tex{setupenumeration} cuyo formato es:
+
+\PonMacro{setupenumeration}\type{\setupenumeration [Nombre] [Configuración]}.
+
+Para cada enumeración podemos configurar por separado cada uno de sus
+niveles. Así, por ejemplo \tex{setupenumeration [subEjercicio]
+  [Configuración]} afectará al segundo nivel de la enumeración llamada
+«Ejercicio».
+
+Las opciones y valores configurables con \tex{setupenumeration} son
+similares a las de \tex{setupdescription}.
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:MarcosLineas,
+    title=Líneas y marcos,
+  ]
+
+Dice el manual de referencia de \ConTeXt\ que \TeX\ tiene una enorme
+capacidad de manejo de texto, pero que es muy débil en el manejo de la
+información gráfica. Me permito discrepar: es cierto que para el
+manejo de líneas y marcos las posibilidades de \ConTeXt\ (en realidad
+\TeX) no son tan abrumadoras como cuando se trata de componer
+texto. Pero de ahí a decir que el sistema resulta débil en este
+aspecto creo que hay un gran trecho. No conozco ninguna función con
+líneas y marcos que puedan hacer otros sistemas de composición de
+documentos y \ConTeXt\ no sea capaz de generar. Y si combinamos
+\ConTeXt\ con MetaPost, o con TiKZ (para cuyo uso en \ConTeXt\ existe
+un módulo de expansión), entonces ya las posibilidades solo están
+limitadas por nuestra imaginación.
+
+En los próximos apartados, no obstante, me limitaré a explicar cómo
+generar líneas simples, horizontales y verticales y marcos en torno a
+palabras, frases o párrafos.
+
+\startsubsection
+  [title=Líneas simples]
+
+La forma más sencilla de dibujar una línea horizontal es con el
+comando \PonMacro{hairline}\tex{hairline}, que genera una línea horizontal que ocupa toda
+la anchura de una línea de texto normal.
+
+En el renglón donde esté la línea generada por \tex{hairline} no puede
+haber texto de ningún tipo. Para generar una línea capaz de convivir
+con el texto de su renglón, necesitamos el comando
+\PonMacro{thinrule}\tex{thinrule}. Este segundo comando usará todo el ancho disponible de
+la línea. Por lo tanto, en un párrafo aislado, tendrá el mismo efecto
+que \tex{hairline}, pero en el caso contrario, \tex{thinrule} producirá
+la misma expansión horizontal que \tex{hfill} (véase la
+\in{sección}[sec:espacio_horizontal2]), pero llenando el espacio
+horizontal, no con espacio en blanco (como hace \tex{hfill}), sino con
+una línea.
+
+\startDobleEjemplo
+\starttyping
+A la izquierda\thinrule\\
+\thinrule A la derecha\\
+A ambos\thinrule lados\\
+\thinrule centrado\thinrule
+\stoptyping
+
+A la izquierda\thinrule\\
+\thinrule A la derecha\\
+A ambos\thinrule lados\\
+\thinrule centrado\thinrule
+
+\stopDobleEjemplo
+
+Con el comando \PonMacro{thinrules}\tex{thinrules} podemos generar varias líneas. Por
+ejemplo \tex{thinrules[n=2]} generará dos líneas consecutivas, cada
+una de ellas de la anchura del renglón. Las líneas generadas con
+\tex{thinrules} pueden también ser configuradas, bien en una llamada
+concreta al comando, indicando la configuración como argumento del
+mismo, bien con carácter general mediante \tex{setupthinrules}. La
+configuración incluye el grosor de la línea ({\tt rulethickness}), el
+color de la línea ({\tt color}), el color de fondo ({\tt background}),
+el interlineado ({\tt interlinespace}), etc.
+
+\startLetraChica
+
+  Dejo varias opciones sin explicar. El lector puede consultar cuáles
+  son en {\tt setup-en.pdf} (véase la
+  \in{sección}[sec:qrc-setup-en]). Algunas opciones se diferencian de
+  otras en cuestiones muy de matiz y creo que es más rápido que el
+  lector intente {\em ver} la diferencia, que esforzarme yo en
+  transmitirlo con palabras. Por ejemplo: el grosor de la línea acabo
+  de decir que depende de la opción {\tt rulethickness}. Pero también
+  le afectan las opciones {\tt height} y {\tt depth}.
+
+\stopLetraChica
+
+Líneas de dimensiones más reducidas pueden generarse con los comandos
+\PonMacro{hl}\tex{hl} y \PonMacro{vl}\tex{vl}. El primero genera una línea horizontal y el
+segundo una línea vertical. Ambos reciben como parámetro un número que
+permite calcular la longitud de la línea. En \tex{hl} el número mide
+la longitud en {\em ems} (no hay que indicar en el comando la unidad
+de medida) y en \tex{vl} el argumento se refiere a la altura actual de
+la línea.
+
+Así \tex{hl[3]} genera una línea horizontal de 3 ems y \tex{vl[3]}
+genera una línea vertical de la altura correspondiente a tres
+líneas. Recuérdese por otra parte que el indicador de medida de la
+línea debe introducirse entre corchetes, no entre llaves. En ambos
+comandos el argumento es opcional. De no introducirse se asume un
+valor de 1.
+
+Otro comando para crear líneas horizontales de longitud precisa, y que
+admite una mayor configuración es
+\PonMacro{fillinline}\tex{fillinline}, en el que podemos indicar (o
+predeterminar con \PonMacro{setupfillinlines}\tex{setupfillinlines})
+la anchura (opción {\tt width}) además de algunas otras
+características.
+
+Una peculiaridad de este comando es que el texto que se escriba a su
+derecha será ubicado a la izquierda de la línea; separando dicho texto
+de la línea por el espacio en blanco necesario para ocupar todo el
+renglón. Por ejemplo:
+
+\starttyping
+\fillinline[width=6cm] Nombre    
+\stoptyping
+
+generará
+
+\startcolor[red]
+  
+\fillinline[width=6cm] {Nombre}
+
+\stopcolor
+
+\startLetraChica
+
+  Sospecho que este extraño funcionamiento se debe a que esta macro
+  fue diseñada para escribir formularios en los que tras el texto hay
+  una línea horizontal sobre el que debe escribirse \Conjetura algo. De
+  hecho el propio nombre del comando {\tt fillinline} significa eso:
+  llenar en la línea.
+
+\stopLetraChica
+
+Además de la anchura de la línea, podemos configurar el margen ({\tt
+  margin}), la distancia ({\tt distance}), el grosor ({\tt
+  rulethickness}) y el color ({\tt color}).
+
+Casi idéntico a \tex{fillinline} es \tex{fillinrules}, si bien este
+comando permite insertar más de una línea (opción \PalClave{n}).
+
+\type{\fillinrules [Configuración] {Texto} {Texto}}
+
+donde los tres argumentos son opcionales.
+
+\stopsubsection
+
+\startsubsection
+  [title=Líneas vinculadas a texto]
+
+Aunque algunos de los comandos que acabamos de ver pueden generar
+líneas que coexistan con el texto, en un mismo renglón, en realidad
+esos comandos se centran en el trazado de la línea. Para escribir
+líneas vinculadas a cierto texto \ConTeXt\
+dispone de comandos
+
+\startitemize
+
+\item Que generan un texto entre líneas.
+
+\item Que generan líneas bajo el texto (subrayado), sobre el texto
+  (sobrerayado) o atravesándolo (tachado).
+
+\stopitemize
+
+Para generar un texto entre líneas el comando habitual es
+\PonMacro{textrule}\tex{textrule}. Este comando traza una línea que atraviesa toda la
+anchura de la página y en el lado izquierdo (pero no en el extremo)
+escribe el texto que recibe como parámetro. Por ejemplo:
+
+\startDobleEjemplo
+\starttyping
+\textrule{Texto de ejemplo}
+\stoptyping
+\ 
+
+\textrule{Texto de ejemplo}
+
+\stopDobleEjemplo
+
+\startLetraChica
+
+  Se supone que \tex{textrule} admite un primer argumento opcional con tres
+  valores posibles: {\tt top}, {\tt middle} y \Duda{\tt bottom}. Pero, tras
+  algunas pruebas, no he conseguido averiguar que efecto producen tales
+  opciones.
+
+\stopLetraChica
+
+Similar a \tex{texrule} es el entorno \PonMacro{starttextrule}\tex{starttextrule} que, además
+de insertar la línea con texto al principio del entorno, inserta una
+línea horizontal al final. El formato de este comando es:
+
+\type{\starttextrule[Configuración]{Texto en la línea} ... \stoptextrule} %
+
+Tanto \tex{textrule} como \text{starttextrule} se pueden configurar
+con \PonMacro{setuptextrule}\tex{setuptextrule}.
+
+Para trazar líneas bajo un texto, sobre él, o tachándolo, se usan los
+siguientes comandos:
+
+\PonMacro{underbar}\PonMacro{underbars}\PonMacro{overbar}
+\PonMacro{overbars}\PonMacro{overstrike}\PonMacro{overstrikes}
+\starttyping
+  \underbar{Texto}
+  \underbars{Texto}
+  \overbar{Texto}
+  \overbars{Texto}
+  \overstrike{Texto}
+  \overstrikes{Texto}
+\stoptyping
+
+Como se ve para cada tipo de línea (bajo, sobre, o a través del texto)
+hay dos comandos. La versión del comando en singular traza una sola
+línea bajo, sobre o a través de todo el texto que se reciba como
+argumento, mientras que la versión en plural del comando sólo traza la
+línea sobre las palabras, pero no sobre los espacios en blanco.
+
+Estos comandos no son compatibles entre sí, es decir: a un mismo texto
+no se le pueden aplicar dos de ellos. Si se intenta siempre
+prevalecerá el último. Por otra parte \tex{underbar} puede anidarse,
+subrayando lo ya subrayado.
+
+\startLetraChica
+
+  Señala el manual de referencia que \tex{underbar} desactiva la
+  partición silábica de palabras en el texto que constituye su
+  argumento. No me queda claro si esa afirmación se refiere sólo a
+  \tex{underbar} o a los seis comandos que estamos examinando.
+
+\stopLetraChica
+
+\stopsubsection
+
+\startsubsection
+  [title=Palabras o textos enmarcados]
+
+Para rodear un texto con un marco o  cuadrícula se usa:
+
+\startitemize
+
+\item Los comandos \PonMacro{framed}\tex{framed} o \PonMacro{inframed}\tex{inframed} si el texto es
+  relativamente corto y no ocupa más de una línea.
+
+\item El entorno \PonMacro{startframedtext}\tex{startframedtext} para textos más largos.
+
+\stopitemize
+
+La diferencia entre \tex{framed} e \tex{inframed} está en la el punto
+a partir del cual se traza el marco. En \tex{frame} el marco se traza
+hacia arriba a partir de una línea ideal, llamada línea base en la que
+se apoyan las letras, pero que ciertas letras traspasan hacia
+abajo. En \tex{inframed} el marco se traza, también hacia arriba,
+desde el punto más bajo posible de la línea. Por ejemplo
+
+\startDobleEjemplo
+\starttyping
+Aquí hay \framed{dos} buenos
+\inframed{marcos}.
+\stoptyping
+
+Aquí hay \framed{dos} buenos
+\inframed{marcos}.
+
+\stopDobleEjemplo
+
+Tanto \tex{framed} como \tex{inframed} pueden personalizarse con
+\PonMacro{setupframed}\tex{setupframed}, y
+\tex{startframedtext} se personaliza con
+\PonMacro{setupframedtext}\tex{setupframedtext}. Las opciones de
+personalización de ambos comandos son bastante parecidas. Permiten
+indicar las medidas del marco ({\tt height, width, depth}), la forma
+de las esquinas ({\tt framecorner}), que puede ser {\tt rectangular} o
+redondeada ({\tt round}), el color del marco ({\tt framecolor}), el
+grosor de la línea ({\tt frametickness}), la alineación de su
+contenido ({\tt align}), color del texto ({\tt foregroundcolor}),
+color del fondo ({\tt backcground} y {\tt backgroundcolor}), etc.
+
+Para \tex{startframedtext} también existe una
+  propiedad aparentemente extraña: {\tt frame=off} que hace que el
+  marco no se dibuje (aunque sigue estando, pero invisible). Esta
+  propiedad existe porque como el marco de un párrafo es indivisible,
+  es corriente que para asegurarnos de que dentro de un párrafo no se
+  insertará ningún salto de línea, se encierre todo el párrafo en en
+  un entorno {\tt framedtext} con la opción de dibujo del marco
+  desactivada.
+
+También podemos crear una versión
+personalizada de estos comandos con \PonMacro{defineframed}\tex{defineframed} y
+\PonMacro{defineframedtext}\tex{defineframedtext}.
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:cajónsastre,
+    title=Otros entornos y construcciones de\\ interés,
+  ]
+
+  Quedan numerosos entornos en \ConTeXt\ que no he ni siquiera
+  mencionado, o sólo lo he hecho muy de pasada. A título de ejemplo:
+
+\startitemize
+  
+\item {\tt\bf buffer}\PonMacro{startbuffer}\PonMacro{getbuffer}
+  Los {\em buffers} son fragmentos de texto almacenados en la memoria
+  para su posterior reutilización. Un {\em buffer} se define en algún
+  punto del documento con \cmd{startbuffer[NombreBuffer]
+    ... \backslash stopbuffer} y puede ser recuperado, tantas veces
+  como se desee, en algún otro punto del documento con
+  \tex{getbuffer[NombreBuffer]}.
+
+\item {\tt\bf chemical}\PonMacro{startchemical}
+  Este entorno permite ubicar dentro de él fórmulas químicas. Si \TeX\
+  destaca, entre otras muchas cosas, por su capacidad para componer
+  bien textos con fórmulas matemáticas, \ConTeXt\ desde el principio
+  quiso ampliar tal capacidad a las fórmulas químicas, y dispone de
+  este entorno dentro del cual se habilitan comandos y estructuras
+  pensadas para la escritura de la química.
+
+\item {\tt\bf combination}\PonMacro{startcombination}
+  Este entorno permite combinar en una misma página varios elementos
+  flotantes. Es particularmente útil para alinear imágenes externas
+  distintas que quedan así vinculadas en nuestro documento.
+
+\item {\tt\bf formula}\PonMacro{startformula}
+  Se trata de un entorno pensado para introducir dentro de él una
+  fórmula matemática.
+
+\item {\tt\bf hiding}\PonMacro{starthiding}
+  El texto almacenado en este entorno no será compilado ni aparecerá,
+  por lo tanto, en el documento final. Esto es útil para inhabilitar
+  temporalmente la compilación de ciertos fragmentos del fichero
+  fuente. Eso mismo se consigue marcando una o varias líneas como
+  comentario. Pero cuando el fragmento que queremos inhabilitar es
+  relativamente largo, más eficaz que marcar como comentario decenas o
+  cientos de líneas del fichero fuente es insertar el comando
+  \tex{starthiding} al principio del fragmento, y \tex{stophiding} al
+  final.
+
+\item {\tt\bf legend}\PonMacro{startlegend}
+  En un contexto matemático, \TeX\ aplica reglas diferentes, de tal
+  modo que no se puede escribir texto normal. No obstante en ocasiones
+  una fórmula va acompañada de una descripción de los elementos usados
+  en ella. Para tal fin existe el entorno \tex{startlegend} que
+  permite ubicar texto normal en un contexto matemático.
+
+\item {\tt\bf linecorrection}\PonMacro{startlinecorrection}
+  Habitualmente \ConTeXt\ gestiona correctamente el espacio vertical
+  entre líneas, pero ocasionalmente una línea puede contener algo que
+  hace que no se vea correctamente. Eso ocurre principalmente con
+  líneas que tienen fragmentos enmarcados con \tex{framed}. En tales
+  casos este entorno ajusta el interlineado para que el párrafo se vea
+  de modo correcto.
+
+\item {\tt\bf mode}\PonMacro{startmode}
+  Este entorno está pensado para incluir en el fichero fuente
+  fragmentos que sólo se compilarán si está activo el modo
+  adecuado. El uso de {\em modos} no es objeto de esta introducción,
+  pero es una herramienta muy interesante si se quiere, a partir de un
+  sólo fichero fuente, poder generar varias versiones con formatos
+  diferentes. Un entorno complementario a este es
+  \PonMacro{startnotmode}\tex{startnotmode}
+
+\item {\tt\bf opposite}\PonMacro{startopposite}
+  Este entorno sirve para componer textos en los que el contenido de
+  las páginas página izquierda derecha esté relacionado.
+
+\item {\tt\bf quotation}\PonMacro{startquotation} Un entorno muy parecido a
+  {\tt narrower}, pensado para insertar citas literales moderadamente
+  largas. El entorno se ocupa de entrecomillar el texto de su interior, y
+  de aumentar los márgenes para que destaque visualmente en la página el
+  párrafo con la cita. Pero hay que tener en cuenta que el entrecomillado
+  se realiza de acuerdo con el estilo habitual de las comillas en inglés,
+  sin que, aparentemente, esto se pueda cambiar, lo que limita la utilidad
+  de este entorno.
+
+\item {\tt\bf standardmakeup}\PonMacro{startstandardmakeup}
+  Este entorno está pensado para generar páginas con el título del
+  documento, cosa relativamente habitual en los documentos académicos
+  de cierta extensión como tesis doctorales, trabajos de fin de
+  máster, etc.
+
+\stopitemize
+
+Para aprender sobre cualquiera de estos entornos (u otros que no he
+mencionado), sugiero los siguientes pasos:
+
+\startitemize[n]
+
+\item Buscar la información sobre el entorno en el manual de
+  referencia de \ConTeXt. Este manual no menciona a todos los
+  entornos; pero sí se dice algo de todos los de la lista anterior.
+
+\item Escribir un documento de prueba en el que se utilice el entorno.
+
+\item Buscar en el listado oficial de comandos de \ConTeXt (véase
+  \in{sección}[sec:qrc-setup-en]) las opciones de configuración del
+  entorno en cuestión, e irlas probando para ver exactamente cómo se
+  manejan.
+  
+\stopitemize
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:
+%%% vim:set filetype=context tw=75 : %%%

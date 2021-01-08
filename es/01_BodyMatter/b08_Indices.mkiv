@@ -1,0 +1,1455 @@
+%%% Fichero:     b08_Indices.mkiv
+%%% Autor:       Joaquín Ataz López
+%%% Inicio:      Julio 2020
+%%% Terminación: Julio 2020
+%%% Contenido: Este capítulo inicialmente formaría parte del capítulo
+%%%            12 (elementos y estructuras de los documentos). Pero me
+%%%            di cuenta de que, de un lado, los índices afectan al
+%%%            documento globalmente y, de otro, si lo incluía en el
+%%%            capítulo 12, la extensión de éste sería
+%%%            desproporcionada. El capítulo fue escrito en un tiempo
+%%%            record (tres o cuadro días), señal de que ya empezaba a
+%%%            comprender íntimamente la lógica de ConTeXt.
+%%%
+%%% Editado: Emacs + AuTeX - Y a veces con vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent b08_Indices.mkiv
+
+\startchapter
+  [
+    reference=cap:índices de contenido,
+    title={Índices},
+  ]
+
+\PonIndiceCap
+
+Un elemento global del documento es el índice. Existen distintos tipos
+de índices: de contenido, también llamados sistemáticos o generales;
+terminológicos, llamados a veces «alfabéticos» o «índices de materias»,
+onomásticos, de imágenes, de tablas, etc.
+
+Nos ocuparemos de todos ellos en el presente capítulo; aunque la
+atención se centra principalmente en los índices de contenido porque
+son, en la práctica, los más importantes: casi todos los documentos
+incluyen uno, mientras que los otros tipos de índice sólo existen en
+ciertos documentos.
+
+\startLetraChica
+
+  La terminología tradicional española reservaba el término «índice» para
+  el índice de contenido o sistemático (véase, por ejemplo, el significado
+  2º de la voz «Índice» en el Diccionario de la Real Academia de la
+  Lengua). Pero en inglés parece ser que el término «índice» se asoció
+  principalmente a lo que en España llamamos índice analítico o
+  terminológico. La preponderancia actual del inglés, y, sobre todo, de
+  herramientas de composición de textos nacidas en el ámbito cultural
+  anglosajón, lleva a que hoy día exista en España (y no sé si también en
+  el resto de los países de habla hispana) una cierta vacilación sobre el
+  uso del término «índice», siendo cada vez más habituales los libros que
+  al índice de contenido lo llaman «Tabla de contenido» o simplemente
+  «Contenido». Personalmente entiendo que, a la vista del significado del
+  verbo {\em indexar} (o {\em indizar}). Todas estas construcciones merecen
+  la denominación de índice, y para evitar confusiones procuraré aclarar
+  siempre a qué tipo de índice me refiero en cada caso.
+
+  En cuanto a la terminología de \ConTeXt, se reserva el término
+  «índice» ({\em index}) para los comandos vinculados con el índice
+  terminológico.
+
+\stopLetraChica
+
+Todos los índices, cualquiera que sea su tipo, implican una aplicación
+particular del mecanismo de las remisiones internas cuya explicación
+se incluye en la \in{sección}[sec:referencias].
+
+\startsection
+  [
+    reference=sec:content,
+    title={Índices de contenido},
+  ]
+
+\startsubsection
+  [title={Visión general de los índices de contenido}]
+
+En el capítulo anterior se han examinado los comandos que permiten ir
+estableciendo la estructura de un documento conforme éste va siendo
+escrito. La presente sección se centra en los índices de contenido, a
+los que a veces se llama «índice general», «tabla de contenido»,
+«sumario», o «índice» a secas; los cuales constituyen un elemento del
+documento en el que, en cierto modo, se {\em refleja} su
+estructura. Resultan muy útiles para hacerse una idea de conjunto del
+documento (lo que ayuda a contextualizar su información) y para buscar
+el punto exacto en el que se encuentra cierto pasaje concreto. En
+libros de estructura muy compleja, con numerosas secciones y
+subsecciones de varios niveles de profundidad, estas dos utilidades de
+los índices parecen exigir un tipo de índice diferente ya que un
+índice poco detallado (tal vez con solo los dos o tres primeros
+niveles de seccionado) ayuda mucho a hacerse una idea global del
+contenido del documento, pero no es muy útil para localizar un
+concreto pasaje; a diferencia de un índice muy detallado en el cual,
+sin embargo, es fácil que los árboles no dejen ver el bosque y que se
+pierda la visión de conjunto del documento. Por ello en ocasiones los
+libros con estructura especialmente compleja incluyen más de un
+índice: uno no demasiado detallado al principio que muestre los
+principales apartados, y un índice detallado del contenido de cada
+capítulo al principio del mismo; o un índice completo al final.
+
+Todos estos índices pueden ser generados por \ConTeXt\ de forma
+automática con relativa facilidad. Podemos:
+
+\startitemize
+
+\item Generar índices completos e índices parciales en cualquier punto
+  del documento.
+
+\item Decidir el contenido de cada índice.
+
+\item Configurar hasta el más mínimo detalle su apariencia.
+
+\item Incluir hiperenlaces en el índice que permitan saltar
+  directamente desde él hasta la sección de que se trate.
+  
+\stopitemize
+
+De hecho esta última utilidad se incluye por defecto en todos los
+índices siempre que en el documento se haya activado la función de
+interactividad. Véase, al respecto, la
+\in{sección}[sec:interactividad].
+
+La explicación que de esta materia se hace en el manual de referencia de
+\ConTeXt\ es, en mi opinión, algo confusa, lo que creo que se debe a que se
+introduce de golpe mucha información. El mecanismo de construcción de los
+índices de \ConTeXt\ incluye numerosas piezas; y es difícil que un texto
+que las intente explicar simultáneamente resulte claro. Sobre todo para el
+lector novato. Por el contrario la explicación de la
+\goto{wiki}[(https://wiki.contextgarden.net/Table_of_Contents#Page_numbering_in_ToC)],
+prácticamente se limita a poner ejemplos: muy útil para aprender {\em
+trucos} pero insuficiente ---pienso--- para comprender el mecanismo de
+funcionamiento. Por ello la estrategia de explicación que he decidido
+abordar en esta introducción parte de empezar asumiendo una afirmación que
+no es estrictamente cierta (o que no es totalmente cierta): que en
+\ConTeXt\ existe algo llamado {\em índice de contenido}. A partir de ahí se
+explican los comandos {\em normales} para generar los índices, y cuando se
+conocen bien estos comandos y su posible configuración, creo que es el
+momento de introducir ---ya a nivel más teórico que práctico--- la
+información sobre las piezas del mecanismo que hasta entonces se han
+omitido. El conocimiento de estas {\em piezas} adicionales permite crear
+índices mucho más personalizados que los que podríamos llamar {\em índices
+normales}, creados con los comandos explicados hasta entonces; pero, en la
+mayor parte de los casos, no necesitaremos hacerlo.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:completecontent,
+    title={Índices totalmente automáticos con título},
+  ]
+
+Los comandos básicos para generar un índice generado automáticamente a
+partir de las secciones numeradas del documento ({\tt part}, {\tt
+  chapter}, {\tt section}, etc.) son \PonMacro{completecontent}\tex{completecontent} y
+\PonMacro{placecontent}\tex{placecontent}. La diferencia principal entre ambos comandos se
+encuentra en que el primero, añade un {\em título} al índice; para lo
+cual inserta inmediatamente antes del índice un {\em capítulo no
+  numerado} titulado por defecto «Contenido» (en documentos en
+español).
+
+Por tanto \tex{completecontent}:
+
+\startitemize
+
+\item Inserta, en el punto en el que se encuentra, un nuevo capítulo
+  no numerado titulado «Contenido». 
+
+  \startLetraChica
+
+    Recordemos que en \ConTeXt\ el comando que se utiliza para generar
+    una sección no numerada del mismo nivel que los capítulos es
+    \tex{title} (véase la \in{sección}[sec:tipossección]). Por lo
+    tanto en realidad \tex{completecontent} no inserta un {\em
+      Capítulo} (\tex{chapter}), sino un {\em Título}
+    (\tex{title}). No lo he dicho así porque pienso que puede ser
+    confuso para el lector usar aquí los nombres de los comandos de
+    sección no numerados, dado que el término {\em Título} en nuestro
+    idioma tiene un sentido muy amplio y es fácil que el lector no lo
+    identifique con el concreto nivel de seccionado a que nos estamos
+    refiriendo.
+
+  \stopLetraChica
+
+\item Dicho {\em capítulo} (en realidad \tex{title}) se formatea
+  exactamente igual que el resto de los capítulos no numerados del
+  documento; lo que por defecto incluye un salto de página.
+
+\item Inmediatamente detrás del título del índice (que para documentos
+  en español es por defecto, como ya se ha dicho, «Contenido»), se
+  imprime el índice.
+
+\stopitemize
+
+En principio el índice que se genera es {\em completo}, tal y como
+cabría deducir del nombre del comando que lo genera
+(\tex{completecontent}). Pero, de un lado, podemos limitar el nivel de
+profundidad del índice tal y como se explica en la
+\in{sección}[sec:placecontent] y, de otro, como este comando es {\em
+  sensible} al lugar del fichero fuente en el que se encuentra (véase
+lo que más adelante se dice sobre \tex{placecontent}), si
+\tex{completecontent} no se encuentra al principio del documento es
+posible que el índice generado no sea completo; y en algunos puntos
+del fichero fuente es posible incluso que el comando sea aparentemente
+ignorado. Si ocurriera eso la solución está en invocar al comando con
+la opción \PalClave{criterium=all}. Sobre esta opción véase, también,
+la \in{sección}[sec:placecontent].
+
+Para cambiar el título asignado por defecto al índice se usa el
+comando \PonMacro{setupheadtext}\tex{setupheadtext} cuya sintaxis es
+
+  \type{\setupheadtext[Idioma][Elemento=Nombre]}
+
+  Donde {\em Idioma} es opcional y se refiere al identificador del
+  idioma usado por \ConTeXt\ (véase la \in{sección}[sec:idiomadoc]),
+  {\em Elemento} se refiere al elemento cuya denominación queremos
+  cambiar (\PalClave{content} en el caso del índice de contenido) y
+  {\em Nombre} es el nombre o título que queremos asignar a nuestro
+  índice. Por ejemplo
+
+  \type{\setupheadtext[es][content=Sumario]}
+
+  hará que el índice generado por \tex{completecontent} se titule
+  «Sumario» en lugar de «Contenido».
+
+Por lo demás \tex{completecontent} admite las mismas opciones de
+configuración que \tex{placecontent}, a cuya explicación (el próximo
+epígrafe) me remito.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:placecontent,
+    title={Índices automáticos sin título},
+  ]
+
+El comando general para insertar índices sin título, generados
+automáticamente a partir de los comandos de seccionado del documento
+es \tex{placecontent}, cuya sintaxis es:
+
+\type{\placecontent [Opciones]}
+
+En principio el índice recogerá absolutamente todas las secciones
+numeradas; aunque podemos limitar su nivel de profundidad con el
+comando \PonMacro{setupcombinedlist}\tex{setupcombinedlist} (del que se hablará más adelante). Y
+así, por ejemplo:
+
+\type{\setupcombinedlist[content][list={chapter,section}]}
+
+limitará el contenido del índice a capítulos y secciones.
+
+Una peculiaridad de este comando es la de que resulta sensible a su
+situación en el fichero fuente. Esto es muy fácil de explicar con unos
+pocos ejemplos, pero mucho más difícil si lo que se quiere es precisar
+exactamente cómo funciona el comando y qué epígrafes se incluyen en el
+índice en cada caso. Empecemos pues, por los ejemplos:
+
+\startitemize
+
+\item \tex{placecontent} ubicado al principio del documento, antes del
+  primer comando de seccionado (parte, capítulo o sección, según los
+  casos) generará un índice completo.
+
+  \startLetraChica
+
+    No estoy en realidad seguro de que el índice generado por defecto
+    sea {\em completo}, creo que sí incluye suficientes niveles de
+    seccionado para que sea completo en la mayor parte de los
+    casos; pero sospecho que no irá más allá del octavo nivel de
+    particionado. En todo caso, como ya se ha dicho antes, podemos
+    ajustar el nivel de seccionado al que llega el índice con
+    
+    \type{\setupcombinedlist[content][list={chapter, section, subsection, ...}]}
+    
+  \stopLetraChica
+
+\item Por el contrario, este mismo comando ubicado en el interior de
+  una parte, capítulo o sección, generará exclusivamente un índice del
+  contenido de dicho elemento, es decir: capítulos, secciones y demás
+  niveles inferiores de seccionado de una parte concreta, o secciones
+  (y demás niveles) de un capítulo concreto, o subsecciones de una
+  sección concreta.
+
+\stopitemize
+
+En cuanto a la explicación técnica y detallada, para comprender bien
+el funcionamiento por defecto de \tex{placecontent} es imprescindible
+recordar que las distintas secciones son, en realidad, para \ConTeXt\
+Mark~IV, {\em entornos} que empiezan con \tex{startTipoDeSección} y
+terminan con \tex{stopTipoDeSección} y que pueden contener dentro de
+sí otros comandos de seccionado de nivel inferior.  Pues bien:
+teniendo eso en cuenta, podemos decir que \tex{placecontent} genera
+por defecto un índice que sólo incluirá:
+
+\startitemize
+
+\item Elementos que pertenezcan al {\em entorno} (nivel de seccionado)
+  en el que se ubique el comando. Es decir: el comando ubicado en un
+  capítulo, no incluirá secciones o subsecciones de otros capítulos.
+
+\item Elementos que tengan un nivel de seccionado inferior al nivel
+  correspondiente al punto en el que se encuentra el comando. O sea:
+  si el comando está en un capítulo, sólo se incluyen secciones,
+  subsecciones y demás niveles inferiores; pero si el comando está en
+  una sección, se partirá para hacer el índice del nivel subsección.
+
+\stopitemize
+
+Además para que el índice se genere, se exige que \tex{placecontent} se
+encuentre {\em antes} de la primera sección del capítulo en el que se
+ubique, o antes de la primera subsección de la sección en que se
+ubique, etc.
+
+\startLetraChica
+
+  No estoy muy seguro de haber sido claro en la explicación
+  anterior. Tal vez con un ejemplo algo más detallado que los
+  anteriores se entienda mejor lo que quiero decir: Imaginemos la
+  siguiente estructura de un documento:
+
+\vbox{
+  \startitemize[packed]
+
+  \item Capítulo 1
+
+    \startitemize[packed]
+
+    \item Sección 1.1
+
+    \item Sección 1.2
+
+      \startitemize[packed]
+
+      \item Subsección 1.2.1
+        
+      \item Subsección 1.2.2
+        
+      \item Subsección 1.2.3
+        
+      \stopitemize
+      
+    \item Sección 1.3
+      
+    \item Sección 1.4
+      
+    \stopitemize
+
+  \item Capítulo 2
+    
+  \stopitemize}
+
+  Pues bien: \tex{placecontent} ubicado antes del capítulo 1 generará un
+  índice completo, similar al generado por \tex{completecontent} aunque sin
+  título. Pero si el comando se ubica dentro del capítulo 1 y antes de la
+  sección 1.1, el índice será sólo del capítulo; y si se ubica al principio
+  de la sección 1.2., el índice recogerá sólo el contenido de la misma.
+  Pero si el comando se ubica, por ejemplo, entre las secciones 1.1 y 1.2
+  será ignorado. También será ignorado si se ubica al final de una sección,
+  o al final del documento.
+
+\stopLetraChica
+
+Todo ello, claro está, se refiere sólo al caso de que el comando no
+incluya opciones. En particular, la opción {\tt criterium} alterará
+ese comportamiento predeterminado.
+
+De las opciones admitidas por \tex{placecontent} sólo explicaré dos
+que son, las más importantes para configurar el índice, y, además, las
+únicas que están documentadas (parcialmente) en el manual de
+referencia de \ConTeXt. La opción {\tt criterium}, que afecta al
+contenido del índice en relación con el lugar del fichero fuente en
+que se encuentre el comando; y la opción {\tt alternative}, que afecta
+al diseño general del índice que se generará.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:criteriumlist,
+    title={Elementos a incorporar al índice: La opción {\tt criterium}},
+  ]
+
+Más arriba se ha explicado el funcionamiento por defecto de
+\tex{placecontent} en relación con la posición del comando en el
+fichero fuente. La opción {\tt criterium} altera este
+funcionamiento. Puede asumir, entre otros, los siguientes valores:
+
+\startitemize
+
+\item {\tt all}: El índice será completo, con independencia del lugar
+  del fichero fuente en que se encuentre el comando.
+
+\item {\tt previous}: El índice sólo incluirá los comandos de
+  seccionado (del nivel en que nos encontremos) {\em anteriores} a
+  \tex{placecontent}. Esta opción está pensada para índices que se
+  escriban al final del documento o sección de que se trate.
+
+\item {\tt part, chapter, section, subsection...}: Implica que el
+  índice debe ceñirse exclusivamente al nivel de seccionado que se le
+  indica.
+
+\item {\tt component}: En proyectos multifichero (véase la
+  \in{sección}[sec-proyectos]), generará solamente el índice
+  correspondiente al elemento {\em component} en que se ubique el
+  comando \tex{placecontent} o \tex{completecontent}.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:alternativelist,
+    title={Diseño del índice: la opción {\tt alternative}},
+  ]
+
+La opción {\tt alternative} controla el diseño general del
+índice. Sus principales valores se recogen en la
+\in{tabla}[tbl:contentalternatives].
+
+\placetable
+  [here]
+  [tbl:contentalternatives]
+  {\tfx Formas de formatear el índice de contenido}
+{\switchtobodyfont[small]
+\starttabulate[|c|l|l|]
+\HL
+\NC {\bf alternative}
+\NC {\bf Contenido de las entradas del índice}
+\NC {\bf Observaciones}
+\NR
+\HL
+\NC a
+\NC Número -- Título -- Página
+\NC Una línea por entrada
+\NR
+\NC b
+\NC Número -- Título -- Espacios -- Página
+\NC Una línea por entrada
+\NR
+\NC c
+\NC Número -- Título -- Puntos -- Página
+\NC Una línea por entrada
+\NR
+\NC d
+\NC Número -- Título -- Página
+\NC Índice continuo
+\NR
+\NC e
+\NC Título
+\NC Enmarcado
+\NR
+\NC f
+\NC Título
+\NC Alineado a la izquierda, 
+\NR
+\NC\NC\NC a la derecha o centrado
+\NR
+\NC g
+\NC Título
+\NC Centrado
+\NR
+\HL
+\stoptabulate}
+
+Los primeros cuatro valores de alternative ofrecen toda la información
+de cada sección (su número, su título y el número de página en donde
+empieza), y por ello son adecuados tanto para documentos en papel como
+para documentos electrónicos. Las tres últimas alternativas sólo
+informan del título, por lo que sólo son adecuadas para documentos
+electrónicos en los que no es preciso saber el número de página en el
+que empieza una sección, siempre que el índice incluya un hiperenlace
+a ella, cosa que en \ConTeXt\ sucede por defecto.
+
+Por lo demás considero que para apreciar verdaderamente las
+diferencias entre las distintas alternativas, lo mejor es que el
+lector genere un documento de prueba en el que pueda analizarlas con
+detenimiento.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:setuplist,
+    title={Formato de las entradas del índice},
+  ]
+  \PonMacro{setuplist}
+
+Hemos visto que la opción {\tt alternative} de \tex{placecontent} o
+\tex{completecontent} permite controlar el {\em diseño} general del
+índice, es decir: qué información se mostrará de cada epígrafe, y si
+habrá o no saltos de lineas que separen a los distintos epígrafes. El
+ajuste fino de cada entrada del índice se logra mediante el comando
+\tex{setuplist} cuya sintaxis es la siguiente:
+
+\type{\setuplist[Elemento][Configuración]}
+
+donde {\em Elemento} se refiere a un tipo concreto de sección. Puede ser:
+{\tt part}, {\tt chapter}, {\tt section}, etc. Podemos también configurar
+simultáneamente más de un elemento, separándolos mediante comas. {\em
+Configuración} incluye hasta 54 posibilidades, muchas de ellas, como de
+costumbre, sin documentar expresamente; lo que por otra parte no impide que
+las sí documentadas, o aquellas cuya denominación es lo suficientemente
+explícita, permitan realizar un ajuste completo del índice.
+
+A continuación explicaré las opciones más importantes, agrupándolas
+según su utilidad, pero antes de entrar en ello recordemos que una
+entrada del índice, dependiendo del valor de {\tt alternative} puede
+llegar a tener hasta tres componentes distintos: El número de sección,
+el título de la sección, y el número de página. Las opciones de
+configuración permiten configurar los distintos componentes de modo
+global o separadamente:
+
+\startitemize
+
+\item {\em Inclusión (o no) de los distintos componentes}: Si hemos
+  elegido una alternativa que incluya, además del título, el número de
+  sección y el número de página (alternativas «a», «b», «c» o «d»),
+  las opciones {\tt headnumber=no} o {\tt pagenumber=no} hacen que
+  para el nivel concreto que estemos configurando no se muestre, el
+  número de sección ({\tt headnumber}) o el número de página ({\tt
+    pagenumber}).
+
+\item {\em Color y estilo} Ya sabemos que la entrada que genera una
+  concreta sección en el índice puede llegar a tener (dependiendo de
+  la alternativa) hasta tres componentes distintos: Número de sección,
+  título y número de página. Podemos indicar conjuntamente el estilo y
+  el color para los tres componentes mediante las opciones {\tt style}
+  y {\tt color}, o hacerlo individualmente para cada uno de los
+  componentes mediante {\tt numberstyle, textstyle} o {\tt pagestyle}
+  (para el estilo) y  {\tt numbercolor, textcolor} o {\tt pagecolor}
+  para el color.
+
+  Para controlar el aspecto de cada entrada, además de los comandos de
+  estilo propiamente dicho, podemos aplicar algún comando a toda la
+  entrada o a alguno de sus distintos elementos. Para ello estás las
+  opciones {\tt command}, {\tt numbercommand}, {\tt pagecommand} y
+  {\tt textcommand}. El comando indicado aquí puede ser un comando
+  estándar de \ConTeXt\ o un comando de nuestra propia creación. Al
+  comando indicado por la opción {\tt command} se le pasarán como
+  argumentos el número de sección, el texto del título y el número de
+  página, mientras que a {\tt numbercommand} se le pasará como
+  argumento el número de sección, a {\tt textcommand} se le pasará
+  como argumento el título de la sección y a {\tt pagecommand} se le
+  pasará como argumento el número de página. Así, por ejemplo, la
+  siguiente sentencia hará que el título de las secciones se escriba
+  en (falsas) versalitas:
+
+  \starttyping
+
+    \setuplist[section][textcommand=\Cap]
+
+  \stoptyping
+
+\item {\em Separación de los demás elementos del índice}: Las opciones
+  {\tt before} y {\tt after} permiten indicar los comandos que se
+  ejecutarán antes ({\tt before}) y despues ({\tt after}) de escribir
+  la entrada del índice. Normalmente estos comandos se utilizan para
+  establecer, bien el espacio de separación, bien algún elemento
+  separador de las entradas anteriores y posteriores.
+
+\item {\em Sangrado del elemento}: se establece con la opción {\tt
+  margin} que permite establecer la cantidad de sangrado izquierdo que
+  tendrán las entradas del nivel que estamos configurando.
+
+\item {\em Hiperenlaces embebidos en el índice}: Por defecto las
+  entradas del índice incluyen un hiperenlace a la página del
+  documento en el que empieza la sección de que se trate. Mediante la
+  opción {\tt interaction} podemos desactivar ese funcionamiento ({\tt
+    interaction=no}) o limitar la parte de la entrada del índice en la
+  que estará el hiperenlace que puede ser el número de la sección
+  ({\tt interaction=number} o {\tt interaction=sectionnumber}), el
+  título de la sección ({\tt interaction=text} o {\tt
+    interaction=title}) o el número de página ({\tt interaction=page}
+  o {\tt interaction=pagenumber}).
+
+\item {\em Otros aspectos}:
+
+  \startitemize
+
+  \item {\tt width}: Especifica la distancia de separación
+    entre el número y el título de la sección. Puede ser una
+    dimensión, o la palabra clave {\tt fit} que establece la anchura
+    exacta del número de la sección.
+
+  \item {\tt symbol}: Permite sustituir el número de sección por un
+    {\em símbolo}. Se admiten tres valores posibles: {\tt one, {\tt
+        two} y {\tt three}}. El valor {\tt none} para esta opción
+    elimina del índice el número de la sección.
+
+  \item {\tt numberalign}: Indica la alineación de los elementos de
+    numeración; puede ser left, right, middle, flushright, flushleft.
+    
+  \stopitemize
+
+\stopitemize
+
+No hay, entre las múltiples opciones de configuración del índice,
+ninguna que nos permita controlar directamente el tamaño de su
+interlineado. Este será, por defecto, el general del documento. En
+muchas ocasiones, sin embargo, es preferible que las líneas del índice
+estén ligeramente más {\em apretadas} que las del resto del
+documento. Para conseguir esto deberíamos encerrar el comando que
+genera el índice (\tex{placecontent} o \tex{completecontent}) dentro
+de un grupo en el que se establezca un interlineado diferente. Por
+ejemplo:
+
+\starttyping
+\start
+  \setupinterlinespace[small]
+  \placecontent
+\stop
+\stoptyping
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:ajustes_manuales,
+    title={Ajustes manuales de los índices},
+  ]
+
+Hemos explicado ya los dos comandos fundamentales para generar índices
+de contenido (\tex{placecontent} y \tex{completecontent}), así como
+sus opciones. Con estos dos comandos se generan, automáticamente,
+índices construidos a partir de las secciones numeradas existentes en
+el documento, o en el bloque o segmento del documento a que se refiera
+el índice. A continuación explicaré ciertos {\em ajustes} que podemos
+hacer para que el contenido del índice no sea tan {\em
+  automático}. Ello implica:
+
+\startitemize
+
+\item La posibilidad de incluir también en el índice ciertos tipos de
+  sección no numerada.
+\item La posibilidad de enviar, manualmente, alguna entrada concreta
+  al índice que no se corresponda con la presencia de una sección
+  numerada.
+\item La posibilidad de excluir del índice alguna concreta sección
+  numerada.
+\item La posibilidad de que el título que para una sección concreta
+  refleja el índice no coincida exactamente con el título que se
+  incluye en el cuerpo del documento.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsubsection
+  [
+    reference=sec:indice con secs no numeradas,
+    title={Incluir en el índice secciones no numeradas},
+  ]
+
+El mecanismo de construcción del índice de \ConTeXt\ incluye en él
+todas las secciones que se numeran automáticamente, lo que, como ya se
+dijo (véase la \in{sección}[sec:partes_titulo]) depende de dos
+opciones ({\tt number} e {\tt incrementnumber}) que, para cada tipo de
+sección podemos cambiar con \tex{setuphead}. También en aquel lugar se
+explicó que un tipo de sección en el que se hubiera establecido {\tt
+  incrementnumber=yes} y {\tt number=no} sería una sección numerada
+internamente pero no externamente.
+
+Por lo tanto, si queremos que cierto tipo de sección no numerada
+---por ejemplo, {\tt title}--- se incluya en el índice, debemos
+cambiar para dicho tipo de sección el valor de la opción {\tt
+  incrementnumber} estableciéndolo como {\tt yes} y, después, incluir
+ese tipo de sección entre los que deben mostrarse en el índice lo que
+se haría, como se explicó más arriba, con \tex{setupcombinedlist}:
+
+\starttyping
+  \setuphead
+    [title]
+    [incrementnumber=yes]
+
+ \setupcombinedlist
+   [content]
+   [list={chapter, title, section, subsection, subsubsection}]
+\stoptyping
+
+A continuación podremos formatear, si así lo deseamos, dicha entrada
+del índice mediante \tex{setuplist} exactamente igual que cualquiera
+de las restantes; por ejemplo:
+
+\type{\setuplist[title][style=bold]}
+
+{\bf Nota:} El procedimiento que se acaba de explicar incluirá en
+el índice todas las instancias en nuestro documento del tipo de
+sección no numerada de que se trate (en nuestro ejemplo las secciones
+de tipo {\tt title}). Si sólo deseamos incluir en el índice una
+aparición concreta de ese tipo de sección, es preferible hacerlo por
+el procedimiento que se explica inmediatamente.
+
+\stopsubsubsection
+
+\startsubsubsection
+  [
+    reference=sec:indicemanual,
+    title={Agregar manualmente entradas al índice},
+  ]
+
+Desde cualquier punto del fichero fuente podemos enviar al índice de
+contenido, bien una entrada (simulando la existencia de una sección
+que en realidad no existe), bien un comando.
+
+Para enviar una entrada que simule la existencia de una sección que en
+realidad no existe se usa el comando \PonMacro{writetolist}\tex{writetolist} cuya sintaxis
+es:
+
+\type{\writetolist[TipoSección][Opciones]{Número}{Texto}}
+
+en donde
+
+\startitemize
+
+\item El primer argumento indica el nivel que debe tener esta entrada
+  en el índice: {\tt chapter}, {\tt section}, {\tt subsection}, etc.
+
+\item El segundo argumento, que es opcional, permite configurar de
+  forma particular esta entrada. Si se omite la entrada manualmente
+  enviada se formateará cono todas las del nivel indicado con el
+  primer argumento; aunque, debo señalar, que en mis pruebas no he
+  conseguido que funcione
+
+  \startLetraChica
+
+    Tanto en el listado oficial de comandos de \ConTeXt\ (véase
+    \in{sección}[sec:qrc-setup-en]) como en la wiki se informa de que este
+    argumento admite los \Duda mismos valores que \tex{setuplist} que es el
+    comando que permite formatear las distintas entradas del índice. Pero,
+    insisto, en mis pruebas no he conseguido cambiar la apariencia de la
+    entrada del índice enviada manualmente.
+
+  \stopLetraChica
+
+\item El tercer argumento se supone que recoge la numeración que habrá
+  de tener el elemento que se envía al \Duda índice, pero tampoco he
+  conseguido hacerlo funcionar en mis pruebas.
+
+\item El último argumento recoge el texto que se envía al índice.
+
+\stopitemize
+
+Esto es útil, por ejemplo, si queremos enviar al índice una concreta
+sección no numerada, pero sólo esa. En la \in{sección}[sec:indice con
+  secs no numeradas] se ha explicado como conseguir que toda una
+categoría de secciones no numeradas se envíen al índice; pero si solo
+queremos enviar al índice una aparición concreta de un tipo de
+sección, es más cómodo usar el comando \tex{writetolist}. Y así, por
+ejemplo, si deseamos que la sección de nuestro documento en la que se
+recoge la bibliografía, no sea una sección numerada, pero aún así se
+incluya en el índice, deberíamos escribir:
+
+\starttyping
+\subject{Bibliografía}
+\writetolist[section]{}{Bibliografía}
+\stoptyping
+
+Véase como usamos para la sección la versión no numerada de {\tt
+  section}, que es {\tt subject}, pero la enviamos al índice,
+manualmente, como si fuera una sección numerada ({\tt section}.)
+
+Otro comando pensado para influir manualmente en el índice es
+\PonMacro{writebetweenlist}\tex{writebetweenlist} que sirve para enviar al índice, desde cierto
+punto del documento, no una entrada propiamente dicha, sino un {\em
+  comando}. Por ejemplo, si queremos introducir una línea entre dos
+elementos del índice, podríamos escribir lo siquiente, en cualquier
+punto del documento ubicado entre las dos secciones de que se trate:
+
+\type{\writebetweenlist[section]{\hrule}}
+
+\stopsubsubsection
+
+\startsubsubsection
+  [title={Excluir del índice una concreta sección perteneciente a un
+    tipo de secciones que están incluidas en el índice}]
+
+El índice se construye a partir de {\em tipos de sección},
+establecidos, como ya sabemos, mediante la opción {\tt list} de
+\tex{setupcombinedlist}, por lo que si cierto {\em tipo} de sección
+debe aparecer en el índice, no hay manera de excluir de él alguna
+concreta sección que, por las razones que sean, no queremos que figure
+en él.
+
+Normalmente, si no queremos que una sección figure en el índice, lo
+que haremos será usar el equivalente {\em no numerado} de dicha
+sección; es decir: {\tt title} en lugar de {\tt chapter}, {\tt
+  subject} en lugar de {\tt section}, etc. Estas secciones no se
+envían al índice, pero tampoco se numeran.
+
+No obstante, si por alguna razón deseamos que cierta sección esté numerada
+pero no aparezca en el índice, aunque las restantes de su tipo si lo hagan,
+podemos utilizar un {\em truco} consistente en crear un nuevo tipo de
+sección que sea un clon del tipo de sección de que se trate. Por ejemplo:
+
+\starttyping
+\definehead[MiSubsección][subsection]
+\section{Primera sección}
+\subsection{Primera subsección}
+\MiSubsección{Segunda subsección}
+\subsection{Tercera subsección}
+\stoptyping
+
+Esto haría que al insertar una sección del tipo {\tt MiSubSección} se
+incrementara el contador de subsecciones, pues esta sección es un {\em
+  clon} de las subsecciones, pero el índice no quedara alterado, pues
+en el índice, por defecto, no se incluyen las secciones del tipo {\tt
+  MiSubSección}.
+
+\stopsubsubsection
+
+\startsubsubsection
+  [title={Texto del título de la sección diferente en el índice y en el
+  cuerpo del documento}]
+
+Si no queremos que el título de una concreta sección que se incluye en
+el índice sea idéntico al que se muestra en el cuerpo del documento,
+disponemos de dos procedimientos:
+
+\startitemize
+
+\item Crear la seción no con la sintaxis tradicional
+  (\type+\TipoSección{Título}+) sino bien con la sintaxis
+  \tex{TipoSección[Opciones]}, bien con
+  \tex{startTipoSección[Opciones]}, y asignar a la opción {\tt list}
+  el texto que queremos que se escriba en el índice (véase la
+  \in{sección}[sec:sintaxissecciones]).
+
+\item Al escribir, en el cuerpo del documento, el título de la sección
+  de que se trate, usar el comando \tex{nolist}: este comando hace que
+  el texto que recibe como argumento se sustituya en el índice por
+  unos puntos suspensivos. Por ejemplo:
+
+\starttyping
+\chapter
+  [title={Introducción \nolist{meramente aproximativa y 
+         ligeramente reiterativa} a la realidad de lo obvio}]
+  \stoptyping
+
+  escribiría, como título del capítulo, en el cuerpo del documento,
+  «Introducción meramente aproximativa y ligeramente reiterativa a la
+  realidad de lo obvio», pero enviaría al índice el texto
+  «Introducción ... a la realidad de lo obvio».
+
+  \startLetraChica
+
+    {\bf Atención:} Lo que acabo de señalar del comando \tex{nolist}
+    está afirmado tanto en el manual de referencia de \ConTeXt\ como
+    en la
+    \goto{wiki}[url(https://wiki.contextgarden.net/Command/nolist)]. A
+    mi, sin embargo, me produce un error de compilación en el que se
+    me informa de que el comando \tex{nolist} está sin definir.
+
+  \stopLetraChica
+
+\stopitemize
+
+\stopsubsubsection
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:listas_ind,
+    title={Listas, listas combinadas e índices\\ creados a partir de una lista},
+  ]
+
+Desde el punto de vista interno, para \ConTeXt\ un índice de contenido no
+es sino una {\em lista combinada}, la cual, a su vez, como su propio nombre
+indica, consiste en una combinación de listas simples. Por lo tanto la
+noción básica a partir de la cual \ConTeXt\ construye los índices es la de
+lista. Varias listas se combinan para dar lugar a un índice de contenido.
+Por defecto \ConTeXt\ contiene una lista combinada predefinida llamada
+\PalClave{content} y es con ella con la que trabajan los comandos hasta
+ahora examinados: \tex{placecontent} y \tex{completecontent}.
+
+\startsubsection
+  [title={Listas en \ConTeXt}]
+
+En \ConTeXt\ una {\em lista} es una matriz de
+elementos numerados de los que hay que recordar tres aspectos:
+
+\startitemize[n]
+
+\item El número.
+
+\item El nombre o título.
+
+\item La página en la que cada elemento se encuentra.  
+
+\stopitemize
+
+Esto ocurre con las secciones numeradas; pero también con otros
+elementos de los documentos como, por ejemplo, las imágenes, las
+tablas, etc. En general aquellos elementos para los que hay un comando
+cuyo nombre empiece por \tex{place} que los ubica como
+\tex{placetable}, \tex{placefigure}, etc.
+
+En todos estos casos \ConTeXt\ genera automáticamente una lista que
+recoge las diferentes apariciones del tipo de elemento de que se
+trate, su número, título y página. Así, por ejemplo, hay una lista de
+capítulos, llamada {\tt chapter}, otra de secciones, llamada {\tt
+  section}; pero también otra de tablas (llamada {\tt table}) o de imágenes
+(llamada {\tt figure}). Las listas generadas automáticamente por
+\ConTeXt\ siempre se llaman igual que el elemento que
+almacenan.
+
+También se generará automáticamente una lista si creamos, por ejemplo,
+un nuevo tipo de sección numerada: al crearla implícitamente estaremos
+creando también la lista que las almacena. Y si para una sección no
+numerada por defecto, establecemos la opción {\tt incrementnumber=yes}
+convirtiéndola en sección numerada, estaremos también implícitamente
+creando una lista con dicho nombre.
+
+Junto con las listas implícitas (definidas automáticamente por
+\ConTeXt) podemos crear nuestras propias listas con \tex{definelist}
+cuya sintaxis es 
+
+\PonMacro{definelist}\type{\definelist[NombreLista][Configuración]}
+
+Los elementos de la lista se añaden:
+
+\startitemize
+
+\item En listas predefinidas por \ConTeXt, o creadas por este como
+  consecuencia de la creación de un nuevo objeto flotante (vése la
+  \in{sección}[sec:definefloat]), automáticamente cada vez que se
+  inserta en el documento un elemento de la lista, bien mediante un
+  comando de seccionado, bien mediante el comando \tex{placeLoQueSea}
+  para otro tipo de listas. Por ejemplo: \tex{placefigure} insertará
+  en el documento la imagen que sea, pero también insertará en la
+  lista la entrada correspondiente a la misma.
+
+\item En cualquier tipo de lista, manualmente mediante
+  \tex{writetolist[NombreLista]}, ya explicado en el
+  \in{apartado}[sec:indicemanual] de la
+  \in{sección}[sec:ajustes_manuales]. También se dispone del comando
+  \tex{writebetweenlist} explicado en el mismo lugar.
+
+\stopitemize
+
+Una vez creada una lista, e incluidos en ella todos sus elementos, los tres
+comandos básicos relacionados con ella son \tex{setuplist},
+\PonMacro{placelist}\tex{placelist} y
+\PonMacro{completelist}\tex{completelist}. El primero permite configurar el
+aspecto de los elementos de la lista; los dos últimos insertan la lista de
+que se trate en el punto del documento en el que se encuentren. La
+diferencia entre \tex{placelist} y \tex{completelist} es similar a la que
+hay entre \tex{placecontent} y \tex{completecontent} (véanse las secciones
+\in{}[sec:completecontent] y \in{}[sec:placecontent]).
+
+Así, por ejemplo,
+
+\type{\placelist[section]}
+
+insertará una lista de las secciones, incluyendo un hiperenlace a las
+mismas si la interactividad del documento está activada y en
+\tex{setuplist} no hemos establecido {\tt interaction=no}. Una lista
+de secciones no es exactamente lo mismo que un índice de secciones: la
+idea de índice suele incluir también los niveles inferiores
+(subsecciones, subsubsecciones, etc.). Pero una lista de secciones
+recogerá solo las secciones propiamente dichas.
+
+La sintaxis de estos comandos es:
+
+\type{\placelist[NombreLista][Opciones]}
+
+\type{\setuplist[NombreLista][Configuración]}
+
+Las opciones de \tex{setuplist} ya las hemos examinado en la
+\in{sección}[sec:setuplist], y las de \tex{placelist} son las mismas
+que las de \tex{placecontent} (véase la
+\in{sección}[sec:placecontent]).
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:indicesvarios,
+    title={Índices de imágenes, tablas y otros\\ elementos},
+  ]
+
+De lo hasta ahora dicho se desprende que, dado que \ConTeXt\ crea
+automáticamente una lista de imágenes insertadas en el documento
+mediante el comando \tex{placefigure}, generar un índice de imágenes
+en un punto concreto de nuestro documento es tan simple como incluir
+en él el comando \tex{placelist[figure]}. Y si queremos generar un
+índice con título (similar al obtenido con \tex{completecontent})
+bastaría con \tex{completelist[figure]}. Lo mismo podemos hacer con
+los otros cuatro tipos de objetos flotantes predefinidos por \ConTeXt:
+tablas (\PalClave{table}), Gráficos (\PalClave{graphic}), {\em
+  intermezzos} (\PalClave{intermezzo}) y fórmulas químicas
+(\PalClave{chemical}), aunque para el caso concreto de estos índices,
+\ConTeXt\ ya incluye un comando que los genera sin título
+(\PonMacro{placelistoffigures}\tex{placelistoffigures},
+\PonMacro{placelistoftables}\tex{placelistoftables},
+\PonMacro{placelistofgraphics}\tex{placelistofgraphics},
+\PonMacro{placelistofintermezzi}\tex{placelistofintermezzi} y
+\PonMacro{placelistofchemicals}\tex{placelistofchemicals}), y otro que
+los genera con título
+(\PonMacro{completelistoffigures}\tex{completelistoffigures},
+\PonMacro{completelistoftables}\tex{completelistoftables},
+\PonMacro{completelistofgraphics}\tex{completelistofgraphics},
+\PonMacro{completelistofintermezzi}\tex{completelistofintermezzi} y
+\PonMacro{completelistofchemicals}\tex{completelistofchemicals}), de
+modo similar a \tex{completecontent}.
+
+De la misma manera, para los objetos flotantes creados por nosotros
+mismos (véase la \in{sección}[sec:definefloat]) se crearán
+automáticamente las órdenes \tex{placelistof<NombreFloat>} y
+\tex{completelistof<NombreFloat>}.
+
+Para las litas creadas por nosotros mismos mediante \tex{definelist}
+podremos crear un índice con \tex{placelist[NombreLista]} o con
+\tex{completelist[NombreLista]}.
+
+\stopsubsection
+
+\startsubsection
+  [title={Listas combinadas}]
+
+Una lista combinada es, como su propio nombre indica, una lista que
+combina elementos de diferentes listas previamente
+definidas. \ConTeXt\ por defecto define una lista combinada para los
+índices de contenido cuyo nombre es \PalClave{content}, pero podemos
+crear otras listas combinadas mediante \PonMacro{definecombinedlist}\tex{definecombinedlist} cuya
+sintaxis es:
+
+\type{\definecombinedlist[Nombre][Listas][Opciones]}
+
+donde
+
+\startitemize
+
+\item {\em Nombre}: es el nombre que tendrá la nueva lista combinada.
+
+\item {\em Listas}: se refiere a los nombres de las listas que hay que
+  combinar, separados por comas.
+
+\item {\em Opciones}: Opciones de configuración de la lista. Pueden
+  indicarse en el momento de definir a la lista o, lo que probablemente sea
+  preferible, cuando la lista sea invocada. Las principales opciones (que
+  ya se han explicado) son {\tt criterium}
+  (\in{apartado}[sec:criteriumlist] de la \in{sección} [sec:placecontent])
+  y {\tt alternative} (en el \in{apartado}[sec:alternativelist] de la misma
+  sección).
+
+\stopitemize
+
+Un efecto colateral de la creación de una lista combinada mediante
+\tex{definecombinedlist} es que se crea también un comando llamado
+\tex{placeNombreLista} que sirve para invocar a la lista, es decir:
+para incluirla en el fichero de salida. Así por ejemplo, 
+
+\type{definecombinedlist[Sumario]}
+
+creará el comando \tex{placeSumario}; y 
+
+\type{definecombinedlist[content]}
+
+creará el comando \tex{placecontent}
+
+Un momento ¿\tex{placecontent}? ¿No es ese el comando que se usa para
+generar un índice de contenido {\em normal}? En efecto: eso significa
+que en realidad el índice de contenido estándar es creado por
+\ConTeXt\ mediante el siguiente comando:
+
+\starttyping
+\definecombinedlist
+  [content]
+  [part, chapter, section, subsection, 
+    subsubsection, subsubsubsection, 
+    subsubsubsubsection]
+\stoptyping
+
+Una vez definida nuestra lista combinada, podemos configurarla (o
+reconfigurarla) con \tex{setupcombinedlist} que admite las opciones ya
+explicadas {\tt criterium} (veáse el \in{apartado}[sec:criteriumlist]
+de la \in{sección}[sec:placecontent]) y {\tt alternative} (véase el
+\in{apartado}[sec:alternativelist] de la misma sección), así como la
+opción {\tt list} para {\em cambiar} las listas incluidas en la lista
+combinada.
+
+\startLetraChica
+
+  El listado oficial de comandos de \ConTeXt\ (véase
+  \in{sección}[sec:qrc-setup-en]) no menciona entre las opciones admisibles
+  para \tex{setupcombinedlist} la opción {\tt list} pero esta es utilizada
+  en varios ejemplos de uso de este comando de la wiki (la cual, por otra
+  parte, tampoco la menciona en la página que dedica a este comando). He
+  comprobado, además, que la opción funciona.
+
+\stopLetraChica
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [title={Índices terminológicos}]
+
+\startsubsection
+  [title={Generación del índice}]
+
+Un índice terminológico, también llamado «analítico», consiste en un
+listado de voces significativas ubicado normalmente al final de un
+documento, en el que se indican las páginas en las que tal noción es
+tratada.
+
+Cuando los libros se componían a mano, generar un índice terminológico
+era tarea compleja, además de tediosa. Cualquier cambio en la
+paginación podía afectar a todas las entradas del índice. Por ello no
+eran muy habituales. Hoy día los mecanismos informáticos de
+composición de textos hacen que, si bien probablemente la tarea siga
+siendo tediosa, ya no es tan compleja; pues para un sistema
+informático no es tan difícil mantener actualizados los datos
+asociados a una entrada del índice.
+
+Para generar un índice terminológico necesitamos:
+
+\startitemize[n]
+
+\item Determinar qué palabras voces o conceptos han de formar parte de
+  él. Esto es tarea que sólo puede hacer el autor.
+
+\item Comprobar para cada entrada del futuro índice, en qué puntos del
+  documento aparece la misma. Aunque, para ser precisos, más que {\em
+    comprobar} los lugares del fichero fuente en los que se habla del
+  concepto o cuestión de que se trate, lo que hacemos cuando
+  trabajamos con \ConTeXt\ es {\em marcar} dichos lugares, insertando
+  un comando que luego servirá para que el índice pueda generarse
+  automáticamente. Esta es la parte tediosa.
+
+\item Por último generar y formatear el índice ubicándolo en el punto
+  del documento de nuestra elección. Esto último es bastante sencillo
+  con \ConTeXt\ y requiere de un sólo comando: \tex{placeindex}.
+  
+\stopitemize
+
+\subsubsection{La previa definición de las entradas del índice y el\\
+  marcado de los puntos del fichero fuente que se\\ refieren a ellas}
+
+El trabajo fundamental está en el segundo paso. Es cierto que los
+sistemas informáticos también lo facilitan en el sentido de que
+podemos hacer una búsqueda global de texto para localizar los lugares
+del fichero fuente en donde se trata de una concreta cuestión. Pero
+tampoco debemos confiar ciegamente en esas búsquedas de texto: un buen
+índice analítico ha de ser capaz de detectar todos los lugares en los
+que se habla de cierta cuestión, aunque ello se haga sin usar el
+término {\em estándar} para referirse a ella.
+
+Para {\em marcar} un punto concreto del fichero fuente, asociándolo a
+una palabra, voz o noción que aparecerá en el índice terminológico se
+usa el comando \PonMacro{index}\tex{index} cuyo formato es el siguiente:
+
+\type{\index[Alfabetización][Entrada del índice]}
+
+donde {\em Alfabetización} es un argumento opcional que sirve para
+indicar un texto alternativo al de la propia entrada del índice para
+ordenarla alfabéticamente, y {\em Entrada del índice} es el texto que
+aparecerá en el índice, asociado a dicha marca. A dicho texto podemos,
+por otra parte, aplicarle las características de formato que deseemos,
+y si en él aparecen caracteres reservados, estos deberán escribirse
+del modo habitual en \ConTeXt.
+
+\startLetraChica
+
+  La posibilidad de alfabetizar una entrada del índice de una manera
+  distinta a como realmente se escribe, ofrece bastante
+  utilidad. Piénsese, por ejemplo, en este documento, si quiero generar
+  una entrada en el índice para todas las refencias al comando
+  \tex{TeX}, por ejemplo, la secuencia \type{\index{\backslash TeX}}
+  alfabetizará el comando, no en la «t» de «TeX», sino en el apartado
+  de los símbolos pues el término que se envía al índice empieza por
+  una barra invertida. Esto se solucionaría escribiendo
+  \type{\index[tex]{\backslash TeX}}.
+
+\stopLetraChica
+
+Las {\em entradas del índice} serán las que nosotros queramos. Para
+que un índice terminológico sea verdaderamente útil hay que esforzarse
+un poco preguntándose por qué conceptos es más probable que el lector
+de un documento busque; y así, por ejemplo, será en general mejor
+definir una entrada como «Hodgkin, Enfermedad de» que definirla como
+«enfermedad de Hodgkin».
+
+\startLetraChica
+
+  Por convención las entradas de un índice analítico se escriben
+  siempre en minúscula, salvo que se trate de nombres
+  propios. Martínez de Sousa sugiere también emplear las mayúsculas
+  cuando se ha usado una coma para colocar delante la palabra más
+  significativa y ésta empieza por mayúsculas; como en el ejemplo
+  anterior: «Hodgkin, Enfermedad de» (en {\em Ortografía y
+    ortotipografía del español actual}, 2ª ed., ediciones Trea 2008,
+  pág. 506).
+  
+\stopLetraChica
+
+Si el índice tiene varios niveles de profundidad (se admiten hasta
+tres niveles) para asociar una concreta entrada del índice con un
+nivel concreto se usa el carácter «+». Del siguiente modo:
+
+\starttyping
+\index{Entrada 1+Entrada 2}
+\index{Entrada 1+Entrada 2+Entrada 3}
+\stoptyping
+
+En el primer caso habremos definido una entrada de segundo nivel
+llamada {\em Entrada 2} que será una subentrada de {\em Entrada 1}. En
+el segundo caso habremos definido una entrada de tercer nivel llamada
+{\em Entrada 3} que será una subentrada de {\em Entrada 2}, la cual
+será, a su vez, subentrada de {\em Entrada 1}.  Por ejemplo
+
+\vbox{
+\starttyping
+
+  A mi \index{perro}perro, que es un \index{perro+galgo}galgo llamado
+  Yuri. No le gustan los \index{gato+callejero}gatos callejeros.
+
+\stoptyping}
+
+Conviene observar varios detalles del fragmento anterior:
+
+\startitemize
+
+\item El comando \tex{index} habitualmente se coloca {\em delante} de
+  la palabra a la que se asocia y normalmente no se le separa de ella
+  por un espacio en blanco. Eso es para asegurarse de que el comando
+  estará exactamente en la misma página que la palabra a la que está
+  vinculado:
+
+  \startitemize
+
+  \item Si hubiera un espacio de separación, cabría la posibilidad de
+    que \ConTeXt\ eligiera exactamente dicho espacio para insertar un
+    salto de línea y de que diera la casualidad de que ese salto de
+    línea fuera también un salto de página, en cuyo caso el comando
+    estaría en una página y la palabra a la que se asocia en la página
+    siguiente.
+
+  \item Si el comando estuviera {\em detrás} de la palabra, cabría la
+    posibilidad de que dicha palabra se partiera silábicamente y entre
+    dos de sus sílabas se insertara un salto de línea que también
+    fuera un salto de página, en cuyo caso el comando estaría
+    apuntando a una página distinta de aquella en la que empieza la
+    palabra a la que apunta.
+
+\stopitemize
+
+\item Véase como en las apariciones 2ª in 3ª del comando se introducen
+  voces del segundo nivel.
+
+\item Compruébese, asimismo, como en el tercer uso del comando
+  \tex{index}, aunque la palabra que aparece en el texto es «gatos»,
+  la voz que se enviará al índice es «gato».
+
+\item Por último: véase como en solo dos líneas se han escrito tres
+  entradas para el índice terminológico. He dicho antes que marcar los
+  lugares precisos del fichero fuente es tedioso. Ahora añadiré que
+  marcarlo demasiado es contraproducente. Un índice demasiado extenso
+  no es preferible a uno más conciso en el que toda la información sea
+  relevante. Por ello dije antes que el decidir qué palabras generarán
+  entrada en el índice y buscarlas para marcarlas, es algo que debe
+  hacer el autor y que es mejor no hacerlo automáticamente, sino que
+  cada entrada del índice debe ser fruto de una decisión consciente
+  del autor.
+
+\stopitemize
+
+Si queremos que nuestro índice sea verdaderamente útil, los términos
+que se usan como sinónimos, deben agruparse en el índice bajo una sola
+voz. Pero como es posible que el lector busque en el índice
+información por cualquiera de las otras voces, es corriente que en los
+índices haya entradas que remiten a otras entradas. Por ejemplo en el
+índice terminológico de un manual de Derecho civil podríamos
+encontrarnos perfectamente algo así como
+
+\startframedtext[frame=off]
+
+invalidez contractual\\
+\qquad véase {\em nulidad}.
+
+\stopframedtext
+
+Ese efecto lo conseguiríamos, no con el comando
+\tex{index} sino con \PonMacro{seeindex}\tex{seeindex} cuyo formato es
+
+\type{\seeindex [Alfabetización] {Entrada1} {Entrada2}}
+
+donde {\em Entrada1} es la entrada del índice que se remitirá a otra;
+y {\em Entrada2} es el destino de la remisión. En nuestro ejemplo de
+antes habría que escribir:
+
+\starttyping
+\seeindex{invalidez contractual}{nulidad}
+\stoptyping
+
+En \tex{seeindex} puede usarse también el signo «+» para indicar
+subniveles para cualquiera de sus dos argumentos entre corchetes.
+
+\subsubsection{Generación del índice propiamente dicho}
+
+Una vez que hemos marcado en nuestro fichero fuente todas las entradas
+para el índice, la generación propiamente dicha del índice se realiza
+mediante los comandos \PonMacro{placeindex}\tex{placeindex} o
+\PonMacro{completindex}\tex{completindex}. Estos dos comandos recorren
+el fichero fuente en busca de los comandos \tex{index}, y generan una
+lista de todas las entradas que el índice debe tener, asociando dicha
+voz con el número de página correspondiente al lugar donde se
+encontraba el comando \tex{index}. Tras ello ordenan alfabéticamente
+la lista de voces que aparecerán en el índice y fusionan los casos en
+los que hay más de una aparición para la misma voz, y, finalmente,
+insertan en el documento final el resultado correctamente formateado.
+
+La diferencia entre \tex{placeindex} y \tex{completeindex} es similar
+a la diferencia que hay entre \tex{content} y \tex{completecontent}
+(véase la \in{sección}[sec:completecontent]): \tex{placeindex} se
+  limita a generar el índice e insertarlo, mientras que
+  \tex{completeindex} previamente inserta en el
+  documento final un nuevo capítulo (titulado por defecto, en
+  documentos en español, «Índice»), dentro del cual se escribirá
+  nuestro índice.
+
+\stopsubsection
+
+\startsubsection
+  [title={Formateo del índice terminológico}]
+  \PonMacro{setupregister}
+
+Los índices terminológicos son una aplicación concreta de una
+estructura más general a la que \ConTeXt\ denomina «registro» («{\em
+  register}»); por lo tanto el índice se formatea mediante el comando:
+
+\type{\setupregister[index][Configuración]}
+
+Mediante este comando podemos:
+
+\startitemize
+
+\head Determinar el aspecto que en el índice tendrán sus distintos
+  elementos. A saber:
+
+  \startitemize
+
+  \item Los encabezados del índice, que normalmente son los nombres de
+    las letras. Se controlan con {\tt style}, {\tt color} y {\tt
+      command}. Por defecto los encabezados que se usan para cada
+    letra van en minúscula. con {\tt alternative=A} conseguiremos que
+    vayan en mayúscula.
+
+  \item Las entradas propiamente dichas, y su número de página, cuya
+    apariencia depende de las opciones {\tt textstyle, textcolor,
+      textcommand} y {\tt deeptextcommand} para la entrada propiamente
+    dicha, y {\tt pagestyle, pagecolor} y {\tt pagecommand}, para el
+    número de página. Con {\tt pagenumber=no} podemos también generar
+    un índice terminológico sin números de página (aunque no estoy muy
+    seguro de cuál pueda ser su utilidad).
+
+  \item La opción {\tt distance} mide la anchura de la separación
+    entre el nombre de una entrada y los números de página; pero
+    también mide el tamaño del sangrado aplicable a las subentradas.
+    
+  \stopitemize
+
+  La denominación de las opciones {\tt style}, {\tt textstyle}, {\tt
+    pagestyle}, {\tt color}, {\tt textcolor}, y {\tt pagecolor} creo
+  que es suficientemente clara respecto de lo que cada una de ellas
+  hace. Sobre {\tt command}, {\tt pagecommand}, {\tt textcommand} y
+  {\tt deeptextcommand}, me remito a la explicación que para opciones
+  de nombres similares se hace en la \in{sección}[sec:estilotítulos],
+  a propósito de la configuración de los comandos de seccionado.
+
+\item Configurar la apariencia general del índice, lo que incluye,
+  entre otras, los comandos a ejecutar antes ({\tt before}) o después
+  ({\tt after}) del índice, el número de columnas que éste ha de tener
+  ({\tt n}), si las columnas deben o no estar balanceadas ({\tt
+    balance}), la alineación de las entradas ({\tt align}), etc.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [title={Crear otros índices terminológicos}]
+  \PonMacro{defineregister}\PonMacro{setupregister}
+
+He explicado el índice terminológico como si en un documento sólo
+fuera posible un índice de este tipo; pero lo cierto es que los
+documentos pueden tener tantos índices analíticos como se desee. Los
+llamados índices onomásticos, por ejemplo, que recogen los nombres
+propios citados en un documento, con indicación del lugar donde se
+citan, no dejan de ser un tipo concreto de índice
+terminológico. También podríamos crear, en un libro jurídico, un
+índice especial para menciones del Código civil; o, en un documento
+como el presente, un índice de macros explicadas en él, etc.
+
+Para crear en nuestro documento un índice analítico adicional se usa
+el comando \tex{defineregister} cuyo formato es:
+
+\type{\defineregister [NombreÍndice] [Configuración]}
+
+donde {\em NombreÍndice} es el nombre que tendra nuestro nuevo índice,
+y {\em Configuración} controla su funcionamiento, siendo posible
+también configurar el índice más adelante mediante
+
+\type{\setupregister [NombreÍndice] [Configuración]}
+
+Una vez creado un nuevo índice de nombre {\em NombreÍndice} tendremos
+a nuestra disposición el comando \tex{NombreÍndice} para marcar con él
+las entradas que tendrá dicho índice de modo similar a como se marcan
+las entradas con \tex{index}. También dispondremos del comando
+\tex{seeNombreÍndice} para crear en el índice entradas que se remitan
+a otras entradas.
+
+Por ejemplo: podría crear un índice de comandos de \ConTeXt\ en este
+documento mediante el comando:
+
+\type{\defineregister[macro]}
+
+que crearía el comando \tex{macro} que me permitiría marcar como
+entrada del índice todas las referencias a comandos de \ConTeXt, para
+luego generar un índice con \tex{placemacro} o con
+\tex{completemacro}.
+
+\startLetraChica
+
+  Al crear un índice nuevo se habilita el comando \tex{NombreÍndice}
+  para marcar sus entradas, y los comandos \tex{placeNombreÍndice} y
+  \tex{completeNombreÍndice} para generar el índice. Pero estos dos
+  últimos comandos en realidad son abreviaturas de dos comandos más
+  generales, aplicados al índice en cuestión. Así,
+  \tex{placeNombreÍndice} equivale a \tex{placeregister[NombreÍndice]}
+  y \tex{completeNombreÍndice} equivale a
+  \tex{completeregister[NombreÍndice]}.
+
+\stopLetraChica
+
+\stopsubsection
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:
+%%% vim:set filetype=context tw=75 : %%%

@@ -1,0 +1,1117 @@
+%%% Fichero:     b09_Referencias.mkiv
+%%% Autor:       Joaquín Ataz López
+%%% Inicio:      Julio 2020
+%%% Terminación: Agosto 2020
+%%% Contenido: Al igual que el capítulo anterior, este capítulo
+%%%            inicialmente se concibió como una sección del capítulo
+%%%            12. Pero al empezar a escribirlo comprendí que afectaba
+%%%            a la globalidad del documento, por lo que lo trasladé
+%%%            de lugar. La información, en este caso, procede
+%%%            básicamente de la wiki.
+%%%
+%%% Editado: Emacs + AuTeX - Y a veces con vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent b09_Referencias.mkiv
+
+\startchapter
+  [title=Remisiones e hiperenlaces]
+
+\PonIndiceCap
+
+\startsection
+  [title=Tipos de remisiones]
+
+Los documentos científico-técnicos abundan en remisiones:
+
+\startitemize
+
+\item A veces se remiten a otros documentos en los que se basa lo que
+  se está diciendo, o que contradicen lo que se está explicando, o que
+  desarrollan o matizan la idea objeto de tratamiento, etc. En estos
+  casos la remisión se dice que es {\em externa} y, si el documento
+  quiere ser riguroso, adopta la forma de {\em cita} bibliográfica.
+
+\item Pero también es corriente que un documento en alguno de sus
+  apartados se remita a otro de sus apartados, en cuyo
+  caso se dice que la remisión es {\em interna}. También hay una
+  remisión interna cuando en un punto del documento se comenta algún
+  aspecto de cierta imagen, tabla, nota, o elemento de naturaleza
+  similar, refiriéndonos a él por su número o por la página en la que
+  se encuentra.
+
+  La remisión interna para ser precisa debe hacerse a un punto exacto
+  del documento que sea fácilmente identificable. Por ello este tipo
+  de remisiones siempre se hace, bien a elementos numerados (como, por
+  ejemplo, cuando se dice «véase la tabla 3.2», o «el capítulo 7»),
+  bien a números de páginas. Las remisiones vagas del tipo «como ya se
+  ha dicho» o «como se verá más adelante» no son verdaderas remisiones
+  y no tienen ningún tipo de requerimiento de cara a la composición ni
+  hay herramientas especiales para ellas. Yo personalmente además
+  suelo desaconsejar a mis alumnos de doctorado o de TFM el uso
+  habitual de las mismas.
+
+  \startLetraChica
+
+    En inglés a las remisiones internas se las suele denominar «cross
+    references» lo que muchas veces se traduce al español como
+    «referencias cruzadas», expresión esta que, en realidad no aclara
+    nada a nadie que no sepa ya de antemano a qué se quiere
+    referir. Por ello yo prefiero hablar aquí de «remisiones» en
+    general y de «remisiones internas» en particular que es, por otra
+    parte, la expresión que recomienda la Real Academia de la Lengua
+    en el {\em Libro de Estilo de la Lengua Española}, Espasa 2018,
+    págs.~188 y 144. [Esto, por cierto, es un ejemplo de {\em
+        remisión externa}, me remito a un documento distinto de
+      este].
+
+  \stopLetraChica
+
+\stopitemize
+
+Para precisar la terminología en materia de remisiones, llamaré {\em
+  origen} al punto del documento en el que se hace la remisión, y {\em
+  destino} al lugar al que la remisión apunta. Desde esta perspectiva
+diremos que una remisión es interna cuando el origen y el destino
+están en el mismo documento, y externa cuando el origen y destino
+están en documentos distintos.
+
+Desde el punto de vista de la composición del documento:
+
+\startitemize
+ 
+\item Las remisiones externas no plantean ningún problema especial y
+  por lo tanto, en principio, no requieren de ninguna herramienta que
+  ayude a realizarlas, ya que desde el documento origen no se puede
+  influir de ninguna manera en el documento destino; y todos los datos
+  que necesite del documento destino los tengo a mi disposición y
+  puedo usarlos en la remisión. Pero si el documento de origen es un
+  documento electrónico y el documento de destino también, y, además,
+  está disponible en la Red, entonces es posible incluir en la
+  remisión un hiperenlace que permita saltar directamente al
+  destino. En estos casos se puede decir que el documento origen es
+  {\em interactivo}.
+
+\item Por el contrario las remisiones internas si plantean un reto de
+  cara a la composición del documento, pues cualquiera que tenga
+  experiencia en la confección de documentos científico-técnicos
+  medianamente extensos sabe que es casi inevitable que el número de
+  página, sección, imagen, tabla, teorema o similar al que apunta la
+  remisión, vaya cambiando durante la confección del documento, lo que
+  dificulta mucho el mantenerla actualizada.
+
+\startLetraChica
+
+  En los tiempos previos a la informática los autores huían de las
+  remisiones internas; y las que eran inevitables como, por ejemplo,
+  el índice de contenido (que, si va acompañado del número de página
+  de cada sección, es un ejemplo de remisión interna) se redactaba al
+  final.
+
+\stopLetraChica
+
+\stopitemize
+
+Hasta los sistemas de composición más limitados, como, por ejemplo, los
+procesadores de texto permiten incluir algún tipo de remisiones
+internas como los índices de contenido. Pero eso no es nada comparado
+con el completo mecanismo de gestión de remisiones que incluye
+\ConTeXt, el cual, además, puede combinar el mecanismo de gestión de
+las remisiones internas dirigido a mantenerlas actualizados, con la
+utilidad de los hiperenlaces que no es, obviamente, exclusiva de las
+remisiones externas.
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:referencias,
+    title=Remisiones internas,
+  ]
+
+Para establecer una remisión interna se necesitan dos cosas:
+
+\startitemize[n]
+
+\item Una etiqueta o nombre identificador en el punto de
+  destino. \ConTeXt, durante la compilación, asociará ciertos datos a
+  dicha etiqueta. Qué datos se asocian depende del tipo de etiqueta
+  que sea; y así puede ser el número de sección, el número de nota, el
+  número de imagen, el número asociado a un elemento concreto de una
+  enumeración, el título de la sección, etc.
+
+\item Un comando en el punto de origen que lea los datos asociados a
+  la etiqueta vinculada al punto de destino y los inserte en el punto
+  de origen. El comando varía dependiendo de qué dato de la etiqueta
+  queremos insertar en el punto de origen.
+  
+\stopitemize
+
+Cuando pensamos en una remisión, lo hacemos en términos
+«origen~\longrightarrow~destino», por lo que, aparentemente, deberían
+explicarse primero los aspectos relativos al origen y después los
+atinentes al destino. Sin embargo creo que es más fácil entender la
+lógica de las remisiones si la explicación la hacemos al revés.
+
+\startsubsection
+  [
+    reference=sec:Etiquetas de destino,
+    title=La etiqueta en el destino de la remisión,
+  ]
+
+En este capítulo, por {\em etiqueta} entiendo una cadena de texto que
+quedará asociada al punto de destino de una remisión y que se usará
+internamente para recuperar cierta información relativa al punto de
+destino de una remisión tal como, por ejemplo, el número de página, el
+número de sección etc. En realidad la información que se asocia a cada
+etiqueta depende del procedimiento de creación de la misma. A estas
+«etiquetas» \ConTeXt\ las llama {\em referencias}, pero creo que este
+segundo término, como tiene un sentido mucho más amplio, resulta menos
+clarificador.
+
+La etiqueta asociada al destino de una remisión:
+
+\startitemize
+
+\item Debe ser única en el documento para cada posible destino, para
+  identificarlo sin ningún genero de dudas. Si se usa la misma
+  etiqueta para dos destinos diferentes \ConTeXt\ no producirá ningún
+  error de compilación, pero hará que todas las remisiones apunten a
+  la primera etiqueta (en el fichero fuente) lo que, a su vez, tiene
+  el efecto colateral de que parte de nuestras remisiones pueden estar
+  mal, y, lo que es peor, que no nos demos cuenta. Por ello es
+  importante asegurarse, en el momento de creación de la etiqueta, de
+  que esa etiqueta nueva que estamos asignando, no ha sido ya asignada
+  antes.
+
+\item Puede contener letras, dígitos, signos de puntuación, espacios
+  en blanco, etc. En el caso de que tenga espacios en blanco, se le
+  aplican las reglas generales de \ConTeXt\ respecto de este tipo de
+  caracteres (véase \in{sección}[sec:espacios]), de manera que, por
+  ejemplo «\type{Mi etiqueta bonita}» y %
+  «\type{Mi     etiqueta    bonita}» %
+  se considerarán la misma etiqueta, aunque el número de espacios en
+  blanco usados en una y otra sean distintos.
+
+\stopitemize
+
+Dado que no hay limitación respecto de qué caracteres pueden formar
+parte de la etiqueta y cuántos pueden ser, mi consejo es usar nombres
+de etiquetas que sean claros, lo que nos ayudará a comprender el
+fichero fuente cuando, tal vez, lo leamos bastante tiempo después de
+su redacción original. Por ello el ejemplo que he puesto antes («Mi
+etiqueta bonita») no es un buen ejemplo, pues no nos dice nada del
+destino al que dicha etiqueta apunta. Para este epígrafe, por ejemplo,
+sería mejor etiqueta la de «sec:Etiquetas de destino»
+
+Para asociar un concreto destino a una etiqueta hay básicamente dos
+procedimientos:
+
+\startitemize[n]
+
+\item Mediante un argumento u opción del comando que se utilice para
+  crear el elemento al que la etiqueta apuntará. Desde este punto de
+  vista, todos los comandos que crean algún tipo de estructura o
+  elemento de texto que es susceptible de ser destino de una remisión,
+  incluyen una opción llamada \PalClave{reference} que sirve para
+  incluir la etiqueta. A veces en lugar de una {\em opción} la
+  etiqueta es el contenido de todo el argumento.
+
+  Un buen ejemplo de lo que se quiere decir lo tenemos en los comandos
+  de seccionado que, como sabemos
+  (\in{sección}[sec:sintaxissecciones]), admiten varias sintaxis. En
+  la sintaxis clásica el comando se escribe como:
+
+  \type{\section[Etiqueta]{Título}}
+
+  y en la sintaxis más específica de \ConTeXt\ el comando se escribe
+  como
+
+  \starttyping
+    \startsection[
+      title=Título,
+      reference=Etiqueta,
+      ...
+    ]
+    
+  \stoptyping
+
+  En uno y otro caso el comando prevé la introducción de una
+  etiqueta que quedará asociada a la sección (o capítulo,
+  subsección, etc) de que se trate.
+
+  He dicho que esta posibilidad está en {\em todos los comandos} que
+  permiten crear un elemento de texto susceptible de ser destino de una
+  remisión. Estos son todos los elementos de texto que admiten ser
+  numerados, lo que incluye, entro otros, secciones, objetos flotantes de
+  todo tipo (tablas, imágenes y similares), notas al pie o finales, citas,
+  enumeraciones, descripciones, definiciones, etc.
+
+  \startLetraChica
+
+    Cuando la etiqueta se introduce directamente con un argumento, y
+    no como una opción a la que se asigna un valor, \ConTeXt\ permite
+    asociar varias etiquetas a un sólo destino. Por ejemplo:
+
+    \type{\chapter[etiqueta1, etiqueta2, etiqueta3] {Mi capítulo de libro}}
+
+    No tengo claro qué ventaja puede haber en tener varias etiquetas
+    distintas para un sólo objetivo y sospecho \Conjetura que ello se
+    hace, no porque ofrezca ventajas, sino como exigencia {\em
+      interna} de \ConTeXt\ aplicable a cierto tipo de argumentos.
+
+  \stopLetraChica
+
+\item Mediante los comandos \PonMacro{pagereference}\tex{pagereference}, \PonMacro{reference}\tex{reference}, o
+  \PonMacro{textreference}\tex{textreference}, cuyas sintaxis son:
+
+  \starttyping
+    \pagereference[Etiqueta]
+    \reference[Etiqueta]{Texto}
+    \textreference[Etiqueta]{Texto}
+  \stoptyping
+
+  \startitemize
+
+  \item La etiqueta creada con \tex{pagereference} permite recuperar
+    el número de página.
+
+  \item Las etiquetas creadas con \tex{reference} y con
+    \tex{textreference} permiten recuperar el número de página así
+    como el texto asociado a ellas que se incluya como argumento.
+
+    Tanto en \tex{reference} como en \tex{textreference} el texto que
+    se vincula a la etiqueta desaparece como tal del documento final
+    en el punto en el que se encuentra el comando (destino de la
+    remisión), pero puede ser recuperado y reaparecer en el punto de
+    origen de la remisión.
+    
+  \stopitemize
+  
+\stopitemize
+
+He dicho antes que cada etiqueta queda asociada a cierta información
+relativa al punto de destino. Cuál sea esa información depende del
+tipo de etiqueta que sea:
+
+\startitemize
+
+\item Todas las etiquetas {\em recuerdan} (en el sentido de que
+  permiten recuperar) el número de página en el que se encuentra el
+  comando que las ha creado. Para etiquetas vinculadas a secciones que
+  tal vez tengan varias páginas, ese número será el de la página en
+  donde empieza la sección de que se trate.
+
+\item Las etiquetas insertadas con el comando que crea un elemento de
+  texto numerado (sección, nota, tabla, imagen, etc.) {\em recuerdan}
+  también el número asociado a dicho elemento (número de sección,
+  número de nota, etc.).
+
+\item Si dicho elemento tiene un {\em título} como ocurre, por
+  ejemplo, en las secciones, pero también en las tablas si se han
+  insertado mediante el comando \tex{placetable}, recordarán dicho
+  título.
+
+\item Las etiquetas creadas mediante \tex{pagereference} sólo {\em
+  recuerdan} el número de página.
+
+\item Las creadas mediante \tex{reference} o \tex{textreference}
+  recuerdan también el texto asociado a ellas que dichos comandos
+  reciben como argumento.
+
+    \startLetraChica
+
+      De hecho no estoy seguro de la diferencia real entre los
+      comandos \tex{reference} y \tex{textreference}. Pienso que es
+      posible \Conjetura que el diseño de los tres comandos que
+      permiten crear etiquetas intente ser paralelo a los tres
+      comandos que permiten recuperar información de las etiquetas
+      (que en seguida veremos); pero lo cierto es que, según mis
+      pruebas, \tex{reference} y \tex{textreference} parecen ser
+      comandos redundantes.
+
+    \stopLetraChica
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [title=Comandos en el punto de origen de una\\ remisión para recuperar
+  datos del punto\\ de destino]
+
+Los comandos que a continuación explicaré, recuperan información de
+las etiquetas y, además, si nuestro documento es interactivo, generan
+un salto al destino de la remisión. Pero lo importante de estos
+comandos es la información que se recupera de la etiqueta. Si sólo
+queremos generar el salto, sin recuperar ninguna información de la
+etiqueta, es preferible usar el comando \tex{goto} que se explica en la
+\in{sección} [sec:crearenlaces].
+
+\startsubsubsection
+  [title=Los comandos básicos para recuperar información de una etiqueta]
+
+Teniendo en cuenta que cada etiqueta asociada a un punto de destino
+puede almacenar informaciones distintas, es lógico que \ConTeXt\
+contemple tres comandos distintos para recuperar tales informaciones:
+según qué información del punto de destino de una remisión queramos
+recuperar, se debe usar un comando u otro:
+
+\startitemize
+
+\item El comando \tex{at} nos permite recuperar el número de página de
+  una etiqueta.
+
+\item Para etiquetas que además del número de página recuerdan un
+  número de elemento (número de sección, de nota, de item, de tabla,
+  etc.), el comando \tex{in} nos permite recuperar dicho número.
+
+\item Por último, para etiquetas que recuerdan un texto asociado a una
+  etiqueta (el título de una sección, el título de una imagen
+  insertada con \tex{placefigure}, etc.) el comando \tex{about} nos
+  permite recuperar dicho texto.
+
+\stopitemize
+
+Los tres comandos tienen la misma sintaxis\PonMacro{at}\PonMacro{in}\PonMacro{about}:
+
+\starttyping
+  \at{Texto}[Etiqueta]
+  \in{Texto}[Etiqueta]
+  \about{Texto}[Etiqueta]
+\stoptyping
+
+\startitemize
+
+\item Etiqueta es la etiqueta de la que queremos recuperar información.
+
+\item Texto es el texto que se escribirá justo antes de la información
+  recuperada por el comando. Entre el texto y los datos de la etiqueta
+  que el comando recupera se insertará un espacio de no separación y
+  si está activada la función de interactividad de tal forma que el
+  comando, además de recuperar la información, genera un enlace que
+  permita saltar al punto del destino, el texto incluido como
+  argumento formará parte del enlace (será texto clicable).
+
+\stopitemize
+
+Así, en el siguiente ejemplo se puede ver como \tex{in} recupera el
+número de sección y \tex{at} el número de página.
+
+\startDobleEjemplo
+\starttyping
+En la in{sección}[sec:Etiquetas de 
+destino], que empieza en la \at{página}
+[sec:Etiquetas de destino], se explican
+las características de las etiquetas
+usadas para las remisiones internas.
+\stoptyping
+
+En la \in{sección}[sec:Etiquetas de destino], que empieza en la
+\at{página} [sec:Etiquetas de destino], se explican las
+características de las etiquetas usadas para las remisiones internas.
+
+\stopDobleEjemplo
+
+Obsérvese que \ConTeXt\ ha creado automáticamente hiperenlaces (véase
+la \in{sección}[sec:interactividad]), y que el texto recibido como
+argumento por \tex{in} y por \tex{at} forma parte del enlace. Pero si
+hubiéramos escrito esto otro, resultaría:
+
+\startDobleEjemplo
+\starttyping
+En la sección \in{}[sec:Etiquetas de
+destino], que empieza en la página \at{}
+[sec:Etiquetas de destino], se explican
+las características de las etiquetas
+usadas para las remisiones internas.
+\stoptyping
+
+
+En la sección \in{}[sec:Etiquetas de
+destino], que empieza en la página
+\at{} [sec:Etiquetas de destino], se
+explican las características de las
+etiquetas usadas para las remisiones
+internas.
+
+\stopDobleEjemplo
+
+el texto sigue siendo el mismo, pero las palabras {\em sección} y {\em página}
+que preceden a la remisión, al no formar ya parte del comando, no se
+incluyen en el enlace.
+
+Si \ConTeXt\ no consigue encontrar la etiqueta a la que apuntan los
+comandos \tex{at}, \tex{in} o \tex{about}, no se produce ningún error
+de compilación, pero en el lugar del documento final en el que debería
+aparecer la información recuperada por estos comandos, se escribirá
+«??».
+
+\startLetraChica
+
+  Que \ConTeXt\ no encuentre una etiqueta puede deberse a dos razones:
+
+  \startitemize[n]
+
+  \item Que nos hayamos equivocado al escribirla.
+
+  \item Que, estemos compilando sólo una parte del documento, y la
+    etiqueta apunta a la parte que no está siendo compilada (véanse
+    las \in{secciones}[input] y \in{}[sec-proyectos]).
+    
+  \stopitemize
+
+  En el primer caso conviene reparar el error. Por ello es buena idea,
+  al terminar la compilación del documento completo (cuando ya no se
+  puede dar el segundo caso), buscar en el fichero PDF todas las
+  apariciones de la secuencia de caracteres «??» para asegurarnos de
+  que no haya en el documento alguna remisión {\em rota}.
+
+\stopLetraChica
+
+\stopsubsubsection
+
+\startsubsubsection
+  [title=Recuperar la información asociada a una etiqueta con el
+    comando \tex{ref}]
+  \PonMacro{ref}
+
+\tex{at}, \tex{in} y \tex{about} recuperan, cada uno de ellos, algún
+elemento de una etiqueta. Hay disponible otro comando que permite
+rescatar cualquier elemento de la etiqueta que se le indique, se trata
+de \tex{ref}, cuya sintaxis es:
+
+\type{\ref[Elemento a recuperar][Etiqueta]}
+
+donde el primer argumento puede ser:
+
+\startitemize
+
+\item {\tt text}: Devuelve el texto asociado a una etiqueta.
+\item {\tt title}: Devuelve el título asociado a la etiqueta.
+\item {\tt number}: Devuelve el número vinculado a una etiqueta. Por
+  ejemplo, en las secciones, el número de sección.
+\item {\tt page}: Devuelve el número de página.
+\item {\tt realpage}: Devuelve el número real de página.
+\item {\tt default}: Devuelve el que \ConTeXt\ considera que es el
+  elemento {\em natural} de dicha etiqueta. En general éste coincide
+  con el que devuelve {\tt number}.
+
+\stopitemize
+
+En realidad \tex{ref} es mucho más preciso que \tex{at}, \tex{in} o
+\tex{about}, y así, por ejemplo, diferencia entre el número de página
+y el número real de página. El número de página puede no coincidir con
+el real si, por ejemplo, se inició la numeración de páginas del
+documento en un 1500 (por ser este documento la continuación de otro
+anterior) o si las páginas del preámbulo se numeraron con números
+romanos y al acabar este se reinició la numeración. Asimismo \tex{ref}
+diferencia entre el {\em texto} y el {\em título} asociados a una
+referencia, cosa que, por ejemplo \tex{about} no hace.
+
+Si se usa \tex{ref} para obtener de una etiqueta información de la que
+dicha etiqueta carece (por ejemplo, el título de una etiqueta asociada
+a una nota a pié de página), el comando devolverá una cadena vacía.
+
+\stopsubsubsection
+
+\startsubsubsection
+  [title=Detectar la dirección del enlace]
+
+\ConTeXt\ dispone también de dos comandos que son sensibles a {\em la
+  dirección del enlace}. Con «dirección del enlace» me quiero referir
+a determinar si el destino de la remisión se encuentra, en el fichero
+fuente, antes del origen, o después. Por ejemplo: estamos redactando
+nuestro documento y nos queremos referir a una sección que aún no
+hemos decidido si en el índice final irá antes o después de la que
+estamos escribiendo. En tal circunstancia sería útil disponer de un
+comando que escriba una cosa u otra según, en el documento definitivo,
+el destino finalmente se encuentre antes o después del origen. Para
+tales necesidades \ConTeXt\ proporciona el comando \PonMacro{somewhere}\tex{somewhere}
+cuya sintaxis es:
+
+\type{\somewhere{Texto si antes}{Texto si después}[Etiqueta]}.
+
+\page[preference]
+
+Por ejemplo, en el siguiente texto:
+
+\starttyping
+  La dirección de un hiperenlace puede también ser detectada por el
+  comando \type{\somewhere}. De esta forma podemos encontrar capítulos
+  u otros elementos de texto \somewhere {anteriores} {posteriores}
+  [sec:referencias] y discutir en algún lugar \somewhere {anterior}
+  {posterior} [sec:interactividad] sus descripciones.
+\stoptyping
+
+\startnarrower\switchtobodyfont[small]
+  
+  \color[red]{La dirección de un hiperenlace puede también ser
+    detectada por el comando \type{\somewhere}. De esta forma podemos
+    encontrar capítulos u otros elementos de texto \somewhere
+    {anteriores} {posteriores} [sec:referencias] y discutir en algún
+    lugar \somewhere {anterior} {posterior} [sec:interactividad] sus
+    descripciones.}
+
+\stopnarrower
+
+\startLetraChica
+
+  Para este ejemplo he usado dos etiquetas reales que en el fichero
+  fuente de esta introducción existen en este capítulo.
+
+\stopLetraChica
+
+Otro comando capaz de detectar si la etiqueta a la que apunta se
+encuentra antes o después, es \PonMacro{atpage}\tex{atpage} cuya sintaxis es:
+
+\type{\atpage[etiqueta]}
+
+Este comando es bastante parecido al anterior, pero en lugar de
+permitirnos escribir nosotros mismos el texto a poner según la
+etiqueta resulte estar antes o después, \tex{atpage} inserta un texto
+predeterminado para cada uno de ambos casos y, si el documento es
+interactivo, también inserta un hiperenlace.
+
+El texto que \tex{atpage} inserta es el asociado a las {\em etiquetas}
+\PalClave{precedingpage} para el caso de que la {\em etiqueta} que
+recibe como argumento se encuentre {\em antes} que el comando, y
+\PalClave{hereafter} para el caso contrario.
+
+\startLetraChica
+
+  Al llegar aquí me traiciona una decisión previa: decidí llamar, en
+  este capítulo, «etiqueta» a lo que \ConTeXt\ llama «referencia». Me
+  parecía más claro. Pero también se llaman «etiquetas» (ahora en otro
+  sentido) a los «rótulos» o fragmentos de texto que ciertos comandos
+  de \ConTeXt, como \tex{atpage}, generan (véase la
+  \in{sección}[sec:etiquetas]). Espero que ello no confunda al
+  lector. Creo que el contexto permite diferenciar bien a cuál de los
+  distintos sentidos de {\em etiqueta} me refiero en cada caso.
+
+\stopLetraChica
+
+Por lo tanto podemos cambiar el texto insertado por \tex{atpage} del
+mismo modo que se cambia el texto de cualquier otra
+etiqueta:
+
+\starttyping
+\setuplabeltext[es][precedingpage=Nuevo texto ]
+\setuplabeltext[es][hereafter=Nuevo texto ]
+\stoptyping
+
+\startLetraChica
+
+  En este punto creo que hay un pequeño error en \suite- (que es la
+  distribución que estoy manejando). Examinando los nombres de las
+  etiquetas predefinidas en \ConTeXt\ que se pueden cambiar con
+  \tex{setuplabeltext} hay dos pares de etiquetas que son candidatas a
+  ser usadas por \tex{atpage}: 
+
+  \startitemize[packed]
+
+  \item \PalClave{precedingpage} y \PalClave{followingpage}.
+  \item \PalClave{hencefore} y \PalClave{hereafter}.
+    
+  \stopitemize
+
+  Podríamos presuponer que \tex{atpage} usará bien el primer par, bien
+  el segundo. Pero de hecho usa, para los objetivos anteriores
+  \PalClave{precedingpage} y para los posteriores
+  \PalClave{hereafter}, lo que creo que es una inconsistencia.
+
+  De otro lado la etiqueta \PalClave{precedingpage} no tiene
+  traducción al español en la distribución.
+
+\stopLetraChica
+
+\stopsubsubsection
+
+\stopsubsection
+
+\startsubsection
+  [title=Generación automática de prefijos para\\ evitar etiquetas duplicadas]
+
+En un documento grande no siempre es fácil evitar la duplicación de
+etiquetas. Por lo tanto, es aconsejable poner un poco de orden en la
+forma de elegir qué etiquetas utilizar. Una práctica que ayuda a ello es
+la de usar prefijos para las etiquetas que variarán según el tipo de
+etiqueta que sea. Por ejemplo «sec:» para las secciones, «fig:» para
+las figuras, «tbl:» para las tablas, etc.
+
+Pensando en esta forma de actuar, \ConTeXt\ incluye un conjunto de
+herramientas que permiten:
+
+\startitemize
+
+\item Que el propio \ConTeXt\ genere automáticamente etiquetas para
+  todos los elementos que las admitan.
+
+\item Que toda etiqueta generada manualmente, reciba un prefijo, bien
+  predeterminado por nosotros mismos, bien generado automáticamente
+  por el propio \ConTeXt.
+
+\stopitemize
+
+La explicación detallada de este mecanismo es larga y, aunque se
+trata, sin duda, de herramientas útiles, no me parecen
+imprescindibles, por ello, como no se pueden explicar en pocas
+palabras, prefiero no explicarlas y remitirme a lo que al respecto se
+dice en el capítulo de «Referencias» del manual de referencia de
+\ConTeXt, o a la \goto{información de la
+  wiki}[url(https://wiki.contextgarden.net/References)] sobre esta
+cuestión.
+
+% Si optamos por escribir a mano todas nuestras etiquetas, un comando
+% que nos puede ayudar a evitar duplicados es el de
+% \tex{showreferences}: este comando mostrará un listado con todas las
+% etiquetas establecidas en el documento.
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:interactividad,
+    title=Documentos electrónicos interactivos,
+  ]
+
+Sólo los documentos electrónicos pueden ser interactivos; pero no
+todos los documentos electrónicos lo son.  Un documento {\em
+  electrónico} es aquel que se almacena en un fichero informático y
+que puede ser abierto y leído directamente en la pantalla del
+mismo. Interactivo es, por otra parte, aquel documento electrónico que
+está dotado de utilidades que permiten al usuario {\em interactuar}
+con él; es decir: hacer algo más que limitarse a leerlo. Hay
+interactividad, por ejemplo, cuando el documento dispone de botones
+que realizan alguna acción, o de enlaces mediante los que se puede
+saltar a otro punto del documento, o a un documento externo; o cuando
+en el documento hay zonas en las que el usuario puede escribir, vídeos
+o clips de audio que puede reproducir, etc.
+
+Todos los documentos que genera \ConTeXt\ son electrónicos (pues
+\ConTeXt\ lo que genera es un fichero PDF que es, por definición, un
+documento electrónico), pero no siempre son interactivos. Para
+dotarles de interactividad es preciso indicarlo expresamente como se
+muestra en la próxima sección.
+
+Téngase en cuenta, por otra parte, que aunque \ConTeXt\ genere un
+fichero PDF interactivo, para apreciar la interactividad es preciso
+que el programa visor de PDF que utilicemos sea capaz de ello, pues no
+todos los visores de PDF existentes permiten hacer uso de
+hiperenlaces, botones y recursos similares propios de los documentos
+interactivos.
+
+\startsubsection
+  [title=Activación de la interactividad en los\\ documentos]
+  \PonMacro{setupinteraction}
+
+\ConTeXt\ no utiliza por defecto funciones interactivas a no ser que
+expresamente se le indique cosa que, normalmente se hace en el
+preámbulo del documento. El comando que activa esta utilidad es:
+
+\type{\setupinteraction[state=start]}
+
+Normalmente este comando se usará sólo en una vez en el preámbulo del
+documento, cuando deseemos generar un documento interactivo. Pero en
+realidad podemos usarlo tantas veces como queramos e ir alterando el
+«estado de interactividad» del documento. La opción
+\PalClave{state=start} activa la interactividad, mientras que
+\PalClave{state=stop} la desactiva, por lo que podemos desactivar la
+interactividad en aquellos capítulos, o {\em fragmentos} de nuestro
+documento en que queramos hacerlo.
+
+\startLetraChica
+
+  No se me ocurre por qué razón íbamos a querer tener fragmentos no
+  interactivos en documentos que tienen interactividad. Pero lo
+  importante de la filosofía de \ConTeXt\ es que si algo es
+  técnicamente posible, aunque sea poco probable que se quiera
+  utilizar, se habilita un procedimiento para hacerlo. Es esa
+  filosofía la que dota a \ConTeXt\ de tantísimas posibilidades, e
+  impide que una simple introducción como la presente sea {\em breve}.
+
+\stopLetraChica
+
+Una vez establecida la interacción:
+
+\startitemize
+
+\item Ciertos comandos de \ConTeXt\ de modo predeterminado
+  incluirán enlaces para hipersaltos. Así:
+
+  \startitemize
+
+  \item Los comandos de creación de índices de contenido, los cuales
+    serán, en principio y salvo que se indique expresamente otra cosa,
+    interactivos, es decir: haciendo clic sobre una entrada del índice
+    saltaremos a la página en la que empieza la sección de que se trate.
+
+  \item Los comandos para remisiones internas que hemos visto en la
+    primera parte de este mismo capítulo, en las que haciendo clic
+    sobre ellas, se salta automáticamente al destino de la remisión.
+
+  \item Las notas a pie de página y las notas finales en las que un
+    clic sobre la llamada de la nota en el cuerpo principal del texto
+    nos llevará a la página en donde se escribe la nota propiamente
+    dicha, y un clic sobre la marca de la nota en el texto de la nota
+    nos llevará al punto del texto principal donde se hizo la llamada.
+
+  \item Etc.
+
+  \stopitemize
+
+\item Se activa la posibilidad de usar otros comandos específicamente
+  pensados para documentos interactivos como pueden ser las
+  presentaciones, que utilizan numerosas herramientas asociadas a la
+  interactividad tales como botones, menús, superposición de imágenes,
+  sonido o vídeo incrustado, etc. La explicación de todo esto sería
+  demasiado larga y además las presentaciones son un tipo muy
+  particular de documentos. Por ello en las líneas que siguen tan sólo
+  describiré una característica asociada a la interactividad: los
+  hiperenlaces.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [title=Configuración básica de la interactividad]
+
+\tex{setupinteraction} además de activar o desactivar la interacción,
+permite configurar algunas cuestiones relacionadas con ella;
+principalmente, pero no sólo, el color y estilo de los enlaces. Ello
+se hace mediante las siguientes opciones del comando:
+
+\startitemize
+
+\item {\tt color}: controla el color {\em normal} de los enlaces.
+
+\item {\tt contrastcolor}: determina el color de aquellos enlaces en
+  los que el destino se encuentra en la misma página que el
+  origen. Recomiento que esta opción se establezca siempre con el
+  mismo contenido que la anterior.
+
+\item {\tt style}: controla el estilo de los enlaces.
+
+\item {\tt tittle, subtitle, author, date, keyword}: Los valores
+  asignados a estas opciones se convertirán en metadatos del PDF
+  generado por \ConTeXt.
+
+\item {\tt click}: Esta opción controla si el enlace se ha de resaltar
+  cuando se hace clic en él.
+
+\stopitemize
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [title=Hiperenlaces a documentos externos]
+
+Distinguiré entre comandos que no crean el enlace, pero ayudan a
+escribir la URL del mismo y comandos que crean el
+hiperenlace. Veamoslos por separado:
+
+\startsubsection
+  [title={Comandos que ayudan a escribir el\\ hiperenlace, pero no lo
+      crean ellos mismos}]
+
+Las URLs tienden a ser muy largas, e incluyen caracteres de todo tipo,
+incluso caracteres que en \ConTeXt\ son caracteres reservados y no
+se pueden usar directamente. Además, cuando la URL se debe mostrar en
+el documento, es muy difícil componer el párrafo, pues la URL puede
+llegar a superar la longitud de una línea y nunca incluye dentro de si
+espacios en blanco que puedan servir para insertar un salto de
+línea. En una URL, además, no es razonable realizar partición silábica
+de palabras para insertar saltos de línea, pues el lector difícilmente
+podría saber si el guión de la partición silábica forma o no realmente
+parte de la URL.
+
+Por ello \ConTeXt\ ofrece dos utilidades para {\em escribir} las
+URLs. La primera es, fundamentalmente, para URLs que serán usadas
+internamente, pero no se mostrarán realmente en el documento. La
+segunda está pensada para URLs que haya que escribir en el texto del
+documento. Veamoslas por separado:
+
+\startdescripción{\tex{useURL}}\PonMacro{useURL}
+
+  Este comando nos permite escribir en el preámbulo del documento una
+  URL asociándola a un nombre, de tal manera que cuando queramos usarla
+  en nuestro documento, podamos invocarla por el nombre
+  asociado a ella. Es especialmente útil con URLs que serán utilizadas
+  varias veces a lo largo del documento.
+
+\page[preference]
+
+El comando admite dos formas de uso:
+
+\startitemize[n, packed]
+
+\item \type{\useURL[Nombre asociado][URL]}
+\item \type{\useURL [Nombre asociado] [URL] [] [Texto del enlace]}
+
+\stopitemize
+
+\startitemize
+
+\item En la primera versión simplemente se asocia la URL al nombre por
+  el que la invocaremos en nuestro documento; pero luego, para usar
+  dicha URL, tendremos que, al invocarla, indicar de alguna manera qué
+  texto clicable se mostrará en el documento.
+
+\item En la segunda versión el último argumento incluye el texto
+  clicable. El tercer argumento, existe por si deseamos dividir una
+  URL en dos partes, de tal modo que la primera parte recoja la
+  dirección de acceso y la segunda el nombre del documento o página
+  concreta que se desea abrir. Por ejemplo: la dirección del documento
+  explicativo de lo que es \ConTeXt\ es
+  \color[blue]{\hyphenatedurl{http://www.pragma-ade.com/general/manuals/what-is-context.pdf}}.
+  Esa dirección podemos escribirla toda en el segundo argumento,
+  dejando vacío el tercero:
+
+\starttyping
+\useURL [QueEsCTX]
+   [http://www.pragma-ade.com/general/manuals/what-is-context.pdf]
+   []
+   [¿Qué es \ConTeXt?]
+\stoptyping
+
+  pero también podemos repartirla entre los dos argumentos:
+
+\starttyping
+\useURL [QueEsCTX]
+   [http://www.pragma-ade.com/general/manuals/]
+   [what-is-context.pdf]
+   [¿Qué es \ConTeXt?]
+\stoptyping
+
+En ambos casos habremos asociado dicha dirección a la palabra
+\PalClave{QueEsCTX}, de tal manera que para incluir un enlace a tal
+dirección, usemos el comando que usemos para crear el enlace, en lugar
+de la URL propiamente dicha, podremos escribir simplemente
+\PalClave{QueEsCTX}.
+
+Si en algún punto del texto queremos reproducir una URL que hemos
+asociado a un nombre mediante \tex{useURL}, podemos usar el comando
+\tex{url[Nombre asociado]} que inserta en el documento la URL asociada
+a dicho nombre. Pero este comando, aunque escribe la URL, no crea
+ningún enlace.
+
+\startLetraChica
+
+  El formato en el que se muestran las URLs escritas mediante
+  \tex{url} no es el establecido de modo general mediante
+  \tex{setupinteraction}, sino el fijado específicamente para este
+  comando mediante \PonMacro{setupurl}\tex{setupurl} que permite
+  configurar el estilo (opción {\tt style}) y el color (opción {\tt
+    color}).
+
+\stopLetraChica
+
+\stopitemize
+
+\stopdescripción
+
+\startdescripción{\tex{hyphenatedurl}}\PonMacro{hyphenatedurl}
+
+Este comando está pensado para URLs que se escribirán en el texto de
+nuestro documento, y hace que \ConTeXt\ incluya dentro de la URL
+saltos de línea, si es preciso, para componer correctamente el
+párrafo. Su formato es:
+
+\type{\hyphenatedurl{Dirección URL}}
+
+A pesar del nombre del comando, \PonMacro{hyphenatedurl}\tex{hyphenatedurl} no parte
+silábicamente el nombre de la URL. Lo que hace es considerar que
+ciertos caracteres, habituales en las URLs son buenos puntos para
+insertar antes o después de ellos saltos de línea. Podemos añadir los
+caracteres que queramos a la lista de caracteres donde se autoriza un
+salto de línea. Para ello disponemos de tres comandos:
+
+\starttyping
+\sethyphenatedurlnormal{Caracteres}
+\sethyphenatedurlbefore{Caracteres}
+\sethyphenatedurlafter{Caracteres}
+\stoptyping\PonMacro{sethyphenatedurlnormal}\PonMacro{sethyphenatedurlbefore}\PonMacro{sethyphenatedurlafter}
+
+Estos comandos añaden los caracteres que reciban como argumento a,
+respectivamente, la lista de caracteres que admiten saltos de línea
+antes y después, la de los que sólo admiten saltos de línea
+anteriores, y la de los que sólo admiten saltos de líneas posteriores.
+
+\tex{hyphenatedurl} puede usarse siempre que se deba escribir una URL que
+vaya a aparecer en el documento final tal cual. Incluso se puede usar
+como último argumento de \tex{useURL} en la versión de dicho comando
+en donde el último argumento recoge el texto clicable que se mostrará
+en el documento final. Por ejemplo:
+
+\starttyping
+\useURL [QueEsCTX]
+   [http://www.pragma-ade.com/general/manuals/what-is-context.pdf]
+   []
+   [\hyphenatedurl{http://www.pragma-ade.com/general/manuals/what-is-context.pdf}]
+\stoptyping
+
+En el argumento de \tex{hyphenatedurl} se pueden usar todos los
+caracteres reservados salvo tres que se deben sustituir por comandos:
+
+\startitemize[packed]
+
+\item \%{} se debe sustituir por \PonMacro{letterpercent}\tex{letterpercent}
+\item \#{} se debe sustituirpor \PonMacro{letterhash}\tex{letterhash}
+\item \backslash{} se debe sustituir por \PonMacro{letterescape}\tex{letterescape} o
+  \PonMacro{letterbackslash}\tex{letterbackslash}.
+  
+\stopitemize
+
+Cada vez que \tex{hyphenatedurl} inserta un salto de línea ejecuta el
+comando \PonMacro{hyphenatedurlseparator}\tex{hyphenatedurlseparator}, el cual, por defecto, no hace
+nada. Pero si lo redefinimos conseguiremos que, de modo similar a como
+ocurre en las palabras normales, en las que se inserta un guión
+indicador de que la palabra sigue en la línea siguiente, se inserte,
+en la URL un carácter representativo de ello. Por ejemplo:
+
+\type{\def\hyphenatedurlseparator{\curvearrowright}}
+
+\def\hyphenatedurlseparator{\curvearrowright}
+
+mostrará así la siguiente dirección web especialmente larga:
+
+\startnarrower\switchtobodyfont[11pt]
+  
+  \color[blue]{\hyphenatedurl{https://support.microsoft.com/?scid=http://support.microsoft.com:80/support/kb/articles/Q208/4/27.ASP&NoWebContent=1}.}
+
+\stopnarrower
+
+\stopdescripción
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:crearenlaces,
+    title=Comandos que establecen el enlace,
+  ]
+
+Para establecer enlaces a URLs predefinidas mediante \tex{useURL}
+podemos utilizar el comando \PonMacro{from}\tex{from}, el cual se limita a establecer
+el enlace, pero no escribe ningún texto clicable. Se usará como texto
+del enlace el predefinido en \tex{useURL}. Su sintaxis es:
+
+\type{\from[Nombre]}
+
+donde {\em Nombre} es el nombre asociado previamente a una URL
+mediante \tex{useURL}.
+
+Para crear enlaces y asociarlos a un texto clicable no previamente
+predefinido disponemos del comando \PonMacro{goto}\tex{goto}, que sirve tanto para
+generar saltos internos como para saltos externos. Su sintaxis es:
+
+\type{\goto{Texto clicable}[Destino]}
+
+donde {\em Texto clicable} es el texto que se mostrará en el documento
+final y en el que podremos hacer clic con el ratón para generar el
+salto, y {\em Destino} puede ser:
+
+\startitemize
+
+\item Una etiqueta de nuestro documento. En tal caso \tex{goto}
+  generará el salto de modo similar a como lo hacen, por ejemplo, los
+  comandos ya examinados \tex{in} o \tex{at}. Pero a diferencia de
+  dichos comandos, no se recuperará ninguna información asociada a la
+  etiqueta.
+
+\item Una URL propiamente dicha. En tal caso hay que indicar
+  expresamente que se trata de una URL escribiendo el comando de la
+  siguiente manera:
+
+  \type{\goto{Texto clicable}[url(URL)]}
+
+  donde URL, a su vez, podrá ser el nombre previamente asociado a una
+  URL mediante \tex{useURL}, o la URL propiamente dicha, caso este en
+  el que al escribir la URL debemos asegurarnos de que los caracteres
+  reservados de \ConTeXt\ que en ella haya se escriban del modo
+  correcto en \ConTeXt. Esto, escribir la URL según las reglas de
+  \ConTeXt, no afectará a la funcionalidad del enlace.
+
+\stopitemize
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [title=Crear un índice de marcadores en el PDF final]
+
+Los ficheros PDF pueden tener un índice de marcadores interno que
+permite al lector ver en una ventana especial del programa visor del
+PDF el índice del documento, y desplazarse por él simplemente haciendo
+clic sobre cada una de las secciones y subsecciones.
+
+Por defecto \ConTeXt\ no dota al PDF de salida de un índice de
+marcadores, aunque conseguir que lo haga es tan sencillo como incluir
+en nuestro documento el comando \PonMacro{placebookmarks}\tex{placebookmarks} cuya sintaxis es:
+
+\type{\placebookmarks[Lista de secciones]}
+
+donde {\em Lista de secciones} es una lista, separada por comas, de
+los niveles de seccionado que deben aparecer en el índice. 
+
+Respecto de este comando, ténganse en cuenta las siguientes
+observaciones:
+
+\startitemize
+
+\item De acuerdo con mis pruebas \tex{placebookmarks} no funciona si
+  se encuentra en el preámbulo del documento. Pero, dentro de lo que
+  es cuerpo del documento (entre \tex{starttext} y \tex{stoptext}, o
+  entre \tex{startproduct} y \tex{stopproduct}), da igual en qué lugar
+  se escriba: el índice de marcadores incluirá también las secciones o
+  subsecciones anteriores al comando. No obstante creo que lo más
+  razonable para un fichero fuente comprensible es ubicar el comando
+  al principio.
+
+\item Los tipos de sección definidos por el usuario (con
+  \tex{definehead}) no siempre se ubican, en el índice de marcadores,
+  en el lugar correcto. Es preferible excluirlos.
+
+\item Si en alguna sección el título de la sección incluía una nota
+  final o a pie de página, el texto de la nota se considerará que
+  forma parte del marcador.
+
+\item Como argumento, en lugar de una lista de secciones, podemos
+  indicar simplemente la palabra simbólica \PalClave{all} que, como su
+  propio nombre indica, incluirá todas las secciones; sin embargo, de
+  acuerdo con mis pruebas, esta palabra, además de lo que son
+  ciertamente secciones, incluye en el índice textos incluidos con
+  algunos comandos que no son de seccionado, por lo que el resultado
+  del índice es algo imprevisible.
+
+\stopitemize
+
+No todos los programas visores de PDF permiten ver el índice de
+marcadores; y muchos que sí lo permiten, por defecto no tienen
+activada tal posibilidad. Por lo tanto, para comprobar el resultado de
+esta función debemos asegurarnos de que nuestro programa lector de PDF
+soporta dicha función y la tiene activada. Acrobat, por ejemplo, creo
+recordar que por defecto no muestra el índice de marcadores, aunque
+hay algún botón en su barra de herramientas para mostrarlos.
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:
+%%% vim:set filetype=context tw=75 : %%%

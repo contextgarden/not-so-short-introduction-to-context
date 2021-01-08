@@ -1,0 +1,449 @@
+%%% File:       a02_Preface.mkiv
+%%% Component:  Preface
+%%% Author:     Joaquín Ataz-López
+%%% Begun:      March 2020
+%%% Concluded:  August 2020
+%%%
+%%% Edited with: Emacs + AuTeX - and at times with vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent a02_Preface.mkiv
+
+{\switchtobodyfont[sl]
+
+\setupnotation
+  [footnote]
+  [numberconversion=set 2]
+
+\starttitle
+  [title=Preface\footnote{This preface began with the intention of being
+  a translation|/|adaptation to \ConTeXt\ of the preface to
+  \quotation{The \TeX Book}, the document that explains {\em everything
+  you need to know about \TeX}. Ultimately, I had to deviate from that;
+  however, I have retained some snippets that I hope, for those who know
+  it, will offer some {\em echoes} of it.}]
+
+\writetolist[chapter]{}{Preface}
+
+\setupnotation
+  [footnote]
+  [numberconversion=n]
+
+\setupheadertexts
+  [\tfx Preface]
+  [\tfx\pagenumber]
+
+Gentle reader, this is a document about \ConTeXt, a typesetting system
+derived from \TeX, which, in turn, is another typesetting system created
+between 1977 and 1982 by {\sc Donald E. Knuth} at Stanford University.
+
+\ConTeXt\ was designed for the creation of documents of very high
+typographical quality -- either paper documents or documents designed to
+be displayed on the screen of a computing device. It is not a word
+processor or text editor, but, as I said before, a {\em system}, or in
+other words a suite of tools aimed at typesetting documents, understood
+as the graphic layout and visualisation of the different elements of the
+document on the page or on screen. \ConTeXt, in summary, aims to provide
+all the tools needed to give documents the best possible appearance. The
+idea is to be able to generate documents that, besides being well
+written, are also \quotation{beautiful}. In this respect, we can mention
+here what {\sc Donald E. Knuth} wrote when presenting \TeX\ (the system
+on which \ConTeXt\ is based):
+
+\startnarrower\it
+
+  If you merely want to produce a passably good document---something
+  acceptable and basically readable but not really beautiful---a simpler
+  system will usually suffice. With \TeX\ the goal is to produce the
+  {\em finest} quality; this requires more attention to detail, but you
+  will not find it much harder to go the extra distance, and you'll be
+  able to take special pride in the finished product.
+
+\stopnarrower
+
+When we prepare a manuscript with \ConTeXt, we indicate exactly how this
+must be transformed into pages (or screens) whose typographical quality
+is comparable to what can be obtained with the best of the world's print
+shops. To do this, once we have learned the system, we need little more
+work than what is needed to normally type up the document in any word
+processor or text editor. In fact, once we have gained a certain ease in
+handling \ConTeXt, our total work is probably less if we bear in mind
+that the main formatting details of the document are described globally
+in \ConTeXt\, and we are working with text files that are -- once we are
+accustomed to them -- a much more natural way of dealing with the
+creation and editing of documents; other than the fact that these kinds
+of files are much lighter and easier to deal with than the heavy binary
+files belonging to word processors.
+
+There is a considerable amount of documentation on \ConTeXt, almost all
+of it in English. What we might consider to be the {\em official}
+distribution of \ConTeXt\ -- called \suite-{}\footnote{At the time the
+first version of this text was drafted, what it said there was factual;
+but in the spring of 2020 the ConTeXt wiki was updated and from then on
+we have to assume that the \quotation{official} distribution of ConTeXt
+has become LMTX. However, for those coming to the world of ConTeXt for
+the first time, I would still recommend using \suite-{} since it is a
+more stable distribution. Appendix A explains how to install either
+distribution.} -- for example, contains some 180 PDF files of
+documentation (the majority of it in English, but some in Dutch and
+German) including manuals, examples and technical articles; and on the
+Pragma ADE web (the company that gave birth to \ConTeXt) there are (on
+the day I did the count in May 2020) 224 downloadable documents, most of
+which are distributed with the \suite- but some others as well. Just the
+same, this huge documentation is not particularly useful for learning
+\ConTeXt\ since, in general, these documents are not aimed at a reader
+who knows nothing about the system but wants to learn it. Of the 56 PDF
+files that \suite- calls \quotation{manuals}, there is only one that
+assumes that the reader knows nothing about \ConTeXt. This is a document
+entitled \quotation{\ConTeXt\ Mark~IV, an Excursion}. This document,
+however, as its name indicates, limits itself to presenting the system
+and explaining how to do certain things that can be done with \ConTeXt.
+It would be a good introduction if it were followed up by a somewhat
+more structured and systematic reference manual. This manual does not
+exist and the gap between the document relating to the \ConTeXt\
+\quotation{Excursion} and the rest of the documentation is too great.
+
+In 2001, a reference manual was written and can be found on the
+\goto{Pragma ADE web site}[url(pragma)]; but despite this title, one the
+one hand it was not designed to be a {\em complete manual}, while on the
+other it was (is) a text aimed at the previous version of \ConTeXt\
+(called Mark~II) and is therefore quite out of date.
+
+In 2013, the manual was partially updated but many of its sections were
+not rewritten and it contains information relating to both \ConTeXt\
+Mark~II and \ConTeXt\ Mark~IV (the current version), without always
+making it totally clear what information refers to each of the versions.
+Perhaps this is why this manual is not to be found among the documents
+included in \suite-. Yet despite these defects, the manual continues to
+be the best document for beginning to learn \ConTeXt\ once we have read
+the introductory \quotation{\ConTeXt\ Mark~IV, an Excursion}. Also very
+useful for starting out in \ConTeXt\ is the information to be found in
+its \goto{wiki}[url(wiki)] which, at the time this is being written, is
+being redesigned and has a much clearer structure, although it too mixes
+explanations that only work in Mark~II with others for Mark~IV or for
+both versions. This lack of differentiation is also found in the
+official list of \ConTeXt\ commands\footnote{For the list see
+\in{section}[sec:qrc-setup-en].} which does not specify which commands
+work only in one of the two versions.
+
+Basically, this introduction has been written by drawing from the four
+information sources listed here: The \ConTeXt\ \quotation{Excursion},
+the 2013 manual, the contents of the wiki and the official list of
+commands that includes, for each of them, the allowable configuration
+options; in addition, of course, my own tests and conclusions. So, in
+fact this introduction is the result of an investigative effort, and for
+some time I was tempted to call it \quotation{What I know about
+\ConTeXt\ Mark~IV} or \quotation{What I have learned about \ConTeXt\
+Mark~IV}. Ultimately, I discarded these titles because, as true as they
+may be, I felt that they might dissuade someone from getting into
+\ConTeXt; and what is certain is that although the documentation has (in
+my view) some shortcomings, here we have a truly useful and versatile
+tool for which the effort it takes to learn it is undoubtedly
+worthwhile. By using \ConTeXt\ we can manipulate and configure text
+documents to achieve things that someone who does not know the system
+simply cannot even imagine.
+
+\startSmallPrint
+
+  Because of who I am, I cannot help the fact that my complaints about
+  the lack of information will appear from time to time throughout this
+  document. I would not like this to be misunderstood: I am immensely
+  grateful to the creators of \ConTeXt\ for having designed such a
+  powerful tool and for having made it available to the public. It is
+  simply that I cannot avoid thinking that this tool would be much more
+  popular if its documentation were improved: one has to invest a lot of
+  time into learning it, not so much because of its intrinsic difficulty
+  (which it has, but no greater than other similar tools -- to the
+  contrary in fact), but due to the lack of clear, complete and
+  well-organised information that differentiates between the two
+  versions of \ConTeXt, explaining the functions in each of them and,
+  above all, clarifying what each command, argument and option does.
+
+  It is true that this kind of information demands great time
+  investment.  But given that many commands share options with similar
+  names, perhaps a kind of {\em glossary} of options could be provided
+  that would also help to detect some inconsistencies resulting from
+  when two options with the same name do different things, or when, to
+  do the same thing, one uses the names of different options in
+  different commands.
+
+  As for the reader who is approaching \ConTeXt\ for the first time, let
+  my complaints not dissuade you, because although it may be true that
+  deficient information increases the time needed to learn it, at least
+  for the material dealt with in this introduction I have already
+  invested this time so that the reader does not have to do so. And just
+  with what can be learned from this introduction, readers will have at
+  their disposal a tool that will allow them to produce documents with
+  an ease that they could never have suspected.
+
+\stopSmallPrint
+
+Since what is explained in this document comes to a large extent from my
+own conclusions, it is likely that even though I have personally tested
+most of what I explain, some statements or opinions may be neither
+correct nor very orthodox. I will, of course, appreciate any correction,
+nuance or clarification readers can offer me, and these can be sent to
+\color[maincolor]{joaquin@ataz.org}. However, to reduce the occasions
+where I am likely to be wrong I have tried not to enter into matters
+about which I have found no information and that I have not been able
+(or have not wanted) to personally try out. At times this is the case
+because the results of my tests were not conclusive, and at other times
+because I have not always tested everything: the number of commands and
+options \ConTeXt\ has is impressive, and if I had to try everything out
+I would never have finished this introduction. There are occasions,
+however, when I cannot avoid {\em assuming} something, i.e. making a
+statement that I see as probable but that I am not completely sure
+about. In these cases, a \quote{conjecture} image has been placed in the
+left margin of the paragraph where I am making such an assumption. The
+image \Conjecture{} aims to graphically represent the
+assumption.\footnote{I did not draw the image, but downloaded it from
+the internet
+(\goto{https://es.dreamstime.com/}[url(https://es.dreamstime.com/icono-s\%C3\%B3lido-negro-para-la-conjetura-preocupaci\%C3\%B3n-y-duda-conjeturar-el-logotipo-image146773292)]),
+where it says that it is a royalty-free image.} At other times, I have
+no choice but to admit that I don't know something and I don't even have
+a reasonable assumption about it: in this case, the image visible to the
+immediate left in the margin\Doubt~is meant to represent more than just
+conjecture or ignorance.\footnote{Also found on the internet
+(\goto{https://www.freepik.es/}[url(https://www.freepik.es/iconos-gratis/duda-cabeza_785036.htm)])
+where its free use is authorised.} But as I have never been very good
+with graphic representations, I am not sure that the images I have
+selected really manage to convey so many nuances.
+
+This introduction, on the other hand, has been written from the point of
+view of a reader who knows nothing about either \TeX\ or \ConTeXt,
+although I hope that it can also be useful to those coming from \TeX\ or
+\LaTeX\ (the most popular of the \TeX\ derivatives) who are approaching
+\ConTeXt\ for the first time. Just the same, I am aware that in trying
+to please so many different kinds of reader, I run the risk of
+satisfying nobody. Therefore, in case of doubt, I have always been clear
+that the principal addressee of this document is the newcomer to
+\ConTeXt, the newcomer who has just come to this fascinating ecosystem.
+
+Being a newcomer to \ConTeXt\ does not imply also being a newcomer to
+using computer tools; and although in this introduction I am not
+assuming any particular level of computer literacy in readers, I do
+presume a certain \quotation{reasonable literacy} that implies, for
+example, having a general understanding of the difference between a word
+processor and a text editor, knowing how to create, open and manipulate
+a text file, knowing how to install a program, knowing how to open a
+terminal and execute a command... and little else.
+
+\startSmallPrint
+
+  Reading through the previous parts of this introduction as I write
+  these lines, I realise that sometimes I get carried away and get into
+  computer issues that are not necessary for learning \ConTeXt\ and that
+  could scare the newcomer off, while at other times I am busy
+  explaining quite obvious things that could bore the experienced
+  reader. I beg the indulgence of both. Rationally, I know that it is
+  very difficult for a complete beginner in computerised text management
+  to even know that \ConTeXt\ exists, but from another point of view, in
+  my professional environment I am surrounded by people who are
+  constantly struggling with texts when they used word processors, and
+  they do so reasonably well, but never having worked with text files as
+  such they ignore such basic issues as, for example, what encoding text
+  files use or what the difference is between a word processor and a
+  text editor.
+
+\stopSmallPrint
+
+The fact that this manual is designed for people who know nothing about
+\ConTeXt\ or \TeX, implies that I have included information that clearly
+is not about \ConTeXt\ but \TeX; but I have understood that it is not
+necessary to burden readers with information that is not relevant for
+them, as could be the case if a certain command that {\em in fact}
+works, is really a \ConTeXt\ command or belongs to \TeX; so only on some
+occasions, when it seems to me to be useful, do I clarify that certain
+commands really belong to \TeX.
+
+With regard to the organisation of this document, the material is
+grouped into three blocks:
+
+\startitemize
+
+  \item {\bf The first part}, comprising the first four chapters, offers
+  a global overview of \ConTeXt, explaining what it is and how we work
+  with it, showing a first example of how to transform a document so as
+  to be able, later, to explain some fundamental concepts of \ConTeXt\
+  along with certain questions relating to \ConTeXt\ source files.
+
+  As a whole, these chapters are intended for readers who up until now
+  have only known how to work with word processors. A reader who already
+  knows about working with markup languages could forgo these early
+  chapters; and if the reader already knows \TeX, or \LaTeX, they could
+  also skip much of the content in Chapters 3 and 4. Just the same, I
+  would recommend at least reading:
+
+  \startitemize
+
+    \item The information relating to \ConTeXt\ commands (Chapter~3),
+    and in particular how it functions, how it is configured, because
+    this is where the principal difference lies between the conception
+    and syntax of \LaTeX\ and \ConTeXt. Since this introduction refers
+    only to the latter, these differences are not expressly indicated as
+    such, but someone reading this chapter who knows how \LaTeX\ works
+    will immediately understand the difference in syntax of the two
+    languages, as also the way that \ConTeXt\ allows us to configure and
+    customise the way almost all of its commands work.
+
+    \item The information relating to multifile \ConTeXt\ projects
+    (Chapter~4), which is not so similar to the way of working with
+    other \TeX-based systems.
+
+  \stopitemize
+
+  \item {\bf The second part}, that includes Chapters 5 to 9, focuses on
+  what we consider to be the main global aspects of a \ConTeXt\
+  document:
+
+  \startitemize
+
+    \item The two aspects that mainly affect the appearance of a
+    document are the size and layout of its pages and the font used.
+    Chapters 5 and 6 are dedicated to these matters.
+
+    \startitemize
+
+      \item The first focuses on pages: size, the elements that make up
+      a page, its layout (meaning, how the page elements are
+      distributed), etc. For systematic reasons, more specific aspects
+      are also dealt with here, such as those relating to pagination and
+      the mechanisms that allow us to influence it.
+
+      \item Chapter 6 explains commands related to the fonts and their
+      handling. Also included here is a basic explanation of the use and
+      management of colours since, although these are not strictly a
+      {\em characteristic} of fonts, they are just as much an influence
+      on the external appearance of the document.
+
+    \stopitemize
+
+    \item Chapters 7 and 8 focus on the structure of the document and
+    the tools that \ConTeXt\ makes available to the author for writing
+    well-structured documents. Chapter 7 focuses on structure properly
+    so called (structural divisions of the document) and Chapter 8 on
+    how this is reflected in the Table of Contents; although, in line
+    with the explanation of this, we use the opportunity to also explain
+    how to generate various kinds of indexes with \ConTeXt, since for
+    \ConTeXt\ these all come under the notion of \quotation{lists}.
+
+    \item Finally, Chapter 9 focuses on references, an important global
+    aspect of any document when we need to refer to something in another
+    part of the document (internal references) or to other documents
+    (external references). In the case of the latter, we are only
+    interested for the moment in references (links) that mean going to
+    an external document. These {\em links} (that can also occur in
+    internal references) make our document {\em interactive}, and in
+    this chapter we explain some of the features of \ConTeXt\ for
+    creating these kinds of documents.
+
+  \stopitemize
+
+  These chapters do not need to be read in any particular order except
+  for Chapter 8, which may be easier to understand if Chapter 7 has been
+  read first. In any case, I have tried to ensure that when a question
+  arises in a chapter or section that is dealt with elsewhere in this
+  introduction, the text includes a mention of that together with a
+  hyperlink to the point where the question is dealt with. However, I am
+  not in a position to guarantee that this will always be the case.
+
+  \item Finally {\bf the third part} (Chapters 10 and following) focuses
+  on more detailed aspects. They are independent not only of each other,
+  but even of their sections (except, perhaps, in the last chapter).
+  Given the large number of utilities that \ConTeXt\ incorporates, this
+  part could be very extensive; but since my understanding is that by
+  the time they arrive here readers will already be prepared to dive
+  into \ConTeXt\ documentation of their own accord, I have only included
+  the following chapters:
+
+  \startitemize
+
+    \item Chapters 10 and 11 deal with what we could call the {\em core
+    elements} of any text document: the text is made up of characters
+    which make up words that are grouped on lines, which in turn make up
+    paragraphs separated from one another by vertical space... Clearly,
+    all these issues could have been included in a single chapter, but
+    as this would be too long, I have divided this matter into two
+    chapters, one that deals with characters, words and horizontal space
+    and another that deals with lines, paragraphs and vertical space.
+
+    \item Chapter 12 is a kind of {\em mishmash} dealing with elements
+    and constructions commonly found in documents; for the most part
+    academic or scientific or technical documents: footnotes, structured
+    lists, descriptions, numbering, etc.
+
+    \item Finally, Chapter 13 focuses on floating objects especially the
+    most typical of these: images inserted into documents, and tables.
+
+  \stopitemize
+
+  \item The introduction closes with three {\bf appendices}. One is
+  about installing \ConTeXt, a second appendix contains several dozen
+  commands that allow the generation of various symbols -- mainly but
+  not only for mathematical use, and a third appendix contains an
+  alphabetical list of \ConTeXt\ commands explained or mentioned in the
+  course of this text.
+
+\stopitemize
+
+There are many issues that remain to be explained: dealing with quotes
+and biblio\-graphic references, writing specialised texts (maths,
+chemistry...), the connection with XML, the interface with Lua code,
+modes and processing based on modes, working with MetaPost for designing
+graphics, etc. This is why, since I am not including a complete
+explanation of \ConTeXt, nor am I pretending to do so, I have called
+this document \quotation{An introduction to \ConTeXt\ Mark IV}; and I
+have added the fact that the introduction is none too short, because
+obviously this is the case: a text that has left so many things still in
+the pipeline but that has already gone beyond 300 pages is not by any
+means a short introduction. This is because I want the reader to
+understand the logic of \ConTeXt, or at least the logic as I have
+understood it. It does not claim to be a reference manual, but rather a
+guide for self-learning that prepares the reader to produce documents of
+medium complexity (and this includes most of the likely documents) and
+that above all teaches the reader to {\em imagine} what can be done with
+this powerful tool and find out how to do it in the documentation
+available. Nor is this document a {\em tutorial}. Tutorials are designed
+to progressively increase the level of difficulty, so that what is to be
+learned is taught step by step; in this respect I have preferred to
+begin with the second part instead of ordering material according to the
+level of difficulty, in order to be more systematic. But while it is not
+a tutorial, I have included very many examples.
+
+It is possible that for some readers this document's title reminds them
+of a text written by {\sc Oetiker, Partl, Hyna} and {\sc Schlegl}
+available on the internet and one of the better documents for
+introducing oneself to the \LaTeX\ world. I am talking about
+\quotation{{\em The Not So Short Introduction to \LaTeX\
+$2_{\epsilon}$}}. This is no coincidence, but a tribute and act of
+appreciation: thanks to the generous work of those who write texts like
+that, it is possible for many people to begin to work with useful and
+powerful tools like \LaTeX\ and \ConTeXt. These authors helped me to
+start out with \LaTeX; I am hoping to do the same with someone who wants
+to start out with \ConTeXt, even though in the original Spanish version
+of this text I stuck exclusively to the Spanish-speaking world who have
+lacked so much documentation in their language. I hope this document
+fulfils this expectation, and in the meantime, others have generously
+offered to translate it into other languages, hence this English
+edition. Thank you.
+
+\page[no]\blank
+
+\rightaligned{Joaquín Ataz-López}\\
+\rightaligned{Summer 2020}
+
+\stoptitle
+
+}
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% TeX-master: "../introCTX.mkiv"
+%%% coding: utf-8-unix
+%%% End:
+%%% vim:set filetype=context tw=72 : %%%

@@ -1,0 +1,58 @@
+%%% Fichero:     Macros.mkiv
+%%% Autor:       Joaquín Ataz López
+%%% Inicio:      Agosto 2020
+%%% Terminación: Agosto 2020
+%%% Contenido: Contiene el listado de comandos de ConTeXt (y de TeX)
+%%%            de los que se habla a lo largo de la introducción. 
+%%%
+%%% Editado: Emacs + AuTeX - Y a veces con vim + context-plugin
+%%%
+
+\environment introCTX_env.mkiv
+
+\startcomponent Macros.mkiv
+
+\startchapter[title=Índice de comandos]
+
+  En el presente índice se recogen los comandos de los que se habla en
+  esta introducción. Algunos simplemente se mencionan, casi de pasada,
+  en cuyo caso la página que aparece en el índice indica el lugar en
+  donde son mencionados. Pero otros comandos son objeto de cierta
+  explicación más detallada. En tal caso en el índice sólo se recoge
+  el lugar en el que empieza la explicación detallada, aunque, tal
+  vez, el comando sea citado también en otros lugares de la
+  introducción.
+
+  No se incluyen en el índice:
+
+  \startitemize
+
+  \item Los comandos \tex{stopLoQueSea} que cierran una construcción
+    que previamente se abrió con \tex{startLoQueSea}, salvo que en el
+    texto se diga algo especial sobre el comando \tex{stop}, o se le
+    trate en un lugar diferente a aquel en el que se trató el
+    correspondiente comando \tex{start}.
+
+  \item Los comandos dirigidos a generar símbolos, que se recogen en
+    el \in{apéndice}[app:símbolos].
+    
+  \item Tratándose de comandos que generan un diacrítico o letra, y que tienen
+    una versión en mayúscula y otra en minúscula, para generar,
+    respectivamente, la letra mayúscula o la minúscula, sólo se recoge
+    la versión con letra minúscula.
+
+  \stopitemize
+
+  \blank\midaligned{***}\blank
+  
+  
+  \placemacro
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% TeX-master: "../introCTX.mkiv"
+%%% coding: utf-8-unix
+%%% End:

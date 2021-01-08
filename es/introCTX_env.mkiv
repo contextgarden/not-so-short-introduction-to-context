@@ -1,0 +1,262 @@
+%%% Fichero:  introCTX_env.mkiv
+%%% Autor:    Joaquín Ataz López
+%%% Creación: Marzo 2020
+%%% Fichero editado con: vim
+%%%
+%%% Este fichero contiene el preámbulo de la introducción a ConTeXt.
+%%% Inicialmente lo copié de las fuentes del fichero about.pdf, incluido
+%%% en la documentación de ConTeXt Standalone, y a partir de ahí fui
+%%% cambiando algunas cosas, según mis necesidades.
+
+\startenvironment introCTX_env.mkiv
+
+    \mainlanguage[es] % Idioma principal = español
+
+    \setupbodyfont[modern] % Letra base del documento
+
+    % Diseño de página
+    \setuplayout
+        [
+            width=middle,
+            height=middle,
+            topspace=2.5cm,
+            backspace=3cm,
+            header=1cm,
+            headerdistance=.5cm,
+            footer=0.5cm
+        ]
+
+    \setupexternalfigures [directory=img, location=global] % Directorio de imágenes
+
+    \setupwhitespace[big] % Espacio vertical amplio
+
+    \setupitemize [indenting=none] % No indentación de la primera línea
+
+    \setupcaptions [headstyle=\bfx, style=\tfx] % Estilo de los títulos de tablas e imágenes
+
+    \definecolor [maincolor] [.6(orange)] % Color para los títulos
+
+    \definecolor [púrpura] [.5(darkblue)] % Color para la portada
+
+    % Escritura de comandos y fragmentos de código
+    \setuptype [color=darkmagenta]
+    \setuptyping
+        [color=darkmagenta,style={\switchtobodyfont[small,tt]}]
+
+    % Etiquetas
+    \setuplabeltext
+        [es]
+        [
+            chapter=Capítulo~,
+            appendix=Apéndice~,
+            part=Parte~
+        ]
+
+    % Notas a pie de página
+    \setupnotation
+        [footnote]
+        [way=bypage, numberconversion=n, after={\blank[small]}]
+
+    % Numeración de páginas
+    \setuppagenumbering [location={header, right}]
+    \setupuserpagenumber [number=2]
+
+    % Pies de página inicialmente vacíos
+    \setupfootertexts[]
+
+% CONFIGURACIÓN DE PARTES, CAPÍTULOS, SECCIONES, ETC.
+
+    % Este fragmento define un pie de página con el número de página. Se le
+    % asigna un nombre para, luego, al configurar los comandos de
+    % seccionado, asignar este nombre a la primera página de part y
+    % chapter.
+    \definetext[ChapterPrimPag]
+        [footer]
+        [pagenumber]
+
+    \setuphead
+        [part]
+        [
+            placehead=yes,
+            alternative=middle,
+            conversion=I,
+            style={\switchtobodyfont[40pt]\bf},
+            color=púrpura,
+            before={\ \godown[4cm]},
+            header=high,
+            footer=ChapterPrimPag,
+        ]
+
+    \setuphead
+        [title, chapter]
+        [
+            style={\switchtobodyfont[30pt]\bf},
+            align=flushright,
+            before={\blank[5*big, force]},
+            after={\blank[2*big]},
+            color=maincolor,
+            sectionsegments=2:2,
+            commandbefore={\blank[small]},
+            header=high,
+            footer=ChapterPrimPag,
+        ]
+
+    \setuphead
+        [section, subject]
+        [
+            style={\bfc},
+            before={\blank[2*big]},
+            after=\blank,
+            color=maincolor,
+            sectionsegments=2:3,
+        ]
+
+    \setuphead
+        [subsection, subsubject]
+        [
+            style={\bfb},
+            before=\blank,
+            after=\blank,
+            color=maincolor,
+            sectionsegments=2:4,
+        ]
+
+    \define[1]\PonPunto{#1.}
+
+    \setuphead
+        [subsubsection,subsubsubject]
+        [
+            sectionsegments=5:5,
+            conversion=A,
+            style=\bfa,
+            color=black,
+            numbercommand=\PonPunto,
+        ]
+
+% Estructuras definidas por mi
+
+    \definedescription
+        [descripción]
+        [
+            alternative=hanging,
+            width=fit,
+            distance=0.3cm,
+            headstyle=\bf
+        ]
+
+    \definedescription
+        [semitabla]
+        [
+            alternative=left,
+            width=fit,
+            distance=1cm,
+            headcolor=darkmagenta,
+            headstyle=\tt,
+        ]
+
+% ENTORNOS
+
+    % DobleEjemplo: Para ejemplos a doble columna. Me daba algunos fallos
+    % al definirlo con \definestartstop (por desconocimiento mío) y al
+    % final lo que hice fue definir un comando, al estilo TeX, para abrirlo
+    % y otro comando para cerrarlo.
+    \def\startDobleEjemplo
+        {
+            \startframedtext
+            [frame=off]
+            \switchtobodyfont[small]
+            \setuptyping[style=tt]
+            \startcolumns
+                [
+                    n=2,
+                    tolerance=verytolerant,
+                    distance=0.5cm,
+                    separator=rule,
+                    rulecolor=darkmagenta
+                ]
+        }
+
+    \def\stopDobleEjemplo{\stopcolumns\stopframedtext}
+
+    % LetraChica
+    \definestartstop[LetraChica]
+    [
+      before={\startnarrower\switchtobodyfont[small,ss]},
+      after={\stopnarrower},
+    ]
+
+% Comandos y abreviaturas
+
+    % Conjetura: Imprime en el margen el icono de la conjetura
+    \define\Conjetura
+      {\inmargin[line=1]{\externalfigure[miniconjetura.jpg][width=1cm]}}
+
+      % Duda: Imprime en el margen el icono de la duda
+      \define\Duda
+        {\inmargin[line=1]{\externalfigure[miniduda.jpg][width=1cm]}}
+
+        % ejemplo: Muestra en rojo y letra chica el resultado de la
+        % compilación de un código previo.
+        \define[1]\ejemplo{\color[red]{\tfx#1}}
+
+        % ConTeXt Standalone
+        \def\suite-{«\ConTeXt\ Standalone»}
+
+        % cmd: Para usar en lugar de tex cuando, en el fichero fuente,
+        % se produce un salto de línea dentro de su argumento.
+        \define[1]\cmd
+               {{\en\tt\color[darkmagenta]{\backslash #1}}}
+
+       % PalClave: Letra tt y comillas angulares
+       \define[1]\PalClave{«{\tt #1}»}
+
+       % Índices parciales de los capítulos:
+       \def\Separar#1{#1;}
+       \def\PonIndiceCap
+         {
+           \startnarrower\switchtobodyfont[small, sl]
+             {\bf Sumario:}
+             \setuplist
+               [section,subsection,subsubsection]
+               [pagenumber=no, textcommand=\Separar]
+             \setuplist[section][style=bold]
+             \placecontent[alternative=d]
+           \stopnarrower
+         }
+
+         % Índice analítico
+         \defineregister[macro]
+         \define[1]\PonMacro{\macro[#1]{\backslash #1}}
+
+% INTERACTIVIDAD
+
+    \setupinteraction
+        [
+            state=start,
+            color=darkblue,
+            contrastcolor=darkblue,
+            style=,
+        ]
+
+    \setupurl [color=blue, style=\tt]
+
+    \useurl
+        [pragma]
+        [http://www.pragma-ade.com/]
+
+    \useurl
+        [wiki]
+        [https://www.contextgarden.net/]
+
+    \useurl
+        [wikisymbols]
+        [https://wiki.contextgarden.net/Symbols/utf8]
+
+\stopenvironment
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% TeX-master: "introCTX.mkiv"
+%%% coding: utf-8-unix
+%%% End:

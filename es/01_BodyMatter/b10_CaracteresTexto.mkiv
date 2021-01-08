@@ -1,0 +1,1925 @@
+%%% Fichero:     b10_CaracteresTexto
+%%% Autor:       Joaquín Ataz López
+%%% Inicio:      Julio 2020
+%%% Terminación: Julio 2020
+%%% Contenido: En realidad es una amalgama de cuestiones las que se
+%%%            plantean en este capítulo, y el criterio que las
+%%%            unifica es algo forzado: La sección 1 podría estar en
+%%%            el capítulo dedicado al fichero fuente (de hecho así
+%%%            era en la primera versión del mismo); la 2 en el
+%%%            capítulo dedicado a las fuentes: pues aunque no son
+%%%            características del formato propiamente dicho, se le
+%%%            parecen bastante. La 3 es espacio horizontal; en las
+%%%            primeras versiones lo junté con el espacio vertical en
+%%%            un capítulo titulado "Espacio en blanco". La 4 y la 5
+%%%            son más difíciles de ubicar. Finalmente opté por este
+%%%            capítulo que es un "poutpurri".
+%%%
+%%% Editado: Emacs + AuTeX - Y a veces con vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent b10_CaracteresTexto.mkiv
+
+\startchapter
+  [title={Caracteres, palabras,\\ texto y espacio horizontal}]
+
+\PonIndiceCap
+
+El elemento nuclear básico de todo documento de texto es el carácter:
+los caracteres se agrupan en palabras, éstas a su vez forman líneas
+que componen párrafos con los que se van formando las páginas.
+
+El presente capítulo, partiendo del «{\em carácter}» explica algunas
+utilidades de \ConTeXt\ relacionadas con los caracteres, las palabras
+y el texto.
+
+\startsection
+  [title=Obtener caracteres no accesibles\\ normalmente desde el teclado]
+
+En un fichero de texto codificado como UTF-8 (véase
+\in{sección}[sec:codificación]) cabe casi cualquier carácter o
+símbolo, tanto de lenguas vivas como de muchas lenguas ya
+extintas. Pero, como las posibilidades de un teclado son limitadas,
+gran parte de los caracteres y símbolos admisibles en UTF-8
+normalmente no se podrán obtener directamente desde el teclado. Ello
+ocurre, en particular, con numerosos signos diacríticos, es decir: los
+que se sitúan sobre (o bajo) ciertas letras dotándoles de un valor
+especial; pero también con muchos otros caracteres como símbolos
+matemáticos, ligaduras tradicionales, etc. Muchos de estos caracteres
+los podemos obtener en \ConTeXt\ mediante comandos.
+
+\startsubsection
+  [title=Signos diacríticos y letras especiales]
+
+Casi todos los idiomas occidentales tienen signos diacríticos (con la
+importante salvedad del inglés) y en general los teclados están
+preparados para generar los diacríticos correspondientes al o a los
+idiomas regionales. Así, un teclado español puede generar todos los
+diacríticos necesarios para el idioma español (básicamente acentos
+agudos y diéresis) así como algunos diacríticos que se usan en otros
+idiomas próximos como el catalán (acentos graves y cedillas) o el
+francés (cedillas, acentos graves y circunflejos); pero no, por
+ejemplo, algunos que se usan en portugués, como la tilde sobre vocal
+de palabras como «navegaç\~ao».
+
+\TeX\ fue diseñado en Estados Unidos donde los teclados en general no
+permiten obtener ningún diacrítico; por ello su autor le dotó de un
+conjunto de comandos que permitían obtener casi todos los símbolos
+diacríticos conocidos (al menos en los idiomas que usan el alfabeto
+latino). Si usamos un teclado español, como supongo que será el caso
+de la mayor parte de los lectores de este texto, no tiene demasiado
+sentido usar esos comandos para obtener aquellos diacríticos que se
+pueden obtener directamente desde el teclado. Aún así conviene saber
+que estos comandos existen, y cuáles son, pues los teclados españoles
+no permiten generar todos los diacríticos posibles.
+
+\placetable
+  [here]
+  [tbl:diacríticos]
+  {\tfx Acentos y otros diacríticos}
+  {
+    \starttabulate[|l|l|l|l|]
+      \HL
+      \NC{\bf Nombre}\NC{\bf Carácter}\NC{\bf Abreviatura}\NC{\bf Comando}\NR
+      \HL
+      \NC Acento agudo\NC\'u\NC{\tt\backslash'u}\NC{\tt\backslash
+        uacute}\NR\PonMacro{aacute}\PonMacro{eacute}\PonMacro{iacute}\PonMacro{oacute}\PonMacro{uacute}
+      \NC Acento grave\NC\`u\NC{\tt\backslash`u}\NC{\tt\backslash
+        ugrave}\NR\PonMacro{agrave}\PonMacro{egrave}\PonMacro{igrave}\PonMacro{ograve}\PonMacro{ugrave}
+      \NC Acento
+      circunflejo\NC\^u\NC{\tt\backslash^u}\NC{\tt\backslash
+        ucircumflex}\NR\PonMacro{acircumflex}\PonMacro{ecircumflex}\PonMacro{icircumflex}\PonMacro{ocircumflex}\PonMacro{ucircumflex}
+      \NC Diéresis o umlaut
+      \NC\"u\NC{\tt\backslash”u}\NC{\tt\backslash udiaeresis,
+        \backslash
+        uumlaut}\NR\PonMacro{adiaeresis}\PonMacro{ediaeresis}\PonMacro{idiaeresis}\PonMacro{odiaeresis}\PonMacro{udiaeresis}
+      \NC Tilde\NC\~u\NC{\tt\backslash\lettertilde u}\NC{\tt\backslash
+        utilde}\NR\PonMacro{atilde}\PonMacro{etilde}\PonMacro{itilde}\PonMacro{otilde}\PonMacro{utilde}
+      \NC Macrón o acento
+      largo\NC\=u\NC{\tt\backslash=u}\NC{\tt\backslash
+        umacron}\NR\PonMacro{amacron}\PonMacro{emacron}\PonMacro{imacron}\PonMacro{omacron}\PonMacro{umacron}
+      \NC Acento breve\NC\u u\NC{\tt\backslash u u}\NC{\tt\backslash
+        ubreve}\PonMacro{u}\PonMacro{abreve}\PonMacro{ebreve}\PonMacro{obreve}\PonMacro{ibreve}\PonMacro{ubreve}\NR
+      \HL
+    \stoptabulate
+}
+  
+  En la \in{tabla}[tbl:diacríticos] se contienen los comandos y las
+  abreviaturas que permiten obtener estos signos. Con un teclado
+  español nunca necesitaremos usar los cuatro primeros comandos; pero
+  los tres últimos tal vez sí debamos usarlos en alguna ocasión. En
+  todos ellos es indiferente usar el comando o la abreviatura. En la
+  tabla he puesto como ejemplo la letra «u» pero estos comandos
+  funcionan con cualquier vocal (la mayoría\footnote{De los comandos
+    recogidos en la \in{tabla}[tbl:diacríticos] la tilde no funciona
+    con la letra «e», no conozco la razón.}) y también con algunas
+  consonantes o semivocales (algunos de ellos).
+
+  \startitemize
+
+  \item Como la mayor parte de los comandos abreviados son {\em símbolos de
+    control} (véase la \in{sección}[sec:comandos_propdic]), la letra sobre
+    la que ha de recaer el diacrítico puede escribirse inmediatamente
+    detrás del comando, o separarse de él con uno o varios espacios en
+    blanco, y así, por ejemplo: Para conseguir la «\~a» portuguesa podremos
+    escribir \tex{=a} o \cmd{=\textvisiblespace a}\footnote{Recuérdese que
+    en este documento representamos los espacios en blanco, cuando es
+    importante que se les vea, con el carácter «\textvisiblespace».}. Pero
+    en el caso del acento breve (\tex{u}), al tratarse de una {\em palabra
+    de control}, el espacio en blanco de separación es obligatorio.
+
+  \item Tratándose de la versión larga del comando, la letra sobre la
+    que debe recaer el diacrítico será la primera letra del nombre del
+    comando, y así, por ejemplo \tex{emacron} pondrá un macrón sobre
+    una «e» minúscula (\emacron), \tex{Emacron} lo hará sobre una «E»
+    mayúscula (\Emacron), mientras que \tex{Amacron} lo hará sobre una
+    «A» mayúscula (\Amacron).
+    
+  \stopitemize
+
+Si los comandos de la \in{tabla}[tbl:diacríticos] funcionan sobre
+cualquier vocal y sobre algunas consonantes, hay otros comandos para
+generar algunos diacríticos y letras especiales, que sólo funcionan
+sobre una o varias letras. Se muestran en la
+\in{tabla}[tbl:masdiacríticos].
+
+{\switchtobodyfont[small]
+\placetable
+  [here]
+  [tbl:masdiacríticos]
+  {\tfx Más diacríticos y letras especiales}
+  {
+    \starttabulate[|l|l|l|l|]
+      \HL
+      \NC{\bf Nombre}\NC{\bf Carácter}\NC{\bf Abreviatura}\NC{\bf Comando}\NR
+      \HL
+      \NC O escandinava\NC\o, \O\NC{\tt \backslash o, \backslash O}\NC\NR\PonMacro{o}
+      \NC A escandinava\NC\aring, \Aring\NC{\tt \backslash aa, \backslash AA, \{\backslash r a\}, \{\backslash r A\}}\NC{\tt \backslash aring, \backslash Aring}\NR\PonMacro{aa}\PonMacro{r}\PonMacro{aring}
+      \NC L polaca\NC\l, \L\NC{\tt \backslash l, \backslash L}\NC\NR\PonMacro{l}
+      \NC Eszett alemana\NC\SS\NC{\tt \backslash ss, \backslash SS}\NC\NR\PonMacro{ss}
+      \NC «i» y «j» sin punto\NC\i, \j\NC{\tt \backslash i, \backslash j}\NC\NR\PonMacro{i}\PonMacro{j}
+      \NC Umlaut húngaro\NC\H u, \H U\NC{\tt\backslash H u}, {\tt\backslash H U}\NC\NR\PonMacro{H}
+      \NC Cedilla\NC\c c, \c C\NC{\tt \backslash c c, \backslash c C}\NC{\tt \backslash ccedilla, \backslash Ccedilla}\PonMacro{c}\PonMacro{ccedilla}\PonMacro{kcedilla}\PonMacro{lcedilla}\PonMacro{ncedilla}\PonMacro{rcedilla}\PonMacro{scedilla}\PonMacro{tcedilla}\NR
+      \HL
+    \stoptabulate
+  }
+}
+
+De la tabla anterior quiero señalar que algunos de los comandos
+generan ellos mismos el carácter a partir de otros caracteres,
+mientras que otros comandos sólo funcionan si la fuente que estamos
+usando ha previsto expresamente el carácter en cuestión. Por ello a
+propósito de la Eszett alemana (ß), en la tabla se muestran dos
+comandos pero un solo carácter; porque la fuente con la que estoy
+escribiendo este texto sólo ha previsto la Eszett alemana en
+mayúsculas (cosa, por otra parte, bastante corriente). Probablemente
+sea esa la razón de que tampoco consigo que \cmd{AA} genere la A
+escandinava en mayúsculas, aunque \PalClave{\{\backslash r A\}} y
+\cmd{Aring} funcionan correctamente.
+
+El umlaut húngaro, además, funciona también con la letra «o», y la
+cedilla con las letras «k», «l», «n», «r», «s» y «t», en minúsculas o
+en mayúsculas; para ello los comandos a usar son, respectivamente,
+\cmd{kcedilla}, \cmd{lcedilla}, \cmd{ncedilla}, etc.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:ligaduras,
+    title=Ligaduras tradicionales,
+  ]
+  % Debería haber otra sección para las ligaduras propiamente dichas,
+  % las gestionadas automáticamente por ConTeXt como característica de
+  % la fuente. Pero como al final, en el capítulo de fuentes, no he
+  % hablado de las características de las distintas fuentes, no hay
+  % dónde ubicar dicha sección.
+
+Una ligadura es un símbolo formado por la unión de dos o más grafemas
+que suelen escribirse por separado. Esta «fusión» entre dos caracteres
+en muchas ocasiones empezó haciéndose para abreviar la escritura,
+cuando esta se hacía a mano; hasta que finalmente alcanzaron cierta
+independencia tipográfica. Algunas de ellas se incluyeron incluso
+entre los caracteres que se suelen definir en una fuente tipográfica
+como es el caso de «\&» que empezó siendo una contracción de la
+conjunción copulativa latina «et», o la Eszett alemana (ß), que, como
+su propio nombre indica, empezó siendo una combinación de una «s» y
+una «z». En algunos diseños de fuentes, todavía hoy, se pueden
+rastrear esos orígenes de estos dos caracteres; o tal vez yo los veo
+porque sé que están ahí. En particular, con la fuente Pagella para
+«\&» y con Bookman para «ß». Como ejercicio sugiero que (tras leer el
+\in{capítulo}[sec:fuentescol], donde se explica cómo hacerlo) se
+intente representar esos caracteres, con dichas fuentes, a un tamaño
+lo suficientemente grande (por ejemplo, 30 pt) como para que se puedan
+“intuir” los componentes originales.
+
+Otras de estas ligaduras tradicionales, que no llegaron a popularizarse
+tanto, pero que todavía hoy día son usadas ocasionalmente, son las
+terminaciones latinas «oe» y «ae» que ocasionalmente se escribían como
+«\oe» o «\ae» para indicar que en latín formaban diptongo. En
+\ConTeXt\ estas ligaduras se obtienen con los comandos recogidos en la
+\in{tabla}[tbl:ligaduras]
+
+\placetable
+  [here]
+  [tbl:ligaduras]
+  {Ligaduras tradicionales}
+{
+  \starttabulate[|l|l|l|]
+    \HL
+    \NC {\bf Ligadura}\NC {\bf Abreviatura}\NC {\bf Comando}\NR
+    \HL
+    \NC\ae, \AE\NC{\tt \backslash ae, \backslash AE}\NC{\tt \backslash aeligature, \backslash AEligature}\NR\PonMacro{ae}\PonMacro{aeligature}
+    \NC\oe, \OE\NC{\tt \backslash oe, \backslash OE}\NC{\tt \backslash oeligature, \backslash OEligature}\PonMacro{oe}\PonMacro{oeligature}\NR
+    \HL
+  \stoptabulate
+}    
+
+Una ligadura que era tradicional en la escritura castellana y que no
+suele estar representada en las fuentes tipográficas, es «Đ»: una
+contracción entre la «D» y la «E». No hay (que yo sepa) ningún comando
+en \ConTeXt\ que permita representarla\footnote{En \LaTeX, por el
+  contrario, puede usarse el comando \cmd{DH} implementado por el
+  paquete \PalClave{fontenc}.}, pero podemos crear uno, tal y como se
+explica en la \in{sección}[sec:crear caracteres].
+
+Junto con las anteriores ligaduras, a las que he llamado {\em
+  tradicionales}, por proceder de la escritura a mano, tras la invención de
+la imprenta se fueron desarrollando ciertas ligaduras propias de textos
+impresos, a las que llamaré «ligaduras tipográficas» que en \ConTeXt\ se
+consideran «utilidades» de la fuente y son gestionadas automáticamente por
+el programa, aunque podemos influir en cómo se gestionarán las utilidades
+de las fuentes (incluyendo las ligaduras) mediante
+\PonMacro{definefontfeature}\tex{definefontfeature} (que no se explica en
+esta introducción).
+
+\stopsubsection
+
+\startsubsection
+  [title=Letras griegas]
+
+En fórmulas matemáticas y físicas es corriente usar caracteres
+griegos. Por ello \TeX\ incluyó la posibilidad de generar todo el
+alfabeto griego, en mayúsculas y en minúsculas.  Aquí el comando se
+construye a partir del nombre en inglés de la letra griega en
+cuestión. Si el primer carácter de la misma se escribe en minúscula
+tendremos la letra griega minúscula y si se escribe en mayúsculas
+obtendremos la letra griega mayúscula. Por ejemplo, en inglés a la
+letra griega que en español se llama «my», se la llama «mu». Por tanto
+el comando \cmd{mu} generará dicha letra en minúscula (\mu) y \cmd{Mu}
+Generará la versión en mayúsculas (Μ). En la
+\in{tabla}[tbl:letrasgriegas] se puede ver con qué comando se genera
+cada una de las letras del alfabeto griego, en mayúsculas o en
+minúsculas.
+
+{\smallbodyfont
+\placetable
+  [here]
+  [tbl:letrasgriegas]
+  {Alfabeto griego}
+{
+  \starttabulate[|l|l|l|]
+    \HL
+    \NC {\bf Nombre español}\NC {\bf Carácter (Min/May)}\NC {\bf Comandos (Min/May)}\NR
+    \HL
+    \NC Alfa\NC\alpha, \Alpha\NC{\tt \backslash alpha, \backslash Alpha}\NR\PonMacro{alpha}
+    \NC Beta\NC\beta, \Beta\NC{\tt \backslash beta, \backslash Beta}\NR\PonMacro{beta}
+    \NC Gamma\NC\gamma, \Gamma\NC{\tt \backslash gamma, \backslash Gamma}\NR\PonMacro{gamma}
+    \NC Delta\NC\delta, \Delta\NC{\tt \backslash delta, \backslash Delta}\NR\PonMacro{delta}
+    \NC Epsilón\NC\epsilon, \varepsilon, \Epsilon\NC{\tt \backslash epsilon, \backslash varepsilon, \backslash Epsilon}\NR\PonMacro{epsilon}\PonMacro{varepsilon}
+    \NC Dseta\NC\zeta, \Zeta\NC{\tt \backslash zeta, \backslash Zeta}\NR\PonMacro{zeta}
+    \NC Eta\NC\eta, \Eta\NC{\tt \backslash eta, \backslash Eta}\NR\PonMacro{eta}
+    \NC Zeta\NC\theta, \vartheta, \Theta\NC{\tt \backslash theta, \backslash vartheta, \backslash Theta}\NR\PonMacro{theta}\PonMacro{vartheta}
+    \NC Iota\NC\iota, \Iota\NC{\tt \backslash iota, \backslash Iota}\NR\PonMacro{iota}
+    \NC Kappa\NC\kappa, \varkappa, \Kappa\NC{\tt \backslash kappa, \backslash varkappa, \backslash Kappa}\NR\PonMacro{kappa}\PonMacro{varkappa}
+    \NC Lambda\NC\lambda, \Lambda\NC{\tt \backslash lambda, \backslash Lambda}\NR\PonMacro{lambda}
+    \NC My\NC\mu, \Mu\NC{\tt \backslash mu, \backslash Mu}\NR\PonMacro{mu}
+    \NC Ny\NC\nu, \Nu\NC{\tt \backslash nu, \backslash Nu}\NR\PonMacro{nu}
+    \NC Xi\NC\xi, \Xi\NC{\tt \backslash xi, \backslash Xi}\NR\PonMacro{xi}
+    \NC Omicrón\NC\omicron, \Omicron\NC{\tt \backslash omicron, \backslash Omicron}\NR\PonMacro{omicron}
+    \NC Pi\NC\pi, \varpi, \Pi\NC{\tt \backslash pi, \backslash varpi, \backslash Pi}\NR\PonMacro{pi}\PonMacro{varpi}
+    \NC Rho\NC\rho, \varrho, \Rho\NC{\tt \backslash rho, \backslash varrho, \backslash Rho}\NR\PonMacro{rho}\PonMacro{varrho}
+    \NC Sigma\NC\sigma, \varsigma, \Sigma\NC{\tt \backslash sigma, \backslash varsigma, \backslash Sigma}\NR\PonMacro{sigma}\PonMacro{varsigma}
+    \NC Tau\NC\tau, \Tau\NC{\tt \backslash tau, \backslash Tau}\NR\PonMacro{tau}
+    \NC Ypsilón\NC\upsilon, \Upsilon\NC{\tt \backslash upsilon, \backslash Upsilon}\NR\PonMacro{upsilon}
+    \NC Fi\NC\phi, \varphi, \Phi\NC{\tt \backslash phi, \backslash varphi, \backslash Phi}\NR\PonMacro{phi}\PonMacro{varphi}
+    \NC Ji\NC\chi, \Chi\NC{\tt \backslash chi, \backslash Chi}\NR\PonMacro{chi}
+    \NC Psi\NC\psi, \Psi\NC{\tt \backslash psi, \backslash Psi}\NR\PonMacro{psi}
+    \NC Omega\NC\omega, \Omega\NC{\tt \backslash omega, \backslash Omega}\PonMacro{omega}\NR
+    \HL
+    
+  \stoptabulate
+}}
+
+Obsérvese como para la versión en minúscula de algunos caracteres
+(epsilón, kappa, zeta, pi, rho, sigma y fi) hay dos posibles variantes.
+
+\stopsubsection
+
+\startsubsection
+  [title=Símbolos variados]
+
+Junto a los caracteres ya vistos, \TeX\ (y, por lo tanto, también
+\ConTeXt), ofrece comandos para generar numerosos símbolos. Estos
+comandos son muchos. En el \in{apéndice}[app:símbolos] he recogido
+un listado amplio, aunque incompleto.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:crear caracteres,
+    title=Definición de caracteres,
+  ]
+  \PonMacro{definecharacter}
+
+Si necesitamos usar algún carácter que no es accesible desde nuestro
+teclado, podemos buscar alguna página web en donde dicho carácter se
+represente y copiarlo en nuestro fichero fuente. Si estamos usando la
+codificación UTF-8 (tal y como se recomienda) eso funcionará casi
+siempre. A estos efectos, en la wiki de \ConTeXt\ existe una página con
+multitud de símbolos para que se puedan simplemente copiar y pegar en
+nuestro documento. Para acceder a ella pulse \goto{en este
+  enlace}[url(wikisymbols)].
+
+Pero si debemos usar más de una vez el carácter en cuestión, irlo
+copiando y pegando no es el procedimiento más eficiente. Es preferible
+definir dicho carácter de tal modo que el mismo quede asociado a un
+comando que lo generará en lo sucesivo. Para ello se usa
+\cmd{definecharacter} cuya sintaxis es
+
+{\tt \backslash definecharacter {\em Nombre} {\em Carácter}}
+
+donde
+
+\startitemize
+
+\item {\bf Nombre} es el nombre al que se asociará el nuevo
+  carácter. No ha de ser el nombre de un comando ya existente, pues
+  ello sobreescribiría dicho comando.
+
+\item {\bf Carácter} es el carácter que se generará cada vez que se
+  ejecute \cmd{{\em Nombre}}. Este carácter lo podemos indicar de tres
+  modos:
+
+  \startitemize
+
+  \item Simplemente escribiéndolo o pegándolo en nuestro fichero
+    fuente (si lo hemos copiado de algún documento electrónico o
+    página web).
+
+  \item Indicando el número asociado a dicho carácter en la fuente que
+    estamos usando en este momento. Para poder ver los caracteres
+    incluidos en la fuente, y los números que se les asocian, podemos
+    usar el comando \cmd{showfont[{\em Nombre de la fuente}]}.
+
+  \item Construyendo el nuevo carácter con alguno de los comandos de
+    construcción de caracteres compuestos que veremos inmediatamente.
+    
+  \stopitemize
+  
+\stopitemize
+
+Como ejemplo del primer uso, retrocedamos un instante a la sección
+relativa a las ligaduras (\in{}[sec:ligaduras]). En ella he hablado de
+una ligadura tradicional de la escritura castellana que no suele
+existir en las fuentes: «Đ». Podemos asociar ese carácter a, por
+ejemplo, el comando \cmd{decontrac} de tal modo que cuando escribamos
+\cmd{decontrac} se genere dicho carácter. Ese se conseguiría con:
+
+\type{\definecharacter decontrac Đ}
+
+\startLetraChica
+
+  Para construir un nuevo carácter que no está en nuestra fuente, y no
+  se puede conseguir desde el teclado, como es el caso del ejemplo que
+  acabo de poner, primero hay que buscar algún texto en el que dicho
+  carácter se represente, para copiarlo y poderlo pegar en nuestra
+  definición. En el ejemplo concreto que acabo de poner, el carácter
+  «Đ» lo copié originalmente de la wikipedia.
+  
+\stopLetraChica
+
+\ConTeXt\ también incluye algunos comandos que permiten crear
+caracteres compuestos y que se pueden usar en combinación con
+\cmd{definecharacter}. Por caracteres compuestos quiero decir
+caracteres con algún signo diacrítico. Estos comandos son los
+siguientes:
+
+\PonMacro{buildmathaccent}\PonMacro{buildtextaccent}\PonMacro{buildtextbootomcomma}\PonMacro{buildtextbottomdot}\PonMacro{buildtextcedilla}\PonMacro{buildtextgrave}\PonMacro{buildtextmacron}\PonMacro{buildtexttognek}
+\starttyping
+  \buildmathaccent Acento Carácter
+  \buildtextaccent Acento Carácter
+  \buildtextbottomcomma Carácter
+  \buildtextbottomdot Carácter
+  \buildtextcedilla Carácter
+  \buildtextgrave Carácter
+  \buildtextmacron Carácter
+  \buildtextognek Carácter
+\stoptyping
+
+Por ejemplo: Como ya sabemos, por defecto \ConTeXt\ sólo tiene comandos
+para escribir con cedilla algunas letras (c, k, l, n, r, s y t), que
+son, por otra parte, las letras que habitualmente se incorporan a la
+fuente con la cedilla. Si quisiéramos poder usar en nuestro documento
+una «b» con cedilla, podríamos usar el comando \cmd{buildtextcedilla}
+del siguiente modo:
+
+\type{\definecharacter bcedilla {\buildtextcedilla b}}
+
+\definecharacter bcedilla {\buildtextcedilla b}
+
+Este comando creará el nuevo comando \cmd{bcedilla} que generará una
+«b» con cedilla («\bcedilla»). Estos comandos literalmente
+«construyen» el nuevo carácter, por lo que éste se generará aunque
+nuestra fuente no lo defina. Ello es porque, en realidad, lo que estos
+comandos hacen es superponer un carácter sobre otro y asociar un
+nombre a dicha superposición.
+
+\startLetraChica
+
+  En mis pruebas no he conseguido hacer funcionar
+  \cmd{buildmathaccent} ni \cmd{buildtextognek}. Por lo tanto a partir
+  de aquí no los mencionaré más.
+  
+\stopLetraChica
+
+{\tt \backslash buildtextaccent} recibe dos caracteres
+como argumentos y superpone uno sobre el otro, elevando, ligeramente,
+uno de ellos. Aunque se denomina «buildtextaccent» no es
+imprescindible que alguno de los caracteres recibidos como argumento
+sea un acento; pero la superposición dará mejores resultados si lo es,
+pues en tal caso al superponer el acento sobre el carácter es menos
+probable que el acento sobreescriba al carácter. Por otra parte, la
+superposición de dos caracteres que en condiciones normales tienen la
+misma línea base, se ve afectada por el hecho de que el comando eleva
+ligeramente uno de los caracteres sobre el otro. Por eso no podemos
+usar este comando para, por ejemplo, obtener con él la contracción «Đ»
+de la que antes se ha hablado, pues si escribimos en nuestro fichero
+fuente
+
+\type{\definecharacter decontrac {\buildtextaccent D E}}
+\definecharacter decontrac {\buildtextaccent D E}
+
+la ligera elevación sobre la línea base de la «D» que
+este comando produce, hace que el efecto no sea muy bueno
+(«\decontrac»). Pero si las alturas de los caracteres lo permiten,
+podemos realizar cualquier combinación. Por ejemplo
+
+
+\type{\definecharacter caralarga {\buildtextaccent \_ "}}
+\definecharacter caralarga {\buildtextaccent \_ "}
+
+definirá el carácter «\caralarga» que quedará
+asociado al comando \cmd{caralarga}.
+
+Los restantes comandos de construcción reciben como único argumento el
+carácter al que se le añadirá el diacrítico que cada comando genera. A
+continuación mostraré un ejemplo de cada uno de ellos, construido
+sobre la letra «z»:
+
+\definecharacter zcoma {\buildtextbottomcomma z}
+\definecharacter zdot {\buildtextbottomdot z}
+\definecharacter zcedilla {\buildtextcedilla z}
+\definecharacter zgrave {\buildtextgrave z}
+\definecharacter zmacron {\buildtextmacron z}
+
+\startitemize
+
+\item {\tt \backslash buildtextbottomcomma} añade una coma bajo el
+  carácter que recibe como argumento («\zcoma»).
+\item {\tt \backslash buildtextbottomdot} añade un punto bajo el
+  carácter que recibe como argumento («\zdot»).
+\item {\tt \backslash buildtextcedilla} añade una cedilla bajo el
+  carácter que recibe como argumento («\zcedilla»).
+\item {\tt \backslash buildtextgrave} añade un acento grave sobre el
+  carácter que recibe como argumento («\zgrave»).
+\item {\tt \backslash buildtextmacron} añade una pequeña barra bajo el
+  carácter que recibe como argumento(«\zmacron»).
+  
+\stopitemize
+
+{\tt \backslash buildtextgrave} parece a primera vista
+redundante respecto a {\tt \backslash buildtextaccent}; sin embargo si
+se comprueba el acento grave generado con el primero de estos dos
+comandos queda algo mejor. En el siguiente ejemplo se muestra el
+resultado de ambos comandos, a un tamaño de letra suficiente como para
+apreciar la diferencia:
+
+\definecharacter zgraveb {\buildtextaccent ` z}
+
+{\switchtobodyfont[30pt]
+\midaligned{\framed{\zgrave\ -- \zgraveb}}
+}
+
+\stopsubsection
+
+\startsubsection
+  [title=Utilización de conjuntos de símbolos\\ predefinidos]
+
+En \suite- se incluye, junto con \ConTeXt\ propiamente dicho, varios
+conjuntos predefinidos de símbolos que podemos usar en nuestros
+documentos. Esos conjuntos se denominan \PalClave{cc}, \PalClave{cow},
+\PalClave{fontawesome}, \PalClave{jmn}, \PalClave{mvs} y
+\PalClave{nav}. Cada uno de esos conjuntos, a su vez incluye varios
+subconjuntos:
+
+\startitemize[packed]
+
+\item {\tt\bf cc} incluye «cc».
+
+\item {\tt\bf cow} incluye «cownormal» y «cowcontour».
+
+\item {\tt\bf fontawesome} incluye «fontawesome».
+
+\item {\tt\bf jmn} incluye «navigation~1», «navigation~2»,
+  «navigation~3» y «navigation~4».
+
+\item {\tt\bf mvs} incluye «astronomic», «zodiac», «europe»,
+  «martinvogel~1», «martinvogel~2» y «martinvogel~3».
+
+\item {\tt\bf nav} incluye «navigation~1», «navigation~2» y «navigation~3».
+  
+\stopitemize
+
+\startLetraChica
+
+  La wiki menciona también un conjunto llamado {\tt\bf was} que
+  incluye «wasy general», «wasy music», «wasy astronomy», «wasy
+  astrology», «wasy geometry», «wasy phisics» y «wasy apl». Pero en mi
+  distribución no he conseguido localizarlo, y mis pruebas para
+  intentar ver los símbolos que contiene han fracasado.
+  
+\stopLetraChica
+
+Para ver los símbolos concretos que contiene cada uno de estos
+conjuntos, se usa la siguiente sintaxis:
+
+\PonMacro{usesymbols}\PonMacro{showsymbolset}
+\starttyping
+  \usesymbols[Conjunto]
+  \showsymbolset[Subconjunto]
+\stoptyping
+
+Por ejemplo: si queremos ver el conjunto de símbolos incluidos en
+«mvs/zodiac» deberíamos escribir en el fichero fuente:
+
+\starttyping
+  \usesymbols[mvs]
+  \showsymbolset[zodiac]
+\stoptyping
+
+y obtendríamos el siguiente resultado:
+
+\usesymbols[mvs]
+%\startcolumns[n=2]
+
+  \showsymbolset[zodiac]
+
+%\stopcolumns
+
+Obsérvese que junto con cada símbolo se indica el nombre del mismo. El
+comando \PonMacro{symbol}\tex{symbol} nos permitirá usar alguno de los símbolos
+concretos. Su sintaxis es:
+
+{\tt \backslash symbol[Subconjunto][NombreSímbolo]}
+
+donde el subconjunto ha de ser uno de los subconjuntos
+asociados a algún conjunto que hayamos cargado previamente con
+\cmd{usesymbols}. Así, por ejemplo, si queremos usar el símbolo
+astrológico asociado a Acuario (que se encuentran en mvs/zodiac)
+deberíamos escribir
+
+\starttyping
+  \usesymbols[mvs]
+  \symbol[zodiac][Aquarius]
+\stoptyping
+\usesymbols[mvs]
+
+con lo que obtendríamos el carácter
+«\symbol[zodiac][Aquarius]», el cual será considerado, a todos los
+efectos, un «carácter», siendo, en consecuencia, afectado por el
+tamaño de la fuente que esté activo cuando se imprima. También podemos
+usar \cmd{definecharacter} para asociar el símbolo de que se trate con
+un comando. Por ejemplo
+
+\type{\definecharacter Aries {\symbol[zodiac][Aries]}}
+\definecharacter Aries {\symbol[zodiac][Aries]}
+
+creará un nuevo comando llamado \cmd{Aries} que
+generará el carácter «\Aries».
+
+También podemos usar estos símbolos, por ejemplo, en un entorno
+itemize. Por ejemplo:
+
+\starttyping
+\usesymbols[mvs]
+\definesymbol[1][{\symbol[martinvogel 2][PointingHand]}]
+\definesymbol[2][{\symbol[martinvogel 2][CheckedBox]}]
+\startitemize[packed]
+\item item \item item
+ \startitemize[packed]
+ \item item \item item
+ \stopitemize
+\item item
+\stopitemize
+\stoptyping
+
+producirá
+
+{
+\usesymbols[mvs]
+\definesymbol[1][{\symbol[martinvogel 2][PointingHand]}]
+\definesymbol[2][{\symbol[martinvogel 2][CheckedBox]}]
+\startitemize[packed]
+\item item \item item
+ \startitemize[packed]
+ \item item \item item
+ \stopitemize
+\item item
+\stopitemize
+}
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [title=Formatos especiales de los\\ caracteres]
+
+En sentido estricto, son comandos de {\em formato} los que afectan a
+la fuente utilizada, a su tamaño, estilo o variante. Estos comandos se
+explican en el \in{capítulo}[sec:fuentescol]. Pero desde un punto de
+vista {\em amplio} también podemos considerar comandos de formateo a
+los que transforman de alguna manera los caracteres que reciben como
+argumento, alterando así su apariencia. En esta sección examinaremos
+algunos de estos comandos; otros como es el caso del texto subrayado o
+rayado, que se construye con líneas sobre o bajo el texto, se verán
+en la \in{sección}[sec:MarcosLineas].
+
+\startsubsection
+  [
+    reference=sec:Mayus-Minus-Pseudo,
+    title={Letras mayúsculas, minúsculas y\\ pseudoversalitas},
+  ]
+
+Las letras propiamente dichas pueden ir en mayúsculas o en
+minúsculas. Para \ConTeXt\ las mayúsculas y las minúsculas son
+caracteres distintos, por lo tanto, en principio, procesará las letras
+tal y como se hayan escrito. No obstante existe un grupo de comandos
+que nos permiten asegurarnos de que el texto que reciban como
+argumento se escriba siempre en mayúsculas o en minúsculas:
+
+\startitemize[packed]
+
+\item \PonMacro{word}\cmd{word\{texto\}}: Convierte a letras minúsculas
+  el texto recibido como argumento.
+  
+\item \PonMacro{Word}\cmd{Word\{texto\}}: Convierte a mayúsculas la
+  primera letra del texto recibido como argumento.
+  
+\item \PonMacro{Words}\cmd{Words\{texto\}}: Convierte a mayúsculas la
+  primera letra de cada una de las palabras que componen el texto
+  recibido como argumento; el resto se escribirá con minúsculas.
+  
+\item \PonMacro{WORD}\cmd{WORD\{texto\}} o
+  \PonMacro{WORDS}\cmd{WORDS\{texto\}}: Escriben con mayúsculas el
+  texto recibido como argumento.
+  
+\stopitemize
+
+Muy parecidos a estos comandos son \PonMacro{cap}\tex{cap} y
+\PonMacro{Cap}\tex{Cap}: también convierten a mayúsculas el texto que
+reciben como argumento, pero después le aplican un factor de escalado igual
+al que aplica el sufijo «x» en los comandos de cambio de fuente (véase la
+\in{sección}[sec:cambio rápido]) con lo que, en la mayor parte de las
+fuentes, se obtiene la misma altura de las letras minúsculas,
+consiguiéndose así una especie de {\em pseudoversalitas} que, frente a las
+auténticas versalitas (véase \in{sección}[sec:versalitas]) tienen las
+siguientes dos ventajas:
+
+\startitemize[n]
+
+\item \tex{cap} y \tex{Cap} funcionarán con cualquier fuente, a diferencia
+  de las auténticas versalitas, que sólo funcionan para aquellas fuentes y
+  estilos en cuyo diseño se hayan incluido expresamente.
+
+\item Las verdaderas versalitas son, por otra parte, una variante de la
+  fuente que, como tal, es incompatible con cualquier otra variante como la
+  negrita, la cursiva, o la letra inclinada. Sin embargo \tex{cap} y
+  \tex{Cap} son plenamente compatibles con cualquier variante de la fuente.
+  
+\stopitemize
+
+La diferencia entre \cmd{cap} y \cmd{Cap} está en que mientras la
+primera aplica el factor de escalado a todas las letras de las
+palabras que constituyen su argumento, \cmd{Cap} no aplica escalado
+alguno a la primera letra de cada palabra, consiguiendo así un efecto
+similar al que se obtiene cuando en un texto en versalitas se usan las
+verdaderas mayúsculas. Si el texto recibido como argumento en
+\cmd{Cap} consta de varias palabras, se mantendrá el tamaño de la
+mayúscula en la primera letra de cada una de ellas.
+
+\page[bigpreference]
+
+Así en el siguiente ejemplo
+
+\startDobleEjemplo
+
+\starttyping
+La ONU, cuyo \Cap{presidente} tiene el
+despacho en la sede de la \cap{oNu}...
+\stoptyping
+  
+La ONU, cuyo \Cap{presidente} tiene el despacho en la sede de la
+\cap{oNu}...
+
+\stopDobleEjemplo
+
+debe observarse, en primer lugar, la diferencia de tamaño entre la primera
+vez que se escribe «ONU» (con mayúsculas) y la segunda vez (con
+pseudoversalitas, «\cap{ONU}»). En el ejemplo, la segunda vez he escrito en
+la fuente \cmd{cap\{oNu\}} para que se compruebe que da igual que el
+argumento de \cmd{cap} se escriba con mayúsculas o con minúsculas: el
+comando convierte todas las letras a mayúsculas y luego aplica el factor de
+reducción; a diferencia de \cmd{Cap} que no reduce la primera letra.
+
+Estos comandos, por otra parte, pueden {\em anidarse}, en cuyo caso se
+volvería a aplicar el factor de escalado, obteniéndose una mayor
+reducción, como en el siguiente ejemplo en el que la palabra «capital»
+de la primera línea aparece doblemente reducida:
+
+\startDobleEjemplo
+
+\starttyping
+\cap{La gente que ha reunido su
+\cap{capital} a costa de otras 
+personas es con frecuencia
+{\bf decapitada} en tiempos 
+revolucionarios}.
+\stoptyping
+
+\cap{La gente que ha reunido su \cap{capital} 
+a costa de otras personas es con 
+frecuencia {\bf decapitada} en tiempos 
+revolucionarios}.
+
+\stopDobleEjemplo
+
+
+El comando \cmd{nocap} aplicado a un texto al que se está aplicando
+\cmd{cap} anula, para el texto que constituya su argumento, el efecto
+de \cmd{cap}. Por ejemplo:
+
+\startDobleEjemplo
+
+\starttyping
+\cap{Amaya tiene un gallo que no calla,
+siempre está este gayo \nocap{apoyado} 
+en una valla}.
+\stoptyping
+
+\cap{Amaya tiene un gallo que no calla,
+siempre está este gayo \nocap{apoyado} 
+en una valla}.
+
+\stopDobleEjemplo
+
+El funcionamiento de \cmd{cap} podemos configurarlo
+mediante \PonMacro{setupcapitals}\cmd{setupcapitals} y también podemos definir
+distintas versiones del comando, cada una de ellas con su propio
+nombre y configuración específica. Esto último se logra mediante
+\PonMacro{definecapitals}\cmd{definecapitals}.
+
+Ambos comandos funcionan de un modo parecido:
+
+\starttyping
+\definecapitals[Nombre][Configuración]
+\setupcapitals[Nombre][Configuración]
+\stoptyping
+
+El parámetro «Nombre» en \cmd{setupcapitals} es opcional, si
+no se usa la configuración afectará al comando \cmd{cap}
+propiamente dicho. Si se usa, hay que poner el nombre que previamente
+hayamos asignado en \cmd{definecapitals} a alguna
+configuración concreta.
+
+La configuración, en cualquiera de los dos comandos, admite tres
+opciones: «{\tt title}», «{\tt sc}» y «{\tt style}» la primera y la
+segunda admiten los valores «yes» y «no», mediante «{\tt title}»
+indicamos si la capitalización afectará también a los títulos (por
+defecto sí lo hace) y mediante «{\tt sc}» indicamos si el comando debe
+usar auténticas versalitas («yes»), o pseudoversalitas («no»). Por
+defecto usa pseudoversalitas lo que tiene la ventaja de que el comando
+funciona aunque se esté usando una fuente que no haya implementado las
+versalitas. El tercer valor que se puede indicar «{\tt style}» permite
+indicar un comando de estilo que se aplicará al texto afectado por
+\cmd{cap}.
+
+\stopsubsection
+
+\startsubsection
+  [title=Texto en subíndice o superíndice]
+
+Ya sabemos (véase la \in{sección}[sec:caracteres reservados]) que, en
+modo matemático, los caracteres reservados \PalClave{_} y \PalClave{^}
+sirven para convertir en subíndice o superíndice al carácter o grupo
+inmediatamente posterior. Para lograr ese mismo efecto fuera del modo
+matemático \ConTeXt\ incluye los siguientes comandos:
+
+\startitemize
+
+\item \PonMacro{high}\cmd{high\{Texto\}}: Escribe el texto recibido como argumento en
+  formato de superíndice.
+
+\item \PonMacro{low}\cmd{low\{Texto\}}: Escribe el texto recibido como argumento en
+  formato de subíndice.
+
+\item \PonMacro{lohi}\cmd{lohi\{SubIndice\}\{SuperIndice\}}: Escribe sus dos
+  argumentos uno encima del otro: en la parte inferior el primer
+  argumento, y en la superior el segundo, lo que constituye un un efecto
+  curioso:
+
+  \startDobleEjemplo
+
+    \starttyping
+      \lohi{abajo}{arriba}
+    \stoptyping
+
+    \lohi{abajo}{arriba}
+
+\stopDobleEjemplo
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:verbatim,
+    title=Texto verbatim,
+  ]
+  \PonMacro{type}\PonMacro{starttyping}
+
+La expresión latina {\em verbatim} (de {\em verbum} $=$ {\em palabra}
++ el sufijo {\em atim}), que podría traducirse por «literalmente» o
+«palabra por palabra», se usa en sistemas de procesado de texto como
+\ConTeXt\ para referirse a fragmentos de texto que no deben procesarse
+en absoluto, sino que deben volcarse, tal cual se escribieron, al
+fichero final. \ConTeXt\ dispone para ello del comando \tex{type},
+pensado para textos cortos que no ocupen más de una línea y del
+entorno {\tt typing} pensado para textos de más de una línea. Estos
+comandos son muy usados en libros que hablan de informática para
+recoger fragmentos de Código; y por ello \ConTeXt\ formatea, por
+defecto, estos textos con letra monoespaciada del tipo de máquina de
+escribir o terminal informática. En ambos casos el texto se envía al
+documento final sin {\em procesar}, lo que significa que en él pueden
+usarse caracteres reservados o caracteres especiales que serán
+transcritos {\em tal cual} en el fichero final. Asimismo, si como
+argumento de \tex{type}, o como contenido de \tex{starttyping}, se
+incluye un comando, este será {\em escrito} en el documento final,
+pero no ejecutado.
+
+El comando \tex{type} tiene, además, la siguiente peculiaridad: su
+argumento se {\em puede} delimitar con llaves (como es normal en
+\ConTeXt), pero también se puede usar como delimitador del argumento
+cualquier otro carácter.
+
+\startLetraChica
+
+  Cuando \ConTeXt\ lee el comando \tex{type} asume que el carácter
+  inmediatamente posterior al nombre del comando que no sea un espacio
+  en blanco, actuará como delimitador de su argumento; por lo que 
+  considera que el contenido del argumento empieza en el carácter
+  siguiente, y acaba en el carácter anterior a la próxima aparición
+  del {\em delimitador}.
+
+  Esto con algunos ejemplos se comprende mejor:
+
+  \starttyping
+    \type 1Tararí que te vi, Mariví1
+    \type |Tararí que te vi, Mariví|
+    \type zTararí que te vi, Marivíz
+    \type (Tararí que te vi, Mariví(
+  \stoptyping
+
+  Obsérvese que en el el primer ejemplo el primer carácter tras el nombre
+  del comando es un «1», en el segundo un «\|» y en el tercero una «z»;
+  pues bien: en cada uno de esos casos \ConTeXt\ considerará que es
+  argumento de \tex{type} todo lo que haya entre dicho carácter y la
+  siguiente aparición del mismo carácter. Lo mismo ocurre en el último
+  ejemplo, el cual, además, es muy aleccionador, porque en principio
+  podríamos asumir que si el delimitador inicial del argumento es un «(»,
+  el final debería ser un «)», pero no es así ya que «(» y «)» son
+  caracteres diferentes y \tex{type}, como he dicho, busca como delimitador
+  de cierre el mismo carácter que se haya usado para delimitar el inicio
+  del argumento.
+
+  Solo hay dos casos en los \tex{type} admite que el delimitador
+  inicial y el final del argumento sean distintos:
+
+  \startitemize
+
+  \item Si el delimitador inicial es el carácter «\{», se considera
+    que el delimitador final será «\}».
+
+  \item Si el delimitador inicial es «<<», se considera que el
+    delimitador final será «>>». Este caso, además, es el único en que
+    se usan dos caracteres consecutivos como delimitadores.
+
+  \stopitemize
+
+  Ahora bien: que \tex{type} admita cualquier delimitador no significa
+  que nosotros debamos usar delimitadores “raros”. Desde el punto de
+  vista de la {\em legibilidad} y {\em comprensibilidad} del fichero
+  fuente, lo mejor es delimitar el argumento de \tex{type} siempre que
+  se pueda con llaves, tal y como es normal en \ConTeXt; y cuando ello
+  no sea posible, porque en el argumento de \tex{type} hay llaves,
+  usar algún símbolo; preferentemente uno que no constituya un
+  carácter reservado de \ConTeXt. Por ejemplo: \cmd{type *Esto es
+    una llave de cierre: «\}»*}.
+
+\stopLetraChica
+
+Tanto \tex{type} como \tex{starttyping} se pueden configurar mediante
+\PonMacro{setuptype}\tex{setuptype} y
+\PonMacro{setuptyping}\tex{setuptyping}. También podemos crear una
+versión personalizada de ellos mediante
+\PonMacro{definetype}\tex{definetype} y
+\PonMacro{definetyping}\tex{definetyping}. Respecto de las concretas
+opciones de configuración de estos comandos, me remito a
+\PalClave{setup-en.pdf} (en el directorio {\tt
+  tex/texmf-context/doc/context/documents/general/qrcs}.
+
+Dos comandos muy parecidos a \tex{type} son:
+
+\startitemize
+
+\item \PonMacro{typ}\tex{typ}: Funciona de modo similar a \tex{type}, pero no
+  inhabilita la partición silábica de palabras.
+
+\item \PonMacro{tex}\tex{tex}: Comando pensado para escribir textos sobre \TeX\ o
+  sobre \ConTeXt: añade una barra invertida delante del texto que
+  recibe como argumento. Por lo demás, este comando, se diferencia de
+  \tex{type} en que procesa algunos de los caracteres reservados que
+  encuentre dentro del texto que recibe como argumento. En particular,
+  dentro de \tex{tex} las llaves serán tratadas del modo habitual en
+  \ConTeXt.
+
+\stopitemize
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:espacio horizontal1,
+    title=Espacios de separación entre\\ caracteres y palabras,
+  ]
+
+\startsubsection
+  [title=Fijación automática del espacio horizontal]
+
+El espacio entre los distintos caracteres y palabras (llamado en \TeX\
+{\em espacio horizontal}) normalmente es fijado automáticamente por
+\ConTeXt:
+
+\startitemize
+
+\item El espacio de separación entre los caracteres  que forman una palabra
+  viene definido por la propia fuente, que, salvo en fuentes de anchura
+  fija, suele utilizar una cantidad mayor o menor de espacio en blanco
+  dependiendo de los caracteres que hay que separar, y así, por ejemplo, el
+  espacio entre una «A» y una «V» («AV») suele ser menor que el existente
+  entre una «A» y una «X» («AX»). Pero, aparte de esas posibles
+  variaciones, que dependen de la combinación de letras de que se trate y
+  que vienen ya predefinidas por la fuente, el espacio entre los caracteres
+  que componen una palabra es, en general, una medida fija e invariable.
+
+\item Por el contrario el espacio de separación entre palabras dentro
+  de una misma línea tiende a ser más elástico.
+
+  \startitemize
+
+  \item Tratándose de palabras en una línea cuya anchura ha de ser
+    igual que la del resto de líneas del párrafo, la variación del
+    espaciado entre palabras es uno de los mecanismos que \ConTeXt\
+    utiliza para obtener líneas de igual anchura, tal y como se
+    explica con algo más de detalle en la \in{sección}[sec:lineas]. En
+    estos casos \ConTeXt\ establecerá exactamente el mismo espacio
+    horizontal entre todas las palabras de la línea (salvo las reglas
+    que más adelante se indican), al tiempo que procurará que la
+    separación entre palabras en las distintas líneas del párrafo sea
+    lo más parecida posible.
+
+  \item Pero, además de las necesidades de estiramiento o encogimiento
+    del espaciado entre palabras para poder justificar las líneas,
+    \ConTeXt, dependiendo del idioma activo, toma en consideración
+    determinadas reglas tipográficas en virtud de las cuales en
+    ciertos lugares la tradición tipográfica asociada a dicho idioma
+    añadía algo de espacio en blanco extra, como ocurre, por ejemplo,
+    en la tradición tipográfica inglesa, que añade espacio en blanco
+    adicional tras un punto y seguido.
+
+    \startLetraChica
+
+      Estos espacios blancos extra funcionan para el idioma inglés, y
+      posiblemente para algunos otros; pero no para el español, donde
+      la tradición tipográfica es diferente. Podemos activar
+      temporalmente esta función Mediante
+      \PonMacro{setupspacing}\cmd{setupspacing[broad]} y
+      desactivarla mediante \cmd{setupspacing[packed]}. También
+      podemos cambiar la configuración por defecto del idioma español,
+      como se explica en la \in{sección}[sec:langconfig].
+
+    \stopLetraChica
+
+  \stopitemize
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [title=Alteración del espacio entre caracteres\\ dentro de una palabra]
+
+La alteración del espacio predeterminado para los caracteres que
+componen una palabra está considerada, desde el punto de vista
+tipográfico, una muy mala práctica, salvo en títulos y encabezados. No
+obstante \ConTeXt\ proporciona un comando para alterar este espacio de
+separación entre los caracteres de la palabra\footnote{Es muy propio
+  de la filosofía de \ConTeXt\ incluir un comando para hacer algo que
+  la documentación del propio \ConTeXt\ desaconseja hacer. Y es que
+  aunque se busca la perfección tipográfica, también se pretende
+  conceder al autor el control absoluto sobre la apariencia de su
+  documento: que esta sea mejor o peor, es, en definitiva, su
+  responsabilidad.}: \PonMacro{stretched}\cmd{stretched}, cuya sintaxis es la siguiente:
+
+\type{\stretched[Configuración]{Texto}}
+
+donde {\em Configuración} admite cualquiera de las situientes
+opciones:
+
+\startitemize
+
+\item {\tt factor}: un número entero o decimal representativo del
+  espaciado que se pretende obtener. No debe ser un número demasiado
+  alto. Un factor de 0.05 ya es observable a simple vista.
+
+\item {\tt width}: Indica la anchura que ha de tener, en total, el
+  texto sometido al comando, de tal manera que el propio comando
+  calculará el espaciado necesario para repartir los caracteres en
+  dicho espacio. 
+
+  \startLetraChica
+
+    De acuerdo con mis pruebas, cuando la anchura establecida con la
+    opción {\tt width} es inferior a la necesaria para representar el
+    texto con un {\em factor} igual a 0.25, se ignora la opción {\em
+      anchura} y se aplica dicho \Conjetura factor. Supongo que eso es
+    porque \cmd{stretched} permite sólo {\em aumentar} el espacio de
+    separación entre los caracteres de una palabra, no reducirlo. Pero
+    no termino de entender por qué se utiliza como medida mínima para
+    la opción {\tt width} la anchura necesaria para representar el
+    texto con un factor de 0.25, y no la {\em anchura natural} del
+    texto (con un factor 0).
+    
+  \stopLetraChica
+
+
+\item {\tt\bf style}: Comando o comandos de estilo a aplicar al texto
+  recibido como argumento.
+
+\item {\tt\bf color}: Color en el que se escribirá el texto recibido
+  como argumento.
+
+\stopitemize
+
+Así en el siguiente ejemplo puede verse gráficamente cómo funcionaría
+el comando aplicado a la misma frase, pero con diferentes anchuras:
+
+\startDobleEjemplo\smallbodyfont
+
+\starttyping
+\stretched[width=4cm]{\bf texto de prueba}
+\stretched[width=6cm]{\bf texto de prueba}
+\stretched[width=8cm]{\bf texto de prueba}
+\stretched[width=9cm]{\bf texto de prueba}
+\stoptyping
+
+\stretched[width=4cm]{\bf texto de prueba}
+\stretched[width=6cm]{\bf texto de prueba}
+\stretched[width=8cm]{\bf texto de prueba}
+\stretched[width=9cm]{\bf texto de prueba}
+
+\stopDobleEjemplo
+
+\startLetraChica
+
+  En este ejemplo se puede observar que el reparto del espacio
+  horizontal entre los distintos caracteres no es uniforme. La «x» y
+  la «t» de «texto» y la «e» y la «b» de «prueba», aparecen siempre
+  mucho más próximos entre sí que el resto de los \Duda caracteres. No
+  he conseguido averiguar por qué ocurre esto.
+  
+\stopLetraChica
+
+Aplicado sin argumentos, el comando usará toda la anchura disponible
+en la línea. De otro lado, dentro del texto que es argumento de este
+comando, el comando \cmd{\backslash} se redefine y en lugar de un
+salto de línea, inserta espacio horizontal. Por ejemplo:
+
+\startcolumns[n=2]
+
+\starttyping
+\stretched{texto\\de\\prueba}    
+\stoptyping
+
+\stretched{texto\\de\\prueba}  
+
+\stopcolumns
+
+Podemos personalizar la configuración por defecto del comando mediante
+\PonMacro{setupstretched}\cmd{setupstretched}.
+
+\startLetraChica
+
+  No hay un comando \PonMacro{definestretched}\cmd{definestretched}
+  que permita establecer configuraciones personalizadas asociadas a un
+  nombre de \Duda comando, pero en el listado oficial de comandos
+  (véase \in{sección}[sec:qrc-setup-en]) se dice que
+  \cmd{setupstretched} deriva de
+  \PonMacro{setupcharacterkerning}\cmd{setupcharacterkerning} y sí hay
+  un comando
+  \PonMacro{definecharacterkerning}\cmd{de\-fi\-ne\-cha\-rac\-ter\-ker\-ning}. En
+  mis pruebas, sin embargo, no he llegado a conseguir establecer,
+  mediante este último, una configuración personalizada para
+  \cmd{stretched}, aunque he de admitir que tampoco he dedicado
+  demasiado tiempo a intentarlo.
+
+\stopLetraChica
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:espacio_horizontal2,
+    title=Comandos para añadir espacio horizontal entre palabras,
+  ]
+
+Ya sabemos que para aumentar el espacio de separación entre palabras,
+no sirve de nada escribir en el fichero fuente dos o más espacios en
+blanco consecutivos, pues \ConTeXt\ absorbe todos los espacios en
+blanco consecutivos, tal y como ya se explicó en la
+\in{sección}[sec:espacios]. Si queremos aumentar la separación entre
+dos palabras, debemos acudir a alguno de los comandos que permiten
+hacerlo:
+
+\startitemize
+
+\item \cmd{,} inserta en el documento un muy pequeño espacio en blanco. Se
+  usa, por ejemplo, para separar los millares en una cifra, o para separar
+  una comilla simple de unas dobles comillas. Por ejemplo:
+  «\color[darkmagenta]{{\tt 1\backslash,473\backslash,451}}» producirá
+  «1\,473\,451».
+
+\item \PonMacro{\textvisiblespace}\PonMacro{space}\cmd{space} o
+  «\cmd{\textvisiblespace}» (una barra invertida seguida de un espacio
+  en blanco que, como es un carácter invisible, he representado como
+  «\textvisiblespace») introducen un espacio en blanco adicional.
+
+\item \PonMacro{enskip}\cmd{enskip}, \PonMacro{quad}\cmd{quad} y \PonMacro{qquad}\cmd{qquad} insertan
+  en el documento un espacio en blanco de, respectivamente, medio {\em
+    em}, 1 {\em em} o 2 {\em ems}. Recordemos que el {\em em} es una
+  medida dependiente del tamaño de la fuente y equivale a la anchura
+  de una «m», la cual normalmente coincide con el tamaño en puntos de
+  la fuente. Así, usando una fuente de 12 puntos, \cmd{enskip}
+  introduce un espacio de 6 puntos, \cmd{quad} introduce 12 puntos y
+  \cmd{qquad} 24 puntos.
+
+\stopitemize
+
+Junto a estos comandos, que introducen espacio en blanco de medida
+exacta, los comandos \PonMacro{hskip}\cmd{hskip} y \PonMacro{hfill}\cmd{hfill} introducen un espacio
+horizontal de dimensiones variables:
+
+\PonMacro{hskip}\cmd{hskip} permite indicar exactamente la cantidad de espacio en
+blanco que queremos añadir. Así
+
+
+\startDobleEjemplo
+
+\starttyping
+Esto es \hskip 1cm 1 centímetro\\
+Esto son \hskip 2cm 2 centímetros\\
+Esto son \hskip 2.5cm 2.5 centímetros\\
+\stoptyping
+
+Esto es \hskip 1cm 1 centímetro\\
+Esto son \hskip 2cm 2 centímetros\\
+Esto son \hskip 2.5cm 2.5 centímetros\\
+
+\stopDobleEjemplo
+
+El espacio indicado puede ser negativo, lo que hará que un texto se
+superponga sobre otro. Así
+
+\startDobleEjemplo
+
+\starttyping
+Esto es una farsa más que 
+una \hskip -1cm comedia
+\stoptyping
+
+Esto es una farsa más que una \hskip -1cm comedia
+
+\stopDobleEjemplo
+
+\cmd{hfill}, por su parte, introduce tanto espacio en blanco como sea
+necesario para ocupar toda la línea, lo que nos permite crear efectos
+interesantes tales como texto alineado a la derecha, texto centrado o
+texto a ambos lados de la línea tal y como se muestra en el siguiente
+ejemplo
+
+\startDobleEjemplo
+\starttyping
+\hfill A la derecha\\
+A ambos\hfill lados
+\stoptyping
+
+\hfill A la derecha\\
+A ambos\hfill lados
+
+\stopDobleEjemplo
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:palabras compuestas,
+    title=Palabras compuestas,
+  ]
+
+A efectos de esta sección por «palabras compuestas» me refiero, no a
+palabras que resultan de la unión de otras pero que formalmente son
+una sola palabra, como por ejemplo, «paraguas», «parabrisas» o
+«francófono»; sino a palabras distintas que se unen entre sí mediante
+algún elemento: normalmente un guión, pero, en ocasiones, algún otro
+elemento (principalmente guiones bajos («\_») barras («\backslash» o
+«/») o signos de apertura o cierre de paréntesis, corchetes o
+llaves; como en, por ejemplo, «franco||canadiense» o en
+«(inter|)|comunicación».
+
+Las palabras compuestas plantean a \ConTeXt\ algunos problemas
+principalmente relacionados con su posible partición silábica al final
+de una línea. Sobre todo si el elemento separador es un guión, pues
+entonces, desde una perspectiva tipográfica, no habría problemas en
+permitir que el primer elemento de la unión de palabras se partiera
+silábicamente al final de una línea, pero debería evitarse que fuera
+el segundo elemento el que se partiera, pues ello dejaría en la
+palabra dos guiones muy seguidos, cada uno de ellos con una
+significación diferente.
+
+Para indicar a \ConTeXt\ que dos palabras constituyen una palabra
+compuesta, está disponible el comando «{\tt\|\|}» que,
+excepcionalmente, no empieza por una barra invertida, y admite dos
+usos diferentes:
+
+\startitemize
+
+\item Se pueden usar las dos barras consecutivas y escribir, por
+  ejemplo \PalClave{hispano\|\|argentino}.
+
+\item Se pueden usar encerrando entre ellas el elemento de
+  separación|/|unión de ambas palabras como, por ejemplo, en
+  \PalClave{separación\|/\|unión}.
+
+\stopitemize
+
+En ambos casos \ConTeXt\ sabrá que se encuentra ante una palabra
+compuesta, y aplicará las reglas de partición silábica adecuadas para
+este tipo de palabras. La diferencia entre usar las dos barras
+consecutivas, o hacerlo enmarcando con ellas el elemento separador de
+las palabras está en que, en el primer caso, \ConTeXt\ usará como
+elemento separador el que tenga preconfigurado en
+\PonMacro{setuphyphenmark}\cmd{setuphyphenmark} que, por defecto, es un guión intermedio
+(\PalClave{--}); y así si en nuestro documento fuente escribimos
+\PalClave{escuela\|\|taller}, \ConTeXt\ generará «Escuela||taller».
+
+Mediante \cmd{setuphyphenmark} podemos cambiar el elemento de
+separación por defecto (para el caso de que se escriban las dos barras
+consecutivas). Como valores para este comando se admiten \PalClave{--,
+  ---, -, ~, (, ), =, /}. Téngase en cuenta, no
+obstante, que el valor \PalClave{=} se traduce en un guión largo
+(igual que \PalClave{---}.
+
+El uso normal de \PalClave{\|\|} es con guiones, pues son éstos los
+que habitualmente se utilizan para unir palabras compuestas. Pero en
+ocasiones el separador de las palabras compuestas puede ser un
+paréntesis, como, por ejemplo, en «(inter)espacio», o una barra
+inclinada, como en «contador/partidor». En estos casos, si queremos
+que se apliquen las reglas de división silábica de las palabras
+compuestas, podemos escribir \PalClave{(inter\|)\|espacio} o
+\PalClave{contador\|/\|partidor}. Como ya se ha dicho antes,
+\PalClave{\|=\|} se considera una abreviatura de \PalClave{\|---\|} e
+inserta como elemento separador un guión largo (---).
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:idiomadoc,
+    title=El idioma del texto,
+  ]
+
+Los caracteres forman palabras, las cuales normalmente pertenecerán a
+algún idioma. Para \ConTeXt\ es importante saber en qué idioma se está
+escribiendo, pues de cuál sea éste dependen varios aspectos
+importantes. Principalmente:
+
+\startitemize[packed]
+
+\item El particionado silábico de las palabras.
+\item El formato de la salida de ciertos comandos.
+\item Ciertos aspectos de la composición del texto que van asociados a
+  la tradición tipográfica del idioma de que se trate.
+
+\stopitemize
+
+\startsubsection
+  [title=Fijación y cambio del idioma]
+
+En \ConTeXt\ se asume que el idioma será el inglés. Eso puede
+cambiarse por dos procedimientos:
+
+\startitemize
+
+\item Mediante el comando \PonMacro{mainlanguage}\cmd{mainlanguage}, concebido para fijar el
+  idioma principal del documento en el preámbulo.
+
+\item Mediante el comando \PonMacro{language}\cmd{language}, pensado para cambiar el
+  idioma activo en cualquier punto del documento.
+  
+\stopitemize
+
+Ambos comandos esperan un argumento consistente en el identificador
+del idioma que sea. Para identificar al idioma puede usarse, bien el
+código internacional de identificación del mismo de dos letras
+establecido en ISO 639-1 que es el mismo que se usa, por ejemplo, en
+la web, bien el nombre en inglés del idioma de que se trate, bien, en
+ocasiones, alguna abreviatura del nombre en inglés.
+
+En la \in{tabla}[tbl:idiomas] se contiene el listado completo de los
+idiomas soportados por \ConTeXt, junto con los identificadores
+admisibles para cada uno de los idiomas en cuestión así como, en su
+caso, los identificadores de ciertas variantes del idioma expresamente
+previstas\footnote{La \in{tabla}[tbl:idiomas] es un resumen del
+  listado que se obtiene con los siguientes comandos:\\
+  \PonMacro{usemodule}\type{\usemodule[languages-system]}\\
+  \PonMacro{loadinstalledlanguajes}\type{\loadinstalledlanguages}\\
+  \PonMacro{swhoinstalledlanguages}\type{\showinstalledlanguages}\\
+  Si usted está leyendo este documento mucho después de la fecha de su
+  confección (2020) es posible que se hayan incorporado algunos
+  idiomas adicionales a \ConTeXt, por lo que puede ser buena idea
+  ejecutar esos comandos para ver un listado de idiomas actualizado.},
+
+{\switchtobodyfont[script]
+\placetable
+  [here]
+  [tbl:idiomas]
+  {Idiomas soportados en \ConTeXt}
+{\starttabulate[|l|l|p(.6\textwidth)|]
+\HL
+\NC{\bf Idioma} \NC {\bf Identificadores} \NC {\bf Variantes} (del idioma)
+\NR
+\HL
+\NC Afrikáans
+\NC af, afrikaans
+\NR
+\NC Alemán
+\NC de, deu, german
+\NC de-at, de-ch, de-de
+\NR
+\NC Árabe
+\NC ar, arabic
+\NC ar-ae, ar-bh, ar-dz, ar-eg, ar-in, ar-ir, ar-jo, ar-kw, ar-lb, ar-ly, ar-ma, ar-om, ar-qa, ar-sa, ar-sd, ar-sy, ar-tn, ar-ye
+\NR
+\NC Catalán
+\NC ca, catalan
+\NR
+\NC Checo
+\NC cs, cz, czech
+\NR
+\NC Coreano
+\NC kr, korean
+\NR
+\NC Croata
+\NC hr, croatian
+\NR
+\NC Danés
+\NC da, danish
+\NR
+\NC Eslovaco
+\NC sk, slovak
+\NR
+\NC Esloveno
+\NC sl, slovene, slovenian
+\NR
+\NC Español
+\NC es, sp, spanish
+\NC es-es, es-la
+\NR
+\NC Estonio
+\NC et, estonian
+\NR
+\NC Finés
+\NC fi, finnish
+\NR
+\NC Francés
+\NC fr, fra, french
+\NR
+\NC Griego
+\NC gr, greek
+\NR
+\NC Griego antiguo
+\NC agr, ancientgreek
+\NR
+\NC Hebreo
+\NC he, hebrew
+\NR
+\NC Holandés
+\NC nl, nld, dutch
+\NR
+\NC Húngaro
+\NC hu, hungarian
+\NR
+\NC Inglés
+\NC en, eng, english
+\NC en-gb, uk, ukenglish, en-us, usenglish
+\NR
+\NC Italiano
+\NC it, italian
+\NR
+\NC Japonés
+\NC ja, japanese
+\NR
+\NC Latín
+\NC la, latin
+\NR
+\NC Lituano
+\NC lt, lithuanian
+\NR
+\NC Malayo
+\NC ml, malayalam
+\NR
+\NC Noruego
+\NC nb, bokmal, no, norwegian
+\NC nn, nynorsk
+\NR
+\NC Persa
+\NC pe, fa, persian
+\NR
+\NC Polaco
+\NC pl, polish
+\NR
+\NC Portugués
+\NC pt, portughese
+\NC pt-br
+\NR
+\NC Rumano
+\NC ro, romanian
+\NR
+\NC Ruso
+\NC ru, russian
+\NR
+\NC Sueco
+\NC sv, swedish
+\NR
+\NC Tailandés
+\NC th, thai
+\NR
+\NC Turco
+\NC tr, turkish
+\NC tk, turkmen
+\NR
+\NC Ucraniano
+\NC ua, ukrainian
+\NR
+\NC Vietnamita
+\NC vi, vietnamese
+\NR
+\HL
+\stoptabulate
+}}
+
+Así, por ejemplo, para establecer el español (castellano) como idioma
+principal del documento podemos usar cualquiera de las siguientes tres
+sentencias.
+
+\starttyping
+\mainlanguage[es]
+\mainlanguage[spanish]
+\mainlanguage[sp]
+\stoptyping
+
+Para activar un concreto lenguaje {\em dentro} del documento, podemos
+usar, bien el comando \cmd{language[Identificador del idioma]}, bien
+un comando específico que active dicho idioma. Así, por ejemplo,
+\PonMacro{en}\cmd{en} activa el idioma inglés, \PonMacro{fr}\cmd{fr}
+activa el francés, \PonMacro{es}\cmd{es} el español o
+\PonMacro{ca}\cmd{ca} el catalán. Una vez activado un idioma concreto,
+se mantendrá activado hasta que expresamente se active otro idioma, o
+se cierre el grupo dentro del cual el idioma se activó. Los idiomas
+funcionan, por lo tanto, igual que los comandos de cambio de
+fuente. Téngase en cuenta, no obstante, que el lenguaje establecido
+por el comando \cmd{language} o por alguna de sus abreviaturas
+(\cmd{en}, \cmd{fr}, \PonMacro{de}\cmd{de}, etc.) no afecta al
+lenguaje en el que se imprimirán las etiquetas (véase la
+\in{sección}[sec:etiquetas]).
+
+\startLetraChica
+
+  Aunque pueda ser trabajoso marcar el idioma de todas las palabras y
+  expresiones que usemos en nuestro documento y que no pertenezcan al
+  idioma principal del mismo, es importante hacerlo si queremos
+  obtener un documento final bien compuesto. Sobre todo en trabajos
+  profesionales. No hay que marcar todo el texto, sino sólo el que no
+  vaya en el idioma principal. A veces es posible automatizar el
+  marcado del idioma mediante alguna macro. Yo, por ejemplo, para este
+  documento en el que se citan continuamente comandos de \ConTeXt\
+  cuyo idioma original es el inglés, he diseñado una macro que, además
+  de escribir el comando en el formato y color adecuado, lo marca como
+  palabra inglesa. En mi trabajo profesional, donde necesito citar mucha
+  bibliografía francesa e italiana, tengo incorporado un campo en mi
+  base de datos bibliográfica para recoger el idioma de la obra, de
+  tal manera que puedo automatizar, en las citas y listas de
+  referencias bibliográficas, la indicación del idioma.
+
+  Si en un mismo documento conviven dos idiomas que usan alfabetos
+  diferentes (por ejemplo, español y griego, o español y ruso
+  cirílico), hay un truco que nos evitará tener que marcar el idioma
+  de las expresiones construidas con el alfabeto alternativo:
+  modificar la configuración del idioma principal (véase la próxima
+  sección) para que cargue por defecto también los patrones de
+  particionado silábico correspondientes al idioma que usa un alfabeto
+  distinto. Por ejemplo, si queremos usar simultáneamente el español y
+  el griego, el siguiente comando nos ahorraría tener que marcar el
+  idioma de los textos en griego:
+
+  \type{\setuplanguage[es][patterns={es, agr}]}
+
+  Esto funciona sólo porque español y griego usan un alfabeto
+  distinto, de tal modo que no es posible que se plantee ningún
+  conflicto en los patrones de particionado de ambos idiomas, por lo
+  que podemos cargarlos ambos simultáneamente. Pero en dos idiomas que
+  usen el mismo alfabeto, cargar simultáneamente los patrones de
+  particionado llevará necesariamente a particiones silábicas
+  inadecuadas.
+
+\stopLetraChica
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:langconfig,
+    title=Configuración del idioma,
+  ]
+  \PonMacro{setuplanguage}
+
+\dontleavehmode\ConTeXt\ asocia el funcionamiento de ciertas
+utilidades al concreto idioma activo en cada momento. Las asociaciones
+por defecto podemos cambiarlas mediante \cmd{setuplanguage} cuya
+sintaxis es:
+
+\type{\setuplanguage[Idioma][Configuración]}
+
+donde {\em Idioma} es el identificador del idioma que pretendemos
+configurar, y {\em Configuración} contiene la concreta configuración
+que deseamos establecer (o cambiar) para dicho idioma. En concreto se
+admiten hasta 32 opciones de configuración distinta de las que aquí
+trataré sólo las que me parecen adecuadas para un texto introductorio
+como este:
+
+\startitemize
+
+\item {\tt\bf date}: Permite configurar el formato por defecto de la
+  fecha. Véase, más adelante en la \at{página}[sec:fechas].
+
+\item {\tt\bf lefthyphenmin, righthyphenmin}: el número mínimo de
+  caracteres que deben quedar a la izquierda o derecha para que se
+  admita la partición silábica de una palabra. Por ejemplo
+  \cmd{setuplanguage[es][lefthyphenmin=4]} no partirá silábicamente
+  ninguna palabra si en el lado izquierdo del guión de partición
+  quedan menos de 4 caracteres.
+
+\item {\tt\bf spacing}: Esta opción admite dos valores posibles
+  \PalClave{broad} o \PalClave{packed}, en el primer caso se aplicarán
+  en dicho idioma las reglas de separación entre palabras propias del
+  inglés, que implican que detrás de los puntos y seguido y de otros
+  caracteres se añada cierto espacio en blanco extra. Por el contrario
+  \PalClave{spacing=packed} inhabilitará estas reglas. Para el idioma
+  español por defecto se encuentran inhabilitadas.
+
+\item {\tt\bf leftquote, rightquote}: Indican, respectivamente, los
+  caracteres (o comandos) que usará el comando \cmd{quote} a la
+  izquierda y derecha del texto que constituye su argumento (véase,
+  sobre este comando, la \at{página}[sec:quote]).
+
+\item {\tt\bf leftquotation, rightquotation}: Indican, respectivamente,
+  los caracteres (o comandos) que usará el comando \cmd{quotation} a la
+  izquierda y derecha del texto que constituye su argumento (véase,
+  sobre este comando, la \at{página}[sec:quote]).
+
+\stopitemize%%%@@@
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:etiquetas,
+    title=Etiquetas asociadas a los concretos idiomas,
+  ]
+
+Muchos comandos de \ConTeXt\ generan automáticamente ciertos textos (o
+{\em etiquetas}), como, por ejemplo, el comando \cmd{placetable} que
+escribe, bajo la tabla que se inserta, la etiqueta “Tabla xx”, o
+\cmd{placefigure} que inserta la etiqueta “Figura xx”.
+
+Estas {\em etiquetas} son sensibles al idioma establecido con
+\cmd{mainlanguage} (pero no al establecido con \cmd{language}) y
+podemos cambiarlas mediante
+
+\PonMacro{setuplabeltext}\type{\setuplabeltext[Idioma][Clave=Etiqueta]}
+
+donde {\em Clave} es la denominación por la que \ConTeXt\ conoce a
+dicha etiqueta y {\em Etiqueta} es el texto que queremos que genere
+\ConTeXt. Así, por ejemplo
+
+\type{\setuplabeltext[es][figure=Imagen~]}
+
+hará que, cuando esté activo el idioma español, las imágenes
+insertadas con \cmd{placefigure} no se titulen “Figura x”, sino
+“Imagen x”. Obsérvese que tras el texto de la etiqueta propiamente
+dicha hay que dejar un espacio en blanco para asegurarse de que
+\ConTeXt\ no pega la etiqueta al siguiente carácter. En el ejemplo he
+usado el carácter reservado «\lettertilde»; podría también haber
+escrito \PalClave{[figure=Imagen\{ \}]} encerrando el espacio en
+blanco entre llaves para asegurarme de que \ConTeXt\ no lo eliminará.
+
+¿Qué etiquetas podemos redefinir mediante \cmd{setuplabeltext}? En
+este punto la documentación de \ConTeXt\ no es lo completa que cabría
+esperar. El manual de referencia de 2013 (que es el que más cosas
+explica sobre este comando) menciona \PalClave{chapter},
+\PalClave{table}, \PalClave{figure},
+\PalClave{appendix}... \Conjetura y, añade, “otros elementos textuales
+comparables”. Podemos suponer que los nombres serán los nombres en
+inglés del elemento en cuestión.
+
+\startLetraChica
+
+  Una de las ventajas del {\em software libre} es la de que los
+  ficheros fuente están disponibles para el usuario; de modo que
+  podemos indagar en ellos. Yo lo he hecho, y {\em husmeando} entre
+  los ficheros fuente de \ConTeXt, he descubierto el fichero
+  \PalClave{lang-txt.lua}, disponible en {\tt
+    tex/texmf-context/tex/context/base/mkiv} que creo que es el que
+  contiene las etiquetas predeterminadas y sus distintas traducciones;
+  de modo que si en algún momento \ConTeXt\ genera un texto
+  predeterminado que queremos cambiar, para ver cómo se llama la
+  etiqueta a que dicho texto está asociado, podemos abrir el fichero
+  en cuestión y buscar en él el texto que queremos cambiar, para ver a
+  qué nombre de etiqueta se le asocia.
+
+\stopLetraChica
+
+Si queremos insertar en algún punto del documento el texto asociado a
+cierta etiqueta, podemos hacerlo con el comando \PonMacro{labeltext}\cmd{labeltext}. Y
+así, por ejemplo, si quiero referirme a una tabla, para asegurarme de
+que la denomino de la misma forma en que \ConTeXt\ la llamará en el
+comando \cmd{placetable}, puede escribir: «{\tt Tal y como se muestra
+  en la \backslash labeltext\{table\} de la próxima página.}» Dicho
+texto, en un documento donde \cmd{mainlanguage} sea el español,
+producirá: «Tal y como se muestra en la \labeltext{table} de la
+próxima página.»
+
+\startLetraChica
+
+  Algunas de las etiquetas redefinibles mediante \cmd{setuplabeltext},
+  por defecto vienen vacías; como, por ejemplo \PalClave{chapter} o
+  \PalClave{section}. Esto es así porque, por defecto, \ConTeXt\ no
+  añade etiquetas a los comandos de seccionado. Si queremos cambiar
+  ese funcionamiento por defecto, basta con redefinir dichas etiquetas
+  en el preámbulo de nuestro documento y así, por ejemplo,
+  \cmd{setuplabeltext[chapter=Capítulo\lettertilde]} hará que los
+  capítulos sean precedidos de la palabra “Capítulo”.
+
+\stopLetraChica
+
+Por último, es importante indicar que si bien en general, en \ConTeXt,
+los comandos que admiten como argumento varias opciones separadas por
+comas, la última opción puede terminar con una coma y no pasa
+nada, en \tex{setuplabeltext} eso generaría un error de compilación.
+
+
+\stopsubsection
+
+\startsubsection
+  [title=Algunos comandos vinculados al idioma]
+
+\startsubsubsection
+  [
+    reference=sec:fechas,
+    title=Comandos relacionados con la fecha,
+  ]
+  \PonMacro{currentdate}\PonMacro{date}\PonMacro{month}
+
+\ConTeXt\ dispone de tres comandos relacionados con la fecha que
+producen su salida en el idioma activo en el momento de su
+ejecución. Se trata de:
+
+\startitemize
+
+\item \tex{currentdate}: Ejecutado sin argumentos en un documento en
+  el que el idioma principal sea el español, devuelve la fecha del
+  sistema en el formato “NumDía de NombreMes de NumAño”. Por ejemplo:
+  «28 de julio de 2020». Pero también podemos indicarle que use un
+  formato distinto, o que incluya también el nombre del día de la
+  semana ({\tt weekday}), o que sólo incluya algunos elementos de la
+  fecha ({\tt day, month, year}).
+
+  Para indicar un formato de fecha diferente, \PalClave{dd} o
+  \PalClave{day} representan los días, \PalClave{mm} los meses (en
+  formato numérico), \PalClave{month} los meses en formato alfabético
+  con minúsculas y \PalClave{MONTH} con mayúsculas. Respecto del año
+  \PalClave{yy} escribirá sólo las dos últimas cifras, mientras que
+  \PalClave{year} o \PalClave{y} escribirán las cuatro cifras. Si
+  queremos algún elemento separador entre los componentes de la fecha,
+  debemos escribirlo expresamente. Por ejemplo
+
+  \type{\currentdate[weekday, {,~}, dd, {~de~}, month]} 
+
+  ejecutado el 28 de julio de 2020 escribirá en nuestro documento
+  «martes, 28 de julio». Obsérvese que para representar el espacio en
+  blanco he usado el carácter reservado
+  \PalClave{\lettertilde}. Podría haber usado espacios en blanco
+  normales, pero éstos deben necesariamente encerrarse entre llaves.
+
+\item \tex{date}: Este comando, ejecutado sin ningún
+  argumento, produce exactamente la misma salida que
+  \cmd{currentdate}, es decir: la fecha actual en el formato
+  estándar. Pero puede indicársele, como argumento, una fecha
+  concreta. Para ello recibe dos argumentos: Con el primer argumento
+  podemos indicar el día (\PalClave{d}), mes (\PalClave{m}) y año
+  (\PalClave{y}) correspondientes a la fecha que queremos representar,
+  mientras que con el segundo argumento (opcional) podemos indicar el
+  formato de la fecha a representar. Por ejemplo, si queremos saber
+  qué día de la semana era el día en que se conocieron John Lennon y
+  Paul McCartney, suceso que, según la wikipedia, tuvo lugar el día 6
+  de julio de 1957, podríamos escribir
+
+  \type{\date[d=6, m=7, y=1957][weekday]}
+
+  y así averiguaríamos que tal evento histórico sucedió un sábado. 
+
+\item \tex{month} recibe como argumento un número, y
+  devuelve el nombre del mes correspondiente a dicho número.
+  
+\stopitemize
+
+\stopsubsubsection
+
+\startsubsubsection
+  [title=El comando \tex{translate}]
+  \PonMacro{translate}
+
+El comando translate admite una serie de frases asociadas a un
+concreto idioma, de tal manera que en el documento final se insertará
+una u otra dependiendo del idioma activo en cada momento. Así en el
+siguiente ejemplo se usa el comando translate para asociar cuatro
+frases al español y al inglés, las cuales se guardan en un buffer de
+memoria (sobre el entorno {\tt buffer} véase en la
+\in{sección}[sec:cajónsastre]):
+
+\starttyping
+\startbuffer
+  \starttabulate[|*{4}{lw(.25\textwidth)|}]
+    \NC \translate[es=Su carta de fecha, en=Your letter dated]
+    \NC \translate[es=Su referencia, en=Your reference]
+    \NC \translate[es=Nuestra referencia, en=Our reference]
+    \NC \translate[es=Fecha, en=Date] \NC\NR
+  \stoptabulate
+\stopbuffer
+\stoptyping
+
+de tal modo que si insertamos el {\em buffer} en un punto del
+documento en el que esté activado el idioma español, se reproducirán
+las frases en español, pero si el punto del documento donde se inserta
+el buffer tiene activado el idioma inglés, se insertarán las frases
+en inglés. Así:
+
+%\startpacked
+  
+\startbuffer
+  \starttabulate[|*{4}{lw(.25\textwidth)|}]
+    \NC \translate[es=Su carta de fecha, en=Your letter dated]
+    \NC \translate[es=Su referencia, en=Your reference]
+    \NC \translate[es=Nuestra referencia, en=Our reference]
+    \NC \translate[es=Fecha, en=Date] \NC\NR
+  \stoptabulate
+\stopbuffer
+
+\starttyping
+\language[es]
+\getbuffer
+\stoptyping
+
+generaría
+
+\ejemplo{\getbuffer}
+
+mientras que
+\starttyping
+\language[en]
+\getbuffer
+\stoptyping
+
+generaría
+
+{\en\ejemplo{\getbuffer}}
+
+%\stoppacked
+
+\stopsubsubsection
+
+\startsubsubsection
+  [
+    reference=sec:quote,
+    title=Los comandos \tex{quote} y \tex{quotation},
+  ]
+  \PonMacro{quote}\PonMacro{quotation}
+
+Uno de los errores tipográficos más corrientes en los documentos de
+texto se produce cuando en ellos se abren comillas (simples o dobles)
+que no se cierran expresamente. Para evitar que esto ocurra \ConTeXt\
+proporciona los comandos \cmd{quote} y \cmd{quotation} que
+entrecomillarán el texto que reciban como argumento; \cmd{quote} usará
+comillas simples y \cmd{quotation} comillas dobles.
+
+Estos comandos son sensibles al idioma en el sentido de que usan para
+abrir y cerrar las comillas el carácter o comando que se haya
+establecido por defecto para el idioma en cuestión (véase
+\in{sección}[sec:langconfig]); y así, por ejemplo, si queremos que al
+utilizar español se usen, como comillas dobles por defecto, las
+angulares propias de nuestra tradición tipográfica, podemos escribir:
+
+\type{\setuplanguage[es][leftquotation=«, rightquotation=»]}.
+
+Estos comandos no gestionan, sin embargo, las comillas anidadas;
+aunque podemos crear nosotros la utilidad que si lo haga, aprovechando
+que, en realidad, \cmd{quote} y \cmd{quotation} son aplicaciones
+concretas de lo que \ConTeXt\ llama {\em delimitedtext} ($=$ {\em
+  texto delimitado}), y que es posible definir otras aplicaciones
+mediante \PonMacro{definedelimitedtext}\cmd{definedelimitedtext}. Así
+el siguiente ejemplo:
+
+\starttyping
+\definedelimitedtext
+  [ComillasNivelA]
+  [left=«, right=»]
+
+\definedelimitedtext
+  [ComillasNivelB]
+  [left=“, right=”]
+
+\definedelimitedtext
+  [ComillasNivelC]
+  [left=`, right=']
+\stoptyping
+
+creará tres comandos que permitirán hasta tres niveles diferentes de
+entrecomillado. El primer nivel con comillas laterales, el  segundo
+con comillas dobles altas y el tercero con comillas simples altas.
+
+\stopsubsubsection
+
+\stopsubsection
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:
+%%% vim:set filetype=context tw=75 : %%%

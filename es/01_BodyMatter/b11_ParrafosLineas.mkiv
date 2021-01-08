@@ -1,0 +1,1377 @@
+%%% Fichero: b11_ParrafosLineas.mkiv
+%%% Autor:   Joaquín Ataz López
+%%% Inicio:  Agosto 2020
+%%% Terminación: Agosto 2020
+%%% Contenido: Este capítulo es más coherente que el anterior. Gran
+%%%            parte de «TeXBook» se dedica a explicar el espacio
+%%%            vertical, y en la excursión por context, el capítulo
+%%%            titulado "Spacing" se refiere al espacio vertical.
+%%%
+%%% Editado: Emacs + AuTeX - Y a veces con vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent b11_ParrafosLineas.mkiv
+
+\startchapter
+  [title={Párrafos, líneas y espaciado vertical}]
+
+\PonIndiceCap
+
+El aspecto general de un documento está principalmente determinado por
+el tamaño y diseño de las páginas, que se ha visto en el
+\in{capítulo}[cap:páginas], por la fuente elegida, que se ha tratado
+en el \in{capítulo}[sec:fuentescol] y por otros aspectos tales como el
+interlineado, la alineación de los párrafos, el espaciado entre ellos,
+etc. Este capítulo se centra en estos otros aspectos.
+
+\startsection
+  [title=Formación y características de los\\ párrafos]
+
+Para \ConTeXt\ el párrafo es la unidad de texto fundamental. 
+Para iniciar un párrafo se dispone de dos procedimientos:
+
+\startitemize[n]
+
+\item Insertar en el fichero fuente una o más líneas en blanco
+  consecutivas.
+\item Los comandos \PonMacro{par}\tex{par} o \PonMacro{endgraf}\tex{endgraf}.
+
+\stopitemize
+
+Normalmente se utiliza el primer procedimiento, pues es más simple, y
+produce ficheros fuente más fáciles de leer y comprender. Insertar
+saltos de párrafo mediante un comando explícito es algo que
+habitualmente sólo se hace dentro de la definición de una macro (véase
+la \in{sección}[sec:define]) o en una celda de una tabla (véase la
+\in{sección}[sec:tablas]).
+
+En un documento bien compuesto, desde el punto de vista tipográfico,
+conviene que los párrafos se destaquen visualmente unos de otros con
+claridad. Ello se suele hacer por dos procedimientos: Sangrando
+ligeramente la primera línea de cada párrafo o aumentando ligeramente
+el espacio en blanco entre los párrafos.  En ocasiones se usa una
+combinación de ambos procedimientos aunque en algunos lugares se
+desrecomienda hacerlo por considerarlo tipográficamente redundante. 
+
+\startLetraChica
+
+  Así lo hace, por ejemplo, el {\em Libro de Estilo de la lengua
+    española} (Espasa 2018). No estoy totalmente de acuerdo. La simple
+  sangría de la primera línea no siempre destaca visualmente lo
+  bastante la separación entre párrafos; pero el aumento del espaciado
+  no acompañado de la sangría, plantea problemas en el caso de
+  párrafos que empiezan en una página sin que, a veces, sea fácil
+  saber si se trata de un párrafo nuevo o del mismo párrafo de la
+  página anterior. Una combinación de ambos procedimientos elimina las
+  dudas.
+
+\stopLetraChica
+
+Veremos, en primer lugar, cómo funciona en \ConTeXt\ el sangrado de
+líneas o párrafos.
+
+\startLetraChica
+
+  {\bf Nota terminológica:} A lo que en la tradición tipográfica
+  española se conoce como {\em sangría} o {\em sangrado} de líneas,
+  hoy se le llama también, a veces, {\em indentación}; palabra esta
+  que no está reconocida por el Diccionario de la RAE y que procede
+  del mundo de la informática, no del de la tipografía.
+
+  Los nombres de los comandos de \ConTeXt\ que se refieren a esta
+  práctica, parten, sin embargo, del verbo {\em indentar}, y por ello,
+  aunque en las líneas que siguen usaré preferentemente la
+  terminología tipográfica, también usaré ocasionalmente el verbo {\em
+    indentar} o el sustantivo {\em indentación}.
+
+\stopLetraChica
+
+\startsubsection
+  [
+    reference=sec:sangría,
+    title=Sangría automática de la primera línea de los párrafos,
+  ]
+
+La introducción automática de una pequeña sangría en la primera línea
+de los párrafos, se encuentra desactivada por defecto. Podemos
+activarla, volverla a desactivar, e indicar, cuando está activada, el
+tamaño de la sangría, mediante
+\PonMacro{setupindenting}\cmd{set\-up\-in\-den\-ting} que admite los
+siguientes valores para indicar si la indentación debe o no estar
+activada:
+
+\startitemize[packed]
+
+\item {\tt\bf always}: Indentará absolutamente todos los párrafos.
+
+\item {\tt\bf yes}: Activa el sangrado de los párrafos {\em
+  normales}. No se indentarán ciertos párrafos que van precedidos de
+  un espaciado vertical extra como, por ejemplo, el primer párrafo de
+  las secciones, o los párrafos que siguen a ciertos entornos.
+
+\item {\tt\bf no, not, never, none}: Desactiva el sangrado automático
+  de la primera línea de los párrafos.
+
+\stopitemize
+
+Para el caso de que hayamos activado el sangrado automático, podemos
+también indicar, mediante el mismo comando, cuánto sangrado debe
+haber. Para ello podemos usar expresamente una dimensión (por ejemplo
+1.5cm) o las palabras simbólicas \PalClave{small}, \PalClave{medium} y
+\PalClave{big} que indican, respectivamente, que se desea un sangrado
+pequeño, mediano o grande. 
+
+\startLetraChica
+
+  En la tradición tipográfica española el sangrado estándar era de dos
+  cuadratines.  El «cuadratín» es, en tipografía, un cuadrado cuya
+  altura y anchura es igual al cuerpo de la letra que se esté
+  usando. Así, con una letra de 12 puntos, el cuadratín mediría 12
+  puntos de ancho por doce de alto. Como su uso fundamental es para
+  separar elementos de texto, también se llama cuadratín al espacio en
+  blanco de esa misma medida; en inglés a un espacio en blanco de ese
+  tamaño se le denomina {\em quad}, y en \ConTeXt\ existen los
+  comandos \tex{quad}, que genera un espacio en blanco de exactamente
+  un cuadratín, y \tex{qquad}, que genera un espacio en blanco de dos
+  cuadratines. Un sangrado de dos cuadratines, con una letra de 11
+  puntos, mediría 22 puntos, y con una letra de 12 puntos, 24 puntos.
+
+\stopLetraChica
+
+Si, estando activada la indentación, deseamos indicar que en cierto
+párrafo no se aplique, debemos utilizar el comando
+\PonMacro{noindentation}\tex{noindentation}.
+
+\startLetraChica
+
+  Yo, en líneas generales, activo el sangrado automático en mis
+  documentos, estableciendo \cmd{set\-up\-in\-den\-ting[yes, big]}. En
+  este documento, sin embargo, no lo he hecho pues la gran cantidad de
+  frases cortas y ejemplos que en él hay, produciría, si se activara
+  la indentación, una apariencia de las páginas visualmente muy
+  desordenada.
+
+\stopLetraChica
+
+\stopsubsection
+
+\startsubsection
+  [title=Sangrado especial de párrafos]
+
+Un procedimiento gráfico que destaca bien un párrafo es el de aumentar
+el sangrado derecho o izquierdo (o ambos) de todo el párrafo. Esto se
+hace, por ejemplo, para representar las citas textuales lo
+suficientemente largas como para ocupar todo un párrafo.
+
+En \ConTeXt\ existe un entorno que permite alterar el sangrado de los
+párrafos, destacándolos así del texto que les rodea. Se trata de
+\PalClave{narrower}:
+
+\PonMacro{startnarrower}\type{\startnarrower [Opciones] ... \stopnarrower}
+
+donde {\em Opciones} pueden ser:
+
+\startitemize
+
+\item {\tt\bf left}: Sangrar el margen izquierdo.
+
+\item {\tt\bf Num*left}: Sangrar el margen izquierdo, multiplicando el
+  sangrado {\em normal} por {\em Num} (por ejemplo {\tt 2*left}).
+
+\item {\tt\bf right}: Sangrar el margen derecho.
+
+\item {\tt\bf Num*right}: Sangrar el margen derecho, multiplicando el
+  sangrado {\em normal} por  {\em Num} (por ejemplo {\tt 2*right}).
+
+\item {\tt\bf middle}: Sangrar ambos márgenes. Este es el
+  funcionamiento por defecto.
+
+\item {\tt\bf Num*middle}: Sangrar por ambos lados, multiplicando el
+  sangrado {\em normal} por {\em Num}.
+
+\stopitemize
+
+Al explicar las opciones he mencionado un {\em sangrado normal}; con
+tal expresión me refiero a la cantidad de sangrado izquierdo y derecho
+que, por defecto, aplica \PalClave{narrower}. Esta {\em cantidad} se
+puede configurar mediante \PonMacro{setupnarrower}\tex{setupnarrower}
+que admite las siguientes opciones de configuración:
+
+\startitemize[packed]
+
+\item {\tt\bf left}: Cantidad de sangrado que se aplicará en el margen
+  izquierdo.
+
+\item {\tt\bf right}: Cantidad de sangrado que se aplicará en el
+  margen derecho.
+
+\item {\tt\bf middle}: Cantidad de sangrado que se aplicará en
+  ambos márgenes.
+
+\item {\tt\bf before}: Comando que se ejecutará antes de entrar en el
+  entorno.
+
+\item {\tt\bf after}: Comando que se ejecutará al salir del entorno.
+
+\stopitemize
+
+Si en nuestro documento queremos utilizar diferentes configuraciones
+del entorno narrower, podemos asignar cada una de ellas a un nombre
+diferente mediante
+
+\PonMacro{definenarrower}\type{\definenarrower [Nombre] [Configuración]}
+
+donde {\em Nombre} es el nombre que se vinculará a esta configuración,
+y {\em Configuración} admite los mismos valores que \tex{setupnarrower}.
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:espaciovertical,
+    title=Espaciado vertical entre párrafos,
+  ]
+
+\startsubsection
+  [title=\tex{setupwhitespace}]
+
+Como ya sabemos (\in{sección}[sec:saltoslinea]), para \ConTeXt\ es
+indiferente cuántas líneas en blanco consecutivas haya en el fichero
+fuente: una o más líneas en blanco insertarán en el documento final
+exclusivamente un salto de párrafo. Para aumentar el espaciado entre
+párrafos no sirve de nada añadir un salto de línea extra en el fichero
+fuente, sino que dicha función es controlada por el comando
+\PonMacro{setupwhitespace}\tex{setupwhitespace} que admite los siguientes valores:
+
+\startitemize
+
+\item {\tt\bf none}: Significa que no se establecerá ningún espacio
+  vertical adicional entre párrafos.
+
+\item {\tt\bf small, medium, big}: Insertan, respectivamente, un
+  espacio adicional pequeño, mediano o grande. El concreto tamaño del
+  espacio insertado por estos valores depende del tamaño de la fuente.
+
+\item {\tt\bf line, halfline, quarterline}: Mide el espacio en blanco
+  adicional en relación con la altura de las líneas e inserta,
+  respectivamente, una línea extra de separación, media línea, o un
+  cuarto de línea.
+
+\item {\tt\bf DIMENSIÓN}: Establece una concreta dimensión como
+  espacio de separación entre párrafos. Por ejemplo
+  \tex{setupwhitespace[5pt]}.
+
+\stopitemize
+
+Con carácter general se desaconseja establecer como valor para
+\tex{setupwhitespace} una dimensión exacta, siendo preferible utilizar
+los valores simbólicos small, medium, big, line, halfline o
+quarterline. Esto es así por dos razones:
+
+\startitemize
+
+\item Los valores simbólicos son dimensiones elásticas (véase la
+  \in{sección}[sec:dimensiones]) es decir: tienen un valor {\em
+    normal} pero se admite una cierta disminución o aumento de dicho
+  valor, lo que ayuda a \ConTeXt\ a componer páginas en las que
+  estéticamente la separación entre párrafos sea similar. Por el
+  contrario una medida fija de separación entre párrafos hace más
+  difícil conseguir una buena paginación del documento.
+
+\item Los valores simbólicos small, medium, big, etc., se calculan a
+  partir del tamaño de la fuente, por lo que si este cambia en ciertos
+  fragmentos, también cambiará la cantidad de espaciado vertical entre
+  párrafos, de tal modo que el resultado será siempre armónico. Por el
+  contrario, un valor fijo para el espaciado vertical no se verá
+  afectado por cambios en el tamaño de la fuente, lo que se traducirá,
+  normalmente, en un documento con el espacio en blanco mal repartido
+  (desde el punto de vista estético) y no acorde con las reglas de la
+  corrección tipográfica.
+  
+\stopitemize
+
+Cuando se ha establecido algún valor para el espaciado vertical entre
+párrafos, tenemos disponibles dos comandos adicionales:
+\PonMacro{nowhitespace}\tex{nowhitespace}, que elimina el espaciado extra entre dos párrafos
+concretos, y \PonMacro{whitespace}\tex{whitespace} que hace lo contrario.  Pero estos
+comandos raramente serán necesarios, pues lo cierto es que \ConTeXt\
+gestiona por sí solo bastante bien el espaciado vertical entre
+párrafos; sobre todo si como valor para él se ha insertado alguna de
+las dimensiones predefinidas que se calculan a partir del tamaño de
+letra e interlineado activos en cada momento.
+
+\startLetraChica
+
+  El sentido de \tex{nowhitespace} es obvio. No tanto el de
+  \tex{whitespace} porque ¿qué sentido tiene ordenar, para dos
+  párrafos concretos, un espaciado vertical que está establecido ya
+  con carácter general para todos los \Conjetura párrafos? Sin embargo
+  en la escritura de macros avanzadas, \tex{whitespace} puede ser útil
+  en el contexto de un bucle que tiene que tomar una decisión a partir
+  del valor de cierta condición. Esto es programación más o menos
+  avanzada, y no entraré en ello.
+
+\stopLetraChica
+
+\stopsubsection
+
+\startsubsection
+  [title=Párrafos sin espacio vertical extra entre ellos]
+
+Si deseamos que en un fragmento concreto de nuestro documento los
+párrafos no estén separados por un espacio vertical extra, podemos,
+por supuesto, modificar la configuración general de
+\tex{setupwhitespace}, pero eso es, en cierto modo, contrario a la
+filosofía de \ConTeXt\ en la que los comandos de configuración general
+deben ubicarse exclusivamente en el preámbulo del fichero fuente, para así
+conseguir documentos coherentes y en los que sea fácil modificar la
+apariencia general. Por ello se proporciona el entorno
+\PalClave{packed} cuya sintaxis general es
+
+\PonMacro{startpacked}\type{\startpacked [Espacio] ... \stoppacked}
+
+donde {\em Espacio} es un argumento opcional que indica qué cantidad
+de separación vertical se desea entre los párrafos del entorno. Si se
+omite no se aplicará ninguna separación vertical extra.
+
+\stopsubsection
+
+\startsubsection
+  [title=Añadir espacio vertical adicional en un\\ punto concreto del documento]
+
+Para el caso de que en un punto concreto del documento el espaciado
+vertical normal entre párrafos no sea suficiente, podemos usar el
+comando \PonMacro{blank}\tex{blank}. Usado sin argumentos, \tex{blank} insertará la
+misma cantidad de espacio vertical que se haya establecido con
+\tex{setupwhitespace}. Pero se le puede indicar entre corchetes, bien
+una dimensión concreta, bien alguno de los valores simbólicos
+calculados a partir del tamaño de la fuente: small, medium o
+big. También podemos multiplicar esos tamaños por algún número entero
+y así, por ejemplo, \tex{blank[3*medium]} insertará el equivalente a
+tres saltos medianos. También podemos juntar dos medidas. Por ejemplo
+\tex{blank[2*big, medium]} insertará dos saltos grandes y un salto
+mediano.
+
+Como \tex{blank} está pensado para aumentar el espacio vertical entre
+párrafos no produce efectos si entre los dos párrafos cuyo espaciado
+vertical se debe aumentar, se inserta un salto de página; y si se
+insertan, seguidos, dos o más comandos \tex{blank}, sólo se aplicará
+uno de ellos (el que mayor espacio haya de insertar). Tampoco produce
+ningún efecto un comando \tex{blank} ubicado tras un salto de
+página. No obstante en estos casos podemos forzar la inserción del
+espaciado vertical indicando, como opción del comando, la palabra
+simbólica \PalClave{force}. Y así, por ejemplo, si queremos que en
+nuestro documento el título de los capítulos aparezca ligeramente
+desplazado hacia abajo en la página, de tal modo que la longitud total
+de la misma sea inferior a la del resto de las páginas, lo que es, por
+otra parte, una práctica tipográfica relativamente frecuente,
+deberemos escribir en la configuración del comando \tex{chapter}, por
+ejemplo:
+
+\starttyping
+\setuphead
+  [chapter]
+  [
+    page=yes,
+    before={\blank[4cm, force]},
+    after={\blank[3*medium]}
+  ]
+\stoptyping
+
+Esta secuencia de comandos logrará que los capítulos empiecen siempre
+una página y que el rótulo del capítulo se desplace cuatro centímetros
+hacia abajo. Sin usar la opción \PalClave{force} esto no funcionaría.
+
+\stopsubsection
+
+\startsubsection
+  [title=\tex{setupblank} y \tex{defineblank}]
+\PonMacro{setupblank}\PonMacro{defineblank}
+
+Antes he dicho que \tex{blank}, usado sin argumentos, equivale a
+\tex{blank[big]}. Pero eso podemos cambiarlo mediante \tex{setupblank}
+estableciendo, por ejemplo, \tex{setupblank[0.5cm]}, o
+\tex{setupblank[medium]}. Usado sin argumento, \tex{setupblank}
+ajustará el valor al tamaño actual de la fuente.
+
+Al igual que ocurre con \tex{setupwhitespace} el espacio en blanco que
+inserta \tex{blank} cuando su valor es alguno de los valores
+simbólicos predefinidos, es una dimensión elástica que admite cierta
+oscilación. Esto lo podemos cambiar mediante la opción
+\PalClave{fixed}, siendo posible, más tarde, restaurar el valor por
+defecto (\PalClave{flexible}). Así, por ejemplo, en el texto a doble
+columna es recomendable establecer \tex{setupblank[fixed, line]}, y al
+volver al texto a una sola columna establecer
+\tex{setupblank[flexible, default]}.
+
+Con \tex{defineblank} podemos asociar una determinada configuración a
+un nombre. El formato general de este comando es:
+
+\type{\defineblank [Nombre] [Configuración]}
+
+Una vez definido nuestra configuración de espacio en blanco, podemos
+usarla con \tex{blank[NombreCongiguración]}.
+
+\stopsubsection
+
+\startsubsection
+  [title=Otros procedimientos para conseguir\\ espacio vertical extra]
+
+En \TeX\ el comando que inserta espacio vertical extra es
+\PonMacro{vskip}\tex{vskip}. Este comando, como casi todos los comandos de \TeX,
+funciona también en \ConTeXt\, pero está fuertemente desaconsejado su
+uso pues interfiere en el funcionamiento interno de algunas macros de
+\ConTeXt. En su lugar se propone el uso de \PonMacro{godown}\tex{godown} cuya sintaxis
+es:
+
+\type{\godown[Dimensión]}
+
+donde {\em Dimensión} ha de ser un número con o sin decimales, seguido
+de una unidad de medida. Por ejemplo \tex{godown[5cm]} producirá un
+salto de cinco centímetros en la página actual; aunque si el cambio de
+página estaba a menos de cinco centímetros, \tex{godown} sólo saltará
+hasta la próxima página. Asimismo, \tex{godown} al principio de una
+página no produce efectos, aunque podemos {\em engañarlo} escribiendo,
+por ejemplo «\cmd{\textvisiblespace \backslash
+  godown[3cm]}»\footnote{Recuérdese que en este documento se usa el
+  carácter «\textvisiblespace» para representar a un espacio en blanco
+cuando la visibilidad del mismo sea importante.} que
+primero insertará un espacio en blanco que hará que ya no estemos al
+principio de la página, y después un salto de tres centímetros.
+
+\startLetraChica
+
+  Como sabemos \tex{blank} también admite como argumento una dimensión
+  concreta. Por lo que, desde el punto de vista del usuario, escribir
+  \tex{blank[3cm]} o \tex{godown[3cm]} es prácticamente lo mismo. No
+  obstante hay algunas diferencias sutiles entre ellos; y así, por
+  ejemplo, dos comandos \tex{blank} consecutivos no pueden acumularse
+  y cuando ello sucede, se aplica sólo el que impone un salto
+  mayor. Dos o más comandos \tex{godown}, por el contrario, pueden
+  perfectamente acumularse.
+
+\stopLetraChica
+
+Otro comando de \TeX\ bastante útil, y cuyo uso en \ConTeXt\ no
+plantea ningún problema, es \PonMacro{vfill}\tex{vfill}. Este comando inserta un
+espacio en blanco vertical flexible que llega hasta la parte inferior
+de la página. Es como si el comando {\em empujara} hacia abajo lo que
+se escriba detrás de él. Ello nos permite efectos interesantes tales
+como ubicar en la parte inferior de la página cierto párrafo, para lo
+que simplemente hay que precederlo de \tex{vfill}.  Ahora bien: el
+efecto de \tex{vfill} es difícil de apreciar si su uso no se combina
+con saltos de página forzados, porque de poco sirve empujar hacia
+abajo un párrafo o línea de texto, si luego ese párrafo, conforme vaya
+creciendo, crece hacia arriba.
+
+Así por ejemplo, para asegurarnos de que una línea se ubique al fondo
+de la página, deberíamos escribir:
+
+\starttyping
+\vfill
+Línea al fondo
+\page[yes]
+\stoptyping
+
+Al igual que el resto de los comandos que insertan espacio vertical,
+\tex{vfill} no produce ningún efecto al principio de una página. Pero
+podemos {\em engañarlo}, precediéndolo de un espacio en blanco
+forzado. Y así, por ejemplo:
+
+\starttyping
+\page[yes]
+\ \vfill
+Línea central
+\vfill
+\page[yes]
+\stoptyping
+
+centrará verticalmente en la página la frase “Línea central”.
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:lineas,
+    title=Cómo construye \ConTeXt\ las líneas que forman los párrafos,
+  ]
+
+Uno de los principales deberes de un sistema de composición
+tipográfica es tomar una larga secuencia de palabras y dividirla en
+líneas individuales del tamaño apropiado. Por ejemplo, cada párrafo de
+este texto se ha dividido en líneas de 15 centímetros de ancho, pero
+el autor no ha tenido que preocuparse por tales detalles, pues
+\ConTeXt\ elige los puntos de ruptura tras considerar cada párrafo en
+su totalidad; de tal modo que las palabras finales de un párrafo
+pueden realmente influir en la división de la primera línea. Como
+resultado, el espacio entre las palabras de todo el párrafo es tan
+uniforme como sea posible.
+
+\startLetraChica
+
+  Es este un aspecto en el que se puede observar mejor que en otros la
+  diferente forma de trabajar de los procesadores de texto, y la mayor
+  calidad que se obtiene con sistemas como \ConTeXt. Porque un
+  procesador de textos, cuando llega al final de la línea y salta a la
+  siguiente ajusta los espacios en blanco de la línea que se acaba de
+  terminar para conseguir justificarla a la derecha. Con cada línea
+  irá haciendo eso, y al final, en un mismo párrafo, cada línea tendrá
+  un espacio de separación entre palabras diferente. Eso puede causar
+  un muy mal efecto. \ConTeXt\, por el contrario, procesa el párrafo
+  en su totalidad y calcula para cada línea cuántos puntos de ruptura
+  admisibles hay, y la medida del espacio en blanco entre palabras que
+  cada posible ruptura de línea provocaría. Como el punto de ruptura
+  de una línea afecta a los posibles puntos de ruptura de las próximas
+  líneas, el número total de posibilidades puede llegar a ser muy
+  alto; pero eso no es problema para \ConTeXt. Finalmente, se tomará
+  una decisión basada en la totalidad del párrafo, procurando que el
+  espacio en blanco entre palabras de cada línea sea {\em lo más
+    parecido posible}, lo que provoca unos párrafos mucho mejor
+  compuestos; visualmente más compactos.
+
+\stopLetraChica
+
+Para hacer su tarea, \ConTeXt\ ensaya distintas alternativas y, asigna
+a cada una de ellas un valor de “inconveniencia” ({\em badness}, en
+inglés) basado en sus parámetros, los cuales, a su vez, se
+establecieron tras estudiar a fondo el arte de la
+tipografía. Finalmente, tras haber explorado todas las posibilidades,
+\ConTeXt\ elige la opción menos inadecuada (la que tenga un valor más
+bajo de inconveniencia). Este procedimiento funciona bastante bien en
+general, pero inevitablemente habrá casos en los que se escojan puntos
+de ruptura de líneas que no sean los mejores, o que a nosotros no nos
+los parezca. Por lo tanto, a veces querremos indicarle al programa que
+ciertos lugares no son buenos puntos de ruptura. Por el contrario, en
+otras ocasiones querremos forzar una ruptura en un punto en
+particular.
+
+\startsubsection
+  [
+    reference=sec:lettertilde,
+    title=Uso del carácter reservado «{\tt\lettertilde}»,
+  ]
+
+Los principales candidatos a ser puntos de ruptura de línea son,
+obviamente, los espacios en blanco de separación entre palabras. Para
+indicar que cierto espacio en blanco no debe nunca ser sustituido por
+un salto de línea, se usa, como ya sabemos, el carácter reservado
+«\lettertilde» al que \TeX\ denomina «lazo» ({\em tie}, en inglés)
+puesto que {\em enlaza} dos palabras.
+
+El {\em Libro de estilo de la lengua española}, de la Real Academia de
+la Lengua (Espasa, 2018) recomienda el uso de estos espacios de no
+separación en los siguientes casos:
+
+\startitemize[packed]
+
+\item Entre los elementos de las abreviaturas complejas. Por ejemplo,
+  {\tt EE\lettertilde UU}.
+
+\item Entre las abreviaturas y el término a que se refieren. Por
+  ejemplo, {\tt Dª\lettertilde Ana Ruiz} o {\tt pág.\lettertilde 45}.
+
+\item Entre los números y el término al que acompañan. Por ejemplo 
+  {\tt Carlos\lettertilde III}, {\tt 45\lettertilde volúmenes}.
+
+\item Entre las cifras y los símbolos pospuestos, siempre que no sean
+  superíndices. Por ejemplo, {\tt 73\lettertilde km}, {\tt 58\lettertilde €}; pero
+  {\tt 35'}.
+
+\item En los porcentajes expresados con palabras. Por ejemplo
+  {\tt veinte\lettertilde por\lettertilde ciento}.
+
+  \item En los grupos numéricos separados por espacios en blanco. Por
+    ejemplo, {\tt 5\lettertilde 357\lettertilde 891}. Aunque en estos
+    casos es preferible usar el llamado {\em espacio fino} que con
+    \ConTeXt\ se consigue con el comando \tex{,} y, por lo tanto,
+    escribir {\tt 5\backslash,357\backslash,891}.
+
+\item Para evitar que una abreviatura sea el único elemento en su
+  línea. Por ejemplo:
+
+  \starttyping
+    Existen secciones como entretenimiento, medios de comunicación, 
+    comercio,~etc.
+  \stoptyping
+
+\stopitemize
+
+A estos casos, {\sc Knuth} (padre de \TeX) añade las siguientes
+recomendaciones:
+
+\startitemize[packed]
+
+\item Detrás de una abreviatura que no esté al final de una frase.
+
+\item En referencias a partes del documento como capítulos, apéndices,
+  figuras, etc. Por ejemplo {\tt Capítulo\lettertilde 12}.
+
+\item Entre el primer nombre y la inicial del segundo nombre de una
+  persona, o entre la inicial del nombre y el apellido. Por ejemplo,
+  {\tt Donald\lettertilde E. Knuth}, {\tt A.\lettertilde Einstein}.
+
+\item Entre símbolos matemáticos en aposición de nombres. Por ejemplo
+  {\tt dimensión\lettertilde \$d\$}, {\tt anchura\lettertilde \$w\$}.
+
+\item Entre símbolos en series. Por ejemplo {\tt \{1,\lettertilde 2,
+  \backslash dots,\lettertilde \$n\$\}}.
+
+\item Cuando un número está estrechamente ligado a una
+  preposición. Por ejemplo {\tt de 0 a\lettertilde 1}.
+
+\item Cuando se expresan con palabras símbolos matemáticos. Por
+  ejemplo, {\tt igual\lettertilde a\lettertilde \$n\$}.
+
+\item En las enumeraciones de casos hechas dentro de un mismo
+  párrafo. Por ejemplo: {\tt (1)\lettertilde verde, (2)\lettertilde
+    rojo, (3)\lettertilde azul}.
+  
+\stopitemize
+
+¿Muchos casos? Sin duda la perfección tipográfica tiene un coste en
+sobresfuerzo. Está claro que si no queremos, no tenemos por qué
+aplicar estas reglas, pero no está de más conocerlas. Además ---y aquí
+hablo por experiencia--- una vez que nos acostumbramos a aplicarlas (o
+a aplicar alguna de ellas) el hacerlo se automatiza. Es como poner
+tildes en las palabras mientras las escribimos: quienes así lo
+hacemos, si estamos tan acostumbrados como para escribirlas
+automáticamente, no tardamos en escribir una palabra con tilde más
+tiempo del que tardaría el que la escribiera sin tilde.
+
+\stopsubsection
+
+\startsubsection
+  [title=Partición silábica de las palabras]
+
+Salvo en un idioma compuesto básicamente de monosílabos, es bastante
+difícil que insertando puntos de ruptura de línea sólo en los espacios
+en blanco entre palabras se obtenga un resultado óptimo. Por ello
+\ConTeXt\ también analiza la posibilidad de introducir un salto de
+línea entre dos sílabas de una palabra; y para hacerlo bien es
+imprescindible saber cuál es el idioma del texto, pues las reglas de
+partición de una palabra en sílabas son diferentes en cada idioma. De
+ahí la importancia del comando \tex{mainlanguage} en el preámbulo del
+documento.
+
+Cuando se inserta un salto de línea entre dos sílabas de una palabra,
+se escribe automáticamente un guión en el punto de la ruptura de la
+palabra para indicar que el segmento que lo precede es una parte de
+una palabra dividida que continúa en la siguiente línea. Como en
+inglés al guión se le llama {\em hyphen}, a ese procedimiento se le
+denomina {\em hyphenation}. En español se usa ese mismo procedimiento
+pero, hasta donde yo se, no existe una palabra específica para
+nombrarlo\footnote{En el antes citado {\em Libro de estilo de la
+    Lengua española} se describe este procedimiento (pág.~129) sin
+  asignarle ningún nombre concreto.}.
+
+Puede ocurrir que \ConTeXt\ no consiga dividir silábicamente una
+palabra de modo adecuado. A veces, porque sus propias reglas de
+particionado se lo impiden (por ejemplo, \ConTeXt\ nunca divide una
+palabra en dos segmentos si dichos segmentos no tienen un número
+mínimo de letras); o porque la palabra resulte ambigua, como ocurre,
+por ejemplo, con «sublime» que, se puede considerar que consta de las
+sílabas su-bli-me; pero que, como empieza por «sub» que es un prefijo
+relativamente corriente en español, es posible que el algoritmo de
+\ConTeXt\ considere que lo correcto sea dividirla como sub-li-me; o
+incluso es posible que, siendo correcta la división silábica, por el
+contexto produzca un resultado que se pretende evitar como, ocurriría,
+por ejemplo, si la última línea de una página acaba con la palabra
+“círculo” y esta se parte por la primera sílaba, haciendo que la
+página siguiente empiece (aparentemente) con la palabra “culo”.
+
+Sean cuales sean las razones, si la división de una palabra no nos
+satisface, o no es correcta, podemos cambiarla indicando expresamente
+los puntos de ruptura admisibles para dicha palabra mediante el
+símbolo de control \tex{-}, y así, por ejemplo, si la palabra
+«sublime» nos hubiera dado algún problema, podríamos escribirla, en el
+fichero fuente como \PalClave{su\backslash-bli\backslash-me}; o si el
+problema lo tenemos con «círculo», podríamos escribir
+\PalClave{círcu\backslash-lo}.
+
+Si la palabra problemática es usada varias veces en nuestro documento,
+es preferible indicar su particionado correcto en el preámbulo,
+mediante el comando \PonMacro{hyphenation}\tex{hyphenation}: este comando, que está pensado
+para ser incluido en el preámbulo del fichero fuente, recibe como
+argumento una o varias palabras (separadas por comas) en las que los
+puntos admitidos de ruptura se indican con un guión. Por ejemplo:
+
+\type{\hyphenation{su-bli-me, círcu-lo}}
+
+En el caso de que la palabra que es argumento de este comando no
+contenga ningún guión, el efecto será el de que dicha palabra no se
+partirá silábicamente nunca. Este mismo efecto podemos conseguirlo
+mediante los comandos \PonMacro{hbox}\tex{hbox}, que crea una caja
+horizontal indivisible en torno a la palabra, o
+\PonMacro{unhyphenated}\tex{unhyphenated} que previene la partición
+silábica de la palabra o palabras que recibe como argumentos. Pero
+mientras \tex{hyphenation} actúa globalmente, \tex{hbox} y
+\tex{unhyphenated} actúan localmente. Es decir: el comando
+\tex{hyphenation} afecta a todas las apariciones en el documento de
+las palabras incluidas en su argumento; a diferencia de \tex{hbox} o
+\tex{unhyphenated} que sólo actúan en el punto del fichero fuente en
+el que se encuentren.
+
+\startLetraChica
+
+  Desde un punto de vista interno, el funcionamiento de la partición
+  silábica de palabras, está controlado por las variables de \TeX\
+  \PonMacro{pretolerance}\tex{pretolerance} y
+  \PonMacro{tolerance}\tex{tolerance}. El primero de estas valores
+  controla la admisibilidad de una partición hecha sólo sobre espacios
+  en blanco. Por defecto vale 100, pero si alteramos su valor a, por
+  ejemplo, 10\,000, conseguiremos que \ConTeXt\ siempre considere
+  aceptable una partición de líneas que no requiera partir
+  silábicamente palabras, por lo que, {\em de facto}, estaremos
+  anulando la partición silábica. Por el contrario, si fijamos, por
+  ejemplo, el valor de \tex{pretolerance} a -1, forzaremos que
+  \ConTeXt\ busque en todo caso la partición silábica de las palabras
+  al final de la línea.
+
+  Podemos fijar, directamente, un valor arbitrario para
+  \tex{pretolerance} en nuestro documento simplemente escribiendo en
+  él la sentencia de asignación. Por ejemplo:
+
+  \type{\pretolerance=10000}
+
+  pero también podemos manipular este valor mediante los valores
+  \PalClave{lesshyphenation} y \PalClave{morehyphenation} de
+  \tex{setupalign}, véase al respecto la \in{sección}[sec:setupalign].
+
+\stopLetraChica
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:toleranciahorizontal,
+    title=Nivel de tolerancia en la ruptura de líneas,
+  ]
+
+A la hora de buscar los posibles puntos de ruptura de línea, \ConTeXt\
+es, normalmente, bastante estricto; lo que significa que prefiere
+permitir que una palabra sobrepase el margen derecho, por no haberla
+podido partir silábicamente, a insertar un salto de línea antes de la
+misma, si ello obliga a aumentar excesivamente el espacio entre
+palabras en la línea. Este comportamiento predeterminado da,
+normalmente, unos resultados óptimos, en los que muy excepcionalmente
+ciertas líneas sobresalen algo por el margen derecho. La idea es que
+el autor (o compositor), una vez terminado el documento, vaya
+revisando uno a uno estos casos excepcionales para tomar la decisión
+adecuada, que puede ser un comando \tex{break} antes de la palabra que
+sobresale, o una distinta redacción para el párrafo que haga que la
+palabra que causa problemas vaya a parar a otro lugar.
+
+No obstante en algunos contextos la poca tolerancia de \ConTeXt\ puede
+ser un inconveniente. En estos casos podemos indicarle que debe ser
+más tolerante con los espacios en blanco en las líneas. Para ello
+contamos con el comando \PonMacro{setuptolerance}\tex{setuptolerance} que permite alterar el
+nivel de tolerancia en el cálculo de los saltos de línea, a lo que
+\ConTeXt\ llama “tolerancia horizontal” (porque afecta al espacio
+horizontal) y en el cálculo de los saltos de página (“tolerancia
+vertical”) de la que hablaremos en la \in{sección}[sec:AlinVertical].
+
+La tolerancia horizontal (que es la que afecta a la ruptura entre
+líneas), por defecto está establecida con el valor
+\PalClave{verystrict}, es decir «muy estricto», podemos alterar este
+valor estableciendo, como posibles valores alternativos,
+\PalClave{strict}, \PalClave{tolerant}, \PalClave{verytolerant} o
+\PalClave{stretch}. Así, por ejemplo
+
+\type{\setuptolerance[horizontal, verytolerant]}
+
+hará que sea casi imposible que una línea sobrepase el margen derecho,
+aunque para ello haya que establecer un muy grande espaciado entre
+palabras de la línea que resulte antiestético.
+
+\stopsubsection
+
+\startsubsection
+  [title=Forzar un salto de línea en cierto punto]
+
+Para forzar un salto de línea en un punto concreto se usan los
+comandos \PonMacro{break}\tex{break}, \PonMacro{crlf}\tex{crlf} o
+\PonMacro{\backslash}{\tt\backslash\backslash}. El primero de ellos,
+\tex{break}, introduce, en el punto en el que se encuentre, un salto
+de línea. Ello, muy probablemente producirá que la línea en la que el
+comando se encuentra quede estéticamente deformada, con una inmensa
+cantidad de espacio en blanco entre las palabras que la componen. como
+se puede ver en el siguiente ejemplo en el que el comando \tex{break}
+en la tercera línea (del fragmento fuente) produce una segunda línea
+(del texto formateado) bastante fea.
+
+\startDobleEjemplo
+
+\starttyping
+Por la esquina del viejo barrio lo vi
+pasar con el \emph{tumbao} que tienen 
+los\break guapos al caminar, las manos
+siempre en los bolsillos de su gabán,
+pa que no sepan en cuál de ellas lleva
+el puñal.
+\stoptyping
+
+Por la esquina del viejo barrio lo vi pasar con el {\em tumbao} que
+tienen los\break guapos al caminar, las manos siempre en los bolsillos
+de su gabán, pa que no sepan en cuál de ellas lleva el puñal.
+
+\stopDobleEjemplo
+
+Para evitar este efecto podemos usar los comandos \cmd{\backslash} o
+\tex{crlf} que también insertan un salto forzado de línea, pero rellenan
+la línea original con el espacio en blanco suficiente como para que
+quede alineada a la izquierda:
+
+\startDobleEjemplo
+
+\starttyping
+Por la esquina del viejo barrio lo vi 
+pasar con el {\em tumbao} que tienen 
+los\\ guapos al caminar, las manos 
+siempre en los bolsillos de su gabán,
+pa que no sepan en cuál de ellas lleva
+el puñal.
+\stoptyping
+
+
+Por la esquina del viejo barrio lo vi pasar con el {\em tumbao} que
+tienen los\\ guapos al caminar, las manos siempre en los bolsillos de
+su gabán, pa que no sepan en cuál de ellas lleva el puñal.
+
+\stopDobleEjemplo
+
+En líneas {\em normales}, hasta donde yo se, no hay diferencias entre
+\cmd{\backslash} y \tex{crlf}; pero dentro del título de una sección
+sí las hay:
+
+\startitemize
+
+\item {\tt\bf\backslash\backslash} genera un salto de línea en el
+  cuerpo del documento, pero no en la transposición del título de la
+  sección al índice.
+
+\item {\bf\tex{crlf}} genera un salto de línea que se aplicará tanto
+  en el cuerpo del documento como en la transposición al índice del
+  título de la sección.
+  
+\stopitemize
+
+No se debe confundir un salto de línea con un salto de párrafo. El
+salto de línea simplemente hace que se termine la línea actual y se
+empiece la línea siguiente, pero manteniéndonos en el mismo párrafo,
+por lo que la separación entre la línea original y la nueva línea será
+la determinada por el interlineado normal dentro de un párrafo. Por
+ello sólo hay tres escenarios en los que puede estar recomendado forzar
+un salto de línea:
+
+\startitemize
+
+\item En casos muy excepcionales, cuando \ConTeXt\ no ha podido
+  encontrar un salto de línea adecuado, de tal modo que una línea
+  sobresale por el lado derecho. En estos casos (que se dan en muy
+  contadas ocasiones, principalmente cuando en la línea hay {\em
+    cajas} indivisibles, o texto {\em verbatim} [véase la
+    \in{sección}[sec:verbatim]]), puede ser conveniente forzar un
+  salto de línea con \tex{break} justo antes de la palabra que
+  sobresale por el margen derecho.
+
+\item En párrafos que en realidad se componen de líneas sueltas, cada
+  una de ellas con información independiente de la de las líneas
+  anteriores como, por ejemplo, el encabezado de una carta en donde la
+  primera línea puede contener el nombre del remitente, la segunda el
+  del destinatario, y la tercera la fecha; o en el texto informativo
+  de la autoría de un trabajo, en el que una línea informa del nombre
+  del autor, otra de su cargo o posición académica y tal vez una
+  tercera línea aclare la fecha, etc. En estos casos el salto de línea
+  debe forzarse con \cmd{\backslash} o \tex{crlf}. Es corriente, por
+  otra parte, que este tipo de párrafos se presenten alineados a la
+  derecha.
+
+\item En la escritura de poemas y textos similares, para separar un
+  verso de otro. Aunque en este último caso es preferible usar el
+  entorno {\tt lines} que se explica en la
+  \in{sección}[sec:startlines].
+
+\stopitemize
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [title=Interlineado]
+
+El interlineado es la distancia que separa a las líneas que componen
+un párrafo. \ConTeXt\ lo calcula automáticamente a partir de la
+concreta fuente que se esté usando y, sobre todo, de su tamaño base,
+establecido con \tex{setupbodyfont} o \tex{switchtobodyfont}.
+
+Podemos influir en el interlineado mediante el comando
+\PonMacro{setupinterlinespace}\tex{setupinterlinespace} que admite tres
+sintaxis diferentes:
+
+\startitemize
+
+\item \tex{setupinterlinespace [..Interlineado..]}, donde {\em
+  Interlineado} es un valor concreto o una palabra simbólica que
+  asigna un interlineado predefinido:
+
+  \startitemize
+
+  \item Cuando es un valor concreto puede ser una dimensión (por
+    ejemplo, 15pt), o un número simple, entero o decimal (por ejemplo,
+    1.2). En este último caso el número se interpreta como “número de
+    líneas” partiendo del interlineado por defecto de \ConTeXt.
+
+  \item Cuando es una palabra simbólica, esta puede ser
+    \PalClave{small}, \PalClave{medium} o \PalClave{big}, cada una de
+    ellas aplicará, respectivamente, un interlineado pequeño, mediano
+    o grande, partiendo siempre del interlineado por defecto que
+    \ConTeXt\ aplicaría.
+
+  \stopitemize
+
+\item \tex{setupinterlinespace [..,..=..,..]}. En esta modalidad el
+  interlineado se fija alterando explícitamente las medidas con base
+  en las cuales \ConTeXt\ calcula el interlineado adecuado. Antes he
+  dicho que el interlineado se calcula atendiendo a la fuente concreta
+  y a su tamaño; pero eso era simplificar mucho: en realidad la fuente
+  y su tamaño lo que hacen es establecer ciertas medidas a partir de
+  las cuales se calcula el interlineado. Mediante esta modalidad de
+  \tex{setupinterlinespace} se modifican esas medidas y, por lo tanto,
+  el interlineado. Las concretas medidas y valores que se pueden
+  manipular por este procedimiento (cuyo significado no voy a explicar
+  por exceder ello el ámbito de una simple {\em introducción}), son:
+  {\tt line, height, depth, minheight, mindepth, distance, top, bottom,
+  stretch} y {\tt shrink}.
+
+\item \tex{setupinterlinespace [Nombre]}. Mediante esta modalidad,
+  estableceremos o configuraremos un tipo concreto y personalizado de
+  interlineado previamente definido con \PonMacro{defineinterlinespace}\tex{defineinterlinespace}.
+
+\stopitemize
+
+Mediante
+
+\type{\defineinterlinespace [Nombre] [Configuración]}
+
+podemos asociar a un nombre concreto una determinada configuración de
+interlineado que luego podremos activar en un punto de nuestro
+documento simplemente con \tex{setupinterlinespace[Nombre]}. Para
+volver al interlineado normal deberíamos escribir
+\tex{setupinterlinespace[reset]}.
+
+\stopsection
+
+\startsection
+  [title=Otras cuestiones relacionadas con las líneas]
+
+\startsubsection
+  [
+    reference=sec:startlines,
+    title=Convertir los saltos de línea del fichero\\ fuente en saltos
+    de línea en el\\ documento final,
+  ]
+
+Como ya sabemos (véase \in{sección}[sec:saltoslinea]) por defecto \ConTeXt\
+ignora los saltos de línea del fichero fuente que considera como simples
+espacios en blanco, salvo que sean dos o más saltos de línea consecutivos,
+en cuyo caso, se insertará un salto de párrafo. No obstante puede haber
+algunas situaciones en las que nos interese respetar los saltos de línea
+del fichero fuente original tal y como se insertaron, como, por ejemplo,
+cuando se escribe poesía. Para ello \ConTeXt\ nos ofrece el entorno
+\PalClave{lines}, cuyo formato es
+
+\PonMacro{startlines}\type{\startlines [Opciones] ... \stoplines}
+
+en donde las opciones pueden ser, entre otras, cualquiera de las
+siguientes:
+
+\startitemize
+
+\item {\tt\bf space}: Cuando se establece esta opción con el valor
+  \PalClave{on}, el entorno, además de respetar los saltos de línea
+  del fichero fuente, respetará los espacios en blanco del fichero
+  fuente, anulando temporalmente la regla de su absorción.
+
+\item {\tt\bf before}: Texto o comando a ejecutar antes de entrar en
+  el entorno.
+  
+\item {\tt\bf after}: Texto o comando a ejecutar al salir del entorno.
+  
+\item {\tt\bf inbetween}: Texto o comando a ejecutar al entrar en el entorno.
+  
+\item {\tt\bf indenting}: Valor que indica si se indentarán o no los
+  párrafos dentro del entorno (véase, \in{sección}[sec:sangría]).
+  
+\item {\tt\bf align}: Alineación de las líneas del entorno (véase
+  \in{sección}[sec:alineación]).
+  
+\item {\tt\bf style}: Comando de estilo a aplicar dentro del entorno.
+  
+\item {\tt\bf color}: Color a aplicar al texto del entorno.  
+  
+\stopitemize
+
+Así, por ejemplo,
+
+\startDobleEjemplo
+\starttyping
+  \startlines
+    Un florín
+    Saltarín
+    de Medellín
+  \stoplines
+\stoptyping
+
+  \startlines
+    Un florín
+    Saltarín
+    de Medellín
+  \stoplines
+\stopDobleEjemplo
+
+También podemos modificar el funcionamiento por defecto del entorno
+mediante \PonMacro{setuplines}\tex{setuplines} y, como en tantos
+comandos de \ConTeXt, es asimismo posible asignar a una configuración
+concreta de este entorno un nombre. Ello se hace mediante
+\PonMacro{definelines}\tex{definelines} cuyo formato es:
+
+\type{\definelines [Nombre] [Configuración]}
+
+donde, como configuración, podemos incluir las mismas opciones que se
+han explicado con carácter general para el entorno. Una vez definido
+nuestro entorno de líneas personalizado, para insertarlo deberíamos
+escribir
+
+\type{\startlines[Nombre] ... \stoplines}
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:linenumbering,
+    title=Numeración de líneas,
+  ]
+
+En cierto tipo de textos es corriente establecer algún tipo de
+numeración de líneas, como por ejemplo, en textos sobre programación
+informática, donde es relativamente corriente que en los fragmentos de
+código que se presentan como ejemplos aparezcan numeradas las líneas,
+o en poemas, ediciones críticas, etc. Para todas estas situaciones
+\ConTeXt\ ofrece el entorno {\tt linenumbering} cuyo formato es
+
+\PonMacro{startlinenumbering}\type{\startlinenumbering [Opciones]
+  ... \stoplinenumbering}
+
+Las opciones admisibles son:
+
+\startitemize
+
+\item {\tt\bf continue}: En el caso de que en nuestro documento haya
+  más de un fragmento cuyas líneas queremos numerar, esta opción
+  controla si en cada fragmento la numeración se reiniciará
+  (\PalClave{continue=no}, valor por defecto) o si, por el contrario,
+  cada fragmento empezará la numeración en el punto en el que quedó la
+  del fragmento anterior (\PalClave{continue=yes}).
+
+\item {\tt\bf start}: Indica el número de la primera línea, para el
+  caso de que no queramos que este sea el «1» o el que corresponda
+  continuando la última enumeración.
+
+\item {\tt\bf step}: Todas las líneas incluidas en el entorno se
+  numerarán, pero, mediante esta opción, podemos indicar que sólo se
+  imprima el número cada cierto intervalo. En la edición de poemas,
+  por ejemplo, es corriente que sólo se muestre el número en los
+  múltiplos de 5 (versos 5, 10, 15...).
+
+\stopitemize
+
+Todas estas opciones se pueden indicar, con carácter general para
+todos los entornos {\em linenumbering} que haya en nuestro documento,
+mediante \PonMacro{setuplinenumbering}\tex{setuplinenumbering}. Este
+comando permite, además, configurar otros aspectos de la numeración de
+líneas:
+
+\startitemize
+
+\item {\tt\bf conversion}: Tipo de numeración de líneas. Puede ser
+  cualquiera de los explicados en la \at{página}[Num:conversion] a
+  propósito de la numeración de capítulos y secciones.
+  
+\item {\tt\bf style}: Comando (o comandos) que determinan el estilo
+  que tendrá el número de línea (fuente, tamaño, variante...).
+  
+\item {\tt\bf color}: Color con el que se imprimirá el número de línea.
+  
+\item {\tt\bf location}: Lugar en donde se colocará el número de
+  línea. Puede ser cualquiera de los siguientes: text, begin, end,
+  default, left, right, inner, outer, inleft, inright, margin,
+  inmargin.
+  
+\item {\tt\bf distance}: Distancia entre el número de línea y la línea
+  propiamente dicha.
+  
+\item {\tt\bf align}: Alineación del número. Puede ser: inner, outer,
+  flushleft, flushright, left, right, middle o auto.
+  
+\item {\tt\bf command}: Comando al que se pasará como parámetro el
+  número de la línea antes de imprimirlo.
+  
+\item {\tt\bf width}: Anchura reservada para imprimir el número de la línea.
+  
+\item {\tt\bf left, right, margin}: 
+  
+\stopitemize
+
+También podemos crear diferentes configuraciones personalizadas de la
+numeración de líneas mediante
+\PonMacro{definelinenumbering}\tex{definelinenumbering} de tal modo
+que la configuración se asocie a un nombre concreto:
+
+\type{\definelinenumbering [Nombre] [Configuración]}
+
+Una vez definida una configuración concreta y asociada a un nombre,
+podemos usarla con 
+
+\type{\startlinenumbering [Nombre] ... \stoplinenumbering}
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:alineación,
+    title=Alineación horizontal y vertical,
+  ]
+
+El comando que controla la alineación del texto con carácter general
+es \PonMacro{setupalign}\cmd{set\-up\-align}. Este comando se usa
+tanto para controlar la alineación horizontal como para controlar la
+alineación vertical.
+
+\startsubsection
+  [
+    reference=sec:setupalign,
+    title=Alineación horizontal,
+  ]
+
+Cuando la anchura {\em exacta} de una línea de texto no ocupa toda su
+anchura posible, se plantea el problema de qué hacer con el espacio en
+blanco resultante\footnote{Por anchura {\em exacta} quiero decir la
+  anchura de la línea {\em antes} de que \ConTeXt\ ajuste el tamaño de
+  los espacios en blanco entre palabras para conseguir su
+  justificación.}. Al respecto podemos hacer básicamente tres cosas:
+
+\startitemize[n]
+  
+\item Acumularlo en uno de los dos lados de la línea: si lo acumulamos
+  en el lado izquierdo, la línea se verá {\em empujada} hacia la
+  derecha, mientras que si lo acumulamos en el lado derecho la línea
+  queda en el lado izquierdo. Hablamos, en el primer caso, de {\em
+    alineación derecha} y, en el segundo, de {\em alineación
+    izquierda}. \ConTeXt\ aplica por defecto la alineación izquierda a
+  la última línea de los párrafos.
+
+  Cuando varias líneas consecutivas se alinean a la izquierda, el lado
+  derecho se ve irregular; por el contrario, cuando la alineación es a
+  la derecha, el lado que se ve irregular es el izquierdo. \ConTeXt,
+  para denominar a las opciones que alinean a uno u otro lado, se
+  fija, no en el lado donde se alinean, sino en el lado que se ve
+  desigual. Por ello la opción {\tt flushright} (literalmente,
+  {\em nivelación derecha}) produce una alineación izquierda y {\tt
+    flushleft} produce una alineación a la derecha, como abreviaturas
+  de {\tt flushright} y {\tt flushleft} \tex{setupalign}
+  admite también los valores {\tt right} y {\tt left}. Pero
+  {\bf atención}: aquí el significado de las palabras en inglés nos
+  engañará, pues, a pesar de que la palabra {\em left} significa
+  «izquierda» y la palabra {\em right} «derecha»,
+  \tex{setupalign[left]} alinea a la derecha y \tex{setupalign[right]}
+  alinea a la izquierda.
+
+  \startLetraChica
+    
+    En caso de que el lector se pregunte el por qué de este extraño
+    funcionamiento, vale la pena citar la wiki de ConTEXt, donde se aclara
+    que esto se debe a que desafortunadamente, cuando Hans estaba
+    escribiendo esta parte de ConTeXt, estaba pensando en una alineación de
+    "derecha desigual" e "izquierda desigual", en lugar de "izquierda
+    nivelada" y "derecha nivelada". Y ahora es imposible cambiarlo, porque
+    ello rompería la compatibilidad retroactiva con todos los documentos
+    existentes que lo utilizan".
+
+  \stopLetraChica
+
+  En documentos preparados para ser impresos a doble cara, además de
+  margen derecho e izquierdo puede hablarse de margen interior y
+  margen exterior. Los valores {\tt flushinner} (o simplemente
+  {\tt inner}) y {\tt flushouter} (o simplemente {\tt outer})
+  establecen la correspondiente alineación en estos casos.
+
+\item Repartirlo entre ambos márgenes. El resultado será que la línea
+  se muestre centrada. La opción de \tex{setupalign} que consigue esto
+  es {\tt middle}.
+
+\item Repartirlo entre todas las palabras que componen la línea,
+  aumentando, si fuera necesario, el espacio entre las palabras, de
+  tal modo que la línea pase a tener exactamente la misma anchura que
+  el espacio disponible para ella. En estos casos se habla de {\em
+    líneas justificadas}. Este es asimismo, el valor por defecto de
+  \ConTeXt\ y por ello no hay ninguna opción especial en
+  \tex{setupalign} que lo establezca. No obstante, si hemos alterado
+  la alineación justificada por defecto, podemos restaurarla mediante
+  \tex{setupalign[reset]}.
+
+\stopitemize
+
+Los valores para \tex{setupalign} que acabamos de ver ({\tt right,
+flushright, left, flushleft, inner, flushinner, outer, flushouter} y
+{\tt middle}) pueden combinarse con {\tt broad}, lo que provoca
+alineaciones algo más toscas.
+
+\startLetraChica
+  
+Otros dos valores posibles de \tex{setupalign} que afectan a la
+alineación horizontal, tienen que ver con la partición silábica de
+palabras al final de la línea, pues del hecho de que esta partición se
+haga o no se haga, dependerá que la medida {\em exacta} de la línea
+sea mayor o menor; lo que a su vez afecta al espacio en blanco
+sobrante.
+
+En este sentido \tex{setupalign} admite el valor
+{\tt morehyphenation} que hace que \ConTeXt\ se esfuerce más en
+buscar puntos de ruptura basados en la partición silábica de palabras,
+y {\tt lesshyphenation} que produce el efecto contrario. Con
+\tex{setupalign[horizontal, morehyphenation]}, el espacio en blanco
+sobrante de las líneas será más reducido y, por lo tanto, la
+alineación menos “ostentosa” o aparente. Por el contrario, con
+\tex{setupalign[horizontal, lesshyphenation]} habrá más espacio en
+blanco sobrante, y la alineación será más visible.
+
+\stopLetraChica
+
+\tex{setupalign} está pensado para ser incluido en el preámbulo y
+afectar a todo el documento o, para ser incluido en un punto concreto
+y afectar desde ese punto hasta el final. Si sólo queremos cambiar la
+alineación de una o varias líneas podemos usar:
+
+\startitemize
+
+\item El entorno \PalClave{alignment}, pensado para afectar a varias
+  líneas. Su formato general es
+
+  \PonMacro{startalignment}\type{\startalignment [Opciones] ... \stopalignment}
+
+  donde {\em Opciones} son cualquiera de las admisibles para
+  \tex{setupalign}.
+
+\item Los comandos \PonMacro{leftaligned}\tex{leftaligned},
+  \PonMacro{midaligned}\tex{midaligned} o
+  \PonMacro{rightaligned}\tex{rightaligned} que provocan,
+  respectivamente, una alineación a la izquierda, centrada o a la
+  derecha; y si lo que queremos es que la última palabra de un párrafo
+  (pero sólo ella, no el resto de la línea) se alinee en el lado
+  derecho podemos usar \PonMacro{wordright}\tex{wordright}. Todos
+  estos comandos han de recibir entre llaves el texto al que
+  afectarán.
+
+  \startLetraChica
+
+    Obsérvese, por otra parte, que si las palabras \PalClave{right} y
+    \PalClave{left}, en \tex{setupalign} provocan una alineación
+    inversa a lo que su nombre sugeriría, no ocurre lo mismo con los
+    comandos \tex{leftaligned} y \tex{rightaligned}, que provocan
+    exactamente el tipo de alineación que su nombre indica: {\tt left}
+    a la izquierda, y {\tt right} a la derecha.
+
+  \stopLetraChica
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:AlinVertical,
+    title=Alineación vertical,
+  ]
+
+Si la alineación horizontal se plantea cuando la anchura de una línea
+no ocupa todo el espacio posible, la alineación vertical afecta a la
+altura de la página: Si la altura {\em exacta} del texto de una página
+no ocupa toda la altura disponible, ¿qué hacemos con el espacio en
+blanco sobrante?: Podemos amontonarlo en la parte superior
+(\PalClave{height}), lo que hará que el texto de la página se empuje
+hacia abajo; amontonarlo en la parte inferior (\PalClave{bottom}) o
+repartirlo entre todos los párrafos (\PalClave{line}). Por defecto el
+valor para la alineación vertical es \PalClave{bottom}.
+
+\subsubsubject{Nivel de tolerancia vertical}
+
+Del mismo modo que con \PonMacro{setuptolerance}\tex{setuptolerance} podemos alterar el nivel
+de tolerancia de \ConTeXt\ de cara al tamaño del espacio horizontal
+admisible en una línea (tolerancia horizontal), podemos también
+alterar la tolerancia vertical, es decir: la tolerancia hacia espacios
+de separación vertical entre párrafos mayores de los que \ConTeXt\
+considera, por defecto razonables para una página bien compuesta. Como
+valores posibles para la tolerancia vertical se admiten los mismos que
+para la tolerancia horizontal: {\tt verystrict, strict, tolerant} y
+{\tt verytolerant}. El valor asignado por defecto es
+\tex{setuptolerance [vertical, strict]}.
+
+
+\subsubsubject{Control de líneas viudas y huérfanas}
+
+Un aspecto que afecta indirectamente a la alineación vertical es el
+del control de líneas viudas y huérfanas. Ambos fenómenos implican que
+se introduzca un salto de página de tal modo que una línea de un
+párrafo quede aislada en una página diferente de donde está el resto
+del párrafo, cosa esta que produce un efecto que tipográficamente no
+se considera adecuado. Si la línea que queda separada del resto del
+párrafo es la primera, se habla de {\em línea viuda}; si la que queda
+separada del párrafo es la última se habla de {\em línea huérfana}.
+
+Por defecto \ConTeXt\ no lleva a cabo un control que impida que estas
+líneas aisladas se produzcan. Pero eso podemos cambiarlo alterando dos
+variables internas de \ConTeXt:
+\PonMacro{widowpenalty}\tex{widowpenalty}, que controla las líneas
+viudas y \PonMacro{clubpenalty}\tex{clubpenalty} que controla las
+líneas huérfanas. Así, las siguientes sentencias en el preámbulo de
+nuestro documento harán que dicho control se lleve a cabo:
+
+\starttyping
+\widowpenalty=10000
+\clubpenalty=10000
+\stoptyping
+
+Llevar a cabo este control significa que \ConTeXt\ evitará insertar un
+salto de página que separe a la primera o a la última línea de un
+párrafo de la página en la que se encuentra el resto. Ese {\em evitar}
+será más o menos riguroso según el valor que asignemos a las
+variables. Con un valor de 10\,000, como el que he utilizado en el
+ejemplo, el control será absoluto; con un valor de, por ejemplo, 150,
+el control no será tan riguroso y ocasionalmente podrá haber alguna
+línea viuda o huérfana cuando la alternativa sea, tipográficamente
+hablando, peor.
+
+\stopsubsection
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:
+%%% vim:set filetype=context tw=75 : %%%

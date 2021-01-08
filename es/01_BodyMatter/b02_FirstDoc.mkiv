@@ -1,0 +1,755 @@
+%%% Fichero:     b02_FirstDoc.mkiv
+%%% Autor:       Joaquín Ataz López
+%%% Inicio:      Marzo 2020
+%%% Terminación: Abril 2020
+%%% Contenido:   En una introducción me parece oportuno empezar
+%%%              poniendo un ejemplo. En «The TeX Book» Knuth empieza
+%%%              mostrando algunos ejemplos de la ejecución de tex. El
+%%%              problema es que ConTeXt al compilar no espera que el
+%%%              usuario resuelva los posibles errores _durante la
+%%%              compilación_, por lo que me quedo casi sin materia
+%%%              para el capítulo. Tampoco he conseguido averiguar
+%%%              para qué sirven gran parte de las opciones de
+%%%              ConTeXt. Y en cuanto a los errores y su tratamiento,
+%%%              salvo en el caso de comandos inexistentes, nunca
+%%%              estoy seguro de si un fallo generará o no un error de
+%%%              compilación. Según he podido comprobar las opciones
+%%%              inexistentes o con valores inadecuados nunca generan
+%%%              errores de compilación, y los entornos no
+%%%              oportunamente cerrados, sólo lo hacen a veces.
+%%%              Para el contenido de este capítulo me he inspirado un
+%%%              poquito en el capítulo II de «El libro de LaTeX», de
+%%%              Bernardo, José Manual y compañía.
+%%%
+%%% Editado: Emacs + AuTeX - Y a veces con vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent b02_FirstDoc.mkiv
+
+\startchapter
+  [reference=cap:firstdoc, title=Nuestro primer fichero fuente]
+
+\PonIndiceCap
+
+El presente capítulo se dedica a realizar nuestro primer experimento;
+y al hilo del mismo se explicará la estructura básica de un documento
+de \ConTeXt\ así como las mejores estrategias para lidiar con los
+posibles errores.
+
+\startsection
+  [title=Preparación del experimento:\\ Herramientas necesarias]
+
+Para escribir y compilar un primer fichero fuente, necesitaremos tener
+instaladas en nuestro sistema, las siguientes herramientas.
+
+\startitemize[n]
+
+\item {\bf Un editor de textos} para escribir nuestro fichero de
+  prueba. Hay muchísimos editores de textos y es difícilmente
+  concebible un sistema informático que no tenga ya instalado
+  alguno. Podemos usar cualquiera: los hay más simples, más complejos,
+  más potentes, más sencillos, de pago, gratuitos, libres,
+  especializados en sistemas \TeX, generales, etc. Si estamos
+  acostumbrados a manejar un editor concreto, lo mejor es que sigamos
+  trabajando con él; si no tenemos costumbre, hasta ahora, de trabajar
+  con editores de texto, mi consejo es, inicialmente, escoger un
+  editor sencillo, para no añadir a la dificultad de aprender
+  \ConTeXt\ la de aprender el manejo del editor. Aunque también es
+  cierto que muchas veces los programas que son más difíciles de
+  aprender, son también los más potentes.
+
+  Este texto lo he escrito con GNU Emacs, que es uno de los editores
+  de propósito general más potentes y versátiles que existen; es
+  verdad que tiene sus peculiaridades y también sus detractores, pero
+  en general hay más «{\em Emacslovers}» que «{\em Emacshaters}». Para
+  trabajar con ficheros de \TeX\ o de alguno de sus derivados existe
+  una extensión de GNU Emacs, llamada AucTeX, que dota al editor de
+  unas utilidades adicionales muy interesantes, aunque AucTeX está en
+  general mejor preparado para batallar con ficheros \LaTeX\ que para
+  hacerlo con ficheros de \ConTeXt. GNU Emacs en combinación con
+  AucTeX pueden ser una buena opción si no sabemos por qué editor
+  decantarnos; ambos son programas de código libre, por lo que hay
+  versiones de ellos para todos los sistemas operativos. De hecho,
+  decir que GNU Emacs es {\em software libre}, es quedarse corto pues
+  este programa encarna mejor que ningún otro el espíritu de lo que es
+  y significa el {\em software libre}. A fin de cuentas su
+  desarrollador principal fue {\sc Richard Stallman} fundador e
+  ideólogo del proyecto GNU y de la {\em Free Software Foundation}.
+
+  Además de GNU Emacs + AucTeX, otras buenas opciones si no sabe por
+  qué editor decantarse son {\em Scite} y {\em TexWorks}. El primero,
+  aunque es un editor de propósito general, no específicamente
+  diseñado para trabajar con ficheros de \ConTeXt, es fácilmente
+  personalizable y, como es el editor que en general utilizan los
+  desarrolladores de \ConTeXt\, en \suite- se contienen los ficheros
+  de configuración de este editor diseñados por el propio {\sc Hans
+    Hagen}. {\em TexWorks} es, por otra parte, un editor de textos
+  rápido, y especializado en el manejo de ficheros de \TeX\ y de sus
+  lenguajes derivados. Resulta bastante sencillo de configurar para
+  trabajar con \ConTeXt\ y en \suite- también se prevé su posible
+  configuración.
+
+  Sea un editor o sea otro, lo que no debemos hacer es usar, como
+  editor de textos, un {\em procesador de textos} como, por ejemplo,
+  OpenOffice Writer o Microsoft Word. Estos programas, que son, en mi
+  opinión, demasiado lentos y pesados, pueden ciertamente, si se les
+  indica expresamente, grabar un fichero como de «sólo texto», pero no
+  están pensados para ello y lo más probable es que termináramos
+  almacenando nuestro fichero en algún formato binario incompatible
+  con \ConTeXt.
+
+\item {\bf Una distribución de \ConTeXt} para procesar nuestro fichero
+  de prueba. Si en nuestro sistema ya existe alguna instalación de
+  \TeX\ (o de \LaTeX) es posible que ya haya alguna versión de
+  \ConTeXt\ instalada. Para comprobarlo basta con abrir una terminal y
+  teclear en ella
+
+  {\tt \$> }\type{context --version}
+
+  \startLetraChica
+
+    {\bf NOTA} para los muy novatos en el manejo de terminales, los
+    dos primeros caracteres que he escrito («\$>») no hay que
+    escribirlos en la terminal. Con ellos intento representar el
+    llamado {\em prompt} de la terminal; esa lucecita parpadeante que
+    indica que el terminal está esperando nuestras instrucciones.
+
+\stopLetraChica
+
+Si ya hubiera instalada alguna versión de \ConTeXt, nos aparecerá algo
+así como
+
+{\tfx\vbox{\starttyping
+mtx-context     | ConTeXt Process Management 1.03
+mtx-context     |
+mtx-context     | main context file: /home/jq/context/LMTX/tex/texmf-context/
+                | tex/context/base/mkiv/context.mkiv
+mtx-context     | current version: 2020.04.30 11:15
+mtx-context     | main context file: /home/jq/context/LMTX/tex/texmf-context/
+                | tex/context/base/mkiv/context.mkxl
+mtx-context     | current version: 2020.04.30 11:15
+stoptyping}}
+
+En la última línea se nos informa de la fecha en que se liberó la
+versión instalada. Si ésta fuera muy antigua, nos conviene, bien
+actualizarla, bien instalar una versión nueva. Yo recomiendo la
+instalación de la distribución llamada \suite- cuyas instrucciones de
+instalación se pueden encontrar en la \goto{wiki de
+  \ConTeXt}[url(wiki)]. En el \in{apéndice}[instalación_suite] se
+incluye un resumen de las mismas.
+
+\item {\bf Un programa visor de ficheros PDF}, para poder ver en
+  pantalla el resultado de nuestro experimento. En sistemas Windows y
+  Mac OS, el visor omnipresente es Adobe Acrobat Reader. No viene
+  instalado por defecto (o no venía cuando yo dejé de usar Microsoft
+  Windows, hace ya más de 15 años), pero lo hace la primera vez que se
+  intenta abrir un fichero PDF por lo que lo más normal es que ya esté
+  instalado. En sistemas Linux/Unix no hay versión actualizada de
+  Acrobat Reader, pero tampoco hace falta, pues existen literalmente
+  decenas de visores PDF gratuitos y muy buenos. En estos sistemas,
+  además, casi siempre hay alguno instalado por defecto. Mi favorito,
+  por su rapidez y facilidad de manejo, es MuPDF; aunque tiene algunas
+  contraindicaciones como, por ejemplo, que no muestra el índice de
+  marcadores, que no permite búsquedas de texto que incluyan
+  caracteres inexistentes en el alfabeto inglés (como las vocales
+  acentuadas o las eñes) o que no permite seleccionar texto, o enviar
+  el documento a la impresora; es simplemente un visor; pero
+  rapidísimo y comodísimo. Cuando necesito alguna de esas utilidades
+  que en MuPDF no funcionan, suelo utilizar, bien Okular, bien
+  qPdfView. Pero, de nuevo, la cuestión va en gustos: cada cual puede
+  elegir el que prefiera.
+
+\stopitemize
+
+Podemos elegir editor, podemos elegir visor de PDF, podemos elegir
+distribución de \ConTeXt ... ¡Bienvenidos al mundo del {\em software}
+libre!.
+
+\stopsection
+
+\startsection
+  [title=El experimento propiamente dicho]
+
+\startsubsubsubject
+  [title=La escritura del fichero fuente]
+
+Si ya tenemos disponibles las herramientas mencionadas en el apartado
+anterior, debemos abrir nuestro editor de textos y crear en él un
+fichero al que llamaremos «avestruz.tex». Como contenido del fichero
+escribiremos el siguiente:
+
+\startframedtext
+\starttyping
+% Primera línea del documento
+
+\mainlanguage[es] % Idioma = Español
+
+\setuppapersize[S5] % Tamaño del papel
+
+\setupbodyfont
+  [modern,12pt] % Fuente = Latin Modern, 12 puntos
+
+\setuphead      % Formato de los capítulos
+  [chapter]
+  [style=\bfc]
+
+\starttext  % Empieza el contenido del documento
+
+\startchapter
+  [title=El tren de los avestruces]
+
+Recorriendo mil poblados, principados y reinados
+ducados y archiducados, y también, algunos pocos
+Estados tan desproletarizados que ya están en otro
+estado, pasa el tren. Va tocando los poblados
+más lujosos y adornados, enjoyados con tejados de
+Belén, pero esos barrios dejados de la mano de los
+hados son salteados con cuidado por el tren.
+
+\stopchapter
+
+\stoptext % Fin del documento
+
+\stoptyping
+\stopframedtext
+
+A la hora de escribirlo no importa si cambia algo; sobre todo si añade
+o quita espacios en blanco o saltos de línea. Lo que sí es importante
+es que las palabra tras los caracteres «{\tt \backslash{}}» se
+escriban exactamente igual, así como el contenido de los corchetes. En
+el resto puede haber variaciones.
+
+\stopsubsubsubject
+
+\startsubsubsubject
+  [title=Codificación del fichero]
+
+Una vez que hayamos escrito lo anterior, guardamos el fichero en disco
+asegurándonos de que la codificación del mismo es UTF-8. Esta
+codificación constituye a día de hoy el estándar y es la que se aplica
+por defecto en la mayoría de sistemas Linux/Unix. No se si ocurre o no
+lo mismo en Mac OS o en Windows, aunque sospecho que en este último es
+muy posible que se utilice la codificación ANSI. En todo caso, si no
+estamos seguros, desde el propio editor de textos podemos ver con qué
+codificación se guardará el fichero y, en su caso, cambiarla. Cómo
+hacerlo depende, claro está, del concreto editor con el que estemos
+trabajando. En GNU Emacs, por ejemplo, pulsando simultáneamente las
+teclas CTRL-X y después Return seguido de «f», en la última línea de
+la ventana (a la que GNU Emacs denomina {\em mini-buffer}) aparecerá
+un mensaje solicitándonos una nueva codificación e informándonos de la
+codificación actual. En otros editores lo normal es que podamos
+acceder a la codificación en el menú «Guardar Como».
+
+Una vez comprobado que la codificación es la correcta, y guardado el
+fichero en el disco cerraremos el editor para centrarnos en el
+análisis de lo que hemos escrito.
+
+\stopsubsubsubject
+
+\startsubsubsubject
+  [title=Un vistazo al contenido de nuestro primer fichero fuente para \ConTeXt]
+
+La primera línea empieza con el carácter «{\tt \%}». Este es un carácter
+reservado que indica a \ConTeXt\ que no debe procesar el texto entre
+dicho carácter y el final de la línea en la que éste se encuentre. Esa
+utilidad sirve para escribir comentarios en el fichero fuente que sólo
+podrá leer el autor, pues no se incorporarán al documento
+definitivo. En este ejemplo he usado ese carácter para llamar la
+atención sobre algunas líneas, explicando qué es lo que hacen.
+
+Las siguientes líneas empiezan con el carácter «{\tt \backslash}» que
+es otro de los caracteres reservados de \ConTeXt\ y que indica que lo
+que viene a continuación es el nombre de un comando. En el ejemplo se
+incluyen varios comandos habituales en un fichero fuente para
+\ConTeXt: El idioma en el que está redactado el documento, el tamaño
+del papel, la fuente que se usará en el documento y el formato que han
+de tener los capítulos. Más adelante, en otros capítulos, iremos
+viendo los detalles de estos comandos, de momento sólo me interesa que
+el lector vea qué aspecto tienen: Empiezan siempre por el carácter
+«{\tt \backslash}», a continuación va el nombre del comando, y
+después, entre corchetes o entre llaves, según los casos, los datos
+que el comando necesita para producir sus efectos. Entre el nombre del
+comando, y los corchetes o llaves que le acompañan, puede haber
+espacios en blanco o saltos de línea.
+
+En la línea 9ª de nuestro ejemplo (cuento sólo las líneas que tienen
+algún texto) está el importante comando \tex{starttext}: le indica a
+\ConTeXt\ que a partir de ese punto empieza el contenido del
+documento; y, en la última línea de nuestro ejemplo, vemos un comando
+\tex{stoptext} que indica que ahí termina el documento. Son dos
+comandos muy importantes sobre los que muy pronto diré algo más. Entre
+ellos se ubica el contenido propiamente dicho de nuestro documento
+que, en nuestro ejemplo, consiste en la primera estrofa de la canción
+«El tren de los avestruces», cuya letra se debe a {\sc Jorge de la
+  Vega}. La he escrito en prosa para que se observe mejor el
+formateado de párrafos que realiza \ConTeXt.
+
+\stopsubsubsubject
+
+\startsubsubsubject
+  [title=Procesado del documento fuente]
+
+Para el siguiente paso, tras asegurarnos de que efectivamente en
+nuestro sistema se ha instalado \ConTeXt\ correctamente, debemos abrir
+una terminal en el directorio en el que se encuentre nuestro fichero
+«avestruz.tex».
+
+\startLetraChica
+
+  Muchos editores de texto permiten compilar el documento con el que
+  se está trabajando sin necesidad de abrir una terminal. Sin embargo
+  el procedimiento {\em canónico} para procesar un documento con
+  \ConTeXt\ implica hacerlo desde una terminal, ejecutando
+  directamente el programa. Voy a hacerlo así (o a presuponer que se
+  hace así) a lo largo de todo este documento por varias razones; la
+  primera es que no tengo forma de saber con qué editor esta
+  trabajando cada lector. Pero la más importante es la de que desde el
+  terminal tendremos acceso a la salida a pantalla de
+  \PalClave{context}y podremos ver los mensajes emitidos por el
+  programa.
+
+\stopLetraChica
+
+Si la distribución de \ConTeXt\ que hemos instalado es \suite-, antes
+de nada debemos ejecutar el {\em script} que indica a la terminal las
+rutas y localización de los ficheros que \ConTeXt\ necesita para
+trabajar. En sistemas Linux/Unix ello se hace escribiendo el siguiente
+comando:
+
+{\tt \$> }\type{source ~/context/tex/setuptex}
+
+suponiendo que hayamos instalado \ConTeXt\ en un directorio llamado
+\PalClave{context}.
+
+\startLetraChica
+
+  Respecto a la ejecución del {\em script} del que se acaba de hablar,
+  véase lo que se dice en el \in{apéndice}[instalación_suite] relativo
+  a la instalación de \suite-.
+
+\stopLetraChica
+
+Una vez que se han cargado en memoria las variables necesarias para la
+ejecución de \PalClave{context}, podemos ejecutarlo. Ello se hace
+escribiendo en el terminal
+
+{\tt \$> }\type{context avestruz}
+
+Obsérvese que aunque el fichero fuente se llama
+\PalClave{avestruz.tex} en la llamada a \PalClave{context} hemos
+omitido la extensión del fichero. Si hubiéramos denominado al fichero
+fuente, por ejemplo, \PalClave{avestruz.mkiv} (cosa que yo suelo hacer
+para saber que ese fichero está escrito para Mark~IV), habríamos
+tenido que indicar expresamente la extensión del fichero a compilar
+escribiendo \PalClave{context avestruz.mkiv}.
+
+Tras ejecutar \PalClave{context} en la terminal, empezarán a mostrarse
+por pantalla varias decenas de líneas, informando de lo que \ConTeXt\
+está haciendo. La información se muestra a una velocidad imposible de
+seguir por un ser humano, pero no nos preocupemos, pues además de en
+la pantalla, dicha información se almacena también en un fichero
+auxiliar, de extensión \PalClave{.log} que se genera con la
+compilación y que más tarde podremos consultar con toda tranquilidad
+si fuera preciso.
+
+A los pocos segundos, si hemos escrito bien el texto de nuestro
+fichero fuente, sin cometer ningún error grave, terminará la emisión
+de mensajes a la terminal. El último de los mensajes nos informará del
+tiempo que se ha necesitado para la compilación. La primera vez que se
+compila un documento siempre se necesita algo más de tiempo, porque
+\ConTeXt\ tiene que cargar en memoria los ficheros con información
+sobre las fuentes que se utilizarán, los cuales quedan ya cargados
+para las ulteriores compilaciones. Con el mensaje relativo al tiempo
+invertido habrá terminado la compilación. Si todo ha ido bien, en el
+directorio en el que hemos ejecutado \PalClave{context} habrán
+aparecido tres ficheros adicionales:
+
+\startitemize[packed]
+
+\item avestruz.pdf
+\item avestruz.log
+\item avestruz.tuc
+
+\stopitemize
+
+El primero de ellos es el resultado de nuestro procesamiento, es
+decir: el fichero PDF ya formateado. El segundo es el fichero
+\PalClave{.log} en el que se ha almacenado toda la información que se
+mostró en pantalla durante la compilación; el tercero es un fichero
+auxiliar que \ConTeXt\ genera durante la compilación y que se usa para
+construir los índices y las referencias cruzadas. De momento, si todo
+ha funcionado como esperábamos, podemos borrar ambos ficheros ({\tt
+  avestruz.log} y {\tt avestruz.tuc}). Si ha habido algún problema la
+información de esos ficheros nos puede ayudar a localizar su origen y
+determinar cómo solucionarlo.
+
+Si no hemos obtenido esos resultados, probablemente ello se debe a
+que:
+
+\startitemize [packed]
+
+\item O bien no hemos instalado correctamente nuestra distribución de
+  \ConTeXt, caso este en el que al escribir en la terminal la orden
+  \PalClave{context}, habrá salido un mensaje de «comando
+  desconocido».
+
+\item O bien nuestro fichero no se codificó en UTF-8 y eso ha generado
+  un error de compilación.
+
+\item O quizás la versión de \ConTeXt\ instalada en nuestro sistema es
+  Mark~II. En esta versión no se puede usar la codificación UTF-8 sin
+  indicarlo expresamente en el propio fichero fuente. Podríamos
+  arreglar el fichero fuente para que compilara bien, pero, dado que
+  esta introducción se refiere a Mark~IV, no tiene sentido seguir
+  trabajando con Mark~II: lo mejor es que nos instalemos \suite-.
+
+\item O bien hemos cometido algún error al escribir en el fichero
+  fuente el nombre de alguno de los comandos o sus datos asociados.
+
+\stopitemize
+
+\startLetraChica
+
+  Si tras ejecutar \PalClave{context} la terminal empezó a emitir
+  mensajes, pero luego se detuvo sin que reapareciera el {\em prompt},
+  antes de seguir debemos pulsar CTRL-X para abortar la ejecución de
+  \ConTeXt\ que quedó interrumpida por el error.
+
+\stopLetraChica
+
+Deberemos pues verificar cual es el caso, y solucionarlo, hasta que
+obtengamos una correcta compilación.
+
+\placefigure
+  [here]
+  [avestruces]
+  {El tren de los avestruces}
+  {\midaligned{\framed{\externalfigure[avestruz.pdf][width=13cm]}}}
+
+  En la \in{figura}[avestruces] se muestra el contenido de
+  \PalClave{avestruz.pdf}. Así veremos que \ConTeXt\ ha numerado la
+  página, ha numerado también el capítulo y ha escrito el texto en la
+  fuente que se le indicó. También ha partido la palabra
+  «archiducados» entre la primera y la segunda línea, así como la
+  palabra «barrios» entre la cuarta y la quinta líneas. \ConTeXt, por
+  defecto, tiene activada la división silábica de palabras, para así
+  conseguir que no haya excesivos espacios en blanco entre las
+  palabras de un línea. Por eso es tan importante que informemos a
+  \ConTeXt\ del idioma del documento, porque los patrones de división
+  silábica varían según el idioma de que se trate. En nuestro ejemplo
+  el primer comando del fichero fuente (\tex{mainlanguage[es]}) es el
+  que se ha ocupado de ello.
+
+En definitiva: \ConTeXt\ ha transformado el fichero fuente y ha
+generado un fichero en el que tenemos un documento formateado según
+las instrucciones que se incluyeron en el fichero fuente. Han
+desaparecido de él los comentario y, respecto de los comandos, lo que
+tenemos ahora no es su nombre, sino el resultado de su ejecución.
+
+\stopsubsubsubject
+
+\stopsection
+
+\startsection
+  [title=La estructura de nuestro fichero de ejemplo]
+
+En un proyecto que se desarrolle en un solo fichero fuente, la
+estructura de este es muy simple y viene marcada por los comandos
+\tex{starttext} ... \tex{stoptext}. Todo lo que haya entre la
+primera línea del fichero y el comando \tex{starttext} constituye el
+{\em preámbulo}. El contenido del documento propiamente dicho se
+inserta entre los comandos \tex{starttext} y \tex{stoptext}. En
+nuestro ejemplo el preámbulo incluye tres comandos de configuración
+global: uno para indicar el idioma de nuestro documento
+(\tex{mainlanguage}), otro para indicar el tamaño de las páginas
+(\tex{setuppapersize}) que en nuestro caso es «S5», que representa las
+proporciones de una pantalla de ordenador, y un tercer comando
+(\tex{setuphead}) que permite configurar el aspecto de los capítulos.
+
+El cuerpo del documento se enmarca entre los comandos \tex{starttext}
+y \tex{stoptext}. Estos comandos indican, respectivamente, el punto
+inicial y el punto final del texto procesable: entre ellos se debe
+incluir todo el texto que queremos que \ConTeXt\ procese, junto con
+aquellos comandos que no deban afectar a todo el documento sino
+solamente a fragmentos del mismo. De momento debemos asumir que los
+comandos \tex{starttext} y \tex{stoptext} son obligatorios en todo
+documento de \ConTeXt, aunque más adelante, al hablar de los proyectos
+multifichero (\in{sección}[sec-proyectos]) veremos que existe alguna
+excepción.
+
+\stopsection
+
+\startsection
+  [title=Algunos detalles adicionales sobre la forma de ejecutar «{\tt context}»]
+
+El comando \PalClave{context} con el que hemos procedido antes a
+procesar nuestro primer fichero fuente es, en realidad, un {\em
+  script} de {\sc Lua}, es decir: un pequeño programa de {\sc Lua}
+que, tras hacer algunas comprobaciones, llama a LuaTeX para que sea
+éste quien procese el fichero fuente.
+
+Podemos llamar a \PalClave{context} con varias opciones. Las opciones
+se introducen inmediatamente después del nombre del comando, precedido
+su nombre de dos guiones. Si queremos introducir más de una opción,
+las separaremos con un espacio en blanco. La opción \PalClave{help}
+nos da un listado de todas las opciones, con una breve explicación de
+cada una de ellas:
+
+{\sc \$>}\type{context --help}
+
+Algunas de las opciones más interesantes son las siguientes:
+
+\descripción{{\tt interface}:}
+
+Como ya dije en el capítulo introductorio, la interfaz de \ConTeXt\
+está traducida a varios idiomas. Por defecto se usa la interfaz en
+inglés, pero mediante esta opción podemos indicarle que utilice la
+versión holandesa (nl), francesa (fr), italiana (it), alemana (de) o
+rumana (ro).
+
+\descripción{{\tt purge, purgeall}:}
+
+Borra los ficheros auxiliares generados durante el procesamiento.
+
+\descripción{{\tt result=Nombre}:}
+
+Indica el nombre que debe tener el fichero PDF resultante. Por defecto
+será el mismo que el del fichero fuente a procesar, con la extensión
+.PDF.
+
+\descripción{{\tt usemodule=lista:}}
+
+Carga los módulos que se le indiquen antes de ejecutar \ConTeXt\ (un
+módulo es una extensión de \ConTeXt, que no forma parte de su núcleo,
+y que le dota de alguna utilidad adicional).
+
+\descripción{{\tt useenvironment=lista:}}
+
+Carga los ficheros de entorno que se le indiquen antes de ejecutar
+\ConTeXt\ (un fichero de entorno es un fichero con instrucciones de
+configuración).
+
+\descripción{{\tt version}:}
+
+Informa de la versión de \ConTeXt.
+
+\descripción{{\tt help}:} imprime información de ayuda sobre las
+opciones del programa.
+
+\descripción{{\tt noconsole}:}
+
+Suprime el envío de mensajes a pantalla durante la compilación. Estos
+mensajes, no obstante, se seguirán guardando en el fichero .log.
+
+\descripción{{\tt nonstopmode}:} Ejecuta la compilación sin detenerse
+ante los errores. Esto no significa que el error no se produzca, sino
+que cuando \ConTeXt\ encuentre un error, aunque sea recuperable,
+seguirá la compilación hasta terminar o hasta encontrar un error
+irrecuperable.
+
+\descripción{{\tt batchmode}:} Es un combinación de las dos opciones
+anteriores. Se ejecuta sin interrupciones y omite los mensajes en
+pantalla.
+
+En los primeros pasos del aprendizaje de \ConTeXt\ no creo que sea una
+buena idea usar las tres últimas opciones, pues cuando se produzca un
+error, no tendremos pista alguna de dónde está o de qué lo ha
+producido. Y, creedme queridos lectores, antes o después se produce
+algún error de compilación.
+
+\stopsection
+
+\startsection
+  [title=Gestión de errores]
+
+Trabajando con \ConTeXt\ es inevitable que antes o después se produzca
+algún error en la compilación. Básicamente podemos agrupar los errores
+en alguna de las siguientes cuatro categorías:
+
+\startitemize[n]
+
+\item {\bf Errores de escritura}. Se producen cuando escribimos mal el
+  nombre de algún comando. En tal caso le estaremos enviando al
+  compilador una orden que no entiende. Como cuando, por ejemplo, en
+  lugar de escribir el comando \tex{TeX} escribimos \tex{Tex} con la
+  «X» final en minúsculas, puesto que \ConTeXt\ diferencia entre
+  mayúsculas y minúsculas y por lo tanto considera que «TeX» y «Tex»
+  son palabras diferentes; o si las opciones de funcionamiento de un
+  comando, en lugar de encerrarlas entre corchetes las encerramos
+  entre llaves, o si intentamos usar alguno de los caracteres
+  reservados como si fuera un carácter normal, etc.
+
+\item {\bf Errores por omisión}. En \ConTeXt\ hay instrucciones que
+  inician una tarea, la cual debe indicarse explícitamente cuándo hay
+  que cerrarla; como el carácter reservado \$ que activa el modo
+  matemático, el cual se mantiene hasta que sea desactivado, y si
+  olvidamos desactivarlo se generará un error en cuanto se encuentre
+  un texto o una instrucción que no tengan sentido en el modo
+  matemático. Exactamente igual si iniciamos un bloque de texto,
+  mediante el carácter reservado «\{» o mediante algún comando
+  \tex{startLoQueSea} y, más adelante, no se encuentra el cierre
+  explícito («\}» o \tex{stopLoQueSea}).
+
+\item {\bf Errores de concepción}. Llamo así a aquellos errores que se
+  producen cuando se llama a un comando que requiere ciertos
+  argumentos, sin facilitárselos, o cuando la sintaxis de la llamada
+  al comando no es la correcta.
+
+\item {\bf Errores de situación}. Hay algunos comandos que están
+  pensados para funcionar solamente en ciertos contextos o entornos,
+  por lo que fuera de ellos son desconocidos. Esto ocurre,
+  particularmente, con el modo matemático: algunos comandos de
+  \ConTeXt\ sólo funcionan en la escritura de fórmulas matemáticas y
+  si son llamados en otros contextos generan un error.
+
+\stopitemize
+
+¿Qué hacer cuando \PalClave{context} nos avisa, durante la
+compilación, de que se ha producido un error? Lo primero, como es
+obvio, es determinar cuál es el error. Para ello tendremos que
+analizar el fichero \PalClave{.log} generado durante la compilación;
+aunque a veces no hace falta pues el error ha sido de tal naturaleza
+que ha provocado que cese inmediatamente la compilación, caso este en
+el que el mensaje de error se podrá ver, todavía en la misma terminal
+en la que estamos ejecutando \PalClave{context}.
+
+\placefloat
+  [here]
+  [middle]
+  [msgerror]
+  {Salida por pantalla en caso de error de compilación}
+{
+\switchtobodyfont[script]
+\startframedtext
+\starttyping
+3     \setuppapersize % Tamaño del papel
+4       [S5]
+5
+6     \setupbodyfont
+7       [modern,12pt] % Fuente principal
+8
+9     \setuphead      % Capítulos en negrita
+10       [chapter]
+11       [style=\bfc]
+12
+13 >>  \startext  % Empieza el documento propiamente dicho
+14
+15     \startchapter[title=El tren de los avestruces]
+16
+17     Recorriendo mil poblados, principados y reinados
+18     ducados y archiducados, y también, algunos pocos
+19     Estados tan desproletarizados que ya están en otro
+20     estado, pasa el tren. Va tocando los poblados
+21     más lujosos y adornados, enjoyados con tejados de
+22     Belén, pero esos barrios dejados de la mano de los
+23     hados son salteados con cuidado por el tren.
+
+mtx-context     | fatal error: return code: 256
+\stoptyping
+\stopframedtext
+}
+
+Por ejemplo, si en nuestro fichero de prueba, \PalClave{avestruz.tex},
+por error, en lugar de \tex{starttext} hubiéramos escrito
+\tex{startext} (con una sola «t»), lo que, por otra parte, es un error
+muy común, al ejecutar \PalClave{context avestruz}, cuando se
+detuviera la compilación, en la pantalla del terminal se podría ver la
+información que se muestra en la \in{figura}[msgerror]. En ella
+podemos ver las líneas de nuestro fichero fuente numeradas, y en una
+de ellas, en este caso la número 13, entre el número y el texto de la
+línea el compilador ha añadido \PalClave{>>} para indicar que es en
+esa línea en la que ha encontrado el error. El fichero
+\PalClave{avestruz.log} nos dará más pistas. En nuestro ejemplo no es
+un fichero demasiado extenso, porque la fuente que estábamos
+compilando es muy reducida; en otros caso puede contener una cantidad
+abrumadora de información. Pero debemos bucear en ella. Si abrimos
+\PalClave{avestruz.log} con un editor de textos, veremos que en este
+fichero se va almacenando todo lo que va haciendo \ConTeXt. En él
+deberemos buscar una línea que empiece con una advertencia de error,
+para lo que podemos usar la función de búsqueda de texto del
+editor. Buscaremos la expresión “tex error”, y llegaremos a las
+siguientes líneas
+
+\starttyping
+tex error       > tex error on line 13 in file |
+                  /home/jq/context/docs/avestruz.tex: ! Undefined control sequence
+
+l.13 \startext
+              % Empieza el documento propiamente dicho
+
+\stoptyping
+
+\startLetraChica
+
+  {\bf Nota:} La primera línea informativa del error, en el fichero
+  \PalClave{avestruz.log} es muy larga.  Para que se viera bien,
+  teniendo en cuenta el ancho de página La he partido en dos. El
+  carácter «\|» indica el punto en el que la he partido.
+
+\stopLetraChica
+
+Si ponemos atención en las tres líneas del mensaje de error, vemos que
+en la primera se nos dice en qué número de línea se ha producido el
+error (la línea 13) y qué tipo de error es: «Undefined control
+sequence», o, lo que es lo mismo: Secuencia de control desconocida, o
+sea, comando desconocido. Las dos siguientes líneas del fichero log
+nos muestran la línea 13, partida en el punto en el que se produjo el
+error. Con lo que no hay dudas, el error está en \tex{startext}. Lo
+leeremos con atención y, con suerte y experiencia, caeremos en la
+cuenta de que hemos escrito «startext» y no «starttext» (con doble
+«t»).
+
+Piénsese que los ordenadores son muy buenos y muy rápidos para
+ejecutar instrucciones, pero muy torpes para leer nuestra mente, y la
+palabra «startext» no es la misma que «starttext». La segunda el
+programa sabe cómo ejecutarla; con la primera no sabe que hacer.
+
+Otras veces la localización del error no será tan
+fácil. Particularmente cuando el error consiste en que se ha iniciado
+una tarea de la que no se ha especificado expresamente su terminación.
+A veces, en lugar de buscar en el fichero \PalClave{.log} la expresión «tex
+error» deberemos buscar un asterisco. Este carácter al principio de una
+línea en dicho fichero representa, no un error fatal, sino una advertencia.
+Pero las advertencias pueden ser útiles para localizar el error.
+
+Y si con la información del fichero \PalClave{.log} no fuera suficiente,
+tendríamos que ir, poco a poco, localizando el lugar del error. Una
+buena estrategia para ello es ir cambiando de lugar el comando
+\tex{stoptext}. Recordemos que \ConTeXt\ deja de procesar el texto en
+cuanto encuentra dicho comando. Por lo tanto, si yo, en mi fichero
+fuente, escribo, más o menos a la altura de la mitad, un
+\tex{stoptext} y compilo, se procesara sólo la primera mitad; si el
+error se repite sabré que este se encuentra en la primera mitad del
+fichero fuente, si no se repite significa que el error está en la
+segunda mitad... y así, poco a poco, cambiando de lugar el comando
+\tex{stoptext} podemos ir ubicando la localización del error. Una vez
+que lo hayamos localizado podremos intentar comprenderlo y corregirlo
+o, si no conseguimos comprender por qué se produce el error, al menos,
+localizado el punto en el que éste se encuentra, podremos intentar
+escribir las cosas de otra manera para evitar que el error se
+reproduzca. Esto último, claro está, sólo si somos los autores; si nos
+limitamos a componer un texto ajeno no podemos alterarlo y habrá que
+seguir investigando hasta que descubramos las razones del error y su
+posible solución.
+
+En la práctica, cuando se confecciona con \ConTeXt\ un documento
+relativamente extenso lo que se suele hacer es ir compilando cada
+cierto tiempo, conforme se va redactando el documento, para que si se
+produce un error tengamos más o menos claro la parte nueva, desde la
+última compilación, que ha podido producirlo.
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% TeX-master: "../introCTX.mkiv"
+%%% coding: utf-8-unix
+%%% End:
+%%% vim:set filetype=context tw=75 : %%%

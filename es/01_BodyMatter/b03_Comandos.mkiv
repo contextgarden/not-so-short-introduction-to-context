@@ -1,0 +1,1804 @@
+%%% Fichero:     b03_Comandos.mkiv
+%%% Autor:       Joaquín Ataz López
+%%% Inicio:      Abril 2020
+%%% Terminación: Abril 2020
+%%% Contenido:   Este es el capítulo central para comprender la
+%%%              esencia de ConTeXt. Parte de su contenido está basado
+%%%              en TeX. El uso de los caracteres reservados y la
+%%%              distinción entre símbolos de control y palabras de
+%%%              control. Knuth insiste en la diferencia, pero ni la
+%%%              documentación de ConTeXt ni, en general, la de LaTeX
+%%%              lo hacen (aunque hay una leve referencia en
+%%%              Kopka). Pero yo creo que esa distinción es importante
+%%%              para comprender por qué en TeX el nombre de los
+%%%              comandos no puede mezclar letras y no letras. En
+%%%              cuanto a la explicación de los comandos, hay
+%%%              decisiones sobre las que todavía dudo, como llamar
+%%%              «entornos» a las construcciones «start-stop». Pero en
+%%%              la wiki también lo hacen a veces. Estoy muy
+%%%              satisfecho, por otra parte, de mi explicación de
+%%%              \setup + \define usando el comando \framed como
+%%%              ejemplo. Entre los conceptos adicionales me habría
+%%%              gustado también introducir los contadores: Pero no he
+%%%              encontrado ninguna documentación sobre el nombre de
+%%%              los principales contadores en ConTeXt. He hecho, por
+%%%              ejemplo, varias pruebas para manipular a mano el
+%%%              contador de capítulos y... cero patatero. Rien de
+%%%              rien. Nothing. Esa información, que es central para
+%%%              controlar ConTeXt, debería estar explicitada en algún
+%%%              lugar.
+%%%
+%%% Editado: Emacs + AuTeX - Y a veces con vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent b03_Comandos.mkiv
+
+\startchapter
+  [
+    reference=cap:comandos,
+    title=Comandos y otros\\ conceptos fundamentales\\ de \ConTeXt,
+  ]
+
+\PonIndiceCap
+
+Ya hemos visto que en el fichero fuente, junto con el contenido
+propiamente dicho de nuestro futuro documento formateado, se insertan
+las instrucciones necesarias para explicarle a \ConTeXt\ cómo queremos
+que se transforme nuestro manuscrito. A estas instrucciones las
+podemos llamar, indistintamente, «comandos», «macros» o «secuencias de
+control».
+
+\startLetraChica
+
+  Desde el punto de vista del funcionamiento interno de \ConTeXt\ (en
+  realidad de \TeX), se diferencia entre {\em primitivas} y {\em macros}.
+  Una primitiva es una instrucción simple que no se puede descomponer en
+  otras instrucciones más simples. Una macro es una instrucción que se
+  descompone en otras instrucciones más simples, las cuales, a su vez, tal
+  vez puedan también descomponerse en otras, y así sucesivamente. La mayor
+  parte de las instrucciones de \ConTeXt\ son, en realidad, macros. Desde
+  la perspectiva del programador, la diferencia entre macros y primitivas
+  es importante. Pero desde la perspectiva del usuario la cuestión no tiene
+  demasiada trascendencia: en ambos casos lo que hay son instrucciones que
+  se ejecutarán, sin importarnos demasiado cómo funcionan a bajo nivel. Por
+  ello es corriente que en la documentación de \ConTeXt\ se hable de {\em
+  comando} cuando se asume la perspectiva del usuario, y de {\em macro}
+  cuando se asume la del programador. Como esta introducción asume sólo la
+  perspectiva del usuario, usaré ambos términos indistintamente y como
+  sinónimos.
+
+  Los {\em comandos} son órdenes a \ConTeXt\ para que haga algo;
+  mediante ellos {\em controlamos} la actuación del programa. Por ello
+  \cap{Knuth}, padre de \TeX, para referirse indistintamente a
+  primitivas y macros usaba la denominación de {\em secuencias de
+    control}, que me parece que es la más precisa de todas. Yo la
+  usaré cuando sea importante diferenciar entre {\em símbolos de
+    control} y {\em palabras de control}.
+
+\stopLetraChica
+
+Las instrucciones de \ConTeXt\ son, básicamente, de dos tipos:
+caracteres reservados, y comandos propiamente dichos.
+
+\startsection
+  [
+    reference=sec:caracteres reservados,
+    title=Los caracteres reservados de \ConTeXt,
+  ]
+
+Cuando \ConTeXt\ va leyendo el fichero fuente, que, como es un fichero
+de texto, se compone sólo de caracteres de texto, necesita de alguna
+manera diferenciar entre lo que es texto propiamente dicho, que hay
+que formatear, y lo que son instrucciones que hay que ejecutar. Para
+diferenciar unas y otras es para lo que existen los caracteres
+reservados de \ConTeXt. En principio \ConTeXt\ asumirá que todo
+carácter en el fichero fuente es texto a procesar, salvo que sea
+alguno de los 11 caracteres reservados, los cuales serán tratados como
+{\em instrucción}.
+
+¿Sólo 11 instrucciones? No. Sólo hay 11 caracteres reservados; pero
+como la función de uno de ellos («{\tt\backslash}») es convertir en
+instrucción el o los caracteres que se escriban inmediatamente detrás
+de él, en realidad el número potencial de comandos es
+ilimitado. \ConTeXt\ tiene en torno a 3000 comandos (sumando los
+comandos exclusivos de Mark~II, los exclusivos de Mark~IV y los
+comunes a ambas versiones).
+
+Los caracteres reservados son los siguientes:
+
+{
+  \switchtobodyfont[25pt]
+  \midaligned{\cmd{ \% \{ \} \# \lettertilde\ \| \$ \_ \letterhat\ \&}}
+}
+
+\ConTeXt\ los interpreta de la siguiente manera:
+
+\semitabla{\backslash}
+
+Este carácter, para nosotros, es el más importante de todos: indica
+que lo que viene inmediatamente detrás no debe ser interpretado como
+texto, sino como instrucción. Se le llama «Carácter de Escape» o
+«Secuencia de Escape» (aunque no tiene nada que ver con la tecla «Esc»
+presente en la mayor parte de los teclados)\footnote{En terminología
+  informática se llama {\em carácter de escape} al que afecta a la
+  interpretación del carácter siguiente. Por el contrario la tecla de
+  {\em escape} de los teclados se llama así porque genera el carácter
+  27 del Código ASCII, que, en dicho Código, se usaba como carácter de
+  escape. Hoy día los usos de la tecla de Escape están más asociados a
+  la idea de cancelar alguna acción en curso.}.
+
+\semitabla{\%}
+
+Le indica a \ConTeXt\ que lo que viene a continuación, y hasta el
+final de la línea, es un comentario que no debe ser procesado ni
+incluido en el fichero final formateado. La introducción de
+comentarios en el fichero fuente es extremadamente útil. Un comentario
+puede servir para explicar el por qué algo se ha hecho de cierta
+manera, lo que es muy útil en ficheros fuente complejos, de cara a su
+revisión posterior, cuando tal vez ya no recordemos por qué hicimos
+las cosas como las hicimos; o también sirve de recordatorio a nosotros
+mismos respecto de algún aspecto que quizás deberíamos revisar; o
+incluso puede servir para ayudar a localizar en qué lugar del fichero
+fuente se encuentra el origen de cierto error de compilación, pues
+poniendo una marca de comentario al inicio de cierta línea, la
+excluiremos de la compilación, y podremos ver si era esa línea la que
+causaba el error; también sirve para almacenar dos versiones distintas
+de una misma macro, de tal manera que podamos compilar con unos
+resultados o con otros; o para eliminar de la compilación cierto
+fragmento del que no estamos muy seguros, pero sin borrarlo del
+fichero fuente para poder volver sobre él más tarde ..., etc.  Una vez
+abierta la posibilidad de que nuestro fichero fuente contenga texto
+que nadie más que nosotros podrá ver, los usos que podemos hacer de
+ello sólo están limitados por nuestra imaginación. Yo admito que esta
+es una de las utilidades que más echo de menos cuando no tengo más
+remedio que escribir un texto con un procesador de textos.
+
+\semitabla{\{}
+
+Este carácter abre un grupo. Los grupos son bloques de texto sometidos
+a ciertas características. Se hablará de ellos en la
+\in{sección}[sec:grupos].
+
+\semitabla{\}}
+
+Este carácter cierra un grupo previamente abierto mediante {\tt \{}.
+
+\semitabla{\#}
+
+Este carácter se usa en la definición de macros para hacer referencia
+a los argumentos de la macro. Véase en la \in{sección}[sec:define] de
+este mismo capítulo.
+
+\semitabla{\lettertilde}
+
+Introduce en el documento un espacio en blanco que no podrá
+sustituirse por un salto de línea, es decir: las dos palabras
+separadas por el carácter \type{~} estarán siempre en la misma
+línea. De esta instrucción, y los casos en los que se aconseja su uso,
+se hablará en la \in{sección}[sec:lettertilde].
+
+\semitabla{\|}
+
+Este carácter se usa para indicar que dos palabras unidas por un
+elemento separador constituyen una palabra compuesta que puede
+dividirse silábicamente en el primer componente, pero no en el
+segundo. Véase la \in{sección}[sec:palabras compuestas].
+
+\semitabla{\$}
+
+Este carácter es un conmutador del modo matemático. Es decir: lo
+activa, si se encuentra desactivado, o lo desactiva si estaba
+activado. En el modo matemático \ConTeXt\ aplica unas fuentes y reglas
+de construcción diferentes de las normales, pensadas para optimizar la
+escritura de fórmulas matemáticas. Aunque un uso muy importante de
+\ConTeXt\ es el de la escritura de matemáticas, no desarrollaré esos
+aspectos en esta introducción pues, siendo yo de letras, no me siento
+capacitado para ello.
+
+\semitabla{\_}
+
+Este carácter se usa en modo matemático para indicar que lo que viene
+a continuación es un subíndice. Así, por ejemplo, para obtener $x_1$,
+debemos escribir \type{$x_1$}.
+
+\semitabla{\letterhat}
+
+Este carácter se usa en modo matemático para indicar que lo que viene
+a continuación es un superíndice. Así por ejemplo, para obtener
+$(x+i)^{n^3}$ deberíamos escribir \type{$(x+i)^{n^3}$}.
+
+\semitabla{\&}
+
+En la documentación de \ConTeXt\ se afirma que se trata de un carácter
+reservado, pero no se dice para qué se reserva. En Plain \TeX\ este
+carácter tiene, fundamentalmente, dos usos: sirve para alinear
+columnas en entornos tabulares básicos, y para indicar, en un contexto
+matemático, que lo que viene a continuación ha de ser tratado como
+texto normal. En el manual introductorio «\ConTeXt\ Mark~IV,
+an Excursion», aunque no se dice para qué sirve, si hay ejemplos de su
+uso dentro de fórmulas matemáticas, aunque no para el uso que tenía en
+Plain \TeX, sino para alinear columnas dentro de funciones
+\Duda complejas. Como yo soy de letras, no me siento capaz de hacer más
+pruebas para ver exactamente cuál es la utilidad de este carácter
+reservado.
+
+Cabe suponer que en la selección de cuáles habrían de ser los
+caracteres reservados, se buscó que se tratara de caracteres
+disponibles en la mayoría de los teclados, pero que normalmente no se
+incluirían en un texto escrito. No obstante, aunque no sea muy
+corriente, siempre cabe la posibilidad de que alguno de ellos deba
+figurar en nuestro documento, como si, por ejemplo, queremos escribir
+que algo costó 100 dólares (100\$), o que en España el porcentaje de
+conductores mayores de 65 años era del 16\% en 2018. En tales casos no
+debemos escribir el carácter reservado directamente sino que deberemos
+insertar un {\em comando} que escriba en el fichero final dicho
+carácter. El comando para cada uno de los caracteres reservados se
+muestra en la \in{tabla}[Reservados].
+
+\placetable
+  [here]
+  [Reservados]
+  {\tfx Escritura de caracteres reservados}
+{\starttabulate[|c|l|]
+  \HL
+  \NC {\bf Carácter reservado} \NC {\bf Comando que lo genera}\NR
+  \HL
+  \NC{\tt
+    \backslash}\NC\PonMacro{backslash}\tex{backslash}\NR\macro{caracteres reservados+\backslash backslash}
+  \NC{\tt \%}\NC{\cmd{\%}}\NR\macro{caracteres reservados+\backslash \%}
+  \NC{\tt \{}\NC\cmd{\{}\NR\macro{caracteres reservados+\backslash \{}
+  \NC{\tt \}}\NC\cmd{\}}\NR\macro{caracteres reservados+\backslash \}}
+  \NC{\tt \#}\NC\cmd{\#}\NR\macro{caracteres reservados+\backslash \#}
+  \NC{\tt \lettertilde}\NC\PonMacro{lettertilde}\tex{lettertilde}\NR\macro{caracteres reservados+\backslash lettertilde}
+  \NC{\tt \|}\NC\cmd{\|}\NR\macro{caracteres reservados+\backslash \|}
+  \NC{\tt \$}\NC\cmd{\$}\NR\macro{caracteres reservados+\backslash \$}
+  \NC{\tt \_}\NC\cmd{\_}\NR\macro{caracteres reservados+\backslash \_}
+  \NC{\tt \letterhat}\NC\PonMacro{letterhat}\tex{letterhat}\NR\macro{caracteres reservados+\backslash letterhat}
+  \NC{\tt \&}\NC\cmd{\&}\macro{caracteres reservados+\backslash \&}\NR
+  \HL
+\stoptabulate}
+
+  Otra forma de obtener los caracteres reservados es mediante el
+  comando \tex{type}. Este comando envía al documento final lo que
+  reciba como argumento sin procesarlo de ninguna manera y, por lo
+  tanto, sin interpretarlo. En el documento final el texto recibido
+  mediante \tex{type} se mostrará en la fuente mono-espaciada típica
+  de las terminales informáticas y de las máquinas de escribir.
+
+\startLetraChica
+
+  Normalmente encerraremos entre llaves el texto que \tex{type} debe
+  mostrar. Pero cuando dicho texto incluya llaves de apertura o de
+  cierre, en lugar de entre llaves debemos encerrar el texto entre dos
+  caracteres iguales que no formen parte del texto que constituye el
+  argumento de \tex{type}. Por ejemplo: \cmd{type*\{*}, o
+  \cmd{type+\}+}.
+
+\stopLetraChica
+
+Si por error usamos directamente alguno de los caracteres reservados,
+no con la finalidad para la que fueron concebidos, sino porque
+momentáneamente hemos olvidado que se trata de caracteres reservados
+que no podemos usar como caracteres normales, pueden ocurrir tres
+cosas:
+
+\startitemize[n]
+
+\item Lo más normal, que se genere un error al compilar.
+
+\item Que obtengamos un resultado inesperado. Esto pasa
+  particularmente con \PalClave{\lettertilde} y con \PalClave{\%}; en
+  el primer caso, en nuestro documento definitivo, en lugar del
+  carácter \PalClave{\lettertilde} que esperábamos, se insertará un
+  espacio en blanco; y en el segundo caso dejará de procesarse todo lo
+  que haya en la misma línea, a partir del \PalClave{\%}. También el
+  uso inadecuado del carácter «{\tt\backslash}» puede producir un
+  resultado inesperado, si el o los caracteres inmediatamente
+  posteriores constituyen un comando conocido por \ConTeXt. Pero lo
+  más normal cuando se usa incorrectamente «{\tt\backslash}» es que se
+  produzca un error de compilación.
+
+\item Que no haya ningún problema: Esto ocurre con los tres
+  caracteres reservados que se usan principalmente en matemáticas
+  ({\tt _ ^ &}): si se usan fuera de dicho entorno, son tratados como
+  caracteres normales.
+
+  \startLetraChica
+
+    El punto 3 es mi conclusión. Lo cierto es que en la documentación de
+    \ConTeXt\ no he encontrado ningún lugar en el que se diga que estos
+    tres caracteres reservados pueden usarse\Conjetura{} directamente; pero
+    en mis pruebas, no he visto que se produzca ningún error cuando así se
+    hace; a diferencia de lo que ocurre, por ejemplo, en \LaTeX.
+
+  \stopLetraChica
+
+\stopitemize
+
+\stopsection
+
+\startsection
+  [
+    title=Comandos propiamente dichos,
+    reference=sec:comandos_propdic,
+  ]
+
+Los comandos propiamente dichos empiezan siempre por el carácter
+«{\tt\backslash}». Atendiendo a lo que haya inmediatamente después de la
+secuencia de escape se distingue entre:
+
+\startitemize[a]
+
+\item {\bf Símbolos de control.} Un símbolo de control empieza por la
+  secuencia de escape («{\tt\backslash}») y consta exclusivamente de un
+  carácter que no sea una letra, como por ejemplo «\tex{,}», «\tex{1}»,
+  »\tex{'}» o «\tex{%}». Cualquier carácter o símbolo que no sea una letra
+  en el sentido estricto de la palabra puede ser un símbolo de control, lo
+  que incluye números, signos de puntuación, símbolos e incluso el espacio
+  en blanco que, en este documento se representa, con el símbolo
+  \textvisiblespace, cuando sea preciso destacar la presencia de algún
+  espacio en blanco. De hecho «\cmd{\textvisiblespace}» (una barra
+  invertida seguida de un espacio en blanco) es un símbolo de control que
+  se usa bastante, como en seguida tendremos ocasión de ver.
+
+  \startLetraChica\reference[nota:espacio invisible]{}
+
+    El espacio en blanco es un carácter “invisible”, lo que, en un
+    documento como este, en el que a veces hay que especificar con
+    mucha claridad lo que se debe escribir en el fichero fuente, es un
+    inconveniente. Ya {\sc Knuth} se dio cuenta de dicho problema y
+    en «The \TeX Book» inició la costumbre de representar con el
+    símbolo «\textvisiblespace» los espacios en blanco que sean
+    significativos. Y así, por ejemplo, si quisiéramos resaltar que en
+    el documento fuente hay que separar dos palabras con dos espacios
+    en blanco, escribiríamos
+    «palabra1\textvisiblespace\textvisiblespace palabra2».
+    
+  \stopLetraChica
+
+\item {\bf Palabras de control.} Si el carácter inmediatamente
+  posterior a la barra invertida es una letra propiamente dicha el
+  comando será una {\em Palabra de control}. Este grupo de comandos es
+  el más numeroso y en él se da la característica de que el nombre del
+  comando sólo puede estar constituido por letras; no se admiten
+  números, signos de puntuación o símbolos de cualquier otro
+  tipo. Exclusivamente letras, en mayúsculas o minúsculas. Téngase en
+  cuenta, por otra parte, que \ConTeXt\ diferencia entre mayúsculas y
+  minúsculas, por lo que para él los comandos \tex{micomando} y
+  \tex{MiComando} tienen nombres diferentes. Pero \tex{Micomando1} y
+  \tex{Micomando2} se consideran el mismo nombre, pues el «1» y el «2»
+  no forman parte del nombre del comando ya que no son letras.
+
+  \startLetraChica
+
+    En el manual de referencia de \ConTeXt\ no se contiene ninguna
+    regla sobre los nombres de los comandos, ni en el resto de los
+    «manuales» que se incluyen con \Conjetura\suite-. Lo que he
+    afirmado en el párrafo anterior es mi conclusión basada en que así
+    ocurre en \TeX\ (donde, además, se consideran «no letras» los
+    caracteres que no existen en el alfabeto inglés, como las vocales
+    acentuadas), y en que esa regla permite explicar bien la absorción
+    de espacios en blanco posteriores al nombre de un comando.
+
+  \stopLetraChica
+
+\stopitemize
+
+Cuando \ConTeXt\ está leyendo un fichero fuente y encuentra el
+carácter de escape («{\tt\backslash}») ya sabe que lo que viene a
+continuación es un comando. Entonces lee el primer carácter detrás de
+la secuencia de escape. Si no es una letra, significa que el comando
+es un símbolo de control y consta sólo de ese primer símbolo. Pero si,
+por el contrario, el primer carácter tras la secuencia de escape es
+una letra, entonces \ConTeXt\ seguirá leyendo carácter a carácter
+hasta que encuentre la primera «no letra», momento en el que sabrá que
+el nombre del comando ya se ha terminado. Esta es la razón de que en
+los nombres de los comandos que sean palabras de control no puede
+haber caracteres que no sean letras.
+
+Cuando la «no letra» con la que acaba el nombre del comando es un
+espacio en blanco, se asume que dicho espacio en blanco no forma parte
+del texto a procesar, sino que se insertó exclusivamente para indicar
+que ahí terminaba el nombre del comando, y por ello \ConTeXt\ elimina
+dicho espacio en blanco. Esto produce un efecto que sorprende a los
+principiantes en \ConTeXt; pues cuando el efecto del comando en
+cuestión implicaba escribir algo en el documento final, lo escrito por
+el comando aparecerá pegado a la siguiente palabra. Así, por ejemplo,
+las siguientes dos frases en el fichero fuente
+
+{\switchtobodyfont[small]
+\starttyping
+Saber \TeX ayuda a aprender \ConTeXt.
+Saber \TeX, aunque no es imprescindible, ayuda a aprender \ConTeXt
+\stoptyping
+}
+
+producirían, respectivamente, los siguientes resultados
+
+{\tfx\color[red]{Saber \TeX ayuda a aprender \ConTeXt.\\
+    Saber \TeX, aunque no es imprescindible, ayuda a aprender
+    \ConTeXt.}\footnote{{\bf Nota:} en los casos en los que en esta
+    introducción, para ilustrar alguna cuestión, se escribe un
+    fragmento del código fuente y el resultado de la compilación del
+    mismo, se siguen dos convenciones: En ocasiones se colocan uno
+    junto a otro en un párrafo a dos columnas el código y el resultado
+    de su compilación; en otros casos el código se escribe en
+    \color[púrpura]{este tono de magenta oscuro} que con carácter
+    general se usa en este documento para representar los comandos de
+    \ConTeXt, y el resultado de su compilación en color rojo.}}
+
+Obsérvese como, en el primer caso, la palabra «\TeX» aparece pegada a
+la siguiente palabra y en el segundo no. Eso es porque en el fichero
+fuente, en el primer caso la primera «no letra» tras el nombre del
+comando \tex{TeX} era un espacio en blanco, que se ha suprimido por
+asumir \ConTeXt\ que su presencia era sólo para indicar la terminación
+del nombre del comando, y en el segundo caso se trataba de una coma,
+que, al no ser un espacio en blanco, no se ha suprimido.
+
+Por otra parte, este problema no se arregla simplemente añadiendo un
+espacio en blanco adicional, y escribir, por ejemplo
+
+\color[darkmagenta]{{\tt Saber \backslash
+  TeX\textvisiblespace\textvisiblespace ayuda a aprender \backslash
+  ConTeXt}}\footnote{Sobre el símbolo «\textvisiblespace» recuérdese
+  la observación hecha en la \at{página}[nota:espacio invisible].}.
+
+no resolverá el problema, pues una regla de \ConTeXt\
+(que veremos en la \in{sección}[sec:espacios]) es la de que un espacio
+en blanco absorbe a todos los espacios en blanco y tabuladores que le
+sigan. Por ello, cuando se nos plantea este problema (lo que por
+suerte no ocurre con demasiada frecuencia) debemos asegurarnos de que
+la primera «no letra» tras el nombre del comando no sea un espacio en
+blanco. Hay dos buenos candidatos para ello:
+
+\startitemize[1]
+
+\item Los caracteres reservados \PalClave{\{\}}. El carácter reservado
+  \PalClave{\{}, como ya dije, abre un grupo, y \PalClave{\}} cierra
+  un grupo, por lo tanto la secuencia \PalClave{\{\}} introduce un
+  grupo vacío. Un grupo vacío no tiene ningún efecto en el documento
+  final, pero sirve para que \ConTeXt\ sepa que el nombre del comando
+  anterior ya ha terminado.  O también podríamos crear un grupo en
+  torno al comando en cuestión, y escribir, por ejemplo
+  «\{\tex{TeX}\}». En cualquiera de ambos casos
+  conseguiríamos que la primera «no letra» tras \tex{TeX} no sea un
+  espacio en blanco.
+
+\item El símbolo de control «\cmd{\textvisiblespace}» (una barra
+  invertida seguida de un espacio en blanco, véase la observación
+  realizada en la \at{página}[nota:espacio invisible]). El efecto de
+  este símbolo de control es el de insertar un espacio en blanco en el
+  documento final. Para entender bien la lógica de \ConTeXt, tal vez
+  merezca la pena entretenerse un poco en ver qué pasa cuando
+  \ConTeXt\ se encuentra con una palabra de control (como por ejemplo
+  \tex{TeX}) seguida de un símbolo de control (como por ejemplo
+  «\cmd{\textvisiblespace}»):
+
+  \startitemize[2, packed]
+
+  \item \ConTeXt\ encuentra el carácter \backslash\ seguido de una «T»
+    y ya sabe que está ante una palabra de control, sigue leyendo
+    caracteres hasta llegar a una «no letra», cosa que ocurre cuando
+    llega al carácter \backslash\ que introduce el próximo símbolo de
+    control.
+
+  \item Una vez que sabe que el nombre del comando era \tex{TeX}, lo
+    ejecuta e imprime en el documento final el texto \TeX. Tras ello
+    vuelve al punto en el que detuvo la lectura para comprobar el
+    carácter inmediatamente posterior a la segunda barra invertida.
+
+  \item Comprueba que es un espacio en blanco, es decir, una «no
+    letra» lo que significa que la secuencia de control es exactamente
+    esa, por lo tanto ya puede ejecutarla. Así lo hace e inserta un
+    espacio en blanco.
+
+  \item Por último, una vez más, vuelve al punto en el que detuvo la
+    lectura (el espacio en blanco que constituía el símbolo de
+    control) y continúa, a partir de ahí, procesando el fichero
+    fuente.
+
+  \stopitemize
+
+\stopitemize
+
+He explicado este mecanismo con cierto detenimiento, pues la
+eliminación de espacios en blanco suele sorprender a los recién
+llegados. No obstante hay que señalar que el problema se plantea
+relativamente poco, pues en general las palabras de control no
+imprimen directamente nada en el documento final, sino que afectan al
+formato y a la apariencia. Por el contrario, si es bastante corriente
+que los símbolos de control impriman algo en el documento final.
+
+\startLetraChica
+
+  Hay un tercer procedimiento para evitar el problema de los espacios
+  en blanco, consistente en definir (al estilo de \TeX) un comando
+  similar e incluir una «no letra» al final del nombre del
+  comando. Por ejemplo, la siguiente secuencia:
+
+  \type{\def\txt-{\TeX}}
+
+  creará un comando llamado \tex{txt}, que hará exactamente lo mismo
+  que el comando \tex{TeX} y sólo funcionará correctamente si es
+  llamado con un guión detrás de su nombre \tex{txt-}. Ese guión no
+  forma técnicamente parte del nombre del comando, pero éste no
+  funcionará si no se escribe el nombre seguido de un guión. El por
+  qué eso es así tiene que ver con el mecanismo de definición de
+  macros de \TeX, y es demasiado complejo de explicar aquí. Pero
+  funciona: una vez definido ese comando, cada vez que usemos
+  \tex{txt-} \ConTeXt\ lo sustituirá por \tex{TeX} eliminando el
+  guión, pero usándolo internamente para saber que el nombre del
+  comando ya se ha terminado, por lo que un espacio en blanco
+  inmediatamente detrás de él no sería eliminado.
+
+  Este «truco» no funciona correctamente con el comando \tex{define},
+  que es el comando específico de \ConTeXt\ para definir macros.
+
+\stopLetraChica
+
+\stopsection
+
+\startsection
+  [title=Ámbito de aplicación de los comandos]
+
+\startsubsection
+  [
+    reference=sec:ámbito comandos,
+    title=Comandos que requieren y comandos que no requieren que se
+    les señale un ámbito de aplicación,
+  ]
+
+Gran parte de los comandos de \ConTeXt, y en particular los comandos
+que afectan de modo directo a las características de formato de las
+fuentes (negrita, cursiva, versalitas, etc.), activan cierta cualidad
+que se queda activada hasta que se encuentre otro comando que la
+desactive, o que active alguna otra característica incompatible con
+ella. Por ejemplo, el comando \tex{bf} activa la negrita, y ésta
+seguirá activa hasta que se encuentre un comando {\em incompatible}
+como, por ejemplo \tex{tf}, o \tex{it}.
+
+Este tipo de comandos no necesita recibir ningún argumento, pues no
+están diseñados para aplicarse sólo a cierto texto. Es como si se
+limitaran a {\em encender} la función que sea (las negritas, la
+cursiva, la letra sans serif, cierto tamaño de letra, etc.).
+
+Cuando estos comandos se ejecutan dentro de un {\em grupo} (véase la
+\in{sección}[sec:grupos]), también pierden su eficacia cuando se
+cierre el grupo en el que se ejecutaron. Por ello, muchas veces, para
+hacer que estos comandos afecten sólo a una porción de texto, lo que
+se hace es generar un grupo que contenga a dicho comando y al texto al
+que queremos que afecte. Un grupo se crea encerrándolo entre
+llaves. Por lo tanto, el siguiente texto
+
+\startDobleEjemplo
+
+\starttyping
+En {\it The \TeX Book}, {\sc Knuth}
+explicó todo lo que hay que saber
+sobre \TeX.
+\stoptyping
+
+En {\it The \TeX Book}, {\sc Knuth} explicó todo lo que hay que saber
+sobre \TeX.
+\stopDobleEjemplo
+
+crea dos grupos, uno para delimitar el ámbito del comando \tex{it}
+(que establece la cursiva) y otro para delimitar el ámbito del comando
+\tex{sc} (que establece las versalitas).
+
+Frente a este tipo de comandos, hay otros que, por el tipo de efecto
+que producen, o por otras razones, requieren que se les indique
+expresamente a qué texto han de aplicarse. En estos casos el texto que
+se haya de ver afectado por el comando se encierra entre llaves {\em
+  inmediatamente después del comando}. Como ejemplo de este tipo de
+comandos podemos mencionar a \tex{framed}: este comando dibuja un
+marco en torno al texto que recibe como argumento, de modo que
+
+{\tfx\type{\framed{Tararí que te vi, Mariví}}}
+
+producirá\blank
+
+\ejemplo{\framed{Tararí que te vi, Mariví}}
+
+Obsérvese que, aunque en el primer grupo de comandos (los que no
+requieren argumento) también se usan a veces llaves para delimitar su
+campo de actuación, esto no es necesario para la eficacia del
+comando. El comando está diseñado para aplicarse a partir del punto en
+el que aparece. Por ello, cuando se delimita su campo de aplicación
+mediante llaves, el comando se ubica {\em dentro de las llaves}, a
+diferencia de lo que ocurre en el segundo grupo de comandos, en los
+que las llaves que encierran el texto al que se aplicará el comando se
+encuentran {\em detrás} del comando.
+
+En el caso del comando \tex{framed} está claro que el efecto que
+produce en cierto modo exige que reciba como argumento un texto al que
+aplicarse. En otros casos, el que el comando sea de un tipo u otro
+depende de lo que decida su diseñador. Y así, por ejemplo lo que hacen
+los comandos \tex{it} y \tex{color} es bastante parecido: aplican una
+característica (de formato o de color) al texto. Pero se decidió
+diseñar al primero como comando sin argumento, y al segundo como
+comando con argumento.
+
+\stopsubsection
+
+\startsubsection
+  [title=Comandos que requieren que se indique\\ expresamente su inicio
+    y su fin (entornos)]
+
+Hay ciertos comandos que delimitan su ámbito de aplicación indicando
+exactamente el punto en el que empezarán a aplicarse y el punto en el
+que dejarán de hacerlo. Estos comandos, por lo tanto se desdoblan en
+dos: una sentencia que indica cuándo se inicia la acción del comando,
+y otra sentencia que indica cuándo cesa la acción del comando. Para
+indicar el inicio se usa el término «start» seguido del nombre del
+comando, y para indicar el final se usa el término «stop», seguido
+también del nombre del comando. Así por ejemplo el comando
+\PalClave{itemize} se convierte en \tex{startitemize} para indicar el
+inicio de la {\em itemización} y \tex{stopitemize} para indicar el fin
+de la misma.
+
+No hay en la documentación oficial de \ConTeXt\ un nombre especial
+para estos comandos por parejas. El manual de referencia y la
+introducción los llaman simplemente comandos «start ... stop». A veces
+se les llama {\em entornos}, que es el nombre con el que se conoce en
+\LaTeX\ a un tipo de construcción similar, aunque ello tiene el
+inconveniente de que en \ConTeXt\ el término «entorno» se usa para
+otra cosa (un tipo especial de fichero que veremos al hablar de los
+proyectos multifichero, en la \in{sección}[sec-proyectos]). Aún así,
+como el término entorno es claro, y, por el contexto, creo que es
+fácil diferenciar si se habla de {\em comandos de entorno} o de {\em
+  ficheros de entorno}, usaré esa denominación.
+
+Los entornos, pues, constan de un comando que los abre o inicia y de
+otro que los cierra o termina. Si en el fichero fuente se encuentra un
+comando de apertura del entorno que no está expresamente cerrado,
+normalmente se generará un error\footnote{Aunque no siempre; depende
+  del entorno de que se trate y de la disposición del resto del
+  documento. En esto \ConTeXt\ se diferencia de \LaTeX\ que es mucho
+  más estricto.}. Este tipo de errores son, por otra parte, los más
+difíciles de localizar, pues el error puede producirse mucho después
+del punto en que se encontraba el comando de apertura. A veces el
+fichero \PalClave{.log} nos informará de la línea en donde se inició
+el entorno no expresamente cerrado; pero otras veces la falta de
+cierre del entorno se traduce en que \ConTeXt\ interprete
+inadecuadamente cierto pasaje y crea que el error está en tal pasaje,
+y no en el entorno no expresamente cerrado, con lo que la información
+del fichero \PalClave{.log} no nos ayudará tanto a descubrir dónde
+está el problema.
+
+Los entornos se pueden anidar, y dentro de un entorno abrir otro
+entorno; si bien en tal caso, cuando hay entornos anidados, un entorno
+se tiene que cerrar dentro del entorno en el que se abrió, es decir,
+el orden de cierre de los distintos entornos ha de ser coherente con
+el orden de su apertura. En el siguiente ejemplo creo que se verá más
+claro:
+
+{\switchtobodyfont[small]
+\startframedtext
+\starttyping
+\startUnaCosa
+  ...
+  \startOtraCosa
+    ...
+    \startUnaTerceraCosa
+      ...
+    \stopUnaTerceraCosa
+  \stopOtraCosa
+\stopUnacosa
+\stoptyping
+\stopframedtext
+}
+
+Véase como, en el ejemplo, si el entorno \PalClave{UnaTerceraCosa} se
+abre dentro del entorno \PalClave{OtraCosa} se tiene que cerrar
+también dentro de él. Lo contrario generaría un error en el momento de
+la compilación.
+
+En general se diseñan como {\em entornos} los comandos que implementan
+algún cambio que está pensado para aplicarse a unidades de texto no
+inferiores al párrafo. Por ejemplo, el entorno \PalClave{narrower},
+que altera los márgenes, sólo tiene sentido aplicado a nivel de
+párrafo; o el entorno \PalClave{framedtext} que enmarca uno o varios
+párrafos. Este último entorno quizás sirva bien para comprender por
+qué algunos comandos se diseñan como entornos y otros se diseñan como
+comandos individuales: Si queremos enmarcar una o varias palabras,
+pero todas ellas en la misma línea, usaremos el comando \tex{framed},
+pero si lo que queremos enmarcar es todo un párrafo (o varios
+párrafos) entonces usaremos el entorno \PalClave{framedtext}.
+
+Por otra parte, el texto ubicado dentro de un concreto entorno,
+normalmente constituye un {\em grupo} (véase la
+\in{sección}[sec:grupos]), lo que significa que si dentro de un
+entorno se encuentra un comando de activación, de los que se aplican a
+todo el texto que le sigue, este comando se aplicará sólo hasta el
+final del entorno en el que se encuentre; y de hecho \ConTeXt\ cuanta
+con un {\em entorno} sin nombre que se inicia con el comando
+\tex{start} (no seguido de ningún otro texto; {\em start} a secas; por
+eso lo he llamado {\em entorno sin nombre}) y se termina con el
+comando \tex{stop} cuya única función (sospecho) es la de crear un grupo.
+
+\startLetraChica
+
+  Que uno de los efectos de los entornos sea el de agrupar su contenido no
+  lo he leído en la documentación de \Conjetura\ConTeXt, pero así resulta
+  de mis pruebas con varios de los entornos predefinidos; aunque debo
+  admitir que las pruebas no han sido demasiado exhaustivas sino que me he
+  limitado a comprobarlo con algunos entornos elegidos al azar. Mis pruebas
+  demuestran, eso sí, que tal afirmación, de ser cierta, sólo lo sería para
+  algunos de los entornos predefinidos: los creados mediante el comando
+  \tex{definestartstop} (que se explica en la \in{sección}[sec:startstop])
+  no crean ningún grupo, salvo que en la definición del nuevo entorno
+  incluyamos los comandos necesarios para crear el grupo (véase la
+  \in{sección}[sec:grupos]).
+
+  También es conjetura mía la de que el entorno al que he llamado {\em
+    sin nombre} (\tex{start}) sólo sirve para crear un grupo:
+  efectivamente crea un grupo, pero si tiene o no alguna otra utilidad
+  no lo se. Este es uno de los comandos no documentados en el manual
+  de referencia.
+
+\stopLetraChica
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    title=Opciones de funcionamiento de los\\ comandos,
+    reference=sec:opciones comandos,
+  ]
+
+\startsubsection
+  [title=Comandos que pueden funcionar de varias maneras distintas]
+
+Muchos comandos pueden funcionar de más de una manera. En tales casos
+hay siempre una forma predeterminada de funcionamiento que se puede
+alterar indicando entre corchetes, tras el nombre del comando los
+parámetros correspondientes al funcionamiento deseado.
+
+Un buen ejemplo de lo que se acaba de decir lo tenemos con el comando
+\tex{framed}, mencionado en el apartado anterior. Este comando dibuja
+un marco alrededor del texto que recibe como argumento. Por defecto el
+marco tiene la altura y la anchura del texto al que se debe aplicar;
+pero podemos indicar una altura y anchura diferentes. Así puede
+observarse la diferencia entre el funcionamiento por defecto de
+\tex{framed}
+
+\startDobleEjemplo
+
+\type{\framed{Tararí}}
+
+\framed{Tararí}
+
+\stopDobleEjemplo
+
+y un funcionamiento personalizado:
+
+\startDobleEjemplo
+
+\starttyping
+\framed
+  [width=3cm, height=1cm]
+  {Tararí}
+\stoptyping
+
+\framed
+  [width=3cm, height=1cm]
+  {Tararí}
+
+\stopDobleEjemplo
+
+En el segundo ejemplo, entre corchetes, hemos indicado una anchura y
+altura específica para el marco que rodea al texto recibido como
+argumento. Dentro de los corchetes, las distintas opciones de configuración se
+separan mediante una coma; los espacios en blanco e incluso los saltos
+de línea (siempre que no sean un doble salto de línea) entre dos o más
+opciones no se toman en consideración, de modo que, por ejemplo, las
+siguientes cuatro versiones del mismo comando producen exactamente el
+mismo resultado:
+
+{\switchtobodyfont[small]
+\startframedtext
+\starttyping
+\framed[width=3cm,height=1cm]{Tararí}
+
+\framed[width=3cm,    height=1cm]{Tararí}
+
+\framed
+  [width=3cm, height=1cm]
+  {Tararí}
+
+\framed
+  [width=3cm,
+    height=1cm]
+  {Tararí}
+
+\stoptyping
+\stopframedtext
+}
+
+Parece claro que la última versión es más fácil de leer: se puede ver
+a simple vista cuántas opciones se han usado y cuáles son. En un
+ejemplo como este, con sólo dos opciones, tal vez ello no sea
+especialmente importante; pero en casos en los que hay una larga lista
+de opciones, que cada una de ellas tenga su propia línea en el fichero
+fuente ayuda a {\em comprender} mejor lo que el fichero fuente está
+pidiéndole a \ConTeXt\ y también, en su caso, a localizar un posible
+error. Por ello esta última (o alguna similar) es la forma de escribir
+los comandos «favorita» de los usuarios.
+
+En cuanto a la sintaxis de las opciones de configuración, véase más
+adelante (\in{sección}[sec:sintaxis]).
+
+\stopsubsection
+
+\startsubsection
+  [title=Comandos que configuran el funcionamiento de otros comandos (\cmd{setupAlgunaCosa})]
+
+Ya hemos visto que los comandos que admiten varias posibilidades en su
+funcionamiento, tienen siempre previsto un funcionamiento por
+defecto. Si en nuestro fichero fuente se llama a uno de esos comandos
+varias veces, y en todas ellas queremos alterar el funcionamiento por
+defecto, mucho más cómodo y eficiente que indicar en cada llamada las
+opciones de funcionamiento, resulta cambiar el funcionamiento por
+defecto. Para ello casi siempre se dispone de un comando cuyo nombre
+empieza con \tex{setup} seguido por el nombre del comando cuyo
+funcionamiento por defecto queremos alterar.
+
+El comando \tex{framed} que nos viene sirviendo de ejemplo en esta
+sección, sigue siendo un buen ejemplo. Así, si en nuestro documento se
+usarán muchos marcos, pero todos ellos deben tener unas medidas
+precisas, lo mejor es reconfigurar el funcionamiento de \tex{framed}
+mediante \tex{setupframed}. Y así
+
+{\switchtobodyfont[small]
+\starttyping
+\setupframed
+  [
+    width=3cm,
+    height=1cm
+  ]
+\stoptyping
+}
+
+hará que, a partir de ese momento, cada vez que llamemos a
+\tex{framed} este vaya a generar, por defecto, un marco de 3
+centímetros de ancho por un centímetro de alto, sin necesidad de
+especificárselo expresamente en cada llamada.
+
+En \ConTeXt\ hay cerca de 300 comandos que permiten configurar el
+funcionamiento de otros comandos. Así podemos configurar el
+funcionamiento por defecto de los marcos (\tex{framed}), de las listas
+(\PalClave{itemize}) de los títulos de capítulos (\tex{chapter}), o de
+los de sección (\tex{section}), etc.
+
+\stopsubsection
+
+\startsubsection
+  [title=Creación de versiones personalizadas de\\ comandos
+    configurables (\cmd{defineAlgunaCosa})]
+
+Claro está que, siguiendo con el ejemplo de \tex{framed}, si nuestro
+documento usa varios tipos de marcos, cada uno de ellos con diferentes
+medidas, lo ideal sería que pudiéramos {\em predefinir} diferentes
+configuraciones de \tex{framed}, y asociar cada una de ellas a un nombre
+concreto para poder usar una u otra según convenga. Eso podríamos lograrlo
+en \ConTeXt\ mediante el comando \tex{defineframed} cuya sintaxis es:
+
+\type{\defineframed[Nombre][Configuración]}
+
+donde {\em Nombre} es el nombre que se asignará al tipo específico de
+marco que se configurará; y {\em Configuración} es la concreta
+configuración asociada a dicho nombre.
+
+El efecto de todo ello será que la configuración indicada queda
+asociada al nombre que hayamos establecido, el cual, a todos los
+efectos, funcionará como si fuera un nuevo comando, que podremos usar
+en cualquier contexto en el que habríamos podido usar el comando
+original (\tex{framed}).
+
+Esta posibilidad no sólo existe en el caso concreto de \tex{framed},
+sino en la mayor parte de los comandos para los que existe un comando
+\tex{setup}. La combinación \tex{defineAlgunaCosa} +
+\tex{setupAlgunaCosa}, constituye un mecanismo que dota a \ConTeXt\ de
+una extremada potencia y flexibilidad. Si analizamos detenidamente lo
+que el comando \tex{defineAlgo} hace, resulta que:
+
+\startitemize[packed]
+
+\item En primer lugar, clona un determinado comando susceptible de
+  admitir varias configuraciones.
+\item Asocia ese clon al nombre de un nuevo comando.
+\item Por último, establece una configuración predeterminada para el
+  clon, distinta de la configuración del comando original.
+
+\stopitemize
+
+En el ejemplo que hemos puesto configurábamos nuestro marco especial
+en el mismo momento en el que lo creábamos. Pero también podemos
+crearlo primero y configurarlo más tarde, pues, como he dicho, una vez
+creado el clon este se puede usar donde se hubiera podido usar el
+original. Y así, por ejemplo, si hemos creado un tipo de marco al que
+hemos llamado \PalClave{MiMarcoEspecial} podremos configurarlo con
+\tex{setupframed} indicando qué marco concreto queremos configurar. En
+este caso el comando \tex{setup} recibirá un argumento nuevo con el
+nombre del marco a configurar:
+
+{\switchtobodyfont[small]
+\vbox{\starttyping
+\defineframed[MiMarcoEspecial]
+
+\setupframed
+  [MiMarcoEspecial]
+  [ ... ]
+\stoptyping
+}}
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:sintaxis,
+    title=Recapitulación sobre la sintaxis de los comandos y de sus
+    opciones{,} y sobre el uso de corchetes y llaves en las\\ llamadas a
+    los mismos,
+  ]
+  % Esta sección está especialmende dedicada a usuarios de LaTeX, para
+  % que comprendan el distinto uso de corchetes y llaves.
+
+Recapitulando lo hasta ahora visto, resulta que en \ConTeXt\
+
+\startitemize
+
+\item Los comandos propiamente dichos siempre empiezan con el carácter
+  «{\tt\backslash}».
+
+\item Algunos comandos pueden recibir uno o varios argumentos.
+
+\item Los argumentos que dicen al comando {\em cómo} debe funcionar o,
+  de alguna manera afectan a lo que hará, se introducen entre
+  corchetes.
+
+\item Los argumentos que dicen al comando sobre qué porción de texto
+  debe actuar, se introducen entre llaves.
+
+  \startLetraChica
+
+    Cuando el comando actuará solamente sobre una letra, como es, por
+    ejemplo, el caso de \tex{buildtextcedilla} (por poner un ejemplo),
+    pueden omitirse las llaves alrededor del argumento: el comando se
+    aplicará al primer carácter que no sea un espacio en blanco.
+
+  \stopLetraChica
+
+\item Algunos de los argumentos pueden ser opcionales, en cuyo caso,
+  podemos omitirlos. Pero lo que no puede hacerse nunca es alterar el orden
+  de los argumentos que el comando espera.
+
+\stopitemize
+
+Los argumentos introducidos entre corchetes, por su parte, pueden ser
+de varios tipos. Principalmente:
+
+\startitemize
+
+\item Pueden recibir un solo valor, que casi siempre consistirá en un
+  nombre o frase.
+
+\item Pueden recibir varias opciones, en cuyo caso estas pueden
+
+  \startitemize
+
+  \item Estar representadas por una sola palabra, que puede ser un
+    nombre simbólico (del que \ConTeXt\ conoce el significado), una
+    medida o dimensión, un número, el nombre de algún otro comando,
+    etc.
+
+  \item Consistir en nombres de variables a las que hay que asignarles
+    un valor. En este caso en la definición oficial del comando (véase
+    \in{sección}[sec:qrc-setup-en]) siempre se nos dice qué tipo de
+    valor espera cada una de las opciones.
+
+    \startitemize
+
+    \item Cuando el valor que espera una opción es un texto, éste
+      puede contener espacios en blanco y también comandos. A veces,
+      en estos casos, conviene encerrar entre llaves el valor de la
+      opción.
+
+    \item Cuando el valor que espera una opción es un comando,
+      normalmente podremos indicar como valor de la opción más de un
+      comando, aunque a veces deberemos encerrar todos los comandos
+      asignados a la opción entre llaves. También deberemos encerrar
+      entre llaves el contenido de la opción si alguno de los comandos
+      incluidos en ella recibe alguna opción entre corchetes.
+
+    \stopitemize
+
+  \stopitemize
+
+  En uno y otro caso las distintas opciones que haya de recibir el
+  mismo argumento se separarán por comas. Los espacios en blanco y
+  saltos de línea (que no sean dobles) entre las distintas opciones
+  son ignorados. También se ignoran los espacios en blanco y saltos de
+  línea entre los distintos argumentos de un comando.
+
+\item Por último, en \ConTeXt\ nunca se da el caso de que un mismo
+  argumento reciba simultáneamente opciones consistentes en una
+  palabra y opciones consistentes en una variable a la que haya que
+  asignar explícitamente un valor. Es decir: Puede haber opciones del
+  tipo
+
+  \type{\comando[Opción1, Opción2, ...]}
+
+  y otras del tipo
+
+  \type{\comando[Variable1=valor, Variable2=valor, ...]}
+
+  Pero nunca encontraremos una mezcla de ambas:
+
+  \type{\comando[Opción1, Variable1=valor, ...]}
+
+
+\stopitemize
+
+\stopsection
+
+\startsection
+  [
+    title=El listado oficial de comandos de\\ \ConTeXt,
+    reference=sec:qrc-setup-en
+  ]
+  % Esta sección está escrita sólo para poderme remitir a ella cada
+  % vez que mencione la existencia de un "listado oficial" de
+  % comandos.
+
+En la documentación de \ConTeXt\ hay un documento especialmente
+importante en el que hay un listado de todos los comandos indicando,
+para cada uno de ellos, cuántos argumentos espera, y de qué tipo es
+así como las distintas opciones que contempla y sus valores
+admisibles. Este documento se llama \PalClave{setup|-|en.pdf}, es
+generado automáticamente para cada versión nueva de \ConTeXt\ y se
+localiza en el directorio
+\PalClave{tex/texmf|-|context/doc/context/documents/general/qrcs}.
+
+\startLetraChica
+
+  En realidad, en el directorio \PalClave{qrc} hay siete versiones de
+  dicho documento, una en cada uno de los idiomas para los que existe
+  una interfaz de \ConTeXt: alemán, checo, francés, holandés, inglés,
+  italiano y rumano. Para cada uno de esos idiomas hay dos
+  documentos en el directorio: uno llamado \PalClave{setup-CodIdioma}
+  (donde CodIdioma son las dos letras de identificación internacional
+  del idioma de que se trate) y un segundo documento llamado
+  \PalClave{setup-mapping-CodIdioma}. Este segundo documento contiene
+  un listado de comandos ordenados alfabéticamente e indicando el {\em
+  prototipo} del comando, pero sin más información sobre los posibles
+  valores de cada argumento.
+
+\stopLetraChica
+
+Este documento es fundamental para aprender a usar \ConTeXt, pues en
+él podemos buscar si existe o no cierto comando; lo que es
+particularmente útil teniendo en cuenta la combinación de {\sc
+  comando} (o {\sc entorno}) + {setup{\sc comando} + define{\sc
+    comando}. Por ejemplo, si yo se que una línea en blanco se
+  introduce con el comando \tex{blank} puedo buscar si existe un
+  comando que me permita configurarlas llamado \tex{setupblank} y otro
+  que me permita crear configuraciones personalizadas de líneas en
+  blanco (\tex{defineblank}).
+
+\startLetraChica
+
+  \PalClave{setup-en.pdf} es, por lo tanto, fundamental, para el
+  aprendizaje de \ConTeXt. Me gustaría, no obstante, que, en primer
+  lugar, informara de si un comando sólo funciona en Mark~II o en
+  Mark~IV, y, sobre todo, que además de informar sobre el número y
+  tipo de argumentos que cada comando admite, dijera para qué sirven
+  dichos argumentos. Ello reduciría mucho las deficiencias de la
+  documentación de \ConTeXt. Hay algunos comandos que
+  admiten argumentos opcionales que yo ni menciono en esta
+  introducción porque no sé para qué sirven y, al ser opcionales,
+  tampoco es imprescindible mencionar dicho argumento. Ello resulta
+  tremendamente frustrante.
+
+\stopLetraChica
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:definircomandos,
+    title=Definición de nuevos comandos,
+  ]
+
+\startsubsection
+  [
+    reference=sec:define,
+    title=Mecanismo general de definición de nuevos comandos,
+  ]
+\PonMacro{define}
+
+Acabamos de ver como mediante \tex{defineAlgo} podemos clonar un
+comando preexistente y, a partir de él, elaborar una nueva versión del
+mismo, que funcionará, a todos los efectos, como un comando nuevo.
+
+Junto con esa posibilidad, que sólo está disponible para algunos
+comandos concretos (bastantes, ciertamente, pero no todos), \ConTeXt\
+incorpora un mecanismo general para la definición de nuevos comandos,
+el cual es extremadamente potente pero, en algunos de sus usos,
+también muy complejo. En un texto como el presente, pensado para
+principiantes, creo que lo mejor es introducirlo a partir de algunos
+de sus usos más simples. El más simple de todos es el de la asociación
+de fragmentos concretos de texto a una palabra, de tal modo que cada
+vez que en el fichero fuente aparezca dicha palabra, esta sea
+reemplazada por el texto vinculado a ella. Ello nos permitirá, de un
+lado, ahorrarnos mucho tiempo de tecleado y además, como ventaja
+extra, se reducen las posibilidades de cometer errores al teclear, al
+tiempo que nos aseguramos de que el texto de que se trate siempre se
+escriba igual.
+
+Imaginemos, por ejemplo, que estamos escribiendo un tratado sobre la
+aliteración en los textos latinos y en él se cita con cierta
+frecuencia la frase latina «O Tite tute Tati tibi tanta tyranne
+tulisti» (¡Oh Tito Tacio, tirano, tú mismo te produjiste tan terribles
+desgracias!). Es una frase relativamente larga, en la que dos de las
+palabras son nombres propios y deben ir en mayúsculas, y en la que,
+admitámoslo, por muy amantes que seamos de la poesía latina, es fácil
+que nos “trastabillemos” al escribirla. En tal caso podríamos,
+simplemente, escribir en el preámbulo de nuestro fichero fuente:
+
+{\tfx \type{\define\Tite{«O Tite tute Tati tibi tanta tyranne tulisti»}}}
+
+A partir de tal definición, cada vez que en nuestro fichero fuente
+aparezca el comando \tex{Tite}, será sustituido por la frase indicada,
+la cual, además, se entrecomillará exactamente igual que estaba
+entrecomillada en la definición original, lo que nos permite
+asegurarnos de que la forma en que aparezca esa frase será siempre la
+misma. Podríamos también haberla escrito con cursivas, con un tamaño
+de letra más grande... como queramos. Lo importante es que sólo
+tenemos que escribirla una vez, y, a lo largo del texto, se
+reproducirá exactamente igual a como se escribió, tantas veces como se
+desee.  También podríamos crear dos versiones del comando, llamadas,
+respectivamente \tex{Tite} y \tex{tite}, según la frase se deba
+escribir o no con la primera letra en mayúsculas. El texto de
+reemplazo puede, por otra parte, ser puro texto, o incluir comandos, o
+formar expresiones matemáticas en las que hay más posibilidades de
+equivocarse al teclearlas (al menos para mí) y así, por ejemplo si en
+nuestro texto continuamente debe aparecer la expresión
+$(x_1,\ldots,x_n)$, podemos crear un comando que la represente. Por
+ejemplo
+
+{\tfx\type{\define\xvec{$(x_1,\ldots,x_n)$}}}
+
+de tal modo que siempre que en el texto aparezca \tex{xvec} sea
+sustituido por la expresión asociada a él.
+
+La sintaxis general del comando \tex{define} es la siguiente:
+
+\type{\define[NumArgumentos]\NombreComando{TeXtoReemplazo}}
+
+% {\ttx \color[maincolor]{\backslash define[{\em
+%         NumArgumentos}]\backslash {\em NombreComando}\{{\em
+%       TextoReemplazo}\}}}
+
+donde
+
+\startitemize[packed]
+
+\item {\tt\bf NumArgumentos} se refiere al número de argumentos que
+  recibirá el nuevo comando. Si no ha de recibir ninguno, como en los
+  ejemplos hasta ahora puestos, esta parte se omitirá.
+
+\item {\tt\bf NombreComando} se refiere al nombre que tendrá el nuevo
+  comando. Aquí se aplican las reglas generales relativas a los
+  nombres de los comandos de tal modo que el nombre puede ser un sólo
+  carácter que no sea una letra, o una o más letras, sin incluir
+  ningún carácter que sea una «no letra».
+
+\item {\tt\bf TextoReemplazo} contiene el texto que sustituirá al
+  nombre del nuevo comando cada vez que este sea encontrado en el
+  fichero fuente.
+
+\stopitemize
+
+La posibilidad de dotar a los nuevos comandos de argumentos en su
+definición, dota a este mecanismo de gran flexibilidad, pues permite
+definir un texto de reemplazo variable según cuáles hayan sido los
+argumentos recibidos.
+
+Por ejemplo: imaginemos que queremos escribir un comando que escriba
+el principio de una carta comercial. Una versión muy simple del mismo
+sería:
+
+{\switchtobodyfont[small]
+\starttyping
+\define\EncabezadoCarta{
+  \rightaligned{Pedro Navajas}\par
+  \rightaligned{Consultor}\par
+  En Murcia, a \date\par
+  Muy Señor mío:\par
+  }
+\stoptyping
+}
+
+pero sería preferible una versión del comando que, en el encabezado,
+escribiera el nombre del destinatario. Para ello habría que usar un
+parámetro que comunicara al nuevo comando el nombre del
+destinatario. Ello exigiría redefinir el comando de la siguiente
+manera:
+
+{\switchtobodyfont[small]
+\starttyping
+\define[1]\EncabezadoCarta{
+  \rightaligned{Pedro Navajas}\par
+  \rightaligned{Consultor}\par
+  En Murcia, a \date\par
+  Estimado Sr. #1:\par
+  }
+\stoptyping
+}
+
+Obsérvese que hemos introducido dos cambios en la definición. En
+primer lugar, entre la palabra clave \tex{define} y el nombre de
+nuestro nuevo comando, hemos incluido un 1 entre corchetes ([1]), con
+esto le indicamos a \ConTeXt\ que el comando que estamos definiendo
+recibirá un argumento. Más adelante, en la última línea de la definición
+del comando, hemos escrito «{\tt Estimado Sr: \#1}», usando el
+carácter reservado \PalClave{\#}. Con ello indicamos que en el punto
+del texto de reemplazo en donde aparece el \PalClave{\#1}, debe
+insertarse, en su lugar, el contenido del primer argumento. Si hubiera
+dos parámetros, \PalClave{\#1} se referiría al primer parámetro y
+\PalClave{\#2} se referiría al segundo. Cuando un comando admite
+argumentos, para invocar al comando (en el fichero fuente) tras el
+nombre del comando hay que incluir, entre llaves, los argumentos. Cada
+argumento con sus propias llaves. De modo que al comando que acabamos
+de definir, en el texto de nuestro fichero fuente habría que invocarlo
+de la siguiente manera:
+
+\type{\EncabezadoCarta{Nombre del Destinatario}}
+
+% {\ttx \color[maincolor]{\backslash EncabezadoCarta\{{\em Nombre del
+%       destinatario}\} }}
+
+Por ejemplo: \cmd{EncabezadoCarta\{Antonio Moreno Gómez\}}.
+
+Todavía podríamos mejorar algo la anterior función, pues en ella se
+asume que la carta se envía a un hombre (pone «Estimado Sr.») tal vez
+podríamos incluir otro parámetro para diferenciar entre destinatario
+masculino y destinatario femenino. Por ejemplo:
+
+{\switchtobodyfont[small]
+\starttyping
+\define[2]\EncabezadoCarta{
+  \rightaligned{Pedro Navajas}\par
+  \rightaligned{Consultor}\par
+  En Murcia, a \date\par
+  #1\ #2:\par
+  }
+\stoptyping
+}
+
+de tal modo que a la función se la llamaría, por ejemplo con
+
+{\tfx\type{\EncabezadoCarta{Estimada Sra.}{Eloísa Martínez López}}}
+
+aunque esto último no es muy elegante (desde el punto de vista de la
+programación). Sería preferible que para el primer argumento se
+definieran valores simbólicos (hombre/mujer; 0/1; h/m) de tal modo que
+la propia macro escogiera el texto adecuado según dicho valor. Pero
+explicar cómo conseguir eso exige meternos en más vericuetos de los
+que a estas alturas creo que el lector novato puede entender.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:startstop,
+    title=Creación de nuevos entornos,
+  ]
+
+\PonMacro{definestartstop}
+
+Para crear un nuevo entorno \ConTeXt\ proporciona el comando
+\tex{definestartstop} cuya sintaxis es la siguiente:
+
+\type{\definestartstop[Nombre][Opciones]}
+
+% {\ttx \color[maincolor]{\backslash definestartstop[{\em Nombre}][{\em Opciones}]}}
+
+\startLetraChica
+
+  En la definición {\em oficial} de \tex{definestartstop} (véase
+  \in{sección}[sec:qrc-setup-en]) hay un argumento adicional que no he
+  puesto más arriba porque es opcional y no he conseguido averiguar
+  para qué \Duda sirve. Ni la excursión introductoria de \ConTeXt\ ni
+  el incompleto manual de referencia lo explican. Supuse que ese
+  argumento (que se debe introducir entre el nombre y la
+  configuración) pudiera ser el nombre de algún entorno ya existente
+  que sirviera de modelo inicial al nuevo entorno, pero mis pruebas
+  han demostrado que mi suposición es errónea. He buscado en la lista
+  de correo de \ConTeXt\ y no he llegado a ver en ella ningún uso de
+  ese posible argumento.
+
+\stopLetraChica
+
+donde
+
+\startitemize
+
+\item {\bf Nombre} es el nombre que tendrá el nuevo entorno.
+
+\item {\bf Configuración} permite configurar el comportamiento del
+  nuevo entorno. Para configurarlo contamos con las siguientes
+  variables:
+
+  \startitemize
+
+  \item {\tt before} -- Comandos que deben ejecutarse antes de entrar
+    en el entorno.
+
+  \item {\tt after} -- Comandos que se ejecutarán al salir del
+    entorno.
+
+  \item {\tt style} -- Estilo que ha de tener el texto del nuevo
+    entorno.
+
+  \item {\tt setups} -- Conjunto de comandos creado mediante
+    \PonMacro{startsetups}\tex{startsetups ... \stopsetups}. Este comando y su uso
+    no es objeto de explicación en la presente introducción.
+
+  \item {\tt color, inbetween, left, right} -- Opciones no
+    documentadas que no he conseguido hacer \Duda funcionar. Algunas,
+    por su nombre, cabría suponer para qué sirven, por ejemplo {\tt
+      color}, pero por más pruebas que he hecho, indicando algún valor
+    para esa opción no observo ningún cambio en el interior del
+    entorno.
+
+  \stopitemize
+
+\stopitemize
+
+Un ejemplo de definición de entorno podría ser el siguiente:
+
+{\switchtobodyfont[small]
+\starttyping
+\definestartstop
+  [TextoConBarra]
+  [before=\startmarginrule\noindentation,
+    after=\stopmarginrule,
+    style=\ss\sl
+  ]
+
+\starttext
+
+Las dos primeras leyes fundamentales de la estupidez humana afirman
+sin ambigüedad que:
+
+\startTextoConBarra
+
+  \startitemize[n,broad]
+
+  \item Siempre e inevitablemente cada uno de nosotros subestima el
+    número de individuos estúpidos que circulan por el mundo.
+
+  \item La probabilidad de que una persona determinada sea estúpida es
+    independiente de cualquier otra característica de la misma
+    persona.
+
+  \stopitemize
+
+\stopTextoConBarra
+
+\stoptext
+\stoptyping
+}
+
+El resultado sería:
+
+\definestartstop
+  [TextoConBarra]
+  [before=\startmarginrule\noindentation,
+    after=\stopmarginrule,
+    style=\sl,
+  ]
+
+\startframedtext[frame=off]
+  \color[red]{Las dos primeras leyes fundamentales de la estupidez
+    humana afirman sin ambigüedad que:
+
+\startTextoConBarra
+
+\startitemize[n,broad]
+
+\item Siempre e inevitablemente cada uno de nosotros subestima el
+  número de individuos estúpidos que circulan por el mundo.
+
+\item La probabilidad de que una persona determinada sea estúpida es
+  independiente de cualquier otra característica de la misma persona.
+
+\stopitemize
+
+\stopTextoConBarra}
+\stopframedtext
+
+Si queremos que nuestro nuevo entorno sea un grupo
+(\in{sección}[sec:grupos]), de tal modo que cualquier alteración del
+funcionamiento normal de \ConTeXt\ que se haga dentro de su interior,
+desaparezca al salir del entorno, debemos incluir en la opción
+\PalClave{before} el comando \PonMacro{bgroup}\tex{bgroup} y en la opción
+\PalClave{after} el comando \PonMacro{egroup}\tex{egroup}.
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [title=Otros conceptos fundamentales]
+
+Hay otras nociones, además de los comandos, que resultan fundamentales
+para comprender la lógica del funcionamiento de \ConTeXt\ algunas de
+ellas, por su complejidad, no son propias de una introducción y, por
+ello, no se llegarán a tratar en este documento; pero hay dos nociones
+que conviene examinar ya: los grupos y las dimensiones.
+
+\startsubsection
+  [reference=sec:grupos, title=Grupos]
+
+Un grupo es un fragmento del fichero fuente bien delimitado que
+\ConTeXt\ usa como {\em unidad de trabajo} (enseguida se explica lo que
+eso significa). Todo grupo tiene un principio y un final que han de
+indicarse expresamente. Un grupo se inicia:
+
+\startitemize[packed]
+
+\item Con el carácter reservado \PalClave{\{} o con el comando
+  \PonMacro{bgroup}\tex{bgroup}.
+
+\item Con el comando \PonMacro{begingroup}\tex{begingroup}
+
+\item Con el comando \PonMacro{start}\tex{start}
+
+\item Con la apertura de ciertos entornos (comandos \tex{startAlgo}).
+
+\item Al iniciar un entorno matemático (con el carácter reservado
+  «\$»).
+
+\stopitemize
+
+y se cerrará
+
+\startitemize[packed]
+
+\item Con el carácter reservado \PalClave{\}} o con el comando
+  \PonMacro{egroup}\tex{egroup}.
+
+\item Con el comando \PonMacro{endgroup}\tex{endgroup}
+
+\item Con el comando \PonMacro{stop}\tex{stop}
+
+\item Con el cierre del entorno (comandos \tex{stopAlgo}).
+
+\item Al salir de un entorno matemático (con el carácter reservado
+  «\$»).
+
+\stopitemize
+
+También ciertos comandos generan automáticamente un grupo como, por
+ejemplo, \tex{hbox}, \tex{vbox} y, en general, los comandos vinculados con
+la creación de {\em cajas}\footnote{La noción de {\em caja} es también una
+noción central de \ConTeXt, pero su explicación no se incluye en la
+presente introducción.}. Fuera de esos últimos casos (grupos generados
+automáticamente por ciertos comandos), la forma de cerrar un grupo ha de
+ser coherente con la forma en que se abrió. Es decir: un grupo iniciado con
+\PalClave{\{} se debe cerrar con \PalClave{\}}, y un grupo iniciado con
+\tex{begingroup} se debe cerrar con \tex{endgroup}. Esta regla sólo tiene
+una excepción y es que el grupo iniciado con \PalClave{\{} se puede cerrar
+con \tex{egroup}, y el grupo iniciado con \tex{bgroup} se puede cerrar con
+\PalClave{\}}; lo que, en realidad, significa que \PalClave{\{} y
+\tex{bgroup} son totalmente sinónimos e intercambiables entre sí, al igual
+que \PalClave{\}} y \tex{egroup}.
+
+\startLetraChica
+
+  Los comandos \PonMacro{bgroup}\tex{bgroup} y
+  \PonMacro{egroup}\tex{egroup} se diseñaron para que pudieran
+  definirse comandos que abrieran un grupo y otros que lo
+  cerraran. Para ello, por razones internas relativas a la sintaxis de
+  \TeX, esos grupos no podían abrirse y cerrarse con las llaves, pues
+  ello generaría, en el fichero fuente, la presencia de llaves no
+  balanceadas, cosa que genera siempre un error de compilación.
+
+  Los comandos \PonMacro{begingroup}\tex{begingroup} y
+  \PonMacro{endgroup}\tex{endgroup}, por el contrario, no son
+  intercambiables con las llaves o con los comandos \tex{bgroup
+    ... \egroup}, por lo que un grupo iniciado con \tex{begingroup}
+  tiene que cerrarse necesariamente con \tex{endgroup}. Estos últimos
+  comandos se diseñaron para poder hacer una comprobación de errores
+  mucho más profunda. En general los usuarios normales no tienen por
+  qué utilizarlos.
+
+\stopLetraChica
+
+Puede haber grupos anidados (es decir, un grupo dentro de otro grupo),
+pero, en tal caso, el orden de cierre de los grupos debe ser coherente
+con el orden en el que se abrieron: todo subgrupo se debe cerrar
+dentro del grupo en el que se inició. También puede haber grupos
+vacíos, que se generan con \PalClave{\{\}}. Un grupo vacío, en
+principio, no produce ningún efecto sobre el documento final, pero
+puede servir, por ejemplo, para indicar el fin del nombre de un
+comando.
+
+El principal efecto de los grupos es el del encapsulamiento de su
+contenido: como regla general, las definiciones, formatos y
+asignaciones de valor que se realicen dentro de un grupo, se “olvidan”
+una vez que se sale del grupo. De esta manera, si queremos que
+\ConTeXt\ temporalmente altere su funcionamiento normal, lo más
+eficiente es crear un grupo y, dentro de él, alterar ese
+funcionamiento. Así, al salir del grupo, se restaurarán todos los
+valores y formatos previos a él. Ya hemos visto algunos ejemplos de
+este funcionamiento al mencionar comandos tales como \tex{it},
+\tex{bf}, \tex{sc}, etc. Pero esto no pasa sólo con los comandos de
+formato: el grupo en cierto modo {\em aísla} su contenido, de tal
+modo que cualquier cambio en cualquiera de las muchas variables
+internas que \ConTeXt\ continuamente maneja, mantendrá su eficacia
+sólo mientras estemos dentro del grupo en el que dicho cambio tuvo
+lugar. Asimismo, un comando definido dentro de un grupo, no será
+conocido fuera de él.
+
+Así, si procesamos el siguiente ejemplo
+
+\starttyping
+\define\A{B}
+\A
+{
+  \define\A{C}
+  \A
+}
+\A
+\stoptyping
+
+veremos que la primera vez que ejecutamos el comando \tex{A}, el
+resultado se corresponde con el de su definición inicial («B»). Luego,
+hemos creado un grupo y redefinido el comando \tex{A} dentro de él. Si
+ahora ejecutamos, dentro del grupo, el comando, nos dará la nueva
+definición (en nuestro ejemplo, «C»), pero, cuando salimos del grupo
+en el que el comando \tex{A}, se redefinió, si volvemos a ejecutarlo,
+volverá a escribir «B». La definición hecha dentro del grupo se
+«olvida» una vez que salimos de él.
+
+Otro uso posible de los grupos tiene que ver con aquellos comandos o
+instrucciones diseñados para aplicarse exclusivamente al carácter que
+se escriba a continuación de los mismos. En tal caso, si queremos que
+el comando se aplique a más de un carácter, debemos encerrar en un
+grupo aquellos caracteres a los que queremos que se aplique el comando
+o instrucción. Así, por ejemplo, el carácter reservado
+\PalClave{\letterhat} que ya sabemos que, usado en un entorno
+matemático, convierte en superíndice el carácter que vaya a
+continuación; y así, por ejemplo, si escribimos \PalClave{\$4^2x\$}
+obtendremos «$4^2x$». Pero si escribimos \PalClave{\$4^\{2x\}\$}
+obtendremos «$4^{2x}$».
+
+En fin: una tercera utilidad del agrupamiento es la de indicar a
+\ConTeXt\ que lo encerrado dentro del grupo debe ser tratado como una
+sola cosa. Esta es la razón de que antes (\in{sección}[sec:sintaxis])
+se haya dicho que en ciertas ocasiones conviene encerrar entre llaves
+el contenido de alguna opción de un comando.
+
+\stopsubsection
+
+\startsubsection
+  [reference=sec:dimensiones, title=Dimensiones]
+
+Aunque podemos usar perfectamente \ConTeXt\ sin preocuparnos por las
+dimensiones, no podremos hacer uso de todas sus posibilidades de
+configuración sin tenerlas muy en consideración. Porque en gran medida
+la perfección tipográfica lograda por \TeX\ y sus derivados está en la
+gran atención que internamente el sistema presta a las
+dimensiones. Los caracteres tienen dimensiones; el espacio entre
+palabras, o entre líneas, o entre párrafos, tienen dimensiones, las
+líneas tienen dimensiones; los márgenes, los encabezados y pies de
+página... Para casi todo elemento de la página en el que podamos
+pensar habrá alguna dimensión.
+
+En \ConTeXt\ las dimensiones se indican mediante un número decimal
+seguido de la unidad de medida. Se pueden usar las unidades de medida
+recogidas en la \in{tabla}[tbl:medidas].
+
+\placetable
+  [here]
+  [tbl:medidas]
+  {Unidades de medida en \ConTeXt}
+{\starttabulate[|l|c|l|]
+  \NC {\bf Nombre} \NC {\bf Nombre en \ConTeXt}\NC {\bf Equivalencia}\NR
+\NC Pulgada\NC in\NC 1 in $=$ 2.54 cm\NR
+\NC Centímetro\NC cm\NC 2.54 cm $=$ 1 pulgada\NR
+\NC Milímetro\NC mm\NC 100 mm $=$ 1 cm\NR
+\NC Punto\NC pt\NC 72.27 pt $=$ 1 pulgada\NR
+\NC Punto grande\NC bp\NC 72 bp $=$ 1 pulgada\NR
+\NC Punto escalado\NC sp\NC 65536 sp $=$ 1 punto\NR
+\NC Pica\NC pc\NC 1 pc $=$ 12 puntos\NR
+\NC Punto Didot\NC dd\NC 1157 dd $=$ 1238 puntos\NR
+\NC Cícero\NC cc\NC 1 cc $=$ 12 didots\NR
+\NC\NC ex\NR
+\NC\NC em\NR
+\stoptabulate
+}
+
+Las tres primeras unidades de la \in{tabla}[tbl:medidas] son medidas
+de longitud estándar; la primera usada en el mundo anglosajón y las
+otras dos usadas fuera de él. Las restantes unidades proceden del
+mundo de la tipografía.  Las dos últimas, para las que no he puesto
+equivalencia son unidades de medida relativa, basadas en la fuente
+activa en cada momento. 1 «em» es igual a la anchura de la «M» y un
+«ex» equivale a la altura de una «x». El uso de medidas relativas al
+tamaño de la fuente permite diseñar macros que se vean igual de bien
+sea cual sea la fuente utilizada en cada instante. Por ello, en
+general, es algo que se recomienda.
+
+Salvo algunas excepciones muy contadas, podemos usar la unidad de
+medida que prefiramos, pues \ConTeXt\ la convertirá internamente. Pero
+siempre que se indique una dimensión es obligatorio indicar la unidad
+de medida, incluso aunque queramos indicar una medida de “0”, hay que
+decir “0pt” ó “0cm”. Entre el número y el nombre de la unidad, podemos
+o no dejar un espacio en blanco. Si la unidad tiene una parte decimal,
+podemos usar como separador de decimales, indistintamente, el punto
+(.) o la coma (,).
+
+Las medidas se usan, normalmente, como opción de algún comando. Pero
+también podemos asignar directamente un valor a alguna medida interna
+de \ConTeXt\ siempre que conozcamos el nombre de la misma. Por
+ejemplo: la indentación de la primera línea de un párrafo ordinario,
+es controlada internamente por \ConTeXt\ mediante una variable llamada
+\PonMacro{parindent}\tex{parindent}. Asignando expresamente un valor a
+dicha variable habremos alterado, a partir del punto en el que lo
+hagamos, la medida que utilizará \ConTeXt. Y así, por ejemplo si
+queremos suprimir la indentación de la primera línea nos bastará con
+escribir en nuestro fichero fuente:
+
+\type{\parindent=0pt}
+
+También podríamos haber escrito \tex{parindent 0pt} (sin el signo
+igual) o \tex{parindent0pt} sin espacio de separación entre el nombre
+de la medida y su valor.
+
+No obstante, asignar directamente un valor a una medida interna, se
+considera «poco elegante», en general se recomienda para ello usar los
+comandos que controlan esa variable, y hacerlo en el preámbulo
+ del fichero fuente. Lo contrario se traduce en ficheros fuente muy
+ difíciles de depurar, por no tener todos los comandos de
+ configuración en el mismo lugar, y en los que es realmente difícil
+ obtener cierta coherencia en las características tipográficas.
+
+Algunas dimensiones utilizadas por \ConTeXt\ son «elásticas», es decir,
+según el contexto pueden adoptar una medida u otra. Esas medidas se
+asignan con la siguiente sintaxis:
+
+\type{\NombreMedida plus MaxIncremento minus MaxDecremento}
+
+% {\tt\backslash {\em NombreMedida} plus {\em IncrementoMáximo} minus
+%   {\em DecrecimientoMáximo}}
+
+Por ejemplo
+
+\type{\parskip 3pt plus 2pt minus 1pt}
+
+Con esta instrucción le estamos indicando a \ConTeXt\ que asigne a
+\PonMacro{parskip}\tex{parskip} (que representa el espacio de
+separación entre párrafos) una medida {\em normal} de 3 puntos, pero
+que si las necesidades de composición de la página se lo exigen, la
+medida pueda llegar a ser de hasta 5 puntos (3 plus 2) o de sólo 2
+puntos (3 minus 1). En estos casos se dejará que sea \ConTeXt\ quien
+elija, para cada página la separación entre un mínimo de 2 puntos y un
+máximo de 5 puntos.
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [title=Método para el autoaprendizaje de\\ \ConTeXt]
+
+  % Sección añadida a última hora, cuando comprobé que yo mismo me
+  % había imbuido tanto del espíritu de ConTeXt que era capaz de
+  % adivinar la existencia de ciertos comandos.
+
+La inmensa cantidad de comandos y opciones de \ConTeXt\ resulta
+verdaderamente abrumadora y puede producirnos la sensación de que
+nunca llegaremos a aprender bien a trabajar con él. Esa impresión
+sería errónea pues una de las ventajas de \ConTeXt\ es el tratamiento
+uniforme que da a todas sus estructuras: aprendiendo bien unas cuantas
+estructuras, y sabiendo, más o menos, para qué sirven las restantes,
+cuando necesitemos alguna utilidad extra será relativamente fácil
+aprender a usarla. Por ello yo concibo esta introducción como una
+especie de {\em entrenamiento} que nos preparará para indagar por
+nuestra cuenta.
+
+Para crear un documento con \ConTeXt\ probablemente sólo sea
+imprescindible el conocimiento de los siguientes cinco aspectos (lo
+que podríamos llamar el {\em Top Five} de \ConTeXt:
+
+\startitemize[n]
+
+\item Saber crear el fichero fuente o en su caso el proyecto; lo que
+  es objeto de explicación en el \in{capítulo}[cap:fichfuente] de esta
+  introducción.
+
+\item Establecer la fuente principal del documento, y conocer los
+  comandos básicos para cambiar la fuente y el color
+  (\in{capítulo}[sec:fuentescol]).
+
+\item Conocer los comandos básicos para estructurar el contenido de
+  nuestro documento, tales como capítulos, secciones, subsecciones,
+  etc. Todo ello es objeto de explicación en nuestro
+  \in{capítulo}[cap:estructura].
+
+\item Tal vez, saber manejar el entorno {\em itemize} que es objeto de
+  explicación relativamente detallada en la \in{sección}[sec:itemize].
+
+\item ... y poco más.
+
+\stopitemize
+
+Del resto lo único que necesitamos es saber que es posible
+hacerlo. Ciertamente nadie usará una utilidad si no sabe que ésta
+existe. En esta introducción se explican muchas de ellas; pero, sobre
+todo, se ve de forma reiterada cómo actúa \ConTeXt\ siempre ante
+cierto tipo de construcción:
+
+\startitemize
+
+\item En primer lugar habrá un comando que permita realizarla.
+
+\item En segundo lugar hay casi siempre un comando que permite configurar y
+  predeterminar cómo se llevará a cabo la tarea; comando éste cuyo nombre
+  empieza por \tex{setup} y suele coincidir con el del comando básico.
+
+\item Por último suele existir también la posibilidad de crear algún
+  comando nuevo que sirva para realizar tareas similares, aunque con
+  una configuración diferente.
+
+\stopitemize
+
+Para ver si estos comandos existen o no, se puede usar el listado
+oficial de comandos (véase la \in{sección}[sec:qrc-setup-en]), el cual
+también nos informará de las opciones de configuración que estos
+comandos admiten. Y aunque en una primera aproximación los nombres de
+estas opciones nos pueden parecer {\em crípticos}, pronto
+comprobaremos que hay opciones que se repiten en muchos comandos y que
+funcionan igual en todos ellos, o de forma muy parecida. Si tenemos
+dudas sobre qué hace una opción, o cómo trabaja, bastará con generar
+un documento y probarla. También podemos indagar en la abundante
+documentación de \ConTeXt. Tal y como es corriente en el mundo del
+software libre, \suite- incluye en la distribución las fuentes de casi
+toda su documentación. Una utilidad como \PalClave{grep} (para
+sistemas GNU Linux) puede ayudarnos a buscar si en alguno de esos
+ficheros fuente se utiliza el comando o la opción que nos plantea
+dudas, para que podamos tener un ejemplo a la vista.
+
+Así concebido el aprendizaje de \ConTeXt\ esta introducción explica
+con detalle los cinco (en realidad, cuatro) aspectos que he destacado,
+y muchos más: conforme vayamos leyendo se irá formando en nuestra
+mente una imagen clara de la secuencia: {\em comando que realiza la
+  tarea} -- {\em comando que configura al anterior} -- {\em comando
+  que permite crear un comando similar}. Aprenderemos también algunas
+de las principales estructuras de \ConTeXt, y sabremos para qué sirven.
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% TeX-master: "../introCTX.mkiv"
+%%% coding: utf-8-unix
+%%% End:
+%%% vim:set filetype=context tw=75 : %%%

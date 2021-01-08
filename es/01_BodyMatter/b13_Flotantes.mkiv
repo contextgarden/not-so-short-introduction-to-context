@@ -1,0 +1,1639 @@
+%%% Fichero:     b13_Flotantes
+%%% Autor:       Joaquín Ataz López
+%%% Inicio:      Agosto 2020
+%%% Terminación: Agosto 2020
+%%% Contenido: Al llegar a este capítulo estaba ya cansado de la
+%%%            introducción. Por ello, por ejemplo, sólo se explica un
+%%%            tipo de tablas. Hacer tablas (en TeX, LaTeX o ConTeXt)
+%%%            es lo que más pereza me da. La organización del
+%%%            capítulo es, por otra parte, un poco heterodoxa
+%%%            (creo). Yo la veo clara, pero no sé si el público lo
+%%%            que pensará es que lo que para mí es un ingenioso
+%%%            "círculo" no será más bien un fuerte desorden mental. 
+%%%
+%%% Editado: Emacs + AuTeX - Y a veces con vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent b13_Flotantes.mkiv
+
+\startchapter
+  [title={Imágenes, tablas y otros objetos flotantes}]
+
+\PonIndiceCap
+
+Este capítulo trata, principalmente, sobre objetos flotantes. Pero al
+hilo de esta noción, se aprovecha para explicar dos tipos de objetos
+que, aunque muchas veces se configuran como objetos flotantes, no
+necesariamente lo son: las imágenes externas y las tablas. Quien
+consulte el índice del capítulo pensará que está muy desordenado: se
+empieza hablando de objetos flotantes, luego se habla de imágenes y de
+tablas, para terminar hablando, de nuevo, de objetos flotantes. Las
+razones de este orden son {\em pedagógicas}: imágenes y tablas se
+pueden explicar sin insistir demasiado en que suelen ser objetos
+flotantes; y sin embargo, al entrar en el examen de estos ayuda mucho
+el descubrir que ¡Sorpresa! ya conocemos dos objetos flotantes.
+
+\startsection
+  [
+    reference=sec:concepto_flotantes,
+    title={Qué son los objetos flotantes y para qué sirven},
+  ]
+
+Si un documento contuviera exclusivamente texto {\em normal} paginarlo
+sería relativamente fácil: Conocida la altura máxima de la zona de
+texto de la página basta con medir la altura de los distintos párrafos
+para saber en qué puntos hay que insertar los saltos de página. El
+problema está en que en muchos documentos hay objetos, fragmentos o
+bloques de texto indivisibles como, por ejemplo, una imagen, una
+tabla, una fórmula, un párrafo enmarcado, etc. En ocasiones estos
+objetos pueden llegar a ocupar un buen trozo de la página lo que, a su
+vez, plantea el problema de que si hay que insertarlo en un punto
+concreto del documento, es posible que, al no caber en la página en
+curso, esta tenga que interrumpirse abruptamente, dejando un amplio
+espacio en blanco en su parte inferior, para que el objeto en
+cuestión, y el texto que le sigue, se desplacen a la página
+siguiente. Las reglas de la buena composición tipográfica, sin
+embargo, indican que, salvo en la última página de un capítulo, la
+cantidad de texto en las páginas debe ser equivalente. 
+
+Es pues aconsejable evitar la aparición de grandes espacios verticales
+en blanco; y los objetos {\em flotantes} constituyen el principal
+mecanismo para conseguirlo. Se llama «objeto flotante» a aquel que no
+se tiene por qué ubicar en un punto exacto del documento, sino que
+puede {\em fluctuar} o {\em flotar} en torno a él. La idea es permitir
+que \ConTeXt\ decida el mejor lugar, desde el punto de vista de la
+paginación, para ubicar tales objetos, autorizando incluso a que se
+trasladen a otra página; pero procurando siempre que no se alejen
+demasiado del punto del fichero fuente en el que se ordenó su
+inclusión.
+
+No hay, por lo tanto, objetos que siempre y necesariamente sean
+flotantes. Pero si hay objetos a los que es recomendable permitirles
+serlo. La decisión, en todo caso, corresponde al autor o a quien se
+encargue de la composición tipográfica, si es una persona distinta.
+
+Que la ubicación exacta de un objeto indivisible pueda cambiar, sin
+duda facilita mucho la tarea de la composición de páginas
+equilibradas; pero, a cambio, tiene el inconveniente de que, como en
+el momento de escribir el original no sabemos exactamente en qué lugar
+aparecerá el objeto en cuestión, se hace difícil referirse a él. Y
+así, si yo, por ejemplo, justo después de incluir en mi documento la
+orden que inserta una imagen, en el párrafo siguiente pretendo
+describirla y escribo algo así como: «Como se puede ver en la figura
+anterior», pero al {\em flotar} la figura, esta se ubica {\em detrás}
+de dicho texto, se habrá producido una inconsistencia: el lector que
+busque una imagen {\em antes} del texto que se refiera a ella, no la
+encontrará, porque, al hacerla flotar, de hecho la imagen se ha
+insertado detrás.
+
+Esto, a su vez, se arregla {\em numerando} los objetos flotantes
+(previa distribución de los mismos en categorías), de tal forma que en
+lugar de referirnos a una imagen como «la imagen anterior» o «la
+próxima imagen», nos referiremos a ella como «la imagen 1.3», pudiendo
+usar el mecanismo de las remisiones internas de \ConTeXt\ para
+asegurarnos de que el número de imagen se mantenga siempre actualizado
+(véase la \in{sección}[sec:referencias]). La numeración de este tipo
+de objetos, por otra parte, facilita el que se pueda crear con
+bastante facilidad un índice de los mismos (índice de tablas, índice
+de gráficos, índice de imágenes, índice de ecuaciones, etc., véase,
+sobre cómo generarlos, la \in{sección}[sec:listas_ind]).
+
+El mecanismo de tratamiento de los objetos flotantes en \ConTeXt\ es
+bastante sofisticado y alcanza unos altos niveles de abstracción que,
+tal vez, no lo hagan adecuado para los principiantes. Por ello en este
+capítulo, voy a empezar por explicarlo a partir de dos casos
+concretos: las imágenes y las tablas. Después intentaré generalizar
+algo para que se comprenda cómo podemos extender dicho mecanismo a
+otro tipo de objetos.
+
+\stopsection
+
+\startsection
+  [title={Imágenes externas}]
+
+Como el lector a estas alturas sabe (pues se explicó en la
+\in{sección}[sec:ctx]), \ConTeXt\ está perfectamente integrado con
+MetaPost y puede generar imágenes y gráficos {\em programados} de modo
+similar a como se programan las transformaciones del texto. También
+hay un módulo de expansión de \ConTeXt\footnote{Los módulos de
+  expansión de \ConTeXt\ le dotan de utilidades adicionales; pero no
+  están incluidos en esta introducción.} que le permite trabajar con
+TiKZ\footnote{Se trata de un lenguaje de programación de gráficos
+  diseñado para trabajar en sistemas basados en \TeX. Su nombre está
+  constituido por las siglas de la frase alemana «TiKZ ist keinen
+  Zeichenprogramm» que traducido significa: «TiKZ no es un programa de
+  dibujo», lo que es un {\em acrónimo recursivo} (igual que GNU); una
+  broma propia de programadores. Dejando de lado MetaPost (que no sé
+  manejar), creo que TiKZ es un gran sistema para el diseño de
+  gráficos programados.}. Pero de ese tipo de imágenes no se trata en
+esta introducción (pues ello probablemente obligaría a duplicar su
+extensión). Me estoy refiriendo aquí al uso de imágenes externas, que
+residen en un fichero de nuestro disco duro o que sean descargadas
+directamente de Internet por \ConTeXt.
+
+\startsubsection
+  [title={Inserción directa de imágenes}]
+  \PonMacro{externalfigure}
+
+Para insertar una imagen directamente (no como objeto flotante) se usa
+el comando \tex{externalfigure} cuya sintaxis es
+
+\type{\externalfigure [Nombre] [Configuración]}
+
+donde 
+
+\startitemize
+
+\item {\em Nombre} puede ser, bien el nombre del fichero que contiene
+  la imagen, bien la dirección web de una imagen ubicada en Internet,
+  bien un nombre simbólico que previamente hayamos asociado a una
+  imagen mediante el comando
+  \PonMacro{useexternalfigure}\tex{useexternalfigure} cuyo formato es
+  similar al de \tex{externalfigure} aunque recibe un primer argumento
+  con el nombre simbólico que se asociará a la imagen en cuestión.
+
+\item {\em Configuración} es un argumento opcional que nos permite
+  aplicar ciertas transformaciones a la imagen antes de su inserción
+  en nuestro documento. Examinaremos este argumento más detenidamente
+  en el \in{epígrafe}[sec:configimagen].
+
+\stopitemize
+
+Los formatos de imagen admitidos son pdf, mps, jpg, png, jp2, jbig,
+jbig2, jb2, svg, eps, gif o tif. De ellos \ConTeXt\ realmente sólo
+soporta los ocho primeros, mientras que los restantes (svg, eps, gif
+o tif) antes de abrirlos necesita convertirlos mediante una
+herramienta externa que cambia según cual sea el formato y que, por lo
+tanto, debe estar instalada en el sistema para que \ConTeXt\ pueda
+manipular ese tipo de ficheros.
+
+\startLetraChica
+
+  Entre los formatos soportados por \tex{externalfigure} también los
+  hay de vídeo. En particular: QuickTime (extensión .mov), Flash Video
+  (extensión .flv) y MPeg~4 (extensión .mp4). Pero la mayor parte de
+  los reproductores de PDF no saben gestionar ficheros PDFs con vídeo
+  incrustado en ellos. No puedo al respecto decir mucho, pues no he
+  hecho pruebas de ningún tipo.
+
+\stopLetraChica
+
+No es preciso, por otra parte, indicar la extensión del fichero:
+\ConTeXt\ buscará un fichero con el nombre especificado y alguna de
+las extensiones propias de los formatos de imagen conocidos. Si
+existen varios candidatos, en primer lugar se usa el formato PDF si lo
+hubiera, y en su defecto el formato MPS (gráficos generados por
+MetaPost). A falta de estos dos, se sigue el siguiente orden: jpeg,
+png, jpeg~2000, jbig y jbig2.
+
+\startLetraChica
+
+  Si el formato real de la imagen no se corresponde con la extensión
+  del fichero que la almacena, \ConTeXt\ no podrá abrirla, salvo que
+  se le indique, mediante la opción {\tt method} cuál es el formato
+  real de la imagen.
+
+\stopLetraChica
+
+Si la imagen no constituye un párrafo aislado, sino que se integra en
+un párrafo de texto, y su altura es superior a la del interlineado,
+éste se ajustará para evitar que la imagen se superponga sobre las
+líneas anteriores, como en el ejemplo que acompaña a esta
+línea\externalfigure[cow-brown][width=2.5em].
+
+Por defecto \ConTeXt\ busca las imágenes en el directorio de trabajo,
+en su directorio padre y en el directorio padre de éste. Podemos
+indicar la ubicación de un directorio en el que se encuentren las
+imágenes con las que trabajaremos mediante la opción {\tt directory}
+del comando \tex{setupexternalfigures}, con lo que se sumaría dicho
+directorio a la ruta de búsqueda. Si queremos que la búsqueda se
+realice sólo en el directorio de imágenes, tenemos que establecer
+también la opción {\tt location}. Así, por ejemplo, para que nuestro
+documento busque todas las imágenes que necesite en el directorio
+\PalClave{img} debemos escribir:
+
+\starttyping
+  \setupexternalfigures
+    [directory=img, location=global]
+\stoptyping
+
+\startLetraChica
+
+  En la opción {\tt directory} de \tex{setupexternalfigures} podemos
+  introducir más de un directorio, separándolos por una coma; pero, en
+  tal caso, es preciso encerrar entre corchetes todos los
+  directorios. Por ejemplo \PalClave{directory=\{img,
+      \lettertilde/imágenes\}}.
+
+  En {\tt directory} se usa siempre el carácter «/» como separador de
+  directorios; incluso en Microsoft Windows cuyo sistema operativo
+  usa el carácter «\backslash» como separador de directorios.
+
+\stopLetraChica
+
+\tex{externalfigure} también es capaz de usar imágenes alojadas en
+Internet. Y así, por ejemplo el siguiente fragmento insertará en el
+documento, directamente de Internet el logotipo de CervanTeX, el grupo
+de usuarios hispanoparlantes de \TeX\footnote{Las direcciones de
+  Internet son muy largas, y el espacio disponible para mostrar el
+  ejemplo a doble columna es escaso. Por ello, para que cupiera bien
+  la orden en la columna izquierda he insertado un salto de línea
+  dentro de la dirección web. Si alguien desea copiar y pegar el
+  ejemplo, no funcionará si no se suprime dicho salto.}:
+
+\startDobleEjemplo
+\starttyping
+\externalfigure
+[http://www.cervantex.es/files/
+cervantex/cervanTeXcolor-small.jpg]
+\stoptyping
+
+\externalfigure
+[http://www.cervantex.es/files/cervantex/cervanTeXcolor-small.jpg]
+
+\stopDobleEjemplo
+
+\startLetraChica
+
+  Cuando se compila por primera vez un documento que contiene un archivo
+  remoto, éste se descarga del servidor y se almacena en el directorio de
+  caché de LuaTeX. Este archivo en caché se utiliza durante las
+  compilaciones subsiguientes.  Normalmente, la imagen remota se descarga
+  de nuevo si la imagen en la caché es más antigua de 1~día. Para cambiar
+  este umbral consulte la \goto{wiki de
+  \ConTeXt}[url(https://wiki.contextgarden.net/Using_Graphics)].
+
+\stopLetraChica
+
+Si \ConTeXt\ no encuentra la imagen que debía insertar, no se genera
+ningún error, sino que en lugar de la imagen se insertará un bloque de
+texto con información sobre la imagen que debería ir allí. El tamaño
+de ese bloque será el de la imagen (si \ConTeXt\ lo conoce) o, en caso
+contrario, un tamaño estándar. Hay un ejemplo de esto en la
+\in{sección}[sec:startcombination].
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:placefigure,
+    title={Inserción de una imagen con \tex{placefigure}},
+  ]
+  \PonMacro{placefigure}
+
+Las imágenes se pueden insertar directamente. Pero es preferible
+insertarlas mediante \tex{placefigure}. Este comando hace que
+\ConTeXt:
+
+\startitemize
+
+\item Sepa que se está insertando una imagen que debe incorporarse a
+  la lista de imágenes del documento, con la que podrá generarse, si
+  lo deseamos, un índice de imágenes.
+
+\item Asigne un número a la imagen, facilitando así las remisiones
+  internas a ella.
+
+\item Añada a la imagen un título, creando un bloque de texto
+  inseparable entre la imagen y su título.
+
+\item Establezca automáticamente el espacio en blanco (horizontal y
+  vertical) necesario para que la imagen se vea correctamente.
+
+\item Ubique la imagen en el lugar que se le indique, haciendo fluir
+  el texto en torno a ella si fuera preciso.
+
+\item Convierta a la imagen en objeto flotante si, teniendo en cuenta
+  su tamaño y las especificaciones relativas a su ubicación, resultara
+  posible\footnote{Esto último es mi conclusión, a la vista de que
+    entre las opciones de ubicación hay algunas (como {\tt force} o
+    \Conjetura{\tt split}) que son contradictorias con la propia idea
+    de objeto flotante.}.
+
+\stopitemize
+  
+\stopfigure
+
+La sintaxis de este comando es la siguiente:
+
+\type{\placefigure[Opciones] [Etiqueta] {Título} {Imagen}}
+
+Los distintos argumentos significan lo siguiente:
+
+\startitemize
+
+\item {\em Opciones} son un conjunto de indicaciones que en general se
+  refieren a dónde ubicar la imagen. Dado que estas opciones son las
+  mismas en este y en otros comandos, las explicaré de modo conjunto
+  más adelante (en la \in{sección}[sec:ubicarobjetos]). De momento,
+  para los ejemplos, usaré la opción {\tt here} que es una indicación
+  a \ConTeXt\ para que, en la medida de lo posible, ubique la imagen
+  exactamente en el punto del documento en el que se encuentra el
+  comando que la inserta.
+
+\item {\em Etiqueta} es una cadena de texto para referirse
+  internamente a este objeto a efectos de poder realizar remisiones
+  internas a él (véase la \in{sección}[sec:referencias]).
+
+\item {\em Título} es el texto del título que se añadirá a la imagen.
+
+\item {\em Imagen} es el comando que insertará la imagen.
+
+\stopitemize
+
+Por ejemplo
+
+\starttyping
+  \placefigure
+    [here]
+    [fig:texknuth]
+    {Logotipo de \TeX\ y fotografía de {\sc Knuth}}
+    {\externalfigure[https://i.ytimg.com/vi/8c5Rrfabr9w/maxresdefault.jpg]}
+\stoptyping
+
+  \placefigure
+    [here]
+    [fig:texknuth]
+    {Logotipo de \TeX\ y fotografía de {\sc Knuth}}
+    {
+      \externalfigure
+        [https://i.ytimg.com/vi/8c5Rrfabr9w/maxresdefault.jpg]
+        [scale=600]
+    }
+
+Como se puede ver en el ejemplo, al insertar así la imagen (lo que,
+por cierto, se ha hecho directamente de una imagen alojada en
+Internet), se producen algunos cambios respecto de lo que ocurre
+cuando se usa directamente el comando \tex{externalfigure}. Así, se ha
+añadido espacio vertical, se ha centrado la imagen y se le ha añadido
+un título. Esos son cambios {\em externos}, apreciables a simple
+vista. Desde el punto de vista interno el comando también ha producido
+estos otros efectos no menos importantes:
+
+\startitemize
+
+\item En primer lugar, la imagen se ha insertado en la «lista de
+  imágenes» que \ConTeXt\ mantiene internamente para los objetos que
+  se insertan en el documento mediante \tex{placefigure}. Esto, a su
+  vez, implica que la imagen aparecerá en el índice de imágenes que se
+  puede generar con \tex{placelist[figure]} (véase la
+  \in{sección}[sec:listas_ind]), aunque existen dos comandos
+  específicos para generar el índice de imágenes que es
+  \PonMacro{placelistoffigures}\tex{placelistoffigures} o
+  \PonMacro{completelistoffigures}\tex{completelistoffigures}.
+
+\item En segundo lugar, la imagen ha quedado vinculada a la etiqueta
+  que se le añadió como segundo argumento del comando
+  \tex{placefigure} lo que significa que a partir de ahora podemos
+  hacer remisiones internas a ella usando dicha etiqueta (véase la
+  \in{sección}[sec:referencias]).
+
+\item Por último la imagen ha pasado a ser un objeto flotante, lo que
+  significa que si fuera necesario por necesidades de composición de
+  la página, \ConTeXt\ desplazaría su ubicación.
+
+\stopitemize
+
+En realidad \tex{placefigure}, a pesar de su nombre, no sirve sólo
+para insertar imágenes, podemos insertar con él cualquier material;
+incluso texto. Pero el texto o material que se inserte en el documento
+mediante \tex{placefigure}, será tratado {\em como si fuera una
+  imagen}, aunque no lo sea; se añadirá a la lista de imágenes
+gestionada internamente por \ConTeXt, y se le podrán aplicar
+transformaciones similares a las propias de las imágenes tales como
+escalar o rotar, enmarcar, etc. Así el siguiente ejemplo:
+
+\placefigure
+  [here, force]
+  [fig:textoprueba]
+  {Uso de \backslash placefigure para transformaciones de texto}
+  {\rotate[rotation=180]{\framed{\tfd Texto de prueba}}}
+
+que se consigue de la siguiente manera:
+
+\starttyping
+\placefigure
+  [here, force]
+  [fig:textoprueba]
+  {Uso de \backslash placefigure para transformaciones de texto}
+  {\rotate[rotation=180]{\framed{\tfd Texto de prueba}}}
+\stoptyping
+
+\stopsubsection
+
+\startsubsection
+  [title={Inserción de imágenes integradas en un\\ bloque de texto}]
+
+  Salvo para imágenes muy pequeñas, que se pueden integrar en una
+  línea sin desbaratar demasiado el interlineado del párrafo,
+  normalmente las imágenes se insertan en un párrafo que sólo las
+  contiene a ellas. Si la imagen se inserta con \tex{placefigure} y su
+  tamaño lo permite, dependiendo de la indicación que hagamos respecto
+  de dónde ubicarse (véase la \in{sección}[sec:ubicarobjetos]),
+  \ConTeXt\ permitirá que el texto de los párrafos anterior y
+  posterior fluya en torno a la imagen. No obstante, si queremos
+  asegurarnos de que cierta imagen no se separará de cierto texto,
+  podemos usar el entorno {\tt \PonMacro{startfiguretext}figuretext}
+  cuyo formato es el siguiente:
+
+\starttyping
+  \startfiguretext
+    [Opciones]
+    [Etiqueta]
+    {Título}
+    {Imagen}
+
+    ... Texto
+
+  \stopfiguretext
+\stoptyping
+
+Los argumentos del entorno son exactamente los mismos que los de
+\tex{placefigure} y tienen el mismo significado. Pero aquí las
+opciones ya no son opciones de ubicación de un objeto flotante, sino
+indicaciones relativas a la integración de la imagen dentro del
+párrafo; y así, por ejemplo, \PalClave{left} aquí significa que la
+imagen se situará en el lado izquierdo y el texto fluirá por el
+derecho, mientras que \PalClave{left, bottom} significará que la
+imagen se debe situar en el lado inferior izquierdo del texto asociado
+a ella.
+
+El texto escrito dentro del entorno es el que fluirá alrededor de la
+imagen.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:configimagen,
+    title={Configuración y transformación de las\\ imágenes que se insertan},
+  ]
+
+\startsubsubsection
+  [title={Opciones del comando de inserción que provocan cierta
+      transformación en la imagen}]
+  \PonMacro{setupexternalfigures}
+
+El último argumento del comando \tex{externalfigure} permite
+realizar ciertos ajustes en la imagen que se inserta. Estos ajustes
+podemos realizarlos:
+
+\startitemize
+
+\item Con carácter general para todas las imágenes que se insertarán
+  en el documento; o para todas las imágenes que se inserten a partir
+  de cierto punto. En tal caso el ajuste lo haremos mediante el
+  comando \tex{setupexternalfigures}.
+
+\item Para una imagen concreta que se pretende insertar varias veces
+  en el documento. En tal caso el ajuste se hace en el último
+  argumento del comando \tex{useexternalfigure} que asocia una imagen
+  externa con un nombre simbólico.
+
+\item En el momento exacto en el que insertemos una concreta
+  imagen. En este caso el ajuste se hace en el propio comando
+  \tex{externalfigure}.
+
+\stopitemize
+
+Los cambios en la imagen que pueden lograrse por esta vía son los
+siguientes:
+
+\startdescripción{Cambiar el tamaño de la imagen.}
+
+Ello lo podemos lograr:
+
+\startitemize
+
+\item {\em Asignándole una anchura o altura concretas}, cosa que se
+  consigue, respectivamente, mediante las opciones {\tt width} y {\tt
+    height}; si sólo se ajusta uno de los dos valores, el otro se
+  adapta automáticamente para mantener la proporción.
+
+  Podemos asignar una altura o anchura exacta, o indicarla como un
+  porcentaje de la altura de la página o anchura de la línea. Por
+  ejemplo: 
+
+  \type{width=.4\textwidth}
+
+  se asegurará de que la imagen tenga una anchura igual al 40\% de la
+  anchura de la línea.
+
+\item {\em Escalando la imagen}: La opción {\tt xscale} escalará la
+  imagen horizontalmente; {\tt yscale} lo hará verticalmente y {\tt
+    scale} la escalará horizontal y verticalmente. Estas tres opciones
+  esperan un número representativo del factor de escalado multiplicado
+  por 1000. Es decir: {\tt scale=1000} dejará la imagen en su tamaño
+  original, mientras que {\tt scale=500} la reducirá a la mitad, y
+  {\tt scale=2000} duplicará su tamaño.
+
+  Un escalado condicional, que se aplica sólo si la imagen supera
+  ciertas dimensiones, se obtiene con las opciones {\tt maxwidth} y
+  {\tt maxheight} que reciben una dimensión. Por ejemplo {\tt
+    maxwidth=.2\backslash textwidth} escalará la imagen sólo si esta
+  resulta tener una anchura superior al 20\% de la anchura de la
+  línea.
+
+\stopitemize  
+
+\stopdescripción
+
+\startdescripción{Rotar la imagen.}
+
+  Para rotar la imagen se usa la opción {\tt orientation} que recibe
+  un número representativo del número de grados de rotación que se
+  aplicará. La rotación se hace en sentido inverso a las agujas del
+  reloj.
+
+  \startLetraChica
+
+    La wiki da a entender que las rotaciones que se pueden conseguir
+    con esta opción han de ser múltiplos de 90 (90, 180 o 270) pero
+    que para conseguir una rotación diferente habría que usar el
+    comando \tex{rotate}. Yo, sin embargo, no he tenido ningún
+    problema para aplicar a una imagen una rotación de 45 grados sólo
+    con {\tt orientation=45}, sin necesidad de acudir al comando
+    \tex{rotate}.
+
+  \stopLetraChica
+  
+\stopdescripción
+
+\startdescripción{Enmarcar la imagen.}
+
+  Podemos rodear también la imagen con un marco mediante la opción
+  {\tt frame=on}, y configurar su color ({\tt framecolor}), la
+  distancia entre el marco y la imagen ({\tt frameoffset}), el grosor
+  de la línea que dibuja el marco ({\tt rulethickness}) o la forma
+  de sus esquinas ({\tt framecorner}) que puede ser redondeada ({\tt
+    round}) o rectangular.
+
+\stopdescripción
+
+\startdescripción{Otros aspectos configurables de las imágenes.}
+
+  Además de los aspectos ya vistos, que implican una transformación en
+  la imagen que se insertará, mediante \tex{setupexternalfigures}
+  podemos configurar otros aspectos como, por ejemplo, el directorio
+  donde hay que buscar la imagen (opción {\tt directory}), si la
+  imagen debe buscarse sólo en el directorio indicado ({\tt
+    location=global}) o se debe incluir también el directorio de
+  trabajo y sus directorios antecesores ({\tt location=local}), si la
+  imagen debe o no ser interactiva ({\tt interaction}), etc.
+  
+\stopdescripción
+
+\stopsubsubsection
+
+\startsubsubsection
+  [title={Comandos específicos para transformar una imagen}]
+ 
+Hay tres comandos en \ConTeXt\ que producen cierta transformación en
+una imagen y que se pueden usar en combinación con
+\tex{externalfigure}. Se trata de:
+
+\startitemize
+  
+\item {\em Reflejo especular}: que se consigue con el comando
+  \PonMacro{mirror}\tex{mirror}.
+
+\item {\em Recorte}: 
+Esto se consigue con el comando \PonMacro{clip}\tex{clip} al que hay que indicar la
+anchura ({\tt width}), altura ({\tt height}), desplazamiento horizontal
+({\tt hoffset}) y desplazamiento vertical ({\tt voffset}) del recorte
+a aplicar. Por ejemplo:
+
+\starttyping
+\clip
+  [width=2cm, height=1cm, hoffset=3mm, voffset=5mm]
+  {\externalfigure[logo.pdf]}
+\stoptyping
+
+\item {\em Rotación.}
+  Un tercer comando capaz de aplicar transformaciones a una imagen es
+  el comando \PonMacro{rotate}\tex{rotate}. Puede usarse en conjunción con
+  \tex{externalfigure} pero normalmente no será necesario dado que
+  este último dispone, como acabamos de ver, de la opción {\tt
+    orientation} que produce ese mismo resultado.
+
+\startLetraChica
+
+\stopLetraChica
+
+\stopitemize
+
+El uso típico de estos comandos es con imágenes, pero en realidad
+actúan sobre {\em cajas}. Por ello podemos aplicarlos a cualquier
+texto simplemente encerrándolo en una caja (cosa que hace
+automáticamente el comando), lo que producirá efectos curiosos como
+los siguientes:
+
+\startDobleEjemplo
+\vbox{\starttyping
+  \mirror{Texto de prueba}\\
+  \rotate[rotation=20] {Texto de prueba}
+\stoptyping}
+
+\vbox{  \mirror{Texto de prueba}\\
+  \rotate[rotation=20]
+     {Texto de prueba}}
+
+\stopDobleEjemplo
+
+\stopsubsubsection
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:tablas,
+    title={Tablas},
+  ]
+
+\startsubsection
+  [title={Ideas generales en torno a las tablas y a su ubicación en el
+  documento}]
+
+Las tablas son objetos estructurados que contienen texto, fórmulas o
+incluso imágenes, ordenadas en una serie de {\em celdas} que permiten
+ver gráficamente la relación entre los contenidos de cada celda. Para
+ello se organiza la información repartiéndola en filas y columnas:
+Todos los datos (o entradas) de una misma fila guardan cierta relación
+entre sí, al igual que todos los datos (o entradas) de una misma
+columna. Una celda es el cruce de una fila con una columna, tal y como
+se muestra en la \in{figura}[fig:tabla].
+
+\placefigure
+  [right]
+  [fig:tabla]
+  {Imagen de una tabla simple}
+  {\externalfigure[tablas][width=.6\textwidth]}
+  
+Las tablas son ideales para mostrar textos o datos que están
+relacionados unos con otros, pues al quedar cada uno encerrado en su
+propia celda, aunque cambie su contenido, o el contenido de las
+restantes celdas, la posición relativa de una de ellas con respecto a
+las otras no variará.
+
+De todas las tareas que implica componer un texto, la creación de
+tablas es la única que, en mi opinión, es más sencilla de hacer en un
+programa gráfico (tipo procesador de textos) que en sistemas basados
+en textos marcados como \ConTeXt. Porque es más fácil {\em dibujar} la
+tabla (que es lo que se hace en un programa de procesado de textos)
+que {\em describirla}, que es lo que hacemos cuando trabajamos con
+\ConTeXt. Cada cambio de fila y cada cambio de columna exige la
+presencia de un comando, y eso hace que se tarde bastante más tiempo
+en implementar la tabla del que se tardaría simplemente diciendo
+cuántas filas y columnas deseamos.
+
+\ConTeXt\ incorpora tres mecanismos distintos para producir tablas; el
+entorno {\tt tabulate} que está recomendado para tablas simples y que
+es el que más directamente aparece inspirado en las tablas de \TeX,
+las llamadas {\em tablas naturales}, inspiradas en las tablas de HTML;
+adecuadas para tablas con necesidades de diseño especiales, en las
+que, por ejemplo, no todas las filas tengan el mismo número de
+columnas, y las llamadas {\em tablas extremas}, claramente basadas en
+XML y recomendadas para tablas de extensión mediana o larga, que
+ocupen más de una página. De los tres explicaré sólo el primero. Las
+tablas naturales están razonablemente bien explicadas en «Una
+excursión por \ConTeXt\ Mark~IV», y para las {\em tablas extremas} se
+incluye un documento sobre ellas en la documentación de \suite-.
+
+En las tablas ocurre algo parecido a lo que ocurría con las imágenes:
+podemos simplemente escribir en un punto del documento los comandos
+necesarios para generar una tabla, y ésta se insertará en ese punto
+exacto, o podemos usar el comando
+\PonMacro{placetable}\tex{placetable} para insertar una tabla, con lo
+que obtendremos algunas ventajas:
+
+\startitemize
+
+\item \ConTeXt\ numerará la tabla y la añadirá a la lista de tablas
+  permitiendo remisiones internas a la tabla (a través de su
+  numeración) e incluyéndola en un eventual índice de tablas.
+
+\item Se ganará flexibilidad en la ubicación de la tabla dentro del
+  documento, facilitando así la tarea de la paginación del mismo.
+
+\stopitemize
+
+El formato de \tex{placetable} es similar al ya visto de
+\tex{placefigure} (véase \in{sección}[sec:placefigure]):
+
+\type{\placetable[Opciones] [Etiqueta] {Título} {tabla}}
+
+Me remito a las secciones \in{}[sec:ubicarobjetos] y
+\in{}[sec:confcaptions] respecto a las opciones relativas a la
+ubicación de la tabla y a la configuración del título. Entre las
+opciones hay una, no obstante, que parece pensada exclusivamente para
+las tablas. Se trata de la opción \PalClave{split} que, cuando se
+establece, autoriza a \ConTeXt\ a extender la tabla a lo largo de dos
+o más páginas, caso este en el que la tabla ya no podrá ser un objeto
+flotante.
+
+Podemos establecer con carácter general la configuración de las tablas
+mediante \PonMacro{setuptables}\tex{setuptables}. Asimismo, igual que ocurre con las
+imágenes, es posible generar un índice de tablas mediante
+\PonMacro{placelistoftables}\tex{placelistoftables} o \PonMacro{completelistoftables}\tex{completelistoftables}, véase, al
+respecto la \in{sección}[sec:indicesvarios].
+
+\stopsubsection
+
+\startsubsection
+  [title={Tablas simples con el entorno {\tt tabulate}}]
+\PonMacro{starttabulate}
+
+Las tablas más simples son las que se logran con el entorno {\em
+  tabulate} cuyo formato es:
+
+\vbox{\starttyping
+  \starttabulate[Diseño de las columnas de la tabla]
+    ... % Contenido de la tabla
+    ...
+    ...
+  \stoptabulate
+\stoptyping}
+
+Donde el argumento recibido entre corchetes describe (en clave) el
+número de columnas que tendrá la tabla, e indica (a veces de modo
+indirecto) la anchura de las mismas.  Digo que el argumento describe
+el diseño {\em en clave}, porque a primera vista parece algo muy
+críptico: consiste en una secuencia de caracteres, cada uno de ellos
+con un significado especial. Lo iré explicando poco a poco y por
+pasos, pues creo que así es más fácil de comprender.
+
+\startLetraChica
+
+  Este es el típico caso en el que la gran cantidad de aspectos que
+  podemos configurar, hace que su descripción exija mucho texto y que
+  parezca que esto es endiabladamente difícil. En realidad, para la
+  mayor parte de las tablas que se construyen en la práctica, basta
+  con los puntos 1 y 2. Lo demás son posibilidades extra que es útil
+  saber que existen, pero que no es imprescindible conocer para
+  componer una tabla.
+
+\stopLetraChica
+
+\startitemize[n]
+
+\item {\bf Delimitador de columnas}: Se usa el carácter \PalClave{\|}
+  para delimitar las columnas de la tabla. Así, por ejemplo,
+  \PalClave{[\|lT\|rB\|]} describiría una tabla con dos columnas, una
+  de las cuales habría de tener las características asociadas a los
+  indicadores \PalClave{l} y \PalClave{T} (que inmediatamente veremos)
+  y la segunda columna tendría las características asociadas a
+  \PalClave{r} y \PalClave{B}. Una tabla sencilla de tres columnas
+  alineadas a la izquierda, por ejemplo, se describiría como
+  \PalClave{[\|l\|l\|l\|]}.
+
+\item {\bf Determinación de la naturaleza básica de las celdas de una
+  columna:} Lo primero a determinar cuando construimos nuestra tabla
+  es si queremos que el contenido de cada celda deba necesariamente
+  escribirse en una sola línea, o si, por el contrario, deseamos que
+  en nuestra tabla, si el texto de alguna columna es demasiado largo,
+  éste se distribuya en dos o más líneas. En el entorno {\tt tabulate}
+  esa cuestión no se decide celda a celda, sino que se considera una
+  característica de las columnas.
+
+  \startitemize[a]
+
+  \item {\em Celdas de una sola línea:} Si el contenido de las celdas
+    de una columna, sea cual sea su extensión, ha de escribirse en una
+    sola línea, debemos especificar la alineación del texto en la
+    columna, la cual puede ser izquierda (\PalClave{l}, de {\em
+      left}), derecha (\PalClave{r}, de {\em right}) o centrado
+    (\PalClave{c}, de {\em center}).
+
+    \startLetraChica
+      
+      En principio estas columnas tendrán la anchura que sea necesaria
+      para que en ella quepa la celda más ancha. Pero podemos limitar
+      la anchura de la columna con el especificador
+      \PalClave{w(Anchura)}. Por ejemplo
+      \PalClave{[\|rw(2cm)\|c\|c\|]} estará describiendo una tabla con
+      dos columnas, la primera alineada a la derecha y con una anchura
+      exacta de 2 centímetros, y las otras dos centradas y sin
+      limitación de anchura.
+
+      Hay que señalar que la limitación de anchura en columnas de una
+      sola línea, puede provocar que el texto de una columna se
+      superponga sobre el de la siguiente columna. Por ello mi consejo
+      es el de que cuando necesitemos columnas de anchura fija, usemos
+      siempre columnas de celdas multilineales.
+
+    \stopLetraChica
+    
+  \item {\em Celdas cuyo texto puede ocupar más de una línea si su
+    extensión lo exige}: El especificador \PalClave{p} genera columnas
+    en las que el texto de cada celda ocupará tantas líneas como se
+    necesiten. Si se indica simplemente \PalClave{p} la anchura de la
+    columna será toda la disponible. Pero también se puede indicar
+    \PalClave{p(Anchura)} en cuyo caso la anchura será la especificada
+    expresamente. Así los siguientes ejemplos:
+
+\starttyping
+\starttabulate[|l|r|p|]
+\starttabulate[|l|p(4cm)|]
+\starttabulate[|r|p(.6\textwidth)|]
+\starttabulate[|p|p|p|]
+\stoptyping
+
+El primer ejemplo creará una tabla con tres columnas, la primera y la
+segunda, de una sola línea, alineadas, respectivamente a la izquierda
+y a la derecha, y la tercera, que ocupará la anchura restante, y la
+altura necesaria para albergar todo su contenido. En el segundo
+ejemplo, la segunda columna medirá exactamente cuatro centímetros de
+ancho, sea cual sea su contenido; pero si éste no cabe en ese espacio,
+ocupará más de una línea. En el tercer ejemplo se calcula la anchura
+de la segunda columna proporcionalmente a la anchura máxima de la
+línea, y en el último ejemplo, habrá tres columnas que se repartirán
+la anchura disponible a partes iguales.
+
+  \stopitemize
+
+  \startLetraChica
+
+    Obsérvese que, en realidad, si una celda es un cuadrilátero, lo
+    que hace el especificador \PalClave{p} es autorizar una altura
+    variable de las celdas de una columna, dependiendo de la extensión
+    del texto.
+    
+  \stopLetraChica
+
+\item {\bf Añadir, a la descripción de la columna, indicaciones sobre
+  el estilo y variante de la fuente a utilizar}: Una vez decidida la
+  naturaleza básica de la columna (anchura y altura, automática o
+  fija, de las celdas), todavía podemos añadir, en la descripción del
+  contenido de la columna, un carácter representativo del {\em
+    formato} en el que ha de escribirse la misma. Estos caracteres
+  pueden ser \PalClave{B} para negrita, \PalClave{I} para cursiva,
+  \PalClave{S} para letra inclinada, \PalClave{R} para letra de estilo
+  roman o \PalClave{T} para letra de estilo {\em typewriter}.
+
+\head {\bf Otros aspectos adicionales que se pueden especificar en la
+  descripción de las columnas de la tabla}:
+
+  \startitemize[1]
+
+  \item {\em Columnas con fórmulas matemáticas}: Los especificadores
+    \PalClave{m} y \PalClave{M} activan en una columna el modo
+    matemático sin necesidad de especificarlo en cada una de sus
+    celdas. A cambio las celdas de esta columna no podrán albergar
+    texto normal.
+
+    \startLetraChica
+
+      Aunque \TeX, el antecesor de \ConTeXt, nació para escribir sobre
+      todo matemáticas, hasta ahora apenas he dicho nada de la
+      escritura de las matemáticas. En el modo matemático (que no voy
+      a explicar) \ConTeXt\ altera sus reglas normales e incluso
+      utiliza unas fuentes diferentes. El modo matemático a su vez
+      tiene dos variedades: el que podríamos llamar {\em en línea} en
+      el que la fórmula se aloja dentro de una línea que contiene
+      texto normal (indicador \PalClave{m}), y el {\em modo matemático
+        completo} que muestra fórmulas en un entorno en el que no hay
+      texto normal. La diferencia principal de ambos modos, en una
+      tabla, está fundamentalmente en el tamaño con que se escribirá
+      la fórmula y el espacio horizontal y vertical con que se la
+      rodeará.
+
+    \stopLetraChica
+
+  \item {\em Añadir espacio horizontal en blanco extra en torno al
+    contenido de las celdas de una columna}: Mediante los indicadores
+    \PalClave{in}, \PalClave{jn} y \PalClave{kn} podemos añadir
+    espacio en blanco extra a la izquierda del contenido de la columna
+    (\PalClave{in}), a la derecha (\PalClave{jn}) o a ambos lados
+    (\PalClave{kn}). En los tres casos \PalClave{n} representa el
+    número por el que se multiplicará el espacio en blanco que
+    normalmente se dejaría de no haberse indicado alguno de estos
+    especificadores (por defecto medio {\em em}). Así, por ejemplo
+    \PalClave{\|j2r\|} indicará que estamos ante una columna que se
+    alineará a la derecha, y en la que queremos que tras el contenido
+    de la columna se añada un espacio en blanco de 1 {\em em} de
+    anchura.
+
+  \item {\em Añadir texto antes o después del contenido de cada
+    celda de una columna}. Los especificadores {\tt b\{Texto\}} y {\tt a\{Texto\}}
+    hacen que el texto entre llaves se escriba antes (\PalClave{b}, de
+    {\em before}) o después (\PalClave{a}, de {\em after}) del
+    contenido de la celda.
+
+  \item {\em Aplicar un comando de formato a toda la columna}. Los
+    indicadores \PalClave{B}, \PalClave{I}, \PalClave{S}, \PalClave{R} y
+    \PalClave{T} que hemos visto antes, no cubren todas las posibilidades
+    de formato: No hay, por ejemplo, ningún indicador para versalitas, o
+    para letra {\em sans serif}, o que afecte al tamaño de la fuente.
+    Mediante el indicador \PalClave{f\backslash Comando} podremos
+    especificar un comando de formato que se aplique automáticamente a
+    todas las celdas de la columna. Por ejemplo \PalClave{\|lf\backslash
+    sc\|} escribirá en versalitas el contenido de la columna.
+
+  \item {\em Aplicar un comando cualquiera a todas las celdas de la
+    columna}. Finalmente el indicador \PalClave{h\backslash Comando}
+    aplicará el comando especificado al contenido de la columna.
+
+\stopitemize
+
+\stopitemize
+
+En la \in{tabla}[tbl:ejemplostabulate] se muestran algunos ejemplos de
+cadenas de especificación de formato de tabla.
+
+\placetable
+  [here]
+  [tbl:ejemplostabulate]
+  {Algunos ejemplos de cómo especificar el formato de las columnas en {\tt tabulate}}
+{\starttabulate[|lT|p(.6\textwidth)|]
+\HL
+\NC{\bf\rm Especificador de formato}
+\NC{\bf Significado}
+\NR
+\HL
+\NC \|l\|
+\NC Genera una columna de anchura automática alineada a la izquierda.
+\NR
+\NC \|rB\|
+\NC Genera una columna de anchura automática, alineada a la derecha, y escrita en negrita.
+\NR
+\NC \|cIm\|
+\NC Genera una columna habilitada para contenido matemático. Este se centrará en la columna y se escribirá con cursivas.
+\NR
+\NC \|j4cb\{---\}\|
+\NC Esta columna, tendrá el contenido centrado, empezará con un guión largo (---) y añadirá a la derecha 2 {\em ems} de espacio en blanco.
+\NR
+\NC \|l\|p(.7\tex{textwidth})\|
+\NC Se generan dos columnas: La primera se alinea a la izquierda y tiene anchura automática. La segunda ocupará un 70\% de la anchura total de la línea.
+\NR
+\HL
+\stoptabulate}
+
+Una vez diseñada la tabla, hay que introducir su contenido. Para
+explicar cómo hacerlo empezaré por describir como habría que rellenar
+una tabla en la que se dibujaran las líneas separadoras de filas y
+columnas:
+
+\startitemize
+
+\item Se empieza siempre dibujando una línea horizontal. Eso, dentro
+  de una tabla, se hace con el comando \PonMacro{HL}\tex{HL} (de {\em Horizontal Line}).
+
+\item A continuación escribimos la primera línea: Al principio de cada
+  celda hay que indicar que empieza una celda nueva y que debe
+  dibujarse una línea vertical. Ello se hace con el comando \PonMacro{VL}\tex{VL}
+  (de {\em Vertical Line}). Por tanto empezamos con dicho comando, y
+  vamos escribiendo el contenido de cada celda. Cada vez que cambiemos
+  de celda repetimos el comando \tex{VL}.
+
+\item Al terminar una fila, indicamos expresamente que se va a iniciar
+  una fila nueva con el comando \PonMacro{NR}\tex{NR} (de {\em Next Row}). Tras él
+  repetimos el comando \tex{HL} para dibujar una nueva línea
+  horizontal.
+
+\item Y así, de una en una, vamos escribiendo todas las filas de la
+  tabla. Al terminar añadimos, de propina, un comando \tex{NR} y otro
+  \tex{HL} para cerrar la cuadrícula con la línea horizontal inferior.
+
+\stopitemize
+
+Si no queremos dibujar la cuadrícula de la tabla, suprimimos los
+comandos \tex{HL} y sustituimos los comando \tex{VL} por \PonMacro{NC}\tex{NC} (de
+{\em New Column}).
+
+No es especialmente difícil cuando uno le coge el tranquillo, aunque
+al ver el código fuente de una tabla resulta difícil hacerse una idea
+del aspecto que tendrá. En la \in{tabla}[tbl:comandostabla] se recogen
+los comandos que se pueden (y deben) usar dentro de una tabla. Hay
+algunos que no he explicado, pero creo que con la descripción que hago
+de ellos es suficiente.
+
+\placetable
+  [here, force]
+  [tbl:comandostabla]
+  {Comandos utilizables en el interior de una tabla}
+{\starttabulate[|l|p(.6\textwidth)|]
+\HL
+\NC {\bf Comando}
+\NC {\bf Significado}
+\NR
+\HL
+\NC \tex{HL}
+\NC Inserta una línea horizontal
+\NR
+\NC \tex{NC}
+\NC Inicia una nueva columna
+\NR
+\NC \tex{NR}
+\NC Inicia una nueva fila
+\NR
+\NC \tex{VL}
+\NC Inserta una línea vertical delimitadora de una columna (se usa en lugar de \tex{NC})
+\NR
+\NC \PonMacro{NN}\tex{NN}
+\NC Inicia una columna en modo matemático (se usa en lugar de \tex{NC})
+\NR
+\NC \PonMacro{TB}\tex{TB}
+\NC Añade algo de espacio vertical extra entra dos filas
+\NR
+\NC \PonMacro{NB}\tex{NB}
+\NC Indica que la fila que sigue inicia un bloque indivisible dentro del cual no puede haber un salto de página
+\NR
+\HL
+\stoptabulate}
+
+Y ahora, como ejemplo voy a transcribir el código con el que se ha
+escrito la \in{tabla}[tbl:comandostabla].
+
+\starttyping
+\placetable
+  [here]
+  [tbl:comandostabla]
+  {Comandos utilizables en el interior de una tabla}
+{\starttabulate[|l|p(.6\textwidth)|]
+\HL
+\NC {\bf Comando}
+\NC {\bf Significado}
+\NR
+\HL
+\NC \tex{HL}
+\NC Inserta una línea horizontal
+\NR
+\NC \tex{NC}
+\NC Inicia una nueva columna
+\NR
+\NC \tex{NR}
+\NC Inicia una nueva fila
+\NR
+\NC \tex{VL}
+\NC Inserta una línea vertical delimitadora de una columna
+(se usa en lugar de \tex{NC})
+\NR
+\NC \tex{NN}
+\NC Inicia una columna en modo matemático (se usa en lugar
+de \tex{NC})
+\NR
+\NC \tex{TB}
+\NC Añade algo de espacio vertical extra entra dos filas
+\NR
+\NC \tex{NB}
+\NC Indica que la fila que sigue inicia un bloque indivisible
+dentro del cual no puede haber un salto de página
+\NR
+\HL
+\stoptabulate}
+\stoptyping
+
+El lector podrá observar que en general he usado una (o dos) líneas de
+texto para cada celda. En un fichero fuente real sólo habría usado
+una línea de texto para cada celda; en el ejemplo he partido las
+líneas demasiado largas. Usar una sola línea por celda me facilita
+mucho la escritura de la tabla pues lo que hago es ir escribiendo el
+contenido de cada celda, sin comandos de separación de filas o
+columnas. Cuando está todo escrito, selecciono el texto de la tabla y
+le pido a mi editor de textos que inserte, al principio de cada línea
+el texto «\tex{NC }». Tras ello, cada dos líneas (porque la tabla
+tiene dos columnas) inserto una línea que añada el comando \tex{NR},
+pues cada dos columnas empieza una fila nueva. Por último, a mano,
+inserto los comandos \tex{HL} en los puntos en los que quiero que
+aparezca una línea horizontal. Tardo casi más en describirlo que en
+hacerlo.
+
+Véase, por otra parte, como en el interior de la tabla se pueden usar
+los comandos ordinarios de \ConTeXt. En particular en esta tabla se
+usa continuamente el comando \tex{tex} que se explicó en la
+\in{sección}[sec:verbatim].
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [title={Aspectos comunes a imágenes, tablas y otros objetos flotantes}]
+
+Ya sabemos que imágenes y tablas no tienen por qué ser objetos
+flotantes, pero son buenos candidatos a serlo si bien para ello hay
+que insertarlos en el documento mediante los comandos
+\tex{placefigure} o \tex{placetable}. Además de estos dos comandos, y
+con la misma estructura, tenemos en \ConTeXt\ los comandos
+\PonMacro{placechemical}\tex{placechemical} (para insertar fórmulas
+químicas), \PonMacro{placegraphic}\tex{placegraphic} (para insertar
+gráficos) y \PonMacro{placeintermezzo}\tex{placeintermezzo} para
+insertar una estructura a la que \ConTeXt\ llama {\em Intermezzo} y
+que \Conjetura sospecho que se refiere a fragmentos de texto
+enmarcados. Todos estos comandos son a su vez aplicación concreta de
+un comando más general que es \PonMacro{placefloat}\tex{placefloat}
+cuya sintaxis es la siguiente:
+
+\type{\placefloat [Nombre] [Opciones] [Etiqueta] {Título} {Contenido}}
+
+Obsérvese que \tex{placefloat} es idéntico a \tex{placefigure} y
+\tex{placetable} salvo por su primer argumento que en \tex{placefloat}
+recoge el nombre del objeto flotante. Ello es porque {\em cada tipo de
+  objeto flotante se puede insertar en el documento con dos comandos
+  distintos}: \tex{placefloat[NombreTipo]} o \tex{placeNombreTipo}. O
+sea: \tex{placefloat[figure]} y \tex{placefigure} son exactamente el
+mismo comando, al igual que \tex{placefloat[table]} es el mismo
+comando que \tex{placetable}.
+
+Hablaré, por lo tanto, a partir de ahora, de \tex{placefloat}, pero
+téngase en cuenta que todo lo que diga será aplicable también a
+\tex{placefigure} o \tex{placetable} que son aplicaciones concretas de
+dicho comando.
+
+Los argumentos de \tex{placefloat} son:
+
+\startitemize
+
+\item {\em Nombre}. Se refiere al objeto flotante de que se
+  trate. Puede ser algún objeto flotante predeterminado ({\tt figure,
+    table, chemical, intermezzo}) o un objeto flotante creado por
+  nosotros mismos mediante \tex{definefloat} (véase la
+  \in{sección}[sec:definefloat]).
+
+\item {\em Opciones}. Una serie de palabras simbólicas que indican a
+  \ConTeXt\ cómo debe insertar el objeto. La inmensa mayoría de ellas
+  se refiere a {\em dónde} insertarlo. Las veremos en el próximo
+  epígrafe.
+
+\item {\em Etiqueta}. Una etiqueta para futuras remisiones internas a
+  este objeto.
+
+\item {\em Título}. Es el texto del título que se añadirá al
+  objeto. Sobre su configuración, véase la
+  \in{sección}[sec:confcaptions].
+
+\item {\em Contenido}. Este depende, claro está, del tipo de objeto
+  que sea. Para imágenes suele ser un comando \tex{externalimage};
+  para tablas, los comandos que crearán la tabla; para {\em
+    intermezzi}, un fragmento de texto enmarcado; etc.
+
+\stopitemize
+
+Los tres primeros argumentos, que se introducen entre corchetes, son
+opcionales. Los dos últimos (que se introducen entre llaves)
+obligatorios, aunque pueden estar vacíos, y así, por ejemplo:
+\cmd{placefloat\{\}\{\}} insertará en el documento:
+
+\placefloat{}{}
+
+\startitemize
+
+  {\bf Nota:} Obsérvese que \ConTeXt\ ha considerado que el objeto que
+  se insertaba era una imagen, pues lo ha numerado como imagen e
+  incluido en la lista de las \Conjetura mismas. Ello me hace suponer
+  que las imágenes son los objetos flotantes predeterminados.
+
+\stopitemize
+
+\startsubsection
+  [
+    reference=sec:ubicarobjetos,
+    title={Opciones de inserción de los objetos\\ flotantes},
+  ]
+
+El argumento {\em Opciones} de \tex{placefigure}, \tex{placetable} y
+\tex{placefloat} controla diferentes aspectos de la inserción de este
+tipo de objetos. Principalmente el lugar de la página en donde se
+insertará el objeto. Aquí se admiten varios valores, de diferente
+naturaleza:
+
+\startitemize
+
+\item Algunos de los lugares de inserción se establecen en relación
+  con los elementos de la página ({\tt top, bottom inleft, inright,
+    inmargin, margin, leftmargin, rightmargin, leftedge, rightedge,
+    innermargin, inneredge, outeredge, inner, outer}). Tiene que ser,
+  claro está, un objeto que pueda caber en la zona donde se le
+  pretende ubicar y tiene además que haberse reservado espacio para
+  ese elemento en el diseño de la página. Véase, al respecto, las
+  secciones \in{}[sec:elementospag] y \in{}[sec:diseñopágina].
+
+\item Otros de los posibles lugares de inserción están más
+  relacionados con el texto que circunda al objeto, y constituyen una
+  indicación respecto de dónde se debe ubicar este para que el texto
+  fluya a su alrededor. Fundamentalmente los valores {\tt left} y {\tt
+    right}.
+
+\item La opción {\tt here} se interpreta como una recomendación para
+  que se mantenga el objeto en el punto del fichero fuente en el que
+  se encuentre. Como tal {\em recomendación}, no será respetada si
+  las exigencias de la paginación no lo permiten. Esta indicación se
+  refuerza si se le añade la opción {\tt force} que significa
+  exactamente eso: que se fuerce la inserción del objeto en ese
+  punto. Téngase en cuenta que al forzar la inserción en un punto
+  concreto, el objeto dejará de ser flotante.
+
+\item Otras de las opciones posibles se refieren a la página en la que
+  se ha de insertar el objeto: \PalClave{page} lo inserta en una nueva
+  página; \PalClave{opposit} lo inserta en la página opuesta a la
+  actual; \PalClave{leftpage} en una página par; \PalClave{rightpage}
+  en una página impar.
+  
+\stopitemize
+
+Hay algunos opciones que no tienen que ver con la ubicación del objeto.
+Entre ellas:
+
+\startitemize
+
+\item {\tt none}: Esta opción suprime el título.
+
+\item {\tt split}: Esta opción autoriza a que el objeto se extienda a
+  lo largo de más de una página. Tiene que ser, claro está, un objeto
+  que por naturaleza sea divisible como, por ejemplo, una
+  tabla. Cuando se usa esta opción y el objeto se divide, ya no puede
+  decirse que es flotante.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:confcaptions,
+    title={Configuración de los títulos de los objetos flotantes},
+  ]
+
+Salvo que se use la opción \PalClave{none} de \tex{placefloat}, por
+defecto los objetos flotantes llevan asociado un título que se compone
+de tres elementos:
+
+\startitemize
+
+\item El nombre del tipo de objeto de que se trate. Este nombre es
+  exactamente el del tipo de objeto; de manera que si, por ejemplo,
+  definimos un nuevo objeto flotante llamado «secuencia» e insertamos
+  una «secuencia» como objeto flotante, el título será “Secuencia
+  1”. Simplemente se pone en mayúsculas el nombre del objeto.
+
+  \startLetraChica
+
+    No obstante lo que se acaba de decir, el nombre en inglés de los
+    objetos flotantes predefinidos, como, por ejemplo, el objeto
+    \PalClave{figure} o el objeto \PalClave{table}, si el idioma
+    principal del documento no es el inglés se traducirá; y así, por
+    ejemplo, el objeto \PalClave{figure} en documentos en español se
+    denomina \PalClave{Figura}, mientras que el objeto
+    \PalClave{table} se denomina \PalClave{Tabla}. Estas
+    denominaciones en español para objetos predefinidos se pueden
+    cambiar mediante \tex{setuplabeltext} tal y como se explica en la
+    \in{sección}[sec:etiquetas].
+    
+  \stopLetraChica
+
+\item Su número. Por defecto los objetos se numeran por capítulos, y
+  así la primera tabla del capítulo 3 será la tabla «3.1».
+
+\item Su contenido. Es este contenido el que se introduce como
+  argumento de \tex{placefloat}.
+
+\stopitemize
+
+Mediante \PonMacro{setupcaptions}\tex{setupcaptions} o
+\PonMacro{setupcaption}\tex{setupcaption[Objeto]} podemos cambiar el
+sistema de numeración y la apariencia del título propiamente dicho. El
+primer comando afectará a todos los títulos de todos los objetos, y el
+segundo afectará sólo a los títulos de un tipo concreto de objetos:
+
+\startitemize
+
+\item En cuanto al sistema de numeración, está controlado por las
+  opciones {\tt number}, {\tt way}, {\tt prefixsegments} y {\tt
+    numberconversion}:
+
+  \startitemize
+
+  \item {\tt number} puede adoptar los valores {\tt yes}, {\tt no} o
+    {\tt none} y controla si habrá o no número.
+
+  \item {\tt way} indica si la numeración será secuencial para todo el
+    documento ({\tt way=bytext}), o si se reiniciará al empezar cada
+    capítulo ({\tt way=bychapter}) o sección ({\tt way=bysection}). En
+    el caso de que se reinicie conviene coordinar el valor de esta
+    opción con el de {\tt prefixsegments}.
+
+  \item {\tt prefixsegments} indica si el número tendrá un {\em
+    prefijo}, y cuál será este. Así {\tt prefixsegments=chapter} hace
+    que el número de los objetos empiece siempre por el número de
+    capítulo, mientras que {\tt prefixsegments=section} precederá al
+    número de objeto por el número de sección. 
+
+  \item {\tt numberconversion} controla el tipo de numeración. Los
+    valores de esta opción pueden ser: numeración de tipo arábigo
+    (\PalClave{numbers}), letras en minúsculas (\PalClave{a},
+    \PalClave{characters}), en mayúsculas (\PalClave{A},
+    \PalClave{Characters}), en (versalitas \PalClave{KA}), números
+    romanos en mayúsculas (\PalClave{I}, \PalClave{R},
+    \PalClave{Romannumerals}), en minúsculas (\PalClave{i},
+    \PalClave{r}, \PalClave{romannumerals} o en versalitas
+    (\PalClave{KR})).
+
+  \stopitemize
+
+\item La apariencia del título propiamente dicho se controla por
+  numerosas opciones. Las enunciaré, pero para la explicación
+  detallada del significado de cada una de ellas, me remito a la
+  \in{sección}[sec:estilotítulos] donde se explica el control de la
+  apariencia de los comandos de seccionado, ya que las opciones son en
+  gran medida las mismas. Las opciones en cuestión son:
+
+  \startitemize
+
+  \item Para controlar el formato de todos los elementos del título,
+    {\tt style, color, command}.
+
+  \item Para controlar el formato sólo del nombre del tipo de objeto:
+    {\tt headstyle, headcolor, headcommand, headseparator}.
+
+  \item Para controlar el formato sólo de la numeración: {\tt
+    numbercommad}.
+
+  \item Para controlar el formato sólo del título propiamente dicho:
+    {\tt textcommand}.
+
+  \stopitemize
+
+\item Se pueden también controlar otros aspectos como la distancia
+  entre los distintos elementos que componen el título, la anchura de
+  éste, su colocación en relación con el objeto, etc. Me remito aquí a
+  la información de la \goto{wiki de \ConTeXt}[url(wiki)] respecto de
+  las opciones configurables con este comando.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:startcombination,
+    title={Inserción combinada de dos o más objetos},
+  ]
+
+Para insertar dos o más objetos distintos en el documento, de tal modo
+que \ConTeXt\ los mantenga unidos y los trate como un solo objeto, se
+dispone del entorno \PonMacro{startcombination}\tex{startcombination} cuya sintaxis es:
+
+\type{\startcombination[Ordenación] ... \stopcombination}
+
+donde {\em Ordenación} indica cómo se ordenarán los objetos: si todos
+se han de ordenar horizontalmente, {\em Ordenación} sólo indica el
+número de objetos a combinar. Pero si queremos combinar los objetos en
+dos o más filas, habrá que indicar el número de objeto por fila,
+seguido del número de filas, y separando ambos números por el carácter
+*. Por ejemplo:
+
+\starttyping
+\startcombination[3*2]
+  {\externalfigure[prueba1]}
+  {\externalfigure[prueba2]}
+  {\externalfigure[prueba3]}
+  {\externalfigure[prueba4]}
+  {\externalfigure[prueba5]}
+  {\externalfigure[prueba6]}
+\stopcombination
+\stoptyping
+
+que producirá la siguiente alineación de imágenes.
+
+\startcombination[3*2]
+  {\externalfigure[prueba1]}
+  {\externalfigure[prueba2]}
+  {\externalfigure[prueba3]}
+  {\externalfigure[prueba4]}
+  {\externalfigure[prueba5]}
+  {\externalfigure[prueba6]}
+\stopcombination
+
+En el anterior ejemplo, las imágenes que he combinado en realidad no
+existen, razón por la que \ConTeXt\ en lugar de las imágenes ha
+generado cajas de texto con información sobre las mismas.
+
+Véase, por otro lado, cómo cada elemento a combinar dentro de
+\tex{startcombination}, va encerrado entre llaves.
+
+En realidad \tex{startcombination} no sólo permite vincular y alinear
+imágenes, sino cualquier tipo de {\em caja} como pueden ser los textos
+ubicados dentro de un entorno \tex{startframedtext}, tablas, etc. Para
+configurar la combinación podemos usar el comando
+\tex{setupcombination} y, asimismo, podemos crear combinaciones
+preconfiguradas mediante
+\PonMacro{definecombination}\tex{definecombination}.
+
+\stopsubsection
+
+\startsubsection
+  [title={Configuración general de los objetos\\ flotantes}]
+
+Ya hemos visto que con \tex{placefloat} podemos controlar la ubicación
+del objeto flotante que se está insertando y algún otro
+detalle. Además es posible configurar:
+
+\startitemize
+
+\item Las características globales de un concreto tipo de objeto
+  flotante. Ello se hace mediante
+  \PonMacro{setupfloat}\cmd{setupfloat[Nombre del tipo de objeto
+      flotante]}.
+
+\item Las características globales de todos los objetos flotantes de
+  nuestro documento. Ello se hace mediante \PonMacro{setupfloats}\tex{setupfloats}.  
+
+\stopitemize
+
+Téngase en cuenta que del mismo modo que \tex{placefloat[figure]}
+equivale a \tex{placefigure}, \tex{setupfloat[figure]} equivale a
+\tex{setupfigures}, y \tex{setupfloat[table]} equivale a
+\tex{setuptables}.
+
+Respecto a las opciones configurables para estos elementos, me remito
+al listado oficial de comandos de \ConTeXt
+(\in{sección}[sec:qrc-setup-en]).
+
+\stopsubsection
+
+\startsection
+  [
+    reference=sec:definefloat,
+    title={Definición de objetos flotantes\\ adicionales},
+  ]
+  \PonMacro{definefloat}
+
+El comando \tex{definefloat} nos permite definir nuestros propios
+objetos flotantes. Su sintaxis es:
+
+\type{\definefloat [Nombre singular] [Nombre plural] [Configuración]}
+
+Donde el argumento {\em Configuración} es un argumento opcional que
+permite indicar ya la configuración de este nuevo objeto en el momento
+de su creación. Podemos también hacerlo más tarde mediante
+\tex{setupfloat[Nombre en singular]}.
+
+Como con este epígrafe terminamos nuestra introducción, voy a
+aprovechar para, al hilo de \tex{definefloat} profundizar un poco en
+la aparente {\em selva} de comandos de \ConTeXt\ que, una vez que se
+comprende, no es tan {\em selvática} sino, de hecho, bastante
+racional.
+
+Empecemos por preguntarnos qué es, en realidad, para \ConTeXt, un
+objeto flotante. La respuesta es que se trata de un objeto con las
+siguientes características:
+
+\startitemize
+
+\item Que tiene cierto margen de libertad respecto de su ubicación en
+  la página.
+
+\item Que lleva asociado a él una {\em lista} con su mismo nombre que
+  permite numerar este tipo de objetos y, eventualmente, generar un
+  índice de ellos.
+
+\item Que tiene un título.
+
+\item Que, cuando el objeto realmente puede flotar, debe ser tratado
+  como unidad inseparable, es decir (en terminología de \TeX) {\em
+    encerrado en una caja}.
+
+\stopitemize
+
+O sea, que el objeto flotante, en realidad, se compone de tres
+elementos: el objeto propiamente dicho, la lista asociada a él y el
+título. Para controlar al objeto propiamente dicho se necesita,
+sólo, un comando que configure su ubicación y otro que permita
+insertar el objeto en el documento; para configurar los aspectos
+relativos a la lista, bastan los comandos generales de control de
+listas, y para configurar los aspectos relativos al título, bastan los
+comandos generales de control del título.
+
+Y aquí es donde viene la genialidad de \ConTeXt: podría haberse
+diseñado un simple comando de control de los objetos flotantes
+(\tex{setupfloats}), y un simple comando de inserción de objetos
+flotantes: \tex{placefloat}; pero lo que \ConTeXt\ hace es:
+
+\startitemize[n]
+
+\item Diseñar un comando que permita vincular un nombre a una
+  configuración específica de objetos flotantes. Se trata de
+  \tex{definefloat}, que en realidad no vincula un nombre, sino dos
+  nombres uno en singular y otro en plural.
+
+\item Crear, junto con el comando de configuración global de objetos
+  flotantes, un comando que permita configurar sólo un tipo concreto
+  de objetos: \tex{setupfloat[Objeto]}.
+
+\item Añadir al comando de ubicación de objetos flotantes
+  (\tex{placefloat}) un argumento que permita diferenciar entre unos
+  tipos u otros (\tex{placefloat[Objeto]}).
+
+\item Crear comandos, que incluyan el nombre del objeto, para todas
+  las acciones propias de un objeto flotante. Algunos de esos comandos
+  (que en realidad son clones de otros comandos más generales) usarán
+  el nombre del objeto en singular y otros lo usarán en plural.
+  
+\stopitemize
+
+Por lo tanto, cuando creamos un nuevo objeto flotante y le decimos a
+\ConTeXt\ cuál es su nombre en singular y cuál en plural, \ConTeXt:
+
+\startitemize
+
+\item Reserva un espacio de memoria para almacenar en él la
+  configuración concreta de ese tipo de objetos.
+
+\item Crea una nueva lista con el nombre en singular de ese tipo de
+  objetos, ya que los objetos flotantes se asocian a una lista.
+
+\item Crea un nuevo tipo de «título» vinculado a este nuevo tipo de
+  objetos flotantes, para poder mantener una configuración
+  personalizada de estos títulos.
+
+\item Y, por último, crea un grupo de comandos nuevos específicos para
+  ese nuevo tipo de objeto, cuyo nombre es en realidad un sinónimo del
+  comando más general.
+  
+\stopitemize
+
+En la \in{tabla}[tbl:comandosflotantes] se pueden ver los comandos que
+se crean automáticamente cuando definimos un nuevo objeto flotante,
+así como el comando más general del que son sinónimos:
+
+\placetable
+  [here]
+  [tbl:comandosflotantes]
+  {Comandos que se crean automáticamente al crear un nuevo objeto flotante}
+{\switchtobodyfont[small]
+\starttabulate[|lT|lT|lT|]
+\HL
+\NC{\bf\rm Comando}
+\NC{\bf\rm Sinónimo de}
+\NC{\bf\rm Ejemplo}
+\NR
+\HL
+\NC\backslash completelistof<NombrePlural>
+\NC\backslash completelist[NombrePlural]
+\NC\backslash completelistoffigures
+\NR
+\NC\backslash place<NombreSingular>
+\NC\backslash placefloat[NombreSingular]
+\NC\backslash placefigure
+\NR
+\NC\backslash placelistof<NombrePlural>
+\NC\backslash placelist[NombrePlural]
+\NC\backslash placelistoffigures
+\NR
+\NC\backslash setup<NombreSingular>
+\NC\backslash setupfloat[NombreSingular]
+\NC\backslash setupfigure
+\NR
+\HL
+\stoptabulate
+}
+
+\startLetraChica
+
+  En realidad se crean algunos comandos adicionales, que son sinónimos
+  de los anteriores y que como no he incluido en la explicación
+  del capítulo, he omitido de la \in{tabla}[tbl:comandosflotantes]:
+  \tex{start<NombreSingular>}, \tex{start<NombreSingular>text} y
+  \tex{startplace<NombreSingular>}.
+
+\stopLetraChica
+
+He usado como ejemplo de los comandos creados al definir un nuevo
+objeto flotante el comando que se usa para las imágenes; y lo he hecho
+porque las imágenes, igual que las tablas y el resto de objetos
+flotantes predefinidos por \ConTeXt, son casos concretos de
+\tex{definefloat}:
+
+\starttyping
+\definefloat[chemical][chemicals]
+\definefloat[figure][figures]
+\definefloat[table][tables]
+\definefloat[intermezzo][intermezzi]
+\definefloat[graphic][graphics]
+\stoptyping
+
+Por último, véase que, en realidad, \ConTeXt\ no controla de ninguna
+manera el tipo de material que se incluye en cada objeto flotante
+concreto; se supone que eso es tarea del autor. Esta es la razón de
+que con los comandos \tex{placefigure} o \tex{placetable} se pueda
+insertar también texto. Pero el texto insertado con \tex{placefigure}
+se incluira en la lista de imágenes, y el insertado con
+\tex{placetable}, en la lista de tablas.
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:
+%%% vim:set filetype=context tw=75 : %%%

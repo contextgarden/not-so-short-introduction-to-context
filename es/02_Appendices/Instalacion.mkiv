@@ -1,0 +1,742 @@
+%%% Fichero:     Instalacion.mkiv
+%%% Autor:       Joaquín Ataz López
+%%% Inicio:      Mayo 2020
+%%% Terminación: Mayo 2020
+%%% Contenido: Le di vueltas a si incluir o no este apéndice. Si tuve
+%%%            claro, desde el principio que si se incluía tenía que
+%%%            ser como apéndice, pues de ponerlo al principio, sería
+%%%            más difícil atrapar al lector desde el
+%%%            principio. Tampoco me apetecía demasiado hacerlo porque
+%%%            no quería ponerme a explicar aspectos relacionados con
+%%%            Windows o Apple que yo en realidad no conozco pues el
+%%%            primero hace más de 15 años que no lo uso y el segundo
+%%%            no lo he usado nunca. Estuve también tentado de
+%%%            remitirme al texto de Pablo Rodríguez (mucho más
+%%%            completo), pero finalmente, el hecho de que ahora la
+%%%            versión "oficial" haya pasado a ser lmtx en cierto modo
+%%%            desactualiza la información de Pablo, por lo que decidí
+%%%            incluir el apéndice, pero muy sintético. Como, por otra
+%%%            parte, no consigo compilar este documento con la
+%%%            versión actual de LMTX (compilaba bien hasta una
+%%%            versión de primeros de agosto) y llevo leyendo la lista
+%%%            de distribución de ConTeXt un par de meses y veo que es
+%%%            relativamente corriente que una nueva versión incluya
+%%%            un bug que haya que arreglar... me decidió por
+%%%            recomendar Standalone. 
+%%%
+%%% Editado: Emacs + AuTeX - Y a veces con vim + context-plugin
+%%%
+
+\environment introCTX_env.mkiv
+
+\setuphead
+  [section]
+  [sectionsegments=3:3]
+
+\setuphead
+  [subsection]
+  [sectionsegments=3:4]
+
+\startcomponent c01_Instalacion.mkiv
+
+\startchapter
+  [
+    reference=instalación_suite,
+    title={Instalación, configuración y actualización de \ConTeXt},
+  ]
+
+Las principales distribuciones de \TeX\ (TeX Live, teTeX, MikTeX,
+MacTeX, etc.) incluyen una versión de \ConTeXt. Pero dicha versión
+normalmente no es la más actualizada. En el presente apéndice
+explicaré dos procedimientos para instalar dos versiones distintas de
+\ConTeXt; la primera incluye tanto \ConTeXt\ Mark~II como Mark~IV y la
+segunda incluye exclusivamente \ConTeXt\ Mark~IV.
+
+El procedimiento de instalación sigue los mismos pasos en cualquier
+sistema operativo; pero los detalles cambian de un sistema a otro. No
+obstante, podemos simplificar de tal modo que en las líneas que siguen
+distinguiré entre dos grandes grupos de sistemas:
+
+\startitemize
+
+\item {\bf Sistemas tipo Unix:} Aquí se incluye a Unix, propiamente
+  dicho, así como a GNU Linux, Mac OS, FreeBSD, OpenBSD o Solaris. El
+  procedimiento es básicamente el mismo en todos estos sistemas; hay
+  algunas pequeñísimas diferencias que destacaré en el lugar adecuado.
+
+\item {\bf Sistemas Windows}, lo que incluye las distintas versiones
+  de dicho sistema operativo: Windows 10 (la última versión, según
+  creo), Windows 8, Windows 7, Windows Vista, Windows XP, Windows NT,
+  etc.
+  
+\stopitemize
+
+\startLetraChica
+
+  {\bf Nota importante sobre el proceso de instalación en sistemas
+    Microsoft Windows:}
+
+  \dontleavehmode\ConTeXt, como todos los sistemas \TeX, está pensado
+  para trabajar desde una terminal; los programas y procedimientos
+  para su instalación, también. Eso en Windows es perfectamente
+  posible y no debería tener mayor dificultad. El problema está en
+  que, de un lado, los usuarios de Windows no siempre tienen costumbre
+  de hacer eso y, de otro, en que como Windows nació sobre la {\em
+    ilusión} (falsa) de que en un sistema informático podía hacerse
+  todo gráficamente, en general las versiones de dicho sistema
+  operativo no {\em publicitan} demasiado cómo utilizar la terminal y,
+  sobre todo, es corriente que en cada versión del sistema se cambie
+  el nombre del programa que ejecuta la terminal, y la manera de
+  iniciarlo. Hasta donde yo se, al programa de emulación de terminal
+  de Windows se le ha llamado de muchas maneras: “Ventana de DOS”,
+  “Símbolo del sistema”, “Command Prompt”, “cmd”, etc. La ubicación de
+  este programa en el menú de aplicaciones de Windows también cambia
+  según la versión de Windows de que se trate.
+
+  Yo dejé de usar sistemas basados en Windows en 2004, por lo que aquí
+  poco puedo ayudar al lector. Tendrá él que descubrir, por su cuenta,
+  cómo abrir una terminal en su concreta versión del sistema
+  operativo; lo que no debería ser muy difícil.
+
+\stopLetraChica
+
+\startsection[title=Instalación y configuración de \suite-]
+
+La distribución de \ConTeXt\ conocida como «Standalone», término
+inglés que podríamos traducir como «autónoma», «independiente» o
+«autosuficiente», conocida también como «\ConTeXt\ Suite», es una
+distribución completa y actualizada de \ConTeXt, que descarga de
+Internet los ficheros necesarios, no ocupa demasiado espacio en disco,
+es fácil de actualizar, y, sobre todo ---de ahí el nombre de {\em
+  Standalone}--- se contiene en un solo directorio, que puede estar
+ubicado en el lugar del disco duro en que deseemos; de tal manera que
+incluso sería posible que en un mismo ordenador convivieran varias
+versiones de \ConTeXt, cada una en su propio directorio. Esta
+distribución incluye las fuentes, ficheros binarios y documentación
+necesaria para ejecutar \ConTeXt\ Mark~II (lo que implica los motores
+de \TeX\ PdfLatex y XeTeX), y \ConTeXt\ Mark~IV (lo que implica el
+motor LuaTeX).
+
+\startLetraChica
+
+  Para información sobre lo que son los {\em motores} de \TeX, véase
+  la \in{sección}[sec:motores]; y sobre los motores de \TeX\ en
+  relación con \ConTeXt, así como sobre las versiones llamadas Mark~II
+  y Mark~IV, la \in{sección}[sec:historiactx].
+
+\stopLetraChica
+
+A continuación se explica cómo instalar, ejecutar, actualizar y
+restaurar en nuestro sistema \suite-. Los datos y procedimientos que
+aquí se proporcionan son un resumen de la información mucho más
+extensa (pero en inglés) incluida en la \goto{wiki de
+  \ConTeXt}[url(https://wiki.contextgarden.net/ConTeXt_Standalone#Unix-like_platforms_.28Linux.2FMacOS_X.2FFreeBSD.2FSolaris.29)],
+a la que he añadido algún detalle adicional extraído de un wikilibro
+sobre \ConTeXt\ alojado en
+\goto{wikibooks}[url(https://fr.wikibooks.org/wiki/ConTeXt/Installation)].
+Si hubiera algún problema con la instalación, o se deseara ampliar
+algún detalle, se debe consultar directamente cualquiera de estas dos
+páginas (según prefiramos el idioma inglés o el francés).
+
+\startsubsection[title=Instalación]
+
+La instalación de \suite- exige tener una conexión a Internet, e
+implica los siguientes pasos:
+
+\startitemize[n, packed]
+
+\item Crear el directorio en el que se instalará \ConTeXt.
+
+\item Descargar en dicho directorio, el {\em script} de instalación.
+
+\item Ejecutar dicho {\em script} con las opciones deseadas.
+
+\item Realizar ciertos ajustes finales.
+
+\stopitemize
+
+\subsubsubject{Paso 1: Crear el directorio de instalación}
+
+Esto, en realidad, no tiene nada que ver con \ConTeXt\ y hay que
+suponer que todo usuario sabrá hacerlo. En sistemas Windows lo normal
+es hacerlo desde el administrador de archivos. En sistemas tipo Unix,
+se puede hacer desde algún administrador de archivos o desde una
+terminal. Es importante, eso sí, tener en cuenta que se desaconseja
+que el directorio de instalación contenga algún espacio en blanco en
+su ruta de acceso. Yo personalmente, además, tiendo a huir de usar en
+los nombres de directorios caracteres no anglosajones tales como
+vocales acentuadas.
+
+En adelante asumiré que el directorio de instalación es, en sistemas
+tipo Unix, \PalClave{\lettertilde/context/} y en Windows,
+\PalClave{C:\backslash Programs\backslash context}.
+
+\subsubsubject{Paso 2: Descargar, en el directorio de instalación, el
+  {\em script} de instalación}
+
+El {\em script} de instalación es distinto según el sistema operativo
+en el que se vaya a realizar la instalación:
+
+\startitemize
+
+\item En sistemas tipo Unix se puede descargar, con un navegador web,
+  o, desde una terminal con \PalClave{wget} o con \PalClave{rsync}:
+
+  \starttyping
+
+    wget http://minimals.contextgarden.net/setup/first-setup.sh
+    rsync rsync://minimals.contextgarden.net/setup/first-setup.sh
+    
+  \stoptyping
+
+\item En sistemas tipo Windows, hasta donde yo se, no hay herramientas
+  estándar para descargarlo desde consola. Ha de ser con un navegador
+  web. La dirección de descarga puede ser cualquiera de las
+  siguientes:
+
+    \color [blue] {\goto {\ttx
+        http://minimals.contextgarden.net/setup/context-setup-mswin.zip}[url(http://minimals.contextgarden.net/setup/context-setup-mswin.zip)]\\
+    \goto{\ttx http://minimals.contextgarden.net/setup/context-setup-win64.zip}[url(http://minimals.contextgarden.net/setup/context-setup-win64.zip)]}
+
+  Una vez descargado, en Windows, hay que descomprimir el fichero
+
+\stopitemize
+
+\subsubsubject{Paso 3: Ejecutar el {\em script} de instalación}
+
+El {\em script} de instalación se debe ejecutar desde una terminal. En
+sistemas tipo Unix el nombre del {\em script} es
+\PalClave{first-setup.sh} y se puede ejecutar con {\tt bash} o con
+{\tt sh}. En sistemas tipo Windows el {\em script} se denomina 
+\PalClave{first-setup.bat} y se ejecuta simplemente escribiendo
+su nombre, en la consola del sistema o ventana de MS-DOS desde
+el directorio de instalación.
+
+El {\em script} de instalación admite las siguientes opciones:
+
+\startitemize
+
+\item {\bf --context}: Esta opción determina qué versión de \ConTeXt\ se
+instalará, si la última versión de desarrollo (\PalClave{--context=latest})
+o la última versión estable (\PalClave{--context=beta}). El valor por
+defecto es \PalClave{beta}.
+
+\item {\bf --engine}: Nos permite indicar si queremos instalar Mark~IV
+(\PalClave{--egine=luatex}, valor por defecto) o si queremos instalar
+Mark~II.
+
+\item {\bf --modules}: Instala también los módulos de expansión de
+\ConTeXt\, que no pertenecen propiamente a la distribución, pero que
+proporcionan interesantes utilidades adicionales. Para ello hay que indicar
+\PalClave{--modules=all}.
+
+\stopitemize
+
+\startLetraChica
+
+  Respecto a las opciones de instalación, creo que la información de la
+  wiki está obsoleta. En ella se dice que para instalar solamente Mark~IV
+  hay que indicar explícitamente la opción \PalClave{--engine=luatex} y que
+  la opción \PalClave{--context=latest} instala la última versión estable,
+  no la versión de desarrollo. Sin embargo desde mediados del año 2020
+  cambió el contenido de first-setup.sh y ojeando en su interior he
+  comprobado que para instalar la ultimísima versión hay que indicar
+  expresamente \PalClave{--context=latest}, pero que
+  \PalClave{--engine=luatex} viene habilitada por defecto.
+
+\stopLetraChica
+
+El wikilibro francés que mencioné al principio, a las opciones que acabo de
+mencionar (documentadas en la wiki de \ConTeXt) añade otras dos opciones
+posibles: \PalClave{--fonts=all} y \PalClave{goodies=all}. Contextgarden no
+las menciona, pero incluirlas también en el comando de instalación no hace
+daño. Por lo tanto yo aconsejaría ejecutar el script de instalación con las
+siguientes opciones (según nos encontremos en un sistema tipo Unix o tipo
+Windows):
+
+\startitemize[packed]\tfx
+\item Unix: \type{bash first-setup.sh --context=latest --modules=all --fonts=all --goodies=all}
+\item Windows: \type{first-setup.bat --context=latest --modules=all --fonts=all --goodies=all}
+\stopitemize
+
+Esto, dependiendo de la velocidad de nuestra conexión a Internet, puede
+tomar cierto tiempo, aunque no demasiado.
+
+\startLetraChica
+
+\subsubsubject{Configuración del proxy}
+
+El script de instalación utiliza rsync para obtener los archivos
+necesarios. Así que, si estamos detrás de un servidor proxy, es
+preciso especificar los detalles del mismo a rsync. La forma más fácil
+de establecer esto es establecer la variable RSYNC_PROXY en la
+terminal o en su {\em script} de inicio (.bashrc o el archivo
+correspondiente para cada shell). Reemplace el nombre de usuario,
+contraseña, proxyhost y proxyport con la información correcta. Esto se
+hace, en sistemas tipo Unix con el comando \PalClave{export} y en
+sistemas tipo Windows con \PalClave{set}. Por ejemplo:
+
+\type{export RSYNC_PROXY=nombredeusuario:contraseña@proxyhost:proxyport}
+
+A veces, cuando estamos detrás de un cortafuegos, el puerto 873 puede
+estar cerrado para las conexiones TCP salientes. Si el puerto 22 está
+abierto para conexiones ssh, un truco que puede utilizarse es
+conectarse a un ordenador situado en algún lugar fuera del cortafuegos
+y hacer un túnel en el puerto 873 (utilizando el programa nc).
+
+\type{export RSYNC_CONNECT_PROG='ssh tunelhost nc %H 873'}
+
+donde el "tunnelhost" es la máquina fuera del firewall a la que
+tenemos acceso. Por supuesto, esta máquina debe tener nc y el puerto
+873 abierto para la conexión TCP saliente
+
+\stopLetraChica
+
+Al terminar la ejecución de \PalClave{first-setup} en el directorio de
+instalación habrán aparecido dos nuevos directorios llamados,
+respectivamente, \PalClave{bin} y \PalClave{tex}.
+
+\subsubsubject{Paso 4: Ajustes finales (Sólo en GNU Linux)}
+
+En sistemas GNU Linux son muchos los directorios en los que puede
+haber fuentes instaladas. Si queremos que \ConTeXt\ las pueda utilizar
+debemos informarle de dónde localizarlas. Para ello deberemos añadir
+la siguiente línea al fichero \PalClave{tex/setuptex} creado tras la
+instalación:
+
+{\tfx\type{export OSFONTDIR="~/.fonts:/usr/share/fonts:/usr/share/texmf/fonts/opentype/”}}
+
+con la que se carga la variable de entorno OSFONTDIR con los tres
+directorios en los que normalmente se pueden localizar las fuentes
+instaladas en el sistema
+
+\startLetraChica
+
+  El directorio /usr/share/texmf/fonts/ sólo existirá si en nuestro
+  sistema hay alguna otra instalación de \TEX\ o de sistemas basados
+  en él; en tal caso conviene incluirlo en la ruta de OSFONTDIR pues
+  así podremos  usar las fuentes opentype que dicha instalación
+  haya podido incluir. Si hemos adquirido alguna fuente comercial que
+  queremos que \ConTeXt\ pueda utilizar, hay que asegurarse de que la
+  ruta de acceso a la misma sea alguna de las incluidas en OSFONTDIR y
+  en caso contrario, añadir a esta variable, la ruta que sea. Tengo
+  entendido, por ejemplo, que algunas fuentes se instalan en
+  /usr/local/fonts en lugar de en /usr/share/fonts.
+
+\stopLetraChica
+
+Por último puede ser buena idea hacer que \ConTeXt\ genere una base de
+datos con los archivos necesarios para su ejecución. Ello se hará
+ejecutando las siguientes tres órdenes desde un terminal:
+
+\starttyping
+  . ~/context/tex/setuptex
+  context --generate
+  context --make
+\stoptyping
+
+La primera instrucción es un punto. Eso es una abreviatura para el
+comando interno de bash {\tt source}. También podemos, claro, ejecutar
+{\em source} si nos es más cómodo.
+
+\stopsubsection
+
+\startsubsection[title=Ejecución de \suite-]
+
+\suite- se ha diseñado para poder convivir con otras instalaciones de
+sistemas \TeX, lo que es una ventaja pues nos permite tener instaladas
+varias versiones distintas en un mismo sistema; pero para poder
+disfrutar de dicha ventaja es imprescindible que las variables de
+entorno que se precisan para la ejecución de \ConTeXt\ no se
+establezcan de modo permanente, lo que, a su vez, supone una
+servidumbre, pues cada vez que iniciemos una terminal para ejecutar en
+ella \PalClave{context} tendremos que empezar por cargar en memoria
+dichas variables de entorno, las cuales se contienen en el fichero
+\PalClave{tex/setuptex} (Unix) o \PalClave{tex/setuptex.bat}
+(Windows). Ello se hace:
+
+\startitemize
+
+\item En sistemas tipo Unix, ejecutando, tras abrir la terminal en la
+  que queremos usar \PalClave{context}, cualquiera de los siguientes
+  dos comandos:
+
+  \starttyping
+    source ~/context/tex/setuptex
+    . ~/context/tex/setuptex
+  \stoptyping
+
+  (asumiendo que el directorio donde se encuentra la versión de «{\tt
+    context}» que queremos utilizar sea sea
+  \PalClave{\lettertilde/context}).
+
+\item En sistemas tipo Windows, en la terminal desde la que usaremos
+  context, ejecutando el comando \type{tex\setuptex.bat} desde el
+  directorio de instalación.
+
+\stopitemize
+
+Si en nuestro sistema no hay ninguna otra instalación de \TeX\ o de
+alguno de sus derivados, podemos evitar dicha servidumbre
+automatizando la ejecución de esta orden cada vez que se abra una
+terminal:
+
+\startitemize
+
+\item En sistemas tipo Unix ello se hace incluyéndola en el fichero
+  donde se contiene el {\em script} general de arranque de las
+  terminales (normalmente \PalClave{.bashrc}).
+
+  \startLetraChica
+
+    El fichero de configuración de una terminal depende del programa
+    de {\em shell} que dicha terminal utilice por defecto. Si esta es
+    {\tt bash} (que es la más usada en sistemas GNU Linux), el fichero
+    que se lee al principio es {\tt .bashrc}. Las {\em shell} {\tt sh}
+    y {\tt ksh} utilizan un fichero llamado {\tt .profile}, {\tt zsh}
+    utiliza {\tt .zshenv}, y {\tt tcsh} o {\tt csh} leen el fichero
+    {\tt .cshrc}. Alguna implementación concreta puede cambiar los
+    nombres de estos ficheros y así, por ejemplo, {\tt .bashrc} a
+    veces se denomina {\tt .bash_profile}.
+
+    
+  \stopLetraChica
+
+\item En sistemas tipo Windows podemos crear un atajo en el escritorio
+  que ejecute cmd.exe y luego editarlo, poniendo como orden a ejecutar
+  cuando se haga doble click sobre él:
+
+  \starttyping
+    C:\WINDOWS\System32\cmd.exe /k C:\Programs\context\tex\setuptex.bat
+  \stoptyping
+
+\stopitemize
+
+Otra posibilidad, si no queremos ejecutar este script cada vez que vayamos
+a usar \ConTeXt, ni queremos tampoco establecer de modo permanente las
+variables de entorno necesarias para su ejecución, es la de, en lugar de
+ejecutar \ConTeXt\ desde una terminal, hacerlo desde el propio editor de
+textos. El cómo hacer esto depende del concreto editor de textos que se
+esté utilizando. En la wiki de \ConTeXt\ se informa de cómo configurar
+varios editores corrientes: LEd, Notepad++, Scite, TeXnicCenter, TeXworks,
+vim y algunos otros.
+
+\stopsubsection
+
+\startsubsection
+  [title=Actualizar la versión de \suite- o volver a una versión anterior]
+
+Mark~IV aún se encuentra en desarrollo, por lo que \suite- se renueva
+con cierta frecuencia. Para actualizar nuestra instalación basta con
+repetir el proceso: descargamos una nueva versión de
+\PalClave{first-setup.sh} y lo ejecutamos.
+
+Si, por las razones que sean, queremos volver a una versión anterior
+de \suite- basta con ejecutar \PalClave{first-setup} con la opción
+\PalClave{--context=fecha} donde {\em fecha} es la fecha
+correspondiente a la versión que queremos recuperar. Piénsese que la
+fecha ha de introducirse en el formato anglosajón: meses-días-años y
+no en el español: días-meses-años.
+
+La lista completa de versiones de \ConTeXt\ y fechas asociadas a las
+mismas se encuentra en \goto{este enlace}[url(https://minimals.contextgarden.net/current/context/)].
+
+Téngase en cuenta, por último, que tras reinstalar el sistema, tanto
+si es para actualizar como si es para regresar a una versión previa,
+en sistemas GNU Linux habrá que volver a ejecutar el paso 4 de la
+instalación, al que he denominado «Ajustes finales».
+
+\stopsubsection
+
+\stopsection
+
+\startsection[title=Instalación de \cap{lmtx}]
+
+Si sólo pensamos usar \ConTeXt\ Mark~IV, y queremos compilar nuestros
+proyectos no directamente con LuaTeX, sino con LuaMetaTex, una versión
+simplificada de LuaTeX que utiliza menos recursos del sistema y que,
+por lo tanto, puede funcionar en sistemas {\em menos potentes},
+debemos instalar en nuestro sistema, en lugar de \suite-, LMTX que es
+la ultimísima versión de \ConTeXt, y cuya denominación es un acrónimo
+del nombre del {\em motor} \TeX\ que se utiliza: LuaMetaTeX. Esta
+versión se lanzó en 2019 y, desde aproximadamente mayo de 2020 es la
+distribución de \ConTeXt\ cuya instalación se propone por defecto en
+la \goto{wiki de \ConTeXt}[url(wiki)].
+
+\startLetraChica
+
+  El desarrollo actual de LMTX es intenso, y la versión beta puede
+  llegar a cambiar varias veces en una misma semana. Algunos de sus
+  desarrollos, además, plantean, temporalmente, ciertas
+  incompatibilidades con Mark~IV, y así, por ejemplo, mientras escribo
+  estas líneas la última versión de LMTX (del 4 de agosto de 2020)
+  produce un error con el comando \tex{Caps}. Por ello yo aconsejaría
+  a los novatos, de momento, trabajar más bien con \suite-.
+
+\stopLetraChica
+
+\startsubsection[title=Instalación propiamente dicha]
+
+La instalación propiamente dicha es tan sencilla como:
+
+\startitemize
+
+\item {\bf Paso 1:} Decidir en qué directorio queremos instalar
+  \ConTeXt\ LMTX y, si es preciso, crearlo. Asumiré que la instalación
+  se hace en un directorio llamado “context” ubicado en nuestro
+  directorio de usuario.
+
+\item {\bf Paso 2:} Descargar de la \goto{wiki de
+  \ConTeXt}[url(https://wiki.contextgarden.net/Installation)], en el
+  directorio de instalación, el fichero zip que se corresponda con
+  nuestro sistema operativo, y procesador. Puede ser cualquiera de los
+  siguientes:
+
+\page[preference]
+
+  \startitemize[packed]
+
+  \item GNU/Linux
+    \startitemize
+    \item Procesador X86
+      \startitemize
+      \item \goto{Versión de 32 bits}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-linux.zip)].
+      \item \goto{Versión de 64 bits}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-linux-64.zip)].
+      \stopitemize
+    \item Procesador ARM
+      \startitemize
+      \item \goto{Versión de 32 bits}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-linux-armhf.zip)].
+      \item \goto{Versión de 64 bits}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-linux-aarch64.zip)].
+      \stopitemize
+    \stopitemize
+  \item Microsoft Windows
+    \startitemize
+    \item \goto{Versión de 32 bits}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-mswin.zip)]
+    \item \goto{Versión de 64 bits}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-win64.zip)]
+    \stopitemize
+  \item Mac OS, \goto{versión de 64 bits}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-osx-64.zip)]
+  \item FreeBSD
+    \startitemize
+    \item \goto{Versión de 32 bits}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-freebsd.zip)].
+    \item \goto{Versión de 64 bits}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-freebsd-amd64.zip)].
+    \stopitemize
+  \item OpenBSD6.6
+    \startitemize
+    \item \goto{Versión de 32 bits}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-openbsd6.6.zip)].
+    \item \goto{Versión de 64 bits}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-openbsd6.6-amd64.zip)].
+    \stopitemize
+  \item OpenBSD6.7
+    \startitemize
+    \item \goto{Versión de 32 bits}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-openbsd6.7.zip)].
+    \item \goto{Versión de 64 bits}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-openbsd6.7-amd64.zip)].
+    \stopitemize
+
+  \stopitemize
+
+  Si no sabe si su sistema es de 32 o 64 bits, lo más probable
+  ---salvo que su ordenador sea muy viejo---, es que sea de 64
+  bits. Si no sabe si su procesador es X86 o ARM, lo más probable es
+  que sea X86.
+
+\item {\bf Paso 3:} Descomprimir, en el directorio de instalación, el
+  fichero descargado en el paso anterior. Se generará una carpeta
+  llamada \PalClave{bin} y dos ficheros, uno, llamado
+  \PalClave{installation.pdf}, que contiene ---en inglés---
+  información más detallada sobre la instalación, y un segundo fichero
+  que es el auténtico programa de instalación y que se denomina
+  \PalClave{install.sh} (en sistemas tipo Unix) o
+  \PalClave{install.bat} (en sistemas Windows).
+
+\item {\bf Paso 4:} Ejecutar el programa de instalación
+  (\PalClave{install.sh} o \PalClave{install.bat}). Se requiere
+  conexión con Internet, pues el programa de instalación busca en la
+  web los ficheros que necesita.
+
+  \startitemize
+
+  \item En sistemas tipo Unix el programa de instalación se ejecuta
+    desde una terminal, ubicados en el directorio de instalación, bien
+    con {\tt bash}, bien con {\tt sh}. Para ello no es preciso tener
+    privilegios de administrador, salvo que el directorio de
+    instalación se encuentre fuera del directorio \PalClave{home} del
+    usuario.
+
+  \item En sistemas tipo Windows hay que abrir una terminal,
+    desplazarse al directorio de instalación, y, desde la terminal,
+    ejecutar {\tt install.bat}. No es tampoco aquí preciso que el
+    programa de instalación se ejecute como administrador del sistema,
+    pero se recomienda que así se haga para que se puedan usar enlaces
+    simbólicos de los ficheros ahorrando así espacio en disco.
+    
+  \stopitemize
+
+\item {\bf Paso 5} informar al sistema de la ruta de acceso a LMTX:
+
+  En sistemas Windows, el programa de instalación genera un fichero,
+  llamado \PalClave{setpath.bat} que actualiza todos los ficheros de
+  configuración necesarios para que Windows sepa que se ha instalado
+  LMTX en el sistema y dónde lo ha hecho.  En Sistemas GNU Linux,
+  FreeBSD o Mac OS no se genera ningún {\em script} que automatice la
+  tarea, por lo que debemos incorporar, en la variable PATH del
+  sistema, la dirección de los binarios de \ConTeXt\, lo que
+  conseguiríamos ejecutando en el terminal, desde el directorio de
+  instalación:
+
+{\ttx export PATH="{\em DirInstalación}/tex/texmf-{\em Plataforma}/bin:"\$PATH}
+
+donde {\tt {\em DirInstalación}} representa el directorio de
+instalación (por ejemplo “/home/usuario/context”)) y {\tt texmf-{\em
+    Plataforma}} variará según qué versión de LMTX hemos
+instalado. Por ejemplo en una instalación hecha en un sistema Linux de
+64 bits, {\tt texmf-{\em Plataforma}} será
+“texmf-linux-64”. Deberíamos, por lo tanto, ejecutar la siguiente
+orden desde un terminal:
+
+{\ttx export PATH="/home/usuario/context/texmf-linux-64/bin:"\$PATH}
+
+Dicha orden incluirá a LMTX en la ruta del sistema, sólo mientras se
+mantenga abierta la terminal desde la que se ha ejecutado. Si queremos que
+ello se realice automáticamente cada vez que se abra un terminal, debemos
+incluir dicha orden en el fichero de configuración del programa de {\em
+shell} que se use por defecto en el sistema. Cuál sea este fichero cambia
+según cuál sea el programa de {\em shell}: bash, sh, zsh, ksh, tcsh, csh...
+En la mayoría de los sistemas Linux, que usan bash, el fichero se llama
+\PalClave{.bashrc} por lo que deberíamos ejecutar la siguiente orden desde
+nuestro directorio de usuario:
+
+{\ttx echo 'export
+  PATH="/home/usuario/context/texmf-linux-64/bin:"\$PATH >> .bashrc}
+
+{\bf Nota Importante:} Al ejecutar este paso, inhabilitaremos la
+posibilidad de utilizar otras versiones de \ConTeXt\ existentes en nuestro
+sistema como, por ejemplo, la incorporada en TeX Live, o \suite-. Si
+queremos compatibilizar ambas versiones, es preferible usar el
+procedimiento descrito en la \in{sección}[sec:alias].
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection[title=Instalación en LMTX de los módulos de\\ expansión]
+
+\ConTeXt\ LMTX no incorpora un procedimiento para
+instalar o actualizar los módulos de expansión de \ConTeXt. Sin
+embargo en la wiki de \ConTeXt\ se contiene un {\em script} que
+permite instalar y actualizar todos los módulos junto con el resto de
+la instalación.
+
+Para ello debemos copiar el \goto{mencionado {\em
+    script}}[url(https://wiki.contextgarden.net/Modules#ConTeXt_LMTX)],
+pegarlo en un fichero de texto ubicado en el directorio principal de
+instalación de LMTX (el que contiene {\tt install.sh} o {\tt
+  install.bat}) y ejecutarlo desde una terminal. He comprobado
+personalmente que esto funciona en un sistema GNU Linux. No estoy
+seguro de si funcionará en un sistema Windows, pues no dispongo de
+ninguna versión de dicho sistema operativo con la que comprobarlo.
+
+\stopsubsection
+
+\startsubsection[title=Actualizar LMTX]
+
+Actualizar LMTX es tan simple como volver a ejecutar el programa de
+instalación: se comprobarán los ficheros instalados con los del
+servidor web y se actualizará lo que sea necesario.
+
+Si el sitio web desde donde se obtienen los archivos ha cambiado,
+debemos adaptar la dirección del mismo en el {\em script} de
+instalación; aunque acaso sea más sencillo descargar una nueva versión
+de los ficheros de instalación en el mismo directorio y extraer de
+ella el nuevo \PalClave{install.sh} o \PalClave{install.bat}; o, más
+fácil aún, descomprimir el fichero con el programa de instalación y
+reinstalar sin necesidad de eliminar primero los ficheros antiguos.
+
+\stopsubsection
+
+\startsubsection
+  [title=Crear un fichero que cargue en memoria las variables
+    necesarias para LMTX (sólo sistemas GNU/Linux)]
+
+\suite- contiene, como ya sabemos, un fichero
+(\PalClave{tex/setuptex}) que carga en memoria todas las variables
+necesarias para su ejecución, pero LMTX no incluye un fichero
+similar. Podemos, no obstante, crearlo nosotros con facilidad y
+almacenarlo, por ejemplo, como \PalClave{setuplmtx} en el directorio
+\PalClave{tex}. Los comandos que podría tener dicho fichero serían:
+
+\starttyping
+export PATH="~/context/LMTX/tex/texmf-linux-64/bin:"$PATH
+echo "Añadiendo ~/context/LMTX/tex/texmf-linux-64/bin a la ruta de PATH"
+export TEXROOT="~/context/LMTX/tex"
+echo "Estableciendo ~/context/LMTX/tex como TEXROOT"
+export OSFONTDIR="~/.fonts:/usr/share/fonts:/usr/share/texmf/fonts/opentype/"
+echo "Cargando en memoria directorios de fuentes"
+alias lmtx="~/context/LMTX/tex/texmf-linux-64/bin/context"
+echo "Creando un alias para ejecutar lmtx"
+\stoptyping%$
+
+Con esto, además de cargar en memoria las rutas y variables necesarias
+para ejecutar LMTX habilitaríamos el comando \PalClave{lmtx} como
+sinónimo de \PalClave{context}. 
+
+Tras crear este fichero, antes de poder usar LMTX deberíamos ejecutar,
+en la terminal en la que pretendemos usarlo,
+
+\type{source ~/context/LMTX/tex/setuplmtx}
+
+todo ello suponiendo que LMTX se haya instalado en
+\PalClave{~/context/LMTX} y que hayamos denominado a este fichero
+\PalClave{setuplmtx} y lo hayamos almacenado en
+\PalClave{~/context/LMTX/tex}.
+
+\startLetraChica
+
+  Lo anterior es lo que yo hago, para trabajar con LMTX del mismo modo
+  con que trabajaba con \suite-. No obstante no excluyo la posibilidad
+  de que en LMTX no sea necesario, por ejemplo, cargar en memoria el
+  la variable OSFONTDIR, pues es llamativo que en la wiki de \ConTeXt\
+  no se diga nada al respecto.
+  
+\stopLetraChica
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:alias,
+    title=Usar en el mismo sistema varias versiones de \ConTeXt\ (sólo
+    para sistemas tipo Unix)
+  ]
+
+La utilidad del sistema operativo llamada {\tt alias} nos permite
+asociar nombres distintos a diferentes versiones de \ConTeXt. Así
+podemos usar, por ejemplo, la versión de \ConTeXt\ incluida en TeX
+Live y LMTX; o la versión {\em Standalone} y LMTX.
+
+Por ejemplo, si almacenamos en directorios distintos las versiones de
+LMTX descargadas en enero y en agosto de 2020 podríamos escribir en
+\PalClave{.bashrc} (o fichero equivalente que se lee por defecto al
+abrir una terminal), las siguientes dos instrucciones:
+
+\starttyping
+alias lmtx-01=”/home/usuario/context/202001/tex/texmf-linux-64/bin/context”
+alias lmtx-08=”/home/usuario/context/202008/tex/texmf-linux-64/bin/context”
+\stoptyping
+
+Estas instrucciones asociarán los nombres {\tt lmtx-01} a la versión
+de LMTX instalada en el directorio \PalClave{context/202001} y {\tt
+  lmtx-08} a la versión instalada en \PalClave{context/202008}.
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:

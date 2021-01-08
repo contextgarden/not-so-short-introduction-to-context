@@ -1,0 +1,190 @@
+%%% Fichero:     PagTitulo.mkiv
+%%% Componente:  Portada, títulos de crédito e índice
+%%% Autor:       Joaquín Ataz López
+%%% Inicio:      Abril 2020
+%%% Terminación: Agosto 2020
+%%%
+%%% Editado: Emacs + AuTeX - Y a veces con vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent a01_PagTitulo.mkiv
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Portada
+% La he copiado del documento about luatex and context (incluido en la
+% documentación de context. La he adaptado un poquito, porque mi
+% título tiene tres líneas y el del original sólo tenía 2, y he
+% cambiado el color de fondo).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \setvariables
+    [document]
+    [titleA=Una introducción,
+    titleB=(no demasiado breve),
+    titleC=a \ConTeXt\ Mark~IV,
+    author=Joaquín Ataz López]
+
+  \startpagemakeup
+
+    \startMPcode
+
+      StartPage ;
+
+        fill Page enlarged 5mm withcolor \MPcolor{púrpura} ;
+        draw anchored.lrt(image(draw textext("\getvariable{document}{titleA}")  xsized(.750PaperWidth)      withcolor white),(lrcorner Page) shifted (-PaperWidth/20, PaperWidth/2.2)) ;
+        draw anchored.lrt(image(draw textext("\getvariable{document}{titleB}")  xsized(.750PaperWidth)      withcolor white),(lrcorner Page) shifted (-PaperWidth/20, PaperWidth/3.1)) ;
+        draw anchored.lrt(image(draw textext("\getvariable{document}{titleC}")  xsized(.750PaperWidth)      withcolor white),(lrcorner Page) shifted (-PaperWidth/20, PaperWidth/5)) ;
+        draw anchored.urt(image(draw textext("\getvariable{document}{author}")   xsized(.375PaperWidth) rotated 90 withcolor white),(urcorner Page) shifted (-PaperWidth/20,-PaperWidth/20)) ;
+
+        setbounds currentpicture to Page ;
+
+      StopPage ;
+
+    \stopMPcode
+
+  \stoppagemakeup
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Títulos de crédito
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  {
+    \page[yes]
+    \page[blank]\parindent0pt
+    \ \vfill
+
+    \switchtobodyfont[small]
+    {\bf Una introducción (no demasiado breve) a \ConTeXt\ MarkIV}\\
+    Versión 1.6 [\FechaRevisión]\\
+    \blank
+
+    % Quería poner el símbolo del copyleft, pero no he descubierto
+    % cómo generarlo. Con \mirror{\copyright} se genera el símbolo,
+    % pero se inserta detrás de él un salto de línea bastante
+    % molesto. Y copiarlo de internet y pegarlo no funciona (no
+    % entiendo por qué, pero no es la primera vez que me pasa).
+
+    {\copyright} 2020, Joaquín Ataz López\\
+    \blank
+
+    El autor del presente texto autoriza su libre distribución y uso, lo
+    que incluye el derecho a copiar y redistribuir este documento en
+    soporte digital con la condición de que se cite la autoría del mismo, y
+    éste no se incluya en ningún paquete o conjunto de {\em software} o de
+    documentación cuyas condiciones de uso o distribución no contemplen el
+    libre derecho de copia y redistribución por parte de sus destinatarios.
+    Se autoriza, asímismo, la traducción del documento, siempre que se
+    indique la autoría del texto original y el texto traducido se
+    distribuya bajo licencia FDL de la {\em Free Software Foundation},
+    licencia {\em Creative Commons} que autorice la copia y redistribución,
+    o licencia similar.
+
+    No obstante lo anterior, la publicación y comercialización en
+    papel de este documento, o de su traducción, requerirán
+    autorización expresa y por escrito del autor.
+
+    % No es una licencia totalmente libre, pues no permite la
+    % comercialización en papel. De lo que se trata es de impedir que
+    % algún "listillo" publique este documento como libro. Pero aparte
+    % de esa restricción, creo que la licencia consigue reflejar
+    % bastante bien el espíritu de la licencia FDL, en bastante menos
+    % espacio.
+
+    Historial de versiones:
+
+    \startitemize[packed]\smallbodyfont
+
+    \item \date[y=2020, m=8, d=18]: Versión 1.0: Documento original.
+
+      \item \date[y=2020, m=8, d=23]: Versión 1.1: Corrección de
+        pequeñas erratas y despistes del autor.
+
+      \item \date[y=2020, m=9, d=3]: Versión 1.15: Más erratas y
+        despistes.
+
+      \item \date[y=2020, m=9, d=5]: Versión 1.16: Más erratas y
+        despistes así como algunos pequeñísimos cambios que aumentan
+        la claridad del texto (creo).
+
+      \item \date[y=2020, m=9, d=6]: Versión 1.17: Es increible la cantidad
+      de pequeñas erratas que voy encontrando. Si quiero parar debo dejar
+      de releer el documento.
+
+    \item \date[y=2020, m=10, d=21]: Versión 1.5: Introducción de
+      sugerencias y corrección de errores reportados por usuarios de
+      NTG-context.
+
+    \item \FechaRevisión: Versión 1.6: Correcciones sugeridas tras una
+    nueva y detenida lectura del documento, con ocasión de su traducción al
+    inglés.
+
+    \stopitemize
+  }
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Índice sumario
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \starttitle
+    [title={Sumario}]
+
+    % Encabezado del índice
+    \setupheadertexts
+      [\tfx Sumario]
+      [\tfx\pagenumber]
+
+    % Formato de las distintas entradas del índice
+    \setuplist
+      [part]
+      [
+        before={\blank[2*big]},
+        after={\blank[big]},
+        style=\bfa,
+        aligntitle=yes,
+      ]
+
+    \setuplist
+      [chapter]
+      [
+        before=\blank,
+        style=\bf,
+        margin=.5cm,
+        aligntitle=yes
+      ]
+
+    \setuplist
+      [section]
+      [
+        aligntitle=yes,
+        style=\tfx,
+        margin=1.5cm
+      ]
+
+    % Definimos nuestro índice (llamado sumario)
+    \definecombinedlist
+      [Sumario]
+      [part, chapter, section]
+      [level=subsection, alternative=c]
+
+    % y lo insertamos, en un contexto de interlineado reducido
+    \start
+      \setupwhitespace[none]
+      \switchtobodyfont[11pt]
+      \setupinterlinespace[small]
+      \placeSumario
+    \stop
+
+  \stoptitle
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: electric-indent
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:
+
+%%% vim:set filetype=context tw=75 : %%%

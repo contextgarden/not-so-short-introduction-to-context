@@ -1,0 +1,113 @@
+%%% Fichero:             introCTX.mkiv
+%%% Título:              Una introducción, no demasiado breve, a ConTeXt Mark IV
+%%% Autor:               Joaquín Ataz López
+%%% Inicio:              Marzo 2020
+%%% Terminación:         Agosto 2020
+%%% Última modificación: Diciembre 2020
+%%%
+%%% Editado: Emacs + AuTeX al principio, luego vim + context-plugin
+%%%
+
+\environment introCTX_env.mkiv % introCTX_env: contiene las configuraciones
+
+\startproduct introCTX.mkiv
+
+  % Fecha de la última vez que se introdujeron modificaciones:
+  \def\FechaRevisión{\date[d=2, m=1, y=2021]}
+
+  % ¿Por qué no uso frontmatter, bodymatter y appendices?  Fundamentalmente
+  % porque sólo le veo sentido a esa división si se quiere establecer una
+  % numeración de páginas diferentes, o una renumeración de los capítulos.
+  % Pero como esta última tengo que hacerla en todo caso, ya que no he
+  % descubierto cómo conseguir que se mantenga la numeración de capítulos
+  % cada vez que se cambia de parte, no tiene sentido introducir una división
+  % nueva
+
+  % Escribe los bookmarks en el PDF. Este comando no funciona si está en el preámbulo
+  \placebookmarks[chapter, section, subsection, subsubsection]
+
+  \component 00_FrontMatter/a01_PagTitulo.mkiv
+  \component 00_FrontMatter/a02_Prefacio.mkiv
+
+  % Primera Parte: Qué es ConTeXt
+  \startpart
+    [title=Qué es \ConTeXt\ y cómo se trabaja\\ con él]
+
+    % Empezamos fijando los encabezados y pies de página para esta parte
+
+    \setupheadertexts
+      [{\tfx\getmarking[chapter]}]
+    \setupheadertexts
+      [{\tfx Capítulo \getmarking[chapternumber]}]
+      [{\tfx\hbox to 2em{\hss\pagenumber}}]
+
+    % Ponemos a cero el contador de capítulos.
+      \setupheadnumber[chapter][0]
+
+    % Capítulos que componen esta parte
+    \component 01_BodyMatter/b01_Introduccion.mkiv
+    \component 01_BodyMatter/b02_FirstDoc.mkiv
+    \component 01_BodyMatter/b03_Comandos.mkiv
+    \component 01_BodyMatter/b04_FichFuente.mkiv
+
+  \stoppart
+
+  % Segunda Parte: Aspectos globales
+  \startpart
+    [title=Aspectos globales del documento]
+
+    % Reajusto el contador de capítulos, pues el comando part lo ha
+    % puesto a cero. No he descubierto cómo indicar que la numeración
+    % de capítulos sea mantenida a lo larto de todo el documento.
+    \setupheadnumber[chapter][4]
+
+    \component 01_BodyMatter/b05_Paginas.mkiv
+    \component 01_BodyMatter/b06_Fuentes.mkiv
+    \component 01_BodyMatter/b07_Estructura.mkiv
+    \component 01_BodyMatter/b08_Indices.mkiv
+    \component 01_BodyMatter/b09_Referencias.mkiv
+
+  \stoppart
+
+  % Tercera Parte: Aspectos concretos
+  \startpart
+    [title=Cuestiones particulares]
+
+    % Una vez más, reajustamos el contador de capítulos
+    \setupheadnumber[chapter][9]
+
+    \component 01_BodyMatter/b10_CaracteresTexto.mkiv
+    \component 01_BodyMatter/b11_ParrafosLineas.mkiv
+    \component 01_BodyMatter/b12_ParrafosEspeciales.mkiv
+    \component 01_BodyMatter/b13_Flotantes.mkiv
+
+  \stoppart
+
+  % Última parte: Apéndices
+  \setuphead[part][number=no] % No numerar esta parte
+
+  \startpart
+    [title=Apéndices]
+
+    % Reajustamos los encabezados
+    \setupheadertexts
+      [{\tfx Apéndice \getmarking[chapternumber]}]
+      [{\tfx\hbox to 2em{\hss\pagenumber}}]
+    \setuplabeltext[es][chapter=Apéndice ]
+    \setuphead[chapter][conversion=A]
+
+
+    \component 02_Appendices/Instalacion.mkiv
+    \component 02_Appendices/Simbolos.mkiv
+    \component 02_Appendices/Macros.mkiv
+
+  \stoppart
+
+\stopproduct
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% End:
+%%% vim:set filetype=context tw=72 : %%%

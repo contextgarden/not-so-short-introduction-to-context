@@ -1,0 +1,1323 @@
+%%% Fichero:     b06_Fuentes.mkiv
+%%% Autor:       Joaquín Ataz López
+%%% Inicio:      Marzo 2020
+%%% Terminación: Junio 2020
+%%% Título: Este capítulo fue el primer capítulo que empecé. Le di
+%%%         muchas vueltas porque quería incluir en él el uso de las
+%%%         fuentes instaladas en nuestro sistema. Pero no he
+%%%         conseguido hacer funcionar las instrucciones de la
+%%%         wiki. Recientemente (agosto) he descubierto el fonttest al
+%%%         que se puede acceder tras ejecutar mtxrun --script server --auto
+%%%         tengo que investigar más. Dicha utilidad "ve" las fuentes
+%%%         instaladas en mi sistema y me dice qué código necesito
+%%%         para usarlas. Pero aún así sigo sin entender por qué
+%%%         funciona. Posiblemente la clave esté en el manual "Fonts
+%%%         out of ConTeXt", pero me cuesta mucho entenderlo.
+%%%
+%%% Editado: Emacs + AuTeX - Y a veces con vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent b06_Fuentes.mkiv
+
+\startchapter
+  [
+    reference=sec:fuentescol,
+    title={Fuentes y colores en\\ \ConTeXt},
+  ]
+
+\PonIndiceCap
+
+\startsection
+  [title={Fuentes tipográficas incluidas en\\ \suite-}]
+
+El sistema de fuentes de \ConTeXt\ ofrece muchas posibilidades, pero
+también es bastante complejo. No entraré en este manual en analizar
+todas las posibilidades avanzadas en materia de fuentes, sino que me
+limitaré a asumir que se trabaja con alguna de las 21 fuentes
+proporcionadas con la instalación de \ConTeXt\ Suite, que son las que
+se muestran en la \in{tabla}[tbl:ctx-fuentes].
+
+{\switchtobodyfont[small]
+  \placetable
+    [here]
+    [tbl:ctx-fuentes]
+    {Fuentes incluidas en la distribución de \ConTeXt}
+    \starttabulate[|l|l|w{2cm}|]
+      \HL
+      \NC{\bf Nombre oficial}\NC{\bf Nombre(s) en \ConTeXt}\NC{\bf Ejemplo}\NR
+      \HL
+      \NC Latin Modern \NC modern, modern-base\NC{\switchtobodyfont[modern] Pablito clavó un clavo}\NR
+      \NC Antykwa Poltawskiego\NC antykwapoltawskiego\NC{\switchtobodyfont[antykwapoltawskiego] Pablito clavó un clavo}\NR
+      \NC Antykwa Toruńska\NC antykwa\NC{\switchtobodyfont[antykwa] Pablito clavó un clavo}\NR
+      \NC Cambria \NC cambria\NC{\switchtobodyfont[cambria] Pablito clavó un clavo}\NR
+      \NC DejaVu\NC dejavu\NC{\switchtobodyfont[dejavu] Pablito clavó un clavo}\NR
+      \NC DejaVu Condensed\NC dejavu-condensed\NC{\switchtobodyfont[dejavu-condensed] Pablito clavó un clavo}\NR
+      \NC Gentium \NC gentium\NC{\switchtobodyfont[gentium] Pablito clavó un clavo}\NR
+      \NC Iwona\NC iwona\NC{\switchtobodyfont[iwona] Pablito clavó un clavo}\NR
+      \NC Latin Modern Variable\NC modernvariable, modern-variable\NC{\switchtobodyfont[modernvariable] Pablito clavó un clavo}\NR
+      \NC PostScript\NC postscript\NC  {\switchtobodyfont[postscript] Pablito clavó un clavo}\NR
+      \NC TeX Gyre Adventor\NC adventor, avantgarde\NC{\switchtobodyfont[adventor] Pablito clavó un clavo}\NR
+      \NC TeX Gyre Bonum\NC bonum, bookman\NC{\switchtobodyfont[bonum] Pablito clavó un clavo}\NR
+      \NC TeX Gyre Cursor\NC cursor, courier\NC{\switchtobodyfont[cursor] Pablito clavó un clavo}\NR
+      \NC TeX Gyre Heros\NC heros, helvetica\NC{\switchtobodyfont[heros] Pablito clavó un clavo}\NR
+      \NC TeX Gyre Schola\NC schola, schoolbook\NC{\switchtobodyfont[schola] Pablito clavó un clavo}\NR
+      \NC Tex Gyre Chorus\NC chorus, chancery\NC{\switchtobodyfont[chorus] Pablito clavó un clavo}\NR
+      \NC Tex Gyre Pagella\NC pagella, palatino\NC{\switchtobodyfont[pagella] Pablito clavó un clavo}\NR
+      \NC Tex Gyre Termes\NC termes, times\NC{\switchtobodyfont[termes] Pablito clavó un clavo}\NR
+      \NC Euler\NC eulernova\NC{\switchtobodyfont[eulernova] Pablito clavó un clavo}\NR
+      \NC Stix2\NC stix\NC{\switchtobodyfont[stix] Pablito clavó un clavo}\NR
+      \NC Xits\NC xits\NC{\switchtobodyfont[xits,8pt] Pablito clavó un clavo}\NR
+      \HL
+    \stoptabulate
+}
+
+La columna central de la \in{tabla}[tbl:ctx-fuentes] indica el nombre
+o nombres por los que \ConTeXt\ conoce la fuente de que se
+trate. Cuando hay dos nombres, ambos funcionan como sinónimos. En la
+última columna se pone un ejemplo de la fuente. En cuanto al orden en
+el que se muestran las fuentes, la primera es la fuente que \ConTeXt\
+usa por defecto, las restantes fuentes se ordenan alfabéticamente,
+colocándose al final tres fuentes específicamente diseñadas para las
+matemáticas. Obsérvese que la fuente Euler no puede representar
+directamente letras acentuadas.
+
+De cara a los lectores que procedan del mundo Windows y de sus fuentes
+por defecto, señalaré que {\em heros} es equivalente a la fuente
+llamada en Windows Arial, mientras que {\em termes} equivale a Times
+New Roman. No son exactamente las mismas fuentes, aunque sí bastante
+parecidas, hasta el punto de que hay que ser muy observador para
+apreciar la diferencia.
+
+  \startLetraChica
+
+    Las fuentes usadas por Windows no son {\em software libre} (en
+    realidad casi nada en Windows es {\em software libre}), por lo que no
+    pueden incluirse en la distribución de \ConTeXt. No obstante si
+    \ConTeXt\ se instala en un sistema Windows donde dichas fuentes ya
+    estén instaladas, podrá hacer uso de ellas como de cualquier otra
+    fuente instalada en el sistema en el que se ejecuta \ConTeXt. Pero
+    en esta introducción no trataré de cómo usar fuentes ya instaladas
+    en el sistema. Puede encontrarse ayuda sobre esa cuestión en la
+    \goto{wiki de \ConTeXt}[url(wiki)].
+    
+  \stopLetraChica
+
+\stopsection
+
+\startsection
+  [title={Características de la fuente}]
+
+\startsubsection
+  [title={Fuentes propiamente dichas, {\em estilos} y\\ variantes del estilo}]
+
+La terminología en materia de fuentes es algo confusa, porque a veces
+se llama fuente a lo que en puridad es una {\em familia de fuentes}
+que incluye distintos estilos y variantes que comparten un diseño
+básico. No entraré aquí a discutir qué terminología es más correcta;
+me interesa solamente aclarar la terminología que se usa en
+\ConTeXt. En ella se distingue entre fuentes, estilos y variantes (o
+alternativas) de cada estilo. Las {\em fuentes} incluidas en la
+distribución de \ConTeXt\ (que en realidad son {\em familias de
+  fuentes}) las hemos visto en el apartado anterior. Veremos ahora los
+{\em estilos} y las {\em alternativas}.
+
+\subsubsubject{Estilos de las fuentes}
+
+\dontleavehmode{\sc Donald E. Knuth} diseñó para \TeX\ la fuente {\em
+  Computer Modern}, a la que dotó de tres {\em estilos} distintos,
+llamados {\em roman}, {\em sans serif} y {\em teletype}. El estilo
+{\em roman} (o romano) es un diseño en el que los caracteres aparecen
+rematados por trazos decorativos a los que en terminología tipográfica
+se denomina {\em serifas}, por esto a este estilo de fuentes se le
+llama también {\em serif} ($=$ serifa, en inglés). Este estilo estaba
+pensado para constituir la fuente {\em normal} o por defecto. El
+estilo {\em sans serif}, como su propio nombre indica, carece de los
+trazos decorativos, por lo que es una fuente más sobria y estilizada,
+a la que en la jerga tipográfica española se la llama, a veces, {\em
+  paloseco}; esta fuente puede ser la fuente principal del documento,
+pero también es adecuada para utilizarla en ciertos fragmentos de un
+texto cuya fuente principal utilice el estilo {\em roman} como, por
+ejemplo, los títulos o los encabezados de página. Por último, el
+estilo {\em teletype} fue incluido en {\em Computer Roman} porque la
+misma había sido diseñada para escribir libros relativos a la
+programación informática, en los que había grandes fragmentos de {\em
+  código} informático que, convencionalmente, se suelen representar en
+los textos impresos con un estilo mono-espaciado que imita al de las
+terminales informáticas y las viejas máquinas de escribir.
+
+Como \TeX\ se escribió con una fuente que disponía de esos tres
+estilos, se le dotó de comandos para activar o desactivar con
+facilidad cualquiera de ellos. Esta es la razón de que todos los
+derivados de \TeX, y entre ellos \ConTeXt, asuman que las fuentes
+tendrán, al menos, esos tres {\em estilos}, aunque lo cierto es que no
+todas las fuentes incluyen en su diseño los tres estilos.
+
+  \startLetraChica
+
+    A estos tres {\em estilos} de la fuente, habría que añadir un cuarto
+    estilo pensado para fragmentos matemáticos. Pero como \TeX\ activa
+    automáticamente dicho estilo cuando entra en modo matemático, no
+    incluye comandos que expresamente lo activen o desactiven, y tampoco
+    tiene las {\em variantes} o alternativas de los otros estilos, no se le
+    suele considerar un {\em estilo} propiamente dicho.
+
+    \ConTeXt, por su parte, incluye comandos para dos posibles estilos
+    adicionales: escritura a mano y escritura caligráfica. No tengo
+    claro cuál es la diferencia exacta entre ellos pues, de un lado,
+    ninguna de las fuentes incluidas en la distribución de \ConTeXt\
+    incluye en su diseño estos estilos y, de otro lado, a mi modo de
+    ver, la escritura caligráfica es también una escritura a
+    mano. Estos comandos que incluye \ConTeXt\ para activar tales
+    estilos, si se usan con una fuente que no los implementa, no
+    provocan ningún error de compilación: simplemente no hacen nada.
+  
+  \stopLetraChica
+
+\subsubsubject{Formas alternativas de la fuente}
+
+Cada {\em estilo} admite varias formas alternativas, a las que
+\ConTeXt\ llama, simplemente, {\em alternativas} ({\em alternative}):
+
+\startitemize[2,packed]
+
+\item Regular o normal (\PalClave{tf}, de {\em typeface}).
+\item Negrita (\PalClave{bf}, de {\em boldface}).
+\item Cursiva (\PalClave{it} de {\em italic})
+\item Negrita y cursiva (\PalClave{bi} de {\em bold italic})
+\item Inclinada (\PalClave{sl} de {\em slanted})
+\item Negrita inclinada (\PalClave{bs} de {\em bold slanted})
+\item Versalitas (\PalClave{sc} de {\em small caps})
+\item Medieval (\PalClave{os} de {\em old style})
+  
+\stopitemize
+
+Estas {\em alternativas}, como su propio nombre indica, son
+excluyentes entre sí: Cuando se activa una de ellas se desactivan las
+restantes. Por ello \ConTeXt\ proporciona comandos para activarlas,
+pero no para desactivarlas; porque al activar una alternativa, se
+desactiva la que hasta entonces se estuviera utilizando; y así, por
+ejemplo, si estamos escribiendo en cursiva y activamos la negrita, se
+desactivará la cursiva. Si queremos usar simultáneamente negrita y
+cursiva no hay que activar una y luego otra, sino que hay que activar la
+alternativa que las incluye a ambas (\PalClave{bi}).
+
+De otro lado, hay que tener en cuenta que aunque \ConTeXt\ asume que
+toda fuente tendrá estas alternativas, y, por lo tanto, proporciona
+comandos para activarlas, dichos comandos necesitan para funcionar y
+producir algún efecto perceptible en el documento final, que la fuente
+contenga en su diseño formas específicas para cada estilo y
+alternativa.
+
+\startLetraChica
+
+  En particular, son muchas las fuentes que no establecen en su diseño
+  ninguna diferencia entre la letra inclinada y la letra cursiva; o
+  que no incluyen formas especiales para las versalitas.
+
+\stopLetraChica
+
+\subsubsubject{Diferencia entre cursiva y letra inclinada}
+
+El parecido en la función tipográfica desempeñada por la cursiva y la
+letra inclinada lleva a que mucha gente confunda estas dos
+alternativas.  La letra inclinada, llamada en inglés {\em slanted} se
+obtiene rotando ligeramente la forma regular. Por el contrario la
+cursiva implica ---al menos en ciertas fuentes--- un diseño distinto
+en el que las letras {\em parecen} inclinadas porque han sido
+dibujadas para parecerlo; pero en realidad no hay auténtica
+inclinación. Eso lo podemos comprobar en el siguiente ejemplo, en el
+que hemos escrito tres veces las mismas palabras a un tamaño lo
+suficientemente grande como para que sea fácil apreciar las
+diferencias. En la primera versión se usa la forma regular, en la
+segunda la forma inclinada, y en la tercera la cursiva:
+
+\midaligned{\switchtobodyfont[20pt,rm] %
+  \framed{{\rm Letra cursiva} -- {\sl Letra cursiva} -- {\it Letra cursiva}} }%
+
+Obsérvese como el diseño de los caracteres es el mismo en los dos
+primeros ejemplos, pero en el tercero hay sutiles diferencias en el
+trazo de algunas letras, lo que resulta muy obvio, sobre todo, en el
+dibujo de la «a», aunque las diferencias en realidad se dan en casi
+todos los caracteres.
+
+Los usos habituales de la cursiva y de la letra inclinada son
+similares y cada cual decide si prefiere usar una u otra. Aquí hay
+libertad, aunque es preciso indicar que un documento estará mejor
+compuesto y tendrá mejor aspecto si el uso de cursivas y letra
+inclinada es {\em consistente}. En muchas fuentes, además, la cursiva
+no tiene un diseño diferente de la letra inclinada, por lo que es
+indiferente usar una u otra.
+
+Tanto la cursiva como la letra inclinada son, por otra parte,
+alternativas de la fuente, lo que significa principalmente dos cosas:
+
+\startitemize[n]
+
+\item Sólo podemos usarlas cuando están definidas en la fuente.
+
+\item Al activar una de ellas, desactivamos la alternativa que se
+  estuviera usando hasta el momento.
+  
+\stopitemize
+
+Junto a los comandos para la letra cursiva y la inclinada, \ConTeXt\
+ofrece un comando adicional dirigido a {\em enfatizar} un determinado
+texto, cuyo uso implica sutiles diferencias con respecto al uso de la
+cursiva o la letra inclinada. Véase al respecto en la
+\in{sección}[sec:enfatizar].
+
+\stopsubsection
+
+\startsubsection
+  [title={Tamaño de la fuente}]
+
+Todas las fuentes que maneja \ConTeXt{} se basan
+  en gráficos vectoriales por lo que, en teoría, se pueden mostrar a
+  prácticamente cualquier tamaño, aunque, como veremos, eso depende de
+  la concreta instrucción que usemos para indicar el tamaño de la
+  fuente. Si no se indica otra cosa se asume que el tamaño será de 12
+  puntos.
+
+\startLetraChica
+
+  Que todas las fuentes usadas por \ConTeXt{} se basen en gráficos
+  vectoriales, y sean por tanto fuentes Opentype o Type 1, implica que
+  las fuentes cuyo origen es anterior a esta tecnología han sido
+  reimplementadas. En particular la fuente por defecto de \TeX, {\em
+    Computer Modern}, diseñada por {\sc Knuth}, sólo existía en
+  ciertos tamaños por lo que fue reimplementada en una fuente llamada
+  \emph{Latin Modern} que es la que utiliza \ConTeXt{}, aunque en
+  muchos documentos se la sigue llamando {\em Computer Modern} por el
+  fuerte simbolismo que esa fuente tiene para los sistemas \TeX{}, ya
+  que estos empezaron funcionando sólo con ella, la cual fue diseñada,
+  además, al mismo tiempo que se desarrollaba el propio \TeX{} con un
+  programa también de la autoría de {\sc Knuth} llamado \MetaFont{}
+  pensado para diseñar fuentes que pudieran trabajar con \TeX{}.
+
+\stopLetraChica
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:fuenteprincipal,
+    title={Fijación de la fuente principal del\\ documento},
+  ]
+\PonMacro{setupbodyfont}
+
+Por defecto, si no se indica ninguna fuente concreta, \ConTeXt{} usará
+{\em Latin Modern Roman} a un tamaño de 12 puntos como fuente
+principal.  Esta fuente fue originalmente diseñada por el propio {\sc
+  Knuth} para implementarla en \TeX{}. Es una fuente elegante del tipo
+llamado «romano» (de ahí el nombre, en inglés, de {\em roman}), con
+gran armonía de proporciones y con «remates» decorativos ---llamados
+{\em serifas} (en inglés {\em serif})--- en ciertos trazos, que
+resulta muy apropiada tanto para textos impresos como para ser
+mostrada en pantalla; aunque ---y esto es una opinión personal--- no
+resulta tan indicada para pantallas pequeñas tipo {\em smartphone},
+pues en ellas las {\em serifas} o remates de las letras tienden a
+amontonarse dificultando la lectura.
+
+Para establecer una fuente distinta se emplea \tex{setupbodyfont}
+que, nos permite no sólo cambiar la fuente propiamente dicha, sino
+también el tamaño y el estilo de la misma. Cuando queremos que esta
+orden afecte a todo el documento, debemos incluirla en el preámbulo
+del fichero fuente. Por el contrario si pretendemos simplemente
+cambiar la fuente a partir de un punto concreto, será allí donde
+deberá incluirse.
+
+El formato de \tex{setupbodyfont} es el siguiente:
+
+\type{\setupbodyfont[Opciones]}
+
+donde las distintas opciones del comando nos permiten
+indicar:
+
+\startitemize
+
+\item {\bf El nombre de la fuente}, que puede ser cualquiera de los
+  nombres simbólicos de las fuentes que se recogen en la
+  \in{tabla}[tbl:ctx-fuentes].
+
+\item {\bf El tamaño}, que se puede indicar bien mediante sus
+  dimensiones (usando el punto como unidad de medida) o mediante
+  ciertos nombres simbólicos. Téngase en cuenta, por otra parte, que
+  aunque antes dije que las fuentes que usa \ConTeXt{} se pueden
+  escalar a prácticamente cualquier tamaño, en \tex{setupbodyfont}
+  sólo se admiten tamaños consistentes en números enteros entre el 4 y
+  el 12, así como los valores 14.4 y 17.3. Por defecto se asume un
+  tamaño de 12 puntos.
+
+  \tex{setupbodyfont}, por otra parte, establece lo que podríamos
+  llamar el {\em tamaño base} del documento; es decir: el tamaño de la
+  letra {\em normal} a partir del cual se calculan otros tamaños como,
+  por ejemplo, los títulos o las notas a pie de página. Al cambiar el
+  tamaño principal con \tex{setupbodyfont} también se estarán
+  cambiando todos estos otros tamaños que se calculan en relación a la
+  fuente principal.
+
+  Además de indicar directamente la dimensión de la letra (10pt, 11pt,
+  12pt, etc.) también podemos usar ciertos nombres simbólicos que
+  calculan el tamaño de letra a aplicar a partir del tamaño
+  actual. Los nombres simbólicos en cuestión son, de mayor a menor:
+  big, small, script, x, scriptscript y xx. Así, por ejemplo, si
+  queremos establecer con \tex{setupbodyfont} un cuerpo de texto
+  superior a 12 puntos debemos indicar como tamaño \PalClave{big}.
+
+\item {\bf El estilo de la fuente}, que, tal y como ya hemos indicado,
+  puede ser romano (con serifas), paloseco (sin serifas), o estilo de
+  máquina de escribir, y en algunas fuentes se admiten también los
+  estilos escritura a mano y caligráfico. \tex{setupbodyfont} admite
+  distintos nombres simbólicos para indicar los diferentes
+  estilos. Estos se recogen en la tabla \in[tab:ctx-estilosstbdf]:
+
+  {\switchtobodyfont[script] %
+    \placetable %
+      [here, force] %
+      [tab:ctx-estilosstbdf] %
+      {Estilos en setupbodyfont} %
+      {\startxtable %
+        \startxrow [topframe=on, bottomframe=on]%
+          \startxcell \bf Estilo \stopxcell %
+          \startxcell \bf Nombres simbólicos que se admiten\stopxcell %
+        \stopxrow %
+        \startxrow %
+          \startxcell Roman \stopxcell %
+          \startxcell \tt rm, roman, serif, regular \stopxcell %
+        \stopxrow %
+        \startxrow %
+          \startxcell Sans Serif \stopxcell %
+          \startxcell \tt ss, sans, support, sansserif\stopxcell %
+        \stopxrow %
+        \startxrow %
+          \startxcell Monoespacio \stopxcell %
+          \startxcell \tt tt, modo, type, teletype \stopxcell %
+        \stopxrow %
+        \startxrow %
+          \startxcell Escritura a mano \stopxcell %
+          \startxcell \tt hw, handwritten \stopxcell %
+        \stopxrow %
+        \startxrow [bottomframe=on]%
+          \startxcell Caligráfico \stopxcell %
+          \startxcell \tt cg, calligraphic\stopxcell %
+        \stopxrow %
+      \stopxtable} %
+  }
+
+  Los distintos nombres que se admiten para cada uno de los estilos
+  son, hasta donde yo se, totalmente sinónimos.
+ 
+\stopitemize
+
+\startsubsubject
+  [
+    reference=sec:ver fuente,
+    title={Ver la apariencia de una fuente},
+  ]
+\PonMacro{showbodyfont}
+
+Antes de decidirnos por usar una fuente concreta en nuestro documento,
+lo normal es que queramos ver su apariencia. Ello se puede hacer casi
+siempre desde el sistema operativo pues es habitual que exista alguna
+utilidad que permita examinar la apariencia de las fuentes instaladas
+en el sistema; pero para mayor comodidad, \ConTeXt{} ofrece una
+utilidad que nos permite ver la apariencia de cualquiera de las
+fuentes habilitadas en el propio \ConTeXt{}. Se trata de
+\tex{showbodyfont}, que genera una tabla con ejemplos de la fuente
+indicada.
+
+El formato de \tex{showbodyfont} es el siguiente:
+
+\type{\showbodyfont [Opciones]}
+
+Donde como opciones podemos indicar exactamente los mismos nombres
+simbólicos que en \tex{setupbodyfont}. Así, por ejemplo
+\tex{showbodyfont[schola, 8pt]} nos mostrará la tabla que más abajo se
+ve, en la que aparecen distintos ejemplos de la fuente schola a un
+tamaño base de 8 puntos:
+
+\showbodyfont[schola,8pt]\bigskip
+
+Obsérvese que en la primera fila y en la primera columna de la tabla
+mostrada se ven ciertos comandos. Más adelante, cuando se haya
+explicado el significado de esos comandos, volveremos a examinar las
+tablas generadas por \tex{showbodyfont}.
+
+Si queremos ver el juego completo de caracteres de una determinada
+fuente, podemos usar el comando
+\PonMacro{showfont}\tex{showfont[NombreFuente]}. Este comando mostrará
+el diseño principal de cada uno de los caracteres, sin aplicar
+comandos de estilo ni alternativas.
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [title={Cambiar la fuente o alguna de sus\\ características}]
+
+\startsubsection
+  [title={Los comandos \tex{setupbodyfont} y\\ \tex{switchtobodyfont}}]
+\PonMacro{switchtobodyfont}\PonMacro{setupbodyfont}
+
+Para cambiar la fuente, el estilo o el tamaño podemos usar el mismo
+comando con el que se establece la fuente al principio del documento
+cuando no queremos usar la fuente por defecto de \ConTeXt:
+\tex{setupbodyfont}. Basta con insertar dicho comando en el
+punto del documento a partir del cual queremos operar el cambio de
+fuente. Ello producirá un cambio {\em permanente} de la fuente, es
+decir: quedará afectada de modo directo la fuente principal y de modo
+indirecto todas las fuentes que se establecen en relación con la
+principal.
+
+Muy parecido a \tex{setupbodyfont} es
+\tex{switchtobodyfont}. Ambos comandos permiten cambiar los mismos
+aspectos de la fuente (la fuente, el estilo y el tamaño) pero
+internamente funcionan de manera distinta y están pensados para usos
+diferentes. El primero (\tex{setupbodyfont}) está pensado para {\em
+  establecer} la fuente principal (y normalmente única) del documento;
+por ello lo habitual es que en un documento sólo se utilice una vez ya
+que no es corriente ---ni tipográficamente correcto--- que un mismo
+documento tenga más de una fuente principal (por eso se llama {\em
+  principal}). Por el contrario \tex{switchtobodyfont} está pensado
+para escribir fragmentos de texto con una fuente diferente, o para
+asignar cierta fuente a algún tipo especial de párrafo que pensemos
+definir en nuestro documento.
+
+Aparte de lo anterior ---que en realidad afecta al funcionamiento
+interno de cada uno de estos dos comandos---, desde el punto de vista
+del usuario hay algunas diferencias entre usar uno u otro comando. En
+particular:
+
+\startitemize[n]
+
+\item Como ya sabemos \tex{setupbodyfont} está limitado a un rango
+  concreto de tamaños, mientras que \tex{switchtobodyfont} permite
+  indicar prácticamente cualquier tamaño, de tal modo que si la
+  fuente no está disponible en dicho tamaño, procederá a escalarla.
+
+\item \tex{switchtobodyfont} no afecta de ninguna manera a
+  los elementos de texto distintos de aquel donde se use, a diferencia
+  de \tex{setupbodyfont} que, como antes se dijo, establece
+  la fuente principal y, al alterar esta, altera también la fuente de
+  todos aquellos elementos textuales cuya fuente se calcule a partir
+  de la fuente principal.
+
+\stopitemize
+
+Ambos comandos, de otro lado, cambian no solo la fuente, el estilo y
+el tamaño, sino también otros aspectos asociados a la fuente usada
+tales como, por ejemplo, el interlineado.
+
+\startLetraChica
+
+  \tex{setupbodyfont} genera un error de compilación si se solicita
+  un tamaño de fuente no permitido; pero no lo genera si se solicita
+  una fuente no existente, caso este último en el que se activará la
+  fuente por defecto ({\em Latin Modern
+    Roman}). \tex{switchtobodyfont} actúa igual respecto de la
+  fuente, y en cuanto al tamaño, como ya he dicho, intenta conseguirlo
+  escalando la fuente. No obstante hay fuentes que no pueden ser
+  escaladas a ciertos tamaños, caso este en el que una vez más se
+  activaría la fuente por defecto.
+
+\stopLetraChica
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:cambio rápido,
+    title={Cambio rápido de estilo, alternativa y\\ tamaño},
+  ]
+
+\subsubsubject{Cambio de estilo y de alternativa}
+
+Además de \tex{switchtobodyfont}, \ConTeXt\ proporciona un grupo de
+comandos que permiten cambiar con rapidez el estilo, la alternativa, o
+el tamaño. Respecto a estos comandos advierte la wiki de \ConTeXt\ que
+en ocasiones, cuando figuran al principio de un párrafo, pueden
+producir algunos efectos colaterales indeseados, por lo que se
+recomienda que en tal caso el comando en cuestión sea precedido del
+comando \PonMacro{dontleavehmode}\tex{dontleavehmode}.
+
+{\switchtobodyfont[small] %
+\placetable[here][tab:ctx-estilos]
+  {Comandos para cambiar entre los distintos estilos}
+  {
+    \starttabulate[|l|l|]
+      \HL
+      \NC {\bf Estilo} \NC {\bf Comandos que lo habilitan}\NR
+      \HL
+      \NC Roman\NC\type{\rm}, \type{\roman}, \type{\serif}, \type{\regular}\NR\PonMacro{rm}\PonMacro{roman}\PonMacro{serif}\PonMacro{regular}
+      \NC Sans Serif\NC\type{\ss}, \type{\sans}, \type{\support}, \type{\sansserif}\NR\PonMacro{ss}\PonMacro{sans}\PonMacro{support}\PonMacro{sansserif}
+      \NC Monoespaciado\NC\type{\tt}, \type{\mono}, \type{\teletype},\NR\PonMacro{tt}\PonMacro{mono}\PonMacro{teletype}
+      \NC Escritura a mano\NC\type{\hw}, \type{\handwritten},\NR\PonMacro{hw}\PonMacro{handwritten}
+      \NC Caligráfico\NC\type{\cf}, \type{\calligraphic}\PonMacro{cf}\PonMacro{calligraphic}\NR
+      \HL
+    \stoptabulate
+  }}
+
+
+La \in{tabla}[tab:ctx-estilos] contiene los comandos que permiten cambiar
+el estilo, sin alterar ningún otro aspecto; y la
+\in{tabla}[tab:ctx-alternativas] contiene los comandos que permiten cambiar
+exclusivamente la alternativa.
+
+
+{\switchtobodyfont[small] %
+  \placetable[here][tab:ctx-alternativas]
+  {Comandos para activar una alternativa concreta}
+  {
+    \starttabulate[|l|l|]
+      \HL
+      \NC {\bf Alternativa} \NC {\bf Comandos que la activan}\NR
+      \HL
+      \NC Normal           \NC\type{\tf}, \type{\normal}\NR\PonMacro{tf}\PonMacro{normal}
+      \NC Cursiva          \NC\type{\it}, \type{\italic}\NR\PonMacro{it}\PonMacro{italic}
+      \NC Negrita          \NC\type{\bf}, \type{\bold}\NR\PonMacro{bf}\PonMacro{bold}
+      \NC Negrita-Cursiva  \NC\type{\bi}, \type{\bolditalic}, \type{\italicbold}\NR\PonMacro{bi}\PonMacro{bolditalic}\PonMacro{italicbold}
+      \NC Inclinada        \NC\type{\sl}, \type{\slanted}\NR\PonMacro{sl}\PonMacro{slanted}
+      \NC Negrita-Inclinada\NC\type{\bs}, \type{\boldslanted}, \type{\slantedbold}\NR\PonMacro{bs}\PonMacro{boldslanted}\PonMacro{slantedbold}
+      \NC Versalitas       \NC\type{\sc}, \type{\smallcaps}\NR\PonMacro{sc}\PonMacro{smalcaps}
+      \NC Medieval         \NC\type{\os}, \type{\mediaeval}\PonMacro{os}\PonMacro{mediaeval}\NR
+    \stoptabulate
+  }
+}
+
+Todos estos comandos mantienen su eficacia hasta que se activa
+explícitamente otro estilo u otra alternativa o se termina el {\em
+  grupo} dentro del que se declaró el comando. Por ello, cuando
+queremos que el comando sólo afecte a un fragmento de texto lo que hay
+que hacer es encerrar dicho fragmento en un grupo, como en el
+siguiente ejemplo, en el que cada vez que aparece la palabra {\em
+  cuento} en el sentido de relato, se ha puesto en cursiva, creando un
+grupo para ello.
+
+\startDobleEjemplo
+
+\starttyping
+Cuando cuentes {\it cuentos}, cuenta 
+cuántos {\it cuentos} cuentas, porque
+si no cuentas cuántos {\it cuentos}
+cuentas, nunca sabrás cuántos
+{\it cuentos} cuentas tú.
+\stoptyping
+
+Cuando cuentes {\it cuentos}, cuenta cuántos {\it
+  cuentos} cuentas, porque si no cuentas cuántos {\it cuentos}
+cuentas, nunca sabrás cuántos {\it cuentos} cuentas tú.
+
+\stopDobleEjemplo
+
+\subsubsubject[sec:sufijos de tamaño]{Sufijos para cambiar el tamaño junto
+con el estilo y la\\ alternativa}
+\PonMacro{rmx}\PonMacro{rmxx}\PonMacro{rma}\PonMacro{rmb}\PonMacro{rmc}\PonMacro{rmd}
+\PonMacro{ssx}\PonMacro{ssxx}\PonMacro{ssa}\PonMacro{ssb}\PonMacro{ssc}\PonMacro{ssd}
+\PonMacro{ttx}\PonMacro{ttxx}\PonMacro{tta}\PonMacro{ttb}\PonMacro{ttc}\PonMacro{ttd}
+\PonMacro{tfx}\PonMacro{tfxx}\PonMacro{tfa}\PonMacro{tfb}\PonMacro{tfc}\PonMacro{tfd}
+\PonMacro{itx}\PonMacro{itxx}\PonMacro{ita}\PonMacro{itb}\PonMacro{itc}\PonMacro{itd}
+\PonMacro{bfx}\PonMacro{bfxx}\PonMacro{bfa}\PonMacro{bfb}\PonMacro{bfc}\PonMacro{bfd}
+\PonMacro{bix}\PonMacro{bixx}\PonMacro{bia}\PonMacro{bib}\PonMacro{bic}\PonMacro{bid}
+\PonMacro{slx}\PonMacro{slxx}\PonMacro{sla}\PonMacro{slb}\PonMacro{slc}\PonMacro{sld}
+\PonMacro{bsx}\PonMacro{bsxx}\PonMacro{bsa}\PonMacro{bsb}\PonMacro{bsc}\PonMacro{bsd}
+
+Los comandos que cambian el estilo o la alternativa, en su versión de
+dos letras (\tex{tf}, \tex{it}, \tex{bf}, etc.)  admiten una serie de
+{\em sufijos} que afectan al tamaño de la fuente. Los sufijos a, b, c
+y d, aumentan el tamaño de la fuente multiplicándolo, respectivamente,
+por $1.2$, $1.2^2$ ($=1.44$), $1.2^3$ ($=1.728$) o $1.2^4$
+($=2.42$). Véase un ejemplo:
+
+\type{\tf prueba, \tfa prueba, \tfb prueba, \tfc prueba, \tfd prueba}
+
+{\color[red]{\tf prueba, \tfa prueba, \tfb prueba, \tfc prueba, \tfd prueba}}
+
+los sufijos x y xx reducen el tamaño de la fuente
+multiplicándolo, respectivamente, por 0.8 y 0.6:
+
+\type{\tf prueba, \tfx prueba, \tfxx prueba}
+
+{\color[red]{\tf prueba, \tfx prueba, \tfxx prueba}}
+
+Los sufijos «x» y «xx» aplicados a \tex{tf} permiten
+abreviar el comando de tal modo que \tex{tfx} se puede
+escribir como \PonMacro{tx}\tex{tx} y \tex{tfxx} como
+\PonMacro{txx}\tex{txx}.
+
+La disponibilidad de los diferentes sufijos, por otra parte, depende de
+la concreta implementación de la fuente. Según el manual de referencia
+de \ConTeXt{} (en su última versión, de 2013 y pensado en gran medida
+para Mark~II) el único sufijo que se garantiza que siempre funcionará
+es «x» los restantes pueden o no estar implementados; y pueden estarlo
+solo para algunas alternativas.
+
+En todo caso, para salir de dudas, podemos usar \tex{showbodyfont}, de
+la que ya antes se habló (en la \in{sección}[sec:ver fuente]). Este
+comando muestra un cuadro que no sólo nos permite apreciar la
+apariencia de la fuente, sino también ver cómo es la fuente en cada
+uno de sus estilos y alternativas, así como que sufijos de alteración
+del tamaño están disponibles.
+
+Volvamos a mirar la tabla mostrada por \tex{showbodyfont}:
+
+\showbodyfont[modern]
+
+Si nos fijamos bien en la tabla veremos que la primera columna recoge
+los estilos de la fuente (\tex{rm}, \tex{ss} y \tex{tt}). La
+primera fila recoge, en el lado izquierdo, las alternativas
+(\tex{tf}, \tex{sc}, \tex{sl}, \tex{it}, \tex{bf},
+  \tex{bs} y \tex{bi}), mientras el lado derecho de la primera
+  fila recoge los sufijos disponibles, aunque, solo con la alternativa
+  regular.
+
+Es importante tener en cuenta que un cambio en el tamaño de la letra
+realizado mediante alguno de estos sufijos, sólo cambiará el tamaño de
+la letra en el sentido estricto, dejando intactos otros valores que
+normalmente van asociados con el tamaño de la letra como puede ser,
+por ejemplo, el interlineado.
+  
+\subsubsubject{Personalización del factor de escalado de los sufijos}
+  
+Para personalizar el factor de escalado, podemos usar
+\PonMacro{definebodyfontenvironment}\tex{definebodyfontenvironment} cuyo formato puede ser:
+
+\starttyping
+\definebodyfontenvironment[tamaño concreto][escalado]
+\definebodyfontenvironment[default][escalado]
+\stoptyping
+
+En la primera versión redefiniríamos el escalado para un tamaño
+concreto de la fuente principal establecido mediante
+\tex{setupbodyfont} o mediante \tex{switchtobodyfont}. Por
+ejemplo:
+
+\type{\definebodyfontenvironment[10pt][a=12pt,b=14pt,c=2, d=3]}
+
+haría que cuando la fuente principal sea de 10 puntos,
+el sufijo “a” cambie a 12 puntos, el sufijo “b” cambie a 14, el sufijo
+“c” multiplique la fuente original por 2 y el sufijo “d” lo
+multiplique por 3. Obsérvese que para a y b se ha indicado una
+dimensión fija, pero para c y d se ha indicado un factor multiplicador
+del tamaño original.
+
+Pero cuando el primer argumento de \tex{definebodyfontenvironment}
+es igual a \PalClave{default}, entonces estaremos redefiniendo el valor de
+escalado para todos los tamaños posibles de fuente, y como valor de
+escalado sólo podremos introducir un número multiplicador. De modo que
+si, por ejemplo, escribimos:
+
+\type{\definebodyfontenvironment[default][a=1.3,b=1.6,c=2.5,d=4]}
+
+estaremos indicando que sea cual sea el tamaño de la
+fuente principal, el sufijo a la multiplique por 1.3, el b por 1.6, el
+c por 2 y el d por 4.
+
+Además de a los sufijos xx, x, a, b, c y d, mediante
+\tex{definebodyfontenvironmen} podemos asignar un valor de escalado
+a las palabras clave \PalClave{big}, \PalClave{small}, \PalClave{script} y
+\PalClave{scriptscript}. Estos valores se aplican a los tamaños que en
+\tex{setupbodyfont} y \tex{switchtobodyfont} se asocian a dichas
+palabras clave. También se aplican en los siguientes comandos, cuya
+utilidad se deduce (creo) de su propio nombre:
+
+\startitemize[1,packed]
+
+\item \PonMacro{smallbold}\tex{smallbold}
+\item \PonMacro{smallslanted}\tex{smallslanted}
+\item \PonMacro{smallboldslanted}\tex{smallboldslanted}
+\item \PonMacro{smallslantedbold}\tex{smallslantedbold}
+\item \PonMacro{smallbolditalic}\tex{smallbolditalic}
+\item \PonMacro{smallitalicbold}\tex{smallitalicbold}
+\item \PonMacro{smallbodyfont}\tex{smallbodyfont}
+\item \PonMacro{bigbodyfont}\tex{bigbodyfont}
+  
+\stopitemize
+
+Si queremos ver los tamaños por defecto de una determinada fuente
+podemos usar \PonMacro{showbodyfontenvironment}\tex{showbodyfontenvironment[Fuente]}. Este comando,
+aplicado a la fuente {\tt modern}, por ejemplo, ofrece el siguiente
+resultado:
+
+\showbodyfontenvironment[modern]
+
+\stopsubsection
+
+\startsubsection
+  [title={Definir comandos y palabras clave para los tamaños, estilos
+      y alternativas de las fuentes}]
+
+Los comandos predefinidos para el cambio de estilo, tamaño o variante
+de la fuente son suficientes, en mi opinión, para casi todo lo que
+queramos hacer. Pero además \ConTeXt\ nos permite:
+
+\startitemize[n]
+
+\item Añadir nuestros propios comandos de cambio de estilo, tamaño o
+  variante de la fuente.
+
+\item Añadir sinónimos a los nombres de estilo o variante, que sean
+  reconocidos por \tex{switchtobodyfont}.
+  
+\stopitemize
+
+Para ello se dispone de los siguientes comandos:
+
+\startitemize
+
+\item \PonMacro{definebodyfontswitch}\tex{definebodyfontswitch}: Permite definir comandos de cambio
+  del tamaño de la fuente. Por ejemplo, si queremos definir el comando
+  \tex{ocho} (o el comando \tex{viii}\footnote{Recuérdese que, salvo
+    en el caso de los símbolos de control, los nombres de los comandos
+    de \ConTeXt\ sólo pueden constar de letras.}) para establecer una
+  fuente de 8 puntos, deberíamos escribir:
+
+  {\tfx\type{\definebodyfontswitch[ocho][8pt]}} o
+  {\tfx\type{\definebodyfontswitch[viii][8pt]}}
+
+\item \PonMacro{definefontstyle}\tex{definefontstyle}: Permite definir una o más palabras que
+  podrán usarse en \tex{setupbodyfont} o en \tex{switchtobodyfont}
+  para establecer un concreto estilo de fuente; de modo que si
+  queremos, por ejemplo, llamar «paloseco» a la fuente {\em sans
+    serif} podríamos escribir
+
+  \type{\definefontstyle[paloseco][ss]}
+
+  Una peculiaridad de \tex{definefontstyle} es que permite asociar
+  simultáneamente varias palabras a un mismo estilo, como, por ejemplo
+  en 
+
+  \type{\definefontstyle[paloseco, sosa, sinrebordes][ss]}
+
+\item \PonMacro{definealternativestyle}\tex{definealternativestyle}: Permite asociar un nombre a una
+  variante de la fuente. Ese nombre podrá funcionar como comando, o
+  ser reconocido por la opción {\tt style} de aquellos comandos que
+  permite configurar el estilo que aplicarán. Así, por ejemplo, el
+  siguiente fragmento
+
+  \type{\definealternativestyle[negrita][\bf][]}
+
+  habilitará el comando \tex{negrita} y la palabra clave
+  \PalClave{negrita} que será reconocida por la opción {\tt style} de
+  aquellos comandos que la admiten.
+
+  \startLetraChica
+
+    El tercer argumento de \tex{definealternativestyle} no se para qué
+    sirve. No es opcional y, por lo tanto, no puede \Duda omitirse;
+    pero la única información que he encontrado sobre él está en el
+    manual de referencia de \ConTeXt\ donde se dice que este tercer
+    argumento sólo tiene importancia en los títulos de capítulos y
+    secciones «{\em donde, aparte de \tex{cap}, debemos obedecer la
+      fuente usada aquí}» (¿?)
+
+  \stopLetraChica
+
+\stopitemize
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [title={Otras cuestiones relacionadas con el uso de algunas
+  alternativas}]
+
+Dentro de las distintas alternativas de una fuente, hay dos cuyo uso
+requiere ciertas precisiones
+
+\startsubsection
+  [
+    reference=sec:enfatizar,
+    title={Cursiva, letra inclinada y enfatización},
+  ]
+
+Tanto la cursiva como la letra inclinada se usan principalmente para
+destacar tipográficamente un fragmento del texto; para llamar la
+atención sobre él. Es decir: para {\em enfatizarlo}.
+
+Podemos, claro está, enfatizar un texto activando explícitamente la
+cursiva o la letra inclinada. Pero \ConTeXt\ ofrece un comando
+alternativo, mucho más útil e interesante, dirigido específicamente a
+la enfatización de un fragmento de texto. Se trata del comando
+\PonMacro{em}\tex{em}, cuyo nombre procede de la palabra inglesa {\em
+  emphasis}. Frente a los comandos \tex{it} y \tex{sl}, que son
+comandos puramente tipográficos, \tex{em} es un comando {\em
+  conceptual}; funciona de una manera distinta y es, por ello, más
+versátil, hasta el punto de que la documentación de \ConTeXt{}
+recomienda usar \tex{em} con preferencia a \tex{it} o
+\tex{sl}. Cuando usamos estos dos últimos comandos le estamos
+diciendo a \ConTeXt{} qué alternativa de la fuente queremos que
+utilice; pero cuando usamos \tex{em} le estamos diciendo qué efecto
+pretendemos conseguir, dejando en manos de \ConTeXt{} el cómo
+conseguirlo.  Normalmente, para conseguir el efecto de enfatizar o
+destacar el texto lo que hará es activar la letra inclinada (o la
+cursiva), pero ello depende del contexto y así, si usamos \tex{em}
+dentro de un texto que ya está inclinado ---o en cursiva--- el comando
+provocará que, para destacarlo de su entorno, se desactive la cursiva.
+
+Así el siguiente ejemplo:
+
+\startDobleEjemplo
+
+\starttyping
+Ya lo dijo Salomón: {\em Oh bella
+reina de Saba, vámonos a 
+{\em Mazarrón}}.
+\stoptyping
+
+Ya lo dijo Salomón: {\em Oh, bella reina de Saba, vámonos a {\em
+    Mazarrón}}.
+  
+\stopDobleEjemplo
+
+Obsérvese que el primer \tex{em} activa la letra inclinada para toda
+la frase del Rey Salomón, y el segundo la desactiva para la palabra
+“Mazarrón”.
+
+Otra ventaja de \tex{em} es que no se trata de una
+alternativa, por lo que no desactiva la alternativa que hubiera antes
+y así, por ejemplo, dentro un texto en negrita \tex{em}
+provocará la negrita inclinada sin necesidad de invocar explícitamente
+a \tex{bs}. Asimismo, si dentro un texto que se está
+enfatizando, aparece el comando \tex{bf}, eso no hará que la
+enfatización cese.
+
+Por defecto \tex{em} activa la letra inclinada y no la cursiva, pero
+eso podemos cambiarlo mediante
+\tex{setupbodyfontenvironment[default][em=italic]}.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:versalitas,
+    title={Versalitas y pseudoversalitas},
+  ]
+
+Las versalitas constituyen un recurso tipográfico que en numerosas
+ocasiones queda mucho mejor que el uso de las mayúsculas propiamente
+dichas, pues la versalita, aunque proporciona a los caracteres la
+forma de la letra mayúscula, no sobresale por su altura dentro de la
+línea de texto.  A pesar de su apariencia formal, se trata de una
+variante estilística de la minúscula, por lo que ---dice la Real
+Academia de la Lengua en su Libro de Estilo (pág.~162)---, cuando se
+emplea, la mayúscula inicial debe mantenerse en aquellas palabras que
+lo requieran. Este tipo de letra se usa fundamentalmente ---sigo
+citando la obra anterior--- “para reemplazar a la mayúscula en
+determinados contextos, favoreciendo el equilibrio tipográfico del
+texto y evitando el exceso de mancha, así como para resaltar una
+palabra o fragmento en aquellos casos en los que el uso de la cursiva
+o la negrita no es lo más indicado, o para destacarlos en un texto que
+ya presenta estos estilos”. Es especialmente útil su uso en la
+escritura de números romanos, o en los títulos de textos o
+capítulos. En textos académicos también es costumbre usar versalitas
+para escribir los nombres de los autores citados.
+
+El problema es que, de un lado, no todas las fuentes
+implementan las versalitas, y las que lo hacen no siempre las
+contemplan para todos los {\em estilos de fuente}. Además, al ser las
+versalitas una alternativa a la cursiva, la negrita o la letra
+inclinada, de acuerdo con las reglas generales que hemos expuesto en
+este mismo capítulo, no podrían usarse simultáneamente todas estas
+características tipográficas.
+
+Estos problemas se pueden resolver utilizando las {\em
+  pseudoversalitas} que \ConTeXt\ permite crear mediante los comandos
+\tex{cap} y \tex{Cap}; véase al respecto la
+\in{sección}[sec:Mayus-Minus-Pseudo].
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [title={Uso y configuración de los colores}]
+
+\ConTeXt\ proporciona comandos para cambiar el color de todo el
+documento, de alguno de sus elementos, o de ciertos fragmentos de
+texto. También proporciona comandos para cargar en memoria cientos de
+colores predefinidos, y para ver cuáles son sus componentes.
+
+\startsubsection
+  [title={Procedimientos para escribir fragmentos de texto en color}]
+
+La mayor parte de los comandos configurables de \ConTeXt\ admite una
+opción llamada \PalClave{color} que nos permite indicar el color en el
+que se debe escribir el texto afectado por dicho comando. Así, por
+ejemplo, para indicar que los títulos de los capítulos se escriban en
+color azul basta con escribir:
+
+\vbox{\starttyping
+  \setuphead
+    [chapter]
+    [color=blue]
+\stoptyping}
+
+Por este procedimiento podemos colorear los títulos, encabezados,
+notas a pie de página, notas al margen, barras y líneas, tablas,
+títulos de tablas o imágenes, etc. La ventaja de usar este
+procedimiento está en que el resultado final será coherente (todos los
+textos que cumplen la misma función se escribirán con el mismo color)
+y más fácil de cambiar globalmente. 
+
+También podemos colorear directamente una porción o fragmento de
+texto, aunque, para evitar un uso demasiado abigarrado de los
+colores, que no es agradable desde una perspectiva tipográfica, o un
+uso inconsistente, en general se recomienda huir del coloreado directo
+y utilizar lo que podríamos llamar un {\em coloreado semántico}, es
+decir: en lugar de, por ejemplo, escribir
+
+\type{\color[red]{Texto muy importante}}
+
+definir un comando para el texto muy importante que lo
+coloree. Por ejemplo
+
+\starttyping
+\definehighlight[importante][color=red]
+\importante{Texto muy importante}
+\stoptyping
+
+\stopsubsection
+
+\startsubsection
+  [title={Cambiar el color del fondo y del primer plano del documento}]
+\PonMacro{setupbackgrounds}\PonMacro{setupcolors}
+
+Si lo que deseamos es cambiar el color de todo el documento,
+dependiendo de que deseemos alterar el color del fondo o el color del
+primer plano (texto) usaremos \tex{setupbackgrounds} o
+\tex{setupcolors}. Así, por ejemplo
+
+\starttyping
+\setupbackgrounds
+  [page]
+  [background=color,backgroundcolor=blue]
+\stoptyping
+
+Este comando establecerá el color del fondo de las
+páginas en azul. Como valor para \PalClave{backgroundcolor} podemos
+usar el nombre de cualquier color predefinido.
+
+Para cambiar, con carácter global, el color del primer plano en todo el
+documento (desde el punto en el que se inserte el comando) se usa
+\tex{setupcolors}, donde la opción \PalClave{textcolor} controla el color
+del texto. Por ejemplo:
+
+\type{\setupcolors[textcolor=red]}
+
+hará que el color del texto sea el rojo.
+
+\stopsubsection
+
+\startsubsection
+  [title={Comandos para colorear fragmentos concretos de texto}]
+\PonMacro{color}\PonMacro{colored}
+
+El comando general para colorear porciones pequeñas de texto es
+
+\type{\color[NombreColor]{Texto a colorear}}
+
+Para porciones más grandes de texto es preferible usar
+
+\type{\startcolor[NombreColor] ... \stopcolor}
+
+Tanto uno como otro reciben como argumento el nombre de algún color
+predefinido. Si queremos definir el color sobre la marcha, podemos
+usar el comando \tex{colored}. Por ejemplo:
+
+\startDobleEjemplo
+
+\starttyping
+Tres gatos \colored[r=0.1, g=0.8, b=0.8]
+{coloreados}    
+\stoptyping
+
+Tres gatos \colored[r=0.1, g=0.8, b=0.8]{coloreados}.
+  
+\stopDobleEjemplo
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:colores_predefinidos,
+    title={Colores predefinidos},
+  ]
+  % Esta es la información sacada del manual de referencia. Pero yo
+  % sospecho que hay bastantes más colores predefinidos. Por ejemplo
+  % el "maincolor" que se usa en este documento se basa en Orange que
+  % no aparece en el listado de colores predefinidos.
+
+  \ConTeXt\ carga por defecto la predefinición de los colores más
+  corrientes cuyos nombres en inglés se recogen en la
+  \in{tabla}[tbl:colores_predefinidos]\footnote{Esta lista se
+    encuentra en el manual de referencia y en la wiki de \ConTeXt\
+    pero estoy bastante seguro de que es una lista incompleta pues en
+    este documento, por ejemplo, sin haber cargado ningún color
+    adicional, se usa el color «orange» ---que no está en la
+    \in{tabla}[tbl:colores_predefinidos]--- para los títulos de los
+    epígrafes.}.
+
+{\switchtobodyfont[small]
+\placetable
+  [here]
+  [tbl:colores_predefinidos]
+  {Colores predefinidos en \ConTeXt}
+{\starttabulate[|l|l|l|l|l|]
+\HL
+\NC{\bf Nombre (español)}
+\NC{\bf Nombre (inglés)}
+\NC{\bf Tono claro}
+\NC{\bf Tono medio}
+\NC{\bf Tono oscuro}
+\NR
+\HL
+\NC Negro
+\NC black
+\NR
+\NC Blanco
+\NC white
+\NR
+\NC Gris
+\NC gray
+\NC lightgray
+\NC middlegray
+\NC darkgray
+\NR
+\NC Rojo
+\NC red
+\NC lightred
+\NC middlered
+\NC darkred
+\NR
+\NC Verde
+\NC green
+\NC lightgreen
+\NC middlegreen
+\NC darkgreen
+\NR
+\NC Azul
+\NC blue
+\NC lightblue
+\NC middleblue
+\NC darkblue
+\NR
+\NC Cian
+\NC cyan
+\NC\NC middlecyan
+\NC darkcyan
+\NR
+\NC Magenta
+\NC magenta
+\NC\NC middlemagenta
+\NC darmagenta
+\NR
+\NC Amarillo
+\NC yellow
+\NC\NC middleyellow
+\NC darkyellow
+\NR
+\HL
+\stoptabulate
+}}
+
+Pero también dispone de otras colecciones de colores que no se cargan
+por defecto, pero que se pueden cargar mediante el comando
+
+\PonMacro{usecolors}\type{\usecolors[NombreColección]}
+
+donde nombrecolección puede ser 
+
+\startitemize[packed]
+\item \PalClave{crayola}, 235 colores que imitan el tono de los rotuladores.
+\item \PalClave{dem}, 91 colores.
+\item \PalClave{ema}, 540 definiciones de color basados en los colores
+  usados por Emacs.
+\item \PalClave{rainbow}, 91 colores pensados para ser usados en
+  fórmulas matemáticas.
+\item \PalClave{ral}, 213 definiciones de color del {\em Deutsches
+  Institut für Gütesicherung und Kennzeichnung} (Instituto Alemán de
+  Aseguramiento de la Calidad y Etiquetado).
+\item \PalClave{rgb}, 223 colores.
+\item \PalClave{solarized}, 16 colores basados en un esquema de solarización.
+\item \PalClave{svg}, 147 colores.
+\item \PalClave{x11}, 450 colores estándar para X11.
+\item \PalClave{xwi}, 124 colores.
+\stopitemize
+
+\startLetraChica
+
+  Los ficheros de definición de colores se incluyen en el directorio
+  \PalClave{context/base/mkiv} de la distribución y su nombre responde
+  al esquema  \PalClave{colo-imp-NOMBRE.mkiv}. La información que
+  acabo de exponer sobre las distintas colecciones de colores
+  predefinidos, se basa en mi concreta distribución. Las concretas
+  colecciones, o el número de colores definidos en ellas, podrían
+  cambiar en versiones futuras.
+
+\stopLetraChica
+
+Para ver qué colores contiene cada una de estas colecciones podemos
+usar el comando \PonMacro{showcolor}\tex{showcolor[NombreColección]}
+que se describe a continuación. Para usar alguno de estos colores,
+primero hay que cargar en memoria la colección
+(\tex{usecolors[NombreColección]}) y luego hay que indicar al comando
+\tex{color} o a \PonMacro{startcolor}\tex{startcolor} el nombre del color. Por ejemplo la
+siguiente secuencia: \page[preference]
+
+\starttyping
+\usecolors[xwi]
+\color[darkgoldenrod]{Tararí que te vi, Mariví}
+\stoptyping
+\page[no]
+
+escribirá
+\usecolors[xwi]\color[darkgoldenrod]{Tararí que te vi, Mariví}
+\page[preference]
+
+\stopsubsection
+
+\startsubsection
+  [title={Ver los colores disponibles}]
+\PonMacro{showcolor}
+
+El comando \tex{showcolor} muestra un listado de colores en el que se puede
+ver la apariencia del color, su apariencia cuando el color se usa en escala
+de grises, los componentes rojo, verde y azul del color, y el nombre por el
+que \ConTeXt\ lo conoce. Usado sin ningún argumento \tex{showcolor}
+mostrará los colores usados en el documento actual. Pero como argumento
+podemos indicar cualquiera de las colecciones predefinidas de colores de
+las que se habló en la \in{sección}[sec:colores_predefinidos], y así, por
+ejemplo, \tex{showcolor[solarized]} nos mostrará los 16 colores solarizados
+de dicha colección:
+
+\showcolor[solarized]
+
+Si lo que queremos es ver las componentes rgb de algún concreto color,
+podemos usar
+\PonMacro{showcolorcomponents}\tex{showcolorcomponents[NombreColor]}. Esto
+es útil si buscamos definir un concreto color, para ver la composición
+de algún color que se le aproxime. Así por ejemplo,
+\tex{showcolorcomponents[darkgoldenrod]} nos mostrará:
+
+\startframedtext[width=\textwidth]\switchtobodyfont[small]
+\showcolorcomponents[darkgoldenrod]
+\stopframedtext
+
+\stopsubsection
+
+\startsubsection
+  [title={Definir nuestros propios colores}]
+\PonMacro{definecolor}
+
+\tex{definecolor} nos permite, bien clonar un color ya existente, bien
+definir un nuevo color. Clonar un color ya existente es tanto como
+crear un nombre alternativo para el mismo. Para ello habría que
+escribir:
+
+\type{\definecolor[Color nuevo][Color viejo]}
+
+Esa orden hará que “{\em Color nuevo}” sea exactamente
+el mismo color que “{\em Color viejo}”.
+
+Pero la principal utilidad de \tex{definecolor} está en la creación de
+colores nuevos. Para ello el comando se debe usar de la siguiente
+forma:
+
+\type{\definecolor[NombreColor][Definición]}
+
+donde {\em Definición} puede hacerse aplicando hasta
+seis esquemas distintos de generación de colores:
+
+\startitemize
+
+\item {\bf Colores RGB}: La definición de colores RGB es una de las
+  más extendidas; se basa en la idea de que es posible representar un
+  color mediante la mezcla, por adición, de los tres colores
+  primarios: rojo («r» de {\em red}), verde («g» de {\em green}) y
+  azul («b» de {\em blue}). Cada uno de estos componentes se indica
+  como un número decimal entre 0 y 1. Por ejemplo
+
+  \type{\definecolor[lima 1][r=0.75, g=1, b=0]}: \definecolor[lima 1]
+       [r=0.75, g=1, b=0] \color[lima 1]{Texto en color “lima 1”}.
+
+\item {\bf Colores Hex}: Esta forma de representar los colores se basa
+  también en el esquema RGB, pero los componentes de rojo, verde y
+  azul se indican como un número hexadecimal de tres bytes en el que
+  el primer byte representa el valor de rojo, el segundo el valor de
+  verde y el tercero el valor de azul. Por ejemplo:
+
+  \type{\definecolor[lima 2][x=BFFF00]}: \definecolor[lima 2][x=BFFF00]
+  \color[lima 2]{Texto en color “lima 2”}.
+
+\item {\bf Colores CMYK}: Este modelo de generación de colores, es lo
+  que se llama un «modelo sustractivo» y se basa en la mezcla de
+  pigmentos de los siguientes colores: cian («c»), magenta («m»),
+  amarillo («y», de {\em yellow}) y negro («k», de {\em key}). Cada
+  uno de estos componentes se indica como un número decimal entre 0 y
+  1. Por ejemplo:
+
+  \type{\definecolor[lima 3][c=0.25, m=0, y=1, k=0]}:
+  \definecolor[lima 3][c=0.25, m=0, y=1, k=0] \color[lima 3]{Texto en
+    color “lima 3”}.
+
+\item {\bf Colores HSL/HSV}: Este modelo de colores parte de medir el
+  matiz («h», de {\em hue}), la saturación («s») y la lumninosidad
+  («l» o a veces «v», de {\em value}). El matiz se corresponde con un
+  número entre 0 y 360; la saturación y la luminosidad  han de ser un
+  número decimal entre 0 y 1. Por ejemplo:
+
+  \type{\definecolor[lima 4][h=75, s=1, v=1]}: \definecolor[lima
+    4][h=75, s=1, v=1] \color[lima 4]{Texto en color “lima 4”}
+
+\item {\bf Colores HWB}: El modelo HWB es un estándar sugerido para
+  CSS4 que mide el matiz («h», de {\em hue}), y el nivel de blanco
+  («w», de {\em whiteness}) y de negro («b», de {\em blackness}). El
+  matiz se corresponde con un número entre 0 y 360, mientras que la
+  blancura y la negrura se representan mediante un número decimal
+  entre 0 y 1.
+
+  \type{\definecolor[Azulón][h=75, w=0.2, b=0.7]}
+  \definecolor[Azulón][h=75, w=0.2, b=0.7]\color[Azulón]{Texto en
+    color “Azulón”}.
+
+  % \type{\definecolor[lima 5][h=75, w=0, b=0]}
+  % \definecolor[lima 5][h=75, w=0.2, b=0.7]\color[lima 5]{Texto en
+  %   color “lima 5”}.
+
+\item {\bf Escala de grises}: Se basa en un solo componente («s», de
+  {\em scale}) que mide el valor de gris. Ha de ser un número decimal
+  entre 0 y 1. Por ejemplo:
+
+  \type{\definecolor[gris pachucho][s=0.65]}: \definecolor[gris
+    pachucho][s=0.65] \color[gris pachucho]{Texto en “gris pachucho”}.
+  
+\stopitemize
+
+También es posible definir un nuevo color a partir de otro color. Por
+ejemplo, el color en el que en esta introducción se escriben los
+títulos viene definido como
+
+\type{\definecolor[ColorPrincipal][0.6(orange)]}
+
+\stopsubsection
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:
+%%% vim:set filetype=context tw=75 : %%%

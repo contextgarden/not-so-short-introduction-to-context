@@ -1,0 +1,972 @@
+%%% Fichero:     b01_Introduccion.mkiv
+%%% Autor:       Joaquín Ataz López
+%%% Inicio:      Marzo 2020
+%%% Terminación: Marzo 2020
+%%% Contenido:   Primer capítulo de la introducción a ConTeXt: una
+%%%              panorámica general del sistema. Para su contenido me
+%%%              he inspirado ligeramente en la presentación de LaTeX
+%%%              que hacen Kopka y Daly en el capítulo 1 de su Guito
+%%%              to LaTeX
+%%%
+%%% Editado: Emacs + AuTeX - Y a veces con vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent b01_Introduccion.mkiv
+
+\startchapter 
+  [
+    title=Panorámica general de \ConTeXt,
+    reference=cap:panorámica
+  ]
+
+\PonIndiceCap
+
+\startsection 
+  [title=Pero entonces ¿Qué es \ConTeXt?]
+
+\ConTeXt\ es un {\em sistema de composición tipográfica}, es decir:
+Un amplio conjunto de herramientas dirigidas a otorgar al usuario un
+absoluto y completo control sobre el aspecto, apariencia y
+prestaciones de un determinado documento electrónico, pensado para ser
+impreso en papel o para ser mostrado en pantalla. En este capítulo se
+explicará qué significa eso. Pero antes, destaquemos alguna de las
+características de \ConTeXt.
+
+\startitemize
+
+\item Existen dos {\em sabores} de \ConTeXt\ llamados,
+  respectivamente, Mark~II y Mark~IV. \ConTeXt\ Mark~II está
+  congelado, es decir: se considera un lenguaje ya plenamente
+  desarrollado al que no está previsto que se le introduzcan cambios o
+  utilidades nuevas. Solamente en el caso de que se detecte algún
+  fallo que deba ser corregido aparecerá una versión nueva. \ConTeXt\
+  Mark~IV, por el contrario, sigue en la actualidad en desarrollo, por
+  lo que con cierta periodicidad aparecen versiones nuevas que
+  introducen alguna mejora o utilidad adicional. Pero, aunque aún en
+  desarrollo, es un lenguaje ya muy maduro, en el que los cambios
+  introducidos por las nuevas versiones son muy sutiles y afectan
+  exclusivamente al funcionamiento a bajo nivel del sistema. Para el
+  usuario medio estos cambios son totalmente transparentes; es como si
+  no existieran. Y aunque ambos {\em sabores} tienen mucho en común,
+  también hay entre ellos algunas incompatibilidades; por ello esta
+  introducción se centra sólo en \ConTeXt\ Mark~IV.
+
+\item \ConTeXt\ es software libre. El programa propiamente dicho (es
+  decir, el conjunto de herramientas informáticas que componen
+  \ConTeXt) se distribuye bajo la licencia {\em GNU General Public
+    License}. La documentación se proporciona bajo licencia «{\em
+    Creative Commons}» que permite copiarla y distribuirla libremente.
+
+\item \ConTeXt\ no es un programa de procesado de textos o un programa
+  de edición de textos, sino un conjunto de herramientas diseñadas
+  para {\em transformar} un texto que previamente hayamos escrito con
+  nuestro editor de textos favorito. Por lo tanto, cuando trabajamos
+  con \ConTeXt:
+
+  \startitemize
+
+  \item Empezamos por escribir uno o varios ficheros de texto con un
+    editor de textos cualquiera.
+
+  \item En esos ficheros, junto con el texto que constituye el
+    contenido propiamente dicho del documento, se incluyen una serie
+    de instrucciones que indican a \ConTeXt\ qué apariencia debe tener
+    el documento final que se genere a partir de los ficheros de texto
+    originales. El conjunto completo de instrucciones de \ConTeXt\
+    constituye, en realidad, un {\em lenguaje}; y como ese lenguaje
+    permite {\em programar} la transformación tipográfica de un texto,
+    puede decirse que \ConTeXt\ es un {\em lenguaje de programación
+      tipográfica}.
+
+  \item Una vez que hemos escrito los ficheros fuente, éstos serán
+    procesados por un programa (que se llama también
+    \PalClave{context}\footnote{\ConTeXt\ es simultáneamente un
+      lenguaje y un programa (además de algunas otras cosas). Esta
+      circunstancia, en un texto como el presente, plantea el problema
+      de que a veces hay que distinguir entre los dos aspectos. Por
+      ello he adoptado la convención tipográfica de escribir «ConTeXt»
+      con su logotipo (\ConTeXt) cuando me quiera referir
+      exclusivamente al lenguaje, o indistintamente al lenguaje y al
+      programa. Pero cuando me quiera referir exclusivamente al
+      programa, escribiré \PalClave{context} todo en minúsculas y con
+      el tipo de letra monoespaciada propio de las terminales
+      informáticas y de las máquinas de escribir que, por otra parte,
+      utilizo también en los ejemplos y en las menciones de los
+      comandos del lenguaje.}), el cual, a partir de ellos, generará
+    un fichero PDF preparado para ser enviado a una impresora o para
+    ser mostrado en pantalla.
+
+  \stopitemize
+
+\item En \ConTeXt, por lo tanto, debemos diferenciar entre el
+  documento que nosotros escribimos, y el documento que \ConTeXt\
+  genera. Para evitar dudas, en esta introducción llamaré {\em fichero
+    fuente} al documento de texto que contiene las instrucciones de
+  formateo, y {\em documento final} al fichero PDF generado por
+  \ConTeXt\ a partir del fichero fuente.
+
+\stopitemize
+
+A continuación se desarrollarán algo más los anteriores puntos
+básicos.
+
+\stopsection
+
+\startsection [title=Composición tipográfica de textos]
+
+Escribir un documento (libro, artículo, capítulo, folleto, impreso,
+cartel ...) y componerlo tipográficamente son dos actividades muy
+diferentes. Escribir el documento es tanto como redactarlo; cosa que
+hace el autor, que es quien decide su contenido y estructura. Al
+documento creado directamente por el autor, tal y como él lo escribió,
+se le llama {\em manuscrito}.  Al manuscrito, por su propia
+naturaleza, sólo tienen acceso el autor y aquellas personas a quienes
+éste permita leerlo. Su difusión más allá de este círculo íntimo,
+requiere que el manuscrito sea {\em publicado}. Hoy día publicar algo
+---en el sentido etimológico de hacerlo «accesible al público»--- es
+tan sencillo como ponerlo en Internet, a disposición de cualquiera que
+lo pueda localizar y lo quiera leer. Pero hasta hace relativamente
+poco la publicación era un proceso que acarreaba costes, dependía de
+ciertos profesionales especializados en ella, y al que sólo accedían
+aquellos manuscritos que, por su contenido, o por su autor, se
+estimaban especialmente interesantes. Y todavía hoy tendemos a
+reservar la palabra {\em publicación} para ese tipo de {\em
+  publicación profesional} en la que el manuscrito experimenta una
+serie de transformaciones en su apariencia dirigidas a mejorar la {\em
+  legibilidad} del documento. Es a esta serie de transformaciones a
+las que se llama {\em composición tipográfica}.
+
+El objetivo de la composición tipográfica es ---en general, y dejando
+de lado los textos publicitarios que persiguen atraer la atención del
+lector--- conseguir documentos con la máxima {\em legibilidad},
+entendiendo por tal aquella cualidad de un texto impreso que invita a
+su lectura, o la facilita, y hace que el lector se sienta cómodo con
+ella. A que esto ocurra contribuyen numerosos aspectos; algunos, por
+supuesto, tienen que ver con {\em el contenido} del documento
+(calidad, claridad, sistemática...), pero otros dependen de cuestiones
+tales como el tipo y tamaño de letra utilizado, la distribución de
+espacios en blanco en la página, la separación visual entre párrafos,
+etc.; además de otro tipo de recursos, no tan gráficos o visuales,
+como la existencia o no en el documento de determinadas ayudas al
+lector tales como encabezados o pies de página, índices, glosarios,
+negritas, titulillos en los márgenes, etc. Al conocimiento y correcto
+manejo de todos los recursos a disposición de un compositor
+tipográfico lo podríamos llamar «arte de la composición tipográfica» o
+«arte de la impresión».
+
+Históricamente, y hasta el advenimiento de la informática, las tareas
+y papeles del escritor y del compositor tipográfico se mantuvieron
+netamente diferenciadas. El autor escribía a mano o, desde mediados
+del siglo XIX, en una «máquina de escribir» cuyos recursos
+tipográficos eran incluso más limitados que los de la escritura a
+mano; y luego entregaba sus originales a la editorial o a la imprenta
+que se encargaba de transformarlos para, a partir de ellos, obtener el
+documento impreso.
+
+Hoy día la informática ha facilitado que sea el propio autor quien
+decida la composición hasta en sus últimos detalles. Pero eso no borra
+el hecho de que las cualidades que necesita un buen autor no son las
+mismas que las que necesita un buen compositor tipográfico. El autor
+requiere, dependiendo del tipo de documento de que se trate,
+conocimiento de la materia sobre la que escribe, claridad expositiva,
+una mente bien estructurada que le permita crear un texto bien
+sistematizado, creatividad, sentido del ritmo, etc. Pero el compositor
+tipográfico tiene que reunir un buen conocimiento de los recursos
+gráficos y conceptuales a su disposición, y el suficiente buen gusto
+para utilizarlos de forma armónica.
+
+Con un buen programa procesador de textos\footnote{Por convención
+  bastante antigua, se distingue entre los programas de {\em edición
+    de textos} y los {\em procesadores de texto}. Los primeros
+  manipulan ficheros de texto sin formato, y los segundos trabajan con
+  ficheros binarios de texto formateado.} es posible conseguir una
+composición tipográfica razonablemente buena. Pero los procesadores de
+textos no están en general pensados para la composición tipográfica y
+sus resultados, aunque pueden ser correctos, no son comparables a los
+que se obtienen con otras herramientas diseñadas específicamente para
+controlar la composición del documento. De hecho los procesadores de
+texto son la evolución de las máquinas de escribir, y su uso, en la
+medida en que estas herramientas enmascaran la diferencia entre la
+autoría del texto y su composición tipográfica, tiende a producir
+textos desestructurados y tipográficamente inadecuados. Por el
+contrario, las herramientas como \ConTeXt\ son la evolución de la
+imprenta; ofrecen muchísimas más posibilidades de composición y, sobre
+todo, no es posible aprender a manejarlas sin adquirir también, en el
+camino, numerosas nociones relativas a la composición tipográfica, a
+diferencia de los procesadores de texto, que pueden ser usados durante
+muchos años sin que se llegue a aprender ni una palabra de tipografía.
+
+\stopsection
+
+\startsection [title=Lenguajes de marcas]
+
+En los tiempos previos a la informática, como he dicho antes, el
+autor preparaba su manuscrito a mano o a máquina y lo entregaba al
+editor o impresor que era quien se ocupaba de la transformación del
+manuscrito en el texto impreso definitivo. Aunque en dicha
+transformación el autor intervenía relativamente poco, sí mantenía
+cierta intervención señalando, por ejemplo, que ciertas líneas del
+manuscrito eran los títulos de sus distintas partes (capítulos,
+secciones ...); o indicando que ciertos fragmentos debían destacarse
+tipográficamente de alguna manera. Estas indicaciones las hacía el
+autor en el propio manuscrito, a veces expresamente, y otras veces
+mediante ciertas convenciones que, con el paso del tiempo, se fueron
+desarrollando; y así, por ejemplo, los capítulos siempre se iniciaban
+en una página nueva, insertando varias líneas en blanco antes del
+título, subrayándolo, escribiéndolo con mayúsculas; o enmarcando el
+texto que se debía resaltar entre dos guiones bajos, aumentando el
+sangrado de un párrafo, etc.
+
+El autor, en definitiva, {\em marcaba} el texto para dar algunas
+indicaciones relativas a la composición tipográfica del mismo. Y
+posteriormente el editor, escribía a mano en el original otras
+indicaciones para el impresor tales como, por ejemplo, el tipo de
+letra, o el tamaño.
+
+Hoy día, en un mundo informatizado, podemos seguir haciendo eso mismo
+para la generación de documentos electrónicos, mediante lo que se
+llama un {\em lenguaje de marcas}. En este tipo de lenguajes se
+utilizan una serie de {\em marcas} o indicaciones que el programa que
+procesa el fichero que las contiene sabe interpretar.  Posiblemente a
+día de hoy el lenguaje de marcas más conocido del mundo sea HTML, pues
+en él se basan la mayoría de las páginas web. Un fichero HTML contiene
+el texto de una página web, junto con una serie de marcas que le
+indican al programa navegador con el que se carga la página, cómo debe
+mostrarse la misma. Al conjunto de marcas HTML comprensibles por los
+navegadores web, junto con las instrucciones relativas a cómo y dónde
+usarlas, se le llama «lenguaje HTML», el cual es un {\em lenguaje de
+  marcas}.  Pero además de HTML, hay muchos otros lenguajes de marcas;
+de hecho éstos están francamente en auge y así XML, que es el lenguaje
+de marcas por excelencia, resulta hoy día absolutamente omnipresente y
+se usa para casi todo: para diseño de bases de datos, para creación de
+lenguajes específicos, transmisión de datos estructurados, ficheros de
+configuración de aplicaciones, etc. Hay también lenguajes de marcado
+pensados para diseñar gráficos (SVG, TikZ o MetaPost), fórmulas
+matemáticas (MathML), música (Lilypond y MusicXML), finanzas,
+geomática, etc. También, por supuesto, los hay para la transformación
+tipográfica de textos, y entre ellos destacan \TeX\ y sus derivados.
+
+A propósito de las marcas {\em tipográficas}, que indican el aspecto
+que debe tener un texto, las hay de dos tipos a los que podríamos
+referirnos como {\em marcado puramente tipográfico} y {\em marcado
+  conceptual} o, si se prefiere, {\em marcado lógico}. Las marcas
+puramente tipográficas se limitan a indicar exactamente con qué
+recurso tipográfico se debe mostrar cierto texto; como cuando, por
+ejemplo, indicamos que cierto texto debe ir en negrita o en
+cursiva. El marcado conceptual, por el contrario, indica qué función
+cumple cierto texto en el total del documento, como cuando indicamos
+que algo es un título, o un subtítulo, o una cita. En general son más
+coherentes y más fáciles de componer los documentos que utilizan
+preferentemente este segundo tipo de marcas, pues en ellas se vuelve a
+manifestar la diferencia entre la autoría y la composición: el autor
+indica que esta línea es un título, o que este fragmento es una
+advertencia, o una cita; y el compositor decide cómo destacar
+tipográficamente todos los títulos, advertencias o citas; con lo que,
+de un lado, se garantiza la coherencia, ya que todos los fragmentos
+que cumplan la misma función tendrán el mismo aspecto, y, de otro, se
+ahorra tiempo, ya que el formato de cada tipo de fragmento sólo hay
+que indicarlo una vez.
+
+\stopsection
+
+\startsection [title=\TeX\ y sus derivados]
+
+\TeX\ fue desarrollado a finales de los años 70 por {\sc Donald E.
+  Knuth}, profesor de teoría de la programación en la Universidad de
+Stanford, que implementó el programa para componer sus propias
+publicaciones y como ejemplo de un programa sistemáticamente
+desarrollado y anotado. Junto con \TeX, {\sc Knuth} desarrolló un
+lenguaje de programación adicional llamado \MetaFont, pensado para el
+diseño de fuentes tipográficas, con el que creó una fuente a la que
+bautizó como {\em Computer Modern}, la cual, junto con los caracteres
+habituales de cualquier fuente, incluía también un juego completo de
+«glifos»\footnote{En tipografía, un glifo es una representación
+  gráfica de un carácter, de varios caracteres o de parte de un
+  carácter y es el equivalente actual del tipo de imprenta (la pieza
+  que tenía grabada la letra).} pensados para la escritura de las
+matemáticas. A todo esto le añadió algunas utilidades adicionales y
+así nació el sistema de composición tipográfica llamado \TeX, que, por
+su potencia, calidad de resultados, flexibilidad de uso y amplias
+posibilidades, está considerado uno de los mejores sistemas
+informáticos de composición de textos. Fue pensado para textos en los
+que hubiera muchas matemáticas, pero pronto se vio que las
+posibilidades del sistema lo hacían idóneo para todo tipo de textos.
+
+\reference[ref:cajas]{}Internamente \TeX\ funciona como lo haría el
+cajista de una imprenta; porque para \TeX\ todo son {\em cajas}: Las
+letras se contienen en cajas, los espacios en blanco son también
+cajas, varias letras (las cajas que contienen varias letras) forman
+una caja nueva que encierra la palabra, y varias palabras, junto con
+el espacio en blanco entre ellas, forman una caja que contiene una
+línea, varias líneas se convierten en una caja que contiene el párrafo
+... y así sucesivamente. Todo ello, además, con una precisión
+extraordinaria en el manejo de las medidas. Piénsese que la unidad más
+pequeña que maneja \TeX\ es 65\,536 veces más pequeña que el punto
+tipográfico, con el que se miden los caracteres y las líneas, que
+suele ser la unidad más pequeña manejada por la mayor parte de los
+programas de procesado de textos. Ello significa que la unidad más
+pequeña que maneja \TeX\ es de, aproximadamente, 0.000005356
+milímetros.
+
+% He copiado y pegado la épsilon acentuada, de "Aprender ConTeXt",
+% de Pablo Rodríguez, pero no se por qué razón, no la procesa. Por
+% lo tanto utilizo \definecharacter para crear una epsilon
+% acentuada.
+
+\definecharacter etilde {\buildtextaccent ´ {\lower.2ex\hbox{\epsilon}}}
+
+El nombre \TeX\ proviene de la raíz de la palabra griega
+\tau\etilde\chi\nu\eta, escrita en mayúsculas ({\tfx ΤÉΧΝΗ}). Por
+ello, como la letra final del nombre \TeX\ no es una «X» latina, sino
+la «\chi» griega, que se pronunciaba ---según parece--- como la «j»
+española, \TeX\ se debe pronunciar «Tej». Dicha palabra griega, por
+otra parte, significaba tanto «arte» como «técnica», siendo esta la
+razón de que {\sc Knuth} la eligiera para bautizar a su sistema. El
+propósito de este nombre ---escribió--- «es para recordarnos que \TeX\
+se ocupa principalmente de manuscritos técnicos de alta calidad. Su
+énfasis está en el arte y en la tecnología, al igual que la palabra
+griega subyacente».
+
+Por convención establecida por {\sc Knuth} el nombre de \TeX\ ha de
+escribirse:
+
+\startitemize
+
+\item En textos tipográficamente formateados como el presente,
+  mediante el logotipo que hasta ahora he venido usando: Las tres
+  letras en mayúsculas, con la «E» central ligeramente desplazada
+  hacia abajo para facilitar una mayor aproximación entre la «T» y la
+  «X»; o sea: «\TeX».
+
+  \startLetraChica
+
+    Para facilitar la escritura de dicho logotipo, {\sc Knuth} incluyó
+    en \TeX\ una instrucción que lo escribe en el documento final:
+    \PonMacro{TeX}\tex{TeX}.
+
+  \stopLetraChica
+
+\item En textos no formateados (como un correo electrónico, o un
+  fichero de texto), con la «T» y la «X» en mayúscula, y la «e»
+  central en minúscula; o sea: «TeX».
+
+\stopitemize
+
+Esta convención se viene siguiendo en todos los derivados de \TeX\ que
+lo incluyen en su propio nombre, como ocurre con \ConTeXt, que cuando
+se escribe en modo de texto ha de escribirse «ConTeXt».
+
+\startsubsection [reference=sec:motores,title=Motores de \TeX]
+
+El programa \TeX\ es software libre: su código fuente está al
+alcance del público y quien quiera puede utilizarlo o modificarlo a su
+gusto, con la única condición de que, si se introducen modificaciones,
+al resultado no se le puede llamar «\TeX». Esta es la razón de que, a
+lo largo del tiempo, hayan ido surgiendo ciertas adaptaciones del
+programa, que introducían diferentes mejoras en el mismo, y a las que
+en general se las denomina {\em motores de \TeX}. Aparte del programa
+original, los principales motores de \TeX\ son, por orden cronológico
+de aparición, \pdfTeX, \eTeX, \XeTeX\ y \LuaTeX. Cada uno de ellos se
+supone que incorpora las mejoras del anterior. Estas mejoras, por otra
+parte, hasta la aparición de \LuaTeX, no afectaron al lenguaje
+propiamente dicho, sino exclusivamente a los ficheros de entrada, los
+ficheros de salida, el manejo de las fuentes y el funcionamiento a
+bajo nivel de las macros.
+
+\startLetraChica
+
+  La cuestión de qué motor de \TeX\ utilizar es muy debatida en el
+  Universo de \TeX. No la desarrollaré aquí porque \ConTeXt\ Mark~IV
+  sólo funciona con LuaTeX. En realidad en el mundo de \ConTeXt\ la
+  discusión sobre los {\em motores} de \TeX\ pasa a ser una discusión
+  sobre si usar Mark~II (que funciona con PdfTeX y con XeTeX) o
+  Mark~IV (que sólo funciona con LuaTeX).
+
+\stopLetraChica
+
+\stopsubsection
+
+\startsubsection [title=Formatos derivados de \TeX]
+
+El núcleo o corazón de \TeX\ sólo entiende un conjunto de
+aproximadamente 300 instrucciones muy básicas, llamadas {\em
+  primitivas}, que son adecuadas para las operaciones de composición
+tipográfica y para funciones de programación. Estas instrucciones, en
+su gran mayoría, son de un muy {\em bajo nivel}, lo que en
+terminología informática significa que son más fácilmente
+comprensibles por el ordenador que por los seres humanos, pues se
+refieren a operaciones muy elementales del tipo «desplaza este
+carácter 0.000725 milímetros hacia arriba». Por ello {\sc Knuth} hizo
+que \TeX\ fuera extensible; es decir: que hubiera un mecanismo que
+permitiera definir instrucciones de más alto nivel, más fácilmente
+comprensibles por los seres humanos. A estas instrucciones, que en el
+momento de la ejecución se descomponen en otras instrucciones más
+simples, se las llama {\em macros}. Por ejemplo, la instrucción de
+\TeX\ que imprime su logotipo (\tex{TeX}), al ejecutarse se descompone
+en:
+
+\vbox{\starttyping 
+T 
+\kern -.1667em 
+\lower .5ex 
+\hbox {E} 
+\kern -.125em 
+X
+stoptyping}
+
+Pero para un ser humano es mucho más sencillo comprender y recordar
+que el simple comando «\PonMacro{TeX}\type{\TeX}» realiza las
+operaciones tipográficas necesarias para imprimir el logotipo.
+
+\startLetraChica
+
+  La diferencia entre lo que son {\em macros} y lo que son {\em
+    primitivas}, en realidad sólo tiene importancia desde el punto de
+  vista del desarrollador de \TeX. Desde el punto de vista del usuario
+  todo son {\em instrucciones} o, si se prefiere, {\em comandos}. {\sc
+    Knuth} las llamaba {\em secuencias de control}.
+
+\stopLetraChica
+
+Esta posibilidad de extender el lenguaje mediante {\em macros} es una
+de las características que han convertido a \TeX\ en una herramienta
+tan potente. De hecho el propio {\sc Knuth} diseñó aproximadamente 600
+macros que, junto con las 300 primitivas componen el formato
+denominado «Plain \TeX». Es bastante corriente confundir a \TeX\
+propiamente dicho, con Plain \TeX\ y, de hecho, casi todo lo que se
+suele decir o escribir sobre \TeX, se refiere en realidad a Plain
+\TeX. Los libros que dicen tratar sobre \TeX\ (incluyendo el libro
+fundacional «{\em The \TeX Book}»), en realidad se refieren a Plain
+\TeX; y quienes creen manejar directamente \TeX\ en realidad están
+manejando Plain \TeX.
+
+Plain \TeX\ es lo que en terminología de \TeX\ se llama un {\em
+  formato}, consistente en un conjunto amplio de macros, junto con
+ciertas reglas de sintaxis relativas a cómo y de qué manera
+utilizarlos. Además de Plain \TeX\ se han desarrollado, con el paso
+del tiempo, otros {\em formatos} entre los que cabe destacar a \LaTeX\
+un amplio conjunto de macros para \TeX\ diseñado en 1985 por {\sc
+  Leslie Lamport} y que probablemente es el derivado de \TeX\ más
+utilizado en el mundo académico, tecnológico y matemático. \ConTeXt\
+es (o empezó siendo), al igual que \LaTeX\ un formato derivado de
+\TeX.
+
+Normalmente estos {\em formatos} van acompañados de un programa que
+carga en memoria las macros que los componen antes de llamar a
+\PalClave{tex} (o al concreto motor que se utilice en la compilación)
+para procesar el fichero fuente.  Pero aunque todos estos formatos, en
+realidad estén ejecutando \TeX, como cada uno de ellos tiene
+instrucciones distintas, y reglas de sintaxis diferentes, desde el
+punto de vista del usuario, podemos considerarlos {\em lenguajes
+  distintos}. Todos ellos inspirados en \TeX, pero diferentes de \TeX\
+y diferentes también entre ellos.
+
+\stopsection
+
+\startsection [title=\ConTeXt, reference=sec:ctx]
+
+En realidad \ConTeXt\, que empezó siendo un {\em formato} de \TeX, hoy
+día es bastante más que eso. \ConTeXt\ incluye:
+
+\startitemize[n]
+
+\item Un amplísimo conjunto de macros de \TeX. Si Plain \TeX\ consta
+  de en torno a 900 instrucciones, \ConTeXt\ se aproxima a las 3500; y
+  si sumamos los nombres de las distintas opciones que tales comandos
+  admiten, estaremos hablando de un vocabulario en torno a las 4000
+  palabras. El vocabulario es así de amplio debido a que la estrategia
+  de \ConTeXt\ para facilitar su aprendizaje, pasa por incluir
+  numerosos sinónimos de comandos y opciones.
+
+  \startLetraChica
+
+    Lo que se pretende es que si se quiere conseguir cierto efecto,
+    para cada una de las formas en las que un hablante de inglés
+    llamaría a ese efecto, haya un comando o una opción que lo logre;
+    lo que se supone que hace más sencillo el uso del lenguaje. Por
+    ejemplo para conseguir simultánemante una letra en negrita (en
+    inglés {\em bold}) y en cursiva (en inglés {\em italic}),
+    \ConTeXt\ contiene tres instrucciones idénticas en su resultado:
+    \type{\bi}, \type{\italicbold} y \type{\bolditalic}.
+
+  \stopLetraChica
+
+\item Un también bastante amplio conjunto de macros para \MetaPost, un
+  lenguaje de programación gráfica derivado de \MetaFont, que, a su
+  vez, es el lenguaje de diseño de fuentes tipográficas que {\sc
+    Knuth} desarrolló conjuntamente con \TeX.
+
+\item Varios {\em scripts} desarrollados en {\sc Perl} (los más
+  antiguos), {\sc Ruby} (algunos también antiguos y otros no tanto) y
+  {\sc Lua} (los más recientes).
+
+\item Una interfaz que integra \TeX, \MetaPost, {\sc Lua} y XML,
+  permitiendo escribir y procesar documentos en cualquiera de estos
+  lenguajes, o que mezclen elementos de algunos de ellos.
+
+\stopitemize
+
+\startLetraChica
+
+  ¿No ha entendido gran cosa de la explicación anterior? No se
+  preocupe. En ella he empleado mucha jerga informática y he
+  mencionado muchos programas y lenguajes. Pero para usar \ConTeXt\ no
+  es preciso saber de dónde vienen sus distintos componentes. Lo
+  importante, a estas alturas del aprendizaje, es quedarse con la idea
+  de que \ConTeXt\ integra numerosas herramientas de procedencias
+  diferentes que forman un {\em sistema de composición tipográfica}.
+
+\stopLetraChica
+
+Es por esta última característica de integración de herramientas de
+orígenes diversos, por lo que se dice de \ConTeXt\ que constituye una
+«tecnología híbrida» orientada a la composición tipográfica de
+documentos. Lo que entiendo que convierte a \ConTeXt\ en un sistema
+extraordinariamente avanzado y potente.
+
+Pero aunque \ConTeXt\ sea mucho más que un conjunto de macros para
+\TeX, su base sigue estando en \TeX, y por ello este documento, que no
+pretende ser más que una {\em introducción}, se centra en tal aspecto.
+
+\ConTeXt, por otra parte, es bastante más moderno que \TeX. Cuando
+\TeX\ se diseñó, apenas empezaba la eclosión de la informática, y se
+estaba todavía lejos de vislumbrar lo que sería (lo que llegaría a
+ser) Internet, o el mundo multimedia. En este sentido \ConTeXt\
+integra con naturalidad algunos elementos que en \TeX\ siempre han
+sido como una especie de cuerpo extraño tales como la inclusión de
+gráficos externos, el manejo de los colores, los hiperenlaces en
+documentos electrónicos, el asumir un tamaño de papel adecuado para un
+documento pensado para mostrarse en pantalla, etc.
+
+\stopsubsection
+
+\startsubsection 
+  [ 
+    reference=sec:historiactx, 
+    title=Breve historia de \ConTeXt
+  ]
+
+\ConTeXt{} nació aproximadamente en 1991. Fue creado por {\sc Hans
+  Hagen} y {\sc Ton Otten} en el seno de una empresa holandesa de
+diseño y composición de documentos llamada «{\em Pragma Advanced
+  Document Engineering}», que se suele abreviar como Pragma
+ADE. Empezó siendo un conjunto de macros para \TeX\ con nombre en
+holandés, conocido oficiosamente como {\em Pragmatex}, y dirigido a
+los empleados no técnicos de la empresa, que tenían que gestionar los
+múltiples detalles de la composición de los documentos a editar, y que
+no estaban habituados a usar lenguajes de marcas ni interfaces que no
+fueran en holandés. Por ello la primera versión de \ConTeXt{} se
+escribió en holandés. La idea era crear un número suficiente de macros
+con una interfaz uniforme y coherente. Aproximadamente en 1994 el {\em
+  paquete} era lo bastante estable como para que se escribiera un
+manual del usuario en holandés, y en 1996, por iniciativa de {\sc Hans
+  Hagen} empezó a usarse el nombre «\ConTeXt{}» para referirse a
+él. Este nombre pretende significar «Texto con \TeX» (usando la
+preposición latina “con” que significa lo mismo que la española),
+pero, al mismo tiempo, juega con el término «Contexto», que en
+holandés (igual que en inglés) se escribe «context». Detrás del nombre
+hay, por lo tanto, un triple juego de palabras entre «\TeX», «texto» y
+«contexto».
+
+\startLetraChica
+
+  Por ello, como en la base del nombre hay un juego de palabras,
+  \ConTeXt\, aunque derive de \TeX\ (pronunciado «Tej»), no debe
+  pronunciarse «Contejt» ya que ello haría que se perdiera el juego de
+  palabras.
+
+\stopLetraChica
+
+La interfaz empezó a traducirse al inglés aproximadamente en 2005,
+dando lugar a la versión conocida como \ConTeXt\ Mark~II, en donde el
+«II» se explica porque en la mente de los desarrolladores, la versión
+previa en holandés había sido la versión~«I», aunque lo cierto es que
+en realidad nunca llegó a denominarse así. Tras haber sido traducida
+la interfaz al inglés, empezó a extenderse el uso del sistema fuera de
+Holanda, traduciéndose la interfaz a otros idiomas europeos como el
+francés, el alemán, el italiano o el rumano. La documentación
+«oficial» de \ConTeXt{}, no obstante, se escribe normalmente sobre la
+versión en inglés, y por ello esa es la versión sobre la que se
+trabaja en este documento; a pesar de que el autor del mismo (o sea,
+yo), se siente más cómodo con el francés que con el inglés.
+
+En su versión inicial \ConTeXt\ Mark~II funcionaba con el {\em motor
+  de \TeX} PdfTeX. Más tarde, al surgir el {\em motor} \XeTeX,
+\ConTeXt\ Mark~II se modificó para permitir el uso de este nuevo motor
+que aportaba numerosas ventajas frente a PdfTeX. Pero cuando años más
+tarde se presentó LuaTeX, se decidió reconfigurar internamente el
+funcionamiento de \ConTeXt{} para integrar en él todas las nuevas
+posibilidades que ofrecía dicho motor. Así nació \ConTeXt\ Mark~IV,
+que fue presentado en 2007, inmediatamente después de que se
+presentara LuaTeX. Muy probablemente en la decisión de reconfigurar
+\ConTeXt\ para adaptarlo a LuaTeX influyó el hecho de que dos de los
+tres principales desarrolladores de \ConTeXt{}, {\sc Hans Hagen} y
+{\sc Taco Hoekwater}, están también en el equipo principal de
+desarrollo de \LuaTeX. Por ello \ConTeXt\ Mark~IV y \LuaTeX\ nacieron
+simultáneamente y se fueron desarrollando al unísono. Hay una sinergia
+entre \ConTeXt{} y \LuaTeX\ que no existe con ningún otro derivado de
+\TeX; y no creo que ninguno de ellos aproveche las posibilidades de
+\LuaTeX\ como las aprovecha \ConTeXt{}.
+
+Entre Mark~II y Mark~IV hay muchas diferencias, aunque la mayoría de
+ellas son {\em internas}, es decir: tienen que ver con cómo funciona
+realmente la macro a bajo nivel, de manera que desde la perspectiva
+del usuario la diferencia no es observable: el nombre y parámetros de
+la macro son los mismos. Hay, no obstante, algunas diferencias que sí
+afectan a la interfaz y obligan a hacer las cosas de modo diferente
+según con qué versión se esté trabajando. Estas diferencias son
+relativamente pocas, pero afectan a aspectos muy importantes como, por
+ejemplo, la codificación del fichero de entrada, o el manejo de las
+fuentes tipográficas instaladas en el sistema.
+
+\startLetraChica
+
+  Sería, no obstante, muy de agradecer que en algún lugar hubiera un
+  documento que explicara (o enumerara) las diferentes apreciables
+  entre Mark~II y \Conjetura Mark~IV. En la wiki de \ConTeXt, por
+  ejemplo, para cada comando de \ConTeXt\ se recogen {\em dos
+    sintaxis} (muchas veces idénticas). Supongo que una es la de
+  Mark~II y la otra es la de Mark~IV; y puestos a suponer, supongo
+  también que la {\em primera versión} es la de Mark~II. Pero lo
+  cierto es que la wiki no informa de nada de eso.
+
+\stopLetraChica
+
+El hecho de que las diferencias, a nivel de lenguaje, sean
+relativamente pocas, lleva a que en muchas ocasiones, más que de dos
+versiones se hable de dos «sabores» de \ConTeXt{}. Pero se les llame
+de una forma o de otra, lo cierto es que un documento preparado para
+Mark~II normalmente no podrá ser compilado con Mark~IV y viceversa; y
+si el documento mezcla ambas versiones, lo más probable es que no
+compile bien con ninguna de ellas; lo que implica que el autor del
+fichero fuente tiene que empezar decidiendo si lo escribirá para
+Mark~II o para Mark~IV.
+
+\startLetraChica
+
+  Si hemos trabajado con las distintas versiones de \ConTeXt{}, un
+  buen truco para diferenciar a simple vista los ficheros pensados
+  para Mark~II y los pensados para Mark~IV consiste en usar una
+  extensión diferente en el nombre de los ficheros. Así yo, por
+  ejemplo, a mis ficheros escritos para Mark~II les pongo, como
+  extensión, \PalClave{.mkii} y a los escritos para Mark~IV,
+  \PalClave{.mkiv}. Es verdad que \ConTeXt{} espera que todos los
+  ficheros fuente tengan la extensión \PalClave{.tex}, pero se puede
+  cambiar la extensión siempre y cuando al invocar a un fichero se
+  indique expresamente su extensión, si esta no es la que \ConTeXt{}
+  espera por defecto.
+
+\stopLetraChica
+
+La distribución de \ConTeXt{} que se instala desde su wiki, \suite-,
+incluye ambas versiones, y para evitar confusiones ---supongo---
+utiliza un comando distinto para compilar en cada una de
+ellas. Mark~II se compila con el comando \PalClave{texexec} y Mark~IV
+con el comando \PalClave{context}.
+
+\startLetraChica
+
+  En realidad tanto el comando \PalClave{context} como
+  \PalClave{texexec} son {\em scripts} que arrancan, con diferentes
+  opciones, \PalClave{mtxrun} que, a su vez, es un {\em script} de
+  {\sc Lua}.
+
+\stopLetraChica
+
+A día de hoy Mark~II está congelada y Mark~IV sigue en desarrollo, lo
+que significa que sólo se publican versiones nuevas de la primera
+cuando se detectan errores o fallos que hay que corregir, mientras que
+de Mark~IV se siguen publicando versiones nuevas con asiduidad; a
+veces incluso dos o tres por mes; aunque en la mayor parte de los
+casos estas «nuevas versiones» no introducen cambios perceptibles en
+el lenguaje, sino que se limitan a mejorar de algún modo la
+implementación a bajo nivel de algún comando, o a actualizar alguno de
+los muchos manuales que se incluyen con la distribución.  Aún así, si
+tenemos instalada la versión de desarrollo ---que es la que
+recomiendo, y la que se instala por defecto con \suite-{}---, conviene
+actualizar nuestra instalación de vez en cuando (Véase el
+\in{apéndice}[instalación_suite] respecto al modo de actualizar la
+versión instalada de \suite-).
+
+\startLetraChica
+
+\startsubsubsubsubject 
+  [title=LMTX y otras implementaciones alternativas de Mark~IV]
+
+  Los desarrolladores de \ConTeXt{} son de naturaleza inquieta, y por
+  lo tanto no han detenido la evolución de \ConTeXt{} en Mark~IV; se
+  siguen probando y experimentando nuevas versiones, aunque éstas, en
+  general, difieren de Mark~IV en muy pocos aspectos, y no tienen la
+  incompatibilidad de compilación que existe entre Mark~IV y Mark~II.
+
+  Así, se han desarrollado ciertas variantes menores de Mark~IV
+  llamadas, respectivamente, Mark~VI, Mark~IX y Mark~XI. De ellas sólo
+  he podido encontrar una pequeña referencia a Mark~VI en la wiki de
+  \ConTeXt{} en la que se dice que su única diferencia con Mark~IV se
+  encuentra en la posibilidad de definir comandos asignando a los
+  parámetros no un número, como es tradicional en \TeX, sino un
+  nombre, como suele hacerse en casi todos los lenguajes de
+  programación.
+
+  Más importante que esas pequeñas variantes ---creo--- es la
+  aparición en el universo de \ConTeXt{} (¿\ConTeXt{}verso?) de una
+  nueva versión, llamada LMTX, nombre que es un acrónimo de
+  LuaMetaTeX: un nuevo {\em motor} de \TeX\ que es una versión
+  simplificada de \LuaTeX, desarrollada con la vista puesta en el
+  ahorro de recursos del ordenador; es decir LMTX requiere menos
+  memoria y menos potencia de procesado que \ConTeXt\ Mark~IV.
+
+  LMTX fue presentado en la primavera de 2019 y se supone que no
+  implicará ninguna alteración externa del lenguaje Mark~IV. Para el
+  autor del documento no habrá diferencia a la hora de diseñarlo; pero
+  en el momento de compilar podrá elegir entre hacerlo con \LuaTeX, o
+  hacerlo con LuaMetaTeX. En el \in{Apéndice}[instalación_suite],
+  relativo a la instalación de \ConTeXt\ se explica un procedimiento
+  para asignar un nombre de comando distinto a cada una de las
+  instalaciones (\in{sección}[sec:alias]).
+
+\stopsubsubsubject
+
+\stopLetraChica
+
+\stopsubsection
+
+\startsubsection [title=\ConTeXt\ versus \LaTeX]
+
+Dado que el formato derivado de \TeX{} más popular es \LaTeX{},
+resulta inevitable la comparación entre este y \ConTeXt. Se trata,
+claro está, de lenguajes distintos aunque, en cierto modo,
+emparentados entre sí por derivar ambos de \TeX; el parentesco es
+pues, similar, al que existe entre, por ejemplo, el español y el
+francés: idiomas que comparten un origen común (el latín) que afecta a
+que las sintaxis sean {\em parecidas} y muchas de las palabras de cada
+uno de estos idiomas tienen un reflejo en el otro.  Pero aparte de ese
+{\em parecido de familia}, \LaTeX\ y \ConTeXt\ difieren en la
+filosofía y en la implementación, pues los objetivos iniciales de uno
+y otro son, en cierto modo, contradictorios. \LaTeX\ pretende
+facilitar el uso de \TeX, aislando al autor de los concretos detalles
+tipográficos para propiciar que el autor se centre en el contenido, y
+deje los detalles de la composición en manos del propio \LaTeX. Es
+decir: la simplificación en el uso de \TeX\ se consigue a costa de
+limitar la inmensa flexibilidad de \TeX, predefiniendo los formatos
+fundamentales y limitando el número de cuestiones tipográficas que el
+autor debe decidir. Frente a esa filosofía, \ConTeXt\ nació en el seno
+de una empresa dedicada a la composición tipográfica de
+documentos. Por lo tanto, lejos de pretender aislar al autor de los
+detalles de composición tipográfica, lo que se intenta es otorgarle un
+absoluto y completo control sobre ellos. Para conseguirlo \ConTeXt\
+proporciona una interfaz uniforme y coherente que se mantiene mucho
+más cerca del espíritu original de \TeX\ que \LaTeX.
+
+Esta diferencia en la filosofía y objetivos fundacionales, se traduce,
+a su vez, en una diferencia en la implementación. Porque \LaTeX, que
+tiende a simplificar todo lo posible, no necesita usar todos los
+recursos de \TeX. Su núcleo es, en cierto modo, bastante simple. Por
+ello, cuando se quieren ampliar sus posibilidades, es necesario
+escribir expresamente un {\em paquete} que lo haga. Esa {\em
+  paquetería} asociada a \LaTeX\ es al mismo tiempo una virtud y un
+defecto: una virtud, porque la tremenda popularidad de \LaTeX, junto
+con la generosidad de sus usuarios, hace que prácticamente cualquier
+necesidad que se nos plantee se le haya planteado antes a alguien, y
+exista un paquete que la implementa; pero también un defecto, porque
+estos paquetes son a menudo incompatibles entre sí, y su sintaxis no
+siempre es uniforme, lo que se traduce en que el manejo de \LaTeX\
+exija un continuo bucear en los miles de paquetes existentes para
+encontrar los que necesitamos y lograr que todos ellos puedan trabajar
+conjuntamente.
+
+Frente a esa simplicidad del núcleo de \LaTeX\ que se complementa con
+su extensibilidad mediante paquetes, \ConTeXt\ está pensado para
+albergar en su seno todas ---o casi todas--- las posibilidades
+tipográficas de \TeX, por lo que su concepción es mucho más
+monolítica, pero, al mismo tiempo, también es más modular: el núcleo
+de \ConTeXt\ permite hacerlo casi todo y está garantizado que no habrá
+incompatibilidades entre sus diferentes utilidades, no hay que
+investigar sobre las extensiones que se necesitan, y la sintaxis del
+lenguaje no cambia por el hecho de que necesitemos cierta utilidad.
+
+Es cierto que en \ConTeXt\ existen los llamados {\em módulos} de
+extensión que alguien podría considerar que cumplen una función
+similar a la de los paquetes de \LaTeX, pero lo cierto es que la
+función de unos y otros es muy diferente: los módulos de \ConTeXt\
+están pensados exclusivamente para albergar utilidades adicionales
+que, por estar en fase de experimentación, aún no se han incorporado
+al núcleo, o para permitir el acceso a extensiones cuya autoría es
+ajena al equipo de desarrollo de \ConTeXt.
+
+No creo que pueda considerarse que alguna de estas dos {\em
+  filosofías} es preferible a la otra. La cuestión más bien depende
+del perfil del usuario y de lo que pretenda. Si el usuario no desea
+lidiar con cuestiones tipográficas sino simplemente producir
+documentos estandarizados de muy alta calidad, probablemente sería
+preferible para él optar por un sistema como \LaTeX; por el contrario,
+al usuario que guste de experimentar, o el que necesite controlar
+hasta el último detalle de sus documentos, o el que debe pergeñar un
+diseño especial para cierto documento, muy probablemente le convenga
+más usar un sistema como \ConTeXt, en donde el autor tiene en sus
+manos absolutamente todo el control; con el riesgo, claro está, de que
+no sepa hacer un uso correcto del mismo.
+
+\stopsubsection
+
+\startsubsection 
+  [title=Comprender bien la dinámica de trabajo en \ConTeXt]
+
+Cuando trabajamos con \ConTeXt, empezamos siempre escribiendo, un
+fichero de texto (al que llamaremos {\em fichero fuente}), en el que
+junto con el contenido propiamente dicho de nuestro documento final,
+iremos incluyendo las instrucciones (en lenguaje \ConTeXt) que indican
+exactamente cómo queremos que el documento se formatee: qué apariencia
+general queremos que tengan sus páginas y párrafos, qué márgenes
+queremos aplicar a ciertos párrafos especiales, con qué tipo de letra
+se debe mostrar, qué fragmentos queremos que se muestren en un tipo de
+letra distinto, etc. Una vez que hemos escrito el fichero fuente,
+desde una terminal, le aplicaremos el programa \PalClave{context}, que
+lo procesará, y, a partir de él, generará un fichero distinto, en el
+que el contenido de nuestro documento se habrá formateado según las
+instrucciones que a tal fin se incluyeron en el fichero fuente. Este
+nuevo fichero podrá ser enviado a la impresora, mostrado en pantalla,
+alojado en Internet o distribuido entre nuestros contactos, amigos,
+clientes, profesores, alumnos ..., o, en definitiva, a cualquiera para
+quien hayamos escrito el documento.
+
+Es decir: cuando se trabaja con \ConTeXt\ el autor actúa sobre un
+fichero cuya apariencia no tiene nada que ver con la del documento
+final: el fichero con el que el autor directamente trabaja es un
+fichero de texto que no está tipográficamente formateado. En esto
+\ConTeXt\ funciona de manera muy diferente a la forma en que se
+comportan los programas llamados {\em procesadores de texto} que van
+mostrando la apariencia final del documento editado al mismo tiempo
+que éste se va escribiendo. Para quien está acostumbrado a los
+procesadores de texto, al principio le parecerá extraña la forma de
+trabajar de \ConTeXt, e incluso es posible que le lleve algún tiempo
+acostumbrarse. Sin embargo una vez que uno se acostumbra a ella
+comprende que en realidad esta otra forma de trabajar, diferenciando
+entre el fichero de trabajo y el resultado final, es, en realidad, una
+ventaja por muchas razones, entre las que aquí destacaré, sin seguir
+ningún orden concreto, las siguientes:
+
+\startitemize[n,broad]
+
+\item Porque los ficheros de texto son más “ligeros” de manejar que
+  los ficheros binarios propios de los procesadores de texto y su
+  edición requiere menos memoria del ordenador; son menos dados a
+  corromperse, y no se vuelven ininteligibles si cambia la versión del
+  programa con el que se crearon. Son también compatibles con
+  cualquier sistema operativo, y se pueden editar con numerosos
+  editores de texto, de tal modo que para que podamos trabajar con
+  ellos no es preciso que el sistema informático tenga instalado el
+  programa con el que el fichero fue creado: cualquier otro programa
+  de edición valdrá; y en todo sistema informático hay siempre algún
+  programa de edición de textos.
+
+\item Porque diferenciar entre el documento de trabajo y el documento
+  final, ayuda a distinguir lo que es contenido propiamente dicho del
+  documento, de lo que será su apariencia, permitiendo que, en la fase
+  de creación, el autor se concentre en el contenido, y en la fase de
+  composición tipográfica, el autor se centre en la apariencia.
+
+\item Porque permite cambiar con rapidez y precisión la apariencia del
+  documento, ya que esta viene determinada por comandos de \ConTeXt\
+  que son fácilmente identificables.
+
+\item Porque esta facilidad para cambiar la apariencia, por otra
+  parte, permite que a partir de un sólo contenido, podamos generar
+  con facilidad dos (o más) versiones diferentes: Tal vez una versión
+  optimizada para su impresión en papel, y otra pensada para ser
+  mostrada en pantalla, ajustada al tamaño de éstas y, quizás,
+  incluyendo hiperenlaces que carecen de sentido en un documento
+  impreso en papel.
+
+\item Porque se evitan también con facilidad errores tipográficos que
+  son comunes en los procesadores de texto tales como, por ejemplo,
+  extender la letra cursiva más allá del último carácter que ha de
+  llevarla.
+
+\item Porque desde el momento en que el fichero de trabajo no será
+  distribuido y es «sólo para nuestros ojos», es posible incorporar a
+  él anotaciones y observaciones, comentarios y advertencias para
+  nosotros mismos, de cara a ulteriores revisiones o versiones, con la
+  tranquilidad de saber que las mismas no aparecerán en el fichero
+  formateado que será objeto de distribución.
+
+\item Porque la calidad que se puede obtener procesando
+  simultáneamente todo el documento, es muy superior a la que es
+  posible alcanzar con un programa que tiene que ir tomando las
+  decisiones tipográficas sobre la marcha, conforme el documento va
+  siendo escrito.
+
+\item Etcétera.
+
+\stopitemize
+
+Todo lo anterior se traduce en que, de un lado, al trabajar con
+\ConTeXt, una vez le hemos cogido el tranquillo, seamos más eficaces y
+productivos, y que, de otro lado, la calidad tipográfica que
+obtendremos sea muy superior a la que se obtendría con los llamados
+{\em procesadores de texto}. Y aunque es verdad que, a cambio, éstos
+últimos son más fáciles de usar, en realidad no son {\em mucho} más
+fáciles de usar. Porque aunque es cierto que \ConTeXt{} consta, como
+antes dije, de cerca de 3500 instrucciones, un usuario normal de
+\ConTeXt{} no tendrá que conocerlas todas. Para hacer lo que se suele
+hacer con los procesadores de texto, le bastará con conocer las
+instrucciones que permiten indicar la estructura del documento, un par
+de instrucciones relativas a recursos tipográficos habituales, tales
+como la negrita o la cursiva, y, tal vez, el cómo generar una lista, o
+una nota a pié de página. En total, no más de 15 ó 20 instrucciones
+nos permitirán hacer casi todas las cosas que se hacen con el
+procesador de textos. El resto de instrucciones nos permiten hacer
+cosas distintas que con el procesador de textos normalmente no se
+pueden hacer, o son muy difíciles de conseguir; de forma que puede
+afirmarse que si bien es cierto que el aprendizaje de \ConTeXt\ es más
+difícil que el de un procesador de textos, ello es porque con
+\ConTeXt\ se pueden hacer muchísimas más cosas.
+
+\stopsubsection
+
+\startsubsection 
+  [title=Obtener ayuda sobre \ConTeXt]
+
+\adaptlayout[+2]
+
+Mientras seamos novatos, el mejor lugar para encontrar ayuda sobre
+\ConTeXt\ es, sin duda, su \goto{wiki}[url(wiki)], la cual abunda en
+ejemplos y tiene un buen buscador, aunque exige, eso sí, entenderse
+bien con el idioma inglés. También podemos buscar ayuda en Internet,
+claro, pero aquí el juego de palabras en que consiste el nombre de
+\ConTeXt\ nos gastará una mala pasada porque una búsqueda de
+información sobre «context» devolvería millones de resultados y la
+mayoría no guardaría ninguna relación con lo que buscábamos. Para
+buscar información sobre \ConTeXt\ hay que añadir algo al nombre
+«context»; por ejemplo, «tex», o «Mark IV» o «Hans Hagen» (uno de los
+creadores de \ConTeXt) o «Pragma ADE», o algo similar. También puede
+ser útil buscar información por el nombre de la wiki: «contextgarden».
+
+Cuando hayamos aprendido algo más de \ConTeXt, si nos manejamos bien
+con el inglés, podemos consultar alguno de los muchos documentos
+incluidos en \suite-, o pedir ayuda, bien en \goto{TeX -- LaTeX Stack
+  Exchange} [url(https://tex.stackexchange.com/)], bien en la lista de
+distribución del propio \ConTeXt\
+(\goto{NTG-context}[url(https://mailman.ntg.nl/mailman/listinfo/ntg-context)]). En
+esta última intervienen las personas que más saben sobre \ConTeXt, sin
+embargo las normas de la buena educación «cibernética» exigen que
+antes de hacer una pregunta hayamos intentado por todos los medios
+hallar la respuesta por nosotros mismos.
+
+\stopsubsection
+
+\stopsubsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% TeX-master: "../introCTX.mkiv"
+%%% coding: utf-8-unix
+%%% End:
+

@@ -1,0 +1,1273 @@
+%%% Fichero:     b07_Estructura.mkiv
+%%% Autor:       Joaquín Ataz López
+%%% Inicio:      Marzo 2020
+%%% Terminación: Mayo 2020
+%%% Título: Este es el segundo capítulo que abordé y, desde mi punto
+%%%         de vista, uno de los más importantes. Fui probando una a
+%%%         una todas las opciones de setuphead, y algunas no llegúe a
+%%%         descubrir para qué sirven o cómo hay que hacerlas
+%%%         funcionar. Sospecho que eso es (1º) Porque acababa yo de
+%%%         empezar en ConTeXt, en julio y agosto me sentía mucho más
+%%%         cómodo, pero en aquel momento todo me sonaba a chino, y
+%%%         (2º) Porque mis pruebas las hice en un documento donde las
+%%%         secciones las escribí al modo clásico (\chapter o \section
+%%%         en lugar de \startchapter o \startsection).
+%%%
+%%% Editado: Emacs + AuTeX - Y a veces con vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent b07_Estructura.mkiv
+
+\startchapter
+  [
+    reference=cap:estructura,
+    title={Estructura del documento},
+  ]
+
+\PonIndiceCap
+
+\startsection
+  [title={Divisiones estructurales en los\\ documentos}]
+
+Salvo en el caso de textos muy pequeños (como, por ejemplo, una
+carta), lo normal es que un documento se estructure dividiéndose en
+bloques o partes del texto que, en general, siguen un orden
+jerárquico. No hay un estándar para la denominación de estos bloques:
+en novelas, por ejemplo, las divisiones estructurales suelen
+denominarse «capítulo», aunque algunas ---las más largas--- incluyen
+también bloques más amplios, llamados habitualmente «parte», que
+agrupan a varios capítulos. Las obras de teatro diferencian entre
+«actos» y «escenas». Los manuales académicos se dividen en «partes» (a
+veces) y «lecciones», «temas» o «capítulos», los cuales a su vez
+suelen tener también divisiones internas; este mismo tipo de
+divisiones jerárquicas complejas suele existir también en otros
+documentos académicos o técnicos (como, por ejemplo, los textos como
+el presente dedicados a explicar un programa o sistema
+informático). Incluso las leyes se estructuran en «libros» (las más
+largas y complejas, como los Códigos), «títulos», «capítulos»,
+«secciones» y «subsecciones». También los documentos
+científico-técnicos pueden llegar a alcanzar hasta seis, siete e
+incluso en ocasiones ocho niveles de profundidad en el anidamiento de
+este tipo de divisiones.
+
+El presente capítulo se dedica a analizar el mecanismo que \ConTeXt\
+ofrece para soportar estas divisiones estructurales a las que me
+referiré globalmente como «secciones».
+
+\startLetraChica
+
+  No existe en castellano ---y sospecho que tampoco en inglés--- una
+  denominación clara que permita referirse genéricamente a este tipo
+  de divisiones estructurales. El “Libro de Estilo de la Lengua
+  Española”, de la Real Academia de la Lengua, se refiere a ellas como
+  “Elementos de titulación”; pero creo que el término {\em Título} es
+  más adecuado para referirse a uno de los elementos de que estas
+  unidades estructurales constan: el texto o rótulo inicial que le da
+  nombre. El término {\em Epígrafe} creo que tiene el mismo
+  inconveniente, pone el acento en la denominación global del bloque,
+  y no en el bloque en sí mismo considerado. El término «sección», que
+  es por el que finalmente me he decantado, tiene la ventaja de que
+  fija la atención más en la división estructural de que se trata que
+  en su título, pero tiene el inconveniente de que una de las
+  divisiones estructurales predeterminadas de \ConTeXt\ se denomina
+  «section». Espero que ello no ocasiones confusiones, pues creo que
+  por el contexto será fácil determinar cuando se está hablando
+  globalmente de este tipo de divisiones estructurales y cuando se
+  está hablando de un tipo concreto de división estructural llamada en
+  inglés «section» y, en castellano, «sección».
+
+\stopLetraChica
+
+Cada «sección» implica:
+
+\startitemize
+
+\item {\em Una división estructural del documento} más o menos larga, que
+  puede, a su vez incluir otras divisiones de menor nivel jerárquico. Desde
+  este punto de vista las «secciones» implican bloques de texto, con una
+  relación jerárquica entre ellos. Desde el punto de vista de sus
+  secciones, todo el documento se puede examinar como un árbol. El
+  documento, en sí mismo considerado es el tronco, cada uno de los
+  capítulos constituye una rama, la cual, a su vez, puede tener subramas,
+  que también pueden subdividirse, y así sucesivamente.
+
+  Que esta estructura esté clara es muy importante para la legibilidad
+  y aprehensibilidad del documento. Pero esta tarea corresponde al
+  autor, no a quien se ocupa de la composición tipográfica. Aunque no
+  está en la mano de \ConTeXt\ el convertirnos en mejores autores de
+  lo que somos, el completo juego de comandos de seccionado que
+  incluye, en el que la jerarquía entre ellos está bastante clara, si
+  puede ayudarnos a escribir documentos bien estructurados.
+
+\item {\em Una denominación} a la que podemos llamar «título» o
+  «rótulo». Esta denominación se imprime:
+
+  \startitemize
+
+  \item Siempre (o casi) en el punto del documento en el que empieza
+    la división estructural.
+
+  \item A veces también en el índice, en el encabezado o en el pie de
+    las páginas ocupadas por la sección de que se trate.
+
+  \stopitemize
+
+  \ConTeXt\ permite automatizar todas estas tareas de tal modo que
+  sólo haya que indicar una vez las características de formato en que
+  se debe imprimir el título de una unidad estructural, y si el mismo
+  debe incluirse también ---o no--- en los índices, o en los
+  encabezados o pies. Para hacer eso \ConTeXt\ sólo necesita saber
+  dónde empieza y dónde acaba cada unidad estructural, cómo se titula,
+  y cuál es su nivel jerárquico.
+
+\stopitemize
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:tipossección,
+    title={Tipos de secciones y jerarquía de las mismas},
+  ]
+
+\ConTeXt\ diferencia entre secciones {\em numeradas} y secciones {\em
+  no numeradas}. Las primeras, como su propio nombre indica, son
+numeradas automáticamente y enviadas a la tabla de contenido del
+documento así como, en ocasiones, a los encabezados o pies de página.
+
+Ordenados jerárquicamente, \ConTeXt\ tiene predefinidos los comandos
+de seccionado que se recogen en la \in{tabla}[tbl:seccionado].
+
+\placetable
+  [here]
+  [tbl:seccionado]
+  {Comandos de seccionado en \ConTeXt}
+{
+  \starttabulate[|l|l|l|]
+\HL
+\NC {\bf Nivel}
+\NC {\bf Secciones numeradas}
+\NC {\bf Secciones no numeradas}
+\NR
+\HL
+\NC 1
+\NC{\tt \backslash part}\PonMacro{part}\PonMacro{startpart}
+\NC --
+\NR
+\NC 2
+\NC{\tt \backslash chapter}\PonMacro{chapter}\PonMacro{startchapter}
+\NC{\tt \backslash title}\PonMacro{title}\PonMacro{starttitle}
+\NR
+\NC 3
+\NC{\tt \backslash section}\PonMacro{section}\PonMacro{startsection}
+\NC{\tt \backslash subject}\PonMacro{subject}\PonMacro{startsubject}
+\NR
+\NC 4
+\NC{\tt \backslash subsection}\PonMacro{subsection}\PonMacro{startsubsection}
+\NC{\tt \backslash subsubject}\PonMacro{subsubject}\PonMacro{startsubsubsubject}
+\NR
+\NC 5
+\NC{\tt \backslash subsubsection}\PonMacro{subsubsection}\PonMacro{startsubsubsection}
+\NC{\tt \backslash subsubsubject}\PonMacro{subsubsubject}\PonMacro{startsubsubsubject}
+\NR
+\NC 6
+\NC{\tt \backslash subsubsubsection}\PonMacro{subsubsubsection}\PonMacro{startsubsubsubsection}
+\NC{\tt \backslash subsubsubsubject}\PonMacro{subsubsubsubject}\PonMacro{startsubsubsubsubject}
+\NR
+\NC ...
+\NC ...
+\NC ...
+\NR
+\HL
+\stoptabulate
+}
+
+En relación con las secciones predefinidas, conviene hacer las
+siguientes precisiones:
+
+\startitemize
+
+\item En la \in{tabla}[tbl:seccionado] los comandos de seccionado se
+  muestran en su forma tradicional. Inmediatamente veremos que también
+  se pueden usar como {\em entornos} (\tex{startchapter
+    ... \stopchapter}, por ejemplo) y que, de hecho, se recomienda ese
+    estilo.
+
+\item En la tabla se recogen sólo los 6 primeros niveles de
+  seccionado. Pero, según mis pruebas, se admiten hasta 12 niveles:
+  Después de \tex{subsubsubsection} vendrá \tex{subsubsubsubsection},
+  y así sucesivamente hasta \tex{subsubsubsubsubsubsubsubsubsection},
+  o \tex{subsubsubsubsubsubsubsubsubsubject}.
+
+  \startLetraChica
+
+    Debe tenerse en cuenta que tan malo para la aprehensibilidad de un
+    documento es un bajo nivel de profundidad en su seccionado, como
+    un nivel excesivo. En el primer caso tendremos secciones largas
+    que inevitablemente tratarán de varios aspectos y harán más
+    difícil que el lector {\em aprehenda} su contenido. Pero una
+    profundidad excesiva puede hacer que se pierda la visión de
+    conjunto produciéndose una sensación de excesiva fragmentación de
+    la materia. En general entiendo que con cuatro niveles de
+    seccionado suele ser suficiente; ocasionalmente puede llegarse a
+    los seis o siete niveles; pero raramente será buena idea una mayor
+    profundidad.
+
+    Desde la perspectiva de la escritura del fichero fuente, por otra
+    parte, el hecho de que a partir de la subsección cada nivel se
+    limite a añadir un «sub» adicional al nombre del nivel previo,
+    puede hacer que el fichero fuente resulte poco legible: si para
+    identificar el nivel de profundidad de un comando llamado
+    «subsubsubsubsubsection» me tengo que poner a contar los
+    «subs»..., mal asunto. Por ello mi consejo es que si realmente
+    necesitamos tantos niveles de profundidad, a partir del quinto
+    nivel (subsubsection) definamos nuestros propios comandos de
+    seccionado (véase la \in{sección}[sec:definehead]) dotándoles de
+    nombres más claros que los preestablecidos.
+
+  \stopLetraChica
+
+\item El nivel de seccionado más alto (\tex{part}) sólo existe para
+  los títulos numerados y tiene la peculiaridad de que no imprime el
+  título de la parte. Pero, aunque no se imprima el título, sí se
+  introduce una página en blanco (en la que se supone que se imprimirá
+  el título una vez el usuario haya reconfigurado el comando) y la
+  numeración de la {\em parte} se tiene en cuenta para calcular la
+  numeración de los capítulos y demás secciones.
+
+  \startLetraChica
+
+    La razón por la que de forma predeterminada \tex{part} no imprime nada
+    es, según la wiki de \ConTeXt, la consideración de que casi siempre el
+    título de este nivel requiere un diseño específico; lo que, siendo
+    cierto, no me parece que sea una razón suficiente, pues, en la
+    práctica, también suelen redefinirse los capítulos y secciones, y el
+    hecho de que las partes no impriman nada, obliga al usuario novato a
+    {\em bucear} en la documentación para ver qué es lo que está fallando.
+    
+  \stopLetraChica
+
+\item Aunque el primer nivel de seccionado es la «parte», eso es así
+  sólo de forma teórica y abstracta. En un documento concreto, el
+  primer nivel de seccionado será el correspondiente al primer comando
+  de seccionado que haya en el documento. Es decir: en un documento
+  que no incluya partes pero sí capítulos, ese será el primer nivel.
+  Pero si el documento tampoco incluye capítulos, sino secciones, la
+  jerarquía, para ese documento, empezará en las secciones.
+
+\stopitemize
+
+\stopchapter
+
+\startsection
+  [
+    reference=sec:sintaxissecciones,
+    title={Sintaxis común de los comandos de seccionado},
+  ]
+
+Todos los comandos de seccionado, incluyendo los posibles niveles
+creados por el usuario (véase la \in{sección}[sec:definehead]),
+admiten las siguientes sintaxis alternativas (se usa, para el ejemplo,
+el nivel \PalClave{section}):
+
+\vbox{\starttyping
+\section [Etiqueta] {Título}
+\section [Opciones]
+\startsection [Opciones] [Variables] ... \stopsection
+\stoptyping}
+
+En las tres modalidades, los argumentos entre corchetes son opcionales y
+pueden omitirse. Veámoslas por separado, pero antes conviene dejar claro
+que en Mark IV se recomienda siempre usar la tercera modalidad.
+
+\startitemize
+
+\item En la primera sintaxis, a la que podríamos bautizar como «{\em
+  clásica}», el comando recibe dos argumentos, uno, opcional, entre
+  corchetes, y otro obligatorio entre llaves. El argumento opcional
+  sirve para asociar la sección a una etiqueta que será usada para
+  remisiones internas (véase la \in{sección}[sec:referencias]). El
+  obligatorio recoge, entre llaves, el título de la sección.
+
+\item Las otras dos sintaxis son más del estilo de \ConTeXt: todo lo
+  que el comando necesita saber se le comunica mediante valores y
+  opciones, introducidas entre corchetes.
+
+  \startLetraChica
+
+    Recuérdese que en las \in{secciones}[sec:ámbito comandos] y
+    \in{}[sec:opciones comandos] dije que, en \ConTeXt\ entre llaves
+    se indica el ámbito de aplicación del comando, y entre corchetes
+    sus opciones. Pero si lo pensamos bien el título de un concreto
+    comando de seccionado no constituye su ámbito de aplicación, por
+    lo que, para ser coherentes con la sintaxis general, no debería
+    introducirse entre llaves, sino como una opción. \ConTeXt\ admite
+    la excepción, porque es el modo clásico de hacer las cosas de
+    \TeX, pero proporciona sintaxis alternativas, más coherentes con
+    su diseño general.
+
+  \stopLetraChica
+
+  Las opciones son del tipo de asignación de valor
+  (NombreOpción=Valor), y son las siguientes:
+
+  \startitemize
+
+  \item {\tt\bf reference}: Etiqueta para referencias cruzadas.
+
+  \item {\tt\bf title}: El título de la sección que se imprimirá en el
+    cuerpo del documento.
+
+  \item {\tt\bf list}: El título de la sección que se imprimirá en el
+    índice.
+    
+  \item {\tt\bf marking}: El título de la sección que se imprimirá en los
+    encabezados o pies de página.
+
+  \item {\tt\bf bookmark}: El título de la sección que se convertirá en
+    {\em marcador} en el fichero PDF.
+
+  \item {\tt\bf ownnumber}: Esta opción se usa en el caso de que se trate
+    de una sección que no se numera automáticamente; supuesto este en el
+    que esta opción recogerá el número asignado a la sección de que se
+    trate.
+
+  \stopitemize
+
+  Como es lógico, las opciones \PalClave{list}, \PalClave{marking} y
+  \PalClave{bookmark} sólo se deben usar si queremos que en esos lugares se
+  use un texto diferente al título principal establecido con la opción
+  \PalClave{title}. Esto es muy útil, por ejemplo, cuando el título es
+  demasiado largo para el encabezado; aunque para conseguir ese efecto (más
+  bien un efecto parecido) también pueden usarse los comandos
+  \PonMacro{nomarking}\tex{nomarking} y \PonMacro{nolist}\tex{nolist}.
+
+  De otro lado, debe tenerse en cuenta que si el texto del título (opción
+  \PalClave{title}) incluye alguna coma, habrá que encerrar entre llaves,
+  bien el texto completo del título, bien la coma, para asegurarnos de que
+  \ConTeXt\ sepa que la coma es parte del título. Igual ocurre en las
+  opciones \PalClave{list}, \PalClave{marking} y \PalClave{bookmark}. Por
+  ello, para no tener que estar pendientes de si en el título hay o no
+  alguna coma, creo que es una buena idea coger el hábito de encerrar
+  siempre entre llaves el valor de cualquiera de esta opciones.
+
+\stopitemize
+
+Así, por ejemplo, las siguientes líneas crearán un capítulo con el
+título «Capítulo de prueba» al que se asociará la etiqueta «prueba»
+para referencias cruzadas, y que enviará al encabezado no el nombre
+del capítulo, sino el texto «Prueba de capítulo»
+
+\vbox{\starttyping
+\chapter
+  [
+    title={Capítulo de prueba},
+    reference=prueba,
+    marking={Prueba de capítulo}
+  ]
+\stoptyping}
+
+La sintaxis \tex{startTipoSección} convierte a la sección en un {\em
+  entorno}. Eso es más coherente con el hecho de que, como dije al
+principio, en el fondo cada sección es un bloque de texto
+diferenciado, aunque, \ConTeXt, por defecto, a los {\em entornos}
+generados a partir de los comandos de seccionado no los considera {\em
+  grupos}. Aún así este procedimiento es el que Mark~IV recomienda;
+muy posiblemente porque esta forma de establecer secciones exige que
+se indique expresamente dónde empieza y donde acaba cada sección, lo
+que facilita el que la estructura sea coherente, y, muy probablemente,
+tenga un mejor soporte para la salida XML y EPUB.
+
+Cuando se usa \tex{startNombreSección} se admite, como argumento
+adicional entre corchetes, una o más variables cuyo valor podrá ser
+recuperado en otro punto del documento mediante el comando
+\PonMacro{structureuservariable}\tex{structureuservariable}.
+
+\startLetraChica
+
+  El establecimiento de variables de usuario, permite usos muy
+  avanzados de \ConTeXt\ en virtud de los cuales se podrían tomar
+  decisiones relativas a si compilar o no un fragmento, o a de qué
+  manera o con qué plantilla compilarlo, según el valor de cierta
+  variable. Estas utilidades de \ConTeXt, sin embargo, exceden la
+  materia que tengo pensado tratar en la presente introducción.
+
+\stopLetraChica
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:setuphead,
+    title={Formateo y configuración de las\\ secciones y sus títulos},
+  ]
+
+\startsubsection
+  [title={Los comandos \tex{setuphead} y \tex{setupheads}}]
+\PonMacro{setuphead}\PonMacro{setupheads}
+
+Por defecto \ConTeXt\ asigna a cada nivel de seccionado ciertas
+características que afectan, fundamentalmente (aunque no sólo) al
+formato en el que se muestra el título en el cuerpo principal del
+documento; no así a la forma en que se muestra ese mismo título en el
+índice o en los encabezados o pies de página. Estas características
+las podemos cambiar con el comando \tex{setuphead} cuya sintaxis es:
+
+\type{\setuphead[Secciones][Opciones]}
+
+en donde
+
+\startitemize
+
+\item {\tt\bf Secciones} se refiere al nombre de una o varias
+  secciones (separadas por coma) que se verán afectadas por el
+  comando. Puede ser
+
+  \startitemize
+
+  \item Alguna de las secciones predefinidas (part, chapter, title,
+    etc.), en cuyo caso podemos referirnos a ellas, bien por su
+    nombre, bien por su nivel. Para referirnos a ellas por su nivel se
+    usa la palabra «{\tt section-{\em NumNivel}}», donde {\em
+      NumNivel} es el número de nivel de la sección de que se
+    trate. Así, \PalClave{section-1} equivale a \PalClave{part},
+    \PalClave{section-2} equivale a \PalClave{chapter}, etc.
+
+  \item Algún tipo de sección definido por nosotros mismos. Véase, al
+    respecto, en la \in{sección}[sec:definehead].
+
+  \stopitemize
+
+\item {\tt\bf Opciones} son las opciones de configuración. Estas
+  opciones son del tipo de asignación explícita de valor (NombreOpción
+  = valor). El número de opciones admisibles es muy elevado (más de
+  sesenta) y por ello las explicaré agrupándolas en categorías según
+  su función. Debo señalar, no obstante, que en algunas de las
+  opciones no he conseguido determinar para qué sirven o cómo se
+  usan. De esas opciones no hablaré.
+
+\stopitemize
+
+Antes he dicho que \tex{setuphead} afecta a las secciones que
+expresamente se le indiquen. Pero ello no significa que la
+modificación de una concreta sección no haya de afectar de ninguna
+manera a las demás salvo que se las haya mencionado expresamente en el
+comando. De hecho ocurre lo contrario: la modificación de una sección
+afecta a otras secciones {\em vinculadas} con ella, aunque no se haya
+explicitado así en el comando. La vinculación entre las distintas
+secciones es de dos tipos:
+
+\startitemize
+
+\item Los comandos no numerados están vinculados con el
+  correspondiente comando numerado del mismo nivel; de tal forma que
+  un cambio en el aspecto del comando numerado, afectará al comando no
+  numerado del mismo nivel; pero no al revés: el cambio en el comando
+  no numerado no afecta al comando numerado. Es decir: si cambiamos,
+  por ejemplo, el aspecto de \PalClave{chapter} (nivel 2) cambiaremos
+  también el aspecto de \PalClave{title}; pero cambiando
+  \PalClave{title} no afectamos a \PalClave{chapter}.
+
+\item Los comandos están vinculados jerárquicamente, de tal modo que
+  si cambiamos {\em ciertas características} en un nivel concreto, el
+  cambio afectará a todos los niveles posteriores. Esto ocurre sólo
+  con ciertas características. Por ejemplo, el color: si establecemos
+  que las subsecciones se muestren en color rojo, también se mostrarán
+  en color rojo las subsubsecciones, subsubsubsecciones, etc. Pero no
+  pasa lo mismo con otras características, como, por ejemplo, el
+  estilo de fuente.
+
+\stopitemize
+
+Junto a \tex{setuphead} \ConTeXt\ dispone del comando \tex{setupheads}
+que afecta globalmente a todos los comandos de seccionado. De este
+comando dice la wiki de \ConTeXt\ que algunas personas han informado
+de que no funciona. De acuerdo con mis pruebas este comando sólo
+funciona en algunas opciones, pero no en otras. En particular no
+funciona con la opción \PalClave{style}, lo que es llamativo, pues el
+estilo de los títulos es lo que más probablemente se querrá cambiar de
+modo global para todos ellos. Pero sí funciona, según mis pruebas, con
+otras opciones como, por ejemplo, \PalClave{number} o \PalClave{color}
+y así, por ejemplo, \tex{setupheads[color=blue]} hará que todos los
+títulos de nuestro documento se impriman en color azul.
+
+Como quiera que me da cierta pereza ir comprobando, opción a opción,
+si funciona o no con \tex{setupheads} (recordemos que hay más de
+sesenta opciones) en lo sucesivo me referiré sólo a \tex{setuphead}.
+
+En fin: antes de entrar al examen de las concretas opciones, es
+preciso advertir algo que se dice en la wiki de \ConTeXt, aunque
+probablemente no se diga en el lugar adecuado:
+algunas opciones sólo funcionan si se ha usado para el comando la
+sintaxis \cmd{start{\em NombreSección}}.
+
+\startLetraChica
+
+  Esta información se contiene a propósito de \tex{setupheads}, pero
+  no a propósito de \tex{setuphead} que es donde se explica el grueso
+  de las opciones y donde, si sólo se debía decir en un lugar, me
+  parece más razonable que se diga. La información, por otra parte,
+  sólo menciona a la opción \PalClave{insidesection}, sin dejar claro
+  si eso sucede también con alguna otra opción.
+
+\stopLetraChica
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:partes_titulo,
+    title={Las partes del título de una sección},
+  ]
+
+Antes de entrar en las concretas opciones que permiten configurar la
+apariencia de los títulos, conviene empezar señalando que un título de
+sección puede llegar a tener hasta tres partes diferentes, las cuales
+\ConTeXt\ permite que se formateen conjuntamente o por separado. Estos
+elementos del título son los siguientes:
+
+\startitemize
+
+\item {\bf El título propiamente dicho}, es decir: el
+  texto que lo compone. En principio este título siempre se muestra,
+  salvo en las secciones de tipo \PalClave{part} en las que, por
+  defecto, no se muestra. La opción que controla que el título se
+  muestre o no se muestre es \PalClave{placehead} que puede asumir los
+  valores \PalClave{yes}, \PalClave{no} \PalClave{hidden},
+  \PalClave{empty} o \Duda\PalClave{section}. El significado de los
+  dos primeros está claro. Respecto del efecto de los restantes
+  valores posibles para esta opción no estoy muy seguro.
+
+  Por lo tanto, si queremos que se muestre el título en las secciones
+  del primer nivel, deberemos establecer:
+
+  \vbox{\starttyping
+    \setuphead
+      [part]
+      [placehead=yes]
+  \stoptyping}
+
+  El título de ciertas secciones, como ya sabemos, se puede enviar
+  automáticamente a los encabezados y al índice. Mediante las opciones
+  {\tt list} y {\tt marking} de los comandos de seccionado podemos
+  indicar un título alternativo que se envíe a esos lugares. También
+  es posible, al escribir el título, usar los comandos \PonMacro{nolist}\tex{nolist} o
+  \PonMacro{nomarking}\tex{nomarking} para conseguir que ciertos fragmentos del título se
+  sustituyan, en el índice o en el encabezado, por puntos
+  suspensivos. Por ejemplo:
+
+  \vbox{\starttyping
+    \chapter{Influencias \nomarking{en el siglo XXI} del impresionismo
+      \nomarking{decimonónico}}
+  \stoptyping}
+
+  Escribirá en el encabezado “Influencias ... del impresionismo ...”.
+
+\item {\bf La numeración}. Este elemento sólo existe en las secciones
+  numeradas (part, chapter, section, subsection...), pero no en las no
+  numeradas (title, subject, subsubject). En realidad que un
+  determinado tipo de sección sea o no numerado depende de las
+  opciones \PalClave{number} e \PalClave{incrementnumber} cuyos
+  valores posibles son \PalClave{yes} y \PalClave{no}. En las
+  secciones numeradas ambas opciones se establecen en {\tt yes} y en
+  las no numeradas en {\tt no}.
+
+  \startLetraChica
+
+    ¿Por qué hay dos opciones para controlar una sola cosa? En
+    realidad las dos opciones controlan dos cosas; una es si la
+    sección es o no numerada ({\tt incrementnumber}) y la otra si el
+    número se muestra o no ({\tt number}). Si para un tipo de sección
+    se establece {\tt incrementnumber=yes} y {\tt number=no}
+    obtendríamos una sección externamente no numerada pero
+    internamente sí. Eso sería útil para incluir ese tipo de sección
+    en los índices, ya que éstos sólo pueden incluir, de forma
+    automática, secciones numeradas. Véase al respecto el
+    \in{apartado}[sec:indice con secs no numeradas] de la \in{sección}
+       [sec:ajustes_manuales].
+
+  \stopLetraChica
+
+\item {\bf El rótulo o etiqueta} del título. En principio este
+  elemento de los títulos está vacío. Pero podemos asociarle algún
+  valor, en cuyo caso, antes del número y del título propiamente
+  dicho, se imprimiría la etiqueta que hayamos asignado a dicho
+  nivel. Por ejemplo, podemos hacer que antes de los capítulos se
+  escriba la palabra «Capítulo», o que antes de las partes se escriba
+  la palabra «Parte». Para ello no se usa \tex{setuphead} sino el
+  comando \tex{setuplabeltext}. Este comando permite asignar un valor
+  textual a las etiquetas de los distintos niveles de seccionado. Y
+  así, por ejemplo, si queremos que en nuestro documento antes de los
+  capítulos se escriba “Capítulo”, deberíamos establecer:
+
+  \vbox{\starttyping
+    \setuplabeltext
+      [chapter=Capítulo~]
+  \stoptyping}
+
+  En el ejemplo, tras el nombre asignado, he incluido el carácter
+  reservado «\lettertilde» que inserta un espacio en blanco de no
+  separación. Si no nos importa que, eventualmente, se inserte un
+  salto de línea entre la etiqueta y el número, podemos escribir
+  simplemente un espacio en blanco. Pero ese espacio en blanco es
+  importante; sin él el número se mostrará pegado a la etiqueta, y se
+  verá, por ejemplo, «Capítulo1» en lugar de «Capítulo 1».
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [title={Control de la numeración (en las secciones numeradas)}]
+
+Ya sabemos que hay secciones numeradas predefinidas (part, chapter,
+section...) y que el que un tipo concreto se sección sea o no numerado
+depende de las opciones \PalClave{number} e \PalClave{incrementnumber}
+que se establecen con \tex{setuphead}.
+
+Por defecto la numeración de los distintos niveles es automática,
+salvo que se asigne a la opción \PalClave{ownnumber} el valor de
+\PalClave{yes}. Cuando \PalClave{ownumber=yes} habrá que indicar el
+número asignado a cada comando. Eso se hace:
+
+\startitemize
+
+\item Si el comando es invocado con la sintaxis clásica, añadiendo un
+  argumento con el número antes del texto del título. Por ejemplo:
+  \cmd{chapter\{13\}\{Título del capítulo\}} generará un capítulo al
+  que se le asigna manualmente el número 13.
+
+\item Si el comando es invocado con la sintaxis específica de \ConTeXt\
+  (\tex{TipoSección [Opciones]} o \tex{startTipoSección [Opciones]}),
+  mediante la opción \PalClave{ownnumber}. Por ejemplo:
+  \tex{chapter[title=Título del capítulo, ownnumber=13]}, generará un
+  capítulo al que manualmente se le asigna el número 13.
+
+\stopitemize
+
+Cuando \ConTeXt\ realiza automáticamente la numeración, se vale de
+contadores internos que almacenan el número de los distintos niveles;
+así hay un contador de partes, otro de capítulos, otro de secciones,
+etc. Cada vez que \ConTeXt\ encuentra un comando de seccionado realiza
+las siguientes acciones:
+
+\startitemize[packed]
+
+\item Incrementa en «1» el contador asociado al nivel correspondiente a
+  dicho comando.
+
+\item Pone a 0 los contadores asociados a todos los niveles inferiores
+  al del comando en cuestión.
+
+\stopitemize
+
+Es decir: cada vez que, por ejemplo, se encuentra un nuevo capítulo,
+se incrementa en 1 el contador de capítulos y se ponen a 0 los contadores
+de secciones, subsecciones, subsubsecciones, etc.; pero el contador de
+partes no se ve afectado.
+
+Para alterar el número a partir del cual se debe empezar a contar, se
+usa el comando \PonMacro{setupheadnumber}\tex{setupheadnumber} de la
+siguiente forma:
+
+\type{\setupheadnumber[TipoSección][Número desde el que contar]}
+
+Donde {\em Número desde el que contar} es el número a partir del cual
+se empezarán a contar las secciones del tipo que sea. Así, si {\em
+  Número desde el que contar} es igual a cero, la primera sección
+sería 1; pero si es igual a 10, la primera sección sería igual a 11.
+
+Este comando también permite alterar la pauta para el incremento
+automático; con lo que podemos, por ejemplo, conseguir que los
+capítulos o secciones se cuenten de dos en dos, o de tres en
+tres. Así, \tex{setupheadnumber[section][+5]} hará que las secciones
+se numeren de 5 en cinco; y \tex{setupheadnumber[chapter][14, +5]}
+hará que el primer capítulo empiece en el número 15 (14+1), el segundo
+lleve por número 20 (15+5), el tercero 25, etc.
+
+Por defecto la numeración de las secciones se muestra con números
+arábigos, y se incluye la numeración de todos los niveles previos. Es
+decir: en un documento en el que haya partes, capítulos, secciones y
+subsecciones, en una concreta subsección se indicará a qué parte,
+capítulo y sección corresponde. Así la cuarta subsección de la segunda
+sección, del tercer capítulo de la primera parte será «1.3.2.4».
+
+Las dos opciones fundamentales que controlan cómo se mostrará la
+numeración son:
+
+\startitemize
+
+\item {\tt\bf conversion:} Esta opción controla el tipo de numeración
+  que se utilizará. Admite numerosos valores dependiendo del tipo de
+  numeración que deseemos:
+  \reference[Num:conversion]{Conversión numérica}
+
+\startitemize
+
+\item {\bf Numeración con números arábigos}: Es la numeración clásica:
+  1, 2, 3, ... Se obtiene con los valores {\tt n, N} o {\tt numbers}.
+
+\item {\bf Numeración con números romanos}. Admite tres modalidades:
+
+  \startitemize[packed]
+
+  \item Números romanos en mayúsculas: {\tt I, R, Romannumerals}.
+  \item Números romanos en minúsculas: {\tt i, r, romannumerals}.
+  \item Números romanos en versalitas: {\tt KR, RK}.
+
+  \stopitemize
+
+\item {\bf Numeración con letras}. Admite también tres modalidades:
+
+  \startitemize[packed]
+
+  \item Letras en mayúsculas: {\tt A, Character}
+  \item Letras en minúsculas: {\tt a, character}
+  \item Letras en versalitas: {\tt AK, KA}
+    
+  \stopitemize
+
+\item {\bf Numeración con palabras}. Es decir: se escribe la palabra
+  que designa al número y así, por ejemplo, «3» se convierte en
+  «tres». Admite dos modalidades:
+
+  \startitemize[packed]
+
+  \item Palabras con la primera letra en mayúscula: {\tt Words}.
+  \item Palabras totalmente en minúsculas: {\tt words}.
+
+  \stopitemize
+
+\item {\bf Numeración con símbolos}: La numeración basada en símbolos
+  utiliza distintos juegos de símbolos en los que se asigna a cada
+  símbolo un valor numérico. Como los juegos de símbolos que \ConTeXt\
+  utiliza tienen un número muy limitado de ellos, sólo es adecuado
+  usar este tipo de numeración cuando el máximo número que se pretende
+  alcanzar no es demasiado alto. \ConTeXt\ prevé cuatro distintos
+  juegos de símbolos denominados, respectivamente, {\tt set~0, set~1,
+    set~2 y set~3}.  A continuación se muestran los símbolos que cada
+  uno de estos conjuntos utiliza para las numeraciones. Obsérvese que
+  el número máximo que se puede alcanzar es de 9 en {\tt set~0} y {\tt
+    set~1} y de 12 en {\tt set~2} y {\tt set~3}:
+
+    \startitemize[empty, packed]\reference[ejemplos de conversion set]{}
+      \item Set 0: \dorecurse{9}{\convertnumber{set 0}{#1}\quad}\par
+      \item Set 1: \dorecurse{9}{\convertnumber{set 1}{#1}\quad}\par
+      \item Set 2: \dorecurse{12}{\convertnumber{set 2}{#1}\quad}\par
+      \item Set 3: \dorecurse{12}{\convertnumber{set 3}{#1}\quad}\par
+
+    \stopitemize
+
+\stopitemize
+
+\item {\tt\bf sectionsegments:} Esta opción permite controlar si se
+  mostrará o no la numeración de los niveles precedentes. Mediante
+  ella podemos indicar qué niveles previos se mostrarán. Ello se hace
+  identificando el nivel inicial y el nivel final que se mostrará. La
+  identificación del nivel la podemos hacer por su número (part=1,
+  chapter=2, section=3, etc.), o por su nombre (part, chapter,
+  section, etc.). Así, por ejemplo, \PalClave{sectionsegments=2:3}
+  indica que se debe mostrar la numeración del capítulo y la de la
+  sección. Es exactamente lo mismo que decir
+  \PalClave{sectionsegments=chapter:section}. Si queremos indicar que
+  se muestren todos los números a partir de cierto nivel podemos usar,
+  como valor de \PalClave{optionsegments}
+  {\em NivelInicial:all}, o {\em NivelInicial:*}. Por ejemplo,
+  \PalClave{sectionsegments=3:*} indica que se muestre la numeración a
+  partir del nivel 3 (section).
+
+\stopitemize
+
+Así, por ejemplo, imaginemos que queremos que las partes se numeren
+con romanos en mayúsculas; los capítulos con arábigos, pero sin
+incluir el número de la parte a que pertenecen; las secciones y
+subsecciones con números arábigos incluyendo los números de capítulo y
+sección, y las subsubsecciones con letras mayúsculas. Deberíamos
+escribir lo siguiente:
+
+\vbox{\starttyping
+  \setuphead[part][conversion=I]
+  \setuphead[chapter]     [conversion=n, sectionsegments=2]
+  \setuphead[section]     [conversion=n, sectionsegments=2:3]
+  \setuphead[subsection]  [conversion=n, sectionsgments=2:4]
+  \setuphead[subsubsection][conversion=A, sectionsegments=5]
+\stoptyping}
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:estilotítulos,
+    title={Estilo y color de los títulos},
+  ]
+
+Para controlar estilo y color disponemos de las siguientes opciones:
+
+\startitemize
+
+\item {\bf El estilo} se controla con las opciones \PalClave{style},
+  \PalClave{numberstyle} y \PalClave{textstyle} según queramos afectar
+  a todo el título, sólo a la numeración, o sólo al texto. Mediante
+  cualquiera de estas opciones podemos incluir comandos que afecten a
+  la fuente; a saber: fuente concreta, estilo (roman, sans serif o
+  ty\-pe\-wri\-ter), alternativa (cursiva, negrita, inclinada...) y
+  tamaño. Si sólo queremos indicar una característica de estilo
+  podemos hacerlo, bien usando el nombre de la misma (por ejemplo,
+  «bold» para la negrita), bien indicando su abreviatura («bf»), bien
+  el comando que la genera (\tex{bf}, en el caso de la negrita). Si
+  queremos indicar simultáneamente varias características, debemos
+  hacerlo mediante los comandos que las generan, escribiéndolos uno
+  tras otro. Téngase en cuenta, por otro lado, que si indicamos sólo
+  una característica, el resto de las características del estilo se
+  establecerán automáticamente con los valores por defecto del
+  documento, razón esta por la que raramente es aconsejable establecer
+  sólo una característica de estilo.
+
+\item {\bf El color} se establece mediante las opciones
+  \PalClave{color}, \PalClave{numbercolor} y \PalClave{textcolor}
+  según queramos configurar el color de todo el título, o sólo el
+  color de la numeración o el del texto. El color que aquí se indique
+  puede ser alguno de los colores predefinidos en \ConTeXt\, o algún
+  color definido por nosotros mismos al que le hayamos previamente
+  asignado un nombre. No puede, sin embargo, usarse aquí directamente
+  un comando de definición de color.
+
+\stopitemize
+
+Junto a estas seis opciones, para establecer algunas características
+más sofisticadas aún se dispone de otras cinco opciones adicionales
+con las que podemos hacer prácticamente lo que deseemos. Se trata de
+\PalClave{command}, \PalClave{numbercommand},
+\PalClave{textcommand},\PalClave{deepnumbercommand} y
+\PalClave{deeptextcommand}. Empecemos por explicar los tres primeros:
+
+\startitemize
+
+\item {\tt\bf command} indica un comando que recibirá dos argumentos,
+  el número y el título de la sección. Puede ser un comando normal de
+  \ConTeXt\ o algún comando que hayamos definido nosotros mismos.
+
+\item {\tt\bf numbercommand} es similar a \PalClave{command}, pero este
+  comando sólo recibirá un argumento con el número de la sección.
+
+\item {\tt\bf textcommand} es también similar a \PalClave{command},
+  pero sólo recibirá un argumento con el texto del título.
+
+\stopitemize
+
+Estas tres opciones nos permiten hacer prácticamente lo que
+queramos. Por ejemplo, si quiero que las secciones se muestren
+alineadas a la derecha, encerradas en un marco y con un salto de línea
+entre el número y el texto, me bastará con crear un comando que haga
+eso, y luego indicar dicho comando como valor de la opción
+\PalClave{command}. Eso lo conseguiría con las siguientes líneas:
+
+\vbox{\starttyping
+\define[2]\AlinearSección
+  {\framed[frame=on, width=broad,align=flushright]{#1\\#2}}
+
+\setuphead
+  [section]
+  [command=\AlinearSección]
+\stoptyping}
+
+Cuando establecemos simultáneamente la opción \PalClave{command} y la
+opción \PalClave{style}, el comando se aplica al título con su estilo. Es
+decir, si, por ejemplo, hemos establecido \PalClave{textstyle=\backslash
+em}, y \PalClave{textcommand=\backslash WORD}, el comando \tex{WORD} (que
+pone en mayúsculas el texto que reciba como argumento) se aplicará al
+título con su estilo, o sea: \cmd{WORD\{\backslash em Texto del título\}}.
+Si queremos que se haga al revés, es decir, que el estilo se aplique al
+contenido del título una vez se le haya aplicado el comando, debemos usar,
+en lugar de las opciones \PalClave{textcommand} y \PalClave{numbercommand}
+las opciones \PalClave{deeptextcommand} y \PalClave{deepnumbercommand}.
+Esto, en el ejemplo que hemos puesto antes, generaría
+\PalClave{\color[darkmagenta]{\{\backslash em\backslash WORD\{Texto del
+título\}\}}}.
+
+En la mayor parte de los casos no habrá ninguna diferencia entre
+hacerlo de un modo o del otro. Pero en algún caso puede que sí la
+haya.
+
+\stopsubsection
+
+\startsubsection
+  [title={Ubicación del número y del texto del título}]
+
+La opción \PalClave{alternative} controla simultáneamente dos cosas:
+la ubicación de la numeración respecto del texto del título, y la
+ubicación del título propiamente dicho (incluyendo número y texto)
+respecto de la página en la que se muestra y el contenido de la
+sección. Son dos cosas distintas, pero, al estar ambas regidas por la
+misma opción, se controlan simultáneamente.
+
+La ubicación del título en relación con la página y con el primer
+párrafo del contenido de la sección, se controla mediante los
+siguientes valores posibles de \PalClave{alternative}:
+
+\startitemize
+
+\item {\tt\bf text:} El título de la sección se integra con el primer
+  párrafo del contenido de la misma. El efecto es similar al que se
+  produce en \LaTeX\ con \tex{paragraph} y \tex{subparagraph}.
+
+\item {\tt\bf paragraph:} El título de la sección será un párrafo
+  independiente.
+
+\item {\tt\bf normal:} El título de la sección se ubicará en el lugar
+  que por defecto tenga previsto \ConTeXt\ para el tipo de sección
+  concreta de que se trate. Normalmente es \PalClave{paragraph}.
+
+\item {\tt\bf middle:} El título se escribe como párrafo autónomo,
+  centrado. Si se trata de un comando numerado, el número y el texto
+  se separan en líneas diferentes, ambas centradas.
+
+  Un efecto parecido al que se obtiene con
+  \PalClave{alternative=middle} se obtiene con la opción
+  \PalClave{align} que controla la alineación del título. Puede asumir
+  los valores \PalClave{left}, \PalClave{middle} o
+  \PalClave{flushright}. Pero si centramos el título con esta opción,
+  el número y el texto aparecerán en la misma línea.
+
+\item {\tt\bf margintext:} Esta opción provoca que todo el título
+  (numeración y texto) se imprima en el espacio reservado para el margen.
+
+\stopitemize
+
+La ubicación del número en relación con el texto del título se indica
+mediante los siguientes valores posibles de \PalClave{alternative}:
+
+\startitemize
+
+\item {\tt\bf margin/inmargin:} El título compone un párrafo
+  independiente. La numeración se escribe en el espacio reservado para
+  el margen. No he llegado a averiguar la diferencia entre usar
+  \PalClave{margin} y usar \PalClave{inmargin}.
+
+\item {\tt\bf reverse:} El título compone un párrafo independiente,
+  pero se invierte el orden normal, y se imprime en primer lugar el
+  texto y después el número.
+
+\item {\tt\bf top/bottom:} En títulos cuyo texto ocupe más de una
+  línea, estas dos opciones controlan, respectivamente, si la
+  numeración se alineará con la primera línea del título o con la
+  última.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [title={Comandos o acciones a realizar antes o\\ después de imprimir el
+  título}]
+
+Es posible indicar uno o varios comandos que se ejecuten antes de escribir
+el título (opción \PalClave{before}) o después (opción \PalClave{after}).
+Estas opciones son muy utilizadas para marcar visualmente al título. Por
+ejemplo: si queremos añadir un mayor espacio vertical entre el título y el
+texto que le precede, mediante \PalClave{before=\backslash blank}
+añadiríamos una línea en blanco. Para añadir un mayor espacio podríamos
+escribir, \PalClave{before=\{\backslash blank[3*big]\}}, caso este en el
+que hemos rodeado con llaves el valor de la opción para evitar un error.
+También podríamos indicar visualmente la separación del texto previo y del
+siguiente con \PalClave{before=\backslash hairline, after=\backslash
+hairline}, lo que dibujaría una línea horizontal antes y después del
+título.
+
+Muy parecidas a las opciones \PalClave{before} y \PalClave{after} son
+\PalClave{commandbefore} y \Conjetura\PalClave{commandafter}. De
+acuerdo con mis pruebas deduzco que la diferencia está en que las dos
+primeras ejecutan acciones antes y después de empezar a escribir el
+título, mientras que las segundas se refieren a comandos que se
+ejecutarán antes y después de escribir {\em el texto del título}.
+
+Si lo que queremos es insertar un salto de página antes del título,
+hay que usar la opción \PalClave{page} que admite, entre otros valores
+los de “yes” para insertar un salto de página, “left” para insertar
+tantos saltos de página como sea preciso para asegurarse de que el
+título empieza en una página par, “right” que se asegura de que el
+título empiece una página impar o “no” si lo que queremos es
+desactivar el salto de página forzado. Esta opción, por otra parte,
+para niveles inferiores a \PalClave{chapter} sólo funcionará siempre
+si la opción \PalClave{continue=no}, en otro caso no funcionará si la
+sección, subsección o comando que sea está en la primera página de un
+capítulo.
+
+\startLetraChica
+
+  Por defecto en \ConTeXt\ los capítulos inician una nueva página. Si
+  se establece que las secciones también inicien página, se plantea el
+  problema de qué hacer con la primera sección de un capítulo que, tal
+  vez, se encuentre al principio del capítulo: si esa sección inicia
+  también un salto de página, tendríamos que la página que abre el
+  capítulo sólo contendría el título de éste, lo que no es muy
+  estético. Para ello se establece la opción \PalClave{continue} cuyo
+  nombre, por cierto, no me parece particularmente claro: Si
+  \PalClave{continue=yes}, el salto de página no se aplicará en las
+  secciones que se encuentren en la primera página de un capítulo. Si
+  \PalClave{continue=no} el salto de página se aplicará siempre.
+
+\stopLetraChica
+
+Si en lugar de comandos de seccionado usamos entornos de seccionado
+(\cmd{start ... \backslash stop}), disponemos también de la opción
+\PalClave{insidesection} mediante la que podemos indicar uno o varios
+comandos que se ejecutarán una vez que se haya escrito el título y
+estemos ya dentro de la sección. Esta opción nos permitiría, por
+ejemplo, asegurarnos de que inmediatamente después de iniciar un
+capítulo, se escribirá, automáticamente, un índice del mismo
+(\PalClave{insidesection=\backslash placecontent})
+
+\stopsubsection
+
+\startsubsection
+  [title={Otras características configurables}]
+
+Además de las ya vistas, mediante \tex{setuphead} podemos configurar
+las siguientes características adicionales:
+
+\startitemize
+
+\item {\bf Interlineado}. Se controla mediante la opción
+  \PalClave{interlinespace} que recibe como valor el nombre de un
+  comando de interlineado creado previamente con
+  \tex{defineinterlinespace} y configurado con
+  \tex{setupinterlinespace}.
+
+\item {\bf Alineación}. La opción \PalClave{align} afecta a la alineación
+  del párrafo que contiene al título. Puede tener, entre otros, los
+  siguientes valores: \PalClave{flushleft} (izquierda),
+  \PalClave{flushright} (derecha), \PalClave{middle} (centrado),
+  \PalClave{inner} (margen interior) y \PalClave{outer} (margen
+  exterior).
+
+\item {\bf Margen}. Mediante la opción \PalClave{margin} podemos fijar
+  manualmente el margen del título.
+
+\item {\bf Indentación del primer párrafo}. El valor de la opción
+  \PalClave{indentnext} (que puede ser “yes”, “no” o “auto”) controla
+  si se indentará o no la primera línea del primer párrafo de la
+  sección. Que se deba indentar o no (en un documento en el que la
+  primera línea de los párrafos, en general, se indenta) es cuestión
+  de gustos.
+
+\item {\bf Anchura}. Por defecto los títulos ocupan la anchura que
+  necesiten salvo que esta sea superior a la anchura de la línea, en
+  cuyo caso el título ocupará más de una línea. Pero mediante la
+  opción \PalClave{width} podemos asignar una anchura concreta para el
+  título. Las opciones \PalClave{numberwidth} y \PalClave{textwidth}
+  asignan, respectivamente, la anchura de la numeración, o del texto
+  del título.
+
+\item {\bf Separación entre el número y el texto}. Las opciones
+  \PalClave{distance} y \PalClave{textdistance} permiten controlar la
+  separación entre la numeración y el texto del mismo.
+
+\item Estilo de los encabezados y pies de página de la sección. Para
+  ello se usan las opciones \PalClave{header} y \PalClave{footer}
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [title={Otras opciones de \tex{setuphead}}]
+
+Con las opciones ya vistas, se verá que las posibilidades de
+configuración de los títulos de las secciones son casi
+ilimitadas. Pero \tex{setuphead} tiene todavía cerca de treinta
+opciones que no he \Duda mencionado. La mayoría porque no he descubierto
+para qué sirven o cómo se usan, unas pocas, porque su explicación me
+obligaría a introducirme en aspectos que no tengo previsto tratar en
+esta introducción.
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:definehead,
+    title={Definición de nuevos comandos de\\ seccionado},
+  ]
+\PonMacro{definehead}
+
+Podemos definir nuestros propios comandos de seccionado mediante
+\tex{definehead} cuya sintaxis es:
+
+\type{\definehead[NombreComando][Modelo][Configuración]}
+
+donde
+
+\startitemize
+
+\item {\bf NombreComando} representa el nombre que tendrá el nuevo
+  comando de seccionado.
+
+\item {\bf Modelo} es el nombre de un comando de seccionado ya
+  existente que se usará como modelo del que el nuevo comando heredará
+  inicialmente todas sus características.
+
+  \startLetraChica
+
+    En realidad el nuevo comando hereda del modelo mucho más que las
+    características iniciales: se convierte en una especie de
+    instancia personalizada del modelo, pero comparte con él, por
+    ejemplo, el contador interno que recoge la numeración.
+
+  \stopLetraChica
+
+\item {\bf Configuración} es la configuración personalizada de nuestro
+  nuevo comando. Aquí se pueden usar exactamente las mismas opciones
+  que en \tex{setuphead}.
+
+\stopitemize
+
+No es necesario configurar el nuevo comando en el momento de su
+creación. Puede hacerse más tarde mediante \tex{setuphead} y, de
+hecho, en los ejemplos que se ponen en los manuales de \ConTeXt\ así
+como en su wiki, eso parece ser que es lo normal.
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:macroestructura,
+    title={Macroestructura del documento},
+  ]
+
+Capítulos, secciones, subsecciones, títulos..., estructuran al documento;
+lo sistematizan. Pero junto con la estructura compuesta por este tipo de
+comandos, en ciertos libros impresos, sobre todo en los procedentes del
+mundo académico existe una especie de {\em macroordenación} del material
+del libro atendiendo no a su contenido sino a la función que en el libro
+desempeña cada una de estas grandes partes. Así se diferencia entre:
+
+\startitemize
+
+\item La parte inicial del documento en donde se contiene la página
+  del título, la de agradecimientos, la dedicatoria, el índice
+  sumario, tal vez el prefacio, la presentación, etc.
+
+\item El cuerpo principal del documento, en donde se contiene el texto
+  fundamental del mismo, dividido, en partes, capítulos, secciones,
+  subsecciones, etc. Esta parte suele ser la más extensa e importante.
+
+\item El material adicional constituido por los apéndices o anexos que
+  desarrollen o ejemplifiquen alguna cuestión tratada en el cuerpo
+  principal, o aporten documentación adicional no escrita por el
+  autor del cuerpo principal, etc.
+
+\item La parte final del documento en donde podemos encontrar la
+  bibliografía, los índices que no se hayan ubicado en la parte
+  inicial, algún glosario, etc.
+
+\stopitemize
+
+Podemos delimitar, en el fichero fuente, cada una de estas partes,
+mediante los entornos que se recogen en la
+\in{tabla}[tbl:macroestructura].
+
+{\switchtobodyfont[small]
+\placetable
+  [here]
+  [tbl:macroestructura]
+  {Entornos que reflejan la macroestructura del documento}
+{\starttabulate[|l|l|]
+\HL
+\NC {\bf Parte del documento}
+\NC {\bf Comando}
+\NR
+\HL
+\NC Parte inicial
+\NC\backslash startfrontmatter [Opciones] ... \backslash stopfrontmatter
+\NR\PonMacro{startfrontmatter}
+\NC Cuerpo principal
+\NC\backslash startbodymatter [Opciones] ... \backslash stopbodymatter
+\NR\PonMacro{startbodymatter}
+\NC Apéndices
+\NC\backslash startappendices \ [Opciones] ... \backslash stopappendices
+\NR\PonMacro{startappendices}
+\NC Parte final
+\NC\backslash startbackmatter [Opciones] ... \backslash stopbackmatter\PonMacro{startbackmatter}
+\NR
+\HL
+\stoptabulate
+}}
+
+Los cuatro entornos admiten las mismas cuatro opciones:
+\PalClave{page}, \PalClave{before}, \PalClave{after} y
+\PalClave{number}, y sus valores y utilidad son similares a los que
+estas mismas opciones tienen en \tex{setuphead} (véase la
+\in{sección}[sec:setuphead]), si bien hay que advertir que aquí la
+opción \PalClave{number=no} eliminará la numeración de todos los
+comandos de seccionado que se encuentren en el interior del entorno.
+
+Incluir en nuestro documento elguno de estos grandes apartados, sólo tiene
+sentido si es para establecer algún tipo de diferenciación entre ellos. Tal
+vez el encabezado de las páginas en frontmatter, o quizás la numeración de
+páginas. Esta configuración de cada uno de estos bloques se consigue
+mediante \PonMacro{setupsectionblock}\tex{setupsectionblock} cuya sintaxis
+es:
+
+\type{\setupsectionblock [Nombre del bloque] [Opciones]}
+
+donde {\em Nombre del bloque} puede ser {\tt frontpart}, {\tt
+  bodypart}, {\tt appendix} o {\tt backpart} y las opciones
+pueden ser las mismas que se acaban de mencionar: \PalClave{page},
+\PalClave{number}, \PalClave{before} y \PalClave{after}. Así, por
+ejemplo, para conseguir que en {\em frontmatter} las páginas se
+numeren con números romanos, deberíamos escribir en el preámbulo de
+nuestro documento:
+
+\starttyping
+\setupsectionblock
+  [frontpart]
+  [
+    before={\setuppagenumbering[conversion=Romannumerals]}
+  ]
+\stoptyping
+
+La configuración por defecto de \ConTeXt\ para estos cuatro bloques
+implica:
+
+\startitemize
+
+\item Los cuatro bloques inician página nueva.
+
+\item En cada uno de estos bloques, cambia la numeración de las
+  secciones:
+
+  \startitemize
+
+  \item En {\tt frontmatter} y en {\tt backmatter} por defecto se
+    anula la numeración de todas las secciones numeradas.
+
+  \item En {\tt bodymatter} los capítulos se numeran con números
+    arábigos.
+
+  \item En {\tt appendices} los capítulos se numeran con letras
+    mayúsculas.
+
+  \stopitemize
+
+\stopitemize
+
+También es posible crear nuevos bloques de sección mediante
+\PonMacro{definesectionblock}\tex{definesectionblock}.
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:
+%%% vim:set filetype=context tw=75 : %%%

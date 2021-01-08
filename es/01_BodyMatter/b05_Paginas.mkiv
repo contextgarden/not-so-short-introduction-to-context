@@ -1,0 +1,1494 @@
+%%% Fichero:     b05_Paginas.mkiv
+%%% Autor:       Joaquín Ataz López
+%%% Inicio:      Mayo 2020
+%%% Terminación: Mayo 2020
+%%% Contenido: Este capítulo mezcla dos cosas: el diseño de la página,
+%%%            que es aspecto global del documento, y los comandos
+%%%            relativos a la paginación, que es aspecto particular
+%%%            que podría tal vez estar en el capítulo 11. Su
+%%%            contenido está basado, principalmente, en el manual de
+%%%            referencia de 2013, aunque también he consultado la wiki.
+%%%
+%%% Editado: Emacs + AuTeX - Y a veces con vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent b05_Paginas.mkiv
+
+\startchapter
+  [
+    reference=cap:páginas,
+    title={Páginas y paginación del documento},
+  ]
+
+\PonIndiceCap
+
+\ConTeXt\ transforma el documento fuente en {\em páginas}
+correctamente formateadas. El cómo sean esas páginas, cómo se
+distribuya en ellos el texto y los espacios en blanco y de qué
+elementos dispongan son aspectos fundamentales de cara a obtener una
+buena composición tipográfica. A todas esas cuestiones, y a algunas
+otras relacionadas con la paginación, se dedica el presente capítulo.
+
+\startsection
+  [
+    reference=sec:tamañopapel,
+    title={El tamaño de las páginas},
+  ]
+
+\startsubsection
+  [
+    reference=sec:tamañopágina,
+    title={Establecimiento del tamaño de página},
+  ]
+\PonMacro{setuppapersize}
+
+Por defecto \ConTeXt\ asume que las páginas del documento serán del
+tamaño A4, que es el estándar en Europa. Podemos establecer un tamaño
+distinto mediante \tex{setuppapersize} que es el típico comando que se
+ubica en el preámbulo del documento. La sintaxis {\em normal} de este
+comando es:
+
+\type{\setuppapersize[PagLógica][PagFísica]}
+
+donde ambos argumentos reciben nombres
+simbólicos\footnote{Recuérdese que en la \in{sección}[sec:sintaxis]
+  señalé que las opciones recibidas por los comandos de \ConTeXt\ son
+  básicamente de dos tipos: nombres simbólicos, cuyo significado es ya
+  conocido por \ConTeXt, o variables a las que hay que asignar
+  explícitamente algún valor.}.  el primer argumento, al que he
+llamado {\em PagLógica} representa el tamaño de página que hay que
+tomar en consideración para la composición tipográfica; y el segundo
+argumento {\em PagFísica} representa el tamaño de página en que se
+imprimirá. Normalmente ambos tamaños son el mismo, y el segundo
+argumento se puede omitir; pero en ocasiones puede haber una
+diferencia entre ambos tamaños, como, por ejemplo, cuando se imprime
+un libro en pliegos de 8 o 16 páginas (técnica de impresión
+relativamente habitual, sobre todo en libros académicos, hasta
+aproximadamente los años sesenta del pasado siglo). En estos casos
+\ConTeXt\ permite diferenciar entre ambos tamaños; y si la idea es que
+en un solo pliego de papel se impriman varias páginas, también se puede
+indicar el esquema de plegado que se seguirá mediante el comando
+\tex{setuparranging} (que no se explicaré en esta introducción).
+
+Como tamaño para la composición podemos indicar: Cualquier tamaño
+predefinido por la industria papelera (o por nosotros mismos). Esto
+incluye
+
+  \startitemize
+
+  \item Cualquiera de los tamaños de las series A, B y C predefinidos
+    por el estándar ISO-216 (de A0 a A10, de B0 a B10 y de C0 a C10),
+    usados en general en Europa.
+
+  \item Cualquiera de los tamaños estándar en Estados Unidos: letter,
+    ledger, tabloid, legal, folio, executive.
+
+  \item Cualquiera de los tamaños RA y RSA definidos por el estándars
+    ISO-217.
+
+  \item Los tamaños G5 y E5 definidos por el estándar sueco
+    SIS-014711 (para tesis doctorales).
+
+  \item Para sobres: Cualquiera de los tamaños definidos por el
+    estándar norteamericano (envelope 9 a envelope 14) o por el
+    estándar ISO-269 (C6/C5, DL, E4).
+
+  \item CD, para portadas de CDs.
+
+  \item S3 – S6, S8, SM, SW para tamaños de pantalla en documentos
+    pensados para no ser impresos sino mostrados en pantalla.
+
+  \stopitemize
+
+  Junto con el tamaño del papel, con \tex{setuppapersize}, podemos
+  indicar la orientación: «portrait» (vertical) o «landscape»
+  (apaisado).
+
+\startLetraChica
+
+  Otras opciones que, según la wiki de \ConTeXt\ admite
+  \tex{setuppapersize} son \PalClave{rotated}, \PalClave{90},
+  \PalClave{180}, \PalClave{270}, \PalClave{mirrored} y
+  \PalClave{negative}. En mis pruebas sólo he conseguido observar
+  algún cambio perceptible con el valor \PalClave{rotated} que
+  invierte la página; aunque tampoco es exactamente una inversión. Los
+  valores numéricos se supone que deberían producir rotaciones
+  equivalentes, por sí solos, o en combinación con \PalClave{rotated},
+  pero no he conseguido hacerlos \Duda funcionar. Tampoco he
+  descubierto exactamente qué hacen las opciones \PalClave{mirrored} y
+  \PalClave{negative}.
+
+\stopLetraChica
+
+El segundo argumento de \tex{setuppapersize}, que ya he dicho que se
+puede omitir cuando el tamaño de impresión no sea distinto del de
+composición, puede recibir los mismos valores que el primero,
+indicativos del tamaño y orientación del papel. Puede también recibir
+el valor \PalClave{oversized} que ---dice la wiki de \ConTeXt--- añade
+un centímetro y medio en cada esquina del papel.
+
+\startLetraChica
+
+  De acuerdo con la wiki hay otros valores posibles para el segundo
+  argumento: \PalClave{undersized}, \PalClave{doublesized} y
+  \PalClave{doubleoversized}. Pero en mis pruebas no he conseguido ver
+  ningún cambio por el hecho de introducir cualquiera de ellos;
+  tampoco la definición oficial del comando (véase
+  \in{sección}[sec:qrc-setup-en]) menciona estas opciones.
+
+\stopLetraChica
+
+\stopsubsection
+
+\startsubsection
+  [title={Uso de tamaños de página no\\ estandarizados}]
+
+Si queremos usar un tamaño de página no estandarizado, podemos hacer
+dos cosas:
+
+\startitemize[n]
+
+\item Usar una sintaxis alternativa de \tex{setuppapersize} que
+  permite introducir la altura y anchura del papel como dimensiones.
+
+\item Definir nuestro propio tamaño de página, asignarle un nombre y
+  usarlo como si fuera un tamaño estándar.
+  
+\stopitemize
+
+\subsubsubject{Sintaxis alternativa de \tex{setuppapersize}}
+
+Además de la sintaxis ya vista, \tex{setuppapersize} admite esta otra
+sintaxis:
+
+\type{\setuppapersize}[Nombre][Opciones]
+
+donde {\em Nombre} es un argumento opcional que representa el nombre
+asignado a algún tamaño de papel mediante \tex{definepapersize} (que
+examinaremos a continuación), y {\em Opciones} son opciones del tipo
+de asignación explícito de valor.  Entre las opciones admisibles se
+pueden destacar las siguientes:
+
+\startitemize
+
+\item {\tt\bf width, height} que representan, respectivamente, la
+  anchura y la altura de la página. 
+  
+\item {\tt\bf page, paper}. La primera se refiere al tamaño de página
+  para la composición tipográfica, y la segunda al tamaño de página
+  para la impresión física. Es decir \PalClave{page} equivale al
+  primer argumento de
+  \tex{setuppapersize} en su sintaxis normal (explicada antes) y
+  \PalClave{paper} al segundo argumento. Estas opciones pueden recibir
+  los mismos valores que antes se indicaron (A4, S3, etc.).
+
+\item {\tt\bf scale}, indica un factor de escalado de la página.
+
+\item {\tt\bf topspace, backspace, offset} distancias adicionales.
+  
+\stopitemize
+
+\subsubsubject{Definición de un tamaño de página personalizado}
+
+Para definir un tamaño de página personalizado se usa el comando
+\tex{definepapersize} cuya sintaxis es
+
+\PonMacro{definepapersize}\type{\definepapersize[Nombre][Opciones]}
+
+donde {\em Nombre} se refiere al nombre que se asignará
+al nuevo tamaño y {\em Opciones} pueden ser
+
+\startitemize
+
+\item Cualquiera de los valores admisibles para \tex{setuppapersize}
+  en su sintaxis normal (A4, A3, B5, CD, etc).
+
+\item Las medidas width (anchura del papel), height (altura del papel)
+  y offset (desplazamiento), o un valor de escalado
+  (\PalClave{scale}).
+  
+\stopitemize
+
+Lo que no es posible es mezclar valores admisibles para
+\tex{setuppapersize} con medidas o factor de escalado. Esto es así
+porque en el primer caso las opciones consisten en palabras simbólicas
+y en el segundo en variables a las que hay que asignar un valor
+explícito; y en \ConTeXt\, como ya se dijo, no es posible mezclar
+ambos tipos de opciones.
+
+Cuando usamos \tex{definepapersize} para indicar un tamaño de papel
+que coincide con alguna de las medidas estándar, en realidad, más que
+definir un nuevo tamaño de papel, lo que estamos es definiendo un
+nuevo nombre para un tamaño de papel ya existente. Esto puede ser útil
+si queremos combinar un tamaño de papel con una orientación y así, por
+ejemplo, podríamos escribir
+
+\starttyping
+\definepapersize[vertical][A4, portrait]
+\definepapersize[apaisado][A4, landscape]
+\stoptyping
+
+\stopsubsection
+
+\startsubsection
+  [title={Cambiar el tamaño de página en algún\\ punto del documento}]
+
+En la mayor parte de los casos, los documentos sólo tienen un tamaño
+de página y por ello \tex{setuppapersize} es el típico comando que se
+incluye en el preámbulo y que se usa una sola vez en cada
+documento. No obstante en algunas ocasiones puede ser necesario
+cambiar el tamaño en algún punto del documento; como, por ejemplo, si
+a partir de cierto punto se incluye un anexo en el que las hojas son
+apaisadas. 
+
+En tales casos se puede usar \tex{setuppapersize} en el punto exacto
+en el que deseamos que cambie el tamaño. Pero como el tamaño cambiará
+inmediatamente, para evitar resultados inesperados lo normal es
+insertar antes de \tex{setuppapersize} un salto de página forzado.
+
+Si sólo necesitamos cambiar el tamaño de página para una página
+concreta, en lugar de usar dos veces \tex{setuppapersize}, una para
+cambiar al nuevo tamaño, y otra para restaurar el valor original,
+podemos usar \PonMacro{adaptpapersize}\tex{adaptpapersize} que cambia
+el tamaño de página y, tras exactamente una página, automáticamente
+establece el valor previo a su llamada. Al igual que con
+\tex{setuppapersize}, antes de usar \tex{adaptpapersize} conviene
+insertar un salto de página forzado.
+
+\stopsubsection
+
+\startsubsection
+  [title={Ajustar el tamaño de página a su contenido}]
+
+Hay tres entornos en \ConTeXt\ que generan páginas del tamaño exacto
+para almacenar su contenido. se trata de
+\PonMacro{startMPpage}\tex{startMPpage},
+\PonMacro{startpagefigure}\tex{startpagefigure} y
+\PonMacro{startTEXpage}\tex{startTEXpage}. El primero crea una
+página que contiene un gráfico generado con MetaPost, lenguaje para el
+diseño de gráficos que se integra en \ConTeXt, pero del que no me
+ocuparé en esta introducción. El segundo hace lo mismo con una imagen
+y, tal vez, algo de texto bajo ella. Recibe dos argumentos el primero
+identifica el fichero que contiene la imagen, me ocuparé de él en el
+capítulo dedicado a las imágenes externas. El tercero
+(\tex{startTEXpage}) encierra en una página el texto que constituya
+su contenido. Su sintaxis es:
+
+\type{\startTEXpage[Opciones] ... \stopTEXTpage}
+
+donde las opciones pueden ser cualquiera de las
+siguientes:
+
+\startitemize
+
+\item {\tt\bf strut}. No estoy seguro de la utilidad de esta
+  opción. En la terminología de \ConTeXt\ un {\em strut} (que en
+  inglés significa pilar o basamento), es un carácter sin anchura,
+  pero con la máxima altura y \Duda profundidad, pero no termino de ver qué
+  tiene eso que ver con la utilidad general de este comando. Según la
+  wiki esta opción admite los valores \PalClave{yes}, \PalClave{no},
+  \PalClave{global} y \PalClave{local}, teniendo por defecto el valor
+  \PalClave{no}.
+
+\item {\tt\bf align}. Indica la alineación del texto. Puede ser
+  \PalClave{normal}, \PalClave{flushleft}, \PalClave{flushright},
+  \PalClave{middle}, \PalClave{high}, \PalClave{low} o
+  \PalClave{lohi}.
+  
+\item {\tt\bf offset} para indicar la cantidad de espacio en blanco
+  alrededor del texto. Puede ser \PalClave{none}, \PalClave{overlay}
+  si se desea un efecto de superposición, o una concreta dimensión.
+  
+\item {\tt\bf width, height} donde podemos indicar una anchura y una
+  altura para la página, o el valor \PalClave{fit} para que anchura y
+  altura sean las que necesita el texto introducido en el entorno.
+  
+\item {\tt\bf frame} que por defecto es \PalClave{off} pero puede
+  asumir el valor de \PalClave{on} si deseamos que se establezca un
+  marco en torno al texto que es el contenido de la página.
+  
+\stopitemize
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:elementospag,
+    title={Elementos en la página},
+  ]
+
+\ConTeXt\ reconoce en las páginas distintos elementos cuyas
+dimensiones se pueden configurar mediante \tex{setuplayout}, que
+inmediatamente veremos; pero antes conviene describir cada uno de los
+elementos de la página, indicando el nombre por el que
+\tex{setuplayout} conoce a cada uno de ellos:
+
+\startitemize
+
+\item {\bf Los bordes:} espacio en blanco que enmarca la zona de
+  texto. Aunque muchos programas de procesado de texto los llama
+  «márgenes», es preferible usar la terminología de \ConTeXt\ pues,
+  ello nos permitirá diferenciar entre el borde propiamente dicho, en
+  el que nunca hay texto (aunque, en documentos electrónicos, puede
+  haber botones de navegación y elementos similares), y los márgenes,
+  en los que ocasionalmente pueden insertarse ciertos elementos
+  textuales como, por ejemplo, las notas marginales.
+
+  \startitemize
+
+  \item La altura del borde superior está controlada por dos medidas:
+    la del borde superior propiamente dicho (\PalClave{top}) y la
+    distancia entre el borde superior y el encabezado
+    (\PalClave{topdistance}). A la suma de estas dos medidas se la
+    llama \PalClave{topspace}.
+
+  \item El tamaño de los bordes izquierdo y derecho depende,
+    respectivamente, de las medidas \PalClave{leftedge} y
+    \PalClave{rightedge}. Si queremos que ambos sean de la misma
+    longitud, podemos configurarlos simultáneamente con la opción
+    \PalClave{edge}.
+
+    En documentos pensados para ser impresos a doble cara, no se habla
+    de borde izquierdo o derecho, sino de borde interior y exterior;
+    el primero es el borde más próximo al punto en el que los folios
+    se graparán o coserán, esto es: en las páginas impares el borde
+    izquierdo, y en las pares el derecho. El borde exterior es el
+    contrario al interior.
+
+  \item La altura del borde inferior se denomina \PalClave{bottom}.
+
+  \stopitemize
+
+  % En documentos pensados para ser impresos en papel, los bordes nunca
+  % pueden contener texto. Pero en documentos pensados para ser
+  % mostrados en pantalla, los bordes pueden alojar ciertos elementos
+  % tales como botones de navegación y similares.
+
+\item {\bf Los márgenes} propiamente dichos. \ConTeXt\ sólo llama
+  márgenes a los laterales (izquierdo y derecho). Los márgenes se
+  ubican entre el borde y la zona principal de texto y están pensados
+  para albergar ciertos elementos textuales como, por ejemplo, las
+  notas marginales, los títulos de las secciones o la numeración de
+  los mismos.
+
+  Las dimensiones que controlan el tamaño de los márgenes son:
+
+  \startitemize
+
+  \item {\tt\bf margin}: se usa cuando se quiere fijar simultáneamente
+    los dos márgenes con el mismo tamaño.
+
+  \item {\tt\bf leftmargin, rightmargin}: Fijan, respectivamente, el
+    tamaño del margen izquierdo y el del margen derecho.
+
+  \item {\tt\bf edgedistance}: Distancia entre el borde y el margen.
+
+  \item {\tt\bf leftedgedistance, rightedgedistance}: Respectivamente
+    la distancia entre el borde y el margen izquierdo, y entre el
+    borde y el margen derecho.
+
+  \item {\tt\bf margindistance}: Distancia entre el margen y la zona
+    principal de texto.
+
+  \item {\tt\bf leftmargindistance, rightmargindistance}:
+    Distancia entre, respectivamente los márgenes izquierdo y derecho
+    y la zona principal de texto.
+
+  \item {\tt\bf backspace}: Esta medida representa el espacio entre la
+    esquina izquierda del papel y el inicio de la zona principal de
+    texto. Constituye, por lo tanto, la suma de \PalClave{leftedge} +
+    \PalClave{leftedgedistance} + \PalClave{leftmargin} +
+    \PalClave{leftmargindistance}.
+    
+  \stopitemize
+
+\item {\bf El encabezado y el pie de página:} El encabezado y el pie
+  de de la página son dos zonas que se ubican, respectivamente en la
+  parte superior o inferior de la zona escrita de la página. En ellas
+  se suele ubicar información que ayude a contextualizar el texto, tal
+  como, por ejemplo, el número de página, el nombre del autor, el
+  título de la obra, el título del capítulo o sección, etc. En
+  \ConTeXt\ estas dos zonas de la página se encuentran afectadas por
+  las siguientes dimensiones:
+
+  \startitemize
+
+  \item {\tt\bf header}: Altura del encabezado.
+
+  \item {\tt\bf footer}: Altura del pie de página.
+
+  \item {\tt\bf headerdistance}: Distancia entre el encabezado y la
+    zona de texto principal de la página.
+
+  \item {\tt\bf footerdistance}: Distancia entre el pie y la zona de
+    texto principal de la página.
+
+  \item {\tt\bf topdistance, bottomdistance}: Ya se mencionaron
+    antes. Respectivamente son la distancia entre el borde superior y
+    el encabezado o entre el borde inferior y el pie de página.
+
+  \stopitemize
+
+\item {\bf La zona de texto principal}: Es la zona más amplia de la
+  página y, en ella, se ubica el texto del documento propiamente
+  dicho. Su tamaño depende de las variables \PalClave{width} (anchura)
+  y \PalClave{textheight} (altura). La variable \PalClave{height}, por
+  su parte, mide la suma de \PalClave{header},
+  \PalClave{headerdistance}, \PalClave{textheight},
+  \PalClave{footerdistance} y \PalClave{footer}.
+  
+\stopitemize
+
+\placefigure
+  [here]
+  [img:diseño_página]
+  {Zonas y medidas en una página}
+  {\externalfigure[DiseñoPag.png][width=.8\textwidth]}
+
+En la \in{imagen}[img:diseño_página] se pueden ver todas estas
+zonas, con los nombres en inglés de las correspondientes medidas, y
+flechas indicativas de su extensión. El grosor de las flechas junto
+con el tamaño de los nombres de las mismas pretenden reflejar la
+importancia que para el diseño de la página tiene cada una de estas
+distancias. Si nos fijamos bien, veremos como dicha imagen muestra que
+una página se puede representar como una tabla con 9 filas y 9
+columnas, o, si no tomamos en consideración los valores de separación
+entre las distintas zonas, habría cinco filas y cinco columnas de las
+que sólo puede haber texto en tres filas y en tres columnas. El cruce
+de la fila central con la columna central constituye la zona de texto
+principal y, normalmente, ocupará la mayor parte de la página.
+
+En la fase de diseño de nuestro documento, podemos ver todas las
+medidas de una página mediante el comando
+\PonMacro{showsetups}\tex{showsetups}. Para ver visualmente indicadas
+las líneas principales de distribución de texto en la página podemos
+usar \PonMacro{showframe}\tex{showframe}; y con
+\PonMacro{showlayouts}\tex{showlayouts} obtendremos una combinación de
+los dos anteriores comandos.
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:diseñopágina,
+    title={El diseño de la página (\tex{setuplayout})},
+  ]
+\PonMacro{setuplayout}
+
+\startsubsection
+  [
+    reference=sec:setuplayout,
+    title={Asignación de tamaño a los distintos\\ componentes de la página},
+  ]
+
+El diseño de la página implica asignar tamaños concretos a las
+respectivas zonas de la página. Ello se hace con
+\tex{setuplayout}. Este comando nos permite alterar cualquiera de las
+dimensiones que se han mencionado en el apartado anterior. Su sintaxis
+es la siguiente:
+
+\type{\setuplayout [Nombre] [Opciones]}
+
+en donde {\em Nombre} es un argumento opcional que se
+usa sólo para el caso de que hayamos definido múltiples diseños (véase
+\in{sección}[sec:definelayout]), y las {\em opciones} son, además de
+otras que en seguida se verán, cualquiera de las medidas que se acaban
+de mencionar. Téngase, en cuenta, no obstante que estas medidas están
+relacionadas entre sí pues la suma total de las componentes que
+afectan a la anchura o de los que afectan a la altura debería
+coincidir con la anchura y altura de la página. Lo que en principio
+significaría que al cambiar una longitud horizontal, deberíamos
+ajustar las restantes longitudes horizontales; y lo mismo si lo que se
+cambia es una longitud vertical.
+
+Por defecto \ConTeXt\ sólo realiza automáticamente el ajuste de
+dimensiones en algunos casos, los cuales, por otra parte, no están
+indicados de forma sistemática y completa en su
+documentación. Realizando varias pruebas he podido comprobar que, por
+ejemplo, un aumento o disminución manual en la altura del encabezado o
+pie de página conlleva un ajuste de \PalClave{textheight}; pero un
+cambio manual de alguno de los márgenes, no ajusta automáticamente
+(según mis pruebas) la anchura del texto (\PalClave{width}).  Por
+ello, lo más eficiente para no generar una inconsistencia entre el
+tamaño de la página (fijado con \tex{setuppapersize}) y el tamaño de
+sus respectivos componentes, es:
+
+\startitemize
+
+\item En cuanto a las medidas horizontales:
+
+  \startitemize
+
+  \item Ajustar \PalClave{backspace} (que incluye \PalClave{leftedge}
+    y \PalClave{leftmargin}).
+
+  \item Ajustar \PalClave{width} (anchura del texto) no con una
+    dimensión, sino con los valores \PalClave{fit} o
+    \PalClave{middle}:
+
+    \startitemize
+
+    \item {\tt fit} calcula la anchura del texto a partir de la
+      anchura del resto de los componentes horizontales de la página.
+
+    \item {\tt middle} hace lo mismo, pero antes iguala los márgenes
+      derecho e izquierdo.
+
+    \stopitemize
+
+  \stopitemize
+
+\item Respecto a las medidas verticales:
+
+  \startitemize
+
+  \item Ajustar \PalClave{topspace}.
+
+  \item Asignar a \PalClave{height} los valores \PalClave{fit} o
+    \PalClave{middle} que funcionan igual que en el caso de la
+    anchura. El primero calcula la altura a partir del resto de los
+    componentes, y el segundo primero iguala el margen superior y el
+    inferior, y luego calcula la altura del texto.
+
+  \item Una vez ajustado \PalClave{height}, ajustar la altura del
+    encabezado o del pie de página si fuera preciso, sabiendo que en
+    tal caso \PalClave{textheight} se reajustará automáticamente.
+
+  \stopitemize
+
+\item Otra posibilidad para determinar de modo indirecto la altura de
+  la zona principal de texto, es hacerlo indicando el número de líneas
+  que cabrán en ella (teniendo en cuenta el tamaño de letra e
+  interlineado actual). Para ello \tex{setuplayout} incluye la opción
+  \PalClave{lines}.
+
+\stopitemize
+
+\subsubsubject{Ubicación de la página lógica dentro de la página física}
+
+Para el caso de que el tamaño de la página lógica no coincida con el de
+la página física (véase la \in{sección}[sec:tamañopágina])
+\tex{setuplayout} permite configurar algunas opciones adicionales
+que afectan a la ubicación de la página lógica dentro de la página
+física:
+
+\startitemize
+
+\item {\tt\bf location}: Esta opción determina el lugar en el que la
+  página se colocará en el papel físico. Sus valores posibles son
+  left, middle, right, top, bottom, singlesided, doublesided o duplex.
+
+\item {\tt\bf scale}: Indica un factor de escalado de la página, antes
+  de ubicarla en el papel físico.
+
+\item {\tt\bf marking}: Imprimirá, en el papel físico, marcas visuales
+  para indicar el lugar por donde se debe guillotinar la página.
+
+\item {\tt\bf horoffset, veroffset, clipoffset, cropoffset,
+  trimoffset, bleedoffset, artoffset}: Medidas varias que indican
+  diferentes desplazamientos dentro del papel físico. La mayoría están
+  explicadas en el manual de referencia de 2013.
+
+\stopitemize
+
+Estas opciones de \tex{setuplayout} deben ser compaginadas con las
+indicaciones de \PonMacro{setuparranging}\tex{setuparranging} que
+indica cómo se deben ordenar las páginas lógicas en el papel
+físico. No explico estos últimos comandos en la introducción pues no
+he hecho pruebas sobre ellos.
+
+\subsubsubject{Obtener la anchura y altura de la zona de escritura}
+
+Los comandos \PonMacro{textwidth}\tex{textwidth} y
+\PonMacro{textheight}\tex{textheight} devuelven, respectivamente, la
+anchura y la altura de la zona de texto. Los valores que ofrecen estos
+comandos no se pueden mostrar directamente en el documento final, pero
+sí pueden ser utilizados por otros comandos para fijar las medidas de
+anchura o altura de los mismos. Y así, por ejemplo, para indicar que
+deseamos una imagen cuya anchura sea el 60\% de la anchura de la línea
+deberíamos indicar, como valor de la opción \PalClave{width} de la
+imagen: \PalClave{width=0.6\backslash textwidth}.
+
+\stopsubsection
+
+\startsubsection
+  [title={Adaptación del diseño de página}]
+\PonMacro{adaptlayout}
+
+Puede ocurrir que nuestro diseño de página en alguna página concreta
+produzca un resultado indeseado; como, por ejemplo, una página final
+de un capítulo con sólo una o dos líneas, lo que estética y
+tipográficamente no es muy recomendable. Para solventar estos casos
+\ConTeXt\ proporciona el comando \tex{adaptlayout} que permite
+alterar, en una o varias páginas el tamaño de la zona de texto. Este
+comando está pensado para ser usado solamente cuando ya hemos
+terminado de escribir nuestro documento y estamos realizando los
+pequeños ajustes finales. Por ello su ubicación natural es el
+preámbulo del documento. La sintaxis del comando es:
+
+\type{\adaptlayout [Páginas] [Opciones]}
+
+donde {\em Páginas} se refiere al número de la página o
+páginas cuyo diseño queremos alterar. Es un argumento opcional que se
+debe usar sólo cuando \tex{adaptlayout} se ubique en el
+preámbulo. Podemos indicar una sola página, o varias páginas,
+separando su número por comas. Si se omite este primer argumento,
+\tex{adaptlayout} afectará exclusivamente a la página en la que se
+encuentre el comando.
+
+En cuanto a las opciones, pueden ser:
+
+\startitemize
+
+\item {\tt\bf height}: Permite indicar, como una dimensión, la altura
+  que tendrá que tener la página en cuestión. Se puede indicar una
+  altura absoluta (ej. “19cm”) o una altura relativa (ejs., “+1cm”,
+  “-0.7cm”).
+
+\item {\tt\bf lines}:  Podemos incluir el número de líneas a añadir o
+  a restar. Para añadir líneas se precede el valor del signo +, y para
+  restarlas se precede del signo $-$.
+
+\stopitemize
+
+Piénsese que cuando cambiamos la cantidad de líneas que admitirá una
+página, con ello podemos afectar al paginado del resto del
+documento. Por ello es por lo que la recomendación es la de usar
+\tex{adaptlayout} sólo al final, cuando el documento no vaya ya a
+sufrir cambios, y hacerlo en el preámbulo. Allí iremos a la primera
+página que queremos adaptar, la adaptaremos y comprobaremos como
+afecta eso a las páginas posteriores; si afecta de tal modo que alguna
+requiere también ser adaptada, se añade su número y se vuelve a
+compilar; y así sucesivamente.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:definelayout,
+    title={Utilización de múltiples diseños de página},
+  ]
+\PonMacro{definelayout}
+
+Si necesitamos usar distintos diseños en diferentes partes del
+documento, lo mejor es, empezar definiendo el diseño {\em general} y
+luego ir definiendo los distintos diseños alternativos, en los que
+sólo cambiaremos la dimensión que haya de ser diferente. Estos diseños
+alternativos heredarán todas las características del diseño global que
+no se alteren en su definición. Para especificar un diseño alternativo
+y asignarle un nombre con el que posteriormente podamos invocarlo, se
+usa el comando \tex{definelayout} cuya sintaxis general es:
+
+\type{\definelayout [Nombre/Número] [Configuración]}
+
+donde {\em Nombre/Número} es el nombre que se asociará
+al nuevo diseño, o el número de página en el que se activará
+automáticamente el nuevo diseño, y {\em Configuración} contendrá los
+aspectos del diseño que se quieren cambiar respecto del diseño global.
+
+Cuando el nuevo diseño se asocia a un nombre, para invocarlo en un
+punto concreto del documento, se usará:
+
+\type{\setuplayout [NombreDiseño]}
+
+y para regresar al diseño general:
+
+\type{\setuplayout [reset]}
+
+Si, por el contrario, el nuevo diseño se asoció a un número concreto
+de página, se activará automáticamente al llegar a dicha página. Pero,
+una vez activado, para regresar al diseño general habrá que indicarlo
+explícitamente. Aunque eso último también podemos {\em
+  semiautomatizarlo}. Por ejemplo, si quisiéramos aplicar un diseño
+exclusivamente para las páginas 1ª y 2ª podríamos escribir, en el
+preámbulo del documento:
+
+\starttyping
+\definelayout[1][...]
+\definelayout[3][reset]
+\stoptyping
+
+El efecto de estos comandos será el de que, en la página 1 se activa
+el diseño definido en la primera línea; y en la página 3 se activa
+otro diseño cuya función es sólo la de regresar al diseño general.
+
+Con \tex{definelayout[even]} crearemos un diseño que se activará
+automáticamente en todas las páginas pares; y con
+\tex{definelayout[odd]} el diseño se activará en las impares.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:pags-otras-cuestiones,
+    title={Otras cuestiones relacionadas con el diseño de la página},
+  ]
+
+\startsubsubsection
+  [
+    reference=sec:doblepágina,
+    title={Distinción entre páginas pares e impares},
+  ]
+
+En documentos impresos a doble cara, en ocasiones se estipula que el
+encabezado, la numeración de páginas y los márgenes laterales difieran
+entre las páginas pares y las impares. A las páginas pares se las
+denomina también páginas izquierda y a las impares, páginas
+derecha. En estos casos también es corriente que la terminología
+relativa a los márgenes cambie y se hable de margen interior y
+exterior. El primero se encuentra en el punto más próximo al lugar
+donde las páginas se coserán o graparán y el segundo en el extremo
+contrario. El margen interior se corresponde, en las páginas impares,
+con el margen izquierdo y en las pares con el margen derecho.
+
+\tex{setuplayout} no tiene ninguna opción que expresamente nos permita
+decirle que deseamos diferenciar entre el diseño de las páginas pares
+y el de las impares. Esto es así porque para \ConTeXt\ la
+diferenciación entre ambos tipos de páginas se establece mediante una
+opción diferente: \tex{setuppagenumbering} que veremos en la
+\in{sección}[sec:numpags]. Una vez establecida esa diferenciación,
+\ConTeXt\ asume que la página descrita con \tex{setuplayout} era la
+página impar, y construye la página par invirtiendo en ella los
+valores de la página impar: es decir: las especificaciones que en la
+página impar se aplican al lado izquierdo, en la par se aplicarán al
+izquierdo; y al revés: las aplicables en la página impar al lado
+derecho, se aplicarán, en la par, al izquierdo.
+
+\stopsubsubsection
+
+\startsubsubsection
+  [
+    reference=sec:pags-columnas,
+    title={Páginas con más de una columna},
+  ]
+
+Mediante \tex{setuplayout} podemos también establecer que el texto de
+nuestro documento se distribuya en dos o más columnas, al modo en que
+lo hacen, por ejemplo, los periódicos y algunas revistas. Ello es
+controlado por la opción \PalClave{columns} cuyo valor ha de ser un
+número entero. Cuando hay más de una columna, la distancia entre
+columnas se indica mediante la opción \PalClave{columndistance}.
+
+Esta opción esta pensada para documentos en los que todo el texto (o
+su mayor parte) esté distribuido en múltiples columnas. Si lo que
+deseamos es, en un documento que en general está compuesto con una
+sola columna, que un fragmento concreto se componga con doble o triple
+columna, no hay que alterar el diseño de página sino, simplemente,
+utilizar el entorno \PalClave{columns} (véase la
+\in{sección}[sec:columnasmultiples]).
+
+\stopsubsubsection
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:numpags,
+    title={Numeración de las páginas},
+  ]
+
+Por defecto \ConTeXt\ numera las páginas con números arábigos y el
+número se muestra en la parte central del encabezado. Para alterar
+estas características \ConTeXt\ dispone de distintos procedimientos lo
+que, en mi opinión, le aporta una innecesaria complejidad en este
+punto.
+
+En primer lugar, las características fundamentales de la numeración
+están controladas por dos comandos diferentes:
+\PonMacro{setuppagenumbering}\tex{setuppagenumbering} y
+\PonMacro{setupuserpagenumber}\tex{setupuserpagenumber}.
+
+\type{\setuppagenumbering} admite las siguientes opciones:
+
+\startitemize
+
+\item {\tt\bf alternative}: Esta opción controla si el documento está
+  concebido para que el encabezado y pie de página sean idénticos en
+  todas las páginas (\PalClave{singlesided}), o diferenciando entre
+  páginas pares e impares (\PalClave{doublesided}). Cuando esta opción
+  asume este último valor, automáticamente los valores de diseño de
+  página introducidos mediante \PalClave{setuplayout} se ven
+  afectados, de tal forma que se asume que lo indicado en
+  \PalClave{setuplayout} se refiere sólo a las páginas impares, y que,
+  por lo tanto, lo dispuesto para el margen izquierdo en realidad se
+  refiere al margen interior (que en las páginas pares está en el lado
+  derecho) y que lo dispuesto para el lado derecho, en realidad se
+  refiere al margen exterior, que en las páginas pares está en el lado
+  izquierdo.
+
+\item {\tt\bf state}: Indica si se mostrará o no el número de
+  página. Admite dos valores: start (se mostrará el número de página)
+  y stop (se suprimen los números de página). La denominación de estos
+  valores (start y stop) pudiera hacernos pensar que cuando
+  \PalClave{state=stop} dejan de numerarse las páginas y cuando
+  \PalClave{state=start} se reinicia la numeración. Pero ello no es
+  así: estos valores afectan sólo a si el número de página se mostrará
+  o no.
+
+\item {\tt\bf location}: Indica en qué lugar se mostrará. Normalmente en
+  esta opción hay que indicar dos valores, separados entre sí por una coma.
+  En primer lugar debemos especificar si deseamos el número de página en el
+  encabezado (\PalClave{header}) o en el pie de página (\PalClave{footer}),
+  y, a continuación, en qué lugar del encabezado o pie debe imprimirse
+  puede ser \PalClave{left}, \PalClave{middle}, \PalClave{right},
+  \PalClave{inleft}, \PalClave{inright}, \PalClave{margin},
+  \PalClave{inmargin}, \PalClave{atmargin} o \PalClave{marginedge}. Por
+  ejemplo: para mostrar la numeración alineada a la derecha en el pie de
+  página deberíamos indicar \PalClave{location=\{footer,right\}}. Véase,
+  por otra parte, cómo hemos rodeado los dos valores de esta opción con
+  llaves para que \ConTeXt\ interprete correctamente a la coma que los
+  separa.
+
+\item {\tt\bf style}: Indica el estilo y tamaño de la fuente que se
+  usará para el número de página.
+
+\item {\tt\bf color}: Indica el color que se aplicará al número de
+  página.
+
+\item {\tt\bf left}: Recoge un comando o texto que se ejecutará o
+  escribirá a la izquierda del número de página.
+
+\item {\tt\bf right}: Recoge un comando o texto que se ejecutará o
+  escribirá a la derecha del número de página.
+
+\item {\tt\bf command}: Recoge un comando al que se le pasará como
+  parámetro el número de página.
+
+\item {\tt\bf width}: Indica la anchura que ocupará el número de
+  página.
+
+\item {\tt\bf strut}: No estoy muy seguro. En mis pruebas cuando
+  \PalClave{strut=no} el número se imprime exactamente en el borde
+  superior del encabezado o en el inferior del pie de página, mientras
+  que cuando \PalClave{strut=yes} (valor por defecto) se aplica un
+  espacio de separación entre el número y el borde.
+
+\stopitemize
+
+\type{\setupuserpagenumber}, por su parte, admite estas otras opciones:
+
+\startitemize
+
+\item {\tt\bf numberconversion}: Controla el tipo de numeración puede ser
+  arábigo (\PalClave{n}, \PalClave{numbers}), letras en minúsculas
+  (\PalClave{a}, \PalClave{characters}), en mayúsculas (\PalClave{A},
+  \PalClave{Characters}), en versalitas (\PalClave{KA}), números
+  romanos en mayúsculas (\PalClave{i}, \PalClave{r},
+  \PalClave{romannumerals}), en mayúsculas (\PalClave{I},
+  \PalClave{R}, \PalClave{Romannumerals}) o en versalitas (\PalClave{KR}).
+
+\item {\tt\bf number}: Indica el número a asignar a la primera página, a
+  partir del cual se calcularán los restantes.
+
+\item {\tt\bf numberorder}: Asignando a esta opción el valor
+  \PalClave{reverse} se consigue que la numeración de páginas se haga
+  en orden decreciente; es decir: que la última página sea el 1, la
+  penúltima el 2, etc.
+
+\item {\tt\bf way}: Permite indicar el procedimiento de numeración. Puede
+  ser: byblock, bychapter, bysection, bysubsection, etc.
+
+\item {\tt\bf prefix}: Permite indicar un prefijo para los números de
+  página.
+
+\item {\tt\bf numberconversionset}: Se explica a continuación.
+
+\stopitemize
+
+Junto a estos dos comandos, también hay que tener en cuenta el control
+de numeración que se puede realizar atendiendo a los grandes bloques
+que componen la macroestructura del documento (véase
+\in{sección}[sec:macroestructura]). Desde este punto de vista el
+comando \PonMacro{defineconversionset}\tex{defineconversionset} nos
+permitirá indicar un tipo de numeración distinta para cada uno de
+estos macrobloques estructurales. Por ejemplo:
+
+\vbox{\starttyping
+\defineconversionset
+  [frontpart:pagenumber][][romannumerals]
+
+\defineconversionset
+  [bodypart:pagenumber][][numbers]
+
+\defineconversionset
+  [appendixpart:pagenumber][][Characters]
+
+\stoptyping}
+
+hará que en nuestro documento el bloque inicial
+(frontmatter) se numere con números romanos en minúsculas, el bloque
+central (bodymatter) lo haga con números arábigos y los apéndices con
+letras mayúsculas.
+
+Para obtener el número de página podemos usar los siguientes comandos:
+
+\startitemize
+
+\item \PonMacro{userpagenumber}\tex{userpagenumber}: Devuelve el
+  número de página, tal y como se haya configurado con
+  \tex{setuppagenumbering} y con \tex{setupuserpagenumber}.
+
+\item \PonMacro{pagenumber}\tex{pagenumber}: Devuelve el mismo número
+  que el anterior comando, pero siempre en números arábigos.
+
+\item \PonMacro{realpagenumber}\tex{realpagenumber}: Devuelve, en
+  números arábigos, el número real de página, sin tomar en
+  consideración ninguna de estas especificaciones.
+
+\stopitemize
+
+Para obtener el número de la última página del documento, disponemos
+también de tres comandos, que son paralelos a los anteriores. Se trata
+de \PonMacro{lastuserpagenumber}\tex{lastuserpagenumber},
+\PonMacro{lastpagenumber}\tex{lastpagenumber} y
+\PonMacro{lastrealpagenumber}\tex{lastrealpagenumber}.
+
+\stopsection
+
+\startsection
+  [title={Saltos de página forzados o sugeridos}]
+
+\startsubsection
+  [title={El comando \tex{page}}]
+\PonMacro{page}
+
+El algoritmo de distribución del texto en páginas de \ConTeXt\ es
+bastante complejo y se basa en multitud de cálculos y variables
+internas que informan al programa del mejor punto posible, desde la
+perspectiva de la corrección tipográfica, para introducir un concreto
+salto de página. El comando \tex{page} nos permite influir en dicho
+algoritmo:
+
+\startitemize[a]
+
+\item Sugiriendo ciertos puntos como lugares óptimos, o inadecuados
+  para incluir en ellos un salto de página.
+
+  \startitemize[packed]
+
+  \item {\tt\bf no}: Indica que el lugar en donde se encuentra el
+    comando no es un buen candidato para insertar en él un salto de
+    página, por lo que, en la medida de lo posible, el salto debería
+    realizarse en otro punto del documento.
+    
+  \item {\tt\bf preference}: Indica a \ConTeXt\ que el punto donde se
+    encuentre el comando, es un {\em buen lugar} para intentar un
+    salto de página, aunque no lo fuerza.
+
+  \item {\tt\bf bigpreference}: Indica que el punto donde se encuentre el
+    comando es un {\em muy buen lugar} para intentar un salto de
+    página, pero tampoco llega a forzarlo.
+
+  \stopitemize
+
+  Obsérvese que estas tres opciones, no fuerzan ni impiden los saltos
+  de página, sólo informan a \ConTeXt\ para que a la hora de buscar el
+  mejor lugar para un salto de página, tenga en cuenta lo que con este
+  comando se le indica. Pero en última instancia el punto exacto donde
+  se producirá el salto de página seguirá siendo decidido por \ConTeXt.
+
+\item Forzando un salto de página en cierto punto; caso este en el
+  que podemos, además, indicar cuántos saltos de página deben hacerse
+  así como ciertas características de las páginas que se insertarán.
+
+  \startitemize[packed]
+
+  \item {\tt\bf yes}: Fuerza, en ese punto, un salto de página.
+
+  \item {\tt\bf makeup}: Similar a \PalClave{yes}, pero el salto que
+    se fuerza es inmediato, sin colocar primero los objetos flotantes
+    pendientes de ubicación (véase la
+    \in{sección}[sec:concepto_flotantes]).
+
+  \item {\tt\bf empty}: Inserta en el documento una página totalmente
+    en blanco.
+    
+  \item {\tt\bf even}: Inserta el número de páginas que sea preciso
+    para que la próxima página sea par.
+    
+  \item {\tt\bf odd}: Inserta el número de páginas que sea preciso
+    para que la próxima página sea impar.
+    
+  \item {\tt\bf left, right}: Similar a las dos opciones anteriores,
+    pero aplicable sólo a documentos impresos a doble cara, con
+    encabezados, pies o márgenes diferentes según la página sea par o
+    impar.
+    
+  \item {\tt\bf quadruple}: Inserta las páginas necesarias para que la
+    próxima página sea múltiplo de 4.
+    
+\stopitemize
+
+\stopitemize
+
+Junto a estas opciones, que propiamente controlan la paginación, \tex{page}
+incluye otras opciones que afectan a su propio funcionamiento. En
+particular la opción \PalClave{disable} que provoca que \ConTeXt\ ignore
+los comandos \tex{page} que encuentre a partir de ese punto y la opción
+\PalClave{reset} que produce el efecto contrario, restaurando la
+efectividad de los futuros comandos \tex{page}.
+
+\stopsubsection
+
+\startsubsection
+  [title={Unir ciertas líneas o párrafos para impedir que entre ellas
+    se inserte un salto de página}]
+
+En ocasiones, si queremos impedir un salto de página entre varios
+párrafos, el uso del comando \tex{page} puede ser trabajoso, pues
+habría que escribirlo en todos los puntos en los que fuera posible que
+se insertara un salto de página. Un procedimiento más sencillo para
+ello es empaquetar el material que queremos que se mantenga en la
+misma página en lo que \TeX\ llama una {\em caja vertical}.
+
+\startLetraChica
+
+  Al principio de este documento (en la \at{página}[ref:cajas]) señalé
+  que internamente para \TeX\ todo son {\em cajas}. La noción de cajas
+  es fundamental en \TeX\ para cualquier aplicación {\em avanzada};
+  pero su manejo es demasiado complejo como para incluirlo en esta
+  introducción. Por ello sólo ocasionalmente se hace referencia a ellas.
+
+\stopLetraChica
+
+Las cajas de \TeX, una vez creadas, son indivisibles, por lo que no
+puede insertarse un salto de página que parta en dos una caja. Por
+ello, si empaquetamos el material que queremos tener unido en una caja
+invisible, evitaremos que se inserte un salto de página que separe
+dicho material. El comando para hacer eso es \PonMacro{vbox}\tex{vbox}
+cuya sintaxis es
+
+\type{\vbox{Material}}
+
+donde {\em Material} está constituido por el texto que queremos
+mantener unido.
+
+Algunos entornos de \ConTeXt\ empaquetan su contenido en una caja. Por
+ejemplo \PalClave{framedtext}, por lo que si encerramos el material
+que queremos mantener unido en dicho entorno y, además, hacemos que el
+marco generado por el mismo sea invisible (lo que se consigue con la
+opción {\tt frame=off}), habremos conseguido lo mismo.
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:encabezadoypie,
+    title={Encabezados y pies de página},
+  ]
+
+\startsubsection
+  [title={Comandos para fijar el contenido de los\\ encabezados y pies}]
+\PonMacro{setupheadertexts}\PonMacro{setupfootertexts}
+
+Si en el diseño de la página hemos asignado algún tamaño al encabezado
+o al pie de página, podemos incluir texto en ellos mediante los
+comandos \tex{setupheadertexts} y \tex{setupfootertexts}. Son dos
+comandos similares con la única diferencia de que el primero actúa
+sobre el encabezado de las páginas y el segundo sobre los pies de
+página. Ambos admiten entre uno y cinco argumentos.
+
+\startitemize[n]
+
+\item Usados con un solo argumento éste contendrá el texto del
+  encabezado o pie de página que se ubicará en el centro del
+  mismo. Por ejemplo: \tex{setupfootertexts[pagenumber]} escribirá el
+  número de página en el centro del pie de página.
+
+\item Usados con dos argumentos, el contenido del primer argumento se
+  ubicará en el lado izquierdo del encabezado o pie de página, y el
+  del segundo argumento en el lado derecho. Por ejemplo
+  \tex{setupheadertexts[Prefacio][pagenumber]} compondrá un encabezado
+  de página en el que, en el lado izquierdo se escriba la palabra
+  «prefacio» y en el lado derecho se imprima el número de página.
+
+\item Si utilizamos tres argumentos, el primero indicará {\em la zona}
+  en la que se han de imprimir los otros dos. Y aquí por {\em zona}
+  hago referencia a las {\em zonas} de la página mencionadas en la
+  \in{sección}[sec:elementospag], es decir: borde (edge), margen
+  (margin) o encabezado propiamente dicho (text). Los restantes dos
+  argumentos contienen el texto que se ubicará, respectivamente, en el
+  borde, margen o lado izquierdo y en el borde, margen o lado derecho.
+
+\stopitemize
+
+El uso con cuatro o cinco argumentos equivale al uso con dos o tres
+argumentos, en los casos en los que se diferencie entre páginas pares
+e impares, cosa que ocurre, como ya sabemos, cuando se establece
+\PalClave{alternative=doublesided} con \tex{setuppagenumbering}.  En
+tal caso se añaden dos argumentos posibles para reflejar el contenido
+de los lados izquierdo y derecho de las páginas pares.
+
+Una característica importante de estos dos comandos es la de que
+cuando se usan con dos argumentos, el encabezado o pie de página
+central previo (si existiera) no se reescribe, lo que nos permite,
+escribir un texto distinto en cada zona siempre y cuando primero
+escribamos el texto central (llamando al comando con un solo
+argumento) y después escribamos los textos laterales (llamándolo de
+nuevo, ahora con dos argumentos). Así, por ejemplo, si escribimos los
+siguientes comandos:
+
+\starttyping
+\setupheadertexts[que te vi]
+\setupheadertexts[Tararí][Mariví]
+\stoptyping
+
+El primer comando escribirá en el centro del encabezado
+la frase “que te vi” y el segundo escribirá en el lado izquierdo la
+frase “Tararí” y en el lado derecho la frase “Mariví”, dejando
+inalterada la zona central, puesto que no se le ha ordenado
+reescribirla, por lo que el encabezado resultante mostraría la frase 
+
+\color[maincolor] {Tararí\hfill que te vi\hfill Mariví}
+
+\startLetraChica
+
+  La explicación que acabo de dar del funcionamiento de estos comandos
+  es mi conclusión después de varias pruebas. La explicación que de
+  estos comandos se da en la {\em excursión} por \ConTeXt\ se basa en
+  la versión con cinco argumentos; y la que se hace en el manual de
+  referencia de 2013 parte de la versión con tres argumentos. Creo que
+  la mía es más \Conjetura clara. De otro lado, el que la segunda
+  llamada al comando no sobrescribe a una llamada anterior, no lo he
+  visto explicado, pero funciona así si primero se escribe el
+  encabezado o pie central y luego los laterales. Por el contrario, si
+  primero escribimos los encabezados o pies laterales, la ulterior
+  llamada al comando para escribir el central borrará los encabezados
+  o pies previos. ¿Por qué? No lo se. Creo que estos pequeños detalles
+  introducen una innecesaria complicación, y deberían estar claramente
+  explicados en la documentación oficial.
+
+\stopLetraChica
+
+Por lo demás, como contenido propiamente dicho del encabezado o del
+pie de página, podemos indicar cualquier combinación de texto y
+comandos. Pero también los siguientes valores:
+
+\startitemize
+
+\item {\tt\bf date, currentdate}: Escribirán (cualquiera de ellos) la
+  fecha actual.
+
+\item {\tt\bf pagenumber}: Escribirá el número de página.
+
+\item {\tt\bf part, chapter, section...}: Escribirán el título
+  correspondiente a la parte, capítulo, sección... o división
+  estructural de que se trate.
+
+\item {\tt\bf partnumber, chapternumber, sectionnumber...}: Escribirán
+  número de parte, capítulo sección ... o división estructural de que
+  se trate.
+
+\stopitemize
+
+  {\bf Ojo:} Estos nombres simbólicos ({\tt date, currentdate,
+    pagenumber, chapter, chapternumber}, etc.) sólo son interpretados
+  como tales si el único contenido del argumento es el nombre
+  simbólico propiamente dicho; pero si añadimos algún otro texto, o
+  comando de formateo, estas palabras se interpretarán literalmente, y
+  así, por ejemplo, si escribimos
+  \tex{setupheadertexts[chapternumber]} obtendremos el número del
+  capítulo actual; pero si escribimos %
+  \tex{setupheadertexts[{Capítulo chapternumber}]} obtendremos la
+  siguiente frase: “Capítulo~chapternumber”. En estos casos, cuando el
+  contenido del comando no es sólo la palabra simbólica, debemos:
+
+  \startitemize
+
+  \item Para {\tt date, currentdate} y {\tt pagenumber} usar, no la
+    palabra simbólica sino el comando del mismo nombre (\tex{date},
+    \tex{currentdate} o \PonMacro{pagenumber}\tex{pagenumber}).
+
+  \item Para {\tt part, partnumber, chapter, chapternumber}, etc. usar
+    el comando \PonMacro{getmarking}\tex{getmarking[Marca]} que
+    devuelve el contenido de la {\em Marca} que se le solicite. Y así,
+    por ejemplo, \tex{getmarking[chapter]} devolverá el título del
+    capítulo actual, mientras que \tex{getmarking[chapternumber]}
+    devolverá el número del capítulo actual.
+
+  \stopitemize
+
+  Para desactivar los encabezados y pies en una página concreta, se
+  usa el comando
+  \PonMacro{noheaderandfooterlines}\tex{noheaderandfooterlines} que
+  actúa exclusivamente sobre la página en la que se ubique. Si sólo
+  queremos suprimir el número de página en una página concreta, hay
+  que usar el comando \tex{page[blank]}.
+
+\stopsubsection
+
+\startsubsection
+  [title={Formato del encabezado y pie}]
+\PonMacro{setupheader}\PonMacro{setupfooter}
+
+El concreto formato en el que se muestre el texto del encabezado o pie
+de página lo podemos indicar en los argumentos de
+\tex{setupheadertexts} o \tex{setupfootertexts} mediante los
+correspondientes comandos de formato. Pero también podemos
+configurarlo globalmente mediante los comandos \tex{setupheader} y
+\tex{setupfooter} que admiten las siguientes opciones:
+
+\startitemize
+
+\item {\tt\bf state}: Admite los siguientes valores: {\tt start, stop, empty,
+  high, none, normal} o {\tt nomarking}.
+  
+\item {\tt\bf style, leftstyle, rightstyle}: Configuración del estilo
+  del texto del encabezado o pie. {\tt style} afecta a todas las
+  páginas, {\tt leftstyle} a las páginas pares y {\tt rightstyle} a
+  las impares.
+  
+\item {\tt\bf color, leftcolor, rightcolor}: Color del encabezado o
+  pie. Puede afectar a todas las páginas (opción {\tt color}) o sólo a
+  las pares ({\tt leftcolor}) o impares ({\tt rightcolor})
+  
+\item {\tt\bf width, leftwidth, rightwidth}: Anchura de todos los
+  encabezados o pies ({\tt width}) o de los encabezados o pies pares
+  ({\tt leftwidth}) o impares ({\tt rightwidth}).
+
+\item {\tt\bf before}: Comando a ejecutar antes de escribir el
+  encabezado o pie.
+
+\item {\tt\bf after}: Comando a ejecutar después de haber escrito el
+  encabezado o pie.
+
+\item {\tt\bf strut}: Si vale «yes» se establece un espacio vertical
+  de separación entre el encabezado y el borde. Cuando vale no, el
+  encabezado o el pie de página aparecen pegados a límite de la zona
+  del borde superior o inferior.
+  
+\stopitemize
+
+% \subsection{Texto en los bordes superior e inferior}
+
+% Si recordamos lo que se explicó en la \in{sección}[sec:elementospag]
+% respecto a los elementos de la página, se dijo que en los bordes
+% superior e inferior de la página ({\tt top} y {\tt bottom} en la
+% terminología de \ConTeXt) en principio no debe haber texto. Pero eso
+% no es una regla absoluta, pues, principalmente en documentos
+% electrónicos pensados para ser mostrados en pantalla, puede ser
+% conveniente incluir algún elemento textual en estas zonas. Por ello
+% \ConTeXt\ permite dotar de contenido textual a estos
+
+\stopsubsection
+
+\startsubsection
+  [title={Definir encabezados o pies específicos y\\ vincularlos a
+    comandos de seccionado}]
+\PonMacro{definetext}
+
+El sistema de encabezados y pies de página de \ConTeXt\ permite que
+automáticamente cambie el texto del encabezado o pie cuando se cambia
+de capítulo o sección; o cuando se cambia de página, si se han
+establecido encabezados o pies diferentes para las páginas pares y las
+impares. Pero lo que no permite es diferenciar entre la primera página
+(del documento, o de un capítulo o sección) y el resto de las
+páginas. Para lograr esto último debemos:
+
+\startitemize[n, packed]
+
+\item Definir un encabezado o pie de página específico.
+\item Vincularlo a la sección de que se trate.
+  
+\stopitemize
+
+La definición de encabezados o pies de página específicos se lleva a
+cabo con el comando \tex{definetext} cuyo formato es:
+
+\vbox{\starttyping
+\definetext 
+  [Nombre] [Tipo]
+  [Contenido1] [Contenido2] [Contenido3]
+  [Contenido4] [Contenido5]
+\stoptyping}
+
+donde {\em Nombre} es el nombre asignado al encabezado o pie de que se
+trate; {\em Tipo} puede ser {\tt header} o {\tt footer}, según estemos
+definiendo un encabezado o un pie de página y los restantes cinco
+argumentos recogen los posibles contenidos del nuevo encabezado o pie
+de modo similar a como ya hemos visto que funcionan
+\PonMacro{setupheadertexts}\tex{setupheadertexts} y
+\PonMacro{setupfootertexts}\tex{setupfootertexts}. Una vez que hemos
+hecho esto, debemos vincular este nuevo encabezado o pie a algún tipo
+concreto de sección mediante \tex{setuphead} usando las opciones (que
+no se explican en el \in{capítulo}[cap:estructura]) {\em header} y {\tt
+  footer}.
+
+Así el siguiente ejemplo hará que en la primera página de cada capítulo se
+oculte el encabezado y como pie de página se muestre el número de página
+centrado:
+
+\starttyping
+\definetext[ChapterPrimPag] [footer] [pagenumber]
+\setuphead 
+  [chapter]
+  [header=high, footer=ChapterPrimPag]
+\stoptyping
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:margintext,
+    title={Inserción de elementos textuales en los bordes y márgenes de
+    la página},
+  ]
+
+Los bordes superior e inferior y los márgenes derecho e izquierdo
+habitualmente no contienen texto de ningún tipo. Sin embargo \ConTeXt\
+permite ubicar allí ciertos elementos textuales. En concreto se
+dispone para ello de los siguientes comandos:
+
+\startitemize
+
+\item \PonMacro{setuptoptexts}\tex{setuptoptexts}: Permite ubicar texto en el borde superior de
+  la página (por encima de la zona dedicada al encabezado).
+
+\item \PonMacro{setupbottomtexts}\tex{setupbottomtexts}: Permite ubicar texto en el borde
+  inferior de la página (por debajo de la zona dedicada al pie de
+  página).
+
+\item \PonMacro{margintext}\tex{margintext},
+  \PonMacro{atleftmargin}\tex{atleftmargin},
+  \PonMacro{atrightmargin}\tex{atrightmargin},
+  \PonMacro{ininner}\tex{ininner},
+  \PonMacro{ininneredge}\tex{ininneredge},
+  \PonMacro{ininnermargin}\tex{ininnermargin},
+  \PonMacro{inleft}\tex{inleft},
+  \PonMacro{inleftedge}\tex{inleftedge},
+  \PonMacro{inleftmargin}\tex{inleftmargin},
+  \PonMacro{inmargin}\tex{inmargin}, \PonMacro{inother}\tex{inother},
+  \PonMacro{inouter}\tex{inouter},
+  \PonMacro{inouteredge}\tex{inouteredge},
+  \PonMacro{inoutermargin}\tex{inoutermargin},
+  \PonMacro{inright}\tex{inright},
+  \PonMacro{inrightedge}\tex{inrightedge},
+  \PonMacro{inrightmargin}\tex{inrightmargin}: Permiten ubicar texto
+  en los márgenes y bordes laterales del documento.
+
+\stopitemize
+
+Los dos primeros comandos funcionan exactamente igual que
+\tex{setupheadertexts} y \tex{setupfootertexts}, e incluso se puede
+configurar de antemano el formato de estos textos mediante
+\tex{setuptop} y \tex{setupbottom} de modo similar a como
+\tex{setupheader} permite configurar el texto establecido con
+\tex{setupheadertexts}. Por todo ello me remito aquí a lo ya dicho en
+la \in{sección}[sec:encabezadoypie]. La única matización que hay que
+añadir es la de que el texto establecido mediante \tex{setuptoptexts}
+o \tex{setupbottomtexts} no será visible si en el diseño de la
+página no se ha reservado algún espacio para los bordes superior ({\tt
+  top}) o inferior ({\tt bottom}). Véase, al respecto, la
+\in{sección}[sec:setuplayout].
+
+En cuanto a los comandos dirigidos a ubicar texto en los márgenes del
+documento, todos tienen una sintaxis similar:
+
+\type{\NombreComando[Referencia][Configuración]{Texto}}
+
+donde {\em Referencia} y {\em Configuración} son argumentos
+opcionales; el primero se usa para posibles referencias cruzadas y el
+segundo permite configurar el texto marginal. El último argumento,
+encerrado entre llaves, contiene el texto a ubicar en el margen.
+
+De estos comandos el más general es \tex{margintext} pues permite ubicar
+texto en cualquiera de los márgenes o bordes laterales de la página. Los
+restantes, tal y como su nombre indica, ubican el texto bien en el margen
+propiamente dicho (derecho o izquierdo, interior o exterior), bien en el
+borde (derecho o izquierdo, interior o exterior). Estos comandos están muy
+relacionados con el diseño de la página pues si, por ejemplo, usamos
+\tex{inrightedge} y en el diseño de la página no se ha reservado ningún
+espacio para el borde derecho, no se verá nada.
+
+Las opciones de configuración de \tex{margintext} son las siguientes:
+
+\startitemize
+
+\item {\tt\bf location}: Indica en qué margen se ubicará el texto. Puede
+  ser {\tt left}, {\tt right} o, en documentos a doble cara, {\tt outer} o
+  {\tt inner}. Por defecto es {\tt left} en documentos a una sola cara y
+  {\tt outer} en documentos a doble cara.
+
+\item {\tt\bf width}: Anchura de que dispondrá el texto para
+  imprimirse. Por defecto se usa toda la anchura del margen.
+
+\item {\tt\bf margin}: Indica si el texto se colocará en el margen
+  propiamente dicho ({\tt margin}) o en el borde ({\tt edge}).
+
+\item {\tt\bf align}: Alineación del texto. Se usan aquí los mismos
+  valores que en \in{\tex{setupalign}}[sec:setupalign].
+
+\item {\tt\bf line}: Permite indicar un número de líneas de
+  desplazamiento del texto al margen. Así, {\tt line=1} desplazará el
+  texto una línea hacia abajo y {\tt line=-1} una linea hacia arriba.
+
+\item {\tt\bf style}: Comando o comandos para indicar el estilo del
+  texto a ubicar en el margen.
+
+\item {\tt\bf color}: Color del texto marginal.
+
+\item {\tt\bf command}: Nombre de un comando al que se pasará como
+  argumento el texto a colocar en el margen. Este comando se ejecutará
+  antes de escribir el texto. Por ejemplo, si queremos dibujar un
+  marco en torno al texto, podríamos usar
+  \PalClave{[command=\backslash framed]\{Texto\}}.
+
+\stopitemize
+
+Los restantes comandos admiten las mismas opciones, salvo {\tt
+  location} y {\tt margin}. En particular los comandos
+\tex{atrightmargin} y \tex{atleftmargin} ubican el texto totalmente
+pegado al cuerpo de la página. Podemos establecer un espacio de
+separación con la opción {\tt distance}, que no he mencionado a
+propósito de \tex{margintext} porque, en mis pruebas, con dicho
+comando parecía no surtir ningún efecto.
+
+\startLetraChica
+
+  Además de las opciones mencionadas, estos comandos admiten también
+  otras opciones ({\tt strut, anchor, method, category, scope, option,
+    hoffset, voffset, dy, bottomspace, threshold y stack}) que no he
+  mencionado porque no están documentadas \Duda y, francamente, no
+  estoy muy seguro de para qué sirven. Las que tienen nombres de {\em
+    distancias} podemos intuirlo pero el resto ¿? En la wiki sólo se
+  menciona la opción {\tt stack} diciendo que se usa para emular el
+  comando \tex{marginpars} de \LaTeX, lo que no me parece
+  particularmente claro.
+
+\stopLetraChica
+
+El comando \PonMacro{setupmargindata}\tex{setupmargindata} permite
+configurar globalmente los textos de cada margen. Así, por ejemplo,
+
+\type{\setupmargindata[right][style=slanted]}
+
+hará que todos los textos ubicados en el margen derecho se escriban
+con letra inclinada. 
+
+También podemos crear nuestro propio comando personalizado con
+
+\PonMacro{definemargindata}\type{\definemargindata[Nombre][Configuración]}
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:
+%%% vim:set filetype=context tw=75 : %%%
