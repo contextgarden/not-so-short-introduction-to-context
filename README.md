@@ -61,9 +61,9 @@ well the spirit of the FDL licence, in considerably less space.
 
 ## Communication history
 
-- August 18th 2020  [ES-TEX Archives](https://listserv.rediris.es/cgi-bin/wa?A2=ind2008&L=ES-TEX&P=24771)
-- October 14th 2020 [ntg-context Archives](https://mailman.ntg.nl/pipermail/ntg-context/2020/thread.html#99759)
-- January 3rd 2021  [ntg-context Archives](https://mailman.ntg.nl/pipermail/ntg-context/2021/thread.html#100880)
+- August 18, 2020:  [ES-TEX Archives](https://listserv.rediris.es/cgi-bin/wa?A2=ind2008&L=ES-TEX&P=24771)
+- October 14, 2020: [ntg-context Archives](https://mailman.ntg.nl/pipermail/ntg-context/2020/thread.html#99759)
+- January 3, 2021:  [ntg-context Archives](https://mailman.ntg.nl/pipermail/ntg-context/2021/thread.html#100880)
 
 ## Evolutions
 
