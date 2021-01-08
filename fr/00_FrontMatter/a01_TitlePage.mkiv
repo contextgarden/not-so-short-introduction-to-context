@@ -1,0 +1,196 @@
+%%% vim:set filetype=context tw=72 : %%%
+%%% File:     TitlePage.mkiv
+%%% Component:Cover, credits and table of contents
+%%% Author:   Joaquín Ataz-López
+%%% Begun:    April 2020
+%%% Concluded:August 2020
+%%%
+%%% Edited with: Emacs + AuTeX - And at times with vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent a01_TitlePage.mkiv
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cover
+% I have copied the document on luatex and context (included in the
+% documentation on context. I have adapted it slightly since my title
+% has three lines while the original has only 2, and I have changed the
+% background colour).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \setvariables
+    [document]
+    [titleA=A not so short,
+    titleB=introduction,
+    titleC=to \ConTeXt\ Mark~IV,
+    author=Joaquín Ataz-López]
+
+  \startpagemakeup
+
+    \startMPcode
+
+      StartPage ;
+
+        fill Page enlarged 5mm withcolor \MPcolor{purple} ;
+        draw anchored.lrt(image(draw textext("\getvariable{document}{titleA}")  xsized(.750PaperWidth)      withcolor white),(lrcorner Page) shifted (-PaperWidth/20, PaperWidth/2.2)) ;
+        draw anchored.lrt(image(draw textext("\getvariable{document}{titleB}")  xsized(.750PaperWidth)      withcolor white),(lrcorner Page) shifted (-PaperWidth/20, PaperWidth/3.1)) ;
+        draw anchored.lrt(image(draw textext("\getvariable{document}{titleC}")  xsized(.750PaperWidth)      withcolor white),(lrcorner Page) shifted (-PaperWidth/20, PaperWidth/5)) ;
+        draw anchored.urt(image(draw textext("\getvariable{document}{author}")   xsized(.375PaperWidth) rotated 90 withcolor white),(urcorner Page) shifted (-PaperWidth/20,-PaperWidth/20)) ;
+
+        setbounds currentpicture to Page ;
+
+      StopPage ;
+
+    \stopMPcode
+
+  \stoppagemakeup
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Credit titles
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  {
+    \page[yes]
+    \page[blank]\parindent0pt
+    \ \vfill
+
+    \switchtobodyfont[small]
+    {\bf A not so short introduction to \ConTeXt\ Mark~IV}\\
+   Version 1.6 [\RevisionDate]\\ 
+    \blank
+
+    % I wanted to use the copyleft symbol, but I have not found out how
+    % to generate it. With \mirror{\copyright} the symbol is generated,
+    % but a rather annoying linebreak is inserted after it. Copy and
+    % paste from the internet doesn't work and I don't know why. (It is
+    % not the first time this happens).
+
+    {\copyright} 2020-2021, Joaquín Ataz-López\\
+    \blank
+    Original title: Una introducción (no demasiado breve) a \ConTeXt\ Mark~IV\\
+    English Translation: A good friend who wishes to remain anonymous.
+
+    The author of this text (and its English translator) authorises its
+    free distribution and use, including the right to copy and
+    redistribute this document in digital format on condition that its
+    authorship is acknowledged, and that it is not included in any
+    software package or suite, or in documentation whose conditions of
+    use or distribution do not include the free right of recipients to
+    copy and distribute.  Authorisation is likewise given for
+    translation of the document, provided that the authorship of the
+    original text is indicated, and that the translated text is
+    distributed under the FDL licence of the {\em Free Software
+    Foundation}, the {\em Creative Commons} licence that authorises
+    copying and redistribution, or a similar licence.
+
+    The above notwithstanding, publication or marketing or translation
+    of this document in paper form will require the author's express
+    authorisation in writing.
+
+    % It is not a totally free licence since it does not allow it to be
+    % marketed in paper form. The point is to pevent some "smartass"
+    % from publishing this document as a book. However, apart from this
+    % restriction, I believe that the licence continues to reflect quite
+    % well the spirit of the FDL licence, in considerably less space.
+
+    \setupnotation[numberconversion=set 0]
+    Version history:
+
+    \startitemize[packed]\smallbodyfont
+
+      \item \date[y=2020, m=8, d=18]: Version 1.0 (Spanish only):
+      Original document.
+
+      \item \date[y=2020, m=8, d=23]: Version 1.1 (Spanish only):
+        Correction of minor errors, typos and misunderstandings by the
+        author.
+
+      \item \date[y=2020, m=9, d=3]: Version 1.15 (Spanish only): More
+        errors, typos and misunderstandings.
+
+      \item \date[y=2020, m=9, d=5]: Version 1.16 (Spanish only): More
+        errors, typos and misunderstandings as well as some very minor
+        changes to make the text clearer (I hope).
+
+      \item \date[y=2020, m=9, d=6]: Version 1.17 (Spanish only): The
+        number of minor errors I am finding is incredible. I would just
+        need to stop re-reading the document to find no more!
+
+      \item \date[y=2020, m=10, d=21]: Version 1.5 (Spanish only):
+        Introduction of suggestions and correction of errors reported by
+        NTG-context users.
+
+      \item \RevisionDate: Version 1.6: Corrections suggested after a
+      new and careful reading of the document, on the occasion of its
+      translation to English. This is the first version in English.
+
+    \stopitemize
+
+  }
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Table of contents
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \starttitle
+    [title={Table of Contents}]
+
+    % Header
+%     \setupheadertexts
+%       [\tfx Table of Contents]
+%       [\tfx\pagenumber]
+
+    % Format of entries in the ToC
+    \setuplist
+      [part]
+      [
+        before={\blank[2*big]},
+        after={\blank[big]},
+        style=\bfa,
+        aligntitle=yes,
+      ]
+
+    \setuplist
+      [chapter]
+      [
+        before=\blank,
+        style=\bf,
+        margin=.5cm,
+        aligntitle=yes
+      ]
+
+    \setuplist
+      [section]
+      [
+        aligntitle=yes,
+        style=\tfx,
+        margin=1.5cm
+      ]
+
+    % Let us define our list (called a Toc)
+    \definecombinedlist
+      [Toc]
+      [part, chapter, section]
+      [level=subsection, alternative=c]
+
+    % and insert it in the context of smaller interline space
+    \start
+      \setupwhitespace[none]
+      \switchtobodyfont[11pt]
+      \setupinterlinespace[small]
+      \placeToc
+    \stop
+
+  \stoptitle
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: electric-indent
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:
+

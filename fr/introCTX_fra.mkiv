@@ -1,0 +1,93 @@
+%%% vim:set filetype=context tw=72 : %%%
+%%% File:      introCTX.mkiv
+%%% Title:     A not so short introduction to ConTeXt Mark IV
+%%% Author:    Joaquín Ataz-López
+%%% Begun:     March 2020
+%%% Concluded: August 2020
+%%%
+%%% Edited with: Emacs + AuTeX - And at times with vim + context-plugin
+%%%
+
+\environment introCTX_env_garulfo.mkiv
+
+\startproduct introCTX.mkiv
+
+  % Date of the last time modifications were introduced:
+  \def\RevisionDate{\date[d=2, m=1, y=2021]}
+
+%============================================================================
+  
+  \startfrontmatter
+  
+    \component a01_TitlePage.mkiv
+    \component a02_Preface.mkiv
+  
+  \stopfrontmatter
+
+%============================================================================
+
+  \startbodymatter
+
+  %----------------------------------------------------------------------------
+  
+    \startpart
+      [title=What is \ConTeXt\ and how do we work\\ with it]
+
+      \component b01_Introduction.mkiv
+      \component b02_FirstDoc.mkiv
+      \component b03_Commands.mkiv
+      \component b04_SourceFile.mkiv
+
+    \stoppart
+
+%------------------------------------------------------------------------------
+
+    \startpart
+      [title=Global aspects of the document]
+
+      \component b05_Pages.mkiv
+      \component b06_Fonts.mkiv
+      \component b07_Structure.mkiv
+      \component b08_Lists.mkiv
+      \component b09_References.mkiv
+
+    \stoppart
+
+%------------------------------------------------------------------------------
+
+    \startpart
+      [title=Particular issues]
+
+      \component b10_CharText.mkiv
+      \component b11_ParasLines.mkiv
+      \component b12_SpecialParas.mkiv
+      \component b13_Floats.mkiv
+
+    \stoppart
+  
+  \stopbodymatter
+
+%============================================================================
+
+  \startappendices
+
+    \startpart
+      [title=Appendices]
+
+      \component Installation.mkiv
+      \component Symbols.mkiv
+      \component Macros.mkiv
+
+  \stoppart
+
+  \stopappendices
+
+%============================================================================
+  
+\stopproduct
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% End:

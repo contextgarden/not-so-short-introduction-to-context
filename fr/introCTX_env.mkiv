@@ -1,0 +1,331 @@
+%%%% vim: set tw=72 %%%
+%%% File:      introCTX_env.mkiv
+%%% Author:    Joaquín Ataz-López
+%%% Created:   March 2020
+%%% File edited with: Emacs + AucTeX - vim
+%
+% This file contains the preamble of the introduction to ConTeXt.  In
+% the beginning I copied it from the source of the file about.pdf,
+% included in the documentation on ConTeXt Standalone, and from there
+% some things were changed in accordance with need.
+
+\startenvironment introCTX_env.mkiv
+
+  \mainlanguage[en] % Main language = English
+  
+  \setupbodyfont[modern] % The document's main (body) font
+
+  % Page layout
+
+  \setuplayout
+    [
+      width=middle,
+      height=middle,
+      topspace=2.5cm,
+      backspace=3cm,
+      header=1cm,
+      headerdistance=.5cm,
+      footer=0.5cm
+    ]
+
+  \setupexternalfigures [directory=img, location=global] % Image directory
+
+  \setupwhitespace[big] % Larger vertical space
+
+  \setupitemize [indenting=none] % First line of paragraphs not indented
+
+  \setupcaptions [headstyle=\bfx, style=\tfx] % Style of table and image titles
+
+  \definecolor [maincolor] [.6(orange)] % Title colour
+
+  \definecolor [purple] [.5(darkblue)] % Cover colour
+
+  % Writing commands and code snippets
+  \setuptype [color=darkmagenta]
+  \setuptyping
+    [color=darkmagenta,style={\switchtobodyfont[small,tt]}]
+
+  % Labels
+  \setuplabeltext
+    [en]
+    [
+      chapter=Chapter~,
+      appendix=Appendix~,
+      part=Part~
+    ]
+
+  % Footnotes
+  \setupnotation
+    [footnote]
+    [way=bypage, numberconversion=n, after={\blank[small]}]
+
+  % Page numbers
+  \setuppagenumbering [location={header, right}]
+  \setupuserpagenumber [number=2]
+
+  % Empty initial footers
+  \setupfootertexts[]
+
+  % CONFIGURATION OF PARTS, CHAPTERS, SECTIONS, ETC.
+
+  % This snippet defines a footer with page numbers. A name is assigned
+  % to it, and then, when section commands are configured, this name is
+  % assigned to the first page of part and chapter.
+  \definetext[ChapterFirstPage]
+    [footer]
+    [pagenumber]
+
+  \setuphead
+    [part]
+    [
+      placehead=yes,
+      alternative=middle,
+      conversion=I,
+      style={\switchtobodyfont[40pt]\bf},
+      color=purple,
+      before={\ \godown[4cm]},
+      header=high,
+      footer=ChapterFirstPage,
+    ]
+
+  \setuphead
+    [title, chapter]
+    [
+      style={\switchtobodyfont[30pt]\bf},
+      align=flushright,
+      before={\blank[5*big, force]},
+      after={\blank[2*big]},
+      color=maincolor,
+      sectionsegments=2:2,
+      commandbefore={\blank[small]},
+      header=high,
+      footer=ChapterFirstPage,
+    ]
+
+  \setuphead
+    [section, subject]
+    [
+      style={\bfc},
+      before={\blank[2*big]},
+      after=\blank,
+      color=maincolor,
+      sectionsegments=2:3,
+    ]
+
+  \setuphead
+    [subsection, subsubject]
+    [
+      style={\bfb},
+      before=\blank,
+      after=\blank,
+      color=maincolor,
+      sectionsegments=2:4,
+    ]
+
+  \define[1]\PlacePoint{#1.} 
+
+  \setuphead
+    [subsubsection,subsubsubject]
+    [
+      sectionsegments=5:5,
+      conversion=A,
+      style=\bfa,
+      color=black,
+      numbercommand=,
+    ]
+
+  \setuphead
+    [subsubsection][numbercommand=\PlacePoint]
+
+
+  % Structures defined by me
+
+  \definedescription
+    [description]
+    [
+      alternative=hanging,
+      width=fit,
+      distance=0.3cm,
+      headstyle=\bf
+    ]
+
+  \definedescription
+    [semitable]
+    [
+      alternative=left,
+      width=fit,
+      distance=1cm,
+      headcolor=darkmagenta,
+      headstyle=\tt,
+    ]
+
+  % ENVIRONMENTS
+
+  % DoubleExample: For two column examples. It gave some errors when
+  % defining it with \definestartstop (due to my lack of knowledge) and
+  % in the end what I did was to define a TeX style command for opening
+  % it, and another command for closing it.
+  \def\startDoubleExample
+    {
+      \startframedtext
+      [frame=off]
+      \switchtobodyfont[small]
+      \setuptyping[style=tt]
+      \startcolumns
+        [
+          n=2,
+          tolerance=verytolerant,
+          distance=0.5cm,
+          separator=rule,
+          rulecolor=darkmagenta
+        ]
+    }
+
+  \def\stopDoubleExample{\stopcolumns\stopframedtext}
+
+  % Small print
+  \definestartstop[SmallPrint]
+    [
+      before={\startnarrower\switchtobodyfont[small,ss]},
+      after={\stopnarrower},
+    ]
+
+  % Commands and abbreviations
+
+  % Assumption: Print the assumption icon in the margin
+  \define\Conjecture
+    {\inmargin[line=1]{\externalfigure[miniconjecture.jpg][width=1cm]}}
+
+  % Doubt: Print the doubt icon in the margin
+  \define\Doubt
+    {\inmargin[line=1]{\externalfigure[minidoubt.jpg][width=1cm]}}
+
+  % example: Show in red and in small print the result of compiling an
+  % earlier code snippet.
+  \define[1]\example{\color[red]{\tfx#1}}
+
+  % ConTeXt Standalone
+  \def\suite-{\quotation{\ConTeXt\ Standalone}}
+
+  % cmd: to be used in place of tex when, in the source file, there is a
+  % line break in an argument.
+  \define[1]\cmd
+   {{\en\tt\color[darkmagenta]{\backslash #1}}}
+
+  % PalClave:  tt and guillemets (angle quotes)
+  % \define[1]\PalClave{«{\tt #1}»}
+       
+  % MyKey: tt and double inverted commas
+  \define[1]\MyKey{\quotation{\tt #1}}
+
+  % Partial chapter table of contents:
+  \def\Separate#1{#1;}
+  \def\TocChap
+    {
+      \startnarrower\switchtobodyfont[small, sl]
+      {\bf Table of Contents:}
+      \setuplist
+        [section,subsection,subsubsection]
+        [pagenumber=no, textcommand=\Separate]
+      \setuplist[section][style=bold]
+      \placecontent[alternative=d]
+      \stopnarrower
+    }
+
+  % Index
+  \defineregister[macro]
+  \define[1]\PlaceMacro{\macro[#1]{\backslash #1}}
+
+  % INTERACTIVITY
+
+  \setupinteraction
+    [
+      state=start,
+      color=darkblue,
+      contrastcolor=darkblue,
+      style=,
+    ]
+
+  \setupurl [color=blue, style=\tt]
+
+  \useurl
+    [pragma]
+    [http://www.pragma-ade.com/]
+
+  \useurl
+    [wiki]
+    [https://www.contextgarden.net/]
+
+  \useurl
+    [wikisymbols]
+    [https://wiki.contextgarden.net/Symbols/utf8]
+
+  % TWO INSTRUCTIONS ADDED BY J. TO ELIMINATE MOST HYPHENATION AND GET BETTER INTERWORD SPACING AS WELL
+
+  \setupalign[hz,lesshyphenated,verytolerant,stretch]
+
+  \setuplanguage[en][spacing=packed]% This avoids an extra space after full stops (periods) which is no longer 'de rigeur' in printed material in English.
+
+%=============================> ADDED BY GARULFO - START <=====================
+
+  \usepath[{00_FrontMatter,01_BodyMatter,02_Appendices}]
+
+  \placebookmarks[chapter, section, subsection, subsubsection]
+
+%------------------------------------------------------------------------------
+
+\startsectionblockenvironment[bodypart]    
+\setupheadertexts                                                      % middle
+      [{\tfx\getmarking[chapter]}]
+\setupheadertexts                                                       % sides
+      [{\tfx\labeltext{chapter}\getmarking[chapternumber]}]
+      [{\tfx\pagenumber}]
+\stopsectionblockenvironment
+
+%------------------------------------------------------------------------------
+
+\startsectionblockenvironment[frontpart] 
+  \setupheadertexts
+    [{\tfx\getmarking[chapter]}]
+    [{\tfx\pagenumber}]
+  \setuphead
+    [chapter]
+    [incrementnumber=list,
+     after={\strut\blank[3*big]},]
+\stopsectionblockenvironment
+
+%------------------------------------------------------------------------------
+
+\startsectionblockenvironment[appendix] 
+ \setuplabeltext                               
+     [en]
+     [chapter={Appendix~}]
+ \setuphead[part][number=no]                       % No numbering for part here
+ \setupheadertexts                                                      % middle
+      [{\tfx\getmarking[chapter]}]
+\setupheadertexts                                                       % sides
+      [{\tfx\labeltext{chapter}\getmarking[chapternumber]}]
+      [{\tfx\pagenumber}]
+\stopsectionblockenvironment
+
+%------------------------------------------------------------------------------
+
+\definestructureresetset
+  [mywaytoreset] 
+  [0,0]                          % do not reset when change of part or chapter
+  [1]                                                             % else reset
+
+\setuphead
+     [chapter]
+     [sectionresetset=mywaytoreset]
+
+%=============================> ADDED BY GARULFO - END   <=====================
+
+\stopenvironment
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% TeX-master: "introCTX.mkiv"
+%%% coding: utf-8-unix
+%%% End:

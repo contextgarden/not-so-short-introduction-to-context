@@ -1,0 +1,1220 @@
+%%% File:     b07_Structure.mkiv
+%%% Author:  Joaquín Ataz-López
+%%% Begun:      March 2020
+%%% Concluded: May 2020
+%%% Title:  This is the second chapter I tackled, and from my point of
+%           view one of the most important. One by one I was trying out
+%           the options for setuphead, and I was unable to discover what
+%           some did or how to get them to work.  I suspect that this is
+%           (1) I had just started working with ConTeXt, and by July,
+%           August I fel much more comfortable but at that time it all
+%           looked like Chinese to me, and (2) because I did my tests in
+%           a document where I wrote the sections in the classic style
+%           (\chapter or \section instead of \startchapter or
+%           \startsection).
+%
+%%% Edited with: Emacs + AuTeX - And at times vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent b07_Structure.mkiv
+
+\startchapter
+  [
+    reference=cap:structure,
+    title=Document structure,
+  ]
+
+\TocChap
+
+\startsection
+  [title=Structural divisions in documents]
+
+Except for very short texts (like a letter, for example),  a document is
+usually structured into blocks or text groupings that generally follow a
+hierarchical order. There is no standard way of naming these blocks: in
+novels, for example, the structural divisions are usually called
+\quotation{chapters} although some -- the longer ones -- have larger
+blocks usually called \quotation{parts} that group a number of chapters
+together.  Theatrical works distinguish between \quotation{acts} and
+\quotation{scenes}. Academic manuals are divided (sometimes) into
+\quotation{parts} and \quotation{lessons}, \quotation{topics} or
+\quotation{chapters} which in turn often have internal divisions as
+well; the same kind of complex hierarchical divisions often exist in
+other academic or technical documents (such as texts like the present
+one dedicated to explaining a computer program or system. Even laws are
+structured into  \quotation{books} (the longest and most complex, such
+as Codes), \quotation{titles},\quotation{chapters},
+\quotation{sections}, \quotation{subsections}. Scientific and technical
+documents can also reach up to six, seven or on occasions even eight
+levels of nesting depth for these kinds of divisions.
+
+This chapter focuses on analysing the mechanism \ConTeXt\ offers for
+supporting these structural divisions. I will refer to them with the
+overall term of \quotation{sections}.
+
+\startSmallPrint
+
+  There is no clear term that allows us to refer generically to all
+  these kinds of structural divisions. The term \quotation{section},
+  that I have opted for, focuses on structural division rather than
+  anything else, though a drawback is that one of \ConTeXt's
+  predetermined structural divisions is called a \quotation{section}. I
+  hope it does not cause confusion, believing that it will be easy
+  enough to determine from the context if we are speaking of section as
+  a generic and overall reference to structural divisions, or of a
+  specific division which \ConTeXt\ calls a section.
+
+\stopSmallPrint
+
+Each \quotation{section} (generically speaking) implies:
+
+\startitemize
+ 
+  \item A reasonably large {\em structural division of a document} which
+  may, in turn, include other lower-level divisions. From this
+  perspective \quotation{sections} imply text blocks with a hierarchical
+  relationship between them. From the point of view of its sections, the
+  document as a whole can be viewed as a tree. The document {\em per se}
+  is the trunk, each of its chapters a branch, which in turn can have
+  twigs that can also subdivide and so on.
+
+  Having a clear structure is very important for the document to be read
+  and understood. This task is up to the author, however, not the
+  typesetter. And although it is not up to \ConTeXt\ to make us better
+  authors than we are, the full range of section commands it includes,
+  where the hierarchy among them is quite clear, could help us to write
+  better-structured documents.
+
+  \item A {\em structure name} that we could call its \quotation{title}
+  or \quotation{label}. This structure name is printed:
+
+  \startitemize
+
+    \item Always (or almost always) at the point in the document where
+    the structural division begins.
+
+    \item At times also in the table of contents, in the header or
+    footer of the pages occupied by the section in question.
+
+  \stopitemize
+
+  \ConTeXt\ allows us to automate all these tasks in such a way that the
+  formatting features with which the title of a structural unit should
+  be printed only have to be indicated once, and whether it should or
+  should not also be included in the table of contents, or in the
+  headers or footers. To do this \ConTeXt\ only needs to know where each
+  structural unit begins and ends, what it is called and what
+  hierarchical level it is at.
+
+\stopitemize
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:sectiontypes,
+    title=Section types and their hierarchy,
+  ]
+
+\ConTeXt\ distinguishes between {\em numbered} and {\em unnumbered}
+sections. The former, as their name suggests, are numbered automatically
+and sent to the table of contents, as well as, sometimes, to page
+headers and/or footers.
+
+\ConTeXt\ has hierarchically-ordered predefined section commands found
+in \in{table}[tbl:sectioned].
+
+\placetable
+  [here]
+  [tbl:sectioned]
+  {Section commands in \ConTeXt}
+{
+  \starttabulate[|l|l|l|]
+\HL
+\NC {\bf Level}
+\NC {\bf Numbered sections}
+\NC {\bf Unnumbered sections}
+\NR
+\HL
+\NC 1
+\NC{\tt \backslash part}\PlaceMacro{part}\PlaceMacro{startpart}
+\NC --
+\NR
+\NC 2
+\NC{\tt \backslash chapter}\PlaceMacro{chapter}\PlaceMacro{startchapter}
+\NC{\tt \backslash title}\PlaceMacro{title}\PlaceMacro{starttitle}
+\NR
+\NC 3
+\NC{\tt \backslash section}\PlaceMacro{section}\PlaceMacro{startsection}
+\NC{\tt \backslash subject}\PlaceMacro{subject}\PlaceMacro{startsubject}
+\NR
+\NC 4
+\NC{\tt \backslash subsection}\PlaceMacro{subsection}\PlaceMacro{startsubsection}
+\NC{\tt \backslash subsubject}\PlaceMacro{subsubject}\PlaceMacro{startsubsubsubject}
+\NR
+\NC 5
+\NC{\tt \backslash subsubsection}\PlaceMacro{subsubsection}\PlaceMacro{startsubsubsection}
+\NC{\tt \backslash subsubsubject}\PlaceMacro{subsubsubject}\PlaceMacro{startsubsubsubject}
+\NR
+\NC 6
+\NC{\tt \backslash subsubsubsection}\PlaceMacro{subsubsubsection}\PlaceMacro{startsubsubsubsection}
+\NC{\tt \backslash subsubsubsubject}\PlaceMacro{subsubsubsubject}\PlaceMacro{startsubsubsubsubject}
+\NR
+\NC ...
+\NC ...
+\NC ...
+\NR
+\HL
+\stoptabulate
+}
+
+With regard to the predefined sections, the following clarifications
+should be made:
+
+\startitemize
+
+  \item In \in{table}[tbl:sectioned] the section commands are shown in
+  their traditional form. But we will immediately see that they can also
+  be used as {\em environments} (\tex{startchapter  ... \stopchapter},
+  for example) and that this is the approach that is actually
+  recommended.
+
+  \item The table contains only the first 6 section levels. In my tests,
+  however, I found up to 12 levels: After \tex{subsubsubsection} comes
+  \tex{subsubsubsubsection},  and so on as far as
+  \tex{subsubsubsubsubsubsubsubsubsection}, or
+  \tex{subsubsubsubsubsubsubsubsubsubject}.
+
+  \startSmallPrint
+
+    But we should bear in mind that the kind of (excessively deep) lower
+    levels indicated above are hardly likely to improve comprehension of
+    a text! First of all we are likely to have large sections inevitably
+    dealing with several matters and this will make it difficult for the
+    reader to {\em grasp} their content. Going to excessive depth in
+    levels can also mean that the reader loses an overall sense of the
+    text, and the effect produced is one of excessive fragmentation of
+    the material involved. My understanding is that in general, four
+    levels are sufficient; very occasionally one might need to go to six
+    or seven levels, but any greater depth would rarely be a good idea.
+
+    From the perspective of writing the source file, the fact that to
+    create further sub-levels means adding yet another \quotation{sub}
+    to the previous level can make the source file almost unreadable: it
+    is no joke trying to work out the level of a command named
+    \quotation{subsubsubsubsubsection} since I have to count all the
+    \quotation{subs}! So my advice is that if we really need so many
+    levels of depth, from the fifth level onwards (subsubsection) we
+    would be better off defining our own section commands (see
+    \in{section}[sec:definehead]) giving them names that are clearer
+    than the predefined ones.
+
+  \stopSmallPrint
+
+  \item The highest section level (\tex{part}) only exists for numbered
+  titles and has the peculiarity that the part title is not printed.
+  However, even if the title is not printed, a blank page is introduced
+  (on which we can assume that the title is printed once the user has
+  reconfigured the command) and the numbering of the {\em part} is taken
+  into account to calculate the numbering of the chapters and other
+  sections.
+
+  \startSmallPrint
+
+    The reasons why the default version of \tex{part} does not print
+    anything is because, according to the \ConTeXt\ wiki, almost always
+    the title at this level requires a specific layout; and while this
+    is true, it doesn't seem a good enough reason to me, since, in
+    practice, chapters and sections are also often redefined, and the
+    fact that the parts do not print anything forces the novice user to
+    {\em dip} into the documentation to see what is going wrong.
+    
+  \stopSmallPrint
+
+  \item Although the first sectioning level is the \quotation{part},
+  this is only theoretical and abstract. In a specific document, the
+  first sectioning level will be the one corresponding to the first
+  sectioning command in the document. That is, in a document that does
+  not include parts but chapters, chapter will be the first level.  But
+  if the document does not include chapters either, only sections, the
+  hierarchy for that document will start with the sections.
+
+\stopitemize
+
+\stopchapter
+
+\startsection
+  [
+    reference=sec:sectionsyntax,
+    title=Syntax common to section commands,
+  ]
+
+All section commands, including any levels created by the user (see
+\in{section}[sec:definehead]), allow the following alternative forms of
+syntax (if, for example, we are using the \MyKey{section} level):
+
+\vbox{\starttyping
+\section [Label] {Title}
+\section [Options]
+\startsection [Options] [Variables] ... \stopsection
+\stoptyping}
+
+In the three ways above, arguments between square brackets are optional
+and can be omitted. We will look at them separately, but first of all it
+helps to make it clear that in Mark IV it is the third of these three
+approaches that is recommended.
+
+\startitemize
+
+  \item In the first syntax form, which we could call the
+  \quotation{{\em classic}} one, the command takes two arguments, one
+  optional between square brackets, and the other obligatory between
+  curly brackets. The optional argument is there to associate the
+  command with a label that will be used for internal references (see
+  \in{section}[sec:references]). The obligatory one between curly
+  brackets is the section title.
+
+  \item The other two forms of syntax are more the \ConTeXt\ style:
+  everything the command needs to know is communicated through values
+  and options introduced between square brackets.
+
+  \startSmallPrint
+
+    Recall that in \in{sections}[sec:command scope] and
+    \in{}[sec:command options] I said that in \ConTeXt, the scope of the
+    command is indicated in curly brackets, and its options in square
+    brackets. But if we think about it, the title of a particular
+    sectioning command is not the scope of its application, so to be
+    consistent with the general syntax, it should not be introduced
+    between curly brackets, but as an option.  \ConTeXt\ allows for this
+    exception because it is the classic way of doing things in \TeX, but
+    it provides the alternative forms of syntax that are more consistent
+    with its overall design.
+
+  \stopSmallPrint
+
+  The options are of the value assignment kind (OptionName=Value), and
+  are as follows:
+
+  \startitemize
+
+  \item {\tt\bf reference}: Label for cross-references.
+
+  \item {\tt\bf title}: The section title that will be printed in the
+  body of the document. 
+
+  \item {\tt\bf list}: The section title that will be printed in the
+  table of contents.
+
+  \item {\tt\bf marking}: The section title to be printed in page
+  headers or footers.
+
+  \item {\tt\bf bookmark}: The section title to be converted into a {\em
+  bookmark} in the PDF file.
+
+  \item {\tt\bf ownnumber}: This option is used in the case of a section
+  that is not automatically numbered; in this case, this option will
+  include the number assigned to the section in question.
+
+  \stopitemize
+
+  Of course, the \MyKey{list}, \MyKey{marking} and \MyKey{bookmark}
+  options should only be used if we want to use a different title to
+  replace the  main title set with the \MyKey{title} option. This is
+  very useful, for example, when the title is too long for the header;
+  although to achieve this we can also use the
+  \PlaceMacro{nomarking}\tex{nomarking} and
+  \PlaceMacro{nolist}\tex{nolist} commands (something very similar). On
+  the other hand, we need to bear in mind that if the title text (the
+  \quotation{title} option) includes any commas, then it will need to be
+  enclosed within curly brackets, both the complete text and the comma,
+  to ensure that ConTeXt knows that the comma is part of the title. The
+  same applies to the options: \quotation{list}, \quotation{marking} and
+  \quotation{bookmark}. Therefore, in order not to have to keep an eye
+  on whether or not there are any commas in the title, I think it is a
+  good idea to get into the habit of always enclosing the value of any
+  of these options between curly brackets.
+
+\stopitemize
+
+So, for example, the following lines will create a chapter entitled
+\quotation{A Test Chapter} associated with the \quotation{test} label
+for cross-references, while the header will be \quotation{Chapter test}
+instead of \quotation{A Test Chapter}.
+
+\vbox{\starttyping
+\chapter
+  [
+    title={A Test Chapter},
+    reference={test},
+    marking={Chapter test}
+  ]
+\stoptyping}
+
+The \tex{startSectionType} syntax turns the section into an {\em
+environment}. It is more consistent with the fact that, as I said at the
+beginning, in the background each section is a differentiated block of
+text, although \ConTeXt, by default, does not consider {\em
+environments} generated by section commands to be {\em groups}. Just the
+same, this procedure is what Mark~IV recommends; quite possibly because
+this way of establishing sections requires us to expressly state where
+each section begins and ends, which makes it easier for the structure to
+be consistent, and most probably has better support for XML and EPUB
+output. In fact, for XML output, it is essential.
+
+When we use \tex{startSectionName} one or more variables are allowed as
+arguments between square brackets. Their value can then be used later at
+other points in the document with the
+\PlaceMacro{structureuservariable}\tex{structureuservariable} command.
+
+\startSmallPrint
+
+  Having user variables allows for very advanced uses in \ConTeXt\ by
+  dint of the fact that decisions can be taken regarding whether or not
+  to compile a fragment, or in what we way to do so, or with what
+  template depending on the value of a particular variable. These
+  \ConTeXt\ utilities, however, go beyond the scope of the material I
+  wish to deal with in this introduction.
+
+\stopSmallPrint
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:setuphead,
+    title=Format and configuration of sections and their titles,
+  ]
+
+\startsubsection
+  [title=The \tex{setuphead} and \tex{setupheads} commands]
+\PlaceMacro{setuphead}\PlaceMacro{setupheads}
+
+By default, \ConTeXt\ assigns certain features to each level of
+sectioning that mainly (but not only) affect the format in which the
+title is displayed in the main body of the document, but not the way the
+title is displayed in the table of contents or headers and footers. We
+can change these features with the \tex{setuphead} command, whose syntax
+is:
+
+\type{\setuphead[Sections][Options]}
+
+where
+
+\startitemize
+
+  \item {\tt\bf Sections} refers to the name of one or more sections
+  (separated by commas) to be affected by the command. This can be:
+
+  \startitemize
+
+  \item Any of the predefined sections (part, chapter, title, etc.), in
+  which case we can refer to them either by name or by their level. To
+  refer to them by their level we use the word \quotation{{\tt
+  section-{\em NumLevel}}}, where {\em NumLevel} is the level number of
+  the section concerned. So, \MyKey{section-1} is equal to \MyKey{part},
+  \MyKey{section-2} is equal to \MyKey{chapter}, etc.
+
+  \item Any kind of section we ourselves have defined. In this regard,
+  see \in{section}[sec:definehead].
+
+  \stopitemize
+
+  \item {\tt\bf Options} are the configuration options. These are of the
+  explicit value assignment kind (OptionName=value). The number of
+  eligible options is very high (over sixty) and I will therefore
+  explain them by grouping them into categories according to their
+  function. I must point out, however, that I have not managed to
+  determine what some of these options are for or how they are used. I
+  will not talk about those options.
+
+\stopitemize
+
+Previously I said that \tex{setuphead} affects the sections that are
+expressly indicated. But this does not mean that the modification of a
+particular section should not affect the others in any way unless they
+have been expressly mentioned in the command. In fact, the opposite is
+true: the modification of a section affects other sections {\em that are
+linked} to it, even if this has not been made explicit in the command.
+The linkage between the different sections is of two kinds:
+
+
+\startitemize
+
+  \item The unnumbered commands are linked to the corresponding numbered
+  command of the same level so that a change in the appearance of the
+  numbered command will affect the unnumbered command of the same level;
+  but not the other way around: the change in the unnumbered command
+  does not affect the numbered command. This means, for example, that if
+  we change some aspect of \MyKey{chapter} (level 2) we are also
+  changing that aspect in \MyKey{title}; but changing \MyKey{title} will
+  not affect \MyKey{chapter}.
+
+  \item The commands are linked hierarchically, such that if we change
+  {\em certain features} in a particular level, the change will affect
+  all levels that come after it. This only happens with certain
+  features. Colour, for example: if we establish that subsections will
+  display in red, we are also changing subsubsections,
+  subsubsubsections, etc. to red. But the same does not happen with
+  other features like font style for example.
+
+\stopitemize
+
+Along with \tex{setuphead} \ConTeXt\ provides the \tex{setupheads}
+command which globally affects all section commands. The \ConTeXt\ wiki
+says, in reference to this command, that some people have said it does
+not work.  According to my tests, this command works for some options
+but not others.  In particular it does not work with the \MyKey{style}
+option, which is striking, since the style for titles is most likely the
+one thing we would like to change globally so it affects all titles. But
+it does work, according to my tests, with other options such as, for
+example, \MyKey{number} or \MyKey{color}. So, for example,
+\tex{setupheads[color=blue]} will ensure that all titles in our document
+are printed in blue.
+
+Since I am a bit too lazy to bother testing every option to see if it
+works or not with \tex{setupheads} (remember that there are more than
+sixty of them) in what follows I will refer only to \tex{setuphead}.
+
+Finally: before examining the specific options, we should note something
+that is said in \ConTeXt\ wiki, although it is probably not said in the
+right place: some options only work if we are using the \cmd{start{\em
+SectionName}} syntax.
+
+\startSmallPrint
+
+  This information is contained in connection with \tex{setupheads}, but
+  not \tex{setuphead} which is where the bulk of the options are
+  explained and where, if it is only to be said in one place, it seems
+  the most reasonable place to say it. On the other hand, the
+  information only mentions the \MyKey{insidesection} option, without
+  making it clear whether or not it also happens with other options.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:title parts,
+    title=Parts of a section title,
+  ]
+
+Before going into the specific options that allow us to configure the
+appearance of titles, it is advisable to start by pointing out that a
+section title can have up to three different parts, which \ConTeXt\
+allows us to format together or separately. These title elements are as
+follows:
+
+\startitemize
+
+  \item {\bf The title itself}, meaning the text it is made up of. In
+  principle this title is always displayed, except for sections of the
+  \MyKey{part} kind where the title is  not displayed by default. The
+  option that controls whether the title is displayed or not is
+  \MyKey{placehead} whose values can be \MyKey{yes}, \MyKey{no}
+  \MyKey{hidden}, \MyKey{empty} or \Doubt\MyKey{section}. The meaning of
+  the first two is clear. But I am not so sure about the results of the
+  remaining values of this option.
+
+  Therefore, if we want the title to be displayed in the first level
+  sections, our setting should be:
+
+  \vbox{\starttyping
+    \setuphead
+      [part]
+      [placehead=yes]
+  \stoptyping}
+
+  The title of certain sections, as we already know, can be
+  automatically sent to headers and the table of contents. Using the
+  {\tt list} and {\tt marking} options of section commands, we can
+  indicate an alternative title to be sent instead. It is also possible,
+  when writing the title, to use the \PlaceMacro{nolist}\tex{nolist} or
+  \PlaceMacro{nomarking}\tex{nomarking} commands to have certain parts
+  of the title replaced by ellipses in the table of contents or header.
+  For example:
+
+  \vbox{\starttyping
+    \chapter{Influences of \nomarking{19th century} impressionism \nomarking{in the 21st century}}
+  \stoptyping}
+
+  Will write \quotation{Influences of ... impressionism ...} in the
+  header.
+
+  \item {\bf Numbering}. This is only the case for numbered sections
+  (part, chapter, section, subsection...), but not for unnumbered ones
+  (title, subject, subsubject). In fact, whether a particular section is
+  numbered or not depends on the \MyKey{number} and
+  \MyKey{incrementnumber} options whose possible values are \MyKey{yes}
+  and \MyKey{no}. In numbered sections both these are set as {\tt yes}
+  and in unnumbered sections, as {\tt no}.
+
+  \startSmallPrint
+
+   Why are there two options to control the same thing? Because in fact
+   the two options control two things; one is whether the section is
+   numbered or not ({\tt incrementnumber}) and the other is whether the
+   number is displayed or not ({\tt number}). If {\tt
+   incrementnumber=yes} and {\tt number=no} are set for a section, we
+   will get a section that is unnumbered outwardly (visually) but still
+   counted internally. This would be useful for including such a section
+   in the table of contents, since ordinarily this would only include
+   numbered sections. In this regard see \in{subsection}[sec:toc with
+   unnumbered secs] in \in{section} [sec:manual adjustments].
+
+  \stopSmallPrint
+
+  \item {\bf The label} for the title. In principle this element in
+  titles is empty. But we can associate a value with it, in which case,
+  prior to the number and the actual title, the label we have assigned
+  to this level will be printed. For example, in chapter titles we might
+  want the word \quotation{Chapter} to be printed, or the word
+  \quotation{Part} for parts.  We do not use \tex{setuphead} to do this
+  but the \tex{setuplabeltext} command.This command allows us to assign
+  a textual value to the labels of the different sectioning levels. So,
+  for example, if we want to write \quotation{Chapter} in our document
+  before the chapter titles, we should set:
+
+  \vbox{\starttyping
+    \setuplabeltext
+      [chapter=Chapter~]
+  \stoptyping}
+
+  In the example, after the assigned name, I have included the reserved
+  \quotation{\lettertilde} character that inserts an unbreakable blank
+  space after the word. If we don't mind a line break happening between
+  the label and the number, we could simply add a blank space. But this
+  blank space (either kind) is important; without it the number will be
+  connected to the label and we would see, for example,
+  \quotation{Chapter1} instead of \quotation{Chapter 1}.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [title=Controlling the numbering\\ (in numbered sections)]
+
+We already know that the predefined numbered sections (part, chapter,
+section...) and whether or not a particular section is numbered or not,
+depends on the \MyKey{number} and \MyKey{incrementnumber} options set up
+with \tex{setuphead}.
+
+By default, the numbering of the various levels is automatic, unless we
+have assigned the value of \MyKey{yes} to the \MyKey{ownnumber} option.
+When \MyKey{ownumber=yes} the number assigned to each command must be
+indicated. This is done:
+
+\startitemize
+
+  \item If the command is invoked using the classic syntax, by adding an
+  argument with the number before the title text. For example:\\
+  \cmd{chapter\{13\}\{Chapter title\}} will generate a chapter that has
+  manually been assigned the number 13.
+
+  \item If the command has been invoked with the syntax specific to
+  \ConTeXt\ (\tex{SectionType [Options]} or \tex{startSectionType
+  [Options]}), with the \MyKey{ownnumber} option. For example:\\
+  \type{\chapter[title={Chapter title}, ownnumber=13]}, will generate a
+  chapter that has manually been assigned the number 13.
+
+\stopitemize
+
+When \ConTeXt\ automatically does the numbering, it uses internal
+counters that store the numbers of the different levels; thus there is a
+counter for parts, another for chapters, another for sections, etc. Each
+time \ConTeXt\ finds a section command it carries out the following
+actions:
+
+\startitemize[packed]
+
+  \item It increases the counter associated with the level corresponding
+  to that command by \quote{1}.
+
+  \item It resets the associated counters at all levels below that of
+  the command in question to 0.
+
+\stopitemize
+
+This means, for example, that each time a new chapter is found, the
+chapter counter is increased by 1 and all the section, subsection,
+subsubsection etc. commands are returned to 0; but the counter for parts
+is not affected.
+
+To alter the number from which to start counting, use the
+\PlaceMacro{setupheadnumber}\tex{setupheadnumber} command as follows:
+
+\type{\setupheadnumber[SectionType][Number from which to count]}
+
+where {\em Number from which to count} is the number from which sections
+of any type will be counted. So if {\em Number from which to count} is
+equal to zero, the first section will be 1; if it is equal to 10, the
+first section will be 11.
+
+This command also allows us to alter the pattern for the automatic
+increment; so we can, for example, get the chapters or sections to be
+counted in pairs, or in threes. So, \tex{setupheadnumber[section][+5]}
+will see chapters numbered as 5 out of five; and
+\tex{setupheadnumber[chapter][14, +5]} will see that the first chapter
+begins with 15 (14+1), the second will be 20 (15+5), the third 25, etc.
+
+By default, section numbering displays Arabic numbers, and the numbering
+of all previous levels is included. That is to say: in a document in
+which there are parts, chapters, sections and sub-sections, a specific
+sub-section will indicate to which part, chapter and section it
+corresponds. Thus the fourth sub-section of the second section of the
+third chapter of the first part will be \quotation{1.3.2.4}.
+
+The two basic options controlling how numbers are displayed are:
+
+\startitemize
+
+  \item {\tt\bf conversion:} It controls the type of numbering that will
+  be used. It allows numerous values depending on the type of numbering
+  we want: \reference[Num:conversion]{Numerical conversion}
+
+  \startitemize
+
+    \item {\bf Numbering with Arabic numbers}: The classic numbering: 1,
+    2, 3, ... is obtained with the values {\tt n, N} or {\tt numbers}.
+
+    \item {\bf Numbering with Roman numbers}. Three ways of doing this:
+
+    \startitemize[packed]
+
+      \item Upper case Roman numbers: {\tt I, R, Romannumerals}.
+      \item Lower case Roman numbers: {\tt i, r, Romannumerals}.
+      \item Roman numbers in small caps: {\tt KR, RK}.
+
+    \stopitemize
+
+    \item {\bf Numbering with letters}. Three ways of doing this:
+
+    \startitemize[packed]
+
+      \item Upper case letters: {\tt A, Character}
+      \item Lower case letters: {\tt a, character}
+      \item Letters in small caps: {\tt AK, KA}
+    
+    \stopitemize
+
+  \item {\bf Numbering in words}. Meaning we write the word that
+  designates the number. So, for example, \quote{3} becomes
+  \quote{Three}. There are two ways of doing this:
+
+  \startitemize[packed]
+
+    \item Words beginning with a capital letter: {\tt Words}.
+    \item Words all in lower case: {\tt words}.
+
+  \stopitemize
+
+  \item {\bf Numbering with symbols}: Symbol-based numbering uses
+  different sets of symbols in which each symbol is assigned a numerical
+  value. As the symbol sets used by \ConTeXt\ have a very limited number
+  of them, it is only appropriate to use this type of numbering when the
+  maximum number to be reached is not too high. \ConTeXt\ provides for
+  four different sets of symbols: {\tt set~0, set~1, set~2 and set~3}
+  respectively. Below are the symbols that each of these sets uses for
+  numbering. Note that the maximum number that can be reached is 9 in
+  {\tt set~0} and {\tt set~1} and 12 in {\tt set~2} and {\tt set~3}:
+
+    \startitemize[empty, packed]\reference[examples of conversion set]{}
+      \item Set 0: \dorecurse{9}{\convertnumber{set 0}{#1}\quad}\par
+      \item Set 1: \dorecurse{9}{\convertnumber{set 1}{#1}\quad}\par
+      \item Set 2: \dorecurse{12}{\convertnumber{set 2}{#1}\quad}\par
+      \item Set 3: \dorecurse{12}{\convertnumber{set 3}{#1}\quad}\par
+
+    \stopitemize
+
+  \stopitemize
+
+  \item {\tt\bf sectionsegments:} This option allows us to control
+  whether or not to display the numbering for the preceding levels. We
+  can indicate which previous levels will be displayed. This is done by
+  identifying the initial level and the final level to be displayed. The
+  identification of the level can be done by its number (part=1,
+  chapter=2, section=3, etc.), or  name (part, chapter, section, etc.).
+  So, for example, \MyKey{sectionsegments=2:3} indicates that chapter
+  and section numbering should be displayed. It is exactly the same as
+  saying \MyKey{sectionsegments=chapter:section}. If we want to indicate
+  that all numbers above a certain level are displayed we can use,  as a
+  value of \MyKey{optionsegments} {\em Initial Level:all}, or {\em
+  InitialLevel:*}.  For example, \MyKey{sectionsegments=3:*} indicates
+  that numbering is displayed starting from level 3 (section).
+
+\stopitemize
+
+So, for example, imagine that we want the parts to be numbered with
+Roman numerals in capital letters; the chapters with Arabic numerals,
+but without including the number of the part to which they belong; the
+sections and subsections with Arabic numerals including the chapter and
+section numbers, and the subsections with capital letters. We should
+write the following:
+
+\vbox{\starttyping
+  \setuphead[part][conversion=I]
+  \setuphead[chapter]     [conversion=n, sectionsegments=2]
+  \setuphead[section]     [conversion=n, sectionsegments=2:3]
+  \setuphead[subsection]  [conversion=n, sectionsgments=2:4]
+  \setuphead[subsubsection][conversion=A, sectionsegments=5]
+\stoptyping}
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:titlestyle,
+    title=Title colour and style,
+  ]
+
+We have the following options to control style and colour:
+
+\startitemize
+
+  \item {\bf The style} is controlled with the \MyKey{style},
+  \MyKey{numberstyle} and \MyKey{textstyle} options depending on whether
+  we want to affect the whole title, only the numbering, or only the
+  text. By means of any of these options we can include commands that
+  affect the font; namely: specific font, style (roman, sans serif or
+  ty\-pe\-wri\-ter), alternative (italic, bold, slanted...) and  size.
+  If we only want to indicate one style feature we can do this either by
+  using the name of the style (for example, \quotation{bold} for bold),
+  or by indicating its abbreviation (\quotation{bf}), or the command
+  that generates it (\tex{bf}, in the case of bold). If we want to
+  indicate several features simultaneously, we must do it by means of
+  the commands that generate them, writing them one after the other.
+  Bear in mind, on the other hand, that if we indicate only one feature,
+  the rest of the style features will be established automatically with
+  the default values of the document, which is why it is rarely
+  advisable to establish only one style feature.
+
+  \item {\bf The colour} is set with the  \MyKey{color},
+  \MyKey{numbercolor} and \MyKey{textcolor} options depending on whether
+  we want to set the colour of the whole title, or just the colour of
+  the numbering or the text.  The colour indicated here can be one of
+  \ConTeXt's predefined colours, or some other colour we have defined
+  ourselves and previously assigned a name to. However, we cannot
+  directly use a colour definition command here.
+
+\stopitemize
+
+In addition to these six options, there are still five more options
+available for establishing some more sophisticated features with which
+we can do virtually anything we want. These are: \MyKey{command},
+\MyKey{numbercommand}, \MyKey{textcommand},\MyKey{deepnumbercommand} and
+\MyKey{deeptextcommand}. Let's begin by explaining the first three:
+
+\startitemize
+
+  \item {\tt\bf command} indicates a command that will take two
+  arguments, the number and the section title. It can be a normal
+  \ConTeXt\ command or a command we have defined ourselves.
+
+  \item {\tt\bf numbercommand} is similar to \MyKey{command}, but this
+  command only takes an argument with the section number.
+
+  \item {\tt\bf textcommand} is also similar to \MyKey{command}, but it
+  only takes an argument with the title text.
+
+\stopitemize
+
+These three options allow us to do practically anything we want. For
+example, if I want the sections to be right-aligned, enclosed in a frame
+and with a line break between the number and the text, I can simply
+create a command that does that, and then indicate that command as the
+value of the \MyKey{command} command. This would be achieved with the
+following lines:
+
+\vbox{\starttyping
+\define[2]\AlignSection
+  {\framed[frame=on, width=broad,align=flushright]{#1\\#2}}
+
+\setuphead
+  [section]
+  [command=\AlignSection]
+\stoptyping}
+
+When we simultaneously set the \MyKey{command} and the \MyKey{style}
+options, the command is applied to the title with its style. This means,
+for example, that if we we have set \MyKey{textstyle=\backslash em}, and
+\MyKey{textcommand=\backslash WORD}, the command \tex{WORD} (which
+capitalizes the text it takes as an argument) will be applied to the
+title with its style, i.e.: \cmd{WORD\{\backslash em Title text\}}.If we
+want it to be done the other way around, i.e. that the style is applied
+to the content of the title once the command has been applied, we should
+use, instead of the \MyKey{textcommand} and \MyKey{numbercommand}
+options, the \MyKey{deeptextcommand} and \MyKey{deepnumbercommand}
+options. This, in the example given above, would generate
+\MyKey{\color[darkmagenta]{\{\backslash em\backslash WORD\{Title
+text\}\}}}.
+
+In most cases there would be no difference in doing it one way or the
+other. But in some cases there may be.
+
+\stopsubsection
+
+\startsubsection
+  [title=Location of number and title text]
+
+The \MyKey{alternative} option controls two things simultaneously: the
+location of the numbering with respect to the title's text, and the
+location of the title itself (including number and text) with respect to
+the page on which it is displayed and the contents of the section. They
+are two different things, but as they are both governed by the same
+option, they are controlled simultaneously.
+
+The location of the title in relation to the page and the first
+paragraph of the section content is controlled by the following possible
+values of \MyKey{alternative}:
+
+\startitemize
+
+  \item {\tt\bf text:} The section title is integrated with the first
+  paragraph of its contents. The effect is similar to what is produced
+  in \LaTeX\ with \tex{paragraph} and \tex{subparagraph}.
+
+  \item {\tt\bf paragraph:} The section title will be an independent
+  paragraph.
+
+  \item {\tt\bf normal:} The section title will be placed in the default
+  location provided by \ConTeXt\ for the particular type of section in
+  question. Normally it is \MyKey{paragraph}.
+
+  \item {\tt\bf middle:} The title is written as an autonomous, centred
+  paragraph. If it is a numbered command, the number and the text are
+  separated on different lines, both centred.
+
+  An effect similar to what is obtained with \MyKey{alternative=middle}
+  is obtained with the \MyKey{align} option that controls title
+  alignment. It can take the values \MyKey{left}, \MyKey{middle} or
+  \MyKey{flushright}.  But if we centre the title with this option, the
+  number and the text will appear on the same line.
+
+  \item {\tt\bf margintext:} This option causes the entire title
+  (numbering and text) to be printed in the space reserved for the
+  margin.
+
+\stopitemize
+
+The location of the number in relation to the title text is indicated by
+the following possible values of \MyKey{alternative}:
+
+\startitemize
+
+  \item {\tt\bf margin/inmargin:} The title is a separate paragraph. The
+  numbering is written in the space reserved for the margin. I haven't
+  figured out the difference between using \MyKey{margin} and using
+  \MyKey{inmargin}.
+
+  \item {\tt\bf reverse:} The title makes up a separate paragraph, but
+  the normal order is reversed, and the text is printed first, then the
+  number.
+
+  \item {\tt\bf top/bottom:} In titles whose text occupies more than one
+  line, these two options control whether the numbering will be aligned
+  with the first line of the title or with the last line respectively.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [title=Commands or actions to be carried out before or after printing the title]
+
+It is possible to indicate one or more commands that are executed before
+printing the title (\MyKey{before} options) or after (\MyKey{after}
+option). These options are widely used to visually mark the title. For
+example: if we want to add more vertical space between the title and the
+text that precedes it, \MyKey{before=\backslash blank} will add a blank
+line. To add even more space we could write \MyKey{before=\{\backslash
+blank[3*big]\}}. In this case we have surrounded the value of the option
+with curly brackets to avoid an error. We could also visually indicate
+the distance between the previous text and the following one with
+\MyKey{before=\backslash hairline, after=\backslash hairline}, which
+would draw a horizontal line before and after the title.
+
+Very similar to the \MyKey{before} and \MyKey{after} options are the
+\MyKey{commandbefore} and \Conjecture \MyKey{commandafter} ones.
+According to my tests I deduce that the difference is that the former
+two execute actions before and after starting to typeset the title as
+such, while the latter two refer to commands that will be executed
+before and after typesetting {\em the title text}.
+
+If we want to insert a page break before the title, we have to use the
+\MyKey{page} option that allows, among other values, “yes” for inserting
+a page break, “left” to insert as many page breaks as necessary to
+ensure that the title starts on an even page, “right” to ensure that the
+title starts on an odd page, or “no” if what we want is to disable the
+forced page break. This option, on the other hand, for levels below
+\MyKey{chapter}, will only work if the \MyKey{continue=no} is used,
+otherwise it will not work if the section, subsection or command is on
+the first page of a chapter.
+
+\startSmallPrint
+
+  By default, chapters start on a new page in \ConTeXt. If it is
+  established that the sections also start a new page, the problem
+  arises of what to do with the first section of a chapter which,
+  perhaps, is at the beginning of the chapter: if that section also
+  starts a page break, we end up with the page which opens the chapter
+  only containing the title of the chapter, which is not very aesthetic.
+  This is why we can set the \MyKey{continue} option, a name, I have to
+  say, that is not very clear to me: if \MyKey{continue=yes}, the page
+  break will not apply to the sections that are on the first page of a
+  chapter. If \MyKey{continue=no} the page break will still be applied.
+
+\stopSmallPrint
+
+If, instead of section commands we use section environments (\cmd{start
+...  \backslash stop}), we also have the \MyKey{insidesection} option,
+by which we can indicate one or more commands that will be executed once
+the title has been typeset and we are already inside the section. This
+option would allow us, for example, to make sure that immediately after
+starting a chapter, a table of contents will be typeset automatically
+with (\MyKey{insidesection=\backslash placecontent})
+
+\stopsubsection
+
+\startsubsection
+  [title=Other configurable features]
+
+As well as those we have already seen, we can configure the following
+additional features with \tex{setuphead}:
+
+\startitemize
+
+  \item {\bf Interlined}. Controlled by the \MyKey{interlinespace} which
+  takes as its value the name of an interline command previously created
+  with \tex{defineinterlinespace} and configured with
+  \tex{setupinterlinespace}.
+
+  \item {\bf Alignment}. The \MyKey{align} option affects the alignment
+  of the paragraph containing the title. Among others it can have the
+  following values: \MyKey{flushleft} (left), \MyKey{flushright}
+  (right), \MyKey{middle} (centred), \MyKey{inner} (inner margin) and
+  \MyKey{outer} (outer margin).
+
+  \item {\bf Margin}. With the \MyKey{margin} option we can manually set
+  the title's margin.
+
+  \item {\bf Indenting the first paragraph}. The value of the
+  \MyKey{indentnext} option (that can be “yes”, “no” or “auto”) controls
+  whether or not the first line of the first paragraph of the section
+  will be indented. Whether or not it should be indented (in a document
+  where the first line of the paragraphs is generally indented) is a
+  matter of taste.
+
+  \item {\bf Width}. By default, titles take up the width they need
+  unless this is greater than the width of the line, in which case the
+  title will take up more than one line. But with the \MyKey{width}
+  option we can assign a particular width for the title. The
+  \MyKey{numberwidth} and \MyKey{textwidth} options respectively, assign
+  the numbering width or the width of the title's text.
+
+  \item {\bf Separating number and text}. The  \MyKey{distance} and
+  \MyKey{textdistance} options allow us to control the distance
+  separating the number from its text.
+
+  \item Style of section headers and footers. For this we use the
+  \MyKey{header} and \MyKey{footer} options
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [title=Other \tex{setuphead} options]
+
+With the options we already seen, we can see that the configuration
+possibilities for section titles are almost unlimited. However,
+\tex{setuphead} has around thirty options that I have not \Doubt
+mentioned.  Most because I have not discovered what they are for or how
+they are used, a few because their explanation would force me to go into
+aspects that I do not intend to deal with in this introduction.
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:definehead,
+    title=Defining new section commands,
+  ]
+\PlaceMacro{definehead}
+
+We can define our own section commands with \tex{definehead} whose
+syntax is:
+
+\type{\definehead[CommandName][Model][Configuration]}
+
+where
+
+\startitemize
+
+  \item {\bf CommandName} represents the name the new section command
+  will have.
+
+  \item {\bf Model} is the name of an existing section command that will
+  be used as a model from which the new command will initially inherit
+  all its characteristics.
+
+  \startSmallPrint
+
+    In fact, the new command inherits much more than its initial
+    characteristics from the model: it becomes a kind of customised
+    instance of the model, but shares with it, for example, the internal
+    counter that controls the numbering.
+
+  \stopSmallPrint
+
+  \item {\bf Configuration} is the customised configuration of our new
+  command. Here we can use exactly the same options as in
+  \tex{setuphead}.
+
+\stopitemize
+
+It is not necessary to configure the new command at the time of its
+creation. This can be done later with \tex{setuphead} and, in fact, in
+the examples given in the \ConTeXt\ manuals and its wiki, this seems to
+be the normal way.
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:macrostructure,
+    title=The document's macrostructure,
+  ]
+
+Chapters, sections, subsections, titles..., structure the document; they
+organise it. But together with the structure resulting from these kinds
+of commands, in certain printed books, especially those coming from the
+academic world, there is a kind of {\em macro-ordering} of the book's
+material, taking into account not its content but the function that each
+of these large parts performs in the book. This is how we differentiate
+between:
+
+\startitemize
+
+  \item The initial part of the document containing the title page,
+  acknowledgement page, a dedication page, the table of contents,
+  perhaps a preface, presentation page, etc.
+
+  \item The main body of the document, which contains the fundamental
+  text of the document, divided into parts, chapters, sections,
+  subsections, etc. This part is usually the most extensive and
+  important.
+
+  \item Additional material made up of appendices or annexes that
+  develop or exemplify some issue dealt with in the main body, or
+  provide additional documentation not written by the author of the main
+  body, etc.
+
+  \item The final part of the document where we can find the
+  bibliography, indexes, glossaries, etc.
+
+\stopitemize
+
+In the source file we can demarcate each of these parts through the
+environments seen in \in{table}[tbl:macrostructure].
+
+{\switchtobodyfont[small]
+\placetable
+  [here]
+  [tbl:macrostructure]
+  {Environments that reflect the document's macrostructure}
+{\starttabulate[|l|l|]
+\HL
+\NC {\bf Part of the document}
+\NC {\bf Command}
+\NR
+\HL
+\NC Initial part
+\NC\backslash startfrontmatter [Options] ... \backslash stopfrontmatter
+\NR\PlaceMacro{startfrontmatter}
+\NC Main body
+\NC\backslash startbodymatter [Options] ... \backslash stopbodymatter
+\NR\PlaceMacro{startbodymatter}
+\NC Appendices
+\NC\backslash startappendices \ [Options] ... \backslash stopappendices
+\NR\PlaceMacro{startappendices}
+\NC Final part
+\NC\backslash startbackmatter [Options] ... \backslash stopbackmatter\PlaceMacro{startbackmatter}
+\NR
+\HL
+\stoptabulate
+}}
+
+The four environments allow the same four options: \MyKey{page},
+\MyKey{before}, \MyKey{after} and \MyKey{number}, and their values and
+usefulness are the same as those found in \tex{setuphead} (see
+\in{section}[sec:setuphead]), though we should note that here the
+\MyKey{number=no} option will eliminate the numbering of all sectioning
+commands within the environment.
+
+To include any of these large sections in our document only makes sense
+if it is to establish some kind of differentiation between them. Perhaps
+headers or page numbering in frontmatter. Configuration of each of these
+blocks is achieved by
+\PlaceMacro{setupsectionblock}\tex{setupsectionblock} whose syntax is:
+
+\type{\setupsectionblock [Block name] [Options]}
+
+where {\em Block name} can be {\tt frontpart}, {\tt bodypart}, {\tt
+appendix} or {\tt backpart} and the options can be the same as just
+mentioned: \MyKey{page},\MyKey{number}, \MyKey{before} and
+\MyKey{after}.  So, for example, to ensure that in {\em frontmatter} the
+pages are numbered with Roman numbers, in the preamble of our document
+we should write:
+
+\starttyping
+\setupsectionblock
+  [frontpart]
+  [
+    before={\setuppagenumbering[conversion=Romannumerals]}
+  ]
+\stoptyping
+
+\ConTeXt's default configuration for these four blocks implies that:
+
+\startitemize
+
+  \item The four blocks begin a new page.
+
+  \item Section numbering changes in each of these blocks:
+
+  \startitemize
+
+    \item In {\tt frontmatter} and {\tt backmatter} by default all
+    numbered sections are unnumbered.
+
+    \item In {\tt bodymatter} chapters have Arabic numbering.
+
+    \item In {\tt appendices} chapters are numbered with upper case
+    letters.
+
+  \stopitemize
+
+\stopitemize
+
+It is also possible to create new section blocks with
+\PlaceMacro{definesectionblock}\tex{definesectionblock}.
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:
+%%% vim:set filetype=context tw=72 : %%%
