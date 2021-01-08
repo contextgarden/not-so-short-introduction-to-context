@@ -19,7 +19,7 @@ order to increase their potential audience, a member of the [ntg-context mailing
 
 ![PDF Spanish version 1.6](en/introCTX_esp.png)
 
-![test](blob/main/en/introCTX_eng.pdf)
+![test](/en/introCTX_eng.pdf)
 
 ## Author
 
