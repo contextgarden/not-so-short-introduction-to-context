@@ -50,7 +50,8 @@ well the spirit of the FDL licence, in considerably less space.
 
 ## Version history:
 
-- August 18, 2020: Version 1.0  (Spanish only): Original document.
+- August 18, 2020: Version 1.0  (Spanish only): 
+  - Original document.
 - August 23, 2020: Version 1.1  (Spanish only): Correction of minor errors, typos and misunderstandings by the author.
 - September 3, 2020: Version 1.15 (Spanish only): More errors, typos and misunderstandings.
 - September 5, 2020: Version 1.16 (Spanish only): More errors, typos and misunderstandings as well as some very minor changes to make the text clearer (I hope).
