@@ -8,28 +8,28 @@
 %%% Edited with: Emacs + AuTeX - And at times with vim + context-plugin
 %%%
 
-\environment introCTX_env_garulfo.mkiv
+\environment introCTX_env.mkiv
 
 \startproduct introCTX.mkiv
 
   % Date of the last time modifications were introduced:
   \def\RevisionDate{\date[d=2, m=1, y=2021]}
 
-%============================================================================
-  
+  %==============================================================================
+
   \startfrontmatter
-  
-    \component a01_TitlePage.mkiv
+
+    \component a01_PageDeTitre.mkiv
     \component a02_Preface.mkiv
-  
+
   \stopfrontmatter
 
-%============================================================================
+  %==============================================================================
 
   \startbodymatter
 
-  %----------------------------------------------------------------------------
-  
+    %------------------------------------------------------------------------------
+
     \startpart
       [title=What is \ConTeXt\ and how do we work\\ with it]
 
@@ -40,7 +40,7 @@
 
     \stoppart
 
-%------------------------------------------------------------------------------
+    %------------------------------------------------------------------------------
 
     \startpart
       [title=Global aspects of the document]
@@ -53,7 +53,7 @@
 
     \stoppart
 
-%------------------------------------------------------------------------------
+    %------------------------------------------------------------------------------
 
     \startpart
       [title=Particular issues]
@@ -64,26 +64,29 @@
       \component b13_Floats.mkiv
 
     \stoppart
-  
+
+    %------------------------------------------------------------------------------
+
   \stopbodymatter
 
-%============================================================================
+  %==============================================================================
 
   \startappendices
 
     \startpart
-      [title=Appendices]
+      [title=Appendices,
+       reference=part:annexes]
 
       \component Installation.mkiv
       \component Symbols.mkiv
       \component Macros.mkiv
 
-  \stoppart
+    \stoppart
 
   \stopappendices
 
-%============================================================================
-  
+  %============================================================================
+
 \stopproduct
 
 %%% Local Variables:

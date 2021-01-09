@@ -31,8 +31,8 @@
 
         fill Page enlarged 5mm withcolor \MPcolor{purple} ;
         
-        pair Pa ; Pa = (PaperWidth*19/20, PaperWidth/2);
-        pair Pb ; Pb = (PaperWidth*19/20, PaperHeight - (PaperWidth/20));
+        pair Pa ; Pa = (PaperWidth*19/20, PaperWidth/2.5);
+        pair Pb ; Pb = (PaperWidth*19/20, PaperHeight - (PaperWidth*2/20));
         
         picture Pict[] ;
         Pict[1] := textext.llft("\getvariable{document}{titleA}") 
@@ -41,11 +41,11 @@
                    
         Pict[2] := textext.llft("\getvariable{document}{titleB}") 
                    xsized (.750PaperWidth) 
-                   shifted (lrcorner Pict[1]);                   
+                   shifted (lrcorner Pict[1] shifted (0mm,5mm)); 
 
         Pict[3] := textext.llft("\getvariable{document}{titleC}") 
                    xsized (.750PaperWidth) 
-                   shifted (lrcorner Pict[2] shifted (0mm,-2pt)); 
+                   shifted (lrcorner Pict[2] shifted (0mm,-4pt)); 
                    
         Pict[4] := textext.dlft("\getvariable{document}{author}") 
                    xsized (.375PaperWidth) 

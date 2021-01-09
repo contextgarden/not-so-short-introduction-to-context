@@ -9,14 +9,30 @@
 % included in the documentation on ConTeXt Standalone, and from there
 % some things were changed in accordance with need.
 
+
 \startenvironment introCTX_env.mkiv
 
-  \mainlanguage[en] % Main language = English
-  
-  \setupbodyfont[modern] % The document's main (body) font
+  %------------------------------------------------------------------------------
+  % GENERAL
 
-  % Page layout
+  \mainlanguage[fr]                                    % Main language = french
 
+  \setupbodyfont[palatino]                    % The document's main (body) font
+
+  \setupalign                                    % two instructions added by j.
+    [hz,                                        % to eliminate most hyphenation
+      lesshyphenated,                 % and get better interword spacing as well
+      verytolerant,
+      stretch]
+
+  \setuplanguage        % This avoids an extra space after full stops (periods)
+    [en]                % which  is  no longer 'de rigueur' in printed material
+    [spacing=packed]    % in English.
+
+  \setupwhitespace[big] % Larger vertical space
+
+  %------------------------------------------------------------------------------
+  % PAGE LAYOUT, HEADERS, FOOTERS, PAGE NUMBERING
   \setuplayout
     [
       width=middle,
@@ -28,52 +44,53 @@
       footer=0.5cm
     ]
 
-  \setupexternalfigures [directory=img, location=global] % Image directory
+  \setuppagenumbering [location={header, right}]                 % Page numbers
+  \setupuserpagenumber [number=2]
+  \setupfootertexts[]                                   % Empty initial footers
 
-  \setupwhitespace[big] % Larger vertical space
+  %------------------------------------------------------------------------------
 
-  \setupitemize [indenting=none] % First line of paragraphs not indented
+  \setupexternalfigures [directory=img, location=global]      % Image directory
+
+  %------------------------------------------------------------------------------
+
+  \setupitemize [indenting=none]        % First line of paragraphs not indented
 
   \setupcaptions [headstyle=\bfx, style=\tfx] % Style of table and image titles
 
-  \definecolor [maincolor] [.6(orange)] % Title colour
+  %------------------------------------------------------------------------------
 
-  \definecolor [purple] [.5(darkblue)] % Cover colour
+  \definecolor [maincolor] [.6(orange)]                          % Title colour
 
-  % Writing commands and code snippets
-  \setuptype [color=darkmagenta]
+  \definecolor [purple] [.5(darkblue)]                           % Cover colour
+
+  \setuptype [color=darkmagenta]           % Writing commands and code snippets
+
   \setuptyping
     [color=darkmagenta,style={\switchtobodyfont[small,tt]}]
 
-  % Labels
-  \setuplabeltext
-    [en]
+  \setuplabeltext                                                      % Labels
+    [fr]
     [
-      chapter=Chapter~,
-      appendix=Appendix~,
-      part=Part~
+      chapter=Chapitre~,
+      appendix=Annexe~,
+      part=Partie~
     ]
 
-  % Footnotes
-  \setupnotation
+  \setupnotation                                                    % Footnotes
     [footnote]
     [way=bypage, numberconversion=n, after={\blank[small]}]
 
-  % Page numbers
-  \setuppagenumbering [location={header, right}]
-  \setupuserpagenumber [number=2]
 
-  % Empty initial footers
-  \setupfootertexts[]
-
-  % CONFIGURATION OF PARTS, CHAPTERS, SECTIONS, ETC.
+  %------------------------------------------------------------------------------
+  % PARTS, CHAPTERS, SECTIONS, ETC.
 
   % This snippet defines a footer with page numbers. A name is assigned
   % to it, and then, when section commands are configured, this name is
   % assigned to the first page of part and chapter.
   \definetext[ChapterFirstPage]
-    [footer]
-    [pagenumber]
+             [footer]
+             [pagenumber]
 
   \setuphead
     [part]
@@ -122,7 +139,7 @@
       sectionsegments=2:4,
     ]
 
-  \define[1]\PlacePoint{#1.} 
+  \define[1]\PlacePoint{#1.}
 
   \setuphead
     [subsubsection,subsubsubject]
@@ -137,8 +154,10 @@
   \setuphead
     [subsubsection][numbercommand=\PlacePoint]
 
+  %==============================================================================
+  % STRUCTURES DEFINED BY ME
 
-  % Structures defined by me
+  %------------------------------------------------------------------------------
 
   \definedescription
     [description]
@@ -148,6 +167,8 @@
       distance=0.3cm,
       headstyle=\bf
     ]
+
+  %------------------------------------------------------------------------------
 
   \definedescription
     [semitable]
@@ -159,15 +180,17 @@
       headstyle=\tt,
     ]
 
-  % ENVIRONMENTS
+  %==============================================================================
+  % ENVIRONMENTS DEFINED BY ME
 
   % DoubleExample: For two column examples. It gave some errors when
   % defining it with \definestartstop (due to my lack of knowledge) and
   % in the end what I did was to define a TeX style command for opening
   % it, and another command for closing it.
-  \def\startDoubleExample
-    {
-      \startframedtext
+
+
+  \def\startDoubleExample{%
+    \startframedtext
       [frame=off]
       \switchtobodyfont[small]
       \setuptyping[style=tt]
@@ -179,26 +202,29 @@
           separator=rule,
           rulecolor=darkmagenta
         ]
-    }
+  }
 
   \def\stopDoubleExample{\stopcolumns\stopframedtext}
 
+  %------------------------------------------------------------------------------
+
   % Small print
   \definestartstop[SmallPrint]
-    [
-      before={\startnarrower\switchtobodyfont[small,ss]},
-      after={\stopnarrower},
-    ]
+                  [
+                    before={\startnarrower\switchtobodyfont[small,ss]},
+                    after={\stopnarrower},
+                  ]
 
+  %------------------------------------------------------------------------------
   % Commands and abbreviations
 
   % Assumption: Print the assumption icon in the margin
-  \define\Conjecture
-    {\inmargin[line=1]{\externalfigure[miniconjecture.jpg][width=1cm]}}
+  \define\Conjecture{%
+    \inmargin[line=1]{\externalfigure[conjecture.pdf][width=1cm]}}
 
   % Doubt: Print the doubt icon in the margin
-  \define\Doubt
-    {\inmargin[line=1]{\externalfigure[minidoubt.jpg][width=1cm]}}
+  \define\Doubt{%
+    \inmargin[line=1]{\externalfigure[doubt.pdf][width=1cm]}}
 
   % example: Show in red and in small print the result of compiling an
   % earlier code snippet.
@@ -209,35 +235,34 @@
 
   % cmd: to be used in place of tex when, in the source file, there is a
   % line break in an argument.
-  \define[1]\cmd
-   {{\en\tt\color[darkmagenta]{\backslash #1}}}
+  \define[1]\cmd{
+    {\en\tt\color[darkmagenta]{\backslash #1}}}
 
   % PalClave:  tt and guillemets (angle quotes)
   % \define[1]\PalClave{«{\tt #1}»}
-       
+
   % MyKey: tt and double inverted commas
   \define[1]\MyKey{\quotation{\tt #1}}
 
   % Partial chapter table of contents:
   \def\Separate#1{#1;}
-  \def\TocChap
-    {
-      \startnarrower\switchtobodyfont[small, sl]
+  \def\TocChap{
+    \startnarrower\switchtobodyfont[small, sl]
       {\bf Table of Contents:}
       \setuplist
         [section,subsection,subsubsection]
         [pagenumber=no, textcommand=\Separate]
       \setuplist[section][style=bold]
       \placecontent[alternative=d]
-      \stopnarrower
-    }
+    \stopnarrower
+  }
 
   % Index
   \defineregister[macro]
   \define[1]\PlaceMacro{\macro[#1]{\backslash #1}}
 
+  %------------------------------------------------------------------------------
   % INTERACTIVITY
-
   \setupinteraction
     [
       state=start,
@@ -255,71 +280,127 @@
   \useurl
     [wiki]
     [https://www.contextgarden.net/]
+    [] [\ConTeXt\ Garden wiki]
 
   \useurl
     [wikisymbols]
     [https://wiki.contextgarden.net/Symbols/utf8]
 
-  % TWO INSTRUCTIONS ADDED BY J. TO ELIMINATE MOST HYPHENATION AND GET BETTER INTERWORD SPACING AS WELL
+  \useurl
+    [ntg-context]
+    [https://mailman.ntg.nl/pipermail/ntg-context]
+    [] [ntg-context]
 
-  \setupalign[hz,lesshyphenated,verytolerant,stretch]
+  \useurl
+    [excursion]
+    [http://www.pragma-ade.com/general/manuals/ma-cb-en.pdf]
+    [] [\quotation{\ConTeXt\ Mark~IV, an Excursion}]
 
-  \setuplanguage[en][spacing=packed]% This avoids an extra space after full stops (periods) which is no longer 'de rigeur' in printed material in English.
+  \useurl
+    [manualref2001]
+    [http://www.pragma-ade.com/general/manuals/cont-enp.pdf]
+    [] [\quotation{\ConTeXt\ Reference Manual 2001}]
 
-%=============================> ADDED BY GARULFO - START <=====================
+  \useurl
+    [manualref2013]
+    [http://pmrb.free.fr/contextref.pdf]
+    [] [\quotation{\ConTeXt\ Reference Manual 2013}]
+
+  \useurl
+    [commandes]
+    [http://www.pragma-ade.com/general/qrcs/setup-en.pdf]
+    [] [\quotation{\ConTeXt\ Commands}]
+
+  %=============================> ADDED BY GARULFO - START <=====================
 
   \usepath[{00_FrontMatter,01_BodyMatter,02_Appendices}]
 
   \placebookmarks[chapter, section, subsection, subsubsection]
 
-%------------------------------------------------------------------------------
+  %------------------------------------------------------------------------------
 
-\startsectionblockenvironment[bodypart]    
-\setupheadertexts                                                      % middle
+  \startsectionblockenvironment[bodypart]
+    \setupheadertexts                                                      % middle
       [{\tfx\getmarking[chapter]}]
-\setupheadertexts                                                       % sides
+    \setupheadertexts                                                       % sides
       [{\tfx\labeltext{chapter}\getmarking[chapternumber]}]
       [{\tfx\pagenumber}]
-\stopsectionblockenvironment
+  \stopsectionblockenvironment
 
-%------------------------------------------------------------------------------
+  %------------------------------------------------------------------------------
 
-\startsectionblockenvironment[frontpart] 
-  \setupheadertexts
-    [{\tfx\getmarking[chapter]}]
-    [{\tfx\pagenumber}]
+  \startsectionblockenvironment[frontpart]
+    \setupheadertexts
+      [{\tfx\getmarking[chapter]}]
+      [{\tfx\pagenumber}]
+    \setuphead
+      [chapter]
+      [incrementnumber=list,
+        after={\strut\blank[3*big]},]
+  \stopsectionblockenvironment
+
+  %------------------------------------------------------------------------------
+
+  \startsectionblockenvironment[appendix]
+    \setuplabeltext
+      [en]
+      [chapter={Appendix~}]
+    \setuphead[part][number=no]                       % No numbering for part here
+    \setupheadertexts                                                      % middle
+      [{\tfx\getmarking[chapter]}]
+    \setupheadertexts                                                       % sides
+      [{\tfx\labeltext{chapter}\getmarking[chapternumber]}]
+      [{\tfx\pagenumber}]
+  \stopsectionblockenvironment
+
+  %------------------------------------------------------------------------------
+
+  \definestructureresetset
+    [mywaytoreset]
+    [0,0]                          % do not reset when change of part or chapter
+    [1]                                                             % else reset
+
+
   \setuphead
     [chapter]
-    [incrementnumber=list,
-     after={\strut\blank[3*big]},]
-\stopsectionblockenvironment
+    [sectionresetset=mywaytoreset]
 
-%------------------------------------------------------------------------------
+  %------------------------------------------------------------------------------
+  % pour la table des matières
+  \setuplist
+    [part]
+    [
+      before={\blank[2*big]},
+      after={\blank[big]},
+      style=\bfa,
+      aligntitle=yes,
+    ]
 
-\startsectionblockenvironment[appendix] 
- \setuplabeltext                               
-     [en]
-     [chapter={Appendix~}]
- \setuphead[part][number=no]                       % No numbering for part here
- \setupheadertexts                                                      % middle
-      [{\tfx\getmarking[chapter]}]
-\setupheadertexts                                                       % sides
-      [{\tfx\labeltext{chapter}\getmarking[chapternumber]}]
-      [{\tfx\pagenumber}]
-\stopsectionblockenvironment
+  \setuplist
+    [chapter]
+    [
+      before=\blank,
+      style=\bf,
+      margin=.5cm,
+      aligntitle=yes
+    ]
 
-%------------------------------------------------------------------------------
+  \setuplist
+    [section]
+    [
+      aligntitle=yes,
+      style=\tfx,
+      margin=1.5cm
+    ]
 
-\definestructureresetset
-  [mywaytoreset] 
-  [0,0]                          % do not reset when change of part or chapter
-  [1]                                                             % else reset
+  \definecombinedlist                     % Let us define our list (called a Toc)
+    [Toc]
+    [part, chapter, section]
+    [level=subsection, alternative=c,criterium=text]
 
-\setuphead
-     [chapter]
-     [sectionresetset=mywaytoreset]
+  \setupheadtext [fr] [Toc=Table des matières]
 
-%=============================> ADDED BY GARULFO - END   <=====================
+  %=============================> ADDED BY GARULFO - END   <=====================
 
 \stopenvironment
 
