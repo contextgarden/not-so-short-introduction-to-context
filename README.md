@@ -43,7 +43,7 @@ of this document in paper form will require the author's express
 authorisation in writing.
 
 It is not a totally free licence since it does not allow it to be
-marketed in paper form. The point is to pevent some "smartass"
+marketed in paper form. The point is to prevent some "smartass"
 from publishing this document as a book. However, apart from this
 restriction, I believe that the licence continues to reflect quite
 well the spirit of the FDL licence, in considerably less space.
@@ -100,7 +100,7 @@ these fragments (instead of translating them) or deleting them, as the
 case may be.
 
 What I don't think is to coordinate the repository: I have never worked 
-on collective projects and I hardly know how github works
+on collective projects and I hardly know how github works.
 
 Having a repository can be useful to keep a version that is always up to 
 date; but that, on the other hand, would force me to be continually 
