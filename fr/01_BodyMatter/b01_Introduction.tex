@@ -21,7 +21,7 @@
 
 \TocChap
 
-\startsection [title=Alors qu'est-ce que \ConTeXt\ ?]
+\startsection [title=Qu'est-ce que \ConTeXt\ ?]
 
 \CONTEXT\ est un {\em système de composition}, c'est à dire un ensemble complet d'outils visant à donner à l'utilisateur un contrôle le plus complet précis possible sur la présentation et l'apparence d'un document électronique destiné à être imprimé sur papier ou affiché à l'écran. Ce chapitre expliquera ce que cela signifie. Mais d'abord, mettons en évidence certains des caractéristiques de \CONTEXT .
 
@@ -95,7 +95,7 @@ Dans la suite, les points fondamentaux ci-dessus seront développés un peu plus
 
 %-------------------------------------------------------------------------------
 
-\startsection [title=Composición tipográfica de textos]
+\startsection [title=La composition typographique de document]
 
 
 Ecrire un document (livre, article, chapitre, brochure, dépliant, imprimé, affiche...) et le mettre en page, dit également le composer, sont deux activités très différentes.
@@ -176,7 +176,7 @@ dans une instruction qui l'inscrit dans le document final : \PlaceMacro{TeX}\tex
 Cette convention est suivie dans tous les dérivés de \TeX\ qui l'incluent dans leur propre nom, comme par exemple  \ConTeXt, qui lorsqu'il est écrit en mode texte doit être écrit  \quotation{ConTeXt}.
 
 
-\startsubsection [reference=sec:motores,title=Moteurs \TeX]
+\startsubsection [reference=sec:motores,title=Les moteurs \TeX]
 
   Le programme \TeX\ est un logiciel libre : son code source est à la disposition du public et chacun peut l'utiliser ou le modifier à sa guise, à la seule condition que, si des modifications sont introduites, le résultat ne puisse être appelé \quotation{\TeX}. C'est la raison pour laquelle, au fil du temps, certaines adaptations du programme sont apparues, qui lui ont apporté différentes améliorations, et qui sont généralement appelées  {\em moteurs \TeX} (engine en anglais). En dehors du programme original, les principaux moteurs \TeX\ sont, par ordre chronologique d'apparition  \pdfTeX, \eTeX, \XeTeX\ et \LuaTeX. Chacun d'entre eux est censé intégrer les améliorations de son prédécesseurs. Ces améliorations, en revanche, jusqu'à l'apparition de  \LuaTeX , n'ont pas affecté le langage lui-même, mais seulement les fichiers d'entrée, les fichiers de sortie, la gestion des polices et le fonctionnement de bas niveau des macros.
 
@@ -193,7 +193,7 @@ Cette convention est suivie dans tous les dérivés de \TeX\ qui l'incluent dans
 
 %===============================================================================
 
-\startsubsection [title=Formats dérivés de \TeX]
+\startsubsection [title=Les formats dérivés de \TeX]
 
   Le noyau, ou cœur, de \TeX\ contient seulement un ensemble d'environ 300 instructions, appelées {\em primitives}, qui conviennent aux opérations de composition et aux fonctions de programmation très basiques. Ces instructions sont pour la plupart de très {\em bas niveau}, ce qui, en terminologie informatique, signifie qu'elles se rapprochent des opérations élémentaires de l'ordinateur, dans un langage machine peu approprié aux êtres humains, du type  \quotation{déplacer ce caractère de 0,000725 millimètre vers le haut}.
 
@@ -356,7 +356,7 @@ LMTX a été présenté au printemps 2019 et l'on suppose qu'il n'impliquera auc
 
   Comme le format  dérivé de \TeX\ le plus populaire est \LaTeX\, la comparaison entre celui-ci et \ConTeXt\ est inévitable.
 
-  Il s'agit bien sûr de langages différents mais, d'une certaine manière, liés par leur origine commune \TeX ; la parenté est donc similaire à celle qui existe entre, par exemple, l'espagnol et le français : des langues qui partagent une origine commune (le latin) qui affecte des syntaxes {\em similaires} et de nombreux mots de l'une de ces langues ont un correspondant dans l'autre. Mais au-delà de cet air de famille,  \LaTeX\ et \ConTeXt\  diffèrent dans leur philosophie et leur mise en œuvre, puisque les objectifs initiaux de l'un et de l'autre sont, en quelque sorte, contradictoires.
+  Il s'agit bien sûr de langages différents mais, d'une certaine manière, liés par leur origine commune \TeX\ ; la parenté est donc similaire à celle qui existe entre, par exemple, l'espagnol et le français : des langues qui partagent une origine commune (le latin) qui utilise des syntaxes {\em similaires} et de nombreux mots se correspondants assez directement. Mais au-delà de cet air de famille,  \LaTeX\ et \ConTeXt\  diffèrent dans leur philosophie et leur mise en œuvre, puisque les objectifs initiaux de l'un et de l'autre sont, en quelque sorte, contradictoires.
 
   \LaTeX\  vise à faciliter l'utilisation de \TeX, en éloignant l'auteur des détails typographiques spécifiques pour l'inciter à se concentrer sur le contenu, et laisser les détails de la composition entre les mains de \LaTeX. En d'autres termes, la simplification de l'utilisation de  \TeX\ est obtenue au prix d'une limitation de son immense flexibilité, par la prédéfinition de nombreux formats de base et la réduction du nombre de choix typographiques que l'auteur doit déterminer.
 
