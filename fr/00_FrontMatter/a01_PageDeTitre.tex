@@ -1,0 +1,173 @@
+%%% vim:set filetype=context tw=72 : %%%
+%%% File:     TitlePage.mkiv
+%%% Component:Cover, credits and table of contents
+%%% Author:   Joaquín Ataz-López
+%%% Begun:    April 2020
+%%% Concluded:August 2020
+%%%
+%%% Edited with: Emacs + AuTeX - And at times with vim + context-plugin
+%%%
+
+\environment introCTX_env
+
+\startcomponent a01_TitlePage
+
+%-------------------------------------------------------------------------------
+
+  \setvariables
+    [document]
+    [titleA=Une courte (?),
+    titleB=introduction,
+    titleC=à \ConTeXt\ Mark~IV,
+    author=Joaquín Ataz-López]
+
+%-------------------------------------------------------------------------------
+                                                     % Front Cover with MetaPost
+  \startpagemakeup
+
+    \startMPcode
+
+      StartPage ;
+
+        fill Page enlarged 5mm withcolor \MPcolor{purple} ;
+        
+        pair Pa ; Pa = (PaperWidth*19/20, PaperWidth/2.5);
+        pair Pb ; Pb = (PaperWidth*19/20, PaperHeight - (PaperWidth*2/20));
+        
+        picture Pict[] ;
+        Pict[1] := textext.llft("\getvariable{document}{titleA}") 
+                   xsized (.750PaperWidth) 
+                   shifted Pa;
+                   
+        Pict[2] := textext.llft("\getvariable{document}{titleB}") 
+                   xsized (.750PaperWidth) 
+                   shifted (lrcorner Pict[1] shifted (0mm,5mm)); 
+
+        Pict[3] := textext.llft("\getvariable{document}{titleC}") 
+                   xsized (.750PaperWidth) 
+                   shifted (lrcorner Pict[2] shifted (0mm,-4pt)); 
+                   
+        Pict[4] := textext.dflt("\getvariable{document}{author}") 
+                   xsized (.375PaperWidth) 
+                   rotated 90
+                   shifted Pb;                    
+                   
+        draw Pict[1] withcolor white ;
+        draw Pict[2] withcolor white ;
+        draw Pict[3] withcolor white ;
+        draw Pict[4] withcolor white ;
+        draw ( (Pa shifted (0, 1cm))  -- 
+               (Pb shifted (0, (-1cm - bbheight Pict[4]) ) ) ) 
+             withpen pencircle scaled 0.6mm 
+             withcolor white ;
+        
+        setbounds currentpicture to Page ;
+
+      StopPage ;
+
+    \stopMPcode
+
+  \stoppagemakeup
+
+%-------------------------------------------------------------------------------
+                                                                 % Credit titles
+
+
+  {
+    \page[yes]
+    \page[blank]\parindent0pt
+    \strut\vfill
+
+    \switchtobodyfont[small]
+    {\bf Une courte (?) introduction à \ConTeXt\ Mark~IV}\\
+    Version 1.6 [\RevisionDate]\\ 
+    \blank
+
+% I wanted  to use  the copyleft  symbol, but  I have  not found  out how  to
+% generate  it. With  \mirror{\copyright} the  symbol  is generated,  but a
+% rather annoying  linebreak is inserted after  it. Copy and paste  from the
+% internet doesn't work and  I don't know why. (It is not  the first time this
+% happens).
+
+    {\copyright} 2020-2021, Joaquín Ataz-López\\
+    \blank
+    Titre original: Una introducción (no demasiado breve) a \ConTeXt\ Mark~IV\\
+    Traduction française: A bon ami qui souhaite rester anonyme.
+
+    L'auteur du  présent texte, ainsi  que ses traducteurs anglais  et français,
+    autorisent sa libre  distribution et utilisation, ce qui inclue  le droit de
+    copier et de redistribuer ce document  sur support numérique à condition que
+    l'auteur soit cité, et que le document  ne soit inclus ni dans un paquet, ni
+    dans une  suite logicielle,  ni dans une  documentation dont  les conditions
+    d'utilisation ou de distribution ne prévoient pas la le droit de copie et de
+    redistribution libre par  ses destinataires.  La traduction  du document est
+    également autorisée,  à condition  que la paternité  du texte  original soit
+    indiquée,  que son  statut  de traduction  soit indiquée,  et  que le  texte
+    traduit soit distribué sous la licence  FDL de la Fondation pour le Logiciel
+    Libre (Free Software Foundation), une  licence Creative Commons qui autorise
+    la copie et la redistribution, ou autre licence similaire.
+
+    Nonobstant  ce qui  précède, la  publication et  la commercialisation  de ce
+    document, ou  sa traduction,  nécessitera l'autorisation écrite  expresse de
+    l'auteur.
+
+% It is not  a totally free licence since  it does not allow it to  be marketed in
+% paper form. The point is to pevent some "smartass" from publishing this document
+% as a  book. However,  apart from  this restriction, I  believe that  the licence
+% continues to reflect  quite well the spirit of the  FDL licence, in considerably
+% less space.
+
+    \setupnotation[numberconversion=set 0]
+    Historique des versions :
+
+    \startitemize[packed]\smallbodyfont
+
+      \item \date[y=2020, m=8, d=18] : Version 1.0 (Uniquement en espagnol) :
+      Document original.
+
+      \item \date[y=2020, m=8, d=23] : Version 1.1 (Uniquement en espagnol) :
+      Correction de petites erreurs de frappe et de malentendus de l'auteur.
+
+      \item \date[y=2020, m=9, d=3] : Version 1.15 (Uniquement en espagnol) :
+      Autres corrections de petites erreurs de frappe et de malentendus.
+
+      \item \date[y=2020, m=9, d=5] : Version 1.16 (Uniquement en espagnol) :
+      Autres corrections  de petites erreurs  de frappe et de  malentendus ainsi
+      que  des petites  modifications  qui  améliorent la  clarté  du texte  (je
+      crois).
+
+      \item \date[y=2020, m=9, d=6] : Version 1.17 (Uniquement en espagnol) :
+      C'est incroyable le  nombre de petites erreurs que je  trouve.  Si je veux
+      m'arrêter, je dois arrêter de relire le document.
+
+      \item \date[y=2020, m=10, d=21] : Version 1.5 (Uniquement en espagnol) :
+      Introduction de  suggestions et correction  des erreurs signalées  par les
+      utilisateurs de la liste de diffusion \from[ntg-context].
+
+      \item \RevisionDate: Version 1.6 : Corrections suggérées après une
+      nouvelle lecture du document, à l'occasion de sa traduction en anglais
+
+    \stopitemize
+
+  }
+
+%------------------------------------------------------------------------------
+                                                           % Table des Matières
+     
+    \start
+      \setupwhitespace[none]
+      \switchtobodyfont[11pt]
+      \setupinterlinespace[small]     % in a context of smaller interline space
+      \completeToc
+    \stop
+
+  
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: electric-indent
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:
+
