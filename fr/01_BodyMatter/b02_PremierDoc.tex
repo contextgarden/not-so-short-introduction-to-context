@@ -25,9 +25,9 @@
 %%%
 
 
-\environment introCTX_env.tex
+\environment introCTX_env
 
-\startcomponent b02_FirstDoc.tex
+\startcomponent b02_PremierDoc
 
 \startchapter
   [reference=cap:firstdoc,
@@ -62,6 +62,10 @@ Qu'il s'agisse d'un éditeur ou d'un autre, ce qu'il ne faut pas faire, c'est ut
 $ context --version
 \stopterminal
 
+\startDemoC
+$ context --version
+\stopDemoC
+
   \startSmallPrint
 
     {\bf NOTA} ceux pour qui l'utilisation du terminal est nouvelle, les deux premiers caractères que j'ai indiqué ( \quotation{\type{$}}) n'ont pas à être tappé dans le terminal par l'utilisateur. Je les utilise pour représenter ce qu'on appelle l'{\em invite} du terminal (le prompt en anglais),
@@ -80,6 +84,17 @@ mtx-context     | current version: 2020.03.10 14:44
 mtx-context     | main context file: /usr/share/texmf/tex/context/base/mkiv/context.mkxl
 mtx-context     | current version: 2020.03.10 14:44
 \stopterminal
+
+\startDemoC
+$ context --version
+mtx-context     | ConTeXt Process Management 1.03
+mtx-context     |
+mtx-context     | main context file: /usr/share/texmf/tex/context/base/mkiv/context.mkiv
+mtx-context     | current version: 2020.03.10 14:44
+mtx-context     | main context file: /usr/share/texmf/tex/context/base/mkiv/context.mkxl
+mtx-context     | current version: 2020.03.10 14:44
+\stopDemoC
+
 
 Dans la dernière ligne, nous sommes informés de la date à laquelle la version installée a été publiée. Si elle est très ancienne, nous devons le mettre à jour ou installer une nouvelle version. Je recommande d'installer la distribution appelée \suite- dont les instructions d'installation se trouvent sur le \goto{wiki de \ConTeXt}[url(wiki)]. Les indications sont également incluses dans l'\in{annexe}[instalación_suite].
 
@@ -103,10 +118,46 @@ Nous pouvons choisir l'éditeur, nous pouvons choisir le visualisateur de PDF, n
 Si nous disposons déjà des outils mentionnés dans la section précédente, nous devons ouvrir notre éditeur de texte et créer un fichier appelé \quotation{la-maison-sur-le-port.tex} pour notre exemple. Comme contenu du fichier, nous allons écrire ce qui suit :
 
 
-\typefile[code]{la-maison-sur-le-port.tex}
+\typefile[code]{../img/la-maison-sur-le-port.tex}
+
+\startDemoI
+% Première ligne du document
+
+\mainlanguage[fr]    % Langue français
+
+\setuppapersize[S5]  % Format du papier
+
+\setupbodyfont       % Police = Latin Modern, 12 points
+  [modern,18pt]
+
+\setuphead           % Format des titres de chapitre
+  [chapter]
+  [style=\bfc]
+
+\starttext           % Début du contenu du document
+
+\startchapter
+  [title=La maison sur le port]
+
+Il y avait des    chansons
+Les hommes        venaient y boire et rêver
+Dans la maison    sur le port
+Où les filles     riaient fort
+Où le vin faisait chanter chanter chanter
+
+Les pêcheurs      vous le diront
+Ils y venaient    sans façon
+Avant de partir   retirer leurs filets
+Ils venaient      se réchauffer près de nous
+Dans la maison    sur le port
+
+\stopchapter
+
+\stoptext            % Fin du document
+\stopDemoI
 
 \attachment
-  [file=la-maison-sur-le-port.tex,
+  [file=../img/la-maison-sur-le-port.tex,
     title={View Source Code},
     name=la-maison-sur-le-port.tex,
     author=Test]
@@ -139,7 +190,7 @@ Sur la 9\high{ème} ligne de notre exemple (je ne compte que les lignes qui ont 
 \stopsubsubsubject
 
 \startsubsubsubject
-  [title=Traitement du document sourcei, ou compilation]
+  [title=Traitement du document source, ou compilation]
 
  \index{compilation}
 
@@ -160,6 +211,11 @@ Si la distribution \ConTeXt\ que nous avons installée est \suite-, nous devons 
 $ source ~/context/tex/setuptex
 \stopterminal
 
+\startDemoC
+$ source ~/context/tex/setuptex
+\stopDemoC
+
+
 en supposant que nous avons installé \ConTeXt\ dans un répertoire appelé \MyKey{context}.
 
 \startSmallPrint
@@ -173,6 +229,11 @@ Une fois que les variables nécessaires à l'exécution de \MyKey{context} ont �
 \startterminal
 $ context la-maison-sur-le-port
 \stopterminal
+
+\startDemoC
+$ context la-maison-sur-le-port
+\stopDemoC
+
 
 Notez que bien que le fichier source s'appelle \quotation{la-maison-sur-le-port.tex} dans l'appel à \MyKey{context} nous avons omis l'extension du fichier. Si nous avions appelé au fichier source, par exemple, \MyKey{la-maison-sur-le-port.mkiv} (ce que je fais habituellement pour savoir que ce fichier est écrit pour Mark~IV), il aurait fallu indiquer expressément l'extension du fichier à compiler en tapant \MyKey{context la-maison-sur-le-port.mkiv}.
 
@@ -257,10 +318,14 @@ Nous pouvons appeler \MyKey{context} avec plusieurs options. Les options sont sa
 $ context --help
 \stopterminal
 
+\startDemoC
+$ context --help
+\stopDemoC
+
 Parmi les options les plus intéressantes, citons les suivantes :
 
 
-\description{\tt Interface} Comme je l'ai dit dans le chapitre d'introduction, l'interface de \ConTeXt\ est traduite en plusieurs langues. Par défaut, c'est l'interface anglaise qui est utilisée, mais cette option nous permet de lui demander d'utiliser la version néerlandaise (nl), française (fr), italienne (it), allemande (de) ou roumaine (ro).
+\description{\tt interface} Comme je l'ai dit dans le chapitre d'introduction, l'interface de \ConTeXt\ est traduite en plusieurs langues. Par défaut, c'est l'interface anglaise qui est utilisée, mais cette option nous permet de lui demander d'utiliser la version néerlandaise (nl), française (fr), italienne (it), allemande (de) ou roumaine (ro).
 
 \description{\tt purge, purgeall} Supprime les fichiers auxiliaires générés pendant le traitement.
 
@@ -343,6 +408,38 @@ mtx-context     | fatal error: return code: 256
 \stopterminal
 }
 
+\startDemoC
+tex error       > tex error on line 14 in file la-maison-sur-le-port_bug.tex: ! Undefined control sequence
+
+l.14 \startext
+                       % Début du contenu du document
+
+ 4
+ 5     \setuppapersize[S5]  % Format du papier
+ 6
+ 7     \setupbodyfont       % Police = Latin Modern, 12 points
+ 8       [modern,18pt]
+ 9
+10     \setuphead           % Format des titres de chapitre
+11       [chapter]
+12       [style=\bfc]
+13
+14 >>  \startext           % Début du contenu du document
+15
+16     \startchapter
+17       [title=La maison sur le port]
+18
+19     Il y avait des    chansons
+20     Les hommes        venaient y boire et rêver
+21     Dans la maison    sur le port
+22     Où les filles     riaient fort
+23     Où le vin faisait chanter chanter chanter
+24
+
+mtx-context     | fatal error: return code: 256
+\stopDemoC
+
+
 Par exemple, si dans notre fichier de test, \MyKey{la-maison-sur-le-port.tex}, par erreur, au lieu de \tex{starttext} nous avions écrit \tex{startext} (avec un seul \quotation{t}), ce qui, par ailleurs, est une erreur très courante, lors de l'exécution de \MyKey{context la-maison-sur-le-port}, lorsque la compilation était arrêtée, dans l'écran du terminal nous pouvions voir l'information montrée dans la \in{figure}[msgerror].
 
   Nous pouvons y voir les lignes de notre fichier source numérotées, et à l'une d'entre elles, dans notre cas la ligne 14, entre le numéro et le texte de la ligne le compilateur a ajouté \quotation{>>} pour indiquer que c'est dans cette ligne qu'il a trouvé l'erreur. Le numéro de la ligne est également indiqué plus haut, avnat l'affichage des lignes, dans une ligne commençant par \MyKey{tex error}. Le fichier \MyKey{la-maison-sur-le-port.log} nous donnera plus d'indices. Dans notre exemple, il ne s'agit pas d'un très gros fichier, car la source que nous compilions est très petite ; dans d'autres cas, il peut contenir une quantité écrasante d'informations. Mais nous devons nous y plonger. Si nous ouvrons  \MyKey{la-maison-sur-le-port.log} avec un éditeur de texte, nous verrons que ce fichier enregistre tout ce que fait \ConTeXt. Nous devons y chercher une ligne qui commence par un avertissement d'erreur \quotation{\tt tex error}, pour cela nous pouvons utiliser la fonction de recherche de texte de l'éditeur. Nous trouveerons les lignes d'erreur suivantes~:
@@ -376,7 +473,8 @@ Une autre astuce consiste à mettre en commentaires le paquets de lignes douteus
 
 Une fois que nous l'avons localisée, nous pouvons essayer de la comprendre et de la corriger ou, si nous ne pouvons pas comprendre pourquoi l'erreur se produit, au moins, ayant localisé le point où elle se trouve, nous pouvons essayer d'écrire les choses d'une manière différente pour éviter que l'erreur se reproduise.i
 
-TODO Garulfo : la remarque me semble plus source de complication dans l'esprit du lecteur que source d'éclaircissement.
+% TODO Garulfo : la remarque me semble plus source de complication dans l'esprit du lecteur que source d'éclaircissement
+
 
 Ce dernier point, bien sûr, uniquement si nous sommes les auteurs ; si nous nous limitons à composer le texte de quelqu'un d'autre, nous ne pourrons pas le modifier et nous devrons continuer à enquêter jusqu'à ce que nous découvrions les raisons de l'erreur et sa possible solution.
 

@@ -25,7 +25,7 @@
       verytolerant,
       stretch]
 
-  \setuplanguage        % This avoids an extra space after full stops (periods)
+\setuplanguage        % This avoids an extra space after full stops (periods)
     [en]                % which  is  no longer 'de rigueur' in printed material
     [spacing=packed]    % in English.
 
@@ -43,7 +43,76 @@
       headerdistance=.5cm,
       footer=0.5cm
     ]
+    
+    
+      %------------------------------------------------------------------------------
+  %------------------------------------------------------------------------------
+  %------------------------------------------------------------------------------
+  %------------------------------------------------------------------------------
+% Trial Garulfo 
+\startsetups [mylayout]
 
+    \setuppapersize[A4]
+
+    \def\nbdiv{11}
+    \def\nbdiva{7}
+    \def\nbdivb{2}
+
+    \newdimen\marge   \marge   = 4mm
+    \def\myfooterdistance{\marge}
+    \def\myheaderdistance{\marge}
+
+    \def\myheader{\dimexpr(((1\paperheight)/\nbdiv)/2-\marge)\relax}
+    \def\myfooter{\dimexpr(((\nbdivb\paperheight)/\nbdiv)/2-\marge)\relax}
+
+    \def\myleftmargin{\dimexpr(((1\paperwidth)/\nbdiv)/2-\marge)\relax}
+    \def\myrightmargin{\dimexpr((\nbdivb\paperwidth)/\nbdiv)-\marge\relax}
+
+    \setuplayout[
+      width={\dimexpr((\nbdiva\paperwidth)/\nbdiv)-\marge\relax},
+      backspace={\dimexpr(1\paperwidth/\nbdiv)+(\marge/2)\relax},
+      % topspace + header + headerdistance = 24,75mm
+      header=\myheader,
+      headerdistance=\myheaderdistance,
+      topspace={\dimexpr(1\paperheight/\nbdiv)+(\marge/2)-\myheader-\myheaderdistance\relax},
+      % height - ( header + headerdistance + footer + footerdistance ) = 222.75mm
+      footer=\myfooter,
+      footerdistance=\myfooterdistance,
+      height={\dimexpr((8\paperheight)/\nbdiv)-\marge+\myfooter+\myfooterdistance+\myheader+\myheaderdistance\relax},
+      %
+      topdistance=\marge,
+      top=\myheader,
+      bottomdistance=\marge,
+      bottom=\myfooter,
+      % edge and margin distance
+      margindistance=\marge,
+      edgedistance=\marge,
+      %
+      % left
+      leftmargin=\myleftmargin,
+      leftedge=\myleftmargin,
+      % rigth
+      rightmargin=\myrightmargin,
+      rightedge=\myrightmargin]
+
+    \newdimen\wDemoHN \wDemoHN=\dimexpr(1.0\textwidth)
+    \newdimen\wDemoHW \wDemoHW=\dimexpr(1.0\textwidth+1.0\rightmargintotal)
+
+    \newdimen\wComba \wComba=\dimexpr(0.5\textwidth+0.5\rightmargintotal-0.5\marge)
+    \newdimen\wCombb \wCombb=\dimexpr(\textwidth/3+\rightmargintotal/3-2\marge/3)
+    \newdimen\wDemoV \wDemoV=\dimexpr(0.5\textwidth+0.5\rightmargintotal-\marge)
+
+  \stopsetups
+
+  \setups{mylayout}
+  
+    %------------------------------------------------------------------------------
+  %------------------------------------------------------------------------------
+  %------------------------------------------------------------------------------
+  %------------------------------------------------------------------------------
+  %------------------------------------------------------------------------------
+
+  
   \setuppagenumbering [location={header, right}]                 % Page numbers
   \setupuserpagenumber [number=2]
   \setupfootertexts[]                                   % Empty initial footers
@@ -154,6 +223,8 @@
   \setuphead
     [subsubsection][numbercommand=\PlacePoint]
 
+ % \setuptyping[bodyfont=10pt]
+
   %==============================================================================
   % STRUCTURES DEFINED BY ME
 
@@ -260,6 +331,35 @@
   % Index
   \defineregister[macro]
   \define[1]\PlaceMacro{\macro[#1]{\backslash #1}}
+
+
+  %======================================================
+  % ADDED BY GARULFO
+
+  \setuplinenumbering[style=\tt\tfxx,align=left]
+
+\defineframedtext
+  [framedcode]
+  [strut=yes,
+   offset=2mm,
+   width=local,
+   align=right]
+
+\definetyping
+  [code]
+  [numbering=line,
+    option=tex,
+    bodyfont=small,
+    before={\startframedcode},
+    after={\stopframedcode}]
+
+  \definetyping
+  [terminal]
+  [numbering=line,
+    option=none,
+    bodyfont=small,
+    before={\startframedcode},
+    after={\stopframedcode}]
 
   %------------------------------------------------------------------------------
   % INTERACTIVITY
@@ -401,6 +501,224 @@
   \setupheadtext [fr] [Toc=Table des matières]
 
   %=============================> ADDED BY GARULFO - END   <=====================
+  
+  
+  %-------------------------------------------------------------------------------
+  % #08 - MISE EN PAGE DES DEMONSTRATONS
+  %-------------------------------------------------------------------------------
+
+  \newdimen\marge   \marge   = 4mm
+
+  \newdimen\wDemoHN \wDemoHN=\dimexpr(1.0\textwidth)
+  \newdimen\wDemoHW \wDemoHW=\dimexpr(1.0\textwidth+1.0\rightmargintotal)
+
+  \newdimen\wComba \wComba=\dimexpr(0.5\textwidth+0.5\rightmargintotal-0.5\marge)
+  \newdimen\wCombb \wCombb=\dimexpr(\textwidth/3+\rightmargintotal/3-2\marge/3)
+  \newdimen\wDemoV \wDemoV=\dimexpr(0.5\textwidth+0.5\rightmargintotal-\marge)
+  
+  \setupcolor[hex]
+  \definecolor[hex-orange] [h=ED7D31]
+  \definecolor[hex-vert]   [h=70AD47]
+  \definecolor[hex-orangel][h=FEE8E1]
+  \definecolor[hex-vertl]  [h=E2EDDB]
+
+  % si besoin de mettre en forme par TeX des commentaires dans les codes sources
+  % il faut les encadrer par [[ et ]] comme indiqué dans typebuffer, option escape
+
+  \definestartstop[comment][style={\rm}]
+
+  % startDemoHN ==> horizontal split, normal width
+  % startDemoHW ==> horizontal split, wide
+  % startDemoVN ==> vertical split, normal width
+  % startDemoVW ==> vertical split, wide
+  % startDemoI  ==> for input file
+  % startDemoC  ==> for shell command
+
+  \startluacode
+    userdata = userdata or {}
+
+    function userdata.Demolua(buffer,lettre)
+    if lettre=="HN" then
+    Tlarg="{\\dimexpr\\textwidth-\\marge\\relax}"
+    elseif lettre=="HW" then
+    Tlarg="{\\dimexpr\\textwidth+\\rightmargintotal-\\marge\\relax}"
+    elseif lettre=="VN" then
+    Tlarg="{\\dimexpr0.5\\textwidth-1.5\\marge\\relax}"
+    elseif lettre=="VW" then
+    Tlarg="{\\dimexpr0.5\\textwidth+0.5\\rightmargintotal-1.5\\marge\\relax}"
+    end
+
+    buffers.assign("tempo",buffers.getcontent(buffer))
+    buffers.assign(buffer,"\\startTEXpage %\n")
+    buffers.append(buffer,"\\project ma-cb %\n")
+    buffers.append(buffer,"\\setupbodyfont[palatino,9pt] %\n")
+    buffers.append(buffer,"\\framed[align=normal,\n width=" .. Tlarg .. ",\n offset=0pt,\n frame=off,strut=no]{%debutZ\n")
+      buffers.append(buffer,buffers.getcontent("tempo"))
+      buffers.append(buffer,"\n%finZ \n}\n")
+    buffers.append(buffer,"\\stopTEXpage\n")
+    end
+  \stopluacode
+
+  %-------------------------------------------------------------------------------
+
+  \def\startDemoHN{\dostartbuffer[DemoTbuff][startDemoHN][stopDemoHN]}
+
+  \def\stopDemoHN{\ctxlua{userdata.Demolua('DemoTbuff',"HN")}%
+    \startplacetable[location={none,force}]
+      \bTABLE
+      \setupTABLE[frame=off,offset=2pt,spaceinbetween=\the\marge]
+      \setupTABLE[column][1][width=\wDemoHN,align=flushleft] %
+      \bTR
+      \bTD[topframe=on,rulethickness=3pt,framecolor=hex-orange,background=color,backgroundcolor=gray]
+      \typebuffer[DemoTbuff][bodyfont=small,option=tex,range={debutZ,finZ},escape={[[,]]}]
+      \eTD
+      \eTR
+      \bTR
+      \bTD[bottomframe=on,rulethickness=3pt,framecolor=hex-vert,background=color,backgroundcolor=gray]
+      \strut\typesetbuffer[DemoTbuff][page=1,frame=off]
+      \eTD
+      \eTR
+      \eTABLE
+    \stopplacetable}
+
+  %-------------------------------------------------------------------------------
+
+  \def\startDemoHW{\dostartbuffer[DemoTbuff][startDemoHW][stopDemoHW]}
+
+  \def\stopDemoHW{\ctxlua{userdata.Demolua('DemoTbuff',"HW")}%
+    \startplacetable[location={none,force}]
+      \bTABLE
+      \setupTABLE[frame=off,offset=2pt,spaceinbetween=\the\marge]
+      \setupTABLE[column][1][width=\wDemoHW,align=flushleft] %
+      \bTR
+      \bTD[topframe=on,rulethickness=3pt,framecolor=hex-orange,background=color,backgroundcolor=gray]
+      \typebuffer[DemoTbuff][bodyfont=small,option=tex,range={debutZ,finZ},escape={[[,]]}]
+      \eTD
+      \eTR
+      \bTR
+      \bTD[bottomframe=on,rulethickness=3pt,framecolor=hex-vert,background=color,backgroundcolor=gray]
+      \strut\typesetbuffer[DemoTbuff][page=1,frame=off]
+      \eTD
+      \eTR
+      \eTABLE
+    \stopplacetable}
+
+  %-------------------------------------------------------------------------------
+
+  \def\startDemoVW{\dostartbuffer[DemoTbuff][startDemoVW][stopDemoVW]}
+
+  \def\stopDemoVW{\ctxlua{userdata.Demolua('DemoTbuff',"VW")}%
+    \startplacetable[location={none,force}]
+      \bTABLE
+      \setupTABLE[frame=off,offset=2pt]
+      \setupTABLE[column][1][width={\dimexpr0.5\wDemoHW-0.5\marge\relax},align=flushleft]
+      \setupTABLE[column][2][width=\marge,align=flushleft]
+      \setupTABLE[column][3][width={\dimexpr0.5\wDemoHW-0.5\marge\relax},align=flushleft]
+      \bTR
+      \bTD[leftframe=on,rulethickness=3pt,framecolor=hex-orange,background=color,backgroundcolor=gray]
+      \typebuffer[DemoTbuff][bodyfont=small,option=tex,range={debutZ,finZ},escape={[[,]]}]
+      \eTD
+      \bTD    \eTD
+      \bTD[rightframe=on,rulethickness=3pt,framecolor=hex-vert,background=color,backgroundcolor=gray]
+      \strut\typesetbuffer[DemoTbuff][page=1,frame=off]
+      \eTD
+      \eTR
+      \eTABLE
+    \stopplacetable}
+
+  %-------------------------------------------------------------------------------
+
+  \def\startDemoVN{\dostartbuffer[DemoTbuff][startDemoVN][stopDemoVN]}
+
+  \def\stopDemoVN{\ctxlua{userdata.Demolua('DemoTbuff',"VN")}%
+    \startplacetable[location={none,force}]
+      \bTABLE
+      \setupTABLE[frame=off,offset=2pt,strut=no]
+      \setupTABLE[column][1][width={\dimexpr0.5\wDemoHN-0.5\marge\relax},align=flushleft]
+      \setupTABLE[column][2][width=\marge,align=flushleft]
+      \setupTABLE[column][3][width={\dimexpr0.5\wDemoHN-0.5\marge\relax},align=flushleft]
+      \bTR
+      \bTD[leftframe=on,rulethickness=3pt,framecolor=hex-orange,background=color,backgroundcolor=gray,strut=no]
+      \typebuffer[DemoTbuff][bodyfont=small,option=tex,range={debutZ,finZ},escape={[[,]]}]
+      \eTD
+      \bTD    \eTD
+      \bTD[rightframe=on,rulethickness=3pt,framecolor=hex-vert,background=color,backgroundcolor=gray,strut=no]
+      \strut\typesetbuffer[DemoTbuff][page=1,frame=off,strut=no]
+      \eTD
+      \eTR
+      \eTABLE
+    \stopplacetable}
+
+  %-------------------------------------------------------------------------------
+
+  \def\startDemoI{\dostartbuffer[DemoTbuffI][startDemoI][stopDemoI]}
+
+  \def\stopDemoI{\ctxlua{userdata.Demolua("DemoTbuffI","HN")}%
+    \startplacetable[location={none,force}]
+      \bTABLE
+      \setupTABLE[frame=off,offset=2pt,spaceinbetween=\the\marge]
+      \setupTABLE[column][1][width=\wDemoHN,align=flushleft]
+      \bTR
+      \bTD[leftframe=on,rulethickness=3pt,framecolor=darkblue,background=color,backgroundcolor=gray]
+      \typebuffer[DemoTbuffI][bodyfont=small,option=tex,range={debutZ,finZ},escape={[[,]]}]
+      \eTD
+      \eTABLE
+    \stopplacetable}
+
+  %-------------------------------------------------------------------------------
+
+  \def\startDemoC{\dostartbuffer[Demobuff][startDemoC][stopDemoC]}
+
+  \def\stopDemoC{\ctxlua{userdata.Demolua("Demobuff","HN")}%
+    \startplacetable[location={none,force}]
+      \bTABLE
+      \setupTABLE[frame=off,offset=2pt,spaceinbetween=\the\marge]
+      \setupTABLE[column][1][width=\wDemoHN,align=flushleft]
+      \bTR
+      \bTD[leftframe=on,rulethickness=3pt,loffset=1mm,framecolor=darkred,background=color,backgroundcolor=gray]
+      \typebuffer[Demobuff][numbering=fine,bodyfont=10pt,option=,range={debutZ,finZ}] %,escape={[[,]]}]
+  \eTD
+  \eTABLE
+\stopplacetable}
+
+%===================================================================================================
+% 10 - Notes de bas de page ou notes marginales
+%===================================================================================================
+\setupnote[footnote][location=none]
+
+\setupnotation[footnote][
+    align=flushleft,
+    location=serried,
+    width=broad,
+]
+\setuptexttexts[margin][]
+    [{\framed[%
+    align={right,bottom},
+    frame=off,
+    height=\textheight,
+    width=\rightmarginwidth
+    ]{\placenotes[footnote]}}]
+
+
+
+% \define\PlaceFootnote
+%   {\inrightmargin{\vtop{\placelocalnotes[footnote][before=,after=]}}}
+
+% \setupnote
+%   [footnote]
+%   [location=text,
+%    bodyfont=,
+%    next=\PlaceFootnote]
+
+% \setupnotation
+%   [footnote]
+%   [alternative=serried]
+
+% \setuplayout
+%   [width=12cm,
+%    rightmargindistance=0.5cm,
+%    rightmargin=5cm]
+
 
 \stopenvironment
 

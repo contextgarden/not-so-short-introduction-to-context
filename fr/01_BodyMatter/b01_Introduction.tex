@@ -27,6 +27,8 @@
 
 \startitemize
 
+\index{Mark~II}
+\index{Mark~IV}
 \item Il existe deux versions de \CONTEXT\, appelées respectivement Mark~II et
   Mark~IV. \CONTEXT\ Mark~II est {\em gelé}, c'est-à-dire qu'il est considéré
   comme finalisé, qu'aucun changement ou nouvelle fonctionnalité ne devrait y
@@ -58,7 +60,7 @@
   \item Nous commençons par écrire un ou plusieurs fichiers texte avec n'importe
     quel éditeur de texte.
 
-  \item Dans ces fichiers, e plus du texte qui constitue le contenu réel du
+  \item Dans ces fichiers, en plus du texte qui constitue le contenu réel du
     document, il y a une série d'instructions, instructions qui indiquent à
     \CONTEXT\ à quoi doit ressembler le document final généré à partir des
     fichiers texte originaux. L'ensemble complet des instructions \CONTEXT\
@@ -97,6 +99,8 @@ Dans la suite, les points fondamentaux ci-dessus seront développés un peu plus
 
 \startsection [title=La composition typographique de document]
 
+\index{rédaction}
+\index{composition}
 
 Ecrire un document (livre, article, chapitre, brochure, dépliant, imprimé, affiche...) et le mettre en page, dit également le composer, sont deux activités très différentes.
 
@@ -119,9 +123,10 @@ Au contraire, les outils tels que  \ConTeXt\ sont l'évolution de l'imprimerie ;
 \stopsection
 
 \startsection [title=Les langages de balisage]
+\index{langages de balisage+balises}
+\index{langages de balisage+markup}
 
-  Avant l'arrivée de l'informatique, comme je l'ai déjà dit, l'auteur préparait son manuscrit à la main ou à la machine à écrire et le remettait à l'éditeur ou à l'imprimeur, qui était chargé de transformer le manuscrit en texte final imprimé. Bien que l'auteur soit relativement peu intervenu dans cette transformation, il l'a fait dans une certaine mesure, par exemple en indiquant que certaines lignes du manuscrit étaient les titres de ses différentes parties (chapitres, sections...) ; ou en indiquant que certains fragments devaient être mis en valeur typographiquement d'une certaine manière. Ces indications étaient faites par l'auteur dans le manuscrit lui-même, parfois expressément, et d'autres fois au moyen de certaines conventions qui, avec le temps, se sont développées ; ainsi, par exemple, les chapitres commençaient toujours sur une nouvelle page, en insérant plusieurs lignes vierges avant le titre, en le soulignant, en l'écrivant en majuscules ; ou en encadrant le texte à mettre en valeur entre deux soulignements, en augmentant l'indentation d'un paragraphe, etc.
-
+Avant l'arrivée de l'informatique, comme je l'ai déjà dit, l'auteur préparait son manuscrit à la main ou à la machine à écrire et le remettait à l'éditeur ou à l'imprimeur, qui était chargé de transformer le manuscrit en texte final imprimé. Bien que l'auteur soit relativement peu intervenu dans cette transformation, il l'a fait dans une certaine mesure, par exemple en indiquant que certaines lignes du manuscrit étaient les titres de ses différentes parties (chapitres, sections...) ; ou en indiquant que certains fragments devaient être mis en valeur typographiquement d'une certaine manière. Ces indications étaient faites par l'auteur dans le manuscrit lui-même, parfois expressément, et d'autres fois au moyen de certaines conventions qui, avec le temps, se sont développées ; ainsi, par exemple, les chapitres commençaient toujours sur une nouvelle page, en insérant plusieurs lignes vierges avant le titre, en le soulignant, en l'écrivant en majuscules ; ou en encadrant le texte à mettre en valeur entre deux soulignements, en augmentant l'indentation d'un paragraphe, etc.
 
   L'auteur, en somme, {\em indiquait} dans le texte original quelques éléments concernant la composition typographique du texte. L'éditeur ensuite inscrivait à son tour de nouvelles indication pour l'imprimeur, comme par exemple la police et la taille de caractères.
 
@@ -136,6 +141,7 @@ En ce qui concerne les balises {\em typographiques}, qui indiquent l'apparence q
 \stopsection
 
 \startsection [title=\TeX\ et ses dérivés]
+  \index{moteurs \TeX}
 
 \TeX\   a été développé à la fin des années 1970 par  {\sc Donald E. Knuth}, professeur de théorie de la programmation à l'université de Stanford, qui l'a utilisé pour composer ses propres publications et ainsi que pour donner un exemple de {\em programmation littéraire}, une approche de la programmation où le code source du logiciel est systématique commenté et documenté. Avec \TeX, {\sc Knuth} a également développé un langage de programmation supplémentaire appelé \MetaFont, pour la conception de caractères typographiques, avec lequel il a créé une police qu'il a nommée {\em Computer Modern}, qui, en plus des caractères habituels de toute police, comprenait également un ensemble complet de \quote{glyphes} \footnote{En typographie, un glyphe est une représentation graphique d'un caractère, de plusieurs caractères ou d'une partie d'un caractère et est l'équivalent actuel du type d'impression (la pièce mobile en bois ou en plomb qui portait la gravure de la lettre).} pour l'écriture des mathématiques. Il a ajouté à tout cela quelques utilitaires supplémentaires et c'est ainsi qu'est né le système de composition appelé \TeX, qui, pour sa puissance, la qualité de ses résultats, sa flexibilité d'utilisation et ses vastes possibilités, est considéré comme l'un des meilleurs systèmes informatiques pour la composition de textes. Il a été pensé pour des textes dans lesquels il y avait beaucoup de mathématiques, mais on a vite vu que les possibilités du système le rendaient adapté à tous les types de textes.
 
@@ -208,6 +214,16 @@ T
 \kern -.125em 
 X
 stoptyping}
+
+\startDemoC
+T 
+\kern -.1667em 
+\lower .5ex 
+\hbox {E} 
+\kern -.125em 
+X
+\stopDemoC
+
 
 On comprend là qu'il est beaucoup plus facile pour un être humain de comprendre et mémoriser la simple commande \quotation{\PlaceMacro{TeX}\type{\TeX}} dont l'exécution effectue l'ensemble des opérations typographiques nécessaires à l'impression du logo.
 
@@ -375,10 +391,9 @@ Je ne pense pas que l'une de ces deux {\em philosophies} puisse être considér�
 \stopsubsection
 
 \startsubsection 
-  [title=Comprendre la dynamique du travail avec \ConTeXt]
+  [title=La logique de travail avec \ConTeXt]
 
 Lorsque nous travaillons avec \ConTeXt, nous commençons toujours par écrire un fichier texte (que nous appellerons  {\em fichier source}), dans lequel nous inclurons, en plus du contenu de notre document final à proprement parler, les instructions (en langage \ConTeXt) qui indiquent exactement comment nous voulons que le document soit composé : quel aspect général nous voulons donner à ses pages et paragraphes, quelles marges nous souhaitons appliquer à certains paragraphes spéciaux, quelles types de police doit être utilisé, quels fragments souhaitons nous afficher avec une police différente, etc. Une fois que nous avons écrit le fichier source, depuis un terminal, nous executerons le programme \MyKey{context}, qui le traitera et, à partir de celui-ci, générera un fichier différent, dans lequel le contenu de notre document aura été formaté selon les instructions qui étaient incluses dans le fichier source. Ce nouveau fichier peut être envoyé à l'imprimante, affiché à l'écran, hébergé sur Internet ou distribué à nos contacts, amis, clients, professeurs, étudiants... bref, à tous ceux pour qui nous avons écrit le document.
-
 
 C'est-à-dire que lorsqu'il travaille avec \ConTeXt, l'auteur agit sur un fichier dont l'apparence n'a rien à voir avec celle du document final : le fichier avec lequel l'auteur travaille directement est un fichier texte qui n'est pas formaté typographiquement. À cet égard, son fonctionnement est très différent de celui des programmes dits de {\em traitement de texte}, qui affichent l'aspect final du document édité au fur et à mesure de sa saisie. Pour ceux qui sont habitués aux  {\em traitements de texte}, le fonctionnement de l'application peut sembler étrange au début, et il peut même falloir un certain temps pour s'y habituer. Cependant, une fois que vous vous y serez habitué, vous comprendrez que cette autre façon de travailler, faisant la différence entre le fichier de travail et le résultat final, est en fait un avantage pour de nombreuses raisons, parmi lesquelles je soulignerai, sans ordre particulier, les suivantes :
 
@@ -410,7 +425,7 @@ Tout cela signifie que, d'une part, lorsque l'on travaille avec \ConTeXt, une fo
 
 \startsubsection 
   [title=Obtenir de l'aide sur \ConTeXt]
-
+\index{aide et ressources}
 %\adaptlayout[+2]
 
 Tant que nous sommes des débutants, le meilleur endroit pour trouver de l'aide sur \ConTeXt\ est sans aucun doute son  \goto{wiki}[url(wiki)], qui regorge d'exemples et dispose d'un bon moteur de recherche, même s'il nécessite bien sûr de bien comprendre l'anglais. Nous pouvons aussi chercher de l'aide sur Internet, mais ici le jeu de mots sur lequel repose \ConTeXt\  nous jouera un sale tour car une recherche d'informations sur \quotation{contexte} renverrait des millions de résultats et la plupart d'entre eux n'auraient aucun rapport avec ce que nous recherchons. Pour rechercher des informations sur \ConTeXt, vous devez ajouter quelque chose au nom \quotation{context} ; par exemple, \quotation{tex}, \quotation{luatex}, \quotation{Mark IV} , \quotation{Hans Hagen} (un des créateurs de  \ConTeXt), \quotation{Pragma ADE}, ou quelque chose de similaire (par exemple une autre commande souvent utilisée dans le cas de figure qui vous préoccupe). Il peut également être utile de rechercher des informations par le nom wiki : \quotation{contextgarden}.
@@ -424,7 +439,7 @@ Après en avoir appris un peu plus sur \ConTeXt, et si l'on maîtrise bien l'ang
   et en particulier \goto{les questions tagguées \quotation{\ConTeXt}} [url(https://tex.stackexchange.com/questions/tagged/context)]
   \item soit sur la liste de diffusion propre à \ConTeXt\
 \goto{NTG-context}[url(https://mailman.ntg.nl/mailman/listinfo/ntg-context)]
-et son \goto{moteur de recherche} [url(https://www.mail-archive.com/search?a=1&l=ntg-context\%40ntg.nl)].
+et son \goto{moteur de recherche} [url(https://www.mail-archive.com/ntg-context@ntg.nl/index.html)].
 \stopitemize
 
 Cette dernière liste diffusion implique les personnes les plus compétents sur \ConTeXt, mais les règles d'une bonne éducation de \quotation{cybercitoyen} exigent qu'avant de poser une question, on ait essayé par tous les moyens de trouver la réponse par soi-même dans les documentations déjà existantes.
@@ -440,7 +455,7 @@ Cette dernière liste diffusion implique les personnes les plus compétents sur 
 %%% Local Variables:
 %%% mode: ConTeXt
 %%% mode: auto-fill
-%%% TeX-master: "../introCTX.mkiv"
+%%% TeX-master: "../introCTX_fra.tex"
 %%% coding: utf-8-unix
 %%% End:
 
