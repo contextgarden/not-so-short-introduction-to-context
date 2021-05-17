@@ -57,11 +57,6 @@ Qu'il s'agisse d'un éditeur ou d'un autre, ce qu'il ne faut pas faire, c'est ut
 
 \item {\bf Une distribution \ConTeXt} pour traiter notre fichier de test. S'il existe déjà une installation \TeX\ (ou \LaTeX) sur votre système, il est possible qu'une version de \ConTeXt\ soit déjà installée. Pour le vérifier, il suffit d'ouvrir un terminal et de taper dans celui-ci
 
-
-\startterminal
-$ context --version
-\stopterminal
-
 \startDemoC
 $ context --version
 \stopDemoC
@@ -75,15 +70,6 @@ qui indique que le terminal attend nos instructions.
 
 Si une version de \ConTeXt\ est déjà installée, vous devriez obtenir un résultat similaire au suivant :
 
-\startterminal
-$ context --version
-mtx-context     | ConTeXt Process Management 1.03
-mtx-context     |
-mtx-context     | main context file: /usr/share/texmf/tex/context/base/mkiv/context.mkiv
-mtx-context     | current version: 2020.03.10 14:44
-mtx-context     | main context file: /usr/share/texmf/tex/context/base/mkiv/context.mkxl
-mtx-context     | current version: 2020.03.10 14:44
-\stopterminal
 
 \startDemoC
 $ context --version
@@ -118,7 +104,6 @@ Nous pouvons choisir l'éditeur, nous pouvons choisir le visualisateur de PDF, n
 Si nous disposons déjà des outils mentionnés dans la section précédente, nous devons ouvrir notre éditeur de texte et créer un fichier appelé \quotation{la-maison-sur-le-port.tex} pour notre exemple. Comme contenu du fichier, nous allons écrire ce qui suit :
 
 
-\typefile[code]{../img/la-maison-sur-le-port.tex}
 
 \startDemoI
 % Première ligne du document
@@ -207,10 +192,6 @@ Si la distribution \ConTeXt\ que nous avons installée est \suite-, nous devons 
 
 % TODO à revoir avec LMTX
 
-\startterminal
-$ source ~/context/tex/setuptex
-\stopterminal
-
 \startDemoC
 $ source ~/context/tex/setuptex
 \stopDemoC
@@ -225,10 +206,6 @@ En ce qui concerne l'exécution du {\em script} qui vient d'être mentionné, vo
 \stopSmallPrint
 
 Une fois que les variables nécessaires à l'exécution de \MyKey{context} ont été chargées en mémoire, nous pouvons l'exécuter. Cela se fait en tapant dans le terminal :
-
-\startterminal
-$ context la-maison-sur-le-port
-\stopterminal
 
 \startDemoC
 $ context la-maison-sur-le-port
@@ -314,9 +291,6 @@ La commande \MyKey{context}  avec laquelle nous avons procédé au traitement de
 
 Nous pouvons appeler \MyKey{context} avec plusieurs options. Les options sont saisies immédiatement après le nom de la commande, précédées de deux traits d'union. Si nous voulons saisir plus d'une option, nous les séparons par un espace blanc. L'option \MyKey{help} nous donne une liste de toutes les options, avec une brève explication de chacune d'elles :
 
-\startterminal
-$ context --help
-\stopterminal
 
 \startDemoC
 $ context --help
@@ -370,44 +344,6 @@ En travaillant avec \ConTeXt, il est inévitable que, tôt ou tard, des erreurs 
 
 Que faire lorsque  \MyKey{context} nous avertit, pendant la compilation, qu'une erreur s'est produite ? La première chose est, évidemment, d'identifier quelle est l'erreur. Pour ce faire, nous devrons parfois analyser le fichier \MyKey{.log} généré pendant la compilation ; mais encore plus souvent il suffira de remonter dans les messages produits par \MyKey{context} dans le terminal où il est exécuté.
 
-\placefloat
-  [here]
-  [middle]
-  [msgerror]
-  {Sortie d'affichage en cas d'erreur de compilation}
-  {
-\startterminal[numbering=]
-tex error       > tex error on line 14 in file la-maison-sur-le-port_bug.tex: ! Undefined control sequence
-
-l.14 \startext
-                       % Début du contenu du document
-
- 4
- 5     \setuppapersize[S5]  % Format du papier
- 6
- 7     \setupbodyfont       % Police = Latin Modern, 12 points
- 8       [modern,18pt]
- 9
-10     \setuphead           % Format des titres de chapitre
-11       [chapter]
-12       [style=\bfc]
-13
-14 >>  \startext           % Début du contenu du document
-15
-16     \startchapter
-17       [title=La maison sur le port]
-18
-19     Il y avait des    chansons
-20     Les hommes        venaient y boire et rêver
-21     Dans la maison    sur le port
-22     Où les filles     riaient fort
-23     Où le vin faisait chanter chanter chanter
-24
-
-mtx-context     | fatal error: return code: 256
-\stopterminal
-}
-
 \startDemoC
 tex error       > tex error on line 14 in file la-maison-sur-le-port_bug.tex: ! Undefined control sequence
 
@@ -440,16 +376,16 @@ mtx-context     | fatal error: return code: 256
 \stopDemoC
 
 
-Par exemple, si dans notre fichier de test, \MyKey{la-maison-sur-le-port.tex}, par erreur, au lieu de \tex{starttext} nous avions écrit \tex{startext} (avec un seul \quotation{t}), ce qui, par ailleurs, est une erreur très courante, lors de l'exécution de \MyKey{context la-maison-sur-le-port}, lorsque la compilation était arrêtée, dans l'écran du terminal nous pouvions voir l'information montrée dans la \in{figure}[msgerror].
+Par exemple, si dans notre fichier de test, \MyKey{la-maison-sur-le-port.tex}, par erreur, au lieu de \tex{starttext} nous avions écrit \tex{startext} (avec un seul \quotation{t}), ce qui, par ailleurs, est une erreur très courante, lors de l'exécution de \MyKey{context la-maison-sur-le-port}, lorsque la compilation était arrêtée, dans l'écran du terminal nous pouvions voir l'information montrée dans ci-dessus.
 
   Nous pouvons y voir les lignes de notre fichier source numérotées, et à l'une d'entre elles, dans notre cas la ligne 14, entre le numéro et le texte de la ligne le compilateur a ajouté \quotation{>>} pour indiquer que c'est dans cette ligne qu'il a trouvé l'erreur. Le numéro de la ligne est également indiqué plus haut, avnat l'affichage des lignes, dans une ligne commençant par \MyKey{tex error}. Le fichier \MyKey{la-maison-sur-le-port.log} nous donnera plus d'indices. Dans notre exemple, il ne s'agit pas d'un très gros fichier, car la source que nous compilions est très petite ; dans d'autres cas, il peut contenir une quantité écrasante d'informations. Mais nous devons nous y plonger. Si nous ouvrons  \MyKey{la-maison-sur-le-port.log} avec un éditeur de texte, nous verrons que ce fichier enregistre tout ce que fait \ConTeXt. Nous devons y chercher une ligne qui commence par un avertissement d'erreur \quotation{\tt tex error}, pour cela nous pouvons utiliser la fonction de recherche de texte de l'éditeur. Nous trouveerons les lignes d'erreur suivantes~:
 
-\startterminal[numbering=]
+\startDemoC
 tex error       > tex error on line 14 in file la-maison-sur-le-port_bug.tex: ! Undefined control sequence
 
 l.14 \startext
                        % Début du contenu du document
-\stopterminal
+\stopDemoC
 
 \startSmallPrint
 

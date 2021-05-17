@@ -17,7 +17,7 @@
 
   \mainlanguage[fr]                                    % Main language = french
 
-  \setupbodyfont[palatino]                    % The document's main (body) font
+  \setupbodyfont[palatino,10.5pt]                    % The document's main (body) font
 
   \setupalign                                    % two instructions added by j.
     [hz,                                        % to eliminate most hyphenation
@@ -44,8 +44,7 @@
       footer=0.5cm
     ]
     
-    
-      %------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
   %------------------------------------------------------------------------------
   %------------------------------------------------------------------------------
   %------------------------------------------------------------------------------
@@ -291,11 +290,11 @@
 
   % Assumption: Print the assumption icon in the margin
   \define\Conjecture{%
-    \inmargin[line=1]{\externalfigure[conjecture.pdf][width=1cm]}}
+    \inouter[line=1]{\externalfigure[conjecture.pdf][width=1cm]}}
 
   % Doubt: Print the doubt icon in the margin
   \define\Doubt{%
-    \inmargin[line=1]{\externalfigure[doubt.pdf][width=1cm]}}
+    \inouter[line=1]{\externalfigure[doubt.pdf][width=1cm]}}
 
   % example: Show in red and in small print the result of compiling an
   % earlier code snippet.
@@ -416,6 +415,7 @@
   \usepath[{00_FrontMatter,01_BodyMatter,02_Appendices}]
 
   \placebookmarks[chapter, section, subsection, subsubsection]
+
 
   %------------------------------------------------------------------------------
 

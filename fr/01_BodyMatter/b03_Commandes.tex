@@ -215,33 +215,9 @@ En fonction de ce qui suit immédiatement ce caractère d'échappement, une dist
 
 Lorsque \ConTeXt\ lit un fichier source et trouve le caractère d'échappement (\quotation{{\tt\backslash}}), il sait qu'une commande va suivre. Il lit alors le premier caractère qui suit la séquence d'échappement. Si ce n'est pas une lettre, cela signifie que la commande est un symbole de contrôle et ne consiste qu'en ce premier symbole. Mais d'un autre côté, si le premier caractère après la séquence d'échappement est une lettre, alors \ConTeXt\ continuera à lire chaque caractère jusqu'à ce qu'il trouve le premier caractère qui ne soit pas une lettre, et il saura alors que le nom de la commande est terminé. C'est pourquoi les noms de commande qui sont d␣es mots de contrôle ne peuvent pas contenir de caractères autres que des lettres.
 
-Lorsque la \quotation{non-lettre} à la fin du nom de la commande est un espace vide, il est supposé que l'espace vide ne fait pas partie du texte à traiter, mais qu'il a été inséré exclusivement pour indiquer la fin du nom de la commande, donc \ConTeXt\ se débarrasse de cet espace. Cela produit un effet qui surprend les débutants, car lorsque l'effet de la commande en question implique d'écrire quelque chose dans le document final, la sortie écrite de la commande est liée au mot suivant. Par exemple, les deux phrases suivantes dans le fichier source
-
-\definebuffer[exempleAA]
-\startexempleAA
-Connaître \TeX aide à l'apprentissage de \ConTeXt.
-
-Connaître \TeX, si non indispensable, aide à l'apprentissage de \ConTeXt.
-
-Connaître \TeX        aide à l'apprentissage de \ConTeXt.
-
-Connaître \TeX{} aide à l'apprentissage de \ConTeXt.
-
-Connaître \TeX\ aide à l'apprentissage de \ConTeXt.
-\stopexempleAA
-
-\startframedcode[background=color,backgroundcolor=middlegray]
-\typeexempleAA[option=tex]
-\stopframedcode
-
-
-produisent le résultat suivant
+Lorsque la \quotation{non-lettre} à la fin du nom de la commande est un espace vide, il est supposé que l'espace vide ne fait pas partie du texte à traiter, mais qu'il a été inséré exclusivement pour indiquer la fin du nom de la commande, donc \ConTeXt\ se débarrasse de cet espace. Cela produit un effet qui surprend les débutants, car lorsque l'effet de la commande en question implique d'écrire quelque chose dans le document final, la sortie écrite de la commande est liée au mot suivant. Par exemple, les deux phrases suivantes dans le fichier source produisent le résultat suivant~:
 % TODO Garulfo : cette remarque n'est pas à mettre en note de bas de page, trop important.
 \footnote{{\bf Note:} par convention, pour illustrer quelque chose dans cette introduction, les exemple de code source utilise une police à espacement fixe. une coloration syntaxique cohérente de \ConTeXt\ dans un cadre de fond gris. Le résultat de la compilation est présenté dans un cadre de fond de couleur jaune foncé.}
-
-\startframedcode[background=color,backgroundcolor=middleyellow]
-\getexempleAA
-\stopframedcode
 
 \startDemoHN
 Connaître \TeX aide à l'apprentissage de \ConTeXt.
@@ -290,15 +266,6 @@ J'ai expliqué ce mécanisme de manière assez détaillée, car l'élimination d
 
   Il existe une troisième procédure pour éviter le problème des espaces vides, qui consiste à définir (à la manière de \TeX) une commande similaire et à inclure une \quotation{non-lettre} à la fin du nom de la commande. Par exemple, la séquence suivante :
 
-\definebuffer[exempleAB]
-\startexempleAB
-\def\txt-{\TeX}
-\stopexempleAB
-
-\startframedcode[background=color,backgroundcolor=middlegray]
-\typeexempleAB[option=tex]
-\stopframedcode
-
 \startDemoI
 \def\txt-{\TeX}
 \stopDemoI
@@ -331,51 +298,18 @@ Ces types de commandes n'ont pas besoin de prendre d'argument, car elles ne sont
 Lorsque ces commandes sont exécutées dans un {\em groupe} (voir \in{section}[sec:groups]), elles perdent également leur efficacité lorsque le groupe dans lequel elles sont exécutées est fermé. Par conséquent, pour que ces commandes n'affectent qu'une partie du texte, il faut souvent générer un groupe contenant cette commande et le texte que l'on souhaite qu'elle affecte. Un groupe est créé en l'enfermant entre des accolades. Par conséquent, le texte suivant
 
 
-\startDoubleExample
-
-\starttyping
-In {\it The \TeX Book}, 
-{\sc Knuth} explained everything
-you need to know about \TeX.
-\stoptyping
-
-In {\it The \TeX Book}, {\sc Knuth} explained everything you need to know
-about \TeX.
-
-\stopDoubleExample
 
 \startDemoHN
 In {\it The \TeX Book}, {\sc Knuth} explained \bf{everything} you need to know about \TeX.
 \stopDemoHN
 
-\startDemoVN
-In {\it The \TeX Book}, {\sc Knuth} explained \bf{everything} you need to know about \TeX.
-\stopDemoVN
-
-\startDemoHW
-In {\it The \TeX Book}, {\sc Knuth} explained everything you need to know about \TeX.
-\stopDemoHW
-
-\startDemoVN
-In {\it The \TeX Book}, {\sc Knuth} explained everything you need to know about \TeX.
-\stopDemoVN   
-
-\startDemoVW
-In {\it The \TeX Book}, {\sc Knuth} explained everything you need to know about \TeX.
-\stopDemoVW
 
 
 
 crée deux groupes, l'un pour déterminer la portée de la commande \tex{it} (italique) et l'autre pour déterminer la portée de la commande \tex{sc} (petites capitales, small capital en anglais).
 
-Au contraire de ce type de commande, il en existe d'autres qui nécessitent immédiatement une indication du texte auquel elles doivent être appliquées. Dans ce cas, le texte qui doit être affecté par la commande est placé entre des crochets immédiatement après la commande. Par exemple, nous pouvons citer la commande \tex{framed} : cette commande dessine un cadre autour du texte qu'elle prend comme argument, de telle sorte que
+Au contraire de ce type de commande, il en existe d'autres qui nécessitent immédiatement une indication du texte auquel elles doivent être appliquées. Dans ce cas, le texte qui doit être affecté par la commande est placé entre des crochets immédiatement après la commande. Par exemple, nous pouvons citer la commande \tex{framed} : cette commande dessine un cadre autour du texte qu'elle prend comme argument, par exemple~:
 
-
-{\tfx\type{\framed{Tweedledum and Tweedledee}}}
-
-produira\blank
-
-\example{\framed{Tweedledum and Tweedledee}}
 
 \startDemoHN
   \framed{Tweedledum and Tweedledee}
@@ -411,24 +345,6 @@ Il n'y a pas de nom spécial pour ces paires de commandes dans la documentation 
 Les environnements consistent donc en une commande qui les ouvre, les commence, et une autre qui les ferme, les termine. Si le fichier source contient une commande d'ouverture d'environnement qui n'est pas fermée par la suite, une erreur est normalement générée.\footnote{Pas toujours, cela dépend de l'environnement en question et de la situation dans le reste du document. \ConTeXt\ diffère de \LaTeX\ à cet égard qui est beaucoup plus stricte.} D'autre part, ces types d'erreurs sont plus difficiles à trouver, car l'erreur peut se produire bien au-delà de l'endroit où se trouve la commande d'ouverture. Parfois, le fichier \MyKey{.log} nous montrera la ligne où commence l'environnement incorrectement fermé ; mais d'autres fois, l'absence d’une fermeture \footnote{test} d'environnement va impliquer une mauvaise interprétation par \ConTeXt\ qui soulignera le passage qu'il considère comme éronné et non pas le manque de fermeture d'environnement, ce qui signifie que le fichier \MyKey{.log} ne nous est pas d'une grande aide pour trouver où se situe le problème.
 
 Les environnements peuvent être imbriqués, ce qui signifie qu'un autre environnement peut être ouvert à l'intérieur d'un environnement existant. Dans de tels cas un environnement doit absolument être fermé à l'intérieur de l'environnement dans lequel il a été ouvert. En d'autres termes, l'ordre dans lequel les environnements sont fermés doit être cohérent avec l'ordre dans lequel ils ont été ouverts. Je pense que cela devrait être clair à partir de l'exemple suivant :
-
-
-{\switchtobodyfont[small]
-\startframedtext
-\starttyping
-\startQuelqueChose
-  …
-  \startQuelqueChoseAutre
-    …
-    \startEncoreQuelqueChoseAutre
-      …
-    \stopEncoreQuelqueChoseAutre
-  \stopQuelqueChoseAutre
-\stopQuelqueChose
-\stoptyping
-\stopframedtext
-}
-
 
 \startDemoC
 \startQuelqueChose
@@ -477,34 +393,11 @@ De nombreuses commandes peuvent fonctionner de plusieurs façons. Dans ce cas, i
 Un bon exemple est la commande \tex{framed} mentionnée dans la section précédente. Cette commande dessine un cadre autour du texte qu'elle prend comme argument. Par défaut, le cadre a la hauteur et la largeur du texte auquel il est appliqué, mais nous pouvons indiquer une hauteur et une largeur différentes. Ainsi, nous pouvons voir la différence entre le fonctionnement de la commande \tex{framed} par défaut :
 
 
-
-\startDoubleExample
-
-  \type{\framed{Tweedledum}}
-
-  \framed{Tweedledum}
-
-\stopDoubleExample
-
 \startDemoVN
     \framed{Tweedledum}
 \stopDemoVN
 
 et celui d'une version personnalisée~:
-
-\startDoubleExample
-
-\starttyping
-\framed
-  [width=3cm, height=1cm]
-  {Tweedledum}
-\stoptyping
-
-\framed
-  [width=3cm, height=1cm]
-  {Tweedledum}
-
-\stopDoubleExample
 
 
 \startDemoVN
@@ -515,27 +408,6 @@ et celui d'une version personnalisée~:
 
 
 Dans le deuxième exemple, nous avons indiqué entre les crochets une largeur et une hauteur spécifiques pour le cadre qui entoure le texte qu'il prend comme argument. À l'intérieur des crochets, les différentes options de configuration sont séparées par une virgule ; les espaces vides et même les sauts de ligne (à condition qu'il ne s'agisse pas d'un double saut de ligne) entre deux ou plusieurs options, ne sont pas pris en considération afin que, par exemple, les quatre versions suivantes de la même commande produisent exactement le même résultat :
-
-
-{\switchtobodyfont[small]
-\startframedtext
-\starttyping
-\framed[width=3cm,height=1cm]{Tweedledum}
-
-\framed[width=3cm,  height=1cm]{Tweedledum}
-
-\framed
-  [width=3cm, height=1cm]
-  {Tweedledum}
-
-\framed
-  [width=3cm,
-   height=1cm]
-  {Tweedledum}
-\stoptyping
-\stopframedtext
-}
-
 
 \startDemoVW
 \framed[width=3cm,height=1cm]{Tweedledum}
@@ -572,16 +444,6 @@ Nous avons déjà vu que les commandes qui offrent des options de fonctionnement
 
 La commande \tex{framed} que nous avons utilisée comme exemple dans cette section reste un bon exemple. Ainsi, si nous utilisons beaucoup de cadres dans notre document, mais qu'ils nécessitent tous des mesures précises, il serait préférable de reconfigurer le fonctionnement de \tex{framed}, en le faisant avec \tex{setupframed}. Ainsi,
 
-{\switchtobodyfont[small]
-\starttyping
-\setupframed
-  [
-  width=3cm,
-  height=1cm,
-  ]
-
-\stoptyping
-}
 
 \startDemoI
 \setupframed
@@ -601,9 +463,8 @@ Il existe environ 300 commandes dans \ConTeXt\ qui nous permettent de configurer
 \startsubsection
   [title=Définir des versions personnalisée de commande configurables (\cmd{defineQuelqueChose})]
 
-En continuant avec l'exemple du \tex{framed}, il est évident que si notre document utilise plusieurs types de cadres, chacun avec des mesures différentes, l'idéal serait de pouvoir {\em prédéfinir} différentes configurations de \tex{framed}, et de les associer à un nom particulier afin de pouvoir utiliser l'un ou l'autre selon les besoins. Nous pouvons le faire dans \ConTeXt\ avec la commande \tex{defineframed}, dont la syntaxe est :
+En continuant avec l'exemple du \tex{framed}, il est évident que si notre document utilise plusieurs types de cadres, chacun avec des mesures différentes, l'idéal serait de pouvoir {\em prédéfinir} différentes configurations de \tex{framed}, et de les associer à un nom particulier afin de pouvoir utiliser l'un ou l'autre selon les besoins. Nous pouvons le faire dans \ConTeXt\ avec la commande \tex{defineframed}, dont la syntaxe est~:
 
-\type{\defineframed[MonCadre][MaConfigurationPourCadre]}
 
 \startDemoI
 \defineframed
@@ -615,7 +476,7 @@ où {\em MonCadre} est le nom attribué au type particulier de cadre à configur
 
 L'association entre la configuration et le nom se traduit par l'existence d'une nouvelle fonction \MyKey{MonCadre} que nous pourrons l'utiliser dans n'importe quel contexte où nous aurions pu utiliser la commande originale (\tex{framed}).
 
-Cette possibilité n'existe pas seulement pour le cas concret de la commande \tex{framed}, mais pour de nombreuses autres commandes. La combinaison de \tex{defineQuelqueChose} + \tex{setupQuelqueChose} est un mécanisme qui donne à \ConTeXt\ son extrême puissance et flexibilité. Si nous examinons en détail ce que fait la commande \tex{defineSomething}, nous constatons que :
+Cette possibilité n'existe pas seulement pour le cas concret de la commande \tex{framed}, mais pour de nombreuses autres commandes. La combinaison de \tex{defineQuelqueChose} + \tex{setupQuelqueChose} est un mécanisme qui donne à \ConTeXt\ son extrême puissance et flexibilité. Si nous examinons en détail ce que fait la commande \tex{defineSomething}, nous constatons que~:
 
 
 \startitemize[packed]
@@ -630,15 +491,6 @@ Cette possibilité n'existe pas seulement pour le cas concret de la commande \te
 
 Dans l'exemple que nous avons donné, nous avons configuré notre cadre spécial \MyKey{MonCadre} en même temps que nous le créions. Mais nous pouvons aussi le créer d'abord et le configurer ensuite, car, comme je l'ai dit, une fois le clone créé, il peut être utilisé là où l'original aurait pu l'être. Ainsi, dans notre exemple, nous pouvons le configurer avec \tex{setupframed} en indiquant le nom du cadre (framed) que nous voulons configurer. Dans ce cas, la commande \tex{setup} prendra un nouvel argument avec le nom du cadre à configurer :
 
-{\switchtobodyfont[small]
-\vbox{\starttyping
-\defineframed[MonCadre]
-
-\setupframed
-  [MonCadre]
-  [ ... ]
-\stoptyping
-}}
 
 \startDemoI
 \defineframed
@@ -661,9 +513,10 @@ Dans l'exemple que nous avons donné, nous avons configuré notre cadre spécial
 \startsection
   [
     reference=sec:syntax,
-    title={Résumé sur la syntaxe des commandes et des options,\\
-      et sur l'utilisation des crochets et des accolades lors de leur appel.}
-  ]
+    title={Résumé sur la syntaxe des commandes et des options,
+      et sur l'utilisation des crochets et des accolades lors de leur appel.},
+    bookmark=Résumé sur la syntaxe des commandes et des options
+      et sur l'utilisation des crochets et des accolades lors de leur appel]
   this section is especially dedicated to LaTeX users, so
   they can understand the different use of such brackets.
 
@@ -975,117 +828,70 @@ Si nous voulons que notre nouvel environnement soit un groupe (\in{section}[sec:
 % ** 3.8 Autres concepts fondamentaux       <== HERE NEXT
 
 \startsection
-  [title=Other fundamental concepts]
+  [title=Autres concepts fondamentaux]
 
-There are other notions, other than commands, that are fundamental to
-understanding the logic behind how \ConTeXt\ works. Some of them,
-because of their complexity, are not appropriate for an introduction and
-therefore will not be dealt with in this document; but there are two
-notions that should be examined now: groups and dimensions.
+  Il existe d'autres notions, autres que les commandes, qui sont fondamentales pour comprendre la logique du fonctionnement de \ConTeXt\. Certaines d'entre elles, en raison de leur complexité, ne sont pas appropriées pour une introduction et ne seront donc pas abordées dans ce document ; mais il y a deux notions qu'il convient d'examiner maintenant : les groupes et les dimensions.
+
 
 \startsubsection
-  [reference=sec:groups, title=Groups]
+  [reference=sec:groups, title=Groupes]
 
-A group is a well-defined fragment of the source file that \ConTeXt\
-uses as a {\em working unit} (what this means is explained shortly).
-Every group has a beginning and end that needs to be expressly
-indicated. A group begins:
+Un groupe est un fragment bien défini du fichier source que \ConTeXt\ utilisé comme une {\em unité de travail}. (ce que cela signifie est expliqué plus loin). Chaque groupe a un début et une fin qui doivent être expressément indiqués. Un groupe commence :
+% TODO Garulfo : mettre les correspondances immédiatmeent ouverture / fermeture
+\startitemize [packed]
 
-\startitemize[packed]
+  \item Avec le caractère réservé \MyKey{\{} ou avec la commande \PlaceMacro{bgroup}\tex{bgroup}.
 
-  \item With the reserved character \MyKey{\{} or with the command
-    \PlaceMacro{bgroup}\tex{bgroup}.
+  \item Avec la commande \PlaceMacro{begingroup}\tex{begingroup}.
 
-  \item With the command \PlaceMacro{begingroup}\tex{begingroup}
+  \item Avec la commande \PlaceMacro{start}\tex{start}
 
-  \item With the command \PlaceMacro{start}\tex{start}
+  \item Avec l'ouverture de certains environnements (commande \tex{startSomething}).
 
-  \item With the opening of certain environments (\tex{startSomething}
-  command).
-
-  \item By beginning a maths environment (with the reserved character
-  «\$»).
+  \item En commençant un environnement mathématique (avec le caractère réservé
+  "\$").
 
 \stopitemize
 
-and is closed
+et est fermé
 
-\startitemize[packed]
+\startitemize [emballé]
 
-  \item With the reserved character \MyKey{\}} or with the command
-    \PlaceMacro{egroup}\tex{egroup}.
+  \item Avec le caractère réservé \MyKey{\}} ou avec la commande \PlaceMacro{egroup}\tex{egroup}.
 
-  \item With the command \PlaceMacro{endgroup}\tex{endgroup}
+  \item Avec la commande \PlaceMacro{endgroup}\tex{endgroup}.
 
-  \item With the command \PlaceMacro{stop}\tex{stop}
+  \item Avec la commande \PlaceMacro{stop}\tex{stop}
 
-  \item With the closing of the environment (\tex{stopSomething} command).
+  \item Avec la fermeture de l'environnement (commande \tex{stopSomething}).
 
-  \item On leaving the maths environment (with the reserved character
-    «\$»).
+  \item Lors de la sortie de l'environnement mathématique (avec le caractère réservé "\$").
 
 \stopitemize
 
-Certain commands also automatically generate a group, for example,
-\tex{hbox}, \tex{vbox} and, in  general, commands linked to the creation
-of {\em boxes}\footnote{The {\em box} notion is also a central \ConTeXt\
-one, but its explanation is not included in this introduction.}. Outside
-of these latter cases (groups automatically generated by certain
-commands), the way of closing a group has to be consistent with the way
-it is opened. This means that a group that is begun with \MyKey{\{} must
-close with \MyKey{\}}, and a group begun with \tex{begingroup} must be
-closed with \tex{endgroup}. This rule has only one exception, that a
-group begun with \MyKey{\{} can be closed with \tex{egroup}, and the
-group begun with \tex{bgroup} can be closed with \MyKey{\}}; in reality,
-this means that \MyKey{\{} and \tex{bgroup} are completely synonymous
-and interchangeable, and similarly for \MyKey{\}} and \tex{egroup}.
+
+
+Certaines commandes génèrent aussi automatiquement un groupe, par exemple, \tex{hbox}, \tex{vbox} et, en général, les commandes liées à la création de {\em boîte}\footnote{La notion de {\em boîte} est également une notion centrale de \ConTeXt\, mais son explication n'est pas incluse dans cette introduction. Vous pouvez voir \goto{le manuel dédié}[url(https://www.pragma-ade.com/general/manuals/lowlevel-boxes.pdf)]}. En dehors de ces derniers cas (groupes générés automatiquement par certaines commandes), la manière de fermer un groupe doit être cohérente avec la manière dont il a été ouvert. Cela signifie qu'un groupe commencé avec \MyKey{\{} doit être fermé avec \MyKey{\}}, et qu'un groupe commencé avec \tex{begingroup} doit être fermé avec \tex{endgroup}.
+% TODO Garulfo : ne pas laisser cette réflexion qui est plus source de confusion qu'autre chose.
+Cette règle n'a qu'une seule exception~: un groupe commencé par \MyKey{\{} peut être fermé par \tex{egroup}, et le groupe commencé par \tex{bgroup} peut être fermé par \MyKey{\}} ; en réalité, cela signifie que \MyKey{\{} et \tex{bgroup} sont complètement synonymes et interchangeables, et de même pour \MyKey{\}} et \tex{egroup}.
 
 \startSmallPrint
 
-  The commands \PlaceMacro{bgroup}\tex{bgroup} and
-  \PlaceMacro{egroup}\tex{egroup} were designed to be able to define
-  commands to open a group and others to close a group. Therefore, for
-  reasons internal to \TeX\ syntax, those groups could not be opened and
-  closed with curly brackets, since this would generate unbalanced curly
-  brackets in the source file, and this would always throw an error when
-  compiling.
+  Les commandes \PlaceMacro{bgroup}\tex{bgroup} et \PlaceMacro{egroup}\tex{egroup} ont été conçues pour pouvoir définir des commandes pour ouvrir un groupe et d'autres pour fermer un groupe. Par conséquent, pour des raisons internes à la syntaxe \TeX\, ces groupes ne pouvaient pas être ouverts et fermés avec des accolades, car cela aurait généré des accolades déséquilibrées dans le fichier source, ce qui aurait toujours provoqué une erreur lors de la compilation.
 
-  The commands \PlaceMacro{begingroup}\tex{begingroup} and
-  \PlaceMacro{endgroup}\tex{endgroup}, by contrast, are not
-  interchangeable with curly brackets or the \tex{bgroup  ... \egroup}
-  commands, since a group begun with \tex{begingroup} has to be closed
-  with \tex{endgroup}. These latter commands were designed to allow for
-  much more in-depth error checking. In general, normal users do not
-  have to use them.
+  %TODO Garulfo : c'est un truc de jedi, pourquoi donner ça en introduction ? https://tex.stackexchange.com/questions/1930/when-should-one-use-begingroup-instead-of-bgroup, il faut mieux utiliser \begingroup
+
+  En revanche, les commandes \PlaceMacro{begingroup}\tex{begingroup} et \PlaceMacro{endgroup}\tex{endgroup} ne sont pas interchangeables avec les accolades ou les commandes \tex{bgroup ... \egroup}, car un groupe commencé avec \tex{begingroup} doit être fermé avec \tex{endgroup}. Ces dernières commandes ont été conçues pour permettre une vérification beaucoup plus approfondie des erreurs. En général, les utilisateurs normaux n'ont pas à les utiliser.
 
 \stopSmallPrint
 
-We can have nested groups (a group within another group), and in this
-case the order in which groups are closed must be consistent with the
-order in which they were opened: any subgroup has to be closed within
-the group in which it began. There can also be empty groups generated
-with \MyKey{\{\}}. An empty group, in principle, has no effect on the
-final document, but it can be useful, for example, for indicating the
-end of a command name.
+Nous pouvons avoir des groupes imbriqués (un groupe à l'intérieur d'un autre groupe), et dans ce cas, l'ordre dans lequel les groupes sont fermés doit être cohérent avec l'ordre dans lequel ils ont été ouverts : tout sous-groupe doit être fermé à l'intérieur du groupe dans lequel il a commencé. Il peut également y avoir des groupes vides générés avec la \MyKey{\{\}}. Un groupe vide n'a, en principe, aucun effet sur le document final, mais il peut être utile, par exemple, pour indiquer la fin du nom d'une commande.
 
-The main effect of the groups is to encapsulate their content: as a
-rule, the definitions, formats and value assignments that are made
-within a group are \quotation{forgotten} once we leave the group. This
-way, if we want \ConTeXt\ to temporarily alter its normal way of
-functioning, the most efficient way is to create a group and, within it,
-alter that functioning. Thus, when we leave the group, all the values
-and formats previous to it will be restored. We have already seen some
-examples of this when mentioning commands like \tex{it}, \tex{bf},
-\tex{sc}, etc. But this doesn't only happen with format commands: the
-group in a way {\em isolates} its contents, so that any change in any of
-the many internal variables that \ConTeXt\ is constantly managing, will
-remain effective only as long as we are within the group in which that
-change took place. Likewise, a command defined within a group will not
-be known outside it.
+Le principal effet des groupes est d'encapsuler leur contenu : en règle générale, les définitions, les formats et les attributions de valeurs effectués au sein d'un groupe sont \quotation{oubliés} une fois que l'on quitte le groupe. De cette façon, si nous voulons que \ConTeXt\ modifie temporairement son mode de fonctionnement normal, le moyen le plus efficace est de créer un groupe et, au sein de celui-ci, de modifier ce fonctionnement. Ainsi, lorsque nous quitterons le groupe, toutes les valeurs et tous les formats antérieurs à celui-ci seront restaurés. Nous en avons déjà vu quelques exemples en mentionnant des commandes comme \tex{it}, \tex{bf}, \tex{sc}, etc. Mais cela ne se produit pas seulement avec les commandes de formatage : le groupe isole en quelque sorte son contenu, de sorte que toute modification de l'une des nombreuses variables internes que \ConTeXt\ gère en permanence, ne restera effective que tant que nous nous trouvons dans le groupe dans lequel cette modification a eu lieu. De même, une commande définie au sein d'un groupe ne sera pas connue en dehors de celui-ci.
 
-So, if we process the following example
+Ainsi, si nous traitons l'exemple suivant
 
-\starttyping
+\startDemoVN
 \define\A{B}
 \A
 {
@@ -1093,62 +899,37 @@ So, if we process the following example
   \A
 }
 \A
-\stoptyping
+\stopDemoVN
 
-we will see that the first time we run the command \tex{A}, the result
-corresponds to that of its initial definition (\quote{B}). Then we
-created a group and redefined the command \tex{A} within it. If we run
-it now within the group, the command will give us the new definition
-(\quote{C} in our example), but when we leave the group in which the
-command \tex{A} was redefined, if we run it again it will type \quote{B}
-once more. The definition made within the group is \quotation{forgotten}
-once we have left it.
+nous voyons que la première fois que nous exécutons la commande \tex{A}, le résultat correspond à celui de sa définition initiale (\quote{B}). Ensuite, nous avons créé un groupe et redéfini la commande \tex{A} au sein de celui-ci. Si nous l'exécutons maintenant au sein du groupe, la commande nous donnera la nouvelle définition (\quote{C} dans notre exemple), mais lorsque nous quittons le groupe dans lequel la commande \tex{A} a été redéfinie, si nous l'exécutons à nouveau, elle tapera \quote{B} une fois de plus. La définition faite au sein du groupe est \quotation{oubliée} une fois que nous l'avons quitté.
 
-Another possible use of the groups concerns those commands or
-instructions designed to apply exclusively to the character that is
-written after them. In this case, if we want the command to be applied
-to more than one character, we must enclose the characters we want the
-command or instruction to be applied to, in a group. So for example, the
-reserved \MyKey{\letterhat} character which, we already know, converts
-the following character into a superscript when used inside the maths
-environment; so if we write, for example, \MyKey{\$4^2x\$} we will get
-\quotation{$4^2x$ }. But if we write \MyKey{\$4^\{2x\}\$} we will get
-\quotation{$4^{2x}$}.
+Une autre utilisation possible des groupes concerne les commandes ou instructions conçues pour s'appliquer exclusivement au caractère qui est écrit après elles. Dans ce cas, si nous voulons que la commande s'applique à plus d'un caractère, nous devons inclure dans un groupe les caractères auxquels nous voulons que la commande ou l'instruction s'applique. Ainsi, par exemple, le caractère réservé \MyKey{\letterhat} qui, nous le savons déjà, convertit le caractère suivant en exposant lorsqu'il est utilisé dans l'environnement mathématique ; ainsi, si nous écrivons, par exemple, \MyKey{\$4^2x\$}, nous obtiendrons \quotation{$4^2x$ }. Mais si nous écrivons \MyKey{\$4^\{2x\}\$}, nous obtiendrons \quotation{$4^{2x}$}.
 
-Finally: a third use of grouping is to tell \ConTeXt\ that what is
-enclosed within the group must be treated as one. This is the reason why
-before (\in{section}[sec:syntax]) it was said that on certain occasions
-it is better to enclose the contents of some command option within curly
-brackets.
+Enfin, une troisième utilisation du regroupement est d'indiquer à \ConTeXt\ que ce qui est inclus dans le groupe doit être traité comme un seul élément. C'est la raison pour laquelle il a été dit précédemment (\in{section}[sec:syntax]) que dans certaines occasions, il est préférable d'enfermer le contenu d'une option de commande entre des crochets.
+
 
 \stopsubsection
 
 \startsubsection
   [reference=sec:dimensions, title=Dimensions]
 
-Although we could use \ConTeXt\ perfectly without worrying about
-dimensions, we would not be able to make use of all the configuration
-possibilities without giving them some consideration. Because to a large
-extent the typographical perfection achieved by \TeX\ and its
-derivatives lies in the great attention that the system pays internally
-to dimensions. Characters have dimensions; the space between words, or
-between lines, or between paragraphs have dimensions; lines have
-dimensions; margins, headers and footers. For almost every element on
-the page we can think of there will be some dimension.
 
-In \ConTeXt\ dimensions are indicated by a decimal number followed by
-the unit of measurement. The units that can be used are found in
+  Bien que nous puissions utiliser \ConTeXt\ parfaitement sans nous soucier des dimensions, nous ne pourrions pas utiliser toutes les possibilités de configuration sans leur accorder une certaine attention. Car, dans une large mesure, la perfection typographique atteinte par \TeX\ et ses dérivés réside dans la grande attention que le système accorde en interne aux dimensions. Les caractères ont des dimensions ; l'espace entre les mots, ou entre les lignes, ou entre les paragraphes ont des dimensions ; les lignes ont des dimensions ; les marges, les en-têtes et les pieds de page. Pour presque tous les éléments de la page auxquels nous pouvons penser, il existe des dimensions.
+
+Dans \ConTeXt\ les dimensions sont indiquées par un nombre décimal suivi par
+l'unité de mesure. Les unités qui peuvent être utilisées se trouvent dans
 \in{table}[tbl:measurements].
+
 
 \placetable
   [here]
   [tbl:measurements]
-  {Units of measurement in \ConTeXt}
+  {Unités de mesure dans \ConTeXt}
 {\starttabulate[|l|c|l|]
-  \NC {\bf Name} \NC {\bf Name in \ConTeXt}\NC {\bf Equivalent}\NR
+  \NC {\bf Nom} \NC {\bf Notation dans \ConTeXt}\NC {\bf Equivalent}\NR
 \NC Inch\NC in\NC 1 in $=$ 2.54 cm\NR
-\NC Centimetre\NC cm\NC 2.54 cm $=$ 1 inch\NR
-\NC Millimetre\NC mm\NC 100 mm $=$ 1 cm\NR
+\NC Centimètre\NC cm\NC 2.54 cm $=$ 1 inch\NR
+\NC Millimètre\NC mm\NC 100 mm $=$ 1 cm\NR
 
 \NC Point\NC pt\NC 72.27 pt $=$ 1 inch\NR
 \NC Big point\NC bp\NC 72 bp $=$ 1 inch\NR
@@ -1161,69 +942,51 @@ the unit of measurement. The units that can be used are found in
 \stoptabulate
 }
 
-The first three units in the \in{table}[tbl:measurements] are standard
-measures of length; the first is used in some parts of the
-English-speaking world and the others outside it or in some parts of it.
-The remaining units come from the world of typography. The last two, for
-which I have put no equivalent, are relative units of measurement based
-on the current font. 1 \quotation{em} is equal to the width of an
-\quotation{M} and an \quotation{ex} is equal to the height of an
-\quotation{x}. The use of measures related to font size allows the
-creation of macros that look just as good whatever the source used at
-any given moment. That is why, in general, it is recommended.
+Les trois premières unités du \in{table} [tbl:measurements] sont des mesures standard de longueur ; la première est utilisée dans certaines parties du monde anglophone et les autres en dehors ou dans certaines parties de celui-ci. Les autres unités proviennent du monde de la typographie. Les deux dernières, pour lesquelles je n'ai pas mis d'équivalent, sont des unités de mesure relatives basées sur la police de caractères actuelle. Une \quotation{em} est égale à la largeur d'un \quotation{M} et une \quotation{ex} est égale à la hauteur d'une \quotation{x}. L'utilisation de mesures liées à la taille des polices permet de créer des macros qui offrent une mise en forme réussies quelle que soit le contexte d'utilisation puisque tout est mis en cohérence avec la taille de la police de caractère. C'est pourquoi, en général, elle est recommandée.
 
-With very few exceptions, we can use any unit of measurement we prefer,
-as \ConTeXt\ will convert it internally. But whenever a dimension is
-indicated, it is compulsory to indicate the unit of measurement, and
-even if we want to indicate a measurement of \quotation{0}, we have to
-say \quote{0pt} or \quote{0cm}. Between the number and the name of the
-unit, we may or may not leave a blank space. If the unit has a decimal
-part, we can use a decimal separator, either the (.) or the comma (,).
+À de très rares exceptions près, nous pouvons utiliser l'unité de mesure de notre choix, car \ConTeXt\ la convertira en interne. Mais chaque fois qu'une dimension est indiquée, il est obligatoire d'indiquer l'unité de mesure, et même si nous voulons indiquer une mesure de \quotation{0}, nous devons dire \quote{0pt} ou \quote{0cm}. Entre le nombre et le nom de l'unité, on peut laisser ou non un espace vide. Si l'unité comporte une partie décimale, nous devons utiliser le \quotation{.} en séparateur décimal.
+% TODO Garulfo : une erreur ici. la virgule nêest pas toléré.
 
-The measurements are usually used as an option for some command. But we
-can also directly assign a value to some internal measure of \ConTeXt\
-as long as we know the name of it. For example, indentation of the first
-line of an ordinary paragraph is internally controlled by \ConTeXt\ with
-a variable called \PlaceMacro{parindent}\tex{parindent}. By expressly
-assigning a value to this variable we will have altered the measurement
-that \ConTeXt\ uses from that point on. And so, for example, if we want
-to eliminate the indentation of the first line, we only need to write in
-our source file:
 
-\type{\parindent=0pt}
+Les mesures sont généralement utilisées comme une option pour une commande. Mais nous pouvons également attribuer directement une valeur à une mesure interne de \ConTeXt\, tant que nous en connaissons le nom. Par exemple~:
 
-We could also have written \tex{parindent 0pt} (without the equal sign)
-or \tex{parindent0pt} with no space between the name of the measure and
-its value.
+\startDemoVN
+\newdimen\MaDimensionA          % déclaration
+\MaDimensionA=10mm              % affectation
+\blackrule[width=\MaDimensionA]
 
-However, assigning a value directly to an internal measure is considered
-\quotation{inelegant}. In general, it is recommended to use the commands
-that control that variable, and to do so in the preamble of the source
-file. The opposite results in source files that are very difficult to
-debug because not all the configuration commands are in the same place,
-and it is really difficult to obtain a certain consistency in
-typographical characteristics.
+\MaDimensionA20mm      % nouvelle affectation
+\blackrule[width=\MaDimensionA]
 
-Some of the dimensions used by \ConTeXt\ are \quotation{elastic}, that
-is, depending on the context, they can take one or other measure. These
-measures are assigned with the following syntax:
+\MaDimensionA 30mm     % nouvelle affectation
+\blackrule[width=\MaDimensionA]
 
-\type{\MeasureName plus MaxIncrement minus MaxDecrease}
+\stopDemoVN
+% TODO Garulfo ne faudrait il pas avoir expliqué ici qu'une ligne vide engendre une fin de paragraphe. Et utiliser parindent dans une exemple comme cela... alors qu'il faut l'éviter avec ConTeXt.
 
-{\tt\backslash {\em MeasureName} plus {\em MaxIncrement} minus
-  {\em MinDecrease}}
 
-For example
+Nous pouvons utiliser \tex{MaDimensionA 10mm} (sans le signe égal) mais aussi \tex{MaDimensionA10mm} sans espace entre le nom de la mesure et sa valeur.
 
-\type{\parskip 3pt plus 2pt minus 1pt}
+Toutefois, l'attribution d'une valeur directement à une mesure interne est considérée comme une \quotation{inelegant}. En général, il est recommandé d'utiliser les commandes qui contrôlent cette variable, et de le faire dans le préambule du fichier source. Le contraire donne lieu à des fichiers sources très difficiles à déboguer car toutes les commandes de configuration ne se trouvent pas au même endroit, et il est vraiment difficile d'obtenir une certaine cohérence dans les caractéristiques typographiques.
 
-With this instruction we are telling \ConTeXt\ to assign to
-\PlaceMacro{parskip}\tex{parskip} (indicating the vertical distance
-between paragraphs) a {\em normal} measurement of 3 points, but that if
-the composition of the page requires it, the measurement can be up to 5
-points (3 plus 2) or only 2 points (3 minus 1). In these cases it will
-be left to \ConTeXt\ to choose the distance for each page between a
-minimum of 2 points and a maximum of 5 points
+Certaines des dimensions utilisées par \ConTeXt\ sont \quotation{élastique}, c'est-à-dire que, selon le contexte, elles peuvent prendre l'une ou l'autre mesure. Ces mesures sont attribuées avec la syntaxe suivante :
+
+\startDemoI
+\MeasureName Value plus MaxIncrement minus MaxDecrease
+\stopDemoI
+
+Par exemple~:
+
+\startDemoI
+\parskip 3pt plus 2pt minus 1pt
+\stopDemoI
+
+
+
+Avec cette instruction, nous demandons à \ConTeXt\ d'attribuer à \PlaceMacro{parskip}\tex{parskip} (indiquant la distance verticale entre les paragraphes qui doit plutôt être paramétrée avec \tex{setupwhitespace} maais nous avons besoin ici d'un exemple) une mesure {\em normal} de 3 points, mais que si la composition de la page l'exige, la mesure peut aller jusqu'à 5 points (3 plus 2) ou seulement 2 points (3 moins 1). Dans ces cas, il appartiendra à \ConTeXt\ de choisir la distance pour chaque page entre un minimum de 2 points et un maximum de 5 points.
+\index{setupwhitespace}
+% TODO Garulfo parskip : toujours pas une bonne idée d'utiliser en illustration une commande que l'utilisateur moyen n'utilise pas.
+
 
 \stopsubsection
 
@@ -1232,87 +995,45 @@ minimum of 2 points and a maximum of 5 points
 % ** 3.9 ConTeXt en autodidacte
 
 \startsection
-  [title=Self-learning method for \ConTeXt]
+  [title=Méthode d'auto apprentissage pour \ConTeXt]
 
-  Section added at the last moment, when I realised that I myself
-  had become so imbued with the spirit of ConTeXt that I was able to
-  guess the existence of certain commands.
 
-The huge quantity of \ConTeXt\ commands and options turns out to be
-truly overwhelming  and can give us the feeling that we will never end
-up learning to work well with it. This impression would be a mistake,
-because one of the advantages of \ConTeXt\ is the uniform way it handles
-all its structures: learning well a few structures, and knowing, more or
-less, what the remaining ones are for, when we need some extra utility
-it will be relatively easy learn to use it. Therefore, I think of this
-introduction as a kind of {\em training} that will prepare us to make
-our own investigations.
+  Section ajoutée au dernier moment, lorsque je me suis rendu compte que j'étais moi-même tellement imprégné de l'esprit de \ConTeXt\ que j'étais capable de deviner l'existence de certaines commandes.
 
-To create a document with \ConTeXt\ it is probably only essential to
-know the following five things (we could call them the \ConTeXt\ {\em
-Top Five}):
+L'énorme quantité de commandes et d'options de \ConTeXt\ peut s'avérer vraiment écrasante et nous donner l'impression que nous ne finirons jamais par apprendre à bien travailler avec. Cette impression est trompeuse, car l'un des avantages de \ConTeXt\ est la manière uniforme dont il gère toutes ses structures~: en apprenant bien quelques structures, et en sachant, plus ou moins, à quoi servent les autres, lorsque nous aurons besoin d'une fonctionnalité supplémentaire, il sera relativement facile d'apprendre à l'utiliser. C'est pourquoi je pense que cette introduction est une sorte d'{\em entrainement} qui nous préparera à faire nos propres recherches.
+
+Pour créer un document avec \ConTeXt, il suffit probablement de connaître les cinq choses suivantes (nous pourrions les appeler le {\em Top Five})~:
+
 
 \startitemize[n]
 
-  \item Know how to create the source file or project of any; this is
-  explained in \in{Chapter}[cap:sourcefile] of this introduction.
+  \item Créer un fichier source ou un projet complet quelconque ; ceci est expliqué dans le \in{Chapitre}[cap:sourcefile] de cette introduction.
 
-  \item Set the main font for the document, and know the basic commands
-    to change font and colour (\in{Chapter}[sec:fontscol]).
+  \item Définir la police principale du document, la changer et changer sa couleur (\in{Chapitre}[sec:fontscol]).
 
-  \item Know the basic commands for structuring the content of our
-  document, such as chapters, sections, subsections, etc. This is all
-  explained in \in{Chapter}[cap:structure].
+  \item Structurer le contenu de notre document, avec des chapitres, des sections, des sous-sections, etc. Tout cela est expliqué dans le \in{Chapitre}[cap:structure].
 
-  \item Perhaps know how to handle the {\em itemize} environment
-  explained in some detail in \in{section}[sec:itemize].
+  \item Utiliser l'environnement {\em itemize} pour les listes, il sera expliqué en détail dans \in{section}[sec:itemize].
 
-  \item ... and little else.
-
+  \item ... et à peine plus.
+%TODO Garulfo : rajouter le layout
 \stopitemize
 
-For the rest, all we need to know is that it is possible. Certainly no
-one will use a utility if they do not know that it exists. Many of them
-are explained in this introduction; but, above all, we can repeatedly
-watch how \ConTeXt\ always acts when faced with a certain type of
-construction:
+Pour le reste, tout ce dont nous avons besoin, c'est de savoir que c'est possible. Certainement personne n'utilisera une fonctionnalité s'il ne sait pas qu'elle existe. Dans cette introduction, nous expliquons beaucoup d'entre elles ; mais, surtout, il est démontré à plusieurs reprises comment \ConTeXt\ se comporte face à un certain type de construction
 
 \startitemize
 
-  \item First there will be a command that allows it to do so.
+  \item Premièrement, il y aura une commande qui lui permettra de le faire.
 
-  \item Second, there is almost always a command that allows us to
-  configure and predetermine how the task will be carried out; a command
-  whose name starts with \tex{setup} and usually coincides with the
-  basic command.
+  \item Deuxièmement, il y a presque toujours une commande qui nous permet de configurer et de prédéterminer la façon dont la tâche sera effectuée ; une commande dont le nom commence par \tex{setup} et coïncide généralement avec la commande de base.
 
-  \item Finally, it is often possible to create a new command to perform
-  similar tasks, but with a different configuration.
+  \item Enfin, il est souvent possible de créer une nouvelle commande pour effectuer des tâches similaires, mais avec une configuration différente.
 
 \stopitemize
 
-To see whether these commands exist or not, look up the official list of
-commands (see \in{section}[sec:qrc-setup-en]), which will also inform us
-of the configuration options that these commands support. And although
-at first glance the names of these options may seem {\em cryptic}, We
-will soon see that there are options that are repeated in many commands
-and that work the same or very similarly in all of them. If we have
-doubts about what an option does, or how it works, it will be enough to
-generate a document and test it. We can also look at the abundant
-\ConTeXt\ documentation. As is common in the world of free software,
-\suite- includes the sources of almost all its documentation in the
-distribution. A utility like \MyKey{grep} (for GNU Linux systems) can
-help us search whether the command or option that we have doubts about
-is used in any of these source files so that we can have an example on
-hand.
+Pour savoir si ces commandes existent ou non, consultez la liste officielle des commandes (voir \in{section}[sec:qrc-setup-fr]), qui nous informera également des options de configuration que ces commandes prennent en charge. Bien qu'à première vue, les noms de ces options puissent sembler cryptiques, nous verrons rapidement que certaines options sont répétées dans de nombreuses commandes et qu'elles fonctionnent de la même manière ou de manière très similaire dans toutes ces commandes. Si nous avons des doutes sur ce que fait une option, ou sur son fonctionnement, il suffira de générer un document et de le tester. Nous pouvons également consulter l'abondante documentation de \ConTeXt\. Comme il est courant dans le monde des logiciels libres, \suite- inclut les sources de presque toute sa documentation dans la distribution. Un utilitaire comme \MyKey{grep} (pour les systèmes GNU Linux) peut nous aider à rechercher si la commande ou l'option sur laquelle nous avons des doutes est utilisée dans l'un de ces fichiers sources afin d'avoir un exemple sous la main.
 
-This is how learning \ConTeXt\ has been conceived: the introduction
-explains in detail the five (actually four) aspects that I have
-highlighted, and many more: as we read, a clear picture of the sequence
-will form in our minds: {\em a command to carry out the task} -- {\em a
-command that configures the previous one} -- {\em a command that allows
-us to create a similar command}. We will also learn some of the  main
-structures of \ConTeXt, and we will know what they are for.
+C'est ainsi que l'apprentissage de \ConTeXt\ a été conçu : l'introduction explique en détail les cinq (en réalité quatre) aspects que j'ai mis en évidence, et bien d'autres encore : au fil de la lecture, une image claire de la séquence se formera dans notre esprit : {\em une commande pour exécuter la tâche} -- {\em une seconde commande pour configurer le comportement de la première} -- {\em une troisième commande pour créer un commande similaire à la première à partir d'un clône}. Nous apprendrons également certaines des principales structures de \ConTeXt, et nous saurons à quoi elles servent.
 
 \stopsection
 
