@@ -10,7 +10,7 @@
 % some things were changed in accordance with need.
 
 
-\startenvironment introCTX_env.mkiv
+\startenvironment introCTX_env
 
   %------------------------------------------------------------------------------
   % GENERAL
@@ -118,7 +118,9 @@
 
   %------------------------------------------------------------------------------
 
-  \setupexternalfigures [directory=img, location=global]      % Image directory
+  \usepath[{00_FrontMatter,01_BodyMatter,02_Appendices}]
+
+  \setupexternalfigures [directory={./img,img}, location=global]      % Image directory
 
   %------------------------------------------------------------------------------
 
@@ -412,7 +414,6 @@
 
   %=============================> ADDED BY GARULFO - START <=====================
 
-  \usepath[{00_FrontMatter,01_BodyMatter,02_Appendices}]
 
   \placebookmarks[chapter, section, subsection, subsubsection]
 
@@ -654,7 +655,7 @@
   \def\startDemoI{\dostartbuffer[DemoTbuffI][startDemoI][stopDemoI]}
 
   \def\stopDemoI{\ctxlua{userdata.Demolua("DemoTbuffI","HN")}%
-    \startplacetable[location={none,force}]
+%    \startplacetable[location={none,force}] 
       \bTABLE
       \setupTABLE[frame=off,offset=2pt,spaceinbetween=\the\marge]
       \setupTABLE[column][1][width=\wDemoHN,align=flushleft]
@@ -662,8 +663,8 @@
       \bTD[leftframe=on,rulethickness=3pt,framecolor=darkblue,background=color,backgroundcolor=gray]
       \typebuffer[DemoTbuffI][bodyfont=small,option=tex,range={debutZ,finZ},escape={[[,]]}]
       \eTD
-      \eTABLE
-    \stopplacetable}
+      \eTABLE}
+%    \stopplacetable}
 
   %-------------------------------------------------------------------------------
 
@@ -680,6 +681,10 @@
   \eTD
   \eTABLE
 \stopplacetable}
+
+
+\definefloat[DemC][DemCs][]
+
 
 %===================================================================================================
 % 10 - Notes de bas de page ou notes marginales
