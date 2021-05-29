@@ -1,0 +1,818 @@
+%%% File:        b04_SourceFile.mkiv
+%%% Author:      Joaquín Ataz-López
+%%% Begun:       April 2020
+%%% Concluded:   June 2020
+%%% Contents:    The idea of the first part of this chapter is
+%%%              taken from Chapter 2 of The TeX Book: "Book
+%%%              printing versus ordinary typing". Basically,
+%%%              it is about explaining how to write the
+%%%              source file. Initially, in this chapter I included
+%%%              part of what finally became Chapter 10 and
+%%%              appendix B. But at the last miniute I decided to reconfigure it
+%%%              and link it to dealing with projects that
+%%%              I initially planned to deal with at the end. I think
+%%%              that this final order is preferable.
+%%%
+%%% Edited with: Emacs + AuTeX - And at times with vim + context-plugin
+%%%
+
+\environment[introCTX_env]
+
+\startcomponent b04_SourceFile
+
+% * En-tête de chapitre 
+
+\startchapter
+  [reference=cap:sourcefile, title=Fichiers sources et projets]
+
+\TocChap
+
+Comme nous le savons déjà, lorsque nous travaillons avec \ConTeXt\, nous commençons toujours par un fichier texte dans lequel sont incluses, outre le contenu du texte, un certain nombre d'instructions indiquant à \ConTeXt\ les transformations qu'il doit appliquer pour générer notre document final correctement formaté en PDF.
+
+En pensant aux lecteurs qui, jusqu'à présent, n'ont su travailler qu'avec des traitements de texte, je pense qu'il vaut la peine de passer un peu de temps avec le fichier source lui-même. Ou plutôt les fichiers sources, car il y a des moments où il n'y a qu'un seul fichier source et d'autres où nous utilisons plusieurs fichiers sources pour arriver au document final. Dans ce dernier cas, nous pouvons parler de \quotation{projets multifichiers}.
+
+
+
+% ** 4.1 - Encodage
+
+\startsection
+  [title=Codage des fichiers sources, reference=sec:encoding]
+\index{encode}
+
+Le ou les fichiers sources doivent être des fichiers texte. Dans la terminologie informatique, c'est le nom donné à un fichier contenant uniquement du texte lisible par l'homme et ne comportant pas de code binaire. Ces fichiers sont également appelés fichiers {\em texte texte simple} ou {\em texte texte brut}.
+
+Étant donné qu'en interne, les systèmes informatiques ne traitent que des nombres binaires, un fichier texte est en réalité constitué de {\em nombres} auxquels sont associés des  {\em caractères}. Une {\em table de correspondance} est utilisée pour définir cette association entre nombres et caractères. Plusieurs tables peuvent être utilisée. Aussi, le terme {\em codage d'un fichier texte} fait référence à la table qui est utilisée par le fichier en question.
+
+
+\startSmallPrint
+
+L'existence de différentes tables de codage pour les fichiers texte est une conséquence de l'histoire de l'informatique elle-même. Aux premiers stades du développement, lorsque la mémoire et la capacité de stockage des dispositifs informatiques étaient rares, il a été décidé d'utiliser une table appelée ASCII (qui signifie \quotation{\em American Standard Code for Information Interchange} (Codage américain standard pour l'échange d'informations) qui n'autorisait que 128 caractères et qui a été établie en 1963 par le comité de normalisation américain. Il est évident que 128 caractères ne suffisent pas à représenter tous les caractères et symboles utilisés dans toutes les langues du monde ; mais c'était plus que suffisant pour représenter l'anglais qui est, de toutes les langues occidentales, celle qui a le moins de caractères, car elle n'utilise pas de diacritiques (accents et autres marques au-dessus ou au-dessous ou à travers d'autres lettres). L'avantage d'utiliser l'ASCII était que les fichiers texte prenaient très peu de place, car 127 (le chiffre le plus élevé de la table) peut être représenté par un nombre binaire à 7 chiffres, et les premiers ordinateurs utilisaient l'octet comme unité de mesure de la mémoire, un nombre binaire à 8 chiffres. Tout caractère de la table peut tenir dans un seul octet. Comme l'octet a 8 chiffres et que l'ASCII n'en utilisait que 7, il restait même de la place pour ajouter d'autres caractères afin de représenter d'autres langues.
+
+  Mais lorsque l'utilisation des ordinateurs s'est développée, l'insuffisance de l'ASCII est devenue évidente et il a fallu développer des tables de caractères alternatifs incluant des caractères non connus de l'alphabet anglais, tels que le \quote{ñ} espagnol, les voyelles accentuées, le \quote{ç} catalan ou français, etc. En revanche, il n'y a pas eu d'accord initial sur ce que devaient être ces {\em tables alternatives} à l'ASCII, de sorte que différentes sociétés informatiques spécialisées se sont progressivement attaquées au problème chacune de leur côté. Ainsi, non seulement des tables spécifiques ont été créées pour différentes langues ou groupes de langues, mais aussi des tables différentes selon la société qui les avait créées (Microsoft, Apple, IBM, etc.). 
+
+   Ce n'est qu'avec l'augmentation de la mémoire des ordinateurs, la baisse du coût des dispositifs de stockage et l'augmentation correspondante de la capacité que l'idée de créer une table unique pouvant être utilisée pour toutes les langues est apparue. Mais, encore une fois, ce n'est pas une table unique contenant tous les caractères qui a été créée, mais un codage standard (appelé {\sc Unicode}) ainsi que différentes manières de le représenter (UTF-8, UTF-16, UTF-32, etc.). De tous ces systèmes, celui qui a fini par devenir la norme de facto est l'UTF-8, qui permet de représenter pratiquement toutes les langues vivantes, et de nombreuses langues déjà éteintes, ainsi que de nombreux symboles supplémentaires, le tout en utilisant des nombres de longueur variable (entre 1 et 4 octets), ce qui permet d'optimiser la taille des fichiers texte. Cette taille n'a pas trop augmenté par rapport aux fichiers utilisant l'ASCII pur.
+
+  Jusqu'à l'apparition de \XeTeX\, les systèmes basés sur \TeX\ -- qui est également né aux États-Unis et a donc l'anglais comme langue maternelle -- supposaient que l'codage était en ASCII pur ; ainsi, pour utiliser un codage différent, vous deviez l'indiquer d'une manière ou d'une autre dans le fichier source. 
+
+\stopSmallPrint
+
+\dontleavehmode\ConTeXt\ Mark~IV suppose que le codage du fichier source sera UTF-8. Cependant, sur les systèmes informatiques moins récents, un autre codage peut être utilisé par défaut. Je ne suis pas très sûr de l'codage par défaut que par défaut que Windows utilise, étant donné que la stratégie de Microsoft pour atteindre le grand public consiste à cacher la complexité (mais même si elle est cachée, cela ne signifie pas qu'elle a disparu !). Il n'y a pas beaucoup d'informations disponibles (ou je n'ai pas été en mesure de les trouver) concernant le système de codage qu'il utilise par défaut.
+
+% TODO Garulfo reformuler, simplifier
+
+Dans tous les cas, quel que soit le codage par défaut, tout éditeur de texte vous permet de d'enregistrer le fichier dans le codage souhaité. Les fichiers sources destinés à être traités par \ConTeXt\ Mark IV doivent être enregistrés en UTF-8, à moins, bien sûr, il y ait une très bonne raison d'utiliser un autre encodage (bien que je ne puisse pas je ne vois pas quelle pourrait être cette raison).
+
+Si l'on veut écrire un fichier écrit dans un autre codage (peut-être un ancien fichier), nous pouvons~: 
+
+
+\startitemize[a]
+
+
+\item Convertir le fichier en UTF-8, option recommandée, et il existe plusieurs outils pour le faire ; sous Linux, par exemple, les commandes {\tt iconv} ou {\tt recode}.
+
+\item Indiquer à \ConTeXt\ dans le fichier source que l'encodage n'est pas UTF-8. Pour ce faire, nous devons utiliser la commande \tex{enableregime}, dont la syntaxe est \tex{enableregime[codage]}, où {\em codage} fait référence au nom par lequel \ConTeXt\ connaît l'encodage réel du fichier en question. Dans la \in{table}[encodings], vous trouverez les différents encodages et les noms par lesquels \ConTeXt\\ les connaît.
+
+\stopitemize
+
+\PlaceMacro{enableregime}
+
+{\switchtobodyfont[small]
+  \placetable
+    [here]
+    [encodings]
+    {Références des principales tables de codage pour \ConTeXt}
+    {
+      \starttabulate[|l|l|l|]
+        \HL
+        \NC {\bf Codage} \NC {\bf Nom pour \ConTeXt} \NC{\bf Notes}\NR
+        \HL
+        \NC Windows CP 1250\NC cp1250, windows-1250\NC Western Europe\NR
+        \NC Windows CP 1251\NC cp1251, windows-1251\NC Cyrillic\NR
+        \NC Windows CP 1252\NC cp1252, win, windows-1252\NC Western Europe\NR
+        \NC Windows CP 1253\NC cp1253, windows-1253\NC Greek\NR
+        \NC Windows CP 1254\NC cp1254, windows-1254\NC Turkish\NR
+        \NC Windows CP 1257\NC cp1257, windows-1257\NC Baltic\NR
+        \NC ISO-8859-1, ISO Latin 1\NC iso-8859-1, latin1, il1\NC Western Europe\NR
+        \NC ISO-8859-2, ISO Latin 2\NC iso-8859-2, latin2, il2\NC Western Europe\NR
+        \NC ISO-8859-15, ISO Latin 9\NC iso-8859-15,  latin9,  il9\NC Western Europe\NR
+        \NC ISO-8859-7\NC iso-8859-7,  grk\NC Greek\NR
+        \NC Mac Roman\NC mac\NC Western Europe\NR
+        \NC IBM PC DOS\NC ibm\NC Western Europe\NR
+        \NC UTF-8\NC utf\NC Unicode\NR
+        \NC VISCII\NC vis,  viscii\NC Vietnamese\NR
+        \NC DOS CP 866\NC cp866, cp866nav\NC Cyrillic\NR
+        \NC KOI8\NC koi8-r, koi8-u, koi8-ru\NC Cyrillic\NR
+        \NC Mac Cyrillic\NC maccyr, macukr\NC Cyrillic\NR
+        \NC Others\NC cp855, cp866av, cp866mav, cp866tat, \NC Various\NR
+        \NC \NC ctt, dbk, iso88595, isoir111, mik, mls, \NC\NR
+        \NC \NC mnk, mos, ncc\NC\NR
+        \HL
+      \stoptabulate
+    }
+}
+
+\ConTeXt\ Mk~IV recommande fortement l'utilisation de UTF-8. Je suis d'accord avec cette recommandation. À partir d'ici dans cette introduction, nous pouvons supposer que l'encodage est toujours UTF-8.
+
+% TODO : Garulfo pas convaincu de l'utilité, message basculer tout en UTF-8 point barre
+
+\startSmallPrint
+
+Avec \tex{enableregime} \ConTeXt\ inclut la commande \PlaceMacro{useregime} \tex{useregime} qui prend en argument une ou plusieurs références de codage. Je n'ai trouvé aucune information sur cette commande ni sur la façon dont elle diffère de \tex{enableregime}, seulement quelques exemples de son utilisation \Conjecture. Je soupçonne que \tex{useregime} est conçu pour les projets complexes qui utilisent de nombreux fichiers sources, avec l'espoir que tous n'auront pas le même codage. Mais ce n'est qu'une supposition.
+
+\stopSmallPrint
+
+\stopsection
+
+% ** 4.2 - Caractères
+
+\startsection
+  [title=Caractères dans le(s) fichier(s) source(s) que \ConTeXt\ traite d'une manière spéciale]
+
+
+{\em Caractères spéciaux} est le nom que je donnerai à un groupe de caractères qui sont différents de {\em Caractères réservés}. Comme on peut le voir dans \in{section}[sec:reserved characters], ces derniers sont ceux qui ont une signification spéciale pour \ConTeXt\ et ne peuvent donc pas être utilisés directement comme caractères dans le fichier source. En plus de ceux-ci, il existe un autre groupe de caractères qui, bien que traités comme tels par \ConTeXt\ lorsqu'il les trouve dans le fichier source, sont traités avec des règles spéciales. Ce groupe comprend les espaces vides (espaces blancs), les tabulations, les sauts de ligne et les traits d'union.
+
+% *** 4.2.1 Espaces vides
+
+\startsubsection
+  [title=Espaces vides (espaces blancs) et tabulations, reference=sec:spaces]
+\index{espace}
+\index{espace vide}
+\index{tabulation}
+
+Les tabulations et les espaces blancs sont traités de la même manière dans le fichier source. Un caractère de tabulation (la touche Tab du clavier) sera transformé en espace blanc par \ConTeXt. Et les espaces blancs sont absorbés par tout autre espace blanc (ou tabulation) qui les suit immédiatement. Ainsi, cela ne fait absolument aucune différence d'écrire un seul plusieurs espaces et tabilations dans le fichier source~:
+
+\startDemoHN
+Tweedledum and Tweedledee.
+
+Tweedledum   and   Tweedledee.
+\stopDemoHN
+
+\ConTeXt{} considère que ces deux lignes sont exactement les mêmes. Par conséquent, si nous voulons introduire un espace supplémentaire entre les mots, nous devons utiliser certaines commandes \ConTeXt{} qui le font. Normalement, cela fonctionnera avec \quotation{\cmd{\textvisiblespace}}, c'est-à-dire un caractère {\tt\backslash} suivi d'un espace blanc. Mais il existe d'autres procédures qui seront examinées dans le \in{chapitre}[sec:horizontal space1] concernant les espacements horizontaux.
+
+\startDemoHN
+Dupont      et      Dupond.
+
+Dupont\     et\     Dupond.
+
+Dupont\ \   et\ \   Dupond.
+
+Dupont\ \ \ et\ \ \ Dupond.
+\stopDemoHN
+
+L'absorption d'espaces blancs consécutifs nous permet de mettre en forme le fichier source comme nous le souhaitons, par exemple en augmentant ou en diminuant l'indentation utilisée pour le rendre clair et lisible, avec la tranquillité d'esprit de savoir que cela n'affectera en rien le document final. Ainsi, dans l'exemple suivant~:
+
+% TODO Garulfo mettre un texte français
+
+\startDemoHN
+The music group from Madrid at the end of the seventies 
+    {\em La Romántica Banda Local} 
+wrote songs of an eclectic style that were very difficult to categorise.
+In their son “El Egipcio”, for example, they said:
+    \quotation{\em
+    Esto es una farsa más que una comedia, 
+    página muy seria de la histeria musical;
+    sueños de princesa, 
+    vicios de gitano pueden en su mano acariciar la verdad},
+mixing word, phrases simply because they have an internal rhythm
+(comedia-histeria-seria, gitano-mano).
+\stopDemoHN
+
+
+vous pouvez voir que certaines lignes sont légèrement en retrait sur la droite. Ce sont les lignes qui font partie des parties qui apparaîtront en italique. Le fait qu'elles soient en retrait aide (l'auteur) à voir où se termine l'italique.
+
+
+% TODO Garulfo : trop compliqué
+
+\startSmallPrint
+
+Certains pourraient penser, quel bazar ! Dois-je m'embêter avec l'indentation des lignes dans mon fichier source ? La vérité est que cette indentation spéciale est faite automatiquement par mon éditeur de texte (GNU Emacs) lorsqu'il édite un fichier source \ConTeXt\. C'est ce genre de petite aide qui vous fait choisir de travailler avec un certain éditeur de texte et pas un autre.
+
+\stopSmallPrint
+
+La règle selon laquelle les espaces vides sont absorbés s'applique exclusivement aux espaces vides consécutifs dans le fichier source. Par conséquent, si un groupe vide (\MyKey{\{\}}), est placé dans le fichier source entre deux espaces vides, bien que le groupe vide ne produise rien dans le fichier final, sa présence garantira que les deux espaces vides ne sont pas consécutifs.
+
+La même chose se produit avec le caractère réservé \MyKey{\lettertilde}, bien qu'il ait pour effet de générer un espace blanc alors qu'il n'en est pas vraiment un~ : un espace blanc suivi d'un \lettertilde\ ne sera pas absorbé par ce dernier, et un espace blanc après un \lettertilde\ ne sera pas absorbé non plus.
+
+Ainsi, regardons l'exemple suivant~:
+
+\startDemoHN
+Dupont    et Dupond.
+
+Dupont {} et Dupond.
+
+Dupont \  et Dupond.
+
+Dupont ~  et Dupond.
+\stopDemoHN
+
+si vous regardez de près, nous obtenons entre les deux premiers mots, deux espaces consécutifs à la deuxième ligne et trois à la troisième.
+
+\stopsubsection
+
+% *** 4.2.2 Saut de ligne  
+
+\startsubsection
+  [reference=sec:linebreaks, title=Sauts de ligne]
+\index{saut de ligne}
+
+Dans la plupart des éditeurs de texte, lorsqu'une ligne dépasse la largeur maximale, un saut de ligne est automatiquement inséré. On peut également insérer expressément un saut de ligne en appuyant sur la touche \quotation{Enter} ou \quotation{Return}.
+
+\ConTeXt{} applique les règles suivantes aux sauts de ligne :
+
+% TODO Garulfo : simplifier tous les espaces blancs et sauts de lignes sont absorbés en un seul et unique espace.
+%  Pour vraiment introduire un saut de ligne, il faut soit mettre \\ soit laisser une ligne vide.
+% Pour vraiment introduire un espace vide, il faut soit mettre ~, soit \ .
+% la différence ? le premier est considéré comme un caractère, donc si on laisse on l'entoure lui même d'espace vide, il y aura trois espaces vide. 
+% pour \ entouré de deux vides, il absorbe le troisième espace vide.
+
+\startitemize [a, large]
+
+\item Un saut de ligne unique est systématiquement équivalent à un espace blanc. Par conséquent, si, immédiatement avant ou après le saut de ligne, il existe un espace blanc ou une tabulation, ceux-ci seront absorbés par le saut de ligne ou le premier espace blanc, et un simple espace blanc sera inséré dans le document final.
+
+\item Deux ou plusieurs sauts de ligne consécutifs créent un saut de paragraphe. Pour cela, deux sauts de ligne sont considérés comme consécutifs s'il n'y a rien d'autre que des espaces vides ou des tabulations entre le premier et le second saut de ligne (car ceux-ci sont absorbés par le premier saut de ligne) ; ce qui, en résumé, signifie qu'une ou plusieurs lignes consécutives absolument vides dans le fichier source (sans aucun caractère, ou seulement avec des espaces vides ou des tabulations) deviennent un saut de paragraphe. 
+
+\stopitemize
+
+
+Notez que j'ai dit \quotation{deux ou plusieurs sauts de ligne consécutifs} et ensuite \quotation{une ou plusieurs lignes consécutives vides}, ce qui signifie que si nous voulons augmenter la séparation entre les paragraphes, nous ne le faisons pas simplement en insérant un autre saut de ligne. Pour cela, nous devrons utiliser une commande qui augmente l'espace vertical. Si nous ne voulons qu'une seule ligne supplémentaire de séparation, nous pouvons utiliser la commande \PlaceMacro{blank}\tex{blank}. Mais il existe d'autres procédures pour augmenter l'espace vertical. Je vous renvoie à \in{section}[sec:espace vertical]. 
+
+\startSmallPrint
+
+Parfois, lorsqu'un saut de ligne devient un espace blanc, nous pouvons nous retrouver avec un espace blanc indésirable et inattendu. En particulier lorsque nous écrivons des macros, où il est facile qu'un espace blanc \quotation{s'introduise} sans que nous nous en rendions compte. Pour éviter cela, nous pouvons utiliser le caractère réservé \MyKey{\%} qui, comme nous le savons, fait en sorte que la ligne où il apparaît ne soit pas traitée, ce qui implique que la coupure à la fin de la ligne ne sera pas non plus traitée. Ainsi, par exemple,
+
+\startDemoVN
+\define[3]\TestA{
+  {\em #1} {\bf #2} {\sc #3}
+}
+\define[3]\TestB{%
+  {\em #1}
+  {\bf #2}
+  {\sc #3}
+}
+\define[3]\TestC{%
+  {\em #1}%
+  {\bf #2}%
+  {\sc #3}%
+}
+
+\TestA{riri}{fifi}{loulou}
+
+\TestB{riri}{fifi}{loulou}
+
+\TestC{riri}{fifi}{loulou}
+\stopDemoVN
+
+les commandes \tex{TestA} et \tex{TestB} écrivent le premier argument en italique, le second en gras et le troisième en petites capitales, mais la première insérera un espace entre chacun de ces arguments, alors que la seconde n'en n'insérera pas~: le caractère réservé \% empêche les sauts de ligne d'être traités et ils deviennent de simples espaces vides.
+
+\stopSmallPrint
+
+\stopsubsection
+
+% *** 4.2.3 trait d'union
+
+\startsubsection
+  [reference=sec:dashes, title=Trait d'union et tirets]
+  \index{trait d’union}
+\index{tirets}
+
+Les tirets sont un bon exemple de la différence entre un clavier d'ordinateur et un texte imprimé. Sur un clavier normal, il n'existe généralement qu'un seul caractère pour le tiret (ou règle, en termes typographiques) que nous appelons le trait d'union ou (\MyKey{-}) ; mais un texte imprimé utilise jusqu'à quatre longueurs différentes pour les règles :
+
+
+\startitemize[1,broad]
+
+\item tiret court (ou trait d'union), comme ceux utilisés pour séparer les syllabes dans les césures en fin de ligne (-).
+
+\item tiret moyen (ou tiret demi-cadratin), légèrement plus longs que les précédentes (--). Ils ont plusieurs usages dont, pour certaines langues européennes (moins en anglais), lister les énumérations, ou encore séparer les chiffres les moins élevés des chiffres les plus élevés dans une fourchette de dates ou de pages ; \citation{pp. 12--33}.
+
+\item tiret longs (ou tiret cadratin) (---), utilisées comme des parenthèses pour inclure une phrase dans une autre.
+
+\item signe moins ($-$) pour représenter une soustraction ou un nombre négatif.
+
+\stopitemize
+
+Aujourd'hui, tous les éléments ci-dessus et d'autres encore sont disponibles en encodage UTF-8. Mais comme ils ne peuvent pas tous être générés par une seule touche du clavier, ils ne sont pas si faciles à produire dans un fichier source. Heureusement, \TeX\ a vu la nécessité d'inclure plusieurs traits et tirets dans notre document final que ce qui pouvait être produit par le clavier, et a conçu une procédure simple pour le faire. \ConTeXt\ a complété cette procédure en ajoutant également des commandes qui génèrent ces différents types de règles. Nous pouvons utiliser deux approches pour générer les quatre types de règles : soit à la manière ordinaire de \ConTeXt\ avec une commande, soit directement à partir du clavier. Ces procédures sont présentées dans \in{table} [tbl:rules] :
+
+
+{\switchtobodyfont[small]
+\placetable
+  [here]
+  [tbl:rules]
+  {Rules/dashes in \ConTeXt}
+  {\starttabulate[|l|c|c|l|]
+    \HL
+    \NC {\bf Type de tiret}
+    \NC {\bf Apparence}
+    \NC {\bf Écriture directe}
+    \NC {\bf Commande}
+    \NR
+    \HL
+    \NC Tiret court / trait d'union
+    \NC -
+    \NC {\tt -}
+    \NC \PlaceMacro{hyphen}\tex{hyphen}
+    \NR
+    \NC Tiret moyen / demi-cadratin
+    \NC --
+    \NC {\tt --}
+    \NC \PlaceMacro{endash}\tex{endash}
+    \NR
+    \NC Tiret long / cadratin
+    \NC ---
+    \NC {\tt ---}
+    \NC \PlaceMacro{emdash}\tex{emdash}
+    \NR
+    \NC Signe moins
+    \NC $-$
+    \NC {\tt \$-\$}
+    \NC \PlaceMacro{minus}\tex{minus}
+    \NR
+    \HL
+  \stoptabulate}
+}
+
+Les noms de commandes \tex{hyphen} et \tex{minus} sont ceux normalement utilisés en anglais. Bien que de nombreux professionnels de l'imprimerie les appellent \quote{tirets}, les termes de \TeX, à savoir \tex{endash} et \tex{emdash} sont également courants dans la terminologie de la composition. Les \quotation{\em en} et \quotation{\em em} sont les noms des unités de mesure utilisées en typographie. Une \quotation{en} représente la largeur d'un \quote{n} tandis que \quotation{em} est la largeur d'un \quote{m} dans la police utilisée.
+
+\stopsubsection
+
+\stopsection
+
+% ** 4.3 - Fichiers unique ou multiples
+
+\startsection
+  [title=Projet simple et projet multi-fichiers]
+
+
+En \ConTeXt\, nous pouvons utiliser un seul fichier source qui inclut absolument tout le contenu de notre document final ainsi que tous les détails s'y rapportant, dans ce cas nous parlons de \quotation{projet simple}, ou, au contraire, nous pouvons utiliser un certain nombre de fichiers sources qui partagent le contenu de notre document final, et dans ce cas nous parlons de \quotation{projet multi-fichier}.
+
+Les scénarios dans lesquels il est typique de travailler avec plus d'un fichier source sont les suivants :
+
+\startitemize
+
+\item Si nous écrivons un document dans lequel plusieurs auteurs ont collaboré, chacun ayant sa propre partie différente des autres ; par exemple, si nous écrivons un livre hommage avec des contributions de différents auteurs, ou un numéro de magazine, etc.
+
+\item Si nous sommes en train d'écrire un long document où chaque partie (chapitre) a une autonomie relative, de sorte que l'arrangement final de ceux-ci permet plusieurs possibilités et sera décidé à la fin. Cela se produit assez fréquemment pour de nombreux textes académiques (manuels, introductions, etc.) où l'ordre des chapitres peut varier.
+
+\item Si nous rédigeons un certain nombre de documents connexes qui partagent certaines caractéristiques de style ou macro, il est alors intéressant de rassembler ces éléments dans des fichiers séparés, et ainsi utilisables directment dans d'autres projets. Ces fichiers constituent comme des modèles de composition de document.
+
+\item Si, tout simplement, le document sur lequel nous travaillons est volumineux, de sorte que l'ordinateur ralentit soit lors de l'édition, soit lors de la compilation ; dans ce cas, le fait de répartir le matériel sur plusieurs fichiers sources accélérera considérablement la compilation de chacun.
+
+\stopitemize
+
+\stopsection
+
+% ** 4.4 - Structure de fichier source simple
+
+\startsection
+  [title=Structure du fichier source d'un projet simple,
+  reference=sec:structure]
+
+In simple projects developed in a single source file, the structure is very simple and revolves around the \MyKey{text} environment that must essentially appear in the same file. We differentiate between the following parts of this file:
+
+% TODO Garulfo j'ai l'impression d'une redite 
+
+\startitemize
+
+\item {\bf Le préambule du document} : tout ce qui va de la première ligne du fichier jusqu'au début de l'environnement \MyKey{text} indiqué par la commande (\PlaceMacro{starttext}\PlaceMacro{stoptext}\tex{starttext}).
+ 
+\item {\bf Le corps du document} : il s'agit du contenu de l'environnement \MyKey{text} ; ou en d'autres termes, tout ce qui se trouve entre \tex{starttext} et \tex{stoptext}.
+
+\stopitemize
+
+\placefigure [here]  
+             [img:ProyectoSimple]
+             {\tfx Fichier source contenant un projet simple}
+{\startDemoI
+% Première ligne du document
+
+% Zone Préambule:
+% Contenant la configuration globales des commandes
+% pour l'ensemble du document
+
+\starttext   % Début du contenu à proprement parler
+
+...
+...          % Contenu du document
+...
+
+\stoptext    % Fin du contenu le reste sera ignoré
+\stopDemoI}
+
+Dans \in{figure}[img:ProyectoSimple] nous voyons un fichier source très simple. Absolument tout ce qui précède la commande \tex{starttext} (qui, dans l'image, se trouve à la ligne 5, en ne comptant que celles contenant du texte), constitue le préambule ; tout ce qui se trouve entre \tex{starttext} et \tex{stoptext} constitue le corps du document. Tout ce qui suit le stoptext sera ignoré.
+
+Le préambule est utilisé pour inclure les commandes qui affectent le document dans son ensemble, celles qui déterminent sa configuration générale. Il n'est pas indispensable d'écrire une commande dans le préambule. S'il n'y en a pas, \ConTeXt\ adoptera une configuration par défaut qui n'est pas très développée mais qui pourrait faire l'affaire pour de nombreux documents. Dans un document bien planifié, le préambule contiendra toutes les commandes affectant le document dans son ensemble, comme les macros et les commandes personnalisées à utiliser dans le fichier source. Dans un préambule typique, cela pourrait inclure les éléments suivants :
+
+
+
+\startitemize[packed]
+
+
+\item la langue principale du document (Voir \in{section}[sec:langdoc]).
+
+\item le format du papier (\in{section}[sec:paperize]) et de la mise en page (\in{section}[sec:pagelayout]).
+
+\item la police principale des documents (\in{section}[sec:mainfont]).
+
+\item la personnalisation des commandes de section à utiliser (\in{section}[sec:setuphead]) et, le cas échéant, la définition de nouvelles commandes de section (\in{section}[sec:definehead]).
+
+\item les en-têtes et les pieds de page (\in{section}[sec:headerfooter]).
+
+\item les paramètres pour nos propres macros (\in{section}[sec:definingcommands]).              
+
+\item Etc.
+
+\stopitemize
+
+
+Le préambule est destiné à la configuration générale du document ; par conséquent, rien de ce qui concerne le contenu du document ou le texte à traiter ne doit y figurer. En théorie, tout texte traitable inclus dans le préambule sera ignoré, bien que parfois, s'il est présent, il provoquera une erreur de compilation. 
+
+{\bf Le corps du document}, encadré entre les commandes \tex{starttext} et \tex{stoptext} comprend le contenu réel, c'est-à-dire le texte réel, ainsi que les commandes \ConTeXt\ qui s'applique à des parties spécifiques du texte contenu et non à l'ensemble du document.
+
+\stopsection
+
+% ** 4.5 - Gestion multi-fichiers
+
+% TODO Garulfo Pourquoi apprendre ici le TeX style?!
+
+\startsection
+  [title=Gestion multi-fichiers {\em à la \TeX}]
+
+Afin de pouvoir travailler avec plus d'un fichier source, \TeX\ a inclus la primitive appelée \tex{input}, qui fonctionne également dans \ConTeXt, bien que ce dernier comprenne deux commandes spécifiques qui comme nous allons le voir, perfectionnent dans une certaine mesure le fonctionnement de \tex{input}.
+
+% *** 4.5.1 input
+
+\startsubsection
+  [reference=input, title=La commande \tex{input}]
+\PlaceMacro{input}
+
+La commande \tex{input} insère le contenu du fichier qu'elle indique. Son format est le suivant~:
+
+\placefigure [here,none] [] {}{
+\startDemoI
+\input NomFichier
+\stopDemoI}
+
+où {\em NomFichier} est le nom du fichier à insérer. Notez qu'il n'est pas nécessaire de placer le nom du fichier entre des accolades, bien que la commande ne génère pas d'erreur si cela est fait. En revanche, il ne doit jamais être placé entre crochets. Si l'extension du fichier est \quotation{\type{.tex}}, elle peut être omise.
+
+Lorsque \ConTeXt\ compile un document et trouve une commande \tex{input}, il recherche le fichier indiqué et poursuit la compilation comme si ce fichier faisait partie du fichier qui l'a appelé. Lorsqu'il a terminé la compilation, il retourne au fichier d'origine et reprend là où il s'est arrêté ; le résultat pratique est donc que le contenu du fichier appelé au moyen de \tex{input} est inséré à l'endroit où il est appelé. Le fichier appelé par \tex{input} doit avoir un nom valide dans notre système d'exploitation et ne doit pas comporter d'espaces vides. \ConTeXt\ le cherchera dans le répertoire de travail, et s'il ne le trouve pas là, il le cherchera dans les répertoires inclus dans la variable de l'environnement TEXROOT. Si le fichier n'est finalement pas trouvé, il produira une erreur de compilation.
+
+L'utilisation la plus courante de la commande \tex{input} est la suivante~: un fichier est écrit, appelons-le \MyKey{principal.tex}, et il sera utilisé comme conteneur pour appeler, par le biais de la commande \tex{input}, les différents fichiers qui composent notre projet. Ceci est illustré dans l'exemple suivant :
+
+\placefigure [here,none] [] {}{
+\startDemoI
+\input MaConfiguration   % Commandes de configuration générale 
+
+\starttext
+
+  \input PageDeTitre
+  \input Preface
+
+  \input Chap1
+  \input Chap2
+  ...
+  \input Chap6
+
+\stoptext
+\stopDemoI}
+
+Notez comment, pour la configuration générale du document, nous avons appelé le fichier \quotation{MaConfiguration.tex} qui, nous le supposons, contient les commandes globales que nous voulons appliquer. Ensuite, entre les commandes \tex{starttext} et \tex{stoptext} nous appelons les différents fichiers qui contiennent le contenu des différentes parties de notre document. Si, à un moment donné, pour accélérer le processus de compilation, nous souhaitons ne pas compiler certains fichiers, il suffit de mettre une marque de commentaire au début de la ligne appelant ce ou ces fichiers. Par exemple, si nous sommes en train d'écrire le deuxième chapitre et que nous voulons le compiler simplement pour vérifier qu'il ne contient pas d'erreurs, nous n'avons pas besoin de compiler le reste et pouvons donc écrire :
+
+\placefigure [here,none] [] {}{
+\startDemoI
+\input MaConfiguration   % Commandes de configuration générale 
+
+\starttext
+
+% \input PageDeTitre
+% \input Preface
+
+% \input Chap1
+  \input Chap2
+  ...
+% \input Chap6
+
+\stoptext
+\stopDemoI}
+
+et seul le chapitre 2 sera compilé. Notez comment, d'autre part, changer l'ordre des chapitres est aussi simple que de changer l'ordre des lignes qui les appellent.
+
+\startSmallPrint
+
+Lorsque nous excluons un fichier de la compilation d'un projet multi-fichier, nous gagnons en vitesse de traitement, mais parmis les conséquences, toutes les références que la partie en cours de compilation fait à d'autres parties non encore compilées ne fonctionneront plus. Voir \in{section}[sec:references].
+
+\stopSmallPrint
+
+Il est important de préciser que lorsque nous travaillons avec \tex{input}, seul le fichier principal, celui qui appelle tous les autres, doit inclure les commandes \tex{starttext} et \tex{stoptext}, car si les autres fichiers les incluent, il y aura une erreur. Cela signifie, d'autre part, que nous ne pouvons pas compiler directement les différents fichiers qui composent le projet, mais que nous devons nécessairement les compiler à partir du fichier principal, qui est celui qui abrite la structure de base du document.
+
+\stopsubsection
+
+
+% *** 4.5.2 readfile 
+
+\startsubsection
+  [title=\tex{ReadFile} et \tex{readfile}]
+\PlaceMacro{ReadFile}\PlaceMacro{readfile}
+
+
+Comme nous venons de le voir, si \ConTeXt\ ne trouve pas le fichier appelé avec \tex{input}, il génère une erreur. Dans le cas où nous voulons insérer un fichier uniquement s'il existe, mais en tenant compte de la possibilité qu'il n'existe pas, \ConTeXt\ offre une variante de la commande \tex{input}~: 
+
+\placefigure [here,none] [] {}{
+\startDemoI
+\ReadFile{MonFichier}
+\stopDemoI}
+
+Cette commande est en tous points similaire à \tex{input}, à la seule exception que si le fichier à insérer est introuvable, elle poursuivra la compilation sans générer d'erreur. Elle diffère également de \tex{input} par sa syntaxe, puisque nous savons qu'avec \tex{input} il n'est pas nécessaire de mettre le nom du fichier à insérer entre accolades. Mais avec \tex{ReadFile}, c'est nécessaire. 
+
+Si nous n'utilisons pas d'accolades, \ConTeXt\ pensera que le nom du fichier à rechercher est le même que le premier caractère qui suit la commande \tex{ReadFile}, suivi de l'extension \type{.tex}. Ainsi, par exemple, si nous écrivons 
+
+\placefigure [here,none] [] {}{
+\startDemoI
+\ReadFile MonFichier
+\stopDemoI}
+
+\ConTeXt\ comprendra que le fichier à lire s'appelle \quotation{\type{M.tex}}, puisque le caractère qui suit immédiatement la commande \tex{ReadFile} (à l'exception des espaces vides qui sont, comme nous le savons, ignorés à la fin du nom d'une commande) est une \quotation{M}. Étant donné que \ConTeXt\ ne trouvera normalement pas un fichier appelé \quotation{\type{M.tex}}, et que \tex{ReadFile} ne génère pas d'erreur s'il ne trouve pas le fichier, \ConTeXt\ continuera la compilation après le \quote{M} dans \quotation{\type{MonFichier}}, et insérera le texte \quotation{\type{onFichier}}.
+
+Une version plus raffinée de \tex{ReadFile} est \tex{readfile} dont le format est le suivant~:
+
+\placefigure [here,none] [] {}{
+\startDemoI
+\readfile{MonFichier}{àInsérerSiExistant}{àInsérerSiNonExistant}
+\stopDemoI}
+
+Le premier argument est similaire à \tex{Readfile}~: le nom d'un fichier entre accolades. Le deuxième argument comprend le texte à écrire si le fichier existe, avant d'insérer le contenu du fichier. Le troisième argument comprend le texte à écrire si le fichier en question n'est pas trouvé. Cela signifie que, selon que le fichier saisi comme premier argument est trouvé ou non, le deuxième argument (si le fichier existe) ou le troisième (si le fichier n'existe pas) sera exécuté.
+
+\stopsubsection
+
+\stopsection
+
+% ** 4.6 - Projet context 
+
+
+\startsection
+  [title=Gestion multi-fichiers {\em à la \ConTeXt},
+  reference=sec-projects]
+
+Le troisième mécanisme que propose \ConTeXt\ pour les projets multi-fichiers est plus complexe et plus complet : il commence par faire une distinction entre différents fichiers les fichiers de projet, les fichiers de produit, les fichiers de composants et les fichiers d'environnement. 
+
+\placefigure
+  [here,none]
+  []
+  {}
+{\externalfigure[project–structure.pdf][width=\textwidth]}
+ 
+
+Pour comprendre les relations et le fonctionnement de chacun de ces types de fichiers, je pense qu'il est préférable de les expliquer individuellement :
+
+% *** 4.6.1 environnements
+
+\startsubsection
+  [reference=environnements, title={Fichiers d'environnement}]
+\PlaceMacro{startenvironment}\PlaceMacro{environnement}
+\index{fichier+environnement}
+
+Un fichier d'environnement est un fichier qui stocke les macros et les configurations d'un style spécifique destinées à être appliquées à plusieurs documents, qu'il s'agisse de documents totalement indépendants ou de parties d'un document complexe. Le fichier d'environnement peut donc inclure tout ce que nous écririons normalement avant \tex{starttext}, c'est-à-dire la configuration générale du document.
+
+\startSmallPrint
+
+J'ai conservé le terme \quotation{fichiers d'environnement} pour ces types de fichiers, afin de ne pas m'écarter de la terminologie officielle de \ConTeXt\, même si je pense qu'un meilleur terme serait probablement \quotation{fichiers de mise en forme} ou \quotation{fichiers de configuration générale}.
+
+\stopSmallPrint
+
+Comme tous les fichiers source de \ConTeXt, les fichiers d'environnement sont des fichiers texte, et supposent que l'extension sera \quotation{\type{.tex}}, bien que si nous le voulons, nous pouvons la changer, peut-être en \quotation{\type{.env}}. Cependant, cela n'est généralement pas fait dans \ConTeXt. Le plus souvent, les fichiers d'environnement sont identifiés en commençant ou en terminant leur nom par \quotation{env}. Par exemple~: \quotation{\type{env_livreA.tex}} ou \quotation{\type{mon-livreA.tex}}. L'intérieur d'un tel fichier d'environnement ressemblerait à ce qui suit :
+
+\placefigure [here,none] [] {}
+{
+\startDemoI
+\startenvironment env_livreA
+
+  \mainlanguage[fr]
+
+  \setupbodyfont
+    [palatino,14pt]
+
+  \setupwhitespace
+    [big]
+
+  ...
+
+\stopenvironment
+\stopDemoI}
+
+ou pourrait également faire appel à d'autres fichiers environnements de façon a décomposer les différents éléments~:
+
+\placefigure [here,none] [] {}
+{
+\startDemoI
+\startenvironment env_livreA
+
+\environment    env_livreA-polices
+\environment    env_livreA-couleurs
+\environment    env_livreA-abbreviations
+\environment    env_livreA-urls
+\environment    env_livreA-macros
+
+\stopenvironment
+\stopDemoI}
+
+En d'autres termes, les définitions et les commandes de configuration se trouvent dans \tex{startenvironment} et \tex{stopenvironment}. Immédiatement après \tex{startenvironment}, nous écrivons le nom par lequel nous voulons identifier l'environnement en question, puis nous incluons toutes les commandes dont nous aimerions que notre environnement soit composé.
+
+\startSmallPrint
+
+En ce qui concerne le nom de l'environnement, d'après mes tests, le nom que nous ajoutons immédiatement après \tex{startenvironment} est simplement indicatif, et si nous ne lui donnions pas de nom, alors rien de préjudiciable ne se passe.
+
+\stopSmallPrint
+
+Les fichiers d'environnement ont été conçus pour fonctionner avec des composants et des produits (expliqués dans la section suivante). C'est pourquoi un ou plusieurs environnements peuvent être appelés depuis un composant ou un produit à l'aide de la commande \tex{environment}. Mais cette commande fonctionne également si elle est utilisée dans la zone de configuration (préambule) de tout fichier source \ConTeXt, même s'il ne s'agit pas d'un fichier source destiné à être compilé en parties.
+
+La commande \tex{environnement} peut être appelée en utilisant l'un des deux formats suivants :
+
+\placefigure [here,none] [] {}{
+\startDemoI
+\environment env_livreA
+\environment[env_livreA]
+\stopDemoI}
+
+Dans les deux cas, l'effet de cette commande sera de charger le contenu du fichier pris en argument. Si ce fichier n'est pas trouvé, la compilation se poursuivra de manière normale sans générer d'erreur. Si l'extension du fichier est \quotation{\type{.tex}}, elle peut être omise.
+
+\stopsubsection
+
+% *** 4.6.2. component and products
+
+\startsubsection
+  [reference=components and products, title=Composants et produits]
+\PlaceMacro{startcomponent}\PlaceMacro{startproduct}\PlaceMacro{product}
+\index{structure+composant}
+\index{structure+produit}
+\index{fichier+composant}
+\index{fichier+produit}
+
+Dans le cas d'un livre dont chaque chapitre se trouve dans un fichier source différent, on dira que les chapitres sont des  {\em composants} et que le livre est le {\em produit}. Cela signifie que le composant est une partie autonome d'un produit, capable d'avoir son propre style et d'être compilé indépendamment. Chaque composant aura un fichier différent et, en outre, il y aura un fichier produit qui rassemblera tous les composants. Les commandes utilisées \tex{startcomponent} et \tex{startproduct} sont suivies d'un nom qui sert à se repérer mais qui n'a pas d'impact sur le fonctionnement de \ConTeXt. L'habitude consiste à indiquer le nom du fichier lui même.
+
+Un fichier de composant typique \quotation{\tt cmp_chapitre-1.tex} serait le suivant
+
+\placefigure [here,none] [] {}
+{\startDemoI
+\startcomponent cmp_chapitre-1
+
+  \startchapter[title={Titre du chapitre 1}]
+  ...
+
+\stopcomponent
+\stopDemoI}
+
+Et un fichier produit \quotation{\tt prd_livre-A.tex} rassemblant les composants ressemblerait à ce qui suit :
+
+\placefigure [here,none] [] {}
+{\startDemoI
+\startproduct   prd_livre-A
+
+  \environment  env_livreA
+
+  \component    cpm_chapitre-1
+  \component    cpm_chapitre-2
+  \component    cpm_chapitre-3
+  ...
+
+\stopproduct
+\stopDemoI}
+
+Le nom du composant qui est appelé à partir d'un produit doit être le nom du fichier qui contient le composant en question. Toutefois, si l'extension de ce fichier est \quotation{\type{.tex}}, il peut être omis.
+
+% TODO Garulfo added
+
+ Pour les questions concernant les chemins de fichiers et répertoire voyez le paragraphe dédié  \at{page}[refchemins].
+
+Notez que le contenu réel de notre document sera réparti entre les différents fichiers \quote{component} et que le fichier produit se limite à établir l'ordre des composants. D'autre part, les composants (individuels) et les produits peuvent être compilés directement. La compilation d'un produit génère un fichier PDF contenant tous les composants de ce produit. Si, par contre, l'un des composants est compilé individuellement, cela générera un fichier PDF contenant uniquement le composant compilé.
+
+% TODO Garulfo
+% avant la commande \tex{startcomponent} <== pas nécessaire, hans met derrière
+% avant la commande \tex{startproduct}
+
+Dans un fichier de composant, nous pouvons appeler un ou plusieurs fichiers d'environnement avec \tex{environment FichierEnvironment}. Nous pouvons faire de même dans le fichier produit. Plusieurs fichiers d'environnement peuvent être chargés simultanément. Nous pouvons, par exemple, avoir notre collection préférée de macros et les différents styles que nous appliquons à nos documents dans différents fichiers. Notez toutefois que lorsque nous utilisons deux ou plusieurs environnements, ceux-ci sont chargés dans l'ordre dans lequel ils sont appelés, de sorte que si la même commande de configuration a été incluse dans plusieurs environnements et qu'elle a des valeurs différentes, ce sont les valeurs du dernier environnement chargé qui s'appliquent. D'autre part, les fichiers d'environnement ne sont chargés qu'une seule fois, donc dans les exemples précédents où l'environnement est appelé à partir du fichier produit et de fichiers composants spécifiques, si nous compilons le produit, c'est le moment où les environnements sont chargés, et dans l'ordre indiqué ; quand un environnement est appelé à partir de l'un des composants, \ConTeXt\ vérifiera si cet environnement est déjà chargé, auquel cas il ne fera rien.
+
+% TODO ADDED BY GARULFO Garulfo
+Si le fichier composant ne fait référence à aucun fichier environnement (ou fichier projet comme nous le verrons juste après), sa compilation directe n'appliquera pas les environnements appelés par le fichier produit.
+
+Au contraire, si le fichier composant fait référence à un fichier environnement spécifique, la compilation du produit les appliquera.
+
+\stopsubsection
+
+% *** 4.6.3. projets
+
+\startsubsection
+  [title=Projets \ConTeXt]
+\PlaceMacro{startproject}\PlaceMacro{project}
+\index{structure+projet}
+\index{fichier+projet}
+
+La distinction entre produits et composants est suffisante dans la plupart des cas. Néanmoins, \ConTeXt\ possède un niveau encore plus élevé où l'on peut regrouper un certain nombre de produits : il s'agit du {\em projet}.
+
+Un fichier projet typique se présenterait plus ou moins comme suit
+
+\placefigure [here,none] [] {}
+{\startDemoI
+\startproject   prj_macollection
+
+\environment    env_general
+
+\product        prd_livre-A  % version française
+\product        prd_livre-B  % version espagnole
+\product        prd_livre-C  % version anglaise
+...
+
+\stopproject
+\stopDemoI}
+
+Un scénario dans lequel nous aurions besoin d'un projet serait, par exemple, lorsque nous devons éditer une collection de livres, tous avec les mêmes spécifications de format ; ou bien différentes traduction d'un même livre ; ou si nous éditons une revue~: la collection de livres, ou la revue en tant que telle, serait le projet ; chaque livre ou chaque numéro de revue serait un produit ; et chaque chapitre d'un livre ou chaque article d'un numéro de revue serait un composant.
+
+Les projets, en revanche, ne sont pas destinés à être compilés directement. Considérons que, par définition, chaque produit appartenant au projet (chaque livre de la collection, ou chaque numéro de revue) doit être compilé séparément et générer son propre PDF. Par conséquent, la commande \tex{product} incluse dans le projet pour indiquer quels produits appartiennent au projet, ne fait en fait rien : il s'agit simplement d'un rappel pour l'auteur.
+
+Évidemment, certains pourraient demander pourquoi nous avons des projets s'ils ne peuvent pas être compilés : la réponse est que le fichier de projet lie certains environnements au projet. C'est pourquoi, si nous incluons la commande \PlaceMacro{projet}\tex{projet NomProjet} dans un fichier de composant ou de produit, \ConTeXt\ lira le fichier de projet et chargera automatiquement les environnements qui lui sont liés. C'est pourquoi la commande \tex{environnement} dans les projets doit venir après \tex{startproject} (comme pour les composants et produits)
+
+% TODO Garulfo : semble faux
+% ; cependant, dans les produits et les composants, \tex{environnement} doit venir {\em avant}. \tex{startproduct} ou \tex{startcomponent}. 
+
+Tout comme pour les commandes \tex{environnement} et \tex{composant}, la commande \tex{projet} nous permet d'indiquer le nom du projet entre crochets ou de ne pas utiliser de crochets du tout. Cela signifie que \tex{projet NomdeFichier} et \tex{Projet[NomdeFichier]} sont des commandes équivalentes.  {\bf Résumé des différentes manières de charger un environnement}  Il ressort de ce qui précède qu'un environnement peut être chargé par n'importe laquelle des
+procédures suivantes :
+
+
+\startitemize[a, broad]
+
+\item Pour un fichier composant, en insérant entre \tex{startcomponent} et \tex{starttext} soit la commande \tex{environnement FichierEnvironnement} soit la commande \tex{projet FichierProjet}.
+
+\item Pour un fichier produit, en insérant entre \tex{startproduct} et le premier \tex{component} soit la commande \tex{environnement FichierEnvironnement} soit la commande \tex{projet FichierProjet}.
+
+\stopitemize
+
+\stopsubsection
+
+% *** 4.6.4 aspects communs
+
+\startsubsection
+  [title={Aspects communs des environnements, composants, produits et projets}]
+
+
+\startdescription{Noms des environnements, des composants, des produits et des projets~:}
+
+% TODO Garulfo : imporession d'une redite avec un peu plus haut, faire une ref
+
+Nous avons déjà vu que, pour tous ces éléments, après la commande \tex{start} qui initie un environnement, un composant, un produit ou un projet particulier, son nom est saisi directement. Ce nom, en règle générale, doit coïncider avec le nom du fichier contenant l'environnement, le composant ou le produit car, par exemple, lorsque \ConTeXt\ est en train de compiler un produit et que, selon le fichier du produit, il doit charger un environnement ou un composant, nous n'avons aucun moyen de savoir quel est le fichier de cet environnement ou de ce composant, à moins que le fichier ait le même nom que l'élément à charger.
+
+Dans le cas contraire, d'après mes tests, le nom écrit après \tex{startproduct}, \tex{startcomponent}, \tex{startproject} ou \tex{startenvironment} dans les fichiers produit et environnement est simplement indicatif. S'il est omis une erreur bloque la compilation, mais s'il ne correspond pas au nom du fichier, rien de grave ne se produit.
+
+% TODO Garulfo : faux selon mes tests 
+% Cependant, dans le cas des composants, il est important que le nom du
+% composant corresponde au nom du fichier qui le contient.
+
+\stopdescription
+
+\startdescription[reference=refchemins]{Structure des répertoires et chemins des fichiers~:}
+
+\index{fichiers+chemin}
+\index{repertoire+chemin}
+\index{structure+chemin}
+
+Par défaut, \ConTeXt\ cherche les fichiers dans le répertoire de travail et dans le chemin indiqué par la variable TEXROOT. Cependant, lorsque nous utilisons les commandes \tex{project}, \tex{product}, \tex{component} ou \tex{environment}, il est supposé que le projet possède une structure de répertoires dans laquelle les éléments communs se trouvent dans le répertoire parent, et les éléments spécifiques dans un répertoire enfant. Ainsi, si le fichier indiqué dans le répertoire de travail est introuvable, il sera recherché dans son répertoire parent, et s'il n'est pas trouvé là non plus, dans le répertoire parent de ce répertoire, et ainsi de suite.
+
+% ADDED TODO Garulfo
+
+Il est parfois utile d'indiquer le chemin d'un fichier particuler, cela se fait naturellement par exemple~: 
+
+\placefigure [here,none] [] {}
+{\startDemoI
+\component chapitres/cmp_chapitre-6
+\stopDemoI}
+
+\PlaceMacro{usepath}\PlaceMacro{setupexternalfigures}
+
+Mais bien souvent cela se défini directement dans l'un des fichiers environnements par la commande \tex{usepath} qui permet d'indiquer la liste des répertoires dans lesquels \ConTeXt\ doit chercher les fichiers {\tt .tex}.
+
+\placefigure [here,none] [] {}
+{\startDemoI
+\usepath[{chapitres,annexes}]  
+\stopDemoI}
+
+Une autre commande \tex{setupexternalfigures} permet d'indiquer le chemin des images (dont l'utilisation sera détaillée à la \in{section}[sec:extimage]), avec une syntaxe similaire indiquée à l'option {\tt directory}~:
+
+\placefigure [here,none] [] {}
+{\startDemoI
+\setupexternalfigures[directory={../general_images,images}]}
+\stopDemoI}
+
+
+\stopdescription
+
+\stopsubsection
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX_fra.tex"
+%%% End:
+%%% vim:set filetype=context tw=75 : %%%

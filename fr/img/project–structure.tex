@@ -1,0 +1,117 @@
+\usemodule[chart]
+
+
+\definecolor    [colcomp]  [middlegreen] % pale green
+\definecolor    [colprod]  [middlered] % pale red
+\definecolor    [colproj]  [middleyellow] % pale blue
+\definecolor    [colenvi]  [middlecyan] % pale blue
+
+\setupFLOWlines
+    [corner=rectangular,
+     color=black,
+     rulethickness=2pt,
+     radius=8pt,
+     corner=round]
+
+\setupFLOWshapes
+    [framecolor=black,
+     background=color,
+     backgroundcolor=colcomp]
+
+\setupFLOWcharts
+[nx=6,
+ny=3,
+dx=2\bodyfontsize,
+dy=2\bodyfontsize,
+maxwidth=\textwidth,
+commentoffset=25pt,
+]
+
+\startTEXpage
+\startFLOWchart[projekte]
+
+    \startFLOWcell
+        \name     {comp11}
+        \location {1,1}
+        \text     {\ssb Composant A}
+    \stopFLOWcell
+    \startFLOWcell
+        \name     {comp12}
+        \location {2,1}
+        \text     {\ssb Composant B}
+    \stopFLOWcell
+    \startFLOWcell
+        \name     {comp21}
+        \location {3,1}
+        \text     {\ssb Composant X}
+    \stopFLOWcell
+    \startFLOWcell
+        \name     {comp22}
+        \location {4,1}
+        \text     {\ssb Composant Y}
+        \connection[-tl] {project}
+        \connection[+tr] {environment1}
+        \comment[b]{via \tex{component}}
+    \stopFLOWcell
+
+    \startFLOWcell
+        \name     {comp23}
+        \location {5,1}
+        \text     {\ssb Composant Z}
+        \connection[rl] {environment3}
+        \comment[b]{via \tex{component}}
+    \stopFLOWcell
+
+     \startFLOWcell[backgroundcolor=colenvi]
+        \name     {environment3}
+        \location {6,1}
+        \text     {\ssb Environnement pour un composant spécifique}
+    \stopFLOWcell
+    \startFLOWcell[backgroundcolor=colenvi]
+        \name     {environment2}
+        \location {6,2}
+        \text     {\ssb Environnement pour un produit spécifique}
+        \label[lt]{via \tex{environment}}
+    \stopFLOWcell
+    \startFLOWcell[backgroundcolor=colenvi]
+        \name     {environment1}
+        \location {6,3}
+        \text     {\ssb Environnement pour l'ensemble du projet}
+        \label[lt]{via \tex{environment}}    
+    \stopFLOWcell
+
+    \startFLOWcell[backgroundcolor=colproj]
+        \name           {project}
+        \location       {3,3}
+        \connection[rl] {environment1}
+        \text           {\ssb Projet}
+        \comment[tr]{via \tex{project}}
+        \comment[tl]{via \tex{project}}
+    \stopFLOWcell
+
+    \startFLOWcell[backgroundcolor=colprod]
+        \name            {product1}
+        \location        {2,2}
+        \connection[-tb] {comp11}
+        \connection[tb]  {comp12}
+        \connection[b-t] {project}
+        \text            {\ssb Produit 1}
+    \stopFLOWcell
+
+    \startFLOWcell[backgroundcolor=colprod]
+        \name            {product2}
+        \location        {4,2}
+        \connection[-tb] {comp21}
+        \connection[tb]  {comp22}
+        \connection[+tb] {comp23}
+        \connection[b+t] {project}
+        \connection[rl]  {environment2}
+        \text            {\ssb Produit 2}
+    \stopFLOWcell
+
+    
+\stopFLOWchart
+
+\FLOWchart[projekte]
+
+\stopTEXpage
