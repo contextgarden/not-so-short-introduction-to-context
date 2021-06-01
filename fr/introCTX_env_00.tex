@@ -1,0 +1,40 @@
+\startenvironment introCTX_env
+
+%------------------------------------------------------------------------------
+
+\mainlanguage[fr]
+
+%------------------------------------------------------------------------------
+
+\setupdocument
+  [metadata:author=Joaquín Ataz-López,
+            author=Joaquín Ataz-López,
+       affiliation=Joaquín Ataz-López,
+    metadata:title=Une courte (?) introduction à ConTeXt,
+             title=Une courte (?) introduction à ConTeXt,
+          location=France,
+           support=https://mailman.ntg.nl/mailman/listinfo/ntg-context,
+           website=https://wiki.contextgarden.net]
+
+%------------------------------------------------------------------------------
+
+\usepath[{00_FrontMatter,01_BodyMatter,02_Appendices}]
+
+%------------------------------------------------------------------------------
+
+\environment introCTX_env_01_color    
+\environment introCTX_env_02_layout  
+\environment introCTX_env_03_headers_footers_pagenumbering  % TODO Garulfo doublesided
+\environment introCTX_env_04_paragraphs_and_fonts 
+\environment introCTX_env_05_headings_toc_and_ref
+\environment introCTX_env_06_figures-tables.tex
+\environment introCTX_env_07_interactivity 
+
+%------------------------------------------------------------------------------
+%                      Specific for this introduction, will not compile without
+
+\environment introCTX_env_08_specific
+\environment introCTX_env_09_for_demo
+\environment introCTX_env_10_attachment
+
+\stopenvironment

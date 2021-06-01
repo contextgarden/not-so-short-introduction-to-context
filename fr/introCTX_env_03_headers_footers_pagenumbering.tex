@@ -1,0 +1,54 @@
+
+%-----------------------------------------------------------------------------
+
+\setuppagenumbering
+  [
+   alternative=doublesided,                             % document recto-verso
+   location=]    % suppression affichage par défaut numéro page centré en-tête
+
+%\setupuserpagenumber [number=2]
+\setupheadertexts[]                                    % Empty initial headers
+\setupfootertexts[]                                    % Empty initial footers
+
+%------------------------------------------------------------------------------
+
+\startsectionblockenvironment[bodypart]
+  \setupfootertexts[text]                                                 % sides
+    [{\tfx\labeltext{chapter}\getmarking[chapternumber]}]
+    [\hfill{\framed[height=max,frame=off,offset=0pt,location=top,align=high]{\tfx\getmarking[chapter]}}]
+    [{\tfx\labeltext{chapter}\getmarking[chapternumber]}]
+    [{\framed[height=max,frame=off,offset=0pt,location=top,align=high]{\tfx\getmarking[chapter]}}]
+  \setupfootertexts[margin]                                                 % sides
+    []
+    [\hfill{\tfx\bf\pagenumber}]
+    [{\tfx\bf\pagenumber}\hfill]
+    []
+\stopsectionblockenvironment
+
+%------------------------------------------------------------------------------
+
+\startsectionblockenvironment[frontpart]
+  \setupheadertexts
+    [{\tfx\getmarking[chapter]}]
+    [{\tfx\pagenumber}]
+  \setuphead
+    [chapter]
+    [incrementnumber=list,
+      after={\strut\blank[3*big]},]
+\stopsectionblockenvironment
+
+%------------------------------------------------------------------------------
+
+\startsectionblockenvironment[appendix]
+  \setuplabeltext
+    [en]
+    [chapter={Appendix~}]
+  \setuphead[part][number=no]                      % No numbering for part here
+  \setupheadertexts                                                    % middle
+    [{\tfx\getmarking[chapter]}]
+  \setupheadertexts                                                     % sides
+    [{\tfx\labeltext{chapter}\getmarking[chapternumber]}]
+    [{\tfx\pagenumber}]
+\stopsectionblockenvironment
+
+

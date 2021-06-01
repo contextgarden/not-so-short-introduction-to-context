@@ -24,10 +24,9 @@
 %%% Editado: Emacs + AuTeX - Y a veces con vim + context-plugin
 %%%
 
-
-\environment[introCTX_env]
-
 \startcomponent b02_PremierDoc
+
+\environment introCTX_env_00
 
 \startchapter
   [reference=cap:firstdoc,
@@ -57,9 +56,10 @@ Qu'il s'agisse d'un éditeur ou d'un autre, ce qu'il ne faut pas faire, c'est ut
 
 \item {\bf Une distribution \ConTeXt} pour traiter notre fichier de test. S'il existe déjà une installation \TeX\ (ou \LaTeX) sur votre système, il est possible qu'une version de \ConTeXt\ soit déjà installée. Pour le vérifier, il suffit d'ouvrir un terminal et de taper dans celui-ci
 
+\placefigure [here,none] [] {}{
 \startDemoC
 $ context --version
-\stopDemoC
+\stopDemoC}
 
   \startSmallPrint
 
@@ -70,7 +70,7 @@ qui indique que le terminal attend nos instructions.
 
 Si une version de \ConTeXt\ est déjà installée, vous devriez obtenir un résultat similaire au suivant :
 
-
+\placefigure [here,none] [] {}{
 \startDemoC
 $ context --version
 mtx-context     | ConTeXt Process Management 1.03
@@ -79,7 +79,7 @@ mtx-context     | main context file: /usr/share/texmf/tex/context/base/mkiv/cont
 mtx-context     | current version: 2020.03.10 14:44
 mtx-context     | main context file: /usr/share/texmf/tex/context/base/mkiv/context.mkxl
 mtx-context     | current version: 2020.03.10 14:44
-\stopDemoC
+\stopDemoC}
 
 
 Dans la dernière ligne, nous sommes informés de la date à laquelle la version installée a été publiée. Si elle est très ancienne, nous devons le mettre à jour ou installer une nouvelle version. Je recommande d'installer la distribution appelée \suite- dont les instructions d'installation se trouvent sur le \goto{wiki de \ConTeXt}[url(wiki)]. Les indications sont également incluses dans l'\in{annexe}[instalación_suite].
@@ -104,7 +104,7 @@ Nous pouvons choisir l'éditeur, nous pouvons choisir le visualisateur de PDF, n
 Si nous disposons déjà des outils mentionnés dans la section précédente, nous devons ouvrir notre éditeur de texte et créer un fichier appelé \quotation{la-maison-sur-le-port.tex} pour notre exemple. Comme contenu du fichier, nous allons écrire ce qui suit :
 
 
-
+\placefigure [here,none] [] {}{
 \startDemoI
 % Première ligne du document
 
@@ -139,7 +139,7 @@ Dans la maison    sur le port
 \stopchapter
 
 \stoptext            % Fin du document
-\stopDemoI
+\stopDemoI}
 
 \attachment
   [file=../img/la-maison-sur-le-port.tex,
@@ -192,9 +192,10 @@ Si la distribution \ConTeXt\ que nous avons installée est \suite-, nous devons 
 
 % TODO à revoir avec LMTX
 
+\placefigure [here,none] [] {}{
 \startDemoC
 $ source ~/context/tex/setuptex
-\stopDemoC
+\stopDemoC}
 
 
 en supposant que nous avons installé \ConTeXt\ dans un répertoire appelé \MyKey{context}.
@@ -207,9 +208,10 @@ En ce qui concerne l'exécution du {\em script} qui vient d'être mentionné, vo
 
 Une fois que les variables nécessaires à l'exécution de \MyKey{context} ont été chargées en mémoire, nous pouvons l'exécuter. Cela se fait en tapant dans le terminal :
 
+\placefigure [here,none] [] {}{
 \startDemoC
 $ context la-maison-sur-le-port
-\stopDemoC
+\stopDemoC}
 
 
 Notez que bien que le fichier source s'appelle \quotation{la-maison-sur-le-port.tex} dans l'appel à \MyKey{context} nous avons omis l'extension du fichier. Si nous avions appelé au fichier source, par exemple, \MyKey{la-maison-sur-le-port.mkiv} (ce que je fais habituellement pour savoir que ce fichier est écrit pour Mark~IV), il aurait fallu indiquer expressément l'extension du fichier à compiler en tapant \MyKey{context la-maison-sur-le-port.mkiv}.
@@ -221,18 +223,16 @@ Après quelques secondes, si nous avons bien écrit le texte de notre fichier so
 
 
 \startitemize[packed]
-
 \item la-maison-sur-le-port.pdf
 \item la-maison-sur-le-port.log
 \item la-maison-sur-le-port.tuc
-
 \stopitemize
 
 
 Le premier est le résultat de notre traitement, c'est-à-dire : le fichier PDF déjà formaté. Le deuxième est le fichier  dans lequel sont stockées toutes les informations qui ont été affichées à l'écran pendant la compilation ; le troisième est un fichier auxiliaire que \ConTeXt\ génère pendant la compilation et qui est utilisé pour construire les index et les références croisées. Pour le moment, si tout a fonctionné comme prévu, nous pouvons supprimer les deux fichiers (\MyKey{la-maison-sur-le-port.log} et \MyKey{la-maison-sur-le-port.tuc}). S'il y a eu un problème, les informations contenues dans ces fichiers peuvent nous aider à localiser la source du problème et à déterminer comment le résoudre.
 
 
-Si nous n'avons pas obtenu ces résultats, c'est probablement dû à un ou plusieurs de points qui suivent :
+Si nous n'avons pas obtenu ces résultats, c'est probablement dû à un ou plusieurs de points qui suivent~:
 
 
 \startitemize [packed]
@@ -260,7 +260,7 @@ En cas de problème, nous devrons donc vérifier chacune de ces possibilités, e
   [here]
   [la-maison-sur-le-port]
   {La maison sur le port}
-  {\midaligned{\framed{\externalfigure[la-maison-sur-le-port.pdf][width=13cm]}}}
+  {\externalfigure[la-maison-sur-le-port.pdf][width=\textwidth,frame=on]}
 
 
 La \in{figure}[la-maison-sur-le-port] montre le contenu de \quotation{la-maison-sur-le-port.pdf}. Nous pouvons voir que \ConTeXt\ a numéroté la page, numéroté le chapitre et écrit le texte dans la police indiquée. Il a également réparti le mot  \quotation{venaient} entre la sixième et la septième ligne, ainsi que le mot  \quotation{maison} la septième et la guitième ligne. \ConTeXt, par défaut, active la césure (division syllabique) des mots afin de répartir les blancs (les espaces vides entre les mots) de façon la plus homogène possible. C'est pourquoi il est si important d'informer \ConTeXt\ de la langue du document, car les modèles de césure varient selon la langue. Dans notre exemple, c'est l'objectif de la première commande du fichier source (\tex{mainlanguage[fr]}).
@@ -291,10 +291,10 @@ La commande \MyKey{context}  avec laquelle nous avons procédé au traitement de
 
 Nous pouvons appeler \MyKey{context} avec plusieurs options. Les options sont saisies immédiatement après le nom de la commande, précédées de deux traits d'union. Si nous voulons saisir plus d'une option, nous les séparons par un espace blanc. L'option \MyKey{help} nous donne une liste de toutes les options, avec une brève explication de chacune d'elles :
 
-
+\placefigure [here,none] [] {}{
 \startDemoC
 $ context --help
-\stopDemoC
+\stopDemoC}
 
 Parmi les options les plus intéressantes, citons les suivantes :
 
@@ -344,6 +344,7 @@ En travaillant avec \ConTeXt, il est inévitable que, tôt ou tard, des erreurs 
 
 Que faire lorsque  \MyKey{context} nous avertit, pendant la compilation, qu'une erreur s'est produite ? La première chose est, évidemment, d'identifier quelle est l'erreur. Pour ce faire, nous devrons parfois analyser le fichier \MyKey{.log} généré pendant la compilation ; mais encore plus souvent il suffira de remonter dans les messages produits par \MyKey{context} dans le terminal où il est exécuté.
 
+\placefigure [here,none] [] {}{
 \startDemoC
 tex error       > tex error on line 14 in file la-maison-sur-le-port_bug.tex: ! Undefined control sequence
 
@@ -373,19 +374,20 @@ l.14 \startext
 24
 
 mtx-context     | fatal error: return code: 256
-\stopDemoC
+\stopDemoC}
 
 
 Par exemple, si dans notre fichier de test, \MyKey{la-maison-sur-le-port.tex}, par erreur, au lieu de \tex{starttext} nous avions écrit \tex{startext} (avec un seul \quotation{t}), ce qui, par ailleurs, est une erreur très courante, lors de l'exécution de \MyKey{context la-maison-sur-le-port}, lorsque la compilation était arrêtée, dans l'écran du terminal nous pouvions voir l'information montrée dans ci-dessus.
 
   Nous pouvons y voir les lignes de notre fichier source numérotées, et à l'une d'entre elles, dans notre cas la ligne 14, entre le numéro et le texte de la ligne le compilateur a ajouté \quotation{>>} pour indiquer que c'est dans cette ligne qu'il a trouvé l'erreur. Le numéro de la ligne est également indiqué plus haut, avnat l'affichage des lignes, dans une ligne commençant par \MyKey{tex error}. Le fichier \MyKey{la-maison-sur-le-port.log} nous donnera plus d'indices. Dans notre exemple, il ne s'agit pas d'un très gros fichier, car la source que nous compilions est très petite ; dans d'autres cas, il peut contenir une quantité écrasante d'informations. Mais nous devons nous y plonger. Si nous ouvrons  \MyKey{la-maison-sur-le-port.log} avec un éditeur de texte, nous verrons que ce fichier enregistre tout ce que fait \ConTeXt. Nous devons y chercher une ligne qui commence par un avertissement d'erreur \quotation{\tt tex error}, pour cela nous pouvons utiliser la fonction de recherche de texte de l'éditeur. Nous trouveerons les lignes d'erreur suivantes~:
 
+\placefigure [here,none] [] {}{  
 \startDemoC
 tex error       > tex error on line 14 in file la-maison-sur-le-port_bug.tex: ! Undefined control sequence
 
 l.14 \startext
                        % Début du contenu du document
-\stopDemoC
+\stopDemoC}
 
 \startSmallPrint
 

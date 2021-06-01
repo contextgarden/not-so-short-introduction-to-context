@@ -1,0 +1,130 @@
+
+
+%------------------------------------------------------------------------------
+% PARTS, CHAPTERS, SECTIONS, ETC.
+
+\setuplabeltext                                                      % Labels
+  [fr]
+  [
+    chapter=Chapitre~,
+    appendix=Annexe~,
+    part=Partie~
+  ]
+  
+% This snippet defines a footer with page numbers. A name is assigned
+% to it, and then, when section commands are configured, this name is
+% assigned to the first page of part and chapter.
+\definetext[ChapterFirstPage]
+           [footer]
+           [pagenumber]
+
+\setuphead
+  [part]
+  [
+    placehead=yes,
+    alternative=middle,
+    conversion=I,
+    style={\switchtobodyfont[36pt]\bf},
+    color=purple,
+    before={\ \godown[4cm]},
+    header=high,
+    footer=ChapterFirstPage,
+  ]
+
+\setuphead
+  [title, chapter]
+  [
+    style={\switchtobodyfont[30pt]\bf},
+    align=flushright,
+    before={\blank[5*big, force]},
+    after={\blank[2*big]},
+    color=maincolor,
+    sectionsegments=2:2,
+    commandbefore={\blank[small]},
+    header=high,
+    footer=ChapterFirstPage,
+  ]
+
+\setuphead
+  [section, subject]
+  [
+    style={\bfc},
+    before={\blank[2*big]},
+    after=\blank,
+    color=maincolor,
+    sectionsegments=2:3,
+  ]
+
+\setuphead
+  [subsection, subsubject]
+  [
+    style={\bfb},
+    before=\blank,
+    after=\blank,
+    color=maincolor,
+    sectionsegments=2:4,
+  ]
+
+\define[1]\PlacePoint{#1.}
+
+\setuphead
+  [subsubsection,subsubsubject]
+  [
+    sectionsegments=5:5,
+    conversion=A,
+    style=\bfa,
+    color=black,
+    numbercommand=,
+  ]
+
+\setuphead
+  [subsubsection][numbercommand=\PlacePoint]
+
+
+%=============================> ADDED BY GARULFO - START <=====================
+
+%------------------------------------------------------------------------------
+
+\definestructureresetset
+  [mywaytoreset]
+  [0,0]                          % do not reset when change of part or chapter
+  [1]                                                             % else reset
+
+
+\setuphead
+  [chapter]
+  [sectionresetset=mywaytoreset]
+
+%------------------------------------------------------------------------------
+% pour la table des matières
+\setuplist
+  [part]
+  [
+    before={\blank[2*big]},
+    after={\blank[big]},
+    style=\bfa,
+    aligntitle=yes,
+  ]
+
+\setuplist
+  [chapter]
+  [
+    before=\blank,
+    style=\bf,
+    margin=.5cm,
+    aligntitle=yes
+  ]
+
+\setuplist
+  [section]
+  [
+    aligntitle=yes,
+    style=\tfx,
+    margin=1.5cm
+  ]
+
+%=============================> ADDED BY GARULFO - END   <=====================
+
+
+
+

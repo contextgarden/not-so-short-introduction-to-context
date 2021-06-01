@@ -7,9 +7,9 @@
 %%% Edited with: Emacs + AuTeX - and at times with vim + context-plugin
 %%%
 
-\environment[introCTX_env]
-
 \startcomponent a02_Preface
+
+\environment introCTX_env_00
 
 %------------------------------------------------------------------------------
 
@@ -75,7 +75,7 @@ d'autant  plus que  ces types  de  fichiers sont  beaucoup plus  légers et  plu
 faciles à traiter que les lourds fichiers binaires des traitements de texte.
 
 %-------------------------------------------------------------------------------
-\margintext{\tfxx Documentation}
+\startsubsubsubject{Documentation}
 
 Il existe une documentation considérable  sur \ConTeXt, presque exclusivement en
 anglais.  Par  exemple, ce que l'on  considère comme étant la  distribution {\em
@@ -129,7 +129,7 @@ retrouve également dans la liste officielle des commandes \from[commandes]
 \footnote{Pour la liste, voir \in{section}[sec:qrc-setup-fr].}
 qui  comprend, pour  chacune d'elles,  l'ensemble des  options de  configuration
 possibles mais ne  précise pas quelles commandes ne fonctionnent  que dans l'une
-ou l'autre des versions.
+ou l'autre des versions. 
 
 Fondamentalement, cette  introduction a  été rédigée  en s'inspirant  des quatre
 sources    d'information    énumérées    préalablement   ~:    \from[excursion],
@@ -180,8 +180,9 @@ pour lequel l'effort d'apprentissage vaut sans aucun doute la peine.  {\bf Grâc
   utilitaires insoupçonnés.
 \stopSmallPrint
 
+\stopsubsubsubject
 %-------------------------------------------------------------------------------
-\margintext{\tfxx Incertitudes}
+\startsubsubsubject{Incertitudes}
 
 Etant donné que ce qui est expliqué dans ce document provient essentiellement de
 mes  propres conclusions,  il est  probable que,  bien qu'ayant  personnellement
@@ -210,8 +211,9 @@ Mais n'ayant  jamais été très  doué pour  les représentations graphiques,  
 suis pas certain que les images sélectionnées parviennent vraiment à transmettre
 ces nuances.
 
+\stopsubsubsubject
 %-------------------------------------------------------------------------------
-\margintext{\tfxx Public visé}
+\startsubsubsubject{Public visé}
 
 Autre aspect,  cette introduction a  été écrite pour  un lecteur qui  ne connaît
 rien à \TeX\ et \ConTeXt, bien  que j'espère qu'elle pourra également être utile
@@ -259,8 +261,9 @@ l'intéressent guère, par exemple de savoir  si une telle commande qui fonction
 qu'en certaines  occasions, lorsque je  l'ai considéré utile, qu'il  est précisé
 que certaines commandes appartiennent réellement à \TeX.
 
+\stopsubsubsubject
 %-------------------------------------------------------------------------------
-\margintext{\tfxx Structuration}
+\startsubsubsubject{Structuration}
 
 En ce  qui concerne l'organisation  de ce document,  le contenu est  présenté en
 trois parties~:
@@ -410,6 +413,10 @@ trois parties~:
 
 \stopitemize
 
+\stopsubsubsubject
+%-------------------------------------------------------------------------------
+\startsubsubsubject{Reste à faire}
+
 
 De nombreux  points restent  à expliquer ~: le traitement  des citations  et des
 références  bibliographiques, la  rédaction de  textes spéciaux  (mathématiques,
@@ -455,6 +462,8 @@ documentation dans sa langue.  J'espère que ce document répondra à cet object
 
 \rightaligned{Joaquín Ataz-López}\\
 \rightaligned{Eté 2020}
+
+\stopsubsubsubject
 
 \stopchapter
 

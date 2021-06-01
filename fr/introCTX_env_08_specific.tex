@@ -1,0 +1,109 @@
+  %==============================================================================
+  % STRUCTURES DEFINED BY ME
+  
+\definedescription
+    [description]
+    [
+      alternative=hanging,
+      width=fit,
+      distance=0.3cm,
+      headstyle=\bf
+    ]
+    
+  \definedescription
+    [semitable]
+    [
+      alternative=left,
+      width=fit,
+      distance=1cm,
+      headcolor=darkmagenta,
+      headstyle=\tt,
+    ]
+
+  %==============================================================================
+  % ENVIRONMENTS DEFINED BY ME
+
+  % DoubleExample: For two column examples. It gave some errors when
+  % defining it with \definestartstop (due to my lack of knowledge) and
+  % in the end what I did was to define a TeX style command for opening
+  % it, and another command for closing it.
+
+
+  \def\startDoubleExample{%
+    \startframedtext
+      [frame=off]
+      \switchtobodyfont[small]
+      \setuptyping[style=tt]
+      \startcolumns
+        [
+          n=2,
+          tolerance=verytolerant,
+          distance=0.5cm,
+          separator=rule,
+          rulecolor=darkmagenta
+        ]
+  }
+
+  \def\stopDoubleExample{\stopcolumns\stopframedtext}
+
+  %------------------------------------------------------------------------------
+
+  % Small print
+  \definestartstop[SmallPrint]
+                  [
+                    before={\startnarrower\switchtobodyfont[small,ss]},
+                    after={\stopnarrower},
+                  ]
+
+  %------------------------------------------------------------------------------
+  % Commands and abbreviations
+
+  % Assumption: Print the assumption icon in the margin
+  \define\Conjecture{%
+    \inouter[line=1]{\externalfigure[conjecture.pdf][width=1cm]}}
+
+  % Doubt: Print the doubt icon in the margin
+  \define\Doubt{%
+    \inouter[line=1]{\externalfigure[doubt.pdf][width=1cm]}}
+
+  % example: Show in red and in small print the result of compiling an
+  % earlier code snippet.
+  \define[1]\example{\color[red]{\tfx#1}}
+
+  % ConTeXt Standalone
+  \def\suite-{\quotation{\ConTeXt\ Standalone}}
+
+  % cmd: to be used in place of tex when, in the source file, there is a
+  % line break in an argument.
+  \define[1]\cmd{
+    {\en\tt\color[darkmagenta]{\backslash #1}}}
+
+  % PalClave:  tt and guillemets (angle quotes)
+  % \define[1]\PalClave{«{\tt #1}»}
+
+  % MyKey: tt and double inverted commas
+  \define[1]\MyKey{\quotation{\tt #1}}
+
+  % Partial chapter table of contents:
+  \def\Separate#1{#1;}
+  \def\TocChap{
+    \startnarrower\switchtobodyfont[small, sl]
+      {\bf Table of Contents:}
+      \setuplist
+        [section,subsection,subsubsection]
+        [pagenumber=no, textcommand=\Separate]
+      \setuplist[section][style=bold]
+      \placecontent[alternative=d]
+    \stopnarrower
+  }
+
+  % Index
+  \defineregister[macro]
+  \define[1]\PlaceMacro{\macro[#1]{\backslash #1}}
+
+  \definecombinedlist                     % Let us define our list (called a Toc)
+  [Toc]
+  [part, chapter, section]
+  [level=subsection, alternative=c,criterium=text]
+
+\setupheadtext [fr] [Toc=Table des matières]

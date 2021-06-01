@@ -11,9 +11,9 @@
 %%% Edited with: Emacs + AuTeX - And at times with vim + context-plugin
 %%%
 
-\environment[introCTX_env]
-
 \startcomponent b01_Introduction
+
+\environment introCTX_env_00
 
 %==============================================================================
 
@@ -205,7 +205,7 @@ Cette convention est suivie dans tous les dérivés de \TeX\ qui l'incluent dans
 
 Pour cette raison, {\sc Knuth} a rendu \TeX\ extensible, c'est-à-dire disposant d'un mécanisme permettant de définir des instructions de plus haut niveau, dans un langage plus facilement compréhensibles par les êtres humains. Ces instructions, qui au moment de l'exécution sont décomposées en instructions élémentaires, sont appelées {\em macros}. Par exemple, l'instruction \TeX\ qui imprime votre logo  (\tex{TeX}), est décomposée lors de son exécution en :
 
-
+\placefigure [here,none] [] {}{
 \startDemoC
 T 
 \kern -.1667em 
@@ -213,7 +213,7 @@ T
 \hbox {E} 
 \kern -.125em 
 X
-\stopDemoC
+\stopDemoC}
 
 
 On comprend là qu'il est beaucoup plus facile pour un être humain de comprendre et mémoriser la simple commande \quotation{\PlaceMacro{TeX}\type{\TeX}} dont l'exécution effectue l'ensemble des opérations typographiques nécessaires à l'impression du logo.

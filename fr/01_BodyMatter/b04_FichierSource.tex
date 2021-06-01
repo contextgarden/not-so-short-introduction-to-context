@@ -16,9 +16,9 @@
 %%% Edited with: Emacs + AuTeX - And at times with vim + context-plugin
 %%%
 
-\environment[introCTX_env]
-
 \startcomponent b04_SourceFile
+
+\environment introCTX_env_00
 
 % * En-tête de chapitre 
 
@@ -141,14 +141,16 @@ Avec \tex{enableregime} \ConTeXt\ inclut la commande \PlaceMacro{useregime} \tex
 
 Les tabulations et les espaces blancs sont traités de la même manière dans le fichier source. Un caractère de tabulation (la touche Tab du clavier) sera transformé en espace blanc par \ConTeXt. Et les espaces blancs sont absorbés par tout autre espace blanc (ou tabulation) qui les suit immédiatement. Ainsi, cela ne fait absolument aucune différence d'écrire un seul plusieurs espaces et tabilations dans le fichier source~:
 
+\placefigure [here,none] [] {}{
 \startDemoHN
 Tweedledum and Tweedledee.
 
 Tweedledum   and   Tweedledee.
-\stopDemoHN
+\stopDemoHN}
 
 \ConTeXt{} considère que ces deux lignes sont exactement les mêmes. Par conséquent, si nous voulons introduire un espace supplémentaire entre les mots, nous devons utiliser certaines commandes \ConTeXt{} qui le font. Normalement, cela fonctionnera avec \quotation{\cmd{\textvisiblespace}}, c'est-à-dire un caractère {\tt\backslash} suivi d'un espace blanc. Mais il existe d'autres procédures qui seront examinées dans le \in{chapitre}[sec:horizontal space1] concernant les espacements horizontaux.
 
+\placefigure [here,none] [] {}{
 \startDemoHN
 Dupont      et      Dupond.
 
@@ -157,12 +159,13 @@ Dupont\     et\     Dupond.
 Dupont\ \   et\ \   Dupond.
 
 Dupont\ \ \ et\ \ \ Dupond.
-\stopDemoHN
+\stopDemoHN}
 
 L'absorption d'espaces blancs consécutifs nous permet de mettre en forme le fichier source comme nous le souhaitons, par exemple en augmentant ou en diminuant l'indentation utilisée pour le rendre clair et lisible, avec la tranquillité d'esprit de savoir que cela n'affectera en rien le document final. Ainsi, dans l'exemple suivant~:
 
 % TODO Garulfo mettre un texte français
 
+\placefigure [here,none] [] {}{
 \startDemoHN
 The music group from Madrid at the end of the seventies 
     {\em La Romántica Banda Local} 
@@ -175,8 +178,7 @@ In their son “El Egipcio”, for example, they said:
     vicios de gitano pueden en su mano acariciar la verdad},
 mixing word, phrases simply because they have an internal rhythm
 (comedia-histeria-seria, gitano-mano).
-\stopDemoHN
-
+\stopDemoHN}
 
 vous pouvez voir que certaines lignes sont légèrement en retrait sur la droite. Ce sont les lignes qui font partie des parties qui apparaîtront en italique. Le fait qu'elles soient en retrait aide (l'auteur) à voir où se termine l'italique.
 
@@ -195,6 +197,7 @@ La même chose se produit avec le caractère réservé \MyKey{\lettertilde}, bie
 
 Ainsi, regardons l'exemple suivant~:
 
+\placefigure [here,none] [] {}{
 \startDemoHN
 Dupont    et Dupond.
 
@@ -203,7 +206,7 @@ Dupont {} et Dupond.
 Dupont \  et Dupond.
 
 Dupont ~  et Dupond.
-\stopDemoHN
+\stopDemoHN}
 
 si vous regardez de près, nous obtenons entre les deux premiers mots, deux espaces consécutifs à la deuxième ligne et trois à la troisième.
 
@@ -240,6 +243,7 @@ Notez que j'ai dit \quotation{deux ou plusieurs sauts de ligne consécutifs} et 
 
 Parfois, lorsqu'un saut de ligne devient un espace blanc, nous pouvons nous retrouver avec un espace blanc indésirable et inattendu. En particulier lorsque nous écrivons des macros, où il est facile qu'un espace blanc \quotation{s'introduise} sans que nous nous en rendions compte. Pour éviter cela, nous pouvons utiliser le caractère réservé \MyKey{\%} qui, comme nous le savons, fait en sorte que la ligne où il apparaît ne soit pas traitée, ce qui implique que la coupure à la fin de la ligne ne sera pas non plus traitée. Ainsi, par exemple,
 
+\placefigure [here,none] [] {}{
 \startDemoVN
 \define[3]\TestA{
   {\em #1} {\bf #2} {\sc #3}
@@ -260,7 +264,7 @@ Parfois, lorsqu'un saut de ligne devient un espace blanc, nous pouvons nous retr
 \TestB{riri}{fifi}{loulou}
 
 \TestC{riri}{fifi}{loulou}
-\stopDemoVN
+\stopDemoVN}
 
 les commandes \tex{TestA} et \tex{TestB} écrivent le premier argument en italique, le second en gras et le troisième en petites capitales, mais la première insérera un espace entre chacun de ces arguments, alors que la seconde n'en n'insérera pas~: le caractère réservé \% empêche les sauts de ligne d'être traités et ils deviennent de simples espaces vides.
 
@@ -580,8 +584,7 @@ J'ai conservé le terme \quotation{fichiers d'environnement} pour ces types de f
 Comme tous les fichiers source de \ConTeXt, les fichiers d'environnement sont des fichiers texte, et supposent que l'extension sera \quotation{\type{.tex}}, bien que si nous le voulons, nous pouvons la changer, peut-être en \quotation{\type{.env}}. Cependant, cela n'est généralement pas fait dans \ConTeXt. Le plus souvent, les fichiers d'environnement sont identifiés en commençant ou en terminant leur nom par \quotation{env}. Par exemple~: \quotation{\type{env_livreA.tex}} ou \quotation{\type{mon-livreA.tex}}. L'intérieur d'un tel fichier d'environnement ressemblerait à ce qui suit :
 
 \placefigure [here,none] [] {}
-{
-\startDemoI
+{\startDemoI
 \startenvironment env_livreA
 
   \mainlanguage[fr]
@@ -600,8 +603,7 @@ Comme tous les fichiers source de \ConTeXt, les fichiers d'environnement sont de
 ou pourrait également faire appel à d'autres fichiers environnements de façon a décomposer les différents éléments~:
 
 \placefigure [here,none] [] {}
-{
-\startDemoI
+{\startDemoI
 \startenvironment env_livreA
 
 \environment    env_livreA-polices

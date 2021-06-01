@@ -1,0 +1,73 @@
+
+%------------------------------------------------------------------------------
+
+\setupbodyfont[palatino]    
+\setupbodyfont[10.5pt]                                      % taille par défaut 
+
+                                                          % use microtypography
+\setuptolerance[strict]               % how tolerant vs ‘ugly’ stretched spaces
+
+\setupalign[hz,                                         % hz for font expansion
+            hanging,                                   % hanging for protrusion
+            lesshyphenated,                      % two instructions added by j.
+            verytolerant,                       % to eliminate most hyphenation
+            stretch]                 % and get better interword spacing as well
+
+
+%------------------------------------------------------------------------------
+
+\setupwhitespace [big]                        % espace interparagraphes "grand"
+
+
+%------------------------------------------------------------------------------
+       
+\setupitemize                  % liste à puce "compactées" et tirets en couleur
+  [packed,
+  indenting=none,                        % First line of paragraphs not indented
+   color=ctr1color]
+
+\definesymbol               % définition d'un symbole = un petit carré de 0.9ex
+  [symitemize1]
+  [{\blackrule[height=1.3ex,width=0.9ex,depth=-0.4ex,]}]
+
+\setupitemize       % et son utilisation pour le premier niveau de liste à puce
+  [1]
+  [symbol=symitemize1]
+
+%------------------------------------------------------------------------------
+%                                      Notes de bas de page ou notes marginales
+
+\setupnote[footnote][location=none]
+
+\setupnotation[footnote][
+    align=flushinner,
+    textcolor=ctr1color
+    width=broad,
+    numberconversion=n, 
+    after={\blank[small]}]
+
+\setuptexttexts[margin][]
+    [{\framed[%
+    align={right,bottom},
+    frame=off,
+    height=\textheight,
+    width=\outermarginwidth
+    ]{\placenotes[footnote]}}]
+
+
+%------------------------------------------------------------------------------
+
+\setuptype
+  [color=darkmagenta]                      % Writing commands and code snippets
+
+\setuptyping
+  [color=darkmagenta,style={\switchtobodyfont[small,tt]}]
+
+%------------------------------------------------------------------------------
+
+% Truc de Jedi pour éviter les lignes veuves (lignes seules en bas de page) ou
+% orphelines (seules en haut de page)
+% https://dave.autonoma.ca/blog/2020/04/28/typesetting-markdown-part-8/
+
+\setpenalties\widowpenalties{1}{10000}
+\setpenalties\clubpenalties {1}{10000}

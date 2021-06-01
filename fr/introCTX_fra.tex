@@ -1,4 +1,3 @@
-%%% vim:set filetype=context tw=72 : %%%
 %%% File:      introCTX.mkiv
 %%% Title:     A not so short introduction to ConTeXt Mark IV
 %%% Author:    Joaquín Ataz-López
@@ -8,87 +7,70 @@
 %%% Edited with: Emacs + AuTeX - And at times with vim + context-plugin
 %%%
 
-\environment introCTX_env
-
 \startproduct introCTX
 
-  % Date of the last time modifications were introduced:
-  \def\RevisionDate{\date[d=2, m=1, y=2021]}
+\environment introCTX_env_00
 
-  %==============================================================================
+\def\RevisionDate{\date[d=29, m=5, y=2021]}  % Date of the last modifications
 
-  \startfrontmatter
+%==============================================================================
 
-    \component a01_PageDeTitre
-    \component a02_Preface
+\startfrontmatter
 
-  \stopfrontmatter
+\component     a01_PageDeTitre
+\component     a02_Preface
 
-  %==============================================================================
+\stopfrontmatter
 
-  \startbodymatter
+%==============================================================================
 
+\startbodymatter
+
+\startpart     [title=Qu'est ce que \ConTeXt\ ?\\Comment travailler avec ?]
+\component     b01_Introduction
+\component     b02_PremierDoc
+\component     b03_Commandes
+\component     b04_FichierSource
+\stoppart
+
+%------------------------------------------------------------------------------
+
+\startpart     [title=Global aspects of the document]
+
+\component     b05_Pages
+% \component   b06_Fonts.mkiv
+% \component   b07_Structure.mkiv
+% \component   b08_Lists.mkiv
+% \component   b09_References.mkiv
+
+\stoppart
     %------------------------------------------------------------------------------
 
-    \startpart
-      [title=Qu'est ce que \ConTeXt\ ?\\Comment travailler avec ?]
+\startpart     [title=Particular issues]
+% \component   b10_CharText.mkiv
+% \component   b11_ParasLines.mkiv
+% \component   b12_SpecialParas.mkiv
+% \component   b13_Floats.mkiv
+\stoppart
 
-      \component b01_Introduction
-      \component b02_PremierDoc
-      \component b03_Commandes
-      \component b04_FichierSource
+%------------------------------------------------------------------------------
 
-    \stoppart
+\stopbodymatter
 
-    %------------------------------------------------------------------------------
+%==============================================================================
 
-    \startpart
-      [title=Global aspects of the document]
+\startappendices
 
-      % \component b05_Pages.mkiv
-      % \component b06_Fonts.mkiv
-      % \component b07_Structure.mkiv
-      % \component b08_Lists.mkiv
-      % \component b09_References.mkiv
+\startpart     [title=Appendices, reference=part:annexes]
+% \component   Installation.mkiv
+% \component   Symbols.mkiv
+% \component   Macros.mkiv
+\completeindex
+\stoppart
 
-    \stoppart
+\stopappendices
 
-    %------------------------------------------------------------------------------
-
-    \startpart
-      [title=Particular issues]
-
-      % \component b10_CharText.mkiv
-      % \component b11_ParasLines.mkiv
-      % \component b12_SpecialParas.mkiv
-      % \component b13_Floats.mkiv
-
-    \stoppart
-
-    %------------------------------------------------------------------------------
-
-  \stopbodymatter
-
-  %==============================================================================
-
-  \startappendices
-
-    \startpart
-      [title=Appendices,
-       reference=part:annexes,
-       bookmark=Annexes]
-
-      % \component Installation.mkiv
-      % \component Symbols.mkiv
-      % \component Macros.mkiv
-
-      \completeindex
-
-    \stoppart
-
-  \stopappendices
-
-  %============================================================================
+%============================================================================
 
 \stopproduct
 

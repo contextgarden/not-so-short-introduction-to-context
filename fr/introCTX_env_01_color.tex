@@ -1,0 +1,41 @@
+%------------------------------------------------------------------------------
+% Sélection de couleurs, peuvent inclure des versions transparentes
+
+\usecolors[svg]
+
+\setupcolor[hex]
+
+\definecolor [orange]        [.6(orange)]                        % Title colour
+\definecolor [purple]        [.5(darkblue)]                      % Cover colour
+\definecolor [hex-orange]    [h=ED7D31]
+\definecolor [hex-vert]      [h=70AD47]
+
+\definecolor [vert1]         [h=dbe6de]
+\definecolor [vert2]         [h=bedcb2]
+\definecolor [violet1]       [x=bec7d6,a=1,t=0.6]
+\definecolor [violet2]       [h=a7c3ab]
+
+\definecolor [white1]        [x=fafafa,a=1,t=0.8]
+
+%------------------------------------------------------------------------------
+% Allocation des couleurs choisies à aux différents besoins dans le document
+% termes choisis génériques pour les utiliser de façon souple
+
+\definecolor [maincolor]     [orange]
+ 
+\definecolor [ctr1color]     [darkblue]
+\definecolor [urlcolor]      [blue]
+\definecolor [typecolor]     [darkmagenta]
+
+\definecolor [demo1color]    [hex-orange]
+\definecolor [demo2color]    [hex-vert]
+\definecolor [demoicolor]    [darkblue]
+\definecolor [democcolor]    [darkred]
+\definecolor [backdemocolor] [white1]
+
+%------------------------------------------------------------------------------
+% Et on commence par utiliser la couleur maincolor pour le corps du texte.
+
+\setupcolors[textcolor=black]
+   
+%------------------------------------------------------------------------------
