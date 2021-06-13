@@ -24,8 +24,8 @@
 \startchapter
   [
     reference=cap:fontscol,
-    title=Polices de caractères et couleurs dans \ConTeXt,
-    bookmark=Fonts and colours in ConTeXt,
+    title=Polices d'écriture et couleurs dans \ConTeXt,
+    bookmark=Polices d'écriture et couleurs dans \ConTeXt,
   ]
 
 \TocChap
@@ -107,7 +107,8 @@ Les polices utilisées par Windows ne sont pas des {\em logiciels libres} (en fa
 La terminologie concernant les polices est quelque peu confuse, car parfois ce que l'on appelle une police est en réalité une {\em famille de polices} qui comprend différents styles et variantes partageant un design de base. Je n'entrerai pas dans la question de savoir quelle terminologie est la plus correcte ; je m'intéresse uniquement à la clarification de la terminologie utilisée dans \ConTeXt. Ce dernier fait une distinction entre les polices, les styles et les variantes (ou alternatives) pour chaque style. Les {\em polices} incluses dans la distribution \ConTeXt\ (il s'agit en fait de {\em familles de polices}) sont celles que nous avons vues dans la section précédente. Nous allons maintenant nous pencher sur les {\em styles} et les {\em alternatives}.
 
 
-\subsubsubject{Style de police}
+\startsubsubsection
+  [title={Style de police}]
 
 
 \dontleavehmode{\sc Donald E. Knuth} a conçu la police {\em Computer Modern} pour \TeX, en lui donnant trois {\em styles} distincts appelés {\em roman}, {\em sans serif} et {\em teletype}. Le style {\em roman} est une conception dans laquelle les caractères présentent des \quotation{empattements} à chaque extrémité, ou \quotation{sérif} dans en jargon typographique, ce qui explique pourquoi ce style de police est également connu sous le nom {\em serif}. Ce style était considéré comme le style normal ou par défaut. Le style {\em sans serif}, comme son nom l'indique, est dépourvu de ces empattements et constitue donc une police plus simple et plus stylisée, parfois connue sous d'autres noms, par exemple en français, {\em linéale} ; cette police peut être la police principale du document, mais elle est également appropriée pour être utilisée pour distinguer certains fragments d'un texte dont la police principale est de style {\em romain}, comme, par exemple, les titres ou les en-têtes de page. Enfin, la police {\em teletype} a été incluse dans la police {\em Computer Roman} car elle a été conçue pour l'écriture de livres de programmation informatique, comportant de grandes sections de code informatique qui sont conventionnellement représentées, dans les documents imprimés, dans un style monospace qui imite les terminaux informatiques et les anciennes machines à écrire. Voici une illustration~:
@@ -130,7 +131,10 @@ Un quatrième style destiné aux fragments de mathématiques pourrait être ajou
   
   \stopSmallPrint
 
-\subsubsubject{Styles alternatifs}
+\stopsubsubsection
+
+\startsubsubsection
+  [title={Styles alternatifs}]
 
 Chaque {\em style} offre un certain nombre de styles alternatifs, et c'est ainsi que le \ConTeXt\ les appelle, ({\em alternative}) :
 
@@ -165,11 +169,14 @@ En particulier, de nombreuses polices ne font pas la différence dans leur conce
 
 \stopSmallPrint
 
-\subsubsubject{Différence entre l'italique et l'oblique}
+\stopsubsubsection
 
+\startsubsubsection
+  [title={Différence entre l'italique et l'oblique}]
+  
 La similitude de la fonction typographique assurée par l'italique et l'oblique conduit de nombreuses personnes à confondre ces deux alternatives. La lettre oblique est obtenue par une légère rotation du style régulier. Mais l'italique implique -- du moins dans certaines polices -- une conception différente dans laquelle les lettres {\em semblent} inclinées parce qu'elles ont été dessinées pour y ressembler ; mais en réalité, il n'y a pas d'inclinaison authentique. C'est ce que montre l'exemple suivant, dans lequel nous avons écrit le même mot trois fois à la même taille suffisamment grande pour qu'il soit facile d'apprécier les différences. Dans la première version, le style régulier est utilisé, dans la deuxième, l'inclinaison, et dans la troisième, l'italique~:
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoHW
 \definebodyfontenvironment[44pt]
 \setupbodyfont[modern,44pt]
@@ -194,6 +201,8 @@ D'autre part, l'italique et l'oblique sont tous deux des alternatives aux police
 \stopitemize
 
 Outre les commandes d'italique et d'oblique, \ConTeXt\ offre une commande supplémentaire pour {\em mettre en valeur} un texte particulier. Son utilisation implique des différences subtiles par rapport à l'italique ou à l'incliné. Voir \in{section}[sec:emphasis].
+
+\stopsubsubsection
 
 \stopsubsection
 
@@ -229,7 +238,7 @@ Pour configurer une police différente, nous utilisons \tex{setupbodyfont} qui n
 
 Le format \tex{setupbodyfont} est le suivant :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \setupbodyfont[Options]
 \stopDemoI}
@@ -255,19 +264,19 @@ En plus d'indiquer directement le corps de caractère (10pt, 11pt, 12pt, etc.), 
 
 Pour utiliser une taille de police différentes de celles disponibles par défaut, il est nécessaire de la déclarer avec \tex{definebodyfontenvironment} préalablement à l'utilisation de \tex{setupbodyfont}.
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoVN
 \setupbodyfont[modern,17.3pt]
 Coucou
 \stopDemoVN}
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoVN
 \setupbodyfont[modern,17.5pt]
 Coucou
 \stopDemoVN}
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoVN
 \definebodyfontenvironment[17.5pt]
 \setupbodyfont[modern,17.5pt]
@@ -327,7 +336,7 @@ Avant de décider d'utiliser une police particulière dans notre document, nous 
 
 Le format de \tex{showbodyfont} est le suivant :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \showbodyfont [Options]
 \stopDemoI}
@@ -335,7 +344,7 @@ Le format de \tex{showbodyfont} est le suivant :
 
 où nous pouvons indiquer comme options précisément les mêmes noms symboliques que dans \tex{setupbodyfont}. Ainsi, l'exemple affiché nous montre différentes illustrations des polices schola et adventor avec une taille de base de 14 points.
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoHW
 \definebodyfontenvironment[14pt]
 \showbodyfont[schola,14pt]
@@ -347,7 +356,7 @@ Notez qu'il y a certaines commandes dans la première ligne et la première colo
 
 Si nous voulons voir la gamme complète des caractères d'une police spécifique, nous pouvons utiliser la commande \PlaceMacro{showfont}\tex{showfont[FontName]}. Cette commande affichera le dessin principal de chacun des caractères sans appliquer les commandes de styles et d'alternatives.
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoHN
 \showfont[texgyreadventorregular]
 \stopDemoHN}
@@ -385,7 +394,7 @@ En dehors de ce qui précède -- qui affecte en fait le fonctionnement interne d
 
 Ces deux commandes, en revanche, modifient non seulement la police, le style et la taille, mais aussi d'autres aspects associés à la police comme, par exemple, l'interligne. 
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoVN
 \setupbodyfont[modern]
 Coucou
@@ -393,7 +402,7 @@ Coucou
 Coucou
 \stopDemoVN}
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoVN
 \setupbodyfont[modern,17.5pt]
 Coucou 
@@ -412,6 +421,7 @@ Coucou
 
 \stopsubsection
 
+
 % ** Subsection quick change
 
 \startsubsection
@@ -420,7 +430,8 @@ Coucou
     title={Changement rapide de style, d'alternative et de taille},
   ]
 
-\subsubsubject{Changement de style et de style alternatif}
+\startsubsubsection
+  [title={Changement de style et de style alternatif}]
 
 Outre \tex{switchtobodyfont}, \ConTeXt\ fournit un ensemble de commandes qui nous permettent de changer rapidement le style, le style alternatif ou la taille. En ce qui concerne ces commandes, le wiki \ConTeXt\ nous avertit que parfois, lorsqu'elles apparaissent au début d'un paragraphe, elles peuvent produire des effets secondaires indésirables, et recommande donc que dans ce cas, la commande en question soit précédée de la commande \PlaceMacro{dontleavehmode}\tex{dontleavehmode}.
 
@@ -473,14 +484,17 @@ exclusively alter the alternative.
 Toutes ces commandes conservent leur efficacité jusqu'à ce qu'un autre style ou une autre alternative soit explicitement activé(e), ou jusqu'à ce que le {\em groupe} dans lequel la commande est déclarée se termine. Par conséquent, lorsque nous voulons que la commande n'affecte qu'une partie du texte, nous devons entourer cette partie d'un groupe, comme dans l'exemple suivant, où chaque fois que le mot {\em pensée} apparaît alors qu'il s'agit d'un nom et non d'un verbe, il est en italique, ce qui crée un groupe pour lui.
 
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoHN
 J'ai pensé à une {\it pensée}, mais la  {\it pensée} que j'ai pensé n'était pas la {\it pensée} que je pensais avoir pensé. Si la  {\it pensée} que je pensais avoir pensé avait été la {\it pensée} que je pensais je n'aurais pas pensé autant !
 \stopDemoHN}
 
+\stopsubsubsection
 
+\startsubsubsection
+  [title={Commandes pour changer d'alternative et de taille en même temps},
+  ref={sec:sufijos de tamaño}]
 
-\subsubsubject[sec:sufijos de tamaño]{Commandes pour changer d'alternative et de taille en même temps}
 \PlaceMacro{rmx}\PlaceMacro{rmxx}\PlaceMacro{rma}\PlaceMacro{rmb}\PlaceMacro{rmc}\PlaceMacro{rmd}
 \PlaceMacro{ssx}\PlaceMacro{ssxx}\PlaceMacro{ssa}\PlaceMacro{ssb}\PlaceMacro{ssc}\PlaceMacro{ssd}
 \PlaceMacro{ttx}\PlaceMacro{ttxx}\PlaceMacro{tta}\PlaceMacro{ttb}\PlaceMacro{ttc}\PlaceMacro{ttd}
@@ -496,7 +510,7 @@ Les commandes qui modifient le style alternatif dans leur version à deux lettre
 
 Les suffixes a, b, c et d augmentent la taille initiale de police en la multipliant respectivement par $1.200^1=1.200$, $1.200^2=1.440$, $1.200^3=1.728$, et $1.200^4=2.074$). Les suffixes x et xx réduisent la taille des caractères, en la multipliant respectivement par $0.8$ et $0.6$. Voici une illustration~:
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoHN%
 \setupbodyfont[modern,12pt]%
 {\tfxx test}, {\tfx test}, {\tf test}, {\tfa test}, {\tfb test}, {\tfc test}, {\tfd test}
@@ -516,7 +530,7 @@ En tout cas, pour éviter les doutes, on peut utiliser \tex{showbodyfont} dont j
 
 Examinons à nouveau le tableau montrant \tex{showbodyfont} pour la police {\em Latin Modern}~:
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoHW
 \definebodyfontenvironment[14pt]
 \showbodyfont[modern,14pt]
@@ -527,11 +541,14 @@ Si l'on regarde attentivement le tableau, on constate que la première colonne c
 
 Il est important de noter qu'un changement de taille de police effectué par l'un de ces suffixes ne modifiera que la taille de la police au sens strict, laissant intactes les autres valeurs normalement associées à la taille de la police, comme l'interligne.
 
-\subsubsubject{Personnalisation des facteurs d'échelle et des suffixes}
+\stopsubsubsection
+
+\startsubsubsection
+  [title={Personnalisation des facteurs d'échelle et des suffixes}]
   
 Pour personnaliser le facteur d'échelle, nous pouvons utiliser \PlaceMacro{definebodyfontenvironment}\tex{definebodyfontenvironment} (déjà vu précédemment pour déclarer la taille de la police) dont le format peut être :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \definebodyfontenvironment[particular size][scaled]
 \definebodyfontenvironment[default][scaled]
@@ -539,7 +556,7 @@ Pour personnaliser le facteur d'échelle, nous pouvons utiliser \PlaceMacro{defi
 
 Dans la première version, nous redéfinissions la mise à l'échelle pour une taille particulière de la police principale définie par \tex{setupbodyfont} ou par \tex{switchtobodyfont}. Par exemple :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \definebodyfontenvironment[10pt][a=12pt,b=14pt,c=2, d=3]
 \stopDemoI}
@@ -548,7 +565,7 @@ ferait en sorte que, lorsque la police principale est de 10 points, le suffixe \
 
 Mais si le premier argument de \tex{definebodyfontenvironment} est égal à \MyKey{default}, alors nous redéfinirons la valeur de mise à l'échelle pour toutes les tailles de police possibles, et comme valeur de mise à l'échelle, nous ne pouvons entrer qu'un nombre multiplicateur. Ainsi, si, par exemple, nous écrivons :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \definebodyfontenvironment[default][a=1.3,b=1.6,c=2.5,d=4]
 \stopDemoI}
@@ -572,12 +589,13 @@ Outre les suffixes xx, x, a, b, c et d, la commande \tex{definebodyfontenvironme
 
 Si nous voulons voir les tailles par défaut d'une police particulière, nous pouvons utiliser \PlaceMacro{showbodyfontenvironment} \tex{showbodyfontenvironment[Font]}. Cette commande, appliquée à la police {\tt modern}, par exemple, donne le résultat suivant :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoHW
 \definebodyfontenvironment[12pt]
 \showbodyfontenvironment[modern,12pt]
 \stopDemoHW}
 
+\stopsubsubsection
 
 \stopsubsection
 
@@ -602,7 +620,7 @@ Les commandes prédéfinies pour modifier la taille, les styles et les variantes
 
 \item \PlaceMacro{definebodyfontswitch} \tex{definebodyfontswitch} : nous permet de définir une commande pour changer la taille de la police. Par exemple, si nous voulons définir la commande \tex{eight} (ou la commande \tex{viii}\footnote{Nous rappelons que, sauf dans le cas des symboles de contrôle, les noms des commandes \ConTeXt\ peuvent uniquement être composés de lettres.}) pour définir une police de 8 points, nous devons écrire :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoVW
 \definebodyfontswitch[quatorze][14pt]
 \definebodyfontswitch[xxii][22pt]
@@ -611,7 +629,7 @@ Les commandes prédéfinies pour modifier la taille, les styles et les variantes
 
 \item \PlaceMacro{definefontstyle}\tex{definefontstyle} : permet de définir un ou plusieurs mots qui peuvent être utilisés dans \tex{setupbodyfont} ou \tex{switchtobodyfont} pour définir un style de police particulier ; ainsi, par exemple, si nous voulons appeler la police {\em sans sérif} autrement (par exemple, en français, nous pourrions l'appeler \quotation{lineale} ou \quotation{sansempattement}), nous pouvons créer des synonymes en écrivant~:
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoVW
 \setupbodyfont[modern,12pt]%
 \definefontstyle[lineale,sansempattement][ss]
@@ -623,7 +641,7 @@ coucou
 
 \item \PlaceMacro{definealternativestyle} \tex{definealternativestyle}~: permet d'associer un nom à un style alternatif de police. Ce nom peut fonctionner comme une commande ou être reconnu par l'option {\tt style} des commandes qui nous permettent de configurer le style à appliquer. Ainsi, par exemple, le fragment suivant
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoVW
 \setupbodyfont[modern,12pt]
 \definealternativestyle[strong][\bf][]
@@ -665,7 +683,7 @@ Nous pouvons, bien sûr, mettre en valeur un texte en activant explicitement l'i
 
 D'où l'exemple suivant :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoVW
 {\it L'une des plus belles 
 orchidées du monde est la 
@@ -677,7 +695,7 @@ Notez que le premier \tex{em} active l'italique (en fait, l'oblique, mais voir c
 
 Un autre avantage de \tex{em} est qu'il ne s'agit pas d'un style alternatif, donc il ne désactive pas l'alternative que nous avions auparavant et donc, par exemple, dans un texte qui est en gras, avec \tex{em} nous obtiendrons du gras oblique sans avoir besoin de faire explicitement appel à \tex{bs}. De même, si la commande \tex{bf} apparaît dans un texte qui est déjà mise en valeur, celle-ci ne cessera pas.
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoVW
 {\bf L'une des plus belles 
 orchidées du monde est la 
@@ -711,81 +729,118 @@ Ces problèmes peuvent être résolus par l'utilisation de {\em fausses petites 
 % * SECTION 6.6 Utilisation des couleurs 
 
 \startsection
-  [title=Use and configuration of colours]
+  [title=Utilisation et configuration des couleurs]
 
-\ConTeXt\ provides commands for changing the colour of an entire
-document, some of its elements, or certain parts of the text. It also
-provides commands for uploading hundreds of predefined colours into
-memory, and for seeing what their components are.
+
+\ConTeXt\ fournit des commandes pour changer la couleur d'un document entier, de certains de ses éléments ou de certaines parties du texte. Il fournit également des commandes permettant de mettre en mémoire des centaines de couleurs prédéfinies (\in{section}[sec:predefined-colours]) et de voir quels sont leurs composants.
+
 
 % ** Subsection écrire une partie en couleur 
 
 \startsubsection
-  [title=Procedures for typesetting text fragments in colour]
+  [title=Utiliser des couleurs pour des éléments textuels]
 
-Most of \ConTeXt's configurable commands allow an option called
-\MyKey{color} that allows us to indicate the colour in which the text
-affected by that command should be written. Thus, for example, to
-indicate that chapter titles are written in blue, we only need to write:
+La plupart des commandes configurables de \ConTeXt\ comportent une option appelée \MyKey{color} qui nous permet d'indiquer la couleur dans laquelle le texte affecté par cette commande doit être écrit. Ainsi, par exemple, pour indiquer que les titres de chapitre sont écrits en bleu, il suffit d'écrire~:
 
-\vbox{\starttyping
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
   \setuphead
     [chapter]
     [color=blue]
-\stoptyping}
+\stopDemoI}
 
-Using this procedure we can colour titles, headings, footnotes, margin
-notes, bars and lines, tables, table or image titles, etc. The advantage
-of using this procedure is that the final result will be consistent (all
-texts that fulfil the same function will be written with the same
-colour) and easier to change globally. 
+Cette méthode permet de colorer les titres, les en-têtes, les notes de bas de page, les notes de marge, les barres et les lignes, les tableaux, les titres de tableaux ou d'images, etc. L'avantage d'utiliser cette méthode est que le résultat final sera cohérent (tous les textes qui remplissent la même fonction seront écrits avec la même couleur) et plus facile à modifier globalement. 
 
-We can also colour a portion or fragment of text directly, although, to
-avoid a too-variegated use of colours, which is not pleasant from a
-typographical perspective, or an inconsistent use, in general it is
-recommended to avoid direct colouring and to use what we could call {\em
-semantic colouring}, that is, instead of, for example, writing
+\PlaceMacro{color}
 
-\type{\color[red]{Very important text}}
+On peut également colorer directement une portion ou un fragment de texte avec la commande \tex{color}, bien que, pour éviter une utilisation trop variée des couleurs, peu agréable du point de vue typographique, ou une utilisation incohérente, il est généralement recommandé d'éviter la coloration directe et d'utiliser ce que l'on pourrait appeler la {\em coloration sémantique}, c'est-à-dire qu'au lieu d'écrire par exemple~:
 
-we define a command for very important text that is given a colour. For
-example
+\PlaceMacro{definehighlight}
 
-\starttyping
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\color[red]{Very important text}
+\stopDemoVW}
+
+nous définissons une commande spécifique avec \tex{definehighlight} auquel nous associons une couleur. Pour exemple~:
+
+\PlaceMacro{definehighlight}
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
 \definehighlight[important][color=red]
 \important{Very important text}
-\stoptyping
+\stopDemoVW}
+
+Ainsi, pour modifer de façon cohérente l'ensemble des textes indiqués comme \quotation{important} dans le code source, il suffira de modifier la déclaration de \tex{definehighlight}.
+
 
 \stopsubsection
 
 % ** Subsection fond et devant en couleur 
 
 \startsubsection
-  [title=Changing the document's background and foreground colour]
+  [title=Utiliser des couleurs en arrière-plan et pour le texte en général]
 \PlaceMacro{setupbackgrounds}\PlaceMacro{setupcolors}
 
-If we want to change the colour of the whole document, depending on
-whether we want to alter the colour of the background or the colour of
-the foreground (text), we will use \tex{setupbackgrounds} or
-\tex{setupcolors}. So, for example
+Si nous voulons changer la couleur de l'ensemble du document, selon que nous voulons modifier la couleur de l'arrière-plan ou celle du premier plan (texte), nous utiliserons \tex{setupbackgrounds} ou \tex{setupcolors}. Ainsi, par exemple
 
-\starttyping
-\setupbackgrounds
-  [page]
-  [background=color,backgroundcolor=blue]
+
+\startbuffer[a7-bufE]
+\setuppapersize[A7,landscape]
+\showframe
+\setupbodyfont[8pt]
+\starttext
+
+\setupbackgrounds [page]      
+  [background=color, backgroundcolor=middlecyan]
+\setupbackgrounds [footer]              
+  [background=color, backgroundcolor=middlemagenta]
+\setupbackgrounds [footer] [leftmargin] 
+  [background=color, backgroundcolor=middlered]
+\setupbackgrounds [text]                
+  [background=color, backgroundcolor=lightgray]
+\setupbackgrounds [text]   [rightmargin] 
+  [background=color, backgroundcolor=middleyellow]
+
+\starttyping[option=tex]
+\setupbackgrounds [page]                  
+  [background=color, backgroundcolor=middlecyan]
+
+\setupbackgrounds [footer]              
+  [background=color, backgroundcolor=middlemagenta]
+
+\setupbackgrounds [footer] [leftmargin] 
+  [background=color, backgroundcolor=middlered]
+
+\setupbackgrounds [text]                
+  [background=color, backgroundcolor=lightgray]
+
+\setupbackgrounds [text]   [rightmargin] 
+  [background=color, backgroundcolor=middleyellow]
 \stoptyping
 
-This command will set the background colour of pages as blue. As a value
-for \MyKey{backgroundcolor} we can use the name of any of the predefined
-colours.
+\stoptext
+\stopbuffer
 
-To globally change the foreground colour throughout the document (from
-the point where the command is inserted) use \tex{setupcolors}, where
-the \MyKey{textcolor} option controls the text colour. For example:
 
-\type{\setupcolors[textcolor=red]}
+\savebuffer[list=a7-bufE,file=ex_definetext_avec.tex,prefix=no]
+\placefigure [here,force,none] [] {}{\typesetbuffer[a7-bufE][frame=on,page=1]
+\attachment
+  [file={ex_setupbackgrounds.tex},
+   title={exemple setupbackgrounds}]}
 
-will see that the text colour is red.
+Cette commande définit la couleur de fond des pages comme étant le cyan, et vous voyez comment il est possible d'affecter une couleur à chaque zone de la page vue à la figure \in{section}[img:page layout]  \at{page}[img:page layout]. Comme valeur pour \MyKey{backgroundcolor}, nous pouvons utiliser le nom de l'une des couleurs prédéfinies  (\in{section}[sec:predefined-colours]).
+
+Pour modifier globalement la couleur d'avant-plan dans tout le document (à partir de l'endroit où la commande est insérée), utilisez \tex{setupcolors}, où l'option \MyKey{textcolor} contrôle la couleur du texte. Par exemple~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\setupcolors[textcolor=middlecyan]
+Texte coloré
+\stopDemoVW}
+
 
 \stopsubsection
 
@@ -793,30 +848,34 @@ will see that the text colour is red.
 
 
 \startsubsection
-  [title=Commands for colouring particular text\\ fragments]
+  [title=Utiliser des couleurs pour des portions de texte]
 \PlaceMacro{color}\PlaceMacro{colored}
 
-The general command for colouring small portions of text is
+% TODO garulfo étonné, peut être fusionner avec la subsection 1
 
-\type{\color[ColourName]{Text to colour}}
+Comme nous l'avons vu précédemement La commande générale pour colorier de petites portions de texte est la suivante~:
 
-For larger portions of text it is preferable to use
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\color[ColourName]{Text to colour}
+\stopDemoI}
 
-\type{\startcolor[ColourName] ... \stopcolor}
+Pour les grandes portions de texte, il est préférable d'utiliser l'environnement \MyKey{color} avec \tex{startcolor} et \tex{stopcolor}.
 
-Both are named after some predefined colour. If we want to define the
-colour on the fly, we can use the \tex{colored} command. For example:
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\startcolor[ColourName] ... \stopcolor
+\stopDemoI}
 
-\startDoubleExample
+Ces deux commandes utiliset des couleurs prédéfinies que l'on désigne par leur nom (\in{section}[sec:predefined-colours]). Si nous voulons définir la couleur à la volée, nous pouvons utiliser la commande \tex{colored}. Par exemple :
 
-\starttyping
-Three \colored[r=0.1, g=0.8, b=0.8]
-{coloured} cats    
-\stoptyping
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+Trois chats 
+\colored[r=0.1, g=0.8, b=0.8]{colorés}.    
+\stopDemoVN}
 
-Three \colored[r=0.1, g=0.8, b=0.8]{coloured} cats.
-  
-\stopDoubleExample
+
 
 \stopsubsection
 
@@ -825,15 +884,14 @@ Three \colored[r=0.1, g=0.8, b=0.8]{coloured} cats.
 \startsubsection
   [
     reference=sec:predefined-colours,
-    title=Predefined colours,
+    title=Couleurs prédéfinies,
   ]
   % This information comes from the reference manual. But I
   % suspect there are considerably more predefined colours. For
   % example the "maincolor" used in this document is based on
   % the orange not defined in the list of predefined colours.
 
-  \ConTeXt\ loads the most common predefined colours listed in
-  \in{table}[tbl:predefined colours].\footnote{This list can be found in the reference manual and \ConTeXt\ wiki but I am fairly sure it is an incomplete list since in this document, for example, without having loaded any additional colour, we use \quotation{orange} -- which is not in the \in{table}[tbl:predefined colours]-- for section titles.}
+\ConTeXt\ charge les couleurs prédéfinies les plus courantes listées dans le  \in{tableau}[tbl:predefined colours].\footnote{Cette liste se trouve dans le manuel de référence et le wiki \ConTeXt\ mais je suis presque sûr qu'il s'agit d'une liste incomplète puisque dans ce document, par exemple, sans avoir chargé de couleur supplémentaire, nous utilisons \quotation{orange} -- qui n'est pas dans le \in{tableau}[predefined colours]-- pour les titres de section.}
 
 {\switchtobodyfont[small]
 \placetable
@@ -842,10 +900,10 @@ Three \colored[r=0.1, g=0.8, b=0.8]{coloured} cats.
   {\ConTeXt's predefined colours}
 {\starttabulate[|l|l|l|l|]
 \HL
-\NC{\bf Name}
-\NC{\bf Light tone}
-\NC{\bf Medium tone}
-\NC{\bf Dark tone}
+\NC{\bf Nom}
+\NC{\bf Tonalité claire}
+\NC{\bf Tonalité moyenne}
+\NC{\bf Tonalité foncée}
 \NR
 \HL
 \NC black
@@ -888,46 +946,34 @@ Three \colored[r=0.1, g=0.8, b=0.8]{coloured} cats.
 \stoptabulate
 }}
 
-There are other colour collections not loaded by default but which can
-be loaded with the command
-
-\PlaceMacro{usecolors}\type{\usecolors[CollectionName]}
-
-where CollectionName can be 
+Il existe d'autres collections de couleurs qui ne sont pas chargées par défaut mais qui peuvent être chargées avec la commande \PlaceMacro{usecolors}  \tex{usecolors[CollectionName]} où \MyKey{CollectionName} peut être~:
 
 \startitemize[packed]
-\item \MyKey{crayola}, 235 colours imitating marker shades.
-\item \MyKey{dem}, 91 colours.
-\item \MyKey{ema}, 540 colour definitions based on colours used by Emacs.
-\item \MyKey{rainbow}, 91 colours for use in maths formulas.
-\item \MyKey{ral}, 213 colour definitions from the {\em Deutsches
-  Institut für Gütesicherung und Kennzeichnung} (German Institute for Quality Assurance and Labelling).
-\item \MyKey{rgb}, 223 colours.
-\item \MyKey{solarized}, 16 colours based on the solarized scheme.
-\item \MyKey{svg}, 147 colours.
-\item \MyKey{x11}, 450 standard colours for X11.
-\item \MyKey{xwi}, 124 colours.
+\item \MyKey{crayola}, 235 couleurs imitant les nuances des marqueurs.
+\item \MyKey{dem},      91 couleurs.
+\item \MyKey{ema},     540 couleurs basées sur celles utilisées par Emacs.
+\item \MyKey{rainbow},  91 couleurs à utiliser dans les formules de mathématiques.
+\item \MyKey{ral},     213 couleurs provenant du {\em Deutsches
+  Institut für Gütesicherung und Kennzeichnung} (Institut allemand pour l'assurance qualité et l'étiquetage).
+\item \MyKey{rgb}, 223 couleurs.
+\item \MyKey{solarized}, 16 couleurs basées sur le schéma solarized.
+\item \MyKey{svg},      147 couleurs.
+\item \MyKey{x11},      450 couleurs standard pour X11.
+\item \MyKey{xwi},      124 couleurs.
 \stopitemize
 
 \startSmallPrint
 
-  The colour definition files are included in the
-  \MyKey{context/base/mkiv} directory of the distribution and its name
-  responds to the \MyKey{colo-imp-NOMBRE.mkiv} scheme. The information I
-  have just provided on the different collections of predefined colours
-  is based on my particular distribution. The specific collections, or
-  the number of colours defined in them, could change in future
-  versions.
+Les fichiers de définition des couleurs sont inclus dans le répertoire \MyKey{context/base/mkiv} de la distribution et son nom répond au schéma \MyKey{colo-imp-NOMBRE.mkiv}. Les informations que je viens de fournir sur les différentes collections de couleurs prédéfinies sont basées sur ma distribution particulière. Les collections spécifiques, ou le nombre de couleurs définies dans celles-ci, pourraient changer dans les versions futures.
 
 \stopSmallPrint
 
-To see what colours each of these collections contains we can use the
-\PlaceMacro{showcolor}\tex{showcolor[CollectionName]} command described
-in what follows. To use some of these colours we first need to load them
-into memory with the (\tex{usecolors[CollectionName]}) command and then
-we have to tell the \tex{color} or
-\PlaceMacro{startcolor}\tex{startcolor} commands the name of the colour.
-For example the following sequence: \page[preference]
+Pour voir quelles couleurs contiennent chacune de ces collections, nous pouvons utiliser la commande \PlaceMacro{showcolor} \tex{showcolor[CollectionName]} décrite dans ce qui suit \in{section}[sec:visucolor]. 
+
+Pour utiliser certaines de ces couleurs, il faut d'abord les charger en mémoire avec la commande (\tex{usecolors[CollectionName]}), puis indiquer le nom de la couleur aux commandes \tex{color} ou \PlaceMacro{startcolor} \tex{startcolor}. Par exemple, la séquence suivant~: 
+
+
+% \page[preference] % TODO Garulfo on peut enlever ?
 
 \placefigure [force,here,none] [] {}{
 \startDemoHN%
@@ -941,123 +987,128 @@ For example the following sequence: \page[preference]
 % ** Subsection visualiser les couleurs dispos
 
 \startsubsection
-  [title=To see available colours]
+  [title=Visualier les couleurs disponibles,
+   reference=sec:visucolor]
 \PlaceMacro{showcolor}
 
-The \tex{showcolor} command shows a list of colours in which you can see
-the appearance of the colour, its appearance when the colour is used in
-grey scale, the red, green and blue components of the colour, and the
-name by which \ConTeXt\ knows it. Used without any argument
-\tex{showcolor} will show the colours used in the current document. But
-as an argument we can indicate any of the predefined collections of
-colours that were discussed in \in{section}[sec:predefined-colours], and
-so, for example, \tex{showcolor[solarized]} will show us the 16
-solarized colours in that collection:
+La commande \tex{showcolor} affiche une liste de couleurs dans laquelle vous pouvez voir l'apparence de la couleur, son apparence lorsque la couleur est passée en échelle de gris (impression noir et blanc par exemple), les composantes rouge, verte et bleue de la couleur, ainsi que le nom par lequel \ConTeXt\ la connaît. Utilisée sans argument, \tex{showcolor} affichera les couleurs utilisées dans le document actuel. Mais comme argument, nous pouvons indiquer l'une des collections prédéfinies de couleurs qui ont été discutées dans \in{section}[sec:predefined-colours], et ainsi, par exemple, \tex{showcolor[solarized]} nous montrera les 16 couleurs de cette collection~:
 
+
+\placefigure [force,here,none] [] {}{
+\startDemoHN
+\usecolors[solarized]
 \showcolor[solarized]
+\stopDemoHN}
 
-If we want to see the rgb components of a particular colour, we can use
-\PlaceMacro{showcolorcomponents}\tex{showcolorcomponents[ColourName]}.
-This is useful if we are trying to define a specific colour, to see the
-composition of some colour that is close to it. For example,
-\tex{showcolorcomponents[darkgoldenrod]} will show us:
 
-\startframedtext[width=\textwidth]\switchtobodyfont[small]
+Si nous voulons voir les composantes rgb d'une couleur particulière, nous pouvons utiliser \PlaceMacro{showcolorcomponents} \tex{showcolorcomponents[ColourName]}. Ceci est utile si nous essayons de définir une couleur spécifique, pour voir la composition d'une couleur qui lui est proche. Par exemple, \tex{showcolorcomponents[darkgoldenrod]} nous montrera :
+
+\placefigure [force,here,none] [] {}{
+\startDemoHN
+\usecolors[xwi]
 \showcolorcomponents[darkgoldenrod]
-\stopframedtext
+\stopDemoHN}
+
+
+
 
 \stopsubsection
 
 % ** Subsection définir ses propres couleurs 
 
 \startsubsection
-  [title=Defining our own colours]
+  [title=Definir ses propres couleurs]
 \PlaceMacro{definecolor}
 
-\tex{definecolor} allows us to either clone an existing colour or define
-a new colour. Cloning an existing colour is as simple as creating an
-alternative name for it. To do this you would have to write:
+\tex{definecolor} nous permet soit de cloner une couleur existante, soit de définir une nouvelle couleur. Cloner une couleur existante est aussi simple que de lui donner un autre nom. Pour ce faire, vous devez écrire :
 
-\type{\definecolor[New colour][Old colour]}
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\definecolor[NouvelleCouleur][Anciennecouleur]
+\stopDemoI}
 
-This will ensure that “{\em New colour}” is exactly the same colour as
-“{\em Old colour}”.
+Ainsi, "{\em NouvelleCouleur}" sera exactement de la même couleur que "{\em Anciennecouleur}".
 
-But the main use of \tex{definecolor} is for creating new colours. To do
-so the command must be used in the following way:
+Mais la principale utilisation de \tex{definecolor} est la création de nouvelles couleurs. Pour ce faire, la commande doit être utilisée de la manière suivante~:
 
-\type{\definecolor[ColourName][Definition]}
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\definecolor[ColourName][Définition]
+\stopDemoI}
 
-where {\em Definition} can be done by applying up to six different
-colour generation schemes:
+où {\em Définition} peut se faire en appliquant jusqu'à six schémas de génération de couleurs différents :
 
-\startitemize
 
-\item {\bf RGB colours}: The definition of RGB colours is one of the
-most widespread; it is based on the idea that it is possible to
-represent a colour by mixing, by addition, the three primary colours:
-red (\quote{r} for {\em red}), green (\quote{g} for {\em green}) and
-blue (\quote{b} for {\em blue}). Each of these components is indicated
-as a decimal number between 0 and 1.
+\startitemize[n]
 
-  \type{\definecolor[lime 1][r=0.75, g=1, b=0]}: \definecolor[lime 1]
-       [r=0.75, g=1, b=0] \color[lime 1]{Text in “lime 1”}.
+\item {\bf Couleurs RVB} : La définition des couleurs RVB est l'une des plus répandues ; elle repose sur l'idée qu'il est possible de représenter une couleur en mélangeant, par addition, les trois couleurs primaires : rouge (\quote{r} pour {\em rouge}), vert (\quote{g} pour {\em vert}) et bleu (\quote{b} pour {\em bleu}). Chacun de ces composants est indiqué par un nombre décimal compris entre 0 et 1.
 
-\item {\bf Hex colours}: This way of representing the colours is also
-based on the RGB scheme, but the red, green and blue components are
-indicated as a three-byte hexadecimal number in which the first byte
-represents the value of red, the second the value of green and the third
-the value of blue. For example:
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\definecolor [CouleurA]
+  [r=0.720, g=0.530, b=0.040]
+\color[CouleurA]{Texte Couleur A.}
+\stopDemoVW}
 
-  \type{\definecolor[lime 2][x=BFFF00]}: \definecolor[lime 2][x=BFFF00]
-  \color[lime 2]{Text in “lime 2”}.
+\item {\bf Couleurs hexadécimales} : Cette façon de représenter les couleurs est également basée sur le schéma RVB, mais les composantes rouge, verte et bleue sont indiquées sous la forme de trois nombres hexadécimaux, le premier représentant la valeur du rouge, le deuxième la valeur du vert et le troisième la valeur du bleu. Par exemple~:
 
-\item {\bf CMYK colours}: This model of colour generation is what is
-called a \quotation{subtractive model} and is based on the mixture of
-pigments of the following colours: cyan (\quote{c}), magenta
-(\quote{m}), yellow (\quote{y}, from {\em yellow}) and black (\quote{k},
-from {\em key}). Each of these components is indicated as a decimal
-number between 0 and 1:
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\definecolor [CouleurB]
+  [x=B8860B]
+\color[CouleurB]{Texte Couleur B.}
+\stopDemoVW}
 
-  \type{\definecolor[lime 3][c=0.25, m=0, y=1, k=0]}:
-  \definecolor[lime 3][c=0.25, m=0, y=1, k=0] \color[lime 3]{Text in
-   “lime 3”}.
 
-\item {\bf HSL/HSV}: This colour model is based on measuring the hue
-(\quote{h}, from {\em hue}), saturation (\quote{s}) and luminescence
-(\quote{l} or sometimes \quote{v}, from {\em value}). Hue corresponds to
-a number between 0 and 360; saturation and luminescence must be a
-decimal number between 0 and 1. For example
+\item {\bf Couleurs CMYK} : Ce modèle de génération des couleurs est ce qu'on appelle un \quotation{modèle soustractif} et repose sur le mélange de pigments des couleurs suivantes : cyan (\quote{c}), magenta (\quote{m}), jaune (\quote{y}, de {\em yellow}) et noir (\quote{k}, de {\em key} (key au sens valeur)). Chacun de ces composants est indiqué par un nombre décimal compris entre 0 et 1~:
 
-  \type{\definecolor[lime 4][h=75, s=1, v=1]}: \definecolor[lime
-    4][h=75, s=1, v=1] \color[lime 4]{Text in “lime 4”}
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\definecolor [CouleurC]
+  [c=0.00, m=0.20, y=0.68, k=0.28]
+\color[CouleurC]{Texte Couleur C.}
+\stopDemoVW}
 
-\item {\bf HWB colours}: The HWB model is a suggested standard for CSS4
-which measures the hue (\quote{h}, from {\em hue}), and the level of
-white (\quote{w}, from {\em whiteness}) and black (\quote{b}, from {\em
-blackness}). Hue corresponds to a number between 0 and 360, while
-whiteness and blackness are represented by a decimal number between 0
-and 1.
 
-  \type{\definecolor[Azure][h=75, w=0.2, b=0.7]}
-  \definecolor[Azure][h=75, w=0.2, b=0.7]\color[Azure]{Text in
-   “Azure”}.
+\item {\bf Couleurs HSL/HSV} : Ce modèle de couleur est basé sur la mesure de la teinte (\quote{h}, de {\em hue}), de la saturation (\quote{s}) et de la luminescence (\quote{l} ou parfois \quote{v}, de {\em value}). La teinte correspond à un nombre compris entre 0 et 360 ; la saturation et la luminescence doivent être un nombre décimal compris entre 0 et 1. Par exemple~:
 
-  % \type{\definecolor[lima 5][h=75, w=0, b=0]}
-  % \definecolor[lima 5][h=75, w=0.2, b=0.7]\color[lima 5]{Texto en
-  %   color “lima 5”}.
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\definecolor [CouleurD] [h=43.00, s=0.89, v=0.38]
+\color[CouleurD]{Texte Couleur D.}
+\stopDemoVW}
 
-\item {\bf Greyscale}: based on a component called (\quote{s}, from {\em scale}) that measures the amount of grey. It needs to be a number between 0 and 1. For example:
+\item {\bf Couleurs HWB} : Le modèle HWB est une norme suggérée pour CSS4 qui mesure la teinte (\quote{h}, de {\em hue}), et le niveau de blanc (\quote{w}, de {\em whiteness}) et de noir (\quote{b}, de {\em blackness}). La teinte correspond à un nombre compris entre 0 et 360, tandis que la blancheur et la noirceur sont représentées par un nombre décimal compris entre 0 et 1.
 
-  \type{\definecolor[light grey][s=0.65]}: \definecolor[light grey][s=0.65] \color[light grey]{Text in “light grey”}.
-  
+\placefigure [force,here,none] [] {}{
+\startDemoVW%
+\definecolor [CouleurE] [h=43.00, w=0.04, b=0.28]
+\color[CouleurE]{Texte Couleur E.}
+\stopDemoVW}
+
+\item {\bf Couleur échelle de gris} : basé sur un composant appelé (\quote{s}, de {\em scale}) qui mesure la quantité de gris. Il doit s'agir d'un nombre compris entre 0 et 1. Par exemple :
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW%
+\definecolor [CouleurF]  [s=0.65] %
+\color[CouleurF]{Texte Couleur F.}
+\stopDemoVW}
+
 \stopitemize
 
-It is also possible to define a new colour from another colour. For
-example, the colour in which titles are written in this introduction is
-defined as
+Il est également possible de définir une nouvelle couleur à partir d'une autre couleur. Par exemple, la couleur dans laquelle les titres sont écrits dans cette introduction est définie comme suit
 
-\type{\definecolor[maincolour][0.6(orange)]}
+\placefigure [force,here,none] [] {}{
+\startDemoVW%
+\definecolor[CouleurG][0.8(orange)] %
+\definecolor[CouleurH][0.6(orange)] %
+\definecolor[CouleurI][0.4(orange)] %
+\definecolor[CouleurJ][0.2(orange)] %
+\color[CouleurG]{Texte Couleur G.} \\
+\color[CouleurH]{Texte Couleur H.} \\
+\color[CouleurI]{Texte Couleur I.} \\
+\color[CouleurJ]{Texte Couleur J.}
+\stopDemoVW}
 
 \stopsubsection
 
@@ -1185,6 +1236,9 @@ notoserifitalic       notoserif   notoserifitalic      NotoSerif-Italic.ttf
 \definedfont [name:notoserifbolditalic*default at 12 pt]%
 Le renard brun et rapide saute par-dessus le chien paresseux.
 \stopDemoHN}
+
+\stopitemize
+
 
 \stopsubsection
 

@@ -218,7 +218,7 @@ Lorsque la \quotation{non-lettre} à la fin du nom de la commande est un espace 
 % TODO Garulfo : cette remarque n'est pas à mettre en note de bas de page, trop important.
 \footnote{{\bf Note:} par convention, pour illustrer quelque chose dans cette introduction, les exemple de code source utilise une police à espacement fixe. une coloration syntaxique cohérente de \ConTeXt\ dans un cadre de fond gris. Le résultat de la compilation est présenté dans un cadre de fond de couleur jaune foncé.}
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoHN
 Connaître \TeX aide à l'apprentissage de \ConTeXt.
 
@@ -266,7 +266,7 @@ J'ai expliqué ce mécanisme de manière assez détaillée, car l'élimination d
 
 Il existe une troisième procédure pour éviter le problème des espaces vides, qui consiste à définir (à la manière de \TeX) une commande similaire et à inclure une \quotation{non-lettre} à la fin du nom de la commande. Par exemple, la séquence suivante :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \def\txt-{\TeX}
 \stopDemoI}
@@ -299,7 +299,7 @@ Ces types de commandes n'ont pas besoin de prendre d'argument, car elles ne sont
 Lorsque ces commandes sont exécutées dans un {\em groupe} (voir \in{section}[sec:groups]), elles perdent également leur efficacité lorsque le groupe dans lequel elles sont exécutées est fermé. Par conséquent, pour que ces commandes n'affectent qu'une partie du texte, il faut souvent générer un groupe contenant cette commande et le texte que l'on souhaite qu'elle affecte. Un groupe est créé en l'enfermant entre des accolades. Par conséquent, le texte suivant
 
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoHN
 In {\it The \TeX Book}, {\sc Knuth} explained \bf{everything} you need to know about \TeX.
 \stopDemoHN}
@@ -308,7 +308,7 @@ crée deux groupes, l'un pour déterminer la portée de la commande \tex{it} (it
 
 Au contraire de ce type de commande, il en existe d'autres qui nécessitent immédiatement une indication du texte auquel elles doivent être appliquées. Dans ce cas, le texte qui doit être affecté par la commande est placé entre des crochets immédiatement après la commande. Par exemple, nous pouvons citer la commande \tex{framed} : cette commande dessine un cadre autour du texte qu'elle prend comme argument, par exemple~:
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoHN
 \framed{Tweedledum and Tweedledee}
 \stopDemoHN}
@@ -344,7 +344,7 @@ Les environnements consistent donc en une commande qui les ouvre, les commence, 
 
 Les environnements peuvent être imbriqués, ce qui signifie qu'un autre environnement peut être ouvert à l'intérieur d'un environnement existant. Dans de tels cas un environnement doit absolument être fermé à l'intérieur de l'environnement dans lequel il a été ouvert. En d'autres termes, l'ordre dans lequel les environnements sont fermés doit être cohérent avec l'ordre dans lequel ils ont été ouverts. Je pense que cela devrait être clair à partir de l'exemple suivant :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoC
 \startQuelqueChose
   …
@@ -392,7 +392,7 @@ De nombreuses commandes peuvent fonctionner de plusieurs façons. Dans ce cas, i
 Un bon exemple est la commande \tex{framed} mentionnée dans la section précédente. Cette commande dessine un cadre autour du texte qu'elle prend comme argument. Par défaut, le cadre a la hauteur et la largeur du texte auquel il est appliqué, mais nous pouvons indiquer une hauteur et une largeur différentes. Ainsi, nous pouvons voir la différence entre le fonctionnement de la commande \tex{framed} par défaut :
 
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoVN
     \framed{Tweedledum}
 \stopDemoVN}
@@ -400,7 +400,7 @@ Un bon exemple est la commande \tex{framed} mentionnée dans la section précéd
 et celui d'une version personnalisée~:
 
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoVN
   \framed
     [width=3cm, height=1cm]
@@ -410,7 +410,7 @@ et celui d'une version personnalisée~:
 
 Dans le deuxième exemple, nous avons indiqué entre les crochets une largeur et une hauteur spécifiques pour le cadre qui entoure le texte qu'il prend comme argument. À l'intérieur des crochets, les différentes options de configuration sont séparées par une virgule ; les espaces vides et même les sauts de ligne (à condition qu'il ne s'agisse pas d'un double saut de ligne) entre deux ou plusieurs options, ne sont pas pris en considération afin que, par exemple, les quatre versions suivantes de la même commande produisent exactement le même résultat :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoVW
 \framed[width=3cm,height=1cm]{Tweedledum}
 
@@ -447,7 +447,7 @@ Nous avons déjà vu que les commandes qui offrent des options de fonctionnement
 La commande \tex{framed} que nous avons utilisée comme exemple dans cette section reste un bon exemple. Ainsi, si nous utilisons beaucoup de cadres dans notre document, mais qu'ils nécessitent tous des mesures précises, il serait préférable de reconfigurer le fonctionnement de \tex{framed}, en le faisant avec \tex{setupframed}. Ainsi,
 
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \setupframed
   [
@@ -469,7 +469,7 @@ Il existe environ 300 commandes dans \ConTeXt\ qui nous permettent de configurer
 En continuant avec l'exemple du \tex{framed}, il est évident que si notre document utilise plusieurs types de cadres, chacun avec des mesures différentes, l'idéal serait de pouvoir {\em prédéfinir} différentes configurations de \tex{framed}, et de les associer à un nom particulier afin de pouvoir utiliser l'un ou l'autre selon les besoins. Nous pouvons le faire dans \ConTeXt\ avec la commande \tex{defineframed}, dont la syntaxe est~:
 
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \defineframed
   [MonCadre]
@@ -496,7 +496,7 @@ Cette possibilité n'existe pas seulement pour le cas concret de la commande \te
 Dans l'exemple que nous avons donné, nous avons configuré notre cadre spécial \MyKey{MonCadre} en même temps que nous le créions. Mais nous pouvons aussi le créer d'abord et le configurer ensuite, car, comme je l'ai dit, une fois le clone créé, il peut être utilisé là où l'original aurait pu l'être. Ainsi, dans notre exemple, nous pouvons le configurer avec \tex{setupframed} en indiquant le nom du cadre (framed) que nous voulons configurer. Dans ce cas, la commande \tex{setup} prendra un nouvel argument avec le nom du cadre à configurer :
 
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \defineframed
   [MonCadre]
@@ -567,7 +567,7 @@ En résumant ce que nous avons vu jusqu'à présent, nous voyons que dans \ConTe
 
 Enfin, il n'arrive jamais avec \ConTeXt\ qu'au sein d'un même argument on mélange le format de déclaration. Nous pouvons donc avoir les cas de figures suivants
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \commande[Option1, Option2, …]
 \commande[Variable1=valeur, Variable2=valeur, …]
@@ -576,7 +576,7 @@ Enfin, il n'arrive jamais avec \ConTeXt\ qu'au sein d'un même argument on méla
 
 Mais nous n'aurons jamais un mélange du genre :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \commande[Option1, Variable1=valeur, …]
 \stopDemoI}
@@ -677,7 +677,7 @@ En plus de cette possibilité, qui n'est disponible que pour certaines commandes
 
 Imaginons, par exemple, que nous sommes en train d'écrire un traité sur l'allitération dans les textes latins, où nous citons souvent la phrase latine \quotation{\em O Tite tute Tati, tibi tanta, tyranne, tulisti !}. (C'est toi-même, Titus Tatius, qui t'es fait, à toi, tyran, tant de torts !). Il s'agit d'une phrase assez longue dont deux des mots sont des noms propres et commencent par une majuscule, et où, avouons-le, même si nous aimons la poésie latine, il nous est facile de \quotation{trébucher} en l'écrivant. Dans ce cas, nous pourrions simplement mettre dans le préambule de notre fichier source :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \define\Tite{\quotation{O Tite tute Tati, tibi tanta, tyranne, tulisti}}
 \stopDemoI}
@@ -686,7 +686,7 @@ Sur la base d'une telle définition, chaque fois que la commande \tex{Tite} appa
 
 Le texte de remplacement peut être du texte pur, ou inclure des commandes, ou encore former des expressions mathématiques dans lesquelles il y a plus de chances de faire des fautes de frappe (du moins pour moi). Par exemple, si l'expression $(x_1,\ldots,x_n)$ doit apparaître régulièrement dans notre texte, nous pouvons créer une commande pour la représenter. Par exemple
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \define\xvec{$(x_1,\ldots,x_n)$}
 \stopDemoI}
 
@@ -694,7 +694,7 @@ de sorte que chaque fois que \tex{xvec} apparaît dans le code source, il sera r
 
 La syntaxe générale de la commande \tex{define} est la suivante :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \define[NbrArguments]\NomCommande{TexteOuCodeDeSubstitution}
 \stopDemoI}
@@ -715,7 +715,7 @@ La possibilité de fournir aux nouvelles commandes des arguments dans leur défi
 
 Par exemple : imaginons que nous voulions écrire une commande qui produise l'ouverture d'une lettre commerciale. Une version très simple de cette commande serait la suivante
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoVW
 \define\EnTetedeLettre{
   \rightaligned{Anne Smith}\par
@@ -727,7 +727,7 @@ Par exemple : imaginons que nous voulions écrire une commande qui produise l'ou
 
 mais il serait préférable d'avoir une version de la commande qui écrirait le nom du destinataire dans l'en-tête. Cela nécessiterait l'utilisation d'un paramètre qui communiquerait le nom du destinataire à la nouvelle commande. Il faudrait donc redéfinir la commande comme suit~:
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoVW
 \define[1]\EnTetedeLettre{
   \rightaligned{Anne Smith}\par
@@ -745,7 +745,7 @@ Si elle avait deux paramètres, \MyKey{\#1} ferait référence au premier param�
 
 Nous pourrions encore améliorer la fonction précédente, car elle suppose que la lettre sera envoyée à une femme (elle met \quotation{chère Madame}), alors que nous pourrions peut-être inclure un autre paramètre pour distinguer les destinataires masculins et féminins. par exemple :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoVW
 \define[2]\EnTetedeLettre{
   \rightaligned{Anne Smith}\par
@@ -772,7 +772,7 @@ bien que cela ne soit pas très élégant (du point de vue de la programmation).
 
 Pour créer un nouvel environnement, \ConTeXt\ fournit la commande \tex{definestartstop} dont la syntaxe est la suivante :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \definestartstop[Nom][Configuration]
 \stopDemoI}
@@ -811,7 +811,7 @@ où
 
 Un exemple de la définition d'un environnement pourrait être le suivant :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoHN
 \definestartstop
   [TextWithBar]
@@ -907,7 +907,7 @@ Le principal effet des groupes est d'encapsuler leur contenu : en règle génér
 
 Ainsi, si nous traitons l'exemple suivant
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoVN
 \define\A{B}
 \A
@@ -967,7 +967,7 @@ Les trois premières unités du \in{table} [tbl:measurements] sont des mesures s
 
 Les mesures sont généralement utilisées comme une option pour une commande. Mais nous pouvons également attribuer directement une valeur à une mesure interne de \ConTeXt\, tant que nous en connaissons le nom. Par exemple~:
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoVW
 \newdimen\MaDimensionA          % déclaration
 \MaDimensionA=10mm              % affectation
@@ -989,14 +989,14 @@ Toutefois, l'attribution d'une valeur directement à une mesure interne est cons
 
 Certaines des dimensions utilisées par \ConTeXt\ sont \quotation{élastique}, c'est-à-dire que, selon le contexte, elles peuvent prendre l'une ou l'autre mesure. Ces mesures sont attribuées avec la syntaxe suivante :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \MeasureName Value plus MaxIncrement minus MaxDecrease
 \stopDemoI}
 
 Par exemple~:
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \parskip 3pt plus 2pt minus 1pt
 \stopDemoI}

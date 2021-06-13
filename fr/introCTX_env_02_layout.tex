@@ -96,27 +96,27 @@
        shifted (0.5 , 0.5)
        xscaled PaperWidth 
        yscaled PaperHeight
-       withcolor \MPcolor{vert1};
+       withcolor \MPcolor{back1};
        
   fill fullsquare 
        shifted (0.5 , 0.5)
        xscaled PaperWidth 
        yscaled (nbdivd*PaperHeight/nbdiv)
-       withcolor \MPcolor{vert2};   
+       withcolor \MPcolor{back2};   
 
   if cote ==  1 :    
   fill fullsquare 
        shifted (0.5 , 0.5)
        xscaled ((nbdiv-nbdiva-1)*PaperWidth/nbdiv) 
        yscaled PaperHeight
-       withcolor \MPcolor{violet1};  
+       withcolor \MPcolor{back3};  
   else :
   fill fullsquare 
        shifted (0.5 , 0.5)
        xscaled ((nbdiv-nbdiva-1)*PaperWidth/nbdiv) 
        yscaled PaperHeight
        shifted (((nbdiva+1)*PaperWidth/nbdiv) , 0.)
-       withcolor \MPcolor{violet1};    
+       withcolor \MPcolor{back3};    
   fi;
   
   if false :
@@ -141,6 +141,3 @@
   [\useMPgraphic
      {page}{nbdiv=\nbdiv,nbdiva=\nbdiva,nbdivb=\nbdivb,nbdivc=\nbdivc,nbdivd=\nbdivd,marge=\the\marge,cote=\coted}]
   
-  
-\setupbackgrounds[leftpage] [background={background,pageg},state=repeat]  % ACTIVER OU NON
-\setupbackgrounds[rightpage][background={background,paged},state=repeat]  % ACTIVER OU NON

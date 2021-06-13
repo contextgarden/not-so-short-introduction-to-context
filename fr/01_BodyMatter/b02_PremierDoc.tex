@@ -56,7 +56,7 @@ Qu'il s'agisse d'un éditeur ou d'un autre, ce qu'il ne faut pas faire, c'est ut
 
 \item {\bf Une distribution \ConTeXt} pour traiter notre fichier de test. S'il existe déjà une installation \TeX\ (ou \LaTeX) sur votre système, il est possible qu'une version de \ConTeXt\ soit déjà installée. Pour le vérifier, il suffit d'ouvrir un terminal et de taper dans celui-ci
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoC
 $ context --version
 \stopDemoC}
@@ -70,7 +70,7 @@ qui indique que le terminal attend nos instructions.
 
 Si une version de \ConTeXt\ est déjà installée, vous devriez obtenir un résultat similaire au suivant :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoC
 $ context --version
 mtx-context     | ConTeXt Process Management 1.03
@@ -97,14 +97,14 @@ Nous pouvons choisir l'éditeur, nous pouvons choisir le visualisateur de PDF, n
 \startsection
   [title=L'experience elle-même]
 
-\startsubsubsubject
+\startsubsubsection
   [title=Rédaction du fichier source]
 
 
 Si nous disposons déjà des outils mentionnés dans la section précédente, nous devons ouvrir notre éditeur de texte et créer un fichier appelé \quotation{la-maison-sur-le-port.tex} pour notre exemple. Comme contenu du fichier, nous allons écrire ce qui suit :
 
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 % Première ligne du document
 
@@ -151,18 +151,18 @@ Dans la maison    sur le port
 Durant l'écriture, certains aspects n'ont aucune importance, notamment si vous ajoutez ou supprimez des espaces blancs ou des sauts de ligne. Ce qui est important, c'est que chaque mot suivant le caractère \quotation{\tt \backslash} soit écrit très exactement de la même façon qu'il l'est dans l'exemple, ainsi que le contenu des crochets. Il peut y avoir des variations dans le reste.
 
 
-\stopsubsubsubject
+\stopsubsubsection
 
-\startsubsubsubject
+\startsubsubsection
   [title=Encodage du fichier]
 
   Une fois le texte précédent écrit, nous enregistrons le fichier sur le disque. Cela n'est dorénavant qu'une vérification à faire, mais il faut nous assurer que l'encodage du fichier est bien UTF-8. Cet encodage est aujourd'hui la norme et constitue l'encodage par défaut sur la plupart des systèmes Linux/Unix. Néanmois, je ne sais pas si c'est la même chose sous Mac OS ou Windows et il est encore tout à fait possible que l'encodage ANSI soit utilisé. En tout cas, si nous ne sommes pas sûrs, depuis l'éditeur de texte lui-même, nous pouvons voir avec quel encodage le fichier sera enregistré et, si nécessaire, le modifier. La manière de procéder dépend, bien entendu, de l'éditeur avec lequel nous travaillons. Dans GNU Emacs, par exemple, en appuyant simultanément sur les touches CTRL-X puis Return suivi de \quotation{f}, dans la dernière ligne de la fenêtre (que GNU Emacs appelle mini-buffer) un message apparaîtra nous demandant un nouvel encodage et nous informant de l'encodage actuel. Dans les autres éditeurs, nous pouvons généralement accéder à l'encodage dans le menu \quotation{Enregistrer sous}.
 
 Après avoir vérifié que l'encodage est correct et enregistré le fichier sur le disque, nous fermerons l'éditeur pour nous concentrer sur l'analyse de ce que nous avons écrit.
 
-\stopsubsubsubject
+\stopsubsubsection
 
-\startsubsubsubject
+\startsubsubsection
   [title=Regardons le contenu de notre premier fichier source pour \ConTeXt]
 
   La première ligne commence par le caractère \quotation{\tt \%}. C'est un caractère réservé qui indique à \ConTeXt\ de ne pas traiter le texte qui le suit et ce jusqu'à la fin de la ligne sur laquelle il se trouve. Cette fonctionnalité est utilisée pour écrire des commentaires dans le fichier source que seul l'auteur pourra lire, car ils ne seront pas incorporés au document final. Dans cet exemple, je l'ai par exemple utilisé pour attirer l'attention sur certaines lignes, en expliquant ce qu'elles font.
@@ -172,9 +172,9 @@ Après avoir vérifié que l'encodage est correct et enregistré le fichier sur 
 Sur la 9\high{ème} ligne de notre exemple (je ne compte que les lignes qui ont du texte) se trouve la commande importante \tex{starttext} : elle indique à \ConTeXt\ que le contenu du document commence à partir de cet endroit; et à la dernière ligne de notre exemple, nous voyons la commande \tex{stoptext} qui indique la fin du contenu. Tout ce qui suit cette dernière commande ne sera pas traité. Ce sont deux commandes très importantes sur lesquelles je reviendrai très bientôt. Entre les deux se trouve donc le contenu à proprement parler de notre document qui, dans notre exemple, consiste en la première strophe de la chanson "\quotation{La maison sur le port}, dont les paroles sont de {\sc Amalia Rodrigues}, et qui a été reprise notamment par {\sc Sanseverino}. Je l'ai écrit en prose afin de mieux observer le formatage des paragraphes effectué par \ConTeXt.
 
 
-\stopsubsubsubject
+\stopsubsubsection
 
-\startsubsubsubject
+\startsubsubsection
   [title=Traitement du document source, ou compilation]
 
  \index{compilation}
@@ -192,7 +192,7 @@ Si la distribution \ConTeXt\ que nous avons installée est \suite-, nous devons 
 
 % TODO à revoir avec LMTX
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoC
 $ source ~/context/tex/setuptex
 \stopDemoC}
@@ -208,7 +208,7 @@ En ce qui concerne l'exécution du {\em script} qui vient d'être mentionné, vo
 
 Une fois que les variables nécessaires à l'exécution de \MyKey{context} ont été chargées en mémoire, nous pouvons l'exécuter. Cela se fait en tapant dans le terminal :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoC
 $ context la-maison-sur-le-port
 \stopDemoC}
@@ -268,7 +268,7 @@ La \in{figure}[la-maison-sur-le-port] montre le contenu de \quotation{la-maison-
 
 En bref : \ConTeXt\ a transformé le fichier source et a généré un fichier dans lequel nous avons un document formaté selon les instructions qui étaient incluses dans le fichier source. Les commentaires en ont disparu et, en ce qui concerne les commandes, ce que nous avons maintenant n'est pas leur nom, mais le résultat de leur application par \ConTeXt.
 
-\stopsubsubsubject
+\stopsubsubsection
 
 \stopsection
 
@@ -291,7 +291,7 @@ La commande \MyKey{context}  avec laquelle nous avons procédé au traitement de
 
 Nous pouvons appeler \MyKey{context} avec plusieurs options. Les options sont saisies immédiatement après le nom de la commande, précédées de deux traits d'union. Si nous voulons saisir plus d'une option, nous les séparons par un espace blanc. L'option \MyKey{help} nous donne une liste de toutes les options, avec une brève explication de chacune d'elles :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoC
 $ context --help
 \stopDemoC}
@@ -344,7 +344,7 @@ En travaillant avec \ConTeXt, il est inévitable que, tôt ou tard, des erreurs 
 
 Que faire lorsque  \MyKey{context} nous avertit, pendant la compilation, qu'une erreur s'est produite ? La première chose est, évidemment, d'identifier quelle est l'erreur. Pour ce faire, nous devrons parfois analyser le fichier \MyKey{.log} généré pendant la compilation ; mais encore plus souvent il suffira de remonter dans les messages produits par \MyKey{context} dans le terminal où il est exécuté.
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoC
 tex error       > tex error on line 14 in file la-maison-sur-le-port_bug.tex: ! Undefined control sequence
 
@@ -381,7 +381,7 @@ Par exemple, si dans notre fichier de test, \MyKey{la-maison-sur-le-port.tex}, p
 
   Nous pouvons y voir les lignes de notre fichier source numérotées, et à l'une d'entre elles, dans notre cas la ligne 14, entre le numéro et le texte de la ligne le compilateur a ajouté \quotation{>>} pour indiquer que c'est dans cette ligne qu'il a trouvé l'erreur. Le numéro de la ligne est également indiqué plus haut, avnat l'affichage des lignes, dans une ligne commençant par \MyKey{tex error}. Le fichier \MyKey{la-maison-sur-le-port.log} nous donnera plus d'indices. Dans notre exemple, il ne s'agit pas d'un très gros fichier, car la source que nous compilions est très petite ; dans d'autres cas, il peut contenir une quantité écrasante d'informations. Mais nous devons nous y plonger. Si nous ouvrons  \MyKey{la-maison-sur-le-port.log} avec un éditeur de texte, nous verrons que ce fichier enregistre tout ce que fait \ConTeXt. Nous devons y chercher une ligne qui commence par un avertissement d'erreur \quotation{\tt tex error}, pour cela nous pouvons utiliser la fonction de recherche de texte de l'éditeur. Nous trouveerons les lignes d'erreur suivantes~:
 
-\placefigure [here,none] [] {}{  
+\placefigure [force,here,none] [] {}{  
 \startDemoC
 tex error       > tex error on line 14 in file la-maison-sur-le-port_bug.tex: ! Undefined control sequence
 

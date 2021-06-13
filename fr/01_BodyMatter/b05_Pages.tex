@@ -49,7 +49,7 @@
 
 Par défaut, \ConTeXt\ suppose que les documents seront de format A4, la norme européenne. On peut établir un format différent avec \tex{setuppapersize} qui est la commande typique que l'on trouve dans le préambule du fichier source. La syntaxe {\em normal} de cette commande est :
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \setuppapersize[FormatPageLogique,Orientation][FormatPagePhysique,Orientation]
 \stopDemoI}
@@ -117,11 +117,12 @@ Si nous voulons utiliser une taille de page non standard, il y a deux choses que
 
 %-----------------------------------------------------
 
-\subsubsubject{Syntaxe alternative de \tex{setuppapersize}}
+\startsubsubsection
+  [title={Syntaxe alternative de \tex{setuppapersize}}]
 
 Outre la syntaxe que nous avons déjà vue, \tex{setuppapersize} nous permet d'utiliser cette autre syntaxe :
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \setuppapersize[Nom][Options]
 \stopDemoI}
@@ -141,14 +142,17 @@ où {\em Nom} est un argument facultatif qui représente le nom attribué à un 
   
 \stopitemize
 
+\stopsubsubsection
+
 %-----------------------------------------------------
 
-\subsubsubject{Définition d'un format de page personnalisé}
+\startsubsubsection
+  [title={Définition d'un format de page personnalisé}]
 
 Pour définir un format de page personnalisé, on utilise la commande \tex{definepapersize}, dont la syntaxe est la suivante
 
 \PlaceMacro{definepapersize}
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \definepapersize[Name][Options]
 \stopDemoI}
@@ -168,11 +172,13 @@ Il n'est pas possible de mélanger les valeurs autorisées pour \tex{setuppapers
 Lorsque nous utilisons \tex{definepapersize} pour indiquer un format de papier qui coïncide avec certaines des mesures standard, en fait, plutôt que de définir un nouveau format de papier, ce que nous faisons est de définir un nouveau nom pour un format de papier déjà existant. Cela peut être utile si nous voulons combiner un format de papier avec une orientation. Ainsi, par exemple, nous pouvons écrire
 
 \PlaceMacro{definepapersize}
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \definepapersize[vertical][A4, portrait]
 \definepapersize[horizontal][A4, landscape]
 \stopDemoI}
+
+\stopsubsubsection
 
 \stopsubsection
 
@@ -199,7 +205,7 @@ Il existe trois environnements dans \ConTeXt\ qui génèrent des pages stricteme
 La première génère une page qui contient un graphique généré avec MetaPost, un langage de conception graphique qui s'intègre à \ConTeXt, mais dont je ne parlerai pas dans cette introduction. La seconde fait la même chose avec une image et peut-être un peu de texte en dessous. Elle prend deux arguments : le premier identifie le fichier contenant l'image. J'en parlerai dans le chapitre consacré aux images externes \in{page}[refextimage]. La troisième (\tex{startTEXpage}) contient le texte qui est son contenu sur une page. Sa syntaxe est la suivante :
 
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \startTEXpage[Options] ... \stopTEXpage
 \stopDemoI}
@@ -341,7 +347,7 @@ Dans la phase de mise en page de notre document, afin de visualiser les principa
 
 La conception de la page implique l'attribution de tailles spécifiques aux zones respectives de la page. Cela se fait avec la commande \tex{setuplayout}. Cette commande nous permet de modifier n'importe laquelle des dimensions mentionnées dans la section précédente. Sa syntaxe est la suivante :
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \setuplayout [Name] [Options]
 \stopDemoI}
@@ -430,7 +436,7 @@ Les commandes \PlaceMacro{textwidth}\tex{textwidth} et \PlaceMacro{textheight}\t
 
 Il se peut que notre mise en page sur une page particulière produise un résultat non souhaité ; comme, par exemple, la dernière page d'un chapitre avec seulement une ou deux lignes, ce qui n'est ni typographiquement ni esthétiquement souhaitable. Pour résoudre ces cas, \ConTeXt\ fournit la commande \tex{adaptlayout} qui nous permet de modifier la taille de la zone de texte sur une ou plusieurs pages. Cette commande est destinée à être utilisée uniquement lorsque nous avons déjà terminé la rédaction de notre document et que nous procédons à quelques petits ajustements finaux. Par conséquent, son emplacement naturel est dans le préambule du document. La syntaxe de la commande est la suivante :
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \adaptlayout [Pages] [Options]
 \stopDemoI}
@@ -463,7 +469,7 @@ Considérez que lorsque nous modifions le nombre de lignes d'une page, cela peut
 
 Si nous devons utiliser différentes mises en page dans différentes parties du document, le mieux est de commencer par définir la mise en page {\em générale}, puis les différentes mises en page alternatives, celles qui ne modifient que les dimensions qui doivent être différentes. Ces mises en page alternatives hériteront de toutes les caractéristiques de la mise en page générale dont la définition ne sera pas modifiée. Pour spécifier une disposition alternative et lui donner un nom avec lequel nous pourrons l'appeler plus tard, nous utilisons la commande \tex{definelayout} dont la syntaxe générale est :
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \definelayout [NomMiseEnPage/Numéro] [Configuration]
 \stopDemoI}
@@ -473,14 +479,14 @@ où {\em Nom/Numéro} est le nom associé à la nouvelle mise en page, ou le num
 
 Lorsque la nouvelle mise en page est associée à un nom, pour l'appeler à un point particulier du document, nous utilisons :
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \setuplayout [NomMiseEnPage]
 \stopDemoI}
 
 et pour revenir à la disposition générale :
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \setuplayout [reset]
 \stopDemoI}
@@ -488,7 +494,7 @@ et pour revenir à la disposition générale :
 
 Si, par contre, la nouvelle mise en page a été associée à un numéro de page spécifique, elle sera automatiquement activée lorsque la page sera atteinte. Cependant, une fois activée, pour revenir à la mise en page générale, nous devrons l'indiquer explicitement, même si nous pouvons le faire de manière  {\em semi-automatique}. Par exemple, si nous voulons appliquer une mise en page exclusivement aux pages 1 et 2, nous pouvons écrire dans le préambule du document : 
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \definelayout[1][...]
 \definelayout[3][reset]
@@ -612,7 +618,7 @@ Tout d'abord, les caractéristiques fondamentales de la numérotation sont contr
 En plus de ces deux commandes, il faut également prendre en compte le contrôle des numéros impliquant la macrostructure du document (voir \in{section}[sec:macrostructure]). De ce point de vue, \PlaceMacro{defineconversionset}\tex{defineconversionset} permet d'indiquer un type de numérotation différent pour chacun des blocs de macro-structure. Par exemple :
 \index{macro-structure}
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \defineconversionset
   [frontpart:pagenumber][][romannumerals]
@@ -715,7 +721,7 @@ Parfois, si l'on veut empêcher un saut de page entre plusieurs paragraphes, l'u
 
 Les boîtes \TeX\, une fois créées, sont indivisibles, ce qui signifie que nous ne pouvons pas insérer un saut de page qui couperait une boîte en deux. C'est pourquoi, si nous plaçons le contenu que nous voulons conserver en un bloc dans une boîte invisible, nous évitons l'insertion d'un saut de page qui diviserait ce contenu. La commande pour ce faire est \PlaceMacro{vbox}\tex{vbox}, dont la syntaxe est la suivante
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \vbox{mon contenu}
 \stopDemoI}
@@ -763,7 +769,7 @@ L'utiliser avec quatre ou cinq arguments est équivalent à l'utiliser avec deux
 Une caractéristique importante de ces deux commandes est que, lorsqu'elles sont utilisées avec deux arguments, l'en-tête ou le pied de page central précédent (s'il existait) n'est pas réécrit, ce qui nous permet d'écrire un texte différent dans chaque zone, à condition d'écrire d'abord le texte central (en appelant la commande avec un seul argument) et d'écrire ensuite les textes des deux côtés (en l'appelant à nouveau, maintenant avec deux arguments). Ainsi, par exemple, si nous écrivons les commandes suivantes 
 
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \setupheadertexts[and]
 \setupheadertexts[Tweedledum][Tweedledee]
@@ -883,8 +889,8 @@ au sein de la page. Ces commandes agissent exclusivement sur la page où elles s
 % \stoptext
 % \stopbuffer
 
-% \placefigure [here,none] [] {}{\typesetbuffer[a7-bufA][frame=on,page=1]}
-% \placefigure [here,none] [] {}{\typesetbuffer[a7-bufB][frame=on,page=1]}
+% \placefigure [force,here,none] [] {}{\typesetbuffer[a7-bufA][frame=on,page=1]}
+% \placefigure [force,here,none] [] {}{\typesetbuffer[a7-bufB][frame=on,page=1]}
 
 % \subsection{Text in the upper and lower edges}
 
@@ -917,7 +923,7 @@ Jusqu'à présent, le système d'en-tête et de pied de page de \ConTeXt\ nous p
 La définition d'en-têtes ou de pieds de page spécifiques s'effectue à l'aide de la fonction \tex{definetext}, dont la syntaxe est la suivante :
 
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \definetext 
   [Name] [Type]
@@ -932,7 +938,7 @@ Une fois cette opération effectuée, nous devons lier le nouvel en-tête ou le 
 
 Ainsi, l'exemple suivant masquera l'en-tête de la première page de chaque chapitre et un numéro de page centré apparaîtra en pied de page :
 
-\placefigure [here,none] [] {}
+\placefigure [here,force,none] [] {}
 {\startDemoI
 \setuphead 
   [chapter]
@@ -951,7 +957,7 @@ We thrive in information--thick worlds because of our marvelous and everyday cap
 \stopbuffer
 
 \savebuffer[list=a7-bufD,file=ex_definetext_sans.tex,prefix=no]
-\placefigure [here,none] [] {}{\typesetbuffer[a7-bufC][frame=on,page=1]
+\placefigure [force,here,none] [] {}{\typesetbuffer[a7-bufC][frame=on,page=1]
 \attachment
   [file={ex_definetext_sans.tex},
    title={exemple definetext sans}]}
@@ -974,7 +980,7 @@ We thrive in information--thick worlds because of our marvelous and everyday cap
 \stopbuffer
 
 \savebuffer[list=a7-bufD,file=ex_definetext_avec.tex,prefix=no]
-\placefigure [here,none] [] {}{\typesetbuffer[a7-bufD][frame=on,page=1]
+\placefigure [here,force,none] [] {}{\typesetbuffer[a7-bufD][frame=on,page=1]
 \attachment
   [file={ex_definetext_avec.tex},
    title={exemple definetext avec}]}
@@ -1026,7 +1032,7 @@ Les deux premières commandes fonctionnent exactement comme \tex{setupheadertext
 Quant aux commandes visant à placer du texte dans les marges du document, elles ont toutes une syntaxe similaire car sont toutes définies par \tex{definemargindata} avec des options particulières pour chacunes.
 
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \CommandName[Reference][Configuration]{Text}
 \stopDemoI}
@@ -1072,7 +1078,7 @@ Les autres commandes offrent les mêmes options, à l'exception de {\tt location
 
 La commande \PlaceMacro{setupmargindata}\tex{setupmargindata} nous permet de configurer globalement les textes de chaque marge. Ainsi, par exemple,
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \setupmargindata[right][style=slanted]
 \stopDemoI}
@@ -1083,7 +1089,7 @@ fera en sorte que tous les textes de la marge de droite soient écrits en style 
 Nous pouvons également créer notre propre commande personnalisée avec
 
 \PlaceMacro{definemargindata}
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \definemargindata[Name][Configuration]
 \stopDemoI}

@@ -141,7 +141,7 @@ Avec \tex{enableregime} \ConTeXt\ inclut la commande \PlaceMacro{useregime} \tex
 
 Les tabulations et les espaces blancs sont traités de la même manière dans le fichier source. Un caractère de tabulation (la touche Tab du clavier) sera transformé en espace blanc par \ConTeXt. Et les espaces blancs sont absorbés par tout autre espace blanc (ou tabulation) qui les suit immédiatement. Ainsi, cela ne fait absolument aucune différence d'écrire un seul plusieurs espaces et tabilations dans le fichier source~:
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoHN
 Tweedledum and Tweedledee.
 
@@ -150,7 +150,7 @@ Tweedledum   and   Tweedledee.
 
 \ConTeXt{} considère que ces deux lignes sont exactement les mêmes. Par conséquent, si nous voulons introduire un espace supplémentaire entre les mots, nous devons utiliser certaines commandes \ConTeXt{} qui le font. Normalement, cela fonctionnera avec \quotation{\cmd{\textvisiblespace}}, c'est-à-dire un caractère {\tt\backslash} suivi d'un espace blanc. Mais il existe d'autres procédures qui seront examinées dans le \in{chapitre}[sec:horizontal space1] concernant les espacements horizontaux.
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoHN
 Dupont      et      Dupond.
 
@@ -165,7 +165,7 @@ L'absorption d'espaces blancs consécutifs nous permet de mettre en forme le fic
 
 % TODO Garulfo mettre un texte français
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoHN
 The music group from Madrid at the end of the seventies 
     {\em La Romántica Banda Local} 
@@ -197,7 +197,7 @@ La même chose se produit avec le caractère réservé \MyKey{\lettertilde}, bie
 
 Ainsi, regardons l'exemple suivant~:
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoHN
 Dupont    et Dupond.
 
@@ -243,7 +243,7 @@ Notez que j'ai dit \quotation{deux ou plusieurs sauts de ligne consécutifs} et 
 
 Parfois, lorsqu'un saut de ligne devient un espace blanc, nous pouvons nous retrouver avec un espace blanc indésirable et inattendu. En particulier lorsque nous écrivons des macros, où il est facile qu'un espace blanc \quotation{s'introduise} sans que nous nous en rendions compte. Pour éviter cela, nous pouvons utiliser le caractère réservé \MyKey{\%} qui, comme nous le savons, fait en sorte que la ligne où il apparaît ne soit pas traitée, ce qui implique que la coupure à la fin de la ligne ne sera pas non plus traitée. Ainsi, par exemple,
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoVN
 \define[3]\TestA{
   {\em #1} {\bf #2} {\sc #3}
@@ -450,7 +450,7 @@ Afin de pouvoir travailler avec plus d'un fichier source, \TeX\ a inclus la prim
 
 La commande \tex{input} insère le contenu du fichier qu'elle indique. Son format est le suivant~:
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \input NomFichier
 \stopDemoI}
@@ -461,7 +461,7 @@ Lorsque \ConTeXt\ compile un document et trouve une commande \tex{input}, il rec
 
 L'utilisation la plus courante de la commande \tex{input} est la suivante~: un fichier est écrit, appelons-le \MyKey{principal.tex}, et il sera utilisé comme conteneur pour appeler, par le biais de la commande \tex{input}, les différents fichiers qui composent notre projet. Ceci est illustré dans l'exemple suivant :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \input MaConfiguration   % Commandes de configuration générale 
 
@@ -480,7 +480,7 @@ L'utilisation la plus courante de la commande \tex{input} est la suivante~: un f
 
 Notez comment, pour la configuration générale du document, nous avons appelé le fichier \quotation{MaConfiguration.tex} qui, nous le supposons, contient les commandes globales que nous voulons appliquer. Ensuite, entre les commandes \tex{starttext} et \tex{stoptext} nous appelons les différents fichiers qui contiennent le contenu des différentes parties de notre document. Si, à un moment donné, pour accélérer le processus de compilation, nous souhaitons ne pas compiler certains fichiers, il suffit de mettre une marque de commentaire au début de la ligne appelant ce ou ces fichiers. Par exemple, si nous sommes en train d'écrire le deuxième chapitre et que nous voulons le compiler simplement pour vérifier qu'il ne contient pas d'erreurs, nous n'avons pas besoin de compiler le reste et pouvons donc écrire :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \input MaConfiguration   % Commandes de configuration générale 
 
@@ -519,7 +519,7 @@ Il est important de préciser que lorsque nous travaillons avec \tex{input}, seu
 
 Comme nous venons de le voir, si \ConTeXt\ ne trouve pas le fichier appelé avec \tex{input}, il génère une erreur. Dans le cas où nous voulons insérer un fichier uniquement s'il existe, mais en tenant compte de la possibilité qu'il n'existe pas, \ConTeXt\ offre une variante de la commande \tex{input}~: 
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \ReadFile{MonFichier}
 \stopDemoI}
@@ -528,7 +528,7 @@ Cette commande est en tous points similaire à \tex{input}, à la seule exceptio
 
 Si nous n'utilisons pas d'accolades, \ConTeXt\ pensera que le nom du fichier à rechercher est le même que le premier caractère qui suit la commande \tex{ReadFile}, suivi de l'extension \type{.tex}. Ainsi, par exemple, si nous écrivons 
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \ReadFile MonFichier
 \stopDemoI}
@@ -537,7 +537,7 @@ Si nous n'utilisons pas d'accolades, \ConTeXt\ pensera que le nom du fichier à 
 
 Une version plus raffinée de \tex{ReadFile} est \tex{readfile} dont le format est le suivant~:
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \readfile{MonFichier}{àInsérerSiExistant}{àInsérerSiNonExistant}
 \stopDemoI}
@@ -558,7 +558,7 @@ Le premier argument est similaire à \tex{Readfile}~: le nom d'un fichier entre 
 Le troisième mécanisme que propose \ConTeXt\ pour les projets multi-fichiers est plus complexe et plus complet : il commence par faire une distinction entre différents fichiers les fichiers de projet, les fichiers de produit, les fichiers de composants et les fichiers d'environnement. 
 
 \placefigure
-  [here,none]
+  [force,here,none]
   []
   {}
 {\externalfigure[project–structure.pdf][width=\textwidth]}
@@ -583,7 +583,7 @@ J'ai conservé le terme \quotation{fichiers d'environnement} pour ces types de f
 
 Comme tous les fichiers source de \ConTeXt, les fichiers d'environnement sont des fichiers texte, et supposent que l'extension sera \quotation{\type{.tex}}, bien que si nous le voulons, nous pouvons la changer, peut-être en \quotation{\type{.env}}. Cependant, cela n'est généralement pas fait dans \ConTeXt. Le plus souvent, les fichiers d'environnement sont identifiés en commençant ou en terminant leur nom par \quotation{env}. Par exemple~: \quotation{\type{env_livreA.tex}} ou \quotation{\type{mon-livreA.tex}}. L'intérieur d'un tel fichier d'environnement ressemblerait à ce qui suit :
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \startenvironment env_livreA
 
@@ -602,7 +602,7 @@ Comme tous les fichiers source de \ConTeXt, les fichiers d'environnement sont de
 
 ou pourrait également faire appel à d'autres fichiers environnements de façon a décomposer les différents éléments~:
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \startenvironment env_livreA
 
@@ -627,7 +627,7 @@ Les fichiers d'environnement ont été conçus pour fonctionner avec des composa
 
 La commande \tex{environnement} peut être appelée en utilisant l'un des deux formats suivants :
 
-\placefigure [here,none] [] {}{
+\placefigure [force,here,none] [] {}{
 \startDemoI
 \environment env_livreA
 \environment[env_livreA]
@@ -651,7 +651,7 @@ Dans le cas d'un livre dont chaque chapitre se trouve dans un fichier source dif
 
 Un fichier de composant typique \quotation{\tt cmp_chapitre-1.tex} serait le suivant
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \startcomponent cmp_chapitre-1
 
@@ -663,7 +663,7 @@ Un fichier de composant typique \quotation{\tt cmp_chapitre-1.tex} serait le sui
 
 Et un fichier produit \quotation{\tt prd_livre-A.tex} rassemblant les composants ressemblerait à ce qui suit :
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \startproduct   prd_livre-A
 
@@ -710,7 +710,7 @@ La distinction entre produits et composants est suffisante dans la plupart des c
 
 Un fichier projet typique se présenterait plus ou moins comme suit
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \startproject   prj_macollection
 
@@ -779,7 +779,7 @@ Par défaut, \ConTeXt\ cherche les fichiers dans le répertoire de travail et da
 
 Il est parfois utile d'indiquer le chemin d'un fichier particuler, cela se fait naturellement par exemple~: 
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \component chapitres/cmp_chapitre-6
 \stopDemoI}
@@ -788,14 +788,14 @@ Il est parfois utile d'indiquer le chemin d'un fichier particuler, cela se fait 
 
 Mais bien souvent cela se défini directement dans l'un des fichiers environnements par la commande \tex{usepath} qui permet d'indiquer la liste des répertoires dans lesquels \ConTeXt\ doit chercher les fichiers {\tt .tex}.
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \usepath[{chapitres,annexes}]  
 \stopDemoI}
 
 Une autre commande \tex{setupexternalfigures} permet d'indiquer le chemin des images (dont l'utilisation sera détaillée à la \in{section}[sec:extimage]), avec une syntaxe similaire indiquée à l'option {\tt directory}~:
 
-\placefigure [here,none] [] {}
+\placefigure [force,here,none] [] {}
 {\startDemoI
 \setupexternalfigures[directory={../general_images,images}]}
 \stopDemoI}

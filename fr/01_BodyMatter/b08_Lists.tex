@@ -13,10 +13,11 @@
 %%% Edited with: Emacs + AuTeX - And at times vim + context-plugin
 %%%
 
-\environment ../introCTX_env.mkiv
+\environment introCTX_env
 
-\startcomponent b08_Lists.mkiv
+\startcomponent b08_Lists
 
+% * Chapter
 \startchapter
   [
     reference=cap:toc,
@@ -37,11 +38,15 @@ Either of these imply a particular application of the mechanism for
 internal references whose explanation is included in
 \in{section}[sec:references].
 
+% * Section TOC
+
 \startsection
   [
     reference=sec:content,
     title=Table of contents,
   ]
+
+% ** Subsection TOC gébé
 
 \startsubsection
   [title=Overall view of the table of contents]
@@ -109,6 +114,8 @@ normal ones} created with the commands explained up to that point; however,
 in most cases we will not need to do this.
 
 \stopsubsection
+
+% ** Subsection full auto
 
 \startsubsection
   [
@@ -180,6 +187,8 @@ Moreover, \tex{completecontent} allows the same configuration options as
 section).
 
 \stopsubsection
+ 
+% ** Subsection full auto sans titre
 
 \startsubsection
   [
@@ -324,6 +333,8 @@ to be generated.
 
 \stopsubsection
 
+% ** Subsection éléments
+
 \startsubsection
   [
     reference=sec:criteriumlist,
@@ -356,6 +367,8 @@ following values:
 \stopitemize
 
 \stopsubsection
+
+% ** Subsection layout
 
 \startsubsection
   [
@@ -425,6 +438,9 @@ between the various alternatives, it is best for the reader to generate a
 test document where he or she can analyse them in detail.
 
 \stopsubsection
+
+% ** Subsection format 
+
 
 \startsubsection
   [
@@ -550,6 +566,9 @@ spacing is established. For example:
 
 \stopsubsection
 
+% ** Subsection ajustements
+
+
 \startsubsection
   [
     reference=sec:manual adjustments,
@@ -581,7 +600,7 @@ the content of the TOC is not so {\em automatic}. This implies:
 
 \stopitemize
 
-\stopsubsection
+% *** Subsubsection include not numbered
 
 \startsubsubsection
   [
@@ -625,6 +644,8 @@ of that section type in the TOC, it is preferable to do so by the procedure
 explained below.
 
 \stopsubsubsection
+
+% *** Subsubsection rajouts manuels
 
 \startsubsubsection
   [
@@ -703,6 +724,8 @@ the document located between the two sections concerned:
 
 \stopsubsubsection
 
+% *** Subsubsection exclude particulier
+
 \startsubsubsection
   [title=Exclude a particular section from the TOC belonging to a section type that is included in the TOC]
 
@@ -736,6 +759,8 @@ the subsections, but the TOC will not be altered, since by default it does
 not include {\tt MySubsection} types.
 
 \stopsubsubsection
+
+% *** Subsubsection textes différents
 
 \startsubsubsection
   [title=Section title text which differs in the TOC from the title in the body of the document]
@@ -785,6 +810,8 @@ procedures available to us:
 \stopsubsection
 
 \stopsection
+
+% * Section Listes
 
 \startsection
   [
@@ -1007,6 +1034,8 @@ with \tex{setupcombinedlist} which allows the already explained options
 \stopsubsection
 
 \stopsection
+
+% * Section INDEX
 
 \startsection
   [title=Index]
@@ -1326,6 +1355,6 @@ index with \tex{placemacro} or \tex{completemacro}.
 %%% mode: ConTeXt
 %%% mode: auto-fill
 %%% coding: utf-8-unix
-%%% TeX-master: "../introCTX.mkiv"
+%%% TeX-master: "../introCTX_fra.tex"
 %%% End:
 %%% vim:set filetype=context tw=72 : %%%
