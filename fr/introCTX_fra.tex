@@ -11,7 +11,7 @@
 
 \environment introCTX_env_00
 
-\def\RevisionDate{\date[d=29, m=5, y=2021]}  % Date of the last modifications
+\def\RevisionDate{\date[d=14, m=6, y=2021]}  % Date of the last modifications
 
 %==============================================================================
 
@@ -32,7 +32,7 @@
 
 \startbodymatter
 
-\startpart        [title=Qu'est ce que \ConTeXt\ ?\\Comment travailler avec ?]
+\startpart        [title=Qu'est ce que \ConTeXt\ et comment travailler avec ?]
 
 \definecolor      [back1]     [backB1]
 \definecolor      [back2]     [backB2]
@@ -44,6 +44,7 @@
 \component        b02_PremierDoc
 \component        b03_Commandes
 \component        b04_FichierSource
+
 \stoppart
 
 %------------------------------------------------------------------------------
@@ -60,12 +61,12 @@
 \component        b06_Polices
 \component        b07_Structure
 \component        b08_Lists
-% \component   b09_References.mkiv
+% \component      b09_References.mkiv
 
 \stoppart
     %------------------------------------------------------------------------------
 
-\startpart     [title=Particular issues]
+\startpart        [title=Particular issues]
 
 \definecolor      [back1]     [backD1]
 \definecolor      [back2]     [backD2]
@@ -73,10 +74,11 @@
 \setupbackgrounds [leftpage]  [background={background,pageg},state=repeat]
 \setupbackgrounds [rightpage] [background={background,paged},state=repeat]
 
-% \component   b10_CharText.mkiv
-% \component   b11_ParasLines.mkiv
-% \component   b12_SpecialParas.mkiv
-% \component   b13_Floats.mkiv
+% \component      b10_CharText.mkiv
+% \component      b11_ParasLines.mkiv
+% \component      b12_SpecialParas.mkiv
+% \component      b13_Floats.mkiv
+
 \stoppart
 
 %------------------------------------------------------------------------------
@@ -87,7 +89,7 @@
 
 \startappendices
 
-\startpart     [title=Appendices, reference=part:annexes]
+\startpart        [title=Appendices, reference=part:annexes]
 
 \definecolor      [back1]     [backE1]
 \definecolor      [back2]     [backE2]
@@ -95,10 +97,11 @@
 \setupbackgrounds [leftpage]  [background={background,pageg},state=repeat]
 \setupbackgrounds [rightpage] [background={background,paged},state=repeat]
 
-% \component   Installation.mkiv
-% \component   Symbols.mkiv
-% \component   Macros.mkiv
+% \component      Installation.mkiv
+% \component      Symbols.mkiv
+\component        Macros.mkiv
 \completeindex
+
 \stoppart
 
 \stopappendices

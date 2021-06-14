@@ -1,0 +1,41 @@
+\startenvironment env_mini_pages
+
+\newdimen\marge   \marge=4mm
+
+\definepapersize[sheet][width=5.327cm,height=7.7cm]
+\setuppapersize[sheet]
+
+\setupbodyfont [pagella,rm,7pt]
+\setuptolerance[horizontal,stretch]
+
+\setupwhitespace[small]
+\setupblank[small]
+
+\mainlanguage[fr]
+
+\setuplayout[
+width={\dimexpr(\paperwidth-\marge)\relax},
+backspace={\dimexpr(\marge/2)\relax},
+% 
+header=0.00mm,
+headerdistance=0.00mm,
+topspace={\dimexpr(\marge/2)\relax},
+% 
+footer=0.00mm,
+footerdistance=0.00mm,
+height={\dimexpr(\paperheight-\marge)\relax},
+%
+topdistance=0.00mm,
+top=0.00mm,
+bottomdistance=0.00mm,
+bottom=0.00mm,
+% 
+edgedistance=0.00mm,
+margindistance=0.00mm,
+leftmargin=0.00mm,
+leftedge=0.00mm,
+% 
+rightmargin=0.00mm,
+rightedge=0.00mm]
+
+\stopenvironment

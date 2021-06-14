@@ -160,7 +160,107 @@
       \completeToc
     \stop
 
-  
+\startMPpage
+
+%------------------------------------------------------------------------------
+                                                  % Table des Matières visuelle
+StartPage ;
+
+% =============================================================================
+
+draw textext.urt("\externalfigure[mini_pages.pdf]
+     [width=2cm,frame=on,page=1,background=color,backgroundcolor=middleyellow]")
+     shifted (1cm,5cm);
+
+draw textext.urt("\externalfigure[mini_pages.pdf]
+     [width=2cm,frame=on,page=2,background=color,backgroundcolor=middleyellow]")
+     shifted (3.5cm,5cm);
+
+draw textext.urt("\externalfigure[mini_pages.pdf]
+     [width=2cm,frame=on,page=3,background=color,backgroundcolor=middlegray]")
+     shifted (6.0cm,5cm);
+
+draw textext.urt("\externalfigure[mini_pages.pdf]
+     [width=2cm,frame=on,page=4,background=color,backgroundcolor=middlegray]")
+     shifted (8.5cm,5cm);
+     
+draw textext.urt("\externalfigure[mini_pages.pdf]
+     [width=2cm,frame=on,page=5,background=color,backgroundcolor=middlegray]")
+     shifted (11.0cm,5cm);
+     
+draw textext.urt("\externalfigure[mini_pages.pdf]
+     [width=2cm,frame=on,page=6,background=color,backgroundcolor=middlecyan]")
+     shifted (13.5cm,5cm);
+     
+draw textext.urt("\externalfigure[mini_pages.pdf]
+     [width=2cm,frame=on,page=7,background=color,backgroundcolor=middlecyan]")
+     shifted (16.0cm,5cm);
+     
+draw textext.urt("\externalfigure[mini_pages.pdf]
+     [width=2cm,frame=on,page=8,background=color,backgroundcolor=middlemagenta]")
+     shifted (18.5cm,5cm);
+     
+% =============================================================================     
+
+draw textext.urt("\externalfigure[frame.pdf]
+     [width=9.5cm,frame=on,page=2]")
+     shifted (1cm,10cm);
+     
+draw textext.urt("\externalfigure[frame.pdf]
+     [width=9.5cm,frame=on,page=1]")
+     shifted (11cm,10cm);
+
+% =============================================================================     
+     
+draw textext.urt("{\bf\in{}{ - Panorama}[cap:panorama]}")         shifted (1cm,27cm);
+draw textext.urt("{\bf\in{}{ - Premier doc}[cap:firstdoc]}")      shifted (5.5cm,27cm);
+
+pickup pencircle scaled 1mm ;
+drawarrow (4cm,25.1cm)--(5cm,25.1cm);
+drawarrow (7cm,24.8cm)--(7cm,23.8cm);
+
+draw textext.urt("{\bf\in{}{ - Commandes}[cap:commands]}")        shifted (1cm,25cm);
+draw textext.urt("{\bf\in{}{ - Fichier source}[cap:sourcefile]}") shifted (5.5cm,25cm);
+
+% =============================================================================     
+
+draw textext.lrt("\framed[align=flushleft,frame=off,width=5.5cm]{%
+{\bf\in{}{ - Pagination}              [cap:pages]}
+\blank[big]
+\in{}{ - Taille de la page}         [sec:papersize]\\
+\in{}{ - Élements de la page}       [sec:page-elements]\\
+\in{}{ - Mise en page}              [sec:pagelayout]\\
+\in{}{ - Numérotation des pages}    [sec:numpages]\\
+\in{}{ - En-têtes et pieds de page} [sec:headerfooter]\\
+\in{}{ - Marges}                    [sec:margintext]
+\blank[big]
+\in{}{ - Sauts de page}             [sec:pagebreak]
+\blank[2*big]
+{\bf\in{}{ - Polices d'écriture et couleurs}              [cap:fontscol]}
+\blank[2*big]
+{\bf\in{}{ - Table des matières, index, listes}           [cap:toc]}
+\blank[2*big]
+{\bf\in{}{ - Références et hyperliens}                    [cap:refpluslinks]}}")         shifted (4cm,22.25cm);
+
+
+draw textext.lrt("\framed[align=flushleft,frame=off,width=5.5cm]{%
+{\bf\in{}{ - Lettres, mots, espaces horizontaux}          [cap:chartext]}
+\blank[2*big]
+{\bf\in{}{ - Paragraphes, lignes, espaces verticaux}      [cap:parlinevspace]}
+\blank[2*big]
+{\bf\in{}{ - Constructions spéciales et paragraphes}      [cap:specialparas]}
+\blank[2*big]
+{\bf\in{}{ - Images, tableaux et autres objets flottants} [cap:floats]}}")         shifted (12cm,22.25cm);
+
+
+draw textext.lrt("\framed[align=flushleft,frame=off,width=8cm]{%
+{\bf\in{}{ - Structure du document}                       [cap:structure]}
+\blank[medium]
+\in{}{ - Macro-structure du document}         [sec:macrostructure]}")         shifted (1cm,9.5cm);
+StopPage ;
+
+\stopMPpage
+
 \stopcomponent
 
 %%% Local Variables:
