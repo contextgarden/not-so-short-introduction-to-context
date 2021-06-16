@@ -890,37 +890,22 @@ La liste officielle des commandes \ConTeXt\ (voir \in{section}[sec:qrc-setup-fr]
 % ** Subsection générer l'index
 
 \startsubsection
-  [title=Generating the index]
+  [title=Génération de l'index]
 
-A subject index consists of a list of significant terms, usually located at
-the end of a document, indicating the pages where such a subject can be
-found.
+Générer un index consiste à générer la liste des sujets considérés comme  importants ou significatifs et précisant les pages y faisant référence. L'index est généralement située à la fin d'un document. 
 
-When books were put typeset by hand, generating a subject index was a
-complex task, as well as a tedious one. Any change in the pagination could
-affect all the entries in the index. Therefore, they were not very common.
-Today, the computer mechanisms for typesetting mean that, while the task is
-likely to continue being tedious, it is no longer so complex given that it
-is not so difficult for a computer system to maintain an up-to-date list of
-data associated with an index entry.
+Lorsque les livres étaient composés à la main, la création d'un index des sujets était une tâche complexe et fastidieuse. Tout changement dans la pagination pouvait affecter toutes les entrées de l'index. Par conséquent, ils n'étaient pas très courants. Aujourd'hui, les mécanismes informatiques de composition font que, même si la tâche est susceptible de rester fastidieuse, elle n'est plus aussi complexe étant donné qu'il n'est pas si difficile pour un système informatique de maintenir à jour la liste des données associées à une entrée d'index.
 
-To generate a subject index we need:
+Pour générer un index par sujet, nous avons besoin de~:
 
-\startitemize[n]
 
-  \item Determine which words, terms or concepts are to be part of it. This
-  is a task that only the author can do.
+\startitemize[n,packed]
 
-  \item Check at which points in the document each entry in the future
-  index appears. Although, to be precise, more than {\em checking} the
-  places in the source file where the concept or issue is discussed, what
-  we do when we work with \ConTeXt\ is {\em to mark} those spots, inserting
-  a command that will then serve to generate the index automatically. This
-  is the tedious part.
+\item Déterminer les mots, les termes ou les concepts qui doivent faire partie de l'article. Il s'agit d'une tâche que seul l'auteur peut accomplir.
 
-  \item Finally, we generate and format the index by placing it at the
-  point of our choice in the document. The latter is quite simple with
-  \ConTeXt\ and requires only one command: \tex{placeindex}.
+\item Vérifier à quels endroits du document chaque entrée du futur index apparaît. Bien que, pour être précis, plus que {\em vérifier} les endroits du fichier source où le concept ou la question est abordé, ce que nous faisons lorsque nous travaillons avec \ConTeXt\ consiste à {\em marquer} ces endroits, en insérant une commande qui servira ensuite à générer l'index automatiquement. C'est la partie la plus fastidieuse.
+
+\item Enfin, nous générons et mettons en forme l'index en le plaçant à l'endroit de notre choix dans le document. Cette dernière opération est assez simple avec \ConTeXt\ et ne nécessite qu'une seule commande : \tex{placeindex} ou \tex{completeindex}.
 
 \stopitemize
 
@@ -1096,53 +1081,35 @@ default, inside which the index will be typeset.
 % ** Subsection formater l'index
 
 \startsubsection
-  [title=Formatting the subject index]
+  [title=Formatage de l'index]
   \PlaceMacro{setupregister}
 
-Subject indexes are a particular application of a more general structure
-\ConTeXt\ calls \quotation{\em register}; therefore the index is formatted
-with the command:
+Les index de sujets sont une application particulière d'une structure plus générale que \ConTeXt\ appelle \quotation{\em register} ; par conséquent l'index est formaté avec la commande :
 
-\type{\setupregister[index][Configuration]}
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\setupregister[index][Configuration]
+\stopDemoI}
 
-With this command we can:
+Avec cette commande, nous pouvons~:
 
 \startitemize
 
-  \head Determine what the index will look like with its different
-  elements. Namely:
+\head Déterminer à quoi ressemblera l'index avec ses différents éléments. A savoir :
 
-  \startitemize
+\startitemize
 
-    \item The index headings which are usually letters of the alphabet. By
-    default these are in lower case. With {\tt alternative=A} we can set
-    them to be in upper case.
+\item Les titres de l'index qui sont généralement des lettres de l'alphabet. Par défaut, ils sont en minuscules. Avec {\tt alternative=A}, nous pouvons les mettre en majuscules.
 
-    \item The entries themselves, and their page number. The appearance
-    depends on the {\tt textstyle, textcolor, textcommand} and {\tt
-    deeptextcommand} options for the actual entry, and {\tt pagestyle,
-    pagecolor} and {\tt pagecommand}, for the page number. With {\tt
-    pagenumber=no} we can also generate a subject index without page
-    numbers (although I don't know if this could be useful).
+\item Les entrées elles-mêmes, et leur numéro de page. L'apparence dépend des options {\tt textstyle, textcolor, textcommand} et {\tt deeptextcommand} pour l'entrée elle-même, et {\tt pagestyle}, {\tt pagecolor} et {\tt pagecommand}, pour le numéro de page. Avec {\tt pagenumber=no}, on peut aussi générer un index des sujets sans numéro de page (mais je ne sais pas si cela peut être utile).
 
-    \item The {\tt distance} option measures the width of separation
-    between the name of an entry and the page numbers; but it also measures
-    the amount of indentation for subentries.
+\item L'option {\tt distance} spécifie la largeur de séparation entre le nom d'une entrée et les numéros de page ; mais elle mesure aussi la quantité d'indentation pour les sous-entrées.
 
-  \stopitemize
+\stopitemize
 
-  The names of the {\tt style}, {\tt textstyle}, {\tt pagestyle}, {\tt
-  color}, {\tt textcolor}, and {\tt pagecolor} options are clear enough to
-  tell us what each one does I think. For {\tt command}, {\tt pagecommand},
-  {\tt textcommand} and {\tt deeptextcommand}, I refer to the explanation
-  for similarly named options in \in{section}[sec:titlestyle], regarding
-  the configuration of section commands.
+Les noms des options {\tt style}, {\tt textstyle}, {\tt pagestyle}, {\tt color}, {\tt textcolor}, et {\tt pagecolor} sont suffisamment clairs pour nous dire ce que chacune fait, je pense. Pour les options {\tt command}, {\tt pagecommand}, {\tt textcommand} et {\tt deeptextcommand}, je me réfère à l'explication des options de même nom dans \in{section}[sec:titlestyle], concernant la configuration des commandes de section.
 
-  \item To set the general appearance of the index, which includes, among
-  others the commands to execute before ({\tt before}) or after({\tt
-  after}) the index, the number of columns it needs to have ({\tt n}),
-  whether the columns should be equal or not ({\tt balance}), the alignment
-  of entries ({\tt align}), etc.
+\item Pour définir l'apparence générale de l'index, ce qui inclut, entre autres, les commandes à exécuter avant ({\tt before}) ou après ({\tt after}) l'index, le nombre de colonnes qu'il doit avoir ({\tt n}), si les colonnes doivent être d'égale hauteur ou non ({\tt balance}), l'alignement des entrées ({\tt align}), etc.
 
 \stopitemize
 
@@ -1151,53 +1118,48 @@ With this command we can:
 % ** Subsection créer d'autres index
 
 \startsubsection
-  [title=Creating other indexes]
+  [title=Création d'autres index]
   \PlaceMacro{defineregister}\PlaceMacro{setupregister}
 
-I have explained the subject index as if only one such index would be
-possible in a document; but the truth is that documents can have as many
-indexes as desired. There could be an index of personal names, for example,
-which collects the names of people mentioned in the document, with an
-indication of the place where they are cited. These are still a kind of
-index. In a legal text we could also create a special index for mentions of
-the Civil Code; or, in a document like the present one, an index of macros
-explained in it, etc.
+J'ai expliqué l'index des sujets comme si un seul index de ce type était possible dans un document ; mais la vérité est que les documents peuvent avoir autant d'index que souhaité. Il peut y avoir un index des noms de personnes, par exemple, qui rassemble les noms des personnes mentionnées dans le document, avec une indication de la page où elles sont citées. Il s'agit toujours d'une sorte d'index. Dans un texte juridique, nous pourrions également créer un index spécial pour les mentions du Code civil ; ou, dans un document comme le présent, un index des macros expliquées dans celui-ci, etc.
 
-To create an additional index in our document we use the
-\tex{defineregister} command whose syntax is:
+Pour créer un index supplémentaire dans notre document, nous utilisons la commande \tex{defineregister} dont la syntaxe est~:
 
-\type{\defineregister [IndexName] [Configuration]}
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\defineregister [NomIndex] [Configuration]
+\stopDemoI}
 
-where {\em IndexName} is the name the new index will have, and {\em
-Configuration} controls how it works. It is also possible to configure the
-index later on by means of
+où {\em NomIndex} est le nom que portera le nouvel index, et {\em Configuration} contrôle son fonctionnement. Il est également possible de configurer l'index ultérieurement au moyen de la fonction
 
-\type{\setupregister [IndexName] [Configuration]}
 
-Once a newly named index {\em IndexName} has been created  we will have the
-\tex{IndexName} command at our disposal to mark the entries that this index
-will have in a similar way to the way entries are marked with \tex{index}.
-The \text{seeIndexName} command also lets us create entries that refer to
-other entries.
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\setupregister [NomIndex] [Configuration]
+\stopDemoI}
 
-For example: we could create an index of \ConTeXt\ commands in this
-document with the command:
+Une fois qu'un nouvel index nommé {\em NomIndex} a été créé, nous disposons de la commande \tex{NomIndex} pour marquer les entrées de cet index de la même manière que les entrées sont marquées avec \tex{index}. La commande \tex{seeNomIndex} nous permet également de créer des entrées qui font référence à d'autres entrées.
 
-\type{\defineregister[macro]}
+Par exemple, nous pouvons créer un index des commandes \ConTeXt\ dans ce document avec la commande~:
 
-that would create the \tex{macro} command. This lets me mark all the
-references to \ConTeXt\ commands as an index entry, and then generate the
-index with \tex{placemacro} or \tex{completemacro}.
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\defineregister[MaMacro]
+
+La commande \tex{etbim} permet de...
+\MaMacro{etbim}
+
+\startsubject[title=Index des macros]
+\placeMaMacro
+\stopsubject
+\stopDemoVW}
+
+qui crée la commande \tex{MaMacro}. Cela me permet de marquer toutes les références aux commandes \ConTeXt\ comme une entrée d'index, puis de générer l'index avec \tex{placeMaMacro} ou \tex{completeMaMacro}. 
 
 \startSmallPrint
 
-  Creating a new index enables the \tex{IndexName} command to mark it
-  entries, and the \tex{placeIndexName} and \tex{completeIndexName}
-  commands for generating the index. But these latter two commands are
-  actually abbreviations of two more general commands applied to the index
-  in question. Thus, \tex{placeIndexName} is equivalent to
-  \tex{placeregister[IndexName]} and \tex{completeIndexName} is equivalent
-  to \tex{completeregister[IndexName]}.
+La création d'un nouvel index active la commande \tex{NomIndex} pour le marquer comme entrée, et les commandes \tex{placeNomIndex} et \tex{completeNomIndex} pour générer l'index. Mais ces deux dernières commandes sont en fait des abréviations de deux commandes plus générales appliquées à l'index en question. Ainsi, \tex{placeNomIndex} est équivalent à \tex{placeregister[NomIndex]} et \tex{completeNomIndex} est équivalent à \tex{completeegister[NomIndex]}.
 
 \stopSmallPrint
 

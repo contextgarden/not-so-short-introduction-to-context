@@ -18,24 +18,30 @@
 %%% Edited by: Emacs + AuTeX - And at times vim + context-plugin
 %%%
 
-\environment ../introCTX_env.mkiv
+\environment introCTX_env
 
-\startcomponent b10_CharText.mkiv
+\startcomponent b10_CharText
+
+% *    Chapter 
 
 \startchapter
-  [title={Characters, words, text and horizontal space},
+  [title={Caractères, mots, texte et espace horizontal},
   reference=cap:chartext]
 
 \TocChap
 
-The basic core element of all text documents is the character: characters are grouped into words, which in turn form lines that make up the paragraphs that make up pages.
+L'élément de base de tous les documents textuels est le caractère : les caractères sont regroupés en mots, qui à leur tour forment des lignes qui constituent les paragraphes qui composent les pages.
 
-The current chapter, starting with \quotation{{\em character}} explains some of \ConTeXt's utilities relating to characters, words and text.
+Le présent chapitre, qui commence par \quotation{\em caractère}, explique certains des utilitaires de \ConTeXt\ relatifs aux caractères, aux mots et au texte.
+
+% **   Section
 
 \startsection
-  [title={Getting characters not normally accessible from the keyboard}]
+  [title={Obtenir des caractères qui ne sont pas normalement accessibles à partir du clavier}]
 
-In a text file encoded as UTF-8 (see \in{section}[sec:encoding]) we can use any character or symbol, both of living languages and of many already extinct. But, as the possibilities of a keyboard are limited, most of the characters and symbols allowed in UTF-8 normally cannot be obtained directly from the keyboard. This is particularly the case with many diacritics, i.e. signs placed above (or below) certain letters, giving them a special value; but also with many other characters like maths symbols, traditional ligatures, etc. We can obtain many of these characters with \ConTeXt\ by using commands.
+Dans un fichier texte codé en UTF-8 (voir \in{section}[sec:encodage]), nous pouvons utiliser n'importe quel caractère ou symbole, aussi bien des langues vivantes que de nombreuses langues dites mortes. Mais, comme les possibilités d'un clavier sont limitées, la plupart des caractères et symboles autorisés en UTF-8 ne peuvent normalement pas être obtenus directement du clavier. C'est notamment le cas de nombreux diacritiques, c'est-à-dire des signes placés au-dessus (ou au-dessous) de certaines lettres, leur conférant une valeur particulière ; mais aussi de nombreux autres caractères comme les symboles mathématiques, les ligatures traditionnelles, etc. Nous pouvons obtenir beaucoup de ces caractères avec \ConTeXt\ en utilisant des commandes.
+
+% ***  SubSection
 
 \startsubsection
   [title={Diacritics and special letters}]
@@ -116,6 +122,8 @@ The Hungarian umlaut also works with the letter \quote{o}, and the cedilla with 
 
 \stopsubsection
 
+% ***  SubSection
+
 \startsubsection
   [
     reference=sec:ligatures,
@@ -153,6 +161,8 @@ A ligature that used to  be traditional in Spanish (Castilian) and that is not u
 Along with the previous ligatures, which I have called {\em traditional} because they come from handwriting, after the invention of the printing press certain printed text ligatures developed which I will call \quotation{typographical ligatures} considered by \ConTeXt\ to be font utilities and which are managed automatically by the program, although we can influence how these font utilities are handled (including ligatures) with \PlaceMacro{definefontfeature}\tex{definefontfeature} (not explained in this introduction).
 
 \stopsubsection
+
+% ***  SubSection
 
 \startsubsection
   [title={Greek letters}]
@@ -202,12 +212,16 @@ Note how for lower case versions of some characters (epsilon, kappa, theta, pi, 
 
 \stopsubsection
 
+% ***  SubSection
+
 \startsubsection
   [title={Various symbols}]
 
 Together with the characters we have just seen, \TeX\ (and therefore \ConTeXt\ as well) offers commands for generating any number of symbols. There are many such commands. I have provided an extended although incomplete list in \in{appendix}[app:symbols].
 
 \stopsubsection
+
+% ***  SubSection
 
 \startsubsection
   [
@@ -321,6 +335,8 @@ At first sight, {\tt \backslash buildtextgrave} seems redundant given that we ha
 
 \stopsubsection
 
+% ***  SubSection
+
 \startsubsection
   [title={Use of predefined symbol sets}]
 
@@ -425,10 +441,14 @@ will produce
 
 \stopsection
 
+% **   Section
+
 \startsection
   [title={Special character formats}]
 
 Strictly speaking, it is {\em format} commands that affect the font used,  its size, style or variant. These commands are explained in \in{Chapter}[sec:fontscol]. However, seen more {\em broadly}, we can also consider the commands that somehow change the characters they take as an argument (thus altering their appearance) to be format commands. We will look at some of these commands in this section. Others, such as underlined or lined text with lines above or below the text (e.g. where we want to provide space to answer a question) will be seen in \in{section}[sec:FramesLines].
+
+% ***  SubSection
 
 \startsubsection
   [
@@ -556,6 +576,8 @@ In either of the two commands the configuration allows for three options: \quota
 
 \stopsubsection
 
+% ***  SubSection
+
 \startsubsection
   [title={Superscript or subscript text}]
 
@@ -582,6 +604,8 @@ We already know (see \in{section}[sec:reserved characters]) that in maths mode, 
 \stopitemize
 
 \stopsubsection
+
+% ***  SubSection
 
 \startsubsection
   [
@@ -640,11 +664,15 @@ Two very similar commands to \tex{type} are:
 
 \stopsection
 
+% **   Section
+
 \startsection
   [
     reference=sec:horizontal space1,
     title={Character and word spacing},
   ]
+
+% ***  SubSection
 
 \startsubsection
   [title=Automatically setting horizontal space]
@@ -674,6 +702,8 @@ The space between different characters and words (called {\em horizontal space} 
 \stopitemize
 
 \stopsubsection
+
+% ***  SubSection
 
 \startsubsection
   [title=Altering the space between characters within a word]
@@ -750,6 +780,8 @@ We can customise the default configuration of the command with
 
 \stopsubsection
 
+% ***  SubSection
+
 \startsubsection
   [
     reference=sec:horizontal space2,
@@ -821,6 +853,8 @@ On both\hfill sides
 
 \stopsection
 
+% **   Section
+
 \startsection
   [
     reference=sec:compound words,
@@ -850,6 +884,8 @@ The normal use of \MyKey{\|\|} is with hyphens, since this is what is normally u
 
 \stopsection
 
+% **   Section
+
 \startsection
   [
     reference=sec:langdoc,
@@ -865,6 +901,8 @@ Characters form words which normally belong to some language. It is important fo
 \item Certain typesetting matters associated with the typesetting tradition of the language in question.
 
 \stopitemize
+
+% ***  SubSection
 
 \startsubsection
   [title=Setting and changing the language]
@@ -887,7 +925,7 @@ In \in{table}[tbl:languages] we find a complete list of languages supported by \
   \PlaceMacro{showinstalledlanguages}\type{\showinstalledlanguages}\\
   Should you be reading this document long after it was written (2020) it is possible that \ConTeXt\ will have incorporated additional languages, so it would be a good idea to use these commands to show an updated list of languages}
 
-{\switchtobodyfont[script]
+{%\switchtobodyfont[script]
 \placetable
   [here]
   [tbl:languages]
@@ -1039,6 +1077,8 @@ To enable a particular language {\em inside} the document, we can use either the
 
 \stopsubsection
 
+% ***  SubSection
+
 \startsubsection
   [
     reference=sec:langconfig,
@@ -1067,6 +1107,8 @@ where {\em Language} is the language code for the language we want to configure,
 \stopitemize%%%@@@
 
 \stopsubsection
+
+% ***  SubSection
 
 \startsubsection
   [
@@ -1107,8 +1149,12 @@ Finally, it is important to point out that although in general, in \ConTeXt, the
 
 \stopsubsection
 
+% ***  SubSection
+
 \startsubsection
   [title=Some language-related commands]
+
+% **** SubSubSection
 
 \startsubsubsection
   [
@@ -1140,6 +1186,8 @@ Finally, it is important to point out that although in general, in \ConTeXt, the
 \stopitemize
 
 \stopsubsubsection
+
+% **** SubSubSection
 
 \startsubsubsection
   [title=The \tex{translate} command]
@@ -1194,6 +1242,8 @@ will generate
 
 \stopsubsubsection
 
+% **** SubSubSection
+
 \startsubsubsection
   [
     reference=sec:quote,
@@ -1234,6 +1284,8 @@ Of course, if we are using English as our main language, then the default single
 
 \stopsection
 
+% *  End
+
 \stopchapter
 
 \stopcomponent
@@ -1242,6 +1294,6 @@ Of course, if we are using English as our main language, then the default single
 %%% mode: ConTeXt
 %%% mode: auto-fill
 %%% coding: utf-8-unix
-%%% TeX-master: "../introCTX.mkiv"
+%%% TeX-master: "../introCTX_fra.tex"
 %%% End:
 %%% vim:set filetype=context tw=72 : %%%

@@ -2,59 +2,37 @@
 
 \startsetups [mylayout]
 
-\def\nbdiv{15}                                         % découpage de la grille
-                                                % le premier élément est laissé
-                                  % pour la marge interne et le blanc supérieur      
-\def\nbdiva{10}                         % nb d'élements pour la zone principale
-\def\nbdivb{3}                                    % nb d'élements pour la marge
-
-\def\nbdivc{12}                                         % texte vertical
-\def\nbdivd{2}                                          % blanc inf vertical
-
-\newdimen\marge   
-\marge=6mm
-\def\myfooterdistance{\marge}
-\def\myheaderdistance{\marge}
-
-\def\myheader{\dimexpr(((1\paperheight)/\nbdiv)-\marge)\relax}
-\def\myfooter{\dimexpr(((\nbdivd\paperheight)/\nbdiv)-\marge)\relax}
-
-\def\myleftmargin{\dimexpr(((1\paperwidth)/\nbdiv)/2-\marge)\relax}
-
-\def\myleftmargin{\dimexpr((1\paperwidth)/\nbdiv)-\marge\relax}
-\def\myrightmargin{\dimexpr((\nbdivb\paperwidth)/\nbdiv)-\marge\relax}
-
 \setuplayout[
   %
-  width={\dimexpr((\nbdiva\paperwidth)/\nbdiv)-\marge\relax},
-  backspace={\dimexpr(1\paperwidth/\nbdiv)+(\marge/2)\relax},
-  % topspace + header + headerdistance = 24,75mm
-  %
-  header=\myheader,
-  headerdistance=\myheaderdistance,
-  topspace={\dimexpr(1\paperheight/\nbdiv)+(\marge/2)-\myheader-\myheaderdistance\relax},
+  width=12cm,
+  backspace=3cm,
+  %  
+  header=2cm,
+  headerdistance=1cm,
+  topspace=1cm,
   % height - ( header + headerdistance + footer + footerdistance ) = 222.75mm
   %
-  footer=\myfooter,
-  footerdistance=\myfooterdistance,
-  height={\dimexpr((\nbdivc\paperheight)/\nbdiv)-\marge+\myfooter+\myfooterdistance+\myheader+\myheaderdistance\relax},
+  footer=2cm,
+  footerdistance=1cm,
+  height=28cm,
   %
-  topdistance=\marge,
+  topdistance=0pt,
   top=0pt,
-  bottomdistance=\marge,
+  bottomdistance=0pt,
   bottom=0pt,
   %
   % edge and margin distance
   %
-  margindistance=\marge,
-  edgedistance=\marge,
+  margindistance=1cm,
+  edgedistance=0pt,
   %
   % left
-  leftmargin=\myleftmargin,
+  leftmargin=1cm,
   leftedge=0pt,
   % rigth
-  rightmargin=\myrightmargin,
-  rightedge=0pt]
+  rightmargin=4cm,
+  rightedge=0pt,
+  grid=yes]
 
 \stopsetups
 
@@ -62,17 +40,41 @@
 
 \setups{mylayout}                     % application du layout défini "mylayout"
 
-\setuppagenumbering
-  [
-   alternative=doublesided,                             % document recto-verso
-   location=]    % suppression affichage par défaut numéro page centré en-tête
+\setupbodyfont[pagella,11pt]    
 
+\definebodyfontenvironment [11pt] [d=38pt]
+
+\setuptolerance[strict]               % how tolerant vs ‘ugly’ stretched spaces
+
+\setupalign[hz,                                         % hz for font expansion
+            hanging,                                   % hanging for protrusion
+            lesshyphenated,                      % two instructions added by j.
+            verytolerant,                       % to eliminate most hyphenation
+            stretch]                 % and get better interword spacing as well
+            
 \setupbackgrounds [page]
 [background=color, backgroundcolor=white]
 
+\setupheadertexts
+    [{\tfd \bf En-tête}]
+    []
+    
+\setupfootertexts
+    [{\tfd \bf Pied-de-page}]
+    []
 
+\setuppagenumbering
+  [
+   location={footer,inright},
+   style=\bfd]    % suppression affichage par défaut numéro page centré en-tête
+
+  
 \starttext
-~
-\page
-~
+{\tfd  \bf Zone de texte} \inright{\tfd \bf Marge} 
+
+\blank[3*big]
+
+{\tfb 
+\input lorem
+}.
 \stoptext

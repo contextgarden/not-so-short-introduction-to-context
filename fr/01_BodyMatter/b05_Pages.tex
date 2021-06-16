@@ -958,7 +958,7 @@ We thrive in information--thick worlds because of our marvelous and everyday cap
 \stopbuffer
 
 \savebuffer[list=a7-bufD,file=ex_definetext_sans.tex,prefix=no]
-\placefigure [force,here,none] [] {}{\typesetbuffer[a7-bufC][frame=on,page=1]
+\placefigure [force,here,none] [] {}{\typesetbuffer[a7-bufC][frame=on,page=1,background=color,backgroundcolor=white]
 \attachment
   [file={ex_definetext_sans.tex},
    title={exemple definetext sans}]}
@@ -981,7 +981,7 @@ We thrive in information--thick worlds because of our marvelous and everyday cap
 \stopbuffer
 
 \savebuffer[list=a7-bufD,file=ex_definetext_avec.tex,prefix=no]
-\placefigure [here,force,none] [] {}{\typesetbuffer[a7-bufD][frame=on,page=1]
+\placefigure [here,force,none] [] {}{\typesetbuffer[a7-bufD][frame=on,page=1,background=color,backgroundcolor=white]
 \attachment
   [file={ex_definetext_avec.tex},
    title={exemple definetext avec}]}
@@ -1041,7 +1041,7 @@ Quant aux commandes visant à placer du texte dans les marges du document, elles
 
 où {\em Reference} et {\em Configuration} sont des arguments optionnels ; le premier est utilisé pour d'éventuelles références croisées et le second nous permet de configurer le texte de la marge. Le dernier argument, entre crochets, contient le texte à placer dans la marge.
 
-\margintext[margin=normal]{\tfxx exemple de\\ \tex{margintext[margin=normal]}, où l'on constate que le texte est dans la marge de gauche mais collé au texte et justifié à droite}
+\inouter{\tfxx exemple de\\ \tex{inouter}, où l'on constate que le texte est dans la marge externe et justifié vers l'interne}
 Parmi ces commandes, une habituellement utilisée est \tex{margintext} car elle permet de placer le texte dans la marge de gauche de la page avec une justification à droite. Les autres commandes, comme leur nom l'indique, placent le texte dans la marge elle-même (droite ou gauche, intérieure ou extérieure), ou dans le bord (droit ou gauche, intérieur ou extérieur). Ces commandes sont étroitement liées à la mise en page car si, par exemple, nous utilisons \tex{inrightedge} mais que nous n'avons pas réservé d'espace dans la mise en page pour le bord droit, rien ne sera visible.
 
 Les options de configuration de \tex{margintext} sont les suivantes :

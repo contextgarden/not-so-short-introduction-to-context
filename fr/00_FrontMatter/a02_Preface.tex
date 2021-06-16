@@ -11,6 +11,317 @@
 
 \environment introCTX_env_00
 
+%-------------------------------------------------------------------------------
+                                                                 % Credit titles
+
+
+  {
+    \page[yes]
+    \page[blank]\parindent0pt
+    \strut\vfill
+
+    \switchtobodyfont[small]
+    {\bf Une courte (?) introduction à \ConTeXt\ Mark~IV}\\
+    Version 1.6 [\RevisionDate]\\ 
+    \blank
+
+% I wanted  to use  the copyleft  symbol, but  I have  not found  out how  to
+% generate  it. With  \mirror{\copyright} the  symbol  is generated,  but a
+% rather annoying  linebreak is inserted after  it. Copy and paste  from the
+% internet doesn't work and  I don't know why. (It is not  the first time this
+% happens).
+
+    {\copyright} 2020-2021, Joaquín Ataz-López\\
+    \blank
+    Titre original: Una introducción (no demasiado breve) a \ConTeXt\ Mark~IV\\
+    Traduction française: A bon ami qui souhaite rester anonyme.
+
+    L'auteur du  présent texte, ainsi  que ses traducteurs anglais  et français,
+    autorisent sa libre  distribution et utilisation, ce qui inclue  le droit de
+    copier et de redistribuer ce document  sur support numérique à condition que
+    l'auteur soit cité, et que le document  ne soit inclus ni dans un paquet, ni
+    dans une  suite logicielle,  ni dans une  documentation dont  les conditions
+    d'utilisation ou de distribution ne prévoient pas la le droit de copie et de
+    redistribution libre par  ses destinataires.  La traduction  du document est
+    également autorisée,  à condition  que la paternité  du texte  original soit
+    indiquée,  que son  statut  de traduction  soit indiquée,  et  que le  texte
+    traduit soit distribué sous la licence  FDL de la Fondation pour le Logiciel
+    Libre (Free Software Foundation), une  licence Creative Commons qui autorise
+    la copie et la redistribution, ou autre licence similaire.
+
+    Nonobstant  ce qui  précède, la  publication et  la commercialisation  de ce
+    document, ou  sa traduction,  nécessitera l'autorisation écrite  expresse de
+    l'auteur.
+
+% It is not  a totally free licence since  it does not allow it to  be marketed in
+% paper form. The point is to pevent some "smartass" from publishing this document
+% as a  book. However,  apart from  this restriction, I  believe that  the licence
+% continues to reflect  quite well the spirit of the  FDL licence, in considerably
+% less space.
+
+    \setupnotation[numberconversion=set 0]
+    Historique des versions :
+
+    \startitemize[packed]\smallbodyfont
+
+      \item \date[y=2020, m=8, d=18] : Version 1.0 (Uniquement en espagnol) :
+      Document original.
+
+      \item \date[y=2020, m=8, d=23] : Version 1.1 (Uniquement en espagnol) :
+      Correction de petites erreurs de frappe et de malentendus de l'auteur.
+
+      \item \date[y=2020, m=9, d=3] : Version 1.15 (Uniquement en espagnol) :
+      Autres corrections de petites erreurs de frappe et de malentendus.
+
+      \item \date[y=2020, m=9, d=5] : Version 1.16 (Uniquement en espagnol) :
+      Autres corrections  de petites erreurs  de frappe et de  malentendus ainsi
+      que  des petites  modifications  qui  améliorent la  clarté  du texte  (je
+      crois).
+
+      \item \date[y=2020, m=9, d=6] : Version 1.17 (Uniquement en espagnol) :
+      C'est incroyable le  nombre de petites erreurs que je  trouve.  Si je veux
+      m'arrêter, je dois arrêter de relire le document.
+
+      \item \date[y=2020, m=10, d=21] : Version 1.5 (Uniquement en espagnol) :
+      Introduction de  suggestions et correction  des erreurs signalées  par les
+      utilisateurs de la liste de diffusion \from[ntg-context].
+
+      \item \RevisionDate: Version 1.6 : Corrections suggérées après une
+      nouvelle lecture du document, à l'occasion de sa traduction en anglais
+
+    \stopitemize
+
+  }
+
+%------------------------------------------------------------------------------
+                                                           % Table des Matières
+     
+    \start
+      \setupwhitespace[none]
+      \switchtobodyfont[11pt]
+      \setupinterlinespace[small]     % in a context of smaller interline space
+      \completeToc
+    \stop
+
+
+%------------------------------------------------------------------------------
+                                                  % Table des Matières visuelle
+
+\definemeasure [xA] [21.0mm]
+\definemeasure [yA] [29.7mm]
+
+\definemeasure [xA] [25.2mm]
+\definemeasure [yA] [35.64mm]
+
+\definemeasure [xm] [10.0mm]
+\definemeasure [ym] [10.0mm]
+
+\definemeasure [xB] [\dimexpr2\measured{xA}+1\measured{xm}\relax]
+\definemeasure [xC] [\dimexpr4\measured{xA}+3\measured{xm}\relax]
+\definemeasure [xD] [\dimexpr5\measured{xA}+4\measured{xm}\relax]
+
+\definemeasure [yE] [\dimexpr4\measured{yA}+3\measured{ym}\relax]
+
+\defineframed
+  [Case]
+  [background=color,
+   backgroundcolor=jaune1,
+   width=\measure{xA},
+   height=\measure{yA},
+   align={flushleft,nothyphenated,verytolerant}
+   location=hanging,
+   frame=off,
+   loffset=2pt,
+   toffset=1pt]
+
+\defineframed
+  [BigCase]
+  [Case]
+  [backgroundoffset=4mm,
+   backgroundcolor=darkgray,
+   frame=off,
+   frameoffset=4mm,
+   width=\measure{xD}]
+
+\startMPpage
+
+StartPage ;
+
+numeric w ; w := bbwidth(Page) ;
+numeric h ; h := bbheight(Page) ;
+
+%fill (unitsquare xyscaled (w,h)) withcolor \MPcolor{white} ;
+
+% =============================================================================
+
+pair pbase ; pbase := (1.5cm,28.0cm); 
+
+pair ppasxA ; ppasxA := (21.0mm, 0.0mm); 
+pair ppasyA ; ppasyA := ( 0.0cm,29.7mm);
+
+ppasxA := (25.2mm, 0.0mm); 
+ppasyA := ( 0.0cm,35.64mm);
+
+pair ppasx ; ppasx := ppasxA + (10mm, 0.0mm); 
+pair ppasy ; ppasy := ppasyA + ( 0mm,10.0mm); 
+
+draw textext.lrt("\BigCase{\sc \bf I}")
+     shifted (pbase + 0 * ppasx - 0 * ppasy);
+
+draw textext.lrt("\Case[backgroundcolor=white]{\tt TXT}")
+     shifted (pbase + 1 * ppasx - 0 * ppasy);
+
+draw textext.lrt("\Case[width=\measure{xB}]{%
+     {\bf \ConTeXt}\blank[small]
+     {\bf\in{}{ - Panorama}[cap:panorama]}\blank[small]
+     {\bf\in{}{ - Premier doc}[cap:firstdoc]}\blank[small]
+     {\bf\in{}{ - Commandes}[cap:commands]}\blank[small]
+     {\bf\in{}{ - Fichier source}[cap:sourcefile]}}")
+     shifted (pbase + 2 * ppasx - 0 * ppasy);
+
+draw textext.lrt("\Case[backgroundcolor=white]{\tt PDF}")
+     shifted (pbase + 4 * ppasx - 0 * ppasy);
+
+
+%------------------------------------------------------------------------------
+
+draw textext.lrt("\BigCase[height=\measure{yE}]{\sc\bf II}")
+     shifted (pbase + 0 * ppasx - 1 * ppasy);
+
+% draw textext.urt("\externalfigure[frame.pdf]
+%      [width=2.1cm,frame=on,page=2]")
+%      shifted (pbase - 1 * ppasy);
+
+draw textext.lrt("\Case[width=\measure{xB}]{%
+     {\bf\in{}{ - Pagination}[cap:pages]}\\
+     \in{}{ - Taille de la page}         [sec:papersize]\\
+     \in{}{ - Mise en page}              [sec:pagelayout]\\
+     \in{}{ - Numérotation pages}        [sec:numpages]\\
+     \in{}{ - En-têtes et pieds de page} [sec:headerfooter]\\
+     \in{}{ - Marges}                    [sec:margintext]\\
+%     \in{}{ - Sauts de page}             [sec:pagebreak]
+}")
+     shifted (pbase + 1 * ppasx - 1 * ppasy);
+
+draw textext.lrt("\externalfigure[frame.pdf]
+     [width=\measure{xA},frame=on,page=1]")
+     shifted (pbase + 3 * ppasx - 1 * ppasy);
+
+draw textext.lrt("\Case{%
+     {\bf\in{}{ - Polices\\ de caractère \\ et couleurs} [cap:fontscol]}}")
+     shifted (pbase + 4 * ppasx - 1 * ppasy);
+
+%------------------------------------------------------------------------------
+
+draw textext.lrt("\Case[height=11mm,width=\measure{xC}]{%
+     {\bf\in{}{ - Structure du document} [cap:structure]} \\
+         \in{}{ - Macro-structure}[sec:macrostructure]}")
+     shifted (pbase + 1 * ppasx - 2 * ppasy);
+
+draw textext.lrt("\externalfigure[introCTX_fra_for_TOC.pdf]
+     [width=\measure{xA},frame=on,page=1,
+      background=color,backgroundcolor=white]")
+     shifted (pbase + 0 * ppasx - 2 * ppasy - (0mm,13mm));
+
+draw textext.lrt("\externalfigure[introCTX_fra_for_TOC.pdf]
+     [width=\measure{xA},frame=on,page=5,
+      background=color,backgroundcolor=white]")
+     shifted (pbase + 1 * ppasx - 2 * ppasy - (0mm,13mm));
+
+draw textext.lrt("\externalfigure[introCTX_fra_for_TOC.pdf]
+     [width=\measure{xA},frame=on,page=11,
+      background=color,backgroundcolor=white]")
+     shifted (pbase + 2 * ppasx - 2 * ppasy - (0mm,13mm));
+
+draw textext.lrt("\externalfigure[introCTX_fra_for_TOC.pdf]  %17 pour 14
+     [width=\measure{xA},frame=on,page=19,
+      background=color,backgroundcolor=white]")
+     shifted (pbase + 3 * ppasx - 2 * ppasy - (0mm,13mm));
+     
+draw textext.lrt("\externalfigure[introCTX_fra_for_TOC.pdf]
+     [width=\measure{xA},frame=on,page=21,
+      background=color,backgroundcolor=white]")
+     shifted (pbase + 4 * ppasx - 2 * ppasy - (0mm,13mm));
+
+
+
+
+draw textext.lrt("\externalfigure[introCTX_fra_for_TOC.pdf]
+     [width=\measure{xA},frame=on,page=107,
+      background=color,backgroundcolor=white]")
+     shifted (pbase + 0 * ppasx - 3 * ppasy - (0mm,5mm));
+
+draw textext.lrt("\externalfigure[introCTX_fra_for_TOC.pdf]
+     [width=\measure{xA},frame=on,page=235,
+      background=color,backgroundcolor=white]")
+     shifted (pbase + 1 * ppasx - 3 * ppasy - (0mm,5mm));
+     
+draw textext.lrt("\externalfigure[introCTX_fra_for_TOC.pdf]
+     [width=\measure{xA},frame=on,page=261,
+      background=color,backgroundcolor=white]")
+     shifted (pbase + 2 * ppasx - 3 * ppasy - (0mm,5mm));
+     
+draw textext.lrt("\externalfigure[introCTX_fra_for_TOC.pdf]
+     [width=\measure{xA},frame=on,page=263,
+      background=color,backgroundcolor=white]")
+     shifted (pbase + 3 * ppasx - 3 * ppasy - (0mm,5mm));
+     
+draw textext.lrt("\externalfigure[introCTX_fra_for_TOC.pdf]
+     [width=\measure{xA},frame=on,page=274,
+      background=color,backgroundcolor=white]")
+     shifted (pbase + 4 * ppasx - 3 * ppasy - (0mm,5mm));
+
+%------------------------------------------------------------------------------
+
+
+draw textext.lrt("\Case{%
+     {\bf\in{}{ - Table \\ des matières, \\ index, listes} [cap:toc]}}")
+     shifted (pbase + 1 * ppasx - 4 * ppasy);
+
+draw textext.lrt("\Case{%
+     {\bf\in{}{ - Références et hyperliens} [cap:refpluslinks]}}")
+     shifted (pbase + 2 * ppasx - 4 * ppasy);
+
+%------------------------------------------------------------------------------
+
+draw textext.lrt("\BigCase{\sc \bf III}")
+     shifted (pbase + 0 * ppasx - 5 * ppasy);
+
+draw textext.lrt("\Case{%
+{\bf\in{}{ - Lettres, \\ mots et \\ espaces \\ horizontaux}     [cap:chartext]}}")
+     shifted (pbase + 1 * ppasx - 5 * ppasy);
+
+draw textext.lrt("\Case{%
+{\bf\in{}{ - \\ Paragraphes, \\ lignes et \\ espaces \\ verticaux} [cap:parlinevspace]}}")
+     shifted (pbase + 2 * ppasx - 5 * ppasy);
+
+draw textext.lrt("\Case{%
+{\bf\in{}{ - \\ Constructions \\ spéciales et \\ paragraphes}      [cap:specialparas]}}")
+     shifted (pbase + 3 * ppasx - 5 * ppasy);
+
+draw textext.lrt("\Case{%
+{\bf\in{}{ - Images, \\ tableaux et \\ autres \\ flottants} [cap:floats]}}")
+     shifted (pbase + 4 * ppasx - 5 * ppasy);
+
+%------------------------------------------------------------------------------
+
+drawarrow (pbase + 1 * ppasx + 1 * ppasxA - 0.5 * ppasyA) -- 
+          (pbase + 2 * ppasx              - 0.5 * ppasyA)
+          withpen pencircle scaled 2bp;
+
+drawarrow (pbase + 3 * ppasx + 1 * ppasxA - 0.5 * ppasyA) -- 
+          (pbase + 4 * ppasx              - 0.5 * ppasyA)
+          withpen pencircle scaled 2bp;
+
+drawarrow (pbase + 2 * ppasx - 1 * ppasy + 1 * ppasxA - 0.1 * ppasyA) -- 
+          (pbase + 3 * ppasx - 1 * ppasy              - 0.1 * ppasyA)
+          withpen pencircle scaled 2bp;
+
+StopPage ;
+
+\stopMPpage
+
+
 %------------------------------------------------------------------------------
 
 \setupnotation

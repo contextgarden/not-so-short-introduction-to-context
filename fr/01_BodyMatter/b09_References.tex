@@ -1,0 +1,820 @@
+%%% File:      b09_References.mkiv
+%%% Author:    Joaquín Ataz-López
+%%% Begun:     July 2020
+%%% Concluded: August 2020
+%%% Contents:  Just like the previous chapter, initially, this
+%            chapter was considered to be a section of Chapter 12. But
+%            when I began writing it I saw that it affected the document
+%            as a whole, so it changed place.  In this case the
+%            information comes fundamentally from the wiki.
+%
+%%% Edited with: Emacs + AuTeX - And at times vim + context-plugin
+%%%
+
+\environment introCTX_env
+
+\startcomponent b09_References
+
+% *    Chapitre 
+\startchapter
+  [title=Références et hyperliens,
+      reference=cap:refpluslinks,]
+
+\TocChap
+
+% **   Section 1 type de réference
+
+\startsection
+  [title=Types de référence]
+
+Les documents scientifiques et techniques abondent de références~:
+
+\startitemize
+
+\item Parfois, ils se réfèrent à d'autres documents qui sont à la base de ce qui est expliqué, ou qui contredisent ce qui est expliqué, ou qui développent ou nuancent l'idée traitée, etc. Dans ce cas, la référence est dite {\em externe} et, si l'on veut que le document soit rigoureux sur le plan académique, la référence prend la forme de {\em citations} de la littérature.
+
+\item Mais il est également fréquent qu'un document, dans l'une de ses sections, fasse référence à une autre de ses sections, auquel cas la référence est dite {\em interne}. Lorsqu'un point du document commente un aspect particulier d'une image, d'un tableau, d'une note ou d'un élément de même nature, en s'y référant par son numéro ou par la page où il se trouve, il s'agit également d'une référence {\em interne}.
+
+Pour des raisons de précision, les références internes doivent viser un endroit précis et facilement identifiable dans le document. C'est pourquoi ce type de références renvoie toujours soit à des éléments numérotés (comme, par exemple, lorsque nous disons \quotation{voir tableau 3.2}, ou \quotation{chapitre 7}), soit à des numéros de page. Les références vagues du type \quotation{comme nous l'avons déjà dit} ou \quotation{comme nous le verrons plus loin} ne sont pas de véritables références, et il n'y a pas d'exigence particulière pour les mettre en forme, ni d'outil spécial pour le faire. De plus, je dissuade personnellement mes étudiants de doctorat ou de maîtrise d'utiliser cette pratique de manière habituelle.
+
+
+\startSmallPrint
+
+Les références internes sont aussi communément appelées \quotation{références croisées} bien que dans ce document j'utiliserai simplement le terme \quotation{références} en général, et \quotation{références internes} lorsque je souhaite être spécifique.
+
+\stopSmallPrint
+
+\stopitemize
+
+Afin de clarifier la terminologie que j'utilise pour les références, j'appellerai le point du document où une référence est introduite, l'\quotation{origine}, et l'endroit vers lequel elle pointe, la quotation{cible}. De cette façon, nous dirons qu'une référence est interne lorsque l'origine et la cible sont dans le même document, et externe lorsque l'origine et la cible sont dans des documents différents.
+
+Du point de vue de la composition du document~:
+
+\startitemize
+
+\item Les références externes ne posent aucun problème particulier et ne nécessitent donc, en principe, aucun outil pour les introduire : toutes les données dont j'ai besoin à partir du document cible sont à ma disposition et je peux les utiliser dans la référence. Toutefois, si le document d'origine est un document électronique et que le document cible est également disponible sur le Web, il est possible d'inclure dans la référence un lien hypertexte permettant de passer directement à la cible par un clic. Dans ce cas, on peut dire que le document d'origine est {\em interactif}.
+
+\item En revanche, les références internes posent un défi pour la composition du document. En effet, quiconque a l'expérience de la préparation de documents scientifiques et techniques moyennement longs sait qu'il est presque inévitable que la numérotation des pages, des sections, des images, des tableaux, des théorèmes ou d'autres éléments similaires à ce qui est indiqué dans la référence, change au cours de la préparation du document, ce qui rend très difficile sa mise à jour.
+
+\startSmallPrint
+
+Avant l'avènement de l'informatique, les auteurs évitaient les références internes ; et celles qui étaient inévitables, comme la table des matières (qui, si elle est accompagnée du numéro de page de chaque section, est un exemple de référence interne), étaient écrites à la toute fin.
+
+\stopSmallPrint
+
+\stopitemize
+
+Même les systèmes de composition les plus limités, comme les traitements de texte, permettent l'inclusion d'une certaine forme de références croisées internes, comme les tables des matières. Mais ce n'est rien comparé au mécanisme complet de gestion des références inclus dans \ConTeXt, qui peut également combiner le mécanisme de gestion des références internes visant à maintenir les références à jour, avec l'utilisation d'hyperliens qui n'est évidemment pas exclusive aux références externes.
+
+\stopsection
+
+% **   Section 2 réferences internes
+
+\startsection
+[
+reference=sec:references,
+title=Références internes,
+]
+
+Deux choses sont nécessaires pour établir une référence interne :
+
+\startitemize[n]
+
+
+\item Une étiquette ou un identifiant au point cible. Lors de la compilation, \ConTeXt, associera des données particulières à cette étiquette. Les données associées dépendent du type d'étiquette ; il peut s'agir du numéro de section, du numéro de note, du numéro d'image, du numéro associé à un élément particulier dans une liste numérotée, du titre de la section, etc.
+
+\item Une commande au point d'origine qui lit les données associées à l'étiquette liée au point cible et les insère au point d'origine. La commande varie en fonction des données de l'étiquette que l'on souhaite insérer au point d'origine.
+
+\stopitemize
+
+Lorsque nous pensons à une référence, nous le faisons en termes de \quotation{origine~\longrightarrow~cible}, il pourrait donc sembler que les questions relatives à l'origine doivent être expliquées en premier, et ensuite celles relatives à la cible. Cependant, je crois qu'il est plus facile de comprendre la logique des références si l'explication est inversée.
+
+% ***  Section label
+
+\startsubsection
+[
+reference=sec:target labels,
+title=L'étiquette de la cible,
+]
+
+% TODO Garulfo : envisager de remplacer étiquette par reference
+
+Dans ce chapitre, par {\em étiquette}, j'entends une chaîne de texte qui sera associée au point cible et utilisée en interne pour y faire référence et ainsi récupérer certaines informations concernant le point cible (par exemple le numéro de page, le numéro de section, etc). En fait, les informations associées à chaque étiquette dépendent de la procédure de création de celle-ci. \ConTeXt\ appelle ces étiquettes {\em références}, mais je pense que ce dernier terme, ayant un sens beaucoup plus large, est moins clair.
+
+L'étiquette associée à la référence cible~:
+
+\startitemize
+
+\item a besoin que chaque cible potentielle du document soit unique afin qu'elle puisse être identifiée sans aucun doute. Si nous utilisons la même étiquette pour différentes cibles, \ConTeXt\ ne lancera pas d'erreur de compilation (il génèrera des messages), mais toutes les références pointeront vers la première étiquette qu'il trouvera (dans le fichier source) et cela aura pour effet secondaire que certaines de nos références pourront être erronées et, pire encore, que nous ne les remarquerons pas. Il est donc important de s'assurer, lors de la création d'une étiquette, que la nouvelle étiquette que nous attribuons n'a pas déjà été attribuée auparavant.
+
+\item Il peut contenir des lettres, des chiffres, des signes de ponctuation, des espaces vides, etc. Lorsqu'il y a des espaces vides, les règles générales de \ConTeXt\ concernant ces types de caractères s'appliquent toujours (voir \in{section}[sec:spaces]), de sorte que, par exemple, \quotation{\type{Mon beau libellé}} et \quotation{\type{Mon     beau libellé}} sont considérés comme identiques, même si un nombre différent d'espaces vides est utilisé dans les deux.
+
+\stopitemize
+
+
+Puisqu'il n'y a aucune limitation quant aux caractères pouvant faire partie de l'étiquette et à leur nombre, mon conseil est d'utiliser des noms d'étiquette clairs, qui nous aideront à comprendre le fichier source lorsque, peut-être, nous le lirons longtemps après qu'il ait été écrit. C'est pourquoi l'exemple que j'ai donné précédemment (\quotation{Mon beau libellé}) n'est pas un bon exemple, car il ne nous dit rien sur la cible vers laquelle pointe l'étiquette. Pour cette rubrique, par exemple, l'étiquette \quotation{\tt sec:EtiquettesCibles} serait meilleure (\quotation{\tt sec} indiquant qu'il s'agit d'une section).
+
+Pour associer une cible particulière à une étiquette, il existe essentiellement deux procédures :
+
+\startitemize[n]
+
+\item Au moyen d'un argument ou d'une option de commande utilisée pour créer l'élément vers lequel l'étiquette pointera. De ce point de vue, toutes les commandes qui créent une sorte de structure ou d'élément textuel susceptible d'être une cible de référence comprennent une option nommée \MyKey{reference} qui est utilisée pour inclure l'étiquette. Parfois, à la place de l'{\em option}, l'étiquette est le contenu de l'argument entier.
+
+Nous trouvons un bon exemple de ce que j'essaie de dire dans les commandes de section qui, comme nous le savons depuis (\in{section}[sec:sectionyntax]), permettent plusieurs types de syntaxe. Voici comment définir une étiquette ave cles deux syntaxes~:
+
+
+Dans la syntaxe classique, la commande est écrite comme suit :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+
+\section[étiquette]{Titre de la section}
+
+\startsection
+  [title=Titre de la section,
+   reference=étiquette]
+\stopsection
+\stopDemoI}
+
+
+Dans les deux cas, la commande prévoit l'introduction d'une étiquette qui sera associée à la section (ou chapter, subsection, etc.) en question.
+
+% TODO Garulfo redite à nettoyer ?
+
+J'ai dit que cette fonctionnalité se retrouve dans {\em toutes les commandes} qui nous permettent de créer un élément de texte susceptible d'être la cible d'une référence. Il s'agit de tous les éléments de texte qui peuvent être numérotés, y compris, entre autres, les sections, les objets flottants de toutes sortes (tableaux, images et autres), les notes de bas de page ou de fin, les citations, les listes numérotées, les descriptions, les définitions, etc.
+
+
+\startSmallPrint
+
+Lorsque l'étiquette est saisie directement avec un argument, et non comme une option à laquelle une valeur est attribuée, il est possible avec \ConTeXt\ d'associer plusieurs étiquettes à une seule cible. Par exemple~:
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\section[étiquette1,étiquette2,étiquette3]{Titre de la section}
+\stopDemoI}
+
+Je ne vois pas bien quel serait l'avantage d'avoir plusieurs étiquettes différentes pour la même cible et je soupçonne \Conjecture que cela peut être fait non pas parce que cela offre des avantages, mais en raison d'une exigence {\em interne} de \ConTeXt\ applicable à certains types d'arguments.
+
+\stopSmallPrint
+
+\item Au moyen des commandes \PlaceMacro{pagereference} \tex{pagereference},
+\PlaceMacro{reference} \tex{reference}, ou \PlaceMacro{textreference} \tex{textreference} dont la syntax est~:
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+Texte initial \pagereference[étiquette]
+\reference[étiquette]{Texte}
+\textreference[étiquette]{Texte}
+et texte final
+\stopDemoVW}
+
+
+\startitemize
+
+\item L'étiquette créée avec \tex{pagereference} nous permet de récupérer le numéro de page.
+
+\item Les étiquettes créées avec \tex{reference} et \tex{textreference} nous permettent de récupérer le numéro de page ainsi que le texte qui leur est associé en argument.
+
+Dans les deux cas  \tex{reference} et \tex{textreference}, le texte lié à l'étiquette n'apparaît pas en tant que tel dans le document final au point où se trouve la commande, mais il peut être récupéré et réapparaître au point d'origine de la référence.
+
+\stopitemize
+
+\stopitemize
+
+J'ai dit précédemment que chaque étiquette est associée à certaines informations concernant le point cible. La nature de ces informations dépend du type d'étiquette~:
+
+\startitemize
+
+\item Toutes les étiquettes {\em rappellent} (dans le sens où elles permettent de les retrouver) le numéro de page de la commande qui les a créées. Pour les étiquettes attachées à des sections qui peuvent avoir plusieurs pages, ce numéro sera celui de la page où commence la section en question.
+
+\item Les étiquettes insérées avec la commande qui crée un élément textuel numéroté (section, note, tableau, image, etc.) {\em rappellent} le numéro associé à cet élément (numéro de section, numéro de note, etc.)
+
+\item Si les éléments possèdenr un {\em titre}, comme c'est le cas, par exemple, pour les sections, mais aussi les tableaux s'ils ont été insérés à l'aide de la commande \tex{placetable}, les étiquettes se {\em rappelleront} de ces titres.
+
+\item Les étiquettes créées avec \tex{pagereference} {\em rappellent} le numéro de page.
+
+\item Celles créées avec \tex{reference} ou \tex{textreference} {\em rappellent} également le texte qu'elles prennent comme argument.
+
+
+\startSmallPrint
+
+
+En fait, je ne suis pas sûr de la différence réelle entre les commandes \tex{reference} et \tex{textreference}. Je pense qu'il est possible que la conception des trois commandes qui permettent la création d'étiquettes tente de fonctionner en parallèle avec les trois commandes qui permettent la récupération d'informations à partir des étiquettes (que nous verrons dans un moment) ; mais la vérité est que, selon mes tests, \tex{reference} et \tex{textreference} semblent être des commandes redondantes.
+
+
+\stopSmallPrint
+
+\stopitemize
+
+\stopsubsection
+
+% ***  Section type de réference
+
+\startsubsection
+[title=Commandes au point de référence d'origine pour récupérer les données du point cible]
+
+Les commandes que je vais vous expliquer ensuite récupèrent les informations des étiquettes et, en plus, si notre document est interactif, génèrent un lien hypertexte vers la cible. Mais ce qui est important dans ces commandes, c'est l'information qui est récupérée de l'étiquette. Si nous voulons seulement générer l'hyperlien, sans récupérer aucune information de l'étiquette, nous devons utiliser la commande \tex{goto} expliquée dans la \in{section} [sec:createlinks]. 
+
+% **** Section basic commands
+
+\startsubsubsection
+[title=Commandes de base pour récupérer les informations d'une étiquette]
+
+Sachant que chaque étiquette associée à un point cible peut stocker différents éléments d'information, il est logique que \ConTeXt\ comprenne trois commandes différentes pour récupérer ces informations~: selon les informations d'un point cible de référence que nous voulons récupérer, nous utilisons l'une ou l'autre de ces commandes~:
+
+\startitemize
+
+\item La commande \tex{at} permet de récupérer le numéro de page de l'étiquette.
+
+\item Pour les étiquettes qui mémorisent un numéro d'élément (numéro de section, numéro de note, numéro d'article, numéro de table, etc.) en plus du numéro de page, la commande \tex{in} permet de récupérer ce numéro. 
+
+\item Enfin, pour les étiquettes qui mémorisent un texte associé à une étiquette (titre de section, titre d'image inséré avec \tex{placefigure}, etc.), la commande \tex{about} permet de récupérer ce texte.
+
+\stopitemize
+
+Les trois commandes \PlaceMacro{at} \tex{at} \PlaceMacro{in} \tex{in} \PlaceMacro{about} \tex{about} ont les syntaxes suivantes~:
+
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\setupinteraction[state=start]
+\startsubsection
+  [title=Titre de la section,
+   reference=sec:cettesection]
+\stopsubsection
+
+À la \at{page}[sec:cettesection] 
+se trouve la \in{section}{.}[sec:cettesection]
+dont le titre est \about[sec:cettesection]
+\stopDemoVW}
+
+
+\startitemize
+
+\item \quotation{\tt sec:cettesection} est l'étiquette de la cible dont nous voulons récupérer l'information, c'est un point commun entre toutes les commandes.
+
+\item le premier texte entre accolades sera ajouté juste avant l'information que l'on souhaite récupérer avec la commande. Entre le texte et les données de l'étiquette que la commande récupère, un espace insécable sera inséré et si la fonction d'interactivité est activée (avec \tex{setupinteraction[state=start]}) l'information récupérée par la commande génère un lien hypertexte qui nous dirigera au point cible. Le texte inclus entre accolades fera partie de ce lien (il sera cliquable).
+
+\item dans le cas de \tex{in} il est possible d'indiquer un second texte entre accolades, celui ci sera ajouté après l'information récupérée par la commande, et sera également intégré au lien hypertexte. Cela est utile par exemple pour générer un hyperlien \quotation{1- Section} au lieu de \quotation{Section 1}.
+
+\stopitemize
+
+Ainsi, dans l'exemple précédent, nous voyons comment \tex{in} récupère le numéro de section et \tex{at} le numéro de page et \tex{about} le titre. 
+
+
+Notez que \ConTeXt\ a automatiquement créé des hyperliens (voir \in{section}[sec:interactivité]), et que le texte pris comme argument par \tex{in} et \tex{at} fait partie du lien. Mais si nous l'avions écrit autrement, le résultat serait :
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\setupinteraction[state=start]
+\startsubsection
+  [title=Titre de la section,
+   reference=sec:cettesection]
+\stopsubsection
+
+À la page \at{}[sec:cettesection] 
+se trouve la section \in{}{}[sec:cettesection]
+dont le titre est \about[sec:cettesection]
+\stopDemoVW}
+
+
+Le texte reste le même, mais les mots {\em section} et {\em page} qui précèdent la référence ne sont pas inclus dans le lien car ils ne font plus partie de la commande.
+
+Si \ConTeXt\ n'est pas en mesure de trouver l'étiquette vers laquelle les commandes \tex{at}, \tex{in} ou \tex{about} pointent, aucune erreur de compilation n'en résultera mais là où les informations récupérées par ces commandes devraient apparaître dans le document final, nous verrons écrit \quotation{??}.
+
+
+
+\startSmallPrint
+
+Il y a deux raisons pour lesquelles \ConTeXt\ ne peut pas trouver une étiquette~:
+
+\startitemize[n]
+
+\item Nous avons fait une erreur en l'écrivant.
+
+\item Nous ne compilons qu'une partie du document, et l'étiquette pointe vers la partie non encore compilée (voir \in{sections}[input] et \in{}[sec-projects]).
+
+\stopitemize
+
+Dans le premier cas, l'erreur devra être corrigée. C'est pourquoi, lorsque nous aurons fini de compiler le document complet (et que le deuxième cas ne sera plus possible), il est bon de rechercher toutes les apparitions de \quotation{??} dans le PDF pour vérifier qu'il n'y a pas de références {\em cassées} dans le document.
+
+\stopSmallPrint
+
+\stopsubsubsection
+
+% **** Section retrieve info 
+
+\startsubsubsection
+[title=Récupération des informations associées à une étiquette avec la commande \tex{ref}]
+
+\PlaceMacro{ref}
+
+Chacune des commandes \tex{at}, \tex{in} et \tex{about} récupère certains éléments d'une étiquette. Il existe une autre commande qui nous permet de récupérer un élément de l'étiquette indiquée. Il s'agit de la commande \tex{ref} dont la syntaxe est~:
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\ref[ÉlémentàRécupérer][Étiquette]
+\stopDemoI}
+
+où le premier argument peut être~:
+
+\startitemize
+
+\item {\tt text} : renvoie le texte associé à une étiquette.
+
+\item {\tt title} : renvoie le titre associé à un libellé.
+
+\item {\tt number} : renvoie le numéro associé à un libellé. Par exemple, dans les sections, le numéro de section.
+
+\item {\tt page} : renvoie le numéro de la page.
+
+\item {\tt realpage} : renvoie le numéro de la page d'un point de vue physique (car parfois la numérotation des pages ne commence qu'à partir de l'introduction).
+
+\item {\tt default} : renvoie ce que \ConTeXt\ considère comme l'élément {\em natural} de l'étiquette. En général, cela coïncide avec ce qui est renvoyé par {\tt number}.
+
+\stopitemize
+
+En fait, \tex{ref} peut permettre d'être plus précis que \tex{at}, \tex{in} ou \tex{about}, et donc, par exemple, il fait la différence entre le numéro de page et le numéro de page réel. Le numéro de page peut ne pas coïncider avec le numéro réel si, par exemple, la numérotation des pages du document a commencé à 1500 (parce que ce document est la suite d'un précédent) ou si les pages du préambule étaient numérotées en chiffres romains et que, voyant cela, la numérotation a été recommencée. De même, \tex{ref} fait la différence entre le {\em text} et le {\em title} associés à une référence, ce que \tex{about}, par exemple, ne permet pas.
+
+Si \tex{ref} est utilisé pour obtenir des informations à partir d'une étiquette qui n'en possède pas (par exemple, le titre d'une étiquette associée à une note de bas de page), la commande renverra une chaîne vide.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\setupinteraction[state=start]
+\startsubsection
+  [title=Titre de la section,
+   reference=sec:cettesection]
+\stopsubsection
+
+{\tt text :}     \ref [text]     [sec:cettesection] \\ 
+{\tt title :}    \ref [title]    [sec:cettesection] \\ 
+{\tt number :}   \ref [number]   [sec:cettesection] \\ 
+{\tt page :}     \ref [page]     [sec:cettesection] \\ 
+{\tt realpage :} \ref [realpage] [sec:cettesection] 
+\stopDemoVW}
+
+
+
+\stopsubsubsection
+
+% **** Section detect wher el link eleadto
+
+\startsubsubsection
+[title=Détecter où le lien mène]
+
+\ConTeXt\ possède également deux commandes qui sont sensibles à {\em l'adresse du lien}. Avec l'\quotation{adresse du lien}, mon intention est de déterminer si la cible du lien dans le fichier source se trouve avant ou après l'origine. Par exemple~: nous sommes en train de rédiger notre document et nous voulons faire référence à une section qui pourrait se trouver avant ou après celle que nous sommes en train d'écrire dans la table des matières finale. Nous n'avons pas encore décidé. Dans cette situation, il serait utile de disposer d'une commande qui écrit l'un ou l'autre selon que la cible se situe finalement avant ou après l'origine dans le document final. Pour des besoins de ce type, \ConTeXt\ fournit la commande \PlaceMacro{somewhere} \tex{somewhere} dont la syntaxe est :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+ \somewhere{texte si avant}{texte si après} [Étiquette].
+\stopDemoI}
+
+Par exemple~:
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\setupinteraction[state=start]
+Dans une \somewhere
+  {section précédente} {section prochaine}
+  [sec:cettesection].
+
+\startsubsection
+  [title=Titre de la section,
+   reference=sec:cettesection]
+\stopsubsection
+
+Dans une \somewhere
+  {section précédente} {section prochaine}
+  [sec:cettesection].
+\stopDemoVW}
+
+
+Une autre commande capable de détecter si l'étiquette qu'elle pointe vient avant ou après, est \PlaceMacro{atpage} \tex{atpage} dont la syntaxe est :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\atpage[label]
+\stopDemoI}
+
+Cette commande est assez similaire à la précédente, mais au lieu de nous permettre d'écrire nous-mêmes le texte, selon que l'étiquette se trouve avant ou après, \tex{atpage} insère un texte par défaut pour chacun des deux cas et, si le document est interactif, insère également un lien hypertexte.
+
+Le texte que \tex{atpage} insère est celui associé à l'option \MyKey{hencefore} de la commande \tex{setuplabeltext}, dans le cas où l'étiquette de la cible se trouve {\em avant} la commande \tex{atpage} (et celui associé à l'option \MyKey{hereafter} dans le cas contraire).
+
+\startSmallPrint
+
+%TODO Garulfo : texte à néttoyer donc
+
+Lorsque je suis arrivé à ce point, j'ai été trahi par une décision antérieure : dans ce chapitre, j'ai décidé d'appeler ce que \ConTeXt\ appelle une \quotation{référence}, une \quotation{étiquette}. Cela me semblait plus clair. Mais certains fragments de texte générés par les commandes \ConTeXt\, tels que \tex{atpage}, sont également appelés \quotation{labels} (cette fois dans un autre sens). (Voir \in{section}[sec:labels]). J'espère que le lecteur ne sera pas perdu par ma façon de présenter. Je pense que le contexte nous permet de distinguer correctement à laquelle des différentes significations de {\em étiquette} je fais référence dans chaque cas.
+
+\stopSmallPrint
+
+Par conséquent, nous pouvons modifier le texte inséré par \tex{atpage} de la même manière que nous modifions le texte de toute autre étiquette :
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\mainlanguage[fr]
+\setupinteraction[state=start]
+\setuplabeltext[fr]
+[hereafter=Comme nous le montrerons plus tard]
+\setuplabeltext[fr]
+[hencefore=Comme nous l'avons vu avant]
+
+\atpage[sec:cettesection].
+\startsubsection
+  [title=Titre de la section,
+   reference=sec:cettesection]
+\stopsubsection
+\atpage[sec:cettesection].
+\stopDemoVW}
+
+\stopsubsubsection
+
+\stopsubsection
+
+% ***  Section autom géné
+
+\startsubsection
+[title=Génération automatique de préfixes pour éviter les étiquettes en double]
+
+Dans un document volumineux, il n'est pas toujours facile d'éviter la duplication des étiquettes. Il est donc conseillé de mettre un peu d'ordre dans la façon dont nous choisissons les étiquettes à utiliser. Une bonne pratique  consiste à utiliser des préfixes pour les étiquettes qui varient en fonction du type d'étiquette. Par exemple, \quotation{sec:} pour les sections, \quotation{fig:} pour les figures, \quotation{tbl:} pour les tableaux, etc.  
+
+
+Dans cette optique, \ConTeXt\ inclut une collection d'outils qui permettent :
+
+\startitemize
+
+\item de générer automatiquement des étiquettes pour tous les éléments autorisés.
+
+\item de faire en sorte que chaque étiquette générée manuellement prenne un préfixe, soit celui que nous avons prédéterminé nous-mêmes, soit celui généré automatiquement par \ConTeXt.
+
+\stopitemize
+
+
+L'explication détaillée de ce mécanisme est longue et, bien qu'il s'agisse sans aucun doute d'outils utiles, je ne pense pas qu'ils soient indispensables. Par conséquent, comme ils ne peuvent être expliqués en quelques mots, je préfère ne pas les expliquer et renvoyer à ce qui est dit à leur sujet dans le manuel de référence \ConTeXt\ ou dans le \goto{wiki}[url(https://wiki.contextgarden.net/References)] sur cette question.
+
+% If we choose to write our own labels, a command that can help us avoid
+% duplicates is \tex{showreferences}: this command will show a list of
+% all established labels in the document.
+
+\stopsubsection
+
+\stopsection
+
+% **   Section 3 Interactivity
+
+\startsection
+[
+reference=sec:interactivity,
+title=Documents électroniques interactifs,
+]
+
+
+Seuls les documents électroniques peuvent être interactifs, mais tous les documents {\em électroniques} ne le sont pas.  Un document électronique est un document qui est stocké dans un fichier informatique et qui peut être ouvert et lu directement à l'écran. En revanche, un document électronique équipé de fonctionnalités qui permettent à l'utilisateur d'{\em interagir} avec lui est interactif, c'est-à-dire qu'on peut faire plus que le lire. Il y a interactivité, par exemple, lorsque le document comporte des boutons permettant d'effectuer une action, ou des liens permettant de passer à un autre point du document, ou à un document externe~; ou lorsque le document comporte des zones où l'utilisateur peut écrire, ou des vidéos ou des clips audio qui peuvent être lus, etc.
+
+Tous les documents générés par \ConTeXt\ sont électroniques (puisque \ConTeXt\ génère un PDF qui est par définition un document électronique), mais ils ne sont pas toujours interactifs. Pour leur conférer une interactivité, il est nécessaire de l'indiquer expressément, comme le montre la section suivante.
+
+Il faut cependant savoir que, même si \ConTeXt\ génère un PDF interactif, pour apprécier cette interactivité, nous avons besoin d'un lecteur de PDF capable de le faire, car tous les lecteurs de PDF ne nous permettent pas d'utiliser des hyperliens, des boutons et autres éléments similaires propres aux documents interactifs.
+
+
+% ***  Section Enabling interactivity in documents
+
+\startsubsection
+[title=Permettre l'interactivité dans les documents]
+\PlaceMacro{setupinteraction}
+
+\ConTeXt\ n'utilise pas de fonctions interactives par défaut, sauf indication expresse, ce qui est normalement fait dans le préambule du document. La commande qui active cet utilitaire est :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\setupinteraction[state=start]
+\stopDemoI}
+
+Normalement, cette commande ne devrait être utilisée qu'une seule fois et dans le préambule du document lorsque nous voulons générer un document interactif. Mais en fait, nous pouvons l'utiliser aussi souvent que nous le souhaitons en modifiant l'état d'interactivité du document. La commande \MyKey{state=start} active l'interactivité, tandis que \MyKey{state=stop} la désactive, de sorte que nous pouvons désactiver l'interactivité dans certains chapitres ou {\em parties} de notre document comme nous le souhaitons.
+
+
+\startSmallPrint
+
+Je ne vois aucune raison pour laquelle nous voudrions avoir des parties non interactives dans des documents qui sont interactifs. Mais ce qui est important dans la philosophie de \ConTeXt\, c'est que quelque chose soit techniquement possible, même s'il est peu probable que nous l'utilisions, et elle offre donc une procédure pour le faire. C'est cette philosophie qui donne à \ConTeXt\ tant de possibilités, et empêche une simple introduction comme celle-ci d'être {\em bref}.
+
+\stopSmallPrint
+
+Une fois l'interaction établie :
+
+
+\startitemize
+
+\item Certaines commandes \ConTeXt\ incluent naturellement des hyperliens telles que~:
+
+
+\startitemize
+
+\item Les commandes de création de tables des matières~: en cliquant sur une entrée de la table des matières, on accède à la page où commence la section en question.
+
+\item Les commandes de références internes que nous avons vues dans la première partie de ce chapitre~: cliquer dessus permet de sauter automatiquement à la cible de la référence.
+
+\item Les notes de bas de page et notes de fin de texte où un clic sur l'ancre de la note dans le corps du texte principal nous amènera à la page où la note elle-même est écrite, et un clic sur la marque de la note dans le texte de la note nous amènera au point du texte principal où l'appel a été fait.
+
+\item idem pour les index, etc.
+
+\stopitemize
+
+\item D'autres commandes sont activées car spécialement conçues pour les documents interactifs, comme les présentations. Celles-ci utilisent de nombreux outils associés à l'interactivité tels que des boutons, des menus, des superpositions d'images, des sons ou des vidéos intégrés, etc. L'explication de tout cela serait trop longue et de plus, les présentations sont un type de document assez particulier. C'est pourquoi, dans les lignes qui suivent, je décrirai une seule fonctionnalité associée à l'interactivité : les hyperliens.
+
+\stopitemize
+
+\stopsubsection
+
+% ***  Section Basic configuration for interactivity
+
+\startsubsection
+[title=Configuration de base pour les éléments interactifs]
+
+\tex{setupinteraction}, en plus d'activer ou de désactiver l'interaction, nous permet de configurer certains éléments qui y sont liés ; principalement, mais pas seulement, la couleur et le style des liens. Cela se fait par le biais des options de commande suivantes :
+
+\startitemize
+
+\item {\tt color} : contrôle la couleur {\em par défaut} des liens.
+
+\item {\tt contrastcolor} : détermine la couleur des liens lorsque leur cible se trouve sur la même page que l'origine. Je recommande que cette option soit toujours définie sur le même contenu que la précédente.
+  
+\item {\tt style} : contrôle le style du lien.
+
+\item {\tt title, subtitle, author, date, keyword} : Les valeurs attribuées à ces options seront converties en métadonnées du PDF généré par \ConTeXt.
+
+\item {\tt click} : Cette option contrôle si le lien doit être mis en évidence lorsqu'il est cliqué.
+
+\stopitemize
+
+\stopsubsection
+
+% **   Section 4 Hyperlinks to external documents
+
+\stopsection
+
+\startsection
+[title=Hyperliens vers des documents externes]
+
+Je distinguerai les commandes qui ne créent pas le lien mais aident à composer l'URL du lien, et les commandes qui créent l'hyperlien à proprement parler. Examinons-les séparément~:
+
+% ***  Section Commands that help typeset the hyperlinks
+
+% TODO Garulfo modifier la formulation (définir + afficher)
+\startsubsection
+[title={Commandes de définition d'hyperlien (sans les introduire dans le document)}]
+
+Les URL ont tendance à être très longues, et comprennent des caractères de tous types, même des caractères réservés en \ConTeXt\ et qui ne peuvent pas être utilisés directement. De plus, lorsque l'URL doit être affichée dans le document, il est très difficile de composer le paragraphe, car l'URL peut dépasser la longueur d'une ligne et ne comporte jamais d'espaces vides pouvant être utilisés pour insérer un saut de ligne. De plus, dans une URL, il n'est pas raisonnable de césurer les mots pour insérer des sauts de ligne, car le lecteur pourrait difficilement savoir si la césure fait ou non partie de l'URL.
+
+C'est pourquoi \ConTeXt\ fournit deux utilitaires pour {\em la composition} des URL. Le premier est principalement destiné aux URL qui seront utilisées en interne, mais qui ne seront pas réellement affichées dans le document. Le second est destiné aux URL qui doivent être écrits dans le texte du document. Examinons-les séparément~:
+
+
+\startdescription{\tex{useURL}}\PlaceMacro{useURL}
+
+Cette commande nous permet d'écrire une URL dans le préambule du document, en l'associant à un nom, de sorte que lorsque nous voulons l'utiliser ensuite dans notre document, nous pouvons l'invoquer par le nom qui lui est associé. Elle est particulièrement utile pour les URL qui seront utilisées plusieurs fois dans le document.
+
+Cette commande permet deux utilisations :
+
+\startitemize[n, packed]
+
+\item \type{\useURL [NomAssocié] [URL]}
+\item \type{\useURL [NomAssocié] [URL] [] [Texte du lien]}
+
+\stopitemize
+
+\startitemize
+
+\item Dans la première version, l'URL est simplement associée au nom par lequel elle sera invoquée dans notre document. Mais alors, pour utiliser l'URL, nous devrons indiquer d'une manière ou d'une autre, en l'invoquant, quel texte cliquable sera affiché dans le document.
+
+Dans la deuxième version, le dernier argument inclut le texte cliquable. Le troisième argument existe dans le cas où nous voulons diviser une URL en deux parties, de sorte que la première partie contienne l'adresse d'accès et la deuxième partie le nom du document ou de la page spécifique que nous voulons ouvrir. Par exemple, avec l'adresse du document qui explique ce qu'est \ConTeXt\~:
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\setupinteraction[state=start]
+\useURL [WhatIsCTXa]
+  [http://www.pragma-ade.com/general/manuals/what-is-context.pdf]
+  []
+  [What is \ConTeXt?]
+
+\useURL [WhatIsCTXb]
+  [http://www.pragma-ade.com/general/manuals]
+  [what-is-context.pdf]
+  [What is \ConTeXt?]
+
+\url[WhatIsCTXa]\\
+\url[WhatIsCTXb]
+
+\from[WhatIsCTXa]
+\stopDemoVW}
+
+Dans les deux cas, nous aurons associé cette adresse au mot \MyKey{WhatIsCTX}. Si, à un moment quelconque du texte, nous voulons reproduire une URL que nous avons associée à un nom à l'aide de la commande \tex{useURL}, nous pouvons utiliser la commande \tex{url[NomAssocié]} qui insère l'URL associée à ce nom dans le document. Mais cette commande, bien qu'elle écrive l'URL, ne crée aucun lien. La commande \tex{from} insère le texte associé au lien (voir \in{section}[sec:createlinks]).
+
+\startSmallPrint
+
+Le format d'affichage des URL écrites à l'aide de \tex{url} n'est pas celui établi de manière générale au moyen de \tex{setupinteraction}, mais celui établi spécifiquement pour cette commande au moyen de \PlaceMacro{setupurl} \tex{setupurl}, qui nous permet de définir le style (option {\tt style}) et la couleur (option {\tt color}).
+
+\stopSmallPrint
+
+\stopitemize
+
+\stopdescription
+
+
+\startdescription{\tex{hyphenatedurl}}\PlaceMacro{hyphenatedurl}
+
+Cette commande est destinée aux URL qui seront écrits dans le texte de notre document, et \ConTeXt\  doit inclure des sauts de ligne dans l'URL, si nécessaire, afin de composer correctement le paragraphe. Son format est le suivant :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\hyphenatedurl{AdresseURL}
+\stopDemoI}
+
+Malgré le nom de la commande \PlaceMacro{hyphenatedurl} \tex{hyphenatedurl}, elle ne met pas de trait d'union dans le nom de l'URL. Ce qu'elle fait, c'est considérer que certains caractères courants dans les URL sont de bons points pour insérer un saut de ligne avant ou après eux. Nous pouvons ajouter les caractères que nous voulons à la liste des caractères pour lesquels un saut de ligne est autorisé. Nous disposons de trois commandes pour cela :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\sethyphenatedurlnormal{caractères}
+\sethyphenatedurlbefore{caractères}
+\sethyphenatedurlafter{caractères}
+\stopDemoI}
+
+\PlaceMacro{sethyphenatedurlnormal}
+\PlaceMacro{sethyphenatedurlbefore}
+\PlaceMacro{sethyphenatedurlafter}
+
+
+Ces commandes ajoutent, respectivement, les caractères qu'elles prennent comme arguments à la liste des caractères qui supportent les sauts de ligne avant et après, uniquement avant, et uniquement après.
+
+\tex{hyphenatedurl} peut être utilisée lorsqu'il faut écrire une URL qui apparaîtra telle quelle dans le document final. Elle peut même être utilisée comme dernier argument de \tex{useURL} dans la version de cette commande où le dernier argument récupère le texte cliquable à afficher dans le document final.
+
+
+Dans l'argument \tex{hyphenatedurl}, tous les caractères réservés peuvent être utilisés, sauf trois qui doivent être remplacés par des commandes :
+
+\startitemize[packed]
+
+\item \%{} doit être remplacé par \PlaceMacro{letterpercent} \tex{letterpercent}
+
+\item \#{} doit être remplacé par \PlaceMacro{letterhash} \tex{letterhash}
+
+\item \backslash{} doit être remplacé par \PlaceMacro{letterescape} \tex{letterescape} ou \PlaceMacro{letterbackslash} \tex{letterbackslash}.
+
+\stopitemize
+
+Chaque fois que \tex{hyphenatedurl} insère un saut de ligne, il exécute la commande \PlaceMacro{hyphenatedurlseparator} \tex{hyphenatedurlseparator}, qui, par défaut, ne fait rien. Mais si nous la redéfinissons, un caractère représentatif est inséré dans l'URL de manière similaire à ce qui se passe avec les mots normaux, où un trait d'union est inséré pour indiquer que le mot continue sur la ligne suivante. Par exemple :
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\setupinteraction[state=start]
+\useURL [WhatIsCTXa]
+[http://www.pragma-ade.com/general/manuals]
+[what-is-context.pdf]
+[http://www.pragma-ade.com/general/manuals/what-is-context.pdf]
+
+\useURL [WhatIsCTXb]
+[http://www.pragma-ade.com/general/manuals]
+[what-is-context.pdf]
+[\hyphenatedurl{http://www.pragma-ade.com/general/manuals/what-is-context.pdf}]
+
+\from[WhatIsCTXa]\\
+\from[WhatIsCTXb]\\
+\def\hyphenatedurlseparator{\curvearrowright}
+\from[WhatIsCTXb]
+\stopDemoVW}
+
+\stopdescription
+
+\stopsubsection
+
+% ***  Section Commands that establish the link
+
+% TODO Garulfo la présentation me semble améliorable et simplifiable
+% Donner un exemple et ensuite expliquer ?
+% ne peut on pas faire l'explication en 2 pages max ?
+
+\startsubsection
+[
+reference=sec:createlinks,
+title={Commandes d'insertion d'hyperlien dans le document}]
+
+Pour établir des liens vers des URL prédéfinis à l'aide de \tex{useURL}, nous pouvons utiliser la commande \PlaceMacro{from} \tex{from}, qui se limite à établir le lien, mais n'écrit aucun texte cliquable. Le texte par défaut de \tex{useURL} sera utilisé comme texte du lien. Sa syntaxe est la suivante :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\from[Nom] 
+\stopDemoI}
+
+où {\em Nom} est le nom précédemment associé à une URL à l'aide de \tex{useURL}.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\setupinteraction[state=start]
+\useURL [WhatIsCTX]
+  [http://www.pragma-ade.com/general/manuals]
+  [what-is-context.pdf]
+  [What is \ConTeXt]
+
+\from[WhatIsCTX]
+\stopDemoVW}
+
+Pour créer des liens et les associer à un texte cliquable qui n'a pas été préalablement défini, nous disposons de la commande \PlaceMacro{goto} \tex{goto} qui est utilisée à la fois pour générer des liens internes et externes. Sa syntaxe est la suivante :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\goto{Texte utilisé en lien}[Cible]
+\stopDemoI}
+
+où {\em Texte utilisé en lien}  est le texte à afficher dans le document final
+et sur lequel un clic de souris conduira le lecteur à la cible, et {\em Cible} peut être :
+
+\startitemize
+
+\item Une étiquette de notre document. Dans ce cas, \tex{goto} générera le saut de la même manière que, par exemple, les commandes \tex{in} ou \tex{at} déjà examinées. Mais contrairement à ces commandes, aucune information associée à l'étiquette ne sera récupérée.
+
+\item L'URL elle-même. Dans ce cas, il faut indiquer expressément qu'il s'agit d'une URL en écrivant la commande comme suit :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\goto{Texte utilisé en lien}[url(URL)]
+\stopDemoI}
+
+où URL, à son tour, peut être le nom précédemment associé à une URL au moyen de \tex{useURL}, ou l'URL elle-même, auquel cas, lors de l'écriture de l'URL, nous devons nous assurer que les caractères réservés de \ConTeXt sont écrits correctement dans \ConTeXt. L'écriture de l'URL selon les règles de \ConTeXt\ n'affectera pas la fonctionnalité du lien.
+
+\stopitemize
+
+\stopsubsection
+
+\stopsection
+
+% **   Section 5 Creating bookmarks in the final PDF]
+
+
+\startsection
+[title=Création de signets dans le PDF final]
+
+Les fichiers PDF peuvent avoir une liste de signets internes qui permet au lecteur de voir le contenu du document dans une fenêtre spéciale du programme de visualisation PDF, et de se déplacer dans le document en cliquant simplement sur chacune des sections et sous-sections.
+
+Par défaut, \ConTeXt\ ne fournit pas au PDF de sortie une liste de signets, mais pour qu'il le fasse, il suffit d'inclure la commande \PlaceMacro{placebookmarks}\tex{placebookmarks}, dont la syntaxe est~:
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\placebookmarks[ListeDeSections][SectionOuverteparDéfaut]
+\stopDemoI}
+
+où {\em ListeDeSections} est une liste des niveaux de section, séparées par des virgules, qui doivent apparaître dans la table des matières.  {\em SectionOuverteparDéfaut}, optionnel, indique le niveau de section que le visualisateur de PDF mettre en évidence par défaut (les autres niveaux étant {\em repliés}). Gardez à l'esprit les observations suivantes concernant cette commande :
+
+\startitemize
+
+% Garulfo : faux
+% \item D'après mes tests, \tex{placebookmarks} ne fonctionne pas s'il se trouve dans le préambule du document. Mais, dans le corps du document (entre \tex{starttext} et \tex{stoptext}, ou entre \tex{startproduct} et \tex{stopproduct}), l'endroit où vous le placez n'a pas d'importance : la liste des signets inclura également les sections ou sous-sections précédant la commande. Cependant, je pense que la chose la plus raisonnable pour qu'un fichier source soit compris correctement, est de placer la commande au début.
+
+% TODO Garulfo  ?????
+\item Les types de section définis par l'utilisateur (avec \tex{definehead}) ne sont pas toujours situés au bon endroit dans la liste des signets. Il est préférable de les exclure.
+
+\item Si le titre d'une section comprend une note de fin ou de bas de page, le texte de la note de bas de page est considéré comme faisant partie du signet.
+
+\item En guise d'argument, au lieu d'une liste de sections, on peut simplement indiquer le mot symbolique \MyKey{all} qui, comme son nom l'indique, inclura toutes les sections ; cependant, d'après mes tests, ce mot, en plus de ce qui est certainement des sections, inclut des textes placés là avec certaines commandes de non-sectionnement, de sorte que la liste résultante est quelque peu imprévisible.
+
+\stopitemize
+
+Tous les programmes de lecture de PDF ne nous permettent pas d'afficher les signets ; et beaucoup de ceux qui le font n'ont pas cette fonction activée par défaut. Par conséquent, pour vérifier le résultat de cette fonction, nous devons nous assurer que notre programme de lecture de PDF prend en charge cette fonction et qu'elle est activée. Je crois me souvenir qu'Acrobat, par exemple, n'affiche pas les signets par défaut, bien qu'il existe un bouton dans sa barre d'outils pour les afficher.
+
+
+\stopsection
+
+
+% **   Section 6 Attachement
+
+% TODO Garulfo added 
+
+\startsection
+  [title=Pièces jointes]
+
+Pour finir avec les fonctionnalités d'interactivité de \ConTeXt, il permet d'introduire des pièces attachées dans vos documents avec la commande \tex{attachment}. 
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\attachment
+  [Nom de la pièce jointe]
+  [file={fichier.txt},
+   author={auteur de la pièce jointe}]
+\stopDemoI}
+
+Le fichier attaché doit être dans le même répertoire que le fichier {\tt .tex} dans lequel se trouve la commande \tex{attachment} ou bien être dans l'un des répertoires indiqués avec la commande \tex{usepath} (voir \in{section}[sec:chemins]).
+
+\stopsection
+
+% *    END
+
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX_fra.tex"
+%%% End:
+%%% vim:set filetype=context tw=72 : %%%

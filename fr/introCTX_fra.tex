@@ -17,13 +17,14 @@
 
 \startfrontmatter
 
+\component        a01_PageDeTitre
+
 \definecolor      [back1]     [backA1]
 \definecolor      [back2]     [backA2]
 \definecolor      [back3]     [backA3]
 \setupbackgrounds [leftpage]  [background={background,pageg},state=repeat]
 \setupbackgrounds [rightpage] [background={background,paged},state=repeat]
 
-\component        a01_PageDeTitre
 \component        a02_Preface
 
 \stopfrontmatter
@@ -49,7 +50,7 @@
 
 %------------------------------------------------------------------------------
 
-\startpart        [title=Global aspects of the document]
+\startpart        [title=Composition des élements généraux au document]
 
 \definecolor      [back1]     [backC1]
 \definecolor      [back2]     [backC2]
@@ -61,12 +62,12 @@
 \component        b06_Polices
 \component        b07_Structure
 \component        b08_Lists
-% \component      b09_References.mkiv
+\component        b09_References
 
 \stoppart
     %------------------------------------------------------------------------------
 
-\startpart        [title=Particular issues]
+\startpart        [title=Composition des élements locaux]
 
 \definecolor      [back1]     [backD1]
 \definecolor      [back2]     [backD2]
@@ -74,7 +75,7 @@
 \setupbackgrounds [leftpage]  [background={background,pageg},state=repeat]
 \setupbackgrounds [rightpage] [background={background,paged},state=repeat]
 
-% \component      b10_CharText.mkiv
+\component        b10_CharText
 % \component      b11_ParasLines.mkiv
 % \component      b12_SpecialParas.mkiv
 % \component      b13_Floats.mkiv
@@ -105,6 +106,14 @@
 \stoppart
 
 \stopappendices
+
+%==============================================================================
+
+\startbackmatter
+
+\component        c01_EndPage
+
+\stopbackmatter
 
 %============================================================================
 
