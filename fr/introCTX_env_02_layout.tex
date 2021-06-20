@@ -26,7 +26,8 @@
 \def\myheaderdistance{\marge}
 
 \def\myheader{\dimexpr(((1\paperheight)/\nbdiv)-\marge)\relax}
-\def\myfooter{\dimexpr(((\nbdivd\paperheight)/\nbdiv)-\marge)\relax}
+\def\myfooterA{\dimexpr(((\nbdivd\paperheight)/\nbdiv)-\marge)\relax}
+\def\myfooter{\dimexpr(0.5\myfooterA)\relax}
 
 \def\myleftmargin{\dimexpr(((1\paperwidth)/\nbdiv)/2-\marge)\relax}
 
@@ -50,8 +51,8 @@
   %
   topdistance=\marge,
   top=0pt,
-  bottomdistance=\marge,
-  bottom=0pt,
+  bottomdistance=0pt,
+  bottom=\myfooter,
   %
   % edge and margin distance
   %

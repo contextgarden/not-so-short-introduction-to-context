@@ -53,7 +53,7 @@
     document, ou  sa traduction,  nécessitera l'autorisation écrite  expresse de
     l'auteur.
 
-% It is not  a totally free licence since  it does not allow it to  be marketed in
+% It is not  a totally free licence since  it does not allow it to  be marketed n
 % paper form. The point is to pevent some "smartass" from publishing this document
 % as a  book. However,  apart from  this restriction, I  believe that  the licence
 % continues to reflect  quite well the spirit of the  FDL licence, in considerably
@@ -100,7 +100,10 @@
       \setupwhitespace[none]
       \switchtobodyfont[11pt]
       \setupinterlinespace[small]     % in a context of smaller interline space
-      \completeToc
+\startchapter[title={Table des matières},
+ reference=sec:thetoc]
+      \placeToc
+\stopchapter
     \stop
 
 

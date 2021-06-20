@@ -34,100 +34,215 @@ L'élément de base de tous les documents textuels est le caractère : les carac
 
 Le présent chapitre, qui commence par \quotation{\em caractère}, explique certains des utilitaires de \ConTeXt\ relatifs aux caractères, aux mots et au texte.
 
-% **   Section
+% **   Section    caractère hors clavier
+
+% TODO Garulfo : mettre tout cela en annexe, ou plus loin, ce n'est pas la priorité du débutant.
 
 \startsection
   [title={Obtenir des caractères qui ne sont pas normalement accessibles à partir du clavier}]
 
 Dans un fichier texte codé en UTF-8 (voir \in{section}[sec:encodage]), nous pouvons utiliser n'importe quel caractère ou symbole, aussi bien des langues vivantes que de nombreuses langues dites mortes. Mais, comme les possibilités d'un clavier sont limitées, la plupart des caractères et symboles autorisés en UTF-8 ne peuvent normalement pas être obtenus directement du clavier. C'est notamment le cas de nombreux diacritiques, c'est-à-dire des signes placés au-dessus (ou au-dessous) de certaines lettres, leur conférant une valeur particulière ; mais aussi de nombreux autres caractères comme les symboles mathématiques, les ligatures traditionnelles, etc. Nous pouvons obtenir beaucoup de ces caractères avec \ConTeXt\ en utilisant des commandes.
 
-% ***  SubSection
+% ***  SubSection diacritiques
+
+% TODO Garulfo et si on mettait tout cela en annexe ?
 
 \startsubsection
-  [title={Diacritics and special letters}]
+  [title={Diacritiques et lettres spéciales}]
 
-Almost all Western languages have diacritics (with the important exception of English for the most part) and in general, keyboards can generate the diacritics corresponding to regional languages. Thus, a Spanish keyboard can generate all the diacritics needed for Spanish (basically accents and diaeresis) as well as some diacritics used in others languages such as Catalan (grave accents and cedillas) or French (cedillas, grave and circumflex accents); but not, for for example, some that are used in Portuguese, such as the tilde on some vowels in words like \quotation{navegaç\~ao}.
+Presque toutes les langues occidentales ont des diacritiques (à l'exception importante de l'anglais pour l'essentiel) et en général, les claviers peuvent générer les diacritiques correspondant aux langues régionales. Ainsi, un clavier espagnol peut générer tous les signes diacritiques nécessaires à l'espagnol (essentiellement les accents et le tréma) ainsi que certains signes diacritiques utilisés dans d'autres langues comme le catalan (accents graves et cédilles) ou le français (cédilles, accents graves et circonflexes) ; mais pas, par exemple, certains signes diacritiques utilisés en portugais, comme le tilde sur certaines voyelles dans des mots comme \quotation{navegaç\~ao}.
 
-\TeX\ was designed in the United States where keyboards generally do not enable us to get diacritics; so Donald Knuth gave it a set of commands that enable us to obtain almost all the known diacritics (at least in languages using the Latin alphabet). If we use a Spanish keyboard, it does not make much sense to use these commands to obtain the diacritics that can be obtained directly from the keyboard. It is still important to know that these commands exist, and what they are, since Spanish (or Italian, or French...) keyboards do not let us generate all possible diacritics.
+\TeX\ a été conçu aux États-Unis où les claviers ne permettent généralement pas d'obtenir les diacritiques ; Donald Knuth lui a donc donné un ensemble de commandes qui permettent d'obtenir presque tous les diacritiques connus (du moins dans les langues utilisant l'alphabet latin). Si nous utilisons un clavier espagnol, cela n'a pas beaucoup de sens d'utiliser ces commandes pour obtenir les diacritiques qui peuvent être obtenus directement à partir du clavier. Il est néanmoins important de savoir que ces commandes existent, et ce qu'elles sont, puisque les claviers espagnols (ou italiens, ou français...) ne permettent pas de générer tous les diacritiques possibles.
+
+\PlaceMacro{aacute} 
+\PlaceMacro{eacute} 
+\PlaceMacro{iacute} 
+\PlaceMacro{oacute} 
+\PlaceMacro{uacute}
+\PlaceMacro{agrave}
+\PlaceMacro{egrave}
+\PlaceMacro{igrave}
+\PlaceMacro{ograve}
+\PlaceMacro{ugrave}
+\PlaceMacro{acircumflex}
+\PlaceMacro{ecircumflex}
+\PlaceMacro{icircumflex}
+\PlaceMacro{ocircumflex}
+\PlaceMacro{ucircumflex}
+\PlaceMacro{adiaeresis}
+\PlaceMacro{ediaeresis}
+\PlaceMacro{idiaeresis}
+\PlaceMacro{odiaeresis}
+\PlaceMacro{udiaeresis}
+\PlaceMacro{amacron}
+\PlaceMacro{emacron}
+\PlaceMacro{imacron}
+\PlaceMacro{omacron}
+\PlaceMacro{umacron}
+\PlaceMacro{atilde}
+\PlaceMacro{etilde}
+\PlaceMacro{itilde}
+\PlaceMacro{otilde}
+\PlaceMacro{utilde}
+\PlaceMacro{u}
+\PlaceMacro{abreve}
+\PlaceMacro{ebreve}
+\PlaceMacro{obreve}
+\PlaceMacro{ibreve}
+\PlaceMacro{ubreve}
 
 \placetable
   [here]
   [tbl:diacritics]
   {\tfx Accents and other diacritics}
   {
-    \starttabulate[|l|l|l|l|]
-      \HL
-      \NC{\bf Name}\NC{\bf Character}\NC{\bf Abbreviation}\NC{\bf Command}\NR
-      \HL
-      \NC Acute accent\NC\'u\NC{\tt\backslash'u}\NC{\tt\backslash
-        uacute}\NR\PlaceMacro{aacute}\PlaceMacro{eacute}\PlaceMacro{iacute}\PlaceMacro{oacute}\PlaceMacro{uacute}
-      \NC Grave accent\NC\`u\NC{\tt\backslash`u}\NC{\tt\backslash
-        ugrave}\NR\PlaceMacro{agrave}\PlaceMacro{egrave}\PlaceMacro{igrave}\PlaceMacro{ograve}\PlaceMacro{ugrave}
-      \NC Circumflex
-      accent\NC\^u\NC{\tt\backslash^u}\NC{\tt\backslash
-        ucircumflex}\NR\PlaceMacro{acircumflex}\PlaceMacro{ecircumflex}\PlaceMacro{icircumflex}\PlaceMacro{ocircumflex}\PlaceMacro{ucircumflex}
-      \NC Dieresis or umlaut
-      \NC\"u\NC{\tt\backslash”u}\NC{\tt\backslash udiaeresis,
-        \backslash
-        uumlaut}\NR\PlaceMacro{adiaeresis}\PlaceMacro{ediaeresis}\PlaceMacro{idiaeresis}\PlaceMacro{odiaeresis}\PlaceMacro{udiaeresis}
-      \NC Tilde\NC\~u\NC{\tt\backslash\lettertilde u}\NC{\tt\backslash
-        utilde}\NR\PlaceMacro{atilde}\PlaceMacro{etilde}\PlaceMacro{itilde}\PlaceMacro{otilde}\PlaceMacro{utilde}
-      \NC Macron\NC\=u\NC{\tt\backslash=u}\NC{\tt\backslash
-        umacron}\NR\PlaceMacro{amacron}\PlaceMacro{emacron}\PlaceMacro{imacron}\PlaceMacro{omacron}\PlaceMacro{umacron}
-      \NC Breve\NC\u u\NC{\tt\backslash u u}\NC{\tt\backslash
-        ubreve}\PlaceMacro{u}\PlaceMacro{abreve}\PlaceMacro{ebreve}\PlaceMacro{obreve}\PlaceMacro{ibreve}\PlaceMacro{ubreve}\NR
-      \HL
-    \stoptabulate
+\starttabulate[|l|l|l|l|]
+\HL
+\NC{\bf Nom}
+\NC{\bf Caractère}
+\NC{\bf Abréviation}
+\NC{\bf Commande}
+\NR
+\HL
+\NC Accent aiguë 
+\NC \' u
+\NC \tex{'} u
+\NC \tex{uacute}
+\NR
+\NC Accent grave
+\NC \` u
+\NC \tex{`} u
+\NC \tex{ugrave}
+\NR
+\NC Accent circonflexe
+\NC \^ u
+\NC \tex{^} u
+\NC \tex{ucircumflex}
+\NR
+\NC Accent tréma
+\NC \" u
+\NC \tex{"} u
+\NC \tex{udiaeresis} ou \tex{uumlaut}
+\NR
+\NC Tilde
+\NC \~ u
+\NC \tex{\lettertilde} u
+\NC \tex{utilde}
+\NR
+\NC Macron 
+\NC \= u
+\NC \tex{=} u
+\NC \tex{umacron}
+\NR
+\NC Brève
+\NC \u u
+\NC \tex{u} u
+\NC \tex{ubreve}
+\NR
+\HL
+\stoptabulate
 }
   
-  In \in{table}[tbl:diacritics] we find the commands and abbreviations that allow us to obtain these diacritics. In all cases it is unimportant whether we use the command or the abbreviation. In the table, I have used the letter \quote{u} as an example, but these commands work with any vowel (most of them\footnote{Of the commands found in \in{table}[tbl:diacritics] the tilde does not work with the letter \quote{e}, and I don't know why.}) and also with some consonants and some semivowels.
 
-  \startitemize
+Dans la \in{table}[tbl:diacritics] nous trouvons les commandes et abréviations qui nous permettent d'obtenir ces diacritiques. Dans tous les cas, il importe peu que nous utilisions la commande ou l'abréviation. Dans le tableau, j'ai utilisé la lettre \quote{u} comme exemple, mais ces commandes fonctionnent avec n'importe quelle voyelle (la plupart d'entre elles \footnote{Parmi les commandes trouvées dans \in{table}[tbl:diacritics] le tilde ne fonctionne pas avec la lettre \quote{e}, et je ne sais pas pourquoi.}) et aussi avec certaines consonnes et certaines semi-voyelles.
 
-  \item As most of the abbreviated commands are {\em control symbols} (see \in{section}[sec:commands themselves]), the letter on which the diacritic is to fall can be written immediately after the command, or separated from it. So, for example: to get the Portuguese \quote{\~a} we can write the \tex{=a} or \cmd{=\textvisiblespace a} characters.\footnote{Remember that in this document we are representing blank spaces, when it is important that we see them, with the \quote{\textvisiblespace}.} But in the case of the breve (\tex{u}), when dealing with a {\em control word} the blank space is obligatory.
+\startitemize
 
-  \item In the case of the long version of the command, the letter on which the diacritic falls will be the first letter of the command name. So, for example \tex{emacron} will place a macron above a lower case \quote{e} (\emacron), \tex{Emacron} will do the same above an upper case \quote{E} (\Emacron), while \tex{Amacron} will do the same above an upper case \quote{A} (\Amacron).
-    
-  \stopitemize
+\item Comme la plupart des commandes abrégées sont des {\em symboles de contrôle} (voir \in{section} [sec:commands themselves]), la lettre sur laquelle le diacritique doit tomber peut être écrite immédiatement après la commande, ou séparée de celle-ci. Ainsi, par exemple, pour obtenir le \quote{\~a} portugais, on peut écrire les caractères 
+\tex{lettertilde a} ou 
+\tex{lettertilde\textvisiblespace a}.
+\footnote{Nous rappelons que dans ce document, nous représentons les espaces vides, lorsqu'il est important de les voir, par le \quote{\textvisiblespace}.} Mais dans le cas du brève (\tex{u}), lorsqu'il s'agit d'un {\em mot de contrôle} l'espace blanc est obligatoire.
 
-While the commands in \in{table}[tbl:diacritics] work with vowels and some consonants, there are other commands to generate some diacritics and special letters which only work on one or several letters. They are shown in \in{table}[tbl:morediacritics].
+\item Dans le cas de la version longue de la commande, la lettre sur laquelle tombe le diacritique sera la première lettre du nom de la commande. Ainsi, par exemple, 
+\tex{emacron} placera un macron au-dessus d'un \quote{e} minuscule (\emacron),
+\tex{Emacron} fera de même au-dessus d'un \quote{E} majuscule (\Emacron), tandis que 
+\tex{Amacron} fera de même au-dessus d'un \quote{A} majuscule (\Amacron).
+   
+\stopitemize
+
+Alors que les commandes de \in{table}[tbl:diacritics] fonctionnent avec les voyelles et certaines consonnes, il existe d'autres commandes pour générer certains diacritiques et lettres spéciales qui ne fonctionnent que sur une ou plusieurs lettres. Elles sont présentées dans \in{table} [tbl:morediacritics].
+
+\PlaceMacro{aa}
+\PlaceMacro{r}
+\PlaceMacro{aring}
+\PlaceMacro{o}
+\PlaceMacro{l}
+\PlaceMacro{ss}
+\PlaceMacro{i}
+\PlaceMacro{j}
+\PlaceMacro{H}
+\PlaceMacro{c}
+\PlaceMacro{ccedilla}
+\PlaceMacro{kcedilla}
+\PlaceMacro{lcedilla}
+\PlaceMacro{ncedilla}
+\PlaceMacro{rcedilla}
+\PlaceMacro{scedilla}
+\PlaceMacro{tcedilla}
 
 {\switchtobodyfont[small]
 \placetable
   [here]
   [tbl:morediacritics]
   {\tfx More diacritics and special letters}
-  {
-    \starttabulate[|l|l|l|l|]
-      \HL
-      \NC{\bf Name}\NC{\bf Character}\NC{\bf Abbreviation}\NC{\bf Command}\NR
-      \HL
-      \NC Scandinavian O\NC\o, \O\NC{\tt \backslash o, \backslash O}\NC\NR\PlaceMacro{o}
-      \NC Scandinavian A\NC\aring, \Aring\NC{\tt \backslash aa, \backslash AA, \{\backslash r a\}, \{\backslash r A\}}\NC{\tt \backslash aring, \backslash Aring}\NR\PlaceMacro{aa}\PlaceMacro{r}\PlaceMacro{aring}
-      \NC Polish L\NC\l, \L\NC{\tt \backslash l, \backslash L}\NC\NR\PlaceMacro{l}
-      \NC German Eszett\NC\SS\NC{\tt \backslash ss, \backslash SS}\NC\NR\PlaceMacro{ss}
-      \NC \quote{i} and \quote{j} wihtout a point\NC\i, \j\NC{\tt \backslash i, \backslash j}\NC\NR\PlaceMacro{i}\PlaceMacro{j}
-      \NC Hungarian Umlaut\NC\H u, \H U\NC{\tt\backslash H u}, {\tt\backslash H U}\NC\NR\PlaceMacro{H}
-      \NC Cedilla\NC\c c, \c C\NC{\tt \backslash c c, \backslash c C}\NC{\tt \backslash ccedilla, \backslash Ccedilla}\PlaceMacro{c}\PlaceMacro{ccedilla}\PlaceMacro{kcedilla}\PlaceMacro{lcedilla}\PlaceMacro{ncedilla}\PlaceMacro{rcedilla}\PlaceMacro{scedilla}\PlaceMacro{tcedilla}\NR
-      \HL
-    \stoptabulate
-  }
+{\starttabulate[|l|l|l|l|]
+\HL
+\NC{\bf Nom}\NC{\bf Caractère}\NC{\bf Abréviation}\NC{\bf Commande}\NR
+\HL
+\NC O scandinave
+\NC \o, \O
+\NC \tex{o}, \tex{O}
+\NC
+\NR
+\NC O scandinave
+\NC \aring, \Aring, \r A
+\NC \tex{aa}, \tex{AA}, \tex{r a}, \tex{r A}
+\NC \tex{aring}, \tex{Aring}
+\NR
+\NC L polonais
+\NC \l, \L
+\NC \tex{l}, \tex{L}
+\NC
+\NR
+\NC Eszett allemand
+\NC \SS
+\NC \tex{ss}, \tex{SS}
+\NC
+\NR
+\NC \quote{i} et \quote{j} sans point
+\NC \i, \j
+\NC \tex{i}, \tex{j}
+\NC
+\NR
+\NC Umlaut (ou tréma) hongrois,
+\NC \H u, \H U
+\NC \tex{H u}, \tex{H U}
+\NC
+\NR
+\NC Cedilla
+\NC \c c, \c C
+\NC \tex{c c}, \tex{c C}
+\NC \tex{ccedilla}, \tex{Ccedilla}
+\NR
+\HL
+\stoptabulate}
 }
 
-I would like to point out that some of the commands in the above table generate the characters from other characters, while other commands only work if the font we are using has expressly provided for the character in question. So where German Eszett (ß) is concerned, the table shows two commands but only one character, because the font I am using here for this text only provides for the upper case version of German Eszett (something quite common). 
 
-That's probably why I can't get the Scandinavian A in upper case either although \MyKey{\{\backslash r A\}} and \cmd{Aring} work correctly.
+Je tiens à préciser que certaines des commandes du tableau ci-dessus génèrent les caractères à partir d'autres caractères, tandis que d'autres commandes ne fonctionnent que si la police que nous utilisons a expressément prévu le caractère en question. Ainsi, en ce qui concerne l'Eszett allemand (ß), le tableau indique deux commandes mais un seul caractère, car la police que j'utilise ici pour ce texte ne prévoit que la version majuscule de l'eszett allemand (ce qui est assez courant). 
 
-The Hungarian umlaut also works with the letter \quote{o}, and the cedilla with the letters \quote{k}, \quote{l}, \quote{n}, \quote{r}, \quote{s} and \quote{t}, in lower or upper case, respectively. The commands to be used are \cmd{kcedilla}, \cmd{lcedilla}, \cmd{ncedilla} ... respectively.
+C'est probablement la raison pour laquelle je n'arrive pas non plus à obtenir le A scandinave en majuscules, bien que \MyKey{\{\backslash r A\}} et \cmd{Aring} fonctionnent correctement.
+
+Le tréma hongrois fonctionne également avec la lettre \quote{o}, et la cédille avec les lettres \quote{k}, \quote{l}, \quote{n}, \quote{r}, \quote{s} et \quote{t}, respectivement en minuscule ou en majuscule. Les commandes à utiliser sont respectivement \cmd{kcedilla}, \cmd{lcedilla}, \cmd{ncedilla}...
 
 \stopsubsection
 
-% ***  SubSection
+% ***  SubSection ligatures
 
 \startsubsection
   [
     reference=sec:ligatures,
-    title={Traditional ligatures},
+    title={Ligatures traditionnelles},
   ]
   % There should be another section just for ligatures
   % automatically generated by ConTeXt as a font feature.
@@ -135,528 +250,489 @@ The Hungarian umlaut also works with the letter \quote{o}, and the cedilla with 
   % features of various fonts, and there was no where to
   % put this section.
 
-A ligature is formed by the union of two or more graphemes that are usually written separately. This \quotation{fusion} between two characters often started out as a kind of shorthand in handwritten texts, until finally they achieved a certain typographic independence. Some of them were even included among the characters that are usually defined in a typographic font, such as the ampersand, \quote{\&}, which began as a contraction of the Latin copula (conjunction) \quotation{et}, or the German Eszett (ß), which, as its name indicates, began as a combination of an \quote{s} and \quote{z}. In some font designs, even today, we can trace the origins of these two characters; or maybe I see them because I know they're there. In particular, with the Pagella font for \quote{\&} and with Bookman for \quote{ß}.
+Une ligature est formée par l'union de deux ou plusieurs graphèmes qui s'écrivent habituellement séparément. Cette \quotation{fusion} entre deux caractères a souvent commencé comme une sorte de sténographie dans les textes manuscrits, pour finalement atteindre une certaine indépendance typographique. Certains d'entre eux ont même été inclus parmi les caractères habituellement définis dans une police typographique, comme l'esperluette, \quote{\&}, qui a commencé comme une contraction de la copule (conjonction) latine \quotation{et}, ou l'Eszett (ß) allemand, qui, comme son nom l'indique, a commencé comme une combinaison d'un \quote{s} et d'un \quote{z}. Dans certaines polices de caractères, même aujourd'hui, nous pouvons retrouver les origines de ces deux caractères ; ou peut-être que je les vois parce que je sais qu'ils sont là. En particulier, avec la police Pagella pour \quote{\&} et avec Bookman pour \quote{ß}.
 
-As an exercise I suggest (after reading \in{Chapter}[sec:fontscol], where it explains how to do it) try representing these characters with these fonts at a size large enough (for example, 30 pt) to be able to work out their components.
+Comme exercice, je suggère (après avoir lu le \in{chapitre}[sec:fontscol], où il explique comment faire) d'essayer de représenter ces caractères avec ces polices à une taille suffisamment grande (par exemple, 30 pt) pour pouvoir travailler sur leurs composants.
 
-Other traditional ligatures which did not become so popular, but are still used occasionally today, are the Latin endings \quotation{oe} and \quotation{ae} which were occasionally written as \quote{\oe} or \quote{ae} to indicate that they formed a diphthong in Latin. These ligatures can be achieved in \ConTeXt\ with the commands found in \in{table}[tbl:ligatures]
+D'autres ligatures traditionnelles qui ne sont pas devenues aussi populaires, mais qui sont encore utilisées occasionnellement aujourd'hui, sont les terminaisons latines \quotation{oe} et \quotation{ae} qui étaient parfois écrites comme \quote{\oe} ou \quote{ae} pour indiquer qu'elles formaient une diphtongue en latin. Ces ligatures peuvent être réalisées dans \ConTeXt\ avec les commandes trouvées dans \in{table}[tbl:ligatures]
+
+\PlaceMacro{ae}
+\PlaceMacro{aeligature}
+\PlaceMacro{oe}
+\PlaceMacro{oeligature}
 
 \placetable
   [here]
   [tbl:ligatures]
-  {Traditional ligatures}
+  {Ligatures traditionnelles}
 {
-  \starttabulate[|l|l|l|]
-    \HL
-    \NC {\bf Ligature}\NC {\bf Abbreviation}\NC {\bf Command}\NR
-    \HL
-    \NC\ae, \AE\NC{\tt \backslash ae, \backslash AE}\NC{\tt \backslash aeligature, \backslash AEligature}\NR\PlaceMacro{ae}\PlaceMacro{aeligature}
-    \NC\oe, \OE\NC{\tt \backslash oe, \backslash OE}\NC{\tt \backslash oeligature, \backslash OEligature}\PlaceMacro{oe}\PlaceMacro{oeligature}\NR
-    \HL
-  \stoptabulate
-}    
+\starttabulate[|l|l|l|]
+\HL
+\NC {\bf Ligature}\NC {\bf Abréviation}\NC {\bf Commande}\NR
+\HL
+\NC \ae, \AE
+\NC \tex{ae}, \tex{AE}
+\NC \tex{aeligature}, \tex{AEligature}
+\NR
+\NC \oe, \OE
+\NC \tex{oe}, \tex{OE}
+\NC \tex{oeligature}, \tex{OEligature}
+\NR
+\HL
+\stoptabulate}    
 
-A ligature that used to  be traditional in Spanish (Castilian) and that is not usually found in fonts today, is \quote{Đ}: a contraction involving \quote{D} and \quote{E}. As far as I know there is no command in \ConTeXt\ that lets us use this,\footnote{In \LaTeX, by contrast, we can use the \cmd{DH} command implemented by the \MyKey{fontenc} package.} but we can create one, as explained in \in{section}[sec:create characters].
+Une ligature qui était autrefois traditionnelle en espagnol (castillan) et que l'on ne trouve généralement pas dans les polices actuelles est \quote{Đ} : une contraction impliquant \quote{D} et \quote{E}. Pour autant que je sache, il n'y a pas de commande dans \ConTeXt\ qui nous permette de l'utiliser
+,\footnote{Dans \LaTeX, par contre, nous pouvons utiliser la commande \cmd{DH} implémentée par le paquet \MyKey{fontenc}.}
+mais nous pouvons en créer un, comme expliqué dans la section [sec:create characters].
 
-Along with the previous ligatures, which I have called {\em traditional} because they come from handwriting, after the invention of the printing press certain printed text ligatures developed which I will call \quotation{typographical ligatures} considered by \ConTeXt\ to be font utilities and which are managed automatically by the program, although we can influence how these font utilities are handled (including ligatures) with \PlaceMacro{definefontfeature}\tex{definefontfeature} (not explained in this introduction).
+En plus des ligatures précédentes, que j'ai appelées {\em traditionnelles} parce qu'elles proviennent de l'écriture manuscrite, après l'invention de la presse à imprimer, certaines ligatures de texte imprimé se sont développées, que j'appellerai \quotation{ligatures typographiques}, considérées par \ConTeXt\ comme des fonctionnalités de police et qui sont gérées automatiquement par le programme, bien que nous puissions influencer la façon dont ces fonctionnalités de police sont gérés (y compris les ligatures) avec \PlaceMacro{definefontfeature} \tex{definefontfeature} (voir \in{section}[sec:fontfeatures])
+
 
 \stopsubsection
 
-% ***  SubSection
+% ***  SubSection alphabet grec 
 
 \startsubsection
-  [title={Greek letters}]
+  [title={Alphabet grec}]
 
-It is common to use Greek characters in mathematical and physics formulas. This is why \ConTeXt\ included the possibility of generating all of the Greek alphabet, upper and lower case. Here the command is built on the English name for the Greek letter in question. If the first character is written in lower case we will have the lower case Greek letter and if it is written in capital letters we will get the Greek letter in upper case. For example, the command \cmd{mu} will generate the lower case version of this letter (\mu) while \cmd{Mu} will generate the upper case version (Μ). In \in{table}[tbl:greekletters] we can see which command generates each of the letters in the Greek alphabet, lower case and upper case.
+Il est courant d'utiliser des caractères grecs dans les formules mathématiques et physiques. C'est pourquoi \ConTeXt\ a inclus la possibilité de générer tout l'alphabet grec, majuscules et minuscules. Ici, la commande est construite sur le nom anglais de la lettre grecque en question. Si le premier caractère est écrit en minuscule, nous aurons la lettre grecque en minuscule et s'il est écrit en majuscule, nous aurons la lettre grecque en majuscule. Par exemple, la commande \tex{mu} générera la version minuscule de cette lettre (\mu) tandis que \tex{Mu} générera la version majuscule (\Mu). Dans la \in{table}[tbl:greekletters], nous pouvons voir quelle commande génère chacune des lettres de l'alphabet grec, en minuscule et en majuscule.
 
 {\smallbodyfont
 \placetable
-  [here]
+  [here,force]
   [tbl:greekletters]
-  {Greek alphabet}
+  {Alphabet grec}
 {
   \starttabulate[|l|l|l|]
     \HL
-    \NC {\bf English name}\NC {\bf Character (lc/uc)}\NC {\bf Commands (lc/uc)}\NR
+    \NC {\bf Nom}\NC {\bf Caractère (min/maj)}\NC {\bf Commande (lc/uc)}\NR
     \HL
-    \NC Alpha\NC\alpha, \Alpha\NC{\tt \backslash alpha, \backslash Alpha}\NR\PlaceMacro{alpha}
-    \NC Beta\NC\beta, \Beta\NC{\tt \backslash beta, \backslash Beta}\NR\PlaceMacro{beta}
-    \NC Gamma\NC\gamma, \Gamma\NC{\tt \backslash gamma, \backslash Gamma}\NR\PlaceMacro{gamma}
-    \NC Delta\NC\delta, \Delta\NC{\tt \backslash delta, \backslash Delta}\NR\PlaceMacro{delta}
-    \NC Epsilon\NC\epsilon, \varepsilon, \Epsilon\NC{\tt \backslash epsilon, \backslash varepsilon, \backslash Epsilon}\NR\PlaceMacro{epsilon}\PlaceMacro{varepsilon}
-    \NC Zeta\NC\zeta, \Zeta\NC{\tt \backslash zeta, \backslash Zeta}\NR\PlaceMacro{zeta}
-    \NC Eta\NC\eta, \Eta\NC{\tt \backslash eta, \backslash Eta}\NR\PlaceMacro{eta}
-    \NC Theta\NC\theta, \vartheta, \Theta\NC{\tt \backslash theta, \backslash vartheta, \backslash Theta}\NR\PlaceMacro{theta}\PlaceMacro{vartheta}
+    \NC Alpha\NC   \alpha, \Alpha\NC{\tt \backslash alpha, \backslash Alpha}\NR\PlaceMacro{alpha}
+    \NC Bêta\NC    \beta,   \Beta\NC{\tt \backslash beta, \backslash Beta}\NR\PlaceMacro{beta}
+    \NC Gamma\NC   \gamma, \Gamma\NC{\tt \backslash gamma, \backslash Gamma}\NR\PlaceMacro{gamma}
+    \NC Delta\NC   \delta, \Delta\NC{\tt \backslash delta, \backslash Delta}\NR\PlaceMacro{delta}
+    \NC Epsilon\NC \epsilon, \varepsilon, \Epsilon\NC{\tt \backslash epsilon, \backslash varepsilon, \backslash Epsilon}\NR\PlaceMacro{epsilon}\PlaceMacro{varepsilon}
+    \NC Zêta\NC    \zeta, \Zeta\NC{\tt \backslash zeta, \backslash Zeta}\NR\PlaceMacro{zeta}
+    \NC Êta\NC\eta, \Eta\NC{\tt \backslash eta, \backslash Eta}\NR\PlaceMacro{eta}
+    \NC Thêta\NC\theta, \vartheta, \Theta\NC{\tt \backslash theta, \backslash vartheta, \backslash Theta}\NR\PlaceMacro{theta}\PlaceMacro{vartheta}
     \NC Iota\NC\iota, \Iota\NC{\tt \backslash iota, \backslash Iota}\NR\PlaceMacro{iota}
     \NC Kappa\NC\kappa, \varkappa, \Kappa\NC{\tt \backslash kappa, \backslash varkappa, \backslash Kappa}\NR\PlaceMacro{kappa}\PlaceMacro{varkappa}
     \NC Lambda\NC\lambda, \Lambda\NC{\tt \backslash lambda, \backslash Lambda}\NR\PlaceMacro{lambda}
     \NC Mu\NC\mu, \Mu\NC{\tt \backslash mu, \backslash Mu}\NR\PlaceMacro{mu}
     \NC Nu\NC\nu, \Nu\NC{\tt \backslash nu, \backslash Nu}\NR\PlaceMacro{nu}
-    \NC Xi\NC\xi, \Xi\NC{\tt \backslash xi, \backslash Xi}\NR\PlaceMacro{xi}
+    \NC Ksi ou Xi\NC\xi, \Xi\NC{\tt \backslash xi, \backslash Xi}\NR\PlaceMacro{xi}
     \NC Omicron\NC\omicron, \Omicron\NC{\tt \backslash omicron, \backslash Omicron}\NR\PlaceMacro{omicron}
     \NC Pi\NC\pi, \varpi, \Pi\NC{\tt \backslash pi, \backslash varpi, \backslash Pi}\NR\PlaceMacro{pi}\PlaceMacro{varpi}
-    \NC Rho\NC\rho, \varrho, \Rho\NC{\tt \backslash rho, \backslash varrho, \backslash Rho}\NR\PlaceMacro{rho}\PlaceMacro{varrho}
+    \NC Rhô\NC\rho, \varrho, \Rho\NC{\tt \backslash rho, \backslash varrho, \backslash Rho}\NR\PlaceMacro{rho}\PlaceMacro{varrho}
     \NC Sigma\NC\sigma, \varsigma, \Sigma\NC{\tt \backslash sigma, \backslash varsigma, \backslash Sigma}\NR\PlaceMacro{sigma}\PlaceMacro{varsigma}
     \NC Tau\NC\tau, \Tau\NC{\tt \backslash tau, \backslash Tau}\NR\PlaceMacro{tau}
-    \NC Ypsilon\NC\upsilon, \Upsilon\NC{\tt \backslash upsilon, \backslash Upsilon}\NR\PlaceMacro{upsilon}
+    \NC Upsilon\NC\upsilon, \Upsilon\NC{\tt \backslash upsilon, \backslash Upsilon}\NR\PlaceMacro{upsilon}
     \NC Phi\NC\phi, \varphi, \Phi\NC{\tt \backslash phi, \backslash varphi, \backslash Phi}\NR\PlaceMacro{phi}\PlaceMacro{varphi}
-    \NC Chi\NC\chi, \Chi\NC{\tt \backslash chi, \backslash Chi}\NR\PlaceMacro{chi}
+    \NC Khi ou Chi\NC\chi, \Chi\NC{\tt \backslash chi, \backslash Chi}\NR\PlaceMacro{chi}
     \NC Psi\NC\psi, \Psi\NC{\tt \backslash psi, \backslash Psi}\NR\PlaceMacro{psi}
-    \NC Omega\NC\omega, \Omega\NC{\tt \backslash omega, \backslash Omega}\PlaceMacro{omega}\NR
+    \NC Oméga\NC\omega, \Omega\NC{\tt \backslash omega, \backslash Omega}\PlaceMacro{omega}\NR
     \HL
-    
-  \stoptabulate
-}}
+\stoptabulate}}
 
-Note how for lower case versions of some characters (epsilon, kappa, theta, pi, rho, sigma and phi) there are two possible variants.
+Notez que pour les versions minuscules de certains caractères (epsilon, kappa, theta, pi, rho, sigma et phi), il existe deux variantes possibles.
 
 \stopsubsection
 
-% ***  SubSection
+% ***  SubSection symboles
 
 \startsubsection
-  [title={Various symbols}]
+  [title={Divers symboles}]
 
-Together with the characters we have just seen, \TeX\ (and therefore \ConTeXt\ as well) offers commands for generating any number of symbols. There are many such commands. I have provided an extended although incomplete list in \in{appendix}[app:symbols].
+Outre les caractères que nous venons de voir, \TeX\ (et donc \ConTeXt\) propose des commandes permettant de générer un nombre quelconque de symboles. Ces commandes sont nombreuses. J'en ai fourni une liste étendue mais incomplète dans \in{appendix}[app:symbols].
 
 \stopsubsection
 
-% ***  SubSection
+% ***  SubSection créer un caractère
+
+% TODO : garulfo peu approprié au débutant à mon avis
 
 \startsubsection
   [
     reference=sec:create characters,
-    title={Defining characters}
+    title=Définir un caractère,
   ]
   \PlaceMacro{definecharacter}
 
-If we need to use any characters not accessible from our keyboard, we can always find a web page with these characters and copy them into our source file. If we are using UTF-8 encoding (as recommended) this will almost always work. But also in the \ConTeXt\ wiki there is a page with heaps of symbols that can be simply copied and pasted into our document. To get them, click \goto{on this link}[url(wikisymbols)].
+Si nous devons utiliser des caractères qui ne sont pas accessibles depuis notre clavier, nous pouvons toujours trouver une page Web avec ces caractères et les copier dans notre fichier source. Si nous utilisons l'encodage UTF-8 (comme recommandé), cela fonctionnera presque toujours ({\bf si la police que vous utilisez les contient}, comme DejaVu qui les contient presque tous). Mais il existe également sur le wiki \ConTeXt\ \goto{une page contenant des tas de symboles}[url(wikisymbols)] qui peuvent être simplement copiés et collés dans notre document.
 
-However, if we need to use one of the characters in question more than once, then copy-paste is not the most efficient way to do so. It would be preferable to define the character so that it is associated with a command that will generate it each time. To do this we use \cmd{definecharacter} whose syntax is:
+Toutefois, si nous devons utiliser plusieurs fois l'un des caractères en question, le copier-coller n'est pas le moyen le plus efficace d'y parvenir. Il serait préférable de définir le caractère de façon à ce qu'il soit associé à une commande qui le générera à chaque fois. Pour ce faire, on utilise \tex{definecharacter} dont la syntaxe est :
 
-{\tt \backslash definecharacter {\em Name} {\em Character}}
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\definecharacter {Nom} {Caractère}
+\stopDemoI}
 
-where
+où
 
 \startitemize
 
-\item {\bf Name} is the name associated with the new character. It should not be the name of an existing command, as this would overwrite that command.
+\item {\bf Nom} est le nom associé au nouveau caractère. Il ne doit pas s'agir du nom d'une commande existante, car cela écraserait cette commande.
 
-\item {\bf Character} is the character generated each time we run \cmd{{\em Name}}. There are three ways we can indicate this character:
+\item {\bf Caractère} est le caractère généré chaque fois que nous exécutons \tex{Nom}. Il existe trois façons d'indiquer ce caractère :
+
 
   \startitemize
 
-  \item By simply writing it or pasting it into our source file (if we have copied it from another electronic document or web page).
+ \item en l'écrivant simplement ou en le collant dans notre fichier source (si nous l'avons copié d'un autre document électronique ou d'une page Web).
 
-  \item By indicating the number associated with that character in the font we are currently using. In order to see the characters included in the font, and the numbers associated with them, we can use the \cmd{showfont[{\em Font name}] command}.
+  \item en indiquant le numéro associé à ce caractère dans la police que nous utilisons actuellement. Pour voir les caractères inclus dans la police et les numéros qui leur sont associés, nous pouvons utiliser la commande \tex{showfont[{\em NomDePolice}]} (voir \in{section}[sec:see-font]).
 
-  \item Building the new character with one of the composite character building commands that we will see immediately following.
-    
+  \item Construire le nouveau caractère avec l'une des commandes de construction de caractères composites que nous verrons immédiatement après.
+
   \stopitemize
   
 \stopitemize
 
-As an example of the first usage, let's return for the moment to the sections dealing with ligatures (\in{}[sec:ligatures]). There I spoke about a traditional ligature in Spanish that we can't usually find in fonts today: \quote{Đ}. We could associate this character, for example, with the \cmd{decontract} command so that the character will be generated whenever we write \cmd{decontract}. We do this with:
+%TODO Garulfo avec LMTX https://wiki.contextgarden.net/composing_characters
 
-\type{\definecharacter decontract Đ}
+Pour illustrer la première utilisation, revenons pour l'instant aux sections traitant des ligatures (\in{}[sec:ligatures]). J'y ai parlé d'une ligature traditionnelle en espagnol que l'on ne trouve généralement pas dans les polices actuelles : \quote{Đ}. Nous pourrions associer ce caractère, par exemple, à la commande \tex{decontract} afin que le caractère soit généré chaque fois que nous écrivons \tex{decontract}. Nous faisons cela avec :
+
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+\definecharacter {decontract} {Đ}
+Ce caractère~: {\tfd \decontract}.
+\stopDemoVN}
+
 
 \startSmallPrint
 
-  To build a new character that is not in our font, and cannot be obtained from the keyboard, as is the case of the example I have just given, first we must find some text where that character is found, copy it and be able to paste it into our definition. In the actual example I have just given, I originally copied the \quote{Đ} from Wikipedia.
+Pour construire un nouveau caractère qui n'est pas dans notre police, et qui ne peut pas être obtenu à partir du clavier, comme c'est le cas de l'exemple que je viens de donner, il faut d'abord trouver un texte où ce caractère se trouve, le copier et être capable de le coller dans notre définition. Dans l'exemple que je viens de donner, j'ai initialement copié la \quote{Đ} de Wikipedia.
   
 \stopSmallPrint
 
-\ConTeXt\ also includes some commands that allow us to create composite characters and that can be used in combination with \cmd{definecharacter}. By composite characters I mean characters that also have diacritics. The commands are as follows:
+\ConTeXt\ comprend également certaines commandes qui nous permettent de créer des caractères composites et qui peuvent être utilisées en combinaison avec \tex{definecharacter}. Par caractères composites, j'entends les caractères qui possèdent également des diacritiques. Les commandes sont les suivantes~:
+
 
 \PlaceMacro{buildmathaccent}\PlaceMacro{buildtextaccent}\PlaceMacro{buildtextbootomcomma}\PlaceMacro{buildtextbottomdot}\PlaceMacro{buildtextcedilla}\PlaceMacro{buildtextgrave}\PlaceMacro{buildtextmacron}\PlaceMacro{buildtexttognek}
-\starttyping
-  \buildmathaccent Accent Character
-  \buildtextaccent Accent Character
-  \buildtextbottomcomma Character
-  \buildtextbottomdot Character
-  \buildtextcedilla Character
-  \buildtextgrave Character
-  \buildtextmacron Character
-  \buildtextognek Character
-\stoptyping
 
-For example: as we already know, by default \ConTeXt\ only has commands for writing certain letters with a cedilla (c, k, l, n, r, s y t) that are usually incorporated into fonts. If we wanted to use a \quote{b} we could use the \cmd{buildtextcedilla} command as follows:
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\definecharacter zete     {\buildtextaccent ` z}
+\definecharacter zcomma   {\buildtextbottomcomma z}
+\definecharacter zdot     {\buildtextbottomdot z}
+\definecharacter zcedilla {\buildtextcedilla z}
+\definecharacter zgrave   {\buildtextgrave z}
+\definecharacter zmacron  {\buildtextmacron z}
 
-\type{\definecharacter bcedilla {\buildtextcedilla b}}
+zete      ~,~ zcomma  ~,~ zdot    ~,~ 
+zcedilla  ~,~ zgrave  ~,~ zmacron
+\stopDemoVW}
 
-\definecharacter bcedilla {\buildtextcedilla b}
+Par exemple : comme nous le savons déjà, par défaut, \ConTeXt\ ne possède que des commandes pour écrire certaines lettres avec une cédille (c, k, l, n, r, s y t) qui sont généralement incorporées dans les polices de caractères. Si nous voulions utiliser un \quotation{b}, nous pourrions utiliser la commande \cmd{buildtextcedilla} comme dans l'exemple.
 
-This command will create the new \cmd{bcedilla} command that will generate a \quote{b} with a cedilla: \quote{\bcedilla}. These commands literally \quotation{build} the new character that will be generated even though our font doesn't have it. What these commands do is to superimpose one character over another then give a name to that superimposition.
+Cette commande crée la nouvelle commande \tex{bB} qui générera un \quotation{b} avec une cédille. Ces commandes construisent littéralement le nouveau caractère qui sera généré même si notre police ne le possède pas. Ce que font ces commandes, c'est superposer un caractère sur un autre, puis donner un nom à cette superposition.
 
 \startSmallPrint
 
-  In my tests I was unable to make \cmd{buildmathaccent} or \cmd{buildtextognek} work. So I will no longer mention them from here on.
+  Lors de mes tests, je n'ai pas réussi à faire fonctionner \tex{buildmathaccent} ou \tex{buildtextognek}. Je ne les mentionnerai donc plus à partir de maintenant.
   
 \stopSmallPrint
 
-{\tt \backslash buildtextaccent} takes two characters as arguments and superimposes one on the other, raising one of them slightly. Although it is called \quotation{buildtextaccent}, it is not essential that any of the characters taken as arguments is an accent; but the overlap will give better results if it is, because in this case, by superimposing the accent on the character the accent is less likely to overwrite the character. On the other hand, the overlapping of two characters that have the same baseline under normal conditions is affected by the fact that the command slightly raises one of the characters above the other. This is why we cannot use this command, for example, to get the contraction \quote{Đ} mentioned above, because if we write 
+\tex{buildtextaccent} prend deux caractères comme arguments et en superpose un sur l'autre, en relevant légèrement l'un d'eux. Bien qu'elle soit appelée \quotation{buildtextaccent}, il n'est pas essentiel que l'un des caractères pris comme arguments soit un accent ; mais la superposition donnera de meilleurs résultats s'il l'est, car dans ce cas, en superposant l'accent sur le caractère, l'accent a moins de chances d'écraser le caractère. D'autre part, le chevauchement de deux caractères qui ont la même ligne de base dans des conditions normales est affecté par le fait que la commande élève légèrement l'un des caractères au-dessus de l'autre. C'est pourquoi nous ne pouvons pas utiliser cette commande, par exemple, pour obtenir la contraction \quote{Đ} mentionnée plus haut, car si nous écrivons~:
 
-\type{\definecharacter decontract {\buildtextaccent D E}}
-\definecharacter decontract {\buildtextaccent D E}
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+\definecharacter {decontract} {\buildtextaccent D E} 
+\decontract ~ vs ~ Đ
+\stopDemoVN}
 
-in our source file, the slight elevation above the \quote{D} baseline that this command produces means that the (\quotation{\decontract}) effect it produces is not very good. But if the height of the characters allows it we could create a combination. For example,
+dans notre fichier source, la légère élévation au-dessus de la ligne de base de \quote{D} que cette commande produit n'est pas très bon. Mais si la hauteur des caractères le permet, nous pourrions créer une combinaison. Par exemple~:
 
-
-\type{\definecharacter unusual {\buildtextaccent \_ "}}
+\placefigure [force,here,none] [] {}{
+\startDemoVN
 \definecharacter unusual {\buildtextaccent \_ "}
+regarde~: \unusual
+\stopDemoVN}
 
-would define the \quote{\unusual} character that would be associated with the \cmd{unusual} command.
+Le reste des commandes de construction prend un seul argument -- le caractère auquel le diacritique généré par chaque commande sera ajouté. L'exemple ci-dessus montre un exemple de chacune d'entre elles, construite sur la lettre \quote{z} :
 
-The rest of the build commands takes a single argument -- the character that the diacritic generated by each command will be added to. Below I will show an example of each of them, built on the letter \quote{z}:
 
-\definecharacter zcomma {\buildtextbottomcomma z}
-\definecharacter zdot {\buildtextbottomdot z}
-\definecharacter zcedilla {\buildtextcedilla z}
-\definecharacter zgrave {\buildtextgrave z}
-\definecharacter zmacron {\buildtextmacron z}
 
 \startitemize
 
-\item {\tt \backslash buildtextbottomcomma} adds a comma beneath the character it takes as an argument (\quote{\zcomma}).
-\item {\tt \backslash buildtextbottomdot} adds a point beneath the character it takes as an argument (\quote{\zdot}).
-\item {\tt \backslash buildtextcedilla} adds a cedilla beneath the character it takes as an argument (\quote{\zcedilla}).
-\item {\tt \backslash buildtextgrave} adds a grave accent above the character it takes as an argument (\quote{\zgrave}).
-\item {\tt \backslash buildtextmacron} adds a small bar beneath the character it takes as an argument (\quote{\zmacron}).
+\item \tex{buildtextbottomcomma} ajoute une virgule sous le caractère qu'il prend comme argument.
+\item \tex{buildtextbottomdot} ajoute un point sous le caractère qu'il prend comme argument.
+\item \tex{buildtextcedilla} ajoute une cédille sous le caractère qu'il prend comme argument.
+\item \tex{buildtextgrave} ajoute un accent grave sur le caractère qu'il prend comme argument.
+\item \tex{buildtextmacron} ajoute une petite barre sous le caractère qu'il prend comme argument.
   
 \stopitemize
 
-At first sight, {\tt \backslash buildtextgrave} seems redundant given that we have {\tt \backslash buildtextaccent}; However, if you check the grave accent generated with the first of these two commands, it looks a little better. The following example shows the result of both commands, at a sufficient font size to appreciate the difference:
+À première vue, \tex{buildtextgrave} semble redondant étant donné que nous avons \tex{buildtextaccent} ; Cependant, si vous vérifiez l'accent grave généré par la première de ces deux commandes, il semble un peu mieux. L'exemple suivant montre le résultat des deux commandes, à une taille de police suffisante pour apprécier la différence :
 
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\definecharacter zgrave  {\buildtextgrave z}
 \definecharacter zgraveb {\buildtextaccent ` z}
-
-{\switchtobodyfont[30pt]
+\switchtobodyfont[30pt]
 \midaligned{\framed{\zgrave\ -- \zgraveb}}
-}
+\stopDemoVW}
+
+
 
 \stopsubsection
 
-% ***  SubSection
+% ***  SubSection utiliser des symboles
 
 \startsubsection
-  [title={Use of predefined symbol sets}]
+  [title={Utilisation de jeux de symboles prédéfinis}]
 
-\suite- includes, along with \ConTeXt\ itself, a number of predefined symbol sets we can use in our documents. These sets are called \MyKey{cc}, \MyKey{cow}, \MyKey{fontawesome}, \MyKey{jmn}, \MyKey{mvs} and \MyKey{nav}. Each of these sets also includes some subsets:
+\suite- comprend, en plus de \ConTeXt\, un certain nombre de jeux de symboles prédéfinis que nous pouvons utiliser dans nos documents. Ces ensembles sont appelés \MyKey{cc}, \MyKey{cow}, \MyKey{fontawesome}, \MyKey{jmn}, \MyKey{mvs} et \MyKey{nav}. Chacun de ces ensembles comprend également des sous-ensembles :
+
 
 \startitemize[packed]
 
-\item {\tt\bf cc} includes \quotation{cc}.
+\item {\tt\bf cc} comprends \quotation{\tt cc}.
 
-\item {\tt\bf cow} includes \quotation{cownormal} and \quotation{cowcontour}.
+\item {\tt\bf cow} comprends \quotation{\tt cownormal} et \quotation{\tt cowcontour}.
 
-\item {\tt\bf fontawesome} includes \quotation{fontawesome}.
+\item {\tt\bf fontawesome} comprends \quotation{\tt fontawesome-regular}, \quotation{\tt fontawesome-solid} et \quotation{\tt fontawesome-brands}.
 
-\item {\tt\bf jmn} includes \quotation{navigation~1}, \quotation{navigation~2},  \quotation{navigation~3} and \quotation{navigation~4}.
+\item {\tt\bf jmn} comprends \quotation{\tt navigation~1}, \quotation{\tt navigation~2},  \quotation{\tt navigation~3} et \quotation{\tt navigation~4}.
 
-\item {\tt\bf mvs} includes \quotation{astronomic}, \quotation{zodiac}, \quotation{europe}, \quotation{martinvogel~1}, \quotation{martinvogel~2} and \quotation{martinvogel~3}.
+\item {\tt\bf mvs} comprends \quotation{\tt astronomic}, \quotation{\tt zodiac}, \quotation{\tt europe}, \quotation{\tt martinvogel~1}, \quotation{\tt martinvogel~2} et \quotation{\tt martinvogel~3}.
 
-\item {\tt\bf nav} includes \quotation{navigation~1}, \quotation{navigation~2} and \quotation{navigation~3}.
+\item {\tt\bf nav} comprends \quotation{\tt navigation~1}, \quotation{\tt navigation~2} et \quotation{\tt navigation~3}.
   
 \stopitemize
+
 
 \startSmallPrint
 
-  The wiki also mentions a set called {\tt\bf was} that includes \quotation{wasy general}, \quotation{wasy music}, \quotation{wasy astronomy}, \quotation{wasy  astrology}, \quotation{wasy geometry}, \quotation{wasy physics} and \quotation{wasy apl}. But I couldn't find them in my distribution, and my tests to attempt to get at them failed.
+  Le wiki mentionne également un ensemble appelé {\tt\bf was} qui inclut \quotation{wasy general}, \quotation{wasy music}, \quotation{wasy astronomy}, \quotation{wasy astrology}, \quotation{wasy geometry}, \quotation{wasy physics} et \quotation{wasy apl}. Mais je n'ai pas pu les trouver dans ma distribution, et mes tests pour tenter d'y accéder ont échoué.
+
   
 \stopSmallPrint
 
-To see the specific symbols contained in each of these sets, the following syntax is used:
+Pour voir les symboles spécifiques contenus dans chacun de ces ensembles, on utilise les commandes \tex{usesymbols} \tex{showsymbolset}. Par exemple : si nous voulons voir les symboles inclus dans \quotation{\tt mvs/zodiac}, alors dans le fichier source nous devons écrire :
 
-\PlaceMacro{usesymbols}\PlaceMacro{showsymbolset}
-\starttyping
-  \usesymbols[Set]
-  \showsymbolset[Subset]
-\stoptyping
+\PlaceMacro{usesymbols} \PlaceMacro{showsymbolset}
 
-For example: if we want to see the symbols included in \quotation{mvs/zodiac}, then in the source file we need to write:
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+\usesymbols [mvs]
+\showsymbolset[zodiac]
+\stopDemoVN}
 
-\starttyping
-  \usesymbols[mvs]
-  \showsymbolset[zodiac]
-\stoptyping
+Notez que le nom de chaque symbole est indiqué ainsi que le symbole. La commande \PlaceMacro{symbol}\tex{symbol} nous permet alors d'utiliser n'importe lequel des symboles. Par exemple, si nous voulons utiliser le symbole astrologique associé au Verseau (trouvé dans mvs/zodiac), nous devons écrire~:
 
-and we will get the following result:
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+\usesymbols [mvs]
+\symbol[zodiac][Aquarius]
+\stopDemoVN}
 
-\usesymbols[mvs]
-%\startcolumns[n=2]
+Le symbole est traité comme un \quotation{caractère} et sera donc affectée par la taille de police active lors de l'impression. Nous pouvons également utiliser \tex{definecharacter} pour associer le symbole en question à une commande. Par exemple et utiliser ces symboles, par exemple, dans un environnement d'énumération. Par exemple~:
 
-  \showsymbolset[zodiac]
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\usesymbols[mvs] 
+\definecharacter %
+  SymbAries  \symbol[zodiac][Aquarius]
+\definesymbol [1]
+  [{\symbol[martinvogel 2][PointingHand]}]
+\definesymbol [2]
+  [{\symbol[martinvogel 2][CheckedBox]}]
 
-%\stopcolumns
-
-Note that the name of each symbol is indicated as well as the symbol. The \PlaceMacro{symbol}\tex{symbol} command allows us to use any of the symbols. Its syntax is:
-
-{\tt \backslash symbol[Subset][SymbolName]}
-
-where subset is one of the subsets associated with any of the sets we have previously loaded with \cmd{usesymbols}. For example, if we wanted to use the astrological symbol associated with Aquarius (found in mvs/zodiac) we would need to write
-
-\starttyping
-  \usesymbols[mvs]
-  \symbol[zodiac][Aquarius]
-\stoptyping
-\usesymbols[mvs]
-
-which will give us the \quotation{\symbol[zodiac][Aquarius]}, and this, for all intents and purposes, will be treated as a \quotation{character} and is therefore affected by the font size that is active when printed. We can also use \cmd{definecharacter} to associate the symbol in question with a command. For example
-
-\type{\definecharacter Aries {\symbol[zodiac][Aries]}}
-\definecharacter Aries {\symbol[zodiac][Aries]}
-
-will create a new command called \cmd{Aries} that will generate the character \quotation{\Aries}.
-
-We could also use these symbols, for example, in an itemize environment. For example:
-
-\starttyping
-\usesymbols[mvs]
-\definesymbol[1][{\symbol[martinvogel 2][PointingHand]}]
-\definesymbol[2][{\symbol[martinvogel 2][CheckedBox]}]
 \startitemize[packed]
-\item item \item item
- \startitemize[packed]
- \item item \item item
- \stopitemize
-\item item
+  \item item avec \SymbAries
+  \item item 
+  \startitemize[packed]
+    \item item 
+    \item item
+  \stopitemize
+  \item item
 \stopitemize
-\stoptyping
-
-will produce
-
-{
-\usesymbols[mvs]
-\definesymbol[1][{\symbol[martinvogel 2][PointingHand]}]
-\definesymbol[2][{\symbol[martinvogel 2][CheckedBox]}]
-\startitemize[packed]
-\item item \item item
- \startitemize[packed]
- \item item \item item
- \stopitemize
-\item item
-\stopitemize
-}
+\stopDemoVW}
 
 \stopsubsection
 
 \stopsection
 
-% **   Section
+% **   Section    formatages spéciaux des caractères
 
 \startsection
-  [title={Special character formats}]
+  [title={Formatages spéciaux des caractères}]
 
-Strictly speaking, it is {\em format} commands that affect the font used,  its size, style or variant. These commands are explained in \in{Chapter}[sec:fontscol]. However, seen more {\em broadly}, we can also consider the commands that somehow change the characters they take as an argument (thus altering their appearance) to be format commands. We will look at some of these commands in this section. Others, such as underlined or lined text with lines above or below the text (e.g. where we want to provide space to answer a question) will be seen in \in{section}[sec:FramesLines].
+À proprement parler, ce sont les commandes de {\em formatage} qui affectent la police utilisée, sa taille, son style ou sa variante. Ces commandes sont expliquées dans le \in{Chapitre} [sec:fontscol]. Cependant, d'un point de vue plus {\em général}, nous pouvons également considérer les commandes qui modifient d'une manière ou d'une autre les caractères qu'elles prennent comme argument (modifiant ainsi leur apparence) comme des commandes de formatage du texte. Nous allons examiner certaines de ces commandes dans cette section. D'autres, telles que le texte souligné ou aligné avec des lignes au-dessus ou au-dessous du texte courant (par exemple, lorsque nous voulons fournir de l'espace pour répondre à une question) seront vues dans \in{section}[sec:FramesLines].
 
-% ***  SubSection
+% ***  SubSection majuscules, minuscules et fausses petites majuscules
 
 \startsubsection
   [
     reference=sec:Upper-Lower-Fake,
-    title={Upper case, lower case and fake small caps},
+    title={Majuscules, minuscules et fausses petites majuscules},
   ]
 
-Letters themselves can be upper case or lower case. For \ConTeXt, upper case and lower case letters are different characters, so in principle it will typeset the letters just as it finds them written. However, there is a group of commands which allow us to ensure that the text they take as an argument is always written in upper or lower case:
+Les lettres elles-mêmes peuvent être en majuscules ou en minuscules. Pour \ConTeXt, les majuscules et les minuscules sont des caractères différents, donc en principe il composera les lettres comme il les trouve écrites. Cependant, il existe un groupe de commandes qui nous permettent de nous assurer que le texte qu'elles prennent comme argument est toujours écrit en majuscules ou en minuscules~:
 
 \startitemize[packed]
 
-\item \PlaceMacro{word}\cmd{word\{text\}}: converts the text taken as an argument into lower case.
+\item \PlaceMacro{word} \cmd{word\{texte\}} : convertit le texte pris comme argument en minuscules.
   
-\item \PlaceMacro{Word}\cmd{Word\{text\}}: converts the first letter of the text taken as an argument into upper case.
+\item \PlaceMacro{Word} \cmd{Word\{texte\}} : convertit en majuscule la première lettre du texte pris en argument.
   
-\item \PlaceMacro{Words}\cmd{Words\{text\}}: converts the first letter of each of the words taken as an argument into upper case; the rest are in lower case.
+\item \PlaceMacro{Words} \cmd{Words\{texte\}} : convertit en majuscule la première lettre de chacun des mots pris comme argument ; les autres sont en minuscule.
   
-\item \PlaceMacro{WORD}\cmd{WORD\{text\}} or
-  \PlaceMacro{WORDS}\cmd{WORDS\{text\}}: writes the text taken as an argument in upper case.
-  
+\item \PlaceMacro{WORD} \cmd{WORD\{texte\}} ou \PlaceMacro{WORDS} \cmd{WORD\{texte\}} : écrit le texte pris comme argument en majuscules.
+ 
 \stopitemize
 
-Very similar to these commands are \PlaceMacro{cap}\cmd{cap} and
-\PlaceMacro{Cap}\cmd{Cap}: they also capitalise the text they take as an
-argument, but then apply a scaling factor to it equal to that applied by
-the \quote{x} suffix in font change commands (see
-\in{section}[sec:quick-change]) so that, in most fonts, the caps will be
-the same height as lower case letters, thus giving us a kind of {\em fake
-small caps} effect. Compared to genuine small caps (see
-\in{section}[sec:smallcaps]) these have the following advantages:
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+\word        {ceCi esT UN tESt} \\
+\Word        {ceCi esT UN tESt} \\
+\Words       {ceCi esT UN tESt} \\
+\WORD        {ceCi esT UN tESt} \\
+\WORDS       {ceCi esT UN tESt} \\
+\Word{\word  {ceCi esT UN tESt}}
+\stopDemoVN}
+
+Les commandes \PlaceMacro{cap} \tex{cap} et \PlaceMacro{Cap} \tex{Cap} sont très similaires à celles-ci~: elles mettent également en majuscules le texte qu'elles prennent comme argument, mais lui appliquent ensuite un facteur d'échelle égal à celui appliqué par le suffixe \quote{x} dans les commandes de changement de police (voir \in{section}[sec:quick-change]) de sorte que, dans la plupart des polices, les majuscules auront la même hauteur que les minuscules, ce qui nous donne une sorte d'effet de fausses petites capitales. Par rapport aux vraies petites capitales (voir \in{section}[sec:smallcaps]), celles-ci présentent les avantages suivants :
+
+
 
 \startitemize[n]
 
-\item \cmd{cap} and \cmd{Cap} will work with any font, by contrast with
-genuine small caps that only work with fonts and styles that expressly
-include them.
+item \tex{cap} et \tex{Cap} fonctionnent avec n'importe quelle police, contrairement aux vraies petites capitales qui ne fonctionnent qu'avec les polices et les styles qui les incluent expressément.
 
-\item True small caps, on the other hand, are a variant of the font which,
-  as such, is incompatible with any other variant such as bold, italic, or
-  slanted. However, \cmd{cap} and \cmd{Cap} are fully compatible with  any
-  font variant.
+\item Les vraies petites capitales, quant à elles, sont une variante de la police qui, en tant que telle, est incompatible avec toute autre variante telle que le gras, l'italique ou l'incliné. En revanche, \tex{cap} et \tex{Cap} sont entièrement compatibles avec toutes les variantes de police.
   
 \stopitemize
 
-The difference between \cmd{cap} and \cmd{Cap} is that while the former
-applies the scaling factor to all the letters of the words that make up its
-argument, \cmd{Cap} does not apply any scaling to the first letter of each
-word, thus achieving an effect similar to what we get if we use real
-capitals in a text in small caps. If the text taken as an argument in
-\quote{caps} consists of several words, the size of the capital letter in
-the first letter of each word will be maintained.
+La différence entre \cmd{cap} et \cmd{Cap} est que, tandis que le premier applique le facteur d'échelle à toutes les lettres des mots qui composent son argument, \cmd{Cap} n'applique aucune échelle à la première lettre de chaque mot, obtenant ainsi un effet similaire à celui que l'on obtient si l'on utilise de vraies majuscules dans un texte en petites capitales. Si le texte pris comme argument dans \quote{caps} est constitué de plusieurs mots, la taille de la majuscule de la première lettre de chaque mot sera maintenue.
 
-\page[bigpreference]
+% TODO Garulfo bug ici avec \Cap... Qui ontroduit : ⋒...
 
-Thus, in the following example
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+L'ONU, dont le \Cap{président} a son bureau au siège de l'\cap{oNu}...
+\stopDemoVN}
 
-\startDoubleExample
+Il faut noter, tout d'abord, la différence de taille entre la première fois que nous écrivons \quotation{ONU} (en majuscules) et la deuxième fois (en petites capitales, \quotation{\cap{oNu}}). Dans l'exemple, j'ai écrit \cmd{cap\{oNu\}} la deuxième fois pour que nous puissions voir que cela n'a pas d'importance si nous écrivons l'argument que prend \cmd{cap} en majuscules ou en minuscules : la commande convertit toutes les lettres en majuscules et applique ensuite un facteur de mise à l'échelle, contrairement à \cmd{Cap} qui ne met pas à l'échelle la première lettre.
 
-\starttyping
-The UN, whose \Cap{president} has his 
-office at \cap{uN} headquarters...
-\stoptyping
-  
-The UN, whose \Cap{president} has his 
-office at \cap{uN} headquarters...
+Ces commandes peuvent également être {\em imbriquées}, auquel cas le facteur d'échelle est appliqué une fois de plus, ce qui entraîne une réduction supplémentaire, comme dans l'exemple suivant où le mot \quotation{capital} de la première ligne est encore réduit :
 
-\stopDoubleExample
-
-we need to note, first of all, the difference in size between the first
-time we write \quotation{UN} (in upper case) and the second time (in small
-caps, \quotation{\cap{UN}}). In the example, I wrote \cmd{cap\{uN\}} the
-second time so we can see that it does not matter if we write the argument
-that \cmd{cap} takes in upper or lower case: the command converts all
-letters into upper case and then applies a scaling factor; by contrast with
-\cmd{Cap} that does not scale the first letter.
-
-These commands can also be {\em nested}, in which case the scaling factor would be applied once more, resulting in a further reduction, as in the following example where the word \quotation{capital} in the first line is scaled yet again:
-
-\startDoubleExample
-
-\starttyping
-\cap{People who have amassed their
-\cap{capital} at the expense of others 
-are more often than not
-{\bf decapitated} in revolutionary 
-times}.
-\stoptyping
-
-\cap{People who have amassed their \cap{capital} 
-at the expense of others are
-more often than not {\bf decapitated} in revolutionary 
-times}.
-
-\stopDoubleExample
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+Les Personnes, \cap{Les personnes qui ont amassé leur \cap{capital} au détriment des autres sont le plus souvent {\bf décapitées} en période de révolution}.
+\stopDemoVN}
 
 
-The \cmd{nocap} command applied to a text to which \cmd{cap} is applied, cancels out the \cmd{cap} effect in the text that is its argument. For example:
+La commande \tex{nocap} appliquée à un texte auquel est appliqué \tex{cap}, annule l'effet de \tex{cap} dans le texte qui est son argument. Par exemple :
 
-\startDoubleExample
+\placefigure [force,here,none] [] {}{
+\startDemoVN
 
-\starttyping
-\cap{When I was One I had just begun,
-when I was Two I was \nocap{nearly} 
-new (A.A. Milne)}.
-\stoptyping
+\cap{Quand j'étais un, je venais de commencer, quand j'étais deux, j'étais \nocap{presque} nouveau (A.A. Milne)}.
+\stopDemoVN}
 
-\cap{When I was one I had just begun,
-when I was two I was \nocap{nearly} 
-new (A.A. Milne)}.
+Nous pouvons configurer le fonctionnement de \cmd{cap} avec \PlaceMacro{setupcapitals} \cmd{setupcapitals} et nous pouvons également définir différentes versions de la commande, chacune avec son propre nom et sa configuration spécifique. Nous pouvons le faire avec \PlaceMacro{definecapitals} \cmd{definecapitals}.
 
-\stopDoubleExample
+Les deux commandes fonctionnent de manière similaire~:
 
-We can configure how \cmd{cap} works with \PlaceMacro{setupcapitals}\cmd{setupcapitals} and we can also define different versions of the command, each with its own name and specific configuration. This we can do with \PlaceMacro{definecapitals}\cmd{definecapitals}.
 
-Both commands work in a similar way:
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\definecapitals [Nom] [Configuration]
+\setupcapitals  [Nom] [Configuration]
+\stopDemoI}
 
-\starttyping
-\definecapitals[Name][Configuration]
-\setupcapitals[Name][Configuration]
-\stoptyping
+Le paramètre \quotation{Nom} de la commande \cmd{setupcapitals} est facultatif. S'il n'est pas utilisé, la configuration affectera la commande \cmd{cap} elle-même. S'il est utilisé, nous devons donner le nom que nous avons précédemment attribué dans \cmd{definecapitals} à une configuration réelle.
 
-The \quotation{Name} parameter in \cmd{setupcapitals} is optional. If it is not used, the configuration will affect the \cmd{cap} command itself. If it is used, we need to give the name we previously assigned in \cmd{definecapitals} to some actual configuration.
-
-In either of the two commands the configuration allows for three options: \quotation{{\tt title}}, \quotation{{\tt sc}} and \quotation{{\tt style}} the first and second allowing \quotation{yes} and \quotation{no} as values. With \quotation{{\tt title}} we indicate whether the capitalisation will also affect titles (which it does by default) and with \quotation{{\tt sc}} we indicate whether the command should be genuine small caps (\quotation{yes}), or fake small caps (\quotation{no}). By default it uses fake small caps which has the advantage that the command works even if you are using a font that has not implemented small caps. The third value \quotation{{\tt style}} allows us to indicate a style command to be applied to the text affected by the \cmd{cap} command.
+Dans l'une ou l'autre des deux commandes, la configuration permet trois options~: \quotation{\tt title}, \quotation{\tt sc} et \quotation{\tt style}, la première et la seconde autorisant \quotation{yes} et \quotation{no} comme valeurs. Avec \quotation{\tt title}, nous indiquons si la capitalisation affectera également les titres (ce qui est le cas par défaut) et avec \quotation{\tt sc}, nous indiquons si la commande doit utiliser de véritables petites capitales (\quotation{yes}) ou de fausses petites capitales (\quotation{no}). Par défaut, il utilise les fausses petites capitales, ce qui présente l'avantage que la commande fonctionne même si vous utilisez une police qui n'a pas implémenté les petites capitales. La troisième valeur \quotation{{\tt style}} permet d'indiquer une commande de style à appliquer au texte affecté par la commande \cmd{cap}.
 
 \stopsubsection
 
-% ***  SubSection
+% ***  SubSection texte en exposant ou en indice
 
 \startsubsection
-  [title={Superscript or subscript text}]
+  [title={Texte en exposant ou en indice}]
 
-We already know (see \in{section}[sec:reserved characters]) that in maths mode, the reserved characters \MyKey{_} and \MyKey{^} will convert the character or group that immediately follows into a superscript or subscript. To achieve this effect outside of maths mode, \ConTeXt\ includes the following commands:
+Nous savons déjà (voir \in{section}[sec:reserved characters]) que dans le mode maths, les caractères réservés \MyKey{_} et \MyKey{^} convertiront le caractère ou le groupe qui suit immédiatement en exposant ou en indice. Pour obtenir cet effet en dehors du mode mathématique, \ConTeXt\ comprend les commandes suivantes~:
+
+\PlaceMacro{high}  \PlaceMacro{low} \PlaceMacro{lohi}
 
 \startitemize
 
-\item \PlaceMacro{high}\cmd{high\{Text\}}: writes the text it takes as an argument as a superscript.
+\item \cmd{high\{Texte\}} : écrit le texte qu'il prend comme argument en exposant.
 
-\item \PlaceMacro{low}\cmd{low\{Text\}}: writes the text it takes as an argument as a subscript.
+\item \cmd{low\{Texte\}} : écrit le texte qu'elle prend comme argument en indice.
 
-\item \PlaceMacro{lohi}\cmd{lohi\{Subscript\}\{Superscript\}}: writes both arguments, one above the other: on the bottom the first argument, and on top the second, which brings about a curious effect:
-
-  \startDoubleExample
-
-    \starttyping
-      \lohi{below}{above}
-    \stoptyping
-
-    \lohi{below}{above}
-
-\stopDoubleExample
+\item \cmd{lohi\{texte 1\}\{Texte 2\}} : écrit les deux arguments l'un au-dessus de l'autre : en bas le premier argument, et en haut le second.
 
 \stopitemize
 
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+Ceci est un texte \high{en haut}, un autre \low{en bas}, et une combinaison \lohi{en bas}{en haut}
+\stopDemoVN}
+
 \stopsubsection
 
-% ***  SubSection
+% ***  SubSection test en verbatim
 
 \startsubsection
   [
     reference=sec:verbatim,
-    title={Verbatim text},
+    title={Texte en verbatim},
   ]
-  \PlaceMacro{type}\PlaceMacro{starttyping}
+  \PlaceMacro{type} \PlaceMacro{starttyping}
 
-The Latin expression {\em verbatim} (from {\em verbum} $=$ {\em word} + the suffix {\em atim}), which could be translated as \quotation{literally} or \quotation{word for word}, is used in text processing programs like \ConTeXt\ to refer to fragments of text that should not be processed at all, but should be dumped, as written, into the final file. \ConTeXt\ uses the command \tex{type} for this, intended for short texts that do not occupy more than one line and the {\tt typing} environment intended for texts of more than one line. These commands are widely used in computer books to show code fragments, and \ConTeXt\ formats these texts in monospaced letters like a typewriter or a computer terminal would. In both cases the text is sent to the final document without {\em processing}, which means that they can use reserved characters or special characters that will be transcribed {\em as is} in the final file. Likewise, if the argument of \tex{type}, or the content of \tex{starttyping} includes a command, this will be {\em written} in the final document, but not executed.
+ L'expression latine {\em verbatim} (de {\em verbum} $=$ {\em mot} avec le suffixe {\em atim}), qui pourrait être traduite par \quotation{littéral} ou \quotation{mot pour mot}, est utilisée dans les programmes de traitement de texte comme \ConTeXt\ pour désigner les fragments de texte qui ne doivent pas être transformé ni mis en forme,  ils doivent être affichés, tels quels, dans le fichier final. Pour cela, \ConTeXt\ utilise la commande \tex{type}, destinée aux textes courts qui n'occupent pas plus d'une ligne et l'environnement {\tt typing} destiné aux textes de plus d'une ligne. Ces commandes sont largement utilisées dans les livres d'informatique pour afficher les fragments de code, et \ConTeXt\ met en forme ces textes en lettres monospace comme le ferait une machine à écrire ou un terminal d'ordinateur. Dans les deux cas, le texte est envoyé dans le document final sans {\em traitement}, ce qui signifie qu'il peut utiliser des caractères réservés ou des caractères spéciaux qui seront transcrits {\em tel quel} dans le fichier final. De même, si l'argument de \tex{type}, ou le contenu de \tex{starttyping} comprend une commande, celle-ci sera {\em écrite} dans le document final, mais pas exécutée.
 
-The \tex{type} command has, besides, the following peculiarity: its argument {\em can} be contained within curly brackets (as is normal in \ConTeXt), but any other character can be used to delimit (surround) the argument.
+La commande \tex{type} présente, en outre, la particularité suivante : son argument {\em peut} être contenu entre des crochets (comme c'est normal dans \ConTeXt), mais tout autre caractère peut être utilisé pour délimiter (entourer) l'argument.
+
 
 \startSmallPrint
 
-  When \ConTeXt\ reads the \tex{type} command it assumes that the character which is not a blank space immediately following the name of the command will act as a delimiter of its argument; so it considers that the contents of the argument begin with the next character, and end with the character before the next appearance of the {\em delimiter}.
+Lorsque \ConTeXt\ lit la commande \tex{type}, il suppose que le caractère qui n'est pas un espace blanc suivant immédiatement le nom de la commande agira comme un délimiteur de son argument ; il considère donc que le contenu de l'argument commence par le caractère suivant, et se termine par le caractère précédant la prochaine apparition du {\em délimiteur}.
 
-  Some examples will help us to understand this better:
+Quelques exemples nous aideront à mieux comprendre :
 
-  \starttyping
-    \type 1Tweedledum and Tweedledee1
-    \type |Tweedledum and Tweedledee|
-    \type zTweedledum and Tweedledeez
-    \type (Tweedledum and Tweedledee(
-  \stoptyping
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\type 1Tweedledum and Tweedledee A1 \\
+\type µTweedledum and Tweedledee Bµ \\ 
+\type zTweedledum and Tweedledee Cz \\
+\type (Tweedledum and Tweedledee D( \\
+\stopDemoVW}
 
-  Note that in the first example, the first character after the command name is a \quote{1}, in the second a \quote{\|} and in the third a \quote{z}; so: in each of these cases \ConTeXt\ will consider that the argument of \tex{type} is everything between that character and the  next appearance of the same character. The same is true for the last example, which is also very instructive, because in principle  we could assume that if the opening delimiter of the argument is a \quote{(}, the closing one should be a \quote{)}, but it is not, because  \quote{(} and \quote{)} are  different characters and \tex{type}, as I said, searches for a closing character delimiter which is the same as the character used at the start of the argument.
 
- There are only two cases where \tex{type} allows the opening and closing delimiters to be different characters:
+Notez que dans le premier exemple, le premier caractère après le nom de la commande est un \quote{1}, dans le deuxième un \quote{\|} et dans le troisième un \quote{z} ; ainsi : dans chacun de ces cas, \ConTeXt\ considérera que l'argument de \tex{type} est tout ce qui se trouve entre ce caractère et la prochaine apparition du même caractère. Il en va de même pour le dernier exemple, qui est également très instructif, car en principe, on pourrait supposer que si le délimiteur d'ouverture de l'argument est un \quote{(}, celui de fermeture devrait être un \quote{)}, mais ce n'est pas le cas, car \quote{(} et \quote{)} sont des caractères différents et \tex{type}, comme je l'ai dit, recherche un délimiteur de fermeture identique au caractère utilisé au début de l'argument.
 
-  \startitemize
+Il n'y a que deux cas où \tex{type} permet que les délimiteurs d'ouverture et de fermeture soient des caractères différents :
 
-  \item If the opening delimiter is the \quote{\{} character, it thinks the closing delimiter will be \quote{\}}.
 
-  \item If the opening delimiter is \quote{<<}, it thinks that the closing delimiter will be \quote{>>}. This case is also unique in that two consecutive characters are being used as delimiters.
 
-  \stopitemize
+\startitemize
 
-However: the fact that \tex{type} allows any delimiter does not mean that we should use \quotation{weird} delimiters. From the point of view of the {\em readability} and {\em comprehensibility} of the file source, it is best to delimit the argument of \tex{type} with curly brackets where possible, as is normal with \ConTeXt; and when this is not possible, because there are curly brackets in the \tex{type} argument, use a symbol: preferably one that is not a \ConTeXt\ reserved character. For example: \cmd{type *This is a closing curly bracket: \quote{\}}*}.
+\item Si le délimiteur d'ouverture est le caractère \quote{\{}, il pense que le délimiteur de fermeture sera \quote{\}}.
+
+\item Si le délimiteur d'ouverture est le caractère \quote{<<}, il pense que le délimiteur de fermeture sera \quote{>>}. Ce cas est également unique dans la mesure où deux caractères consécutifs sont utilisés comme délimiteurs.
+
+\stopitemize
+
+ Toutefois, le fait que \tex{type} autorise n'importe quel délimiteur ne signifie pas que nous devrions utiliser des délimiteurs \quotation{bizarre}. Du point de vue de la lisibilité et de l'intelligibilité du fichier source, il est préférable de délimiter l'argument du \tex{type} par des accolades lorsque cela est possible, comme c'est le cas avec \ConTeXt\ ; et lorsque cela n'est pas possible, parce qu'il y a des accolades dans l'argument du \tex{type}, utilisez un symbole~: de préférence un qui ne soit pas un caractère réservé \ConTeXt\. Par exemple~: \cmd{type *Ceci est une accolade fermante :    \quote{\}}*}.
 
 
 \stopSmallPrint
 
-Both \tex{type} and \tex{starttyping} can be configured with \PlaceMacro{setuptype}\tex{setuptype} and \PlaceMacro{setuptyping}\tex{setuptyping}. We can also create a customised version of these with \PlaceMacro{definetype}\tex{definetype} and \PlaceMacro{definetyping}\tex{definetyping}. Regarding the actual configuration options for these commands, I refer to \MyKey{setup-en.pdf} (in the directory {\tt tex/texmf-context/doc/context/documents/general/qrcs}.
+\tex{type} et \tex{starttyping} peuvent être configurés avec \PlaceMacro{setuptype} \tex{setuptype} et \PlaceMacro{setuptyping} \tex{setuptyping}. Nous pouvons également créer une version personnalisée de ces éléments avec \PlaceMacro{definetype} \tex{definetype} et \PlaceMacro{definetyping} \tex{definetyping}. En ce qui concerne les options de configuration réelles de ces commandes, je me réfère à \MyKey{setup-fr.pdf} (dans le répertoire {\tt tex/texmf-context/doc/context/documents/general/qrcs}).
 
-Two very similar commands to \tex{type} are:
+
+Deux commandes très similaires à \tex{type} sont :
 
 \startitemize
 
-\item \PlaceMacro{typ}\tex{typ}: works similarly to \tex{type}, but does not disable hyphenation.
+\item \PlaceMacro{typ} \tex{typ} : fonctionne de manière similaire à \tex{type}, mais ne désactive pas les césures.
 
-\item \PlaceMacro{tex}\tex{tex}: a command intended for writing texts about \TeX\ or \ConTeXt: it adds a backspace before the text it takes as an argument. Otherwise, this command differs from \tex{type} in that is processes some of the reserved characters it finds in the text it takes as an argument. In particular, curly brackets inside \tex{tex} will be treated in the same way they are usually treated in \ConTeXt.
+\item \PlaceMacro{tex}\tex{tex} : commande destinée à la rédaction de textes sur \TeX\ ou \ConTeXt\ : elle ajoute une barre oblique inversée (backslash ou antislash) devant le texte qu'elle prend comme argument. Sinon, cette commande diffère de \tex{type} en ce qu'elle traite certains des caractères réservés qu'elle trouve dans le texte qu'elle prend comme argument. En particulier, les crochets à l'intérieur de \tex{tex} seront traités de la même manière qu'ils le sont habituellement dans \ConTeXt.
 
 \stopitemize
 
@@ -664,36 +740,48 @@ Two very similar commands to \tex{type} are:
 
 \stopsection
 
-% **   Section
+% **   Section    espacement des caractères et des mots
 
 \startsection
   [
     reference=sec:horizontal space1,
-    title={Character and word spacing},
+    title={Espacement des caractères et des mots},
   ]
 
-% ***  SubSection
+% ***  SubSection réglage automatique de l'espacement horizontal
 
 \startsubsection
-  [title=Automatically setting horizontal space]
+  [title=Réglage automatique de l'espacement horizontal]
 
-The space between different characters and words (called {\em horizontal space} in \TeX) is normally set automatically by \ConTeXt:
+L'espace entre les différents caractères et mots (appelé {\em espace horizontal} dans \TeX) est défini automatiquement par \ConTeXt :
 
 \startitemize
 
-\item The space between the characters that make up a word is defined by the font itself, which, except in fixed-width fonts, usually uses a greater or lesser amount of white space depending on the characters to be separated, and so, for example, the space between an \quote{A} and a \quote{V} (\quote{AV}) is usually less than the space between an \quote{A} and an \quote{X} (\quote{AX}). However, apart from these possible variations that depend on the combination of letters concerned and predefined by the font, the space between the characters that make up a word is, in general, a fixed and invariable measure.
+\item L'espace entre les caractères qui composent un mot est défini par la police elle-même, qui, sauf dans les polices à largeur fixe, utilise généralement une quantité plus ou moins grande d'espace blanc en fonction des caractères à séparer, et donc, par exemple, l'espace entre un \quote{A} et un \quote{V} (\quote{AV}) est généralement moins grand que l'espace entre un \quote{A} et un \quote{X} (\quote{AX}). Cependant, en dehors de ces variations possibles qui dépendent de la combinaison de lettres concernées et prédéfinies par la police de caractères, l'espace entre les caractères qui composent un mot est, en général, une mesure fixe et invariable (que \ConTeXt\ peut parfois adapter, mécanisme appelé {\em expansion} et configuré avec \tex{definefontfeature} et \tex{setupalign}).
 
-\item By contrast, the space between words on the same line can be more elastic.
+% TODO Garulfo : ici rajouter lien ave csetualign et definefontfeature
+
+\placefigure [force,here,none] [] {}{
+\startDemoVN%
+\switchtobodyfont[50pt]%
+AVA \\
+AXA
+\stopDemoVN}
+
+\item En revanche, l'espace entre les mots d'une même ligne peut être plus élastique.
+
 
   \startitemize
 
-  \item In the case of words in a line whose width must be the same as that of the rest of the lines in the paragraph, the variation of the spacing between words is one of the mechanisms that \ConTeXt\ uses to obtain lines of equal width, as explained in more detail in \in{section}[sec:lines]. In these cases, \ConTeXt\ will establish exactly the same horizontal space between all the words in the line (except for the rules below), while ensuring that the space between words in the different lines of the paragraph is as similar as possible.
+\item Dans le cas des mots d'une ligne dont la largeur doit être la même que celle du reste des lignes du paragraphe, la variation de l'espacement entre les mots est l'un des mécanismes que \ConTeXt\ utilise pour obtenir des lignes de largeur égale, comme expliqué plus en détail dans \in{section}[sec:lines]. Dans ces cas, \ConTeXt\ établira exactement le même espace horizontal entre tous les mots de la ligne (sauf pour les règles ci-dessous), tout en s'assurant que l'espace entre les mots des différentes lignes du paragraphe est aussi similaire que possible.
 
-  \item However, in addition to the need to stretch or shrink the spacing between words in order to justify the lines, depending on the active language, \ConTeXt\ takes certain typographical rules into consideration  whereby in certain places the typographical tradition associated with that language adds some extra white space, as is the case, for example, in some parts of the English typographical tradition, which adds extra white space after a full stop.
+  \item Cependant, en plus de la nécessité d'étirer ou de rétrécir l'espacement entre les mots afin de justifier les lignes, selon la langue active, \ConTeXt\ prend en considération certaines règles typographiques selon lesquelles, à certains endroits, la tradition typographique associée à cette langue ajoute un espace blanc supplémentaire, comme c'est le cas, par exemple, dans certaines parties de la tradition typographique anglaise, qui ajoute un espace blanc supplémentaire après un point.
+
+% TODO Garulfo trouver un test 
 
     \startSmallPrint
 
-      These extra white spaces work for English and possibly for some other languages (though it is also true that in many instances, publishers in English nowadays choose not to have extra space after a full stop) but not for Spanish where the typographical tradition is different. So we can temporarily enable this function with \PlaceMacro{setupspacing}\cmd{setupspacing[broad]} and disable it with \cmd{setupspacing[packed]}. We could also change the default configuration for Spanish (and for that matter for any other language including English), as explained in \in{section}[sec:langconfig].
+Ces espaces blancs supplémentaires fonctionnent pour l'anglais et peut-être pour d'autres langues (bien qu'il soit également vrai que dans de nombreux cas, les éditeurs anglais choisissent aujourd'hui de ne pas avoir d'espace supplémentaire après un point) mais pas toujours pour le français où la tradition typographique est différente. Nous pouvons donc activer temporairement cette fonction avec \PlaceMacro{setupspacing} \cmd{setupspacing[broad]} et la désactiver avec \cmd{setupspacing[packed]}. Nous pouvons également modifier la configuration par défaut pour le français avec \tex{setcharacterspacing [frenchpunctuation]} (et d'ailleurs pour toute autre langue, y compris l'anglais), comme expliqué dans \in{section}[sec:langconfig].
 
     \stopSmallPrint
 
@@ -703,236 +791,256 @@ The space between different characters and words (called {\em horizontal space} 
 
 \stopsubsection
 
-% ***  SubSection
+% ***  SubSection modification de l'espacement entre les caractères d'un mot
+
+
+% TODO : Garulfo  pas si simple que ça streched joue sur l'ensemble des espacements...
+% https://articles.contextgarden.net/journal/2017/27-76.pdf
 
 \startsubsection
-  [title=Altering the space between characters within a word]
+  [title=Modification de l'espace entre les caractères et les mots]
 
-Altering the default space for the characters that make up a word is considered very bad practice from a typographical point of view, except in titles and headings. However, \ConTeXt\ provides a command to alter this space between the characters in a word:\footnote{It is very typical of the philosophy of \ConTeXt\ to include a command to do something that the \ConTeXt\ documentation itself advises against doing. Although typographical perfection is sought, the aim is also to give the author absolute control over the appearance of his or her document: whether it is better or worse is, in short, his or her responsibility.} \PlaceMacro{stretched}\cmd{stretched}, whose syntax is as follows:
 
-\type{\stretched[Configuration]{Text}}
+Modifier l'espace par défaut des caractères qui composent un mot est considéré comme une très mauvaise pratique d'un point de vue typographique, sauf dans les titres et les en-têtes. \ConTeXt\ fournit une commande pour modifier cet espace entre les caractères d'un mot~: \footnote{Il est typique de la philosophie de \ConTeXt\ d'inclure une commande pour faire quelque chose que la documentation \ConTeXt\ elle-même déconseille de faire. Bien que la perfection typographique soit recherchée, l'objectif est également de donner à l'auteur un contrôle absolu sur l'apparence de son document : qu'il soit meilleur ou moins bon est, en somme, de sa responsabilité.} \PlaceMacro{stretched} \tex{stretched}, dont la syntaxe est la suivante :
 
-where {\em Configuration} allows any of the following options:
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\stretched[Configuration]{Texte}
+\stopDemoI}
+
+
+
+où {\em Configuration} permet l'une des options suivantes~:
 
 \startitemize
 
-\item {\tt factor}: an integer or decimal number representative of the spacing to be obtained. It should not be too high a number. A factor of 0.05 is already visible to the naked eye.
+\item {\tt factor} : un nombre décimal qui influence la répartition de l'espace additionnel entre les mots et entre les lettres.
 
-\item {\tt width}: indicates the total width that the text submitted to the command must have, in such a way that the command itself will calculate the necessary spacing to distribute the characters in that space. 
+\item {\tt width} : indique la largeur totale que doit avoir le texte soumis à la commande, de telle sorte que la commande calcule elle-même l'espacement nécessaire pour répartir les caractères dans cet espace. Par défaut, l'espacement horizontal ajouté comblera la longeur disponible sur la ligne pour le texte donné en argument. Si {\tt factor} devient trop important, alors \ConTeXt continuera de faire grandir les espaces sans respecter la valeur de largeur {\tt width} indiquée.
 
   \startSmallPrint
 
-    According to my tests, when the width established with the {\tt width} option is less than that required to represent the text with a {\em factor} equal to 0.25, the {\em width} option and this factor are ignored. I guess that's because \cmd{stretched} allows us only {\em to increase} the space between the characters in a word, not reduce it. But I don't understand why the width required to represent the text with a factor of 0.25 is used as a minimum measure for the {\tt width} option, and not the {\em natural width} of the text (with a factor of 0).
-    
+D'après mes tests, lorsque la largeur établie avec l'option {\tt width} est inférieure à celle requise pour représenter le texte avec un {\em factor} égal à $0.25$, l'option {\tt width} et ce facteur sont ignorés. Je suppose que c'est parce que \cmd{stretched} ne nous permet que d'augmenter l'espace entre les caractères d'un mot, et non de le réduire. Mais je ne comprends pas pourquoi la largeur requise pour représenter le texte avec un facteur de 0,25 est utilisée comme mesure minimale pour l'option {\tt width}, et non la {\em natural width} du texte (avec un facteur de 0).
+
   \stopSmallPrint
 
+\item {\tt\bf style} : la ou les commandes de style à appliquer au texte pris en argument.
 
-\item {\tt\bf style}: style command or commands to apply to the text taken as an argument.
-
-\item {\tt\bf color}: the colour in which the text taken as an argument will be written.
+\item {\tt\bf color} : couleur dans laquelle le texte pris comme argument sera écrit.
 
 \stopitemize
 
-So in the following example we can see graphically how the command would work when applied to the same sentence, but with different widths:
+Ainsi, dans l'exemple suivant, nous pouvons voir graphiquement comment la commande fonctionnerait lorsqu'elle est appliquée à la même phrase, mais avec des largeurs différentes :
 
-\startDoubleExample\smallbodyfont
+\placefigure [force,here,none] [] {}{
+\startDemoHN
+%\setupcharacterkerning
+%  [stretched]
+%  [factor=max,
+%   width=\availablehsize]
+                                    {\bfd to the limit}\\
+\stretched[factor=0.00,  width=10cm]{\bfd to the limit}\\
+\stretched[factor=0.25,  width=10cm]{\bfd to the limit}\\
+\stretched[factor=0.50,  width=10cm]{\bfd to the limit}\\
+\stretched[factor=0.75,  width=10cm]{\bfd to the limit}\\
+\stretched[factor=1.00,  width=10cm]{\bfd to the limit}\\
+\stretched[factor=1.25,  width=10cm]{\bfd to the limit}\\
+\stretched[factor=1.50,  width=10cm]{\bfd to the limit}\\
+\stretched[factor=1.75,  width=10cm]{\bfd to the limit}\\
+\\
+\stretched[factor=max,   width=10cm]{\bfd to the limit}\\ 
+\\
+\stretched[factor=0.75,  width=10cm]{\bfd to the limit}\\
+\stretched[factor=0.80,  width=10cm]{\bfd to the limit}\\
+\stretched[factor=0.85,  width=10cm]{\bfd to the limit}\\
+\\
+\stretched[factor=0.75]             {\bfd to the limit}
+\stopDemoHN}
 
-\starttyping
-\stretched[width=4cm]{\bf test text}
-\stretched[width=6cm]{\bf test text}
-\stretched[width=8cm]{\bf test text}
-\stretched[width=9cm]{\bf test text}
-\stoptyping
-
-\stretched[width=4cm]{\bf test text}
-\stretched[width=6cm]{\bf test text}
-\stretched[width=8cm]{\bf test text}
-\stretched[width=9cm]{\bf test text}
-
-\stopDoubleExample
 
 \startSmallPrint
 
-  In this example it can be seen that the distribution of the horizontal space between the different characters is not uniform. The \quote{x} and \quote{t} in \quotation{text} and the \quote{e} and \quote{b} in \quotation{test}, always appear much closer together than the other characters. I haven't been able to find out why this happens.
+Dans cet exemple, en l'absenc de {\tt factor}, on peut voir que la répartition de l'espace horizontal entre les différents caractères n'est pas uniforme. Les \quote{T} et \quote{e} dans \quotation{Texte} apparaissent toujours beaucoup plus proches les uns des autres que les autres caractères. Je n'ai pas réussi à trouver la raison de ce phénomène.
   
 \stopSmallPrint
 
-Applied without arguments, the command will use the full width of the line. On the other hand, within the text that is the argument to this command, the command \cmd{\backslash} is redefined and instead of a line break, it inserts horizontal space. For example:
+Appliquée sans argument, la commande utilisera toute la largeur de la ligne. Par contre, dans le texte qui est l'argument de cette commande, la commande \cmd{\backslash} est redéfinie et au lieu d'un saut de ligne, elle insère un espace horizontal. Par exemple~:
 
-\startcolumns[n=2]
+\placefigure [force,here,none] [] {}{
+\startDemoHN
+\stretched[width=8cm,factor=0.25] {Texte de    test G}\\
+\stretched[width=8cm,factor=0.25] {Texte de \\ test G}
+\stopDemoHN}
 
-\starttyping
-\stretched{test\\text}    
-\stoptyping
+Nous pouvons personnaliser la configuration par défaut de la commande avec
+\PlaceMacro{setupstretched} \cmd{setupstretched}.
 
-\stretched{test\\text}  
 
-\stopcolumns
-
-We can customise the default configuration of the command with
-\PlaceMacro{setupstretched}\cmd{setupstretched}.
 
 \startSmallPrint
 
-  There is no \PlaceMacro{definestretched}\cmd{definestretched} command that would allow us to set customised configurations associated with a \Doubt command name, however, in the official list of commands (see \in{section}[sec:qrc-setup-en]) it says that \cmd{setupstretched} comes from \PlaceMacro{setupcharacterkerning}\cmd{setupcharacterkerning} and there is a \PlaceMacro{definecharacterkerning}\cmd{de\-fi\-ne\-cha\-rac\-ter\-ker\-ning} command. In my tests, however, I have not managed to set any customised configuration for \cmd{stretched} by means of the latter,  although I must admit that I have not spent much time trying to do so either.
+Il n'existe pas de commande \PlaceMacro{definestretched} \cmd{definestretched} qui nous permettrait de définir des configurations personnalisées associées à un nom de commande \Doubt, cependant, dans la liste officielle des commandes (voir \in{section}[sec:qrc-setup-en]), il est indiqué que \cmd{setupstretched} provient de \PlaceMacro{setupcharacterkerning} \tex{setupcharacterkerning} et qu'il existe une commande \PlaceMacro{definecharacterkerning} \cmd{de\-fi\-ne\-cha\-rac\-ter\-ker\-ning}. Dans mes tests, cependant, je n'ai pas réussi à définir une configuration personnalisée pour \cmd{stretched} au moyen de cette dernière, bien que je doive admettre que je n'ai pas passé beaucoup de temps à essayer de le faire non plus.
 
 \stopSmallPrint
 
 \stopsubsection
 
-% ***  SubSection
+% ***  SubSection ajouter un espace horizontal entre les mots
 
 \startsubsection
   [
     reference=sec:horizontal space2,
-    title={Commands for adding horizontal space between words},
+    title={Commandes pour ajouter un espace horizontal entre les mots},
   ]
 
-We already know that to increase the space between words it is of no use to
-add two or more consecutive blank spaces, since \ConTeXt\ absorbs all
-consecutive blank spaces, as explained in \in{section}[sec:spaces]. If we
-wish to increase the space between words, we need to go to one of the
-commands that allows us to do this:
+Nous savons déjà que pour augmenter l'espace entre les mots, il est inutile d'ajouter deux espaces vides consécutifs ou plus, car \ConTeXt\ absorbe tous les espaces vides consécutifs, comme expliqué dans \in{section}[sec:spaces]. Si nous souhaitons augmenter l'espace entre les mots, nous devons passer par l'une des commandes qui nous permet de le faire :
+
+
 
 \startitemize
 
-\item \cmd{,} inserts a very small blank space (called a thin space) in the document. It is used, for example, to separate thousands in a set of numbers (e.g. 1,000,000), or to separate a single inverted comma from double inverted commas. For example: \quotation{\color[darkmagenta]{{\tt 1\backslash,473\backslash,451}}} will produce \quotation{1\,473\,451}.
+\item \cmd{,} insère un très petit espace vide (appelé espace mince) dans le document. Il est utilisé, par exemple, pour séparer les milliers dans un ensemble de chiffres (par exemple 1,000,000), ou pour séparer une simple virgule inversée des doubles virgules inversées. Par exemple :
 
-\item \PlaceMacro{\textvisiblespace}\PlaceMacro{space}\cmd{space} or  \quotation{\cmd{\textvisiblespace}} (a backslash followed by a blank space  which, since it is an invisible character, I have represented as \quotation{\textvisiblespace}) introduces an additional blank space.
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+1 473 451   \\
+1\,473\,451 \\
+\stopDemoVN}
 
-\item \PlaceMacro{enskip}\cmd{enskip}, \PlaceMacro{quad}\cmd{quad} and \PlaceMacro{qquad}\cmd{qquad} insert a blank space in the document of half an {\em em}, 1 {\em em} or 2 {\em ems} respectively. Remember that the {\em em} is a measure dependent on the size of the font and is equivalent to the width of an \quote{m}, which normally coincides with the size in points of the font. So, using a 12 point font, \cmd{enskip} gives us a space of 6 points, \cmd{quad} gives us 12 points and \cmd{qquad} gives us 24 points.
+
+\item \PlaceMacro{\textvisiblespace} \PlaceMacro{space} \cmd{space} ou \quotation{\cmd{\textvisiblespace}} (une barre oblique inversée suivie d'un espace vide que j'ai représenté par \quotation{\textvisiblespace}, car il s'agit d'un caractère invisible) introduit un espace vide supplémentaire.
+
+% TODO garulfo la taille se réfère à em ou xheight, plutôt x non ?
+
+\item \PlaceMacro{enskip}\cmd{enskip}, \PlaceMacro{quad}\cmd{quad} et \PlaceMacro{qquad}\cmd{qquad} insèrent un espace blanc dans le document de respectivement un demi-{\em em}, 1{\em em} ou 2{\em ems}. N'oubliez pas que le {\em em} est une mesure qui dépend de la taille de la police et équivaut à la largeur d'un \quote{m}, qui coïncide normalement avec la taille en points de la police. Ainsi, en utilisant une police de 12 points, \cmd{enskip} nous donne un espace de 6 points, \cmd{quad} nous donne 12 points et \cmd{qquad} nous donne 24 points.
 
 \stopitemize
 
-Along with these commands which give us blank space in precise measurements, the \PlaceMacro{hskip}\cmd{hskip} and \PlaceMacro{hfill}\cmd{hfill} commands introduce horizontal space of varying dimensions:
 
-\PlaceMacro{hskip}\cmd{hskip} allows us to indicate exactly how much blank space we want to add. Thus:
+Outre ces commandes qui nous donnent des espaces vides de dimensions précises, les commandes \PlaceMacro{hskip}\cmd{hskip} et \PlaceMacro{hfill}\cmd{hfill} introduisent des espaces horizontaux de dimensions variables :
+
+\PlaceMacro{hskip}\cmd{hskip} nous permet d'indiquer exactement la quantité d'espace vide que nous voulons ajouter. L'espace indiqué peut être négatif, ce qui entraînera la superposition d'un texte sur un autre. Ainsi~:
 
 
-\startDoubleExample
+\placefigure [force,here,none] [] {}{
+\startDemoHN
+Ceci est un espace de \hskip 1.0cm 1 centimetre\\
+Ceci est un espace de \hskip 2.0cm 2 centimetres\\
+Ceci est un espace de \hskip 2.5cm 2.5 centimetres\\
+Ceci est un espace de \hskip -1.0cm moins 1 centimetre\\
+\stopDemoHN}
 
-\starttyping
-This is \hskip 1cm 1 centimetre\\
-This is \hskip 2cm 2 centimetres\\
-This is \hskip 2.5cm 2.5 centimetres\\
-\stoptyping
 
-This is \hskip 1cm 1 centimetre\\
-This is \hskip 2cm 2 centimetres\\
-This is \hskip 2.5cm 2.5 centimetres\\
+\cmd{hfill}, pour sa part, introduit autant d'espace blanc que nécessaire pour occuper toute la ligne, ce qui nous permet de créer des effets intéressants tels que du texte aligné à droite, du texte centré ou du texte des deux côtés de la ligne. Dans le cas de plusieurs \tex{hfill} sur une ligne, ils se répartissent l'espace horizontal de façon équitable. Par exemple~:
 
-\stopDoubleExample
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\hfill hfill pousse à droite.\\
+hfill pousse \hfill  des deux côtés.\\
+2 hfills \hfill poussent \hfill simultanéement.
+\stopDemoVW}
 
-The space indicated may be negative, which will cause one text to be superimposed over another. Thus:
+% TODO Garulfo added 
 
-\startDoubleExample
+Une dernière commande,  \PlaceMacro{wordright} \tex{wordright}, propose un fonctionnement similaire à \tex{hfill} au sens où elle va pousser le texte qu'elle prend en argument vers la droite, mais elle va en plus automatiquement passer à la ligne, juste après son argument. Voyez~:
 
-\starttyping
-This is farce rather than 
-\hskip -1cm comedy
-\stoptyping
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+hfill pousse \hfill des deux côtés. 2 hfills \hfill poussent \hfill simultanéement.
 
-This is farce rather than \hskip -1cm comedy
+hfill pousse \wordright{des deux côtés.} 2 hfills \hfill poussent \hfill simultanéement.
+\stopDemoVW}
 
-\stopDoubleExample
-
-\cmd{hfill}, for its part, introduces as much white space as necessary to occupy the entire line, allowing us to create interesting effects such as right-aligned text, centred text or text on both sides of the line as shown in the following example:
-
-\startDoubleExample
-\starttyping
-\hfill On the right\\
-On both\hfill sides
-\stoptyping
-
-\hfill On the right\\
-On both\hfill sides
-
-\stopDoubleExample
 
 \stopsubsection
 
 \stopsection
 
-% **   Section
+% **   Section    mots composés
 
 \startsection
   [
     reference=sec:compound words,
-    title=Compound words,
+    title=Mots composés,
   ]
 
-By \quotation{compound words} in this section I mean words that are formally understood to be one word, rather than words that are simply conjoined. It is not always an easy distinction to understand: \quotation{rainbow} is clearly made up of two words (\quotation{rain + bow}) but no English speaker would think of the combined terms in any other way than as a single word. On the other hand, we have words that are sometimes combined with the help of a hyphen or backslash. The two words have distinct meanings and uses but are conjoined (and may in some cases become a single word, but not yet!). So, for example, we can find words like \quotation{French||Canadian} or \quotation{(inter|)|communication} (though we may well also find \quotation{intercommunication} and discover that the speaking public has finally accepted the two words to be a single word. That is how language evolves).
+Par \quotation{mots composés} dans cette section, j'entends les mots qui sont formellement compris comme étant un seul mot, plutôt que les mots qui sont simplement conjoints. Cette distinction n'est pas toujours facile à comprendre : \quotation{portemanteau} est clairement composé de deux mots (\quotation{porte + manteau}) mais aucun francophone ne penserait aux termes combinés d'une autre manière que comme un seul mot. D'autre part, nous avons des mots qui sont parfois combinés à l'aide d'un trait d'union ou d'une barre oblique inversée. Les deux mots ont des significations et des utilisations distinctes, mais ils sont joints (et peuvent dans certains cas devenir un seul mot, mais pas encore !) Ainsi, par exemple, nous pouvons trouver des mots comme \quotation{Français||Canadien} ou \quotation{(inter|)|communication} (bien que nous puissions aussi trouver \quotation{intercommunication} et découvrir que l'usage public a finalement accepté que les deux mots soient un seul mot. C'est ainsi que les langues évoluent).
 
-Compound words present \ConTeXt\ with some problems mainly connected with their potential hyphenation at the end of a line. If the joining element is a hyphen, then from a typographical perspective there is no hyphenation problem at the end of a line at that point, but we would need to avoid a second hyphenation in the second part of the word since that would leave us with two consecutive hyphens which could cause comprehension difficulties.
+Les mots composés posent quelques problèmes, principalement liés à leur éventuelle césure en fin de ligne. Si l'élément de jonction est un trait d'union, d'un point de vue typographique, il n'y a pas de problème de césure à la fin d'une ligne à cet endroit, mais nous devrions éviter une deuxième césure dans la deuxième partie du mot, car cela nous laisserait avec deux traits d'union consécutifs qui pourraient causer des difficultés de compréhension.
 
-The \quotation{{\tt\|\|}}command is available to tell \ConTeXt\ that two words make up a compound word. This command, exceptionally, does not begin with a backslash, and allows two different usages:
+La commande  \type{||} est disponible pour indiquer à \ConTeXt\ que deux mots forment un mot composé. Cette commande, exceptionnellement, ne commence pas par une barre oblique inverse, et permet deux utilisations différentes~:
+
+
 
 \startitemize
 
-\item We can use two consecutive vertical bars (pipes) and write, for example, \MyKey{Spanish\|\|Argentine}.
+\item Nous pouvons utiliser deux barres verticales consécutives (tube ou pipe en anglais) et écrire, par exemple, \type{Espagnol||Argentin}.
 
-\item The two vertical bars can have the joining |/|separating item between two words enclosed between them, as in, for example, \MyKey{joining\|/\|separating}.
-  
+\item Les deux barres verticales peuvent être séparée de l'élément de jonction à utiliser entre les deux mots, comme dans, par exemple, \type{joindre|/|séparer}.
 
 \stopitemize
 
-In both cases, \ConTeXt\  will know that it is dealing with a compound word, and will apply the appropriate hyphenation rules for this type of word. The difference between using the two consecutive vertical bars (pipes), or framing the word separator with them, is that in the first case, \ConTeXt\ will use the separator that is predefined as \PlaceMacro{setuphyphenmark}\cmd{setuphyphenmark}, or in other words the hyphen, which is the default (\MyKey{--}). So if we write \MyKey{picture\|\|frame}, \ConTeXt\ will generate \quotation{Picture||frame}.
+% TODO Garulfo possible de simplifier il me semble
 
-With \cmd{setuphyphenmark} we can change the default separator (in the case where we need two pipes). The values allowed for this command are \MyKey{--, ---, -, ~, (, ), =, /}. Bear in mind, however, that the \MyKey{=} value becomes an em dash (the same as \MyKey{---}).
+Dans les deux cas, \ConTeXt\ saura qu'il s'agit d'un mot composé et appliquera les règles de césure appropriées pour ce type de mot. La différence entre l'utilisation des deux barres verticales consécutives (tubes), ou l'encadrement du séparateur de mot avec celles-ci, est que dans le premier cas, \ConTeXt\ utilise le séparateur prédéfini comme \PlaceMacro{setuphyphenmark} \tex{setuphyphenmark}, ou en d'autres termes le trait d'union, qui est la valeur par défaut (\MyKey{--}). Ainsi, si nous écrivons \MyKey{après\|\|midi}, \ConTeXt\ générera \quotation{après||midi}. alors qu'avec \MyKey{après\|/\|midi}, \ConTeXt\ générera \quotation{après|/|midi}.
 
-The normal use of \MyKey{\|\|} is with hyphens, since this is what is normally used between composite words. But occasionally the separator could be a parenthesis, if, for example, we want \quotation{(inter)space}, or it could be a forward slash, as in \quotation{input/output}. In these cases, if we want the normal hyphenation rules for composite words to apply, we could write \MyKey{(inter\|)\|space} or \MyKey{input\|/\|output}. As I said earlier, \MyKey{\|=\|} is considered to be an abbreviation of \MyKey{\|---\|} and inserts an em dash as a separator (---).
+Avec \cmd{setuphyphenmark}, nous pouvons changer le séparateur par défaut (dans le cas où nous utilisons les deux barres verticales). Les valeurs autorisées pour cette commande sont \MyKey{--, ---, -, ~, (, ), =, /}. N'oubliez pas, cependant, que la valeur \MyKey{=} devient un tiret (comme \MyKey{---}).
+
+L'utilisation normale de \MyKey{\|\|} est avec des tirets, puisque c'est ce qui est normalement utilisé entre les mots composés. Mais parfois, le séparateur peut être une parenthèse, si, par exemple, nous voulons obtenir \quotation{(inter)space}, ou il peut être une barre oblique, comme dans \quotation{input/output}. Dans ces cas, si nous voulons que les règles de césure normales pour les mots composés s'appliquent, nous pouvons écrire \MyKey{(inter\|)\|space} ou \MyKey{input\|/\|output}. Comme je l'ai dit précédemment, \MyKey{\|=\|} est considéré comme une abréviation de \MyKey{\|---\|} et insère un tiret em comme séparateur (---).
 
 \stopsection
-
-% **   Section
+  
+% **   Section    la langue du texte
 
 \startsection
   [
     reference=sec:langdoc,
-    title={The language of the text},
+    title={La langue du texte},
   ]
 
-Characters form words which normally belong to some language. It is important for \ConTeXt\ to know the language we are writing in, because a number of important things depend on this. Mainly:
+Les caractères forment des mots qui appartiennent normalement à une certaine langue. Il est important pour \ConTeXt\ de connaître la langue dans laquelle nous écrivons, car un certain nombre de choses importantes en dépendent. Principalement~:
 
 \startitemize[packed]
 
-\item Word hyphenation.
-\item The output format of certain words.
-\item Certain typesetting matters associated with the typesetting tradition of the language in question.
+\item La césure des mots.
+\item Le format de sortie de certains mots.
+\item Certaines questions de composition associées à la tradition de composition de la langue en question.
 
 \stopitemize
 
-% ***  SubSection
+% ***  SubSection définition et modification de la langue
 
 \startsubsection
-  [title=Setting and changing the language]
+  [title=Définition et modification de la langue,]
 
-\ConTeXt\ assumes that the language will be English. Two procedures can change this:
+Par défaut, \ConTeXt\ suppose que la langue sera l'anglais. Deux procédures permettent de changer cela~:
 
 \startitemize
 
-\item By using the \PlaceMacro{mainlanguage}\cmd{mainlanguage} command, used in the preamble to change the main language of the document.
+\item En utilisant la commande \PlaceMacro{mainlanguage} \tex{mainlanguage}, utilisée en préambule pour changer la langue principale du document. Cela permet d'adapter les éléments générés automatiquement par \ConTeXt . \quotation{Table of content} et \quotation{Chapter}, deviennent respectivement \quotation{Table des matières} ry \quotation{Chapitre}.
 
-\item By using the \PlaceMacro{language}\cmd{language} command, aimed at changing the active language at any point in the document.
-  
+\item En utilisant la commande \PlaceMacro{language} \tex{language}, visant à changer la langue active à tout moment du document. Cette commande modifie les règles de césure, les guillemets, etc.
+
 \stopitemize
 
-Both commands expect an argument consisting of any language identifier (or code). To identify the language, we use either the two-letter international language code set out in ISO 639-1, which is the same as that used, for example, on the web, or the English name of the language in question, or sometimes some abbreviation of the name in English.
+Les deux commandes attendent un argument consistant en un identifiant (ou code) de langue quelconque. Pour identifier la langue, nous utilisons soit le code international de langue à deux lettres défini dans la norme ISO 639-1, qui est le même que celui utilisé, par exemple, sur le web, soit le nom anglais de la langue en question, ou parfois une abréviation du nom en anglais.
 
-In \in{table}[tbl:languages] we find a complete list of languages supported by \ConTeXt, along with the ISO code for each of the languages in question as well as, where appropriate, the code for certain language variants expressly provided for.\footnote{\in{Table}[tbl:languages] has a summary of the list obtained with the following commands:\\
-  \PlaceMacro{usemodule}\type{\usemodule[languages-system]}\\
-  \PlaceMacro{loadinstalledlanguages}\type{\loadinstalledlanguages}\\
-  \PlaceMacro{showinstalledlanguages}\type{\showinstalledlanguages}\\
-  Should you be reading this document long after it was written (2020) it is possible that \ConTeXt\ will have incorporated additional languages, so it would be a good idea to use these commands to show an updated list of languages}
+Dans la \in{table}[tbl:languagesa]
+\footnote{\in{Table}[tbl:languagesa] a un résumé de la liste obtenue avec les commandes suivantes~:\\
+  \PlaceMacro{usemodule}              \type{\usemodule[languages-system]}\\
+  \PlaceMacro{loadinstalledlanguages} \type{\loadinstalledlanguages}\\
+  \PlaceMacro{showinstalledlanguages} \type{\showinstalledlanguages}\\
+Si vous lisez ce document longtemps après qu'il ait été écrit (2020), il est possible que \ConTeXt\ ait incorporé d'autres langues, il serait donc judicieux d'utiliser ces commandes pour afficher une liste mise à jour des langues.},
+nous trouvons une liste complète des langues supportées par \ConTeXt, avec le code ISO pour chacune des langues en question ainsi que, le cas échéant, le code pour certaines variantes linguistiques expressément prévues.
 
 {%\switchtobodyfont[script]
 \placetable
-  [here]
-  [tbl:languages]
-  {Language support in \ConTeXt}
-{\starttabulate[|l|l|p(.6\textwidth)|]
+  [here,force]
+  [tbl:languagesa]
+  {Support des langues avec \ConTeXt}
+{\starttabulate[|p(.2\textwidth)|p(.25\textwidth)|p(.5\textwidth)|]
 \HL
-\NC{\bf Language} \NC {\bf ISO code} \NC {\bf Language} (variants)
+\NC{\bf Langage} \NC {\bf Code ISO} \NC {\bf Langage} (variantes)
 \NR
 \HL
 \NC Afrikaans
@@ -1054,229 +1162,333 @@ In \in{table}[tbl:languages] we find a complete list of languages supported by \
 \stoptabulate
 }}
 
-So, for example, to set Spanish (Castilian) as the main language of the document we could use any of the three that follow:
+Ainsi, par exemple, pour définir le français comme langue principale du document, nous pouvons utiliser l'une des trois codes suivants~:
 
-\starttyping
-\mainlanguage[es]
-\mainlanguage[spanish]
-\mainlanguage[sp]
-\stoptyping
-To enable a particular language {\em inside} the document, we can use either the \cmd{language[Language code]} command, or a specific command to activate that language. So, for example, \PlaceMacro{en}\cmd{en} activates English, \PlaceMacro{fr}\cmd{fr} activates French, \PlaceMacro{es}\cmd{es} Spanish, or \PlaceMacro{ca}\cmd{ca} Catalan. Once an actual language has been activated, it remains so until we expressly switch to another language, or the group in which the language was activated is then closed. Languages work, therefore, just like font change commands. Note, however, that the language set by the \cmd{language} command or by one of its abbreviations (\cmd{en}, \cmd{fr}, \PlaceMacro{de}\cmd{de}, etc.) does not affect the language in which labels are printed (see \in{section}[sec:labels]).
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\mainlanguage[fr]
+\mainlanguage[fra]
+\mainlanguage[french]
+\stopDemoI}
+
+
+Pour activer une langue particulière {\em dans} le document, nous pouvons utiliser soit la commande \cmd{language[Code de la langue]}, soit une commande spécifique pour activer cette langue. Ainsi, par exemple, \PlaceMacro{en} \cmd{en} active l'anglais, \PlaceMacro{fr} \cmd{fr} active le français, \PlaceMacro{es} \cmd{es} espagnol, ou \PlaceMacro{ca} \cmd{ca} le catalan. Une fois qu'une langue a été activée, elle le reste jusqu'à ce que l'on passe expressément à une autre langue, ou que le groupe dans lequel la langue a été activée soit alors fermé. Les langues fonctionnent donc comme des commandes de changement de police. Notez toutefois que la langue définie par la commande \cmd{language} ou par l'une de ses abréviations (\cmd{en}, \cmd{fr}, \PlaceMacro{de}\cmd{de}, etc.) n'affecte pas la langue dans laquelle les étiquettes sont imprimées (voir \in{section}[sec:labels]).
+
 
 \startSmallPrint
 
-  Although it may be laborious to mark the language of all the words and expressions we use in our document that do not belong to the main language of the document, it is important to do so if we want to obtain a properly typeset final document, especially in professional work. We should not mark all the text, but only the part that does not belong to the main language. Sometimes it is possible to automate the marking of the language by using a macro. For example, for this document in which \ConTeXt\ commands are continuously being quoted, the original language of which is English, I have designed a macro which, in addition to writing the command in the appropriate format and colour, marks it as an English word. In my professional work, where I need to quote a lot of French and Italian bibliography, I have incorporated a field in my  bibliographic database to pick up the language of the work, so that I can automate the language indication in the quotations and lists  of bibliographical references.
+  Bien qu'il puisse être laborieux de marquer la langue de tous les mots et expressions que nous utilisons dans notre document et qui n'appartiennent pas à la langue principale du document, il est important de le faire si nous voulons obtenir un document final correctement composé, en particulier dans les travaux professionnels. Nous ne devons pas marquer tout le texte, mais seulement la partie qui n'appartient pas à la langue principale. Il est parfois possible d'automatiser le marquage de la langue en utilisant une macro. Par exemple, pour ce document dans lequel on cite continuellement des commandes \ConTeXt\, dont la langue d'origine est l'anglais, j'ai conçu une macro qui, en plus d'écrire la commande dans le format et la couleur appropriés, la marque comme un mot anglais. Dans mon travail professionnel, où je dois citer beaucoup de bibliographie française et italienne, j'ai incorporé un champ dans ma base de données bibliographique pour capter la langue de l'ouvrage, de façon à automatiser l'indication de la langue dans les citations et les listes de références bibliographiques.
 
-  If we are using two languages that use different alphabets in the same document (for example, English and Greek, or English and Russian), there is a trick that will prevent us from having to mark the language of expressions built with the alternative alphabet: modify the main language setting (see next section) so that it also loads the default hyphenation patterns for the language that uses a different alphabet. For example, if we want to use English and ancient Greek, the following command would save us from having to mark language of the texts in Greek:
+  Si nous utilisons deux langues qui utilisent des alphabets différents dans le même document (par exemple, l'anglais et le grec, ou l'anglais et le russe), il existe une astuce qui nous évitera de devoir marquer la langue des expressions construites avec l'alphabet alternatif~: modifier le paramètre de la langue principale (voir section suivante) afin qu'il charge également les modèles de césure par défaut pour la langue qui utilise un alphabet différent. Par exemple, si nous voulons utiliser l'anglais et le grec ancien, la commande suivante nous évitera de devoir marquer la langue des textes en grec :
 
-  \type{\setuplanguage[en][patterns={en, agr}]}
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\setuplanguage[en][patterns={en, agr}
+\stopDemoI}
 
-  This only works because English and Greek use a different alphabet, so there can be no conflict in the hyphenation patterns of the two languages, therefore we can load them both simultaneously. But in two languages that use the same alphabet, loading the hyphenation patterns simultaneously will necessarily lead to inappropriate hyphenation.
+Cela ne fonctionne que parce que l'anglais et le grec utilisent un alphabet différent. Il ne peut donc y avoir de conflit entre les modèles de césure des deux langues, et nous pouvons donc les charger simultanément. Mais dans deux langues qui utilisent le même alphabet, le chargement simultané des modèles de césure conduira nécessairement à une césure inappropriée.
 
 \stopSmallPrint
 
+
 \stopsubsection
 
-% ***  SubSection
+% ***  SubSection configuration de la langue 
 
 \startsubsection
   [
     reference=sec:langconfig,
-    title=Configuring the language,
+    title=Configuration de la langue,
   ]
   \PlaceMacro{setuplanguage}
 
-\dontleavehmode\ConTeXt\ associates the functioning of certain utilities with the specific language active at any given time. The default associations can be changed with \cmd{setuplanguage} whose syntax is:
+\ConTeXt\ associe le fonctionnement de certains utilitaires à la langue spécifique active à un moment donné. Les associations par défaut peuvent être modifiées avec \cmd{setuplanguage} dont la syntaxe est :
 
-\type{\setuplanguage[Language][Configuration]}
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\setuplanguage[Langage][Configuration]
+\stopDemoI}
 
-where {\em Language} is the language code for the language we want to configure, and {\em Configuration} contains the specific configuration that we want to set (or change) for that language. Specifically, up to 32 different configuration options are allowed, but I will only deal with those that seem suitable for an introductory text such as this:
+où {\em Langage} est le code de la langue que nous voulons configurer, et {\em Configuration} contient la configuration spécifique que nous voulons définir (ou modifier) pour cette langue. Plus précisément, jusqu'à 32 options de configuration différentes sont autorisées, mais je ne traiterai que celles qui semblent convenir à un texte d'introduction tel que celui-ci~:
 
 \startitemize
 
-\item {\tt\bf date}: allows us to configure the default date format. See further ahead on \at{page}[sec:dates].
+\item {\tt\bf date} : permet de configurer le format de date par défaut. Voir plus loin sur \at{page}[sec:dates].
 
-\item {\tt\bf lefthyphenmin, righthyphenmin}: the minimum number of characters that must be to the left or to the right for hyphenation of a word to be supported. For example \cmd{setuplanguage[en][lefthyphenmin=4]} will not hyphenate any word if there are fewer than 4 characters to the left of the eventual hyphen.
+\item {\tt\bf lefthyphenmin, righthyphenmin} : le nombre minimum de caractères qui doivent se trouver à gauche ou à droite pour que la césure d'un mot soit prise en charge. Par exemple, \cmd{setuplanguage[en][lefthyphenmin=4]} ne prendra pas en charge la césure d'un mot s'il y a moins de 4 caractères à gauche du trait d'union éventuel.
 
-\item {\tt\bf spacing}: the possible values for this option are \MyKey{broad} or \MyKey{packed}. In the first case (broad), the rules for spacing words in English will be applied, which means that after a full stop and when another character follows, a certain amount of extra blank space will be added. On the other hand, \MyKey{spacing=packed} will prevent these rules from applying. For English, broad is the default.
+\item {\tt\bf spacing} : les valeurs possibles pour cette option sont \MyKey{broad} ou \MyKey{packed}. Dans le premier cas ({\tt broad}), les règles d'espacement des mots en anglais seront appliquées, ce qui signifie qu'après un point et lorsqu'un autre caractère suit, une certaine quantité d'espace vide supplémentaire sera ajoutée. En revanche, \MyKey{spacing=packed} empêchera l'application de ces règles. Pour l'anglais, {\tt broad} est la valeur par défaut.
 
-\item {\tt\bf leftquote, rightquote}: indicate the characters (or commands), respectively, that \cmd{quote} will use to the left and right of the text that is its argument (for this command, see \at{page}[sec:quote]).
+\item {\tt\bf leftquote, rightquote} : indique les caractères (ou commandes), respectivement, que \tex{quote} utilisera à gauche et à droite du texte qui est son argument (pour cette commande, voir \at{page}[sec:quote]).
 
-\item {\tt\bf leftquotation, rightquotation}: indicate the characters (or commands), respectively that \cmd{quotation} will use to the left and right of the text that is its argument (for this command, see \at{page}[sec:quote]).
+\item {\tt\bf leftquotation, rightquotation} : indique les caractères (ou commandes), respectivement que \tex{quotation} utilisera à gauche et à droite du texte qui est son argument (pour cette commande, voir \at{page}[sec:quote]).
 
-\stopitemize%%%@@@
+\stopitemize
+
+% TODO Garulfo added
+
+Voyez par exemple l'effet des configurations par défaut~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoHN
+\language[en] \quotation{Mon texte} et \quote{Mon texte} \\
+\language[de] \quotation{Mon texte} et \quote{Mon texte} \\
+\language[fr] \quotation{Mon texte} et \quote{Mon texte}
+\stopDemoHN}
+
+Dans le cas particulier du français, n'oubliez pas d'utiliser \tex{setcharacterspacing[frenchpunctuation]} qui indique à \ConTeXt\ d'ajouter des espaces fines insécables devant les signes doubles (mais pas après, sauf pour «). Il n'enlève pas les espaces en trop donc il vous faudra tout de même faire attention au niveau du fichier source. Vous pouvez aussi configurer directement ce comportement avec \tex{setupcharacterspacing}.
+\PlaceMacro{setupcharacterspacing}
+
+
+
+
+\placefigure [force,here,none] [] {}{
+\startDemoHN%
+\language[fr]%
+A - Une phrase,avec des,signes simples.\\
+B - Une:phrase;avec des signes! doubles?\\
+C - Une phrase , avec des , signes simples .\\
+D - Une : phrase ; avec des signes ! doubles ?\\
+E - et\quote{Mon texte}pour finir.\\
+
+\blank[big]
+\setcharacterspacing   [frenchpunctuation]
+
+A - Une phrase,avec des,signes simples.\\
+B - Une:phrase;avec des signes! doubles?\\
+C - Une phrase , avec des , signes simples .\\
+D - Une : phrase ; avec des signes ! doubles ?\\
+E - et\quote{Mon texte}pour finir.\\
+
+\blank[big]
+\setupcharacterspacing [frenchpunctuation] ["003A]  % pour :
+                       [left=.75,right=.75,alternative=1] 
+% ["003A]: ["003B]; ["003F]? ["0021]! ["002C], ["002E]. ["00AB]« ["00BB]»
+
+B - Une:phrase;avec des signes! doubles?
+\stopDemoHN}
 
 \stopsubsection
 
-% ***  SubSection
+% ***  SubSection étiquettes associées à des langues particulières,
 
 \startsubsection
   [
     reference=sec:labels,
-    title=Labels associated with particular languages,
+    title=Étiquettes associées à des langues particulières,
   ]
 
-Many of \ConTeXt's commands automatically generate certain texts (or {\em labels}), as, for example, the \cmd{placetable} command that writes the label \quotation{Table xx} under the table that is inserted, or \cmd{placefigure} which inserts the label \quotation{Figure xx}.
+De nombreuses commandes de \ConTeXt\ génèrent automatiquement certains textes (ou {\em étiquettes}), comme, par exemple, la commande \tex{placetable} qui écrit l'étiquette \quotation{Tableau xx} sous le tableau qui est inséré, ou \tex{placefigure} qui insère l'étiquette \quotation{Figure xx}.
 
-These {\em labels} are sensitive to the language set with \cmd{mainlanguage} (but not if set with \cmd{language}) and we can change them with
+Ces {\em étiquettes} dépendent de la langue définie avec \tex{mainlanguage}. (mais pas de \tex{language} qui ne concerne que les règles de césure, ponctuations, guillements etc.) et nous pouvons les modifier avec la commande~:
 
-\PlaceMacro{setuplabeltext}\type{\setuplabeltext[Language][Key=Label]}
+\PlaceMacro{setuplabeltext}
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\setuplabeltext[Language][Clé=Texte]
+\stopDemoI}
 
-where {\em Key} is the term by which \ConTeXt\ knows the label and {\em Label} is the text we want \ConTeXt\ to generate. So, for example,
+où {\em Clé} est le terme par lequel \ConTeXt\ connaît l'étiquette et {\em Texte} est le texte que nous voulons que \ConTeXt\ génère. Ainsi, par exemple,
 
-\type{\setuplabeltext[es][figure=Imagen~]}
+\PlaceMacro{setuplabeltext}
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\mainlanguage[fr]%
+\setuplabeltext[fr][figure={Illustration~}]
+\placefigure [] [] {Texte de la légende} {Texte}
+\stopDemoVW}
 
-would see that when the main language is Spanish, images inserted with \cmd{placefigure} are not called \quotation{Figure x} but \quotation{Imagen x}. Note that after the text on the label itself, a blank space must be left to ensure that the label is not attached to the next character. In the example I have used the reserved character \quotation{\lettertilde}; I could also have written \MyKey{[figure=Imagen\{ \}]} enclosing the blank space between curly brackets to ensure that \ConTeXt\ will not get rid of it.
+implique que lorsque la langue principale est le  français, les images insérées avec \cmd{placefigure} ne sont pas appelées \quotation{Figure x} mais \quotation{Illustration x}. Notez qu'après le texte de l'étiquette proprement dite, il faut laisser un espace vide pour que l'étiquette ne soit pas rattachée au caractère suivant qui est la numérotation de la figure. Dans l'exemple, j'ai utilisé le caractère réservé \quotation{\lettertilde} ; j'aurais également pu écrire \MyKey{[figure=Illustration\{ \}]} en enfermant l'espace vide entre des accolades pour m'assurer que \ConTeXt\ ne s'en débarrasse pas.
 
-What labels can we redefine with \cmd{setuplabeltext}? The \ConTeXt\ documentation is not as complete as one might hope on this point. The 2013 reference manual (which is the one that explains most about this command) mentions \MyKey{chapter}, \MyKey{table}, \MyKey{figure}, \MyKey{appendix}... \Conjecture and adds \quotation{other comparable text elements}. We can assume that the names will be the English names of the element in question.
+Quelles étiquettes pouvons-nous redéfinir avec \cmd{setuplabeltext} ? La documentation de \ConTeXt\ n'est pas aussi complète qu'on pourrait l'espérer sur ce point. Le manuel de référence 2013 (qui est celui qui explique le plus cette commande) mentionne \MyKey{chapter}, \MyKey{table}, \MyKey{figure}, \MyKey{appendix}... \Conjecture et ajoute \quotation{autres éléments de texte comparables}. Nous pouvons notamment identifier 
+\MyKey{content},
+\MyKey{tables}, 
+\MyKey{figures},
+\MyKey{index},
+\MyKey{intermezzo}, 
+\MyKey{intermezzi}, 
+\MyKey{graphic}, 
+\MyKey{graphics}
+\MyKey{abbreviations},
+\MyKey{logos}
+\MyKey{units}, 
+\MyKey{part},
+\MyKey{section}
+\MyKey{section}, 
+\MyKey{subsection},
+\MyKey{subsubsection}
+\MyKey{subsubsubsection},
+\MyKey{line},
+\MyKey{lines},
+\MyKey{page},
+\MyKey{atpage},
+\MyKey{hencefore},
+\MyKey{hereafter},
+\MyKey{see}.
 
 \startSmallPrint
 
-  One of the advantages of {\em free libre software} is that the source files are available to the user; so we can look into them. I have done so, and {\em snooping} through the source files of \ConTeXt, I have discovered the file \MyKey{lang-txt.lua}, available in {\tt tex/texmf-context/tex/context/base/mkiv} which I think is the one that contains the predefined labels and their different translations; so that if at any time \ConTeXt\ generates a redefined text that we want to change, to see the name of the label that text is associated we can open the file in question and find that we want to change. This way we can see which label name is associated with it.
+
+L'un des avantages des {\em  logiciels libres} est la disponibilité des fichiers sources ; nous pouvons donc les examiner. C'est ce que j'ai fait, et en fouinant dans les fichiers sources de ConTeXt, j'ai découvert le fichier 
+\goto{\tt lang-txt.lua}[url(https://source.contextgarden.net/tex/context/base/mkiv/lang-txt.lua)], disponible dans {\tt tex/texmf-context/tex/context/base/mkiv} qui, je pense, est celui qui contient les étiquettes prédéfinies et leurs différentes traductions ; de sorte que si à tout moment \ConTeXt\ génère un texte redéfini que nous voulons changer, pour identifier le nom de l'étiquette à laquelle ce texte est associé il suffit de consulter ce fichier.
 
 \stopSmallPrint
 
-If we want to insert the text associated with a certain label somewhere in the document, we can do so with the \PlaceMacro{labeltext}\cmd{labeltext} command. So, for example, if I want to refer to a table, to ensure that I name it in the same way that \ConTeXt\ calls it in the \cmd{placetable} command, I can write: \quotation{{\tt Just as shown in the \backslash labeltext\{table\} on the next page.}.} This text, in a document where \cmd{mainlanguage} is English, will produce: \quotation{Just as shown in the \labeltext{table} on the next page.}
+Si nous voulons insérer le texte associé à une certaine étiquette quelque part dans le document, nous pouvons le faire avec la commande \PlaceMacro{labeltext} \tex{labeltext}. Ainsi, par exemple, si je veux faire référence à un tableau, pour m'assurer que je le nomme de la même manière que \ConTeXt\ dans la commande \cmd{placetable}, je peux écrire : \quotation{\tt Juste comme indiqué dans le \backslash labeltext\{table\} de la page suivante.}.
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\useMPlibrary [dum] % pour produire des images
+\mainlanguage[fr]   %
+\setuplabeltext[fr][figure={Illustration~}]
+\placefigure [] [] 
+  {Texte de la légende}
+  {\externalfigure [dummy] 
+     [height=1cm,width=6cm]}
+
+Juste comme indiqué dans l'\labeltext{figure} précédente.
+\stopDemoVW}
 
 \startSmallPrint
 
-  Some of the labels redefinable with \cmd{setuplabeltext}, are empty by default; like, for example, \MyKey{chapter} or \MyKey{section}. This is because by default \ConTeXt\ does not add labels to sectioning commands. If we want to change this default operation, we need only to redefine these labels in the preamble of our document and so, for example, \cmd{setuplabeltext[chapter=Chapter\lettertilde]} will see that chapters are preceded by the word \quotation{Chapter}.
+ Certaines étiquettes redéfinissables avec \tex{setuplabeltext}, sont vides par défaut ; comme, par exemple, \MyKey{chapter} ou \MyKey{section}. Cela est dû au fait que, par défaut, \ConTeXt\ n'ajoute pas d'étiquettes aux commandes de sectionnement. Si nous voulons changer ce fonctionnement par défaut, il nous suffit de redéfinir ces étiquettes dans le préambule de notre document et ainsi, par exemple, \cmd{setuplabeltext[chapter=Chapter\lettertilde]} verra que les chapitres sont précédés du mot \quotation{Chapter}.
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\mainlanguage[fr]%
+\setuplabeltext[fr][section={Verset~}]
+
+\startsection[title=Titre de section]
+\stopsection
+\stopDemoVW}
 
 \stopSmallPrint
 
-Finally, it is important to point out that although in general, in \ConTeXt, the commands that allow several comma-separated options as an argument, the last option can end with a comma and nothing bad happens. In \tex{setuplabeltext} that would generate an error when compiling.
 
+Enfin, il est important de souligner que bien qu'en général, dans \ConTeXt, les commandes qui permettent plusieurs options séparées par des virgules comme argument, la dernière option peut se terminer par une virgule et rien de mal ne se passe. Dans \tex{setuplabeltext}, cela générerait une erreur lors de la compilation.
 
 \stopsubsection
 
-% ***  SubSection
+% ***  SubSection quelques commandes liées à la langue
 
 \startsubsection
-  [title=Some language-related commands]
+  [title=Quelques commandes liées à la langue]
 
-% **** SubSubSection
+% **** SubSubSection date
 
 \startsubsubsection
   [
     reference=sec:dates,
-    title=Date-related commands,
+    title=Commandes liées à la date,
   ]
-  \PlaceMacro{currentdate}\PlaceMacro{date}\PlaceMacro{month}
+  \PlaceMacro{currentdate} \PlaceMacro{date} \PlaceMacro{month}
 
-\ConTeXt\ has three date-related commands that produce their output in the active language at the time they are run. These are:
+
+\ConTeXt\ a trois commandes liées à la date qui produisent une sortie dépendante de la langue active au moment où elles sont exécutées. Il s'agit de :
+
 
 \startitemize
 
-\item \tex{currentdate}: run without arguments in a document in which the main language is English, it returns the system date in the format \quotation{Day Month Year}. For example: \quotation{11 September 2020}. But we can also tell it to use a different format (as would happen in the US and some other parts of the English-speaking world that follow their system of putting the month before the day, hence the infamous date, 9/11), or include the name of the day of the week ({\tt weekday}), or include only some elements of the date ({\tt day, month, year}) 
+\item \tex{currentdate} : exécutée sans arguments dans un document dont la langue principale est l'anglais, elle renvoie la date système au format \quotation{Jour Mois Année}. Par exemple \quotation{11 septembre 2020}. Mais nous pouvons également lui demander d'utiliser un format différent (comme c'est le cas aux États-Unis et dans certaines autres parties du monde anglophone qui suivent leur système consistant à placer le mois avant le jour, d'où la date tristement célèbre du 11 septembre), ou d'inclure le nom du jour de la semaine ({\tt weekday}), ou de n'inclure que certains éléments de la date ({\tt day, month, year}). 
 
-  To indicate a different date format, \MyKey{dd} or \MyKey{day} represent the days, \MyKey{mm} the months (in number format), \MyKey{month} the months in alphabetical format in lower case, and \MyKey{MONTH} in upper case. Regarding the year, \MyKey{yy} will write only the last digits, while \MyKey{year} or \MyKey{y} will write all four. If we want some separating element between the date components, we must write it expressly. For example
+Pour indiquer un format de date différent, \MyKey{dd} ou \MyKey{day} représentent les jours, \MyKey{mm} les mois (au format numérique), \MyKey{month} les mois au format alphabétique en minuscules, et \MyKey{MONTH} en majuscules. En ce qui concerne l'année, \MyKey{yy} n'écrira que les derniers chiffres, tandis que \MyKey{year} ou \MyKey{y} écrira les quatre. Si nous voulons un élément de séparation entre les composants de la date, nous devons l'écrire expressément. Par exemple
 
-  \type{\currentdate[weekday, dd, month]} 
+\placefigure [force,here,none] [] {}{
+\startDemoVW%
+\mainlanguage[en] \language[en]%
+\currentdate[weekday,month,day,{, },year]
 
-  when run on 9 September 2020 will write \quotation{Wednesday 9 September}.
+\mainlanguage[fr] \language[fr]%
+\currentdate[weekday,day,month,year]
+\stopDemoVW}
   
-\item \tex{date}: this command, run without any argument, produces exactly the same output as \cmd{currentdate}, meaning, the actual date in standard format. However, a specific date can be given as an argument. Two arguments are given for this: with the first argument we can indicate the day (\MyKey{d}), month (\MyKey{m}) and year  (\MyKey{y}) corresponding to the date we want to represent, while with the second argument (optional) we can indicate the format of the date to be represented. For example, if we want to know what day of the week John Lennon and Paul McCartney met, an event which, according to Wikipedia, took place on 6 July 1957, we could write
+\item \tex{date} : cette commande, exécutée sans aucun argument, produit exactement le même résultat que \cmd{currentdate}, c'est-à-dire la date actuelle au format standard. Cependant, une date spécifique peut être donnée comme argument. Deux arguments sont fournis pour cela : avec le premier argument, nous pouvons indiquer le jour (\MyKey{d}), le mois (\MyKey{m}) et l'année (\MyKey{y}) correspondant à la date que nous voulons représenter, tandis qu'avec le second argument (facultatif), nous pouvons indiquer le format de la date à représenter. Par exemple, si nous voulons savoir quel jour de la semaine John Lennon et Paul McCartney se sont rencontrés, un événement qui, selon Wikipedia, a eu lieu le 6 juillet 1957, nous pourrions écrire
 
-  \type{\date[d=6, m=7, y=1957][weekday]}
+\placefigure [force,here,none] [] {}{
+\startDemoVN%
+\mainlanguage[fr] \language[fr]%
+\date[d=6, m=7, y=1957][weekday]
+\stopDemoVN}
 
-  and so we would find out that such an historical event happened on a Saturday. 
+et ainsi nous découvrons qu'un tel événement historique s'est produit un samedi. 
 
-\item \tex{month} takes a number as an argument, and returns the name of the month corresponding to that number.
+\item \tex{month} prend un nombre en argument, et renvoie le nom du mois correspondant à ce nombre.
   
 \stopitemize
 
+Pour l'heure, il existe aussi \tex{currenttime} qui prend en argument \MyKey{h} pour les heures et \MyKey{m} pour les minutes. 
+
 \stopsubsubsection
 
-% **** SubSubSection
+% **** SubSubSection translate
 
 \startsubsubsection
-  [title=The \tex{translate} command]
+  [title=La commande \tex{translate}]
   \PlaceMacro{translate}
 
-The translate command supports a series of phrases associated with a specific language, so that one or another will be inserted in the final document depending on the language active at any given time. In the following example, the translate command is used to associate four phrases with Spanish and English, which are saved in a memory buffer (regarding the {\tt buffer} environment, see \in{section}[sec:buffer]):
+La commande \tex{translate} prend en charge une série de phrases associées à une langue spécifique, de sorte que l'une ou l'autre sera insérée dans le document final en fonction de la langue active à un moment donné. Dans l'exemple suivant, la commande translate est utilisée pour associer quatre phrases au français et à l'anglais, qui sont enregistrées dans un tampon de mémoire (concernant l'environnement {\tt buffer}, voir \in{section}[sec:buffer]). Si nous insérons le {\em tampon} à un point du document où le français est activé, les phrases en français seront affichées, et de même avec l'anglais. Ainsi :
 
-\starttyping
+\placefigure [force,here,none] [] {}{
+\startDemoHW%
 \startbuffer
-  \starttabulate[|*{4}{lw(.25\textwidth)|}]
-    \NC \translate[es=Su carta de fecha, en=Your letter dated]
-    \NC \translate[es=Su referencia, en=Your reference]
-    \NC \translate[es=Nuestra referencia, en=Our reference]
-    \NC \translate[es=Fecha, en=Date] \NC\NR
-  \stoptabulate
-\stopbuffer
-\stoptyping
-
-so that if we insert the {\em buffer} at a point in the document where Spanish is activated, the Spanish phrases will be played, but if the point in the document where the buffer is inserted has English activated, the English phrases will be inserted. Thus:
-
-%\startpacked
-\language[es]  
-\startbuffer
-  \starttabulate[|*{4}{lw(.25\textwidth)|}]
-    \NC \translate[es=Su carta de fecha, en=Your letter dated]
-    \NC \translate[es=Su referencia, en=Your reference]
-    \NC \translate[es=Nuestra referencia, en=Our reference]
-    \NC \translate[es=Fecha, en=Date] \NC\NR
+\starttabulate[|*{4}{lw(3cm)|}]
+\HL \NC \translate[fr=Votre lettre,    en=Your letter]
+    \NC \translate[fr=Votre référence, en=Your reference]
+    \NC \translate[fr=Notre référence, en=Our reference]
+    \NC \translate[fr=Date,            en=Date] \NR
   \stoptabulate
 \stopbuffer
 
-\starttyping
-\language[es]
-\getbuffer
-\stoptyping
-
-will generate
-
-\example{\getbuffer}
-
-while
-\starttyping
-\language[en]
-\getbuffer
-\stoptyping
-
-will generate
-
-{\en\example{\getbuffer}}
+\language[fr]  \getbuffer
+\blank[big]
+\language[en]  \getbuffer
+\stopDemoHW}
 
 %\stoppacked
 
 \stopsubsubsection
 
-% **** SubSubSection
+% **** SubSubSection commandes \tex{quote} et \tex{quotation}
 
 \startsubsubsection
   [
     reference=sec:quote,
-    title=The \tex{quote} and \tex{quotation} commands,
+    title=Les commandes \tex{quote} et \tex{quotation},
   ]
   \PlaceMacro{quote}\PlaceMacro{quotation}
 
-One of the most common typographical errors in text documents occurs when quote marks (single or double) are opened but not expressly closed. To avoid this happening, \ConTeXt\ provides the \cmd{quote} and \cmd{quotation} commands that will quote the text that is their argument; \cmd{quote} will use single quotation marks and \cmd{quotation} will use double quotation marks.
+L'une des erreurs typographiques les plus courantes dans les documents texte survient lorsque les guillemets (simples ou doubles) sont ouverts mais pas expressément fermés. Pour éviter cela, \ConTeXt\ fournit les commandes \tex{quote} et \tex{quotation} qui citeront le texte qui est leur argument ; \tex{quote} utilisera des guillemets simples et \tex{quotation} des guillemets doubles.
 
-These commands are language sensitive in that they use the default character or command set for the language in question to open and close quotes (see
-\in{section}[sec:langconfig]); and so, for example, if we want to use Spanish as the default style for double quotation marks -- the guillemets or chevrons (angle brackets)) typical of Spanish, Italian, French, we would write:
+Ces commandes sont sensibles à la langue dans la mesure où elles utilisent le jeu de caractères ou de commandes par défaut de la langue en question pour ouvrir et fermer les guillemets (cf. \in{section} [sec:langconfig]) ; Dans l'exemple suivant, vous voyez la configuration pour le français par défaut puis une version utlisant les versionŝ anglais des guillemets simples et doubles.
 
-\type{\setuplanguage[es][leftquotation=«, rightquotation=»]}.
+\placefigure [force,here,none] [] {}{
+\startDemoHW%
+\setcharacterspacing   [frenchpunctuation]%
+\mainlanguage[fr] \language[fr]%
+\tfd \quotation{Mon texte} et \quote{Mon texte}
+\blank[big]
+\setuplanguage[fr][leftquotation=“,rightquotation=”]
+\setuplanguage[en][leftquote=‘,rightquote=’]
+\tfd \quotation{Mon texte} et \quote{Mon texte}
+\stopDemoHW}
 
-These commands do not, however, manage nested quotes; although we can create the utility that does this, taking advantage of the fact that \cmd{quote} and \cmd{quotation} are actual applications of what \ConTeXt\ calls {\em delimitedtext}, and that it is possible to define further applications with \PlaceMacro{definedelimitedtext}\cmd{definedelimitedtext}. Thus the following example:
 
-\starttyping
-\definedelimitedtext
-  [CommasLevelA]
-  [left=«, right=»]
+Ces commandes ne gèrent cependant pas les guillemets imbriqués, bien que nous puissions créer un utilitaire qui le fasse, en profitant du fait que \cmd{quote} et \cmd{quotation} sont des applications réelles de ce que \ConTeXt\ appelle {\em delimitedtext}, et qu'il est possible de définir d'autres applications avec \PlaceMacro{definedelimitedtext} \tex{definedelimitedtext}. Ainsi, l'exemple suivant :
 
-\definedelimitedtext
-  [CommasLevelB]
-  [left=“, right=”]
 
-\definedelimitedtext
-  [CommasLevelC]
-  [left=`, right=']
-\stoptyping
+crée trois commandes qui permettront jusqu'à trois niveaux différents de citation. Le premier niveau avec des guillemets latéraux, le deuxième avec des guillemets doubles et le troisième avec des guillemets simples.
 
-will create three commands that will allow up to three different levels of quoting. The first level with side quotes, the second with double quotes and the third with single quotes.
+Bien entendu, si nous utilisons l'anglais comme langue principale, les guillemets simples et doubles par défaut (frisés, et non droits, comme dans ce document !) seront automatiquement utilisés.
 
-Of course, if we are using English as our main language, then the default single and double quotation marks (curly, not straight, as you find in this document!) will be automatically used.
+
+\placefigure [force,here,none] [] {}{
+\startDemoHW%
+\definedelimitedtext [GuillemetsNivA] [left=«, right=»]
+\definedelimitedtext [GuillemetsNivB] [left=“, right=”]
+\definedelimitedtext [GuillemetsNivC] [left=', right=']
+
+\GuillemetsNivA{Mon texte et \GuillemetsNivB{un second et \GuillemetsNivC{un troisième}}} 
+\stopDemoHW}
 
 \stopsubsubsection
 
@@ -1284,7 +1496,7 @@ Of course, if we are using English as our main language, then the default single
 
 \stopsection
 
-% *  End
+% *    End
 
 \stopchapter
 

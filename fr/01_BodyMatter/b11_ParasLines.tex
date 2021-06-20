@@ -10,131 +10,108 @@
 %%% Edited with: Emacs + AuTeX - and at times vim + context-plugin
 %%%
 
-\environment ../introCTX_env.mkiv
+\environment introCTX_env
 
-\startcomponent b11_ParasLines.mkiv
+\startcomponent b11_ParasLines
+
+% * BEGIN
 
 \startchapter
-  [title={Paragraphs, lines and\\ vertical space},
+  [title={Paragraphes, lignes et espace vertical},
   reference=cap:parlinevspace,
   bookmark={Paragraphs, lines and vertical space},]
 
 \TocChap
 
-The general look of a document is determined mainly by the size and layout
-of the pages which we have seen in \in{Chapter}[cap:pages], by the font we
-have chosen, dealt with in \in{Chapter}[sec:fontscol], and by other matters
-like interline spacing, paragraph alignment and spacing between them, etc.
-This chapter focuses on these other matters.
+L'aspect général d'un document est principalement déterminé  par la taille et la disposition des pages que nous avons vues dans le \in{Chapitre}[cap:pages], par la police de caractères que nous avons choisie, traitée dans le \in{Chapitre}[sec:fontscol], et par d'autres questions comme l'espacement entre les lignes, l'alignement des paragraphes et l'espacement entre eux, etc. Ce chapitre se concentre sur ces questions.
+
+% ** Section
 
 \startsection
-  [title={Paragraphs and their characteristics}]
+  [title={Les paragraphes et leurs caractéristiques}]
 
-The paragraph is the fundamental unit of text for \ConTeXt. There are two
-procedures for commencing a paragraph:
+Le paragraphe est l'unité de texte fondamentale pour \ConTeXt. Il existe deux procédures pour commencer un paragraphe :
 
 \startitemize[n]
 
-  \item Inserting one or more consecutive blank lines in the source file.
+ \item Insertion d'une ou plusieurs lignes vides consécutives dans le fichier source.
 
-  \item The \PlaceMacro{par}\tex{par} or \PlaceMacro{endgraf}\tex{endgraf}
-  commands.
+  \item Les commandes 
+\PlaceMacro{par}        \tex{par} ou
+\PlaceMacro{endgraf}    \tex{endgraf}.
 
 \stopitemize
 
-The first of these procedures is the one normally used since it is simpler
-and produces source files that are easier to read and understand. Inserting
-paragraph breaks with an explicit command is something usually done only
-inside a macro (see \in{section}[sec:define]) or in a table cell (see
-\in{section}[sec:tables]).
+La première de ces procédures est celle qui est normalement utilisée car elle est plus simple et produit des fichiers sources plus faciles à lire et à comprendre. L'insertion de sauts de paragraphe par une commande explicite n'est généralement réalisée qu'à l'intérieur d'une macro (voir \in{section}[sec:define]) ou dans une cellule de tableau (voir \in{section}[sec:tables]).
 
-In a well-typeset document, from a typographical point of view it is
-important that the paragraphs stand out visually from each other. This is
-usually achieved with two procedures: by slightly indenting the first line
-of each paragraph or by slightly increasing the blank space between
-paragraphs, and sometimes by a combination of both procedures, although in
-some places this is not recommended because it is considered
-typographically redundant.
+Dans un document bien typé, il est important, d'un point de vue typographique, que les paragraphes se distinguent visuellement les uns des autres. On y parvient généralement par deux procédés : en indentant légèrement la première ligne de chaque paragraphe ou en augmentant légèrement l'espace blanc entre les paragraphes, et parfois par une combinaison des deux procédés, bien que dans certains endroits, cette méthode ne soit pas recommandée car elle est considérée comme redondante du point de vue typographique.
+
 
 \startSmallPrint
 
-  I don't totally agree. The simple indentation of the first line does not
-  always visually highlight the separation between paragraphs enough; but
-  an increase in spacing not accompanied by indentation poses problems in
-  the case of a paragraph that begins on the top of a page and we may
-  therefore be unsure whether it is a new paragraph, or a continuation from
-  the previous page. A combination of both procedures eliminates doubts.
+Je ne suis pas tout à fait d'accord. Le simple retrait de la première ligne ne souligne pas toujours assez visuellement la séparation entre les paragraphes ; mais une augmentation de l'espacement non accompagnée d'un retrait pose des problèmes dans le cas d'un paragraphe qui commence en haut d'une page où nous ne pouvons pas savoir s'il s'agit d'un nouveau paragraphe, ou d'une continuation de la page précédente. Une combinaison des deux procédures permet d'éliminer les doutes.
 
 \stopSmallPrint
 
-Let us see, first of all how indentation of lines and paragraphs is
-achieved with \ConTeXt.
+Voyons tout d'abord comment l'indentation des lignes et des paragraphes est réalisée avec \ConTeXt .
+
+% *** Subsection Mise en retrait automatique des premières lignes des paragraphes
 
 \startsubsection
   [
     reference=sec:indentation,
-    title={Automatically indenting first lines of paragraphs},
+    title={Mise en retrait automatique des premières lignes des paragraphes},
   ]
 
-Automatic insertion of a small indent in the first line of paragraphs is
-disabled by default. We can enable it, disable it again and when it is
-enabled, indicate the extent of indentation with the
-\PlaceMacro{setupindenting}\cmd{set\-up\-in\-den\-ting} command that allows
-the following values to indicate whether indentation should or should not
-be enabled:
+L'insertion automatique d'un petit retrait à la première ligne des paragraphes est désactivée par défaut. Nous pouvons l'activer, la désactiver à nouveau et, lorsqu'elle est activée, indiquer l'étendue du retrait à l'aide de la commande \PlaceMacro{setupindenting} \tex{setupindenting} qui autorise les valeurs suivantes pour indiquer si le retrait doit être activé ou non :
 
 \startitemize[packed]
 
-  \item {\tt\bf always}: all paragraphs will be indented, regardless.
+\item {\tt\bf always} : tous les paragraphes seront indentés, quoi qu'il arrive.
 
-  \item {\tt\bf yes}: enable {\em normal} paragraph indentation. Certain
-  paragraphs preceded by extra vertical spacing, such as the first
-  paragraph of sections, or paragraphs following certain environments, will
-  not be indented.
+\item {\tt\bf yes} : active l'indentation des paragraphes {\em normaux}. Certains paragraphes précédés d'un espacement vertical supplémentaire, comme le premier paragraphe des sections, ou les paragraphes suivant certains environnements, ne seront pas mis en retrait.
 
-  \item {\tt\bf no, not, never, none}: disable automatic indenting of the
-  first line in paragraphs.
+\item {\tt\bf no, not, never, none} : désactive le retrait automatique de la première ligne des paragraphes.
+
+\item {\tt\bf first / next} : active ou désactive le retrait automatique du premier paragraphe d'une section.
 
 \stopitemize
 
-In cases where we have enabled automatic indentation, we can also indicate,
-by means of the same command, how much indentation there should be. To do
-this we can expressly use a dimension (for example 1.5cm) or the symbolic
-words \MyKey{small}, \MyKey{medium} and \MyKey{big} which indicate that
-what we want is small, medium or big indents.
+Dans le cas où nous avons activé l'indentation automatique, nous pouvons également indiquer, au moyen de la même commande, la quantité d'indentation à prévoir. Pour ce faire, nous pouvons utiliser expressément une dimension (par exemple 1,5 cm) ou bien les mots symboliques \MyKey{small}, \MyKey{medium} et \MyKey{big} qui indiquent que nous voulons un petit, moyen ou grand retrait.
+
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+\setupindenting[yes,1em]
+Un petit pagragraphe afin de montrer l'effet visuel d'une indentation. Un petit pagragraphe afin de montrer l'effet visuel d'une indentation.
+
+\setupindenting[yes,medium]
+Un petit pagragraphe afin de montrer l'effet visuel d'une indentation. Un petit pagragraphe afin de montrer l'effet visuel d'une indentation.
+
+\setupindenting[no,2em]
+Un petit pagragraphe afin de montrer l'effet visuel d'une indentation. Un petit pagragraphe afin de montrer l'effet visuel d'une indentation.
+\stopDemoVN}
+
 
 \startSmallPrint
 
-  In some typesetting traditions (among them Spanish), the default
-  indentation was two quads. In typography, a quad (originally
-  \em{quadrat}) was a metal spacer used in letterpress typesetting. The
-  term was later adopted as the generic name for two common space sizes in
-  typography, regardless of the form of typesetting used. An em quad is a
-  space that is one em wide; as wide as the height of the font (Wikipedia).
-  Thus, with a 12-point letter, the quad would be 12 points wide by 12
-  points high. \ConTeXt\ has two quad commands: \tex{quad} that generates
-  one space of the kind referred to above, and \tex{qquad} that generates
-  twice that amount, but based on the font being used. An indent of two
-  quads with an 11 point letter will measure 22 points, and with a 12 point
-  letter, 24 points.
+% TODO Garulfo faux c'est-à-dire aussi large que la hauteur de la police (Wikipedia)
+% Sans doute à reformuler
+
+Dans certaines traditions de composition (et notamment en espagnol), l'indentation par défaut était de deux quarts. En typographie, une quad (à l'origine \em{quadrat}) était un espaceur (entretoise) métallique utilisé en typographie. Le terme a ensuite été adopté comme nom générique pour deux tailles d'espacement courantes en typographie, quelle que soit la forme de composition utilisée. Un em quad est un espace d'un em de large, c'est-à-dire aussi large que la lettre M de la police.  Ainsi, dans le cas d'une lettre de 12 points, le quadrilatère aurait une largeur de 12 points et une hauteur de 12 points. \ConTeXt\ possède deux commandes de quadrature : \tex{quad} qui génère un espace du type mentionné ci-dessus, et \tex{qquad} qui génère deux fois cette quantité, toujours en restant proportionnel à la police utilisée. Un retrait de deux quads avec une lettre de 11 points mesurera 22 points, et avec une lettre de 12 points, 24 points.
 
 \stopSmallPrint
 
-When indentation is enabled, if we don't want a certain paragraph indented
-we need to use the \PlaceMacro{noindentation}\tex{noindentation} command.
+Lorsque l'indentation est activée, si nous ne voulons pas qu'un certain paragraphe soit indenté, nous devons utiliser la commande \PlaceMacro{noindentation} \tex{noindentation}.
 
 \startSmallPrint
 
-  In general, I enable automatic indentation in my documents with
-  \cmd{set\-up\-in\-den\-ting[yes, big]}. In this document, however, I
-  haven't done this because if indentation were enabled, the large number
-  of short sentences and examples would result in a visually untidy
-  appearance of the pages.
+En général, j'active l'indentation automatique dans mes documents avec \tex{setupindenting [yes, big]}. Dans ce document, cependant, je ne l'ai pas fait parce que si l'indentation était activée, le grand nombre de phrases courtes et d'exemples donnerait une apparence désordonnée aux pages.
 
 \stopSmallPrint
 
 \stopsubsection
 
+% *** Subsection
 \startsubsection
   [title=Special paragraph indenting]
 
@@ -203,12 +180,15 @@ Configuration} allows the same values as \tex{setupnarrower}.
 
 \stopsection
 
+% ** Section
+
 \startsection
   [
     reference=sec:verticalspace,
     title={Vertical space between paragraphs},
   ]
 
+% *** Subsection
 \startsubsection
   [title=\tex{setupwhitespace}]
 
@@ -288,6 +268,7 @@ value, calculated from the current active font size and spacing.
 
 \stopsubsection
 
+% *** Subsection
 \startsubsection
   [title={Paragraphs with no extra vertical space between them}]
 
@@ -307,6 +288,7 @@ omitted, no extra vertical space will be applied.
 
 \stopsubsection
 
+% *** Subsection
 \startsubsection
   [title={Adding additional vertical space at a particular point in the document}]
 
@@ -351,6 +333,7 @@ using the \MyKey{force} option, this will not work.
 
 \stopsubsection
 
+% *** Subsection
 \startsubsection
   [title=\tex{setupblank} and \tex{defineblank}]
 \PlaceMacro{setupblank}\PlaceMacro{defineblank}
@@ -379,6 +362,7 @@ Once our white space configuration is defined, we can use it with
 
 \stopsubsection
 
+% *** Subsection
 \startsubsection
   [title={Other procedures for achieving more vertical space}]
 
@@ -452,6 +436,8 @@ will vertically centre the phrase \quotation{centre line} on the page.
 
 \stopsection
 
+% ** Section
+
 \startsection
   [
     reference=sec:lines,
@@ -500,6 +486,7 @@ to be the best. Therefore, sometimes we will want to tell the program that
 certain places are not good breakpoints. Then on other occasions we will
 want to force a break at a particular point.
 
+% *** Subsection
 \startsubsection
   [
     reference=sec:lettertilde,
@@ -591,6 +578,7 @@ word with an accent than it would for a word without an accent.
 
 \stopsubsection
 
+% *** Subsection
 \startsubsection
   [title=Word hyphenation]
 
@@ -670,6 +658,7 @@ that only act at the point in the source file where they are encountered.
 
 \stopsubsection
 
+% *** Subsection
 \startsubsection
   [
     reference=sec:horizontaltolerance,
@@ -709,6 +698,7 @@ between words on a line.
 
 \stopsubsection
 
+% *** Subsection
 \startsubsection
   [title={Forcing a line break at a certain point}]
 
@@ -812,6 +802,8 @@ force a line break:
 
 \stopsection
 
+% ** Section
+
 \startsection
   [title=Interline space]
 
@@ -877,9 +869,12 @@ would then need to write \tex{setupinterlinespace[reset]}.
 
 \stopsection
 
+% ** Section
+
 \startsection
   [title={Other matters relating to lines}]
 
+% *** Subsection
 \startsubsection
   [
     reference=sec:startlines,
@@ -963,6 +958,7 @@ customised line environment, to insert it we should write:
 
 \stopsubsection
 
+% *** Subsection
 \startsubsection
   [
     reference=sec:linenumbering,
@@ -1050,6 +1046,8 @@ we can use it with
 
 \stopsection
 
+% ** Section 
+
 \startsection
   [
     reference=sec:alignment,
@@ -1060,6 +1058,7 @@ The command that controls text alignment in general is
 \PlaceMacro{setupalign}\cmd{set\-up\-align}. This command is used to
 control both horizontal and vertical alignment.
 
+% *** Subsection
 \startsubsection
   [
     reference=sec:setupalign,
@@ -1183,6 +1182,7 @@ or several lines we can use:
 
 \stopsubsection
 
+% *** Subsection
 \startsubsection
   [
     reference={sec:VerticalAlignment},
@@ -1245,6 +1245,8 @@ alternative is worse in typographical terms.
 
 \stopsection
 
+% * END 
+
 \stopchapter
 
 \stopcomponent
@@ -1253,6 +1255,6 @@ alternative is worse in typographical terms.
 %%% mode: ConTeXt
 %%% mode: auto-fill
 %%% coding: utf-8-unix
-%%% TeX-master: "../introCTX.mkiv"
+%%% TeX-master: "../introCTX.tex"
 %%% End:
 %%% vim:set filetype=context tw=75 : %%%
