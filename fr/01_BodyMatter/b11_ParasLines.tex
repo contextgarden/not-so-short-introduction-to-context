@@ -14,18 +14,18 @@
 
 \startcomponent b11_ParasLines
 
-% * BEGIN
+% *   BEGIN
 
 \startchapter
   [title={Paragraphes, lignes et espace vertical},
   reference=cap:parlinevspace,
-  bookmark={Paragraphs, lines and vertical space},]
+  bookmark={Paragraphes, lignes et espace vertical},]
 
 \TocChap
 
 L'aspect général d'un document est principalement déterminé  par la taille et la disposition des pages que nous avons vues dans le \in{Chapitre}[cap:pages], par la police de caractères que nous avons choisie, traitée dans le \in{Chapitre}[sec:fontscol], et par d'autres questions comme l'espacement entre les lignes, l'alignement des paragraphes et l'espacement entre eux, etc. Ce chapitre se concentre sur ces questions.
 
-% ** Section
+% **  Section
 
 \startsection
   [title={Les paragraphes et leurs caractéristiques}]
@@ -55,7 +55,7 @@ Je ne suis pas tout à fait d'accord. Le simple retrait de la première ligne ne
 
 Voyons tout d'abord comment l'indentation des lignes et des paragraphes est réalisée avec \ConTeXt .
 
-% *** Subsection Mise en retrait automatique des premières lignes des paragraphes
+% *** Subsection Mise en retrait auto des 1er lignes des paragraphes
 
 \startsubsection
   [
@@ -111,158 +111,155 @@ En général, j'active l'indentation automatique dans mes documents avec \tex{se
 
 \stopsubsection
 
-% *** Subsection
+% *** Subsection Narrower 
 \startsubsection
-  [title=Special paragraph indenting]
+  [title=Mise en retrait de paragraphes]
 
-One graphic procedure for highlighting a paragraph is to indent either the
-right or left (or both) sides of a paragraph. This is used, for example,
-for block quotes.
+Une méthode graphique pour mettre en évidence un paragraphe consiste à mettre en retrait le côté droit ou le côté gauche (ou les deux) d'un paragraphe. Cette méthode est utilisée, par exemple, pour les blocs de citation.
 
-\ConTeXt\ has an environment that allows us to alter paragraph indenting to
-highlight the text in a paragraph. This is the \MyKey{narrower}
-environment:
+\ConTeXt\ propose un environnement dédié pour cela~: \MyKey{narrower}.
 
-\PlaceMacro{startnarrower}\type{\startnarrower [Options] ... \stopnarrower}
 
-where {\em Options} can be:
+\PlaceMacro{startnarrower}
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\startnarrower [Options] ... \stopnarrower
+\stopDemoI}
+
+où {\em Options} peut être~:
+
 
 \startitemize
 
-  \item {\tt\bf left}: indent the left margin.
+\item {\tt\bf left} : met en retrait la marge de gauche.
 
-  \item {\tt\bf Num*left}: indent the left margin, multiplying the {\em
-  normal} indent by {\em Num} (for example {\tt 2*left}).
+\item {\tt\bf Num*gauche} : met en retrait la marge de gauche, en multipliant le retrait {\em normal} par {\em Num}. (par exemple, {\tt 2*left}).
 
-  \item {\tt\bf right}: indent the right margin.
+\item {\tt\bf right} : met en retrait la marge de droite.
 
-  \item {\tt\bf Num*right}: indent the right margin, multiplying the {\em
-  normal} indent by {\em Num} (for example {\tt 2*right}).
+\item {\tt\bf Num*right} : met en retrait la marge de droite, en multipliant le retrait {\em normal} par {\em Num}. (par exemple, {\tt 2*right}).
 
-  \item {\tt\bf middle}: indent both margins. This is the default.
+\item {\tt\bf middle} : met en retrait les deux marges. Il s'agit de la valeur par défaut.
 
-  \item {\tt\bf Num*middle}: indent both sides, multiplying the {\em
-  normal} indent by {\em Num}.
+\item {\tt\bf Num*middle} : met en retrait les deux marges, en multipliant le retrait {\em normal} par {\em Num}.
 
 \stopitemize
 
-When explaining the options I mentioned {\em normal indentation}; this
-refers to the amount of left and right indentation that \MyKey{narrower}
-applies by default. This {\em amount} can be configured with
-\PlaceMacro{setupnarrower}\tex{setupnarrower} that allows the following
-configuration options:
+Lors de l'explication des options, j'ai mentionné l'indentation  {\em normale}, qui fait référence à la quantité d'indentation gauche et droite que \MyKey{narrower} applique par défaut. Cette quantité peut être configurée avec \PlaceMacro{setupnarrower} \tex{setupnarrower} qui permet les options de configuration suivantes :
+
 
 \startitemize[packed]
 
-  \item {\tt\bf left}: amount of indentation to be applied to the left
-  margin.
 
-  \item {\tt\bf right}: amount of indentation to be applied to the right
-  margin.
+  \item {\tt\bf left} : montant de l'indentation à appliquer à la marge gauche.
 
-  \item {\tt\bf middle}: amount of indentation to be applied to both
-  margins.
+  \item {\tt\bf right} : montant du retrait à appliquer à la marge de droite.
 
-  \item {\tt\bf before}: command to be run before entering the environment.
+  \item {\tt\bf middle} : montant du retrait à appliquer aux deux marges.
 
-  \item {\tt\bf after}: command to be run after existing the environment.
+  \item {\tt\bf before} : commande à exécuter avant d'entrer dans l'environnement.
+
+  \item {\tt\bf after} : commande à exécuter après avoir existé dans l'environnement.
 
 \stopitemize
 
-If  we want to use different configurations of the narrower environment in
-our document, we can assign a different name to each of them with
-\PlaceMacro{definenarrower}\type{\definenarrower [Name] [Configuration]}
+Si nous voulons utiliser différentes configurations de l'environnement plus étroit dans notre document, nous pouvons attribuer un nom différent à chacune d'entre elles avec \PlaceMacro{definenarrower} \type{\definenarrower [Name] [Configuration]} où {\em Name} est le nom lié à cette configuration et où {\em Configuration} autorise les mêmes valeurs que \tex{setupnarrower}.
 
-where {\em Name} is the name linked to this configuration and where {\em
-Configuration} allows the same values as \tex{setupnarrower}.
+\PlaceMacro{startnarrower}
+\placefigure [force,here,none] [] {}{
+\startDemoHN%
+\definenarrower[ConfigA][left=1cm,right=3cm,default={right,left}]
+\definenarrower[ConfigB][left=3cm,right=1cm,default={right,left}]
+\definenarrower[ConfigC][middle=2cm,default=middle]
+
+Ceci est un petit texte sans effet de narrower.
+
+\startConfigA
+Ceci est un petit texte pour visualiser l'effet de narrower en ConfigA. Ceci est un petit texte pour visualiser l'effet de narrower en ConfigA. Ceci est un petit texte pour visualiser l'effet de narrower en ConfigA.
+\stopConfigA
+
+Ceci est un petit texte sans effet de narrower.
+
+\startConfigB
+Ceci est un petit texte pour visualiser l'effet de narrower en ConfigB. Ceci est un petit texte pour visualiser l'effet de narrower en ConfigB. Ceci est un petit texte pour visualiser l'effet de narrower en ConfigB.
+\stopConfigB
+
+Ceci est un petit texte sans effet de narrower.
+
+\startConfigC
+Ceci est un petit texte pour visualiser l'effet de narrower en ConfigB. Ceci est un petit texte pour visualiser l'effet de narrower en ConfigB. Ceci est un petit texte pour visualiser l'effet de narrower en ConfigB.
+\stopConfigC
+\stopDemoHN}
+
 
 \stopsubsection
 
 \stopsection
 
-% ** Section
+% **  Section
 
 \startsection
   [
     reference=sec:verticalspace,
-    title={Vertical space between paragraphs},
+    title={Espace vertical entre les paragraphes},
   ]
 
-% *** Subsection
+% *** Subsection \tex{setupwhitespace}
 \startsubsection
   [title=\tex{setupwhitespace}]
 
-As we already know from (\in{section}[sec:linebreaks]), it does not matter
-to \ConTeXt\ how many consecutive blank lines there are in the source file:
-one or more blank lines will insert a single paragraph break in the final
-document. To increase the space between paragraphs, it is of no help to add
-an extra blank line in the source file. Instead, this function is
-controlled by the \PlaceMacro{setupwhitespace}\tex{setupwhitespace} command
-that allows the following values:
+Comme nous le savons déjà (\in{section}[sec:linebreaks]), le nombre de lignes vides consécutives dans le fichier source n'a aucune importance pour \ConTeXt\ : une ou plusieurs lignes vides insèreront une seule coupure de paragraphe dans le document final. Pour augmenter l'espace entre les paragraphes, il n'est d'aucune utilité d'ajouter une ligne vierge supplémentaire dans le fichier source. En revanche, cette fonction est contrôlée par la commande \PlaceMacro{setupwhitespace} \tex{setupwhitespace} qui autorise les valeurs suivantes :
 
 \startitemize
 
-  \item {\tt\bf none}: means that there will be no additional vertical
-  space between paragraphs.
+\item {\tt\bf none} : signifie qu'il n'y aura pas d'espace vertical supplémentaire entre les paragraphes.
 
-  \item {\tt\bf small, medium, big}: these insert, respectively, a small,
-  medium or large vertical space. The actual size of the space inserted by
-  these values depends on the font size.
+\item {\tt\bf small, medium, big} : ces valeurs insèrent, respectivement, un espace vertical petit, moyen ou grand. La taille réelle de l'espace inséré par ces valeurs dépend de la taille de la police.
 
-  \item {\tt\bf line, halfline, quarterline}: measures the additional blank
-  space in relation to the height of the lines and inserts an extra line,
-  half a line, or a quarter line of space respectively.
+\item {\tt\bf line, halfline, quarterline} : indique l'espace en terme de hauteur des lignes et insère respectivement une ligne, une demi-ligne ou un quart de ligne d'espace supplémentaire.
 
-  \item {\tt\bf DIMENSION}: establishes an actual dimension for the space
-  between paragraphs. For example, \tex{setupwhitespace[5pt]}.
+\item {\tt\bf DIMENSION} : établit une dimension réelle pour l'espace entre les paragraphes. Par exemple, \tex{setupwhitespace[5pt]}.
 
 \stopitemize
 
-As a general rule, it is not advisable to set an exact dimension as a value
-for \tex{setupwhitespace}. It is preferable to use the symbolic values
-small, medium, big, line, halfline or quarterline. This is so for two
-reasons:
+En règle générale, il n'est pas conseillé de définir une dimension exacte comme valeur pour \tex{setupwhitespace}. Il est préférable d'utiliser les valeurs symboliques small, medium, big, line, halfline ou quarterline. Il en est ainsi pour deux raisons~:
 
 \startitemize
 
-  \item The symbolic values are elastic dimensions (see
-  \in{section}[sec:dimensions]) meaning that they have {\em normal}
-  dimensions but a certain decrease or increase in this value is allowed,
-  to assist \ConTeXt\ in typesetting pages so that paragraph breaks are
-  aesthetically similar. But a fixed measure of separation between
-  paragraphs makes it more difficult to achieve good pagination for the
-  document.
+\item Les valeurs symboliques small, medium, big, etc., sont calculées sur la base de la taille de la police, donc si celle-ci change dans certaines parties, cela changera également la quantité d'espacement vertical entre les paragraphes, et le résultat final sera toujours harmonieux. À l'inverse, une valeur fixe pour l'espacement vertical ne sera pas affectée par les changements de taille de police, ce qui se traduira normalement par un document avec des espaces blancs mal répartis (du point de vue esthétique) et non conformes aux règles de l'ajustement typographique.
 
-  \item The symbolic values small, medium, big, etc., are calculated on the
-  basis of font size, so if this changes in certain parts, it will also
-  change the amount of vertical spacing between  paragraphs, and the end
-  result will always be harmonious. Conversely, a fixed value for vertical
-  spacing will not be affected by changes in font size, which will normally
-  translate into a document with poorly distributed white space (from the
-  aesthetic point of view) and not in accordance with the rules of
-  typographical adjustment.
+\item Les valeurs symboliques sont des dimensions {\em élastiques} (voir \in{section}[sec:dimensions]), ce qui signifie qu'elles ont des dimensions {\em normales} mais qu'une certaine diminution ou augmentation de cette valeur est autorisée, afin d'aider \ConTeXt\ dans la composition des pages de sorte que les coupures de paragraphe soient esthétiquement similaires. Mais une mesure fixe de la séparation entre les paragraphes rend plus difficile l'obtention d'une bonne pagination pour le document.
 
 \stopitemize
 
-When a value has been set for vertical paragraph spacing, two additional
-commands are available: \PlaceMacro{nowhitespace}\tex{nowhitespace}, which
-eliminates any extra space between particular paragraphs, and
-\PlaceMacro{whitespace}\tex{whitespace} which does the opposite. However,
-these commands are rarely needed, because the fact is that \ConTeXt\
-manages the vertical spacing between paragraphs quite well on its own;
-especially if one of the predefined dimensions has been inserted as a
-value, calculated from the current active font size and spacing.
+\PlaceMacro{startnarrower}
+\placefigure [force,here,none] [] {}{
+\startDemoVN%
+\setupwhitespace[medium]%
+Phrase 1.1.\par
+Phrase 1.2.\par
+Phrase 1.3.\par
+\nowhitespace
+Phrase 1.4.\par
+Phrase 1.5.
+
+\setupwhitespace[big]
+Phrase 2.1.\par
+Phrase 2.2.\par
+Phrase 2.3.\par
+\nowhitespace
+Phrase 2.4.\par
+Phrase 2.5.
+\stopDemoVN}
+
+Une fois la valeur définie pour l'espacement vertical des paragraphes, deux commandes supplémentaires sont disponibles : \PlaceMacro{nowhitespace} \tex{nowhitespace}, qui élimine tout espace supplémentaire entre des paragraphes particuliers, et \PlaceMacro{whitespace} \tex{whitespace} qui fait le contraire. Cependant, ces commandes sont rarement nécessaires, car le fait est que \ConTeXt\ gère assez bien l'espacement vertical entre les paragraphes par lui-même ; surtout si l'une des dimensions prédéfinies a été insérée comme valeur, calculée à partir de la taille de police et de la hauteur de ligne courantes.
+
 
 \startSmallPrint
 
-  The meaning of \tex{nowhitespace} is obvious. But not \tex{whitespace}
-  itself, necessarily, because what is the point of ordering vertical
-  spacing for particular paragraphs given that vertical spacing has already
-  been generally established \Conjecture for all paragraphs? However, when
-  writing advanced macros, \tex{whitespace} can be useful in the context of
-  a loop that has to make a decision based on the value of a certain
-  condition. This is more or less advanced programming, and I won't go into
-  it here.
+% TODO Garulfo à dégager car plutot source à confusion ?
+
+La signification de \tex{nowhitespace} est évidente. Mais pas nécessairement celle de \tex{whitespace}, car quel est l'intérêt d'ordonner l'espacement vertical pour des paragraphes particuliers étant donné que l'espacement vertical a déjà été généralement établi \Conjecture pour tous les paragraphes ? Cependant, lors de l'écriture de macros avancées, \tex{whitespace} peut être utile dans le contexte d'une boucle qui doit prendre une décision en fonction de la valeur d'une certaine condition. Il s'agit d'une programmation plus ou moins avancée, et je ne m'y attarderai pas ici.
 
 \stopSmallPrint
 
@@ -270,389 +267,277 @@ value, calculated from the current active font size and spacing.
 
 % *** Subsection
 \startsubsection
-  [title={Paragraphs with no extra vertical space between them}]
+  [title={Paragraphes sans espace vertical supplémentaire entre eux}]
 
-If we want particular parts of our document to have paragraphs that are not
-separated by extra vertical space, we can of course, modify the general
-configuration of \tex{setupwhitespace}, but that is, in a way, contrary to
-the \ConTeXt\ philosophy in which the general configuration commands should
-be placed exclusively in the preamble of the source file, so as to achieve
-a consistent and easily amendable general appearance for documents. Hence
-the \MyKey{packed} environment, whose general syntax is
+Si nous voulons que certaines parties de notre document aient des paragraphes qui ne soient pas séparés par un espace vertical supplémentaire, nous pouvons bien sûr modifier la configuration générale de \tex{setupwhitespace}, mais cela est, d'une certaine manière, contraire à la philosophie de \ConTeXt\ selon laquelle les commandes de configuration générale doivent être placées exclusivement dans le préambule du fichier source, afin d'obtenir une apparence générale cohérente et facilement modifiable pour les documents. D'où l'environnement \MyKey{packed}, dont la syntaxe générale est la suivante
 
-\PlaceMacro{startpacked}\type{\startpacked [Space] ... \stoppacked}
+\PlaceMacro{startpacked}
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\startpacked [Espace] ... \stoppacked
+\stopDemoI}
 
-where {\em Space} is an optional argument indicating what amount of
-vertical space is desired between the paragraphs in the environment. If
-omitted, no extra vertical space will be applied.
+où {\em Espace} est un argument facultatif indiquant la quantité d'espace vertical souhaitée entre les paragraphes de l'environnement. S'il est omis, aucun espace vertical supplémentaire ne sera appliqué.
 
 \stopsubsection
 
 % *** Subsection
 \startsubsection
-  [title={Adding additional vertical space at a particular point in the document}]
+  [title={Ajout d'un espace vertical supplémentaire à un endroit particulier du document}]
 
-If, at a particular point in the document the normal vertical spacing
-between paragraphs is not sufficient, we can use the
-\PlaceMacro{blank}\tex{blank} command. Used without arguments, \tex{blank}
-will insert the same amount of vertical space as has been set with
-\tex{setupwhitespace}. But we can indicate either a specific dimension
-between square brackets, or one of the symbolic values calculated from the
-font size: small, medium or big. We can also multiply those sizes by some
-whole number, and so on, for example, \tex{blank[3*medium]} will insert the
-equivalent of three medium line breaks. We can also put two sizes together.
-For example, \tex{blank[2*big, medium]} will insert two large and a medium
-break.
 
-Since \tex{blank} is designed to increase the vertical space between
-paragraphs, it has no effect if a page break is inserted between the two
-paragraphs whose spacing should be increased; and if we insert two or more
-\tex{blank} commands in succession, only one of them will apply (the one
-with the most space to be inserted). Nor does a \tex{blank} command placed
-after a page break have any effect. However, in these cases we can force
-the insertion of vertical spacing using the symbolic word \MyKey{force} as
-a command option. So, for example, if we want the chapter titles in our
-document to appear further down the page, so that the total length of the
-page is less than the rest of the pages (a relatively frequent
-typographical practice), we must write in the configuration of
-\tex{chapter} command, for example:
+Si, à un endroit particulier du document, l'espacement vertical normal entre les paragraphes n'est pas suffisant, nous pouvons utiliser la commande \PlaceMacro{blank} \tex{blank}. Utilisée sans argument, \tex{blank} insère la même quantité d'espacement vertical que celle définie avec \tex{setupwhitespace}. Mais nous pouvons indiquer soit une dimension spécifique entre crochets, soit l'une des valeurs symboliques calculées à partir de la taille de la police : small, medium ou big. Nous pouvons également multiplier ces tailles par un nombre entier, et ainsi de suite, par exemple, \tex{blank[3*medium]} insérera l'équivalent de trois sauts de ligne moyens. Nous pouvons également combiner deux tailles. Par exemple, \tex{blank[2*big, medium]} insérera deux sauts de ligne de grande taille et un de taille moyenne.
 
-\starttyping
+Puisque \tex{blank} est conçu pour augmenter l'espace vertical entre les paragraphes, il n'a aucun effet si un saut de page est inséré entre les deux paragraphes dont l'espacement doit être augmenté ; et si nous insérons deux ou plusieurs commandes \tex{blank} à la suite, seule l'une d'entre elles s'appliquera (celle dont l'espacement est le plus important). Une commande \tex{blank} placée après un saut de page n'a pas non plus d'effet. Toutefois, dans ces cas, nous pouvons forcer l'insertion d'un espacement vertical en utilisant le mot symbolique \MyKey{force} comme option de la commande. Ainsi, par exemple, si nous voulons que les titres des chapitres de notre document apparaissent plus bas sur la page, de sorte que la longueur totale de la page soit inférieure à celle du reste des pages (une pratique typographique relativement fréquente), nous devons écrire dans la configuration de la commande \tex{chapter}, par exemple :
+
+
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+\startsection[title=C'est le titre]
+C'est le texte de la section .
+\stopsection
+\stopDemoVN}
+
+\placefigure [force,here,none] [] {}{
+\startDemoVN
 \setuphead
-  [chapter]
-  [
-    page=yes,
-    before={\blank[4cm, force]},
-    after={\blank[3*medium]}
-  ]
-\stoptyping
+  [section]
+  [page=yes,
+   before={\blank[4cm, force]},
+   after={\blank[3*medium]}]
+\startsection[title=C'est le titre]
+C'est le texte de la section.
+\stopsection
+\stopDemoVN}
 
-This sequence of commands will ensure that chapters always start on a new
-page and that the chapter label moves four centimetres downwards. Without
-using the \MyKey{force} option, this will not work.
+Cette séquence de commandes garantit que les sections commencent toujours sur une nouvelle page et que l'étiquette du chapitre soit positionner quatre centimètres vers le bas. Sans l'utilisation de l'option \MyKey{force}, cela ne fonctionnera pas.
 
 \stopsubsection
 
 % *** Subsection
 \startsubsection
-  [title=\tex{setupblank} and \tex{defineblank}]
+  [title=\tex{setupblank} et \tex{defineblank}]
+
 \PlaceMacro{setupblank}\PlaceMacro{defineblank}
 
-Earlier, I said that \tex{blank}, used without arguments, is equivalent to
-\tex{blank[big]}. However, we can change this with \tex{setupblank},
-setting it as \tex{setupblank[0.5cm]} for example, or
-\tex{setupblank[medium]}. Used without arguments, \tex{setupblank} will
-adjust the value to the size of the current font.
 
-Just the same as with \tex{setupwhitespace} the white space inserted by
-\tex{blank}, when its value is one of the predefined symbolic values, is an
-elastic dimension that allows for some adjustment. We can change this with
-\MyKey{fixed}, with the possibility, later on, of restoring the default
-value with (\MyKey{flexible}). Thus, for example, for text in double
-columns it is recommended to set \tex{setupblank[fixed, line]}, and when
-going back to a single column \tex{setupblank[flexible, default]}.
+Plus tôt, j'ai dit que \tex{blank}, utilisé sans arguments, est équivalent à \tex{blank[big]}. Cependant, nous pouvons changer cela avec \tex{setupblank}, en le définissant comme \tex{setupblank[0.5cm]} par exemple, ou \tex{setupblank[medium]}. Utilisé sans argument, \tex{setupblank} ajustera la valeur à la taille de la police actuelle.
 
-With \tex{defineblank} we can associate a certain configuration with a
-name. The general format of this command is:
+% TODO Garulfo revoir le wording
 
-\type{\defineblank [Name] [Configuration]}
+De même qu'avec \tex{setupwhitespace}, l'espace blanc inséré par \tex{blank}, lorsque sa valeur est l'une des valeurs symboliques prédéfinies, est une dimension élastique qui permet un certain ajustement. On peut la modifier avec \MyKey{fixed}, avec la possibilité, par la suite, de rétablir la valeur par défaut avec (\MyKey{flexible}). Ainsi, par exemple, pour un texte en double colonne, il est recommandé de définir \tex{setupblank[fixed, line]}, et lors du retour à une seule colonne de revenir à la définition initiale \tex{setupblank[flexible, default]}.
 
-Once our white space configuration is defined, we can use it with
-\tex{blank[ConfigurationName]}.
+Avec \tex{defineblank}, nous pouvons associer une certaine configuration à un nom. Le format général de cette commande est le suivant :
+
+
+\PlaceMacro{startpacked}
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\defineblank [Name] [Configuration]
+\stopDemoI}
+
+Une fois que notre configuration d'espace blanc est définie, nous pouvons l'utiliser avec \tex{blank[Name]}.
 
 \stopsubsection
 
 % *** Subsection
 \startsubsection
-  [title={Other procedures for achieving more vertical space}]
+  [title={Autres procédures pour obtenir plus d'espace vertical}]
 
-In \TeX\ the command that inserts extra vertical space is
-\PlaceMacro{vskip}\tex{vskip}. This command, like almost all \TeX\
-commands, also works in \ConTeXt\, but its use is strongly advised against
-since it interferes with the internal functioning of some of \ConTeXt's
-macros. In its place it is suggested to use \PlaceMacro{godown}\tex{godown}
-whose syntax is:
 
-\type{\godown[Dimension]}
+Dans \TeX\, la commande qui insère un espace vertical supplémentaire est \PlaceMacro{vskip} \tex{vskip}. Cette commande, comme presque toutes les commandes \TeX , fonctionne également dans \ConTeXt , mais son utilisation est fortement déconseillée car elle interfère avec le fonctionnement interne de certaines macros de \ConTeXt. À sa place, il est suggéré d'utiliser \PlaceMacro{godown}\tex{godown} dont la syntaxe est :
 
-where {\em Dimension} needs to be a number with or without decimals,
-followed by a unit of measure. For example, \tex{godown[5cm]} will shift 5
-centimetres down on the page; although if change of page is less than this
-amount, \tex{godown} will only move to the next page. Similarly,
-\tex{godown} will have no effect at the beginning of a page, although we
-can {\em trick it} by writing, for example
-\quotation{\cmd{\textvisiblespace \backslash godown[3cm]}}\footnote{Recall
-that we are using the \quote{\textvisiblespace} character in this document
-to represent a blank space when it is important for us to see it.} that
-will first insert a blank space that will mean we are no longer at the
-beginning of the page, and will then go down three centimetres.
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\godown[Dimension]
+\stopDemoI}
+
+
+où {\em Dimension} doit être un nombre avec ou sans décimales, suivi d'une unité de mesure. Par exemple, \tex{godown[5cm]} déplacera le prochain texte de 5 centimètres vers le bas ; toutefois, si le changement de page arrive avec l'atteinte de cette quantité, \tex{godown} ne fera que passer à la page suivante. De même, \tex{godown} n'aura aucun effet au début d'une page, bien que nous puissions {\em le tromper} en écrivant, par exemple \quotation{\cmd{\textvisiblespace \backslash godown[3cm]}}\footnote{Rappellez-vous que nous utilisons le caractère \quote{\textvisiblespace} dans ce document pour représenter un espace vide lorsqu'il est important pour nous de le voir. } qui va d'abord insérer un espace vide signifiant que nous ne sommes plus au début de la page, puis descendre de trois centimètres.
+
 
 \startSmallPrint
 
-  As we know, \tex{blank} also allows a precise dimension as an argument.
-  Therefore, from the user's point of view, writing \tex{blank[3cm]} or
-  \tex{godown[3cm]} is practically the same. However, there are some subtle
-  differences between them. So, for example, two consecutive \tex{blank}
-  commands cannot be accumulated and when this happens, only the one that
-  imposes a greater distance is applied. Two or more \tex{godown} commands,
-  on the other hand, can accumulate perfectly.
+Comme nous le savons, \tex{blank} permet également d'utiliser une dimension précise comme argument.   Par conséquent, du point de vue de l'utilisateur, écrire \tex{blank[3cm]} ou \tex{godown[3cm]} est pratiquement la même chose. Cependant, il existe quelques différences subtiles entre elles. Ainsi, par exemple, deux commandes \tex{blank} consécutives ne peuvent pas être cumulées et lorsque cela se produit, seule celle qui impose une plus grande distance est appliquée. En revanche, deux commandes \tex{godown} ou plus peuvent parfaitement se cumuler.
+
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+Texte 1.
+\blank[1cm]
+Texte 2.
+\blank[1cm]
+\blank[1cm]
+Texte 3.
+\godown[1cm]
+Texte 4.
+\godown[1cm]
+\godown[1cm]
+Texte 5.
+\stopDemoVN}
+
 
 \stopSmallPrint
 
-Another rather useful \TeX\ command, the use of which poses no problems in
-\ConTeXt, is \PlaceMacro{vfill}\tex{vfill}. This command inserts a flexible
-vertical blank space going as far as the bottom of the page. It is as if
-the command {\em pushes} down what is written after it. This allows for
-interesting effects such as how to place a certain paragraph at the bottom
-of the page, by simply preceding it with \tex{vfill}. Now, the effect of
-\tex{vfill} is difficult to appreciate if its use is not combined with
-forced page breaks, because there is little point in pushing a paragraph or
-line of text down if the paragraph, as it grows, grows upwards.
+Une autre commande \TeX\ plutôt utile, dont l'utilisation ne pose aucun problème dans \ConTeXt, est \PlaceMacro{vfill} \tex{vfill}. Cette commande insère un espace blanc vertical flexible allant jusqu'au bas de la page (c'est le pendant vertical de \tex{hfill} vu \in{section}[sec:horizontal space2]). C'est comme si la commande {\em poussait} vers le bas ce qui est écrit après elle. Cela permet d'obtenir des effets intéressants, comme placer un certain paragraphe en bas de la page, en le faisant simplement précéder de \tex{vfill}. Maintenant, l'effet du \tex{vfill} est difficile à apprécier si son utilisation n'est pas combinée avec des sauts de page forcés, car il n'y a pas beaucoup d'intérêt à pousser un paragraphe ou une ligne de texte vers le bas si le paragraphe, au fur et à mesure qu'il se développe, se développe vers le haut.
 
-So, for example, to ensure that a line is placed at the bottom of the page,
-we should write:
+Ainsi, par exemple, pour s'assurer qu'une ligne est placée en bas de la page, il faut écrire~:
 
-\starttyping
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
 \vfill
-Line at the bottom
+Ligne en bas.
 \page[yes]
-\stoptyping
+\stopDemoI}
 
-Like all other commands that insert vertical space, \tex{vfill} has no
-effect at the beginning of a page. But we can {\em trick it} by preceding
-it with a forced blank space. So, for example:
+Comme toutes les autres commandes qui insèrent un espace vertical, \tex{vfill} n'a aucun effet en début de page. Mais on peut encore {\em le tromper} en la faisant précéder d'un espace blanc forcé, ou bien d'un \tex{strut}. Ainsi, par exemple~:
 
-\starttyping
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
 \page[yes]
 \ \vfill
-Centre line
+Ligne centrée verticalement.
 \vfill
-\page[yes]
-\stoptyping
+\stopDemoI}
 
-will vertically centre the phrase \quotation{centre line} on the page.
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\strut\vfill
+Ligne centrée verticalement.
+\vfill
+\stopDemoI}
+
+permet de centrer verticalement la phrase sur la page.
+
+
+% TODO Garuflo : c'est un vrai todo ici
+
+Un {\tt strut}, ou {\em point d'appui} est un petit bloc invisible sans largeur mais avec la hauteur et la profondeur maximales d'un caractère ou d'une ligne. Nous y reviendrons plus tard, car cet élément est souvent utile dans de nombreux cas pour les auteurs et compositeur pointilleux (voir \in{section}[sec:strut]).
+
 
 \stopsubsection
 
 \stopsection
 
-% ** Section
+% **  Section
 
 \startsection
   [
     reference=sec:lines,
-    title={How \ConTeXt\ builds lines that form paragraphs},
+    title={Comment \ConTeXt\ construit les lignes qui forment les paragraphes},
   ]
 
-One of the main duties of a typesetting system is to take a long string of
-words and divide it into individual lines of the appropriate size. For
-example, each paragraph in this text has been divided into lines 15
-centimetres wide, but the author has not had to worry about such details,
-as \ConTeXt\ chooses the breakpoints after considering each paragraph in
-its entirety, so that the final words of a paragraph can really influence
-the division of the first line. As a result, the space between the words in
-the entire paragraph is as uniform as possible.
+L'une des principales tâches d'un système de composition consiste à prendre une longue chaîne de mots et à la diviser en lignes individuelles de la taille appropriée. Par exemple, chaque paragraphe de ce texte a été divisé en lignes de \the\textwidth de large, mais l'auteur n'a pas eu à se soucier de ces détails, car \ConTeXt\ choisit les points d'arrêt après avoir considéré chaque paragraphe dans son intégralité, de sorte que les derniers mots d'un paragraphe peuvent réellement influencer la division de la première ligne. Par conséquent, l'espace entre les mots de l'ensemble du paragraphe est aussi uniforme que possible.
+
 
 \startSmallPrint
 
-  This is one aspect where we can best note the different way word
-  processors work and the better quality obtained with systems such as
-  \ConTeXt. Because a word processor, when it reaches the end of the line
-  and jumps to the next, adjusts the white space in the line just finished
-  to enable right justification. It does this with each line, and at the
-  end, each line in the paragraph will have different interword spacing.
-  This can cause a very bad effect (e.g. \quote{rivers} of white space
-  running through a text). \ConTeXt, on the other hand, processes the
-  paragraph in its entirety and for each line calculates how many
-  breakpoints are admissible and the amount of interword spacing that would
-  result from a line break. As the breakpoint of a line affects the
-  potential breakpoints of the next lines, the total number of
-  possibilities can be very high; but that is not a problem for  \ConTeXt.
-  It will make a final decision based on the entire paragraph, ensuring
-  that the space between words on each line is {\em as similar as
-  possible}, which results in much better typeset paragraphs; visually more
-  compact.
+C'est l'un des aspects où l'on peut le mieux constater la différence de fonctionnement des traitements de texte et la meilleure qualité obtenue avec des systèmes tels que \ConTeXt. En effet, un traitement de texte, lorsqu'il atteint la fin de la ligne et passe à la suivante, ajuste l'espace blanc de la ligne qui vient de se terminer pour permettre la justification à droite. Il fait cela pour chaque ligne, et à la fin, chaque ligne du paragraphe aura un espacement différent entre les mots.   Cela peut produire un très mauvais effet (par exemple, une {\em rivière} d'espaces blancs qui traverse le texte). \ConTeXt, en revanche, traite le paragraphe dans son intégralité et calcule pour chaque ligne le nombre de points d'arrêt admissibles et la quantité d'espacement entre les mots qui résulterait d'un saut de ligne. Comme le point de rupture d'une ligne affecte les points de rupture potentiels des lignes suivantes, le nombre total de possibilités peut être très élevé ; mais ce n'est pas un problème pour \ConTeXt.   Il prendra une décision finale en se basant sur l'ensemble du paragraphe, en s'assurant que l'espace entre les mots de chaque ligne est {\em aussi similaire que possible}, ce qui donne des paragraphes bien mieux composés, visuellement plus compacts.
 
 \stopSmallPrint
 
-To do this, \ConTeXt\ tests different alternatives, and assigns a {\em
-badness} value to each of them based on its parameters. These were
-established after an in-depth study of the art of typography. Finally,
-after having explored all possibilities, \ConTeXt\ chooses the least
-unsuitable option (the one with the least badness value). In general, this
-functions quite well, but there will inevitably be cases where line
-breakpoints are chosen that are not the best, or that do not appear to us
-to be the best. Therefore, sometimes we will want to tell the program that
-certain places are not good breakpoints. Then on other occasions we will
-want to force a break at a particular point.
+Pour ce faire, \ConTeXt\ teste différentes alternatives, et attribue une valeur de {\em mauvais goût (badness)} à chacune d'entre elles en fonction de ses paramètres. Ceux-ci ont été établis après une étude approfondie de l'art de la typographie. Enfin, après avoir exploré toutes les possibilités, \ConTeXt\ choisit l'option la moins inadaptée (celle qui a la plus petite valeur de mauvais goût). En général, cela fonctionne assez bien, mais il y aura inévitablement des cas où l'on choisira des points de rupture de ligne qui ne sont pas les meilleurs, ou qui ne nous paraissent pas être les meilleurs. Par conséquent, nous voudrons parfois indiquer au programme que certains endroits ne sont pas de bons points d'arrêt. En d'autres occasions, nous voudrons forcer une rupture à un point particulier.
 
 % *** Subsection
 \startsubsection
   [
     reference=sec:lettertilde,
-    title={Use of the reserved \quote{{\tt\lettertilde}} character},
+    title={Utilisation du caractère réservé \quote{\tt\lettertilde}},
   ]
 
-The main candidates for line breakpoints are obviously the white space
-between words. To indicate that a certain space should never be replaced by
-a line break, we use, as we already know, the \quote{\lettertilde} reserved
-character, which \TeX\ calls a {\em tie}, tying two words together.
+Les principaux candidats pour les sauts de ligne sont évidemment les espaces blancs entre les mots. Pour indiquer qu'un certain espace ne doit jamais être remplacé par un saut de ligne, nous utilisons, comme nous le savons déjà, le caractère réservé \quote{\lettertilde}, que \TeX\ appelle une {\em attache (tie)}, liant deux mots ensemble.
 
-It is generally recommended to use this non-breaking space in the following
-cases:
+Il est généralement recommandé d'utiliser cet espace insécable dans les cas suivants :
+
 
 \startitemize[packed]
 
-  \item Between the parts that make up an abbreviation. For example, {\tt
-  U\lettertilde S}.
+\item Entre les parties qui composent une abréviation. Par exemple, {\tt U\lettertilde S}.
 
-  \item Between abbreviations and the term they refer to. For example, {\tt
-  Dr\lettertilde Anne Ruben} or {\tt p.\lettertilde 45}.
+\item entre les abréviations et le terme auquel elles se réfèrent. Par exemple, {\tt Dr\lettertilde Anne Ruben} ou {\tt p.\lettertilde 45}.
 
-  \item Between numbers and the term that goes with them. For example, {\tt
-  Elizabeth\lettertilde II}, {\tt 45\lettertilde volumes}.
+\item Entre les chiffres et le terme qui les accompagne. Par exemple, {\tt Elizabeth\lettertilde II}, {\tt 45\lettertilde volumes}.
 
-  \item Between digits and the symbols preceding or following them so long
-  as they are not superscripts. For example, {\tt 73\lettertilde km}, {\tt
-  \$\lettertilde 53}; however, {\tt 35'}.
+\item Entre les chiffres et les symboles qui les précèdent ou les suivent, à condition qu'ils ne soient pas en exposant. Par exemple, {\tt 73\lettertilde km}, {\tt \$\lettertilde 53} ; cependant, {\tt 35'}.
 
-  \item In percentages expressed in words. For example, {\tt
-  twenty\lettertilde per\lettertilde cent}.
+\item En pourcentages exprimés en mots. Par exemple, {\tt trente\lettertilde pour\lettertilde cent}.
 
-  \item In groups of numbers separated by white space. For example, {\tt
-  5\lettertilde 357\lettertilde 891}. Although in these cases it is
-  preferable to use what is called {\em thin space} achieved in \ConTeXt\
-  with the \tex{,} command, and therefore write {\tt
-  5\backslash,357\backslash,891}.
+\item Dans les groupes de chiffres séparés par un espace blanc. Par exemple, {\tt 5\lettertilde 357\lettertilde 891}. Bien que dans ces cas, il soit préférable d'utiliser ce que l'on appelle l'espacement fin, obtenu dans \ConTeXt\ avec la commande \tex{,}, et donc d'écrire {\tt 5\backslash,357\backslash,891}.
 
-  \item To avoid an abbreviation being the only item on that line. For
-  example:
+  \item Pour éviter qu'une abréviation soit le seul élément de cette ligne. Par exemple :
 
-  \starttyping
-    There are sectors such as entertainment, communications media,
-    commerce,~etc.
-  \stoptyping
+\placefigure [force,here,none] [] {}{
+\startDemoI
+Il existe des secteurs tels que le divertissement, les médias de communication,  le commerce,~etc.
+\stopDemoI}
+
 
 \stopitemize
 
-To these cases, {\sc Knuth} (the father of \TeX) adds the following
-recommendations:
+A ces cas, {\sc Knuth} (le père de \TeX) ajoute les suivantes recommandations :
 
 \startitemize[packed]
 
-  \item After an abbreviation that is not at the end of a sentence.
+\item Après une abréviation qui ne se trouve pas à la fin d'une phrase.
 
-  \item In reference to parts of a document such as chapters, appendices,
-  figures, etc. For example {\tt Chapter\lettertilde 12}.
+  \item En référence aux parties d'un document telles que les chapitres, les annexes, les figures, etc. Par exemple : {\tt Chapitre\lettertilde 12}.
 
-  \item Between the first name and the initial of the second name of a
-  person, or between the initial of the first name and the surname. For
-  example, {\tt Donald\lettertilde E. Knuth}, {\tt A.\lettertilde
-  Einstein}.
+  \item Entre le prénom et l'initiale du second nom d'une personne, ou entre l'initiale du prénom et le nom de famille. Par exemple, {\tt Donald\lettertilde E. Knuth}, {\tt A.\lettertilde Einstein}.
 
-  \item Between mathematical symbols in apposition to names. For example,
-  {\tt dimension\lettertilde \$d\$}, {\tt width\lettertilde \$w\$}.
+  \item Entre les symboles mathématiques en apposition aux noms. Par exemple, {\tt dimension\lettertilde \$d\$}, {\tt width\lettertilde \$w\$}.
 
-  \item Between symbols in series. For example {\tt \{1,\lettertilde 2,
-  \backslash dots,\lettertilde \$n\$\}}.
+  \item Entre des symboles en série. Par exemple : {\tt \{1,\lettertilde 2, \backslash dots,\lettertilde \$n\$\}}.
 
-  \item When a number is strictly bound up with a preposition. For example
-  {\tt from 0 to\lettertilde 1}.
+  \item Quand un nombre est strictement lié à une préposition. Par exemple : {\tt de 0 à\lettertilde 1}.
 
-  \item When mathematical symbols are expressed in words. For example, {\tt
-  equals\lettertilde a\lettertilde \$n\$}.
+  \item Lorsque des symboles mathématiques sont exprimés par des mots. Par exemple, {\tt égale\lettertilde à\lettertilde \$n\$}.
 
-  \item In lists within a paragraph. For example: {\tt (1)\lettertilde
-  green, (2)\lettertilde red, (3)\lettertilde blue}.
+  \item Dans les listes à l'intérieur d'un paragraphe. Par exemple : {\tt (1)\lettertilde vert, (2)\lettertilde rouge, (3)\lettertilde bleu}.
+
 
 \stopitemize
 
-Many cases? Without a doubt, typographic perfection has a cost in terms of
-extra effort. It is clear that if we don't want to, we don't have to apply
-these rules, but it doesn't hurt to know them. Besides -- and here I speak
-from experience -- once we get used to applying them (or any of them),
-doing so becomes automatic. It is like putting accents on words as we write
-them (as we need to do in Spanish): for those of us who do, if we are used
-to writing them automatically, it doesn't take us any longer to write a
-word with an accent than it would for a word without an accent.
+De nombreux cas ? Sans aucun doute, la perfection typographique a un coût en termes d'efforts supplémentaires. Il est clair que si nous ne le voulons pas, nous ne sommes pas obligés d'appliquer ces règles, mais cela ne fait pas de mal de les connaître. En outre, et je parle ici d'expérience, une fois que nous nous sommes habitués à les appliquer (ou à n'importe laquelle d'entre elles), cela devient automatique. C'est comme mettre des accents sur les mots lorsque nous les écrivons (comme nous devons le faire en français) : pour ceux d'entre nous qui le font, si nous sommes habitués à les écrire automatiquement, il ne nous faut pas plus de temps pour écrire un mot avec un accent que pour un mot sans accent.
 
 \stopsubsection
 
 % *** Subsection
 \startsubsection
-  [title=Word hyphenation]
+  [title=La césure des mots]
 
-Except for languages made up mostly of monosyllables, it is quite difficult
-to get an optimal result if line breakpoints are only in the space between
-words. Hence \ConTeXt\ also analyses the possibility of inserting a line
-break between two syllables of a word; and to do this it is essential for
-it to know the language the text is in, since hyphenation rules are
-different for each language. Thus the importance of the \tex{mainlanguage}
-command in the document preamble.
+Sauf pour les langues composées principalement de monosyllabes, il est assez difficile d'obtenir un résultat optimal si les sauts de ligne se trouvent uniquement au niveau des espaces entre les mots. C'est pourquoi \ConTeXt\ analyse également la possibilité d'insérer un saut de ligne entre deux syllabes d'un mot ; et pour ce faire, il est essentiel qu'il connaisse la langue du texte, puisque les règles de césure sont différentes pour chaque langue. D'où l'importance de la commande \tex{mainlanguage} dans le préambule du document.
 
-It can happen that \ConTeXt\ has been unable to hyphenate a word suitably.
-Sometimes this can be because its own rules for splitting words get in the
-way of the task (for example, \ConTeXt\ never splits a word into two parts
-if these parts do not have a minimum number of letters); or because the
-word is ambiguous. After all, what might \ConTeXt\ do with the word
-\quotation{unionised}? The word could appear in a phrase like
-\quotation{the unionised workforce}, but it could also appear in a
-chemistry text as \quotation{an unionised particle} (i.e. un-ionised). And
-what if \ConTeXt\ had to deal with the word \quotation{manslaughter} as the
-last word on a page before a page break. It may split the word as
-man-slaughter (correct) but it may also split it as mans-laughter
-(ambiguous).
+\PlaceMacro{mainlanguage}
 
-Whatever the reason, if we are not satisfied with how a word has been
-split, or it is incorrect, we can change it by expressly indicating the
-potential points where a word can be split with the \tex{-} control symbol.
-So, for example, if \quotation{unionised} gave us any problems,  we could
-write it in the source file as \MyKey{union\backslash-ised}; or if we had a
-problem with \quotation{manslaughter}, we could write
-\MyKey{man\backslash-slaughter}.
+Il peut arriver que \ConTeXt\ soit incapable de couper un mot de manière appropriée. Cela peut être dû à ses propres règles de division des mots (par exemple, \ConTeXt\ ne divise jamais un mot en deux parties si ces parties n'ont pas un nombre minimum de lettres) ou à l'ambiguïté du mot. Par exemple, le mot malaise se coupe en \quotation{mal-aise} s’il s’agit du nom masculin qui désigne un état de désagrément ou de gêne passagère, mais en \quotation{ma-laise} s’il s’agit du nom féminin ou de l’adjectif relatif à la Malaisie. 
 
-If the problem word is used several times in our document then the
-preference is to show how it should be hyphenated in our preamble with the
-\PlaceMacro{hyphenation}\tex{hyphenation} command: this command, which is
-intended to be included in the preamble of the source file, takes one or
-more words (commas-separated) as an argument, indicating the points at
-which they can be split with a hyphen. For example:
+Quelle que soit la raison, si nous ne sommes pas satisfaits de la façon dont un mot a été scindé, ou s'il est incorrect, nous pouvons le modifier en indiquant expressément les points potentiels où un mot peut être scindé avec le symbole de contrôle \tex{-}. Ainsi, par exemple, si \quotation{malaise} nous posait problème, nous pourrions l'écrire dans le fichier source sous la forme \MyKey{mal\backslash-aise} ou \MyKey{ma\backslash-laise}.
 
-\type{\hyphenation{union-ised, man-slaughter}}
+Si le mot problématique est utilisé plusieurs fois dans notre document, il est préférable d'indiquer la manière dont il doit être séparé par un trait d'union dans notre préambule à l'aide de la commande \PlaceMacro{hyphénation} \tex{hyphénation} : cette commande, qui est destinée à être incluse dans le préambule du fichier source, prend un ou plusieurs mots (séparés par des virgules) comme argument, indiquant les points auxquels ils peuvent être séparés par un trait d'union. Par exemple :
 
-If the word that is the subject of this command does not contain a hyphen,
-the effect will be that the word will never be hyphenated. This same effect
-can be achieved by using the \PlaceMacro{hbox}\tex{hbox} command that
-creates an indivisible horizontal box around the word, or
-\PlaceMacro{unhyphenated}\tex{unhyphenated} that prevents the hyphenation
-of the word or words it takes as arguments. But while \tex{hyphenation}
-acts globally, \tex{hbox} and \tex{unhyphenated} act locally, meaning that
-the \tex{hyphenation} command affects all occurrences in the document of
-words included in its argument; unlike \tex{hbox} or \tex{unhyphenated}
-that only act at the point in the source file where they are encountered.
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\hyphenation{mal-aise, roudou-dou}
+\stopDemoI}
+
+% TODO Garulfo redite à simplifier
+
+Si le mot qui fait l'objet de cette commande ne contient pas de trait d'union, l'effet sera que le mot ne sera jamais ciselé. Ce même effet peut être obtenu en utilisant la commande \PlaceMacro{hbox} \tex{hbox} qui crée une boîte horizontale indivisible autour du mot, ou la commande \PlaceMacro{unhyphenated} \tex{unhyphenated} qui empêche la césure du ou des mots qu'elle prend comme arguments. Mais alors que \tex{hyphenation} agit globalement, \tex{hbox} et \tex{unhyphenated} agissent localement, ce qui signifie que la commande \tex{hyphenation} affecte toutes les occurrences dans le document des mots inclus dans son argument, contrairement à \tex{hbox} ou \tex{unhyphenated} qui n'agissent qu'à l'endroit du fichier source où ils sont rencontrés.
 
 \startSmallPrint
 
-  Internally, how hyphenation works is controlled by the \TeX\
-  \PlaceMacro{pretolerance}\tex{pretolerance} and
-  \PlaceMacro{tolerance}\tex{tolerance} variables. The first of these
-  controls the admissibility of a split done only on white space. By
-  default it is 100, but if we alter it, for example, to 10\,000, then
-  \ConTeXt\ will always consider it acceptable for there to be a line break
-  that does not mean splitting words according to syllables, meaning that
-  {\em de facto}, we are removing hyphenation based on syllables. While if,
-  for example, we were to set the \tex{pretolerance} value to a -1, we
-  would be forcing  \ConTeXt\ to use word hyphenation at the end of the
-  line every time.
+En interne, le fonctionnement de la césure est contrôlé par les paramètres \TeX\ \PlaceMacro{pretolerance}. \tex{pretolerance} et \PlaceMacro{tolerance} \tex{tolerance}. La première de ces variables contrôle l'admissibilité d'une division effectuée uniquement sur un espace blanc. Par défaut, elle est égale à 100, mais si nous la modifions, par exemple, pour la porter à 10\,000, alors \ConTeXt\ considérera toujours qu'il est acceptable qu'il y ait un saut de ligne qui n'implique pas la séparation des mots en fonction des syllabes, ce qui signifie que {\em de facto}, nous supprimons la césure basée sur les syllabes. Alors que si, par exemple, nous fixions la valeur de \tex{pretolerance} à -1, nous obligerions \ConTeXt\ à utiliser la césure des mots en fin de ligne à chaque fois.
 
-  We can directly set an arbitrary value for \tex{pretolerance} by simply
-  assigning a value there in our document. For example:
+Nous pouvons directement définir une valeur arbitraire pour \tex{pretolerance} en lui attribuant simplement une valeur dans notre document. Par exemple :
 
-  \type{\pretolerance=10000}
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\pretolerance=10000
+\stopDemoI}
 
-  but we can also manipulate this value with the \MyKey{lesshyphenation}
-  and \MyKey{morehyphenation} values in \tex{setupalign}. In this regard
-  see \in{section}[sec:setupalign].
+Nous pouvons également manipuler cette valeur avec les valeurs \MyKey{lesshyphenation} et \MyKey{morehyphenation} dans \tex{setupalign}. Voir à ce sujet la section \in{section} [sec:setupalign].
 
 \stopSmallPrint
 
@@ -662,139 +547,90 @@ that only act at the point in the source file where they are encountered.
 \startsubsection
   [
     reference=sec:horizontaltolerance,
-    title={Tolerance level for line breaks},
+    title={Niveau de tolérance pour les sauts de ligne},
   ]
 
-When looking for possible line break points, \ConTeXt\ is usually quite
-strict, which means that it prefers to allow a word to go beyond the
-right-hand margin because it has not been able to hyphenate it, and prefers
-not to insert a line break before the word if this results in too great an
-increase in interword space on that line. This default behaviour normally
-provides optimal results, and only exceptionally do certain lines stand out
-somewhat on the right-hand side. The idea is that the author (or
-typesetter), reviews these exceptional cases once the document is finished,
-to make the appropriate decision, which could be a \tex{break} command
-before the word that extends beyond, or could also mean wording the
-paragraph differently so that this word shifts position elsewhere.
+Lorsqu'il recherche les points de retour à la ligne possibles, \ConTeXt\ est généralement assez strict, ce qui signifie qu'il préfère permettre à un mot de dépasser la marge de droite parce qu'il n'a pas pu y placer de césure, et préfère ne pas insérer de retour à la ligne avant le mot si cela entraîne une augmentation trop importante de l'espace inter-mots sur cette ligne. Ce comportement par défaut donne normalement des résultats optimaux, et ce n'est qu'exceptionnellement que certaines lignes ressortent quelque peu sur la droite. L'idée est que l'auteur (ou le compositeur) examine ces cas exceptionnels une fois le document terminé, pour prendre la décision appropriée, qui pourrait être une commande \tex{break} devant le mot qui s'étend au-delà, ou pourrait également signifier une formulation différente du paragraphe afin que ce mot change de position.
 
-However, in some cases, \ConTeXt's low tolerance can be a problem. In these
-cases we can tell it to be more tolerant with white space in lines. We have
-the \PlaceMacro{setuptolerance}\tex{setuptolerance} command for this,
-allowing us to alter the level of tolerance in calculating line breaks,
-which \ConTeXt\ calls \quotation{horizontal tolerance} (because it affects
-horizontal space) and  \quotation{vertical tolerance} when calculating page
-breaks. We will talk about this in \in{section}[sec:VerticalAlignment].
+Cependant, dans certains cas, la faible tolérance de \ConTeXt\ peut être un problème. Dans ces cas, nous pouvons lui demander d'être plus tolérant avec les espaces blancs dans les lignes. Nous disposons pour cela de la commande \PlaceMacro{setuptolerance} \tex{setuptolerance}, qui nous permet de modifier le niveau de tolérance dans le calcul des sauts de ligne, que \ConTeXt\ appelle \quotation{tolérance horizontale} (car elle affecte l'espace horizontal) et \quotation{tolérance verticale} lors du calcul des sauts de page. Nous en parlerons dans la \in{section} [sec:VerticalAlignment].
 
-Horizontal tolerance (which is the one that effects line breaks), is set at
-the \MyKey{verystrict} value by default. We can alter this by setting, as
-alternatives, any of the following values: \MyKey{strict},
-\MyKey{tolerant}, \MyKey{verytolerant} or \MyKey{stretch}. So, for example,
+La tolérance horizontale (qui est celle qui affecte les sauts de ligne), est fixée à la valeur \MyKey{verystrict} par défaut. Nous pouvons modifier cela en définissant, comme alternatives, l'une des valeurs suivantes : \MyKey{strict}, \MyKey{tolerant}, \MyKey{verytolerant} ou \MyKey{stretch}. Ainsi, par exemple,
+\MyKey{verytolerant} rendra presque impossible le dépassement de la marge de droite par une ligne, quitte à établir un espacement très important et inesthétique entre les mots d'une ligne.
 
-\type{\setuptolerance[horizontal, verytolerant]}
 
-will make it almost impossible for a line to go beyond the right-hand
-margin, even if this means establishing a very large and unsightly spacing
-between words on a line.
+\startbuffer[testtolerance]
+Pour en revenir à l'utilisation des caractères dans l'édition électronique, bon nombre de nouveaux typographes tirent leurs connaissances et leurs informations sur les règles de la typographie des livres, des magazines informatiques ou des manuels d'instruction qu'ils reçoivent à l'achat d'un PC ou d'un logiciel. 
+\stopbuffer
+
+{\bf Exemple avec \MyKey{verytolerant}}
+{\startcolumns[n=3]\tfa
+\setuptolerance [horizontal,verytolerant]%
+\getbuffer[testtolerance]
+\stopcolumns}
+
+{\bf Exemple avec \MyKey{verystrict}}
+{\startcolumns[n=3]\tfa
+\setuptolerance [horizontal,verystrict]%
+\getbuffer[testtolerance]
+\stopcolumns}
+
 
 \stopsubsection
 
 % *** Subsection
 \startsubsection
-  [title={Forcing a line break at a certain point}]
+  [title={Forcer un saut de ligne à un certain point}]
 
-To force a line break at a certain point we use the
-\PlaceMacro{break}\tex{break}, \PlaceMacro{crlf}\tex{crlf} or
-\PlaceMacro{\backslash}{\tt\backslash\backslash} commands. The first of
-these, \tex{break}, enters a line break at the point where it is located.
-This will most probably cause the line where the command is placed to be
-aesthetically deformed, with an immense amount of white space between the
-words on that line. As can be seen in the following example in which the
-\tex{break} command in the third line (of the source fragment on the left)
-results in a second quite ugly line (in the formatted text on the right).
+Pour forcer un retour à la ligne à un certain point, nous utilisons les fonctions \PlaceMacro{break} \tex{break}, \PlaceMacro{crlf} \tex{crlf} ou \PlaceMacro{\backslash} {\tt\backslash\backslash}. La première d'entre elles, \tex{break}, introduit un saut de ligne à l'endroit où elle se trouve. Cela entraînera très probablement une déformation esthétique de la ligne où la commande est placée, avec une immense quantité d'espace blanc entre les mots de cette ligne. Comme on peut le voir dans l'exemple suivant, où la commande \tex{break} dans la troisième ligne (du fragment source à gauche) donne lieu à une deuxième ligne assez laide (dans le texte formaté à droite).
 
-\startDoubleExample
 
-\starttyping
-On the corner of the old quarter I saw
-him \emph{swagger} along like
-the\break tough guys do when they walk,
-hands always in their overcoat pockets,
-so no one can know which of them carries
-the dagger.
-\stoptyping
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+Au coin du vieux quartier, je 
+l'ai vu \emph{se pavaner} comme
+le font\break les gros bras quand
+ils marchent, les mains toujours
+dans les poches de leur pardessus,
+pour que personne ne puisse savoir
+lequel d'entre eux porte le poignard.
+\stopDemoVN}
 
-On the corner of the old quarter I saw him {\em swagger} along like
-the\break tough guys do when they walk, hands always in their overcoat
-pockets, so no one can know which of them carries the dagger.
 
-\stopDoubleExample
 
-To avoid this effect, we can use the \cmd{\backslash} or \tex{crlf}
-commands that also insert a forced line break, but they fill in the
-original line with enough blank space to align it to the left:
+Pour éviter cet effet, nous pouvons utiliser les commandes \cmd{\backslash} ou \tex{crlf} qui insèrent également un saut de ligne forcé, mais elles remplissent la ligne d'origine avec suffisamment d'espace vide pour l'aligner à gauche :
 
-\startDoubleExample
 
-\starttyping
-On the corner of the old quarter I saw
-him \emph{swagger} along like
-the\\ tough guys do when they walk,
-hands always in their overcoat pockets,
-so no one can know which of them carries
-the dagger.
-\stoptyping
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+Au coin du vieux quartier, je 
+l'ai vu \emph{se pavaner} comme
+le font\\ les gros bras quand
+ils marchent, les mains toujours
+dans les poches de leur pardessus,
+pour que personne ne puisse savoir
+lequel d'entre eux porte le poignard.
+\stopDemoVN}
 
-On the corner of the old quarter I saw him {\em swagger} along like the\\
-tough guys do when they walk, hands always in their overcoat pockets, so no
-one can know which of them carries the dagger.
+Sur les lignes {\em normales}, pour autant que je sache, il n'y a pas de différence entre \cmd{\backslash} et \tex{crlf} ; mais dans un titre de section, il y a une différence~:
 
-\stopDoubleExample
-
-On {\em normal} lines, as far as I know, there are no differences between
-\cmd{\backslash} and \tex{crlf}; but in a section title there is a
-difference:
 
 \startitemize
 
-  \item {\tt\bf\backslash\backslash} generates a line break in the body of
-  the document, but not when the section title is transferred to the table
-  of contents.
+\item {\tt\bf\backslash\backslash} génère un saut de ligne dans le corps du document, mais pas lorsque le titre de la section est transféré dans la table des matières.
 
-  \item {\bf\tex{crlf}} generates a line break that is applied both in the
-  body of the document and when the section title is transferred to the
-  table of contents.
+\item {\bf\tex{crlf}} génère un retour à la ligne qui s'applique à la fois dans le corps du document et lorsque le titre de la section est transféré dans la table des matières.
 
 \stopitemize
 
-A line break should not be confused with a paragraph break. A line break
-simply ends the current line and starts the next line, but keeps us in the
-same paragraph, so the separation between the original line and the new
-line will be determined by the normal spacing within a paragraph.
-Therefore, there are only three scenarios in which it may be recommended to
-force a line break:
+Un saut de ligne ne doit pas être confondu avec un saut de paragraphe. Un saut de ligne met simplement fin à la ligne en cours et commence la ligne suivante, mais nous maintient dans le même paragraphe, de sorte que la séparation entre la ligne d'origine et la nouvelle ligne sera déterminée par l'espacement normal dans un paragraphe. Par conséquent, il n'y a que trois scénarios dans lesquels il peut être recommandé de forcer un saut de ligne :
 
 \startitemize
 
-  \item In very exceptional cases when \ConTeXt\ has not been able to find
-  a suitable line break, so that a line protrudes on the right. In these
-  cases (which occur very rarely, mainly when the line has indivisible {\em
-  boxes}, or {\em verbatim} text [see \in{section}[sec:verbatim]]), it
-  could be helpful to force a line break with \tex{break} just before the
-  word that protrudes into the right margin.
+\item Dans des cas très exceptionnels, lorsque \ConTeXt\ n'a pas été en mesure de trouver un saut de ligne approprié, de sorte qu'une ligne dépasse sur la droite. Dans ces cas (qui se produisent très rarement, principalement lorsque la ligne contient des {\em boîtes} indivisibles, ou du texte {\em verbatim} [voir \in{section}[sec:verbatim]]), il peut être utile de forcer un saut de ligne avec \tex{break} juste avant le mot qui dépasse dans la marge de droite.
 
-  \item In paragraphs that are actually made up of individual lines, each
-  with information independent of that of the previous lines, for example,
-  the heading of a letter in which the first line may contain the name of
-  the sender, the second the recipient, and the third the date; or in a
-  text talking about the authorship of a work, where one line has the
-  author's name, another their office or academic position and perhaps a
-  third line with the date, etc. In these cases the line break should be
-  forced with the \cmd{\backslash} or \tex{crlf} commands. It is also
-  common for these kinds of paragraphs to be right-aligned.
+\item Dans les paragraphes qui sont en fait composés de lignes individuelles, chacune contenant des informations indépendantes de celles des lignes précédentes, par exemple, l'en-tête d'une lettre dans laquelle la première ligne peut contenir le nom de l'expéditeur, la deuxième le destinataire et la troisième la date ; ou dans un texte parlant de la paternité d'une œuvre, où une ligne contient le nom de l'auteur, une autre sa fonction ou sa position académique et peut-être une troisième ligne avec la date, etc. Dans ces cas, le saut de ligne doit être forcé avec les commandes \cmd{\backslash} ou \tex{crlf}. Il est également courant que ce type de paragraphe soit aligné à droite.
 
-  \item When writing poems or similar kinds of texts, to separate one verse
-  from another. Although in this latter case it is preferable to use the
-  {\tt lines} environment explained in \in{section}[sec:startlines].
+\item Lors de la rédaction de poèmes ou d'autres types de textes similaires, pour séparer un vers d'un autre. Bien que dans ce dernier cas, il soit préférable d'utiliser l'environnement {\tt lines} expliqué dans \in{section}[sec:startlines].
 
 \stopitemize
 
@@ -802,159 +638,187 @@ force a line break:
 
 \stopsection
 
-% ** Section
+% **  Section
 
 \startsection
-  [title=Interline space]
+  [title=Espace interligne]
 
-Interline space is the distance separating the lines that make up a
-paragraph. \ConTeXt\ calculates this automatically on the basis of the
-actual font being used, and, above all, on the base size set with
-\tex{setupbodyfont} or \tex{switchtobodyfont}.
 
-We can influence interline space with the
-\PlaceMacro{setupinterlinespace}\tex{setupinterlinespace} command that
-allows for three different kinds of syntax:
+L'interligne est la distance séparant les lignes qui composent un paragraphe. \ConTeXt\ calcule automatiquement cette distance en fonction de la police utilisée et, surtout, de la taille de base définie avec \tex{setupbodyfont} ou \tex{switchtobodyfont}.
+
+% DONE Garulfo added
+
+\startSmallPrint
+
+Plus précisément, l'espace interligne est  déterminée à partir de la taille de la police utilisée.  Elle  vaut dans \type{2.8ex}, un  \type{ex} étant la hauteur du caractère x. Une ligne  a une hauteur  et une profondeur.   La somme de  la hauteur maximale et de la profondeur maximale donne la distance interligne.
+
+\placefigure [force,here,none] [] {}{
+\startDemoHN
+\leavevmode
+\ruledhbox{%
+\tfc Une ligne a une {\tt height} et une {\tt depth} ~: 
+\blackrule[height=max,depth=0pt] +
+\blackrule[height=0pt,depth=max] =
+\blackrule[height=max,depth=max]}
+\stopDemoHN}
+
+\stopSmallPrint
+
+
+
+Nous pouvons influencer l'espace interligne avec la fonction \PlaceMacro{setupinterlinespace} \tex{setupinterlinespace} qui permet trois types de syntaxe différents :
 
 \startitemize
 
-  \item \tex{setupinterlinespace [..Interline space..]}, where {\em
-  Interline space} is a precise value or a symbolic word that assigns a
-  predefined interline space:
+  \item \tex{setupinterlinespace [espace interligne]}, où {\em espace interligne} est une valeur précise ou un mot symbolique qui attribue un espace interligne prédéfini :
 
   \startitemize
 
-    \item When it is a precise value it can be a dimension (for example,
-    15pt), or a simple, whole or decimal number (for example, 1.2). In this
-    latter case the number is interpreted as \quotation{number of lines}
-    based on \ConTeXt's default interline space.
+   \item Lorsqu'il s'agit d'une valeur précise, il peut s'agir d'une dimension (par exemple, 15pt), ou d'un nombre simple, entier ou décimal (par exemple, 1,2). Dans ce dernier cas, le nombre est interprété comme \quotation{nombre de lignes} en fonction de l'interligne par défaut de \ConTeXt.
 
-    \item When it is a symbolic word this can be \MyKey{small},
-    \MyKey{medium} or \MyKey{big}, each of which applies a small, medium or
-    big interline space respectively, always based on the default interline
-    space \ConTeXt\ would apply.
+    \item Lorsqu'il s'agit d'un mot symbolique, il peut s'agir de \MyKey{small}, \MyKey{medium} ou \MyKey{big}, chacun appliquant respectivement un espace interligne petit, moyen ou grand, toujours basé sur l'espace interligne par défaut que \ConTeXt\ appliquerait.
+
 
   \stopitemize
 
-  \item \tex{setupinterlinespace [..,..=..,..]}. In this mode, the
-  interline space is set by explicitly altering the based measures with
-  which \ConTeXt\ calculates the appropriate interline spacing. In this
-  mode the spacing is set by explicitly altering the measures on the basis
-  of which \ConTeXt\ calculates the appropriate spacing. I have previously
-  said that line spacing is calculated on the basis of the specific font
-  and its size; but that was to keep things very simple: actually what the
-  font and its size do is to establish certain measures on the basis of
-  which the interline space is calculated. By means of this
-  \tex{setupinterlinespace} approach, these measures are modified and
-  therefore, so is the interline space. The actual measures and values that
-  can be manipulated by this procedure (the meaning of which I will not
-  explain because it goes beyond the scope of a simple {\em introduction}),
-  are:  {\tt line, height, depth, minheight, mindepth, distance, top,
-  bottom, stretch} and {\tt shrink}.
+\item \tex{setupinterlinespace [..,..=..,..]}. Dans ce mode, l'espacement interligne est défini en modifiant explicitement les mesures sur la base desquelles \ConTeXt\ calcule l'espacement interligne approprié. Dans ce mode, l'espacement est défini en modifiant explicitement les mesures sur la base desquelles \ConTeXt\ calcule l'espacement approprié. J'ai dit précédemment que l'interligne est calculé sur la base de la police spécifique et de sa taille, mais c'était pour simplifier les choses : en fait, la police et la taille servent à établir certaines mesures sur la base desquelles l'interligne est calculé. Grâce à cette approche \tex{setupinterlinespace}, ces mesures sont modifiées et, par conséquent, l'espace interligne l'est aussi. Les mesures et valeurs réelles qui peuvent être manipulées par cette procédure (dont je n'expliquerai pas la signification car cela dépasse le cadre d'une simple introduction) sont les suivantes :  {\tt line, height, depth, minheight, mindepth, distance, top, bottom, stretch} et {\tt shrink}.
 
-  \item \tex{setupinterlinespace [Name]}. With this mode, we establish or
-  configure a specific and customised type of line spacing previously
-  defined with \PlaceMacro{defineinterlinespace}\tex{defineinterlinespace}.
+% DONE Garulfo added
+
+\startSmallPrint
+
+Les valeurs des paramètres  \type{top} et \type{bottom} déterminent la
+hauteur de la première ligne et la profondeur de la dernière ligne sur
+la page. Ce  sont également des ratios mais cette  fois appliqués à la
+taille  de  la  police  de   corps  de  texte  (\type{bodyfont}).  Ces
+paramètres sont  en rapport avec les  paramètres \TeX\ \type{\topskip}
+et \type {\maxdepth}.
+
+\stopSmallPrint
+
+  \item \tex{setupinterlinespace [Nom]}. Avec ce mode, nous établissons ou configurons un type d'interligne spécifique et personnalisé, préalablement défini avec \PlaceMacro{defineinterlinespace} \tex{defineinterlinespace}.
 
 \stopitemize
 
-With
+Les paramètres par défauts sont les suivants~:
 
-\type{\defineinterlinespace [Name] [Configuration]}
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\setupinterlinespace
+  [height=.72,
+   depth=.28,
+   top=1.0,
+   bottom=0.4,
+   line=2.8ex]
+\stopDemoI}
 
-we can associate a certain interline space configuration with a specific
-name that we can then simply trigger at some point in our document with
-\tex{setupinterlinespace[Name]}. To return to normal interline space, we
-would then need to write \tex{setupinterlinespace[reset]}.
+Voyons un exemple
+
+\placefigure [force,here,none] [] {}{
+\startDemoHN
+\startbuffer[texteinterligne]
+Bordeaux est une commune du Sud-Ouest  de la France. Elle est capitale
+de la Gaule aquitaine dès le  début du III\high{e} siècle. La ville est
+connue dans le monde entier pour les vins et vignobles du Bordelais.
+\stopbuffer
+
+\defineparagraphs[TroisColumns][n=3,distance=0.04\textwidth]
+
+\startTroisColumns
+%
+\getbuffer[texteinterligne]
+\TroisColumns
+%
+\setupinterlinespace[1.25]
+\getbuffer[texteinterligne]
+\TroisColumns
+%
+\setupinterlinespace[1.5]
+\getbuffer[texteinterligne]
+%
+\stopTroisColumns
+\stopDemoHN}
+
+
+Avec \PlaceMacro{defineinterlinespace} \tex{defineinterlinespace} nous pouvons associer une certaine configuration d'espace interligne à un nom spécifique que nous pouvons ensuite simplement déclencher à un moment donné dans notre document avec \tex{setupinterlinespace[Nom]}. Pour revenir à un espace interligne normal, nous devrions alors écrire \tex{setupinterlinespace[reset]}.
+
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\defineinterlinespace [Nom] [Configuration]
+\stopDemoI}
+
 
 \stopsection
 
-% ** Section
+% **  Section
 
 \startsection
-  [title={Other matters relating to lines}]
+  [title={Autres questions relatives aux lignes}]
 
 % *** Subsection
 \startsubsection
   [
     reference=sec:startlines,
-    title={Converting line breaks in the source file into line breaks in the final document},
+    title={Conversion des sauts de ligne du fichier source en sauts de ligne du document final},
   ]
 
-As we already know (see \in{section}[sec:linebreaks]), by default \ConTeXt\
-ignores the line breaks in the source file that it considers to be simple
-blank spaces, unless there are two or more consecutive line breaks, in
-which case a paragraph break will be inserted. However, there may be some
-situations in which we are interested in respecting the line breaks of the
-original source file as they were put there, for example, when writing
-poetry. For this, \ConTeXt\ offers us the \MyKey{lines} environment whose
-format is:
+Comme nous le savons déjà (voir \in{section}[sec:linebreaks]), par défaut, \ConTeXt\ ignore les sauts de ligne du fichier source qu'il considère comme de simples espaces vides, sauf s'il y a deux ou plusieurs sauts de ligne consécutifs, auquel cas un saut de paragraphe sera inséré. Cependant, dans certaines situations, il peut être intéressant de respecter les sauts de ligne du fichier source original tels qu'ils ont été placés, par exemple, lors de l'écriture de poèmes. Pour cela, \ConTeXt\ nous offre l'environnement \MyKey{lines} dont le format est :
 
-\PlaceMacro{startlines}\type{\startlines [Options] ... \stoplines}
+\PlaceMacro{startlines}
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\startlines [Options] ... \stoplines
+\stopDemoI}
 
-where the options can be any of the following, amongst others:
+où les options peuvent être l'une des suivantes, entre autres~:
 
 \startitemize
 
-  \item {\tt\bf space}: When this option is set with the \MyKey{on} value,
-  in addition to respecting the line breaks in the source file, the
-  environment will also respect blank spaces in the source file,
-  temporarily ignoring the absorption rule.
+\item {\tt\bf space} : Lorsque cette option est définie avec la valeur \MyKey{on}, en plus de respecter les sauts de ligne du fichier source, l'environnement respectera également les espaces vides du fichier source, en ignorant temporairement la règle d'absorption.
 
-  \item {\tt\bf before}: Text or command to run before entering the
-  environment.
+\item {\tt\bf before} : Texte ou commande à exécuter avant d'entrer dans l'environnement.
 
-  \item {\tt\bf after}: Text or command to run after exiting the
-  environment.
+\item {\tt\bf after} : Texte ou commande à exécuter après avoir quitté l'environnement.
 
-  \item {\tt\bf inbetween}: Text or command to run when entering the
-  environment.
+\item {\tt\bf inbetween} : Texte ou commande à exécuter lors de l'entrée dans l'environnement.
 
-  \item {\tt\bf indenting}: Value indicating whether or not to indent
-  paragraphs in the environment (see \in{section}[sec:indentation]).
+\item {\tt\bf indenting} : Valeur indiquant si les paragraphes doivent être indentés ou non dans l'environnement (voir \in{section}[sec:indentation]).
 
-  \item {\tt\bf align}: Alignment of lines in the environment (see
-    \in{section}[sec:alignment]).
+\item {\tt\bf align} : Alignement des lignes dans l'environnement (voir \in{section}[sec:alignment]).
 
-  \item {\tt\bf style}: Style command to apply within the environment.
+\item {\tt\bf style} : Commande de style à appliquer dans l'environnement.
 
-  \item {\tt\bf color}: Colour to apply within the environment.
+\item {\tt\bf color} : Couleur à appliquer dans l'environnement.
 
 \stopitemize
 
-So, for example,
+Ainsi par exemple~:
 
-\startDoubleExample
-\starttyping
-  \startlines
-    One-one was a race horse.
-    Two-two was one too.
-    One-one won one race.
-    Two-two won one too.
-  \stoplines
-\stoptyping
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+\startlines
+One-one was a race horse.
+Two-two was one too.
+One-one won one race.
+Two-two won one too.
+\stoplines
+\stopDemoVN}
 
-  \startlines
-    One-one was a race horse.
-    Two-two was one too.
-    One-one won one race.
-    Two-two won one too.
-  \stoplines
-\stopDoubleExample
+Nous pouvons également modifier le fonctionnement par défaut de l'environnement avec \PlaceMacro{setuplines} \tex{setuplines} et, comme pour de nombreuses commandes de \ConTeXt, il est également possible d'attribuer un nom à une configuration particulière de cet environnement. Nous le faisons avec la commande \PlaceMacro{definelines} \tex{definelines} dont la syntaxe est :
 
-We can also modify the default way the environment works with
-\PlaceMacro{setuplines}\tex{setuplines} and, as with so many of \ConTeXt's
-commands, it is also possible to assign a name to a particular
-configuration of this environment. We do this with the
-\PlaceMacro{definelines}\tex{definelines} command whose syntax is:
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\definelines [Nom] [Configuration]
+\stopDemoI}
 
-\type{\definelines [Name] [Configuration]}
+où, en tant que configuration, nous pouvons inclure les mêmes options que celles qui ont été expliquées de manière générale pour l'environnement. Une fois que nous avons défini notre environnement de ligne personnalisé, nous devons écrire pour l'insérer :
 
-where, as a configuration, we can include the same options that have been
-explained generally for the environment. Once we have defined our
-customised line environment, to insert it we should write:
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\startlines[Nom] ... \stoplines
+\stopDemoI}
 
-\type{\startlines[Name] ... \stoplines}
 
 \stopsubsection
 
@@ -962,221 +826,151 @@ customised line environment, to insert it we should write:
 \startsubsection
   [
     reference=sec:linenumbering,
-    title={Line numbering},
+    title={Numérotation des lignes},
   ]
 
-In certain kinds of texts it is common to establish some kind of line
-numbering, for example, in texts on computer programming where it is
-relatively common for the code fragments offered as examples to have their
-lines numbered, or in poems, critical editions, etc. For all these
-situations \ConTeXt\ offers the {\tt linenumbering} environment whose
-format is
+Dans certains types de textes, il est courant d'établir une certaine forme de numérotation des lignes, par exemple dans les textes sur la programmation informatique où il est relativement courant que les fragments de code proposés à titre d'exemple aient leurs lignes numérotées, ou encore dans les poèmes, les éditions critiques, etc. Pour toutes ces situations, \ConTeXt\ offre l'environnement {\tt linumbering} dont le format est le suivant
 
-\PlaceMacro{startlinenumbering}\type{\startlinenumbering [Options] ... \stoplinenumbering}
+\PlaceMacro{startlinenumbering} 
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\startlinenumbering[Options] ... \stoplinenumbering
+\stopDemoI}
 
-The available options are:
-
-\startitemize
-
-  \item {\tt\bf continue}: In cases where there is more than one part of
-  our document requiring lines to be numbered, this option sees that the
-  numbering restarts for each part (\MyKey{continue=no}, the default
-  value). On the other hand, if line numbering is meant to continue on from
-  where the previous part left off, we choose \MyKey{continue=yes}.
-
-  \item {\tt\bf start}: Indicates the number of the first line in cases
-  where we do not want it to be \quote{1}, or for it to correspond with the
-  previous enumeration.
-
-  \item {\tt\bf step}: All the lines included in the environment will be
-  numbered, but, by means of this option, we can indicate that the number
-  is printed only at certain intervals. With poems, for example, it is
-  common that the number only appears in multiples of 5 (verses 5, 10,
-  15...).
-
-\stopitemize
-
-All these options can be indicated, in general for all the {\em
-linenumbering} environments in our document, with
-\PlaceMacro{setuplinenumbering}\tex{setuplinenumbering}. This command also
-allows us to configure other aspects of line numbering:
+Les options disponibles sont les suivantes~:
 
 \startitemize
 
-  \item {\tt\bf conversion}: Line numbering type. It can be any of the ones
-  explained on \at{page}[Num:conversion] regarding the numbering of
-  chapters and sections.
+\item {\tt\bf continue} : Dans le cas où il y a plusieurs parties de notre document nécessitant une numérotation des lignes, cette option fait en sorte que la numérotation recommence pour chaque partie (\MyKey{continue=no}, la valeur par défaut). En revanche, si la numérotation des lignes doit se poursuivre là où la partie précédente s'est arrêtée, nous choisissons \MyKey{continue=yes}.
 
-  \item {\tt\bf style}: Command (or commands) determining the style the
-  line numbering will have (font, size, variant...).
+\item {\tt\bf start} : Indique le numéro de la première ligne dans les cas où nous ne voulons pas qu'il soit \quote{1}, ou qu'il corresponde à l'énumération précédente.
 
-  \item {\tt\bf color}: Colour the line number will be printed in.
-
-  \item {\tt\bf location}: Where the line number will be placed. It can be
-  any of the following: text, begin, end, default, left, right, inner,
-  outer, inleft, inright, margin, inmargin.
-
-  \item {\tt\bf distance}: Distance between the line number and the line
-  itself.
-
-  \item {\tt\bf align}: Number alignment. Can be: inner, outer, flushleft,
-  flushright, left, right, middle or auto.
-
-  \item {\tt\bf command}: Command to which the line number will be passed
-  as a parameter before printing.
-
-  \item {\tt\bf width}: Width reserved for printing the line number.
-
-  \item {\tt\bf left, right, margin}:
+\item {\tt\bf step} : Toutes les lignes incluses dans l'environnement seront numérotées, mais, au moyen de cette option, nous pouvons indiquer que le numéro n'est imprimé qu'à certains intervalles. Dans le cas des poèmes, par exemple, il est courant que le numéro n'apparaisse que par multiples de 5 (vers 5, 10, 15...).
 
 \stopitemize
 
-We can also create different customised line numbering configurations with
-\PlaceMacro{definelinenumbering}\tex{definelinenumbering} such that the
-configuration be be associated with a name:
+Toutes ces options peuvent être indiquées, en général pour tous les environnements {\em linenumbering} de notre document, avec \PlaceMacro{setuplinenumbering} \tex{setuplinenumbering}. Cette commande nous permet également de configurer d'autres aspects de la numérotation des lignes~:
 
-\type{\definelinenumbering [Name] [Configuration]}
+\startitemize
 
-Once a specific configuration has been defined and associated with a name,
-we can use it with
+\item {\tt\bf conversion} : Type de numérotation des lignes. Il peut s'agir de l'un de ceux expliqués sur \at{page}[Num:conversion] concernant la numérotation des chapitres et des sections.
 
-\type{\startlinenumbering [Name] ... \stoplinenumbering}
+\item {\tt\bf style} : Commande (ou commandes) déterminant le style qu'aura la numérotation des lignes (police, taille, variante...).
+
+\item {\tt\bf color} : Couleur dans laquelle le numéro de ligne sera imprimé.
+
+\item {\tt\bf location} : localisation du numéro de ligne (lieu où il sera placé). Il peut s'agir de l'un des éléments suivants : text, begin, end, default, left, right, inner, outer, inleft, inright, margin, inmargin.
+
+\item {\tt\bf distance} : Distance entre le numéro de la ligne et la ligne elle-même.
+
+\item {\tt\bf align} : Alignement du numéro. Peut être : inner, outer, flushleft, flushright, left, right, middle ou auto.
+
+\item {\tt\bf command} : Commande à laquelle le numéro de ligne sera transmis en tant que paramètre avant l'impression.
+
+\item {\tt\bf width} : Largeur réservée à l'impression du numéro de ligne.
+
+\item {\tt\bf left, right, margin} :
+
+\stopitemize
+
+Nous pouvons également créer différentes configurations personnalisées de numérotation des lignes avec \PlaceMacro{definelinenumbering} \tex{definelinenumbering} de sorte que la configuration soit associée à un nom~:
+
+\PlaceMacro{startlinenumbering} 
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\definelinenumbering [Name] [Configuration]
+\stopDemoI}
+
+Une fois qu'une configuration spécifique a été définie et associée à un nom, nous pouvons l'utiliser avec la commande
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\startlinenumbering [Name] ... \stoplinenumbering
+\stopDemoI}
 
 \stopsubsection
 
 \stopsection
 
-% ** Section 
+% **  Section 
 
 \startsection
   [
     reference=sec:alignment,
-    title={Horizontal and vertical alignment},
+    title={Alignement horizontal et vertical},
   ]
 
-The command that controls text alignment in general is
-\PlaceMacro{setupalign}\cmd{set\-up\-align}. This command is used to
-control both horizontal and vertical alignment.
+La commande qui contrôle l'alignement du texte en général est \PlaceMacro{setupalign} \cmd{set-up\-align}. Cette commande est utilisée pour contrôler l'alignement horizontal et vertical.
 
-% *** Subsection
+% *** >> Subsection
 \startsubsection
   [
     reference=sec:setupalign,
-    title={Horizontal alignment},
+    title={Alignement horizontal},
   ]
 
-When the {\em exact} width of a line of text does not take up all the width
-possible, this poses a problem of what to do with the resulting white
-space.\footnote{By {\em exact} width I mean the width of the line {\em
-before} \ConTeXt\ adjusts the size of interword space to enable
-justification.} We can basically do three things in this regard:
+Lorsque la largeur {\em exacte} d'une ligne de texte n'occupe pas toute la largeur possible, cela pose le problème de savoir que faire avec l'espace blanc qui en résulte.\footnote{Par largeur {\em exacte}, j'entends la largeur de la ligne {\em avant}. \ConTeXt\ ajuste la taille de l'espace inter-mots pour permettre la justification.} Nous pouvons essentiellement faire trois choses à cet égard :
 
 \startitemize[n]
 
-  \item Accumulate it on one of the two sides of the line: if we accumulate
-  it on the left hand side, the line will look {\em a little pushed} to the
-  right, while if we accumulate it on the right hand side the line remains
-  on the left hand side. We are talking, in the former case, about {\em
-  right alignment} and, in the latter, about {\em left alignment}. By
-  default, \ConTeXt\ applies left alignment to the last line of paragraphs.
+\item L'accumuler sur l'un des deux côtés de la ligne : si nous l'accumulons sur le côté gauche, la ligne semblera {\em poussée} vers la droite, tandis que si nous l'accumulons sur le côté droit, la ligne reste sur le côté gauche. On parle, dans le premier cas, d'un {\em alignement à droite} et, dans le second, d'un {\em alignement à gauche}. Par défaut, \ConTeXt\ applique l'alignement à gauche à la dernière ligne des paragraphes.
 
-  When several consecutive lines are aligned on the left, the right hand
-  side is irregular; but when the alignment is on the right, the side that
-  looks uneven is the left. To name the options that align one or other
-  side, \ConTeXt\ does not set the side where they are aligned, but the
-  side where they are uneven. Therefore, the {\tt flushright} option
-  results in left alignment and {\tt flushleft} in right alignment. As
-  abbreviations  of {\tt flushright} and {\tt flushleft}, \tex{setupalign}
-  also supports {\tt right} and {\tt left} as values. But {\bf attention}:
-  here the meaning of the words is deceptive. Even though {\em left} means
-  \quotation{left} and {\em right} means \quotation{right},
-  \tex{setupalign[left]} aligns on the right and \tex{setupalign[right]}
-  aligns on the left. In case the reader wonders why this comment has been
-  made, it would be worth quoting from the \ConTeXt\ wiki:
-  \quotation{ConTeXt uses flushleft and flushright options. The right and
-  left alignments are backwards from the usual directions in all commands
-  that accept an alignment option, in the sense of \quote{ragged left} and
-  \quote{ragged right}. Unfortunately, when Hans was first writing this
-  part of ConTeXt, he was thinking of \quote{ragged right} and
-  \quote{ragged left} alignment, rather than \quote{flush left} and
-  \quote{flush right}. And now that it's been this way a while, it's
-  impossible to change it, because changing it would break backward
-  compatibility with all of the existing documents that use it.}
+Lorsque plusieurs lignes consécutives sont alignées à gauche, le côté droit est irrégulier ; mais lorsque l'alignement est à droite, le côté qui semble irrégulier est le gauche. Pour nommer les options qui alignent l'un ou l'autre côté, \ConTeXt\ ne définit pas le côté où elles sont alignées, mais le côté où elles sont irrégulières. Par conséquent, l'option {\tt flushright} entraîne un alignement à gauche et l'option {\tt flushleft} un alignement à droite. En tant qu'abréviations de {\tt flushright} et {\tt flushleft}, \tex{setupalign} prend également en charge les valeurs {\tt right} et {\tt left}. Mais {\bf attention} : ici, le sens des mots est trompeur. Même si {\em left} signifie \quotation{left} et {\em right} signifie \quotation{right}, \tex{setupalign[left]} s'aligne à droite et \tex{setupalign[right]} s'aligne à gauche. Au cas où le lecteur se demanderait pourquoi ce commentaire a été fait, il serait utile de citer le wiki \ConTeXt\ : \quotation{ConTeXt utilise les options flushleft et flushright. Les alignements à droite et à gauche sont inversés par rapport aux directions habituelles dans toutes les commandes qui acceptent une option d'alignement, dans le sens de \quote{ragged left} et \quote{ragged right}. Malheureusement, lorsque Hans a écrit cette partie de ConTeXt pour la première fois, il pensait à l'alignement \quote{ragged right} et \quote{ragged left}, plutôt qu'à \quote{flush left} et \quote{flush right}. Et maintenant qu'il en est ainsi depuis un certain temps, il est impossible de le modifier, car cela romprait la rétrocompatibilité avec tous les documents existants qui l'utilisent.}
 
-  In documents prepared for double-sided printing, in addition to the right
-  and left margins, there are also inner and outer margins. The values {\tt
-  flushinner} (or simply {\tt inner}) and {\tt flushouter} (or simply {\tt
-  outer}) establish the corresponding alignment in these cases.
+Dans les documents préparés pour une impression recto-verso, outre les marges droite et gauche, il existe également des marges intérieure et extérieure. Les valeurs {\tt flushinner} (ou simplement {\tt inner}) et {\tt flushouter}. (ou simplement {\tt outer}) établissent l'alignement correspondant dans ces cas.
 
-  \item Distribute it across both margins. The result will be that the line
-  is centred. The \tex{setupalign} option that does this is {\tt middle}.
+\item Le répartir sur les deux marges. Le résultat sera que la ligne est centrée. L'option \tex{setupalign} qui permet de le faire est {\tt middle}.
 
-  \item Distribute it among all the words making up the line,if necessary
-  by increasing interword space, so that the line becomes exactly the same
-  width as the space available to it. In these cases we talk about {\em
-  justified lines}. This is also \ConTeXt's default value which is why
-  there is no special option in \tex{setupalign} to establish it. However,
-  if we have altered alignment justified by default, we can restore it with
-  \tex{setupalign[reset]}.
+\item La répartir entre tous les mots qui composent la ligne, si nécessaire en augmentant l'espace entre les mots, afin que la ligne ait exactement la même largeur que l'espace dont elle dispose. Dans ces cas, on parle de {\em lignes justifiées}. C'est également la valeur par défaut de \ConTeXt, c'est pourquoi il n'y a pas d'option spéciale dans \tex{setupalign} pour l'établir. Cependant, si nous avons modifié l'alignement justifié par défaut, nous pouvons le rétablir avec \tex{setupalign[reset]}.
 
 \stopitemize
 
-The value for \tex{setupalign} that we have just seen ({\tt right,
-flushright, left, flushleft, inner, flushinner, outer, flushouter} and {\tt
-middle}) can be combined with {\tt broad}, which results in somewhat
-rougher alignment.
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+\startalignment [flushleft]
+Une phrase pour voir l'impact de l'option d'alignement {\bf \tt flushleft}.
+\stopalignment
+\startalignment [right]
+Une phrase pour voir l'impact de l'option d'alignement {\bf \tt right}.
+\stopalignment
+\startalignment [flushright]
+Une phrase pour voir l'impact de l'option d'alignement {\bf \tt flushright}.
+\stopalignment
+\startalignment [left]
+Une phrase pour voir l'impact de l'option d'alignement {\bf \tt left}.
+\stopalignment
+\stopDemoVN}
+
+La valeur de \tex{setupalign} que nous venons de voir ({\tt right, flushright, left, flushleft, inner, flushinner, outer, flushouter} et {\tt middle}) peut être combinée avec {\tt broad}, ce qui donne un alignement un peu plus grossier.
 
 \startSmallPrint
 
-  Two other possible values of \tex{setupalign} that affect the horizontal
-  alignment, have to do with the hyphenation of words at the end of the
-  line, because whether this is done or not depends on whether the {exact}
-  measure of the line is larger or smaller; which in turn affects the
-  remaining white space.
+Deux autres valeurs possibles de \tex{setupalign} qui affectent l'alignement horizontal, concernent la césure des mots en fin de ligne, car le fait que cela soit fait ou non dépend de la mesure {\em exacte} de la ligne, qui est plus ou moins grande, ce qui affecte l'espace blanc restant.
 
-  To this effect, \tex{setupalign} allows the {\tt morehyphenation} value
-  which makes \ConTeXt\ work harder to find breakpoints based on
-  hyphenation, and {\tt lesshyphenation} which produces the opposite
-  effect. With \tex{setupalign[horizontal, morehyphenation]}, the remaining
-  white space in the lines will be reduced and therefore the alignment will
-  be less apparent. On the contrary, with \tex{setupalign[horizontal,
-  lesshyphenation]}, there will be more white space left, and the alignment
-  will be more visible.
+À cet effet, \tex{setupalign} autorise la valeur {\tt morehyphenation} qui fait travailler \ConTeXt\ plus fort pour trouver des points d'arrêt basés sur la césure, et {\tt lesshyphenation} qui produit l'effet inverse. Avec \tex{setupalign[horizontal, morehyphenation]}, l'espace blanc restant dans les lignes sera réduit et l'alignement sera donc moins apparent. Au contraire, avec \tex{setupalign[horizontal, lesshyphenation]}, il restera plus d'espace blanc, et l'alignement sera plus visible.
 
 \stopSmallPrint
 
-\tex{setupalign} is intended to be included in the preamble and affect the
-whole document or, to be included at a specific point and affect everything
-from that point to the end. If we only want to change the alignment of one
-or several lines we can use:
+\tex{setupalign} est destiné à être inclus dans le préambule et à affecter tout le document ou, à être inclus à un point spécifique et à affecter tout à partir de ce point jusqu'à la fin. Si nous voulons seulement changer l'alignement d'une ou plusieurs lignes, nous pouvons utiliser :
 
 \startitemize
 
-  \item The \MyKey{alignment} environment, intended to affect several
-  lines. Its general format is:
+\item L'environnement \MyKey{alignment}, destiné à affecter plusieurs lignes. Son format général est le suivant, où {\em Options} sont toutes celles autorisées pour \tex{setupalign}~:
 
-  \PlaceMacro{startalignment}\type{\startalignment [Options] ... \stopalignment}
+\PlaceMacro{startalignment}
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\startalignment [Options] ... \stopalignment
+\stopDemoI}
 
-  where {\em Options} are any of those allowable for \tex{setupalign}.
 
-  \item The \PlaceMacro{leftaligned}\tex{leftaligned},
-  \PlaceMacro{midaligned}\tex{midaligned} or
-  \PlaceMacro{rightaligned}\tex{rightaligned} commands that cause left,
-  centred or right alignment respectively; and if we want the last word in
-  a paragraph (but only this and not the rest of the line) to be right
-  aligned we can use \PlaceMacro{wordright}\tex{wordright}. All these
-  commands require the text to be affected to be between curly brackets.
+\item \PlaceMacro{leftaligned} \tex{leftaligned}, \PlaceMacro{midaligned} \tex{midaligned} ou \PlaceMacro{rightaligned}. \tex{rightaligned} provoquent respectivement un alignement à gauche, centré ou à droite ; et si nous voulons que le dernier mot d'un paragraphe (mais seulement celui-ci et pas le reste de la ligne) soit aligné à droite, nous pouvons utiliser \PlaceMacro{wordright} \tex{wordright} (voir l'exemple en fin de \in{section}[sec:horizontal space2]). Toutes ces commandes requièrent que le texte à affecter se trouve entre des accolades.
 
-  \startSmallPrint
+\startSmallPrint
 
-    Note, on the other hand, that if the words \MyKey{right} and
-    \MyKey{left} in \tex{setupalign} cause the opposite alignment to what
-    the name suggests, the same does not happen with the \tex{leftaligned}
-    and \tex{rightaligned} commands that bring about exactly the kind of
-    alignment that their name suggests: {\tt left} on the left, and {\tt
-    right} on the right.
+Notez, d'autre part, que si les mots \MyKey{right} et \MyKey{left} dans \tex{setupalign} provoquent l'alignement opposé à ce que le nom suggère, il n'en va pas de même avec les commandes \tex{leftaligned} et \tex{rightaligned} qui provoquent exactement le type d'alignement que leur nom suggère : {\tt left} à gauche, et {\tt right} à droite.
 
-  \stopSmallPrint
+\stopSmallPrint
 
 \stopitemize
 
@@ -1186,66 +980,57 @@ or several lines we can use:
 \startsubsection
   [
     reference={sec:VerticalAlignment},
-    title={Vertical alignment},
+    title={Alignement vertical},
   ]
 
-If horizontal alignment comes into play when the width of a line does not
-take up all the space available to it, vertical alignment affects the
-height of the whole page: if the {\em exact} text height of a page does not
-take up all the height available to it, what do we do with the remaining
-white space? We can pile it up at the top (\MyKey{height}), which means
-that the text on the page will be pushed down; we can pile it up at the
-bottom (\MyKey{bottom}) or distribute it among the paragraphs
-(\MyKey{line}). The default value for vertical alignment is \MyKey{bottom}.
+Si l'alignement horizontal intervient lorsque la largeur d'une ligne n'occupe pas tout l'espace disponible, l'alignement vertical concerne la hauteur de toute la page~: si la hauteur {\em exacte} du texte d'une page n'occupe pas toute la hauteur disponible, que fait-on de l'espace blanc restant ? Toujours avec \tex{setupalign} Nous pouvons l'empiler en haut (\MyKey{height}), ce qui signifie que le texte de la page sera poussé vers le bas ; nous pouvons l'empiler en bas (\MyKey{bottom}) ou le répartir entre les paragraphes (\MyKey{line}). La valeur par défaut de l'alignement vertical est \MyKey{bottom}.
 
-\subsubsubject{Vertical level of tolerance}
+\startSmallPrint
 
-In the same way we can alter \ConTeXt's level of tolerance with regard to
-the amount of horizontal space permissible in a line (horizontal tolerance)
-with \PlaceMacro{setuptolerance}\tex{setuptolerance}, we can also alter its
-vertical tolerance, i.e. tolerance for space between paragraphs larger than
-what \ConTeXt, by default, considers reasonable for a well-typeset page.
-The values possible for vertical tolerance are the same as for horizontal
-tolerance: {\tt verystrict, strict, tolerant} and {\tt verytolerant}. The
-default value is \tex{setuptolerance [vertical, strict]}.
+L'option \MyKey{height} semble pas fonctionner.
 
-\subsubsubject{Controlling widows and orphans}
+\stopSmallPrint
 
-One aspect that indirectly affects vertical alignment is the control of
-widows and orphans. Both phenomena imply that a page break causes one line
-of a paragraph to be isolated on a different page from the rest of the
-paragraph. This is not considered to be typographically appropriate. If the
-line that is separated from the rest of the paragraph is the first one on
-the page, we are talking about a {\em widowed line}; if the line separated
-from its paragraph is the last one on the page then we are talking about an
-{\em orphaned line}.
 
-By default, \ConTeXt\ does not implement a control to ensure these lines do
-not occur. But we can change this by altering some of \ConTeXt's internal
-variables: \PlaceMacro{widowpenalty}\tex{widowpenalty} controls widowed
-lines and \PlaceMacro{clubpenalty}\tex{clubpenalty} controls orphaned
-lines. Thus, the following statements in the preamble to our document will
-ensure that this control is carried out:
+\startsubsubsubject{Niveau de tolérance en vertical}
 
-\starttyping
-\widowpenalty=10000
-\clubpenalty=10000
-\stoptyping
+De la même manière que nous pouvons modifier le niveau de tolérance de \ConTeXt\ en ce qui concerne la quantité d'espace horizontal autorisée dans une ligne (tolérance horizontale) avec \PlaceMacro{setuptolerance} \tex{setuptolerance}, nous pouvons également modifier sa tolérance verticale, c'est-à-dire la tolérance pour un espace inter-paragraphe plus grand que celui que \ConTeXt\ considère comme raisonnable par défaut pour une page correctement composée. Les valeurs possibles pour la tolérance verticale sont les mêmes que pour la tolérance horizontale : {\tt verystrict, strict, tolerant} et {\tt verytolerant}. La valeur par défaut est \tex{setuptolerance [vertical, strict]}.
 
-Carrying out this control means that \ConTeXt\ will avoid inserting a page
-break that separates the first or last line of a paragraph from the page on
-which the rest is found. This avoidance will be more or less rigorous
-depending on the value we assign to the variables. With a value of 10\,000,
-like the one I used in the example, the control will be absolute; with a
-value of, for example, 150, the control will not be as rigorous and
-occasionally there may be some widowed or orphaned lines when the
-alternative is worse in typographical terms.
+\stopsubsubsubject
+
+\startsubsubsubject{Contrôler les veuves et les orphelins}
+
+
+Un aspect qui affecte indirectement l'alignement vertical est le contrôle des veuves et des orphelins. Ces deux termes font référence aux lignes de paragraphes unique et isolées du reste du paragraphe à cause d'un saut de page. Ceci n'est pas considéré comme typographiquement approprié. Si la ligne séparée du reste du paragraphe est la première de la page, on parle d'une {\em ligne veuve} ; si la ligne séparée de son paragraphe est la dernière de la page, on parle d'une {\em ligne orpheline}.
+
+% MODIFIED Garulfo 
+% from https://mailman.ntg.nl/pipermail/ntg-context/2013/074055.html
+
+Par défaut, \ConTeXt\ n'implémente pas de contrôle pour s'assurer que ces lignes ne se produisent pas. Mais nous pouvons changer cela en modifiant certaines des variables internes de \ConTeXt\ : \PlaceMacro{widowpenalties} \tex{widowpenalties} contrôle les lignes veuves et \PlaceMacro{clubpenalties} \tex{clubpenalties} contrôle les lignes orphelines. Ainsi, les déclarations suivantes dans le préambule de notre document garantiront que ce contrôle est effectué :
+
+\PlaceMacro{startsetups}
+\PlaceMacro{setdefaultpenalties}
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\startsetups [mypenalties]
+\setdefaultpenalties
+\setpenalties\widowpenalties{3}{10000} %     3 == nombre de lignes
+\setpenalties\clubpenalties {3}{10000} % 10000 == penalité entre les 3 lignes
+\stopsetups
+
+\setuplayout[setups=mypenalties]
+\stopDemoI}
+
+Par l'exécution de ces commandes \ConTeXt\ évitera d'insérer un saut de page qui sépare les 3 premières ou dernières lignes d'un paragraphe de la page sur laquelle se trouve le reste. Cet évitement sera plus ou moins rigoureux selon la valeur que nous attribuons aux variables. Avec une valeur de 10 000, comme celle que j'ai utilisée dans l'exemple, le contrôle sera absolu ; avec une valeur de 150, par exemple, le contrôle ne sera pas aussi rigoureux et il se peut qu'il y ait parfois quelques lignes veuves ou orphelines lorsque l'alternative est pire en termes typographiques.
+
+\stopsubsubsubject
 
 \stopsubsection
 
 \stopsection
 
-% * END 
+% *   END 
 
 \stopchapter
 
@@ -1255,6 +1040,6 @@ alternative is worse in typographical terms.
 %%% mode: ConTeXt
 %%% mode: auto-fill
 %%% coding: utf-8-unix
-%%% TeX-master: "../introCTX.tex"
+%%% TeX-master: "../introCTX_fra.tex"
 %%% End:
 %%% vim:set filetype=context tw=75 : %%%

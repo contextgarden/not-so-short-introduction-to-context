@@ -14,7 +14,6 @@
             verytolerant,                       % to eliminate most hyphenation
             stretch]                 % and get better interword spacing as well
 
-
 %------------------------------------------------------------------------------
 
 \setupwhitespace [big]                        % espace interparagraphes "grand"
@@ -23,8 +22,8 @@
 %------------------------------------------------------------------------------
        
 \setupitemize                  % liste à puce "compactées" et tirets en couleur
-  [packed,
-  indenting=none,                        % First line of paragraphs not indented
+  [packed]
+  [indenting=none,                        % First line of paragraphs not indented
    color=ctr1color]
 
 \definesymbol               % définition d'un symbole = un petit carré de 0.9ex
@@ -33,8 +32,15 @@
 
 \setupitemize       % et son utilisation pour le premier niveau de liste à puce
   [1]
-  [symbol=symitemize1]
+  [packed]
+  [indenting=none,                        % First line of paragraphs not indented
+   color=ctr1color,
+   symbol=symitemize1]
 
+\setupitemize       % et son utilisation pour le premier niveau de liste à puce
+  [2]
+  [packed]
+  []
 %------------------------------------------------------------------------------
 %                                      Notes de bas de page ou notes marginales
 
@@ -70,5 +76,10 @@
 % orphelines (seules en haut de page)
 % https://dave.autonoma.ca/blog/2020/04/28/typesetting-markdown-part-8/
 
-\setpenalties\widowpenalties{1}{10000}
-\setpenalties\clubpenalties {1}{10000}
+\startsetups [mypenalties]
+\setdefaultpenalties
+\setpenalties\widowpenalties{3}{10000} %     3 == number of lines
+\setpenalties\clubpenalties {3}{10000} % 10000 == penalty between these 3 lines
+\stopsetups
+
+\setuplayout[setups=mypenalties]

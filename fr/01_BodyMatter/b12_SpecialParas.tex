@@ -12,41 +12,48 @@
 %%% Edited: Emacs + AuTeX - And at times vim + context-plugin
 %%%
 
-\environment ../introCTX_env.mkiv
+\environment introCTX_env
 
-\startcomponent b12_SpecialParas.mkiv
+\startcomponent b12_SpecialParas
+
+% * BEGIN 
 
 \startchapter
-  [title={Special constructions and paragraphs},
+  [title={Constructions et paragraphes spéciaux},
   reference=cap:specialparas]
 
 \TocChap
 
+
+% ** Section
 \startsection
-  [title={Footnotes and endnotes}]
+  [title={Notes de bas de page et de fin de document}]
 
-Notes are \quotation{secondary textual elements employed for various purposes, such as clarifying or extending the main text, providing the bibliographic reference for the sources, including citations, referring to other documents or stating the meaning of the text} [{\em Libro de Estilo de la Lengua española} (Spanish Language Style Guide), p. 195]. They are particularly important in texts of an academic nature. They can be placed at different points on the page or in the document. Today, the most widespread ones are those located at the foot of the page (called, therefore, footnotes); sometimes they are also located in one of the margins (margin notes), at the end of each chapter or section, or at the end of the document (endnotes). In particularly complex documents, there may also be different {\em series} of notes: author's notes, translator's notes, updates, etc. In particular, in critical editions the note apparatus can become rather complex and only a few typesetting systems are capable of supporting it. \ConTeXt\ is one of these. There are numerous commands available to establish and configure different types of notes. 
+Les notes sont des \quotation{éléments textuels secondaires employés à des fins diverses, comme clarifier ou prolonger le texte principal, fournir la référence bibliographique des sources, y compris les citations, renvoyer à d'autres documents ou énoncer le sens du texte}. [{\em Libro de Estilo de la Lengua española} (Guide de style de la langue espagnole), p. 195]. Elles sont particulièrement importantes dans les textes de nature académique. Elles peuvent être placés à différents endroits de la page ou du document. Aujourd'hui, les plus répandues sont celles qui sont situées en bas de page (appelées, par conséquent, notes de bas de page) ; parfois, elles sont également situées dans l'une des marges (notes de marge), à la fin de chaque chapitre ou section, ou à la fin du document (notes de fin de document). Dans les documents particulièrement complexes, il peut également y avoir différentes séries de notes : notes de l'auteur, notes du traducteur, mises à jour, etc. En particulier, dans les éditions critiques, l'appareil de notes peut devenir assez complexe et seuls quelques systèmes de composition sont capables de le supporter. \ConTeXt\ est l'un d'entre eux. De nombreuses commandes sont disponibles pour établir et configurer les différents types de notes. 
 
-To explain this, it is useful to start by pointing out the various elements that can be involved in a note:
+Pour expliquer cela, il est utile de commencer par indiquer les différents éléments qui peuvent être impliqués dans une note :
+
 
 \startitemize
 
-\item {\em Mark} or note {\em anchor}: The sign placed in the body of the text to indicate that there is a note linked to it. Not all types of notes have an {\em anchor} associated with them, but when there is one, this {\em anchor} appears in two places: at the point in the main text to which the note refers, and at the beginning of the note text itself. The presence of the same reference mark in both places is what allows the note to be associated with the main text.
+\item {\em Marque} ou note {\em ancre} : Signe placé dans le corps du texte pour indiquer qu'une note lui est associée. Tous les types de notes ne sont pas associés à une {\em ancre}, mais lorsqu'il y en a une, cette {\em ancre} apparaît à deux endroits : à l'endroit du texte principal auquel la note fait référence, et au début du texte de la note elle-même. C'est la présence de la même marque de référence à ces deux endroits qui permet d'associer la note au texte principal.
 
-\item The note {\em ID or identifier}: The letter, number or symbol that identifies the note and distinguishes it from other notes. Some notes, for example margin notes, can lack an ID. When this is not the case, the ID normally coincides with the {\em anchor}.
+\item La note {\em ID ou identifiant} : La lettre, le chiffre ou le symbole qui identifie la note et la distingue des autres notes. Certaines notes, par exemple les notes de marge, peuvent ne pas avoir d'ID. Lorsque ce n'est pas le cas, l'identifiant coïncide normalement avec l'{\em ancre} de la note.
 
-  \startSmallPrint
+\startSmallPrint
 
-    If we think exclusively of footnotes, we will see no difference between what I have just called a {\em reference mark} and the {\em id}. We clearly see the difference in other kinds of notes: Line notes, for example, have an id, but not a reference mark.
+Si nous pensons exclusivement aux notes de bas de page, nous ne verrons aucune différence entre ce que je viens d'appeler une {\em Marque} et l’{\em id}. Nous voyons clairement la différence dans d'autres types de notes : Les notes de ligne, par exemple, ont un id, mais pas de marque de référence.
     
-  \stopSmallPrint
+\stopSmallPrint
 
-\item {\em Text} or {\em contents} of the note, always located at a different point on the page or in the document than the command that generates the note and indicates its content.
 
-\item {\em Label} associated with the note: A label or name associated with a note that is not shown in the final document, but allows us to refer to it and retrieve its ID elsewhere in the document.
+\item {\em Texte} ou {\em Contenu} de la note, toujours situé à un endroit différent sur la page ou dans le document que la commande qui génère la note et indique son contenu.
+
+\item {\em Étiquette} associée à la note : Étiquette ou nom associé à une note qui n'apparaît pas dans le document final, mais qui permet d'y faire référence et de retrouver son identifiant ailleurs dans le document.
 
 \stopitemize
 
+% *** Subsection 
 \startsubsection
   [title=Types of notes in \ConTeXt\ and commands associated with them]
 
@@ -82,6 +89,7 @@ I will now exclusively develop the first two types of notes:
 
 \stopsubsection
 
+% *** Subsection 
 \startsubsection
   [title=A close look at footnotes and endnotes]
   \PlaceMacro{footnote}\PlaceMacro{endnote}
@@ -179,6 +187,7 @@ is a sentence with nested notes.
 
 \stopsubsection
 
+% *** Subsection 
 \startsubsection
   [
     reference=sec:localfootnotes,
@@ -190,6 +199,7 @@ The \tex{startlocalfootnotes} environment means that the footnotes included with
 
 \stopsubsection
 
+% *** Subsection 
 \startsubsection
   [
     reference=sec:definenote,
@@ -243,6 +253,7 @@ Once we have created a new note type, e.g. {\em BlueNote} the command allowing u
 
 \stopsubsection
 
+% *** Subsection 
 \startsubsection
   [title=Configuring notes]
   \PlaceMacro{setupnote}\PlaceMacro{setupnotation}
@@ -373,6 +384,7 @@ I will now try to organise what I have found out after doing some tests with the
 
 \stopsubsection
 
+% *** Subsection 
 \startsubsection
   [title={Temporary excluding notes when compiling}]
   \PlaceMacro{notesenabledfalse}\PlaceMacro{notesenabledtrue}
@@ -383,6 +395,7 @@ The \tex{notesenabledfalse} and \tex{notesenabledtrue} commands tell \ConTeXt\ t
 
 \stopsection
 
+% ** Section
 \startsection
   [
     reference=sec:multiplecolumns,
@@ -425,6 +438,7 @@ In this section I will focus on the use of the multi-column mechanism in special
 
 \stopcolumns
 
+% *** Subsection 
 \startsubsection
   [title={The \tex{startcolumns} environment}]
   \PlaceMacro{startcolumns}
@@ -491,6 +505,7 @@ In both cases the configuration options are the same. The most important ones, o
 
 \stopsubsection
 
+% *** Subsection 
 \startsubsection
   [title={Parallel paragraphs}]
   \PlaceMacro{defineparagraphs}\PlaceMacro{setupparagraphs}
@@ -620,6 +635,7 @@ As for the configuration options for parallel paragraphs (\tex{setupparagraphs})
 
 \stopsection
 
+% ** Section
 \startsection
   [
     reference=sec:itemize,
@@ -646,12 +662,14 @@ The general tool for writing lists in \ConTeXt\ is the \tex{itemize} environment
 
 where the two arguments are optional. The first one allows symbolic names as content that have been assigned a precise meaning by \ConTeXt; the second argument, which is rarely used, makes it possible to assign specific values to certain variables that affect the functioning of the environment.
 
+% *** Subsection 
 \startsubsection
   [
     reference=sec:itemize_select-list-type,
     title={Selection the kind of list and separator between {\em items}},
   ]
 
+% **** Subsubsection
 \startsubsubsection
   [title={Unordered lists}]
 
@@ -697,6 +715,7 @@ will assign the international  {\em copyright} symbol: \copyright\, to  nesting 
 
 \stopsubsubsection
 
+% **** Subsubsection
 \startsubsubsection
   [title=Ordered lists]
 
@@ -741,6 +760,7 @@ The difference between {\tt n} and {\tt m} lies in the font used to represent th
 
 \stopsubsection
 
+% *** Subsection 
 \startsubsection
   [
     reference=sec:itemize_item-type,
@@ -835,6 +855,7 @@ After reading the following introduction, answer the following questions:
 
 \stopsubsection
 
+% *** Subsection 
 \startsubsection
   [
     reference=sec:itemize_arg1,
@@ -871,6 +892,7 @@ We recall that \MyKey{itemize} allows for two arguments. We have already seen ho
 
 \stopsubsection
 
+% *** Subsection 
 \startsubsection
   [
     reference=sec:itemize_arg2,
@@ -918,6 +940,7 @@ within the environment. See \in{section}[sec:indentation]
 
 \stopsubsection
 
+% *** Subsection 
 \startsubsection
   [
     reference=sec:items command,
@@ -960,6 +983,7 @@ The configuration options supported by this command are a subset of the {\tt ite
 
 \stopsubsection
 
+% *** Subsection 
 \startsubsection
   [
     reference=sec:setupitemize,
@@ -984,11 +1008,13 @@ We achieve the first with the \tex{setupitemize} and \tex{setupitems} commands. 
 
 \stopsection
 
+% ** Section
 \startsection
   [title={Descriptions and enumerations}]
 
 Descriptions and enumerations are two constructions that allow for the consistent typesetting of paragraphs or groups of paragraphs that develop, describe, or define a phrase or word.
 
+% *** Subsection 
 \startsubsection
   [title={Descriptions}]
 
@@ -1058,6 +1084,7 @@ where {\em Name} is the name of our new description, and {\em Configuration} det
 
 \stopsubsection
 
+% *** Subsection 
 \startsubsection
   [title={Enumerations}]
 
@@ -1132,6 +1159,7 @@ The options and values configurable with \tex{setupenumeration} are similar to t
 
 \stopsection
 
+% ** Section
 \startsection
   [
     reference=sec:FramesLines,
@@ -1142,6 +1170,7 @@ It says in the\ConTeXt\ reference manual that \TeX\ has a huge text management c
 
 In the following sections, however, I will limit myself to explaining how to generate simple horizontal and vertical lines and frames around words, sentences or paragraphs.
 
+% *** Subsection 
 \startsubsection
   [title={Simple lines}]
 
@@ -1208,6 +1237,7 @@ where the three arguments are optional.
 
 \stopsubsection
 
+% *** Subsection 
 \startsubsection
   [title={Lines linked to text}]
 
@@ -1270,6 +1300,7 @@ These commands are not compatible with each other, that is to say, two of them c
 
 \stopsubsection
 
+% *** Subsection 
 \startsubsection
   [title={Framed words or texts}]
 
@@ -1306,6 +1337,7 @@ We can also create a customized version of these commands with \PlaceMacro{defin
 
 \stopsection
 
+% ** Section
 \startsection
   [
     reference=sec:buffer,
@@ -1362,6 +1394,7 @@ To learn about any of these environments (or others I have not mentioned), I sug
   
 \stopitemize
 
+% * END 
 \stopchapter
 
 \stopcomponent
@@ -1370,6 +1403,6 @@ To learn about any of these environments (or others I have not mentioned), I sug
 %%% mode: ConTeXt
 %%% mode: auto-fill
 %%% coding: utf-8-unix
-%%% TeX-master: "../introCTX.mkiv"
+%%% TeX-master: "../introCTX_fra.tex"
 %%% End:
 %%% vim:set filetype=context tw=75 : %%%
