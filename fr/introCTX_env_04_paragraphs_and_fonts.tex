@@ -22,7 +22,7 @@
 %------------------------------------------------------------------------------
        
 \setupitemize                  % liste à puce "compactées" et tirets en couleur
-  [packed]
+  [packed,joinedup]
   [indenting=none,                        % First line of paragraphs not indented
    color=ctr1color]
 
@@ -32,14 +32,14 @@
 
 \setupitemize       % et son utilisation pour le premier niveau de liste à puce
   [1]
-  [packed]
-  [indenting=none,                        % First line of paragraphs not indented
-   color=ctr1color,
-   symbol=symitemize1]
+  [packed,joinedup]
+  [color=ctr1color,
+  symbol=symitemize1]
+
 
 \setupitemize       % et son utilisation pour le premier niveau de liste à puce
   [2]
-  [packed]
+  [packed,joinedup]
   []
 %------------------------------------------------------------------------------
 %                                      Notes de bas de page ou notes marginales

@@ -107,3 +107,22 @@
   [level=subsection, alternative=c,criterium=text]
 
 \setupheadtext [fr] [Toc=Table des matières]
+
+%------------------------------------
+
+\defineitemgroup[commanddesc][itemize]
+
+\setupitemgroup [commanddesc]
+  [1]
+  [packed,joinedup]
+  [
+  option=headintext,
+  headstyle=bold,
+  inbetween={\blank[nowhite]},
+  color=ctr1color,
+  distance=2em,
+  textdistance=2em,
+  headstyle=\tt\bf,
+  headcolor=darkmagenta,
+  symbol=symitemize1,
+]

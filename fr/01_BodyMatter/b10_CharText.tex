@@ -18,7 +18,7 @@
 %%% Edited by: Emacs + AuTeX - And at times vim + context-plugin
 %%%
 
-\environment introCTX_env
+\environment introCTX_env_00
 
 \startcomponent b10_CharText
 
@@ -646,6 +646,36 @@ Les deux commandes fonctionnent de manière similaire~:
 Le paramètre \quotation{Nom} de la commande \cmd{setupcapitals} est facultatif. S'il n'est pas utilisé, la configuration affectera la commande \cmd{cap} elle-même. S'il est utilisé, nous devons donner le nom que nous avons précédemment attribué dans \cmd{definecapitals} à une configuration réelle.
 
 Dans l'une ou l'autre des deux commandes, la configuration permet trois options~: \quotation{\tt title}, \quotation{\tt sc} et \quotation{\tt style}, la première et la seconde autorisant \quotation{yes} et \quotation{no} comme valeurs. Avec \quotation{\tt title}, nous indiquons si la capitalisation affectera également les titres (ce qui est le cas par défaut) et avec \quotation{\tt sc}, nous indiquons si la commande doit utiliser de véritables petites capitales (\quotation{yes}) ou de fausses petites capitales (\quotation{no}). Par défaut, il utilise les fausses petites capitales, ce qui présente l'avantage que la commande fonctionne même si vous utilisez une police qui n'a pas implémenté les petites capitales. La troisième valeur \quotation{{\tt style}} permet d'indiquer une commande de style à appliquer au texte affecté par la commande \cmd{cap}.
+
+\stopsubsection
+
+% ADDED Garulfo
+
+\startsubsection
+  [title={Lettrine}]
+
+\setupinitial
+  [color=darkred, 
+   n=3]
+
+\placeinitial Une lettrine est une lettre initiale majuscule décorée placée en tête d'un texte et occupant une hauteur supérieure à la ligne courante. Le sujet n'est abordé ici que pour faire prendre connaissance des commandes \tex{setupinitial} et \tex{placeinitial}.
+
+\setup{setupinitial}
+
+% TODO Garulfo bug ici inital ne marche pas dans DemoVN
+
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+\setupinitial
+  [color=darkred, 
+   distance=0.75em, 
+   n=3, 
+   hoffset=-0.25em]
+
+\placeinitial Bon, c'est simple. Vous suivez les baffes. Et il devrait être au bout. J'vous accompagne pas hein, j'vais rester là et réfléchir un peu
+\stopDemoVN}
+
+
 
 \stopsubsection
 
@@ -1489,6 +1519,8 @@ Bien entendu, si nous utilisons l'anglais comme langue principale, les guillemet
 
 \GuillemetsNivA{Mon texte et \GuillemetsNivB{un second et \GuillemetsNivC{un troisième}}} 
 \stopDemoHW}
+
+Enfin, sachez qu'il existe un environnement spécifique pour présenter les citation~: \tex{startquotation} présenté \at{page}[env:quotation].
 
 \stopsubsubsection
 

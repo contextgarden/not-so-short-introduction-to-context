@@ -13,7 +13,7 @@
 %%% Edited: Emacs + AuTeX - And at times vim + context-plugin
 %%%
 
-\environment introCTX_env
+\environment introCTX_env_00
 
 \startcomponent b12_SpecialParas
 
@@ -872,7 +872,7 @@ Pour générer une liste ordonnée, nous devons indiquer à {\tt itemize} le typ
 
 \sym{{\bf n}} 1, 2, 3, 4, ...
 
-\sym{{\bf m}} {\switchtobodyfont[antykwa]1, 2, 3, 4, ...}
+\sym{{\bf m}} {\os 1}, {\os 2}, {\os 3}, {\os 4}, ...
 
 \sym{{\bf g}} \alpha, \beta, \gamma, \delta, ...
 
@@ -1241,146 +1241,197 @@ Nous réalisons la première avec les commandes \tex{setupitemize} et \tex{setup
 
 Les descriptions et les énumérations sont deux constructions qui permettent la composition cohérente de paragraphes ou de groupes de paragraphes qui développent, décrivent ou définissent une phrase ou un mot.
 
-% *** Subsection          <<<<<<<<<<<<<<<<<
+% *** Subsection  
 \startsubsection
   [title={Descriptions}]
 
-For descriptions we differentiate between a {\em title} and its explanation or development. We can create a new description with:
 
-\PlaceMacro{definedescription}\type{\definedescription [Name] [Configuration]}
+Pour les descriptions, nous faisons la différence entre un {\em titre} et son explication ou développement. Nous pouvons créer une nouvelle description avec :
 
-where {\em Name} is the name by which this new construction will be known, and Configuration controls what our new structure will look like. After the previous statement we will have a new command and an environment with the name we have chosen. Thus:
+\PlaceMacro{definedescription}
 
-\type{\definedescription [Concept]}
+\setup{definedescription}
 
-will create the commands:
+où le premier {\em Name} est le nom sous lequel cette nouvelle construction sera connue, le second correspond à un environment de description déjà existant et dont le nouveau va hériter, et le dernier arguments contrôle ce à quoi notre nouvel environment ressemblera. Après la déclaration précédente, nous aurons une nouvelle commande et un environnement portant le nom que nous avons choisi. Ainsi~:
 
-\starttyping
-  \Concept{Title}
-  \startConcept {Title} ... \stopConcept
-\stoptyping
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\definedescription [Concept]
 
-We will use the command for the case where the explanatory text of the title consists of only one paragraph, and the environment for titles whose description occupies more than one paragraph. When the command is used, the paragraph immediately following it is the one that will be considered the title's explanatory text. But when the environment is used, all content will be formatted with the appropriate indentation to make it clear how it relates to the title.
+\Concept{Protestation} Il vient une heure où protester ne suffit plus : après la philosophie, il faut l'action.
 
-For example:
+Ceci est une citation de Victor Hugo. 
 
-\starttyping
+\startConcept{Rire}
+Faire rire, c'est faire oublier.
+
+Ceci est une citation de Victor Hugo. 
+\stopConcept
+\stopDemoVW}
+
+Nous pouvons utiliser la commande pour le cas où le texte explicatif du titre ne comporte qu'un seul paragraphe, mais généralement nous utiliserons plutôt l'environnement car il permet de traiter le cas plus général où la description occupe plus d'un paragraphe, contient des flottants etc. Lorsque la commande est utilisée, seul le paragraphe qui la suit immédiatement est celui qui sera considéré comme le texte explicatif du titre. Lorsque l'environnement est utilisé, tout le contenu sera formaté avec l'indentation appropriée pour faire apparaître clairement son lien avec le titre.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
 \definedescription
   [Concept]
   [alternative=left, width=1cm, headstyle=bold]
+\startConcept{Contextualiser}
+Placer quelque chose dans un certain contexte, ou composer un texte avec le système de composition appelé \ConTeXt. La capacité à contextualiser correctement dans toute situation est considérée comme un signe d'intelligence et de bon sens.
+\stopConcept
+\stopDemoVW}
 
-\Concept{Contextualise}
+Comme c'est normalement le cas avec \ConTeXt, l'aspect qu'aura notre nouvelle construction peut être indiqué au moment de sa création, avec le dernier argument ou plus tard avec \tex{setupdescription} :
 
-Place something in a certain context, or typeset a text with the typesetting system called \ConTeXt. The ability to correctly contextualise in any situation is considered a sign of intelligence and good sense.
+\setup{setupdescription}
 
-\stoptyping
+où {\em 1} est le nom (ou la liste de nom) de notre nouvelle description, et {\em 2} détermine à quoi elle ressemble. Parmi les différentes options de configuration possibles, je soulignerai~:
 
-This will generate the following result:
+\startcommanddesc
 
-\startcolor[red]
+\starthead{alternative} cette option est celle qui contrôle fondamentalement l'apparence de la construction. Elle détermine le placement du titre par rapport à sa description. Ses valeurs possibles sont les suivantes : {\tt left, right, inmargin, inleft, inright, margin, leftmargin, rightmargin, innermargin, outermargin, serried, hanging}, leurs noms sont suffisamment clairs pour se faire une idée du résultat, même si, en cas de doute, il est préférable de faire un test pour voir ce que cela donne.\stophead
 
-\definedescription
-  [Concept]
-  [alternative=left, width=3cm, headstyle=bold]
+\starthead{width} contrôle la largeur de la boîte dans laquelle le titre sera écrit. Selon la valeur de {\tt alternative}, cette distance fera également partie de l'indentation avec laquelle le texte explicatif sera écrit.\stophead
 
-\Concept{Contextualise}
+\starthead{distance} contrôle la distance entre le titre et l'explication.\stophead
 
-Place something in a certain context, or typeset a text with the typesetting system called \ConTeXt. The ability to correctly contextualise in any situation is considered a sign of intelligence and good sense.
-  
-\stopcolor
+\starthead{headstyle, headcolor, headcommand} affecte l'aspect du titre lui-même : Style ({\tt headstyle}) et couleur ({\tt headcolor}). Avec headcommand, on peut indiquer une commande à laquelle le texte du titre sera passé comme argument. Par exemple : {\tt headcommand=\backslash WORD} fera en sorte que le texte du titre soit tout en majuscules.\stophead
 
-As is normally the case with \ConTeXt, the appearance that our new construction will have can be indicated at the time of its creation, with the {\em Configuration} argument or later on with \tex{setupdescription}:
+\starthead{style, color} contrôle l'apparence du texte descriptif du titre.\stophead
 
-\PlaceMacro{setupdescription}\type{\setupdescription [Name] [Configuration]}
+\starthead{hang} contrôle les spécificités dans le cas de l'alternative {\tt hanging} (combien de ligne sont mise en retrait).\stophead
 
-where {\em Name} is the name of our new description, and {\em Configuration} determines what it looks like. Among the different possible configuration options I will highlight:
+\stopcommanddesc
 
-\startitemize
 
-\item {\tt alternative}: This option is the one that fundamentally controls the appearance of the construction. It determines the placement of the title in relation to its description. Its possible values are {\tt left, right, inmargin, inleft, inright, margin,  leftmargin, rightmargin, innermargin, outermargin, serried, hanging}, their names are clear enough to get an idea of the result, although, in case  of doubt, it is best to do a test to see how it looks.
+\placefigure [force,here,none] [] {}
+{\startDemoVW%
+\startbuffer
+Il vient une heure où protester ne suffit plus : après la philosophie, il faut l'action.
+\stopbuffer%
+\definedescription  [Concept]
+  [alternative=left, 
+   width=2.5cm,
+   distance=2em,
+   headstyle=\tt\bf,
+   headcolor=darkred]%
+\startConcept{left} \getbuffer \stopConcept
 
-\item {\tt width}: controls the width of the box in which the title will be written. Depending on the value of {\tt alternative} that distance will also be part of the indentation with which the explanatory text is written.
-
-\item {\tt distance}: controls the distance between the title and the explanation.
-
-\item {\tt headstyle, headcolor, headcommand}: affect how the title itself will look: Style ({\tt headstyle}) and color ({\tt headcolor}). With headcommand we can indicate a command to which the title text will be passed as an argument. For example: {\tt headcommand=\backslash WORD} will make sure that the title text is all in upper case.
-
-\item {\tt style, color}: controls the appearance of the title's descriptive text.
-
-\stopitemize
+\definedescription [Concept] [alternative=hanging]
+\startConcept{hanging} \getbuffer \stopConcept
+\definedescription [Concept] [alternative=top]
+\startConcept{top} \getbuffer \stopConcept
+\definedescription [Concept] [alternative=serried]
+\startConcept{serried} \getbuffer \stopConcept
+\definedescription [Concept] [distance=5em]
+\startConcept{distance} \getbuffer \stopConcept
+\definedescription [Concept] [alternative=right, distance=2em]
+\startConcept{right} \getbuffer \stopConcept
+\definedescription [Concept] [headalign=flushright]
+\startConcept{headalign} \getbuffer \stopConcept
+\stopDemoVW}
 
 \stopsubsection
 
 % *** Subsection 
 \startsubsection
-  [title={Enumerations}]
+  [title={Énumerations}]
 
-Enumerations are numbered text elements structured on several levels. Each element starts with a title that consists, by default, of the name of the structure and its number, although we can change the title with the {\tt text} option. They are quite similar to descriptions, although they differ in that:
-
-\startitemize
-
-\item All the elements in an enumeration share the same title.
-
-\item Therefore they differ from each other by their numbering.  
-
-\stopitemize
-
-This structure can be very useful, for example, to write formulas, problems or exercises in a textbook, ensuring that they are numbered correctly and formatted in a consistent manner.
-
-We create an enumeration with
-
-\PlaceMacro{defineenumeration}\type{\defineenumeration [Name] [Configuration]}
-
-where {\em Name} is the name of the new construction, and {\em Configuration} controls what it will look like. 
-
-So, in the following example:
-
-\starttyping
-  \defineenumeration
-    [Exercise]
-    [alternative=top, before=\blank, after=\blank, between=\blank]
-\stoptyping
-
-We have created a new structure called {\em Exercise} and, as happens with enumerations, we will have  the following new commands available:
-
-\starttyping
-  \Exercise
-  \startExercise
-\stoptyping
-
-The command is used just for a single paragraph {\em exercise}, and the environment for multiple paragraph {\em exercises}. But since enumerations can be up to four levels deep, the following commands and environments will also be created:
-
-\starttyping
-  \subExercise
-  \startsubExercise
-  \stopsubExercise
-  \subsubExercise
-  \startsubsubExercise
-  \stopsubsubExercise
-  \subsubsubExercise
-  \startsubsubsubExercise
-  \stopsubsubsubExercise
-\stoptyping
-
-And, to control the numbering, the following additional commands:
+Les énumérations sont des éléments de texte numérotés et structurés sur plusieurs niveaux. Chaque élément commence par un titre qui se compose, par défaut, du nom de la structure et de son numéro, bien que nous puissions modifier le titre avec l'option {\tt text} (voir le second exemple page suivante). Elles sont assez similaires aux descriptions, mais offrent deux distinctions~:
 
 \startitemize
 
-\item \tex{setEnumerationName}: sets the current numbering value.
+\item Tous les éléments d'une énumération partagent le même titre.
 
-\item \tex{resetEnumerationame}: sets the enumeration counter to zero.
-
-\item \tex{nextEnumerationName}: increases the enumeration counter by one.
+\item Ils diffèrent donc les uns des autres par leur numérotation.  
 
 \stopitemize
 
-The appearance of enumerations can be determined at the time of their creation or later with \tex{setupenumeration} whose format is:
 
-\PlaceMacro{setupenumeration}\type{\setupenumeration [Name] [Configuration]}.
+Cet environnement peut être très utile, par exemple, pour rédiger des énoncés, des définitions, des formules, des problèmes ou des exercices dans un manuel, en veillant à ce qu'ils soient correctement numérotés et formatés de manière cohérente et automatique.
 
-For each enumeration we can configure each of its levels separately. Thus, for example, \tex{setupenumeration [subExercise] [Configuration]} will affect the second level of the enumeration called \quotation{Exercise}.
+\PlaceMacro{defineenumeration}
+\setup{defineenumeration}
 
-The options and values configurable with \tex{setupenumeration} are similar to those in \tex{setupdescription}.
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\defineenumeration [Exercice]
+  [alternative=top, 
+   before=\blank, 
+   after=\blank, 
+   between=\blank]
+
+\Exercice 
+pas facile celui-ci A.\par
+pas facile celui-ci B.
+
+
+\startExercice
+Commençons par le commencement A.\par
+Commençons par le commencement B.
+
+\startsubExercice
+Celui ci est élémentaire A.\par
+Celui ci est élémentaire B.
+\stopsubExercice
+
+\startsubExercice
+Celui ci est un complément A.\par
+Celui ci est un complément B.
+\stopsubExercice
+
+\subExercice 
+pour finir A.\par
+pour finir B.
+
+\stopExercice
+\stopDemoVW}
+
+Ainsi, dans l'exemple précédent, on constate que \tex{defineenumeration} génère automatiquement une série de nouvelles commandes associées au nom du nouvel environnement (\tex{startExercice}, \tex{startsubExercice}, …), en effet les énumérations peuvent avoir jusqu'à quatre niveaux de profondeur. Tout comme pour les descriptions, nous utiliserons généralement l'environnement \tex{startNom ... \stopNom} qui permet de couvrir plusieurs paragraphes, mais les commandes simples (\tex{Exercice}, \tex{subExercice}, …) peuvent également être utilisées dans le cas de paragraphe seul.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\defineenumeration [Exercice]
+  [alternative=left,
+   headcolor=darkcyan,
+   width=2cm,
+   text={Exercice},
+   before=\blank, 
+   after=\blank, 
+   between=\blank]
+
+\startExercice
+Commençons par le commencement A.\par
+Commençons par le commencement B.
+
+\startsubExercice
+Celui ci est élémentaire A.\par
+Celui ci est élémentaire B.
+\stopsubExercice
+
+\startsubExercice
+Celui ci est un complément A.\par
+Celui ci est un complément B.
+\stopsubExercice
+
+\stopExercice
+\stopDemoVW}
+
+L'apparence des énumérations (voir exemple ci-dessus) peut être déterminée au moment de leur création ou ultérieurement avec \tex{setupenumeration} dont les options et valeurs sont similaires à celles de \tex{setupdescription}.
+
+Pour chaque énumération, nous pouvons configurer chacun de ses niveaux séparément. Ainsi, par exemple, \tex{setupenumeration [subExercice] [Configuration]} affectera le deuxième niveau de l'énumération appelée \quotation{Exercice}.
+
+\PlaceMacro{setupenumeration}
+\setup{setupenumeration}
+
+
+Pour contrôler la numérotation, il existe les commandes supplémentaires suivantes :
+
+\startcommanddesc
+\starthead{\tex{setEnumerationName}} définit la valeur de numérotation actuelle. \stophead
+\starthead{\tex{resetEnumerationName}} remet le compteur d'énumération à zéro.\stophead
+\starthead{\tex{nextEnumerationName}} augmente le compteur d'énumération d'une unité.\stophead
+\stopcommanddesc
 
 \stopsubsection
 
@@ -1390,138 +1441,209 @@ The options and values configurable with \tex{setupenumeration} are similar to t
 \startsection
   [
     reference=sec:FramesLines,
-    title={Lines and frames},
+    title={Lignes et cadres},
   ]
 
-It says in the\ConTeXt\ reference manual that \TeX\ has a huge text management capability, but is very weak in managing graphic information. I beg to differ: it is true that for handling lines and frames the possibilities of \ConTeXt\ (actually \TeX) are not as overwhelming as when it comes to typesetting text. But to go on to say that the system is weak in this regard is, I think, somewhat of a stretch. I don't know of any function with lines and frames that  other typesetting systems can do for documents that \ConTeXt\ is unable to generate. And if we combine \ConTeXt\ with MetaPost, or with TiKZ (\ConTeXt\ has an expansion module for this), then the possibilities are only limited by our imagination.
+Il est dit dans le manuel de référence de \ConTeXt\ que \TeX\ a une énorme capacité de gestion du texte, mais est très faible dans la gestion des informations graphiques. Je ne suis pas d'accord : il est vrai que pour la gestion des lignes et des cadres, les possibilités de \ConTeXt\ (en fait \TeX) ne sont pas aussi écrasantes que lorsqu'il s'agit de composer du texte. Mais dire que le système est faible à cet égard est, je pense, un peu exagéré. Je ne connais aucune fonction avec des lignes et des cadres que d'autres systèmes de composition peuvent faire pour des documents et que \ConTeXt\ est incapable de générer. Et si nous combinons \ConTeXt\ avec MetaPost, ou avec TiKZ (\ConTeXt\ a un module d'extension pour cela), alors les possibilités ne sont limitées que par notre imagination.
 
-In the following sections, however, I will limit myself to explaining how to generate simple horizontal and vertical lines and frames around words, sentences or paragraphs.
+Dans les sections suivantes, cependant, je me limiterai à expliquer comment générer de simples lignes horizontales et verticales et des cadres autour des mots, des phrases ou des paragraphes.
 
 % *** Subsection 
 \startsubsection
-  [title={Simple lines}]
+  [title={Lignes simples}]
 
-The simplest way of drawing a horizontal line is with the \PlaceMacro{hairline}\tex{hairline} command that generates a horizontal line that occupies all the width of a normal text line.
+La façon la plus simple de dessiner une ligne horizontale est d'utiliser la commande \PlaceMacro{hairline} \tex{hairline} qui génère une ligne horizontale occupant toute la largeur d'une ligne de texte normale.
 
-There cannot be text of any kind on the line where the line generated by \tex{hairline} is. In order to generate a line capable of coexisting with the text on the same line, we need the \PlaceMacro{thinrule}\tex{thinrule} command. This second command will use the full width of the line. Therefore, in an isolated paragraph, it will have the same effect as \tex{hairline}, while in the opposite case, \tex{thinrule} will produce the same horizontal expansion as \tex{hfill} (see \in{section}[sec:horizontal space2]), but instead of filling the horizontal space with white space (as \tex{hfill} does), it fills it with a line.
+Il ne peut y avoir de texte d'aucune sorte sur la ligne où se trouve la ligne générée par \tex{hairline}. Afin de générer une ligne capable de coexister avec le texte sur la même ligne, nous avons besoin de la commande \PlaceMacro{thinrule} \tex{thinrule}. Cette deuxième commande utilisera toute la largeur de la ligne. Par conséquent, dans un paragraphe isolé, elle aura le même effet que \tex{hairline}, tandis que dans le cas contraire, \tex{thinrule} produira la même expansion horizontale que \tex{hfill} (voir \in{section}[sec:horizontal space2]), mais au lieu de remplir l'espace horizontal avec un espace blanc (comme le fait \tex{hfill}), elle le remplit avec une ligne.
 
-\startDoubleExample
-\starttyping
-On the left\thinrule\\
-\thinrule On the right\\
-On both\thinrule sides\\
-\thinrule centred\thinrule
-\stoptyping
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+Avec hairline~:\par
+Sur la gauche\hairline\\
+\hairline sur la droite\\
+Des deux \hairline côtés\\
+\hairline centré\hairline
+\blank[big]
+Avec thinrule~:\par
+Sur la gauche\thinrule\\
+\thinrule sur la droite\\
+Des deux \thinrule côtés\\
+\thinrule centré\thinrule
+\stopDemoVN}
 
-On the left\thinrule\\
-\thinrule On the right\\
-On both\thinrule sides\\
-\thinrule centred\thinrule
+\PlaceMacro{thinrule}
+\PlaceMacro{setupthinrules}
+\PlaceMacro{thinrules}
 
-\stopDoubleExample
+La commande \tex{thinrules} permet de générer plusieurs lignes. Par exemple, \tex{thinrules[n=2]} générera deux lignes consécutives, chacune de la largeur de la ligne normale. Les lignes générées avec \tex{thinrules} peuvent également être configurées, soit dans un appel direct à la commande, en indiquant la configuration comme l'un de ses arguments, soit de manière générale avec \tex{setupthinrules}. La configuration comprend l'épaisseur de la ligne ({\tt rulethickness}), sa couleur ({\tt color}), la couleur de fond ({\tt background}), l'espace interligne ({\tt interlinespace}), etc.
 
-With the \PlaceMacro{thinrules}\tex{thinrules} command we can generate several lines. For example \tex{thinrules[n=2]} will generate two consecutive lines, each the width of the normal line. The lines generated with \tex{thinrules} can also be configured, either in an actual call to the command, indicating the configuration as one of its arguments, or generally with \tex{setupthinrules}. Configuration includes the thickness of the line ({\tt rulethickness}), its colour ({\tt color}), background colour ({\tt background}), interline space ({\tt interlinespace}), etc.
-
-\startSmallPrint
-
-  I will leave a number of options without explanation. The reader can consult them in {\tt setup-en.pdf} (see \in{section}[sec:qrc-setup-en]). Some options only differ from others in terms of nuance (i.e there is hardly any difference between them), and I think it is faster for the reader to try to {\em see} the difference, than for me to try to convey it in words. For example: the thickness of the line I just said depends on the {\tt rulethickness} option. But it is also affected by the {\tt height} and {\tt depth} options.
-
-\stopSmallPrint
-
-Smaller lines can be generated with the \PlaceMacro{hl}\tex{hl} and \PlaceMacro{vl}\tex{vl} commands. The first generates a horizontal line and the second a vertical line. Both take a number as a parameter that allows us to calculate the length of the line. In \tex{hl} the number measures the length in {\em ems} (no need to indicate the unit of measurement in the command) and in \tex{vl} the argument refers to the current height of the line.
-
-Thus \tex{hl[3]} generates a horizontal line of 3 ems and \tex{vl[3]} generates a vertical line of the height corresponding to three lines. Remember that the line measurement indicator must be inserted between square brackets, not between curly brackets. In both commands the argument is optional. If it is not entered, a value of 1 is assumed.
-
-\PlaceMacro{fillinline}\tex{fillinline} is another command to create horizontal lines of precise length. It supports more configuration in which we can indicate (or predetermine with \PlaceMacro{setupfillinlines}\tex{setupfillinlines}) the width ({\tt width} option) in addition to some other features.
-
-A peculiarity of this command is that text that is written to its right will be placed on the left of the line, separating that text from the line by the necessary white space to occupy the whole line. For example:
-
-\starttyping
-\fillinline[width=6cm] Name    
-\stoptyping
-
-will generate
-
-\startcolor[red]
-  
-\fillinline[width=6cm] {Name}
-
-\stopcolor
+\placefigure [force,here,none] [] {}
+{\startDemoHN
+\setupthinrules[color=darkyellow,height=-0.5mm,depth=1.0mm]
+Sur la gauche\thinrules[n=3] centre décalé \thinrule sur la droite
+\stopDemoHN}
 
 \startSmallPrint
 
-  I suspect that this strange operation is due to the fact that this macro was designed to write forms where there is a horizontal line behind the text on which something \Conjecture must be written. In fact the very name of the command {\tt fillinline} means, fill in the line.
+Je laisserai un certain nombre d'options sans explication. Le lecteur peut les consulter dans {\tt setup-fr.pdf} (voir \in{section}[sec:qrc-setup-fr]). Certaines options ne diffèrent des autres qu'en termes de nuance (c'est-à-dire qu'il n'y a pratiquement aucune différence entre elles), et je pense qu'il est plus rapide pour le lecteur d'essayer de {\em voir} la différence, que pour moi d'essayer de la transmettre avec des mots. Par exemple : l'épaisseur de la ligne que je viens de dire dépend de l'option {\tt rulethickness}. Mais elle est également affectée par les options {\tt height} et {\tt depth} (voir l'exemple ci-dessus).
 
 \stopSmallPrint
 
-Besides the width of the line, we can configure the margin ({\tt margin}), the distance ({\tt distance}), the thickness ({\tt rulethickness}) and the colour ({\tt color}).
 
-Almost identical to \tex{fillinline} is \tex{fillinrules}, although this command allows us to insert more than one line ( \MyKey{n} option).
+Des lignes plus petites peuvent être générées avec les commandes \PlaceMacro{hl}\tex{hl} et \PlaceMacro{vl}\tex{vl}. La première génère une ligne horizontale et la seconde une ligne verticale. Toutes deux prennent comme paramètre un nombre qui nous permet de calculer la longueur de la ligne. Dans \tex{hl}, le nombre mesure la longueur en {\em ems} (il n'est pas nécessaire d'indiquer l'unité de mesure dans la commande) et dans \tex{vl}, l'argument fait référence à la hauteur actuelle de la ligne.
 
-\type{\fillinrules [Configuration] {Text} {Text}}
 
-where the three arguments are optional.
+\placefigure [force,here,none] [] {}
+{\startDemoHN
+Une ligne verticale \vl[2] et une autre horizontale \hl[2]
+\stopDemoHN}
+
+Ainsi, \tex{hl[2]} génère une ligne horizontale de 3 ems et \tex{vl[2]} génère une ligne verticale de la hauteur correspondant à trois lignes. N'oubliez pas que l'indicateur de mesure de ligne doit être inséré entre crochets, et non entre accolades. Dans les deux commandes, l'argument est facultatif. S'il n'est pas saisi, la valeur 1 est prise en compte.
+
+
+
+\PlaceMacro{fillinline} \tex{fillinline} est une autre commande (je pense dépréciée, voyez ensuite \tex{fillinrules}) permettant de créer des lignes horizontales de longueur précise. Elle prend en charge davantage de configuration dans laquelle nous pouvons indiquer (ou prédéterminer avec \PlaceMacro{setupfillinlines} \tex{setupfillinlines}) la largeur (option {\tt width}) en plus de quelques autres caractéristiques.
+
+Une particularité de cette commande est que le texte qui est écrit en argument sera placé à gauche de la ligne, séparant ce texte de la ligne par l'espace blanc nécessaire pour occuper toute la ligne. Attention, il faut bien penser à indiquer un changement de paragraphe entre deux lignes de ce type.
+Par exemple :
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\fillinline[width=2cm]{Nom} \par
+\fillinline[width=4cm]{Prénom}
+
+\fillinline[width=4cm]{Adresse} \par
+\stopDemoVW}
+
+Outre la largeur de la ligne, nous pouvons configurer la marge ({\tt margin}), la distance ({\tt distance}), l'épaisseur ({\tt rulethickness}) et la couleur ({\tt color}).
+
+\PlaceMacro{fillinrules}
+\tex{fillinrules} a un rôle très proche de \tex{fillinline} mais plus générale car elle permet d'insérer plus d'une ligne (option \MyKey{n}) et traite automatiquement le changement de ligne et de paragraphe.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\setupfillinrules[separator=:,interlinespace=small]
+\fillinrules[n=1]{Nom}{(en majuscule)}
+\fillinrules[n=1,width=2cm]{Prénom}
+\fillinrules[n=3,width=fit]{Adresse 1}
+\fillinrules[n=3,distance=1cm]{Adresse 2}
+\stopDemoVW}
+
+\PlaceMacro{blackrule}
+\PlaceMacro{setupblackrules}
+\PlaceMacro{blackrules}
+
+Dernier type de ligne~: \tex{blackrule}. Voyez la comparaison avec thinrules~:
+
+\placefigure [force,here,none] [] {}
+{\startDemoHN
+\setupthinrules[color=darkyellow,height=-0.5mm,depth=1.0mm]
+Sur la gauche\thinrules[n=3] centre décalé \thinrule sur la droite
+
+\setupblackrules[color=darkgreen,height=-0.5mm,depth=1.0mm]
+Sur la gauche\blackrules[n=3] centre décalé \blackrule sur la droite
+\stopDemoHN}
+
+Contrairement à \tex{thinrule}, \tex{blackrule} produit des lignes de longeur fixe, que l'on défini avec l'option {\tt width}.
+
+Un manuel spécifique aux lignes a été produit en 2018 intitulé \goto{Rules}[url(https://www.pragma-ade.com/general/manuals/rules-mkiv.pdf)]. N'hésitez pas à le consulter.
 
 \stopsubsection
 
 % *** Subsection 
 \startsubsection
-  [title={Lines linked to text}]
+  [title={Lignes liées au texte}]
 
-Although some of the commands we have just seen can generate lines that coexist with text on the same line, those commands actually focus on the line's layout. To write lines linked to certain text, \ConTeXt\ has commands:
+Bien que certaines des commandes que nous venons de voir puissent générer des lignes qui coexistent avec du texte sur la même ligne, ces commandes se concentrent en fait sur la mise en page de la ligne. Pour écrire des lignes liées à un certain texte, \ConTeXt\ a des commandes :
+
 
 \startitemize
 
-\item that generate text between lines.
+\item qui génèrent du texte entre les lignes.
 
-\item that generate lines under the text (underlining), above the text (overlining) or through it (strikethrough).
+\item qui génèrent des lignes sous le texte (soulignement, underlining), au-dessus du texte (surlignage, overlining) ou à travers le texte (barré, strikethrough).
 
 \stopitemize
 
-To generate a text between lines the usual command is \PlaceMacro{textrule}\tex{textrule}. This command draws a line that crosses the entire width of the page and writes the text it takes as a parameter on the left side (but not at the margin). For example:
+Pour générer un texte entre les lignes, la commande habituelle est  \PlaceMacro{textrule} \tex{textrule}. Cette commande trace une ligne qui traverse toute la largeur de la page et écrit le texte qu'elle prend comme paramètre sur le côté gauche (mais pas dans la marge). Par exemple :
 
-\startDoubleExample
-\starttyping
-\textrule{Example text}
-\stoptyping
-\ 
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+Texte avant.
+\textrule{Texte en exemple}
+Texte encore après.
+\stopDemoVN}
 
-\textrule{Example text}
+\tex{textrule} permet un premier argument facultatif avec trois valeurs possibles : {\tt top}, {\tt middle} et \Doubt{\tt bottom} selon la position souhaitée par rapport au reste du texte.
 
-\stopDoubleExample
+\placefigure [force,here,none] [] {}
+{\startDemoHN
+Texte A.
+\textrule[top]{Texte en exemple}
+Texte B.
+\textrule[middle]{Texte en exemple}
+Texte C.
+\textrule[bottom]{Texte en exemple}
+Texte D.
+\stopDemoHN}
 
-\startSmallPrint
+Similaire à \tex{texrule}, l'environnement \PlaceMacro{starttextrule} \tex{starttextrule} permet d'insérer une ligne de texte au début de l'environnement, mais aussi une ligne horizontale à la fin. 
 
-  It is assumed that \tex{textrule} allows an optional first argument with three possible values: {\tt top}, {\tt middle} and \Doubt{\tt bottom}. But, after some tests, I have not been able to find out what effect such options produce.
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+Texte avant.
+\starttextrule{Texte en exemple}
+Texte utilisé en contenu de l'environnement, pour faire joli.
+\stoptextrule
+Texte encore après.
+\stopDemoVN}
 
-\stopSmallPrint
+\tex{textrule} et \text{starttextrule} peuvent être configurés avec \PlaceMacro{setuptextrule} \tex{setuptextrules}.
 
-Similar to \tex{texrule} is the \PlaceMacro{starttextrule}\tex{starttextrule} environment which, besides inserting the line with text at the beginning of the environment, inserts a horizontal line at the end. The format of this command is:
+\placefigure [force,here,none] [] {}
+{\startDemoHN
+\startbuffer
+Texte utilisé en contenu de l'environnement, pour faire joli.
+\stopbuffer
 
-\type{\starttextrule[Configuration]{Text on the line} ... \stoptextrule} %
+\setuptextrules[location=left] % sinon inmargin
+\starttextrule{location=left} \getbuffer \stoptextrule
 
-Both \tex{textrule} and \text{starttextrule} can be configured with \PlaceMacro{setuptextrule}\tex{setuptextrule}.
+\setuptextrules[width=2cm]   % largeur du trait à gauche
+\starttextrule{width} \getbuffer\stoptextrule
 
-To draw lines under, over, or through text, the following commands are used:
+\setuptextrules[distance=2em] % distance entre le trait et le texte
+\starttextrule{distance} \getbuffer\stoptextrule
+
+\setuptextrules[style=\bfa,color=darkgreen,rulecolor=darkred]
+\starttextrule{style et couleur} \getbuffer\stoptextrule
+\stopDemoHN}
+
 
 \PlaceMacro{underbar}\PlaceMacro{underbars}\PlaceMacro{overbar}
 \PlaceMacro{overbars}\PlaceMacro{overstrike}\PlaceMacro{overstrikes}
-\starttyping
-  \underbar{Text}
-  \underbars{Text}
-  \overbar{Text}
-  \overbars{Text}
-  \overstrike{Text}
-  \overstrikes{Text}
-\stoptyping
 
-As we can see, for each type of line (under, over, or through text) there are two commands. The singular version of the command draws a single line under, over or through all the text taken as an argument, while the plural version of the command only draws the line over the words, but not the white space.
+Pour tracer des lignes sous, sur ou à travers du texte, les commandes suivantes sont utilisées~:
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\setupinterlinespace[big]
+\underbar{Ceci est un texte underbar} \\
+\underbar{Ceci \underbar{est \underbar{un texte}} underbar} \\
+\underbars{Ceci est un texte underbars} \\
+\overbar{Ceci est un texte overbar} \\
+\overbars{Ceci est un texte overbars} \\
+\overstrike{Ceci est un texte overstrike} \\
+\overstrikes{Ceci est un texte overstrikes}
+\stopDemoVW}
 
-These commands are not compatible with each other, that is to say, two of them cannot be applied to the same text. If we try, the last one will always prevail. On the other hand \tex{underbar} can be nested, underlining what has already been underlined.
+
+Comme on peut le voir, il existe deux commandes pour chaque type de ligne (sous, sur ou à travers le texte). La version singulière de la commande trace une seule ligne sous, sur ou à travers tout le texte pris comme argument, tandis que la version plurielle de la commande ne trace la ligne que sur les mots, mais pas sur les espaces blancs.
+
+Ces commandes ne sont pas compatibles entre elles, c'est-à-dire qu'on ne peut pas en appliquer deux au même texte. Si on essaie, c'est toujours la dernière qui l'emportera. En revanche, \tex{underbar} peut être imbriqué, soulignant ce qui a déjà été souligné.
 
 \startSmallPrint
 
-  The reference manual points out that \tex{underbar} disables hyphenation of words in the text that constitute its argument. It is not clear to me whether that statement refers only to \tex{underbar} or to the six commands we are examining.
+Le manuel de référence signale que \tex{underbar} désactive la césure des mots du texte qui constituent son argument. Il n'est pas clair pour moi si cette déclaration se réfère uniquement à \tex{underbar} ou aux six commandes que nous examinons.
 
 \stopSmallPrint
 
@@ -1529,36 +1651,240 @@ These commands are not compatible with each other, that is to say, two of them c
 
 % *** Subsection 
 \startsubsection
-  [title={Framed words or texts}]
+  [title={Mots ou textes encadrés}]
 
-To surround a text with a frame or grid we use:
+% ADDED Garulfo 
+Les cadres sont un élément essentiel de \ConTeXt . Ils permettent d'obtenir toute sorte de personnalisation et d'effets graphiques surlesquels nous reviendrons, mais surtout leur utilisation est omniprésente dans quantité d'élements de \ConTeXt\ et donc bien les comprendre ainsi que l'effet des différentes options est très prévieux.
+% ADDED Garulfo end
+
+Pour entourer un texte d'un cadre ou d'une grille, on utilise :
 
 \startitemize
 
-\item The \PlaceMacro{framed}\tex{framed} or \PlaceMacro{inframed}\tex{inframed} commands if the text is relatively brief and does not take up more than one line.
+\item Les commandes \PlaceMacro{framed}\tex{framed} ou \PlaceMacro{inframed}\tex{inframed} si le texte est relativement bref et ne prend pas plus d'une ligne.
 
-\item The \PlaceMacro{startframedtext}\tex{startframedtext} environment for longer texts.
+\item L'environnement \PlaceMacro{startframedtext}\tex{startframedtext} pour les textes plus longs.
+
+% TODO Garulfo 
+% \item L'environnement \PlaceMacro{startframed} \tex{startframed}
+% TODO Garulfo end
 
 \stopitemize
 
-The difference between \tex{framed} and \tex{inframed} lies at the point from which the frame is drawn. In \tex{frame} the frame is drawn upwards from an ideal line, called a baseline, on which the letters rest, but certain letters pass downwards. In \tex{inframed} the frame is drawn, also upwards, from the lowest possible point on the line. For example:
+La différence entre \tex{framed} et \tex{inframed} réside dans le point à partir duquel le cadre est dessiné. Dans le cas de \tex{framed}, le cadre est positionné sur la ligne de base, sur laquelle reposent les lettres. Avec \tex{inframed}, c'est le mot qui est positionnés sur la ligne de base.
 
-\startDoubleExample
-\starttyping
-Here there are \framed{two} good
-\inframed{frames}.
-\stoptyping
+\placefigure [force,here,none] [] {}
+{\startDemoHW
+\tfd
+Voici deux \framed{cadres} bien \inframed{encadrés}.
 
-Here there are \framed{two} good
-\inframed{frames}.
+\showboxes
+Voici deux \framed{cadres} bien \inframed{encadrés}.
+\stopDemoHW}
 
-\stopDoubleExample
+Les deux, peuvent être personnalisés avec \PlaceMacro{setupframed} \tex{setupframed}, et \tex{startframedtext} est personnalisé avec \PlaceMacro{setupframedtext} \tex{setupframedtext}. Les options de personnalisation des deux commandes sont assez similaires. Elles nous permettent d'indiquer les dimensions du cadre ({\tt height, width, depth}), la forme des coins ({\tt framecorner}), qui peut être {\tt rectangular} ou ronde ({\tt round}), la couleur du cadre ({\tt framecolor}), l'épaisseur du trait ({\tt framethickness}), l'alignement du contenu ({\tt align}), la couleur du texte ({\tt foregroundcolor}), la couleur de l'arrière-plan ({\tt background} et {\tt backgroundcolor}), etc.
 
-Both, framed and inframed text, can be customized with \PlaceMacro{setupframed}\tex{setupframed}, and \tex{startframedtext} is customized with \PlaceMacro{setupframedtext}\tex{setupframedtext}. The customization option for both commands are quite similar. They allow us to indicate the measurements of the frame ({\tt height, width, depth}), the shape of the corners ({\tt framecorner}), which can be {\tt rectangular} or round ({\tt round}), the frame colour ({\tt framecolor}), the line thickness ({\tt framethickness}), the alignment of content ({\tt align}), text colour ({\tt foregroundcolor}), background colour ({\tt background} and {\tt backgroundcolor}), etc.
+Pour \tex{startframedtext}, il existe également une propriété apparemment étrange : {\tt frame=off} qui fait que le cadre n'est pas dessiné (il est toujours présent, mais invisible). Cette propriété existe parce que, le cadre entourant un paragraphe étant indivisible, il est courant que le paragraphe entier soit enfermé dans un environnement {\tt framedtext} avec l'option de dessin du cadre désactivée, afin de s'assurer qu'aucun saut de page n'est inséré dans un paragraphe.
 
-For \tex{startframedtext} there is also an apparently strange property: {\tt frame=off} that causes the frame not to be drawn (although it is still there, but invisible). This property exists because since the frame around a paragraph is indivisible, it is common for the entire paragraph to be enclosed in a {\tt framedtext} environment with the frame drawing option turned off, to ensure that no page breaks are inserted within a paragraph.
+Nous pouvons également créer une version personnalisée de ces commandes avec \PlaceMacro{defineframed}\tex{defineframed} et \PlaceMacro{defineframedtext}\tex{defineframedtext}.
 
-We can also create a customized version of these commands with \PlaceMacro{defineframed}\tex{defineframed} and \PlaceMacro{defineframedtext}\tex{defineframedtext}.
+
+% ADDED by Garulfo BEGIN   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+\startsubsubsection[title=Premiers exemples]
+
+Nous allons voir quelques exemples, simples pour commencer.
+
+\placefigure [force,here,none] [] {}
+{\startDemoHW%
+\defineframed
+  [MonCadre]
+  [background=color,
+   backgroundcolor=darkred,
+   foregroundcolor=white,
+   foregroundstyle=\bfc]%
+A
+\MonCadre{coucou 1}\hfill
+\MonCadre[offset=2mm]{offset}\hfill
+\MonCadre{coucou 2}\hfill
+\MonCadre[frameoffset=2mm]{frameoffset}\hfill   % conserve la position du mot
+\MonCadre[backgroundoffset=2mm]{backgroundoffset}
+\stopDemoHW}
+
+Il y a ensuite tout une série de personnalisation sur le trait du cadre, sur la distance entre le texte et le cadre (en haut, en bas, à gauche, à droite), à découvrir au fur et à mesure de vos besoins. 
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN%
+\defineframed[MonTitre]
+  [frame=off, topframe=on, 
+   leftframe=on,
+   rulethickness=2pt,
+   foregroundstyle=\bfa, 
+   framecolor=darkred]%
+\MonTitre{Superbe titre 1}
+\blank
+\MonTitre
+  [loffset=1em,toffset=2pt]
+  {Superbe titre 2}
+\blank
+\MonTitre
+  [corner=16,frame=on,offset=2pt]
+  {Superbe titre 3}
+\stopDemoVN}
+
+\stopsubsubsection
+
+%=======================================
+
+\startsubsubsection[title=Retour à la ligne et alignement]
+
+Attention, par défaut, le cadre ne fait aucun retour à la ligne. Il faut indiquer une valeur à {\tt align} (voir \in{section}[sec:setupalign] pour les valeurs à considérer, normal fait référence à un texte justifié, et \in{section}[sec:horizontaltolerance] pour les options de tolérance). Dans l'exemple on utilise {\tt align=\{normal,verytolerant\}}.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN%
+\startbuffer
+Si le texte est un peu trop grand, par défaut il ne sera pas coupé
+\stopbuffer%
+\defineframed
+  [MonCadre]
+  [background=color,
+   backgroundcolor=darkred,
+   foregroundcolor=white,
+   foregroundstyle=\bfa]%
+\MonCadre{\getbuffer} \blank
+\MonCadre[width=5cm]{\getbuffer} \blank
+\MonCadre[width=5cm,align=normal] {\getbuffer} \blank
+\MonCadre[width=5cm,
+          align={normal,verytolerant},
+          backgroundcolor=darkgreen]
+         {\getbuffer}
+\stopDemoVN}
+
+\stopsubsubsection
+
+
+%=======================================
+
+\startsubsubsection[title=Largeur]
+
+Un point concernant le paramètre {\tt width}. La dimension de la largeur peut être indiquée directement (en cm, en pt, en fonction d'autre longueur par exemple \MyKey{0.5\backslash textwidth}). 
+
+Des dimensions automatiques sont proposées par \ConTeXt.
+{\tt broad} fait référence à la largeur totale disponible pour la zone de texte,
+{\tt local} fait référence à la largeur totale disponible pour la zone en cours,
+et {\tt fit} colle à la largeur du texte contenu par le cadre, 
+
+\startbuffer[a7-testframedwidth]
+\setuppapersize[A7,landscape]
+\setupbodyfont[8pt]
+\showframe
+\setupframed[framecolor=blue,align=middle,style=tt]
+\definenarrower[MyNarrow][left=1cm,default=left]
+
+\starttext
+
+\framed[width=4cm]   {width=6cm}
+\framed[width=0.5\textwidth]   {width=0.5\backslash textwidth}
+\framed[width=broad] {width=broad}
+\framed[width=local] {width=local}
+\framed[width=fit]   {width=fit}
+
+\startitemize[packed]
+\item \framed[width=broad] {width=broad}
+\item \framed[width=local] {width=local}
+\item \framed[width=fit]   {width=fit}
+\stopitemize
+
+\startMyNarrow
+\startitemize[packed]
+\item \framed[width=broad] {width=broad}
+\item \framed[width=local] {width=local}
+\item \framed[width=fit]   {width=fit}
+\stopitemize
+\stopMyNarrow
+
+\stoptext
+
+\stopbuffer
+
+\savebuffer[list=a7-testframedwidth,file=ex_framedwidth.tex,prefix=no]
+\placefigure [force,here,none] [] {}{\typesetbuffer[a7-testframedwidth][frame=on,page=1,background=color,backgroundcolor=white]
+\attachment
+  [file={ex_framedwidth.tex},
+   title={exemple ex_framedwidth}]}
+
+\stopsubsubsection
+
+%=======================================
+
+\startsubsubsection[title=Positionnement par rapport à la ligne de base]
+
+\placefigure [force,here,none] [] {}
+{\startDemoHW%
+\defineframed[MonCadre][width=2.25cm,align=middle]
+\define[1]\DemoLoc{\ruledhbox{%
+    {\getbuffer \MonCadre[location=#1]
+     {location\\ \color[darkmagenta]{\bf #1}\\location}}}}
+\setupbodyfont[14pt]
+%\showboxes
+\startbuffer
+\blackrule[height=max,depth=0pt,width=3mm]%
+\blackrule[height=0pt,depth=max,width=3mm]
+\stopbuffer
+
+\strut
+\DemoLoc{empty}  \dontleavehmode \DemoLoc{keep}    \dontleavehmode 
+\DemoLoc{depth}  \dontleavehmode \DemoLoc{bottom}  \dontleavehmode
+\DemoLoc{low} 
+\blank[big]\strut
+\DemoLoc{middle} \dontleavehmode \DemoLoc{lohi}    \dontleavehmode 
+\DemoLoc{line}
+\blank[big]\strut
+\DemoLoc{top}    \dontleavehmode \DemoLoc{height}  \dontleavehmode 
+\DemoLoc{high}   \dontleavehmode \DemoLoc{formula} \dontleavehmode 
+\DemoLoc{hanging}
+\stopDemoHW}
+
+Plus complexe, ci-dessus les différents cas possible pour le paramètre {\tt location}. Vous voyez que de nombreux cas sont possibles, afin d'aligner le haut ou le bas de la boite sur la ligne de base du texte, ou bien encore, souvent plus utile, d'aligner la première ou la dernière ligne de base de la boite avec la ligne de base du texte.
+
+\stopsubsubsection
+
+
+%=======================================
+
+%TODO Garulfo strut
+
+\startsubsubsection[title=Attention au paramètre {\tt strut}]
+
+L'option {\tt strut} force la première ligne de l'encadré à prendre tout la hauteur et toute la profondeur que la police en cours lui permet de prendre. Cela permet de \quotation{donner une hauteur de ligne standard}. Si vous avez des difficultés parfois à positionner correctement vos {\tt framed} par rapport à la ligne de base, ou bien si vous avez des difficultés d'alignement / positionnement vertical, pensez à regarder l'effet de {\tt strut}. Par exemple~:
+
+Voyez l'effet comment avec {\tt strut=no} la première ligne à une hauteur réduire par rapport à la version  {\tt strut=yes} ce qui perturbe le positionnement par rapport à l'effet désiré. 
+
+\placefigure [force,here,none] [] {}
+{\startDemoHW%
+\defineframed[MonCadre][width=2.25cm,align=middle]
+\define[1]\DemoLoc{\ruledhbox{%
+    {\getbuffer \MonCadre[location=#1]
+     {location\\ \color[darkmagenta]{\bf #1}\\location}}}}
+\setupbodyfont[14pt]
+%\showboxes
+\startbuffer
+\blackrule[height=max,depth=0pt,width=3mm]%
+\blackrule[height=0pt,depth=max,width=3mm]
+\stopbuffer
+
+\setupframed[MonCadre][strut=yes]
+\strut
+{\tt strut=yes}
+\DemoLoc{bottom}    \dontleavehmode \DemoLoc{top}
+
+{\tt strut=no}
+\setupframed[MonCadre][strut=no]
+\DemoLoc{bottom}    \dontleavehmode \DemoLoc{top}
+\stopDemoHW}
+
+\stopsubsubsection
+
+% ADDED by Garulfo END     <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 \stopsubsection
 
@@ -1568,56 +1894,138 @@ We can also create a customized version of these commands with \PlaceMacro{defin
 \startsection
   [
     reference=sec:buffer,
-    title={Other environments and constructions of interest},
+    title={Autres environnements et constructions d'intérêt},
   ]
 
-  There are still many environments in \ConTeXt\ that I have not even mentioned, or only very much in passing. By way of example:
+Il existe encore de nombreux environnements dans \ConTeXt\ que je n'ai même pas mentionnés, ou seulement de manière très approximative. À titre d'exemple :
 
 \startitemize
   
-\item {\tt\bf buffer}\PlaceMacro{startbuffer}\PlaceMacro{getbuffer} {\em Buffers} are text fragments stored in memory for later re-use. A {\em buffer} is defined somewhere in the document with \cmd{startbuffer[BufferName] ... \backslash stopbuffer} and can be retrieved as often as desired at some other point in the document with  \tex{getbuffer[BufferName]}.
+  
+\item {\tt\bf buffer}\PlaceMacro{startbuffer}\PlaceMacro{getbuffer}\PlaceMacro{typebuffer} {\em Tampons (Buffers)} sont des fragments de texte stockés en mémoire pour une réutilisation ultérieure. Un {\em tampon} est défini quelque part dans le document avec \cmd{startbuffer[BufferName] ... \backslash stopbuffer} et peut être récupéré aussi souvent que souhaité à un autre endroit du document avec \tex{getbuffer[BufferName]}. La commande \tex{typebuffer[BufferName]} affiche le texte du buffer en verbatim (sans traitement par \ConTeXt).
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+\startbuffer[visite]
+Coucou \ConTeXt.
+\stopbuffer
+\getbuffer[visite]
+\getbuffer[visite]
+\stopDemoVN}
 
 \item {\tt\bf chemical}\PlaceMacro{startchemical}
-  This environment allows us to place chemical formulas inside it. If \TeX\ stands out, among many other things, for its ability to typeset texts with mathematical formulas properly, from the outset \ConTeXt\ sought to extend this ability to chemical formulas, and it has this environment where commands and structures are enabled for writing chemical formulas.
+  Cet environnement nous permet de placer des formules chimiques à l'intérieur. Si \TeX\ se distingue, entre autres, par sa capacité à composer correctement des textes contenant des formules mathématiques, \ConTeXt\ a cherché dès le départ à étendre cette capacité aux formules chimiques, et dispose de cet environnement où sont activées les commandes et les structures permettant d'écrire des formules chimiques.
 
-\item {\tt\bf combination}\PlaceMacro{startcombination}
-  This environment allows us to combine several floating elements on the same page. It is particularly useful for aligning different connected external images in our document.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+\usemodule[chemic]
+\startchemical
+\chemical[SIX,B,R6,RZ6][\SL{COOH}]
+\stopchemical
+\stopDemoVN}
+
+\item {\tt\bf combinations}\PlaceMacro{startcombinations}
+  Cet environnement nous permet de combiner plusieurs éléments flottants sur une même page. Il est particulièrement utile pour aligner différentes images externes connectées dans notre document.
+
+\placefigure [force,here,none] [] {}
+{\startDemoHN
+\useMPlibrary [dum] % pour produire des images
+\placefigure [here] [fig:combinations] {Un exemple de combinaison}
+{\startcombination[2*2]
+{\externalfigure [dummy] [height=1cm,width=4cm]} {a}
+{\externalfigure [dummy] [height=1cm,width=4cm]} {b}
+{\externalfigure [dummy] [height=1cm,width=4cm]} {c}
+{\externalfigure [dummy] [height=1cm,width=4cm]} {d}
+\stopcombination} 
+\stopDemoHN}
+
 
 \item {\tt\bf formula}\PlaceMacro{startformula}
-  This is an environment aimed at typesetting maths formulas.
+Il s'agit d'un environnement destiné à la composition de formules mathématiques.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\usemodule[newmat]
+
+Display math:
+\startformula
+q = \delta \frac{\partial p}{\partial x} = 
+\delta(\phi) p_{vsat}(\theta) \frac{\partial \phi}{\partial x} = 
+\left[ \frac{\delta_a}{\mu(\theta)} p_{vsat}(\theta) \right] \frac{\partial \phi}{\partial x} = 
+k \frac{\partial \phi}{\partial x}
+\stopformula
+\stopDemoVW}
 
 \item {\tt\bf hiding}\PlaceMacro{starthiding}
-  The text stored in this environment will not be compiled and will not appear, therefore, in the final document. This is useful for temporarily disabling compilation of certain fragments in the source file. The same thing is achieved by marking one or more lines as a comment. But when the fragment we want to disable is relatively long, more effective than marking tens or hundreds of lines of the source file as a comment is to insert the \tex{starthiding} command at the beginning of the fragment, and \tex{stophiding} at the end. 
+Le texte stocké dans cet environnement ne sera pas compilé et n'apparaîtra donc pas dans le document final. Ceci est utile pour désactiver temporairement la compilation de certains fragments du fichier source. On obtient la même chose en marquant une ou plusieurs lignes comme commentaire. Mais lorsque le fragment que l'on veut désactiver est relativement long, il est plus efficace que de marquer des dizaines ou des centaines de lignes du fichier source comme commentaire d'insérer la commande \tex{starthiding} au début du fragment, et \tex{stophiding} à la fin. 
 
 \item {\tt\bf legend}\PlaceMacro{startlegend}
-  In a mathematical context, \TeX\ applies different rules so that no normal text can be written. However, sometimes a formula is accompanied by a description of the elements used in it. For this purpose there is the \tex{startlegend} environment which allows us to place normal text in a mathematical context.
+Dans un contexte mathématique, \TeX\ applique des règles différentes de sorte qu'aucun texte normal ne peut être écrit. Cependant, il arrive qu'une formule soit accompagnée d'une description des éléments qui la composent. Pour cela, il existe l'environnement \tex{startlegend} qui permet de placer un texte normal dans un contexte mathématique.
 
 \item {\tt\bf linecorrection}\PlaceMacro{startlinecorrection}
-  Usually, \ConTeXt\ correctly manages the vertical space between lines, but occasionally a line may contain something that makes it not look right. This happens mainly with lines that have fragments framed with \tex{framed}. In such cases this environment adjusts the line spacing so that the paragraph appears correctly.
+En général, \ConTeXt\ gère correctement l'espace vertical entre les lignes, mais il arrive parfois qu'une ligne contienne quelque chose qui la rende incorrecte. Cela se produit principalement avec les lignes dont les fragments ont été encadrés avec \tex{framed}. Dans de tels cas, cet environnement ajuste l'espacement des lignes afin que le paragraphe apparaisse correctement.
+
+
 
 \item {\tt\bf mode}\PlaceMacro{startmode}
-  This environment is intended to include fragments in the source file that will only be compiled if the appropriate mode is active. The use of {\em modes} is not the subject of this introduction, but it is a very interesting tool if we want to be able to generate several versions with different formats, from a single source file. A complementary environment to this one is \PlaceMacro{startnotmode}\tex{startnotmode}.
+Cet environnement est destiné à inclure dans le fichier source des fragments qui ne seront compilés que si le mode approprié est actif. L'utilisation des {\em modes} n'est pas le sujet de cette introduction, mais c'est un outil très intéressant si l'on veut pouvoir générer plusieurs versions avec des formats différents (une version écran et une papier, ou bien un version anglaise et une française), à partir d'un seul fichier source. Voici un exemple~:
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\startmode[palatino]
+   \setupbodyfont[palatino,12pt]
+\stopmode
+
+\startmode[times]
+   \setupbodyfont[postscript,12pt]
+\stopmode
+
+\starttext
+\input knuth
+\stoptext
+\stopDemoI}
+
+\placefigure [force,here,none] [] {}
+{\startDemoC
+context --mode=palatino filename
+context --mode=times    filename
+\stopDemoC}
+
+ Un environnement complémentaire à celui-ci est \PlaceMacro{startnotmode}\tex{startnotmode}.
+
 
 \item {\tt\bf opposite}\PlaceMacro{startopposite}
-  This environment is used to typeset texts when the contents of the left and right pages are related.
+Cet environnement est utilisé pour composer des textes lorsque les contenus des pages de gauche et de droite sont liés.
 
-\item {\tt\bf quotation}\PlaceMacro{startquotation}
-  A very similar environment to {\tt narrower}, intended to insert moderately long literal quotations. The environment makes sure that the text inside is quoted, and that the margins are increased so that the paragraph with the quotation stands out visually on the page. But it should be noted that according to usual blockquote style in English, there should be no opening and closing quotation marks -- which makes this command or environment less useful.
+
+\item {\tt\bf quotation}\PlaceMacro{startquotation}  \reference[env:quotation]{envquotation} 
+Un environnement très similaire à {\tt narrower}, destiné à insérer des citations littérales moyennement longues. L'environnement veille à ce que le texte soit cité et à ce que les marges soient augmentées pour que le paragraphe contenant la citation se détache visuellement sur la page.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+Cette citation de Victo Hugo~:
+\startquotation
+Il vient une heure où protester ne suffit plus : après la philosophie, il faut l'action.
+\stopquotation
+\stopDemoVN}
 
 \item {\tt\bf standardmakeup}\PlaceMacro{startstandardmakeup}
-  This environment is designed to generate pages with the title of the document, which is relatively common in academic documents of a certain length, such as doctoral theses, master's theses, etc.
+Cet environnement est conçu pour générer des pages de titre de chapitre, ou bien la première de couverture du document, ce qui est relativement courant dans les livres et les documents universitaires d'une certaine longueur, tels que les thèses de doctorat, les mémoires de maîtrise, etc.
 
 \stopitemize
 
-To learn about any of these environments (or others I have not mentioned), I suggest the following steps:
+Pour en savoir plus sur l'un de ces environnements (ou d'autres que je n'ai pas mentionnés), je vous suggère, en plus du \goto{wiki}[url(wiki)], de suivre les étapes suivantes~:
+
 
 \startitemize[n]
 
-\item Look for information on the environment in the \ConTeXt\ reference manual. This manual does not mention all the environments; but it does say something about every item in the list above.
+\item Cherchez des informations sur l'environnement dans le manuel de référence \ConTeXt\. Ce manuel ne mentionne pas tous les environnements, mais il parle de chaque élément de la liste ci-dessus.
 
-\item Write a test document where the environment is used.
+\item Rédigez un document de test dans lequel l'environnement est utilisé.
 
-\item Look up \ConTeXt's official list of commands (see \in{section}[sec:qrc-setup-en]) for the configuration options for the environment in question, then test them to see exactly what they do.
+\item Consultez la liste officielle des commandes de \ConTeXt (voir \in{section}[sec:qrc-setup-fr]) pour connaître les options de configuration de l'environnement en question, puis testez-les pour voir exactement ce qu'elles font.
+  
   
 \stopitemize
 
