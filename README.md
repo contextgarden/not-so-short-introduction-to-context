@@ -64,6 +64,9 @@ well the spirit of the FDL licence, in considerably less space.
   - Introduction of suggestions and correction of errors reported by NTG-context users.
 - January 2, 2021: Version 1.6
   - Corrections suggested after a new and careful reading of the document, on the occasion of its translation to English. This is the first version in English.
+- July 4, 2021: Version 1.6
+  -  1.6 version translated to french
+  -  additionnal content, updated layout, reorganized source code only available in french
 
 
 ## Communication history
