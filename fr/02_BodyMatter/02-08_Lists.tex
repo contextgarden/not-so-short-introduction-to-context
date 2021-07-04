@@ -1,0 +1,1180 @@
+%%% File:      b08_Lists.mkiv
+%%% Author:    Joaquín Ataz-López
+%%% Begun:     July 2020
+%%% Concluded: July 2020
+%%% Contents:  Initially this chapter was to be part of Chapter 12
+%              (elements and structures of documents). But I saw that on
+%              the one hand indexes affected the document globally, and on
+%              the other hand, if I included this in Chapter 12, it would
+%              become disproprotionately long. The chapter was written in
+%              record time (three or four days), a sign that I was already
+%              beginning to get a more intimate understanding of ConTeXt.
+%
+%%% Edited with: Emacs + AuTeX - And at times vim + context-plugin
+%%%
+
+\environment introCTX_env_00
+
+\startcomponent 02-08_Lists
+
+% * Chapter
+\startchapter
+  [
+    reference=cap:toc,
+    title={Table des matières, index, listes},
+  ]
+
+\TocChap
+
+
+Une table des matières et un index sont des élements globaux d'un document. Presque tous les documents auront une table des matières, tandis que seuls certains documents auront un index. Dans de nombreuses langues (mais pas en anglais), la table des matières et l'index sont regroupés sous le terme général \quote{index}. Pour les lecteurs anglais, la table des matières se trouve normalement au début (d'un document, voire dans certains cas au début des chapitres), et l'index à la fin.
+
+L'un et l'autre impliquent une application particulière du mécanisme des références internes dont l'explication est incluse dans \in{section}[sec:references].
+
+% * Section TOC
+
+\startsection
+  [
+    reference=sec:content,
+    title=Table des matières,
+  ]
+
+% ** Subsection TOC gébé
+
+\startsubsection
+  [title=Vue d'ensemble de la table des matières]
+
+Dans le chapitre précédent, nous avons examiné les commandes qui permettent d'établir la structure d'un document au fur et à mesure de sa rédaction. Cette section se concentre sur la table des matières et l'index, qui reflètent en quelque sorte la structure du document et offrent des outils efficaces pour y naviguer. La table des matières est très utile pour se faire une idée du document dans son ensemble (elle permet de contextualiser l'information) et pour rechercher l'endroit exact où se trouve un passage particulier. Les livres dont la structure est très complexe, avec de nombreuses sections et sous-sections de différents niveaux de profondeur, semblent nécessiter un autre type de table des matières, car une table des matières moins détaillée (peut-être avec seulement les deux ou trois premiers niveaux de sectionnement) est essentielle pour se faire une idée générale du contenu du document. Par contre, elle ne permet pas de localiser un passage particulier ce qui peut être l'objet d'une table des matières très détaillée. Cette dernière ayant pour faiblesse de facilement faire perdre la vue d'ensemble à son lecteur. C'est pourquoi, parfois, les livres dont la structure est particulièrement complexe comportent plusieurs tables des matières : une table des matières peu détaillée en début d'ouvrage, indiquant les parties principales, une table des matières plus détaillée au début de chaque chapitre ainsi que, éventuellement, un index en fin de document.
+
+Tous ces éléments peuvent être générés automatiquement par \ConTeXt\ avec une relative facilité. On peut~:
+
+\startitemize
+
+\item Générer une table des matières complète ou partielle à n'importe quel endroit du document.
+
+\item Décider du contenu de l'une ou l'autre.
+
+\item Configurer leur apparence jusqu'au moindre détail.
+
+\item Inclure des hyperliens qui nous permettent de passer directement à la section en question.
+
+\stopitemize
+
+En fait, cette dernière fonctionnalité est incluse par défaut dans toutes les tables des matières, à condition que la fonction d'interactivité ait été activée dans le document. Voir, à ce sujet, \in{section}[sec:interactivity].
+
+
+L'explication de ce mécanisme dans le manuel de référence de \ConTeXt\ est, à mon avis, quelque peu confuse, ce qui, je pense, est dû au fait que trop d'informations sont introduites en même temps. Le mécanisme de construction des tables des matières de \ConTeXt\ comporte de nombreux éléments, et il est difficile de les expliquer tous tout en restant clair. En revanche, l'explication dans \goto{wiki} [url(https://wiki.contextgarden.net/Table_of_Contents#Page_numbering_in_ToC)], 
+se limite pratiquement des exemples~: cela est très utile pour apprendre les {\em trucs} mais inadéquat -- je pense -- pour comprendre le mécanisme et comment il fonctionne. C'est pourquoi la stratégie que j'ai décidé d'utiliser pour expliquer les choses dans cette introduction commence par supposer quelque chose qui n'est pas strictement vrai (ou pas complètement vrai) : qu'il existe quelque chose dans \ConTeXt\ appelé la {\em table des matières}. A partir de là, les commandes {\em normales} pour générer la table des matières sont expliquées, et quand ces commandes et leur configuration sont bien connues, je pense que c'est le moment d'introduire -- bien qu'à un niveau théorique plutôt que plus pratique -- les informations sur les pièces du mécanisme qui ont été omises jusqu'alors. La connaissance de ces {\em éléments supplémentaires} nous permet de créer des tables des matières beaucoup plus personnalisées que celles que nous pouvons appeler les {\em les éléments de base} crées avec les commandes expliquées jusqu'à ce point ; cependant, dans la plupart des cas, nous n'aurons pas besoin de le faire.
+
+\stopsubsection
+
+% ** Subsection full auto
+
+\startsubsection
+  [
+    reference=sec:completecontent,
+    title=Table des matières entièrement automatique avec un titre,
+  ]
+
+Les commandes de base pour générer automatiquement une table des matières (TdM ou ToC en anglais) à partir des sections numérotées d'un document ({\tt part}, {\tt chapter}, {\tt section}, etc.) sont \PlaceMacro{completecontent} \tex{completecontent} et \PlaceMacro{placecontent} \tex{placecontent}. La principale différence entre ces deux commandes est que la première ajoute un {\em titre} à la Table des matières ; pour ce faire, elle insère immédiatement avant la Table des matières un {\em chapitre non numéroté} dont le titre par défaut est \quotation{Table des matières}.
+
+Par conséquent, \tex{completecontent}~:
+
+
+\startitemize
+
+\item Insère, à l'endroit où il se trouve, un nouveau chapitre non numéroté intitulé \quotation{Table des matières}.
+
+\startSmallPrint
+
+Nous rappelons que dans \ConTeXt\ la commande utilisée pour générer une section non numérotée au même niveau que les chapitres, est \tex{title}. (voir \in{section}[sec:sectiontypes]). Par conséquent, en réalité, \tex{completcontent} n'insère pas un {\em Chapitre} (\tex{chapter}) mais un {\em Title} (\tex{title}). Je ne l'ai pas dit parce que je pense qu'il peut être déroutant pour le lecteur d'utiliser les noms des commandes de section non numérotées ici, puisque le terme {\em Title} a également un sens plus large, et il est facile pour le lecteur de ne pas l'identifier avec le niveau concret de section auquel nous faisons référence.
+
+\stopSmallPrint
+
+\item Ce {\em chapitre} (en fait, \tex{title}) est formaté exactement de la même manière que le reste des chapitres non numérotés du document, ce qui inclut par défaut un saut de page.
+
+\item La table des matières est affichée immédiatement après le titre.
+
+\stopitemize
+
+Initialement, la TdM générée est {\em complète}, comme nous pouvons le déduire du nom de la commande qui la génère (\tex{completecontent}). Mais d'une part, nous pouvons limiter le niveau de profondeur de la TdM comme expliqué dans \in{section}[sec:placecontent] et, d'autre part, comme cette commande est {\em sensible} à l'endroit où elle se trouve dans le fichier source (voir ce qui est dit plus loin à propos de \tex{placecontent}), si \tex{completecontent} ne se trouve pas au début du document, il est possible que la TdM générée ne soit pas complète ; et à certains endroits du fichier source, il est même possible que la commande soit apparemment ignorée. Si cela se produit, la solution consiste à invoquer la commande avec l'option \MyKey{criterium=all}. À propos de cette option, voir également \in{section}[sec:placecontent].
+
+Pour modifier le titre par défaut attribué aux TdM, nous utilisons la commande \PlaceMacro{setupheadtext} \tex{setupheadtext} dont la syntaxe est :
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\setupheadtext[Langage][Élément=Texte]
+\stopDemoI}
+
+où {\em Langage} est facultatif et fait référence à l'identificateur de langue utilisé par \ConTeXt\ (voir \in{section}[sec:langdoc]), et {\em Élément} fait référence à l'élément dont nous voulons modifier le nom (\MyKey{content} dans le cas de la table des matières) et {\em Texte} est le texte du titre que nous voulons donner à notre TdM. Par exemple
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\setupheadtext[fr][content={Carte de navigation}]
+\stopDemoI}
+
+fera en sorte que la TdM générée par \tex{completecontent} soit intitulée \quotation{Carte de navigation} au lieu de \quotation{Table des matières}.
+
+De plus, \tex{completecontent} permet les mêmes options de configuration que \tex{placecontent}, pour l'explication desquelles je renvoie à la section suivante.
+
+\stopsubsection
+ 
+% ** Subsection full auto sans titre
+
+\startsubsection
+  [
+    reference=sec:placecontent,
+    title=Table des matières automatique sans titre,
+  ]
+
+La commande générale d'insertion d'une TdM sans titre, générée automatiquement à partir des commandes de sectionnement du document, est \tex{placecontent}, dont la syntaxe est~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\placecontent [Options]
+\stopDemoI}
+
+En principe, la table des matières contiendra absolument toutes les sections numérotées, bien que nous puissions limiter son niveau de profondeur avec la commande \PlaceMacro{setupcombinedlist} \tex{setupcombinedlist} (dont nous parlerons plus loin). Ainsi, par exemple :
+
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\setupcombinedlist[content][list={chapter,section}]
+\stopDemoI}
+
+limitera le contenu de la table des matières aux deux niveaux indiqués~: chapitre et section.
+
+Une particularité de cette commande est qu'elle est sensible à son emplacement dans le fichier source. C'est très facile à expliquer avec quelques exemples, mais beaucoup plus difficile si nous voulons spécifier exactement comment la commande fonctionne et quelles rubriques sont incluses dans la Table des matières dans chaque cas. Commençons donc par les exemples~:
+
+\startitemize
+
+
+\item \tex{placecontent} placé au début du document, avant la première commande de section (partie, chapitre ou section, selon la situation) générera une table des matières complète.
+
+\startSmallPrint
+
+Je ne suis pas vraiment sûr que la table des matières générée par défaut soit {\em complète}, je crois qu'elle comprend suffisamment de niveaux de section pour être complète dans la plupart des cas ; mais je soupçonne qu'elle ne dépassera pas le huitième niveau de section. Quoi qu'il en soit, comme mentionné ci-dessus, nous pouvons ajuster le niveau de sectionnement que la TdM atteint avec
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\setupcombinedlist[content][list={chapitre, section, sous-section, ...}]
+\stopDemoI}
+
+
+\stopSmallPrint
+
+\item En revanche, cette même commande située à l'intérieur d'une partie, d'un chapitre ou d'une section générera une TdM strictement limité au contenu de l'élément de section concerné, ou en d'autres termes des chapitres, des sections et d'autres niveaux inférieurs de découpage d'une partie spécifique, ou des sections (et d'autres niveaux) d'un chapitre spécifique, ou des sous-sections d'une section spécifique.
+
+\stopitemize
+
+% TODO Garulfo : il me semble que l'on doit pouvoir simplifier la formulation et éviter une certaine redondance.
+
+En ce qui concerne l'explication technique et détaillée, afin de bien comprendre le fonctionnement par défaut de \tex{placecontent}, il est essentiel de se rappeler que les différentes sections sont, en fait, des {\em environnements} pour \ConTeXt\ Mark~IV qui commencent par \tex{start{\em TypedeSection}} et se terminent par \tex{stop{\em TypedeSection}} et peuvent être contenues dans d'autres commandes de section de niveau inférieur. Donc, en tenant compte de cela, nous pouvons dire que \tex{placecontent} génère par défaut une table des matières qui comprendra uniquement~:
+
+\startitemize
+
+\item les éléments qui appartiennent à l'{\em environnement} (niveau de section) où la commande est placée. Cela signifie que la commande, lorsqu'elle est placée dans un chapitre, ne fera pas apparaître les sections et sous-sections des autres chapitres.
+
+\item les éléments qui ont un niveau de section inférieur au niveau correspondant au point où se trouve la commande. Cela signifie que si la commande se trouve dans un chapitre, seules les sections, les sous-sections et les autres niveaux inférieurs sont inclus ; Si la commande se trouve au niveau d'une section, seules les sous-sections, les sous-sous-sections et les autres niveaux inférieurs sont inclus.
+
+\stopitemize
+
+En outre, pour que la table des matières soit générée, il faut que \tex{placecontent} se trouve {\em avant} la première section du chapitre dans lequel il se trouve, ou avant la première sous-section de la section dans laquelle il se trouve, etc.
+
+\startSmallPrint
+
+Je ne suis pas sûr d'avoir été clair dans l'explication ci-dessus. Peut-être qu'avec un exemple un peu plus détaillé que les précédents, nous pourrons mieux comprendre ce que je veux dire : imaginons la structure suivante d'un document :
+
+\vbox{ \startitemize[packed]
+
+  \item Chapter 1
+
+    \startitemize[packed]
+
+    \item Section 1.1
+
+    \item Section 1.2
+
+      \startitemize[packed]
+
+      \item Subsection 1.2.1
+
+      \item Subsection 1.2.2
+
+      \item Subsection 1.2.3
+
+      \stopitemize
+
+    \item Section 1.3
+
+    \item Section 1.4
+
+    \stopitemize
+
+  \item Chapter 2
+
+  \stopitemize}
+
+Ainsi : \tex{placecontent} placée avant le chapitre 1 générera une table des matières complète, similaire à celle générée par \tex{completecontent} mais sans titre. Mais si la commande est placée à l'intérieur du chapitre 1 et avant la section 1.1, la table des matières sera uniquement celle du chapitre ; et si elle est placée au début de la section 1.2, la table des matières sera uniquement le contenu de cette section. Mais si la commande est placée, par exemple, entre les sections 1.1 et 1.2, elle sera ignorée. Elle sera également ignorée si elle est placée à la fin d'une section, ou à la fin du document.
+
+\stopSmallPrint
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\setuphead[chapter][page=no]
+
+\startchapter[title=chapter 1]
+
+ \startcolor[darkgreen]
+ \placecontent                    %  <=====
+ \stopcolor
+
+ \startsection[title=Section 1.1]
+ \stopsection
+ \startsection[title=Section 1.2]
+
+  \startcolor[darkred]
+  \placecontent                  %  <=====
+  \stopcolor
+
+  \startsubsection[title=Sous-section 1.2.1]
+  \stopsubsection
+  \startsubsection[title=Sous-section 1.2.2]
+  \stopsubsection
+  \startsubsection[title=Sous-section 1.2.3]
+  \stopsubsection
+
+ \stopsection
+ \startsection[title=Section 1.3]
+ \stopsection
+ \startsection[title=Section 1.4]
+ \stopsection
+
+\stopchapter
+
+\startchapter[title=chapter 2]
+\stopchapter
+\stopDemoVW}
+
+Tout ceci, bien sûr, ne concerne que le cas où la commande ne comporte pas d'options. En particulier, l'option {\tt criterium} modifiera ce comportement par défaut.
+
+Parmi les options autorisées par \tex{placecontent} je n'en expliquerai que deux, les plus importantes pour la mise en place de la table des matières, et, de plus, les seules qui sont (partiellement) documentées dans le manuel de référence \ConTeXt. L'option {\tt criterium}, qui affecte le contenu de la table des matières par rapport à l'endroit du fichier source où se trouve la commande, et l'option {\tt alternative}, qui affecte la présentation générale de la table des matières à générer.
+
+\stopsubsection
+
+% ** Subsection option de fonctionnement (quels éléments intégrer)
+
+\startsubsection
+  [
+    reference=sec:criteriumlist,
+    title={Option de sélection des éléments intégrés à la TdM~: l'option {\tt criterium}},
+  ]
+
+Le fonctionnement par défaut de \tex{placecontent} vis-à-vis de la position de la commande dans le fichier source a été expliqué ci-dessus. En plus de la commande \tex{setupcombinedlist} vue à la \in{section}[sec:toc with unnumbered secs] qui permet de sélectionner les éléments à intégrer dans la TdM, l'option {\tt criterium} permet d'adapter le fonctionnement. Entre autres, elle peut prendre les valeurs suivantes~:
+
+\startitemize
+
+item {\tt all} : la TdM sera complète, quel que soit l'endroit du fichier source où se trouve la commande.
+
+\item {\tt previous} : la table des matières n'inclura que les commandes de section (du niveau auquel nous nous trouvons) {\em précédent} la commande \tex{placecontent}. Cette option est destinée aux TdMs qui sont positionnées à en fin de document ou en fin de la section courante.
+
+\item {\tt part, chapter, section, subsection...} : implique que la TdM doit être limitée au niveau de section indiqué.
+
+\item {\tt component} : dans les projets multifichiers (voir \in{section} [sec-projects]), cette option génère uniquement la TdM correspondant au {\em composant} (component) où se trouve la commande \tex{placecontent} ou \tex{completecontent}.
+
+\stopitemize
+
+\stopsubsection
+
+% ** Subsection layout
+
+\startsubsection
+  [
+    reference=sec:alternativelist,
+    title={Mise en page de la TdM~: l'option {\tt alternative}},
+  ]
+
+L'option {\tt alternative} contrôle la présentation générale de la table des matières. Ses principales valeurs peuvent être consultées dans le  \in{tableau}[tbl:contentalternatives].
+
+
+
+\placetable
+  [here]
+  [tbl:contentalternatives]
+  {\tfx Ways of formatting the table of contents}
+{\switchtobodyfont[small]
+\starttabulate[|c|l|l|]
+\HL
+\NC {\bf alternative}
+\NC {\bf Entrées sélectionnnées}
+\NC {\bf Remarques}
+\NR
+\HL
+\NC a
+\NC Numéro -- Titre -- Page
+\NC Une ligne par entrée
+\NR
+\NC b
+\NC Numéro -- Titre -- Espaces -- Page
+\NC Une ligne par entrée
+\NR
+\NC c
+\NC Numéro -- Titre -- Ligne de points -- Page
+\NC Une ligne par entrée
+\NR
+\NC d
+\NC Numéro -- Titre -- Page
+\NC TdM continue, entrées bout-à-bout
+\NR
+\NC e
+\NC Titre
+\NC Encadré
+\NR
+\NC f
+\NC Titre
+\NC Justification à gauche
+\NR
+\NC\NC\NC Justification à droite ou centrée
+\NR
+\NC g
+\NC Titre
+\NC Justification centrée
+\NR
+\HL
+\stoptabulate}
+
+Les quatre premières alternatives (a, b, c, d) fournissent toutes les informations de chaque section (son numéro, son titre et le numéro de page où elle commence), et conviennent donc aussi bien aux documents papier qu'aux documents électroniques. Les trois dernières alternatives (e, f, g)  ne nous informent que sur le titre, elles ne conviennent donc qu'aux documents électroniques où il n'est pas nécessaire de connaître le numéro de page où commence une section, à condition que la table des matières contienne un hyperlien vers celle-ci, ce qui est le cas par défaut avec \ConTeXt.
+
+Par ailleurs, je pense que pour apprécier réellement les différences entre les différentes alternatives, il est préférable que le lecteur génère un document test où il pourra les analyser en détail. Voici quelques illustrations~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\setuphead[chapter][page=no]
+
+\startcolor[darkgray]
+\placecontent[alternative=a]       %  <=====
+\stopcolor
+
+\startcolor[darkred]
+\placecontent[alternative=b]       %  <=====
+\stopcolor
+
+\startcolor[darkgreen]
+\placecontent[alternative=c]       %  <=====
+\stopcolor
+
+\startcolor[darkblue]
+\placecontent[alternative=d]       %  <=====
+\stopcolor
+
+\startcolor[darkcyan]
+\placecontent[alternative=e]       %  <=====
+\stopcolor
+
+\startcolor[darkmagenta]
+\placecontent[alternative=f]       %  <=====
+\stopcolor
+
+\startcolor[darkyellow]
+\placecontent[alternative=g]       %  <=====
+\stopcolor
+
+\startchapter[title=Chapitre 1]
+ \startsection[title=Section 1.1]
+  \startsubsection[title=Sous-section 1.1.1]
+  \stopsubsection
+ \stopsection
+\stopchapter
+
+\stopDemoVW}
+
+
+\stopsubsection
+
+% ** Subsection format 
+
+
+\startsubsection
+  [
+    reference=sec:setuplist,
+    title=Format des entrées de la TdM,
+  ]
+  \PlaceMacro{setuplist}
+
+Nous avons vu que l'option {\tt alternative} de \tex{placecontent} ou \tex{completecontent} nous permet de contrôler la {\em mise en page} générale de la table des matières, c'est-à-dire les informations qui seront affichées pour chaque rubrique, et la présence ou non de sauts de ligne séparant les différentes rubriques. Les ajustements finaux de chaque entrée de la table des matières sont effectués avec la commande \tex{setuplist} dont la syntaxe est la suivante :
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\setuplist[Élement][Configuration]
+\stopDemoI}
+
+où {\em Élement} fait référence à un type particulier de section. Il peut s'agir de {\tt part}, {\tt chapter}, {\tt section}, etc. On peut également configurer plusieurs éléments en même temps, en les séparant par des virgules. {\em Configuration} offre jusqu'à 54 possibilités, dont beaucoup, comme d'habitude, ne sont pas expressément documentées ; mais cela n'empêche pas celles qui sont documentées, ou celles qui ne sont pas suffisamment claires, de permettre un ajustement très complet de la TdM.  Je vais maintenant expliquer les options les plus importantes, en les regroupant selon leur utilité, mais avant de les aborder, rappelons qu'une entrée de la TdM, selon la valeur de l'option {\tt alternative}, peut comporter jusqu'à trois éléments différents : Le numéro de section, le titre de la section et le numéro de page. Les options de configuration nous permettent de configurer les différents composants de manière globale ou séparée :
+
+
+\startitemize
+
+\item {\bf Inclusion ou exclusion des différents composants} : Si nous avons choisi une alternative qui inclut, en plus du titre, le numéro de section et le numéro de page (alternatives \quote{a} \quote{b} \quote{c} ou \quote{d}), les options {\tt headnumber=no} ou {\tt pagenumber=no} indiquent pour le niveau spécifique que nous configurons,  que le numéro de section ({\tt headnumber}) ou le numéro de page ({\tt pagenumber}) ne doivent pas être affichés.
+
+\item {\bf Couleur et style} : Nous savons déjà que l'entrée qui génère une section spécifique dans la TdM peut avoir (selon l'alternative) jusqu'à trois composants différents : le numéro de section, le titre et le numéro de page. Nous pouvons indiquer conjointement le style et la couleur des trois composants à l'aide des options {\tt style} et {\tt couleur}, ou le faire individuellement pour chaque composant au moyen des options
+{\tt numberstyle}, {\tt textstyle} et {\tt pagestyle}  (pour le style) et
+{\tt numbercolor}, {\tt textcolor} ou {\tt pagecolor} pour la couleur.
+
+
+Pour contrôler l'apparence de chaque entrée, en plus du style lui-même, nous pouvons appliquer une commande à l'entrée entière ou à l'un de ses différents éléments. Pour cela, il existe les options {\tt command}, {\tt numbercommand}, {\tt pagecommand} et {\tt textcommand}. La commande indiquée ici peut être une commande standard \ConTeXt\ ou une commande de notre propre création. Le numéro de section, le texte du titre et le numéro de page seront passés comme arguments à l'option {\tt command}, tandis que le titre de la section sera passé comme argument à {\tt textcommand} et le numéro de page à {\tt pagecommand}. Ainsi, par exemple, la phrase suivante fera en sorte que les titres de section soient écrits en (fausses) petites majuscules :
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\setuphead[chapter][page=no]
+
+\setuplist
+  [section] 
+  [textcommand=\cap,
+   pagecolor=darkgreen,
+   numberstyle=bold]
+
+\placecontent[alternative=c]       %  <=====
+
+\startchapter[title=Chapitre 1]
+ \startsection[title=Section 1.1]
+  \startsubsection[title=Sous-section 1.1.1]
+  \stopsubsection
+ \stopsection
+\stopchapter
+
+\stopDemoVW}
+
+\item {\bf Séparation des autres éléments de la TdM} : Les options {\tt before} et {\tt after} nous permettent d'indiquer les commandes qui seront exécutées avant ({\tt before}) et après ({\tt after}) la composition de l'entrée de la table des matières. Normalement, ces commandes sont utilisées pour définir l'espacement ou un élément de séparation (tel un trait horizontal) entre les entrées précédentes et suivantes.
+
+\item {\bf Indentation d'un élément} : défini avec l'option {\tt margin} qui nous permet de définir l'espace d'indentation gauche des entrées du niveau que nous configurons.
+
+\item {\bf Hyperliens intégrés à la TdM} : Par défaut, les entrées de l'index comprennent un hyperlien vers la page du document où commence la section en question. L'option {\tt interaction} permet de désactiver cette fonction ({\tt interaction=no}) ou de limiter la partie de l'entrée d'index où se trouvera l'hyperlien, qui peut être le numéro de section ({\tt interaction=number} ou {\tt interaction=sectionnumber}), le titre de la section ({\tt interaction=text} ou {\tt interaction=title}) ou le numéro de page ({\tt interaction=page} ou {\tt interaction=pagenumber}).
+
+\item {\em Autres aspects}:
+
+\startitemize
+
+\item {\tt width et distance} : spécifient respectivement la largeur accordé à l'affichage du numéro et la distance de séparation entre l'espace d'affichage du numéro et le titre de la section. Il peut s'agir d'une dimension (ou du mot clé {\tt fit} pour {\tt width} qui définit la largeur exacte du numéro de section). 
+
+\item {\tt numberalign} : indique l'alignement des éléments de numérotation ; il peut être {\tt left}, {\tt right}, {\tt middle}, {\tt flushright}, {\tt flushleft}, {\tt inner}, {\tt outer}
+
+Voici un exemple qui combine ces trois dernières options~:
+
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\setuphead[chapter][page=no]
+
+\setuplist[chapter]   [width=15mm, margin=0mm,
+                       distance=3mm,
+                       numberalign=flushright]  
+\setuplist[section]   [width=15mm, margin=0mm,
+                       distance=6mm,
+                       numberalign=flushright]  
+\setuplist[subsection][width=15mm,  margin=0mm,
+                       distance=9mm,
+                       numberalign=flushright] 
+\placecontent
+
+\startchapter[title=Chapitre 1]
+ \startsection[title=Section 1.1]
+  \startsubsection[title=Sous-section 1.1.1]
+  \stopsubsection
+ \stopsection
+\stopchapter
+\stopDemoVW}
+
+\item {\tt symbol} : permet de remplacer le numéro de section par un {\em symbole}. Trois valeurs possibles sont prises en charge : {\tt one}, {\tt two} et {\tt three}. La valeur {\tt none} de cette option supprime le numéro de section de la table des matières.
+
+\stopitemize
+
+\stopitemize
+
+Parmi les multiples options de configuration de la TdM, aucune ne nous permet de contrôler directement l'espacement entre les lignes. Celui-ci sera, par défaut, celui qui s'applique à l'ensemble du document. Souvent, cependant, il est préférable que les lignes de la table des matières soient légèrement plus serrées que le reste du document. Pour ce faire, nous devons inclure la commande qui génère la table des matières (\tex{placecontent} ou \tex{completecontent}) dans un groupe où l'espacement interligne est défini différemment. Par exemple~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\setuphead[chapter][page=no]
+\start
+  \startcolor[darkred]
+  \setupinterlinespace[6mm]
+  \placecontent
+  \stopcolor
+\stop
+
+\start
+  \startcolor[darkyellow]
+  \setupinterlinespace[small]
+  \placecontent
+  \stopcolor
+\stop
+
+\startchapter[title=Chapitre 1]
+ \startsection[title=Section 1.1]
+  \startsubsection[title=Sous-section 1.1.1]
+  \stopsubsection
+ \stopsection
+\stopchapter
+\stopDemoVW}
+
+\stopsubsection
+
+% ** Subsection ajustements
+
+
+\startsubsection
+  [
+    reference=sec:manual adjustments,
+    title=Ajustements manuels,
+  ]
+
+Nous avons déjà expliqué les deux commandes fondamentales pour générer des tables des matières (\tex{placecontent} et \tex{completecontent}), ainsi que leurs options. Ces deux commandes permettent de générer automatiquement des tables des matières, construites à partir des sections numérotées existantes dans le document, ou dans le bloc ou le segment du document auquel la table des matières fait référence. Je vais maintenant expliquer certaines configurations que nous pouvons effectuer pour que le contenu de la table des matières ne soit pas aussi {\em automatique} et plus {\em personnalisé}. Cela implique~:
+
+
+\startitemize
+
+\item la possibilité d'inclure également certains titres de sections non numérotées dans la table des matières.
+
+\item la possibilité d'intégrer dans la table des matières une entrée particulière qui ne correspond pas à une section numérotée.
+
+\item la possibilité d'exclure une section numérotée particulière de la table des matières.
+
+\item la possibilité que le titre d'une section particulière figurant dans la table des matières ne coïncide pas exactement avec le titre figurant dans le corps du document.
+
+\stopitemize
+
+% *** Subsubsection include not numbered
+
+\startsubsubsection
+  [
+    reference=sec:toc with unnumbered secs,
+    title=Inclure les sections non numérotées dans la TdM,
+  ]
+
+Le mécanisme par lequel \ConTeXt\ construit la TdM implique que toutes les sections numérotées sont automatiquement incluses, ce qui, comme je l'ai déjà dit (voir \in{section}[sec:title parts]) dépend des deux options ({\tt number} et {\tt incrementnumber}) que nous pouvons modifier avec \tex{setuphead} pour chaque type de section. Il a également été expliqué qu'un type de section où {\tt incrementnumber=yes} et {\tt number=no} serait une section numérotée {\em en interne} mais pas {\em en externe} (c'est à dire pas de façon visible).
+
+Par conséquent, si nous voulons qu'un type de section non numéroté particulier -- par exemple, {\tt subject} -- soit inclus dans la table des matières, nous devons modifier la valeur de l'option {\tt incrementnumber} pour ce type de section, en lui attribuant la valeur {\tt yes}, puis inclure ce type de section parmi ceux qui doivent être affichés dans la table des matières, ce qui se fait, comme expliqué précédemment, avec \tex{setupcombinedlist}.
+
+Nous pouvons ensuite, si nous le souhaitons, formater cette entrée en utilisant \tex{setuplist} de la même manière que les autres ; par exemple~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\setuphead [chapter] [page=no]
+
+\setuphead [subject]
+           [incrementnumber=yes]
+\setuplist [subject] [color=darkred]
+
+\setupcombinedlist
+   [content]
+   [list={chapter, subject, section, subsection}]
+
+\placecontent
+
+\startchapter[title=Chapitre 1]
+ \startsection[title=Section 1.1]
+ \stopsection
+ \startsubject[title=Sujet 1.2]
+ \stopsubject
+\stopchapter
+\stopDemoVW}
+
+{\bf Note:} La procédure qui vient d'être expliquée inclura toutes les occurrences dans notre document du type de section non numérotée concerné (dans notre exemple, les sections de type {\tt subject}). Si l'on ne souhaite inclure qu'une occurrence particulière de ce type de section dans la table des matières, il est préférable de le faire par la procédure expliquée ci-dessous.
+
+\stopsubsubsection
+
+% *** Subsubsection rajouts manuels
+
+\startsubsubsection
+  [
+    reference=sec:manualtoc,
+    title=Ajouter des entrées manuellement à la TdM,
+  ]
+
+On peut envoyer soit une entrée (simulant l'existence d'une section qui n'existe pas réellement), soit une commande à la table des matières, à partir de n'importe quel point du fichier source.
+ 
+Pour envoyer une entrée qui simule l'existence d'une section qui n'existe pas réellement, utilisez la fonction \PlaceMacro{writetolist} \tex{writetolist} dont la syntaxe est :
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\writetolist[TypedeSection][Options]{Numéro}{Texte}
+\stopDemoI}
+
+dans laquelle~:
+
+\startitemize
+
+\item Le premier argument indique le niveau que doit avoir cette entrée de section dans la table des matières : {\tt chapter}, {\tt section}, {\tt sous-section}, etc.
+
+\item Le deuxième argument, qui est facultatif, permet de configurer cette entrée d'une manière particulière. Si l'entrée envoyée manuellement est omise, elle sera formatée comme le sont toutes les entrées du niveau indiqué par le premier argument ; je dois cependant signaler que dans mes tests, je n'ai pas réussi à le faire fonctionner.
+
+\startSmallPrint
+
+Tant dans la liste officielle des commandes de \ConTeXt\ (voir \in{section}[sec:qrc-setup-fr]) que dans le wiki, on nous dit que cet argument permet les \Doubt mêmes valeurs que \tex{setuplist} qui est la commande qui nous permet de formater les différentes entrées de la COT. Mais, j'insiste, dans mes tests je n'ai pas réussi à modifier de quelque manière que ce soit l'apparence de l'entrée de la TdM envoyée manuellement.
+
+\stopSmallPrint
+
+\item Le troisième argument est censé refléter la numérotation que possède l'élément envoyé à la COT \Doubt, mais je n'ai pas non plus réussi à le faire fonctionner dans mes tests.
+
+\item Le dernier argument comprend le texte à envoyer à la table des matières.
+
+\stopitemize
+
+Ceci est utile, par exemple, si nous voulons envoyer une section non numérotée particulière, mais seulement celle-ci à la table des matières. Dans \in{section}[sec:toc with unnumbered secs], il est expliqué comment obtenir qu'une catégorie entière de sections non numérotées soit envoyée à la table des matières ; mais si nous voulons seulement y envoyer une occurrence particulière d'un type de section, il est plus pratique d'utiliser la commande \tex{writetolist} localement. Ainsi, par exemple, si nous voulons que la section de notre document contenant la bibliographie ne soit pas une section numérotée, mais qu'elle soit tout de même incluse dans la table des matières, nous devons écrire~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\setuphead [chapter] [page=no]
+
+\placecontent
+
+\startchapter[title=Chapitre 1]
+ \startsection[title=Section 1.1]
+ \stopsection
+ \startsubject[title=Sujet]
+ \writetolist[section]{53}{Sujet important}
+ \stopsubject
+\stopchapter
+\stopDemoVW}
+
+Voyez comment nous utilisons la version non numérotée de {\tt section}, qui est {\tt subject}, pour la section mais nous l'envoyons à l'index, manuellement, comme s'il s'agissait d'une section numérotée ({\tt section}).
+
+Une autre commande destinée à influencer manuellement la table des matières est \PlaceMacro{writebetweenlist} \tex{writebetweenlist} qui est utilisée pour envoyer non pas une entrée elle-même, mais une {\em commande} à la table des matières, depuis un point particulier du document. Par exemple, si nous voulons inclure une ligne entre deux éléments de la TdM, nous pouvons écrire ce qui suit à n'importe quel endroit du document situé entre les deux sections concernées :
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\setuphead [chapter] [page=no]
+
+\placecontent
+
+\startchapter[title=Chapitre 1]
+ \startsection[title=Section 1.1]
+ \stopsection
+ \writebetweenlist
+   [section]
+   [location=here]
+   {\hrule}
+ \startsection[title=Section 1.2]
+ \stopsection
+\stopchapter
+\stopDemoVW}
+
+
+
+\stopsubsubsection
+
+% *** Subsubsection exclude particulier
+
+\startsubsubsection
+  [title=Exclure de la TdM une section particulière appartenant à un type de section qui est inclus dans le TdM]
+
+La table des matières est construite à partir de {\em types de section} établis, comme nous le savons déjà, par l'option {\tt list} de \tex{setupcombinedlist}. Par conséquent, si un certain {\em type de section} doit apparaître dans la table des matières, il n'y a aucun moyen d'en exclure une section particulière que nous ne voulons pas voir figurer dans la table des matières, pour quelque raison que ce soit.
+
+Normalement, si l'on ne veut pas qu'une section apparaisse dans la table des matières, il faut utiliser son équivalent non numéroté, c'est-à-dire, par exemple, {\tt title} au lieu de {\tt chapter}, {\tt subject} au lieu de {\tt section}, etc. Ces sections ne sont pas envoyées à la TdM, et ne sont pas non plus numérotées. 
+
+Cependant, si pour une raison quelconque, nous voulons qu'une certaine section soit numérotée mais n'apparaisse pas dans la table des matières, même si d'autres types de ce genre le font, nous pouvons utiliser une {\em astuce} qui consiste à créer un nouveau type de section qui est un clone de la section en question. Par exemple~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\definehead[MySubsection][subsection]
+\placecontent
+\startsection [title={Première section}]
+\stopsection
+\startsubsection [title={Première subsection}]
+\stopsubsection
+\startMySubsection [title={Seconde subsection}]
+\stopMySubsection
+\startsubsection [title={Troisième subsection}]
+\stopsubsection
+\stopDemoVW}
+
+
+Ainsi, lors de l'insertion d'une section de type {\tt MySubsection}, le compteur de sous-sections augmentera, puisque cette section est un {\em clone} des sous-sections, mais la TdM ne sera pas modifiée, puisque par défaut elle n'inclut pas les section de types {\tt MySubsection}.
+
+\stopsubsubsection
+
+% *** Subsubsection textes différents
+
+\startsubsubsection
+  [title=Textes du titre différents entre TdM et corps du document]
+
+Si nous voulons un texte de titre d'une section particulière différent entre celui inclu dans la table des matières et celui affiché dans le corps du document, nous devons créer la section non pas avec la syntaxe traditionnelle (\type{SectionType{Titre}}) mais avec \tex{SectionType [Options]}, ou avec \tex{startSectionType [Options]}, et attribuer le texte que l'on souhaite voir écrit dans la Table des matières à l'option {\tt list} (voir \in{section}[sec:sectionyntax]).
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\placecontent
+\startsection
+  [title={Une introduction approximative et légèrement répétitive à la réalité de l'évidence},
+   list={Une introduction à la réalité de l'évidence}]
+\stopsection
+\stopDemoVW}
+
+% TODO Garulfo \nolist is deprecated since 2015
+% https://www.mail-archive.com/ntg-context@ntg.nl/msg80259.html
+
+\stopsubsubsection
+
+\stopsubsection
+
+\stopsection
+
+% * Section Listes
+
+\startsection
+  [
+    reference=sec:lists,
+    title={Listes, listes combinées et tables des matières basées sur une liste},
+  ]
+
+En interne, pour \ConTeXt\, une table des matières n'est rien de plus qu'une {\em liste combinée}, qui, à son tour, comme son nom l'indique, consiste en une combinaison de listes simples. Par conséquent, la notion de base à partir de laquelle \ConTeXt\ construit la table des matières est celle d'une liste. Plusieurs listes sont combinées pour former une table des matières. Par défaut, \ConTeXt\ contient une liste combinée prédéfinie appelée \MyKey{content} et c'est avec elle que les commandes examinées jusqu'à présent fonctionnent : \tex{placecontent} et \tex{completecontent}.
+
+% ** Subsection listes de context
+
+\startsubsection
+  [title=Listes de \ConTeXt]
+
+Dans \ConTeXt, une {\em liste} est plus précisément une liste d'éléments numérotés à propos desquels nous devons nous souhaitons conservers trois informations~:
+
+\startitemize[n, packed]
+
+  \item leur numéro.
+
+  \item leur texte, qui peut aussi être leur nom, leur titre.
+
+  \item leur page d'apparition.
+
+\stopitemize
+
+Cela est utilisé avec les sections numérotées, mais aussi avec d'autres éléments du document tels que les images, les tableaux, etc. En général, les éléments pour lesquels il existe une commande dont le nom commence par \tex{place} qui les positionne dans le document comme \tex{placetable}, \tex{placefigure}, etc.
+
+Dans tous ces cas, \ConTeXt\ génère automatiquement une liste des différentes occurrences du type d'élément en question, avec pour chaque occurence~: son numéro, son titre (ou texte) et sa page. Ainsi, par exemple, il existe une liste de chapitres, appelée {\tt chapter}, une autre de sections, appelée {\tt section} ; mais aussi une autre de tableaux (appelée {\tt table}) ou d'images (appelée {\tt figure}). Les listes générées automatiquement par \ConTeXt\ sont toujours appelées de la même manière que l'élément qu'elles stockent. 
+
+Une liste sera également générée automatiquement si nous créons, par exemple, un nouveau type de section numérotée : lorsque nous la créons, nous créons aussi implicitement la liste qui les stocke. Et si, pour une section non numérotée par défaut, nous activons l'option {\tt incrementnumber=yes}, ce qui en fait une section numérotée, nous créerons aussi implicitement une liste portant ce nom.
+ 
+Outre les listes implicites (définies automatiquement par \ConTeXt), nous pouvons créer nos propres listes avec \tex{definelist}, dont la syntaxe est la suivante
+
+\PlaceMacro{definelist}
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\definelist[ListName][Configuration]
+\stopDemoI}
+
+Des éléments sont ajoutés de la liste~:
+
+\startitemize
+
+\item Dans les listes prédéfinies par \ConTeXt, ou créées par lui suite à la création d'un nouvel objet flottant (voir \in{section}[sec:definefloat]), automatiquement chaque fois qu'un élément de la liste est inséré dans le document, soit par une commande de section, soit par la commande \tex{placeQuoiQueCeSoit} pour les autres types de listes, par exemple : \tex{placefigure}, insère une image dans le document, mais elle insère également l'entrée correspondante dans la liste.
+
+\item Manuellement dans tout type de liste avec \tex{writetolist[ListName]}, déjà expliqué dans \in{subsection}[sec:manualtoc] de \in{section}[sec:manual adjustments]. La commande \tex{writebetweenlist} est également disponible. Elle a également été expliquée dans cette section.
+
+\stopitemize
+
+Une fois qu'une liste a été créée et que tous ses éléments y ont été inclus, les trois commandes de base qui s'y rapportent sont \PlaceMacro{setuplist}  \tex{setuplist}, \PlaceMacro{placelist} \tex{placelist} et \PlaceMacro{completetelist} \tex{completetelist}. La première nous permet de configurer l'aspect de la liste ; les deux dernières insèrent la liste en question à l'endroit du document où elle les trouve. La différence entre \tex{placelist} et \tex{completelist} est similaire à la différence entre \tex{placecontent} et \tex{completecontent}~: {\tt complete} introduit la liste dans une section dédiée, avec un titre dédié, de niveau {\tt chapter / title}. (voir les sections \in{}[sec:completecontent] et \in{}[sec:placecontent]).
+
+
+Donc, par exemple \tex{placelist[section]} insére une liste des sections, y compris un lien hypertexte vers celles-ci (si l'interactivité du document est activée et si, dans \tex{setuplist}, nous n'avons pas défini {\tt interaction=no}). Une liste de sections n'est pas exactement la même chose qu'une table des matières basée sur des sections : l'idée d'une table des matières inclut généralement aussi les niveaux supérieurs et inférieurs (sous-sections, sous-sous-sections, etc.). Mais une liste de sections ne comprendra que les sections elles-mêmes.
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\placelist[section]
+
+\startsection[title=Section 1.1]
+\stopsection
+
+\startsection[title=Section 1.2]
+  \startsubsection[title=Sous-section 1.2.1]
+  \stopsubsection
+  \startsubsection[title=Sous-section 1.2.2]
+  \stopsubsection
+  \startsubsection[title=Sous-section 1.2.3]
+  \stopsubsection
+ \stopsection
+
+ \startsection[title=Section 1.3]
+ \stopsection
+ \startsection[title=Section 1.4]
+
+ \stopsection
+\stopDemoVW}
+
+La syntaxe de ces commandes est la suivante~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\placelist[ListName][Options]}
+\setuplist[ListName][Configuration]
+\stopDemoI}
+
+Les options de \tex{setuplist} ont déjà été expliquées dans \in{section}[sec:setuplist], et les options de \tex{placelist} sont les mêmes que celles de \tex{placecontent} (voir \in{section}[sec:placecontent]).
+
+\stopsubsection
+
+% ** Subsection liste images tables etc...
+
+\startsubsection
+  [
+    reference=sec:variouslists,
+    title={Listes ou index d'images, de tableaux et d'autres éléments},
+  ]
+
+D'après ce qui a été dit jusqu'à présent, on peut voir que, puisque \ConTeXt\ crée automatiquement une liste d'images placées dans un document avec la commande \tex{placefigure}, générer une liste ou un index d'images à un point particulier de notre document est aussi simple que d'utiliser la commande \tex{placelist[figure]}. Et si nous voulons générer une liste avec un titre (similaire à ce que nous obtenons avec \tex{completecontent}), nous pouvons le faire avec \tex{completelist[figure]}. Nous pouvons faire de même avec les quatre autres types prédéfinis d'objets flottants dans \ConTeXt\ : tableaux (\MyKey{table}),  graphiques (\MyKey{graphic}), {\em intermezzos} (\MyKey{intermezzo}) et formules chimiques (\MyKey{chemical}). \ConTeXt\ comprend également des commandes qui les génère dans leur version sans titre  (\PlaceMacro{placelistoffigures} \tex{placelistoffigures}, \PlaceMacro{placelistoftables} \tex{placelistoftables}, \PlaceMacro{placelistofraphics} \tex{placelistofgraphics}, \PlaceMacro{placelistofintermezzi} \tex{placelistofintermezzi} et \PlaceMacro{placelistofchemicals} \tex{placelistofchemicals}), et d'autre qui les génère avec titre (\PlaceMacro{completelistoffigures} \tex{complettelistoffigures}, \PlaceMacro{complettelistoftables} \tex{completelistoftables}, \PlaceMacro{completelistofgraphics}. \tex{completelistofraphics}, \PlaceMacro{completelistofintermezzi}. \tex{completelistofintermezzi} et \PlaceMacro{completelistofchemicals}. \tex{completelistofchemicals}), de manière similaire à \tex{completecontent}. 
+
+De la même manière, pour les objets flottants que nous avons nous-mêmes créés (voir \in{section}[sec:definefloat]), les commandes \tex{placelistof<FloatName>} et \tex{completetelistof<FloatName>} seront automatiquement créés.
+
+Pour les listes que nous avons créées avec \tex{definelist[ListName]}, nous pouvons créer un index avec \tex{placelist[ListName]} ou avec \tex{completelist[ListName]}.
+
+\stopsubsection
+
+% ** Subsection liste combinées
+
+\startsubsection
+  [title=Listes combinées]
+
+Une liste combinée est, comme son nom l'indique, une liste qui combine des éléments provenant de différentes listes précédemment définies. Par défaut, \ConTeXt\ définit une liste combinée pour les tables de contenu dont le nom est \MyKey{content}, mais nous pouvons créer d'autres listes combinées avec \PlaceMacro{definecombinedlist} \tex{definecombinedlist} dont la syntaxe est :
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\definecombinedlist[Nom][Listes][Options]
+\stopDemoI}
+
+où~:
+
+\startitemize[packed]
+
+\item {\em Nom} : est le nom que portera la nouvelle liste combinée.
+
+\item {\em Listes} : désigne les noms des listes à combiner, séparés par des virgules.
+
+\item {\em Options} : Options de configuration de la liste. Elles peuvent être indiquées au moment de la définition de la liste, ou, de préférence, lorsque la liste est invoquée. Les principales options (qui ont déjà été expliquées) sont les suivantes : {\tt criterium} (\in{sous-section}[sec:criteriumlist] de \in{section} [sec:placecontent]) et {\tt alternative} (dans \in{sous-section}[sec:liste des alternatives] de la même section).
+
+\stopitemize
+
+Un effet collatéral de la création d'une liste combinée avec \tex{definecombinedlist} est qu'elle crée également une commande appelée \tex{placeListNom} qui sert à invoquer la liste, c'est-à-dire à l'inclure dans le fichier de sortie. Ainsi, par exemple,
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\definecombinedlist[TdM]
+\definecombinedlist[content]
+\stopDemoI}
+
+créera les commandes \tex{placeTdM} et \tex{placecontent}.
+
+Mais attendez, \tex{placecontent} ! N'est-ce pas la commande qui est utilisée pour créer une table des matières {\em normal} ? En effet, cela signifie que la table des matières standard est en fait créée par \ConTeXt\ au moyen de la commande suivante :
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\definecombinedlist
+  [content]
+  [part, chapter, section, subsection,
+    subsubsection, subsubsubsection,
+    subsubsubsubsection]
+\stopDemoI}
+
+Une fois notre liste combinée définie, nous pouvons la configurer (ou la reconfigurer) avec \tex{setupcombinedlist} qui permet les options déjà expliquées {\tt criterium} (voir \in{sous-section}[sec:criteriumlist] dans \in{section}[sec:placecontent]) et {\tt alternative} (voir \in{subsection}[sec:alternativelist] dans la même section), ainsi que l'option {\tt list} pour {\em modifier} les listes incluses dans la liste combinée.
+
+\startSmallPrint
+
+La liste officielle des commandes \ConTeXt\ (voir \in{section}[sec:qrc-setup-fr]) ne mentionne pas l'option {\tt list} parmi les options autorisées pour \tex{setupcombinedlist}, mais elle est utilisée dans plusieurs exemples d'utilisation de cette commande dans le wiki (qui, par ailleurs, ne la mentionne pas non plus dans la page consacrée à cette commande sauf en exemple). J'ai également vérifié que l'option fonctionne.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\stopsection
+
+% * Section INDEX
+
+\startsection
+  [title=Index]
+
+% ** Subsection générer l'index
+
+\startsubsection
+  [title=Génération de l'index]
+
+Générer un index consiste à générer la liste des sujets considérés comme  importants ou significatifs et précisant les pages y faisant référence. L'index est généralement située à la fin d'un document. 
+
+Lorsque les livres étaient composés à la main, la création d'un index des sujets était une tâche complexe et fastidieuse. Tout changement dans la pagination pouvait affecter toutes les entrées de l'index. Par conséquent, ils n'étaient pas très courants. Aujourd'hui, les mécanismes informatiques de composition font que, même si la tâche est susceptible de rester fastidieuse, elle n'est plus aussi complexe étant donné qu'il n'est pas si difficile pour un système informatique de maintenir à jour la liste des données associées à une entrée d'index.
+
+Pour générer un index par sujet, nous avons besoin de~:
+
+
+\startitemize[n,packed]
+
+\item Déterminer les mots, les termes ou les concepts qui doivent faire partie de l'article. Il s'agit d'une tâche que seul l'auteur peut accomplir.
+
+\item Vérifier à quels endroits du document chaque entrée du futur index apparaît. Bien que, pour être précis, plus que {\em vérifier} les endroits du fichier source où le concept ou la question est abordé, ce que nous faisons lorsque nous travaillons avec \ConTeXt\ consiste à {\em marquer} ces endroits, en insérant une commande qui servira ensuite à générer l'index automatiquement. C'est la partie la plus fastidieuse.
+
+\item Enfin, nous générons et mettons en forme l'index en le plaçant à l'endroit de notre choix dans le document. Cette dernière opération est assez simple avec \ConTeXt\ et ne nécessite qu'une seule commande : \tex{placeindex} ou \tex{completeindex}.
+
+\stopitemize
+
+% *** Subsection définir les entrées et les points de marquage
+
+\subsubsection{The prior definition of the entries in the index and the
+marking of the points in the source file that refer to them}
+
+The fundamental work is in the second step. It is true that computer
+systems also facilitate it in the sense that we can do a global text search
+to locate the places in the source file where a specific subject is
+treated. But we should also not blindly rely on such text searches: a good
+subject index must be able to detect every spot where a particular subject
+is being discussed, even if this is done without using the {\em standard}
+term to refer to it.
+
+To {\em mark} an actual point in the source file, associating it with a
+word, term or idea that will appear in the index, we use the
+\PlaceMacro{index}\tex{index} command whose syntax is as follows:
+
+\type{\index[Alphabetical][Index entry]}
+
+where {\em Alphabetical} is an optional argument that is used to indicate
+an alternative text to that of the index entry itself in order to sort it
+alphabetically, and {\em Index entry} is the text that will appear in the
+index, associated with this mark. We can also apply the formatting features
+that we wish to use, and if reserved characters appear in the text, they
+must be written in the usual way in \ConTeXt.
+
+\startSmallPrint
+
+  The possibility of alphabetising an index entry in a way  different from
+  how it is actually written, is very useful. Think, for example, of this
+  document, if I want to generate  an entry in the index for all references
+  to the \tex{TeX} command. For example, the sequence
+  \type{\index{\backslash TeX}} will list the command not by the \quote{t}
+  in \quote{TeX}, but among the symbols, since the term sent to the index
+  begins with a backslash. This is done by writing
+  \type{\index[tex]{\backslash TeX}}.
+
+\stopSmallPrint
+
+The {\em index entries} will be the ones we want. For a subject index to be
+really useful we have to work a little harder at asking what concepts the
+reader of a document is most likely to look for; so, for example, it may be
+better to define an entry as \quotation{disease, Hodgkins} than defining it
+as \quotation{Hodgkin's disease}, since the more inclusive term is
+\quotation{disease}.
+
+\startSmallPrint
+
+  By convention, entries in a subject index are always written in lower
+  case, unless they are proper names.
+
+\stopSmallPrint
+
+If the index has several levels of depth (up to three are allowed) to associate a particular index entry with a specific level the \quote{+} character is used. As follows:
+
+\starttyping
+\index{Entry 1+Entry 2}
+\index{Entry 1+Entry 2+Entry 3}
+\stoptyping
+
+In the first case we defined a second level entry called {\em Entry 2} that
+will be a sub-entry of {\em Entry 1}. In the second case we defined a third
+level entry called {\em Entry 3} that will be a sub-entry of {\em Entry 2},
+which in turn is a sub-entry of {\em Entry 1}.  For example
+
+\vbox{
+\starttyping
+My \index{dog}dog, is a \index{dog+greyhound}greyhound called Rocket.
+He does not like \index{cat+stray}stray cats.
+\stoptyping}
+
+It is worth noting some details of the above:
+
+\startitemize
+
+  \item The \tex{index} command is usually placed {\em before} the word it
+  is associated with and is normally not separated from it by a a blank
+  space. This is to ensure that the command is on the exact same page as
+  the word it is linked to:
+
+  \startitemize
+
+      \item If there were a space separating them, there could be the
+      possibility that \ConTeXt\ would choose just that space for a line
+      break which could also end up being a page break, in which case the
+      command would be on one page and the word it is associated with on
+      the next page.
+
+    \item If the command were to come {\em after} the word, it would be
+    possible for this word to be broken by syllables and a line break
+    inserted between two of its syllables that would also be a page break,
+    in which case the command would be pointing to the next page beginning
+    with the word it points to.
+
+  \stopitemize
+
+  \item See how second level terms are introduced in the second and third
+  appearances of the command.
+
+  \item Also check how, in the third use of the \tex{index} command,
+  although the word that appears in the text is \quotation{cats}, the term
+  that will be sent to the index is \quotation{cat}.
+
+  \item Finally: see how three entries for the subject index have been
+  written in just two lines. I said before that marking the precise places
+  in the source file is tedious. I will now add that marking too many of
+  them is counter-productive. Too extensive an index is by no means
+  preferable to a more concise one in which all the information is
+  relevant. That is why I said before that deciding which words will
+  generate  entry in the index should be the result of a conscious decision
+  by the author.
+
+\stopitemize
+
+If we want our index to be truly useful, terms that are used as synonyms
+must be grouped in the index under one head term. But since it is possible
+for the reader to search the index for information by any of the other head
+terms, it is common for the index to contain entries that refer to other
+entries. For example, the subject index of a civil law manual could just as
+easily be something like
+
+\startframedtext[frame=off]
+
+  contractual invalidity\\
+  \qquad see {\em nullity}.
+
+\stopframedtext
+
+We achieve this not with the \tex{index} command but with
+\PlaceMacro{seeindex}\tex{seeindex} whose format is:
+
+\type{\seeindex [Alphabetical] {Entry1} {Entry2}}
+
+where {\em Entry1} is the index entry that will refer to the other; and
+{\em Entry2} is the reference target. In our previous example we would have
+to write:
+
+\starttyping
+\seeindex{contractual invalidity}{nullity}
+\stoptyping
+
+In \tex{seeindex} we can also use the \quote{+} sign to indicate sub-levels
+
+for either of its two arguments in square brackets.
+
+% *** Subsection générer l'index final
+
+\subsubsection{Generating the final index}
+
+Once we have marked all the entries for the index in our source file, the
+actual generation of the index is carried out using the
+\PlaceMacro{placeindex}\tex{placeindex} or
+\PlaceMacro{completindex}\tex{completindex} commands. These two commands
+scan the source file for the \tex{index} commands, and generate a list of
+all the entries that the index should have, associating a term with the
+page number corresponding to where it found the \tex{index} command. Then
+they alphabetically order the list of terms that appear in the index and
+merge cases where the same term appears more than once, and finally, they
+insert the correctly formatted result in the final document.
+
+The difference between \tex{placeindex} and \tex{completeindex} is similar
+to the difference between \tex{content} and \tex{completecontent} (see
+\in{section}[sec:completecontent]): \tex{placeindex} is limited to
+generating the index and inserting it, while \tex{completeindex} previously
+inserts a new chapter in the final document, called \quotation{Index} by
+default, inside which the index will be typeset.
+
+\stopsubsection
+
+% ** Subsection formater l'index
+
+\startsubsection
+  [title=Formatage de l'index]
+  \PlaceMacro{setupregister}
+
+Les index de sujets sont une application particulière d'une structure plus générale que \ConTeXt\ appelle \quotation{\em register} ; par conséquent l'index est formaté avec la commande :
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\setupregister[index][Configuration]
+\stopDemoI}
+
+Avec cette commande, nous pouvons~:
+
+\startitemize
+
+\head Déterminer à quoi ressemblera l'index avec ses différents éléments. A savoir :
+
+\startitemize
+
+\item Les titres de l'index qui sont généralement des lettres de l'alphabet. Par défaut, ils sont en minuscules. Avec {\tt alternative=A}, nous pouvons les mettre en majuscules.
+
+\item Les entrées elles-mêmes, et leur numéro de page. L'apparence dépend des options {\tt textstyle, textcolor, textcommand} et {\tt deeptextcommand} pour l'entrée elle-même, et {\tt pagestyle}, {\tt pagecolor} et {\tt pagecommand}, pour le numéro de page. Avec {\tt pagenumber=no}, on peut aussi générer un index des sujets sans numéro de page (mais je ne sais pas si cela peut être utile).
+
+\item L'option {\tt distance} spécifie la largeur de séparation entre le nom d'une entrée et les numéros de page ; mais elle mesure aussi la quantité d'indentation pour les sous-entrées.
+
+\stopitemize
+
+Les noms des options {\tt style}, {\tt textstyle}, {\tt pagestyle}, {\tt color}, {\tt textcolor}, et {\tt pagecolor} sont suffisamment clairs pour nous dire ce que chacune fait, je pense. Pour les options {\tt command}, {\tt pagecommand}, {\tt textcommand} et {\tt deeptextcommand}, je me réfère à l'explication des options de même nom dans \in{section}[sec:titlestyle], concernant la configuration des commandes de section.
+
+\item Pour définir l'apparence générale de l'index, ce qui inclut, entre autres, les commandes à exécuter avant ({\tt before}) ou après ({\tt after}) l'index, le nombre de colonnes qu'il doit avoir ({\tt n}), si les colonnes doivent être d'égale hauteur ou non ({\tt balance}), l'alignement des entrées ({\tt align}), etc.
+
+\stopitemize
+
+\stopsubsection
+
+% ** Subsection créer d'autres index
+
+\startsubsection
+  [title=Création d'autres index]
+  \PlaceMacro{defineregister}\PlaceMacro{setupregister}
+
+J'ai expliqué l'index des sujets comme si un seul index de ce type était possible dans un document ; mais la vérité est que les documents peuvent avoir autant d'index que souhaité. Il peut y avoir un index des noms de personnes, par exemple, qui rassemble les noms des personnes mentionnées dans le document, avec une indication de la page où elles sont citées. Il s'agit toujours d'une sorte d'index. Dans un texte juridique, nous pourrions également créer un index spécial pour les mentions du Code civil ; ou, dans un document comme le présent, un index des macros expliquées dans celui-ci, etc.
+
+Pour créer un index supplémentaire dans notre document, nous utilisons la commande \tex{defineregister} dont la syntaxe est~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\defineregister [NomIndex] [Configuration]
+\stopDemoI}
+
+où {\em NomIndex} est le nom que portera le nouvel index, et {\em Configuration} contrôle son fonctionnement. Il est également possible de configurer l'index ultérieurement au moyen de la fonction
+
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\setupregister [NomIndex] [Configuration]
+\stopDemoI}
+
+Une fois qu'un nouvel index nommé {\em NomIndex} a été créé, nous disposons de la commande \tex{NomIndex} pour marquer les entrées de cet index de la même manière que les entrées sont marquées avec \tex{index}. La commande \tex{seeNomIndex} nous permet également de créer des entrées qui font référence à d'autres entrées.
+
+Par exemple, nous pouvons créer un index des commandes \ConTeXt\ dans ce document avec la commande~:
+
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\defineregister[MaMacro]
+
+La commande \tex{etbim} permet de...
+\MaMacro{etbim}
+
+\startsubject[title=Index des macros]
+\placeMaMacro
+\stopsubject
+\stopDemoVW}
+
+qui crée la commande \tex{MaMacro}. Cela me permet de marquer toutes les références aux commandes \ConTeXt\ comme une entrée d'index, puis de générer l'index avec \tex{placeMaMacro} ou \tex{completeMaMacro}. 
+
+\startSmallPrint
+
+La création d'un nouvel index active la commande \tex{NomIndex} pour le marquer comme entrée, et les commandes \tex{placeNomIndex} et \tex{completeNomIndex} pour générer l'index. Mais ces deux dernières commandes sont en fait des abréviations de deux commandes plus générales appliquées à l'index en question. Ainsi, \tex{placeNomIndex} est équivalent à \tex{placeregister[NomIndex]} et \tex{completeNomIndex} est équivalent à \tex{completeegister[NomIndex]}.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX_fra.tex"
+%%% End:
+%%% vim:set filetype=context tw=72 : %%%

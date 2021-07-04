@@ -1,0 +1,2043 @@
+% * BEGIN 
+%%% File:      b12_SpecialParas.mkiv
+%%% Author:    Joaquín Ataz-López
+%%% Begun:     July 2020
+%%% Concluded: August 2020
+%%% Contents:  This chapter is a big final mishmash. Everything
+%%%            that could not be clearly located elsewhere, is
+%%%            here. I decided on the final structure when
+%%%            I was writing this chapter, since when starting
+%%%            to deal with certain material I became aware
+%%%            that it could be placed elsewhere.
+%%%
+%%% Edited: Emacs + AuTeX - And at times vim + context-plugin
+%%%
+
+\environment introCTX_env_00
+
+\startcomponent 02-12_SpecialParas
+
+
+\startchapter
+  [title={Constructions et paragraphes spéciaux},
+  reference=cap:specialparas]
+
+\TocChap
+
+% ** Section
+\startsection
+  [title={Notes de bas de page et de fin de document}]
+
+Les notes sont des \quotation{éléments textuels secondaires employés à des fins diverses, comme clarifier ou prolonger le texte principal, fournir la référence bibliographique des sources, y compris les citations, renvoyer à d'autres documents ou énoncer le sens du texte}. [{\em Libro de Estilo de la Lengua española} (Guide de style de la langue espagnole), p. 195]. Elles sont particulièrement importantes dans les textes de nature académique. Elles peuvent être placés à différents endroits de la page ou du document. Aujourd'hui, les plus répandues sont celles qui sont situées en bas de page (appelées, par conséquent, notes de bas de page) ; parfois, elles sont également situées dans l'une des marges (notes de marge), à la fin de chaque chapitre ou section, ou à la fin du document (notes de fin de document). Dans les documents particulièrement complexes, il peut également y avoir différentes séries de notes : notes de l'auteur, notes du traducteur, mises à jour, etc. En particulier, dans les éditions critiques, l'appareil de notes peut devenir assez complexe et seuls quelques systèmes de composition sont capables de le supporter. \ConTeXt\ est l'un d'entre eux. De nombreuses commandes sont disponibles pour établir et configurer les différents types de notes. 
+
+Pour expliquer cela, il est utile de commencer par indiquer les différents éléments qui peuvent être impliqués dans une note :
+
+
+\startitemize
+
+\item {\em Marque} ou note {\em ancre} : Signe placé dans le corps du texte pour indiquer qu'une note lui est associée. Tous les types de notes ne sont pas associés à une {\em ancre}, mais lorsqu'il y en a une, cette {\em ancre} apparaît à deux endroits : à l'endroit du texte principal auquel la note fait référence, et au début du texte de la note elle-même. C'est la présence de la même marque de référence à ces deux endroits qui permet d'associer la note au texte principal.
+
+\item La note {\em ID ou identifiant} : La lettre, le chiffre ou le symbole qui identifie la note et la distingue des autres notes. Certaines notes, par exemple les notes de marge, peuvent ne pas avoir d'ID. Lorsque ce n'est pas le cas, l'identifiant coïncide normalement avec l'{\em ancre} de la note.
+
+\startSmallPrint
+
+Si nous pensons exclusivement aux notes de bas de page, nous ne verrons aucune différence entre ce que je viens d'appeler une {\em Marque} et l’{\em id}. Nous voyons clairement la différence dans d'autres types de notes : Les notes de ligne, par exemple, ont un id, mais pas de marque de référence.
+    
+\stopSmallPrint
+
+
+\item {\em Texte} ou {\em Contenu} de la note, toujours situé à un endroit différent sur la page ou dans le document que la commande qui génère la note et indique son contenu.
+
+\item {\em Étiquette} associée à la note : Étiquette ou nom associé à une note qui n'apparaît pas dans le document final, mais qui permet d'y faire référence et de retrouver son identifiant ailleurs dans le document.
+
+\stopitemize
+
+% *** Subsection 
+\startsubsection
+  [title=Le types de notes dans \ConTeXt\ et les commandes associées]
+
+Nous disposons de différents types de notes dans \ConTeXt. Pour l'instant, je me contenterai de les énumérer, en les décrivant en termes généraux et en fournissant des informations sur les commandes qui les génèrent. Plus tard, je développerai les deux premiers~:
+
+
+\startitemize
+
+\item {\bf Notes de bas de page (footnotes)~:} Sans aucun doute la plus populaire, à tel point qu'il est courant que tous les types de notes soient désignés par le terme générique de {\em notes de bas de page}. Les notes de bas de page introduisent une {\em marque} avec l'{\em id} de la note à l'endroit du document où se trouve la commande, et insèrent le texte de la note elle-même en bas de la page où la marque apparaît. Elles sont créées avec la commande \tex{footnote}.
+
+\item {\bf Notes de fin de document (endnotes)~:} Ces notes, créées avec la commande \tex{endnote}, sont insérées à l'endroit du document où se trouve une marque portant l'identifiant de la note ; mais le contenu de la note est inséré à un autre endroit du document, et l'insertion est produite par une commande différente (\tex{placenotes}).
+
+\item {\bf Notes marginales (margin notes)~:} Comme leur nom l'indique, elles sont écrites dans la marge du texte et il n'y a pas d'identifiant ou de marque ou d'ancre générée automatiquement dans le corps du document. Les deux principales commandes (mais pas les seules) qui les créent sont \tex{inmargin} et \tex{margintext} (voir \in{section}[sec:margintext]).
+
+\item {\bf Notes de ligne (line notes)~:} Type de note typique des environnements où les lignes sont numérotées, comme dans le cas de \tex{startlinenumbering ... \stoplinenumbering} (voir \in{section}[sec:linumbering]). La note, qui est généralement écrite en bas, fait référence à un numéro de ligne spécifique. Elles sont générées par la commande \PlaceMacro{linenote} \tex{linenote} qui est configurée avec \PlaceMacro{setuplinenote} \tex{setuplinenote}. Cette commande n'imprime pas de {\em marque} dans le corps du texte, mais dans la note elle-même, elle imprime le numéro de ligne auquel la note se réfère (utilisé comme {\em ID}).
+
+\stopitemize
+
+Je vais maintenant développer exclusivement les deux premiers types de notes~:
+
+\startitemize
+
+\item Les notes de marge sont traitées ailleurs (\in{section}[sec:margintext]).
+
+\item Les notes de ligne ont un usage très spécialisé (notamment dans les éditions critiques) et je pense que dans un document d'introduction comme celui-ci, il suffit que le lecteur sache qu'elles existent.
+
+\startSmallPrint
+
+Cependant, pour le lecteur intéressé, je recommande une vidéo (en espagnol) accompagnée d'un texte (également en espagnol) sur les éditions critiques dans \ConTeXt, dont l'auteur est Pablo Rodríguez. Elle est disponible \goto{en ligne}[url(http://www.ediciones-criticas.tk/)]. Il est également très utile pour comprendre plusieurs des paramètres généraux des notes en général.
+
+\stopSmallPrint
+
+\stopitemize
+
+\stopsubsection
+
+% *** Subsection 
+\startsubsection
+  [title=Zoom les notes de bas de page et de fin de document]
+
+\PlaceMacro{footnote}
+\PlaceMacro{endnote}
+
+La syntaxe des commandes \tex{footnotes} et \tex{endnotes} et les mécanismes de configuration et de personnalisation dont elles disposent sont assez similaires, puisque, en réalité, ces deux types de notes sont des instances particulières d'une construction plus générale (notes), dont d'autres instances peuvent être définies avec la commande \tex{definenote} (voir \in{section}[sec:definenote]).
+
+La syntaxe de la commande qui crée chacun de ces types de notes est la suivante :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\footnote [Étiquette] {Texte}
+\endnote  [Étiquette] {Texte}
+\stopDemoI}
+
+\startitemize
+
+\item {\em Étiquette} est un argument facultatif qui attribue à la note une étiquette qui nous permettra d'y faire référence ailleurs dans le document.
+
+\item {\em Texte} est le contenu de la note. Il peut être aussi long que nous le souhaitons, et inclure des paragraphes et des paramètres spéciaux, bien qu'il faille noter qu'en ce qui concerne les notes de bas de page, une mise en page correcte est assez difficile dans les documents contenant des notes abondantes et excessivement longues.
+
+\startSmallPrint
+
+En principe, toute commande qui peut être utilisée dans le texte principal peut être utilisée dans le texte de la note. Cependant, j'ai pu vérifier que certaines constructions et caractères qui ne posent aucun problème dans le texte principal, génèrent une erreur de compilation lorsqu'ils sont utilisés dans le texte de la note. J'ai trouvé ces cas lors de mes tests, mais je ne les ai pas organisés de quelque manière que ce soit.
+
+\stopSmallPrint
+
+\stopitemize
+
+Lorsque l'argument {\em Étiquette} a été utilisé pour définir une étiquette pour la note, la commande \PlaceMacro{note} \tex{note} nous permet de récupérer l'ID de la note en question. Cette commande affiche l'ID de la note associée à l'étiquette qu'elle prend en argument sur le document. Ainsi, par exemple :
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\setuppapersize[A7,landscape]
+\setupbodyfont[8pt]
+\starttext
+Humpty Dumpty{\footnote[humpty]{probablement le personnage de comptine anglais le plus célèbre} s'est assis sur un mur, Humpty Dumpty\note[humpty] a fait une grande chute. Tous les chevaux du roi et tous les hommes du roi n'ont pas pu remettre Humpty\note[humpty] ensemble.
+\stoptext
+\stopDemoI}
+
+
+\startbuffer[a7-testfootnoteA]
+\setuppapersize[A7,landscape]
+\setupbodyfont[8pt]
+\starttext
+Humpty Dumpty{\footnote[humpty]{probablement le personnage de comptine anglais le plus célèbre} s'est assis sur un mur, Humpty Dumpty\note[humpty] a fait une grande chute. Tous les chevaux du roi et tous les hommes du roi n'ont pas pu remettre Humpty\note[humpty] ensemble.
+\stoptext
+\stopbuffer
+
+\savebuffer[list=a7-testfootnoteA,file=ex_footnoteA.tex,prefix=no]
+\placefigure [force,here,none] [] {}{\typesetbuffer[a7-testfootnoteA][frame=on,page=1,background=color,backgroundcolor=white]
+\attachment
+  [file={ex_footnoteA.tex},
+   title={exemple testfootnoteA}]}
+
+La principale différence entre \tex{footnote} et \tex{endnote} est l'endroit où la note apparaît~:
+
+
+\startdescription{\tex{footnote}}
+
+En règle générale, il imprime le texte de la note au bas de la page sur laquelle se trouve la commande, de sorte que la marque de la note et son texte (ou le début du texte, s'il doit être réparti sur deux pages) apparaissent sur la même page. Pour ce faire, \ConTeXt\ fera les ajustements nécessaires lors de la composition de la page en calculant l'espace requis par l'emplacement de la note au bas de la page.
+
+\startSmallPrint
+
+% TODO Garulfo : ce n'est pas ainsi que cela fonctionne
+% footnotetext c'est comme footnote, sans afficher la marque
+
+% Mais dans certains environnements, \tex{footnote} insérera le texte de la note, non pas en bas de la page elle-même mais sous l'environnement. C'est le cas, par exemple dans l'environnement {\tt columns}. Dans ces cas, si nous voulons que les notes à l'intérieur de l'environnement soient situées en bas de la page, au lieu de \tex{footnote}, la commande que nous devons utiliser est \tex{footnotetext} en combinaison avec la commande \tex{note} mentionnée ci-dessus. La première, qui prend également en charge une étiquette comme argument facultatif, imprime uniquement le texte de la note et non la marque. Mais comme \tex{note} n'imprime que la marque sans le texte, la combinaison des deux nous permet de placer la note à l'endroit voulu. Ainsi, par exemple, nous pouvons écrire \tex{note[MonÉtiquette]} dans un tableau ou un environnement à plusieurs colonnes, puis, une fois sorti de cet environnement, \type{\footnotetext[MonÉtiquette]{texte de la note}}.
+
+\PlaceMacro{footnotetext}
+\PlaceMacro{note}
+
+\tex{footnotetext} fait la même chose que \tex{footnote} mais sans introduire la marque localement. La marque peut-être affichée séparément avec \tex{note}, il faut pour cela passer aux deux commandes le nom de référence entre crochet \MyKey{\[MonÉtiquette\]}. Une utilisation de \tex{footnotetext} en combinaison avec \tex{note} serait des notes à l'intérieur d'autres notes. C'est ainsi qu'a été construit la référence 3 dans l'exemple suivant, où vous pouvez constater que dans un environnement \tex{startcolumns} les notes de bas de page deviennent des notes de bas de colonne~:
+
+%-----------------------------------------
+
+\startbuffer[a7-testfootnoteC]
+\setuppapersize[A7,landscape]
+\setupbodyfont[8pt]
+\starttext
+\startcolumns[n=2]
+Une première phrase pour servir d'exemple
+\footnote{Coucou 1}
+\column
+Une seconde phrase pour servir d'exemple
+\footnote{Coucou 2} 
+\footnotetext[testici]{Coucou 3} 
+\note[testici]
+\stopcolumns
+\stoptext
+\stopbuffer
+
+\savebuffer[list=a7-testfootnoteC,file=ex_footnoteC.tex,prefix=no]
+\placefigure [force,here,none] [] {}{\typesetbuffer[a7-testfootnoteC][frame=on,page=1,background=color,backgroundcolor=white]
+\attachment
+  [file={ex_footnoteC.tex},
+   title={exemple testfootnoteC}]}
+
+%-----------------------------------------
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+Une seconde phrase pour servir d'exemple
+\footnote{Coucou 2} 
+\footnotetext[testici]{Coucou 3} 
+\note[testici]
+\stopDemoI}
+
+
+
+\stopSmallPrint
+  
+\stopdescription
+
+\startdescription{\tex{endnote}}
+
+imprime uniquement l'ancre de la note à l'endroit du fichier source où elle se trouve. Le contenu réel de la note est inséré à un autre endroit du document à l'aide d'une autre commande, (\PlaceMacro{placenotes} \tex{placenotes[endnote]}) qui, à l'endroit où elle se trouve, insère le contenu de {\em toutes} les notes de fin de document (ou du chapitre ou de la section en question).
+
+\stopdescription
+
+\stopsubsection
+
+% *** Subsection 
+\startsubsection
+  [
+    reference=sec:localfootnotes,
+    title={Notes locales},
+  ]
+
+\PlaceMacro{startlocalfootnotes} 
+\PlaceMacro{placelocalfootnotes}
+
+L'environnement \tex{startlocalfootnotes} signifie que les notes de bas de page qui y sont incluses sont considérées comme des notes {\em locales}, ce qui signifie que leur numérotation sera réinitialisée et que le contenu des notes ne sera pas automatiquement inséré avec le reste des notes, mais seulement à l'endroit du document où se trouvera la commande \tex{placelocalfootnotes}, qui peut ou non se trouver dans l'environnement.
+
+%-----------------------------------------
+
+\startbuffer[a7-testfootnoteB]
+\setuppapersize[A7,landscape]
+\setupbodyfont[8pt]
+\starttext
+Ceci 
+\footnote{ou cela \note[noteB], si vous préférez.}%
+\footnotetext[noteB]
+{ou encore possiblement celle-ci \note[noteC].}
+\footnotetext[noteC]{pourrait être totalement différentes.}
+est une phrase avec des notes imbriquées.
+
+\placetable{Table hors localfootnotes}
+{\bTABLE[width=0.25\textwidth]
+\bTR \bTD Petit A   \eTD \bTD Petit B\footnote{coucou B} \eTD \eTR
+\eTABLE}
+
+\placetable{Table encadrée par localfootnotes}
+{\startlocalfootnotes
+\bTABLE[width=0.25\textwidth]
+\bTR \bTD Petit C   \eTD \bTD Petit D\footnote{coucou D} \eTD \eTR
+\bTR \bTD[nc=2,frame=off] \placelocalfootnotes           \eTD \eTR
+\eTABLE
+\stoplocalfootnotes}
+\stoptext
+\stopbuffer
+
+\savebuffer[list=a7-testfootnoteB,file=ex_footnoteB.tex,prefix=no]
+\placefigure [force,here,none] [] {}{\typesetbuffer[a7-testfootnoteB][frame=on,page=1,background=color,backgroundcolor=white]
+\attachment
+  [file={ex_footnoteB.tex},
+   title={exemple testfootnoteB}]}
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\placetable{Table encadrée par localfootnotes}
+{\startlocalfootnotes
+\bTABLE[width=0.25\textwidth]
+\bTR \bTD Petit C   \eTD \bTD Petit D\footnote{coucou D} \eTD \eTR
+\bTR \bTD[nc=2,frame=off] \placelocalfootnotes           \eTD \eTR
+\eTABLE
+\stoplocalfootnotes}
+\stopDemoI}
+
+\stopsubsection
+
+% *** Subsection 
+\startsubsection
+  [
+    reference=sec:definenote,
+    title={Création et utilisation de types de notes personnalisées},
+  ]
+  \PlaceMacro{definenote}
+
+Nous pouvons créer des types spéciaux de notes avec la commande \tex{definenote}. Cela peut être utile dans les documents complexes où il y a des notes de différents auteurs, ou à des fins différentes, pour distinguer graphiquement chacun des types de notes dans notre document au moyen d'un format différent et d'une numérotation différente.
+
+La syntaxe de la commande \tex{definenote} est la suivante :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\definenote[MesNotes][Modèle][Configuration]
+\stopDemoI}
+
+\startitemize
+
+\item {\em MesNotes} est le nom que nous attribuons à notre nouveau type de note.
+
+\item {\em Modèle} est le modèle de note qui sera utilisé initialement, soit par exemple {\tt footnote} et {\tt endnote}. Dans le premier cas, notre modèle de note fonctionnera comme des notes de bas de page, et dans le second cas, comme des notes de fin de document. Nous les définirons dans le fichier source avec la commande \tex{MesNotes} et nous utliseront \tex{placenotes[MesNotes]} (le nom que nous avons attribué à ces types de notes) à l'endriot où nous souhaitons les afficher dans le document final.
+
+
+\item {\em Configuration} est un argument facultatif qui nous permet de distinguer notre nouveau type de notes de son modèle~: soit en définissant un format différent, soit un type de numérotation différent, soit les deux.
+
+  \startSmallPrint
+
+Selon la liste officielle des commandes \ConTeXt\ (voir \in{section}[sec:qrc-setup-fr]), les paramètres qui peuvent être fournis lors de la création du nouveau type de note sont basés sur ceux qui pourraient être fournis plus tard avec \tex{setupnote}. Cependant, comme nous le verrons bientôt, il existe en fait deux commandes possibles pour configurer les notes : \tex{setupnote} et \cmd{setupnotation} (voir \in{section}[sec:confnotes]). Je pense donc qu'il est préférable d'omettre cet argument lors de la création du type de note, puis de configurer nos nouvelles notes à l'aide des commandes appropriées. Au moins, c'est plus facile à expliquer.
+
+  \stopSmallPrint
+
+\stopitemize
+
+Par exemple, pour créer un nouveau type de note appelé \quotation{MesNotesBleues} qui sera similaire aux notes de bas de page mais dont le contenu sera imprimé en gras et en bleu, nous pouvons définir ainsi~: 
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\definenote    [MesNotes]
+\setupnotation [MesNotesBleues]  [color=blue, style=bf]
+\stopDemoI}
+
+Une fois créée, nous disposonss de la commande \tex{MesNotesBleues} dont la syntaxe est similaire à \tex{footnote}.
+
+%-----------------------------------------
+
+\startbuffer[a7-testfootnoteD]
+\setuppapersize[A7,landscape]
+\setupbodyfont[8pt]
+\definenote[MesNotesBleues]
+\setupnotation 
+  [MesNotesBleues] 
+  [color=blue, style=bf]
+\starttext
+Coucou \MesNotesBleues[refA]{coucou ici}
+\placenotes[MesNotesBleues]
+\stoptext
+\stopbuffer
+
+\savebuffer[list=a7-testfootnoteD,file=ex_footnoteD.tex,prefix=no]
+\placefigure [force,here,none] [] {}{\typesetbuffer[a7-testfootnoteD][frame=on,page=1,background=color,backgroundcolor=white]
+\attachment
+  [file={ex_footnoteD.tex},
+   title={exemple testfootnoteD}]}
+
+
+\stopsubsection
+
+% *** Subsection 
+\startsubsection
+  [title=Configurer les notes,
+   ref=sec:confnotes]
+
+\PlaceMacro{setupnote}
+\PlaceMacro{setupnotation}
+
+La configuration des notes (notes de bas de page ou de fin de page, notes créées avec \tex{definenote} et aussi notes de ligne mises en place avec \tex{linenote}) est réalisée avec deux commandes : \tex{setupnote} et \tex{setupnotation}.
+
+\startSmallPrint 
+\tex{setupnote} possède 35 options de configuration {\em directes} et 45 options supplémentaires héritées de \tex{setupframed} ; \tex{setupnotation} possède 45 options de configuration  {\em directes} et 23 autres héritées de \tex{setupcounter} \tex{setupcounter}. Comme ces options ne sont pas documentées et, bien que pour beaucoup d'entre elles nous puissions deviner leur utilité à partir de leur nom, nous devons vérifier si notre intuition est vraie ou non ; et aussi en tenant compte du fait que beaucoup de ces options permettent un certain nombre de valeurs et qu'elles doivent toutes être testées... Vous verrez que pour écrire cette explication j'ai dû faire un certain nombre de tests ; et bien que faire un test soit rapide, faire beaucoup de tests est lent et ennuyeux. J'espère donc que le lecteur m'excusera si je lui dis qu'en dehors des deux commandes de configuration générale des notes que je mentionne dans le texte principal et sur lesquelles je me concentre dans l'explication suivante, je laisserai de côté quatre autres possibilités de configuration dans l'explication :
+
+\startitemize
+
+\item \PlaceMacro{setupnotes} \tex{setupnotes} et \PlaceMacro{setupnotations}\tex{setupnotations} : En d'autres termes, le même nom mais au pluriel. Le wiki dit que les versions singulière et plurielle de la commande sont synonymes, et je le crois.
+
+  \item \PlaceMacro{setupfootnotes} \tex{setupfootnotes} et \PlaceMacro{setupendnotes} \tex{setupendnotes} : Nous supposons qu'il s'agit d'applications spécifiques pour, respectivement, les notes de bas de page et les notes de fin. Il serait peut-être plus facile d'expliquer la configuration des notes sur la base de ces commandes, cependant, puisque je n'ai pas réussi à faire fonctionner la première option ({\tt numberconversion}) que j'ai essayée avec \tex{setupfootnotes}, bien que je sache que les autres options de ces commandes fonctionnent... J'étais trop paresseux pour ajouter les tests nécessaires pour inclure ces deux commandes dans l'explication aux nombreux tests que j'ai déjà dû faire pour écrire ce qui suit.\blank[small]
+
+Mais je suis d'avis (d'après les quelques tests aléatoires que j'ai effectués) que tout ce qui fonctionne dans ces deux commandes, mais dont je laisse l'explication de côté, fonctionne également dans les commandes pour lesquelles je donne une explication.
+
+\stopitemize
+
+\stopSmallPrint 
+
+La syntaxe est similaire dans les deux cas :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\setupnote[NoteType][Configuration]
+\setupnotation[NoteType][Configuration]
+\stopDemoI}
+
+% TODO Garulfo : il va falloir nettoyer pour éclaircir le propos
+
+où {\em NoteType} fait référence au type de note que nous configurons ({\tt footnote}, {\tt endnote} ou le nom d'un type de note que nous avons nous-mêmes créé), et {\em configuration} contient les options de configuration particulières de la commande.
+
+Le problème est que les noms de ces deux commandes n'indiquent pas clairement la différence entre elles ni ce que chacune d'elles configure ; et le fait que de nombreuses options de ces commandes ne soient pas documentées n'aide pas beaucoup non plus. Après de nombreux tests, je n'ai pas été en mesure de parvenir à une conclusion qui me permettrait de comprendre pourquoi certaines choses sont configurées avec l'une, tandis que d'autres le sont avec l'autre,\footnote{Il existe une page dans le \goto{ \ConTeXt\ wiki} [url(https://wiki.contextgarden.net/Unexpected\_behavior)] que j'ai découverte par hasard (puisqu'elle n'est pas spécifiquement dédiée aux notes), qui suggère que la différence est que \tex{setupnotation} contrôle le texte de la note à insérer, et \tex{setupnote} l'environnement de la note dans laquelle elle sera placée ( ? ) Mais ceci n'est pas cohérent avec le fait que, par exemple, la largeur du texte de la note (qui a à voir avec son {\em insertion}) est contrôlée par l'option {\tt width} de \tex{setupnote} et non par l'option \tex{setupnotation} du même nom. Ce qui est contrôlé dans ce cas c'est la largeur de l'espace pris pour afficher la marque, avant l'affichage du texte de la note.} sauf peut-être que, en raison des choix que j'ai faits pour le faire fonctionner, \tex{setupnotation} affecte toujours le texte de la note, ou l'ID qui est imprimé avec le texte de la note, alors que \tex{setupnote} a quelques options qui affectent la marque de la note insérée dans le texte principal.
+
+Je vais maintenant essayer d'organiser ce que j'ai découvert après avoir fait quelques tests avec les différentes options des deux commandes. Je laisse de côté la plupart des options des deux commandes, car elles ne sont pas documentées et je n'ai pas pu tirer de conclusions quant à leur utilité ou aux conditions dans lesquelles elles doivent être utilisées :
+
+
+\startitemize
+
+\head {\bf ID utilisé pour la note:} Les notes sont toujours identifiées par un numéro. Ce que nous pouvons configurer ici est :
+
+  \startitemize
+
+  \item {\em Le premier nombre} : contrôlé par {\tt start} dans \tex{setupnotation}. Sa valeur doit être un nombre entier, que \ConTeXt\ utilise comme point de départ pour comptabiliser les notes.
+
+  \item {\em Le système de numérotation}, qui dépend de l'option {\tt numberconversion} dans \tex{setupnotation}. Ses valeurs peuvent être :
+
+  \startitemize [packed]
+
+  \item {\em chiffres arabes} : {\tt n, N} ou {\tt numbers}.
+
+  \item {\em chiffres romains} : {\tt I, R, Romannumerals, i, r, romannumerals}. Les trois premiers sont des chiffres romains en majuscules et les trois derniers en minuscules.
+
+  \item {\em Numérotation avec des lettres} : {\tt A, Character, Characters, a, character, characters} selon que l'on souhaite que les lettres soient en majuscules (les trois premières options) ou en minuscules (le reste).
+
+  \item {\em Numérotation avec des mots}. En d'autres termes, on écrit le mot qui désigne le nombre et ainsi, par exemple, \quote{3} devient \quote{trois}. Deux méthodes sont possibles. L'option {\tt Words} écrit les mots en majuscules et {\tt words} en minuscules.
+
+  \item {\em Numérotation avec symboles} : on peut utiliser quatre jeux de symboles différents selon l'option choisie : {\tt set~0, set~1, set~2} o {\tt set~3}. Sur \at{page} [exemples de jeux de conversion], vous trouverez un exemple des symboles utilisés dans chacune de ces options.
+
+  \stopitemize
+
+\item {\em L'événement qui détermine la remise à zéro de la numérotation des notes} : Cela dépend de l'option {\tt way} dans \tex{setupnotation}. Lorsque la valeur est {\tt bytext}, toutes les notes du document seront numérotées séquentiellement sans que la numérotation soit réinitialisée. Lorsqu'elle vaut {\tt bychapter, bysection, bysubsection, etc.}, le compteur de notes sera réinitialisé chaque fois qu'un nouveau chapitre, ou nouvelle section ou sous-section est créé, tandis que lorsqu'elle vaut {\tt byblock}, la numérotation sera réinitialisée chaque fois que nous changerons de bloc dans la macrostructure du document (voir \in{section}[sec:macrostructure]). La valeur {\tt bypage} fait redémarrer le compteur de notes à chaque fois que la page est changée.
+
+  \stopitemize
+
+\head {\bf  Configurer la marque de la note~:}
+
+  \startitemize
+
+  \item Affichage ou non : Option {\tt number} dans \tex{setupnotation}.
+
+  \item Positionnement de la marque par rapport au texte de la note : L'option {\tt alternative} dans \tex{setupnotation} : elle peut prendre l'une des valeurs suivantes : {\tt left, inleft, leftmargin, right, inright, rightmargin, inmargin, margin, innermargin, outermargin, serried, hanging, top, command}. Par défaut la marque est dans l'espace entre la marge et le texte. Avec {\tt hanging}
+la marque est intégré dans la zone de texte, de même avec {\tt serried} qui en plus intégre une identation lors des retours à la ligne du texte de la note .
+
+  \item Style et couleur à appliquer à la marque dans le corps du texte : L'option {\tt textstyle} et {\tt textcolor} dans \tex{setupnote}.
+
+  \item Style et couleur à appliquer à la marque dans la note elle-même : L'option {\tt headstyle} et {\tt headcolor} dans \tex{setupnotation}.
+  
+  \item Commande à appliquer à la marque dans le corps du texte : L'option {\tt textcommand} dans \tex{setupnote}.
+
+  \item Commande à appliquer à la marque dans la note elle-même : L'option {\tt numbercommand} dans \tex{setupnotation}.
+   
+\startSmallPrint
+      
+Les options {\tt numbercommand} et {\tt textcommand} doivent consister en une commande qui prend le contenu de la marque comme argument. Il peut s'agir d'une commande auto-définie. Cependant, j'ai constaté que les commandes de formatage simples (\tex{bf}, \tex{it}, etc.) fonctionnent, bien qu'elles ne soient pas des commandes devant prendre un argument.
+
+\stopSmallPrint
+
+\item Distance entre la marque et le texte (dans la note elle-même) : l'option {\tt distance} dans \tex{setupnotation}. Elle est complétée par l'option {\tt width} qui indique la largeur à accorder à l'affichage de la marque elle-même.
+
+\item Existence ou non d'un lien hypertexte permettant de sauter entre la marque dans le texte principal et la marque dans la note elle-même : L'option {\tt interaction} dans \tex{setupnote}. Avec {\tt yes} comme valeur, il y aura un lien, et avec {\tt no} il n'y en aura pas.
+
+\stopitemize
+
+\head {\bf Configuration du texte de la note elle-même.}
+   Nous pouvons influencer les aspects suivants~:
+
+  \startitemize
+
+  \item Positionnement : cela dépend de l'option {\tt location} dans \tex{setupnote}. 
+
+    \startSmallPrint
+      
+En principe, nous savons déjà que les notes de bas de page sont placées en bas de la page ({\tt location=page}) et les notes de fin de page au point où la commande \tex{placenotes[endnote]} ({\tt location=text}) est trouvée. ({\tt location=text}), mais nous pouvons ajuster cette fonction et définir les notes de bas de page, par exemple, en tant que {\tt location=text}. Les notes de bas de page fonctionneront alors de la même manière que les notes de fin de document et apparaîtront à l'endroit du document où se trouve la commande \tex{placenotes[footnote]}, ou la commande spécifique aux notes de bas de page \tex{placefootnotes}. Avec cette procédure, nous pourrions, par exemple, imprimer les notes sous le paragraphe dans lequel elles se trouvent.
+
+    \stopSmallPrint
+
+
+  \item Séparation des paragraphes entre les notes : par défaut, chaque note est imprimée dans son propre paragraphe, mais on peut faire en sorte que toutes les notes d'une même page soient imprimées dans le même paragraphe en définissant l'option {\tt paragraph} de \tex{setupnote} sur \MyKey{yes}. 
+
+  \item Style et couleur dans lequel le texte de la note sera écrit : l'option {\tt style} et {\tt color} dans \tex{setupnotation}.
+
+  \item Taille de la lettre : l'option {\tt bodyfont} dans \tex{setupnote}.
+
+    \startSmallPrint
+
+Cette option ne concerne que le cas où l'on souhaite définir manuellement une taille de police pour les notes de bas de page. Ce n'est presque jamais une bonne idée de le faire car, par défaut, \ConTeXt\ ajuste la taille de la police des notes de bas de page pour qu'elle soit plus petite que celle du texte principal, mais avec une taille {\em proportionnelle} à celle de la police du corps principal.
+
+    \stopSmallPrint
+
+\item Marge gauche pour le texte de la note : l'option {\tt margin} dans \tex{setupnotation}.
+
+  \item Largeur maximale : l'option {\tt width} dans \tex{setupnote}.
+
+  \item Nombre de colonnes : l'option {\tt n} de \tex{setupnote} détermine si le texte de la note sera sur deux colonnes ou plus. La valeur \quote{n} doit être un nombre entier.
+
+\stopitemize
+
+
+\head {\bf Espace entre les notes ou entre les notes et le texte~:} ici, nous avons les options suivantes :
+ 
+\startitemize
+ 
+\item {\tt rule}, dans \tex{setupnote} détermine s'il y aura ou non une ligne (règle) entre la zone des notes et la zone de la page contenant le texte principal. Ses valeurs possibles sont {\tt yes, on, no} et {\tt off}. Les deux premières valeurs activent la règle et la dernière la désactive. Il est possible de configurer la ligne plus précisément en indiquant {\tt rule=command} et en définisant {\tt rulecommand} par exemple 
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+rule=command,
+rulecommand={\blackrule[width=0.5\textwidth,color=green,height=3pt,depth=-2pt]},
+\stopDemoI}
+ 
+  \item {\tt before}, dans \tex{setupnotation} : commande ou commandes à exécuter avant l'insertion du texte de la note. Sert à insérer un espacement supplémentaire, des lignes de séparation entre les notes, etc.
+ 
+   \item {\tt after}, dans \tex{setupnotation} : commande ou commandes à exécuter après l'insertion du texte de la note.
+ 
+ \stopitemize
+
+\stopitemize
+
+Finissons par un exemple~:
+
+\startbuffer[a7-testfootnoteE]
+\setuppapersize[A7,landscape]
+\setupbodyfont[8pt]
+%\showframe
+%\showboxes
+\definenote    [MesNotesBleuesA]
+
+\setupnotation [MesNotesBleuesA]
+  [color=middleblue,
+   style=bf,
+   headcolor=middlecyan,
+   way=bypage,
+   align=flushleft,
+   alternative=hanging,
+   width=broad,
+   distance=0.5cm,
+   numberconversion=Words,
+   width=1.5cm,]
+
+\setupnote     [MesNotesBleuesA]
+  [textcolor=middlered,
+   textstyle=it,
+   rule=command,
+   rulecommand={\blackrule[width=0.5\textwidth,color=middlegreen,height=3pt,depth=-2pt]},
+   width=5cm,]
+
+\definenote [MesNotesBleuesB] [MesNotesBleuesA] [alternative=inleft,textcolor=middleyellow]
+
+\setupnotation [MesNotesBleuesB]
+  [headcolor=middlemagenta,
+   alternative=serried,]
+
+\starttext
+Ce début de phrase \MesNotesBleuesA[refA]{coucou ici ceci est une note de bas de page qui s'étend tout au long de la page} est suivi d'une fin de phrase \MesNotesBleuesB[refB]{coucou là ceci est une note de bas de page qui s'étend tout au long de la page}.
+\stoptext
+\stopbuffer
+
+\savebuffer[list=a7-testfootnoteE,file=ex_footnoteE.tex,prefix=no]
+\placefigure [force,here,none] [] {}{\typesetbuffer[a7-testfootnoteE][frame=on,page=1,background=color,backgroundcolor=white]
+\attachment
+  [file={ex_footnoteE.tex},
+   title={exemple testfootnoteE}]}
+
+
+
+\stopsubsection
+
+% *** Subsection 
+\startsubsection
+  [title={Exclusion temporaire des notes lors de la compilation}]
+
+\PlaceMacro{notesenabledfalse}
+\PlaceMacro{notesenabledtrue}
+
+
+Les commandes \tex{notesenabledfalse} et \tex{notesenabledtrue} indiquent à \ConTeXt\ d'activer ou de désactiver la compilation des notes respectivement. Cette fonction peut être utile si l'on souhaite obtenir une version sans notes lorsque le document comporte des notes nombreuses et étendues. Dans mon expérience personnelle, par exemple, lorsque je corrige une thèse de doctorat, je préfère la lire une première fois en une seule fois, sans les notes, puis faire une seconde lecture avec les notes incorporées.
+
+\stopsubsection
+
+\stopsection
+
+% ** Section
+\startsection
+  [
+    reference=sec:multiplecolumns,
+    title={Paragraphes avec plusieurs colonnes},
+  ]
+
+La composition du texte peut être effectuée en plusieurs colonnes~:
+
+
+\startitemize[a]
+
+\item Comme une caractéristique générale de la mise en page.
+
+\item Comme une caractéristique de certaines constructions telles que, par exemple, les listes structurées, les notes de bas de page ou les notes de fin de document.
+
+\item Comme une caractéristique appliquée à des paragraphes particuliers d'un document.
+
+\stopitemize
+ 
+Dans tous ces cas, la plupart des commandes et des environnements fonctionneront parfaitement même si nous travaillons avec plus d'une colonne. Il existe cependant quelques limitations, principalement en ce qui concerne les objets flottants en général (voir \in{section}[sec:floating objects]) et avec les tableaux en particulier (\in{section}[sec:tables]) même s'ils ne sont pas flottants.
+
+En ce qui concerne le nombre de colonnes autorisées, \ConTeXt\ n'a pas de limite théorique. Cependant, il existe des limites physiques qui doivent être prises en compte :
+
+\startitemize
+
+\item la largeur du papier : un nombre illimité de colonnes nécessite une largeur illimitée de papier (si le document est destiné à être imprimé) ou d'écran (s'il s'agit d'un document destiné à être affiché sur écran). En pratique, compte tenu de la largeur {\em normale} des formats de papier commercialisés et utilisés pour composer les livres, et des écrans des appareils informatiques, il est difficile qu'un texte soit composé selon plus de quatre ou cinq colonnes.
+
+\item la taille de la mémoire de l'ordinateur : le manuel de référence de  \ConTeXt\ indique que, sur des systèmes  {\em normaux} (ni particulièrement puissants, ni particulièrement limités en ressources), il est possible de gérer entre 20 et 40 colonnes.
+
+\stopitemize
+
+Dans cette section, je me concentrerai sur l'utilisation du mécanisme multi-colonnes dans les paragraphes ou fragments spéciaux, car
+
+\startitemize
+
+\item Les colonnes multiples comme option de mise en page ont déjà été abordées (dans la \in{sous-section}[sec:pages-columns] de la \in{section}[sec:pages-other-matters]).
+
+\item La possibilité offerte par certaines constructions, telles que les listes structurées ou les notes de bas de page, de composer du texte sur plus d'une colonne, est discutée en fonction de la construction ou de l'environnement en question.
+
+\stopitemize
+
+
+
+% *** Subsection 
+\startsubsection
+  [title={L'environnement \tex{startcolumns}}]
+
+\PlaceMacro{startcolumns}
+
+La procédure normale pour insérer des parties de texte composées en plusieurs colonnes consiste à utiliser l'environnement {\tt columns} dont le format est :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\startcolumns[Configuration] ... \stopcolumns
+\stopDemoI}
+
+où {\em Configuration} nous permet de contrôler de nombreux aspects de l'environnement. Nous pouvons indiquer la configuration désirée à chaque fois que nous appelons l'environnement, ou adapter le fonctionnement par défaut de l'environnement pour tous les appels à l'environnement, ce dernier point pouvant être réalisé avec 
+
+\PlaceMacro{setupcolumns}
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\setupcolumns[Configuration]
+\stopDemoI}
+
+Dans les deux cas, les options de configuration sont les mêmes. Les plus importantes, classées selon leur fonction, sont les suivantes :
+
+\startitemize
+
+\item {\bf Options permettant de contrôler le nombre de colonnes et l'espace entre elles~:}
+
+  \startitemize
+    
+\item {\tt n} : contrôle le nombre de colonnes. Si cette option est omise, deux colonnes seront générées.
+
+  \item {\tt nleft, nright} : ces options sont utilisées dans la mise en page de documents recto-verso (voir \in{subsection}[sec:double-sided] de \in{section}[sec:pages-autres-matières]), pour établir le nombre de colonnes sur les pages de gauche (paires) et de droite (impaires) respectivement.
+
+  \item {\tt distance} : espace entre les colonnes.
+
+  \item {\tt separator} : détermine ce qui marque la séparation entre les colonnes. Il peut s'agir de {\tt espace} (valeur par défaut) ou {\tt rule}, auquel cas une ligne (règle) sera générée entre les colonnes. Dans le cas où une règle est établie entre les colonnes, cette règle peut à son tour être configurée avec les deux options suivantes :
+
+    \startitemize
+      
+    \item {\tt rulecolor} : couleur du trait.
+
+    \item {\tt rulethickness} : épaisseur du trait.
+
+    \stopitemize
+
+  \item {\tt maxwidth}: Largeur maximale que peuvent avoir les colonnes + l'espace entre elles.
+
+  \stopitemize
+
+\item {\bf Options qui contrôlent la distribution du texte entre les colonnes~:}
+
+  \startitemize
+
+\item {\tt balance} : par défaut, \ConTeXt {\em équilibre (balance)} les colonnes, c'est-à-dire qu'il répartit le texte entre elles afin qu'elles aient plus ou moins la même quantité de texte. Cependant, nous pouvons définir cette option avec l'option \quotation{\tt no} : le texte ne commencera pas dans une colonne tant que la précédente ne sera pas pleine.
+
+  \item {\tt direction} : détermine dans quel sens le texte est réparti entre les colonnes. Par défaut, l'ordre de lecture naturel est suivi (de gauche à droite), mais si vous donnez à cette option la valeur {\tt reverse}, l'ordre de lecture sera de droite à gauche.
+
+  \stopitemize
+  
+\head {\bf Options affectant la composition du texte dans l'environnement~:}
+
+  \startitemize
+
+\item {\tt tolerance} : un texte écrit sur plus d'une colonne signifie que la largeur de ligne à l'intérieur d'une colonne est plus petite, et comme expliqué lors de la description du mécanisme utilisé par \ConTeXt\ pour construire les lignes (\in{section}[sec:lines]), cela rend difficile la localisation des points optimaux pour insérer les sauts de ligne. Cette option nous permet de modifier temporairement la tolérance horizontale d'un environnement (voir \in{section}[sec:horizontaltolerance]), afin de faciliter la composition du texte et éviter les débordements.
+
+    \item {\tt align} : contrôle l'alignement horizontal des lignes dans l'environnement. Il peut prendre l'une des valeurs suivantes : {\tt right, flushright, left, flushleft, inner, flushinner, outer, flushouter, middle} ou {\tt broad}. Pour connaître la signification de ces options, voir \in{section}[sec:setupalign].
+
+    \item {\tt color} : spécifie le nom de la couleur dans laquelle le texte de l'environnement sera écrit.
+
+  \stopitemize
+
+\stopitemize
+
+Parfois, pour positionner les flottants (des tableaux, des images, voir \in{section}[cap:floats]) dans un contexte de composition en colonne, dans le cas où ces flottants couvrent toute la largeur des colonnes, il est préférable de commencer par quitter l'environnement columns avec \tex{stopcolumns}, de positionner le flottant avec par exemple avec \tex{startplacefigure}, et de reprendre ensuite avec \tex{stopplacefigure} puis  \tex{startcolumns}.
+
+\stopsubsection
+
+% *** Subsection 
+\startsubsection
+  [title={Paragraphes parallèles}]
+
+\PlaceMacro{defineparagraphs}
+\PlaceMacro{setupparagraphs}
+
+Une version spécifique de la composition en plusieurs colonnes met en parallèle les paragraphes.  Dans ce type de construction, le texte est réparti sur deux colonnes (généralement, mais parfois plus de deux), mais il n'est pas autorisé à circuler librement entre elles, et garde au contraire un contrôle strict sur ce qui apparaîtra dans chaque colonne. Ceci est très utile, par exemple, pour générer des documents qui mettent en contraste deux versions d'un texte, comme la nouvelle et l'ancienne version d'une loi récemment modifiée, ou dans des éditions bilingues ; ou encore pour rédiger des glossaires pour des définitions de textes spécifiques où le texte à définir apparaît à gauche et la définition à droite, etc.
+
+Normalement, nous utiliserions le mécanisme de table pour traiter ce type de paragraphes, mais cela est dû au fait que la plupart des processeurs de texte ne sont pas aussi puissants que \ConTeXt\ qui possède les commandes \tex{defineparagraphs} et \tex{setupparagraphs} qui construisent ce type de paragraphe en utilisant le mécanisme de colonne, qui, bien qu'il ait des limites, est plus flexible que le mécanisme de table.
+
+\startSmallPrint
+
+  Pour autant que je sache, ces paragraphes n'ont pas de nom particulier. Je les ai appelés \quotation{Paragraphes parallèles} parce que cela me semble être un terme plus descriptif que celui que \ConTeXt\ utilise pour s'y référer : \quotation{paragraphes}.
+
+\stopSmallPrint
+
+Les commandes de base ici sont \tex{defineparagraphs} et  \tex{setupparagraphs}  dont la syntaxe est :
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\defineparagraphs[Nom][Configuration]}
+\setupparagraphs[Nom] [NumColonne][Configuration]}
+\stopDemoI}
+
+où {\em Nom} est le nom donné au nouvel environnement en question, {\em NumColonne} est un argument facultatif permettant de configurer une colonne particulière, et {\em Configuration} permet de déterminer son fonctionnement pratique. Par exemple~:
+
+\placefigure [force,here,none] [] {}
+{\startDemoHN
+\defineparagraphs [MonTrio]      [n=3, before={\blank},after={\blank}]
+
+\setupparagraphs  [MonTrio] [1]  [width=.1\textwidth, style=bold]
+\setupparagraphs  [MonTrio] [2]  [width=.4\textwidth]
+
+\startMonTrio
+825
+\MonTrio
+Fondation de la ville de Murcie.
+\MonTrio
+Les origines de la ville de Murcie sont incertaines, mais il est prouvé qu'il a été ordonné de la fonder sous le nom de Madina (ou Medina) en l'an 825 par l'émir d'al-Àndalus Abderramán II,  probablement sur un établissement beaucoup plus ancien.
+\stopMonTrio
+\stopDemoHN}
+
+Le fragment ci-dessus crée un environnement à trois colonnes appelé \MyKey{MonTrio}, puis configure la première colonne pour qu'elle occupe 10\% de la largeur de la ligne et soit écrite en gras, et configure la deuxième colonne pour qu'elle occupe 40\% de la largeur de la ligne. Comme la troisième colonne n'est pas configurée, elle aura la largeur restante, c'est-à-dire 50\%. Une fois l'environnement créé et configuré, nous pouvons l'utilisons.
+
+Si nous voulions continuer à raconter l'histoire de Murcie, une nouvelle instance de l'environnement (\tex{startMonTrio}) serait nécessaire pour l'événement suivant, car il n'est pas possible d'inclure plusieurs {\em rangées} avec ce mécanisme. 
+
+De l'exemple qui vient d'être donné, je voudrais souligner les détails suivants :
+
+\startitemize
+
+\item Une fois l'environnement créé avec, par exemple, \tex{defineparagraphes[MaryPoppins]}, celui-ci devient un environnement normal qui commence par \tex{startMaryPoppins} et se termine par \tex{stopMaryPoppins}.
+
+\item Une commande \tex{MaryPoppins} est également créée, utilisée dans l'environnement pour indiquer quand changer de colonne.
+
+\stopitemize
+
+En ce qui concerne les options de configuration des paragraphes parallèles (\tex{setupparagraphs}), je comprends qu'à ce stade de l'introduction, et compte tenu de l'exemple qui vient d'être donné, le lecteur est déjà prêt à comprendre l'objectif de chacune des options, et je me contenterai donc d'indiquer ci-dessous le nom et le type des options et, le cas échéant, les valeurs possibles. N'oubliez pas, cependant, que \tex{setupparagraphs [Nom] [Configuration]} établit des configurations qui affectent tout l'environnement, tandis que \tex{setupparagraphs [Nom] [NumColonne] [Configuration]} applique des configurations exclusivement à la colonne indiquée.
+
+\startitemize[columns, three, packed]\switchtobodyfont[small]
+ 
+\item {\tt n}: Nombre de colonne
+
+\item {\tt before}: Commande à éxécuter avant l'environnement
+
+\item {\tt after}: Commande à éxécuter après l'environnement
+
+\item {\tt width}: Dimension, largeur de la colonne
+
+\item {\tt distance}: Dimension, distance entre les colonnes
+
+\item {\tt align}: Similaire à \tex{setupalign}
+
+\item {\tt inner}: Commande
+
+\item {\tt rule}: on off
+
+\item {\tt rulethickness}: Dimension, épaisseur du trait de séparation
+
+\item {\tt rulecolor}: Couleur  du trait
+
+\item {\tt style}: Style à appliquer au texte 
+
+\item {\tt color}: Couleur à appliquer au texte 
+
+\stopitemize
+
+\startSmallPrint
+
+La liste des options ci-dessus n'est pas complète ; j'ai exclu de la liste des options celles que je n'expliquerais pas normalement ici. J'ai également profité du fait que nous nous trouvions dans la section consacrée aux colonnes pour afficher la liste des options en triple colonne, bien que je ne l'aie pas fait avec l'une des commandes expliquées dans cette section, mais avec l'option {\tt columns} de l'environnement {\tt itemize}, auquel la section suivante est consacrée.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\stopsection
+
+% ** Section
+\startsection
+  [
+    reference=sec:itemize,
+    title={Listes structurées},
+  ]
+
+Lorsque les informations sont présentées de manière ordonnée, elles sont plus faciles à saisir pour le lecteur. Mais si l'agencement est également perceptible visuellement, cela souligne pour le lecteur le fait que nous avons ici un texte structuré. C'est pourquoi il existe certaines {\em constructions} ou {\em mécanismes} qui tentent de mettre en évidence la disposition visuelle du texte, contribuant ainsi à sa structuration. Parmi les outils que \ConTeXt\ met à la disposition de l'auteur à cette fin, le plus important, qui fait l'objet de cette section, est l'environnement {\tt itemize} qui permet de développer ce que nous pourrions appeler des {\em listes structurées}.
+
+Les listes sont des séquences d'{\em éléments de texte} (que j'appellerai {\em items}), chacun d'entre eux étant précédé d'un caractère qui permet de le mettre en évidence en le différenciant du reste, et que j'appellerai le \quotation{séparateur}. Le séparateur peut être un chiffre, une lettre ou un symbole. Généralement (mais pas toujours), les {\em items} sont des paragraphes et la liste est formatée de manière à assurer la  {\em visibilité} du séparateur pour chaque élément, généralement en appliquant un retrait suspendu qui le met en évidence. 
+\footnote{En typographie, un retrait qui s'applique à toutes les lignes d'un paragraphe sauf la première est appelé un {\em tiret suspendu}, ce qui permet de trouver facilement le premier mot ou caractère du paragraphe.}
+Dans le cas de listes imbriquées, l'indentation de chacune d'elles augmente progressivement. Le langage HTML appelle généralement les listes où le séparateur est un nombre ou un caractère qui augmente de manière séquentielle, des {\em listes ordonnées}, ce qui signifie que chaque {\em item} de la liste aura un séparateur différent qui nous permettra de nous référer à chaque élément par son numéro ou son identifiant ; et il donne le nom de {\em listes non ordonnées} à celles où le même caractère ou symbole est utilisé pour chaque élément de la liste.
+
+\ConTeXt\ gère automatiquement la numérotation ou l'ordre alphabétique du séparateur dans les listes numérotées, ainsi que l'indentation que doivent avoir les listes imbriquées ; et, dans le cas de listes non ordonnées imbriquées, il s'occupe également de la sélection d'un caractère ou d'un symbole différent qui permet de distinguer d'un coup d'œil le niveau d'un {\em item} dans la liste en fonction du symbole qui le précède.
+
+
+\startSmallPrint
+
+Le manuel de référence dit que le niveau maximum d'imbrication dans les listes est de 4, mais je suppose que c'était le cas en 2013, lorsque le manuel a été écrit. D'après mes tests, il ne semble pas y avoir de limite à l'imbrication des listes {\em ordonnées} (dans mes tests, j'ai atteint jusqu'à 15 niveaux d'imbrication). Pour les listes non ordonnées, il ne semble pas y avoir de limite non plus, dans le sens où peu importe le nombre d'imbrications que nous incluons, aucune erreur ne sera générée ; mais, pour les listes non ordonnées, \ConTeXt\ applique seulement des symboles par défaut pour les neuf premiers niveaux d'imbrication. 
+
+Quoi qu'il en soit, il convient de souligner qu'un nombre excessif d'imbrications de listes peut avoir l'effet inverse de celui recherché, à savoir que le lecteur se sent perdu, incapable de situer chaque élément dans la structure générale de la liste. C'est pourquoi je pense personnellement que, bien que les listes soient un outil puissant pour structurer un texte, il n'est presque jamais bon de dépasser le troisième niveau d'imbrication ; et même le troisième niveau ne devrait être utilisé que dans certains cas où nous pouvons le justifier.
+
+\stopSmallPrint
+
+L'outil général pour écrire des listes dans \ConTeXt\ est l'environnement \tex{itemize} dont la syntaxe est la suivante :
+
+The general tool for writing lists in \ConTeXt\ is the \tex{itemize} environment whose syntax is as follows:
+
+\PlaceMacro{startitemize}
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\startitemize[Options][Configuration] ... \stopitemize
+\stopDemoI}
+
+où les deux arguments sont facultatifs. Le premier permet d'utiliser des noms symboliques comme contenu auquel une signification précise a été attribuée par \ConTeXt\ ; le second argument, rarement utilisé, permet d'attribuer des valeurs spécifiques à certaines variables qui affectent le fonctionnement de l'environnement.
+
+% *** Subsection 
+\startsubsection
+  [
+    reference=sec:itemize_select-list-type,
+    title={Sélection du type de liste et du séparateur entre les {\em items} de la liste},
+  ]
+
+% **** Subsubsection
+\startsubsubsection
+  [title={Listes non ordonnées}]
+
+Par défaut, la liste générée par {\tt itemize} est une liste non ordonnée, dans laquelle le séparateur sera automatiquement sélectionné en fonction du niveau d'imbrication :
+
+\startitemize[packed, columns, two]\switchtobodyfont[small]
+\sym{\convertnumber{set 0}{1}} Pour le premier niveau d'imbrication.
+\sym{\convertnumber{set 0}{2}} Pour le second niveau d'imbrication.
+\sym{\convertnumber{set 0}{3}} Pour le troisième niveau d'imbrication.
+\sym{\convertnumber{set 0}{4}} Pour le quatrième niveau d'imbrication.
+\sym{\convertnumber{set 0}{5}} Pour le cinquième niveau d'imbrication.
+\sym{\convertnumber{set 0}{6}} Pour le sixième niveau d'imbrication.
+\sym{\convertnumber{set 0}{7}} Pour le septième niveau d'imbrication.
+\sym{\convertnumber{set 0}{8}} Pour le huitième niveau d'imbrication.
+\sym{\convertnumber{set 0}{9}} Pour le neuvième niveau d'imbrication.
+
+\stopitemize
+
+Cependant, nous pouvons indiquer expressément que nous voulons que le symbole associé à un niveau particulier soit utilisé, simplement en passant le numéro du niveau comme argument. Ainsi, \tex{startitemize[4]} générera une liste non ordonnée dans laquelle le caractère \triangleright, sera utilisé comme séparateur, quel que soit le niveau d'imbrication de la liste.
+
+Nous pouvons également modifier le symbole prédéterminé pour chaque niveau avec \PlaceMacro{definesymbol} \tex{definesymbol} :
+
+\placefigure [force,here,none] [] {}
+{\startDemoHN
+% definesymbol
+%  [Level]
+%  [Symbol associated with the level]
+\definesymbol [symA] [\diamond]
+\definesymbol [symB] [{\blackrule[height=1.3ex, width=0.9ex, depth=-0.4ex,]}] 
+\setupitemize [1]    [packed] [color=middlegreen, symbol=symA]
+\setupitemize [2]    [packed] [color=middlered,   symbol=symB]
+\startitemize
+\item Texte 1  \item Texte 2
+\startitemize  \item Texte 3 \item Texte 4 \stopitemize
+\item Texte 5
+\stopitemize
+\stopDemoHN}
+
+\stopsubsubsection
+
+% **** Subsubsection
+\startsubsubsection
+  [title=Listes ordonnées]
+
+Pour générer une liste ordonnée, nous devons indiquer à {\tt itemize} le type d'ordre que nous voulons. Cela peut être~:
+
+\startitemize[intro, packed, 2*broad, columns, three]
+\switchtobodyfont[small]
+
+\sym{{\bf n}} 1, 2, 3, 4, ...
+
+\sym{{\bf m}} {\os 1}, {\os 2}, {\os 3}, {\os 4}, ...
+
+\sym{{\bf g}} \alpha, \beta, \gamma, \delta, ...
+
+\sym{{\bf G}} \Alpha, \Beta, \Gamma, \Delta, ...
+
+\sym{{\bf a}} a, b, c, d, ...
+
+\sym{{\bf A}} A, B, C, D, ...
+
+\sym{{\bf KA}} \cap{a, b, c, d, ...}
+
+\sym{}
+
+\sym{{\bf r}} i, ii, iii, iv, ...
+
+\sym{{\bf R}} I, II, III, IV, ...
+
+\sym{{\bf KR}} \cap{i, ii, iii, iv, ...}
+
+\stopitemize
+
+La différence entre {\tt n} et {\tt m} réside dans la police utilisée pour représenter le nombre : {\tt n} utilise la police activée à ce moment-là, tandis que {\tt m} utilise une police différente, plus élégante, presque calligraphique.
+
+\startSmallPrint
+
+Je ne connais pas le nom de la police que {\tt m} utilise, et donc dans la liste ci-dessus je n'ai pas pu représenter exactement le type de chiffres que cette option génère. Je suggère aux lecteurs de la tester par eux-mêmes.
+
+\stopSmallPrint
+
+\stopsubsubsection
+
+\stopsubsection
+
+% *** Subsection 
+\startsubsection
+  [
+    reference=sec:itemize_item-type,
+    title={Saisie des éléments d'une liste},
+  ]
+
+En règle générale, les éléments d'une liste créée avec \tex{startitemize} sont saisis avec la commande \PlaceMacro{item}\tex{item} qui possède également une version sous forme d'environnement plus adaptée au style Mark~IV :
+\PlaceMacro{startitem} \tex{startitem ... \stopitem}. Ainsi, observez l'exemple suivant :
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+\startitemize[a, packed]
+\startitem Premier élément \stopitem
+\startitem Second élément \stopitem
+\startitem Troisième élément \stopitem
+\stopitemize
+
+\startitemize[a, packed]
+\item Premier élément
+\item Second élément
+\item Troisième élément
+\stopitemize
+\stopDemoVN}
+
+\tex{item} ou \tex{startitem} est la commande {\em générale} pour insérer un élément dans la liste. Elle s'accompagne des commandes supplémentaires suivantes pour obtenir un résultat particulier :
+
+
+\startitemize[3*broad]
+
+\sym{\PlaceMacro{head}\tex{head}} Cette commande doit être utilisée à la place de \tex{item} lorsque l'on veut éviter d'insérer un saut de page après l'élément en question. Son formatage peut être indiqué avec l'option {\tt headstyle=}  (bold par exemple).
+
+\startSmallPrint
+
+Une construction courante consiste à inclure une liste imbriquée ou un bloc de texte immédiatement sous un élément de liste, de sorte que l'élément de liste fonctionne, en un sens, comme le {\em titre} de la sous-liste ou du bloc de texte. Dans ce cas, il est déconseillé d'insérer un saut de page entre cet élément et les paragraphes suivants. Si nous utilisons \tex{head} au lieu de \tex{item} pour saisir ces éléments, \ConTeXt\ {\em s'efforcera} (dans la mesure du possible) de ne pas séparer cet élément du bloc suivant.
+
+\stopSmallPrint
+
+\sym{\PlaceMacro{nop}\tex{nop}} annule l'affichage du séparateur. 
+
+\sym{\PlaceMacro{sym}\tex{sym}} La commande \type{\sym{Texte}} permet de saisir un élément dans lequel le texte utilisé comme argument de \tex{sym} est utilisé comme {\em séparateur}, et non comme nombre ou symbole. Cette liste, par exemple, est construite avec des éléments saisis au moyen de \tex{sym} au lieu de \tex{item}. 
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+\startitemize[a, packed]
+\item Premier élément
+\sym{x} Second élément
+\nop Troisième élément
+\stopitemize
+\stopDemoVN}
+
+\sym{\PlaceMacro{sub}\tex{sub}} Cette commande, qui ne doit être utilisée que dans les listes ordonnées (où chaque élément est précédé d'un numéro ou d'une lettre dans l'ordre alphabétique), fait en sorte que l'élément saisi avec elle conserve le numéro de l'élément précédent et, afin d'indiquer que le numéro est répété et qu'il ne s'agit pas d'une erreur, le signe \quote{+} est imprimé à gauche. Cela peut être utile si l'on se réfère à une liste antérieure pour laquelle on suggère des modifications mais où, pour des raisons de clarté, il convient de conserver la numérotation de la liste originale.
+
+\sym{\PlaceMacro{mar}\tex{mar}} Cette commande conserve la numérotation des éléments, mais ajoute une lettre ou un caractère dans la marge (qui lui est passé en argument, entre crochets). Je ne suis pas sûr de son utilité.
+
+% TODO Garulfo vérifier la compréhension de mar et sub 
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+\startnarrower[left]
+\startitemize[n, packed]
+\item Premier élément
+\mar{o} Second élément (un o en marge)
+\sub  Second élément
+\item Troisième élément
+\stopitemize
+\stopnarrower
+\stopDemoVN}
+
+\stopitemize
+
+Il existe deux commandes supplémentaires pour la saisie d'éléments, dont la combinaison produit des effets très {\em intéressants} et, si je peux me permettre, je pense qu'il est préférable de les expliquer par un exemple. \PlaceMacro{ran} \tex{ran} (abréviation de {\em gamme}) et \PlaceMacro{its} \tex{its}, abréviation de {\em items}. La première prend un argument (entre crochets) et la seconde répète le symbole utilisé comme séparateur dans la liste un nombre x de fois (par défaut 4 fois, mais nous pouvons modifier cela en utilisant l'option {\tt items}). L'exemple suivant montre comment ces deux commandes peuvent fonctionner ensemble pour créer une liste qui imite un questionnaire :
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoHN
+Après avoir lu l'introduction suivante, répondez aux questions suivantes~:
+\startitemize[5, packed][width=8em, distance=2em, items=5]
+\ran{No \hss Yes} % \hss = un espace infiniment extensible et écrasable
+\its Je n'utiliserai jamais ConTeXt, c'est trop difficile.
+\its Je ne l'utiliserai que pour écrire de gros livres.
+\its Je l'utiliserai toujours.
+\its Je l'aime tellement que j'appellerai mon prochain enfant \quotation{Hans}, en hommage à Hans Hagen.
+\stopitemize
+\stopDemoHN}
+
+\stopsubsection
+
+% *** Subsection 
+\startsubsection
+  [
+    reference=sec:itemize_arg1,
+    title={Configuration basique des listes},
+  ]
+
+Nous rappelons que \MyKey{itemize} permet deux arguments. Nous avons déjà vu comment le premier argument nous permet de sélectionner le type de liste que nous voulons. Mais nous pouvons également l'utiliser pour indiquer d'autres caractéristiques de la liste ; ceci est fait par les options suivantes pour \MyKey{itemize} dans son premier argument :
+
+\startitemize
+
+\item {\tt columns} : cette option détermine que la liste est composée de deux colonnes ou plus. Après l'option colonnes, le nombre de colonnes souhaité doit être écrit sous forme de mots séparés par une virgule : {\tt two, three, four, five, six, seven, eight or nine}. {\tt columns} non suivi d'un nombre quelconque génère deux colonnes.
+
+\item {\tt intro} : cette option tente de ne pas séparer la liste, par un saut de ligne, du paragraphe qui la précède.  
+
+\item {\tt continue} : dans les listes ordonnées (numériques ou alphabétiques), cette option permet à la liste de poursuivre la numérotation à partir de la dernière liste numérotée. Si l'option {\tt continue} est utilisée, il n'est pas nécessaire d'indiquer le type de liste que l'on souhaite, car on suppose qu'elle sera identique à la dernière liste numérotée.
+
+\item {\tt packed} : est l'une des options les plus utilisées. Son utilisation permet de réduire au maximum l'espace vertical entre les différents {\em items} de la liste.
+
+\item {\tt nowhite} produit un effet similaire à celui de {\tt packed}, mais plus radical : il réduit non seulement l'espace vertical entre les éléments, mais aussi l'espace vertical entre la liste et le texte environnant.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+Texte introductif.
+\startitemize[packed]
+\item Premier élément
+\item Second élément
+\item Troisième élément
+\stopitemize
+Texte introductif.
+\startitemize[nowhite]
+\item Premier élément
+\item Second élément
+\item Troisième élément
+\stopitemize
+Texte introductif.
+\stopDemoVN}
+
+\item {\tt after, before:} rajoutent au contraire des espaces respectivement après ou avant la liste
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+Texte introductif.
+\startitemize[nowhite,after]
+\item Premier élément
+\item Second élément
+\item Troisième élément
+\stopitemize
+Texte introductif.
+\startitemize[nowhite,before]
+\item Premier élément
+\item Second élément
+\item Troisième élément
+\stopitemize
+Texte introductif.
+\stopDemoVN}
+
+\item {\tt joinedup :} assure le rôle de {\tt nowhite} mais entre un niveau d'item et son parent dans le cas de listes imbriquées.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW%
+\setupitemgroup[itemize] [1] [nowhite]%
+\setupitemgroup[itemize] [2] [nowhite]%
+\startitemize  
+\item item 1.1
+\startitemize
+\item item 2.1 \item item 2.2
+\stopitemize   
+\item item 1.2
+\stopitemize
+
+\setupitemgroup[itemize] [1] [joinedup]%
+\startitemize  
+\item item 1.1
+\startitemize
+\item item 2.1 \item item 2.2
+\stopitemize   
+\item item 1.2
+\stopitemize
+\stopDemoVW}
+
+
+
+\item {\tt broad} : augmente l'espace horizontal entre le séparateur d'élément et le texte de l'élément. L'espace peut être augmenté en multipliant un nombre par {\tt broad} comme dans, par exemple : \type{\startitemize[2*broad]}.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+\startitemize[packed,2*broad]
+\item Premier élément
+\item Second élément
+\stopitemize
+\stopDemoVN}
+
+\item {\tt serried} : supprime l'espace horizontal entre le séparateur d'élément et le texte.
+
+\item {\tt intext} : supprime le retrait suspendu.
+
+\item {\tt text} : supprime le retrait suspendu et réduit l'espace vertical entre les éléments.
+
+\item {\tt repeat} : dans les listes imbriquées, la numérotation d'un niveau enfant {\em repeat} devient le même niveau que le niveau précédent. Ainsi, nous aurions, au premier niveau : 1, 2, 3, 4 ; au deuxième niveau : 1.1, 1.2, 1.3, etc. L'option doit être indiquée pour la liste intérieure, pas pour la liste extérieure.
+
+\item {\tt margin, inmargin} : par défaut, le séparateur de liste est imprimé à gauche, mais à l'intérieur de la zone de texte elle-même ({\tt atmargin}). Les options {\tt margin} et {\tt inmargin} permettent de déplacer le séparateur vers la marge.
+
+\stopitemize
+
+\stopsubsection
+
+% *** Subsection 
+\startsubsection
+  [
+    reference=sec:itemize_arg2,
+    title={Configuration complémentaire des listes},
+  ]
+
+Le deuxième argument, également facultatif, de \tex{startitemize} permet une configuration plus détaillée et plus approfondie des listes.
+
+\startitemize
+
+\item {\tt before, after} : commandes à exécuter respectivement avant le démarrage ou après la fermeture de l'environnement itemize (à ne pas confondre avec ces options de l'argument 1, qui font référence aux espacements verticaux voir ci-dessus).
+
+\item {\tt inbetween} : commande à exécuter entre deux {\tt items}.
+
+\item {\tt beforehead, afterhead} : commande à exécuter avant ou après un élément saisi avec la commande \tex{head}.
+
+\item {\tt left, right} : caractère à imprimer à gauche ou à droite du séparateur. Par exemple, pour obtenir des listes alphabétiques dans lesquelles les lettres sont entourées de parenthèses, il faudrait écrire \tex{startitemize[a][left=(, right=)]}
+
+\item {\tt stopper} : indique un caractère à écrire après le séparateur. Ne fonctionne que dans les listes ordonnées.
+
+\item {\tt width, maxwidth} : largeur de l'espace réservé au séparateur et donc au retrait suspendu.
+
+\item {\tt factor} : nombre représentatif du facteur de séparation entre le séparateur et le texte.
+
+\item {\tt distance} : mesure de la distance entre le séparateur et le texte.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW%
+\setupitemgroup[itemize]   [1]
+               [nowhite,joinedup,3*broad]%
+\setupitemgroup[itemize]   [2]
+               [nowhite] [width=5mm]%
+\startitemize  
+\item item 1.1
+\startitemize
+\item item 2.1 \item item 2.2
+\stopitemize   
+\item item 1.2
+\stopitemize
+\setupitemgroup[itemize] [1] [distance=5mm]%
+\setupitemgroup[itemize] [2] [distance=5mm]%
+\startitemize  
+\item item 1.1
+\startitemize
+\item item 2.1 \item item 2.2
+\stopitemize   
+\item item 1.2
+\stopitemize
+\stopDemoVW}
+
+
+\item {\tt leftmargin, rightmargin, margin} : marge à ajouter à gauche (leftmargin) ou à droite (rightmargin) des éléments. 
+
+
+
+\item {\tt start} : numéro à partir duquel la numérotation des éléments commencera.
+
+\item {\tt symalign, itemalign, align} : alignement des éléments. Permet les mêmes valeurs que \tex{setupalign}. {\tt symalign} contrôle l'alignement du séparateur, {\tt itemalign} celui du texte de l'élément et {\tt align} contrôle les deux.
+
+\item {\tt identing} : indentation de la première ligne des paragraphes
+à l'intérieur de l'environnement. Voir \in{section}[sec:indentation].
+
+\item {\tt indentnext} : indique si le paragraphe suivant l'environnement doit être indenté ou non. Les valeurs sont {\em yes, no} et {\tt auto}.
+
+\item {\tt items} : dans les éléments saisis en entrée avec \tex{its}, indique le nombre de fois que le séparateur doit être reproduit.
+
+\item {\tt style, color ; headstyle, headcolor ; marstyle, marcolor ; symstyle, symcolor} : ces options contrôlent le style et la couleur des éléments lors de leur saisie dans l'environnement avec les commandes \tex{item}, \tex{head}, \tex{mar} ou \tex{sym}.
+
+\stopitemize
+
+\stopsubsection
+
+% *** Subsection 
+\startsubsection
+  [
+    reference=sec:items command,
+    title={Listes simples à l'aide de la commande \tex{items}.},
+  ]
+
+\PlaceMacro{items}
+
+Une alternative à l'environnement {\tt itemize} pour les listes non numérotées très simples, où les éléments ne sont pas trop gros, est la commande \tex{items} dont la syntaxe est :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\items[Configuration]{Item 1, Item 2, ..., item n}
+\stopDemoI}
+
+Les différents éléments de la liste sont séparés les uns des autres par des virgules. Par exemple :
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+Les fichiers graphiques peuvent avoir, entre autres, les extensions suivantes :
+\items{png, jpg, tiff, bmp}
+\stopDemoVN}
+
+Les options de configuration prises en charge par cette commande sont un sous-ensemble de celles de la commande {\tt itemize}, à l'exception de deux options spécifiques à cette commande : 
+
+\startitemize
+  
+\item {\tt symbol} : cette option détermine le type de liste qui sera généré. Elle prend en charge les mêmes valeurs que celles utilisées pour {\tt itemize} pour sélectionner un type de liste.
+ 
+\item {\tt n} : cette option indique à partir de quel numéro d'élément il y aura un séparateur.
+
+\stopitemize
+
+\stopsubsection
+
+% *** Subsection 
+\startsubsection
+  [
+    reference=sec:setupitemize,
+    title={Prédétermination du comportement des listes et création de nos propres types de listes},
+  ]
+  
+Dans les sections précédentes, nous avons vu comment indiquer quel type de liste nous voulons et quelles caractéristiques elle doit avoir. Mais faire cela à chaque fois qu'une liste est appelée est inefficace et produira généralement un document incohérent dans lequel chaque liste a sa propre apparence, mais sans que les différentes apparences ne répondent à aucun critère.
+
+Résultat préférable pour cela :
+
+\startitemize
+
+\item Prédéterminer le comportement {\em normal} de {\tt itemize} et \tex{items} dans le préambule du document.
+
+\item Créer nos propres listes personnalisées. Par exemple : une liste numérotée alphabétiquement que nous voulons appeler {\em ListAlpha}, une liste numérotée avec des chiffres romains ({\em ListRoman}), etc.
+ 
+\stopitemize
+
+Nous réalisons la première avec les commandes \tex{setupitemize} et \tex{setupitems}. La seconde nécessite l'utilisation de la commande \PlaceMacro{defineitemgroup} \tex{defineitemgroup}, ou \PlaceMacro{defineitems} \tex{defineitems}. La première créera un environnement de liste similaire à {\tt itemize} et la seconde une commande similaire à {\tt items}.
+
+\stopsubsection
+
+\stopsection
+
+% ** Section 
+\startsection
+  [title={Descriptions et énumerations}]
+
+Les descriptions et les énumérations sont deux constructions qui permettent la composition cohérente de paragraphes ou de groupes de paragraphes qui développent, décrivent ou définissent une phrase ou un mot.
+
+% *** Subsection  
+\startsubsection
+  [title={Descriptions}]
+
+
+Pour les descriptions, nous faisons la différence entre un {\em titre} et son explication ou développement. Nous pouvons créer une nouvelle description avec :
+
+\PlaceMacro{definedescription}
+
+\setup{definedescription}
+
+où le premier {\em Name} est le nom sous lequel cette nouvelle construction sera connue, le second correspond à un environment de description déjà existant et dont le nouveau va hériter, et le dernier arguments contrôle ce à quoi notre nouvel environment ressemblera. Après la déclaration précédente, nous aurons une nouvelle commande et un environnement portant le nom que nous avons choisi. Ainsi~:
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\definedescription [Concept]
+
+\Concept{Protestation} Il vient une heure où protester ne suffit plus : après la philosophie, il faut l'action.
+
+Ceci est une citation de Victor Hugo. 
+
+\startConcept{Rire}
+Faire rire, c'est faire oublier.
+
+Ceci est une citation de Victor Hugo. 
+\stopConcept
+\stopDemoVW}
+
+Nous pouvons utiliser la commande pour le cas où le texte explicatif du titre ne comporte qu'un seul paragraphe, mais généralement nous utiliserons plutôt l'environnement car il permet de traiter le cas plus général où la description occupe plus d'un paragraphe, contient des flottants etc. Lorsque la commande est utilisée, seul le paragraphe qui la suit immédiatement est celui qui sera considéré comme le texte explicatif du titre. Lorsque l'environnement est utilisé, tout le contenu sera formaté avec l'indentation appropriée pour faire apparaître clairement son lien avec le titre.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\definedescription
+  [Concept]
+  [alternative=left, width=1cm, headstyle=bold]
+\startConcept{Contextualiser}
+Placer quelque chose dans un certain contexte, ou composer un texte avec le système de composition appelé \ConTeXt. La capacité à contextualiser correctement dans toute situation est considérée comme un signe d'intelligence et de bon sens.
+\stopConcept
+\stopDemoVW}
+
+Comme c'est normalement le cas avec \ConTeXt, l'aspect qu'aura notre nouvelle construction peut être indiqué au moment de sa création, avec le dernier argument ou plus tard avec \tex{setupdescription} :
+
+\setup{setupdescription}
+
+où {\em 1} est le nom (ou la liste de nom) de notre nouvelle description, et {\em 2} détermine à quoi elle ressemble. Parmi les différentes options de configuration possibles, je soulignerai~:
+
+\startcommanddesc
+
+\starthead{alternative} cette option est celle qui contrôle fondamentalement l'apparence de la construction. Elle détermine le placement du titre par rapport à sa description. Ses valeurs possibles sont les suivantes : {\tt left, right, inmargin, inleft, inright, margin, leftmargin, rightmargin, innermargin, outermargin, serried, hanging}, leurs noms sont suffisamment clairs pour se faire une idée du résultat, même si, en cas de doute, il est préférable de faire un test pour voir ce que cela donne.\stophead
+
+\starthead{width} contrôle la largeur de la boîte dans laquelle le titre sera écrit. Selon la valeur de {\tt alternative}, cette distance fera également partie de l'indentation avec laquelle le texte explicatif sera écrit.\stophead
+
+\starthead{distance} contrôle la distance entre le titre et l'explication.\stophead
+
+\starthead{headstyle, headcolor, headcommand} affecte l'aspect du titre lui-même : Style ({\tt headstyle}) et couleur ({\tt headcolor}). Avec headcommand, on peut indiquer une commande à laquelle le texte du titre sera passé comme argument. Par exemple : {\tt headcommand=\backslash WORD} fera en sorte que le texte du titre soit tout en majuscules.\stophead
+
+\starthead{style, color} contrôle l'apparence du texte descriptif du titre.\stophead
+
+\starthead{hang} contrôle les spécificités dans le cas de l'alternative {\tt hanging} (combien de ligne sont mise en retrait).\stophead
+
+\stopcommanddesc
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW%
+\startbuffer
+Il vient une heure où protester ne suffit plus : après la philosophie, il faut l'action.
+\stopbuffer%
+\definedescription  [Concept]
+  [alternative=left, 
+   width=2.5cm,
+   distance=2em,
+   headstyle=\tt\bf,
+   headcolor=darkred]%
+\startConcept{left} \getbuffer \stopConcept
+
+\definedescription [Concept] [alternative=hanging]
+\startConcept{hanging} \getbuffer \stopConcept
+\definedescription [Concept] [alternative=top]
+\startConcept{top} \getbuffer \stopConcept
+\definedescription [Concept] [alternative=serried]
+\startConcept{serried} \getbuffer \stopConcept
+\definedescription [Concept] [distance=5em]
+\startConcept{distance} \getbuffer \stopConcept
+\definedescription [Concept] [alternative=right, distance=2em]
+\startConcept{right} \getbuffer \stopConcept
+\definedescription [Concept] [headalign=flushright]
+\startConcept{headalign} \getbuffer \stopConcept
+\stopDemoVW}
+
+\stopsubsection
+
+% *** Subsection 
+\startsubsection
+  [title={Énumerations}]
+
+Les énumérations sont des éléments de texte numérotés et structurés sur plusieurs niveaux. Chaque élément commence par un titre qui se compose, par défaut, du nom de la structure et de son numéro, bien que nous puissions modifier le titre avec l'option {\tt text} (voir le second exemple page suivante). Elles sont assez similaires aux descriptions, mais offrent deux distinctions~:
+
+\startitemize
+
+\item Tous les éléments d'une énumération partagent le même titre.
+
+\item Ils diffèrent donc les uns des autres par leur numérotation.  
+
+\stopitemize
+
+
+Cet environnement peut être très utile, par exemple, pour rédiger des énoncés, des définitions, des formules, des problèmes ou des exercices dans un manuel, en veillant à ce qu'ils soient correctement numérotés et formatés de manière cohérente et automatique.
+
+\PlaceMacro{defineenumeration}
+\setup{defineenumeration}
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\defineenumeration [Exercice]
+  [alternative=top, 
+   before=\blank, 
+   after=\blank, 
+   between=\blank]
+
+\Exercice 
+pas facile celui-ci A.\par
+pas facile celui-ci B.
+
+
+\startExercice
+Commençons par le commencement A.\par
+Commençons par le commencement B.
+
+\startsubExercice
+Celui ci est élémentaire A.\par
+Celui ci est élémentaire B.
+\stopsubExercice
+
+\startsubExercice
+Celui ci est un complément A.\par
+Celui ci est un complément B.
+\stopsubExercice
+
+\subExercice 
+pour finir A.\par
+pour finir B.
+
+\stopExercice
+\stopDemoVW}
+
+Ainsi, dans l'exemple précédent, on constate que \tex{defineenumeration} génère automatiquement une série de nouvelles commandes associées au nom du nouvel environnement (\tex{startExercice}, \tex{startsubExercice}, …), en effet les énumérations peuvent avoir jusqu'à quatre niveaux de profondeur. Tout comme pour les descriptions, nous utiliserons généralement l'environnement \tex{startNom ... \stopNom} qui permet de couvrir plusieurs paragraphes, mais les commandes simples (\tex{Exercice}, \tex{subExercice}, …) peuvent également être utilisées dans le cas de paragraphe seul.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\defineenumeration [Exercice]
+  [alternative=left,
+   headcolor=darkcyan,
+   width=2cm,
+   text={Exercice},
+   before=\blank, 
+   after=\blank, 
+   between=\blank]
+
+\startExercice
+Commençons par le commencement A.\par
+Commençons par le commencement B.
+
+\startsubExercice
+Celui ci est élémentaire A.\par
+Celui ci est élémentaire B.
+\stopsubExercice
+
+\startsubExercice
+Celui ci est un complément A.\par
+Celui ci est un complément B.
+\stopsubExercice
+
+\stopExercice
+\stopDemoVW}
+
+L'apparence des énumérations (voir exemple ci-dessus) peut être déterminée au moment de leur création ou ultérieurement avec \tex{setupenumeration} dont les options et valeurs sont similaires à celles de \tex{setupdescription}.
+
+Pour chaque énumération, nous pouvons configurer chacun de ses niveaux séparément. Ainsi, par exemple, \tex{setupenumeration [subExercice] [Configuration]} affectera le deuxième niveau de l'énumération appelée \quotation{Exercice}.
+
+\PlaceMacro{setupenumeration}
+\setup{setupenumeration}
+
+
+Pour contrôler la numérotation, il existe les commandes supplémentaires suivantes :
+
+\startcommanddesc
+\starthead{\tex{setEnumerationName}} définit la valeur de numérotation actuelle. \stophead
+\starthead{\tex{resetEnumerationName}} remet le compteur d'énumération à zéro.\stophead
+\starthead{\tex{nextEnumerationName}} augmente le compteur d'énumération d'une unité.\stophead
+\stopcommanddesc
+
+\stopsubsection
+
+\stopsection
+
+% ** Section
+\startsection
+  [
+    reference=sec:FramesLines,
+    title={Lignes et cadres},
+  ]
+
+Il est dit dans le manuel de référence de \ConTeXt\ que \TeX\ a une énorme capacité de gestion du texte, mais est très faible dans la gestion des informations graphiques. Je ne suis pas d'accord : il est vrai que pour la gestion des lignes et des cadres, les possibilités de \ConTeXt\ (en fait \TeX) ne sont pas aussi écrasantes que lorsqu'il s'agit de composer du texte. Mais dire que le système est faible à cet égard est, je pense, un peu exagéré. Je ne connais aucune fonction avec des lignes et des cadres que d'autres systèmes de composition peuvent faire pour des documents et que \ConTeXt\ est incapable de générer. Et si nous combinons \ConTeXt\ avec MetaPost, ou avec TiKZ (\ConTeXt\ a un module d'extension pour cela), alors les possibilités ne sont limitées que par notre imagination.
+
+Dans les sections suivantes, cependant, je me limiterai à expliquer comment générer de simples lignes horizontales et verticales et des cadres autour des mots, des phrases ou des paragraphes.
+
+% *** Subsection 
+\startsubsection
+  [title={Lignes simples}]
+
+La façon la plus simple de dessiner une ligne horizontale est d'utiliser la commande \PlaceMacro{hairline} \tex{hairline} qui génère une ligne horizontale occupant toute la largeur d'une ligne de texte normale.
+
+Il ne peut y avoir de texte d'aucune sorte sur la ligne où se trouve la ligne générée par \tex{hairline}. Afin de générer une ligne capable de coexister avec le texte sur la même ligne, nous avons besoin de la commande \PlaceMacro{thinrule} \tex{thinrule}. Cette deuxième commande utilisera toute la largeur de la ligne. Par conséquent, dans un paragraphe isolé, elle aura le même effet que \tex{hairline}, tandis que dans le cas contraire, \tex{thinrule} produira la même expansion horizontale que \tex{hfill} (voir \in{section}[sec:horizontal space2]), mais au lieu de remplir l'espace horizontal avec un espace blanc (comme le fait \tex{hfill}), elle le remplit avec une ligne.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+Avec hairline~:\par
+Sur la gauche\hairline\\
+\hairline sur la droite\\
+Des deux \hairline côtés\\
+\hairline centré\hairline
+\blank[big]
+Avec thinrule~:\par
+Sur la gauche\thinrule\\
+\thinrule sur la droite\\
+Des deux \thinrule côtés\\
+\thinrule centré\thinrule
+\stopDemoVN}
+
+\PlaceMacro{thinrule}
+\PlaceMacro{setupthinrules}
+\PlaceMacro{thinrules}
+
+La commande \tex{thinrules} permet de générer plusieurs lignes. Par exemple, \tex{thinrules[n=2]} générera deux lignes consécutives, chacune de la largeur de la ligne normale. Les lignes générées avec \tex{thinrules} peuvent également être configurées, soit dans un appel direct à la commande, en indiquant la configuration comme l'un de ses arguments, soit de manière générale avec \tex{setupthinrules}. La configuration comprend l'épaisseur de la ligne ({\tt rulethickness}), sa couleur ({\tt color}), la couleur de fond ({\tt background}), l'espace interligne ({\tt interlinespace}), etc.
+
+\placefigure [force,here,none] [] {}
+{\startDemoHN
+\setupthinrules[color=darkyellow,height=-0.5mm,depth=1.0mm]
+Sur la gauche\thinrules[n=3] centre décalé \thinrule sur la droite
+\stopDemoHN}
+
+\startSmallPrint
+
+Je laisserai un certain nombre d'options sans explication. Le lecteur peut les consulter dans {\tt setup-fr.pdf} (voir \in{section}[sec:qrc-setup-fr]). Certaines options ne diffèrent des autres qu'en termes de nuance (c'est-à-dire qu'il n'y a pratiquement aucune différence entre elles), et je pense qu'il est plus rapide pour le lecteur d'essayer de {\em voir} la différence, que pour moi d'essayer de la transmettre avec des mots. Par exemple : l'épaisseur de la ligne que je viens de dire dépend de l'option {\tt rulethickness}. Mais elle est également affectée par les options {\tt height} et {\tt depth} (voir l'exemple ci-dessus).
+
+\stopSmallPrint
+
+
+Des lignes plus petites peuvent être générées avec les commandes \PlaceMacro{hl}\tex{hl} et \PlaceMacro{vl}\tex{vl}. La première génère une ligne horizontale et la seconde une ligne verticale. Toutes deux prennent comme paramètre un nombre qui nous permet de calculer la longueur de la ligne. Dans \tex{hl}, le nombre mesure la longueur en {\em ems} (il n'est pas nécessaire d'indiquer l'unité de mesure dans la commande) et dans \tex{vl}, l'argument fait référence à la hauteur actuelle de la ligne.
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoHN
+Une ligne verticale \vl[2] et une autre horizontale \hl[2]
+\stopDemoHN}
+
+Ainsi, \tex{hl[2]} génère une ligne horizontale de 3 ems et \tex{vl[2]} génère une ligne verticale de la hauteur correspondant à trois lignes. N'oubliez pas que l'indicateur de mesure de ligne doit être inséré entre crochets, et non entre accolades. Dans les deux commandes, l'argument est facultatif. S'il n'est pas saisi, la valeur 1 est prise en compte.
+
+
+
+\PlaceMacro{fillinline} \tex{fillinline} est une autre commande (je pense dépréciée, voyez ensuite \tex{fillinrules}) permettant de créer des lignes horizontales de longueur précise. Elle prend en charge davantage de configuration dans laquelle nous pouvons indiquer (ou prédéterminer avec \PlaceMacro{setupfillinlines} \tex{setupfillinlines}) la largeur (option {\tt width}) en plus de quelques autres caractéristiques.
+
+Une particularité de cette commande est que le texte qui est écrit en argument sera placé à gauche de la ligne, séparant ce texte de la ligne par l'espace blanc nécessaire pour occuper toute la ligne. Attention, il faut bien penser à indiquer un changement de paragraphe entre deux lignes de ce type.
+Par exemple :
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\fillinline[width=2cm]{Nom} \par
+\fillinline[width=4cm]{Prénom}
+
+\fillinline[width=4cm]{Adresse} \par
+\stopDemoVW}
+
+Outre la largeur de la ligne, nous pouvons configurer la marge ({\tt margin}), la distance ({\tt distance}), l'épaisseur ({\tt rulethickness}) et la couleur ({\tt color}).
+
+\PlaceMacro{fillinrules}
+\tex{fillinrules} a un rôle très proche de \tex{fillinline} mais plus générale car elle permet d'insérer plus d'une ligne (option \MyKey{n}) et traite automatiquement le changement de ligne et de paragraphe.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\setupfillinrules[separator=:,interlinespace=small]
+\fillinrules[n=1]{Nom}{(en majuscule)}
+\fillinrules[n=1,width=2cm]{Prénom}
+\fillinrules[n=3,width=fit]{Adresse 1}
+\fillinrules[n=3,distance=1cm]{Adresse 2}
+\stopDemoVW}
+
+\PlaceMacro{blackrule}
+\PlaceMacro{setupblackrules}
+\PlaceMacro{blackrules}
+
+Dernier type de ligne~: \tex{blackrule}. Voyez la comparaison avec thinrules~:
+
+\placefigure [force,here,none] [] {}
+{\startDemoHN
+\setupthinrules[color=darkyellow,height=-0.5mm,depth=1.0mm]
+Sur la gauche\thinrules[n=3] centre décalé \thinrule sur la droite
+
+\setupblackrules[color=darkgreen,height=-0.5mm,depth=1.0mm]
+Sur la gauche\blackrules[n=3] centre décalé \blackrule sur la droite
+\stopDemoHN}
+
+Contrairement à \tex{thinrule}, \tex{blackrule} produit des lignes de longeur fixe, que l'on défini avec l'option {\tt width}.
+
+Un manuel spécifique aux lignes a été produit en 2018 intitulé \goto{Rules}[url(https://www.pragma-ade.com/general/manuals/rules-mkiv.pdf)]. N'hésitez pas à le consulter.
+
+\stopsubsection
+
+% *** Subsection 
+\startsubsection
+  [title={Lignes liées au texte}]
+
+Bien que certaines des commandes que nous venons de voir puissent générer des lignes qui coexistent avec du texte sur la même ligne, ces commandes se concentrent en fait sur la mise en page de la ligne. Pour écrire des lignes liées à un certain texte, \ConTeXt\ a des commandes :
+
+
+\startitemize
+
+\item qui génèrent du texte entre les lignes.
+
+\item qui génèrent des lignes sous le texte (soulignement, underlining), au-dessus du texte (surlignage, overlining) ou à travers le texte (barré, strikethrough).
+
+\stopitemize
+
+Pour générer un texte entre les lignes, la commande habituelle est  \PlaceMacro{textrule} \tex{textrule}. Cette commande trace une ligne qui traverse toute la largeur de la page et écrit le texte qu'elle prend comme paramètre sur le côté gauche (mais pas dans la marge). Par exemple :
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+Texte avant.
+\textrule{Texte en exemple}
+Texte encore après.
+\stopDemoVN}
+
+\tex{textrule} permet un premier argument facultatif avec trois valeurs possibles : {\tt top}, {\tt middle} et \Doubt{\tt bottom} selon la position souhaitée par rapport au reste du texte.
+
+\placefigure [force,here,none] [] {}
+{\startDemoHN
+Texte A.
+\textrule[top]{Texte en exemple}
+Texte B.
+\textrule[middle]{Texte en exemple}
+Texte C.
+\textrule[bottom]{Texte en exemple}
+Texte D.
+\stopDemoHN}
+
+Similaire à \tex{texrule}, l'environnement \PlaceMacro{starttextrule} \tex{starttextrule} permet d'insérer une ligne de texte au début de l'environnement, mais aussi une ligne horizontale à la fin. 
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+Texte avant.
+\starttextrule{Texte en exemple}
+Texte utilisé en contenu de l'environnement, pour faire joli.
+\stoptextrule
+Texte encore après.
+\stopDemoVN}
+
+\tex{textrule} et \text{starttextrule} peuvent être configurés avec \PlaceMacro{setuptextrule} \tex{setuptextrules}.
+
+\placefigure [force,here,none] [] {}
+{\startDemoHN
+\startbuffer
+Texte utilisé en contenu de l'environnement, pour faire joli.
+\stopbuffer
+
+\setuptextrules[location=left] % sinon inmargin
+\starttextrule{location=left} \getbuffer \stoptextrule
+
+\setuptextrules[width=2cm]   % largeur du trait à gauche
+\starttextrule{width} \getbuffer\stoptextrule
+
+\setuptextrules[distance=2em] % distance entre le trait et le texte
+\starttextrule{distance} \getbuffer\stoptextrule
+
+\setuptextrules[style=\bfa,color=darkgreen,rulecolor=darkred]
+\starttextrule{style et couleur} \getbuffer\stoptextrule
+\stopDemoHN}
+
+
+\PlaceMacro{underbar}\PlaceMacro{underbars}\PlaceMacro{overbar}
+\PlaceMacro{overbars}\PlaceMacro{overstrike}\PlaceMacro{overstrikes}
+
+Pour tracer des lignes sous, sur ou à travers du texte, les commandes suivantes sont utilisées~:
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\setupinterlinespace[big]
+\underbar{Ceci est un texte underbar} \\
+\underbar{Ceci \underbar{est \underbar{un texte}} underbar} \\
+\underbars{Ceci est un texte underbars} \\
+\overbar{Ceci est un texte overbar} \\
+\overbars{Ceci est un texte overbars} \\
+\overstrike{Ceci est un texte overstrike} \\
+\overstrikes{Ceci est un texte overstrikes}
+\stopDemoVW}
+
+
+Comme on peut le voir, il existe deux commandes pour chaque type de ligne (sous, sur ou à travers le texte). La version singulière de la commande trace une seule ligne sous, sur ou à travers tout le texte pris comme argument, tandis que la version plurielle de la commande ne trace la ligne que sur les mots, mais pas sur les espaces blancs.
+
+Ces commandes ne sont pas compatibles entre elles, c'est-à-dire qu'on ne peut pas en appliquer deux au même texte. Si on essaie, c'est toujours la dernière qui l'emportera. En revanche, \tex{underbar} peut être imbriqué, soulignant ce qui a déjà été souligné.
+
+\startSmallPrint
+
+Le manuel de référence signale que \tex{underbar} désactive la césure des mots du texte qui constituent son argument. Il n'est pas clair pour moi si cette déclaration se réfère uniquement à \tex{underbar} ou aux six commandes que nous examinons.
+
+\stopSmallPrint
+
+\stopsubsection
+
+% *** Subsection 
+\startsubsection
+  [title={Mots ou textes encadrés}]
+
+% ADDED Garulfo 
+Les cadres sont un élément essentiel de \ConTeXt . Ils permettent d'obtenir toute sorte de personnalisation et d'effets graphiques surlesquels nous reviendrons, mais surtout leur utilisation est omniprésente dans quantité d'élements de \ConTeXt\ et donc bien les comprendre ainsi que l'effet des différentes options est très prévieux.
+% ADDED Garulfo end
+
+Pour entourer un texte d'un cadre ou d'une grille, on utilise :
+
+\startitemize
+
+\item Les commandes \PlaceMacro{framed}\tex{framed} ou \PlaceMacro{inframed}\tex{inframed} si le texte est relativement bref et ne prend pas plus d'une ligne.
+
+\item L'environnement \PlaceMacro{startframedtext}\tex{startframedtext} pour les textes plus longs.
+
+% TODO Garulfo 
+% \item L'environnement \PlaceMacro{startframed} \tex{startframed}
+% TODO Garulfo end
+
+\stopitemize
+
+La différence entre \tex{framed} et \tex{inframed} réside dans le point à partir duquel le cadre est dessiné. Dans le cas de \tex{framed}, le cadre est positionné sur la ligne de base, sur laquelle reposent les lettres. Avec \tex{inframed}, c'est le mot qui est positionnés sur la ligne de base.
+
+\placefigure [force,here,none] [] {}
+{\startDemoHW
+\tfd
+Voici deux \framed{cadres} bien \inframed{encadrés}.
+
+\showboxes
+Voici deux \framed{cadres} bien \inframed{encadrés}.
+\stopDemoHW}
+
+Les deux, peuvent être personnalisés avec \PlaceMacro{setupframed} \tex{setupframed}, et \tex{startframedtext} est personnalisé avec \PlaceMacro{setupframedtext} \tex{setupframedtext}. Les options de personnalisation des deux commandes sont assez similaires. Elles nous permettent d'indiquer les dimensions du cadre ({\tt height, width, depth}), la forme des coins ({\tt framecorner}), qui peut être {\tt rectangular} ou ronde ({\tt round}), la couleur du cadre ({\tt framecolor}), l'épaisseur du trait ({\tt framethickness}), l'alignement du contenu ({\tt align}), la couleur du texte ({\tt foregroundcolor}), la couleur de l'arrière-plan ({\tt background} et {\tt backgroundcolor}), etc.
+
+Pour \tex{startframedtext}, il existe également une propriété apparemment étrange : {\tt frame=off} qui fait que le cadre n'est pas dessiné (il est toujours présent, mais invisible). Cette propriété existe parce que, le cadre entourant un paragraphe étant indivisible, il est courant que le paragraphe entier soit enfermé dans un environnement {\tt framedtext} avec l'option de dessin du cadre désactivée, afin de s'assurer qu'aucun saut de page n'est inséré dans un paragraphe.
+
+Nous pouvons également créer une version personnalisée de ces commandes avec \PlaceMacro{defineframed}\tex{defineframed} et \PlaceMacro{defineframedtext}\tex{defineframedtext}.
+
+
+% ADDED by Garulfo BEGIN   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+\startsubsubsection[title=Premiers exemples]
+
+Nous allons voir quelques exemples, simples pour commencer.
+
+\placefigure [force,here,none] [] {}
+{\startDemoHW%
+\defineframed
+  [MonCadre]
+  [background=color,
+   backgroundcolor=darkred,
+   foregroundcolor=white,
+   foregroundstyle=\bfc]%
+A
+\MonCadre{coucou 1}\hfill
+\MonCadre[offset=2mm]{offset}\hfill
+\MonCadre{coucou 2}\hfill
+\MonCadre[frameoffset=2mm]{frameoffset}\hfill   % conserve la position du mot
+\MonCadre[backgroundoffset=2mm]{backgroundoffset}
+\stopDemoHW}
+
+Il y a ensuite tout une série de personnalisation sur le trait du cadre, sur la distance entre le texte et le cadre (en haut, en bas, à gauche, à droite), à découvrir au fur et à mesure de vos besoins. 
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN%
+\defineframed[MonTitre]
+  [frame=off, topframe=on, 
+   leftframe=on,
+   rulethickness=2pt,
+   foregroundstyle=\bfa, 
+   framecolor=darkred]%
+\MonTitre{Superbe titre 1}
+\blank
+\MonTitre
+  [loffset=1em,toffset=2pt]
+  {Superbe titre 2}
+\blank
+\MonTitre
+  [corner=16,frame=on,offset=2pt]
+  {Superbe titre 3}
+\stopDemoVN}
+
+\stopsubsubsection
+
+%=======================================
+
+\startsubsubsection[title=Retour à la ligne et alignement]
+
+Attention, par défaut, le cadre ne fait aucun retour à la ligne. Il faut indiquer une valeur à {\tt align} (voir \in{section}[sec:setupalign] pour les valeurs à considérer, normal fait référence à un texte justifié, et \in{section}[sec:horizontaltolerance] pour les options de tolérance). Dans l'exemple on utilise {\tt align=\{normal,verytolerant\}}.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN%
+\startbuffer
+Si le texte est un peu trop grand, par défaut il ne sera pas coupé
+\stopbuffer%
+\defineframed
+  [MonCadre]
+  [background=color,
+   backgroundcolor=darkred,
+   foregroundcolor=white,
+   foregroundstyle=\bfa]%
+\MonCadre{\getbuffer} \blank
+\MonCadre[width=5cm]{\getbuffer} \blank
+\MonCadre[width=5cm,align=normal] {\getbuffer} \blank
+\MonCadre[width=5cm,
+          align={normal,verytolerant},
+          backgroundcolor=darkgreen]
+         {\getbuffer}
+\stopDemoVN}
+
+\stopsubsubsection
+
+
+%=======================================
+
+\startsubsubsection[title=Largeur]
+
+Un point concernant le paramètre {\tt width}. La dimension de la largeur peut être indiquée directement (en cm, en pt, en fonction d'autre longueur par exemple \MyKey{0.5\backslash textwidth}). 
+
+Des dimensions automatiques sont proposées par \ConTeXt.
+{\tt broad} fait référence à la largeur totale disponible pour la zone de texte,
+{\tt local} fait référence à la largeur totale disponible pour la zone en cours,
+et {\tt fit} colle à la largeur du texte contenu par le cadre, 
+
+\startbuffer[a7-testframedwidth]
+\setuppapersize[A7,landscape]
+\setupbodyfont[8pt]
+\showframe
+\setupframed[framecolor=blue,align=middle,style=tt]
+\definenarrower[MyNarrow][left=1cm,default=left]
+
+\starttext
+
+\framed[width=4cm]   {width=6cm}
+\framed[width=0.5\textwidth]   {width=0.5\backslash textwidth}
+\framed[width=broad] {width=broad}
+\framed[width=local] {width=local}
+\framed[width=fit]   {width=fit}
+
+\startitemize[packed]
+\item \framed[width=broad] {width=broad}
+\item \framed[width=local] {width=local}
+\item \framed[width=fit]   {width=fit}
+\stopitemize
+
+\startMyNarrow
+\startitemize[packed]
+\item \framed[width=broad] {width=broad}
+\item \framed[width=local] {width=local}
+\item \framed[width=fit]   {width=fit}
+\stopitemize
+\stopMyNarrow
+
+\stoptext
+
+\stopbuffer
+
+\savebuffer[list=a7-testframedwidth,file=ex_framedwidth.tex,prefix=no]
+\placefigure [force,here,none] [] {}{\typesetbuffer[a7-testframedwidth][frame=on,page=1,background=color,backgroundcolor=white]
+\attachment
+  [file={ex_framedwidth.tex},
+   title={exemple ex_framedwidth}]}
+
+\stopsubsubsection
+
+%=======================================
+
+\startsubsubsection[title=Positionnement par rapport à la ligne de base]
+
+\placefigure [force,here,none] [] {}
+{\startDemoHW%
+\defineframed[MonCadre][width=2.25cm,align=middle]
+\define[1]\DemoLoc{\ruledhbox{%
+    {\getbuffer \MonCadre[location=#1]
+     {location\\ \color[darkmagenta]{\bf #1}\\location}}}}
+\setupbodyfont[14pt]
+%\showboxes
+\startbuffer
+\blackrule[height=max,depth=0pt,width=3mm]%
+\blackrule[height=0pt,depth=max,width=3mm]
+\stopbuffer
+
+\strut
+\DemoLoc{empty}  \dontleavehmode \DemoLoc{keep}    \dontleavehmode 
+\DemoLoc{depth}  \dontleavehmode \DemoLoc{bottom}  \dontleavehmode
+\DemoLoc{low} 
+\blank[big]\strut
+\DemoLoc{middle} \dontleavehmode \DemoLoc{lohi}    \dontleavehmode 
+\DemoLoc{line}
+\blank[big]\strut
+\DemoLoc{top}    \dontleavehmode \DemoLoc{height}  \dontleavehmode 
+\DemoLoc{high}   \dontleavehmode \DemoLoc{formula} \dontleavehmode 
+\DemoLoc{hanging}
+\stopDemoHW}
+
+Plus complexe, ci-dessus les différents cas possible pour le paramètre {\tt location}. Vous voyez que de nombreux cas sont possibles, afin d'aligner le haut ou le bas de la boite sur la ligne de base du texte, ou bien encore, souvent plus utile, d'aligner la première ou la dernière ligne de base de la boite avec la ligne de base du texte.
+
+\stopsubsubsection
+
+
+%=======================================
+
+%TODO Garulfo strut
+
+\startsubsubsection[title=Attention au paramètre {\tt strut}]
+
+L'option {\tt strut} force la première ligne de l'encadré à prendre tout la hauteur et toute la profondeur que la police en cours lui permet de prendre. Cela permet de \quotation{donner une hauteur de ligne standard}. Si vous avez des difficultés parfois à positionner correctement vos {\tt framed} par rapport à la ligne de base, ou bien si vous avez des difficultés d'alignement / positionnement vertical, pensez à regarder l'effet de {\tt strut}. Par exemple~:
+
+Voyez l'effet comment avec {\tt strut=no} la première ligne à une hauteur réduire par rapport à la version  {\tt strut=yes} ce qui perturbe le positionnement par rapport à l'effet désiré. 
+
+\placefigure [force,here,none] [] {}
+{\startDemoHW%
+\defineframed[MonCadre][width=2.25cm,align=middle]
+\define[1]\DemoLoc{\ruledhbox{%
+    {\getbuffer \MonCadre[location=#1]
+     {location\\ \color[darkmagenta]{\bf #1}\\location}}}}
+\setupbodyfont[14pt]
+%\showboxes
+\startbuffer
+\blackrule[height=max,depth=0pt,width=3mm]%
+\blackrule[height=0pt,depth=max,width=3mm]
+\stopbuffer
+
+\setupframed[MonCadre][strut=yes]
+\strut
+{\tt strut=yes}
+\DemoLoc{bottom}    \dontleavehmode \DemoLoc{top}
+
+{\tt strut=no}
+\setupframed[MonCadre][strut=no]
+\DemoLoc{bottom}    \dontleavehmode \DemoLoc{top}
+\stopDemoHW}
+
+\stopsubsubsection
+
+% ADDED by Garulfo END     <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+\stopsubsection
+
+\stopsection
+
+% ** Section
+\startsection
+  [
+    reference=sec:buffer,
+    title={Autres environnements et constructions d'intérêt},
+  ]
+
+Il existe encore de nombreux environnements dans \ConTeXt\ que je n'ai même pas mentionnés, ou seulement de manière très approximative. À titre d'exemple :
+
+\startitemize
+  
+  
+\item {\tt\bf buffer}\PlaceMacro{startbuffer}\PlaceMacro{getbuffer}\PlaceMacro{typebuffer} {\em Tampons (Buffers)} sont des fragments de texte stockés en mémoire pour une réutilisation ultérieure. Un {\em tampon} est défini quelque part dans le document avec \cmd{startbuffer[BufferName] ... \backslash stopbuffer} et peut être récupéré aussi souvent que souhaité à un autre endroit du document avec \tex{getbuffer[BufferName]}. La commande \tex{typebuffer[BufferName]} affiche le texte du buffer en verbatim (sans traitement par \ConTeXt).
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+\startbuffer[visite]
+Coucou \ConTeXt.
+\stopbuffer
+\getbuffer[visite]
+\getbuffer[visite]
+\stopDemoVN}
+
+\item {\tt\bf chemical}\PlaceMacro{startchemical}
+  Cet environnement nous permet de placer des formules chimiques à l'intérieur. Si \TeX\ se distingue, entre autres, par sa capacité à composer correctement des textes contenant des formules mathématiques, \ConTeXt\ a cherché dès le départ à étendre cette capacité aux formules chimiques, et dispose de cet environnement où sont activées les commandes et les structures permettant d'écrire des formules chimiques.
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+\usemodule[chemic]
+\startchemical
+\chemical[SIX,B,R6,RZ6][\SL{COOH}]
+\stopchemical
+\stopDemoVN}
+
+\item {\tt\bf combinations}\PlaceMacro{startcombinations}
+  Cet environnement nous permet de combiner plusieurs éléments flottants sur une même page. Il est particulièrement utile pour aligner différentes images externes connectées dans notre document.
+
+\placefigure [force,here,none] [] {}
+{\startDemoHN
+\useMPlibrary [dum] % pour produire des images
+\placefigure [here] [fig:combinations] {Un exemple de combinaison}
+{\startcombination[2*2]
+{\externalfigure [dummy] [height=1cm,width=4cm]} {a}
+{\externalfigure [dummy] [height=1cm,width=4cm]} {b}
+{\externalfigure [dummy] [height=1cm,width=4cm]} {c}
+{\externalfigure [dummy] [height=1cm,width=4cm]} {d}
+\stopcombination} 
+\stopDemoHN}
+
+
+\item {\tt\bf formula}\PlaceMacro{startformula}
+Il s'agit d'un environnement destiné à la composition de formules mathématiques.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\usemodule[newmat]
+
+Display math:
+\startformula
+q = \delta \frac{\partial p}{\partial x} = 
+\delta(\phi) p_{vsat}(\theta) \frac{\partial \phi}{\partial x} = 
+\left[ \frac{\delta_a}{\mu(\theta)} p_{vsat}(\theta) \right] \frac{\partial \phi}{\partial x} = 
+k \frac{\partial \phi}{\partial x}
+\stopformula
+\stopDemoVW}
+
+\item {\tt\bf hiding}\PlaceMacro{starthiding}
+Le texte stocké dans cet environnement ne sera pas compilé et n'apparaîtra donc pas dans le document final. Ceci est utile pour désactiver temporairement la compilation de certains fragments du fichier source. On obtient la même chose en marquant une ou plusieurs lignes comme commentaire. Mais lorsque le fragment que l'on veut désactiver est relativement long, il est plus efficace que de marquer des dizaines ou des centaines de lignes du fichier source comme commentaire d'insérer la commande \tex{starthiding} au début du fragment, et \tex{stophiding} à la fin. 
+
+\item {\tt\bf legend}\PlaceMacro{startlegend}
+Dans un contexte mathématique, \TeX\ applique des règles différentes de sorte qu'aucun texte normal ne peut être écrit. Cependant, il arrive qu'une formule soit accompagnée d'une description des éléments qui la composent. Pour cela, il existe l'environnement \tex{startlegend} qui permet de placer un texte normal dans un contexte mathématique.
+
+\item {\tt\bf linecorrection}\PlaceMacro{startlinecorrection}
+En général, \ConTeXt\ gère correctement l'espace vertical entre les lignes, mais il arrive parfois qu'une ligne contienne quelque chose qui la rende incorrecte. Cela se produit principalement avec les lignes dont les fragments ont été encadrés avec \tex{framed}. Dans de tels cas, cet environnement ajuste l'espacement des lignes afin que le paragraphe apparaisse correctement.
+
+
+
+\item {\tt\bf mode}\PlaceMacro{startmode}
+Cet environnement est destiné à inclure dans le fichier source des fragments qui ne seront compilés que si le mode approprié est actif. L'utilisation des {\em modes} n'est pas le sujet de cette introduction, mais c'est un outil très intéressant si l'on veut pouvoir générer plusieurs versions avec des formats différents (une version écran et une papier, ou bien un version anglaise et une française), à partir d'un seul fichier source. Voici un exemple~:
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\startmode[palatino]
+   \setupbodyfont[palatino,12pt]
+\stopmode
+
+\startmode[times]
+   \setupbodyfont[postscript,12pt]
+\stopmode
+
+\starttext
+\input knuth
+\stoptext
+\stopDemoI}
+
+\placefigure [force,here,none] [] {}
+{\startDemoC
+context --mode=palatino filename
+context --mode=times    filename
+\stopDemoC}
+
+ Un environnement complémentaire à celui-ci est \PlaceMacro{startnotmode}\tex{startnotmode}.
+
+
+\item {\tt\bf opposite}\PlaceMacro{startopposite}
+Cet environnement est utilisé pour composer des textes lorsque les contenus des pages de gauche et de droite sont liés.
+
+
+\item {\tt\bf quotation}\PlaceMacro{startquotation}  \reference[env:quotation]{envquotation} 
+Un environnement très similaire à {\tt narrower}, destiné à insérer des citations littérales moyennement longues. L'environnement veille à ce que le texte soit cité et à ce que les marges soient augmentées pour que le paragraphe contenant la citation se détache visuellement sur la page.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+Cette citation de Victo Hugo~:
+\startquotation
+Il vient une heure où protester ne suffit plus : après la philosophie, il faut l'action.
+\stopquotation
+\stopDemoVN}
+
+\item {\tt\bf standardmakeup}\PlaceMacro{startstandardmakeup}
+Cet environnement est conçu pour générer des pages de titre de chapitre, ou bien la première de couverture du document, ce qui est relativement courant dans les livres et les documents universitaires d'une certaine longueur, tels que les thèses de doctorat, les mémoires de maîtrise, etc.
+
+\stopitemize
+
+Pour en savoir plus sur l'un de ces environnements (ou d'autres que je n'ai pas mentionnés), je vous suggère, en plus du \goto{wiki}[url(wiki)], de suivre les étapes suivantes~:
+
+
+\startitemize[n]
+
+\item Cherchez des informations sur l'environnement dans le manuel de référence \ConTeXt\. Ce manuel ne mentionne pas tous les environnements, mais il parle de chaque élément de la liste ci-dessus.
+
+\item Rédigez un document de test dans lequel l'environnement est utilisé.
+
+\item Consultez la liste officielle des commandes de \ConTeXt (voir \in{section}[sec:qrc-setup-fr]) pour connaître les options de configuration de l'environnement en question, puis testez-les pour voir exactement ce qu'elles font.
+  
+  
+\stopitemize
+
+% * END 
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX_fra.tex"
+%%% End:
+%%% vim:set filetype=context tw=75 : %%%

@@ -8,19 +8,33 @@
 
 %------------------------------------------------------------------------------
 
+\setvariables
+  [document]
+  [titleA={Une courte (?)},
+  titleB={introduction},
+  titleC={à \ConTeXt},
+  author={Joaquín Ataz-López}]
+    
+\setvariables
+  [document]
+  [title={\getvariable{document}{titleA} 
+          \getvariable{document}{titleB}
+          \getvariable{document}{titleC}}]
+  
+  
 \setupdocument
-  [metadata:author=Joaquín Ataz-López,
-            author=Joaquín Ataz-López,
-       affiliation=Joaquín Ataz-López,
-    metadata:title=Une courte (?) introduction à ConTeXt,
-             title=Une courte (?) introduction à ConTeXt,
+  [metadata:author=\getvariable{document}{author},
+            author=\getvariable{document}{author},
+       affiliation=\getvariable{document}{author},
+    metadata:title=\getvariable{document}{title},
+             title=\getvariable{document}{title},
           location=France,
            support=https://mailman.ntg.nl/mailman/listinfo/ntg-context,
            website=https://wiki.contextgarden.net]
 
 %------------------------------------------------------------------------------
 
-\usepath[{00_FrontMatter,01_BodyMatter,02_Appendices,03_BackMatter}]
+\usepath[{01_FrontMatter,02_BodyMatter,03_Appendices,04_BackMatter}]
 
 %------------------------------------------------------------------------------
 
