@@ -1,0 +1,723 @@
+\startcomponent 02-04-01-13_Typeset_Sections
+
+\environment introCTX_env_00
+
+%==============================================================================
+
+\startsection
+  [title=Sections et titres des sections,
+   reference=sec:setuphead]
+
+
+\TocChap
+
+%==============================================================================
+
+% ** Subsection setuphead  et setupheads
+
+\startsubsection
+  [title=Les commandes \tex{setuphead} and \tex{setupheads}]
+\PlaceMacro{setuphead}\PlaceMacro{setupheads}
+
+
+Par défaut, \ConTeXt\ affecte certaines caractéristiques à chaque niveau de section qui affectent principalement (mais pas uniquement) le format d'affichage du titre dans le corps principal du document, mais pas la manière dont le titre est affiché dans la table des matières ou les en-têtes et pieds de page. Nous pouvons modifier ces caractéristiques à l'aide de la commande \tex{setuphead}, dont la syntaxe est :
+
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\setuphead[Sections][Options]
+\stopDemoI}
+
+où
+
+\startitemize
+
+  \item {\tt\bf Sections} fait référence au nom d'une ou plusieurs sections (séparées par des virgules) qui seront affectées par la commande. Cela peut être~:
+
+  \startitemize
+
+  \item N'importe quelle section prédéfinie (partie, chapitre, titre, etc.), auquel cas on peut y faire référence soit par son nom, soit par son niveau. Pour les désigner par leur niveau, nous utilisons le mot \quotation{{\tt section-{\em NumLevel}}}, où {\em NumLevel} est le numéro de niveau de la section concernée. Ainsi, \MyKey{section-1} est égal à \MyKey{part}, \MyKey{section-2} est égal à \MyKey{chapter}, etc.
+
+  \item Tout type de section que nous avons nous-mêmes défini. À cet égard, voir \in{section} [sec:definehead].
+
+  \stopitemize
+
+  \item {\tt\bf Options} sont les options de configuration. Elles sont du type affectation explicite de valeur (OptionName=valeur). Le nombre d'options éligibles est très élevé (plus de soixante) et je vais donc les expliquer en les regroupant en catégories selon leur fonction. Je dois cependant préciser que je n'ai pas réussi à déterminer à quoi servent certaines de ces options ni comment elles sont utilisées. Je ne parlerai pas de ces options.
+
+
+\stopitemize
+
+J'ai dit précédemment que \tex{setuphead} affecte les sections qui sont expressément indiquées. Mais cela ne signifie pas que la modification d'une section particulière ne doit en aucun cas affecter les autres sections, à moins qu'elles n'aient été expressément mentionnées dans la commande. En fait, c'est le contraire qui est vrai : la modification d'une section affecte les autres sections qui lui sont liées, même si cela n'a pas été explicité dans la commande. Le lien entre les différentes sections est de deux types :
+
+
+\startitemize
+
+  \item Les commandes non numérotées sont liées à la commande numérotée correspondante du même niveau, de sorte qu'un changement d'apparence de la commande numérotée affectera la commande non numérotée du même niveau ; mais pas l'inverse~: le changement de la commande non numérotée n'affecte pas la commande numérotée. Cela signifie, par exemple, que si nous modifions un aspect de \MyKey{chapter} (niveau 2), nous modifions également cet aspect dans \MyKey{titre} ; mais la modification de \MyKey{title} n'affectera pas \MyKey{chapter}.
+
+  \item Les commandes sont liées hiérarchiquement, de sorte que si nous modifions {\em certaines caractéristiques} dans un niveau particulier, la modification affectera tous les niveaux qui suivent. Cela ne se produit qu'avec certaines caractéristiques. La couleur, par exemple~: si nous établissons que les sous-sections s'afficheront en rouge, nous changeons également les sous-sous-sections, les sous-sous-sections, etc. en rouge. Mais il n'en va pas de même avec d'autres caractéristiques, comme le style de police par exemple.
+
+\stopitemize
+
+Avec la commande \tex{setupheads} \ConTeXt\ fournit la commande \tex{setupheads} qui affecte globalement toutes les commandes de section. Le wiki \ConTeXt\ indique, en référence à cette commande, que certaines personnes ont déclaré qu'elle ne fonctionnait pas.  D'après mes tests, cette commande fonctionne pour certaines options mais pas pour d'autres.  En particulier, elle ne fonctionne pas avec l'option \MyKey{style}, ce qui est frappant, puisque le style des titres est très probablement la chose que nous voudrions changer globalement pour qu'il affecte tous les titres. Mais cela fonctionne, d'après mes tests, avec d'autres options telles que, par exemple, \MyKey{number} ou \MyKey{color}. Ainsi, par exemple, \tex{setupheads[color=blue]} fera en sorte que tous les titres de notre document soient imprimés en bleu.
+
+Étant donné que je suis un peu trop paresseux pour prendre la peine de tester chaque option pour voir si elle fonctionne ou non avec \tex{setupheads}. (rappelez-vous qu'il y en a plus de soixante), dans ce qui suit je ne ferai référence qu'à \tex{setuphead}.
+
+Enfin, avant d'examiner les options spécifiques, nous devrions noter quelque chose qui est dit dans le wiki \ConTeXt, bien que ce ne soit probablement pas dit au bon endroit~: certaines options ne fonctionnent que si nous utilisons la syntaxe \cmd{start{\em SectionName}}.
+
+
+\startSmallPrint
+
+Cette information est contenue en relation avec \tex{setupheads}, mais pas avec \tex{setuphead} qui est pourtant l'endroit où la majeure partie des options sont expliquées et où, si cela ne doit être dit qu'à un seul endroit, cela il serait le plus raisonnable de l'indiquer. D'autre part, l'information ne mentionne que l'option \MyKey{insidesection}, sans préciser si cela se produit également avec d'autres options.
+
+
+\stopSmallPrint
+
+\stopsubsection
+
+% ** Subsection les éléments du titre
+
+\startsubsection
+  [
+    reference=sec:title parts,
+    title=Parties du titre d'une section,
+  ]
+
+
+Avant d'entrer dans les options spécifiques qui nous permettent de configurer l'apparence des titres, il convient de commencer par signaler qu'un titre de section peut comporter jusqu'à trois parties différentes, que \ConTeXt\ nous permet de formater ensemble ou séparément. Ces éléments de titre sont les suivants~:
+
+
+\startitemize
+
+  \item {\bf Le titre lui-même}, c'est-à-dire le texte qui le compose. En principe, ce titre est toujours affiché, sauf pour les sections du type \MyKey{part} où le titre n'est pas affiché par défaut. L'option qui contrôle l'affichage ou non du titre est \MyKey{placehead} dont les valeurs peuvent être \MyKey{yes}, \MyKey{no}   \MyKey{hidden}, \MyKey{empty} ou \Doubt\MyKey{section}. La signification des deux premiers est claire. Mais je ne suis pas si sûr des résultats des autres valeurs de cette option.
+
+Par conséquent, si nous voulons que le titre soit affiché dans les sections de premier niveau, notre paramètre doit être le suivant :
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\setuphead
+  [part]
+  [placehead=yes]
+\stopDemoI}
+
+Le titre de certaines sections, comme nous le savons déjà, peut être envoyé automatiquement aux en-têtes et à la table des matières. En utilisant les options {\tt list} et {\tt marking} des commandes de section, on peut indiquer un autre titre à envoyer à la place. Il est également possible, lors de l'écriture du titre, d'utiliser les options \PlaceMacro{nolist} \tex{nolist} ou \PlaceMacro{nomarking} \tex{nomarking} pour que certaines parties du titre soient remplacées par des ellipses dans la table des matières ou l'en-tête.   Par exemple : 
+
+% TODO Garulfo faire une démo ici
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\startsection
+  [title={Influences of \nomarking{19th century} impressionism \nomarking{in the 21st century}},]
+\stopDemoI}
+
+écrira \quotation{Influences de ... l'impressionnisme ...} dans l'en-tête.
+
+  \item {\bf La numérotation}. Ce n'est le cas que pour les sections numérotées (partie, chapitre, section, sous-section...), mais pas pour les sections non numérotées (titre, sujet, sous-sujet). En fait, le fait qu'une section particulière soit numérotée ou non dépend des options \MyKey{number} et \MyKey{incrementnumber} dont les valeurs possibles sont \MyKey{yes} et \MyKey{no}. Dans les sections numérotées, ces deux options sont définies comme {\tt yes} et dans les sections non numérotées, comme {\tt no}. 
+
+
+  \startSmallPrint
+
+Pourquoi y a-t-il deux options pour contrôler la même chose ? Parce qu'en fait, les deux options contrôlent deux choses différentes : l'une est de savoir si la section est numérotée ou non ({\tt incrementnumber}) et l'autre est de savoir si le numéro est affiché ou non ({\tt number}). Si {\tt incrementnumber=yes} et {\tt number=no} sont définis pour une section, nous obtiendrons une section non numérotée visuellement mais elle sera tout de même comptabilisée par \ConTeXt. Cela peut être utile pour inclure une telle section dans la table des matières, puisque d'ordinaire, celle-ci n'inclut que les sections numérotées. À cet égard, voir \in{sous-section}[sec:toc avec sec non numérotés] dans \in{section} [sec:manual adjustmentsajustements].
+
+  \stopSmallPrint
+
+\item {\bf Le libellé} du titre. En principe, cet élément des titres est vide. Mais nous pouvons lui associer une valeur, auquel cas, avant le numéro et le titre proprement dit, l'étiquette que nous avons attribuée à ce niveau sera affichée. Par exemple, dans les titres de chapitre, on peut vouloir que le mot \quotation{Chapitre} soit affiché, ou le mot \quotation{Partie} pour les parties.  Pour ce faire, nous n'utilisons pas la commande \tex{setuphead} mais la commande \tex{setuplabeltext}, qui nous permet d'attribuer une valeur textuelle aux étiquettes des différents niveaux de sectionnement. Ainsi, par exemple, si nous voulons écrire \quotation{Chapitre} dans notre document avant les titres des chapitres, nous devons définir :
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+\setuplabeltext
+  [section=Section~]
+\startsection
+  [title={Mon joli titre}]
+Mon texte.
+\stopsection
+\stopDemoVN}
+
+Dans l'exemple, après le nom attribué, j'ai inclus le caractère réservé \quotation{\lettertilde} qui insère un espace blanc insécable après le mot. Si nous ne tenons pas à ce qu'un saut de ligne se produise entre l'étiquette et le numéro, nous pouvons simplement ajouter un espace blanc. Mais cet espace blanc (quel qu'il soit) est important ; sans lui, le numéro sera relié à l'étiquette et nous verrions, par exemple, \quotation{Section1} au lieu de \quotation{Section 1}.
+
+\stopitemize
+
+% TODO #1 Garulfo ne manque t'il pas "sectionseparatorset" ====================
+% \defineseparatorset[mysepdash][][--]
+% \setuphead[sectionseparatorset=mysepdash]
+% pour avoir 1 puis 1--1
+% sectionstopper=o,
+% sectionstarter=u
+
+
+\stopsubsection
+
+% ** Subsection contrôle de la numérotation
+
+\startsubsection
+  [title=Contrôle de la numérotation (dans les sections numérotées)]
+
+Nous savons déjà que les sections numérotées prédéfinies (part, chapter, section...) et le fait qu'une section particulière soit numérotée ou non, dépendent des options \MyKey{number} et \MyKey{incrementnumber} configurées avec \tex{setuphead}.
+
+Par défaut, la numérotation des différents niveaux est automatique, sauf si nous avons attribué la valeur \MyKey{yes} à l'option \MyKey{ownnumber}. Lorsque \MyKey{ownumber=yes}, il faut indiquer le numéro attribué à chaque commande. Cela se fait~:
+
+\startitemize
+
+\item Si la commande est invoquée en utilisant la syntaxe classique, en ajoutant un argument avec le numéro avant le texte du titre. Par exemple : \cmd{chapter\{13\}\{Titre titre du chapitre\}} générera un chapitre auquel on a attribué manuellement le numéro 13.
+
+\item Si la commande a été invoquée avec la syntaxe spécifique à \ConTeXt\ (\tex{SectionType [Options]} ou \tex{startSectionType [Options]}), avec l'option \MyKey{ownnumber}. Par exemple : \\ \type{\chapter[title={Titre du chapitre}, ownnumber=13]}, génère un chapitre auquel on a attribué manuellement le numéro 13.
+
+\stopitemize
+
+Lorsque \ConTeXt\ fait automatiquement la numérotation, il utilise des compteurs internes qui stockent les numéros des différents niveaux ; il y a donc un compteur pour les parties, un autre pour les chapitres, un autre pour les sections, etc. Chaque fois que \ConTeXt\ trouve une commande de section, il effectue les actions suivantes~:
+
+
+\startitemize[packed]
+
+  \item Elle augmente de \quote{1} le compteur associé au niveau correspondant à cette commande.
+
+  \item Elle remet à 0 les compteurs associés à tous les niveaux inférieurs à celui de la commande en question.
+
+\stopitemize
+
+Cela signifie, par exemple, qu'à chaque fois qu'un nouveau chapitre est trouvé, le compteur de chapitre est augmenté de 1 et toutes les commandes de section, sous-section, sous-sous-section, etc. sont remises à 0 ; mais le compteur de parties n'est pas affecté.
+
+Pour modifier le nombre à partir duquel le comptage doit commencer, utilisez la commande \PlaceMacro{setupheadnumber}\tex{setupheadnumber} comme suit :
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\setupheadnumber[SectionType][Nombre à partir duquel compter]
+\stopDemoI}
+
+où {\em Nombre à partir duquel compter} est le nombre à partir duquel les sections de tout type seront comptées. Ainsi, si {\em Nombre à partir duquel compter} est égal à zéro, la première section sera 1 ; s'il est égal à 10, la première section sera 11.
+
+Cette commande nous permet également de modifier le modèle d'incrémentation automatique ; ainsi, nous pouvons, par exemple, faire en sorte que les chapitres ou les sections soient comptés par paires ou par trois. Ainsi, \tex{setupheadnumber[section][+5]} verra les chapitres numérotés 5 sur 5 ; et \tex{setupheadnumber[chapter][14, +5]} verra que le premier chapitre commence par 15 (14+1), le deuxième sera 20 (15+5), le troisième 25, etc.
+
+% TODO #2 Begin Garulfo ne manque t'il pas "sectionresetset" ====================
+
+\startsubsubsection
+  [title=Règles de remise à zéro des compteurs]
+
+\PlaceMacro{defineresetset}
+
+Il est possible de définir des règles de comptage encore plus spécifique avec \tex{defineresetset}. La syntaxe ainsi que l'utilisation sont illustrées~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\defineresetset
+  [NomRègle]
+  [ . , . , . , ....]
+  [.]
+
+\setupheads[sectionresetset=NomRègle]
+\stopDemoI}
+
+Chaque point \MyKey{.} prend la valeur soit 0, soit 1. La seconde paire de crochets accueille donc une liste de 1 et de 0. La première valeur est associée au premier niveau de section et ainsi de suite. Une valeur de 1 indique qu'une nouvelle section du niveau supérieur au niveau concerné doit s'accompagner d'une remise à zéro du niveau concerné. La troisième paire de crochet indique la valeur à utiliser par défaut. Ainsi voici un exemple définissant que l'ont souhaite ne pas remettre à zéro le compteur du niveau section lorsqu'on change de chapitre~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\defineresetset[norazsection][1,1,0,1][0]
+\setupheads[sectionresetset=norazsection]
+\setuphead[chapter][page=no]
+
+\startchapter[title=chapter 1]
+  \startsection[title=Section 1.1]
+    \startsubsection[title=Section 1.1.1]
+    \stopsubsection
+    \startsubsection[title=Section 1.1.2]
+    \stopsubsection
+  \stopsection
+  \startsection[title=Section 1.2]
+    \startsubsection[title=Section 1.2.1]
+    \stopsubsection
+    \startsubsection[title=Section 1.2.2]
+    \stopsubsection
+  \stopsection
+\stopchapter
+
+\startchapter[title=chapter 2]
+  \startsection[title=Section 2.1]
+    \startsubsection[title=Section 2.1.1]
+    \stopsubsection
+    \startsubsection[title=Section 2.1.2]
+    \stopsubsection
+  \stopsection
+  \startsection[title=Section 2.2]
+    \startsubsection[title=Section 2.2.1]
+    \stopsubsection
+    \startsubsection[title=Section 2.2.2]
+    \stopsubsection
+  \stopsection
+\stopchapter
+\stopDemoVW}
+
+\stopsubsubsection
+
+% End added Garulfo 
+
+\startsubsubsection
+  [title=Règles de numérotation,
+   reference=sec:numerotation]
+
+Par défaut, la numérotation des sections affiche des chiffres arabes, et la numérotation de tous les niveaux précédents est incluse. Autrement dit, dans un document comportant des parties, des chapitres, des sections et des sous-sections, une sous-section spécifique indiquera à quelle partie, chapitre et section elle correspond. Ainsi, la quatrième sous-section de la deuxième section du troisième chapitre de la première partie sera \quotation{1.3.2.4}.
+
+Les deux options de base permettant de contrôler l'affichage des nombres sont les suivantes :
+
+\startitemize[n]
+
+\item {\tt\bf conversion:} Il contrôle le type de numérotation qui sera utilisé. Il autorise de nombreuses valeurs en fonction du type de numérotation que l'on souhaite : \reference[Num:conversion]{Conversion numérique}
+
+  \startitemize
+
+    \item {\bf Numérotation avec chiffres arabes} : La numérotation classique : 1, 2, 3, ... est obtenue avec les valeurs {\tt n, N} ou {\tt numbers}.
+
+    \item {\bf Numérotation avec des chiffres romains}. Trois façons de procéder~:
+
+    \startitemize[packed]
+
+      \item chiffres romains majuscules : {\tt I, R, Romannumerals}.
+      \item chiffres romains minuscules : {\tt i, r, romannumerals}.
+      \item chiffres romains en petites majuscules : {\tt KR, RK}.
+
+    \stopitemize
+
+    \item {\bf Numérotation avec des lettres}. Trois façons de procéder~:
+
+    \startitemize[packed]
+
+      \item lettres majuscules : {\tt A, Caractère}
+      \item lettres minuscules : {\tt a, character}
+      \item lettres en petites majuscules : {\tt AK, KA}
+    
+    \stopitemize
+
+   \item {\bf Numérotation en mots}. C'est-à-dire qu'on écrit le mot qui désigne le nombre. Ainsi, par exemple, \quote{3} devient \quote{Trois}. Il y a deux façons de procéder :
+
+  \startitemize[packed]
+
+    \item mots commençant par une majuscule : {\tt Words}.
+    \item mots en minuscule : {\tt mots}.
+
+  \stopitemize
+
+  \item {\bf Numérotation par symboles} : La numérotation avec symboles utilise différents jeux de symboles dans lesquels une valeur numérique est attribuée à chaque symbole. Comme les jeux de symboles utilisés par \ConTeXt\ ont un nombre très limité, il n'est approprié d'utiliser ce type de numérotation que lorsque le nombre maximal à atteindre n'est pas trop élevé. \ConTeXt\ prévoit quatre jeux de symboles différents : {\tt set~0, set~1, set~2 et set~3} respectivement. Vous trouverez ci-dessous les symboles que chacun de ces jeux utilise pour la numérotation. Notez que le nombre maximum qui peut être atteint est de 9 dans les jeux de symboles {\tt set~0} et {\tt set~1} et de 12 dans les jeux de symboles {\tt set~2} et {\tt set~3} :
+
+    \startitemize[empty, packed]\reference[examples of conversion set]{}
+      \item Set 0: \dorecurse{9}{\convertnumber{set 0}{#1}\quad}\par
+      \item Set 1: \dorecurse{9}{\convertnumber{set 1}{#1}\quad}\par
+      \item Set 2: \dorecurse{12}{\convertnumber{set 2}{#1}\quad}\par
+      \item Set 3: \dorecurse{12}{\convertnumber{set 3}{#1}\quad}\par
+
+    \stopitemize
+
+  \stopitemize
+
+  \item {\tt\bf sectionsegments:} Cette option nous permet de contrôler l'affichage ou non de la numérotation des niveaux précédents. Nous pouvons indiquer quels niveaux précédents seront affichés. Cela se fait en identifiant le niveau initial et le niveau final à afficher. L'identification du niveau peut se faire par son numéro (partie=1, chapitre=2, section=3, etc.), ou par son nom (partie, chapitre, section, etc.).   
+
+Ainsi, par exemple, \MyKey{sectionsegments=2:3} indique que la numérotation des chapitres et des sections doit être affichée. C'est exactement la même chose que de dire \MyKey{sectionsegments=chapitre:section}. Si nous voulons indiquer que tous les numéros supérieurs à un certain niveau sont affichés, nous pouvons utiliser, comme valeur de \MyKey{optionsegments} {\em Initial Level:all}, ou {\em InitialLevel:*}.  Par exemple, \MyKey{sectionsegments=3:*} indique que la numérotation est affichée à partir du niveau 3 (section).
+
+\stopitemize
+
+Ainsi, par exemple, imaginons que nous voulons que les parties soient numérotées en chiffres romains en lettres majuscules ; les chapitres en chiffres arabes, mais sans inclure le numéro de la partie à laquelle ils appartiennent ; les sections et sous-sections en chiffres arabes incluant les numéros de chapitre et de section, et les sous-sections en lettres majuscules. Il faut écrire ce qui suit~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoHN
+\setuphead [part]          [conversion=I]
+\setuphead [chapter]       [conversion=n,  sectionsegments=1:2]
+\setuphead [section]       [conversion=r,  sectionsegments=2:3]
+\setuphead [subsection]    [conversion=a,  sectionsegments=2:4]
+\setuphead [subsubsection] [conversion=KA, sectionsegments=5]
+
+\startpart          [title=Ma partie]
+\startchapter       [title=Mon chapitre]
+\startsection       [title=Ma section]
+\startsubsection    [title=Ma sous-section]
+\startsubsubsection [title=Ma sous-sous-section]
+texte
+\stopsubsubsection
+\stopsubsection
+\stopsection
+\stopchapter
+\stoppart
+\stopDemoHN}
+
+
+% TODO #3 Begin Garulfo ne manque t'il pas "sectionresetset" ====================
+
+Nous voyons dans ce dernier exemple que l'option {\tt conversion} affecte l'ensemble des élements qui composent la numérotation d'un niveau de section. Bien souvent nous préférons maintenir une cohérence d'un niveau de section à l'autre pour faciliter la lecture. Pour cela nous utiliserons \PlaceMacro{definestructureconversionset} \tex{definestructureconversionset}.
+
+
+\placefigure [force,here,none] [] {}{
+\startDemoHN
+\definestructureconversionset 
+  [mysectionnumbers]
+  [I,n,r,a,KA]
+  [n]
+
+\setupheads[sectionconversionset=mysectionnumbers] 
+
+\setuphead [chapter]       [sectionsegments=1:2]
+\setuphead [section]       [sectionsegments=2:3]
+\setuphead [subsection]    [sectionsegments=2:4]
+\setuphead [subsubsection] [sectionsegments=5]
+
+\startpart          [title=Ma partie]
+\startchapter       [title=Mon chapitre]
+\startsection       [title=Ma section]
+\startsubsection    [title=Ma sous-section]
+\startsubsubsection [title=Ma sous-sous-section]
+texte
+\stopsubsubsection
+\stopsubsection
+\stopsection
+\stopchapter
+\stoppart
+\stopDemoHN}
+
+Il devient alors plus facile pour le lecteur de repérer que le 1 en numérotation arabe fait référence à la numérotation du niveau chapitre et ainsi de suite.
+
+\stopsubsubsection
+
+\startsubsubsection
+  [title=Séparateurs]
+
+Profitons-en pour introduire ici deux compléments de configuration qui sont les symboles utilisés en tant que séparateur de chaque élément de la numérotation, avec \tex{definestructureseparatorset} \PlaceMacro{definestructureseparatorset} (donc la syntaxe est proche de celle précédemment vue pour \tex{definestructureconversionset}), et le symbole utilisé comme séparateur entre la numérotation et le texte du titre, avec l'option {\tt sectionstopper}
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+
+\startchapter         [title=Section 1]
+  \startsection       [title=Section 1.1]
+    \startsubsection  [title=Section 1.1.1]
+    \stopsubsection
+  \stopsection
+\stopchapter
+
+\definestructureseparatorset 
+  [default]  
+  [{.},{/},{-}] 
+  [{/}]
+
+\setupheads
+  [sectionstopper={)}] 
+
+\startchapter         [title=Section 2]
+  \startsection       [title=Section 2.1]
+    \startsubsection  [title=Section 2.1.1]
+    \stopsubsection
+  \stopsection
+\stopchapter
+\stopDemoVW}
+
+\stopsubsubsection
+
+\startsubsubsection
+  [title=Raffinements]
+
+Voyons ici une dernière illustration de ce que permet \ConTeXt\ sur le mécanisme de numérotation des sections. Imaginons que nous souhaitons, pour facilier encore la lecture, faire varier la taille de police de la numérotation en fonction du niveau de section. Nous allons personnaliser avec la commande \tex{defineconversion} \PlaceMacro{defineconversion} 
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\def\NiveauUn#1{\tfd\bf{#1}}
+\def\NiveauDeux#1{\tfc\bf{#1}}
+\def\NiveauTrois#1{\tfb\bf{#1}}
+\def\NiveauQuatre#1{\tfa\bf{#1}}
+
+\defineconversion[N1][\NiveauUn]
+\defineconversion[N2][\NiveauDeux]
+\defineconversion[N3][\NiveauTrois]
+\defineconversion[N4][\NiveauQuatre]
+
+\definestructureconversionset
+  [mysectionnumbers]
+  [N1,N2,N3,N4]
+  [N]
+\setupheads
+  [sectionconversionset=mysectionnumbers] 
+
+\startpart[title=Partie 1]
+  \startchapter[title=Chapitre 1.1]
+    \startsection[title=Section 1.1.1]
+      \startsubsection[title=Section 1.1.1.1]
+      \stopsubsection
+    \stopsection
+  \stopchapter
+\stoppart
+\stopDemoVW}
+
+% TODO #3 End   Garulfo
+
+
+\stopsubsubsection
+
+
+\stopsubsection
+
+% ** Subsection couleur et style
+
+\startsubsection
+  [
+    reference=sec:titlestyle,
+    title=Couleur et style du titre,
+  ]
+
+Nous disposons des options suivantes pour contrôler le style et la couleur~:
+
+
+\startitemize
+
+\item {\bf Le style} est contrôlé par les options \MyKey{style}, \MyKey{numberstyle} et \MyKey{textstyle} selon que l'on souhaite affecter l'ensemble du titre, uniquement la numérotation ou uniquement le texte. Au moyen de l'une de ces options, nous pouvons inclure des commandes qui affectent la police, à savoir : police spécifique, style (romain, sans serif ou à chasse fixe), alternative (italique, gras, oblique...) et taille.   Si l'on veut indiquer une seule caractéristique de style, on peut le faire soit en utilisant le nom du style (par exemple, \quotation{bold} pour bold), soit en indiquant son abréviation (\quotation{bf}), soit la commande qui la génère (\tex{bf}, dans le cas de bold). Si nous voulons indiquer plusieurs caractéristiques simultanément, nous devons le faire au moyen des commandes qui les génèrent, en les écrivant les unes après les autres.   N'oubliez pas, par ailleurs, que si vous n'indiquez qu'une seule caractéristique, le reste des caractéristiques de style sera établi automatiquement avec les valeurs par défaut du document, c'est pourquoi il est rarement conseillé d'établir une seule caractéristique de style.
+
+
+\item {\bf La couleur} est définie avec les options \MyKey{color}, \MyKey{numbercolor} et \MyKey{textcolor} selon que l'on souhaite définir la couleur de l'ensemble du titre, ou seulement la couleur de la numérotation ou du texte.  La couleur indiquée ici peut être l'une des couleurs prédéfinies de \ConTeXt, ou une autre couleur que nous avons définie nous-mêmes et à laquelle nous avons préalablement attribué un nom. Cependant, nous ne pouvons pas utiliser directement une commande de définition de couleur ici.
+
+\stopitemize
+
+En plus de ces six options, il existe encore cinq autres options permettant de mettre en place des fonctionnalités plus sophistiquées avec lesquelles nous pouvons faire pratiquement tout ce que nous voulons. Il s'agit de : \MyKey{command}, \MyKey{numbercommand}, \MyKey{textcommand}, \MyKey{deepnumbercommand} et \MyKey{deeptextcommand}. Commençons par expliquer les trois premières :
+
+
+\startitemize
+
+
+\item {\tt\bf command} indique une commande qui prendra deux arguments, le numéro et le titre de la section. Il peut s'agir d'une commande \ConTeXt\ normale ou d'une commande que nous avons définie nous-mêmes.
+
+  \item {\tt\bf numbercommand} est similaire à \MyKey{command}, mais cette commande ne prend en argument que le numéro de la section.
+
+  \item {\tt\bf textcommand} est également similaire à \MyKey{command}, mais elle ne prend en argument que le texte du titre.
+
+
+\stopitemize
+
+Ces trois options nous permettent de faire pratiquement tout ce que nous voulons. Par exemple, si je veux que les sections soient alignées à droite, enfermées dans un cadre et avec un retour à la ligne entre le numéro et le texte, je peux simplement créer une commande à cet effet, puis indiquer cette commande comme valeur de la commande \MyKey{command}. Cela pourrait être réalisé avec les lignes suivantes :
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\startsection[title=Joli titre ici]
+Mon texte.
+\stopsection
+
+\define[2]\AlignSection
+  {\framed
+    [frame=on, 
+     width=broad,
+     align=flushright]{#1\\#2}}
+\setuphead
+  [section]
+  [style=bold,
+   color=darkred,
+   command=\AlignSection]
+
+\startsection[title=Joli titre là]
+Mon texte.
+\stopsection
+\stopDemoVW}
+
+
+Lorsque nous définissons simultanément les options \MyKey{command} et \MyKey{style}, la commande est appliquée au titre avec son style. Cela signifie, par exemple, que si nous avons défini \MyKey{style de texte=\backslash em}, et \MyKey{commande de texte=\backslash WORD}, la commande \tex{WORD} (qui met en majuscule le texte qu'elle prend comme argument) sera appliquée au titre avec son style, c'est-à-dire : \cmd{WORD\{\backslash em Texte du titre\}}.Si nous voulons que cela se fasse dans l'autre sens, c'est-à-dire que le style soit appliqué au contenu. Si l'on veut que le style soit appliqué au contenu du titre une fois la commande appliquée, il faut utiliser, au lieu des options \MyKey{commandtext} et \MyKey{commandnumber}, les options \MyKey{commanddeeptext} et \MyKey{commanddeepnumber}. Ainsi, dans l'exemple donné ci-dessus, on obtiendrait \MyKey{\color[darkmagenta]{\{\backslash em\backslash WORD\{Texte du titre\}}}.
+
+Dans la plupart des cas, il n'y a pas de différence entre les deux méthodes. Mais dans certains cas, il peut y en avoir une.
+
+\stopsubsection
+
+% ** Subsection position du numéro et du texte du titre 
+
+\startsubsection
+  [title=Emplacement du numéro et du texte du titre]
+
+L'option \MyKey{alternative} contrôle deux choses simultanément~: l'emplacement de la numérotation par rapport au texte du titre, et l'emplacement du titre lui-même (y compris le numéro et le texte) par rapport à la page sur laquelle il est affiché et au contenu de la section. Ce sont deux choses différentes, mais comme elles sont régies par la même option, elles sont contrôlées simultanément.
+
+L'emplacement du titre par rapport à la page et au premier paragraphe du contenu de la section est contrôlé par les valeurs possibles suivantes de \MyKey{alternative} :
+
+
+
+\startitemize
+
+\item {\tt\bf text:} Le titre de la section est intégré au premier paragraphe de son contenu. L'effet est similaire à celui produit dans \LaTeX\ avec \tex{paragraph} et \tex{subparagraph}.
+
+  \item {\tt\bf paragraph:} Le titre de la section sera un paragraphe indépendant.
+
+  \item {\tt\bf normal:} Le titre de la section sera placé à l'emplacement par défaut fourni par \ConTeXt\ pour le type particulier de section en question. Normalement, il s'agit de \MyKey{paragraph}.
+
+  \item {\tt\bf middle:} Le titre est écrit comme un paragraphe autonome, centré. S'il s'agit d'une commande numérotée, le numéro et le texte sont séparés sur des lignes différentes, toutes deux centrées.
+
+  Un effet similaire à celui obtenu avec \MyKey{alternative=middle} est obtenu avec l'option \MyKey{align} qui contrôle l'alignement du titre. Elle peut prendre les valeurs \MyKey{left}, \MyKey{middle} ou \MyKey{flushright}.  Mais si nous centrons le titre avec cette option, le numéro et le texte apparaîtront sur la même ligne.
+
+  \item {\tt\bf margintext:} Cette option permet d'imprimer la totalité du titre (numérotation et texte) dans l'espace réservé à la marge.
+
+\stopitemize
+
+
+
+\startbuffer[a7-bufF]
+\setuppapersize[A7,landscape]
+\showframe
+\setupbodyfont[7pt]
+\starttext
+\setuphead    [section]  [alternative=text]
+\startsection [title=Joli titre {\tt text}]
+Mon texte.
+\stopsection
+
+\setuphead    [section]  [alternative=paragraph]
+\startsection [title=Joli titre {\tt paragraph=normal}]
+Mon texte.
+\stopsection
+
+\setuphead    [section]  [alternative=middle]
+\startsection [title=Joli titre {\tt middle}]
+Mon texte.
+\stopsection
+
+\setuphead    [section]  [alternative=margintext]
+\startsection [title=Joli titre {\tt margintext}]
+Mon texte.
+\stopsection
+
+\stoptext
+\stopbuffer
+
+\savebuffer[list=a7-bufF,file=ex_setuphead.tex,prefix=no]
+\placefigure [here,force,none] [] {}{\typesetbuffer[a7-bufF][frame=on,page=1,background=color,backgroundcolor=white]
+\attachment
+  [file={ex_setuphead.tex},
+   title={exemple setuphead}]}
+
+
+
+L'emplacement du numéro par rapport au texte du titre est indiqué par les valeurs possibles suivantes de \MyKey{alternative} : 
+\startitemize
+
+  \item {\tt\bf margin/inmargin:} Le titre constitue un paragraphe distinct. La numérotation est écrite dans l'espace réservé à la marge. Je n'ai pas encore compris la différence entre l'utilisation de \MyKey{margin} et l'utilisation de \MyKey{inmargin}.
+
+  \item {\tt\bf reverse:} Le titre constitue un paragraphe distinct, mais l'ordre normal est inversé, et le texte est imprimé en premier, puis le numéro.
+
+  \item {\tt\bf top/bottom:} Dans les titres dont le texte occupe plus d'une ligne, ces deux options permettent de contrôler si la numérotation sera alignée sur la première ligne du titre ou sur la dernière ligne respectivement.
+
+\stopitemize
+
+\startbuffer[a7-bufG]
+\setuppapersize[A7,landscape]
+\showframe
+\setupbodyfont[7pt]
+\starttext
+\setuphead    [section]  [alternative=margin]
+\startsection [title=Joli titre {\tt margin}]
+Mon texte.
+\stopsection
+
+\setuphead    [section]  [alternative=reverse]
+\startsection [title=Joli titre {\tt reverse}]
+Mon texte.
+\stopsection
+
+\setuphead    [section]  [alternative=bottom]
+\startsection [title=Joli titre \\{\tt bottom}]
+Mon texte.
+\stopsection
+
+\setuphead    [section]  [alternative=top]
+\startsection [title=Joli titre \\{\tt top}]
+Mon texte.
+\stopsection
+
+\stoptext
+\stopbuffer
+
+\savebuffer[list=a7-bufG,file=ex_setuphead.tex,prefix=no]
+\placefigure [here,force,none] [] {}{\typesetbuffer[a7-bufG][frame=on,page=1,background=color,backgroundcolor=white]
+\attachment
+  [file={ex_setuphead_two.tex},
+   title={exemple setuphead two}]}
+
+
+
+\stopsubsection
+
+% ** Subsection avant et après le titre 
+
+\startsubsection
+  [title=Commandes ou actions à effectuer avant ou après un titre ou une section]
+
+
+Il est possible d'indiquer une ou plusieurs commandes qui sont exécutées avant l'affichage du titre (option \MyKey{before}) ou après (option \MyKey{after}). Ces options sont largement utilisées pour marquer visuellement le titre. Par exemple, si nous voulons ajouter un espace vertical supplémentaire entre le titre et le texte qui le précède, l'option \MyKey{before=\backslash blank} ajoutera une ligne blanche. Pour ajouter encore plus d'espace, nous pourrions écrire \MyKey{before=\{\backslash blank[3*big]\}}. Dans ce cas, nous avons entouré la valeur de l'option de crochets pour éviter une erreur. Nous pourrions également indiquer visuellement la distance entre le texte précédent et le suivant avec \MyKey{before=\backslash hairline, after=\backslash hairline}, qui tracerait une ligne horizontale avant et après le titre. 
+
+
+Très similaires aux options \MyKey{beforesection} et \MyKey{aftersection} sont les options \MyKey{commandbefore} et \Conjecture \MyKey{commandafter}. D'après mes tests, je déduis que la différence est que les deux premières options exécutent des actions avant et après le début de la composition du titre en tant que tel, tandis que les deux dernières font référence à des commandes qui seront exécutées avant et après la composition du {\em texte du titre}.
+
+% TODO Garulfo added
+
+Dans la même veine, les options \MyKey{beforesection} et \MyKey{aftersection} permettent d'indiquer des commandes à exécuter respectivement avant et après l'ensemble de la section, c'est à dire avant l'affichage du titre et après le dernier mots de la section (c'est à dire lors du \tex{stopsection}).
+
+Si, au lieu des commandes de section, nous utilisons les environnements de section (\tex{start} ... \tex{stop}), nous disposons également de l'option \MyKey{insidesection}, grâce à laquelle nous pouvons indiquer une ou plusieurs commandes qui seront exécutées une fois que le titre aura été composé et que nous serons déjà à l'intérieur de la section. Cette option nous permet, par exemple, de nous assurer qu'immédiatement après le début d'un chapitre, une table des matières sera automatiquement tapée avec (\MyKey{insidesection=\backslash placecontent}).
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW%
+\setuphead
+  [section]
+  [beforesection={1-beforesection},
+    aftersection={2-aftersection},
+          before={3-before},
+           after={4-after},
+       inbetween={5-inbetween},
+   insidesection={6-insidesection},
+           style=bold]%
+\startsection[title={Joli titre}]
+Mon texte.
+\stopsection
+\stopDemoVW}
+
+
+Si l'on veut insérer un saut de page avant le titre, il faut utiliser l'option \MyKey{page} qui permet, entre autres valeurs, \MyKey{yes} pour insérer un saut de page, \MyKey{left} pour insérer autant de sauts de page que nécessaire pour que le titre commence sur une page paire, \MyKey{right} pour que le titre commence sur une page impaire, ou \MyKey{no} si l'on veut désactiver le saut de page forcé. Par contre, pour les niveaux inférieurs à \MyKey{chapter}, cette option ne fonctionnera que si la \MyKey{continue=no} est utilisée, sinon elle ne fonctionnera pas si la section, la sous-section ou la commande se trouve sur la première page d'un chapitre.
+
+\startSmallPrint
+
+
+Par défaut, les chapitres commencent sur une nouvelle page dans \ConTeXt. S'il est établi que les sections commencent aussi sur une nouvelle page, le problème se pose de savoir ce qu'il faut faire avec la première section d'un chapitre qui, peut-être, se trouve au début du chapitre : si cette section commence aussi un saut de page, on se retrouve avec la page qui ouvre le chapitre ne contenant que le titre du chapitre, ce qui n'est pas très esthétique.   C'est pourquoi on peut définir l'option \MyKey{continue}, un nom, je dois dire, qui n'est pas très clair pour moi : si \MyKey{continue=yes}, le saut de page ne s'appliquera pas aux sections qui sont sur la première page d'un chapitre. Si \MyKey{continue=no}, le saut de page sera quand même appliqué.
+
+
+\stopSmallPrint
+
+
+\stopsubsection
+
+% ** Subsection autres fonctionnalités configurable
+
+\startsubsection
+  [title=Autres fonctionnalités configurables]
+
+En plus de celles que nous avons déjà vues, nous pouvons configurer les fonctionnalités supplémentaires suivantes avec \tex{setuphead} :
+
+\startitemize
+
+  \item {\bf Interligne}. Contrôlé par la \MyKey{interlinespace} qui prend comme valeur le nom d'une commande interligne préalablement créée avec \tex{defineinterlinespace} et configurée avec \tex{setupinterlinespace}.
+
+  \item {\bf Alignement}. L'option \MyKey{align} affecte l'alignement du paragraphe contenant le titre. Elle peut prendre, entre autres, les valeurs suivantes : \MyKey{flushleft} (gauche), \MyKey{flushright} (droite), \MyKey{middle} (centré), \MyKey{inner} (marge intérieure) et \MyKey{outer} (marge extérieure).
+
+  \item {\bf Marge}. L'option \MyKey{margin} permet de définir manuellement la marge du titre.
+
+  \item {\bf Indentation du premier paragraphe}. La valeur de l'option \MyKey{indentnext} (qui peut être "yes", "no" ou "auto") contrôle si la première ligne du premier paragraphe de la section sera mise en retrait ou non. Le fait qu'elle soit ou non en retrait (dans un document où la première ligne des paragraphes est généralement en retrait) est une question de goût.
+
+  \item {\bf Largeur}. Par défaut, les titres occupent la largeur dont ils ont besoin, sauf si celle-ci est supérieure à la largeur de la ligne, auquel cas le titre occupera plus d'une ligne. Mais avec l'option \MyKey{width}, nous pouvons attribuer une largeur particulière au titre. Les options \MyKey{numberwidth} et \MyKey{textwidth} permettent respectivement d'affecter la largeur de la numérotation ou la largeur du texte du titre.
+
+  \item {\bf Séparation du numéro et du texte}. Les options \MyKey{distance} et \MyKey{textdistance} permettent de contrôler la distance séparant le numéro du titre du texte du titre.
+
+  \item Style des en-têtes et des pieds de section. Pour cela, nous utilisons les options \MyKey{header} et \MyKey{footer}.
+
+\stopitemize
+
+\stopsubsection
+
+% ** Subsection autres options
+
+\startsubsection
+  [title=Autres options de \tex{setuphead}]
+
+%TODO Garulfo : besoin d'une subsection pour cela ?
+
+Avec les options que nous avons déjà vues, nous pouvons constater que les possibilités de configuration des titres de section sont presque illimitées. Cependant, \tex{setuphead} possède une trentaine d'options que je n'ai \Doubt pas mentionnées.  La plupart parce que je n'ai pas découvert à quoi elles servent ou comment elles sont utilisées, quelques-unes parce que leur explication m'obligerait à entrer dans des aspects que je n'ai pas l'intention de traiter dans cette introduction.
+
+\stopsubsection
+
+
+%==============================================================================
+
+\stopsection
+
+\stopcomponent
+
+%%% TeX-master: "../introCTX_fra.tex"

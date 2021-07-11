@@ -1,0 +1,195 @@
+\startcomponent 02-01_Introduction
+
+\environment introCTX_env_00
+
+\startchapter
+  [title=Introduction et vue d'ensemble,reference=cap:panorama]
+
+\TocChap
+
+%==============================================================================
+
+Pour être à l'aise avec l'utilisation de \ConTeXt , comme pour toute technologie
+informatique, il en faut comprendre la logique sous-jacente. 
+La logique de \ConTeXt\ s'appuie sur trois concepts~:
+
+\startitemize[n]
+\item le fichier source,
+\item le balisage,
+\item la composition et la mise en page.
+\stopitemize
+
+L'objectif des deux premières parties est de donner une sorte 
+d'\quotation{essentiel en moins de 75 pages}, pour un fois l'esprit clair
+sur les grandes règles syntaxiques et le balisage, vous puissiez vous concentrer
+sur la composition, la mise en page, c'est à dire l'ensemble des configurations
+qui vous permettrons de personnaliser votre document.
+
+% * Section 1 - le fichier source =============================================
+
+\startsection [title=Le fichier source]
+
+
+\stopsection
+
+% * Section 2 - le balisage ===================================================
+
+\startsection [title=Le balisage]
+
+
+\stopsection
+
+% * Section 3 - la composition et la mise en page =============================
+
+\startsection [title=La composition et la mise en page]
+
+
+\stopsection
+
+
+%==============================================================================
+
+\startsection [title=Fil pédagogique du document]
+
+\start
+\tfx
+\bTABLE[option=stretch]
+\setupTABLE [frame=off]
+\setupTABLE [c] [first] [style=bold]
+\setupTABLE [c] [each]  [width=.15\textwidth]
+\setupTABLE [c] [1]     [width=.4\textwidth]
+%================================================================================================================================================================================================
+\bTR[style=bold,foregroundcolor=maincolor] 
+     \bTD \eTD
+     \bTD Fichier \par source               \eTD 
+     \bTD Balisage                          \eTD
+     \bTD Composition d'ensemble            \eTD
+     \bTD Composition spécifique            \eTD 
+\eTR
+\bTR[style=bold,topframe=on,toffset=1ex,foregroundcolor=maincolor] 
+  \bTD[topframe=off] \eTD    \bTD \in{Partie}[part:src]             \eTD \bTD \in{Partie}[part:mkp]               \eTD \bTD \in{Partie}[part:typset:global]      \eTD\bTD \in{Partie}[part:typset:local]        \eTD \eTR 
+%==========================================================================================================================================================================================================
+\bTR[topframe=on,toffset=1ex] 
+     \bTD Fichier source                    \eTD \bTD \in{Chapitre}[cap:firstdoc]   \eTD  \bTD      \eTD \bTD                                      \eTD \bTD                                      \eTD \eTR
+\bTR \bTD Règles syntaxiques                \eTD \bTD \in{Chapitre}[cap:commands]   \eTD  \bTD      \eTD \bTD                                      \eTD \bTD                                      \eTD \eTR
+\bTR \bTD Organisation des fichiers         \eTD \bTD \in{Chapitre}[cap:sourcefile] \eTD  \bTD      \eTD \bTD                                      \eTD \bTD                                      \eTD \eTR
+%==========================================================================================================================================================================================================
+\bTR[topframe=on,toffset=1ex] 
+     \bTD Pages                             \eTD \bTD \eTD \bTD                                     \eTD \bTD \in{Chapitre}[cap:pages]             \eTD \bTD                                      \eTD \eTR
+\bTR \bTD Polices                           \eTD \bTD \eTD \bTD                                     \eTD \bTD \in{Chapitre}[cap:fontscol]          \eTD \bTD                                      \eTD \eTR
+\bTR \bTD Couleurs                          \eTD \bTD \eTD \bTD                                     \eTD \bTD \in{Chapitre}[sec:typset:colors]     \eTD \bTD                                      \eTD \eTR
+\bTR \bTD Langue                            \eTD \bTD \eTD \bTD                                     \eTD \bTD \in{Chapitre}[sec:langdoc]           \eTD \bTD                                      \eTD \eTR
+\bTR \bTD Interactivité                     \eTD \bTD \eTD \bTD                                     \eTD \bTD \in{Chapitre}[sec:interactivity]     \eTD \bTD                                      \eTD \eTR
+%==========================================================================================================================================================================================================
+\bTR[style=bold,topframe=on,toffset=1ex,foregroundcolor=maincolor] 
+     \bTD Flux principal                    \eTD \bTD \eTD \bTD \in{Chapitre}[cap:mkp:mainflow]     \eTD \bTD                                      \eTD \bTD \in{Chapitre}[cap:typset:mainflow]   \eTD \eTR 
+\bTR \bTD Paragraphes                       \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:para]          \eTD \bTD                                      \eTD \bTD \in{Section}[cap:parlinevspace]      \eTD \eTR
+\bTR \bTD Emphase de mots                   \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:emphasew]      \eTD \bTD                                      \eTD \bTD \in{Section}[cap:chartext]           \eTD \eTR
+\bTR \bTD Emphase de paragraphes            \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:emphasep]      \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:emphasep]    \eTD \eTR
+\bTR \bTD Encadrement                       \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:framed]        \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:framed]      \eTD \eTR
+\bTR \bTD Lignes et traits                  \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:lines]         \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:lines]       \eTD \eTR
+\bTR \bTD Citations                         \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:quotes]        \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:quotes]      \eTD \eTR
+\bTR \bTD Listes structurées                \eTD \bTD \eTD \bTD \in{Section}[sec:itemize]           \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:itemize]     \eTD \eTR
+\bTR \bTD Description et énumération        \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:descenum]      \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:descenum]    \eTD \eTR
+\bTR \bTD Textes tabulés                    \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:tabulate]      \eTD \bTD                                      \eTD \bTD \in{Section}[sec:cmptabulate]        \eTD \eTR
+\bTR \bTD Tableaux                          \eTD \bTD \eTD \bTD \in{Section}[sec:tables]            \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:table]       \eTD \eTR
+\bTR \bTD Images et Combinaisons            \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:images]        \eTD \bTD                                      \eTD \bTD \in{Section}[sec:extimage]           \eTD \eTR
+\bTR \bTD Objets flottants                  \eTD \bTD \eTD \bTD \in{Section}[cap:floats]            \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:floats]      \eTD \eTR
+\bTR \bTD Section                           \eTD \bTD \eTD \bTD \in{Section}[cap:structure]         \eTD \bTD                                      \eTD \bTD \in{Section}[sec:setuphead]          \eTD \eTR
+\bTR \bTD Macro-structure                   \eTD \bTD \eTD \bTD \in{Section}[sec:macrostructure]    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:macrostr]    \eTD \eTR
+\bTR \bTD Page de couverture et de titre    \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:cover]         \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:covers]      \eTD \eTR
+\bTR \bTD Mathématiques                     \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:math]          \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:math]        \eTD \eTR
+\bTR \bTD Autres                            \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:others]        \eTD \bTD                                      \eTD \bTD                                      \eTD \eTR
+\bTR \bTD Colonnes                          \eTD \bTD \eTD \bTD                                     \eTD \bTD                                      \eTD \bTD \in{Section}[sec:multiplecolumns]    \eTD \eTR
+%==========================================================================================================================================================================================================
+\bTR[style=bold,topframe=on,toffset=1ex,foregroundcolor=maincolor]                                                                        
+     \bTD Compléments au flux principal     \eTD \bTD \eTD \bTD \in{Chapitre}[cap:mkp:complement]   \eTD \bTD                                      \eTD \bTD \in{Chapitre}[cap:typset:complement] \eTD \eTR 
+\bTR \bTD Table des matières                \eTD \bTD \eTD \bTD \in{Section}[sec:content]           \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:content]     \eTD \eTR
+\bTR \bTD Notes de bas de page              \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:notes]         \eTD \bTD                                      \eTD \bTD \in{Section}[sec:confnotes]          \eTD \eTR
+\bTR \bTD Notes marginales                  \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:margind]       \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:margind]     \eTD \eTR
+\bTR \bTD Pièces jointes                    \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:attach]        \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:attach]      \eTD \eTR
+\bTR \bTD Références internes               \eTD \bTD \eTD \bTD \in{Section}[sec:references]        \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:refint]      \eTD \eTR
+\bTR \bTD Références externes               \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:refext]        \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:refext]      \eTD \eTR
+\bTR \bTD Références bibliographiques       \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:biblio]        \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:biblio]      \eTD \eTR
+\bTR \bTD Listes des images, tableaux…      \eTD \bTD \eTD \bTD \in{Section}[sec:lists]             \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:lists]       \eTD \eTR
+\bTR \bTD Index                             \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:index]         \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:index]       \eTD \eTR
+%==========================================================================================================================================================================================================
+\bTR[style=bold,topframe=on,toffset=1ex,foregroundcolor=maincolor]                                                                        
+     \bTD Personnalisé                      \eTD \bTD \eTD \bTD \in{Chapitre}[cap:definingcommands] \eTD \bTD                                      \eTD \bTD \in{Chapitre}[cap:typset:custom]     \eTD \eTR
+%==========================================================================================================================================================================================================
+\eTABLE                                                       
+\stop   
+
+
+Nous avons donc vu que la logique de \ConTeXt\ repose sur trois concepts~: 
+le fichier source, le balisage, et la composition. 
+Chacun de ces concepts va maintenant être approfondi selon la table ci-dessus.
+
+
+
+% \start
+% \tfx
+% \bTABLE
+% \setupTABLE[frame=off]
+% \setupTABLE[c][first][style=bold]
+% =================================================================================================================
+% \bTR[style=bold,bottomframe=on]
+%      \bTD Flux principal                 \eTD \bTD Balisage                                       \eTD \bTD Composition                                    \eTD \eTR 
+% \bTR \bTD Paragraphes                    \eTD \bTD 02-02-01-01_Markup_Paragraphs.tex              \eTD \bTD 02-04-01-01_Typeset_Paragraphs.tex             \eTD \eTR
+% \bTR \bTD Emphase de mots                \eTD \bTD 02-02-01-02_Markup_WordEmphasis.tex            \eTD \bTD 02-04-01-02_Typeset_WordEmphasis.tex           \eTD \eTR
+% \bTR \bTD Emphase de paragraphes         \eTD \bTD 02-02-01-03_Markup_ParagraphsEmphasis.tex      \eTD \bTD 02-04-01-03_Typeset_ParagraphsEmphasis.tex     \eTD \eTR
+% \bTR \bTD Encadrement                    \eTD \bTD 02-02-01-04_Markup_Framed.tex                  \eTD \bTD 02-04-01-04_Typeset_Framed.tex                 \eTD \eTR
+% \bTR \bTD Lignes et traits               \eTD \bTD 02-02-01-05_Markup_LinesRules.tex              \eTD \bTD 02-04-01-05_Typeset_LinesRules.tex             \eTD \eTR
+% \bTR \bTD Citations                      \eTD \bTD 02-02-01-06_Markup_Quotations.tex              \eTD \bTD 02-04-01-06_Typeset_Quotations.tex             \eTD \eTR
+% \bTR \bTD Listes structurées             \eTD \bTD 02-02-01-07_Markup_Itemize.tex                 \eTD \bTD 02-04-01-07_Typeset_Itemize.tex                \eTD \eTR
+% \bTR \bTD Description et énumération     \eTD \bTD 02-02-01-08_Markup_DescriptionEnumeration.tex  \eTD \bTD 02-04-01-08_Typeset_DescriptionEnumeration.tex \eTD \eTR
+% \bTR \bTD Textes tabulés                 \eTD \bTD 02-02-01-09_Markup_Tabulate.tex                \eTD \bTD 02-04-01-09_Typeset_Tabulate.tex               \eTD \eTR
+% \bTR \bTD Tableaux                       \eTD \bTD 02-02-01-10_Markup_Tables.tex                  \eTD \bTD 02-04-01-10_Typeset_Tables.tex                 \eTD \eTR
+% \bTR \bTD Images et Combinaisons         \eTD \bTD 02-02-01-11_Markup_ImagesAndCombinaisons.tex   \eTD \bTD 02-04-01-11_Typeset_ImagesAndCombinaisons.tex  \eTD \eTR
+% \bTR \bTD Objets flottants               \eTD \bTD 02-02-01-12_Markup_Floats.tex                  \eTD \bTD 02-04-01-12_Typeset_Floats.tex                 \eTD \eTR
+% \bTR \bTD Section                        \eTD \bTD 02-02-01-13_Markup_Sections.tex                \eTD \bTD 02-04-01-13_Typeset_Sections.tex               \eTD \eTR
+% \bTR \bTD Macro-structure                \eTD \bTD 02-02-01-14_Markup_Macrostructure.tex          \eTD \bTD 02-04-01-14_Typeset_Macrostructure.tex         \eTD \eTR
+% \bTR \bTD Page de couverture et de titre \eTD \bTD 02-02-01-15_Markup_Covers.tex                  \eTD \bTD 02-04-01-15_Typeset_Covers.tex                 \eTD \eTR
+% \bTR \bTD Mathématiques                  \eTD \bTD 02-02-01-16_Markup_Maths.tex                   \eTD \bTD 02-04-01-16_Typeset_Maths.tex                  \eTD \eTR
+% \bTR \bTD Autres                         \eTD \bTD 02-02-01-50_Markup_Others.tex                  \eTD \bTD 02-04-01-21_Typeset_Columns.tex                \eTD \eTR
+% =================================================================================================================
+% \bTR[style=bold,bottomframe=on,toffset=3ex]
+%      \bTD Général                        \eTD \bTD Balisage                                       \eTD \bTD Composition                                    \eTD \eTR 
+% \bTR \bTD Pages                          \eTD \bTD                                                \eTD \bTD 02-03-01_Typeset_Pages.tex                     \eTD \eTR
+% \bTR \bTD Polices                        \eTD \bTD                                                \eTD \bTD 02-03-02_Typeset_Fonts.tex                     \eTD \eTR
+% \bTR \bTD Couleurs                       \eTD \bTD                                                \eTD \bTD 02-03-03_Typeset_Colors.tex                    \eTD \eTR
+% \bTR \bTD Langue                         \eTD \bTD                                                \eTD \bTD 02-03-04_Typeset_Language.tex                  \eTD \eTR
+% \bTR \bTD Interactivité                  \eTD \bTD                                                \eTD \bTD 02-03-05_Typeset_Interactivity.tex             \eTD \eTR
+% ================================================================================================================
+% \bTR[style=bold,bottomframe=on,toffset=3ex]
+%      \bTD Compléments au flux principal  \eTD \bTD Balisage                                       \eTD \bTD Composition                                    \eTD \eTR 
+% \bTR \bTD Table des matières             \eTD \bTD 02-02-02-01_Markup_ToC.tex                     \eTD \bTD 02-04-02-01_Typeset_ToC.tex                    \eTD \eTR
+% \bTR \bTD Notes de bas de page           \eTD \bTD 02-02-02-02_Markup_Notes.tex                   \eTD \bTD 02-04-02-02_Typeset_Notes.tex                  \eTD \eTR
+% \bTR \bTD Notes marginales               \eTD \bTD 02-02-02-03_Markup_Margindata.tex              \eTD \bTD 02-04-02-03_Typeset_Margindata.tex             \eTD \eTR
+% \bTR \bTD Pièces jointes                 \eTD \bTD 02-02-02-04_Markup_Attachments.tex             \eTD \bTD 02-04-02-04_Typeset_Attachments.tex            \eTD \eTR
+% \bTR \bTD Références internes            \eTD \bTD 02-02-02-05_Markup_ReferencesInternal.tex      \eTD \bTD 02-04-02-05_Typeset_ReferencesInternal.tex     \eTD \eTR
+% \bTR \bTD Références externes            \eTD \bTD 02-02-02-06_Markup_ReferencesExternal.tex      \eTD \bTD 02-04-02-06_Typeset_ReferencesExternal.tex     \eTD \eTR
+% \bTR \bTD Références bibliographiques    \eTD \bTD 02-02-02-07_Markup_ReferencesBiblio.tex        \eTD \bTD 02-04-02-07_Typeset_ReferencesBiblio.tex       \eTD \eTR
+% \bTR \bTD Listes des images, tableaux…   \eTD \bTD 02-02-02-08_Markup_Lists.tex                   \eTD \bTD 02-04-02-08_Typeset_Lists.tex                  \eTD \eTR
+% \bTR \bTD Index                          \eTD \bTD 02-02-02-09_Markup_Index.tex                   \eTD \bTD 02-04-02-09_Typeset_Index.tex                  \eTD \eTR
+% ================================================================================================================
+% \bTR[style=bold,bottomframe=on,toffset=3ex]
+%      \bTD Personnalisé                   \eTD \bTD 02-02-03_Markup_Customized.tex                 \eTD \bTD 02-04-03_Typeset_Customized.tex                \eTD \eTR
+% \eTABLE                                                       
+% \stop   
+   
+\stopsection   
+   
+\stopchapter                                            
+                                                        
+\stopcomponent                                          
+                                                        
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% TeX-master: "../introCTX_fra.tex"
+%%% coding: utf-8-unix
+%%% End:
+
+ 
+

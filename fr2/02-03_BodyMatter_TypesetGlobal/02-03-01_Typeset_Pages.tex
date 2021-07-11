@@ -1,0 +1,1097 @@
+\startcomponent 02-03-01_Typeset_Pages
+
+\environment introCTX_env_00
+
+% * Chapitre
+
+\startchapter
+  [
+    reference=cap:pages,
+    title={Mise en page},
+    bookmark={Mise en page},
+  ]
+
+\TocChap
+
+\ConTeXt\ transforme le document source en {\em pages} correctement formatées. L'aspect de ces pages, la façon dont le texte et les espaces vides sont répartis et les éléments qu'elles comportent sont autant d'éléments fondamentaux pour une bonne composition. Ce chapitre est consacré à toutes ces questions, ainsi qu'à d'autres sujets relatifs comme la pagination (qui est la façon dont sont numérotées les pages d'un document).
+
+% * Section Page size
+
+\startsection
+  [
+    reference=sec:papersize,
+    title=Taille de la page,
+  ]
+
+% ** SubSecTion configure la taille de la page
+
+\startsubsection
+  [
+    reference=sec:pagesize,
+    title=Réglage du format de la page,
+  ]
+\PlaceMacro{setuppapersize}
+\index{page+dimension}
+
+Par défaut, \ConTeXt\ suppose que les documents seront de format A4, la norme européenne. On peut établir un format différent avec \tex{setuppapersize} qui est la commande typique que l'on trouve dans le préambule du fichier source. La syntaxe {\em normal} de cette commande est :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\setuppapersize[FormatPageLogique,Orientation][FormatPagePhysique,Orientation]
+\stopDemoI}
+
+où les deux arguments prennent des noms symboliques.
+\footnote{Rappellez-vous que dans la \in{section}[sec:syntax] j'ai indiqué que les options prises par les commandes \ConTeXt\ sont essentiellement de deux sortes : des noms symboliques, dont la signification est déjà connue de \ConTeXt, ou des variables auxquelles nous devons explicitement attribuer une valeur.}
+Le premier argument, que j'ai appelé {\em FormatPageLogique}, représente la taille de la page finale qui est celle à prendre en compte pour sa composition ; et le second argument, {\em FormatPagePhysique}, représente la taille de la page de papier sur laquelle les pages du document seront imprimées puis découpées. Bien souvent (document purement numérique, impression à la maison ou au bureau) les deux tailles sont identiques et le second argument peut être omis. Cependant, il arrive que les deux tailles soient différentes, comme par exemple lors de l'impression d'un livre en feuilles de 8 ou 16 pages (une technique d'impression courante, notamment pour les livres universitaires jusqu'aux années 1960 environ). Dans ces cas, \ConTeXt\ nous permet de distinguer les deux tailles ; et si l'idée est d'imprimer plusieurs pages sur une seule feuille de papier, nous pouvons également indiquer le schéma de pliage à suivre en utilisant la commande \tex{setuparranging} (qui ne sera pas expliquée dans cette introduction).
+
+\PlaceMacro{setuparranging}
+
+Pour le format de composition, nous pouvons indiquer n'importe lequel des formats prédéfinis utilisés par l'industrie du papier (ou par nous-mêmes). Cela inclut :
+
+  \startitemize
+
+  \item Toute série A, B et C définie par la norme ISO-216 (de A0 à A10, de B0 à B10 et de C0 à C10), généralement utilisée en Europe.
+
+  \item S3 - S6, S8, SM, SW pour les tailles d'écran dans les documents non destinés à être imprimés mais affichés à l'écran.
+
+  \item N'importe quel format standard américain : lettre, ledger, tabloïd, légal, folio, executive.
+
+  \item L'un des formats RA et RSA définis par la norme ISO-217.  
+
+  \item Les formats G5 et E5 définis par la norme suisse SIS-014711 (pour les thèses de doctorat).
+
+  \item Pour les enveloppes : l'un des formats définis par la norme nord-américaine (enveloppe 9 à enveloppe 14) ou par la norme ISO-269 (C6/C5, DL, E4).
+
+  \item CD, pour les pochettes de CD.
+
+  \stopitemize
+
+
+  En même temps que le format du papier, avec \tex{setuppapersize} on peut indiquer l'orientation de la page : \quotation{portrait} (verticale) ou \quotation{landscape}(horizontale).
+
+\startSmallPrint
+
+  Les autres options que \tex{setuppapersize} permet, selon le wiki \ConTeXt, sont \MyKey{rotated}, \MyKey{90}, \MyKey{180}, \MyKey{270}, \MyKey{mirrored} et \MyKey{negative}. Dans mes propres tests, je n'ai remarqué que quelques changements perceptibles avec \MyKey{rotated} qui inverse la page, bien que ce ne soit pas exactement une inversion. Les valeurs numériques sont censées produire le degré de rotation équivalent, seules ou en combinaison avec \MyKey{rotated}, mais je n'ai pas réussi à les faire fonctionner. Je n'ai pas non plus découvert exactement à quoi servent \MyKey{mirrored} et \MyKey{negative}.
+
+\stopSmallPrint
+
+Le deuxième argument de \tex{setuppapersize}, dont j'ai déjà dit qu'il peut être omis lorsque la taille d'impression n'est pas différente de la taille de composition, peut prendre les mêmes valeurs que le premier, indiquant la taille et l'orientation du papier. Elle peut également prendre la valeur \MyKey{oversized} qui, selon le wiki \ConTeXt\, ajoute un centimètre et demi à chaque coin du papier.
+
+\startSmallPrint
+
+  Selon le wiki, il existe d'autres valeurs possibles pour le deuxième argument : \MyKey{sous-format}, \MyKey{double-format} et \MyKey{double-surformat}. Mais lors de mes propres tests, je n'ai constaté aucun changement après l'utilisation de l'une de ces valeurs ; la définition officielle de la commande (voir \in{section}[sec:qrc-setup-fr]) ne mentionne pas non plus ces options.
+
+\stopSmallPrint
+
+\stopsubsection
+
+% ** SubSection page non standard
+
+% TODO Garulfo est ce qu'on veut vraiment mettre ça en priorité.
+\startsubsection
+  [title=Utiliser des dimensions non-standard]
+
+Si nous voulons utiliser une taille de page non standard, il y a deux choses que nous pouvons faire :
+
+\startitemize[n]
+
+\item Utiliser une syntaxe alternative de \tex{setuppapersize} qui nous permet d'introduire la hauteur et la largeur du papier comme dimensions.
+
+\item Définir notre propre format de page, en lui attribuant un nom et en l'utilisant comme s'il s'agissait d'un format de papier standard.
+  
+\stopitemize
+
+%-----------------------------------------------------
+
+\startsubsubsection
+  [title={Syntaxe alternative de \tex{setuppapersize}}]
+
+Outre la syntaxe que nous avons déjà vue, \tex{setuppapersize} nous permet d'utiliser cette autre syntaxe :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\setuppapersize[Nom][Options]
+\stopDemoI}
+
+
+où {\em Nom} est un argument facultatif qui représente le nom attribué à un format de papier avec \tex{definepapersize} (que nous verrons ensuite), et {\em Options} est l'attribution d'une valeur explicite. Parmi les options autorisées, nous pouvons souligner les suivantes :
+
+\startitemize
+
+\item {\tt\bf width, height} qui représentent, respectivement, la largeur et la hauteur de la page. 
+  
+\item {\tt\bf page, paper}. Le premier fait référence à la taille de la page à composer, et le second à la taille de la page à imprimer physiquement. Cela signifie que \MyKey{page} est équivalent au premier argument de \tex{setuppapersize} dans sa syntaxe normale (expliquée ci-dessus) et \MyKey{paper} au second argument. Ces options peuvent prendre les mêmes valeurs que celles indiquées précédemment (A4, S3, etc.).
+
+\item {\tt\bf scale}, indique un facteur d'échelle pour la page.
+
+\item {\tt\bf topspace, backspace, offset,} distances supplémentaires.
+  
+\stopitemize
+
+\stopsubsubsection
+
+%-----------------------------------------------------
+
+\startsubsubsection
+  [title={Définition d'un format de page personnalisé}]
+
+Pour définir un format de page personnalisé, on utilise la commande \tex{definepapersize}, dont la syntaxe est la suivante
+
+\PlaceMacro{definepapersize}
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\definepapersize[Name][Options]
+\stopDemoI}
+
+où {\em Nom} désigne le nom donné au nouveau format et {\em Options} peut être :
+
+\startitemize
+
+\item Toute valeur autorisée pour \tex{setuppapersize} dans sa syntaxe normale (A4, A3, B5, CD, etc.).
+
+\item Mesures de la largeur (du papier), de la hauteur (du papier) et du décalage (déplacement), ou une valeur mise à l'échelle (\MyKey{scale}).
+
+\stopitemize
+
+Il n'est pas possible de mélanger les valeurs autorisées pour \tex{setuppapersize} avec des mesures ou des facteurs d'échelle. En effet, dans le premier cas, les options sont des mots symboliques et dans le second, des variables auxquelles on donne une valeur explicite ; et dans \ConTeXt, comme je l'ai déjà dit, il n'est pas possible de mélanger les deux types d'options.
+
+Lorsque nous utilisons \tex{definepapersize} pour indiquer un format de papier qui coïncide avec certaines des mesures standard, en fait, plutôt que de définir un nouveau format de papier, ce que nous faisons est de définir un nouveau nom pour un format de papier déjà existant. Cela peut être utile si nous voulons combiner un format de papier avec une orientation. Ainsi, par exemple, nous pouvons écrire
+
+\PlaceMacro{definepapersize}
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\definepapersize[vertical][A4, portrait]
+\definepapersize[horizontal][A4, landscape]
+\stopDemoI}
+
+\stopsubsubsection
+
+\stopsubsection
+
+% ** SubSection changer la taille à n'importe quel moment
+
+\startsubsection
+  [title=Modification du format de la page à n'importe quel endroit du document]
+
+
+Dans la plupart des cas, les documents n'ont qu'un seul format de page et c'est pourquoi \tex{setuppapersize} est la commande typique que nous incluons dans le préambule et que nous n'utilisons qu'une seule fois dans chaque document. Cependant, à certaines occasions, il peut être nécessaire de changer la taille à un moment donné du document ; par exemple, si à partir d'un certain point une annexe est incluse dans laquelle les feuilles sont en paysage. 
+
+Dans ce cas, nous pouvons utiliser \tex{setuppapersize} à l'endroit précis où nous voulons que le changement se produise. Mais comme le format change immédiatement, pour éviter des résultats inattendus, il faut normalement insérer un saut de page forcé avant le \tex{setuppapersize}.
+
+Si nous n'avons besoin de modifier la taille de la page que pour une seule page, au lieu d'utiliser deux fois \tex{setuppapersize}, une fois pour passer à la nouvelle taille et la seconde pour revenir à la taille d'origine, nous pouvons utiliser \PlaceMacro{adaptpapersize}\tex{adaptpapersize} qui modifie la taille de la page et, une page plus tard, réinitialise automatiquement la valeur avant d'être appelée. De la même manière qu'avec \tex{setuppapersize}, nous devons insérer un saut de page forcé avant d'utiliser \tex{adaptpapersize}.
+
+\stopsubsection
+
+% ** SubSection Ajuster la page au contenu
+
+\startsubsection
+  [title=Adapter la taille de la page à son contenu]
+
+Il existe trois environnements dans \ConTeXt\ qui génèrent des pages strictement limitée à la taille exacte de leur contenu. Il s'agit de \PlaceMacro{startMPpage}\tex{startMPpage}, \PlaceMacro{startpagefigure}\tex{startpagefigure} et \PlaceMacro{startTEXpage}\tex{startTEXpage}.
+La première génère une page qui contient un graphique généré avec MetaPost, un langage de conception graphique qui s'intègre à \ConTeXt, mais dont je ne parlerai pas dans cette introduction. La seconde fait la même chose avec une image et peut-être un peu de texte en dessous. Elle prend deux arguments : le premier identifie le fichier contenant l'image. J'en parlerai dans le chapitre consacré aux images externes \in{page}[refextimage]. La troisième (\tex{startTEXpage}) contient le texte qui est son contenu sur une page. Sa syntaxe est la suivante :
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\startTEXpage[Options] ... \stopTEXpage
+\stopDemoI}
+
+où les options peuvent être l'une des suivantes~:
+
+\startitemize
+
+\item {\tt\bf strut}. Je ne suis pas sûr de l'utilité de cette option. Dans la terminologie de \ConTeXt\, un {\em strut} est un caractère sans largeur, mais avec une hauteur maximale et une profondeur \Doubt, mais je ne vois pas bien ce que cela a à voir avec l'utilité globale de cette commande. Selon le wiki, cette option permet les valeurs \MyKey{yes}, \MyKey{no}, \MyKey{global} et \MyKey{local}, et où la valeur par défaut est \MyKey{no}.
+
+\item {\tt\bf align}. Indique l'alignement du texte. Il peut s'agir de \MyKey{normal}, \MyKey{flushleft}, \MyKey{flushright}, \MyKey{middle}, \MyKey{high}, \MyKey{low} ou \MyKey{lohi}.
+  
+\item {\tt\bf offset} pour indiquer la quantité d'espace blanc autour du texte. Il peut s'agir de \MyKey{none}, \MyKey{overlay} si un effet de superposition est souhaité, ou d'une dimension réelle.
+  
+\item {\tt\bf width, height} où l'on peut indiquer une largeur et une hauteur pour la page, ou la valeur \MyKey{fit} pour que la largeur et la hauteur soient celles requises par le texte qui est inclus dans l'environnement.
+  
+\item {\tt\bf frame} qui est \MyKey{off} par défaut mais peut prendre la valeur \MyKey{on} si nous voulons une bordure autour du texte de la page.
+
+\stopitemize
+
+\stopsubsection
+
+\stopsection
+
+% * Section éléments sur la page 
+
+\startsection
+  [
+    reference=sec:page-elements,
+    title=Élements sur la page,
+  ]
+
+\PlaceMacro{setuplayout}
+
+\ConTeXt\ identifie différents zones sur les pages, dont les dimensions peuvent être configurées avec \tex{setuplayout}. 
+
+Nous pouvons voir toutes ces zones dans \in{image}[img:page layout] avec les noms donnés aux différentes mesures correspondantes, et des flèches indiquant leur étendue. L'épaisseur des flèches ainsi que la taille des noms des flèches sont destinées à refléter l'importance de chacune de ces distances pour la mise en page. Si nous regardons attentivement, nous verrons que cette image montre qu'une page peut être représentée comme un tableau de 9 lignes et 9 colonnes, ou, si nous ne tenons pas compte des valeurs de séparation entre les différentes zones, il y aurait cinq lignes et cinq colonnes dont il ne peut y avoir de texte que dans trois lignes et trois colonnes. L'intersection de la ligne et de la colonne du milieu constitue la zone de texte principale et occupera normalement la majeure partie de la page.
+
+\placefigure
+  [here]
+  [img:page layout]
+  {Zones et mesures sur une page}
+  {\externalfigure[layout.pdf][width=\textwidth]}
+
+Nous allons décrire chacun des éléments de la page, en indiquant le nom à indiquer pour \tex{setuplayout} pour chacun d'eux :
+
+\startitemize
+
+\item {\bf Edges (Bords)~:} espace blanc entourant la zone de texte. Bien que la plupart des traitements de texte les appellent \quotation{margins}, il est préférable d'utiliser la terminologie de \ConTeXt\ car elle nous permet de faire la différence entre les bords en tant que tels, où il n'y a pas de texte (bien que dans les documents électroniques, il puisse y avoir des boutons de navigation et autres), et les marges où peuvent parfois se trouver certains éléments de texte, comme, par exemple, les notes de marge.
+
+  \startitemize
+
+  \item La hauteur du bord supérieur est contrôlée par deux mesures : le bord supérieur lui-même (\MyKey{top}) et la distance entre le bord supérieur et l'en-tête (\MyKey{topdistance}). La somme de ces deux mesures est appelée \MyKey{topspace}.
+
+  \item La taille des bords gauche et droit dépend de la \MyKey{leftedge} \MyKey{rightedge} respectivement. Si l'on souhaite que les deux soient de la même longueur, on peut les configurer simultanément avec l'option \MyKey{edge}.
+
+    Dans les documents destinés à être imprimés en recto-verso, on ne parle pas de bords gauche et droit mais de bords intérieur (\MyKey{inner}) et extérieur (\MyKey{outery}) ; le premier est le bord le plus proche du point où les feuilles seront agrafées ou cousues, c'est-à-dire le bord gauche sur les pages impaires et le bord droit sur les pages paires. Le bord extérieur est l'opposé du bord intérieur.
+
+  \item La hauteur du bord inférieur est appelée \MyKey{bottom}.
+
+
+  \stopitemize
+
+%-----------------------------------
+
+  % In documents intended for printing on paper, edges can never
+  % contain text. But in documents intended for
+  % display on screen, edges can host some elements
+  % such as navigation buttons and the like.
+
+
+\item {\bf Marges (Margins)~:} correctement appelé ainsi. \ConTeXt\ appelle uniquement les marges latérales (gauche et droite) des marges. Les marges sont situées entre le bord et la zone de texte principale et sont destinées à accueillir certains éléments de texte comme, par exemple, les notes de marge, les titres de section ou leurs numéros.  
+
+Les dimensions qui contrôlent la taille des marges sont :
+
+  \startitemize
+
+  \item {\tt\bf margin} : utilisé lorsque l'on souhaite définir simultanément les marges à la même taille.
+
+  \item {\tt\bf leftmargin, rightmargin} : définit la taille des marges gauche et droite respectivement.
+
+  \item {\tt\bf edgedistance} : Distance entre le bord et la marge.
+
+  \item {\tt\bf leftgedistance, rightedgedistance} : Distance entre le bord et les marges gauche et droite respectivement.
+
+  \item {\tt\bf margindistance} : Distance entre la marge et la zone de texte principale.
+
+  \item {\tt\bf leftmargindistance, rightmargindistance} : Distance entre la zone de texte principal et les marges droite et gauche respectivement.
+
+  \item {\tt\bf backspace} : cette mesure représente l'espace entre le coin gauche du papier et le début de la zone de texte principale. Elle est donc constituée de la somme de \MyKey{leftedge} +     \MyKey{leftedgedistance} + \MyKey{leftmargin} +     \MyKey{leftmargindistance}.
+    
+  \stopitemize
+
+%-----------------------------------
+
+\item {\bf En-tête (Header) et pied de page (footer)~:} Ils contiennent généralement des informations qui permettent de contextualiser le texte, comme le numéro de page, le nom de l'auteur, le titre de l'ouvrage, le titre du chapitre ou de la section, etc. Dans \ConTeXt\ ces zones de la page sont affectées par les dimensions suivantes :
+
+  \startitemize
+
+  \item {\tt\bf header} : Hauteur de l'en-tête.
+
+  \item {\tt\bf footer} : Hauteur du pied de page
+
+  \item {\tt\bf headerdistance} : Distance entre l'en-tête et la zone de texte principale de la page.
+
+  \item {\tt\bf footerdistance} : Distance entre le pied de page et la zone de texte principale de la page.
+
+  \item {\tt\bf topdistance, bottomdistance} : Ces deux éléments ont été mentionnés précédemment.   Il s'agit de la distance entre le bord supérieur et l'en-tête ou le bord inférieur et le pied de page, respectivement.
+
+  \stopitemize
+
+\item {\bf Zone de texte principal} : Il s'agit de la zone la plus large de la page, contenant le texte du document. Sa taille dépend des variables \MyKey{width} et \MyKey{textheight}. La variable \MyKey{height}, quant à elle, mesure la somme de \MyKey{header}, \MyKey{headerdistance}, \MyKey{textheight}, \MyKey{footerdistance} et \MyKey{footer}.
+  
+\stopitemize
+
+%-----------------------------------
+
+Dans la phase de mise en page de notre document, afin de visualiser les principaux contours de la distribution du texte, nous pouvons utiliser \PlaceMacro{showframe}\tex{showframe}~; pour lister les valeurs des différentes mesures il faut utiliser la commande \PlaceMacro{showsetups}\tex{showsetups}~; et avec \PlaceMacro{showlayouts}\tex{showlayouts} nous obtenons une combinaison des deux commandes précédentes.
+
+
+\stopsection
+
+% * Section setuplayout
+
+\startsection
+  [
+    reference=sec:pagelayout,
+    title=Mise en page (\tex{setuplayout}),
+  ]
+\PlaceMacro{setuplayout}
+
+% ** SubSection setuplayout
+
+\startsubsection
+  [
+    reference=sec:setuplayout,
+    title=Attribution d'une dimension aux différents composants de la page,
+  ]
+
+La conception de la page implique l'attribution de tailles spécifiques aux zones respectives de la page. Cela se fait avec la commande \tex{setuplayout}. Cette commande nous permet de modifier n'importe laquelle des dimensions mentionnées dans la section précédente. Sa syntaxe est la suivante :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\setuplayout [Name] [Options]
+\stopDemoI}
+
+
+où {\em Nom} est un argument facultatif utilisé uniquement dans le cas où nous avons conçu plusieurs dispositions (voir \in{section}[sec:definelayout]), et les options sont, en plus d'autres que nous verrons plus tard, n'importe laquelle des mesures mentionnées précédemment. N'oubliez pas, cependant, que ces mesures sont liées entre elles puisque la somme totale des composants affectant la largeur et de ceux affectant la hauteur doit coïncider avec la largeur et la hauteur de la page. En principe, cela signifie que lorsque nous modifions une longueur horizontale, nous devons ajuster les autres longueurs horizontales, et il en va de même lorsque nous ajustons une longueur verticale.
+
+Par défaut, \ConTeXt\ n'effectue des ajustements automatiques des dimensions que dans certains cas qui, par ailleurs, ne sont pas indiqués de manière complète ou systématique dans sa documentation. En effectuant plusieurs tests, j'ai pu vérifier, par exemple, qu'une augmentation ou une diminution manuelle de la hauteur de l'en-tête ou du pied de page entraîne un ajustement de \MyKey{hauteur du texte} ; en revanche, une modification manuelle de certaines marges n'ajuste pas automatiquement (selon mes tests) la largeur du texte (\MyKey{largeur}). C'est pourquoi le moyen le plus efficace pour ne pas générer d'incohérence entre la taille de la page (définie avec \tex{setuppapersize}) et la taille de ses composants respectifs, est de procéder ainsi~:
+
+
+\startitemize
+
+\item En ce qui concerne les mesures horizontales~:
+
+  \startitemize
+
+
+  \item En ajustant \MyKey{backspace} (ce qui inclut \MyKey{leftedge} et \MyKey{leftmargin}).
+
+  \item En ajustant \MyKey{largeur} (largeur du texte) non pas avec une dimension mais avec les valeurs \MyKey{fit} ou \MyKey{middle} :
+
+    \startitemize
+
+    \item {\tt fit} calcule la largeur du texte sur la base de la largeur du reste des composants horizontaux de la page.
+
+    \item {\tt middle} fait la même chose, mais rend d'abord les marges de droite et de gauche égales.
+
+    \stopitemize
+
+  \stopitemize
+
+\item En ce qui concerne les mesures verticales~:
+
+  \startitemize
+
+  \item En ajustant \MyKey{topspace}.
+
+  \item En donnant les valeurs de \MyKey{fit} ou \MyKey{middle} à
+  \MyKey{height}. Ces valeurs fonctionnent de la même manière que dans le cas de la largeur. Le  premier calcule la hauteur en fonction du reste des composants, et le  la seconde rend les marges supérieure et inférieure égales, puis calcule la hauteur du texte.
+
+  \item Une fois que \MyKey{height} est ajusté, en ajustant la hauteur de l'en-tête ou du pied de page si nécessaire, sachant que dans ce cas \MyKey{hauteur du texte} sera automatiquement réajustée.
+
+  \stopitemize
+
+\item Une autre possibilité pour déterminer de manière indirecte la hauteur de la
+de la zone de texte principale, en indiquant le nombre de lignes qu'elle doit contenir (en tenant compte de l'espace interligne et de la taille de police actuels). C'est pourquoi \tex{setuplayout} inclut l'option \MyKey{lines}.
+
+\stopitemize
+
+\startsubsubject{Placer la page logique sur la page physique}
+
+
+Dans le cas où la taille de la page logique n'est pas la même que celle de la page physique (voir \in{section}[sec:pagesize]), \tex{setuplayout} nous permet de configurer certaines options supplémentaires affectant le placement de la page logique sur la page physique :
+
+\startitemize
+
+\item {\tt\bf location} : Cette option détermine l'endroit où la page sera placée sur la page physique. Ses valeurs possibles sont : left, middle, right, top, bottom, singlesided, doublesided or duplex.
+
+\item {\tt\bf scale} : Indique un facteur d'échelle pour la page avant de la placer sur la page physique.
+
+\item {\tt\bf marking} : Imprime des marques visuelles sur la page pour indiquer où le papier doit être coupé.
+
+\item {\tt\bf horoffset, veroffset, clipoffset, cropoffset, trimoffset, bleedoffset, artoffset} : Une série de mesures indiquant différents déplacements dans la page physique. La plupart d'entre elles sont expliquées dans le 
+\goto{manuel de référence 2013}[url(http://pmrb.free.fr/contextref.pdf\#page=42)]
+
+
+\stopitemize
+
+Ces options \tex{setuplayout} doivent être combinées avec les indications de \PlaceMacro{setuparranging}\tex{setuparranging} qui indique comment les pages logiques doivent être ordonnées sur la feuille de papier physique. Je n'expliquerai pas ces commandes dans cette introduction, car je n'ai pas effectué de tests à leur sujet.
+
+\stopsubsubject
+
+\startsubsubject{Obtenir la largeur et de la hauteur de la zone de texte}
+
+Les commandes \PlaceMacro{textwidth}\tex{textwidth} et \PlaceMacro{textheight}\tex{textheight} renvoient respectivement la largeur et la hauteur de la zone de texte. Les valeurs affichées par ces commandes ne peuvent pas être directement affichées dans le document final, mais elles peuvent être utilisées par d'autres commandes pour définir leurs mesures de largeur ou de hauteur. Ainsi, par exemple, pour indiquer que nous voulons une image dont la largeur sera de 60\% de la largeur de la ligne, nous devons indiquer comme valeur de l'option \MyKey{width} de l'image : \MyKey{width=0.6\backslash textwidth}.
+
+\startsubsubject
+
+\stopsubsection
+
+% ** SubSection adaptlayout
+
+\startsubsection
+  [title=Adapter la mise en page]
+\PlaceMacro{adaptlayout}
+
+Il se peut que notre mise en page sur une page particulière produise un résultat non souhaité ; comme, par exemple, la dernière page d'un chapitre avec seulement une ou deux lignes, ce qui n'est ni typographiquement ni esthétiquement souhaitable. Pour résoudre ces cas, \ConTeXt\ fournit la commande \tex{adaptlayout} qui nous permet de modifier la taille de la zone de texte sur une ou plusieurs pages. Cette commande est destinée à être utilisée uniquement lorsque nous avons déjà terminé la rédaction de notre document et que nous procédons à quelques petits ajustements finaux. Par conséquent, son emplacement naturel est dans le préambule du document. La syntaxe de la commande est la suivante :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\adaptlayout [Pages] [Options]
+\stopDemoI}
+
+où {\em Pages} fait référence au numéro de la page ou des pages dont on veut modifier la mise en page. Il s'agit d'un argument facultatif qui ne doit être utilisé que lorsque \tex{adaptlayout} est placé dans le préambule. Nous pouvons indiquer une seule page, ou plusieurs pages, en séparant les numéros par des virgules. Si nous omettons ce premier argument, \tex{adaptlayout} affectera exclusivement la page sur laquelle il trouve la commande.
+
+Quant aux options, elles peuvent être :
+
+\startitemize
+
+\item {\tt\bf height} : Permet d'indiquer, sous forme de dimensions, la hauteur que doit avoir la page en question. Nous pouvons indiquer une hauteur absolue (par exemple, "19cm") ou une hauteur relative (par exemple, "+1cm", "-0,7cm").
+
+\item {\tt\bf lines} :  On peut inclure le nombre de lignes à ajouter ou à soustraire. Pour ajouter des lignes, la valeur est précédée d'un +, et pour soustraire des lignes, du signe $-$.
+
+\stopitemize
+
+
+Considérez que lorsque nous modifions le nombre de lignes d'une page, cela peut affecter la pagination du reste du document. C'est pourquoi il est recommandé d'utiliser \tex{adaptlayout} uniquement à la fin, lorsque le document ne subira plus de modifications, et de le faire dans le préambule. Ensuite, nous allons à la première page que nous souhaitons adapter, nous le faisons et nous vérifions comment cela affecte les pages qui suivent ; si cela l'affecte de telle manière qu'une autre page doit être adaptée, nous ajoutons son numéro et nous compilons à nouveau, et ainsi de suite.
+
+\stopsubsection
+
+% ** SubSection definelayout
+
+\startsubsection
+  [
+    reference=sec:definelayout,
+    title=Utilisation de différentes mises en page,
+  ] 
+\PlaceMacro{definelayout}
+
+Si nous devons utiliser différentes mises en page dans différentes parties du document, le mieux est de commencer par définir la mise en page {\em générale}, puis les différentes mises en page alternatives, celles qui ne modifient que les dimensions qui doivent être différentes. Ces mises en page alternatives hériteront de toutes les caractéristiques de la mise en page générale dont la définition ne sera pas modifiée. Pour spécifier une disposition alternative et lui donner un nom avec lequel nous pourrons l'appeler plus tard, nous utilisons la commande \tex{definelayout} dont la syntaxe générale est :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\definelayout [NomMiseEnPage/Numéro] [Configuration]
+\stopDemoI}
+
+
+où {\em Nom/Numéro} est le nom associé à la nouvelle mise en page, ou le numéro de page où la nouvelle mise en page sera automatiquement activée, et {\em Configuration} contiendra les aspects de la mise en page que nous souhaitons modifier par rapport à la mise en page générale.
+
+Lorsque la nouvelle mise en page est associée à un nom, pour l'appeler à un point particulier du document, nous utilisons :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\setuplayout [NomMiseEnPage]
+\stopDemoI}
+
+et pour revenir à la disposition générale :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\setuplayout [reset]
+\stopDemoI}
+
+
+Si, par contre, la nouvelle mise en page a été associée à un numéro de page spécifique, elle sera automatiquement activée lorsque la page sera atteinte. Cependant, une fois activée, pour revenir à la mise en page générale, nous devrons l'indiquer explicitement, même si nous pouvons le faire de manière  {\em semi-automatique}. Par exemple, si nous voulons appliquer une mise en page exclusivement aux pages 1 et 2, nous pouvons écrire dans le préambule du document : 
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\definelayout[1][...]
+\definelayout[3][reset]
+\stopDemoI}
+
+
+L'effet de ces commandes sera que la mise en page définie dans la première ligne est activée sur la page 1 et sur la page 3 une autre mise en page est activée dont la fonction est uniquement de revenir à la mise en page générale.
+
+Avec \tex{definelayout[even]} nous créons une mise en page qui sera activée sur toutes les pages paires ; et avec \tex{definelayout[odd]} la mise en page sera appliquée à toutes les pages impaires.
+
+\stopsubsection
+
+% ** SubSection autres
+
+\startsubsection
+  [
+    reference=sec:pages-other-matters,
+    title=Autres questions relatives à la mise en page,
+  ]
+
+% ***  SubSubSection pages paires et impaires
+
+\startsubsubsection
+  [
+    reference=sec:double-sided,
+    title=Distinction entre les pages paires et impaires,
+  ]
+
+
+Dans les documents imprimés recto-verso, il arrive souvent que l'en-tête, la numérotation des pages et les marges latérales diffèrent entre les pages paires (even) et impaires (odd). Les pages paires (even) sont également appelées pages de gauche (verso) et les pages impaires (odd), pages de droite (recto). Dans ces cas, il est également habituel que la terminologie concernant les marges change, et l'on parle de marges intérieures (inner) et extérieures (outer). La première est située au point le plus proche de l'endroit où les pages seront cousues ou agrafées et la seconde sur le côté opposé. Sur les pages impaires, la marge intérieure correspond à la marge de gauche et sur les pages paires, la marge intérieure correspond à la marge de droite.
+
+\tex{setuplayout} ne dispose d'aucune option nous permettant expressément de lui indiquer que nous voulons différencier la mise en page pour les pages impaires et paires.  En effet, pour \ConTeXt\ la différence entre les deux types de pages est définie par une option différente : \tex{setuppagenumbering} que nous verrons dans \in{section}[sec:numpages]. Une fois cette option définie, \ConTeXt\ suppose que la page décrite avec \tex{setuplayout} était la page impaire, et construit la page paire en lui appliquant les valeurs inversées de la page impaire : les spécifications applicables sur la page impaire s'appliquent à la gauche, sur la page paire elles s'appliquent à la droite ; et vice versa : celles applicables sur la page impaire à droite, s'appliquent à la page paire à gauche.
+
+\stopsubsubsection
+
+% ***  SubSubSection pages avec plus d'une colonne
+
+\startsubsubsection
+  [
+    reference=sec:pages-columns,
+    title=Pages avec plus d'une colonne,
+  ]
+
+
+Avec \tex{setuplayout}, nous pouvons également voir que le texte de notre document est réparti sur deux ou plusieurs colonnes, à la manière des journaux et de certains magazines, par exemple. Cette répartition est contrôlée par l'option \MyKey{columns}, dont la valeur doit être un nombre entier. Lorsqu'il y a plus d'une colonne, la distance entre les colonnes est indiquée par l'option \MyKey{columndistance}.
+
+Cette option est destinée aux documents dans lesquels tout le texte (ou la majeure partie du texte) est réparti sur plusieurs colonnes. Si, dans un document principalement à une colonne, nous souhaitons qu'une partie particulière soit sur deux ou trois colonnes, nous n'avons pas besoin de modifier la mise en page mais simplement d'utiliser l'environnement \MyKey{columns} (voir \in{section}[sec:multiplecolumns]).
+
+
+\stopsubsubsection
+
+\stopsubsection
+
+\stopsection
+
+% * title
+
+\startsection
+  [
+    reference=sec:numpages,
+    title=Numérotation des pages,
+  ]
+
+% TODO Garulfo revoir la forumlation "inutilement complexe"
+
+Par défaut, \ConTeXt\ utilise les chiffres arabes pour la numérotation des pages et le numéro apparaît centré dans l'en-tête. Pour modifier ces caractéristiques, \ConTeXt\ dispose de différentes procédures qui, à mon avis, le rendent inutilement complexe en la matière.
+
+Tout d'abord, les caractéristiques fondamentales de la numérotation sont contrôlées par deux commandes différentes :
+
+
+\PlaceMacro{setuppagenumbering}\tex{setuppagenumbering} et \PlaceMacro{setupuserpagenumber}\tex{setupuserpagenumber}.
+
+\tex{setuppagenumbering} permet les options suivantes :
+
+\startitemize
+
+\item {\tt\bf alternative} : Cette option contrôle si le document est conçu de manière à ce que l'en-tête et le pied de page soient identiques sur toutes les pages (\MyKey{singlesided}), ou s'ils différencient les pages paires et impaires (\MyKey{doublesided}). Lorsque cette option prend cette dernière valeur, les valeurs de mise en page introduites par \MyKey{setup\-layout} sont automatiquement affectées, de sorte qu'il est supposé que ce qui est indiqué dans \MyKey{setup\-layout} se réfère uniquement aux pages impaires qui sont à droite, et donc que ce qui est indiqué pour la marge de gauche se réfère en fait à la marge intérieure (qui deviendra en miroir, sur les pages paires, la marge de droite) et que ce qui est indiquée pour le côté droit se réfère en fait à la marge extérieure, qui, sur les pages paires, sera à gauche.
+
+\item {\tt\bf state} : Indique si le numéro de page sera affiché ou non. Il admet deux valeurs : start (le numéro de page sera affiché) et stop (les numéros de page seront supprimés). Le nom de ces valeurs (start et stop) pourrait nous faire penser que lorsque nous avons \MyKey{state=stop} les pages cessent d'être numérotées, et que lorsque \MyKey{state=start} la numérotation recommence. Mais ce n'est pas le cas : ces valeurs n'affectent que l'affichage ou non du numéro de page.
+
+\item {\tt\bf location} : indique où il sera affiché. Normalement, nous devons indiquer deux valeurs dans cette option, séparées par une virgule. Tout d'abord, nous devons préciser si nous voulons que le numéro de page figure dans l'en-tête (\MyKey{header}) ou dans le pied de page (\MyKey{footer}), et ensuite, à quel endroit dans l'en-tête ou le pied de page : il peut s'agir de \MyKey{left}, \MyKey{middle}, \MyKey{right}, \MyKey{inleft}, \MyKey{inright}, \MyKey{margin}, \MyKey{inmargin}, \MyKey{atmargin} or \MyKey{marginedge}. Par exemple, pour afficher une numérotation alignée à droite dans le pied de page, il faut indiquer \MyKey{location=\{footer,right\}}. Voyez, d'autre part, comment nous avons entouré cette option de crochets afin que \ConTeXt\ puisse interpréter correctement la virgule de séparation.  
+
+\item {\tt\bf style} : indique la taille et le style de police à utiliser pour les numéros de page.
+
+\item {\tt\bf color} : indique la couleur à appliquer au numéro de page.
+
+\item {\tt\bf left} : indique le texte à ajouter à gauche du numéro de page (par exemple un tiret).
+
+\item {\tt\bf right} : indique le texte à ajouter à droite du numéro de page.
+
+\item {\tt\bf command} : indique une commande à laquelle le numéro de page sera passé en paramètre.
+
+\item {\tt\bf width} : indique la largeur occupée par le numéro de page.
+
+\item {\tt\bf strut} : Je n'en suis pas si sûr. Dans mes tests, lorsque \MyKey{strut=no}, le numéro est imprimé exactement sur le bord supérieur de l'en-tête ou sur le bas du pied de page, alors que lorsque \MyKey{strut=yes} (valeur par défaut), un espace est appliqué entre le numéro et le bord.
+
+\stopitemize
+
+
+\tex{setupuserpagenumber} permet les options suivantes :
+
+
+\startitemize
+
+\item {\tt\bf numberconversion} : contrôle le type de numérotation qui peut être arabe (\MyKey{n}, \MyKey{numbers}), minuscule (\MyKey{a}, \MyKey{characters}), majuscule (\MyKey{A},\MyKey{Characters}), petites majuscules (\MyKey{KA}), minuscules romaines (\MyKey{i}, \MyKey{r}, \MyKey{romannumerals}), majuscules romaines (\MyKey{I}, \MyKey{R}, \MyKey{Romannumerals}) ou petites majuscules romaines (\MyKey{KR}).
+
+\item {\tt\bf numéro} : indique le numéro à attribuer à la première page, sur la base duquel le reste sera calculé.
+
+\item {\tt\bf numberorder} : si on lui attribue la valeur \MyKey{reverse}, la numérotation des pages se fera dans l'ordre décroissant ; cela signifie que la dernière page sera la 1, l'avant-dernière la 2, etc.
+
+\item {\tt\bf way} : permet d'indiquer comment la numérotation va se dérouler. Cela peut être : par bloc, par chapitre, par section, par sous-section, etc.
+
+\item {\tt\bf prefix} : permet d'indiquer un préfixe aux numéros de page s'il ont souhaite rajouter un prefix à la numérotation (yes ou no).
+
+\item {\tt\bf prefixset} : permet d'indiquer le préfixe que l'on souhaite rajouter au numéro de page (par exemple \quotation{section} pour préfixer le numéro de page par le numéro de la section en cours).
+
+\item {\tt\bf numberconversionset} : Expliqué dans ce qui suit.
+
+\stopitemize
+
+En plus de ces deux commandes, il faut également prendre en compte le contrôle des numéros impliquant la macrostructure du document (voir \in{section}[sec:macrostructure]). De ce point de vue, \PlaceMacro{defineconversionset}\tex{defineconversionset} permet d'indiquer un type de numérotation différent pour chacun des blocs de macro-structure. Par exemple :
+\index{macro-structure}
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\defineconversionset
+  [frontpart:pagenumber][][romannumerals]
+
+\defineconversionset
+  [bodypart:pagenumber][][numbers]
+
+\defineconversionset
+  [appendixpart:pagenumber][][Characters]
+\stopDemoI}
+
+
+Vous verrez que le premier bloc de notre document (le préambule, aussi appelé frontmatter en anglais) est numéroté avec des chiffres romains minuscules, le bloc central (le corps du texte, ou bodymatter en anglais) avec des chiffres arabes et les annexes (appendices en anglais) avec des lettres majuscules.
+
+Nous pouvons utiliser les commandes suivantes pour obtenir le numéro de page~:
+
+\startitemize
+
+\item \PlaceMacro{userpagenumber}\tex{userpagenumber} : renvoie le numéro de page tel qu'il a été configuré avec \tex{setuppagenumbering} et avec \tex{setupuserpagenumber}.
+
+\item \PlaceMacro{pagenumber}\tex{pagenumber} : renvoie le même numéro que la commande précédente mais toujours en numérotation arabe.
+
+\item \PlaceMacro{realpagenumber}\tex{realpagenumber} : renvoie le numéro réel de la page en numérotation arabes sans tenir compte des spécifications indiquées par \tex{setuppagenumbering} (sans saut de numérotation, en commençant de numéroter par 1, ...).
+
+\stopitemize
+
+
+Pour obtenir le numéro de la dernière page du document, il existe trois commandes en miroir des trois précédentes. Il s'agit de : \PlaceMacro{lastuserpagenumber}\tex{lastuserpagenumber}, \PlaceMacro{lastpagenumber}\tex{lastpagenumber} et \PlaceMacro{lastrealpagenumber}\tex{lastrealpagenumber}.
+
+\stopsection
+
+% * Section
+
+\startsection
+  [title=Sauts de page forcés ou suggérés,
+   reference=sec:pagebreak]
+
+% ** SubSection commande page
+
+\startsubsection
+  [title=La commande \tex{page}]
+\PlaceMacro{page}
+
+L'algorithme de distribution du texte dans \ConTeXt\ est assez complexe et repose sur une multitude de calculs et de variables internes qui indiquent au programme quel est le meilleur endroit possible pour introduire un saut de page réel du point de vue de la pertinence typographique. La commande \tex{page} nous permet d'influencer cet algorithme :
+
+\startitemize[a]
+
+\item En suggérant certains points comme étant le meilleur endroit ou le plus inapproprié pour inclure un saut de page.
+
+  \startitemize[packed]
+
+  \item {\tt\bf no} : indique que l'endroit où se trouve la commande n'est pas un bon candidat pour insérer un saut de page, donc, dans la mesure du possible, le saut doit être effectué à un autre endroit du document.
+    
+  \item {\tt\bf preference} : indique à \ConTeXt\ que l'endroit où il rencontre la commande est un {\em bon endroit} pour tenter un saut de page, bien qu'il ne le forcera pas.
+
+  \item {\tt\bf bigpreference} : indique que l'endroit où il rencontre la commande est un {\em très bon endroit} pour tenter un saut de page, mais il ne va pas non plus jusqu'à le forcer.
+
+  \stopitemize
+
+  Notez que ces trois options ne forcent ni n'empêchent les sauts de page, mais indiquent seulement à \ConTeXt\ que lorsqu'il recherche le meilleur endroit pour un saut de page, il doit prendre en compte ce qui est indiqué dans cette commande. En dernier ressort, cependant, l'endroit où le saut de page aura lieu continuera à être décidé par \ConTeXt.
+
+\item En forçant un saut de page à un certain endroit ; dans ce cas, nous pouvons également indiquer combien de sauts de page doivent être effectués ainsi que certaines caractéristiques des pages à insérer.
+
+  \startitemize [packed]
+
+  \item {\tt\bf yes} : force un saut de page à cet endroit.
+
+  \item {\tt\bf makeup} : similaire à \MyKey{yes}, mais le saut forcé est immédiate, sans placer au préalable les objets flottants dont le placement est en attente (voir \in{section}[sec:floating objects]).
+
+  \item {\tt\bf empty} : insérer une page complètement vierge dans le document.
+    
+  \item {\tt\bf even} : insérer autant de pages que nécessaire pour que la page suivante soit une page paire.
+    
+  \item {\tt\bf odd} : insérer autant de pages que nécessaire pour que la page suivante soit une page impaire.
+    
+  \item {\tt\bf left, right} : similaire aux deux options précédentes, mais applicable uniquement aux documents imprimés en recto-verso, avec des en-têtes, pieds de page ou marges différents selon que la page est paire ou impaire.
+    
+  \item {\tt\bf quadruple} : insère le nombre de pages nécessaires pour que la page suivante soit un multiple de 4.
+   
+\stopitemize
+
+\stopitemize
+
+Outre ces options qui contrôlent spécifiquement la pagination, \tex{page} comprend d'autres options qui affectent le fonctionnement de cette commande. En particulier l'option \MyKey{disable} qui fait que \ConTeXt\ ignore les commandes \tex{page} qu'il trouve à partir de maintenant, et l'option \MyKey{reset} qui produit l'effet inverse, en restaurant l'efficacité des futures commandes \tex{page}.
+
+\stopsubsection
+
+% ** SubSection
+
+\startsubsection
+  [title=Joindre certaines lignes ou certains paragraphes pour empêcher l'insertion d'un saut de page entre eux]
+
+
+Parfois, si l'on veut empêcher un saut de page entre plusieurs paragraphes, l'utilisation de la commande \tex{page} peut être laborieuse, car il faudrait l'écrire à chaque endroit où il est possible qu'un saut de page soit inséré. Une procédure plus simple consiste à placer les éléments que l'on souhaite conserver sur la même page dans ce que \TeX\ appelle une {\em boîte verticale}.
+
+\startSmallPrint
+
+  Au début de ce document (sur \at{page}[ref:boîtes]), j'ai indiqué qu'en interne, tout est une {\em boîte} pour \TeX. La notion de boîte est fondamentale dans \TeX\ pour tout type d'opération {\em avancée} ; mais sa gestion est trop complexe pour être incluse dans cette introduction. C'est pourquoi je ne fais que des références occasionnelles aux boîtes.
+
+\stopSmallPrint
+
+Les boîtes \TeX\, une fois créées, sont indivisibles, ce qui signifie que nous ne pouvons pas insérer un saut de page qui couperait une boîte en deux. C'est pourquoi, si nous plaçons le contenu que nous voulons conserver en un bloc dans une boîte invisible, nous évitons l'insertion d'un saut de page qui diviserait ce contenu. La commande pour ce faire est \PlaceMacro{vbox}\tex{vbox}, dont la syntaxe est la suivante
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\vbox{mon contenu}
+\stopDemoI}
+
+
+où {\em mon contenu} est le texte que nous voulons conserver en un bloc.
+
+Certains des environnements de \ConTeXt placent leur contenu dans une boîte. Par exemple, \MyKey{framedtext}, donc si nous encadrons le matériel que nous voulons garder ensemble dans cet environnement et que nous voyons également que le cadre est invisible (ce que nous faisons avec l'option {\tt frame=off}), nous obtiendrons le même résultat.
+
+\stopsubsection
+
+\stopsection
+
+% * Section
+
+\startsection
+  [
+    reference=sec:headerfooter,
+    title=En-têtes et pieds de page,
+  ]
+
+% ** SubSection
+
+\startsubsection
+  [title=Commandes pour établir le contenu des en-têtes et des pieds de page]
+\PlaceMacro{setupheadertexts}\PlaceMacro{setupfootertexts}
+
+
+
+Si nous avons attribué une certaine taille à l'en-tête et au pied de page dans la mise en page, nous pouvons y inclure du texte avec les commandes \tex{setupheadertexts} et \tex{setupfootertexts}. Ces deux commandes sont similaires, la seule différence étant que la première active le contenu de l'en-tête et la seconde celui du pied de page. Elles ont toutes deux de un à cinq arguments.
+
+\startitemize[n]
+
+\item Utilisé avec un seul argument, il contient le texte de l'en-tête ou du pied de page qui sera placé au centre de la page. Par exemple : \tex{setupfootertexts[pagenumber]} écrira le numéro de page au centre du pied de page.
+
+\item Utilisé avec deux arguments, le contenu du premier argument sera placé sur le côté gauche de l'en-tête ou du pied de page, et celui du second argument sur le côté droit. Par exemple, \tex{setupheadertexts[Preface][pagenumber]} composera un en-tête de page dans lequel le mot \quotation{preface} sera écrit sur le côté gauche et le numéro de page sera imprimé sur le côté droit.
+
+\item Si nous utilisons trois arguments, le premier indiquera {\em la zone} dans laquelle les deux autres doivent être imprimés. Par {\em zone} je fais référence aux {\em zones} qui se répartissent horizontalement au travers de la page, mentionnées dans \in{section}[sec:page-elements], autrement dit : edge (bord), margin (marge), text (texte)... Les deux autres arguments contiennent le texte à placer dans le bord, la marge de gauche et le bord, la marge de droite.
+
+\stopitemize
+
+
+L'utiliser avec quatre ou cinq arguments est équivalent à l'utiliser avec deux ou trois arguments, dans les cas où une distinction est faite entre les pages paires et impaires, ce qui se produit, comme nous le savons, lorsque \MyKey{alternative=doublesided} avec \tex{setuppagenumbering} a été défini.  Dans ce cas, deux arguments possibles sont ajoutés pour refléter le contenu des côtés gauche et droit des pages paires.
+
+Une caractéristique importante de ces deux commandes est que, lorsqu'elles sont utilisées avec deux arguments, l'en-tête ou le pied de page central précédent (s'il existait) n'est pas réécrit, ce qui nous permet d'écrire un texte différent dans chaque zone, à condition d'écrire d'abord le texte central (en appelant la commande avec un seul argument) et d'écrire ensuite les textes des deux côtés (en l'appelant à nouveau, maintenant avec deux arguments). Ainsi, par exemple, si nous écrivons les commandes suivantes 
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\setupheadertexts[and]
+\setupheadertexts[Tweedledum][Tweedledee]
+\stopDemoI}
+
+La première commande écrira \quotation{et} au centre de l'en-tête et la seconde écrira \quotation{Tweedledum} à gauche et \quotation{Tweedledee} à droite, laissant la zone centrale intacte, puisqu'il n'a pas été demandé de la réécrire. L'en-tête qui en résulte se présente alors comme suit
+
+\color[maincolor] {Tweedledum\hfill and\hfill Tweedledee}
+
+\startSmallPrint
+
+  L'explication que je viens de donner du fonctionnement de ces commandes est ma conclusion après de nombreux tests. L'explication de ces commandes fournie dans \ConTeXt\ {\em excursion} est basée sur la version avec cinq arguments ; et celle du manuel de référence 2013 est basée sur la version avec trois arguments. Je pense que ma \Conjecture est plus claire.   D'autre part, je n'ai pas vu d'explication sur la raison pour laquelle le deuxième appel de commande n'écrase pas l'appel précédent, mais c'est ainsi que cela fonctionne si nous écrivons d'abord l'élément central dans l'en-tête ou le pied de page, puis ceux de chaque côté. Mais si nous écrivons d'abord les éléments de chaque côté dans l'en-tête ou le pied de page, l'appel ultérieur à la commande d'écriture de l'élément central effacera les en-têtes ou pieds de page précédents. Pourquoi ? Je n'en ai aucune idée. Je pense que ces petits détails introduisent une complication inutile et devraient être clairement expliqués dans la documentation officielle.
+
+\stopSmallPrint
+
+En outre, nous pouvons indiquer toute combinaison de texte et de commandes comme contenu de l'en-tête ou du pied de page. Mais aussi les valeurs suivantes :
+
+\startitemize
+
+\item {\tt\bf date, currentdate} : écrira (l'un ou l'autre) la date du jour.
+
+\item {\tt\bf pagenumber} : écrira le numéro de page.
+
+\item {\tt\bf part, chapter, section...} : écrira le titre correspondant à la partie, au chapitre, à la section... ou à toute autre division structurelle.
+
+\item {\tt\bf partnumber, chapternumber, sectionnumber...} : indique le numéro de la partie, du chapitre, de la section... ou de toute autre division structurelle.
+
+\stopitemize
+
+  {\bf Attention:} Ces noms symboliques ({\tt date, currentdate, pagenumber, chapter, chapternumber}, etc. ) ne sont interprétés comme tels que si le nom symbolique lui-même est le seul contenu de l'argument ; mais si nous ajoutons une autre commande de texte ou de formatage, ces mots seront interprétés littéralement, et ainsi, par exemple, si nous écrivons \tex{setupheadertexts[chapternumber]} nous obtiendrons le numéro du chapitre actuel ; mais si nous écrivons \tex{setupheadertexts[{Chapitre chapternumber}]} nous obtiendrons :   \quotation{Chapitre~chapternumber}. Dans ces cas, lorsque le contenu de la commande n'est pas seulement le mot symbolique, nous devons :
+
+\startitemize
+
+  \item Pour {\tt date, currentdate} et {\tt pagenumber}, utilisez, non pas le mot symbolique, mais la commande du même nom (\tex{date}, \tex{currentdate} ou \PlaceMacro{pagenumber}\tex{pagenumber}).
+
+  \item Pour {\tt part, partnumber, chapter, chapternumber}, etc., utilisez la commande \PlaceMacro{getmarking}\tex{getmarking[info]} qui renvoie le contenu de l'{\em info} demandée. Ainsi, par exemple, \tex{getmarking[chapter]} renvoie le titre du chapitre en cours, tandis que \tex{getmarking[chapternumber]} renvoie son numéro.
+
+  \stopitemize
+
+
+
+% TODO GArulfo on a déjà donné une solution à cela : \setupheader[state=stop]
+% Si l'on souhaite uniquement supprimer le numéro de page d'une page particulière, il faut utiliser la commande \tex{page[blank]} qui créera une page complètement blanche.
+% TODO garulfo : modifié la proposition "pour désactiver l'affichage du numéro de la page sur une page donnée.
+
+% TODO Garulfo : à montrer aussi comment définir par zone frontmatter etc...
+
+
+\stopsubsection
+
+% ** > > SubSection
+
+\startsubsection
+  [title=Mise en forme des en-têtes et des pieds de page]
+
+\PlaceMacro{setupheader}\PlaceMacro{setupfooter}
+
+
+Le format spécifique dans lequel le texte de l'en-tête ou du pied de page est affiché peut être indiqué dans les arguments de \tex{setupheadertexts} ou \tex{setupfootertexts} en utilisant les commandes de format correspondantes dans les crochets des différents éléments. 
+
+Cependant, on peut aussi configurer cela globalement avec \tex{setupheader} et \tex{setupfooter} qui offrent les options suivantes~:
+
+
+\startitemize
+
+\item {\tt\bf state} : permet les valeurs suivantes : {\tt start, stop, empty, high, none, normal} ou {\tt nomarking}.
+  
+\item {\tt\bf style, leftstyle, rightstyle} : configuration du style de texte de l'en-tête et du pied de page. {\tt style} affecte toutes les pages, {\tt leftstyle} les pages paires et {\tt rightstyle} les pages impaires.
+  
+\item {\tt\bf color, leftcolor, rightcolor} : couleur de l'en-tête ou du pied de page. Elle peut affecter toutes les pages (option {\tt color}) ou seulement les pages paires ({\tt leftcolor}) ou impaires ({\tt rightcolor}).
+  
+\item {\tt\bf width, leftwidth, rightwidth} : largeur de tous les en-têtes et pieds de page ({\tt width}) ou des en-têtes/pieds de page sur les pages paires ({\tt leftwidth}) ou impaires ({\tt rightwidth}).
+
+\item {\tt\bf before} : commande à exécuter avant d'écrire l'en-tête ou le pied de page.
+
+\item {\tt\bf after} : commande à exécuter après l'écriture de l'en-tête ou du pied de page.
+
+\item {\tt\bf strut} : si renseigné avec \quotation{yes}, \ConTeXt\ va donner une profondeur et une hauteur en lien avec la police utilisée, même si le texte utilisé en question n'utilise que des lettres sans jambage (la patte du p, la partie supérieure d'un h...). En conséquence, un espace de séparation vertical est établi entre le texte de l'en-tête et le bord supérieur de la zone d'en-tête. Si renseigné avec \quotation{no}, la hauteur et la profondeur de ligne collent strictement au texte de l'en-tête et ce dernier vient buter contre le bord supérieur de la zone d'en-tête.
+
+\stopitemize
+
+
+  Pour désactiver (voire modifier) les en-têtes et les pieds de page \quotation{localement}, c'est à dire sur une page particulière, utilisez les commandes 
+\PlaceMacro{\setupheader}\tex{\setupheader[state=empty]} 
+\PlaceMacro{\setupfooter}\tex{\setupfooter[state=empty]} 
+au sein de la page. Ces commandes agissent exclusivement sur la page où elles se trouvent.
+
+% TODO Garulfo : Pour visualiser l'effet de strut~:
+
+% \startbuffer[a7-bufA]
+% \setupbodyfont[8pt]
+% \showframe
+% \definepapersize[fiche][width=12cm,height=12cm]
+% \setuppapersize[fiche]
+% \setuplayout[footerdistance=0.25cm]
+% \setupheader[strut=yes,before={\startcolor[blue]\showboxes},after=\stopcolor]
+% \setupheadertexts[Mon entête]
+% \setupfooter[strut=yes,before={\startcolor[blue]\showboxes},after=\stopcolor]
+% \setupfootertexts[Le pied de page][pagenumber]
+% \starttext
+% We thrive in information--thick worlds because of our marvelous and everyday capacity to select, edit, single out, structure, highlight, group, pair, merge, harmonize, synthesize, focus, organize, condense, reduce, boil down, choose, categorize, catalog, classify, list, abstract, scan, look into, idealize, isolate, discriminate, distinguish, screen, pigeonhole, pick over, sort, integrate, blend, inspect, filter, lump, skip, smooth, chunk, average, approximate, cluster, aggregate, outline, summarize, itemize, review, dip into, flip through, browse, glance into, leaf through, skim, refine, enumerate, glean, synopsize, winnow the wheat from the chaff and separate the sheep from the goats.
+% \stoptext
+% \stopbuffer
+
+% \startbuffer[a7-bufB]
+% \setupbodyfont[8pt]
+% \showframe
+% \definepapersize[fiche][width=12cm,height=12cm]
+% \setuppapersize[fiche]
+% \setuplayout[footerdistance=0.25cm]
+% \setupheader[strut=no,before={\startcolor[blue]\showboxes},after=\stopcolor]
+% \setupheadertexts[Mon entête]
+% \setupfooter[strut=no,before={\startcolor[blue]\showboxes},after=\stopcolor]
+% \setupfootertexts[Le pied de page][pagenumber]
+% \starttext
+% We thrive in information--thick worlds because of our marvelous and everyday capacity to select, edit, single out, structure, highlight, group, pair, merge, harmonize, synthesize, focus, organize, condense, reduce, boil down, choose, categorize, catalog, classify, list, abstract, scan, look into, idealize, isolate, discriminate, distinguish, screen, pigeonhole, pick over, sort, integrate, blend, inspect, filter, lump, skip, smooth, chunk, average, approximate, cluster, aggregate, outline, summarize, itemize, review, dip into, flip through, browse, glance into, leaf through, skim, refine, enumerate, glean, synopsize, winnow the wheat from the chaff and separate the sheep from the goats.
+% \stoptext
+% \stopbuffer
+
+% \placefigure [force,here,none] [] {}{\typesetbuffer[a7-bufA][frame=on,page=1]}
+% \placefigure [force,here,none] [] {}{\typesetbuffer[a7-bufB][frame=on,page=1]}
+
+% \subsection{Text in the upper and lower edges}
+
+% If we recall what I explained in \in{section}[sec:elementospag]
+% regarding page elements, I said that the upper and lower
+% edges of the page ({\tt top} and {\tt bottom} in
+% \ConTeXt terminology) in principle must not have text. However,
+% this is not an absolute rule, since, mainly in electronic
+% documents intended for display on screen, it can be
+% useful to include some textual elements in these areas. This is why
+% \ConTeXt\ allows text content in them
+
+\stopsubsection
+
+% ** SubSection
+
+\startsubsection
+  [title=Définir des en-têtes et des pieds de page spécifiques et les relier aux commandes de section]
+\PlaceMacro{definetext}
+
+Jusqu'à présent, le système d'en-tête et de pied de page de \ConTeXt\ nous permet de changer automatiquement le texte de l'en-tête ou du pied de page lorsque nous changeons de chapitre ou de section, ou lorsque nous changeons de page, si nous avons défini des en-têtes ou des pieds de page différents pour les pages paires et impaires. Mais ce qu'il ne permet pas, c'est de différencier la première page (du document, d'un chapitre ou d'une section) du reste des pages. Pour réaliser ce dernier point, nous devons : 
+
+\startitemize [n, packed]
+
+\item Définir un en-tête ou un pied de page spécifique. 
+\item Le lier à la section à laquelle il doit s'applique.
+  
+\stopitemize
+
+La définition d'en-têtes ou de pieds de page spécifiques s'effectue à l'aide de la fonction \tex{definetext}, dont la syntaxe est la suivante :
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\definetext 
+  [Name] [Type]
+  [Content1] [Content2] [Content3]
+  [Content4] [Content5]
+\stopDemoI}
+
+où {\em Name} est le nom attribué à l'en-tête ou au pied de page dont il s'agit ; {\em Type} peut être {\tt header} ou {\tt footer}, selon celui que nous définissons, et les cinq arguments restants contiennent le contenu que nous voulons pour le nouvel en-tête ou pied de page, de manière similaire à la façon dont nous avons vu les fonctions \PlaceMacro{setupheadertexts}\tex{setupheadertexts} et \PlaceMacro{setupfootertexts}\tex{setupfootertexts}. 
+
+Une fois cette opération effectuée, nous devons lier le nouvel en-tête ou le nouveau pied de page à une section particulière avec \tex{setuphead} en utilisant les options {\em header} et {\tt footer} (qui ne sont pas expliquées dans \in{Chapter}[cap:structure]).
+
+
+Ainsi, l'exemple suivant masquera l'en-tête de la première page de chaque chapitre et un numéro de page centré apparaîtra en pied de page :
+
+\placefigure [here,force,none] [] {}
+{\startDemoI
+\setuphead 
+  [chapter]
+  [footer=ChapterFirstPage]
+\stopDemoI}
+
+
+\startbuffer[a7-bufC]
+\setuppapersize[A7,landscape]
+\showframe
+\setupbodyfont[8pt]
+\starttext
+\startchapter[title=Test]
+We thrive in information--thick worlds because of our marvelous and everyday capacity to select, edit, single out, structure, highlight, group, pair, merge, harmonize, synthesize, focus, organize, condense, reduce, boil down, choose, categorize, catalog, classify, list, abstract, scan, look into, idealize, isolate, discriminate, distinguish, screen, pigeonhole, pick over, sort, integrate, blend, inspect, filter, lump, skip, smooth, chunk, average, approximate, cluster, aggregate, outline, summarize, itemize, review, dip into, flip through, browse, glance into, leaf through, skim, refine, enumerate, glean, synopsize, winnow the wheat from the chaff and separate the sheep from the goats.
+\stopchapter
+\stopbuffer
+
+\savebuffer[list=a7-bufD,file=ex_definetext_sans.tex,prefix=no]
+\placefigure [force,here,none] [] {}{\typesetbuffer[a7-bufC][frame=on,page=1,background=color,backgroundcolor=white]
+\attachment
+  [file={ex_definetext_sans.tex},
+   title={exemple definetext sans}]}
+
+
+
+\startbuffer[a7-bufD]
+\setuppapersize[A7,landscape]
+\showframe
+\setupbodyfont[8pt]
+\definetext[ChapterFirstPage] [footer] [pagenumber]
+\setuphead 
+  [chapter]
+  [header=high, footer=ChapterFirstPage]
+\starttext
+\startchapter[title=Test]
+We thrive in information--thick worlds because of our marvelous and everyday capacity to select, edit, single out, structure, highlight, group, pair, merge, harmonize, synthesize, focus, organize, condense, reduce, boil down, choose, categorize, catalog, classify, list, abstract, scan, look into, idealize, isolate, discriminate, distinguish, screen, pigeonhole, pick over, sort, integrate, blend, inspect, filter, lump, skip, smooth, chunk, average, approximate, cluster, aggregate, outline, summarize, itemize, review, dip into, flip through, browse, glance into, leaf through, skim, refine, enumerate, glean, synopsize, winnow the wheat from the chaff and separate the sheep from the goats.
+\stopchapter
+\stoptext
+\stopbuffer
+
+\savebuffer[list=a7-bufD,file=ex_definetext_avec.tex,prefix=no]
+\placefigure [here,force,none] [] {}{\typesetbuffer[a7-bufD][frame=on,page=1,background=color,backgroundcolor=white]
+\attachment
+  [file={ex_definetext_avec.tex},
+   title={exemple definetext avec}]}
+
+\stopsubsection
+
+\stopsection
+
+% * Section
+
+\startsection
+  [
+    reference=sec:margintext,
+    title=Insertion d'éléments de texte dans les bords de page et les marges,
+  ]
+
+Les bords supérieur et inférieur et les marges droite et gauche ne contiennent généralement pas de texte d'aucune sorte. Cependant, \ConTeXt\ permet d'y placer certains éléments de texte. En particulier, les commandes suivantes sont disponibles à cet effet :
+
+\startitemize
+
+\item \PlaceMacro{setuptoptexts}\tex{setuptoptexts} : permet de placer du texte sur le bord supérieur de la page (au-dessus de la zone d'en-tête).
+
+\item \PlaceMacro{setupbottomtexts}\tex{setupbottomtexts} : permet de placer du texte au bord inférieur de la page (sous la zone de pied de page).
+
+
+\item \PlaceMacro{margintext}\tex{margintext},
+  \PlaceMacro{atleftmargin}\tex{atleftmargin},
+  \PlaceMacro{atrightmargin}\tex{atrightmargin},
+  \PlaceMacro{ininner}\tex{ininner},
+  \PlaceMacro{ininneredge}\tex{ininneredge},
+  \PlaceMacro{ininnermargin}\tex{ininnermargin},
+  \PlaceMacro{inleft}\tex{inleft},
+  \PlaceMacro{inleftedge}\tex{inleftedge},
+  \PlaceMacro{inleftmargin}\tex{inleftmargin},
+  \PlaceMacro{inmargin}\tex{inmargin}, 
+  \PlaceMacro{inother}\tex{inother},
+  \PlaceMacro{inouter}\tex{inouter},
+  \PlaceMacro{inouteredge}\tex{inouteredge},
+  \PlaceMacro{inoutermargin}\tex{inoutermargin},
+  \PlaceMacro{inright}\tex{inright},
+  \PlaceMacro{inrightedge}\tex{inrightedge},
+  \PlaceMacro{inrightmargin}\tex{inrightmargin}~: nous permettent de placer du texte dans les bords latéraux et les marges du document.
+
+
+\stopitemize
+
+Les deux premières commandes fonctionnent exactement comme \tex{setupheadertexts} et \tex{setupfootertexts}, et le format de ces textes peut même être configuré à l'avance avec \tex{setuptop} et \tex{setupbottom} de la même manière que \tex{setupheader} nous permet de configurer les textes pour \tex{setupheadertexts}. Pour tout cela, je renvoie à ce que j'ai déjà dit dans \in{section}[sec:headerfooter]. Le seul petit détail à ajouter est que le texte mis en place pour \tex{setuptoptexts} ou \tex{setupbottomtexts} ne sera pas visible si aucun espace n'a été réservé dans la mise en page pour les bords supérieur ({\tt top}) ou inférieur ({\tt bottom}). Pour cela, voir \in{section}[sec:setuplayout].
+
+Quant aux commandes visant à placer du texte dans les marges du document, elles ont toutes une syntaxe similaire car sont toutes définies par \tex{definemargindata} avec des options particulières pour chacunes.
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\CommandName[Reference][Configuration]{Text}
+\stopDemoI}
+
+
+où {\em Reference} et {\em Configuration} sont des arguments optionnels ; le premier est utilisé pour d'éventuelles références croisées et le second nous permet de configurer le texte de la marge. Le dernier argument, entre crochets, contient le texte à placer dans la marge.
+
+\inouter{\tfxx exemple de\\ \tex{inouter}, où l'on constate que le texte est dans la marge externe et justifié vers l'interne}
+Parmi ces commandes, une habituellement utilisée est \tex{margintext} car elle permet de placer le texte dans la marge de gauche de la page avec une justification à droite. Les autres commandes, comme leur nom l'indique, placent le texte dans la marge elle-même (droite ou gauche, intérieure ou extérieure), ou dans le bord (droit ou gauche, intérieur ou extérieur). Ces commandes sont étroitement liées à la mise en page car si, par exemple, nous utilisons \tex{inrightedge} mais que nous n'avons pas réservé d'espace dans la mise en page pour le bord droit, rien ne sera visible.
+
+Les options de configuration de \tex{margintext} sont les suivantes :
+
+\startitemize
+
+\item {\tt\bf location} : indique dans quelle marge le texte sera placé. Elle peut être {\tt left}, {\tt right} ou, dans les documents recto-verso, {\tt outer} ou {\tt inner}. Par défaut, il s'agit de {\tt left} pour les documents recto et de {\tt outer} pour les documents recto-verso.
+
+\item {\tt\bf width} : largeur disponible pour l'impression du texte. Par défaut, la largeur totale de la marge sera utilisée.
+
+\item {\tt\bf margin} : indique si le texte sera placé dans la {\tt margin} elle-même ou dans le {\tt edge}, voire directement au contact du texte principal avec  {\tt normal}.
+
+\item {\tt\bf align} : alignement du texte. Les mêmes valeurs sont utilisées ici que dans \in{\tex{setupalign}}[sec:setupalign].
+
+\item {\tt\bf line} : permet d'indiquer un nombre de lignes de déplacement du texte dans la marge. Ainsi, {\tt line=1} déplacera le texte d'une ligne en dessous et {\tt ligne=-1} d'une ligne au-dessus.
+
+\item {\tt\bf style} : commande ou commandes permettant d'indiquer le style du texte à placer dans les marges.
+
+\item {\tt\bf color} : couleur du texte des marges.
+
+\item {\tt\bf command} : nom d'une commande à laquelle le texte à placer dans la marge sera passé en argument. Cette commande sera exécutée avant d'écrire le texte. Par exemple, si nous voulons dessiner un cadre autour du texte, nous pouvons utiliser \MyKey{[command=\{\backslash framed\}]}.
+
+\stopitemize
+
+Les autres commandes offrent les mêmes options, à l'exception de {\tt location} et {\tt margin}. En particulier, les commandes \tex{atrightmargin} et \tex{atleftmargin} placent le texte complètement collé au corps de la page. Nous pouvons établir un espace de séparation avec l'option {\tt distance}, que je n'ai pas mentionnée en parlant de \tex{margintext}.
+
+
+
+\startSmallPrint
+  En plus des options ci-dessus, ces commandes prennent également en charge d'autres options ({\tt strut, anchor, method, category, scope, option, hoffset, voffset, dy, bottomspace, threshold et stack}) que je n'ai pas mentionnées parce qu'elles ne sont pas documentées et que, franchement, je ne suis pas très sûr de leur utilité. Ceux qui ont des noms comme {\em distance}, on peut les deviner, mais le reste ? Le wiki ne mentionne que l'option {\tt stack}, disant qu'elle est utilisée pour émuler la commande \tex{marginpars} de \LaTeX, mais cela ne me semble pas très clair.
+
+\stopSmallPrint
+
+{\tfx\setup{setupmargindata}}
+
+La commande \PlaceMacro{setupmargindata}\tex{setupmargindata} nous permet de configurer globalement les textes de chaque marge. Ainsi, par exemple,
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\setupmargindata[right][style=slanted]
+\stopDemoI}
+
+
+fera en sorte que tous les textes de la marge de droite soient écrits en style oblique. 
+
+Nous pouvons également créer notre propre commande personnalisée avec
+
+\PlaceMacro{definemargindata}
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\definemargindata[Name][Configuration]
+\stopDemoI}
+
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX_fra.tex"
+%%% End:
+%%% vim:set filetype=context tw=72 : %%%

@@ -1,0 +1,226 @@
+\startcomponent 02-02-01-12_Markup_Floats
+
+\environment introCTX_env_00
+
+%==============================================================================
+
+\startsection
+  [title=Éléments flottants,
+  reference=cap:floats]
+
+  \TocChap
+
+
+\tex{startfloat}
+\tex{placefloat}
+\tex{startplacefloat}
+\tex{startfloattext}
+
+\startsubsection
+  [
+    reference=sec:floating objects,
+    title={Que sont les objets flottants et que font-ils ?},
+  ]
+
+Si un document ne contenait que du texte {\em normal}, sa pagination serait relativement facile : il suffit de connaître la hauteur maximale de la zone de texte de la page pour mesurer la hauteur des différents paragraphes et savoir où insérer les sauts de page. Le problème est que dans de nombreux documents, on trouve des objets, des fragments ou des blocs indivisibles tels qu'une image, un tableau, une formule, un paragraphe encadré, etc.
+
+Parfois, ces objets peuvent occuper une grande partie de la page, ce qui pose à son tour le problème suivant : si l'on doit l'insérer à un endroit précis du document, il se peut qu'il ne tienne pas sur la page en cours et qu'il faille l'interrompre brusquement, en laissant un grand espace vide en bas, afin que l'objet en question, et le texte qui le suit, soient déplacés sur la page suivante. Les règles d'une bonne composition indiquent cependant que, à l'exception de la dernière page d'un chapitre, il doit y avoir la même quantité de texte sur chaque page. 
+
+Il est donc conseillé d'éviter l'apparition de grands espaces verticaux vides, et les objets {\em flottants} sont le principal moyen d'y parvenir. Un objet flottant ne doit pas nécessairement se trouver à un endroit précis du document, mais peut {\em être déplacer} ou {\em flotter} autour de celui-ci. L'idée est de permettre à \ConTeXt\ de décider du meilleur endroit, du point de vue de la pagination, pour placer de tels objets, voire de les autoriser à se déplacer vers une autre page ; mais en essayant toujours de ne pas trop s'éloigner du point d'inclusion dans le fichier source.
+
+
+Par conséquent, il n'y a pas d'objet qui {\em doit} être un flottant (en soi). Mais il y a des objets qui devront occasionnellement être des flottants. Dans tous les cas, la décision appartient à l'auteur ou à la personne chargée de la composition, s'il s'agit de deux personnes différentes.
+
+Il ne fait aucun doute que le fait de permettre le changement de l'emplacement exact d'un objet indivisible facilite grandement la composition de pages joliment équilibrées ; mais le problème qui en découle est que, puisque nous ne savons pas exactement où cet objet se retrouvera au moment où nous écrivons le fichier source, il est difficile d'y faire référence. Ainsi, par exemple, si je viens de mettre dans mon document une commande qui insère une image et que dans le paragraphe suivant je veux la décrire et écrire quelque chose à son sujet comme : \quotation{Comme vous pouvez le voir sur la figure précédente}, lorsque la figure {\em flotte}, elle pourrait bien être placée {\em après} ce que je viens d'écrire et le résultat abouti à une incohérence : le lecteur cherche une image {\em avant} le texte qui y fait référence et ne la trouve pas car après avoir flotté, l'image s'est retrouvée après cette référence.
+
+
+Ce problème est résolu par la {\em numérotation} des objets flottants (après les avoir répartis en catégories), de sorte qu'au lieu de se référer à une image comme \quotation{l'image précédente} ou \quotation{l'image suivante}, nous nous y référerons comme \quotation{image 1.3}, puisque nous pouvons utiliser le mécanisme de référence interne de \ConTeXt pour nous assurer que le numéro de l'image est toujours maintenu à jour (voir \in{section}[sec:références]). La numérotation de ces types d'objets, d'autre part, permet de créer assez facilement un index de ceux-ci (index des tableaux, graphiques, images, équations, etc.). Pour savoir comment faire, voir (\in{section}[sec:lists]).
+
+Le mécanisme de traitement des objets flottants dans \ConTeXt\ est assez sophistiqué et parfois si abstrait qu'il peut ne pas convenir aux débutants. C'est pourquoi, dans ce chapitre, je commencerai par l'expliquer en utilisant deux cas particuliers : les images et les tableaux. Ensuite, j'essaierai de généraliser quelque peu pour que nous puissions comprendre comment étendre le mécanisme à d'autres types d'objets.
+
+\stopsubsection
+
+\startsubsection
+  [title={Aspects communs aux images, tableaux et autres objets flottants}]
+
+Nous savons déjà que les images et les tableaux ne sont pas obligatoirement des objets flottants, mais ils sont de bons candidats pour l'être, et il faut alors utiliser les commandes \tex{placefigure} ou \tex{placetable}. En plus de ces deux commandes, et avec la même structure, dans \ConTeXt\ nous avons la commande \PlaceMacro{placechemical} \tex{placechemical} (pour insérer des formules chimiques), la commande \PlaceMacro{placegraphic} \tex{placegraphic} (pour insérer des graphiques) et la commande \PlaceMacro{placeintermezzo} \tex{placeintermezzo} pour insérer une structure que \ConTeXt\ appelle {\em Intermezzo} et que je soupçonne de faire référence à des fragments de texte encadrés. Toutes ces commandes sont à leur tour des applications concrètes d'une commande plus générale qui est \PlaceMacro{placefloat} \tex{placefloat} dont la syntaxe est la suivante 
+
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\placefloat [Nom] [Options] [Étiquette] {Titre} {Contenu}
+\stopDemoI}
+
+Notez que \tex{placefloat} est identique à \tex{placefigure} et \tex{placetable} à l'exception du premier argument qui dans \tex{placefloat} prend le nom de l'objet flottant. En effet, {\em chaque type d'objet flottant peut être inséré dans le document avec deux commandes différentes} : \tex{placefloat[TypeName]} ou \tex{placeTypeName}. En d'autres termes : \tex{placefloat[figure]} et \tex{placefigure} sont exactement la même commande, tout comme \tex{placefloat[table]} est la même commande que \tex{placetable}.
+
+Je parlerai donc désormais de \tex{placefloat}, mais sachez que tout ce que je dirai s'appliquera également à \tex{placefigure} ou \tex{placetable} qui sont des applications spécifiques de cette commande.
+
+Les arguments \tex{placefloat} sont :
+
+\PlaceMacro{definefloat}
+
+\startitemize
+
+\item {\em Nom}. fait référence à l'objet flottant en question. Il peut s'agir d'un objet flottant prédéterminé ({\tt figure, tableau, chimique, intermezzo}) ou d'un objet flottant créé par nos soins à l'aide de \tex{definefloat} (voir \in{section}[sec:definefloat]).
+
+\item {\em Options}. Une série de mots symboliques qui indiquent à \ConTeXt\ la façon dont il doit insérer l'objet. La grande majorité d'entre eux font référence à {\em où} l'insérer. Nous verrons cela dans la section suivante.
+
+\item {\em Étiquette}. Une étiquette pour les futures références internes à cet objet.
+
+\item {\em Titre}. Le texte du titre à ajouter à l'objet. Concernant sa configuration, voir \in{section}[sec:confcaptions].
+
+\item {\em Contenu}. Cela dépend, bien entendu, du type d'objet. Pour les images, il s'agit généralement d'une commande \tex{externalimage} ; pour les tableaux, des commandes qui permettront de créer le tableau ; pour les {\em intermezzi}, d'un fragment de texte encadré ; etc.
+
+
+\stopitemize
+
+Les trois premiers arguments, qui sont introduits entre crochets, sont facultatifs. Les deux derniers (qui sont introduits entre crochets) sont obligatoires, bien qu'ils puissent être vides. Ainsi, par exemple~:
+
+
+
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+\placefloat{}{}
+\stopDemoVN}
+
+
+{\bf Note:} Nous voyons que \ConTeXt\ a considéré que l'objet à insérer était une image, puisqu'il a été numéroté comme une image et inclus dans la liste des images \Conjecture. Cela me fait supposer que les objets flottants sont des images par défaut.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:definefloat,
+    title={Définition d'objets flottants supplémentaires},
+  ]
+
+\PlaceMacro{definefloat}
+
+La commande \tex{definefloat} nous permet de définir nos propres objets flottants. Sa syntaxe est la suivante :
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\definefloat [NomSingulier] [NomPluriel] [Configuration]
+\stopDemoI}
+
+Où l'argument {\em Configuration} est un argument facultatif qui nous permet d'indiquer déjà la configuration de ce nouvel objet au moment de sa création. Nous pouvons également le faire plus tard avec \tex{setupfloat[NomSingulier]}.
+
+Puisque nous terminons notre introduction par cette section, je vais en profiter pour approfondir un peu plus l'apparente {\em jungle} des commandes \ConTeXt\ qui, une fois comprise, n'est pas tant une {\em jungle} mais est, en fait, tout à fait rationnelle.
+
+Commençons par nous demander ce qu'est réellement un objet flottant pour \ConTeXt, la réponse étant qu'il s'agit d'un objet ayant les caractéristiques suivantes :
+
+\startitemize
+
+\item il dispose d'une certaine marge de liberté quant à son emplacement sur la page.
+
+\item l est associé à une liste qui lui permet de numéroter ce type d'objets et, éventuellement, d'en générer un index.
+
+\item il possède un titre
+
+\item lorsque l'objet peut réellement flotter, il doit être traité comme une unité indissociable, c'est-à-dire (dans la terminologie \TeX\) {\em  enfermé dans une boîte}
+
+\stopitemize
+
+En d'autres termes, l'objet flottant est en fait constitué de trois éléments : l'objet lui-même, la liste qui lui est associée et le titre. Pour contrôler l'objet lui-même, nous n'avons besoin que d'une commande pour définir son emplacement et d'une autre pour insérer l'objet dans le document ; pour définir les aspects de la liste, les commandes générales de contrôle de la liste sont suffisantes, et pour définir les aspects du titre, les commandes générales de contrôle du titre.
+
+Et c'est là qu'intervient le génie de \ConTeXt\ : une commande simple pour contrôler les objets flottants (\tex{setupfloats}), et une commande simple pour insérer les objets flottants : \tex{placefloat}, auraient pu être conçues : mais ce que fait \ConTeXt\ est de :
+
+
+\startitemize[n]
+
+\item Conçoit une commande permettant de lier un nom à une configuration d'objet flottant spécifique. Il s'agit de la commande \tex{definefloat}, qui ne lie pas réellement un nom, mais deux noms, un au singulier et un au pluriel.
+
+\item Créez, avec la commande de configuration globale des objets flottants, une commande qui nous permet de configurer uniquement un type d'objet spécifique : \tex{setupfloat[NomSingulier]}.
+
+\item Ajouter à la commande de localisation des objets flottants, (\tex{placefloat}), un argument qui nous permet de différencier l'un ou l'autre type : (\tex{placefloat[NomSingulier]}).
+
+\item Crée des commandes, y compris le nom de l'objet, pour toutes les actions d'un objet flottant. Certaines de ces commandes (qui sont en fait des clones d'autres commandes plus générales) utiliseront le nom de l'objet au singulier et d'autres l'utiliseront au pluriel.
+
+
+\stopitemize
+
+
+%TODO Garulfo difficile on dit trois fois la même chose...
+
+Par conséquent, lorsque nous créons un nouvel objet flottant et que nous indiquons à \ConTeXt\ son nom au singulier et au pluriel, \ConTeXt :
+
+
+\startitemize
+
+
+\item Réserve un espace en mémoire pour stocker la configuration spécifique de ce type d'objet.
+
+\item Crée une nouvelle liste avec le nom singulier de ce type d'objet, puisque les objets flottants sont associés à une liste.
+
+\item Crée un nouveau type de \quotation{titre} lié à ce nouveau type d'objet, afin de conserver une configuration personnalisée de ces titres.
+
+\item Et enfin, elle crée un groupe de nouvelles commandes spécifiques à ce nouveau type d'objet, dont le nom est en fait un synonyme de la commande plus générale.
+  
+\stopitemize
+
+Dans \in{table}[tbl:floatcommands], nous pouvons voir les commandes qui sont automatiquement créées lorsque nous définissons un nouvel objet flottant, ainsi que les commandes plus générales dont elles sont les synonymes :
+
+\placetable
+  [here]
+  [tbl:floatcommands]
+  {Commandes générées à la création d'un nouvel objet flottant}
+{\switchtobodyfont[small]
+\starttabulate[|lT|lT|lT|]
+\HL
+\NC{\bf\rm Commande}
+\NC{\bf\rm Synonyme de}
+\NC{\bf\rm Exemple}
+\NR
+\HL
+\NC\backslash completelistof<NomPluriel>
+\NC\backslash completelist[NomPluriel]
+\NC\backslash completelistoffigures
+\NR
+\NC\backslash place<NomSingulier>
+\NC\backslash placefloat[NomSingulier]
+\NC\backslash placefigure
+\NR
+\NC\backslash placelistof<PluralName>
+\NC\backslash placelist[PluralName]
+\NC\backslash placelistoffigures
+\NR
+\NC\backslash setup<NomSingulier>
+\NC\backslash setupfloat[NomSingulier]
+\NC\backslash setupfigure
+\NR
+\HL
+\stoptabulate
+}
+
+
+\startSmallPrint
+
+En fait, quelques commandes supplémentaires sont créées qui sont synonymes des précédentes et comme je ne les ai pas incluses dans l'explication du chapitre, je les ai omises de \in{table}[tbl:floatcommands] : \tex{start<NomSingulier>}, \tex{start<NomSingulier>text} et \tex{startplace<NomSingulier>}.
+
+
+
+\stopSmallPrint
+
+J'ai utilisé la commande utilisée pour les images comme exemple des commandes créées lors de la définition d'un nouvel objet flottant ; et je l'ai fait parce que les images, comme les tableaux et le reste des objets flottants prédéfinis par \ConTeXt, sont des cas réels de \tex{definefloat} :
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\definefloat[chemical][chemicals]
+\definefloat[figure][figures]
+\definefloat[table][tables]
+\definefloat[intermezzo][intermezzi]
+\definefloat[graphic][graphics]
+\stopDemoI}
+
+Enfin, nous constatons qu'en réalité, la commande \ConTeXt\ ne contrôle en aucun cas le type de matériel inclus dans chaque objet flottant particulier ; elle présume que c'est le travail de l'auteur. C'est pourquoi nous pouvons également insérer du texte avec les commandes \tex{placefigure} ou \tex{placetable}. Toutefois, le texte saisi avec \tex{placefigure} est inclus dans la liste des images, et s'il est saisi avec \tex{placetable}, dans la liste des tableaux.
+
+\stopsubsection
+
+
+\stopsection
+
+%==============================================================================
+
+\stopcomponent
+
+%%% TeX-master: "../introCTX_fra.tex"

@@ -1,0 +1,275 @@
+\startcomponent 02-02-02-09_Markup_Index
+
+\environment introCTX_env_00
+
+%==============================================================================
+
+\startsection
+  [title={Index},
+  reference=sec:mkp:index,]  
+
+
+\TocChap
+
+  
+\tex{index}
+\tex{placeindex}
+\tex{seeindex}
+\tex{defineregister}
+
+% ** Subsection générer l'index
+
+\startsubsection
+  [title=Génération de l'index]
+
+Générer un index consiste à générer la liste des sujets considérés comme  importants ou significatifs et précisant les pages y faisant référence. L'index est généralement située à la fin d'un document. 
+
+Lorsque les livres étaient composés à la main, la création d'un index des sujets était une tâche complexe et fastidieuse. Tout changement dans la pagination pouvait affecter toutes les entrées de l'index. Par conséquent, ils n'étaient pas très courants. Aujourd'hui, les mécanismes informatiques de composition font que, même si la tâche est susceptible de rester fastidieuse, elle n'est plus aussi complexe étant donné qu'il n'est pas si difficile pour un système informatique de maintenir à jour la liste des données associées à une entrée d'index.
+
+Pour générer un index par sujet, nous avons besoin de~:
+
+
+\startitemize[n,packed]
+
+\item Déterminer les mots, les termes ou les concepts qui doivent faire partie de l'article. Il s'agit d'une tâche que seul l'auteur peut accomplir.
+
+\item Vérifier à quels endroits du document chaque entrée du futur index apparaît. Bien que, pour être précis, plus que {\em vérifier} les endroits du fichier source où le concept ou la question est abordé, ce que nous faisons lorsque nous travaillons avec \ConTeXt\ consiste à {\em marquer} ces endroits, en insérant une commande qui servira ensuite à générer l'index automatiquement. C'est la partie la plus fastidieuse.
+
+\item Enfin, nous générons et mettons en forme l'index en le plaçant à l'endroit de notre choix dans le document. Cette dernière opération est assez simple avec \ConTeXt\ et ne nécessite qu'une seule commande : \tex{placeindex} ou \tex{completeindex}.
+
+\stopitemize
+
+% *** Subsection définir les entrées et les points de marquage
+
+\startsubsubsection
+  [title={The prior definition of the entries in the index and the
+marking of the points in the source file that refer to them}]
+
+The fundamental work is in the second step. It is true that computer
+systems also facilitate it in the sense that we can do a global text search
+to locate the places in the source file where a specific subject is
+treated. But we should also not blindly rely on such text searches: a good
+subject index must be able to detect every spot where a particular subject
+is being discussed, even if this is done without using the {\em standard}
+term to refer to it.
+
+To {\em mark} an actual point in the source file, associating it with a
+word, term or idea that will appear in the index, we use the
+\PlaceMacro{index}\tex{index} command whose syntax is as follows:
+
+\type{\index[Alphabetical][Index entry]}
+
+where {\em Alphabetical} is an optional argument that is used to indicate
+an alternative text to that of the index entry itself in order to sort it
+alphabetically, and {\em Index entry} is the text that will appear in the
+index, associated with this mark. We can also apply the formatting features
+that we wish to use, and if reserved characters appear in the text, they
+must be written in the usual way in \ConTeXt.
+
+\startSmallPrint
+
+  The possibility of alphabetising an index entry in a way  different from
+  how it is actually written, is very useful. Think, for example, of this
+  document, if I want to generate  an entry in the index for all references
+  to the \tex{TeX} command. For example, the sequence
+  \type{\index{\backslash TeX}} will list the command not by the \quote{t}
+  in \quote{TeX}, but among the symbols, since the term sent to the index
+  begins with a backslash. This is done by writing
+  \type{\index[tex]{\backslash TeX}}.
+
+\stopSmallPrint
+
+The {\em index entries} will be the ones we want. For a subject index to be
+really useful we have to work a little harder at asking what concepts the
+reader of a document is most likely to look for; so, for example, it may be
+better to define an entry as \quotation{disease, Hodgkins} than defining it
+as \quotation{Hodgkin's disease}, since the more inclusive term is
+\quotation{disease}.
+
+\startSmallPrint
+
+  By convention, entries in a subject index are always written in lower
+  case, unless they are proper names.
+
+\stopSmallPrint
+
+If the index has several levels of depth (up to three are allowed) to associate a particular index entry with a specific level the \quote{+} character is used. As follows:
+
+\starttyping
+\index{Entry 1+Entry 2}
+\index{Entry 1+Entry 2+Entry 3}
+\stoptyping
+
+In the first case we defined a second level entry called {\em Entry 2} that
+will be a sub-entry of {\em Entry 1}. In the second case we defined a third
+level entry called {\em Entry 3} that will be a sub-entry of {\em Entry 2},
+which in turn is a sub-entry of {\em Entry 1}.  For example
+
+\vbox{
+\starttyping
+My \index{dog}dog, is a \index{dog+greyhound}greyhound called Rocket.
+He does not like \index{cat+stray}stray cats.
+\stoptyping}
+
+It is worth noting some details of the above:
+
+\startitemize
+
+  \item The \tex{index} command is usually placed {\em before} the word it
+  is associated with and is normally not separated from it by a a blank
+  space. This is to ensure that the command is on the exact same page as
+  the word it is linked to:
+
+  \startitemize
+
+      \item If there were a space separating them, there could be the
+      possibility that \ConTeXt\ would choose just that space for a line
+      break which could also end up being a page break, in which case the
+      command would be on one page and the word it is associated with on
+      the next page.
+
+    \item If the command were to come {\em after} the word, it would be
+    possible for this word to be broken by syllables and a line break
+    inserted between two of its syllables that would also be a page break,
+    in which case the command would be pointing to the next page beginning
+    with the word it points to.
+
+  \stopitemize
+
+  \item See how second level terms are introduced in the second and third
+  appearances of the command.
+
+  \item Also check how, in the third use of the \tex{index} command,
+  although the word that appears in the text is \quotation{cats}, the term
+  that will be sent to the index is \quotation{cat}.
+
+  \item Finally: see how three entries for the subject index have been
+  written in just two lines. I said before that marking the precise places
+  in the source file is tedious. I will now add that marking too many of
+  them is counter-productive. Too extensive an index is by no means
+  preferable to a more concise one in which all the information is
+  relevant. That is why I said before that deciding which words will
+  generate  entry in the index should be the result of a conscious decision
+  by the author.
+
+\stopitemize
+
+If we want our index to be truly useful, terms that are used as synonyms
+must be grouped in the index under one head term. But since it is possible
+for the reader to search the index for information by any of the other head
+terms, it is common for the index to contain entries that refer to other
+entries. For example, the subject index of a civil law manual could just as
+easily be something like
+
+\startframedtext[frame=off]
+
+  contractual invalidity\\
+  \qquad see {\em nullity}.
+
+\stopframedtext
+
+We achieve this not with the \tex{index} command but with
+\PlaceMacro{seeindex}\tex{seeindex} whose format is:
+
+\type{\seeindex [Alphabetical] {Entry1} {Entry2}}
+
+where {\em Entry1} is the index entry that will refer to the other; and
+{\em Entry2} is the reference target. In our previous example we would have
+to write:
+
+\starttyping
+\seeindex{contractual invalidity}{nullity}
+\stoptyping
+
+In \tex{seeindex} we can also use the \quote{+} sign to indicate sub-levels
+
+for either of its two arguments in square brackets.
+
+\stopsubsubsection
+
+% *** Subsection générer l'index final
+
+\startsubsubsection
+  [title={Generating the final index}]
+
+Once we have marked all the entries for the index in our source file, the
+actual generation of the index is carried out using the
+\PlaceMacro{placeindex}\tex{placeindex} or
+\PlaceMacro{completindex}\tex{completindex} commands. These two commands
+scan the source file for the \tex{index} commands, and generate a list of
+all the entries that the index should have, associating a term with the
+page number corresponding to where it found the \tex{index} command. Then
+they alphabetically order the list of terms that appear in the index and
+merge cases where the same term appears more than once, and finally, they
+insert the correctly formatted result in the final document.
+
+The difference between \tex{placeindex} and \tex{completeindex} is similar
+to the difference between \tex{content} and \tex{completecontent} (see
+\in{section}[sec:completecontent]): \tex{placeindex} is limited to
+generating the index and inserting it, while \tex{completeindex} previously
+inserts a new chapter in the final document, called \quotation{Index} by
+default, inside which the index will be typeset.
+
+\stopsubsubsection
+
+\stopsubsection
+
+
+% ** Subsection créer d'autres index
+
+\startsubsection
+  [title=Création d'autres index]
+  \PlaceMacro{defineregister}\PlaceMacro{setupregister}
+
+J'ai expliqué l'index des sujets comme si un seul index de ce type était possible dans un document ; mais la vérité est que les documents peuvent avoir autant d'index que souhaité. Il peut y avoir un index des noms de personnes, par exemple, qui rassemble les noms des personnes mentionnées dans le document, avec une indication de la page où elles sont citées. Il s'agit toujours d'une sorte d'index. Dans un texte juridique, nous pourrions également créer un index spécial pour les mentions du Code civil ; ou, dans un document comme le présent, un index des macros expliquées dans celui-ci, etc.
+
+Pour créer un index supplémentaire dans notre document, nous utilisons la commande \tex{defineregister} dont la syntaxe est~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\defineregister [NomIndex] [Configuration]
+\stopDemoI}
+
+où {\em NomIndex} est le nom que portera le nouvel index, et {\em Configuration} contrôle son fonctionnement. Il est également possible de configurer l'index ultérieurement au moyen de la fonction
+
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\setupregister [NomIndex] [Configuration]
+\stopDemoI}
+
+Une fois qu'un nouvel index nommé {\em NomIndex} a été créé, nous disposons de la commande \tex{NomIndex} pour marquer les entrées de cet index de la même manière que les entrées sont marquées avec \tex{index}. La commande \tex{seeNomIndex} nous permet également de créer des entrées qui font référence à d'autres entrées.
+
+Par exemple, nous pouvons créer un index des commandes \ConTeXt\ dans ce document avec la commande~:
+
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\defineregister[MaMacro]
+
+La commande \tex{etbim} permet de...
+\MaMacro{etbim}
+
+\startsubject[title=Index des macros]
+\placeMaMacro
+\stopsubject
+\stopDemoVW}
+
+qui crée la commande \tex{MaMacro}. Cela me permet de marquer toutes les références aux commandes \ConTeXt\ comme une entrée d'index, puis de générer l'index avec \tex{placeMaMacro} ou \tex{completeMaMacro}. 
+
+\startSmallPrint
+
+La création d'un nouvel index active la commande \tex{NomIndex} pour le marquer comme entrée, et les commandes \tex{placeNomIndex} et \tex{completeNomIndex} pour générer l'index. Mais ces deux dernières commandes sont en fait des abréviations de deux commandes plus générales appliquées à l'index en question. Ainsi, \tex{placeNomIndex} est équivalent à \tex{placeregister[NomIndex]} et \tex{completeNomIndex} est équivalent à \tex{completeegister[NomIndex]}.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\stopsection
+
+
+%==============================================================================
+
+\stopcomponent
+
+%%% TeX-master: "../introCTX_fra.tex"

@@ -1,0 +1,44 @@
+\startcomponent 02-02-01-01_Markup_Paragraphs
+
+\environment introCTX_env_00
+
+%==============================================================================
+
+\startsection
+  [title=Paragraphs,
+  reference=sec:mkp:para]
+
+
+\TocChap
+
+Le paragraphe est l'unité de texte fondamentale pour \ConTeXt. Il existe deux procédures pour commencer un paragraphe :
+
+\startitemize[n]
+
+ \item Insertion d'une ou plusieurs lignes vides consécutives dans le fichier source.
+
+  \item Les commandes 
+\PlaceMacro{par}        \tex{par} ou
+\PlaceMacro{endgraf}    \tex{endgraf}.
+
+\stopitemize
+
+La première de ces procédures est celle qui est normalement utilisée car elle est plus simple et produit des fichiers sources plus faciles à lire et à comprendre. L'insertion de sauts de paragraphe par une commande explicite n'est généralement réalisée qu'à l'intérieur d'une macro (voir \in{section}[sec:define]) ou dans une cellule de tableau (voir \in{section}[sec:tables]).
+
+Dans un document bien typé, il est important, d'un point de vue typographique, que les paragraphes se distinguent visuellement les uns des autres. On y parvient généralement par deux procédés : en indentant légèrement la première ligne de chaque paragraphe ou en augmentant légèrement l'espace blanc entre les paragraphes, et parfois par une combinaison des deux procédés, bien que dans certains endroits, cette méthode ne soit pas recommandée car elle est considérée comme redondante du point de vue typographique.
+
+
+\startSmallPrint
+
+Je ne suis pas tout à fait d'accord. Le simple retrait de la première ligne ne souligne pas toujours assez visuellement la séparation entre les paragraphes ; mais une augmentation de l'espacement non accompagnée d'un retrait pose des problèmes dans le cas d'un paragraphe qui commence en haut d'une page où nous ne pouvons pas savoir s'il s'agit d'un nouveau paragraphe, ou d'une continuation de la page précédente. Une combinaison des deux procédures permet d'éliminer les doutes.
+
+\stopSmallPrint
+
+
+\stopsection
+
+%==============================================================================
+
+\stopcomponent
+
+%%% TeX-master: "../introCTX_fra.tex"

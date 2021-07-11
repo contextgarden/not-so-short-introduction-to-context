@@ -1,0 +1,150 @@
+%%% File:      introCTX.mkiv
+%%% Title:     A not so short introduction to ConTeXt Mark IV
+%%% Author:    Joaquín Ataz-López
+%%% Begun:     March 2020
+%%% Concluded: August 2020
+%%%
+%%% Edited with: Emacs + AuTeX - And at times with vim + context-plugin
+%%%
+
+\startproduct introCTX
+
+\environment introCTX_env_00
+
+\def\RevisionDate{\date[d=14, m=6, y=2021]}  % Date of the last modifications
+
+%==============================================================================
+
+\startfrontmatter
+
+\component        01-01_TitlePage
+
+\definecolor      [back1]     [backA1]
+\definecolor      [back2]     [backA2]
+\definecolor      [back3]     [backA3]
+\setupbackgrounds [leftpage]  [background={background,pageg},state=repeat]
+\setupbackgrounds [rightpage] [background={background,paged},state=repeat]
+
+\component        01-02_Credit
+\component        01-03_ToC
+\component        01-04_Preface                                   % à re-écrire
+\component        01-05_Introduction                              % à re-écrire 
+
+\stopfrontmatter
+
+%==============================================================================
+
+\startbodymatter
+
+ 
+\startpart        [title=Le fichier source,reference=part:src]
+
+\definecolor      [back1]     [backB1]
+\definecolor      [back2]     [backB2]
+\definecolor      [back3]     [backB3]
+\setupbackgrounds [leftpage]  [background={background,pageg},state=repeat]
+\setupbackgrounds [rightpage] [background={background,paged},state=repeat]
+
+\component        02-01-01_Source_FirstDoc
+\component        02-01-02_Source_Commands
+\component        02-01-03_Source_Files
+
+\stoppart
+
+%------------------------------------------------------------------------------
+
+\startpart        [title=Le balisage,reference=part:mkp]
+
+\definecolor      [back1]     [backC1]
+\definecolor      [back2]     [backC2]
+\definecolor      [back3]     [backC3]
+\setupbackgrounds [leftpage]  [background={background,pageg},state=repeat]
+\setupbackgrounds [rightpage] [background={background,paged},state=repeat]
+
+\component        02-02-01_Markup_MainFlow
+\component        02-02-02_Markup_Complements
+\component        02-02-03_Markup_Customized
+
+\stoppart
+
+%------------------------------------------------------------------------------
+
+\startpart        [title={Composition d'ensemble},reference=part:typset:global]
+
+\definecolor      [back1]     [backD1]
+\definecolor      [back2]     [backD2]
+\definecolor      [back3]     [backD3]
+\setupbackgrounds [leftpage]  [background={background,pageg},state=repeat]
+\setupbackgrounds [rightpage] [background={background,paged},state=repeat]
+
+\component        02-03-01_Typeset_Pages
+\component        02-03-02_Typeset_Fonts
+\component        02-03-03_Typeset_Colors
+\component        02-03-04_Typeset_Language
+\component        02-03-05_Typeset_Interactivity
+
+\stoppart
+
+%------------------------------------------------------------------------------
+
+\startpart        [title={Composition spécifique},reference=part:typset:local] 
+
+\definecolor      [back1]     [backA1]
+\definecolor      [back2]     [backA2]
+\definecolor      [back3]     [backA3]
+\setupbackgrounds [leftpage]  [background={background,pageg},state=repeat]
+\setupbackgrounds [rightpage] [background={background,paged},state=repeat]
+
+\component        02-04-01_Typeset_MainFlow
+\component        02-04-02_Typeset_Complements
+\component        02-04-03_Typeset_Customized
+
+%\component        02-13_Floats
+
+\stoppart
+
+%------------------------------------------------------------------------------
+
+\stopbodymatter
+
+%==============================================================================
+
+\startappendices
+
+\startpart        [title=Appendices, reference=part:annexes]
+
+\definecolor      [back1]     [backE1]
+\definecolor      [back2]     [backE2]
+\definecolor      [back3]     [backE3]
+\setupbackgrounds [leftpage]  [background={background,pageg},state=repeat]
+\setupbackgrounds [rightpage] [background={background,paged},state=repeat]
+
+\component        03-01_Installation
+\component        03-02_Symbols
+\component        03-03_Macros
+\component        03-04_Introduction_old
+\component        03-05_CharactersSymbols
+\completeindex
+
+\stoppart
+
+\stopappendices
+
+%==============================================================================
+
+\startbackmatter
+
+\component        04-01_EndPage
+
+\stopbackmatter
+
+%============================================================================
+
+\stopproduct
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: t
+%%% End:

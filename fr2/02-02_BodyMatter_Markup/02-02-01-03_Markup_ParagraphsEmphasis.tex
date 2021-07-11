@@ -1,0 +1,36 @@
+\startcomponent 02-02-01-03_Markup_ParagraphsEmphasis
+
+\environment introCTX_env_00
+
+%==============================================================================
+
+\startsection
+  [title=Emphase de paragraphe par mise en retrait,
+  reference=sec:mkp:emphasep]
+
+\TocChap
+
+\tex{narrower}  
+\tex{definenarrower}
+
+Une méthode graphique pour mettre en évidence un paragraphe consiste à mettre en retrait le côté droit ou le côté gauche (ou les deux) d'un paragraphe. Cette méthode est utilisée, par exemple, pour les blocs de citation.
+
+\ConTeXt\ propose un environnement dédié pour cela~: \MyKey{narrower}.
+
+\PlaceMacro{startnarrower}
+\placefigure [force,here,none] [] {}{
+\startDemoHN%
+Texte avant.
+\startnarrower
+Ceci est un petit texte pour visualiser l'effet de narrower en ConfigA. Ceci est un petit texte pour visualiser l'effet de narrower en ConfigA. Ceci est un petit texte pour visualiser l'effet de narrower en ConfigA.
+\stopnarrower
+Texte après.
+\stopDemoHN}
+
+\stopsection
+
+%==============================================================================
+
+\stopcomponent
+
+%%% TeX-master: "../introCTX_fra.tex"

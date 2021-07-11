@@ -1,0 +1,206 @@
+\startcomponent 02-02-01-05_Markup_LinesRules
+
+\environment introCTX_env_00
+
+%==============================================================================
+
+\startsection
+  [title=Traits et traits de séparation,reference=sec:mkp:lines]
+
+
+\TocChap
+
+
+
+\tex{hairline}
+\tex{thinrule}
+\tex{texrule}
+\tex{fillinline}
+\tex{fillinrules}
+\tex{blackrules}
+\tex{texrule}  
+
+% *** Subsection Lignes simple
+\startsubsection
+  [title={Lignes simples},
+  reference=sec:FramesLines,]
+
+La façon la plus simple de dessiner une ligne horizontale est d'utiliser la commande \PlaceMacro{hairline} \tex{hairline} qui génère une ligne horizontale occupant toute la largeur d'une ligne de texte normale.
+
+Il ne peut y avoir de texte d'aucune sorte sur la ligne où se trouve la ligne générée par \tex{hairline}. Afin de générer une ligne capable de coexister avec le texte sur la même ligne, nous avons besoin de la commande \PlaceMacro{thinrule} \tex{thinrule}. Cette deuxième commande utilisera toute la largeur de la ligne. Par conséquent, dans un paragraphe isolé, elle aura le même effet que \tex{hairline}, tandis que dans le cas contraire, \tex{thinrule} produira la même expansion horizontale que \tex{hfill} (voir \in{section}[sec:horizontal space2]), mais au lieu de remplir l'espace horizontal avec un espace blanc (comme le fait \tex{hfill}), elle le remplit avec une ligne.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+Avec hairline~:\par
+Sur la gauche\hairline\\
+\hairline sur la droite\\
+Des deux \hairline côtés\\
+\hairline centré\hairline
+\blank[big]
+Avec thinrule~:\par
+Sur la gauche\thinrule\\
+\thinrule sur la droite\\
+Des deux \thinrule côtés\\
+\thinrule centré\thinrule
+\stopDemoVN}
+
+\PlaceMacro{thinrule}
+\PlaceMacro{setupthinrules}
+\PlaceMacro{thinrules}
+
+La commande \tex{thinrules} permet de générer plusieurs lignes. Par exemple, \tex{thinrules[n=2]} générera deux lignes consécutives, chacune de la largeur de la ligne normale. Les lignes générées avec \tex{thinrules} peuvent également être configurées, soit dans un appel direct à la commande, en indiquant la configuration comme l'un de ses arguments, soit de manière générale avec \tex{setupthinrules}. La configuration comprend l'épaisseur de la ligne ({\tt rulethickness}), sa couleur ({\tt color}), la couleur de fond ({\tt background}), l'espace interligne ({\tt interlinespace}), etc.
+
+\placefigure [force,here,none] [] {}
+{\startDemoHN
+\setupthinrules[color=darkyellow,height=-0.5mm,depth=1.0mm]
+Sur la gauche\thinrules[n=3] centre décalé \thinrule sur la droite
+\stopDemoHN}
+
+\startSmallPrint
+
+Je laisserai un certain nombre d'options sans explication. Le lecteur peut les consulter dans {\tt setup-fr.pdf} (voir \in{section}[sec:qrc-setup-fr]). Certaines options ne diffèrent des autres qu'en termes de nuance (c'est-à-dire qu'il n'y a pratiquement aucune différence entre elles), et je pense qu'il est plus rapide pour le lecteur d'essayer de {\em voir} la différence, que pour moi d'essayer de la transmettre avec des mots. Par exemple : l'épaisseur de la ligne que je viens de dire dépend de l'option {\tt rulethickness}. Mais elle est également affectée par les options {\tt height} et {\tt depth} (voir l'exemple ci-dessus).
+
+\stopSmallPrint
+
+
+Des lignes plus petites peuvent être générées avec les commandes \PlaceMacro{hl}\tex{hl} et \PlaceMacro{vl}\tex{vl}. La première génère une ligne horizontale et la seconde une ligne verticale. Toutes deux prennent comme paramètre un nombre qui nous permet de calculer la longueur de la ligne. Dans \tex{hl}, le nombre mesure la longueur en {\em ems} (il n'est pas nécessaire d'indiquer l'unité de mesure dans la commande) et dans \tex{vl}, l'argument fait référence à la hauteur actuelle de la ligne.
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoHN
+Une ligne verticale \vl[2] et une autre horizontale \hl[2]
+\stopDemoHN}
+
+Ainsi, \tex{hl[2]} génère une ligne horizontale de 3 ems et \tex{vl[2]} génère une ligne verticale de la hauteur correspondant à trois lignes. N'oubliez pas que l'indicateur de mesure de ligne doit être inséré entre crochets, et non entre accolades. Dans les deux commandes, l'argument est facultatif. S'il n'est pas saisi, la valeur 1 est prise en compte.
+
+
+
+\PlaceMacro{fillinline} \tex{fillinline} est une autre commande (je pense dépréciée, voyez ensuite \tex{fillinrules}) permettant de créer des lignes horizontales de longueur précise. Elle prend en charge davantage de configuration dans laquelle nous pouvons indiquer (ou prédéterminer avec \PlaceMacro{setupfillinlines} \tex{setupfillinlines}) la largeur (option {\tt width}) en plus de quelques autres caractéristiques.
+
+Une particularité de cette commande est que le texte qui est écrit en argument sera placé à gauche de la ligne, séparant ce texte de la ligne par l'espace blanc nécessaire pour occuper toute la ligne. Attention, il faut bien penser à indiquer un changement de paragraphe entre deux lignes de ce type.
+Par exemple :
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\fillinline[width=2cm]{Nom} \par
+\fillinline[width=4cm]{Prénom}
+
+\fillinline[width=4cm]{Adresse} \par
+\stopDemoVW}
+
+Outre la largeur de la ligne, nous pouvons configurer la marge ({\tt margin}), la distance ({\tt distance}), l'épaisseur ({\tt rulethickness}) et la couleur ({\tt color}).
+
+\PlaceMacro{fillinrules}
+\tex{fillinrules} a un rôle très proche de \tex{fillinline} mais plus générale car elle permet d'insérer plus d'une ligne (option \MyKey{n}) et traite automatiquement le changement de ligne et de paragraphe.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\setupfillinrules[separator=:,interlinespace=small]
+\fillinrules[n=1]{Nom}{(en majuscule)}
+\fillinrules[n=1,width=2cm]{Prénom}
+\fillinrules[n=3,width=fit]{Adresse 1}
+\fillinrules[n=3,distance=1cm]{Adresse 2}
+\stopDemoVW}
+
+\PlaceMacro{blackrule}
+\PlaceMacro{setupblackrules}
+\PlaceMacro{blackrules}
+
+Dernier type de ligne~: \tex{blackrule}. Voyez la comparaison avec thinrules~:
+
+\placefigure [force,here,none] [] {}
+{\startDemoHN
+\setupthinrules[color=darkyellow,height=-0.5mm,depth=1.0mm]
+Sur la gauche\thinrules[n=3] centre décalé \thinrule sur la droite
+
+\setupblackrules[color=darkgreen,height=-0.5mm,depth=1.0mm]
+Sur la gauche\blackrules[n=3] centre décalé \blackrule sur la droite
+\stopDemoHN}
+
+Contrairement à \tex{thinrule}, \tex{blackrule} produit des lignes de longeur fixe, que l'on défini avec l'option {\tt width}.
+
+Un manuel spécifique aux lignes a été produit en 2018 intitulé \goto{Rules}[url(https://www.pragma-ade.com/general/manuals/rules-mkiv.pdf)]. N'hésitez pas à le consulter.
+
+\stopsubsection
+
+% *** Subsection  Lignes liées au texte
+\startsubsection
+  [title={Lignes liées au texte}]
+
+Bien que certaines des commandes que nous venons de voir puissent générer des lignes qui coexistent avec du texte sur la même ligne, ces commandes se concentrent en fait sur la mise en page de la ligne. Pour écrire des lignes liées à un certain texte, \ConTeXt\ a des commandes :
+
+
+\startitemize
+
+\item qui génèrent du texte entre les lignes.
+
+\item qui génèrent des lignes sous le texte (soulignement, underlining), au-dessus du texte (surlignage, overlining) ou à travers le texte (barré, strikethrough).
+
+\stopitemize
+
+Pour générer un texte entre les lignes, la commande habituelle est  \PlaceMacro{textrule} \tex{textrule}. Cette commande trace une ligne qui traverse toute la largeur de la page et écrit le texte qu'elle prend comme paramètre sur le côté gauche (mais pas dans la marge). Par exemple :
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+Texte avant.
+\textrule{Texte en exemple}
+Texte encore après.
+\stopDemoVN}
+
+\tex{textrule} permet un premier argument facultatif avec trois valeurs possibles : {\tt top}, {\tt middle} et \Doubt{\tt bottom} selon la position souhaitée par rapport au reste du texte.
+
+\placefigure [force,here,none] [] {}
+{\startDemoHN
+Texte A.
+\textrule[top]{Texte en exemple}
+Texte B.
+\textrule[middle]{Texte en exemple}
+Texte C.
+\textrule[bottom]{Texte en exemple}
+Texte D.
+\stopDemoHN}
+
+Similaire à \tex{texrule}, l'environnement \PlaceMacro{starttextrule} \tex{starttextrule} permet d'insérer une ligne de texte au début de l'environnement, mais aussi une ligne horizontale à la fin. 
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+Texte avant.
+\starttextrule{Texte en exemple}
+Texte utilisé en contenu de l'environnement, pour faire joli.
+\stoptextrule
+Texte encore après.
+\stopDemoVN}
+
+\tex{textrule} et \text{starttextrule} peuvent être configurés avec \PlaceMacro{setuptextrule} \tex{setuptextrules}.
+
+\placefigure [force,here,none] [] {}
+{\startDemoHN
+\startbuffer
+Texte utilisé en contenu de l'environnement, pour faire joli.
+\stopbuffer
+
+\setuptextrules[location=left] % sinon inmargin
+\starttextrule{location=left} \getbuffer \stoptextrule
+
+\setuptextrules[width=2cm]   % largeur du trait à gauche
+\starttextrule{width} \getbuffer\stoptextrule
+
+\setuptextrules[distance=2em] % distance entre le trait et le texte
+\starttextrule{distance} \getbuffer\stoptextrule
+
+\setuptextrules[style=\bfa,color=darkgreen,rulecolor=darkred]
+\starttextrule{style et couleur} \getbuffer\stoptextrule
+\stopDemoHN}
+
+
+\stopsubsection
+
+
+\stopsection
+
+
+%==============================================================================
+
+\stopcomponent
+
+%%% TeX-master: "../introCTX_fra.tex"

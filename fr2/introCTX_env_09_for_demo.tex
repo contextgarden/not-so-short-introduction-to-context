@@ -1,0 +1,162 @@
+%-------------------------------------------------------------------------------
+% #08 - MISE EN PAGE DES DEMONSTRATONS
+%-------------------------------------------------------------------------------
+
+\setupfloat[figure][location=inner]
+\setupfloat[table] [location=inner]
+
+\newdimen\marged   \marged   = 5mm
+
+\newdimen\wDemoHN \wDemoHN=\dimexpr(1.0\textwidth)
+\newdimen\wDemoHW \wDemoHW=\dimexpr(1.0\textwidth+1.0\rightmargintotal)
+
+\newdimen\wComba \wComba=\dimexpr(0.5\textwidth+0.5\rightmargintotal-0.5\marged)
+\newdimen\wCombb \wCombb=\dimexpr(\textwidth/3+\rightmargintotal/3-2\marged/3)
+\newdimen\wDemoV \wDemoV=\dimexpr(0.5\textwidth+0.5\rightmargintotal-\marged)
+
+% si besoin de mettre en forme par TeX des commentaires dans les codes sources
+% il faut les encadrer par [[ et ]] comme indiqué dans typebuffer, option escape
+
+\definestartstop[comment][style={\rm}]
+
+% startDemoHN ==> horizontal split, normal width
+% startDemoHW ==> horizontal split, wide
+% startDemoVN ==> vertical split, normal width
+% startDemoVW ==> vertical split, wide
+% startDemoI  ==> for input file
+% startDemoC  ==> for shell command
+
+\startluacode
+  userdata = userdata or {}
+
+  function userdata.Demolua(buffer,lettre)
+  if lettre=="HN" then
+  Tlarg="{\\dimexpr\\textwidth-\\marged\\relax}"
+  elseif lettre=="HW" then
+  Tlarg="{\\dimexpr\\textwidth+\\rightmargintotal-\\marged\\relax}"
+  elseif lettre=="VN" then
+  Tlarg="{\\dimexpr0.5\\textwidth-1.5\\marged\\relax}"
+  elseif lettre=="VW" then
+  Tlarg="{\\dimexpr0.5\\textwidth+0.5\\rightmargintotal-1.5\\marged\\relax}"
+  end
+
+  buffers.assign("tempo",buffers.getcontent(buffer))
+  buffers.assign(buffer,"\\startTEXpage %\n")
+  buffers.append(buffer,"\\environment introCTX_env_09_for_demo %\n")
+  buffers.append(buffer,"\\setupbodyfont[palatino,9pt] %\n")
+  buffers.append(buffer,"\\framed[align=normal,\n width=" .. Tlarg .. ",\n offset=6pt,\n frame=off,strut=no]{%debutZ\n")
+    buffers.append(buffer,buffers.getcontent("tempo"))
+    buffers.append(buffer,"\n%finZ \n}\n")
+  buffers.append(buffer,"\\stopTEXpage\n")
+  end
+\stopluacode
+
+%-------------------------------------------------------------------------------
+
+\def\startDemoHN{\dostartbuffer[DemoTbuff][startDemoHN][stopDemoHN]}
+
+\def\stopDemoHN{\ctxlua{userdata.Demolua('DemoTbuff',"HN")}%
+    \bTABLE
+    \setupTABLE[frame=off,offset=2pt,spaceinbetween=\the\marged]
+    \setupTABLE[column][1][width=\wDemoHN,align=flushleft] %
+    \bTR
+    \bTD[topframe=on,rulethickness=3pt,framecolor=demo1color,background=color,backgroundcolor=backdemocolor]
+    \typebuffer[DemoTbuff][bodyfont=11pt,option=tex,range={debutZ,finZ},escape={[[,]]}]
+    \eTD
+    \eTR
+    \bTR
+    \bTD[bottomframe=on,rulethickness=3pt,framecolor=demo2color,background=color,backgroundcolor=backdemocolor]
+    \strut\typesetbuffer[DemoTbuff][page=1,frame=off,align={normal,verytolerant}]
+    \eTD
+    \eTR
+    \eTABLE}
+
+%-------------------------------------------------------------------------------
+
+\def\startDemoHW{\dostartbuffer[DemoTbuff][startDemoHW][stopDemoHW]}
+
+\def\stopDemoHW{\ctxlua{userdata.Demolua('DemoTbuff',"HW")}%
+    \bTABLE
+    \setupTABLE[frame=off,offset=2pt,spaceinbetween=\the\marged]
+    \setupTABLE[column][1][width=\wDemoHW,align=flushleft] %
+    \bTR
+    \bTD[topframe=on,rulethickness=3pt,framecolor=demo1color,background=color,backgroundcolor=backdemocolor]
+    \typebuffer[DemoTbuff][bodyfont=11pt,option=tex,range={debutZ,finZ},escape={[[,]]}]
+    \eTD
+    \eTR
+    \bTR
+    \bTD[bottomframe=on,rulethickness=3pt,framecolor=demo2color,background=color,backgroundcolor=backdemocolor]
+    \strut\typesetbuffer[DemoTbuff][page=1,frame=off,align={normal,verytolerant}]
+    \eTD
+    \eTR
+    \eTABLE}
+
+%-------------------------------------------------------------------------------
+
+\def\startDemoVW{\dostartbuffer[DemoTbuff][startDemoVW][stopDemoVW]}
+
+\def\stopDemoVW{\ctxlua{userdata.Demolua('DemoTbuff',"VW")}%
+    \bTABLE
+    \setupTABLE[frame=off,offset=2pt]
+    \setupTABLE[column][1][width={\dimexpr0.5\wDemoHW-0.5\marged\relax},align=flushleft]
+    \setupTABLE[column][2][width=\marged,align=flushleft]
+    \setupTABLE[column][3][width={\dimexpr0.5\wDemoHW-0.5\marged\relax},align=flushleft]
+    \bTR
+    \bTD[leftframe=on,rulethickness=3pt,framecolor=demo1color,background=color,backgroundcolor=backdemocolor]
+    \typebuffer[DemoTbuff][bodyfont=11pt,option=tex,range={debutZ,finZ},escape={[[,]]}]
+    \eTD
+    \bTD    \eTD
+    \bTD[rightframe=on,rulethickness=3pt,framecolor=demo2color,background=color,backgroundcolor=backdemocolor]
+    \strut\typesetbuffer[DemoTbuff][page=1,frame=off,align={normal,verytolerant}]
+    \eTD
+    \eTR
+    \eTABLE}
+
+%-------------------------------------------------------------------------------
+
+\def\startDemoVN{\dostartbuffer[DemoTbuff][startDemoVN][stopDemoVN]}
+
+\def\stopDemoVN{\ctxlua{userdata.Demolua('DemoTbuff',"VN")}%
+    \bTABLE
+    \setupTABLE[frame=off,offset=2pt,strut=no]
+    \setupTABLE[column][1][width={\dimexpr0.5\wDemoHN-0.5\marged\relax},align=flushleft]
+    \setupTABLE[column][2][width=\marged,align=flushleft]
+    \setupTABLE[column][3][width={\dimexpr0.5\wDemoHN-0.5\marged\relax},align=flushleft]
+    \bTR
+    \bTD[leftframe=on,rulethickness=3pt,framecolor=demo1color,background=color,backgroundcolor=backdemocolor,strut=no]
+    \typebuffer[DemoTbuff][bodyfont=11pt,option=tex,range={debutZ,finZ},escape={[[,]]}]
+    \eTD
+    \bTD    \eTD
+    \bTD[rightframe=on,rulethickness=3pt,framecolor=demo2color,background=color,backgroundcolor=backdemocolor,strut=no]
+    \strut\typesetbuffer[DemoTbuff][page=1,frame=off,strut=no,align={normal,verytolerant}]
+    \eTD
+    \eTR
+    \eTABLE}
+
+%-------------------------------------------------------------------------------
+
+\def\startDemoI{\dostartbuffer[DemoTbuffI][startDemoI][stopDemoI]}
+
+\def\stopDemoI{\ctxlua{userdata.Demolua("DemoTbuffI","HN")}%
+   \bTABLE
+   \setupTABLE[frame=off,offset=2pt,spaceinbetween=\the\marged]
+   \setupTABLE[column][1][width=\wDemoHN,align=flushleft]
+   \bTR
+   \bTD[leftframe=on,rulethickness=3pt,framecolor=demoicolor,background=color,backgroundcolor=backdemocolor]
+   \typebuffer[DemoTbuffI][bodyfont=11pt,option=tex,range={debutZ,finZ},escape={[[,]]}]
+   \eTD
+   \eTABLE}
+
+%-------------------------------------------------------------------------------
+
+\def\startDemoC{\dostartbuffer[Demobuff][startDemoC][stopDemoC]}
+
+\def\stopDemoC{\ctxlua{userdata.Demolua("Demobuff","HN")}%
+    \bTABLE
+    \setupTABLE[frame=off,offset=2pt,spaceinbetween=\the\marged]
+    \setupTABLE[column][1][width=\wDemoHN,align=flushleft]
+    \bTR
+    \bTD[leftframe=on,rulethickness=3pt,loffset=1mm,framecolor=democcolor,background=color,backgroundcolor=backdemocolor]
+    \typebuffer[Demobuff][numbering=fine,bodyfont=11pt,option=,range={debutZ,finZ}] %,escape={[[,]]}]
+\eTD
+\eTABLE}

@@ -1,0 +1,137 @@
+\startcomponent 02-02-01-10_Markup_Tables
+
+\environment introCTX_env_00
+
+%==============================================================================
+
+\startsection
+  [title=Tableaux (tableaux naturels),
+     reference=sec:tables,]
+
+\TocChap
+
+
+\tex{bTABLE}
+
+\PlaceMacro{bTABLE}
+\PlaceMacro{bTR}
+\PlaceMacro{bTD}
+\PlaceMacro{bTH}
+\PlaceMacro{bTABLEhead}
+\PlaceMacro{bTABLEnext}
+\PlaceMacro{bTABLEbody}
+\PlaceMacro{bTABLEfoot}
+\PlaceMacro{setupTABLE}
+
+Cette partie provient en grande partie des  \goto{\em Fiches à Bébert}[url(http://lesfichesabebert.fr/context/table.html)].
+
+Les tableaux naturels offrent une configuration plus fine et une robustesse plus grande, parfois au prix d'une plus grande rigueur dans la définition.
+
+
+
+% **** Subsubsection
+\startsubsubsection[title={Décrire le contenu du tableau}]
+
+\setupTABLE[r][2,3][color=darkred] Toutes les éléments d'un tableau naturel sont des environnements, ils commencent tous par un bTRUC (en fait beginTRUC) et s'achève par un eTRUC (endTRUC). Attention les majuscules sont essentielles. 
+
+\placetable
+  [here,force]
+  [tbl:nattablecommands]
+  {Commandes permettant de définir le contenu d'un tableau naturel}
+{\bTABLE
+\setupTABLE[frame=off] 
+\setupTABLE[r] [first] [bottomframe=on]
+\bTABLEhead
+\bTR
+\bTH Élément délimité \eTH
+\bTH Commande début \eTH
+\bTH Commande fin \eTH
+\bTH Commentaire \eTH
+\eTR
+\eTABLEhead
+\bTABLEbody
+%----------------------
+\bTR
+\bTD Tableau\eTD 
+\bTD \tex{bTABLE} \eTD 
+\bTD \tex{eTABLE} \eTD 
+\eTR
+%----------------------
+\bTR
+\bTD Colonne \eTD 
+\bTD \tex{bTR} \eTD 
+\bTD \tex{eTR} \eTD 
+\bTD Table Row\eTD 
+\eTR
+%----------------------
+\bTR
+\bTD Cellule\eTD 
+\bTD \tex{bTD} \eTD 
+\bTD \tex{eTD} \eTD 
+\bTD Table Data\eTD 
+\eTR
+%----------------------
+\bTR
+\bTD Cellule d'en-tête\eTD 
+\bTD \tex{bTH} \eTD 
+\bTD \tex{eTH} \eTD 
+\eTR
+%----------------------
+\bTR
+\bTD En-tête de la table\eTD 
+\bTD \tex{bTABLEhead} \eTD 
+\bTD \tex{eTABLEhead} \eTD 
+\eTR
+%----------------------
+\bTR
+\bTD Second en-tête de la table\eTD
+\bTD \tex{bTABLEnext} \eTD 
+\bTD \tex{eTABLEnext} \eTD 
+\bTD utilisé après un changement de page \eTD 
+\eTR
+%----------------------
+\bTR
+\bTD Corps de la table\eTD 
+\bTD \tex{bTABLEbody} \eTD 
+\bTD \tex{eTABLEbody} \eTD 
+\eTR
+%----------------------
+\bTR
+\bTD Fin de la table\eTD 
+\bTD \tex{bTABLEfoot} \eTD 
+\bTD \tex{eTABLEfoot} \eTD 
+\eTR
+\eTABLEbody
+%----------------------
+\eTABLE}
+
+\placefigure [force,here,none]
+  []
+  {}
+{\startDemoHN
+\bTABLE
+\bTABLEhead
+\bTR \bTH Français     \eTH \bTH Chti         \eTH 
+     \bTH Anglais      \eTH \bTH Italien      \eTH \eTR
+\eTABLEhead
+\bTABLEbody
+\bTR \bTD Pantalon     \eTD \bTD Marrone      \eTD 
+     \bTD Pants        \eTD \bTD Pantaloni    \eTD \eTR
+\bTR \bTD Serpillière  \eTD \bTD Wassingue    \eTD 
+     \bTD Swab         \eTD \bTD Strofinaccio \eTD \eTR
+\bTR \bTD Boue         \eTD \bTD Berdoule     \eTD
+     \bTD Mud          \eTD \bTD Fangos       \eTD \eTR
+\eTABLEbody
+\eTABLE 
+\stopDemoHN}
+
+\stopsubsubsection
+
+\stopsection
+
+
+%==============================================================================
+
+\stopcomponent
+
+%%% TeX-master: "../introCTX_fra.tex"

@@ -1,0 +1,530 @@
+\startcomponent 03-05_CharactersSymbols
+
+\environment introCTX_env_00
+
+%==============================================================================
+
+\startchapter[title={Obtenir des caractères qui ne sont pas normalement accessibles à partir du clavier},reference=sec:obtainchar]
+
+\TocChap
+% **   Section    caractère hors clavier
+
+% TODO Garulfo : mettre tout cela en annexe, ou plus loin, ce n'est pas la priorité du débutant.
+
+Dans un fichier texte codé en UTF-8 (voir \in{section}[sec:encodage]), nous pouvons utiliser n'importe quel caractère ou symbole, aussi bien des langues vivantes que de nombreuses langues dites mortes. Mais, comme les possibilités d'un clavier sont limitées, la plupart des caractères et symboles autorisés en UTF-8 ne peuvent normalement pas être obtenus directement du clavier. C'est notamment le cas de nombreux diacritiques, c'est-à-dire des signes placés au-dessus (ou au-dessous) de certaines lettres, leur conférant une valeur particulière ; mais aussi de nombreux autres caractères comme les symboles mathématiques, les ligatures traditionnelles, etc. Nous pouvons obtenir beaucoup de ces caractères avec \ConTeXt\ en utilisant des commandes.
+
+% ***  SubSection diacritiques
+
+% TODO Garulfo et si on mettait tout cela en annexe ?
+
+\startsection
+  [title={Diacritiques et lettres spéciales}]
+
+Presque toutes les langues occidentales ont des diacritiques (à l'exception importante de l'anglais pour l'essentiel) et en général, les claviers peuvent générer les diacritiques correspondant aux langues régionales. Ainsi, un clavier espagnol peut générer tous les signes diacritiques nécessaires à l'espagnol (essentiellement les accents et le tréma) ainsi que certains signes diacritiques utilisés dans d'autres langues comme le catalan (accents graves et cédilles) ou le français (cédilles, accents graves et circonflexes) ; mais pas, par exemple, certains signes diacritiques utilisés en portugais, comme le tilde sur certaines voyelles dans des mots comme \quotation{navegaç\~ao}.
+
+\TeX\ a été conçu aux États-Unis où les claviers ne permettent généralement pas d'obtenir les diacritiques ; Donald Knuth lui a donc donné un ensemble de commandes qui permettent d'obtenir presque tous les diacritiques connus (du moins dans les langues utilisant l'alphabet latin). Si nous utilisons un clavier espagnol, cela n'a pas beaucoup de sens d'utiliser ces commandes pour obtenir les diacritiques qui peuvent être obtenus directement à partir du clavier. Il est néanmoins important de savoir que ces commandes existent, et ce qu'elles sont, puisque les claviers espagnols (ou italiens, ou français...) ne permettent pas de générer tous les diacritiques possibles.
+
+\PlaceMacro{aacute} 
+\PlaceMacro{eacute} 
+\PlaceMacro{iacute} 
+\PlaceMacro{oacute} 
+\PlaceMacro{uacute}
+\PlaceMacro{agrave}
+\PlaceMacro{egrave}
+\PlaceMacro{igrave}
+\PlaceMacro{ograve}
+\PlaceMacro{ugrave}
+\PlaceMacro{acircumflex}
+\PlaceMacro{ecircumflex}
+\PlaceMacro{icircumflex}
+\PlaceMacro{ocircumflex}
+\PlaceMacro{ucircumflex}
+\PlaceMacro{adiaeresis}
+\PlaceMacro{ediaeresis}
+\PlaceMacro{idiaeresis}
+\PlaceMacro{odiaeresis}
+\PlaceMacro{udiaeresis}
+\PlaceMacro{amacron}
+\PlaceMacro{emacron}
+\PlaceMacro{imacron}
+\PlaceMacro{omacron}
+\PlaceMacro{umacron}
+\PlaceMacro{atilde}
+\PlaceMacro{etilde}
+\PlaceMacro{itilde}
+\PlaceMacro{otilde}
+\PlaceMacro{utilde}
+\PlaceMacro{u}
+\PlaceMacro{abreve}
+\PlaceMacro{ebreve}
+\PlaceMacro{obreve}
+\PlaceMacro{ibreve}
+\PlaceMacro{ubreve}
+
+\placetable
+  [here]
+  [tbl:diacritics]
+  {\tfx Accents and other diacritics}
+  {
+\starttabulate[|l|l|l|l|]
+\HL
+\NC{\bf Nom}
+\NC{\bf Caractère}
+\NC{\bf Abréviation}
+\NC{\bf Commande}
+\NR
+\HL
+\NC Accent aiguë 
+\NC \' u
+\NC \tex{'} u
+\NC \tex{uacute}
+\NR
+\NC Accent grave
+\NC \` u
+\NC \tex{`} u
+\NC \tex{ugrave}
+\NR
+\NC Accent circonflexe
+\NC \^ u
+\NC \tex{^} u
+\NC \tex{ucircumflex}
+\NR
+\NC Accent tréma
+\NC \" u
+\NC \tex{"} u
+\NC \tex{udiaeresis} ou \tex{uumlaut}
+\NR
+\NC Tilde
+\NC \~ u
+\NC \tex{\lettertilde} u
+\NC \tex{utilde}
+\NR
+\NC Macron 
+\NC \= u
+\NC \tex{=} u
+\NC \tex{umacron}
+\NR
+\NC Brève
+\NC \u u
+\NC \tex{u} u
+\NC \tex{ubreve}
+\NR
+\HL
+\stoptabulate
+}
+  
+
+Dans la \in{table}[tbl:diacritics] nous trouvons les commandes et abréviations qui nous permettent d'obtenir ces diacritiques. Dans tous les cas, il importe peu que nous utilisions la commande ou l'abréviation. Dans le tableau, j'ai utilisé la lettre \quote{u} comme exemple, mais ces commandes fonctionnent avec n'importe quelle voyelle (la plupart d'entre elles \footnote{Parmi les commandes trouvées dans \in{table}[tbl:diacritics] le tilde ne fonctionne pas avec la lettre \quote{e}, et je ne sais pas pourquoi.}) et aussi avec certaines consonnes et certaines semi-voyelles.
+
+\startitemize
+
+\item Comme la plupart des commandes abrégées sont des {\em symboles de contrôle} (voir \in{section} [sec:commands themselves]), la lettre sur laquelle le diacritique doit tomber peut être écrite immédiatement après la commande, ou séparée de celle-ci. Ainsi, par exemple, pour obtenir le \quote{\~a} portugais, on peut écrire les caractères 
+\tex{lettertilde a} ou 
+\tex{lettertilde\textvisiblespace a}.
+\footnote{Nous rappelons que dans ce document, nous représentons les espaces vides, lorsqu'il est important de les voir, par le \quote{\textvisiblespace}.} Mais dans le cas du brève (\tex{u}), lorsqu'il s'agit d'un {\em mot de contrôle} l'espace blanc est obligatoire.
+
+\item Dans le cas de la version longue de la commande, la lettre sur laquelle tombe le diacritique sera la première lettre du nom de la commande. Ainsi, par exemple, 
+\tex{emacron} placera un macron au-dessus d'un \quote{e} minuscule (\emacron),
+\tex{Emacron} fera de même au-dessus d'un \quote{E} majuscule (\Emacron), tandis que 
+\tex{Amacron} fera de même au-dessus d'un \quote{A} majuscule (\Amacron).
+   
+\stopitemize
+
+Alors que les commandes de \in{table}[tbl:diacritics] fonctionnent avec les voyelles et certaines consonnes, il existe d'autres commandes pour générer certains diacritiques et lettres spéciales qui ne fonctionnent que sur une ou plusieurs lettres. Elles sont présentées dans \in{table} [tbl:morediacritics].
+
+\PlaceMacro{aa}
+\PlaceMacro{r}
+\PlaceMacro{aring}
+\PlaceMacro{o}
+\PlaceMacro{l}
+\PlaceMacro{ss}
+\PlaceMacro{i}
+\PlaceMacro{j}
+\PlaceMacro{H}
+\PlaceMacro{c}
+\PlaceMacro{ccedilla}
+\PlaceMacro{kcedilla}
+\PlaceMacro{lcedilla}
+\PlaceMacro{ncedilla}
+\PlaceMacro{rcedilla}
+\PlaceMacro{scedilla}
+\PlaceMacro{tcedilla}
+
+{\switchtobodyfont[small]
+\placetable
+  [here]
+  [tbl:morediacritics]
+  {\tfx More diacritics and special letters}
+{\starttabulate[|l|l|l|l|]
+\HL
+\NC{\bf Nom}\NC{\bf Caractère}\NC{\bf Abréviation}\NC{\bf Commande}\NR
+\HL
+\NC O scandinave
+\NC \o, \O
+\NC \tex{o}, \tex{O}
+\NC
+\NR
+\NC O scandinave
+\NC \aring, \Aring, \r A
+\NC \tex{aa}, \tex{AA}, \tex{r a}, \tex{r A}
+\NC \tex{aring}, \tex{Aring}
+\NR
+\NC L polonais
+\NC \l, \L
+\NC \tex{l}, \tex{L}
+\NC
+\NR
+\NC Eszett allemand
+\NC \sz, \SS
+\NC \tex{sz}, \tex{SS}
+\NC
+\NR
+\NC \quote{i} et \quote{j} sans point
+\NC \i, \j
+\NC \tex{i}, \tex{j}
+\NC
+\NR
+\NC Umlaut (ou tréma) hongrois,
+\NC \H u, \H U
+\NC \tex{H u}, \tex{H U}
+\NC
+\NR
+\NC Cedilla
+\NC \c c, \c C
+\NC \tex{c c}, \tex{c C}
+\NC \tex{ccedilla}, \tex{Ccedilla}
+\NR
+\HL
+\stoptabulate}
+}
+
+
+Je tiens à préciser que certaines des commandes du tableau ci-dessus génèrent les caractères à partir d'autres caractères, tandis que d'autres commandes ne fonctionnent que si la police que nous utilisons a expressément prévu le caractère en question. Ainsi, en ce qui concerne l'Eszett allemand (ß), le tableau indique deux commandes mais un seul caractère, car la police que j'utilise ici pour ce texte ne prévoit que la version majuscule de l'eszett allemand (ce qui est assez courant). 
+
+C'est probablement la raison pour laquelle je n'arrive pas non plus à obtenir le A scandinave en majuscules, bien que \MyKey{\{\backslash r A\}} et \cmd{Aring} fonctionnent correctement.
+
+Le tréma hongrois fonctionne également avec la lettre \quote{o}, et la cédille avec les lettres \quote{k}, \quote{l}, \quote{n}, \quote{r}, \quote{s} et \quote{t}, respectivement en minuscule ou en majuscule. Les commandes à utiliser sont respectivement \cmd{kcedilla}, \cmd{lcedilla}, \cmd{ncedilla}...
+
+\stopsection
+
+% ***  SubSection ligatures
+
+\startsection
+  [
+    reference=sec:ligatures,
+    title={Ligatures traditionnelles},
+  ]
+  % There should be another section just for ligatures
+  % automatically generated by ConTeXt as a font feature.
+  % But in the end in the font chapter, I did not talk about
+  % features of various fonts, and there was no where to
+  % put this section.
+
+Une ligature est formée par l'union de deux ou plusieurs graphèmes qui s'écrivent habituellement séparément. Cette \quotation{fusion} entre deux caractères a souvent commencé comme une sorte de sténographie dans les textes manuscrits, pour finalement atteindre une certaine indépendance typographique. Certains d'entre eux ont même été inclus parmi les caractères habituellement définis dans une police typographique, comme l'esperluette, \quote{\&}, qui a commencé comme une contraction de la copule (conjonction) latine \quotation{et}, ou l'Eszett (ß) allemand, qui, comme son nom l'indique, a commencé comme une combinaison d'un \quote{s} et d'un \quote{z}. Dans certaines polices de caractères, même aujourd'hui, nous pouvons retrouver les origines de ces deux caractères ; ou peut-être que je les vois parce que je sais qu'ils sont là. En particulier, avec la police Pagella pour \quote{\&} et avec Bookman pour \quote{ß}.
+
+Comme exercice, je suggère (après avoir lu le \in{chapitre}[sec:fontscol], où il explique comment faire) d'essayer de représenter ces caractères avec ces polices à une taille suffisamment grande (par exemple, 30 pt) pour pouvoir travailler sur leurs composants.
+
+D'autres ligatures traditionnelles qui ne sont pas devenues aussi populaires, mais qui sont encore utilisées occasionnellement aujourd'hui, sont les terminaisons latines \quotation{oe} et \quotation{ae} qui étaient parfois écrites comme \quote{\oe} ou \quote{ae} pour indiquer qu'elles formaient une diphtongue en latin. Ces ligatures peuvent être réalisées dans \ConTeXt\ avec les commandes trouvées dans \in{table}[tbl:ligatures]
+
+\PlaceMacro{ae}
+\PlaceMacro{aeligature}
+\PlaceMacro{oe}
+\PlaceMacro{oeligature}
+
+\placetable
+  [here]
+  [tbl:ligatures]
+  {Ligatures traditionnelles}
+{
+\starttabulate[|l|l|l|]
+\HL
+\NC {\bf Ligature}\NC {\bf Abréviation}\NC {\bf Commande}\NR
+\HL
+\NC \ae, \AE
+\NC \tex{ae}, \tex{AE}
+\NC \tex{aeligature}, \tex{AEligature}
+\NR
+\NC \oe, \OE
+\NC \tex{oe}, \tex{OE}
+\NC \tex{oeligature}, \tex{OEligature}
+\NR
+\HL
+\stoptabulate}    
+
+Une ligature qui était autrefois traditionnelle en espagnol (castillan) et que l'on ne trouve généralement pas dans les polices actuelles est \quote{Đ} : une contraction impliquant \quote{D} et \quote{E}. Pour autant que je sache, il n'y a pas de commande dans \ConTeXt\ qui nous permette de l'utiliser
+,\footnote{Dans \LaTeX, par contre, nous pouvons utiliser la commande \cmd{DH} implémentée par le paquet \MyKey{fontenc}.}
+mais nous pouvons en créer un, comme expliqué dans la section [sec:create characters].
+
+En plus des ligatures précédentes, que j'ai appelées {\em traditionnelles} parce qu'elles proviennent de l'écriture manuscrite, après l'invention de la presse à imprimer, certaines ligatures de texte imprimé se sont développées, que j'appellerai \quotation{ligatures typographiques}, considérées par \ConTeXt\ comme des fonctionnalités de police et qui sont gérées automatiquement par le programme, bien que nous puissions influencer la façon dont ces fonctionnalités de police sont gérés (y compris les ligatures) avec \PlaceMacro{definefontfeature} \tex{definefontfeature} (voir \in{section}[sec:fontfeatures])
+
+
+\stopsection
+
+% ***  SubSection alphabet grec 
+
+\startsection
+  [title={Alphabet grec}]
+
+Il est courant d'utiliser des caractères grecs dans les formules mathématiques et physiques. C'est pourquoi \ConTeXt\ a inclus la possibilité de générer tout l'alphabet grec, majuscules et minuscules. Ici, la commande est construite sur le nom anglais de la lettre grecque en question. Si le premier caractère est écrit en minuscule, nous aurons la lettre grecque en minuscule et s'il est écrit en majuscule, nous aurons la lettre grecque en majuscule. Par exemple, la commande \tex{mu} générera la version minuscule de cette lettre (\mu) tandis que \tex{Mu} générera la version majuscule (\Mu). Dans la \in{table}[tbl:greekletters], nous pouvons voir quelle commande génère chacune des lettres de l'alphabet grec, en minuscule et en majuscule.
+
+{\smallbodyfont
+\placetable
+  [here,force]
+  [tbl:greekletters]
+  {Alphabet grec}
+{
+  \starttabulate[|l|l|l|]
+    \HL
+    \NC {\bf Nom}\NC {\bf Caractère (min/maj)}\NC {\bf Commande (lc/uc)}\NR
+    \HL
+    \NC Alpha\NC   \alpha, \Alpha\NC{\tt \backslash alpha, \backslash Alpha}\NR\PlaceMacro{alpha}
+    \NC Bêta\NC    \beta,   \Beta\NC{\tt \backslash beta, \backslash Beta}\NR\PlaceMacro{beta}
+    \NC Gamma\NC   \gamma, \Gamma\NC{\tt \backslash gamma, \backslash Gamma}\NR\PlaceMacro{gamma}
+    \NC Delta\NC   \delta, \Delta\NC{\tt \backslash delta, \backslash Delta}\NR\PlaceMacro{delta}
+    \NC Epsilon\NC \epsilon, \varepsilon, \Epsilon\NC{\tt \backslash epsilon, \backslash varepsilon, \backslash Epsilon}\NR\PlaceMacro{epsilon}\PlaceMacro{varepsilon}
+    \NC Zêta\NC    \zeta, \Zeta\NC{\tt \backslash zeta, \backslash Zeta}\NR\PlaceMacro{zeta}
+    \NC Êta\NC\eta, \Eta\NC{\tt \backslash eta, \backslash Eta}\NR\PlaceMacro{eta}
+    \NC Thêta\NC\theta, \vartheta, \Theta\NC{\tt \backslash theta, \backslash vartheta, \backslash Theta}\NR\PlaceMacro{theta}\PlaceMacro{vartheta}
+    \NC Iota\NC\iota, \Iota\NC{\tt \backslash iota, \backslash Iota}\NR\PlaceMacro{iota}
+    \NC Kappa\NC\kappa, \varkappa, \Kappa\NC{\tt \backslash kappa, \backslash varkappa, \backslash Kappa}\NR\PlaceMacro{kappa}\PlaceMacro{varkappa}
+    \NC Lambda\NC\lambda, \Lambda\NC{\tt \backslash lambda, \backslash Lambda}\NR\PlaceMacro{lambda}
+    \NC Mu\NC\mu, \Mu\NC{\tt \backslash mu, \backslash Mu}\NR\PlaceMacro{mu}
+    \NC Nu\NC\nu, \Nu\NC{\tt \backslash nu, \backslash Nu}\NR\PlaceMacro{nu}
+    \NC Ksi ou Xi\NC\xi, \Xi\NC{\tt \backslash xi, \backslash Xi}\NR\PlaceMacro{xi}
+    \NC Omicron\NC\omicron, \Omicron\NC{\tt \backslash omicron, \backslash Omicron}\NR\PlaceMacro{omicron}
+    \NC Pi\NC\pi, \varpi, \Pi\NC{\tt \backslash pi, \backslash varpi, \backslash Pi}\NR\PlaceMacro{pi}\PlaceMacro{varpi}
+    \NC Rhô\NC\rho, \varrho, \Rho\NC{\tt \backslash rho, \backslash varrho, \backslash Rho}\NR\PlaceMacro{rho}\PlaceMacro{varrho}
+    \NC Sigma\NC\sigma, \varsigma, \Sigma\NC{\tt \backslash sigma, \backslash varsigma, \backslash Sigma}\NR\PlaceMacro{sigma}\PlaceMacro{varsigma}
+    \NC Tau\NC\tau, \Tau\NC{\tt \backslash tau, \backslash Tau}\NR\PlaceMacro{tau}
+    \NC Upsilon\NC\upsilon, \Upsilon\NC{\tt \backslash upsilon, \backslash Upsilon}\NR\PlaceMacro{upsilon}
+    \NC Phi\NC\phi, \varphi, \Phi\NC{\tt \backslash phi, \backslash varphi, \backslash Phi}\NR\PlaceMacro{phi}\PlaceMacro{varphi}
+    \NC Khi ou Chi\NC\chi, \Chi\NC{\tt \backslash chi, \backslash Chi}\NR\PlaceMacro{chi}
+    \NC Psi\NC\psi, \Psi\NC{\tt \backslash psi, \backslash Psi}\NR\PlaceMacro{psi}
+    \NC Oméga\NC\omega, \Omega\NC{\tt \backslash omega, \backslash Omega}\PlaceMacro{omega}\NR
+    \HL
+\stoptabulate}}
+
+Notez que pour les versions minuscules de certains caractères (epsilon, kappa, theta, pi, rho, sigma et phi), il existe deux variantes possibles.
+
+\stopsection
+
+% ***  SubSection symboles
+
+\startsection
+  [title={Divers symboles}]
+
+Outre les caractères que nous venons de voir, \TeX\ (et donc \ConTeXt\) propose des commandes permettant de générer un nombre quelconque de symboles. Ces commandes sont nombreuses. J'en ai fourni une liste étendue mais incomplète dans \in{appendix}[app:symbols].
+
+\stopsection
+
+% ***  SubSection créer un caractère
+
+% TODO : garulfo peu approprié au débutant à mon avis
+
+\startsection
+  [
+    reference=sec:create characters,
+    title=Définir un caractère,
+  ]
+  \PlaceMacro{definecharacter}
+
+Si nous devons utiliser des caractères qui ne sont pas accessibles depuis notre clavier, nous pouvons toujours trouver une page Web avec ces caractères et les copier dans notre fichier source. Si nous utilisons l'encodage UTF-8 (comme recommandé), cela fonctionnera presque toujours ({\bf si la police que vous utilisez les contient}, comme DejaVu qui les contient presque tous). Mais il existe également sur le wiki \ConTeXt\ \goto{une page contenant des tas de symboles}[url(wikisymbols)] qui peuvent être simplement copiés et collés dans notre document.
+
+Toutefois, si nous devons utiliser plusieurs fois l'un des caractères en question, le copier-coller n'est pas le moyen le plus efficace d'y parvenir. Il serait préférable de définir le caractère de façon à ce qu'il soit associé à une commande qui le générera à chaque fois. Pour ce faire, on utilise \tex{definecharacter} dont la syntaxe est :
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\definecharacter {Nom} {Caractère}
+\stopDemoI}
+
+où
+
+\startitemize
+
+\item {\bf Nom} est le nom associé au nouveau caractère. Il ne doit pas s'agir du nom d'une commande existante, car cela écraserait cette commande.
+
+\item {\bf Caractère} est le caractère généré chaque fois que nous exécutons \tex{Nom}. Il existe trois façons d'indiquer ce caractère :
+
+
+  \startitemize
+
+ \item en l'écrivant simplement ou en le collant dans notre fichier source (si nous l'avons copié d'un autre document électronique ou d'une page Web).
+
+  \item en indiquant le numéro associé à ce caractère dans la police que nous utilisons actuellement. Pour voir les caractères inclus dans la police et les numéros qui leur sont associés, nous pouvons utiliser la commande \tex{showfont[{\em NomDePolice}]} (voir \in{section}[sec:see-font]).
+
+  \item Construire le nouveau caractère avec l'une des commandes de construction de caractères composites que nous verrons immédiatement après.
+
+  \stopitemize
+  
+\stopitemize
+
+%TODO Garulfo avec LMTX https://wiki.contextgarden.net/composing_characters
+
+Pour illustrer la première utilisation, revenons pour l'instant aux sections traitant des ligatures (\in{}[sec:ligatures]). J'y ai parlé d'une ligature traditionnelle en espagnol que l'on ne trouve généralement pas dans les polices actuelles : \quote{Đ}. Nous pourrions associer ce caractère, par exemple, à la commande \tex{decontract} afin que le caractère soit généré chaque fois que nous écrivons \tex{decontract}. Nous faisons cela avec :
+
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+\definecharacter {decontract} {Đ}
+Ce caractère~: {\tfd \decontract}.
+\stopDemoVN}
+
+
+\startSmallPrint
+
+Pour construire un nouveau caractère qui n'est pas dans notre police, et qui ne peut pas être obtenu à partir du clavier, comme c'est le cas de l'exemple que je viens de donner, il faut d'abord trouver un texte où ce caractère se trouve, le copier et être capable de le coller dans notre définition. Dans l'exemple que je viens de donner, j'ai initialement copié la \quote{Đ} de Wikipedia.
+  
+\stopSmallPrint
+
+\ConTeXt\ comprend également certaines commandes qui nous permettent de créer des caractères composites et qui peuvent être utilisées en combinaison avec \tex{definecharacter}. Par caractères composites, j'entends les caractères qui possèdent également des diacritiques. Les commandes sont les suivantes~:
+
+
+\PlaceMacro{buildmathaccent}\PlaceMacro{buildtextaccent}\PlaceMacro{buildtextbootomcomma}\PlaceMacro{buildtextbottomdot}\PlaceMacro{buildtextcedilla}\PlaceMacro{buildtextgrave}\PlaceMacro{buildtextmacron}\PlaceMacro{buildtexttognek}
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\definecharacter zete     {\buildtextaccent ` z}
+\definecharacter zcomma   {\buildtextbottomcomma z}
+\definecharacter zdot     {\buildtextbottomdot z}
+\definecharacter zcedilla {\buildtextcedilla z}
+\definecharacter zgrave   {\buildtextgrave z}
+\definecharacter zmacron  {\buildtextmacron z}
+
+zete      ~,~ zcomma  ~,~ zdot    ~,~ 
+zcedilla  ~,~ zgrave  ~,~ zmacron
+\stopDemoVW}
+
+Par exemple : comme nous le savons déjà, par défaut, \ConTeXt\ ne possède que des commandes pour écrire certaines lettres avec une cédille (c, k, l, n, r, s y t) qui sont généralement incorporées dans les polices de caractères. Si nous voulions utiliser un \quotation{b}, nous pourrions utiliser la commande \cmd{buildtextcedilla} comme dans l'exemple.
+
+Cette commande crée la nouvelle commande \tex{bB} qui générera un \quotation{b} avec une cédille. Ces commandes construisent littéralement le nouveau caractère qui sera généré même si notre police ne le possède pas. Ce que font ces commandes, c'est superposer un caractère sur un autre, puis donner un nom à cette superposition.
+
+\startSmallPrint
+
+  Lors de mes tests, je n'ai pas réussi à faire fonctionner \tex{buildmathaccent} ou \tex{buildtextognek}. Je ne les mentionnerai donc plus à partir de maintenant.
+  
+\stopSmallPrint
+
+\tex{buildtextaccent} prend deux caractères comme arguments et en superpose un sur l'autre, en relevant légèrement l'un d'eux. Bien qu'elle soit appelée \quotation{buildtextaccent}, il n'est pas essentiel que l'un des caractères pris comme arguments soit un accent ; mais la superposition donnera de meilleurs résultats s'il l'est, car dans ce cas, en superposant l'accent sur le caractère, l'accent a moins de chances d'écraser le caractère. D'autre part, le chevauchement de deux caractères qui ont la même ligne de base dans des conditions normales est affecté par le fait que la commande élève légèrement l'un des caractères au-dessus de l'autre. C'est pourquoi nous ne pouvons pas utiliser cette commande, par exemple, pour obtenir la contraction \quote{Đ} mentionnée plus haut, car si nous écrivons~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+\definecharacter {decontract} {\buildtextaccent D E} 
+\decontract ~ vs ~ Đ
+\stopDemoVN}
+
+dans notre fichier source, la légère élévation au-dessus de la ligne de base de \quote{D} que cette commande produit n'est pas très bon. Mais si la hauteur des caractères le permet, nous pourrions créer une combinaison. Par exemple~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+\definecharacter unusual {\buildtextaccent \_ "}
+regarde~: \unusual
+\stopDemoVN}
+
+Le reste des commandes de construction prend un seul argument -- le caractère auquel le diacritique généré par chaque commande sera ajouté. L'exemple ci-dessus montre un exemple de chacune d'entre elles, construite sur la lettre \quote{z} :
+
+
+
+\startitemize
+
+\item \tex{buildtextbottomcomma} ajoute une virgule sous le caractère qu'il prend comme argument.
+\item \tex{buildtextbottomdot} ajoute un point sous le caractère qu'il prend comme argument.
+\item \tex{buildtextcedilla} ajoute une cédille sous le caractère qu'il prend comme argument.
+\item \tex{buildtextgrave} ajoute un accent grave sur le caractère qu'il prend comme argument.
+\item \tex{buildtextmacron} ajoute une petite barre sous le caractère qu'il prend comme argument.
+  
+\stopitemize
+
+À première vue, \tex{buildtextgrave} semble redondant étant donné que nous avons \tex{buildtextaccent} ; Cependant, si vous vérifiez l'accent grave généré par la première de ces deux commandes, il semble un peu mieux. L'exemple suivant montre le résultat des deux commandes, à une taille de police suffisante pour apprécier la différence :
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\definecharacter zgrave  {\buildtextgrave z}
+\definecharacter zgraveb {\buildtextaccent ` z}
+\switchtobodyfont[30pt]
+\midaligned{\framed{\zgrave\ -- \zgraveb}}
+\stopDemoVW}
+
+
+
+\stopsection
+
+% ***  SubSection utiliser des symboles
+
+\startsection
+  [title={Utilisation de jeux de symboles prédéfinis}]
+
+\suite- comprend, en plus de \ConTeXt\, un certain nombre de jeux de symboles prédéfinis que nous pouvons utiliser dans nos documents. Ces ensembles sont appelés \MyKey{cc}, \MyKey{cow}, \MyKey{fontawesome}, \MyKey{jmn}, \MyKey{mvs} et \MyKey{nav}. Chacun de ces ensembles comprend également des sous-ensembles :
+
+
+\startitemize[packed]
+
+\item {\tt\bf cc} comprends \quotation{\tt cc}.
+
+\item {\tt\bf cow} comprends \quotation{\tt cownormal} et \quotation{\tt cowcontour}.
+
+\item {\tt\bf fontawesome} comprends \quotation{\tt fontawesome-regular}, \quotation{\tt fontawesome-solid} et \quotation{\tt fontawesome-brands}.
+
+\item {\tt\bf jmn} comprends \quotation{\tt navigation~1}, \quotation{\tt navigation~2},  \quotation{\tt navigation~3} et \quotation{\tt navigation~4}.
+
+\item {\tt\bf mvs} comprends \quotation{\tt astronomic}, \quotation{\tt zodiac}, \quotation{\tt europe}, \quotation{\tt martinvogel~1}, \quotation{\tt martinvogel~2} et \quotation{\tt martinvogel~3}.
+
+\item {\tt\bf nav} comprends \quotation{\tt navigation~1}, \quotation{\tt navigation~2} et \quotation{\tt navigation~3}.
+  
+\stopitemize
+
+
+\startSmallPrint
+
+  Le wiki mentionne également un ensemble appelé {\tt\bf was} qui inclut \quotation{wasy general}, \quotation{wasy music}, \quotation{wasy astronomy}, \quotation{wasy astrology}, \quotation{wasy geometry}, \quotation{wasy physics} et \quotation{wasy apl}. Mais je n'ai pas pu les trouver dans ma distribution, et mes tests pour tenter d'y accéder ont échoué.
+
+  
+\stopSmallPrint
+
+Pour voir les symboles spécifiques contenus dans chacun de ces ensembles, on utilise les commandes \tex{usesymbols} \tex{showsymbolset}. Par exemple : si nous voulons voir les symboles inclus dans \quotation{\tt mvs/zodiac}, alors dans le fichier source nous devons écrire :
+
+\PlaceMacro{usesymbols} \PlaceMacro{showsymbolset}
+
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+\usesymbols [mvs]
+\showsymbolset[zodiac]
+\stopDemoVN}
+
+Notez que le nom de chaque symbole est indiqué ainsi que le symbole. La commande \PlaceMacro{symbol}\tex{symbol} nous permet alors d'utiliser n'importe lequel des symboles. Par exemple, si nous voulons utiliser le symbole astrologique associé au Verseau (trouvé dans mvs/zodiac), nous devons écrire~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+\usesymbols [mvs]
+\symbol[zodiac][Aquarius]
+\stopDemoVN}
+
+Le symbole est traité comme un \quotation{caractère} et sera donc affectée par la taille de police active lors de l'impression. Nous pouvons également utiliser \tex{definecharacter} pour associer le symbole en question à une commande. Par exemple et utiliser ces symboles, par exemple, dans un environnement d'énumération. Par exemple~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\usesymbols[mvs] 
+\definecharacter %
+  SymbAries  \symbol[zodiac][Aquarius]
+\definesymbol [1]
+  [{\symbol[martinvogel 2][PointingHand]}]
+\definesymbol [2]
+  [{\symbol[martinvogel 2][CheckedBox]}]
+
+\startitemize[packed]
+  \item item avec \SymbAries
+  \item item 
+  \startitemize[packed]
+    \item item 
+    \item item
+  \stopitemize
+  \item item
+\stopitemize
+\stopDemoVW}
+
+\stopsection
+
+
+\stopchapter
+
+\stopcomponent
+
+%%% TeX-master: "../introCTX_fra.tex"

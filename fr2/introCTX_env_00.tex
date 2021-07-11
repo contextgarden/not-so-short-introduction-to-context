@@ -1,0 +1,66 @@
+\startenvironment introCTX_env
+
+%------------------------------------------------------------------------------
+
+\mainlanguage[fr]
+\language[fr]
+\setcharacterspacing[frenchpunctuation] 
+
+%------------------------------------------------------------------------------
+
+\setvariables
+  [document]
+  [titleA={Une courte (?)},
+  titleB={introduction},
+  titleC={à \ConTeXt},
+  author={Joaquín Ataz-López}]
+    
+\setvariables
+  [document]
+  [title={\getvariable{document}{titleA} 
+          \getvariable{document}{titleB}
+          \getvariable{document}{titleC}},]
+  
+  
+\setupdocument
+  [metadata:author={\getvariable{document}{author}},
+            author={\getvariable{document}{author}},
+       affiliation={\getvariable{document}{author}},
+    metadata:title={\getvariable{document}{title}},
+             title={\getvariable{document}{title}},
+          location={France},
+           support={https://mailman.ntg.nl/mailman/listinfo/ntg-context},
+           website={https://wiki.contextgarden.net},
+           ]
+
+%------------------------------------------------------------------------------
+
+\usepath[{01_FrontMatter,02-01_BodyMatter_Source,02-02_BodyMatter_Markup,02-03_BodyMatter_TypesetGlobal,02-04_BodyMatter_TypesetLocal,03_Appendices,04_BackMatter}]
+
+%------------------------------------------------------------------------------
+
+\usemodule[setups]                                % used to show command syntax
+\usemodule[setups-basics]
+\usemodule[x-setups-basics]
+
+\usemodule[chemic]
+\useMPlibrary [dum]  % pour produire des images dummy
+
+%------------------------------------------------------------------------------
+
+\environment introCTX_env_01_color    
+\environment introCTX_env_02_layout  
+\environment introCTX_env_03_headers_footers_pagenumbering  
+\environment introCTX_env_04_paragraphs_and_fonts 
+\environment introCTX_env_05_headings_toc_and_ref
+\environment introCTX_env_06_figures-tables.tex
+\environment introCTX_env_07_interactivity 
+
+%------------------------------------------------------------------------------
+%                      Specific for this introduction, will not compile without
+
+\environment introCTX_env_08_specific
+\environment introCTX_env_09_for_demo
+\environment introCTX_env_10_attachment
+
+\stopenvironment

@@ -1,0 +1,37 @@
+\startcomponent 02-02-01-06_Markup_Quotations
+
+\environment introCTX_env_00
+
+%==============================================================================
+
+\startsection
+  [title=Citations,reference=sec:mkp:quotes]
+
+\TocChap
+
+
+\tex{quote}
+\tex{quotation}
+\tex{startquotation}
+
+
+\item {\tt\bf quotation}\PlaceMacro{startquotation}  \reference[env:quotation]{envquotation} 
+Un environnement très similaire à {\tt narrower}, destiné à insérer des citations littérales moyennement longues. L'environnement veille à ce que le texte soit cité et à ce que les marges soient augmentées pour que le paragraphe contenant la citation se détache visuellement sur la page.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+Cette citation de Victo Hugo~:
+\startquotation
+Il vient une heure où protester ne suffit plus : après la philosophie, il faut l'action.
+\stopquotation
+\stopDemoVN}
+
+
+
+\stopsection
+
+%==============================================================================
+
+\stopcomponent
+
+%%% TeX-master: "../introCTX_fra.tex"

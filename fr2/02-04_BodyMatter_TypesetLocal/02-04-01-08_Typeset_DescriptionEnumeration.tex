@@ -1,0 +1,124 @@
+\startcomponent 02-04-01-08_Typeset_DescriptionEnumeration
+
+\environment introCTX_env_00
+
+%==============================================================================
+
+\startsection
+  [title=DescriptionEnumeration,
+  reference=sec:typset:descenum]
+
+
+\TocChap
+
+\startsubsection
+  [title=Descriptions]
+
+Comme c'est normalement le cas avec \ConTeXt, l'aspect qu'aura notre nouvelle construction peut être indiqué au moment de sa création, avec le dernier argument ou plus tard avec \tex{setupdescription} :
+
+\setup{setupdescription}
+
+où {\em 1} est le nom (ou la liste de nom) de notre nouvelle description, et {\em 2} détermine à quoi elle ressemble. Parmi les différentes options de configuration possibles, je soulignerai~:
+
+\startcommanddesc
+
+\starthead{alternative} cette option est celle qui contrôle fondamentalement l'apparence de la construction. Elle détermine le placement du titre par rapport à sa description. Ses valeurs possibles sont les suivantes : {\tt left, right, inmargin, inleft, inright, margin, leftmargin, rightmargin, innermargin, outermargin, serried, hanging}, leurs noms sont suffisamment clairs pour se faire une idée du résultat, même si, en cas de doute, il est préférable de faire un test pour voir ce que cela donne.\stophead
+
+\starthead{width} contrôle la largeur de la boîte dans laquelle le titre sera écrit. Selon la valeur de {\tt alternative}, cette distance fera également partie de l'indentation avec laquelle le texte explicatif sera écrit.\stophead
+
+\starthead{distance} contrôle la distance entre le titre et l'explication.\stophead
+
+\starthead{headstyle, headcolor, headcommand} affecte l'aspect du titre lui-même : Style ({\tt headstyle}) et couleur ({\tt headcolor}). Avec headcommand, on peut indiquer une commande à laquelle le texte du titre sera passé comme argument. Par exemple : {\tt headcommand=\backslash WORD} fera en sorte que le texte du titre soit tout en majuscules.\stophead
+
+\starthead{style, color} contrôle l'apparence du texte descriptif du titre.\stophead
+
+\starthead{hang} contrôle les spécificités dans le cas de l'alternative {\tt hanging} (combien de ligne sont mise en retrait).\stophead
+
+\stopcommanddesc
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW%
+\startbuffer
+Il vient une heure où protester ne suffit plus : après la philosophie, il faut l'action.
+\stopbuffer%
+\definedescription  [Concept]
+  [alternative=left, 
+   width=2.5cm,
+   distance=2em,
+   headstyle=\tt\bf,
+   headcolor=darkred]%
+\startConcept{left} \getbuffer \stopConcept
+
+\definedescription [Concept] [alternative=hanging]
+\startConcept{hanging} \getbuffer \stopConcept
+\definedescription [Concept] [alternative=top]
+\startConcept{top} \getbuffer \stopConcept
+\definedescription [Concept] [alternative=serried]
+\startConcept{serried} \getbuffer \stopConcept
+\definedescription [Concept] [distance=5em]
+\startConcept{distance} \getbuffer \stopConcept
+\definedescription [Concept] [alternative=right, distance=2em]
+\startConcept{right} \getbuffer \stopConcept
+\definedescription [Concept] [headalign=flushright]
+\startConcept{headalign} \getbuffer \stopConcept
+\stopDemoVW}
+
+\stopsubsection
+
+\startsubsection
+  [title=Énumérations]
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\defineenumeration [Exercice]
+  [alternative=left,
+   headcolor=darkcyan,
+   width=2cm,
+   text={Exercice},
+   before=\blank, 
+   after=\blank, 
+   between=\blank]
+
+\startExercice
+Commençons par le commencement A.\par
+Commençons par le commencement B.
+
+\startsubExercice
+Celui ci est élémentaire A.\par
+Celui ci est élémentaire B.
+\stopsubExercice
+
+\startsubExercice
+Celui ci est un complément A.\par
+Celui ci est un complément B.
+\stopsubExercice
+
+\stopExercice
+\stopDemoVW}
+
+L'apparence des énumérations (voir exemple ci-dessus) peut être déterminée au moment de leur création ou ultérieurement avec \tex{setupenumeration} dont les options et valeurs sont similaires à celles de \tex{setupdescription}.
+
+Pour chaque énumération, nous pouvons configurer chacun de ses niveaux séparément. Ainsi, par exemple, \tex{setupenumeration [subExercice] [Configuration]} affectera le deuxième niveau de l'énumération appelée \quotation{Exercice}.
+
+\PlaceMacro{setupenumeration}
+\setup{setupenumeration}
+
+
+Pour contrôler la numérotation, il existe les commandes supplémentaires suivantes :
+
+\startcommanddesc
+\starthead{\tex{setEnumerationName}} définit la valeur de numérotation actuelle. \stophead
+\starthead{\tex{resetEnumerationName}} remet le compteur d'énumération à zéro.\stophead
+\starthead{\tex{nextEnumerationName}} augmente le compteur d'énumération d'une unité.\stophead
+\stopcommanddesc
+
+\stopsubsection
+
+\stopsection
+
+%==============================================================================
+
+\stopcomponent
+
+%%% TeX-master: "../introCTX_fra.tex"

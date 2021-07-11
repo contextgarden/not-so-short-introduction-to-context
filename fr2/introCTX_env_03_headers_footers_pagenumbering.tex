@@ -1,0 +1,117 @@
+
+%-----------------------------------------------------------------------------
+
+\setuppagenumbering
+  [
+   alternative=doublesided,                             % document recto-verso
+   location=]    % suppression affichage par défaut numéro page centré en-tête
+
+%\setupuserpagenumber [number=2]
+\setupheadertexts[]                                    % Empty initial headers
+\setupfootertexts[]                                    % Empty initial footers
+
+%------------------------------------------------------------------------------
+
+\startsectionblockenvironment[bodypart]
+
+\setuphead[part][header=empty,footer=empty]
+
+\setuphead
+    [chapter]
+    [after={\strut\blank[3*big]},
+     header=empty,footer=empty]
+
+\setupfootertexts[text]                                                 % sides
+    [{\tfx\labeltext{chapter} \getmarking[chapternumber]}]
+    [{\framed[height=max,
+             frame=off,
+             offset=0pt,
+             location=top,
+             align={high,flushright}]
+     {\tfx\getmarking[chapter]}}]
+    [{\tfx\labeltext{chapter} \getmarking[chapternumber]}]
+    [{\framed[height=max,
+              frame=off,
+              offset=0pt,
+              location=top,
+              align={high,flushright}]
+     {\tfx\getmarking[chapter]}}]
+
+\setupfootertexts[margin]                                                 % sides
+    []
+    [\hfill{\tfx\bf\pagenumber}]
+    [{\tfx\bf\pagenumber}\hfill]
+    []
+
+ 
+\setupbottomtexts[text]                                                 % sides
+    [{\tfx \in{\triangleleft ~ Table des matières}[sec:thetoc]}]
+    []
+    [{\tfx \in{\triangleleft ~ Table des matières}[sec:thetoc]}]
+    []
+
+\stopsectionblockenvironment
+
+%------------------------------------------------------------------------------
+
+
+\startsectionblockenvironment[frontpart]
+
+\setuphead[part][header=empty,footer=empty]
+
+\setuphead
+    [chapter]
+    [after={\strut\blank[3*big]},
+     header=empty,footer=empty]
+
+\setupfootertexts[text]                                                 % sides
+    []
+  [\hfill{\framed[height=max,frame=off,offset=0pt,location=top,align={high,flushright}]{\tfx\getmarking[chapter]}}]
+    []
+    [{\framed[height=max,frame=off,offset=0pt,location=top,align={high,flushright}]{\tfx\getmarking[chapter]}}]
+  \setupfootertexts[margin]                                                 % sides
+    []
+    [\hfill{\tfx\bf\pagenumber}]
+    [{\tfx\bf\pagenumber}\hfill]
+    []
+
+
+\stopsectionblockenvironment
+
+
+%------------------------------------------------------------------------------
+
+\startsectionblockenvironment[appendix]
+
+\setuphead[part][header=empty,footer=empty]
+
+\setuphead
+    [chapter]
+    [after={\strut\blank[3*big]},
+     header=empty,footer=empty]
+
+\setupfootertexts[text]                                                 % sides
+    [{\tfx\labeltext{appendix} \getmarking[chapternumber]}]
+    [{\framed[height=max,
+             frame=off,
+             offset=0pt,
+             location=top,
+             align={high,flushright}]
+     {\tfx\getmarking[chapter]}}]
+    [{\tfx\labeltext{appendix} \getmarking[chapternumber]}]
+    [{\framed[height=max,
+              frame=off,
+              offset=0pt,
+              location=top,
+              align={high,flushright}]
+     {\tfx\getmarking[chapter]}}]
+
+\setupfootertexts[margin]                                                 % sides
+    []
+    [\hfill{\tfx\bf\pagenumber}]
+    [{\tfx\bf\pagenumber}\hfill]
+    []
+
+\stopsectionblockenvironment
+
+
