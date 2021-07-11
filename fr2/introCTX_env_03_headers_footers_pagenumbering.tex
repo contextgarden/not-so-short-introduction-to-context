@@ -83,7 +83,7 @@
 
 \startsectionblockenvironment[appendix]
 
-\setuphead[part][header=empty,footer=empty]
+\setuphead[part][header=empty,footer=empty,number=no]
 
 \setuphead
     [chapter]
@@ -111,6 +111,11 @@
     [\hfill{\tfx\bf\pagenumber}]
     [{\tfx\bf\pagenumber}\hfill]
     []
+
+\setuphead  [chapter, title]                [sectionsegments=2:2]
+\setuphead  [section, subject]              [sectionsegments=2:3]
+\setuphead  [subsection, subsubject]        [sectionsegments=2:4]
+\setuphead  [subsubsection, subsubsubject]  [sectionsegments=2:5]
 
 \stopsectionblockenvironment
 

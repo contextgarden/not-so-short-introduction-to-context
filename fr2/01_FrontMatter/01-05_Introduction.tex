@@ -14,42 +14,114 @@ informatique, il en faut comprendre la logique sous-jacente.
 La logique de \ConTeXt\ s'appuie sur trois concepts~:
 
 \startitemize[n]
-\item le fichier source,
+\item les fichiers sources,
 \item le balisage,
 \item la composition et la mise en page.
 \stopitemize
 
 L'objectif des deux premières parties est de donner une sorte 
-d'\quotation{essentiel en moins de 75 pages}, pour un fois l'esprit clair
+d'\quotation{essentiel en moins de 100 pages}, pour un fois l'esprit clair
 sur les grandes règles syntaxiques et le balisage, vous puissiez vous concentrer
 sur la composition, la mise en page, c'est à dire l'ensemble des configurations
 qui vous permettrons de personnaliser votre document.
 
 % * Section 1 - le fichier source =============================================
 
-\startsection [title=Le fichier source]
 
+\startsubsection [title=Les fichiers sources]
 
-\stopsection
+Il s'agit de la donnée d'entrée. Quelle est la forme de la donnée d'entrée ?
+Et bien ce qu'il y a de plus simple en informatique~: des fichiers textes. 
+Ce sont des fichiers lisibles sur tous les ordinateurs du monde, avec un simple éditeur de texte.
+
+Cette universalité se fait au prix de deux conditions.
+Ils ne contiennent que des suites de caractères (pas de couleur, pas de mise en page, pas d'images, pas de sons… rien que du texte). 
+Ils utilisent un codage (c'est à dire des règles standards de représentation informatique) des caractères particulier, que l'on appelle \goto{UTF-8}[url(https://fr.wikipedia.org/wiki/UTF-8)]. Ce codage, dorénavant utilisé par plus de 97\% des sites web, permet de représenter les milliers de caractères du répertoire universel, c'est à dire des langues du monde.
+
+Il y a d'autres codage possibles, mais dorénavant, il est plus que recommandé de travailler avec des fichiers codés en UTF-8. Et si vous rencontrez des difficultés, assurez vous que vos fichiers textes sont en UTF-8.
+
+\ConTeXt\ prend donc en entrée des fichiers textes. Ces derniers doivent donc  contenir le contenu de votre document. Pour ce qui est donc de la partie textuelle de votre document, c'est assez simple à envisager. Mais la question se pose pour ce qui n'est pas du texte, par exemple les informations telles que \quotation{ce texte est un titre de chapitre}, \quotation{ce texte doit être en rouge}, \quotation{ici, il faut une image}….
+
+Comme le fichier ne contient que des suites de caractères, toutes ces informations, dites information de composition, à défaut d'être vue, vont donc devoir être décrite par… des suites de caractères puisque c'est la seule chose que l'on peut stocker dans un fichier texte.
+
+L'informatique a donc développé des techniques et langages de balisage tels que 
+\goto{HTML}[url(https://fr.wikipedia.org/wiki/Hypertext_Markup_Language)],   
+\goto{Markdown}[url(https://daringfireball.net/projects/markdown/syntax)], 
+\goto{Org-mode}[url(https://orgmode.org/)], 
+et \goto{\ConTeXt}[url(https://wiki.contextgarden.net)].
+
+\stopsubsection
 
 % * Section 2 - le balisage ===================================================
 
-\startsection [title=Le balisage]
+\startsubsection [title=Le balisage]
+
+Le langage de balisage de \ConTeXt\ va permettre de distinguer les différentes informations des fichiers sources~: \quotation{ce texte est un paragraphe}, \quotation{ceci est un titre}, \quotation{ici, il faut une image} etc. Il faut donc apprendre à écrire ce langage informatique et cela nécessite rigueur. Une logique et des règles sont à respecter pour une interprétation correcte par \ConTeXt\ et l'ordinateur.
+
+% Certains caractères du répertoire universel vont être consacrés à \ConTeXt\ pour distinguer les balises du reste du texte. Il ne sera donc pas possible de les utiliser comme habituellement. Ces caractères ont été choisis intelligemment, cela ne pose donc pas de difficultés, mais c'est un pli à prendre.
+
+Le langage \ConTeXt\, comme tout langage, a ses règles mais aussi son vocabulaire, qu'il va s'approprier. Et l'art de la composition étant particulièrement vaste ( \quotation{tout est permis} et \quotation{l'imagination est la seule limite}), le vocabulaire de \ConTeXt\ l'est également. Le document présent va donc tacher de vous transmettre les principaux éléments de vocabulaire ainsi que la logique et la structuration sous-jacentes afin d'en faciliter l'appprentissage. En particulier, nous distingueront, en plus des balises, deux familles d'information.
+
+La première famille concerne le {\bf flux principal} d'information qui se déroule linéairement de page en page, ou bien d'écran en écran. Il s'agit essentiellement des éléments suivants, en partant de la structuration la plus élémentaire à la plus macroscopique (sauf les quatre derniers éléments qui sont des éléments spécialisés)~:
+
+\startitemize[n,columns,two]
+\item Paragraphes
+\item Emphase de mots
+\item Emphase de paragraphes
+\item Encadrement
+\item Lignes et traits
+\item Citations
+\item Listes structurées
+\item Description et énumération
+\item Textes tabulés
+\item Tableaux
+\item Images et Combinaisons
+\item Objets flottants
+\item Section
+\item Macro-structure
+\item Page de couverture et de titre
+\item Mathématiques
+\item Autres éléments spécialisés
+\item Colonnes
+\stopitemize
+
+La deuxième famille concerne les {\bf compléments au flux principal}. Ils permettent de l'enrichir, d'y naviguer, de faire des connexions complexes à d'autres informations. Ces éléments permettent de sortir des limites du flux linéaire principal et sont en ce sens tout à fait essentiels~:
+
+\startitemize[n,columns,two]
+\item Table des matières
+\item Notes de bas de page
+\item Notes marginales
+\item Pièces jointes
+\item Références internes vers des illustrations, des sections,
+\item Références externes vers internet,
+\item Références bibliographiques
+\item Listes des images, tableaux...
+\item Index
+\stopitemize
+
+Le langage de balisage \ConTeXt\ nous permet ainsi, parmi l'ensemble des chaînes de caractères des fichiers sources, de distinguer les différents élements évoqués précedemment (et d'autres encore). Il s'agira alors, pour finir, d'expliciter ce qu'il faut en faire~: comment les mettre en page et les formater pour obtenir le document final.
+
+\stopsubsection
 
 
-\stopsection
-
-% * Section 3 - la composition et la mise en page =============================
-
-\startsection [title=La composition et la mise en page]
+% * Section 3 - la composition et mise en page ================================
 
 
-\stopsection
+\startsubsection [title=La composition et la mise en page]
 
+Le langage \ConTeXt\ permet donc, au-delà du balisage, de configurer l'ensemble des règles de composition à appliquer. Ce qui est très appréciable et apprécié, c'est que la configuration par défaut donne d'excellents résultats. Il est ainsi agréable de pouvoir travailler en complétant et en améliorant une base de qualité.
+
+Par contre, cela représente de nouveau un certain vocabulaire \ConTeXt\ à s'approprier. \ConTeXt\ bénéficie d'un important effort de standardisation durant les années, et vous aurez rapidement des réflexes. Le flux de travail est par contre très différents des logiciels auxquels certains utilisateurs sont habitués. Avec \ConTeXt\ il s'agit de remplacer par des lignes de texte les multiples sélection à la souris et navigation dans les menus et sous-menus graphiques que proposent certains logiciels. En quelque sorte, vous programmer la production du document de sortie. Cela représente un coût d'apprentissage non négigeable, par contre cela offre la force de la programmation~: organisation, systématisation, automatisation, reproduction…
+
+\stopsubsection
 
 %==============================================================================
 
-\startsection [title=Fil pédagogique du document]
+\startsubsection [title=Fil pédagogique du document]
+
+Nous avons donc vu que la logique de \ConTeXt\ repose sur trois concepts~: 
+les fichiers sources, le balisage, et la composition. 
+Chacun de ces concepts va maintenant être approfondi selon la table ci-dessous, dans la logique évoquée ci-dessus :-).
 
 \start
 \tfx
@@ -61,7 +133,7 @@ qui vous permettrons de personnaliser votre document.
 %================================================================================================================================================================================================
 \bTR[style=bold,foregroundcolor=maincolor] 
      \bTD \eTD
-     \bTD Fichier \par source               \eTD 
+     \bTD Fichiers \par sources             \eTD 
      \bTD Balisage                          \eTD
      \bTD Composition d'ensemble            \eTD
      \bTD Composition spécifique            \eTD 
@@ -70,7 +142,7 @@ qui vous permettrons de personnaliser votre document.
   \bTD[topframe=off] \eTD    \bTD \in{Partie}[part:src]             \eTD \bTD \in{Partie}[part:mkp]               \eTD \bTD \in{Partie}[part:typset:global]      \eTD\bTD \in{Partie}[part:typset:local]        \eTD \eTR 
 %==========================================================================================================================================================================================================
 \bTR[topframe=on,toffset=1ex] 
-     \bTD Fichier source                    \eTD \bTD \in{Chapitre}[cap:firstdoc]   \eTD  \bTD      \eTD \bTD                                      \eTD \bTD                                      \eTD \eTR
+     \bTD Fichiers sources                  \eTD \bTD \in{Chapitre}[cap:firstdoc]   \eTD  \bTD      \eTD \bTD                                      \eTD \bTD                                      \eTD \eTR
 \bTR \bTD Règles syntaxiques                \eTD \bTD \in{Chapitre}[cap:commands]   \eTD  \bTD      \eTD \bTD                                      \eTD \bTD                                      \eTD \eTR
 \bTR \bTD Organisation des fichiers         \eTD \bTD \in{Chapitre}[cap:sourcefile] \eTD  \bTD      \eTD \bTD                                      \eTD \bTD                                      \eTD \eTR
 %==========================================================================================================================================================================================================
@@ -99,7 +171,7 @@ qui vous permettrons de personnaliser votre document.
 \bTR \bTD Macro-structure                   \eTD \bTD \eTD \bTD \in{Section}[sec:macrostructure]    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:macrostr]    \eTD \eTR
 \bTR \bTD Page de couverture et de titre    \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:cover]         \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:covers]      \eTD \eTR
 \bTR \bTD Mathématiques                     \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:math]          \eTD \bTD                                      \eTD \bTD \in{Section}[sec:typset:math]        \eTD \eTR
-\bTR \bTD Autres                            \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:others]        \eTD \bTD                                      \eTD \bTD                                      \eTD \eTR
+\bTR \bTD Autres éléments spécialisés       \eTD \bTD \eTD \bTD \in{Section}[sec:mkp:others]        \eTD \bTD                                      \eTD \bTD                                      \eTD \eTR
 \bTR \bTD Colonnes                          \eTD \bTD \eTD \bTD                                     \eTD \bTD                                      \eTD \bTD \in{Section}[sec:multiplecolumns]    \eTD \eTR
 %==========================================================================================================================================================================================================
 \bTR[style=bold,topframe=on,toffset=1ex,foregroundcolor=maincolor]                                                                        
@@ -120,11 +192,9 @@ qui vous permettrons de personnaliser votre document.
 \eTABLE                                                       
 \stop   
 
-
-Nous avons donc vu que la logique de \ConTeXt\ repose sur trois concepts~: 
-le fichier source, le balisage, et la composition. 
-Chacun de ces concepts va maintenant être approfondi selon la table ci-dessus.
-
+   
+\stopsubsection
+   
 
 
 % \start
@@ -177,9 +247,7 @@ Chacun de ces concepts va maintenant être approfondi selon la table ci-dessus.
 %      \bTD Personnalisé                   \eTD \bTD 02-02-03_Markup_Customized.tex                 \eTD \bTD 02-04-03_Typeset_Customized.tex                \eTD \eTR
 % \eTABLE                                                       
 % \stop   
-   
-\stopsection   
-   
+
 \stopchapter                                            
                                                         
 \stopcomponent                                          

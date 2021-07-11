@@ -18,7 +18,6 @@
 \startfrontmatter
 
 \component        01-01_TitlePage
-
 \definecolor      [back1]     [backA1]
 \definecolor      [back2]     [backA2]
 \definecolor      [back3]     [backA3]
@@ -27,7 +26,7 @@
 
 \component        01-02_Credit
 \component        01-03_ToC
-\component        01-04_Preface                                   % à re-écrire
+%\component       01-04_Preface                                   % à re-écrire
 \component        01-05_Introduction                              % à re-écrire 
 
 \stopfrontmatter
@@ -37,7 +36,7 @@
 \startbodymatter
 
  
-\startpart        [title=Le fichier source,reference=part:src]
+\startpart        [title=Les fichiers sources,reference=part:src]
 
 \definecolor      [back1]     [backB1]
 \definecolor      [back2]     [backB2]
@@ -120,11 +119,11 @@
 \setupbackgrounds [rightpage] [background={background,paged},state=repeat]
 
 \component        03-01_Installation
-\component        03-02_Symbols
+\component        03-02_CharactersSymbols
 \component        03-03_Macros
-\component        03-04_Introduction_old
-\component        03-05_CharactersSymbols
 \completeindex
+\component        03-04_Introduction_old
+
 
 \stoppart
 
