@@ -13,9 +13,9 @@ Initially written in Spanish, this document interested several people, and in
 order to increase the potential audience, a member of the [ntg-context mailing list]( https://mailman.ntg.nl/pipermail/ntg-context/)
 (native English speaker, who wishes to remain anonymous) has proceeded to translate my text into English.
 
-| [PDF Spanish version 1.6](es/introCTX_esp.pdf)   | [PDF English version 1.6](en/introCTX_eng.pdf)   | [PDF French version 1.6](fr/introCTX_fra.pdf)   |
+| [PDF Spanish version 1.6](es/introCTX_esp.pdf)   | [PDF English version 1.6](en/introCTX_eng.pdf)   | [PDF French version 1.6](fr/introCTX_fra_s.pdf)   |
 |------------------------------------------------------------------------|----------------------------|----------------------------|
-| [![PDF Spanish version 1.6](/es/introCTX_esp.png)](es/introCTX_esp.pdf) | [![PDF English version 1.6](/en/introCTX_eng.png)](en/introCTX_eng.pdf) | [![PDF French version 1.6](/fr/introCTX_fra.png)](fr/introCTX_fra.pdf) |
+| [![PDF Spanish version 1.6](/es/introCTX_esp.png)](es/introCTX_esp.pdf) | [![PDF English version 1.6](/en/introCTX_eng.png)](en/introCTX_eng.pdf) | [![PDF French version 1.6](/fr/introCTX_fra.png)](fr/introCTX_fra_s.pdf) |
 
 ## Author
 
@@ -64,6 +64,9 @@ well the spirit of the FDL licence, in considerably less space.
   - Introduction of suggestions and correction of errors reported by NTG-context users.
 - January 2, 2021: Version 1.6
   - Corrections suggested after a new and careful reading of the document, on the occasion of its translation to English. This is the first version in English.
+- July 4, 2021: Version 1.6
+  -  1.6 version translated to french
+  -  additionnal content, updated layout, reorganized source code only available in french
 
 
 ## Communication history
