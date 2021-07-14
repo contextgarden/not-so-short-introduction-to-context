@@ -1,0 +1,739 @@
+
+\definepapersize[sheet][width=65mm,height=60mm]
+\setuppapersize[sheet]
+
+\setuplayout[backspace=12mm,
+    width=53mm,
+    margindistance=1mm,
+    rightmargin=0mm,
+    headerdistance=1mm,
+    footerdistance=1mm,
+    topspace=0.5mm,
+    backspace=10mm,
+    margin=8mm,
+    header=4mm,
+    footer=4mm,
+    height=59mm]
+
+%\showframe
+
+%------------------------------------------------------------------------------         
+\setupbodyfont[pagella]    
+\setupbodyfont[8pt]
+
+
+%\setupinterlinespace[2.2ex]
+\setupwhitespace[medium]
+
+\mainlanguage[fr]
+\language[fr]
+\setcharacterspacing[frenchpunctuation] 
+
+\setuptolerance[strict]               % how tolerant vs ‘ugly’ stretched spaces
+
+\setupalign[hz,                                         % hz for font expansion
+            hanging,                                   % hanging for protrusion
+            lesshyphenated,                      % two instructions added by j.
+            verytolerant,                       % to eliminate most hyphenation
+            stretch]                 % and get better interword spacing as well
+
+%------------------------------------------------------------------------------
+
+\usecolors[x11]
+
+\definecolor [orange]        [.6(orange)]  
+\definecolor [maincolor]     [orange]
+\definecolor [purple]        [.5(darkblue)]
+
+%------------------------------------------------------------------------------
+
+\definehighlight [importantA]       [style=\underbar,color=darkred]
+\definehighlight [importantB]       [style={\bf\cap},color=darkred]
+\definehighlight [importantC]       [style=\bf,color=darkred]
+\definehighlight [importantD]       [style=\bfc,color=darkred]
+
+%------------------------------------------------------------------------------
+
+\definetext[ChapterFirstPage]
+           [footer]
+           [pagenumber]
+
+
+
+\setuphead [part]
+  [placehead=yes,
+    bodypartlabel=part,
+    before={\setupbackgrounds[page][background=color,backgroundcolor=purple]\strut\vfill},
+    alternative=middle,
+    after={\strut\vfill\page\setupbackgrounds[page][background=color,backgroundcolor=]},
+%    conversion=I,
+    style={\switchtobodyfont[24pt]\bf},
+    color=white,
+    header=high,
+    footer=ChapterFirstPage,
+  ]
+
+\setuphead[section]
+  [page=yes,
+   align={flushleft, nothyphenated, verytolerant},
+   color=maincolor,
+   style=\bfb]
+\setuphead[subsection]  [style=]
+
+%------------------------------------------------------------------------------
+
+\setupnarrower[middle=0.75cm]
+
+%-------------------------------------------------------------------------------
+
+\setupinteraction[state=start]
+
+%------------------------------------------------------------------------------
+
+\startuseMPgraphic{myattachmentsymbol}  % #1 - Draw a symbol, here a paperclip!
+path pa;
+numeric u; u=0.6mm;
+numeric Ra; Ra=u/2;  numeric Rb; Rb=2.2Ra;  numeric Rc; Rc=1.5Rb;
+numeric La; La=3.5u; numeric Lb; Lb=-La/10; numeric Lc; Lc=1.2*La;
+
+pair a[];
+aa=(0,0);
+ab=(La,0);        ac=(La+Ra,-Ra);         ad=(La,-2Ra);
+ae=(Lb,-2Ra);     af=(Lb-Rb,-2Ra+Rb);     ag=(Lb,-2Ra+2Rb);
+ah=(Lc,-2Ra+2Rb); ai=(Lc+Rc,-2Ra+2Rb-Rc); aj=(Lc,-2Ra+2Rb-2Rc);
+ak=(1u,-2Ra+2Rb-2Rc);
+
+pa := (aa--ab..ac..ad--ae..af..ag--ah..ai..aj--ak) rotated 45;
+
+path pb;
+pb := fullcircle scaled (2.8*(Lc-Lb-Rb)) shifted (center(pa)) ;
+fill pb withcolor \MPcolor{darkred};
+pickup pencircle scaled (1.3*(Rb-Ra))   ;
+draw pa  withcolor white;
+\stopuseMPgraphic
+
+
+\definesymbol                             % #2 - Define the drawing as a symbol
+  [myattachmentsym]
+  [\useMPgraphic{myattachmentsymbol}]
+
+%\setupattachments                          % #3 - Use the symbol for attachment
+%  [symbol=myattachmentsym]
+
+%------------------------------------------------------------------------------
+
+\startbuffer
+Ceci est un petit texte pour illustrer les différentes possibilités  \ConTeXt\ de balisage et de composition.
+\stopbuffer
+
+%-------------------------------------------------------------------------------
+
+\definemakeup[custom][align=middle]
+
+%-------------------------------------------------------------------------------
+
+\setupheadertexts[]
+\setupfootertexts[margin][pagenumber][]
+
+\startsetups[showframe]
+\setupbackgrounds [header,text,footer] [leftmargin,text,rightmargin] 
+[frame=on,framecolor=darkred]
+\stopsetups
+
+\startsetups[showheaderfooter]
+\setupheadertexts[{\color[darkred]{Texte d'en-tête}}][{\color[darkred]{ici}}]
+\setupfootertexts[{\color[darkred]{Texte de pied de page}}][{\color[darkred]{et là}}]
+\setupfootertexts[margin][{\color[darkred]{\pagenumber}}][]
+\stopsetups
+
+
+\startsetups[hide]
+   \setupbackgrounds [header,text,footer] [leftmargin,text,rightmargin] 
+[frame=off]
+\setupheadertexts[]
+\setupheadertexts[][]
+\setupfootertexts[][]
+\setupfootertexts[margin][][]
+\stopsetups
+%-------------------------------------------------------------------------------
+
+
+
+\starttext
+
+%===============================================================================
+
+\startfrontmatter
+
+%-------------------------------------------------------------------------------
+
+\setupbackgrounds[page][background=color,backgroundcolor=darkred]
+\startmakeup[custom]
+\switchtobodyfont[24pt]\bf\color[white]{Couverture}
+\stopmakeup
+\setupbackgrounds[page][backgroundcolor=ivory2]
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Introduction]
+\index{introduction}
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Table des matières]
+
+La table des matière est présentée \at{page}[toc].
+
+\stopsection
+
+\stopfrontmatter
+
+%===============================================================================
+
+\startbodymatter
+
+\startpart [title={Balisage}] 
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Paragraphes]
+\index{paragraphes}
+\getbuffer \par
+\color[darkred]{\getbuffer} \par
+\getbuffer
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Emphase de mots]
+Ceci est un \color[darkred]{\em petit texte} pour illustrer les différentes possibilités \ConTeXt\ de \importantA{balisage} et de \importantB{composition}.
+
+Ceci est un {\em petit texte} pour illustrer les différentes possibilités \ConTeXt\ de \importantC{balisage} et de \importantD{composition}.     
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Emphase de paragraphes]
+\getbuffer
+\startnarrower
+\color[darkred]{\getbuffer} 
+\stopnarrower
+\getbuffer
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Encadrement]
+\index{encadrement}
+\getbuffer \par
+\startframed[align={normal,verytolerant},width=local,framecolor=darkred,rulethickness=2pt]
+\getbuffer
+\stopframed\par                 
+\getbuffer
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Lignes et traits]
+Coucou.\par
+\blackrule [color=darkred,height=1pt, width=\textwidth]    
+\getbuffer
+\setuptextrules[color=darkred,rulecolor=darkred]
+\starttextrule{Exemple}
+\getbuffer
+\stoptextrule
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Citations]
+Ceci est un petit texte pour illustrer les différentes possibilités \ConTeXt\ de \color[darkred]{\quote{balisage}} et de \color[darkred]{\quotation{composition}}.     
+\color[darkred]{%
+\startquotation
+\getbuffer
+\stopquotation}
+\getbuffer
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Listes structurées]
+\getbuffer
+\index{itemize}
+\startitemize[packed][color=darkred]
+\item premier élément
+\item second élément
+\startitemize[packed,n][color=darkred]
+\item et ici
+\item et là
+\stopitemize
+\item troisième élément
+\stopitemize
+
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title={Description, énumération}]
+
+\definedescription [Concept] [width=0.9cm,headcolor=darkred]
+\defineenumeration [Exercice][alternative=serried,width=1.1cm,headcolor=darkred]
+
+\startConcept{Coucou}
+\getbuffer
+\stopConcept
+
+\startExercice
+\getbuffer
+\stopExercice
+
+\startExercice
+\getbuffer
+\stopExercice
+
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Textes tabulés]
+\getbuffer
+\color[darkred]{%
+\starttabulate
+\NC Ligne 1 \NC  Petite texte A \NC en unité a\NC\NR
+\NC Ligne 2 \NC  Petite texte B \NC en unité b\NC\NR
+\NC Ligne 3 \NC  Petite texte C \NC en unité c\NC\NR
+\NC Ligne 4 \NC  Petite texte D \NC en unité d\NC\NR
+\stoptabulate}
+
+Et voilà.
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Tableaux]
+\getbuffer
+\index{tableau}
+
+\color[darkred]{%
+\bTABLE
+\bTABLEhead
+\bTR 
+\bTH Colonne 1 \eTH 
+\bTH Colonne 2 \eTH 
+\bTH Colonne 3 \eTH 
+\eTR
+\eTABLEhead
+\bTABLEbody
+\bTR 
+\bTD Texte 1.1 \eTD 
+\bTD Texte 2.1 \eTD 
+\bTD Texte 3.1 \eTD
+\eTR
+\bTR 
+\bTD Texte 1.2 \eTD 
+\bTD Texte 2.2 \eTD 
+\bTD Texte 3.3 \eTD
+\eTR
+\eTABLEbody
+\eTABLE}
+
+\getbuffer
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Images et Combinaisons]
+\getbuffer \index{image}
+
+\externalfigure[https://meeting.contextgarden.net/2016/img/cm2016-group-photo.jpg][width=\textwidth]
+
+\useMPlibrary [dum]
+\startcombination[2*2]
+{\externalfigure [dummy]
+ [height=2cm,width=2cm]}
+{\externalfigure [dummy]
+ [height=2cm,width=2cm]}
+{\externalfigure [dummy]
+ [height=2cm,width=2cm]}
+{\externalfigure [dummy]
+ [height=2cm,width=2cm]}
+\stopcombination
+
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Objets flottants, reference=secdemo]
+\getbuffer
+\start
+\setupcaption[headcolor=darkred,color=darkred]
+\startplacefigure
+  [title=Une jolie illustration,
+   reference=figdemo]
+\externalfigure[http://www.cervantex.es/files/cervantex/cervanTeXcolor-small.jpg][height=2.25cm]
+\stopplacefigure
+
+\startplacefigure
+  [title=Une jolie photo,
+   reference=figdemo]
+\externalfigure[https://meeting.contextgarden.net/2016/img/cm2016-group-photo.jpg][width=0.75\textwidth]
+\stopplacefigure
+
+\startplacetable
+  [title=Un joli tableau,
+   reference=tabdemo]
+\bTABLE
+\bTABLEhead
+\bTR 
+\bTH Colonne 1 \eTH 
+\bTH Colonne 2 \eTH 
+\bTH Colonne 3 \eTH 
+\eTR
+\eTABLEhead
+\bTABLEbody
+\bTR 
+\bTD Texte 1.1 \eTD 
+\bTD Texte 2.1 \eTD 
+\bTD Texte 3.1 \eTD
+\eTR
+\eTABLEbody
+\eTABLE
+\stopplacetable
+\stop
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Section]
+
+\setuphead[subsection][color=darkred,style=bold]
+\startsubsection[title=Titre 1]
+\startsubsubsection[title=Titre 1.1]
+\startsubsubsubsection[title=Titre 1.1.1]
+\stopsubsubsubsection
+\stopsubsubsection
+\stopsubsection
+\startsubsection[title=Titre 2]
+\stopsubsection
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Macro-structure]
+Les \color[darkred]{pages préliminaires} sont les premières pages.
+
+Les \color[darkred]{pages finales} sont les dernières pages.
+
+Les \color[darkred]{pages du corps de texte} se trouvent entre les deux.
+
+Les \color[darkred]{pages d'annexe} leur succèdent immédiatement.
+
+Les distringuer permet des les composer différemment (numérotations, couleur, mise en page…).
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Page de couverture et de titre]
+Regardez la première et la dernière page de cette galerie (sur \color[darkred]{fond rouge}), ainsi que les quatre pages de changement de partie (sur \color[darkred]{fond bleu}).
+
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Mathématiques]
+
+\color[darkred]{
+\startformula \startalign
+  \NC f(x) \NC =  \startcases
+                      \NC 1,  \MC x >  0 \NR
+                      \NC 0,  \MC x >= 0 \NR
+                  \stopcases  \NR
+  \NC g(x) \NC = x^2 +2x +1   \NR
+
+\NC q \NC = \delta \frac{\partial p}{\partial x} = \delta(\phi) p_{vsat}(\theta) \frac{\partial \phi}{\partial x} \NR
+\NC   \NC = \left[ \frac{\delta_a}{\mu(\theta)} p_{vsat}(\theta)
+\right] \frac{\partial \phi}{\partial x} \NR
+\NC   \NC = k \frac{\partial \phi}{\partial x}\NR
+\stopalign \stopformula}
+
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Autres éléments spécialisés]
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Colonnes]
+\startcolumns[separator=rule,color=darkred]
+{\tfxx \getbuffer \getbuffer \getbuffer \getbuffer \getbuffer \getbuffer}
+\stopcolumns
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\stoppart
+
+%===============================================================================
+
+\startpart [title={Composition d'ensemble}] 
+
+%-------------------------------------------------------------------------------
+
+
+\startsection[title={Mise en page}]
+\setup[showframe]
+Il s'agit de définir la place et le positionnement des différentes zones de la page.
+\stopsection
+
+\startsection[title={En-tête et pied de page}]
+\setup[hide]
+\setup[showheaderfooter]
+
+\getbuffer \par \getbuffer
+
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+
+\startsection[title=Polices]
+\setup[hide]
+\definefontfeature
+  [mesfeaturesA]
+  [mode=node, 
+   language=dflt, 
+   protrusion=quality,  % for protrusion (dans les marges)
+   expansion=quality,   % for expansions (expansion des lettres)
+   script=latn, 
+   kern=no,            % for kerning
+   liga=no,            % ligatures communes
+   dlig=no,            % ligatures spécifiques (exemple st) 
+   calt=no,            % alternatives contextuelles
+   lnum=yes,            % lining numbers
+   onum=no,             % old style numbers,
+   ccmp=no,            % petites majuscules
+   ss04=no,            % stylistic swash
+   ]
+\definefontfeature
+  [mesfeaturesB]
+  [mode=node, 
+   language=dflt, 
+   protrusion=quality,  % for kerning
+   expansion=quality,   % for kerning
+   script=latn, 
+   kern=yes,            % for kerning
+   liga=yes,            % ligatures communes
+   dlig=yes,            % ligatures spécifiques (exemple st) 
+   calt=yes,            % alternatives contextuelles
+   lnum=no,            % lining numbers
+   onum=yes,             % old style numbers,
+   ccmp=yes,            % petites majuscules
+   ss04=yes,            % stylistic swash
+   ]
+%definedfont [name:garamondpremrpro*mesfeaturesA at 30 pt]%
+%t fi Qu 0123
+\color[darkred]{%
+\definedfont [name:texgyreadventor at 36 pt]%
+Amour
+
+\cap{\definedfont [name:garamondpremrpro*mesfeaturesB at 36 pt] Amour}
+
+\definedfont [name:garamondpremrpro*mesfeaturesB at 30 pt]%
+st fi Qu 0123
+}
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Couleurs]
+\showcolorcomponents[gold,darkorange,firebrick,violetred,mediumorchid,royalblue3,seagreen3]
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Langue]
+\start
+\definedfont [name:garamondpremrpro*mesfeaturesB at 24 pt]
+\startalign[flushleft]
+\mainlanguage	[de]	\quotation{Inhalt}\par
+\color[darkred]{\mainlanguage	[fr]	\quotation{Contenu}\par}
+\mainlanguage	[en]	\quotation{Content}\par
+\stopalign
+
+\stop
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Interactivité]
+Cela permet d'activer par exemple :
+\startitemize[packed]
+\item les liens dans la table des matières,
+\item les liens d'une page à une autre,
+\item les liens vers Internet,
+\item les pièces jointes,
+\item les signets PDF.
+\stopsection
+
+%===============================================================================
+
+\startpart [title={Composition spécifique}] 
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Table des matières,reference=toc]
+
+\start
+\tfxx
+\setupcombinedlist[content][list={part,section}]
+\setupinterlinespace[2.8ex] 
+%\startcolumns[n=2]
+\placecontent[criterium=all,alternative=d]
+%\stopcolumns
+\stop
+
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Abréviations et glossaire]
+\abbreviation{PRAGMA}{PRAGMA Advanced Document Engineering}
+\abbreviation{LMTX}{\LuaMetaTex}
+\abbreviation{FAQ}{Foire aux Questions}
+
+Une \color[darkred]{\FAQ} est une \color[darkred]{\infull{FAQ}}. 
+N'hésitez pas à aller sur le Wiki ainsi que sur le site de \color[darkred]{\PRAGMA} (\color[darkred]{\infull{PRAGMA}})
+
+\startsubsubject[title=Glossaire]
+\placelistofabbreviations
+\stopsubsubject
+
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Notes de bas de page]
+\getbuffer
+\setupfootnotes[textcolor=darkred,rulecolor=darkred]
+\setupfootnotedefinition[color=darkred, headcolor=darkred]
+\footnote{Une note de bas de page}
+\getbuffer
+\footnote{Une seconde}
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Notes marginales]
+\getbuffer
+\margintext{\color[darkred]{Note en marge}}
+\getbuffer
+\getbuffer
+\margintext{\color[darkred]{Une autre}}
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Pièces jointes] 
+\getbuffer
+
+\attachment[file=demonstration.tex,location=leftmargin]
+\getbuffer
+
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title={Références internes vers des illustrations, des sections}]
+
+Regardez la \in{figure}[figdemo] \at{page}[figdemo].
+
+Regardez la \in{section}[secdemo] \at{page}[secdemo].
+
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Références externes vers internet]
+
+\goto{Wiki de \ConTeXt}[url(https://wiki.contextgarden.net)]
+
+\useurl [wiki] [https://wiki.contextgarden.net]
+        []     [https://wiki.contextgarden.net]
+\from[wiki]
+
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Références bibliographiques]
+
+\usebtxdataset [../introCTX_biblio.bib]
+
+Cf. \cite[title][Hagen2017metafun]
+de \cite[author][Hagen2017metafun] \cite[Hagen2017metafun]
+
+Ainsi que \cite[title][ConTeXtExcursion]
+de \cite[author][ConTeXtExcursion] \cite[ConTeXtExcursion]
+
+\startsubsubject[title=Bibliographie]
+\placelistofpublications
+\stopsubsubject
+
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\stoppart
+
+\stopbodymatter
+
+%===============================================================================
+
+\startappendices
+
+\startpart        [title=Annexes]
+
+\setupbackgrounds[page][backgroundcolor=ivory2]
+
+%-------------------------------------------------------------------------------
+
+\startsection[title={Listes des images, tableaux…}]
+
+\startsubsubject[title=Figures]
+\placelistoffigures[criterium=all]
+\stopsubsubject
+
+\startsubsubject[title=Tableaux]
+\placelistoftables[criterium=all]
+\stopsubsubject
+
+%-------------------------------------------------------------------------------
+\startsection[title=Index]
+\placeindex
+\stopsection
+
+\stoppart
+
+\stopappendices
+
+%===============================================================================
+
+
+\startbackmatter
+
+%-------------------------------------------------------------------------------
+
+\setupbackgrounds[page][background=color,backgroundcolor=darkred]
+\startmakeup[custom]
+\switchtobodyfont[24pt]\bf\color[white]{4\high{ème} de couverture}
+\stopmakeup
+\setupbackgrounds[page][backgroundcolor=]
+
+%-------------------------------------------------------------------------------
+
+\stopbackmatter
+
+\stoptext

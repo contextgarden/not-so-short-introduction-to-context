@@ -56,12 +56,17 @@ StopPage ;
       
 \stopuseMPgraphic
 
+\startuseMPgraphic{FrontCover}
+fill fullcircle scaled 10cm withcolor red;
+\stopuseMPgraphic
+
 %------------------------------------------------------------------------------
 
 \defineoverlay[oFrontCover][\useMPgraphic{FrontCover}]
 
-\setupbackgrounds [leftpage]  [background={background},state=repeat]
-\setupbackgrounds [rightpage] [background={background,oFrontCover},state=repeat]
+\setupbackgrounds[leftpage][background={background},state=repeat]
+
+\setupbackgrounds[rightpage][background={background,oFrontCover},state=repeat]
 
 \startstandardmakeup[page=right]
 \stopstandardmakeup

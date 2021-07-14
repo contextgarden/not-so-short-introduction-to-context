@@ -1,0 +1,40 @@
+\startcomponent 02-02-02-04_Markup_Attachments
+
+\environment introCTX_env_00
+
+%==============================================================================
+
+\startsection
+  [title=Pièces jointes,
+  reference=sec:mkp:attach]
+
+\TocChap
+
+
+\tex{attachment}
+% **   Section 6 Attachement
+
+% TODO Garulfo added 
+
+Une autre fonctionnalité d'interactivité de \ConTeXt\ : il permet d'introduire des pièces attachées dans vos documents avec la commande \tex{attachment}. 
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\attachment
+  [Nom de la pièce jointe]
+  [file={fichier.txt},
+   author={auteur de la pièce jointe}]
+\stopDemoI}
+
+Le fichier attaché doit être dans le même répertoire que le fichier {\tt .tex} dans lequel se trouve la commande \tex{attachment} ou bien être dans l'un des répertoires indiqués avec la commande \tex{usepath} (voir \in{section}[sec:chemins]).
+
+
+
+\stopsection
+
+
+%==============================================================================
+
+\stopcomponent
+
+%%% TeX-master: "../introCTX_fra.tex"

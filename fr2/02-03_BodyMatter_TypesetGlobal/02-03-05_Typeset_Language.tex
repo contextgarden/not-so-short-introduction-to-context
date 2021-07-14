@@ -1,0 +1,525 @@
+\startcomponent 02-03-03_Typeset_Colors
+
+\environment introCTX_env_00
+
+\startchapter
+  [
+    reference=sec:langdoc,
+    title={Langue},
+  ]
+
+\TocChap
+
+% **   Section    la langue du texte
+
+Les caractères forment des mots qui appartiennent normalement à une certaine langue. Il est important pour \ConTeXt\ de connaître la langue dans laquelle nous écrivons, car un certain nombre de choses importantes en dépendent. Principalement~:
+
+\startitemize[packed]
+
+\item La césure des mots.
+\item Le format de sortie de certains mots.
+\item Certaines questions de composition associées à la tradition de composition de la langue en question.
+
+\stopitemize
+
+% ***  SubSection définition et modification de la langue
+
+\startsection
+  [title=Définition et modification de la langue,]
+
+Par défaut, \ConTeXt\ suppose que la langue sera l'anglais. Deux procédures permettent de changer cela~:
+
+\startitemize
+
+\item En utilisant la commande \PlaceMacro{mainlanguage} \tex{mainlanguage}, utilisée en préambule pour changer la langue principale du document. Cela permet d'adapter les éléments générés automatiquement par \ConTeXt . \quotation{Table of content} et \quotation{Chapter}, deviennent respectivement \quotation{Table des matières} ry \quotation{Chapitre}.
+
+\item En utilisant la commande \PlaceMacro{language} \tex{language}, visant à changer la langue active à tout moment du document. Cette commande modifie les règles de césure, les guillemets, etc.
+
+\stopitemize
+
+Les deux commandes attendent un argument consistant en un identifiant (ou code) de langue quelconque. Pour identifier la langue, nous utilisons soit le code international de langue à deux lettres défini dans la norme ISO 639-1, qui est le même que celui utilisé, par exemple, sur le web, soit le nom anglais de la langue en question, ou parfois une abréviation du nom en anglais.
+
+Dans la \in{table}[tbl:languagesa]
+\footnote{\in{Table}[tbl:languagesa] a un résumé de la liste obtenue avec les commandes suivantes~:\\
+  \PlaceMacro{usemodule}              \type{\usemodule[languages-system]}\\
+  \PlaceMacro{loadinstalledlanguages} \type{\loadinstalledlanguages}\\
+  \PlaceMacro{showinstalledlanguages} \type{\showinstalledlanguages}\\
+Si vous lisez ce document longtemps après qu'il ait été écrit (2020), il est possible que \ConTeXt\ ait incorporé d'autres langues, il serait donc judicieux d'utiliser ces commandes pour afficher une liste mise à jour des langues.},
+nous trouvons une liste complète des langues supportées par \ConTeXt, avec le code ISO pour chacune des langues en question ainsi que, le cas échéant, le code pour certaines variantes linguistiques expressément prévues.
+
+{%\switchtobodyfont[script]
+\placetable
+  [here,force]
+  [tbl:languagesa]
+  {Support des langues avec \ConTeXt}
+{\starttabulate[|p(.2\textwidth)|p(.25\textwidth)|p(.5\textwidth)|]
+\HL
+\NC{\bf Langage} \NC {\bf Code ISO} \NC {\bf Langage} (variantes)
+\NR
+\HL
+\NC Afrikaans
+\NC af, afrikaans
+\NR
+\NC Arabic
+\NC ar, arabic
+\NC ar-ae, ar-bh, ar-dz, ar-eg, ar-in, ar-ir, ar-jo, ar-kw, ar-lb, ar-ly, ar-ma, ar-om, ar-qa, ar-sa, ar-sd, ar-sy, ar-tn, ar-ye
+\NR
+\NC Catalan
+\NC ca, catalan
+\NR
+\NC Czech
+\NC cs, cz, czech
+\NR
+\NC Croatian
+\NC hr, croatian
+\NR
+\NC Danish
+\NC da, danish
+\NR
+\NC Dutch
+\NC nl, nld, dutch
+\NR
+\NC English
+\NC en, eng, english
+\NC en-gb, uk, ukenglish, en-us, usenglish
+\NR
+\NC Estonian
+\NC et, estonian
+\NR
+\NC Finnish
+\NC fi, finnish
+\NR
+\NC French
+\NC fr, fra, french
+\NR
+\NC German
+\NC de, deu, german
+\NC de-at, de-ch, de-de
+\NR
+\NC Greek
+\NC gr, greek
+\NR
+\NC Greek (ancient)
+\NC agr, ancientgreek
+\NR
+\NC Hebrew
+\NC he, hebrew
+\NR
+\NC Hungarian
+\NC hu, hungarian
+\NR
+\NC Italian
+\NC it, italian
+\NR
+\NC Japanese
+\NC ja, japanese
+\NR
+\NC Korean
+\NC kr, korean
+\NR
+\NC Latin
+\NC la, latin
+\NR
+\NC Lithuanian
+\NC lt, lithuanian
+\NR
+\NC Malayalam
+\NC ml, malayalam
+\NR
+\NC Norwegian
+\NC nb, bokmal, no, norwegian
+\NC nn, nynorsk
+\NR
+\NC Persian
+\NC pe, fa, persian
+\NR
+\NC Polish
+\NC pl, polish
+\NR
+\NC Portuguese
+\NC pt, portughese
+\NC pt-br
+\NR
+\NC Romanian
+\NC ro, romanian
+\NR
+\NC Russian
+\NC ru, russian
+\NR
+\NC Slovak
+\NC sk, slovak
+\NR
+\NC Slovenian
+\NC sl, slovene, slovenian
+\NR
+\NC Spanish
+\NC es, sp, spanish
+\NC es-es, es-la
+\NR
+\NC Swedish
+\NC sv, swedish
+\NR
+\NC Thai
+\NC th, thai
+\NR
+\NC Turkish
+\NC tr, turkish
+\NC tk, turkmen
+\NR
+\NC Ukranian
+\NC ua, ukrainian
+\NR
+\NC Vietnamese
+\NC vi, vietnamese
+\NR
+\HL
+\stoptabulate
+}}
+
+Ainsi, par exemple, pour définir le français comme langue principale du document, nous pouvons utiliser l'une des trois codes suivants~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\mainlanguage[fr]
+\mainlanguage[fra]
+\mainlanguage[french]
+\stopDemoI}
+
+
+Pour activer une langue particulière {\em dans} le document, nous pouvons utiliser soit la commande \cmd{language[Code de la langue]}, soit une commande spécifique pour activer cette langue. Ainsi, par exemple, \PlaceMacro{en} \cmd{en} active l'anglais, \PlaceMacro{fr} \cmd{fr} active le français, \PlaceMacro{es} \cmd{es} espagnol, ou \PlaceMacro{ca} \cmd{ca} le catalan. Une fois qu'une langue a été activée, elle le reste jusqu'à ce que l'on passe expressément à une autre langue, ou que le groupe dans lequel la langue a été activée soit alors fermé. Les langues fonctionnent donc comme des commandes de changement de police. Notez toutefois que la langue définie par la commande \cmd{language} ou par l'une de ses abréviations (\cmd{en}, \cmd{fr}, \PlaceMacro{de}\cmd{de}, etc.) n'affecte pas la langue dans laquelle les étiquettes sont imprimées (voir \in{section}[sec:labels]).
+
+
+\startSmallPrint
+
+  Bien qu'il puisse être laborieux de marquer la langue de tous les mots et expressions que nous utilisons dans notre document et qui n'appartiennent pas à la langue principale du document, il est important de le faire si nous voulons obtenir un document final correctement composé, en particulier dans les travaux professionnels. Nous ne devons pas marquer tout le texte, mais seulement la partie qui n'appartient pas à la langue principale. Il est parfois possible d'automatiser le marquage de la langue en utilisant une macro. Par exemple, pour ce document dans lequel on cite continuellement des commandes \ConTeXt\, dont la langue d'origine est l'anglais, j'ai conçu une macro qui, en plus d'écrire la commande dans le format et la couleur appropriés, la marque comme un mot anglais. Dans mon travail professionnel, où je dois citer beaucoup de bibliographie française et italienne, j'ai incorporé un champ dans ma base de données bibliographique pour capter la langue de l'ouvrage, de façon à automatiser l'indication de la langue dans les citations et les listes de références bibliographiques.
+
+  Si nous utilisons deux langues qui utilisent des alphabets différents dans le même document (par exemple, l'anglais et le grec, ou l'anglais et le russe), il existe une astuce qui nous évitera de devoir marquer la langue des expressions construites avec l'alphabet alternatif~: modifier le paramètre de la langue principale (voir section suivante) afin qu'il charge également les modèles de césure par défaut pour la langue qui utilise un alphabet différent. Par exemple, si nous voulons utiliser l'anglais et le grec ancien, la commande suivante nous évitera de devoir marquer la langue des textes en grec :
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\setuplanguage[en][patterns={en, agr}
+\stopDemoI}
+
+Cela ne fonctionne que parce que l'anglais et le grec utilisent un alphabet différent. Il ne peut donc y avoir de conflit entre les modèles de césure des deux langues, et nous pouvons donc les charger simultanément. Mais dans deux langues qui utilisent le même alphabet, le chargement simultané des modèles de césure conduira nécessairement à une césure inappropriée.
+
+\stopSmallPrint
+
+
+\stopsection
+
+% ***  SubSection configuration de la langue 
+
+\startsection
+  [
+    reference=sec:langconfig,
+    title=Configuration de la langue,
+  ]
+  \PlaceMacro{setuplanguage}
+
+\ConTeXt\ associe le fonctionnement de certains utilitaires à la langue spécifique active à un moment donné. Les associations par défaut peuvent être modifiées avec \cmd{setuplanguage} dont la syntaxe est :
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\setuplanguage[Langage][Configuration]
+\stopDemoI}
+
+où {\em Langage} est le code de la langue que nous voulons configurer, et {\em Configuration} contient la configuration spécifique que nous voulons définir (ou modifier) pour cette langue. Plus précisément, jusqu'à 32 options de configuration différentes sont autorisées, mais je ne traiterai que celles qui semblent convenir à un texte d'introduction tel que celui-ci~:
+
+\startitemize
+
+\item {\tt\bf date} : permet de configurer le format de date par défaut. Voir plus loin sur \at{page}[sec:dates].
+
+\item {\tt\bf lefthyphenmin, righthyphenmin} : le nombre minimum de caractères qui doivent se trouver à gauche ou à droite pour que la césure d'un mot soit prise en charge. Par exemple, \cmd{setuplanguage[en][lefthyphenmin=4]} ne prendra pas en charge la césure d'un mot s'il y a moins de 4 caractères à gauche du trait d'union éventuel.
+
+\item {\tt\bf spacing} : les valeurs possibles pour cette option sont \MyKey{broad} ou \MyKey{packed}. Dans le premier cas ({\tt broad}), les règles d'espacement des mots en anglais seront appliquées, ce qui signifie qu'après un point et lorsqu'un autre caractère suit, une certaine quantité d'espace vide supplémentaire sera ajoutée. En revanche, \MyKey{spacing=packed} empêchera l'application de ces règles. Pour l'anglais, {\tt broad} est la valeur par défaut.
+
+\item {\tt\bf leftquote, rightquote} : indique les caractères (ou commandes), respectivement, que \tex{quote} utilisera à gauche et à droite du texte qui est son argument (pour cette commande, voir \at{page}[sec:quote]).
+
+\item {\tt\bf leftquotation, rightquotation} : indique les caractères (ou commandes), respectivement que \tex{quotation} utilisera à gauche et à droite du texte qui est son argument (pour cette commande, voir \at{page}[sec:quote]).
+
+\stopitemize
+
+% TODO Garulfo added
+
+Voyez par exemple l'effet des configurations par défaut~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoHN
+\language[en] \quotation{Mon texte} et \quote{Mon texte} \\
+\language[de] \quotation{Mon texte} et \quote{Mon texte} \\
+\language[fr] \quotation{Mon texte} et \quote{Mon texte}
+\stopDemoHN}
+
+Dans le cas particulier du français, n'oubliez pas d'utiliser \tex{setcharacterspacing[frenchpunctuation]} qui indique à \ConTeXt\ d'ajouter des espaces fines insécables devant les signes doubles (mais pas après, sauf pour «). Il n'enlève pas les espaces en trop donc il vous faudra tout de même faire attention au niveau du fichier source. Vous pouvez aussi configurer directement ce comportement avec \tex{setupcharacterspacing}.
+\PlaceMacro{setupcharacterspacing}
+
+
+
+
+\placefigure [force,here,none] [] {}{
+\startDemoHN%
+\language[fr]%
+A - Une phrase,avec des,signes simples.\\
+B - Une:phrase;avec des signes! doubles?\\
+C - Une phrase , avec des , signes simples .\\
+D - Une : phrase ; avec des signes ! doubles ?\\
+E - et\quote{Mon texte}pour finir.\\
+
+\blank[big]
+\setcharacterspacing   [frenchpunctuation]
+
+A - Une phrase,avec des,signes simples.\\
+B - Une:phrase;avec des signes! doubles?\\
+C - Une phrase , avec des , signes simples .\\
+D - Une : phrase ; avec des signes ! doubles ?\\
+E - et\quote{Mon texte}pour finir.\\
+
+\blank[big]
+\setupcharacterspacing [frenchpunctuation] ["003A]  % pour :
+                       [left=.75,right=.75,alternative=1] 
+% ["003A]: ["003B]; ["003F]? ["0021]! ["002C], ["002E]. ["00AB]« ["00BB]»
+
+B - Une:phrase;avec des signes! doubles?
+\stopDemoHN}
+
+\stopsection
+
+% ***  SubSection étiquettes associées à des langues particulières,
+
+\startsection
+  [
+    reference=sec:labels,
+    title=Étiquettes associées à des langues particulières,
+  ]
+
+De nombreuses commandes de \ConTeXt\ génèrent automatiquement certains textes (ou {\em étiquettes}), comme, par exemple, la commande \tex{placetable} qui écrit l'étiquette \quotation{Tableau xx} sous le tableau qui est inséré, ou \tex{placefigure} qui insère l'étiquette \quotation{Figure xx}.
+
+Ces {\em étiquettes} dépendent de la langue définie avec \tex{mainlanguage}. (mais pas de \tex{language} qui ne concerne que les règles de césure, ponctuations, guillements etc.) et nous pouvons les modifier avec la commande~:
+
+\PlaceMacro{setuplabeltext}
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\setuplabeltext[Language][Clé=Texte]
+\stopDemoI}
+
+où {\em Clé} est le terme par lequel \ConTeXt\ connaît l'étiquette et {\em Texte} est le texte que nous voulons que \ConTeXt\ génère. Ainsi, par exemple,
+
+\PlaceMacro{setuplabeltext}
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\mainlanguage[fr]%
+\setuplabeltext[fr][figure={Illustration~}]
+\placefigure [] [] {Texte de la légende} {Texte}
+\stopDemoVW}
+
+implique que lorsque la langue principale est le  français, les images insérées avec \cmd{placefigure} ne sont pas appelées \quotation{Figure x} mais \quotation{Illustration x}. Notez qu'après le texte de l'étiquette proprement dite, il faut laisser un espace vide pour que l'étiquette ne soit pas rattachée au caractère suivant qui est la numérotation de la figure. Dans l'exemple, j'ai utilisé le caractère réservé \quotation{\lettertilde} ; j'aurais également pu écrire \MyKey{[figure=Illustration\{ \}]} en enfermant l'espace vide entre des accolades pour m'assurer que \ConTeXt\ ne s'en débarrasse pas.
+
+Quelles étiquettes pouvons-nous redéfinir avec \cmd{setuplabeltext} ? La documentation de \ConTeXt\ n'est pas aussi complète qu'on pourrait l'espérer sur ce point. Le manuel de référence 2013 (qui est celui qui explique le plus cette commande) mentionne \MyKey{chapter}, \MyKey{table}, \MyKey{figure}, \MyKey{appendix}... \Conjecture et ajoute \quotation{autres éléments de texte comparables}. Nous pouvons notamment identifier 
+\MyKey{content},
+\MyKey{tables}, 
+\MyKey{figures},
+\MyKey{index},
+\MyKey{intermezzo}, 
+\MyKey{intermezzi}, 
+\MyKey{graphic}, 
+\MyKey{graphics}
+\MyKey{abbreviations},
+\MyKey{logos}
+\MyKey{units}, 
+\MyKey{part},
+\MyKey{section}
+\MyKey{section}, 
+\MyKey{subsection},
+\MyKey{subsubsection}
+\MyKey{subsubsubsection},
+\MyKey{line},
+\MyKey{lines},
+\MyKey{page},
+\MyKey{atpage},
+\MyKey{hencefore},
+\MyKey{hereafter},
+\MyKey{see}.
+
+\startSmallPrint
+
+
+L'un des avantages des {\em  logiciels libres} est la disponibilité des fichiers sources ; nous pouvons donc les examiner. C'est ce que j'ai fait, et en fouinant dans les fichiers sources de ConTeXt, j'ai découvert le fichier 
+\goto{\tt lang-txt.lua}[url(https://source.contextgarden.net/tex/context/base/mkiv/lang-txt.lua)], disponible dans {\tt tex/texmf-context/tex/context/base/mkiv} qui, je pense, est celui qui contient les étiquettes prédéfinies et leurs différentes traductions ; de sorte que si à tout moment \ConTeXt\ génère un texte redéfini que nous voulons changer, pour identifier le nom de l'étiquette à laquelle ce texte est associé il suffit de consulter ce fichier.
+
+\stopSmallPrint
+
+Si nous voulons insérer le texte associé à une certaine étiquette quelque part dans le document, nous pouvons le faire avec la commande \PlaceMacro{labeltext} \tex{labeltext}. Ainsi, par exemple, si je veux faire référence à un tableau, pour m'assurer que je le nomme de la même manière que \ConTeXt\ dans la commande \cmd{placetable}, je peux écrire : \quotation{\tt Juste comme indiqué dans le \backslash labeltext\{table\} de la page suivante.}.
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\useMPlibrary [dum] % pour produire des images
+\mainlanguage[fr]   %
+\setuplabeltext[fr][figure={Illustration~}]
+\placefigure [] [] 
+  {Texte de la légende}
+  {\externalfigure [dummy] 
+     [height=1cm,width=6cm]}
+
+Juste comme indiqué dans l'\labeltext{figure} précédente.
+\stopDemoVW}
+
+\startSmallPrint
+
+ Certaines étiquettes redéfinissables avec \tex{setuplabeltext}, sont vides par défaut ; comme, par exemple, \MyKey{chapter} ou \MyKey{section}. Cela est dû au fait que, par défaut, \ConTeXt\ n'ajoute pas d'étiquettes aux commandes de sectionnement. Si nous voulons changer ce fonctionnement par défaut, il nous suffit de redéfinir ces étiquettes dans le préambule de notre document et ainsi, par exemple, \cmd{setuplabeltext[chapter=Chapter\lettertilde]} verra que les chapitres sont précédés du mot \quotation{Chapter}.
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\mainlanguage[fr]%
+\setuplabeltext[fr][section={Verset~}]
+
+\startsection[title=Titre de section]
+\stopsection
+\stopDemoVW}
+
+\stopSmallPrint
+
+
+Enfin, il est important de souligner que bien qu'en général, dans \ConTeXt, les commandes qui permettent plusieurs options séparées par des virgules comme argument, la dernière option peut se terminer par une virgule et rien de mal ne se passe. Dans \tex{setuplabeltext}, cela générerait une erreur lors de la compilation.
+
+\stopsection
+
+% ***  SubSection quelques commandes liées à la langue
+
+\startsection
+  [title=Quelques commandes liées à la langue]
+
+% **** SubSubSection date
+
+\startsubsection
+  [
+    reference=sec:dates,
+    title=Commandes liées à la date,
+  ]
+  \PlaceMacro{currentdate} \PlaceMacro{date} \PlaceMacro{month}
+
+
+\ConTeXt\ a trois commandes liées à la date qui produisent une sortie dépendante de la langue active au moment où elles sont exécutées. Il s'agit de :
+
+
+\startitemize
+
+\item \tex{currentdate} : exécutée sans arguments dans un document dont la langue principale est l'anglais, elle renvoie la date système au format \quotation{Jour Mois Année}. Par exemple \quotation{11 septembre 2020}. Mais nous pouvons également lui demander d'utiliser un format différent (comme c'est le cas aux États-Unis et dans certaines autres parties du monde anglophone qui suivent leur système consistant à placer le mois avant le jour, d'où la date tristement célèbre du 11 septembre), ou d'inclure le nom du jour de la semaine ({\tt weekday}), ou de n'inclure que certains éléments de la date ({\tt day, month, year}). 
+
+Pour indiquer un format de date différent, \MyKey{dd} ou \MyKey{day} représentent les jours, \MyKey{mm} les mois (au format numérique), \MyKey{month} les mois au format alphabétique en minuscules, et \MyKey{MONTH} en majuscules. En ce qui concerne l'année, \MyKey{yy} n'écrira que les derniers chiffres, tandis que \MyKey{year} ou \MyKey{y} écrira les quatre. Si nous voulons un élément de séparation entre les composants de la date, nous devons l'écrire expressément. Par exemple
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW%
+\mainlanguage[en] \language[en]%
+\currentdate[weekday,month,day,{, },year]
+
+\mainlanguage[fr] \language[fr]%
+\currentdate[weekday,day,month,year]
+\stopDemoVW}
+  
+\item \tex{date} : cette commande, exécutée sans aucun argument, produit exactement le même résultat que \cmd{currentdate}, c'est-à-dire la date actuelle au format standard. Cependant, une date spécifique peut être donnée comme argument. Deux arguments sont fournis pour cela : avec le premier argument, nous pouvons indiquer le jour (\MyKey{d}), le mois (\MyKey{m}) et l'année (\MyKey{y}) correspondant à la date que nous voulons représenter, tandis qu'avec le second argument (facultatif), nous pouvons indiquer le format de la date à représenter. Par exemple, si nous voulons savoir quel jour de la semaine John Lennon et Paul McCartney se sont rencontrés, un événement qui, selon Wikipedia, a eu lieu le 6 juillet 1957, nous pourrions écrire
+
+\placefigure [force,here,none] [] {}{
+\startDemoVN%
+\mainlanguage[fr] \language[fr]%
+\date[d=6, m=7, y=1957][weekday]
+\stopDemoVN}
+
+et ainsi nous découvrons qu'un tel événement historique s'est produit un samedi. 
+
+\item \tex{month} prend un nombre en argument, et renvoie le nom du mois correspondant à ce nombre.
+  
+\stopitemize
+
+Pour l'heure, il existe aussi \tex{currenttime} qui prend en argument \MyKey{h} pour les heures et \MyKey{m} pour les minutes. 
+
+\stopsubsection
+
+% **** SubSubSection translate
+
+\startsubsection
+  [title=La commande \tex{translate}]
+  \PlaceMacro{translate}
+
+La commande \tex{translate} prend en charge une série de phrases associées à une langue spécifique, de sorte que l'une ou l'autre sera insérée dans le document final en fonction de la langue active à un moment donné. Dans l'exemple suivant, la commande translate est utilisée pour associer quatre phrases au français et à l'anglais, qui sont enregistrées dans un tampon de mémoire (concernant l'environnement {\tt buffer}, voir \in{section}[sec:buffer]). Si nous insérons le {\em tampon} à un point du document où le français est activé, les phrases en français seront affichées, et de même avec l'anglais. Ainsi :
+
+\placefigure [force,here,none] [] {}{
+\startDemoHW%
+\startbuffer
+\starttabulate[|*{4}{lw(3cm)|}]
+\HL \NC \translate[fr=Votre lettre,    en=Your letter]
+    \NC \translate[fr=Votre référence, en=Your reference]
+    \NC \translate[fr=Notre référence, en=Our reference]
+    \NC \translate[fr=Date,            en=Date] \NR
+  \stoptabulate
+\stopbuffer
+
+\language[fr]  \getbuffer
+\blank[big]
+\language[en]  \getbuffer
+\stopDemoHW}
+
+%\stoppacked
+
+\stopsubsection
+
+% **** SubSubSection commandes \tex{quote} et \tex{quotation}
+
+\startsubsection
+  [
+    reference=sec:quote,
+    title=Les commandes \tex{quote} et \tex{quotation},
+  ]
+  \PlaceMacro{quote}\PlaceMacro{quotation}
+
+L'une des erreurs typographiques les plus courantes dans les documents texte survient lorsque les guillemets (simples ou doubles) sont ouverts mais pas expressément fermés. Pour éviter cela, \ConTeXt\ fournit les commandes \tex{quote} et \tex{quotation} qui citeront le texte qui est leur argument ; \tex{quote} utilisera des guillemets simples et \tex{quotation} des guillemets doubles.
+
+Ces commandes sont sensibles à la langue dans la mesure où elles utilisent le jeu de caractères ou de commandes par défaut de la langue en question pour ouvrir et fermer les guillemets (cf. \in{section} [sec:langconfig]) ; Dans l'exemple suivant, vous voyez la configuration pour le français par défaut puis une version utlisant les versionŝ anglais des guillemets simples et doubles.
+
+\placefigure [force,here,none] [] {}{
+\startDemoHW%
+\setcharacterspacing   [frenchpunctuation]%
+\mainlanguage[fr] \language[fr]%
+\tfd \quotation{Mon texte} et \quote{Mon texte}
+\blank[big]
+\setuplanguage[fr][leftquotation=“,rightquotation=”]
+\setuplanguage[en][leftquote=‘,rightquote=’]
+\tfd \quotation{Mon texte} et \quote{Mon texte}
+\stopDemoHW}
+
+
+Ces commandes ne gèrent cependant pas les guillemets imbriqués, bien que nous puissions créer un utilitaire qui le fasse, en profitant du fait que \cmd{quote} et \cmd{quotation} sont des applications réelles de ce que \ConTeXt\ appelle {\em delimitedtext}, et qu'il est possible de définir d'autres applications avec \PlaceMacro{definedelimitedtext} \tex{definedelimitedtext}. Ainsi, l'exemple suivant :
+
+
+crée trois commandes qui permettront jusqu'à trois niveaux différents de citation. Le premier niveau avec des guillemets latéraux, le deuxième avec des guillemets doubles et le troisième avec des guillemets simples.
+
+Bien entendu, si nous utilisons l'anglais comme langue principale, les guillemets simples et doubles par défaut (frisés, et non droits, comme dans ce document !) seront automatiquement utilisés.
+
+
+\placefigure [force,here,none] [] {}{
+\startDemoHW%
+\definedelimitedtext [GuillemetsNivA] [left=«, right=»]
+\definedelimitedtext [GuillemetsNivB] [left=“, right=”]
+\definedelimitedtext [GuillemetsNivC] [left=', right=']
+
+\GuillemetsNivA{Mon texte et \GuillemetsNivB{un second et \GuillemetsNivC{un troisième}}} 
+\stopDemoHW}
+
+Enfin, sachez qu'il existe un environnement spécifique pour présenter les citation~: \tex{startquotation} présenté \at{page}[env:quotation].
+
+\stopsubsection
+
+\stopsection
+
+
+\stopchapter
+
+\stopcomponent
+
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX_fra.tex"
+%%% End:
+%%% vim:set filetype=context tw=72 : %%%

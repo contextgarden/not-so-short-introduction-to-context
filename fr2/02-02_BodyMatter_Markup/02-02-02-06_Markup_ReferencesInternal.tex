@@ -1,0 +1,465 @@
+\startcomponent 02-02-02-05_Markup_ReferencesInternal
+
+\environment introCTX_env_00
+
+%==============================================================================
+
+\startsection
+  [title=Références internes,
+  reference=sec:references,]
+
+
+\TocChap
+
+
+\tex{pagereference}
+\tex{reference}
+\tex{textreference}
+\tex{at}
+\tex{in}
+\tex{about}
+\tex{atpage}
+\tex{somewhere}
+
+
+% **   Section 1 type de réference
+
+\startsubsection
+  [title=Types de référence,
+  reference=cap:refpluslinks]
+
+Les documents scientifiques et techniques abondent de références~:
+
+\startitemize
+
+\item Parfois, ils se réfèrent à d'autres documents qui sont à la base de ce qui est expliqué, ou qui contredisent ce qui est expliqué, ou qui développent ou nuancent l'idée traitée, etc. Dans ce cas, la référence est dite {\em externe} et, si l'on veut que le document soit rigoureux sur le plan académique, la référence prend la forme de {\em citations} de la littérature.
+
+\item Mais il est également fréquent qu'un document, dans l'une de ses sections, fasse référence à une autre de ses sections, auquel cas la référence est dite {\em interne}. Lorsqu'un point du document commente un aspect particulier d'une image, d'un tableau, d'une note ou d'un élément de même nature, en s'y référant par son numéro ou par la page où il se trouve, il s'agit également d'une référence {\em interne}.
+
+Pour des raisons de précision, les références internes doivent viser un endroit précis et facilement identifiable dans le document. C'est pourquoi ce type de références renvoie toujours soit à des éléments numérotés (comme, par exemple, lorsque nous disons \quotation{voir tableau 3.2}, ou \quotation{chapitre 7}), soit à des numéros de page. Les références vagues du type \quotation{comme nous l'avons déjà dit} ou \quotation{comme nous le verrons plus loin} ne sont pas de véritables références, et il n'y a pas d'exigence particulière pour les mettre en forme, ni d'outil spécial pour le faire. De plus, je dissuade personnellement mes étudiants de doctorat ou de maîtrise d'utiliser cette pratique de manière habituelle.
+
+
+\startSmallPrint
+
+Les références internes sont aussi communément appelées \quotation{références croisées} bien que dans ce document j'utiliserai simplement le terme \quotation{références} en général, et \quotation{références internes} lorsque je souhaite être spécifique.
+
+\stopSmallPrint
+
+\stopitemize
+
+Afin de clarifier la terminologie que j'utilise pour les références, j'appellerai le point du document où une référence est introduite, l'\quotation{origine}, et l'endroit vers lequel elle pointe, la quotation{cible}. De cette façon, nous dirons qu'une référence est interne lorsque l'origine et la cible sont dans le même document, et externe lorsque l'origine et la cible sont dans des documents différents.
+
+Du point de vue de la composition du document~:
+
+\startitemize
+
+\item Les références externes ne posent aucun problème particulier et ne nécessitent donc, en principe, aucun outil pour les introduire : toutes les données dont j'ai besoin à partir du document cible sont à ma disposition et je peux les utiliser dans la référence. Toutefois, si le document d'origine est un document électronique et que le document cible est également disponible sur le Web, il est possible d'inclure dans la référence un lien hypertexte permettant de passer directement à la cible par un clic. Dans ce cas, on peut dire que le document d'origine est {\em interactif}.
+
+\item En revanche, les références internes posent un défi pour la composition du document. En effet, quiconque a l'expérience de la préparation de documents scientifiques et techniques moyennement longs sait qu'il est presque inévitable que la numérotation des pages, des sections, des images, des tableaux, des théorèmes ou d'autres éléments similaires à ce qui est indiqué dans la référence, change au cours de la préparation du document, ce qui rend très difficile sa mise à jour.
+
+\startSmallPrint
+
+Avant l'avènement de l'informatique, les auteurs évitaient les références internes ; et celles qui étaient inévitables, comme la table des matières (qui, si elle est accompagnée du numéro de page de chaque section, est un exemple de référence interne), étaient écrites à la toute fin.
+
+\stopSmallPrint
+
+\stopitemize
+
+Même les systèmes de composition les plus limités, comme les traitements de texte, permettent l'inclusion d'une certaine forme de références croisées internes, comme les tables des matières. Mais ce n'est rien comparé au mécanisme complet de gestion des références inclus dans \ConTeXt, qui peut également combiner le mécanisme de gestion des références internes visant à maintenir les références à jour, avec l'utilisation d'hyperliens qui n'est évidemment pas exclusive aux références externes.
+
+
+
+% **   Section 2 réferences internes
+
+
+Deux choses sont nécessaires pour établir une référence interne :
+
+\startitemize[n]
+
+
+\item Une étiquette ou un identifiant au point cible. Lors de la compilation, \ConTeXt, associera des données particulières à cette étiquette. Les données associées dépendent du type d'étiquette ; il peut s'agir du numéro de section, du numéro de note, du numéro d'image, du numéro associé à un élément particulier dans une liste numérotée, du titre de la section, etc.
+
+\item Une commande au point d'origine qui lit les données associées à l'étiquette liée au point cible et les insère au point d'origine. La commande varie en fonction des données de l'étiquette que l'on souhaite insérer au point d'origine.
+
+\stopitemize
+
+Lorsque nous pensons à une référence, nous le faisons en termes de \quotation{origine~\longrightarrow~cible}, il pourrait donc sembler que les questions relatives à l'origine doivent être expliquées en premier, et ensuite celles relatives à la cible. Cependant, je crois qu'il est plus facile de comprendre la logique des références si l'explication est inversée.
+
+\stopsubsection
+
+% ***  Section label
+
+\startsubsection
+[
+reference=sec:target labels,
+title=L'étiquette de la cible,
+]
+
+% TODO Garulfo : envisager de remplacer étiquette par reference
+
+Dans ce chapitre, par {\em étiquette}, j'entends une chaîne de texte qui sera associée au point cible et utilisée en interne pour y faire référence et ainsi récupérer certaines informations concernant le point cible (par exemple le numéro de page, le numéro de section, etc). En fait, les informations associées à chaque étiquette dépendent de la procédure de création de celle-ci. \ConTeXt\ appelle ces étiquettes {\em références}, mais je pense que ce dernier terme, ayant un sens beaucoup plus large, est moins clair.
+
+L'étiquette associée à la référence cible~:
+
+\startitemize
+
+\item a besoin que chaque cible potentielle du document soit unique afin qu'elle puisse être identifiée sans aucun doute. Si nous utilisons la même étiquette pour différentes cibles, \ConTeXt\ ne lancera pas d'erreur de compilation (il génèrera des messages), mais toutes les références pointeront vers la première étiquette qu'il trouvera (dans le fichier source) et cela aura pour effet secondaire que certaines de nos références pourront être erronées et, pire encore, que nous ne les remarquerons pas. Il est donc important de s'assurer, lors de la création d'une étiquette, que la nouvelle étiquette que nous attribuons n'a pas déjà été attribuée auparavant.
+
+\item Il peut contenir des lettres, des chiffres, des signes de ponctuation, des espaces vides, etc. Lorsqu'il y a des espaces vides, les règles générales de \ConTeXt\ concernant ces types de caractères s'appliquent toujours (voir \in{section}[sec:spaces]), de sorte que, par exemple, \quotation{\type{Mon beau libellé}} et \quotation{\type{Mon     beau libellé}} sont considérés comme identiques, même si un nombre différent d'espaces vides est utilisé dans les deux.
+
+\stopitemize
+
+
+Puisqu'il n'y a aucune limitation quant aux caractères pouvant faire partie de l'étiquette et à leur nombre, mon conseil est d'utiliser des noms d'étiquette clairs, qui nous aideront à comprendre le fichier source lorsque, peut-être, nous le lirons longtemps après qu'il ait été écrit. C'est pourquoi l'exemple que j'ai donné précédemment (\quotation{Mon beau libellé}) n'est pas un bon exemple, car il ne nous dit rien sur la cible vers laquelle pointe l'étiquette. Pour cette rubrique, par exemple, l'étiquette \quotation{\tt sec:EtiquettesCibles} serait meilleure (\quotation{\tt sec} indiquant qu'il s'agit d'une section).
+
+Pour associer une cible particulière à une étiquette, il existe essentiellement deux procédures :
+
+\startitemize[n]
+
+\item Au moyen d'un argument ou d'une option de commande utilisée pour créer l'élément vers lequel l'étiquette pointera. De ce point de vue, toutes les commandes qui créent une sorte de structure ou d'élément textuel susceptible d'être une cible de référence comprennent une option nommée \MyKey{reference} qui est utilisée pour inclure l'étiquette. Parfois, à la place de l'{\em option}, l'étiquette est le contenu de l'argument entier.
+
+Nous trouvons un bon exemple de ce que j'essaie de dire dans les commandes de section qui, comme nous le savons depuis (\in{section}[sec:sectionyntax]), permettent plusieurs types de syntaxe. Voici comment définir une étiquette ave cles deux syntaxes~:
+
+
+Dans la syntaxe classique, la commande est écrite comme suit :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\section[étiquette]{Titre de la section}
+
+\startsection
+  [title=Titre de la section,
+   reference=étiquette]
+\stopsection
+\stopDemoI}
+
+
+Dans les deux cas, la commande prévoit l'introduction d'une étiquette qui sera associée à la section (ou chapter, subsection, etc.) en question.
+
+% TODO Garulfo redite à nettoyer ?
+
+J'ai dit que cette fonctionnalité se retrouve dans {\em toutes les commandes} qui nous permettent de créer un élément de texte susceptible d'être la cible d'une référence. Il s'agit de tous les éléments de texte qui peuvent être numérotés, y compris, entre autres, les sections, les objets flottants de toutes sortes (tableaux, images et autres), les notes de bas de page ou de fin, les citations, les listes numérotées, les descriptions, les définitions, etc.
+
+
+\startSmallPrint
+
+Lorsque l'étiquette est saisie directement avec un argument, et non comme une option à laquelle une valeur est attribuée, il est possible avec \ConTeXt\ d'associer plusieurs étiquettes à une seule cible. Par exemple~:
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\section[étiquette1,étiquette2,étiquette3]{Titre de la section}
+\stopDemoI}
+
+Je ne vois pas bien quel serait l'avantage d'avoir plusieurs étiquettes différentes pour la même cible et je soupçonne \Conjecture que cela peut être fait non pas parce que cela offre des avantages, mais en raison d'une exigence {\em interne} de \ConTeXt\ applicable à certains types d'arguments.
+
+\stopSmallPrint
+
+\item Au moyen des commandes \PlaceMacro{pagereference} \tex{pagereference},
+\PlaceMacro{reference} \tex{reference}, ou \PlaceMacro{textreference} \tex{textreference} dont la syntax est~:
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+Texte initial \pagereference[étiquette]
+\reference[étiquette]{Texte}
+\textreference[étiquette]{Texte}
+et texte final
+\stopDemoVW}
+
+
+\startitemize
+
+\item L'étiquette créée avec \tex{pagereference} nous permet de récupérer le numéro de page.
+
+\item Les étiquettes créées avec \tex{reference} et \tex{textreference} nous permettent de récupérer le numéro de page ainsi que le texte qui leur est associé en argument.
+
+Dans les deux cas  \tex{reference} et \tex{textreference}, le texte lié à l'étiquette n'apparaît pas en tant que tel dans le document final au point où se trouve la commande, mais il peut être récupéré et réapparaître au point d'origine de la référence.
+
+\stopitemize
+
+\stopitemize
+
+J'ai dit précédemment que chaque étiquette est associée à certaines informations concernant le point cible. La nature de ces informations dépend du type d'étiquette~:
+
+\startitemize
+
+\item Toutes les étiquettes {\em rappellent} (dans le sens où elles permettent de les retrouver) le numéro de page de la commande qui les a créées. Pour les étiquettes attachées à des sections qui peuvent avoir plusieurs pages, ce numéro sera celui de la page où commence la section en question.
+
+\item Les étiquettes insérées avec la commande qui crée un élément textuel numéroté (section, note, tableau, image, etc.) {\em rappellent} le numéro associé à cet élément (numéro de section, numéro de note, etc.)
+
+\item Si les éléments possèdenr un {\em titre}, comme c'est le cas, par exemple, pour les sections, mais aussi les tableaux s'ils ont été insérés à l'aide de la commande \tex{placetable}, les étiquettes se {\em rappelleront} de ces titres.
+
+\item Les étiquettes créées avec \tex{pagereference} {\em rappellent} le numéro de page.
+
+\item Celles créées avec \tex{reference} ou \tex{textreference} {\em rappellent} également le texte qu'elles prennent comme argument.
+
+
+\startSmallPrint
+
+
+En fait, je ne suis pas sûr de la différence réelle entre les commandes \tex{reference} et \tex{textreference}. Je pense qu'il est possible que la conception des trois commandes qui permettent la création d'étiquettes tente de fonctionner en parallèle avec les trois commandes qui permettent la récupération d'informations à partir des étiquettes (que nous verrons dans un moment) ; mais la vérité est que, selon mes tests, \tex{reference} et \tex{textreference} semblent être des commandes redondantes.
+
+
+\stopSmallPrint
+
+\stopitemize
+
+\stopsubsection
+
+% ***  Section type de réference
+
+\startsubsection
+[title=Commandes au point de référence d'origine pour récupérer les données du point cible]
+
+Les commandes que je vais vous expliquer ensuite récupèrent les informations des étiquettes et, en plus, si notre document est interactif, génèrent un lien hypertexte vers la cible. Mais ce qui est important dans ces commandes, c'est l'information qui est récupérée de l'étiquette. Si nous voulons seulement générer l'hyperlien, sans récupérer aucune information de l'étiquette, nous devons utiliser la commande \tex{goto} expliquée dans la \in{section} [sec:createlinks]. 
+
+% **** Section basic commands
+
+\startsubsubsection
+[title=Commandes de base pour récupérer les informations d'une étiquette]
+
+Sachant que chaque étiquette associée à un point cible peut stocker différents éléments d'information, il est logique que \ConTeXt\ comprenne trois commandes différentes pour récupérer ces informations~: selon les informations d'un point cible de référence que nous voulons récupérer, nous utilisons l'une ou l'autre de ces commandes~:
+
+\startitemize
+
+\item La commande \tex{at} permet de récupérer le numéro de page de l'étiquette.
+
+\item Pour les étiquettes qui mémorisent un numéro d'élément (numéro de section, numéro de note, numéro d'article, numéro de table, etc.) en plus du numéro de page, la commande \tex{in} permet de récupérer ce numéro. 
+
+\item Enfin, pour les étiquettes qui mémorisent un texte associé à une étiquette (titre de section, titre d'image inséré avec \tex{placefigure}, etc.), la commande \tex{about} permet de récupérer ce texte.
+
+\stopitemize
+
+Les trois commandes \PlaceMacro{at} \tex{at} \PlaceMacro{in} \tex{in} \PlaceMacro{about} \tex{about} ont les syntaxes suivantes~:
+
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\setupinteraction[state=start]
+\startsubsection
+  [title=Titre de la section,
+   reference=sec:cettesection]
+\stopsubsection
+
+À la \at{page}[sec:cettesection] 
+se trouve la \in{section}{.}[sec:cettesection]
+dont le titre est \about[sec:cettesection]
+\stopDemoVW}
+
+
+\startitemize
+
+\item \quotation{\tt sec:cettesection} est l'étiquette de la cible dont nous voulons récupérer l'information, c'est un point commun entre toutes les commandes.
+
+\item le premier texte entre accolades sera ajouté juste avant l'information que l'on souhaite récupérer avec la commande. Entre le texte et les données de l'étiquette que la commande récupère, un espace insécable sera inséré et si la fonction d'interactivité est activée (avec \tex{setupinteraction[state=start]}) l'information récupérée par la commande génère un lien hypertexte qui nous dirigera au point cible. Le texte inclus entre accolades fera partie de ce lien (il sera cliquable).
+
+\item dans le cas de \tex{in} il est possible d'indiquer un second texte entre accolades, celui ci sera ajouté après l'information récupérée par la commande, et sera également intégré au lien hypertexte. Cela est utile par exemple pour générer un hyperlien \quotation{1- Section} au lieu de \quotation{Section 1}.
+
+\stopitemize
+
+Ainsi, dans l'exemple précédent, nous voyons comment \tex{in} récupère le numéro de section et \tex{at} le numéro de page et \tex{about} le titre. 
+
+
+Notez que \ConTeXt\ a automatiquement créé des hyperliens (voir \in{section}[sec:interactivité]), et que le texte pris comme argument par \tex{in} et \tex{at} fait partie du lien. Mais si nous l'avions écrit autrement, le résultat serait :
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\setupinteraction[state=start]
+\startsubsection
+  [title=Titre de la section,
+   reference=sec:cettesection]
+\stopsubsection
+
+À la page \at{}[sec:cettesection] 
+se trouve la section \in{}{}[sec:cettesection]
+dont le titre est \about[sec:cettesection]
+\stopDemoVW}
+
+
+Le texte reste le même, mais les mots {\em section} et {\em page} qui précèdent la référence ne sont pas inclus dans le lien car ils ne font plus partie de la commande.
+
+Si \ConTeXt\ n'est pas en mesure de trouver l'étiquette vers laquelle les commandes \tex{at}, \tex{in} ou \tex{about} pointent, aucune erreur de compilation n'en résultera mais là où les informations récupérées par ces commandes devraient apparaître dans le document final, nous verrons écrit \quotation{??}.
+
+
+
+\startSmallPrint
+
+Il y a deux raisons pour lesquelles \ConTeXt\ ne peut pas trouver une étiquette~:
+
+\startitemize[n]
+
+\item Nous avons fait une erreur en l'écrivant.
+
+\item Nous ne compilons qu'une partie du document, et l'étiquette pointe vers la partie non encore compilée (voir \in{sections}[input] et \in{}[sec-projects]).
+
+\stopitemize
+
+Dans le premier cas, l'erreur devra être corrigée. C'est pourquoi, lorsque nous aurons fini de compiler le document complet (et que le deuxième cas ne sera plus possible), il est bon de rechercher toutes les apparitions de \quotation{??} dans le PDF pour vérifier qu'il n'y a pas de références {\em cassées} dans le document.
+
+\stopSmallPrint
+
+\stopsubsubsection
+
+% **** Section retrieve info 
+
+\startsubsubsection
+[title=Récupération des informations associées à une étiquette avec la commande \tex{ref}]
+
+\PlaceMacro{ref}
+
+Chacune des commandes \tex{at}, \tex{in} et \tex{about} récupère certains éléments d'une étiquette. Il existe une autre commande qui nous permet de récupérer un élément de l'étiquette indiquée. Il s'agit de la commande \tex{ref} dont la syntaxe est~:
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\ref[ÉlémentàRécupérer][Étiquette]
+\stopDemoI}
+
+où le premier argument peut être~:
+
+\startitemize
+
+\item {\tt text} : renvoie le texte associé à une étiquette.
+
+\item {\tt title} : renvoie le titre associé à un libellé.
+
+\item {\tt number} : renvoie le numéro associé à un libellé. Par exemple, dans les sections, le numéro de section.
+
+\item {\tt page} : renvoie le numéro de la page.
+
+\item {\tt realpage} : renvoie le numéro de la page d'un point de vue physique (car parfois la numérotation des pages ne commence qu'à partir de l'introduction).
+
+\item {\tt default} : renvoie ce que \ConTeXt\ considère comme l'élément {\em natural} de l'étiquette. En général, cela coïncide avec ce qui est renvoyé par {\tt number}.
+
+\stopitemize
+
+En fait, \tex{ref} peut permettre d'être plus précis que \tex{at}, \tex{in} ou \tex{about}, et donc, par exemple, il fait la différence entre le numéro de page et le numéro de page réel. Le numéro de page peut ne pas coïncider avec le numéro réel si, par exemple, la numérotation des pages du document a commencé à 1500 (parce que ce document est la suite d'un précédent) ou si les pages du préambule étaient numérotées en chiffres romains et que, voyant cela, la numérotation a été recommencée. De même, \tex{ref} fait la différence entre le {\em text} et le {\em title} associés à une référence, ce que \tex{about}, par exemple, ne permet pas.
+
+Si \tex{ref} est utilisé pour obtenir des informations à partir d'une étiquette qui n'en possède pas (par exemple, le titre d'une étiquette associée à une note de bas de page), la commande renverra une chaîne vide.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\setupinteraction[state=start]
+\startsubsection
+  [title=Titre de la section,
+   reference=sec:cettesection]
+\stopsubsection
+
+{\tt text :}     \ref [text]     [sec:cettesection] \\ 
+{\tt title :}    \ref [title]    [sec:cettesection] \\ 
+{\tt number :}   \ref [number]   [sec:cettesection] \\ 
+{\tt page :}     \ref [page]     [sec:cettesection] \\ 
+{\tt realpage :} \ref [realpage] [sec:cettesection] 
+\stopDemoVW}
+
+
+
+\stopsubsubsection
+
+% **** Section detect wher el link eleadto
+
+\startsubsubsection
+[title=Détecter où le lien mène]
+
+\ConTeXt\ possède également deux commandes qui sont sensibles à {\em l'adresse du lien}. Avec l'\quotation{adresse du lien}, mon intention est de déterminer si la cible du lien dans le fichier source se trouve avant ou après l'origine. Par exemple~: nous sommes en train de rédiger notre document et nous voulons faire référence à une section qui pourrait se trouver avant ou après celle que nous sommes en train d'écrire dans la table des matières finale. Nous n'avons pas encore décidé. Dans cette situation, il serait utile de disposer d'une commande qui écrit l'un ou l'autre selon que la cible se situe finalement avant ou après l'origine dans le document final. Pour des besoins de ce type, \ConTeXt\ fournit la commande \PlaceMacro{somewhere} \tex{somewhere} dont la syntaxe est :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+ \somewhere{texte si avant}{texte si après} [Étiquette].
+\stopDemoI}
+
+Par exemple~:
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\setupinteraction[state=start]
+Dans une \somewhere
+  {section précédente} {section prochaine}
+  [sec:cettesection].
+
+\startsubsection
+  [title=Titre de la section,
+   reference=sec:cettesection]
+\stopsubsection
+
+Dans une \somewhere
+  {section précédente} {section prochaine}
+  [sec:cettesection].
+\stopDemoVW}
+
+
+Une autre commande capable de détecter si l'étiquette qu'elle pointe vient avant ou après, est \PlaceMacro{atpage} \tex{atpage} dont la syntaxe est :
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\atpage[label]
+\stopDemoI}
+
+Cette commande est assez similaire à la précédente, mais au lieu de nous permettre d'écrire nous-mêmes le texte, selon que l'étiquette se trouve avant ou après, \tex{atpage} insère un texte par défaut pour chacun des deux cas et, si le document est interactif, insère également un lien hypertexte.
+
+Le texte que \tex{atpage} insère est celui associé à l'option \MyKey{hencefore} de la commande \tex{setuplabeltext}, dans le cas où l'étiquette de la cible se trouve {\em avant} la commande \tex{atpage} (et celui associé à l'option \MyKey{hereafter} dans le cas contraire).
+
+\startSmallPrint
+
+%TODO Garulfo : texte à néttoyer donc
+
+Lorsque je suis arrivé à ce point, j'ai été trahi par une décision antérieure : dans ce chapitre, j'ai décidé d'appeler ce que \ConTeXt\ appelle une \quotation{référence}, une \quotation{étiquette}. Cela me semblait plus clair. Mais certains fragments de texte générés par les commandes \ConTeXt\, tels que \tex{atpage}, sont également appelés \quotation{labels} (cette fois dans un autre sens). (Voir \in{section}[sec:labels]). J'espère que le lecteur ne sera pas perdu par ma façon de présenter. Je pense que le contexte nous permet de distinguer correctement à laquelle des différentes significations de {\em étiquette} je fais référence dans chaque cas.
+
+\stopSmallPrint
+
+Par conséquent, nous pouvons modifier le texte inséré par \tex{atpage} de la même manière que nous modifions le texte de toute autre étiquette :
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\mainlanguage[fr]
+\setupinteraction[state=start]
+\setuplabeltext[fr]
+[hereafter=Comme nous le montrerons plus tard]
+\setuplabeltext[fr]
+[hencefore=Comme nous l'avons vu avant]
+
+\atpage[sec:cettesection].
+\startsubsection
+  [title=Titre de la section,
+   reference=sec:cettesection]
+\stopsubsection
+\atpage[sec:cettesection].
+\stopDemoVW}
+
+\stopsubsubsection
+
+\stopsubsection
+
+% ***  Section autom géné
+
+\startsubsection
+[title=Génération automatique de préfixes pour éviter les étiquettes en double]
+
+Dans un document volumineux, il n'est pas toujours facile d'éviter la duplication des étiquettes. Il est donc conseillé de mettre un peu d'ordre dans la façon dont nous choisissons les étiquettes à utiliser. Une bonne pratique  consiste à utiliser des préfixes pour les étiquettes qui varient en fonction du type d'étiquette. Par exemple, \quotation{sec:} pour les sections, \quotation{fig:} pour les figures, \quotation{tbl:} pour les tableaux, etc.  
+
+
+Dans cette optique, \ConTeXt\ inclut une collection d'outils qui permettent :
+
+\startitemize
+
+\item de générer automatiquement des étiquettes pour tous les éléments autorisés.
+
+\item de faire en sorte que chaque étiquette générée manuellement prenne un préfixe, soit celui que nous avons prédéterminé nous-mêmes, soit celui généré automatiquement par \ConTeXt.
+
+\stopitemize
+
+
+L'explication détaillée de ce mécanisme est longue et, bien qu'il s'agisse sans aucun doute d'outils utiles, je ne pense pas qu'ils soient indispensables. Par conséquent, comme ils ne peuvent être expliqués en quelques mots, je préfère ne pas les expliquer et renvoyer à ce qui est dit à leur sujet dans le manuel de référence \ConTeXt\ ou dans le \goto{wiki}[url(https://wiki.contextgarden.net/References)] sur cette question.
+
+% If we choose to write our own labels, a command that can help us avoid
+% duplicates is \tex{showreferences}: this command will show a list of
+% all established labels in the document.
+
+\stopsubsection
+
+\stopsection
+%==============================================================================
+
+\stopcomponent
+
+%%% TeX-master: "../introCTX_fra.tex"
