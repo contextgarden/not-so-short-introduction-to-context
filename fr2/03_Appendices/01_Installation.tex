@@ -1,0 +1,339 @@
+%%% File:     Installation.mkiv
+%%% Author:       Joaquín Ataz-López
+%%% Begun:      May 2020
+%%% concluded: May 2020
+%%% Contents:  I thought about whether or not to include this appendix. I was clear from the outset that if it were to be included it had to be as an appendix, because if I put it at the beginning, it would be more difficult to engage the reader from the start. I wasn't so keen on it either because I didn't want to explain aspects related to Windows or Apple that I don't really know, since  I haven't used the former for more than 15 years and the latter I have never used. I was also tempted to refer to Pablo Rodriguez's text (much more complete), but finally, the fact that now the "official" version has become lmtx, in a way, Pablo's information is out of date, so I decided to include the appendix, but in very summary form. As I am unable to compile this document with the current version of LMTX (it compiled well up to a version in early August) and I have been reading the ConTeXt distribution list for a couple of months, I see that it is relatively common for a new version of LMTX to include a bug that needs to be fixed... I decided to recommend Standalone. 
+%%%
+%%% Edited with: Emacs + AuTeX - And at times vim + context-plugin
+%%%
+
+\environment introCTX_env_00
+
+\setuphead
+  [section]
+  [sectionsegments=3:3]
+
+\setuphead
+  [subsection]
+  [sectionsegments=3:4]
+
+\startcomponent 03-01_Installation
+
+\startchapter
+  [
+    reference=installation_suite,
+    title={Installation, configuration et mise à jour de \ConTeXt},
+  ]
+
+Les principales distributions de \TeX (TeX Live, teTeX, MikTeX, MacTeX, etc.) incluent déjà une version de \ConTeXt , souvent mise à jour de façon annuelle ou plus régulière. Dans cette annexe, j'expliquerai la procédure pour installer la dernière version de \ConTeXt\ intitulée \ConTeXt\ \cap{lmtx}. Le nom est un acronyme du nom du moteur \TeX\ utilisé : \LuaMetaTeX. Cette version a été lancée en 2019, et depuis environ mai 2020, elle est la distribution \ConTeXt\ recommandée par défaut, comme le suggère \goto{\ConTeXt\ wiki}[url(wiki)].
+
+\startSmallPrint
+Le développement actuel de \ConTeXt\ \cap{lmtx} est intense, et il peut changer de version plusieurs fois par semaine. Certains de ses développements posent d'ailleurs temporairement certaines incompatibilités ou bugs, et ainsi, par exemple, alors que j'écris ces lignes, la dernière version (4 août 2020) produit une erreur avec la commande \tex{Caps}.
+\stopSmallPrint
+
+
+La procédure d'installation suit les mêmes étapes sur n'importe quel système d'exploitation ; mais des détails changent d'un système à l'autre. Cependant, nous pouvons simplifier les choses de telle sorte que dans les lignes qui suivent, je distinguerai deux grands groupes de systèmes :
+
+\startitemize
+
+\item {\bf Systèmes de type Unix:} Cela inclut Unix lui-même, ainsi que GNU Linux, Mac OS, FreeBSD, OpenBSD. La procédure est fondamentalement la même pour tous ces systèmes ; il existe quelques très petites différences que je soulignerai à l'endroit approprié.
+
+\item {\bf Systèmes Windows}, cela inclut les différentes versions de ce système d'exploitation : Windows 10 (la dernière version, je crois), Windows 8, Windows 7, Windows Vista, Windows XP, Windows NT, etc.
+
+\stopitemize
+
+
+\startSmallPrint
+{\bf Remarque importante concernant le processus d'installation sur les systèmes Microsoft Windows~:} Comme tous les systèmes \TeX\, ConTeXt est conçu pour fonctionner à partir d'un terminal ; les programmes et les procédures d'installation également. Les utilisateurs de Windows n'ont pas toujours l'habitude d'utiliser le terminal et, il est courant que chaque version de ce système change la dénomination et l'emplacement du programme de terminal~: \quotation{Fenêtre DOS}, \quotation{Invite de commande}, \quotation{cmd}, \quotation{powershell}, etc. J'ai cessé d'utiliser les systèmes basés sur Windows en 2004, je ne peux donc pas faire grand-chose ici pour aider le lecteur. Il devra trouver par lui-même comment ouvrir un terminal dans sa propre version du système d'exploitation, ce qui ne devrait pas être trop difficile.
+\stopSmallPrint
+
+\page[bigpreference]
+
+\startsubsection[title=Installation Express]
+
+\placetable [force,here] [tbl:installdownload] {Les versions de \ConTeXt\ \cap{lmtx} disponibles depuis \goto{PRAGMA ADE}[url(https://www.pragma-ade.com/install.htm)]}{
+\bTABLE[option=stretch,frame=off]
+\setupTABLE[c][3,4][align=center]
+\bTR
+\bTH Système d'exploitation \eTH
+\bTH Processeur \eTH
+\bTH[nc=2] Version (bits)\eTH
+\eTR
+\bTR[topframe=on]
+\bTD[nr=3] GNU/Linux \eTD
+\bTD X86 \eTD
+\bTD \goto{32b}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-linux.zip)] \eTD
+\bTD \goto{64b}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-linux-64.zip)] \eTD
+\eTR
+\bTR
+\bTD ARM \eTD
+\bTD \goto{32b}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-linux-armhf.zip)] \eTD
+\bTD \goto{64b}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-linux-aarch64.zip)] \eTD
+\eTR
+\bTR
+\bTD Musl \eTD
+\bTD -- \eTD
+\bTD \goto{64b}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-linuxmusl.zip)] \eTD
+\eTR
+\bTR[topframe=on]
+\bTD[nr=2] Microsoft Windows \eTD
+\bTD X86 \eTD
+\bTD \goto{32b}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-mswin.zip)] \eTD
+\bTD \goto{64b}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-win64.zip)] \eTD
+\eTR
+\bTR
+\bTD ARM \eTD
+\bTD -- \eTD
+\bTD \goto{64b}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-windows-arm64.zip)] \eTD
+\eTR
+\bTR[topframe=on]
+\bTD[nr=2] Mac OS \eTD
+\bTD X86 \eTD
+\bTD -- \eTD
+\bTD \goto{64b}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-osx-64.zip)] \eTD
+\eTR
+\bTR
+\bTD ARM \eTD
+\bTD -- \eTD
+\bTD \goto{64b}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-osx-arm64.zip)] \eTD
+\eTR
+\bTR[topframe=on]
+\bTD FreeBSD  \eTD
+\bTD X86 \eTD
+\bTD \goto{32b}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-freebsd.zip)]\eTD
+\bTD \goto{64b}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-freebsd-amd64.zip)]\eTD
+\eTR
+\bTR[topframe=on]
+\bTD OpenBSD6.8  \eTD
+\bTD X86 \eTD
+\bTD \goto{32b}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-openbsd6.8.zip)]\eTD
+\bTD \goto{64b}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-openbsd6.8-amd64.zip)]\eTD
+\eTR
+\bTR[topframe=on]
+\bTD OpenBSD6.9  \eTD
+\bTD X86 \eTD
+\bTD \goto{32b}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-openbsd6.9.zip)]\eTD
+\bTD \goto{64b}[url(http://lmtx.pragma-ade.nl/install-lmtx/context-openbsd6.9-amd64.zip)]\eTD
+\eTR
+\eTABLE}
+
+
+Pour Windows
+
+\placefigure [force,here,none] [] {}
+{\startDemoC
+Créez un répertoire pour ConTeXt, tel que C:\context
+Téléchargez la version spécifique à l'architecture dans le répertoire.
+Extrayez l'archive.
+Exécutez : install.bat
+Exécutez : setpath.bat
+Exécutez : set OSFONTDIR=c:/windows/fonts/
+\stopDemoC}
+
+
+Pour Unix
+
+\placefigure [force,here,none] [] {}
+{\startDemoC
+mkdir $HOME/bin/context
+cd $HOME/bin/context
+wget http://lmtx.pragma-ade.nl/install-lmtx/context-linux-64.zip
+unzip context-linux-64.zip
+sh install.sh
+echo 'export PATH=$HOME/bin/context/tex/texmf-linux-64/bin:$PATH' \
+      >> $HOME/.bashrc
+echo 'export OSFONTDIR=$HOME/.fonts:/usr/share/fonts' >> $HOME/.bashrc
+\stopDemoC}
+
+Pour Mac OX
+
+\placefigure [force,here,none] [] {}
+{\startDemoC
+mkdir $HOME/bin/context
+cd $HOME/bin/context
+wget http://lmtx.pragma-ade.nl/install-lmtx/context-osx-64.zip
+unzip context-osx-64.zip
+sh install.sh
+echo 'export PATH=$HOME/bin/context/tex/texmf-osx-64/bin:$PATH' \
+     >> $HOME/.zshenv
+echo 'OSFONTDIR=/Library/Fonts:/System/Library/Fonts:$HOME/Library/Fonts'\
+     >> $HOME/.zshenv     
+\stopDemoC}
+
+\stopsubsection
+
+\startsubsection[title=Installation détaillée]
+
+\definedescription[StepInstall][headstyle=bold,width=1.5cm]
+
+  
+\startStepInstall{Étape 1}
+{\bf Créer le répertoire} dans lequel vous voulez installer \ConTeXt. Je vais supposer que l'installation se fait dans un répertoire appelé \quotation{context} situé dans notre répertoire utilisateur.
+\stopStepInstall
+
+\startStepInstall{Étape 2}
+{\bf Téléchargez le fichier zip d'installation} qui correspond à votre système d'exploitation et à votre processeur, à partir soit du \in{tableau}[tbl:installdownload] soit du site \goto{PRAGMA ADE}[url(https://www.pragma-ade.com/install.htm)]. Enregistrez le dans le répertoire créé précédemment.
+
+Si vous ne savez pas si votre système est 32 ou 64 bits, il y a de fortes chances, sauf si votre ordinateur est très ancien, qu'il soit 64 bits. Si vous ne savez pas si votre processeur est X86 ou ARM, il est très probablement X86. Pour Mac OS, les processeurs Mx sont des processeurs ARM. 
+
+\stopStepInstall
+
+
+\startStepInstall{Étape 3}
+{\bf Dézippez le fichier téléchargé} dans le répertoire d'installation. Un dossier appelé \MyKey{bin} sera créé ainsi que deux fichiers, l'un appelé \MyKey{installation.pdf}, qui contient des informations plus détaillées sur l'installation, et un second fichier qui est le programme d'installation proprement dit appelé \MyKey{install.sh} (dans les systèmes de type Unix) ou \MyKey{install.bat} (dans les systèmes Windows). Un troisième fichier  \MyKey{setpath.bat} est également présent pour Windows.
+\stopStepInstall
+
+
+\startStepInstall{Étape 4}
+{\bf Exécutez le programme d'installation} (\MyKey{install.sh} ou \MyKey{install.bat}). Une connexion Internet est nécessaire car le programme d'installation télécharge les fichiers dont il a besoin sur le Web.
+
+
+  \startitemize
+  
+  \item Sur les systèmes de type Windows, vous devez ouvrir un terminal, vous rendre dans le répertoire d'installation et, à partir de ce terminal, exécuter l'option {\tt install.bat}. Il n'est pas nécessaire ici non plus que le programme d'installation soit exécuté en tant qu'administrateur système (même s'il peut être recommandé de le faire afin de pouvoir utiliser des liens symboliques des fichiers, ce qui permet d'économiser de l'espace disque).
+  
+  \item Sur les systèmes de type Unix, le programme d'installation, situé dans le répertoire d'installation, est exécuté depuis un terminal, soit avec {\tt bash}, soit avec {\tt sh}. Il n'est pas nécessaire d'avoir des privilèges d'administrateur, sauf si le répertoire d'installation se trouve en dehors du répertoire \MyKey{home} de l'utilisateur.
+    
+  \stopitemize
+  
+\stopStepInstall
+
+
+\startStepInstall{Étape 5}
+{\bf Informez le système du chemin vers \ConTeXt}.
+
+  \startitemize
+  
+  \item Dans les systèmes Windows, l'exécution du fichier \MyKey{setpath.bat} se charge d'ajouter le chemin à ceux connus par le système Windows.
+  
+  \item Dans les systèmes GNU Linux, FreeBSD ou Mac OS, aucun {\em script} n'automatise cette tâche. Nous devons donc ajouter manuellement le chemin des binaires \ConTeXt\ dans la variable PATH du système. Ce chemin est indiqué par le script d'installation \MyKey{install.sh}, il suffit de le copier/coller. Voici un exemple de sortie justement~:
+
+\placefigure [force,here,none] [] {}
+{\startDemoC
+If you want to run ConTeXt everywhere, you need to adapt the path, like:
+
+  export PATH=/home/user/context/tex/texmf-linux-64/bin:$PATH
+
+If you run from an editor you can specify the full path to mtxrun:
+
+  /home/user/context/tex/texmf-linux-64/tex/texmf-linux-64/bin/mtxrun --autogenerate --script context --autopdf ...
+
+\stopDemoC}
+
+Nous devrons donc lancer la commande suivante depuis le terminal :
+
+\placefigure [force,here,none] [] {}
+{\startDemoC
+export PATH=/home/user/context/tex/texmf-linux-64/bin:$PATH
+\stopDemoC}
+
+Cette commande inclura \ConTeXt\ dans les chemins connus par le système, seulement tant que le terminal à partir duquel elle a été lancée reste ouvert. Si nous voulons que cela soit fait automatiquement à chaque fois qu'un terminal est ouvert, nous devons inclure cette commande dans le fichier de configuration du programme {\em shell} utilisé par défaut dans le système. Le nom de ce fichier change en fonction du programme {\em shell} utilisé : bash, sh, zsh, ksh, tcsh, csh... Pour Linux il s'agit très souvent de Bash, pour MacOS, depuis la version Catalina (10.15) c'est Zsh (auparavant c'était Bash).
+
+\placefigure [force,here,none] [] {} 
+{\startDemoC  
+# Pour Bash
+echo 'export PATH=...chemin...:$PATH'  >> ~/.bashrc 
+
+# Pour Zsh
+echo 'export PATH=...chemin...:$PATH'  >> ~/.zshenv
+
+# Pour Sh/Ksh
+echo 'export PATH=...chemin...:$PATH'  >> ~/.profile 
+
+# Pour Tcsh/csh
+echo 'set path = ($path ...chemin...)' >> ~/.cshrc
+\stopDemoC}
+
+{\bf Note importante:} En exécutant cette étape, nous désactivons la possibilité d'utiliser d'autres versions de \ConTeXt\ sur notre système, comme celle incorporée dans TeX Live ou \quotation{\ConTeXt\ Standalone}. Si nous voulons rendre les deux versions compatibles, il est préférable d'utiliser la procédure décrite dans \in{section}[sec:alias].
+
+\stopitemize
+
+\stopStepInstall
+
+\stopsubsection
+
+\startsubsection[title=Mettre à jour]
+
+La mise à jour de \ConTeXt\ est super simple~: il suffit de relancer le script d'installation (\MyKey{install.sh} ou \MyKey{install.bat}). Il vérifiera les fichiers installés par rapport à ceux du serveur web et mettra à jour lorsque nécessaire.
+
+En cas d'accident, il se peut que le site web à partir duquel les fichiers sont obtenus ait changé. Nous devons alors télécharger une nouvelle version du zip d'installation et écraser les fichiers existants avec leurs versions à jour.
+
+\stopsubsection
+
+\startsubsection[title=Installation de modules d'extension]
+
+\ConTeXt\ \cap{LMTX} n'intègre pas de procédure d'installation ou de mise à jour des modules d'extension \ConTeXt. Cependant, dans le wiki \ConTeXt, il existe \goto{un script}[url(https://wiki.contextgarden.net/Modules\#ConTeXt_LMTX)] qui vous permet d'installer et de mettre à jour tous les modules en même temps que le reste de l'installation.
+
+Pour ce faire, nous devons copier le texte du script dans un fichier texte situé dans le répertoire principal d'installation (celui contenant {\tt install.sh} ou {\tt install.bat}) et le lancer depuis un terminal. J'ai personnellement vérifié que cela fonctionne sur un système GNU Linux. Je ne suis pas sûr que cela fonctionne sur un système Windows, puisque je n'ai pas de version de ce système d'exploitation pour le vérifier.
+
+\stopsubsection
+
+\startsubsection  [title={Utilisation de plusieurs versions de \ConTeXt\ sur le même système (uniquement pour les systèmes de type Unix)},
+    reference=sec:alias,    
+  ]
+
+L'utilitaire du système d'exploitation appelé {\tt alias} nous permet d'associer différents noms à différentes versions de \ConTeXt\. Ainsi, nous pouvons utiliser, par exemple, la version de \ConTeXt\ incluse dans TeX Live et LMTX ; ou la version {\em Standalone} et LMTX.
+
+Par exemple, si nous stockons les versions de LMTX téléchargées en janvier et août 2020 dans des répertoires différents, nous pourrions écrire les deux instructions suivantes dans \MyKey{.bashrc} (ou le fichier équivalent lu par défaut lors de l'ouverture d'un terminal) :
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoC
+alias lmtxA=”$HOME/context/202001/tex/texmf-linux-64/bin/context”
+alias lmtxB=”$HOME/context/202008/tex/texmf-linux-64/bin/context”
+\stopDemoC}
+
+Ces instructions associeront les noms {\tt lmtxA} avec la version de LMTX installée dans le répertoire \MyKey{context/202001} et {\tt lmtxB} avec la version installée dans \MyKey{context/202008}. Si vous avez peur qu'une mise à jour casse votre flux de travail, n'hésitez pas à conserver une installation de secours de \ConTeXt.
+
+\stopsubsection
+
+\startsubsection [title={Création d'un fichier qui charge en mémoire les variables nécessaires à \ConTeXt\ (uniquement GNU/Linux)}]
+
+Les anciennes versions de \ConTeXt\ (\suite-) contiennent un fichier (\MyKey{tex/setuptex}) qui charge en mémoire toutes les variables nécessaires à son exécution. \ConTeXt\ \cap{LMTX} ne comprend pas de fichier similaire. Nous pouvons cependant facilement le créer nous-mêmes et le stocker, par exemple, sous le nom de \MyKey{setuplmtx} dans le répertoire \MyKey{context}. Les commandes que ce fichier pourrait contenir seraient les suivantes :
+
+\placefigure [force,here,none] [] {}
+{\startDemoC
+echo  "Ajout de $HOME/bin/context/tex/texmf-linux-64/bin à PATH"
+export export PATH=$HOME/bin/context/tex/texmf-linux-64/bin:$PATH
+
+echo "Configuration de $HOME/bin/context/tex en tant que TEXROOT"
+export TEXROOT="$HOME/bin/context/tex"
+
+echo "Déclaration des répertoires où sont stockées les polices de caractère"
+export OSFONTDIR=~/.fonts:/usr/share/fonts:/usr/share/texmf/fonts/opentype/
+
+echo "Creation d'un alias lmt pour exécuter ConTeXt"
+alias lmtx="$HOME/bin/context/tex/texmf-linux-64/bin/context"
+\stopDemoC}
+
+Ainsi, en plus de charger en mémoire les chemins et variables nécessaires à l'exécution de \ConTeXt, nous activerons la commande \MyKey{lmtx} comme synonyme de \MyKey{context}. 
+
+Après avoir créé ce fichier, avant de pouvoir utiliser \MyKey{lmtx}, là où nous avons l'intention de l'utiliser, nous devons exécuter ce qui suit dans le terminal :
+
+\placefigure [force,here,none] [] {}
+{\startDemoC
+source $HOME/bin/context/setuplmtx
+\stopDemoC}
+
+toujour en supposant que \ConTeXt\ \cap{LMTX} est installé dans \MyKey{\$HOME/context}, que nous avons appelé ce fichier
+\MyKey{setuplmtx} et que nous l'avons stocké dans \MyKey{\$HOME/context}.
+
+
+\startSmallPrint
+
+C'est ce que je fais, pour travailler avec \ConTeXt\ \cap{LMTX} de la même manière que je travaillais avec \suite-. Cependant, je n'exclus pas la possibilité qu'avec \ConTeXt\ \cap{LMTX} tout ne soit pas nécessaire, mais le wiki \ConTeXt\ ne dit rien à ce sujet.
+  
+\stopSmallPrint
+
+\stopsubsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX_fra.tex"
+%%% End:

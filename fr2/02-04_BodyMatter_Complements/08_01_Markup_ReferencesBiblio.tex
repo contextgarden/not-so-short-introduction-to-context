@@ -1,0 +1,87 @@
+\startcomponent 02-02-02-07_Markup_ReferencesBiblio
+
+\environment introCTX_env_00
+
+%==============================================================================
+
+\startsection
+  [title=Références bibliographiques,
+  reference=sec:mkp:biblio]
+
+
+\TocChap
+
+
+\tex{usebtxdataset}
+\tex{showbtxdatasetfields}
+\tex{cite}
+\tex{placelistofpublications}
+
+
+% **   Section 7 Bibliographie
+
+% TODO Garulfo added 
+
+Partons ici de l'hypothèse que vous avez un fichier BiBTeX {\tt .bib} qui contient les références bibliographiques. Les principales commandes à connaitre sont~: \tex{usebtxdataset}, \tex{showbtxdatasetfields}, \tex{cite} et \tex{placelistofpublications}. Voyez plutôt~:
+
+\PlaceMacro{usebtxdataset}
+\PlaceMacro{showbtxdatasetfields}
+\PlaceMacro{cite}
+\PlaceMacro{placelistofpublications}
+
+\attachment
+  [Exemple de bibliographie]
+  [file={introCTX_biblio.bib},
+   author={bibliographie exemple}]
+
+\placefigure [force,here,none] [] {}
+{\startDemoHN%
+\usebtxdataset [introCTX_biblio.bib]%
+\showbtxdatasetfields%
+%\showbtxdatasetcompleteness
+
+Une première citation~: \cite[title][Hagen2017metafun]
+de \cite[author][Hagen2017metafun] (\cite[Hagen2017metafun])
+
+Une seconde citation~: \cite[title][ConTeXtExcursion]
+de \cite[author][ConTeXtExcursion] (\cite[ConTeXtExcursion])
+
+\startsubject[title=Biblio]
+\placelistofpublications
+\stopsubject
+\stopDemoHN}
+
+
+\usebtxdataset [introCTX_biblio.bib]%
+
+Une première citation~: \cite[title][Hagen2017metafun]
+de \cite[author][Hagen2017metafun] (\cite[Hagen2017metafun])
+
+Une seconde citation~: \cite[title][ConTeXtExcursion]
+de \cite[author][ConTeXtExcursion] (\cite[ConTeXtExcursion])
+
+
+Cette section méritera d'être complétée. Pour le moment, vous pouvez consulter
+\goto{la présentation de 2014}
+[url(https://meeting.contextgarden.net/2014/talks/2014-09-09-alan-bibtex/From_BibTeX_to_ConTeXt_MKVI.pdf)] 
+de Alan Braslau,
+ainsi que le manuel office
+\goto{Bibliographies the \ConTeXt\ way}
+[url(https://pragma-ade.nl/general/manuals/mkiv-publications.pdf)] qui indique notamment comment personaliser l'affichage des informations.
+
+\page
+
+\startsubsubsubject[title=Biblio]
+\placelistofpublications
+\stopsubsubsubject
+
+
+
+\stopsection
+
+
+%==============================================================================
+
+\stopcomponent
+
+%%% TeX-master: "../introCTX_fra.tex"

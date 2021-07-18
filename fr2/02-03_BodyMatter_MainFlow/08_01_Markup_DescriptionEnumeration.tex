@@ -1,0 +1,133 @@
+\startcomponent 02-02-01-08_Markup_DescriptionEnumeration
+
+\environment introCTX_env_00
+
+%==============================================================================
+
+\startsection
+  [title=Descriptions et énumerations,
+  reference=sec:mkp:descenum]
+
+
+\TocChap
+
+\tex{startdescription}
+
+Les descriptions et les énumérations sont deux constructions qui permettent la composition cohérente de paragraphes ou de groupes de paragraphes qui développent, décrivent ou définissent une phrase ou un mot.
+
+
+\startsubsection
+  [title=Descriptions]
+
+
+
+
+Pour les descriptions, nous faisons la différence entre un {\em titre} et son explication ou développement. Nous pouvons créer une nouvelle description avec :
+
+\PlaceMacro{definedescription}
+
+\setup{definedescription}
+
+où le premier {\em Name} est le nom sous lequel cette nouvelle construction sera connue, le second correspond à un environment de description déjà existant et dont le nouveau va hériter, et le dernier arguments contrôle ce à quoi notre nouvel environment ressemblera. Après la déclaration précédente, nous aurons une nouvelle commande et un environnement portant le nom que nous avons choisi. Ainsi~:
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\definedescription [Concept]
+
+\Concept{Protestation} Il vient une heure où protester ne suffit plus : après la philosophie, il faut l'action.
+
+Ceci est une citation de Victor Hugo. 
+
+\startConcept{Rire}
+Faire rire, c'est faire oublier.
+
+Ceci est une citation de Victor Hugo. 
+\stopConcept
+\stopDemoVW}
+
+Nous pouvons utiliser la commande pour le cas où le texte explicatif du titre ne comporte qu'un seul paragraphe, mais généralement nous utiliserons plutôt l'environnement car il permet de traiter le cas plus général où la description occupe plus d'un paragraphe, contient des flottants etc. Lorsque la commande est utilisée, seul le paragraphe qui la suit immédiatement est celui qui sera considéré comme le texte explicatif du titre. Lorsque l'environnement est utilisé, tout le contenu sera formaté avec l'indentation appropriée pour faire apparaître clairement son lien avec le titre.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\definedescription
+  [Concept]
+  [alternative=left, width=1cm, headstyle=bold]
+\startConcept{Contextualiser}
+Placer quelque chose dans un certain contexte, ou composer un texte avec le système de composition appelé \ConTeXt. La capacité à contextualiser correctement dans toute situation est considérée comme un signe d'intelligence et de bon sens.
+\stopConcept
+\stopDemoVW}
+
+
+\stopsubsection
+
+
+% * Section ===================================================================
+
+\startsubsection
+  [title=Énumérations]
+
+\tex{startenumeration}
+
+
+Les énumérations sont des éléments de texte numérotés et structurés sur plusieurs niveaux. Chaque élément commence par un titre qui se compose, par défaut, du nom de la structure et de son numéro, bien que nous puissions modifier le titre avec l'option {\tt text} (voir le second exemple page suivante). Elles sont assez similaires aux descriptions, mais offrent deux distinctions~:
+
+\startitemize
+
+\item Tous les éléments d'une énumération partagent le même titre.
+
+\item Ils diffèrent donc les uns des autres par leur numérotation.  
+
+\stopitemize
+
+
+Cet environnement peut être très utile, par exemple, pour rédiger des énoncés, des définitions, des formules, des problèmes ou des exercices dans un manuel, en veillant à ce qu'ils soient correctement numérotés et formatés de manière cohérente et automatique.
+
+\PlaceMacro{defineenumeration}
+\setup{defineenumeration}
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\defineenumeration [Exercice]
+  [alternative=top, 
+   before=\blank, 
+   after=\blank, 
+   between=\blank]
+
+\Exercice 
+pas facile celui-ci A.\par
+pas facile celui-ci B.
+
+
+\startExercice
+Commençons par le commencement A.\par
+Commençons par le commencement B.
+
+\startsubExercice
+Celui ci est élémentaire A.\par
+Celui ci est élémentaire B.
+\stopsubExercice
+
+\startsubExercice
+Celui ci est un complément A.\par
+Celui ci est un complément B.
+\stopsubExercice
+
+\subExercice 
+pour finir A.\par
+pour finir B.
+
+\stopExercice
+\stopDemoVW}
+
+Ainsi, dans l'exemple précédent, on constate que \tex{defineenumeration} génère automatiquement une série de nouvelles commandes associées au nom du nouvel environnement (\tex{startExercice}, \tex{startsubExercice}, …), en effet les énumérations peuvent avoir jusqu'à quatre niveaux de profondeur. Tout comme pour les descriptions, nous utiliserons généralement l'environnement \tex{startNom ... \stopNom} qui permet de couvrir plusieurs paragraphes, mais les commandes simples (\tex{Exercice}, \tex{subExercice}, …) peuvent également être utilisées dans le cas de paragraphe seul.
+
+
+\stopsubsection
+
+\stopsection
+
+%==============================================================================
+
+\stopcomponent
+
+%%% TeX-master: "../introCTX_fra.tex"

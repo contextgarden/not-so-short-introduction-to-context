@@ -1,0 +1,272 @@
+\startcomponent 02-03-01_Typeset_Pages
+
+\environment introCTX_env_00
+
+% * Chapitre
+
+\startchapter
+  [
+    reference=sec:headerfooter,
+    title={En-têtes et pieds de page},
+  ]
+
+\TocChap
+
+{\externalfigure[demonstration.pdf][page=6,background=color,backgroundcolor=white]}
+
+% * Section
+
+\startsection
+  [title=Commandes pour établir le contenu des en-têtes et des pieds de page]
+\PlaceMacro{setupheadertexts}\PlaceMacro{setupfootertexts}
+
+
+
+Si nous avons attribué une certaine taille à l'en-tête et au pied de page dans la mise en page, nous pouvons y inclure du texte avec les commandes \tex{setupheadertexts} et \tex{setupfootertexts}. Ces deux commandes sont similaires, la seule différence étant que la première active le contenu de l'en-tête et la seconde celui du pied de page. Elles ont toutes deux de un à cinq arguments.
+
+\startitemize[n]
+
+\item Utilisé avec un seul argument, il contient le texte de l'en-tête ou du pied de page qui sera placé au centre de la page. Par exemple : \tex{setupfootertexts[pagenumber]} écrira le numéro de page au centre du pied de page.
+
+\item Utilisé avec deux arguments, le contenu du premier argument sera placé sur le côté gauche de l'en-tête ou du pied de page, et celui du second argument sur le côté droit. Par exemple, \tex{setupheadertexts[Preface][pagenumber]} composera un en-tête de page dans lequel le mot \quotation{preface} sera écrit sur le côté gauche et le numéro de page sera imprimé sur le côté droit.
+
+\item Si nous utilisons trois arguments, le premier indiquera {\em la zone} dans laquelle les deux autres doivent être imprimés. Par {\em zone} je fais référence aux {\em zones} qui se répartissent horizontalement au travers de la page, mentionnées dans \in{section}[sec:page-elements], autrement dit : edge (bord), margin (marge), text (texte)... Les deux autres arguments contiennent le texte à placer dans le bord, la marge de gauche et le bord, la marge de droite.
+
+\stopitemize
+
+
+L'utiliser avec quatre ou cinq arguments est équivalent à l'utiliser avec deux ou trois arguments, dans les cas où une distinction est faite entre les pages paires et impaires, ce qui se produit, comme nous le savons, lorsque \MyKey{alternative=doublesided} avec \tex{setuppagenumbering} a été défini.  Dans ce cas, deux arguments possibles sont ajoutés pour refléter le contenu des côtés gauche et droit des pages paires.
+
+Une caractéristique importante de ces deux commandes est que, lorsqu'elles sont utilisées avec deux arguments, l'en-tête ou le pied de page central précédent (s'il existait) n'est pas réécrit, ce qui nous permet d'écrire un texte différent dans chaque zone, à condition d'écrire d'abord le texte central (en appelant la commande avec un seul argument) et d'écrire ensuite les textes des deux côtés (en l'appelant à nouveau, maintenant avec deux arguments). Ainsi, par exemple, si nous écrivons les commandes suivantes 
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\setupheadertexts[and]
+\setupheadertexts[Tweedledum][Tweedledee]
+\stopDemoI}
+
+La première commande écrira \quotation{et} au centre de l'en-tête et la seconde écrira \quotation{Tweedledum} à gauche et \quotation{Tweedledee} à droite, laissant la zone centrale intacte, puisqu'il n'a pas été demandé de la réécrire. L'en-tête qui en résulte se présente alors comme suit
+
+\color[maincolor] {Tweedledum\hfill and\hfill Tweedledee}
+
+\startSmallPrint
+
+  L'explication que je viens de donner du fonctionnement de ces commandes est ma conclusion après de nombreux tests. L'explication de ces commandes fournie dans \ConTeXt\ {\em excursion} est basée sur la version avec cinq arguments ; et celle du manuel de référence 2013 est basée sur la version avec trois arguments. Je pense que ma \Conjecture est plus claire.   D'autre part, je n'ai pas vu d'explication sur la raison pour laquelle le deuxième appel de commande n'écrase pas l'appel précédent, mais c'est ainsi que cela fonctionne si nous écrivons d'abord l'élément central dans l'en-tête ou le pied de page, puis ceux de chaque côté. Mais si nous écrivons d'abord les éléments de chaque côté dans l'en-tête ou le pied de page, l'appel ultérieur à la commande d'écriture de l'élément central effacera les en-têtes ou pieds de page précédents. Pourquoi ? Je n'en ai aucune idée. Je pense que ces petits détails introduisent une complication inutile et devraient être clairement expliqués dans la documentation officielle.
+
+\stopSmallPrint
+
+En outre, nous pouvons indiquer toute combinaison de texte et de commandes comme contenu de l'en-tête ou du pied de page. Mais aussi les valeurs suivantes :
+
+\startitemize
+
+\item {\tt\bf date, currentdate} : écrira (l'un ou l'autre) la date du jour.
+
+\item {\tt\bf pagenumber} : écrira le numéro de page.
+
+\item {\tt\bf part, chapter, section...} : écrira le titre correspondant à la partie, au chapitre, à la section... ou à toute autre division structurelle.
+
+\item {\tt\bf partnumber, chapternumber, sectionnumber...} : indique le numéro de la partie, du chapitre, de la section... ou de toute autre division structurelle.
+
+\stopitemize
+
+  {\bf Attention:} Ces noms symboliques ({\tt date, currentdate, pagenumber, chapter, chapternumber}, etc. ) ne sont interprétés comme tels que si le nom symbolique lui-même est le seul contenu de l'argument ; mais si nous ajoutons une autre commande de texte ou de formatage, ces mots seront interprétés littéralement, et ainsi, par exemple, si nous écrivons \tex{setupheadertexts[chapternumber]} nous obtiendrons le numéro du chapitre actuel ; mais si nous écrivons \tex{setupheadertexts[{Chapitre chapternumber}]} nous obtiendrons :   \quotation{Chapitre~chapternumber}. Dans ces cas, lorsque le contenu de la commande n'est pas seulement le mot symbolique, nous devons :
+
+\startitemize
+
+  \item Pour {\tt date, currentdate} et {\tt pagenumber}, utilisez, non pas le mot symbolique, mais la commande du même nom (\tex{date}, \tex{currentdate} ou \PlaceMacro{pagenumber}\tex{pagenumber}).
+
+  \item Pour {\tt part, partnumber, chapter, chapternumber}, etc., utilisez la commande \PlaceMacro{getmarking}\tex{getmarking[info]} qui renvoie le contenu de l'{\em info} demandée. Ainsi, par exemple, \tex{getmarking[chapter]} renvoie le titre du chapitre en cours, tandis que \tex{getmarking[chapternumber]} renvoie son numéro.
+
+  \stopitemize
+
+
+
+% TODO GArulfo on a déjà donné une solution à cela : \setupheader[state=stop]
+% Si l'on souhaite uniquement supprimer le numéro de page d'une page particulière, il faut utiliser la commande \tex{page[blank]} qui créera une page complètement blanche.
+% TODO garulfo : modifié la proposition "pour désactiver l'affichage du numéro de la page sur une page donnée.
+
+% TODO Garulfo : à montrer aussi comment définir par zone frontmatter etc...
+
+
+\stopsection
+
+% ** > > SubSection
+
+\startsection
+  [title=Mise en forme des en-têtes et des pieds de page]
+
+\PlaceMacro{setupheader}\PlaceMacro{setupfooter}
+
+
+Le format spécifique dans lequel le texte de l'en-tête ou du pied de page est affiché peut être indiqué dans les arguments de \tex{setupheadertexts} ou \tex{setupfootertexts} en utilisant les commandes de format correspondantes dans les crochets des différents éléments. 
+
+Cependant, on peut aussi configurer cela globalement avec \tex{setupheader} et \tex{setupfooter} qui offrent les options suivantes~:
+
+
+\startitemize
+
+\item {\tt\bf state} : permet les valeurs suivantes : {\tt start, stop, empty, high, none, normal} ou {\tt nomarking}.
+  
+\item {\tt\bf style, leftstyle, rightstyle} : configuration du style de texte de l'en-tête et du pied de page. {\tt style} affecte toutes les pages, {\tt leftstyle} les pages paires et {\tt rightstyle} les pages impaires.
+  
+\item {\tt\bf color, leftcolor, rightcolor} : couleur de l'en-tête ou du pied de page. Elle peut affecter toutes les pages (option {\tt color}) ou seulement les pages paires ({\tt leftcolor}) ou impaires ({\tt rightcolor}).
+  
+\item {\tt\bf width, leftwidth, rightwidth} : largeur de tous les en-têtes et pieds de page ({\tt width}) ou des en-têtes/pieds de page sur les pages paires ({\tt leftwidth}) ou impaires ({\tt rightwidth}).
+
+\item {\tt\bf before} : commande à exécuter avant d'écrire l'en-tête ou le pied de page.
+
+\item {\tt\bf after} : commande à exécuter après l'écriture de l'en-tête ou du pied de page.
+
+\item {\tt\bf strut} : si renseigné avec \quotation{yes}, \ConTeXt\ va donner une profondeur et une hauteur en lien avec la police utilisée, même si le texte utilisé en question n'utilise que des lettres sans jambage (la patte du p, la partie supérieure d'un h...). En conséquence, un espace de séparation vertical est établi entre le texte de l'en-tête et le bord supérieur de la zone d'en-tête. Si renseigné avec \quotation{no}, la hauteur et la profondeur de ligne collent strictement au texte de l'en-tête et ce dernier vient buter contre le bord supérieur de la zone d'en-tête.
+
+\stopitemize
+
+
+  Pour désactiver (voire modifier) les en-têtes et les pieds de page \quotation{localement}, c'est à dire sur une page particulière, utilisez les commandes 
+\PlaceMacro{\setupheader}\tex{\setupheader[state=empty]} 
+\PlaceMacro{\setupfooter}\tex{\setupfooter[state=empty]} 
+au sein de la page. Ces commandes agissent exclusivement sur la page où elles se trouvent.
+
+% TODO Garulfo : Pour visualiser l'effet de strut~:
+
+% \startbuffer[a7-bufA]
+% \setupbodyfont[8pt]
+% \showframe
+% \definepapersize[fiche][width=12cm,height=12cm]
+% \setuppapersize[fiche]
+% \setuplayout[footerdistance=0.25cm]
+% \setupheader[strut=yes,before={\startcolor[blue]\showboxes},after=\stopcolor]
+% \setupheadertexts[Mon entête]
+% \setupfooter[strut=yes,before={\startcolor[blue]\showboxes},after=\stopcolor]
+% \setupfootertexts[Le pied de page][pagenumber]
+% \starttext
+% We thrive in information--thick worlds because of our marvelous and everyday capacity to select, edit, single out, structure, highlight, group, pair, merge, harmonize, synthesize, focus, organize, condense, reduce, boil down, choose, categorize, catalog, classify, list, abstract, scan, look into, idealize, isolate, discriminate, distinguish, screen, pigeonhole, pick over, sort, integrate, blend, inspect, filter, lump, skip, smooth, chunk, average, approximate, cluster, aggregate, outline, summarize, itemize, review, dip into, flip through, browse, glance into, leaf through, skim, refine, enumerate, glean, synopsize, winnow the wheat from the chaff and separate the sheep from the goats.
+% \stoptext
+% \stopbuffer
+
+% \startbuffer[a7-bufB]
+% \setupbodyfont[8pt]
+% \showframe
+% \definepapersize[fiche][width=12cm,height=12cm]
+% \setuppapersize[fiche]
+% \setuplayout[footerdistance=0.25cm]
+% \setupheader[strut=no,before={\startcolor[blue]\showboxes},after=\stopcolor]
+% \setupheadertexts[Mon entête]
+% \setupfooter[strut=no,before={\startcolor[blue]\showboxes},after=\stopcolor]
+% \setupfootertexts[Le pied de page][pagenumber]
+% \starttext
+% We thrive in information--thick worlds because of our marvelous and everyday capacity to select, edit, single out, structure, highlight, group, pair, merge, harmonize, synthesize, focus, organize, condense, reduce, boil down, choose, categorize, catalog, classify, list, abstract, scan, look into, idealize, isolate, discriminate, distinguish, screen, pigeonhole, pick over, sort, integrate, blend, inspect, filter, lump, skip, smooth, chunk, average, approximate, cluster, aggregate, outline, summarize, itemize, review, dip into, flip through, browse, glance into, leaf through, skim, refine, enumerate, glean, synopsize, winnow the wheat from the chaff and separate the sheep from the goats.
+% \stoptext
+% \stopbuffer
+
+% \placefigure [force,here,none] [] {}{\typesetbuffer[a7-bufA][frame=on,page=1]}
+% \placefigure [force,here,none] [] {}{\typesetbuffer[a7-bufB][frame=on,page=1]}
+
+% \subsection{Text in the upper and lower edges}
+
+% If we recall what I explained in \in{section}[sec:elementospag]
+% regarding page elements, I said that the upper and lower
+% edges of the page ({\tt top} and {\tt bottom} in
+% \ConTeXt terminology) in principle must not have text. However,
+% this is not an absolute rule, since, mainly in electronic
+% documents intended for display on screen, it can be
+% useful to include some textual elements in these areas. This is why
+% \ConTeXt\ allows text content in them
+
+\stopsection
+
+% * Section
+
+\startsection
+  [title=Définir des en-têtes et des pieds de page spécifiques et les relier aux commandes de section]
+\PlaceMacro{definetext}
+
+Jusqu'à présent, le système d'en-tête et de pied de page de \ConTeXt\ nous permet de changer automatiquement le texte de l'en-tête ou du pied de page lorsque nous changeons de chapitre ou de section, ou lorsque nous changeons de page, si nous avons défini des en-têtes ou des pieds de page différents pour les pages paires et impaires. Mais ce qu'il ne permet pas, c'est de différencier la première page (du document, d'un chapitre ou d'une section) du reste des pages. Pour réaliser ce dernier point, nous devons : 
+
+\startitemize [n, packed]
+
+\item Définir un en-tête ou un pied de page spécifique. 
+\item Le lier à la section à laquelle il doit s'applique.
+  
+\stopitemize
+
+La définition d'en-têtes ou de pieds de page spécifiques s'effectue à l'aide de la fonction \tex{definetext}, dont la syntaxe est la suivante :
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\definetext 
+  [Name] [Type]
+  [Content1] [Content2] [Content3]
+  [Content4] [Content5]
+\stopDemoI}
+
+où {\em Name} est le nom attribué à l'en-tête ou au pied de page dont il s'agit ; {\em Type} peut être {\tt header} ou {\tt footer}, selon celui que nous définissons, et les cinq arguments restants contiennent le contenu que nous voulons pour le nouvel en-tête ou pied de page, de manière similaire à la façon dont nous avons vu les fonctions \PlaceMacro{setupheadertexts}\tex{setupheadertexts} et \PlaceMacro{setupfootertexts}\tex{setupfootertexts}. 
+
+Une fois cette opération effectuée, nous devons lier le nouvel en-tête ou le nouveau pied de page à une section particulière avec \tex{setuphead} en utilisant les options {\em header} et {\tt footer} (qui ne sont pas expliquées dans \in{Chapter}[cap:structure]).
+
+
+Ainsi, l'exemple suivant masquera l'en-tête de la première page de chaque chapitre et un numéro de page centré apparaîtra en pied de page :
+
+\placefigure [here,force,none] [] {}
+{\startDemoI
+\setuphead 
+  [chapter]
+  [footer=ChapterFirstPage]
+\stopDemoI}
+
+
+\startbuffer[a7-bufC]
+\setuppapersize[A7,landscape]
+\showframe
+\setupbodyfont[8pt]
+\starttext
+\startchapter[title=Test]
+We thrive in information--thick worlds because of our marvelous and everyday capacity to select, edit, single out, structure, highlight, group, pair, merge, harmonize, synthesize, focus, organize, condense, reduce, boil down, choose, categorize, catalog, classify, list, abstract, scan, look into, idealize, isolate, discriminate, distinguish, screen, pigeonhole, pick over, sort, integrate, blend, inspect, filter, lump, skip, smooth, chunk, average, approximate, cluster, aggregate, outline, summarize, itemize, review, dip into, flip through, browse, glance into, leaf through, skim, refine, enumerate, glean, synopsize, winnow the wheat from the chaff and separate the sheep from the goats.
+\stopchapter
+\stopbuffer
+
+\savebuffer[list=a7-bufD,file=ex_definetext_sans.tex,prefix=no]
+\placefigure [force,here,none] [] {}{\typesetbuffer[a7-bufC][frame=on,page=1,background=color,backgroundcolor=white]
+\attachment
+  [file={ex_definetext_sans.tex},
+   title={exemple definetext sans}]}
+
+
+
+\startbuffer[a7-bufD]
+\setuppapersize[A7,landscape]
+\showframe
+\setupbodyfont[8pt]
+\definetext[ChapterFirstPage] [footer] [pagenumber]
+\setuphead 
+  [chapter]
+  [header=high, footer=ChapterFirstPage]
+\starttext
+\startchapter[title=Test]
+We thrive in information--thick worlds because of our marvelous and everyday capacity to select, edit, single out, structure, highlight, group, pair, merge, harmonize, synthesize, focus, organize, condense, reduce, boil down, choose, categorize, catalog, classify, list, abstract, scan, look into, idealize, isolate, discriminate, distinguish, screen, pigeonhole, pick over, sort, integrate, blend, inspect, filter, lump, skip, smooth, chunk, average, approximate, cluster, aggregate, outline, summarize, itemize, review, dip into, flip through, browse, glance into, leaf through, skim, refine, enumerate, glean, synopsize, winnow the wheat from the chaff and separate the sheep from the goats.
+\stopchapter
+\stoptext
+\stopbuffer
+
+\savebuffer[list=a7-bufD,file=ex_definetext_avec.tex,prefix=no]
+\placefigure [here,force,none] [] {}{\typesetbuffer[a7-bufD][frame=on,page=1,background=color,backgroundcolor=white]
+\attachment
+  [file={ex_definetext_avec.tex},
+   title={exemple definetext avec}]}
+
+\stopsection
+
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX_fra.tex"
+%%% End:
+%%% vim:set filetype=context tw=72 : %%%

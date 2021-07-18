@@ -1,0 +1,24 @@
+
+%------------------------------------------------------------------------------
+% INTERACTIVITY
+
+\setupinteraction
+  [
+    state=start,                                          % enable hyperlinks
+    color=ctr1color,                        % choose the color of hyperlinks
+    contrastcolor=ctr1color,
+    style=,
+  ]
+
+\setupurl [color=urlcolor, style=\tt]
+
+\placebookmarks 
+ [part,chapter,section,subsection,subsubsection]    % make bookmarks visible when opening document
+ [chapter]                       % select unfolded levels when opening document
+
+\setupinteractionscreen
+  [option=bookmark,
+  nomenubar]
+
+\enabledirectives[references.bookmarks.preroll]
+\enabledirectives[interaction.identity.preroll]

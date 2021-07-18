@@ -1,0 +1,395 @@
+\startcomponent 02-03-04_Typeset_Colors
+
+\environment introCTX_env_00
+
+\startchapter
+  [title=Couleurs,
+  reference=sec:typset:colors]
+
+\TocChap
+
+{\externalfigure[demonstration.pdf][page=9,background=color,backgroundcolor=white]}
+
+\ConTeXt\ fournit des commandes pour changer la couleur d'un document entier, de certains de ses éléments ou de certaines parties du texte. Il fournit également des commandes permettant de mettre en mémoire des centaines de couleurs prédéfinies (\in{section}[sec:predefined-colours]) et de voir quels sont leurs composants.
+
+
+% ** Subsection écrire une partie en couleur 
+
+\startsection
+  [title=Utiliser des couleurs pour des éléments textuels]
+
+La plupart des commandes configurables de \ConTeXt\ comportent une option appelée \MyKey{color} qui nous permet d'indiquer la couleur dans laquelle le texte affecté par cette commande doit être écrit. Ainsi, par exemple, pour indiquer que les titres de chapitre sont écrits en bleu, il suffit d'écrire~:
+
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+  \setuphead
+    [chapter]
+    [color=blue]
+\stopDemoI}
+
+Cette méthode permet de colorer les titres, les en-têtes, les notes de bas de page, les notes de marge, les barres et les lignes, les tableaux, les titres de tableaux ou d'images, etc. L'avantage d'utiliser cette méthode est que le résultat final sera cohérent (tous les textes qui remplissent la même fonction seront écrits avec la même couleur) et plus facile à modifier globalement. 
+
+\PlaceMacro{color}
+
+On peut également colorer directement une portion ou un fragment de texte avec la commande \tex{color}, bien que, pour éviter une utilisation trop variée des couleurs, peu agréable du point de vue typographique, ou une utilisation incohérente, il est généralement recommandé d'éviter la coloration directe et d'utiliser ce que l'on pourrait appeler la {\em coloration sémantique}, c'est-à-dire qu'au lieu d'écrire par exemple~:
+
+\PlaceMacro{definehighlight}
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\color[red]{Very important text}
+\stopDemoVW}
+
+nous utilisons \tex{definehighlight} comme par exemple à la \in{section}[sec:mkp:emphasew]
+
+
+\stopsection
+
+% ** Subsection fond et devant en couleur 
+
+\startsection
+  [title=Utiliser des couleurs en arrière-plan et pour le texte en général]
+\PlaceMacro{setupbackgrounds}\PlaceMacro{setupcolors}
+
+Si nous voulons changer la couleur de l'ensemble du document, selon que nous voulons modifier la couleur de l'arrière-plan ou celle du premier plan (texte), nous utiliserons \tex{setupbackgrounds} ou \tex{setupcolors}. Ainsi, par exemple
+
+
+\startbuffer[a7-bufE]
+\setuppapersize[A7,landscape]
+\showframe
+\setupbodyfont[8pt]
+\starttext
+
+\setupbackgrounds [page]      
+  [background=color, backgroundcolor=middlecyan]
+\setupbackgrounds [footer]              
+  [background=color, backgroundcolor=middlemagenta]
+\setupbackgrounds [footer] [leftmargin] 
+  [background=color, backgroundcolor=middlered]
+\setupbackgrounds [text]                
+  [background=color, backgroundcolor=lightgray]
+\setupbackgrounds [text]   [rightmargin] 
+  [background=color, backgroundcolor=middleyellow]
+
+\starttyping[option=tex]
+\setupbackgrounds [page]                  
+  [background=color, backgroundcolor=middlecyan]
+
+\setupbackgrounds [footer]              
+  [background=color, backgroundcolor=middlemagenta]
+
+\setupbackgrounds [footer] [leftmargin] 
+  [background=color, backgroundcolor=middlered]
+
+\setupbackgrounds [text]                
+  [background=color, backgroundcolor=lightgray]
+
+\setupbackgrounds [text]   [rightmargin] 
+  [background=color, backgroundcolor=middleyellow]
+\stoptyping
+
+\stoptext
+\stopbuffer
+
+
+\savebuffer[list=a7-bufE,file=ex_definetext_avec.tex,prefix=no]
+\placefigure [here,force,none] [] {}{\typesetbuffer[a7-bufE][frame=on,page=1]
+\attachment
+  [file={ex_setupbackgrounds.tex},
+   title={exemple setupbackgrounds}]}
+
+Cette commande définit la couleur de fond des pages comme étant le cyan, et vous voyez comment il est possible d'affecter une couleur à chaque zone de la page vue à la figure \in{section}[img:page layout]  \at{page}[img:page layout]. Comme valeur pour \MyKey{backgroundcolor}, nous pouvons utiliser le nom de l'une des couleurs prédéfinies  (\in{section}[sec:predefined-colours]).
+
+Pour modifier globalement la couleur d'avant-plan dans tout le document (à partir de l'endroit où la commande est insérée), utilisez \tex{setupcolors}, où l'option \MyKey{textcolor} contrôle la couleur du texte. Par exemple~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\setupcolors[textcolor=middlecyan]
+Texte coloré
+\stopDemoVW}
+
+
+\stopsection
+
+% ** Subsection commandes pour mettre en couleur des textes particuliers
+
+
+\startsection
+  [title=Utiliser des couleurs pour des portions de texte]
+\PlaceMacro{color}\PlaceMacro{colored}
+
+% TODO garulfo étonné, peut être fusionner avec la subsection 1
+
+Comme nous l'avons vu précédemement La commande générale pour colorier de petites portions de texte est la suivante~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\color[ColourName]{Text to colour}
+\stopDemoI}
+
+Pour les grandes portions de texte, il est préférable d'utiliser l'environnement \MyKey{color} avec \tex{startcolor} et \tex{stopcolor}.
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\startcolor[ColourName] ... \stopcolor
+\stopDemoI}
+
+Ces deux commandes utiliset des couleurs prédéfinies que l'on désigne par leur nom (\in{section}[sec:predefined-colours]). Si nous voulons définir la couleur à la volée, nous pouvons utiliser la commande \tex{colored}. Par exemple :
+
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+Trois chats 
+\colored[r=0.1, g=0.8, b=0.8]{colorés}.    
+\stopDemoVN}
+
+
+
+\stopsection
+
+% ** Subsection les couleurs prédéfinies
+
+\startsection
+  [
+    reference=sec:predefined-colours,
+    title=Couleurs prédéfinies,
+  ]
+  % This information comes from the reference manual. But I
+  % suspect there are considerably more predefined colours. For
+  % example the "maincolor" used in this document is based on
+  % the orange not defined in the list of predefined colours.
+
+\ConTeXt\ charge les couleurs prédéfinies les plus courantes listées dans le  \in{tableau}[tbl:predefined colours].\footnote{Cette liste se trouve dans le manuel de référence et le wiki \ConTeXt\ mais je suis presque sûr qu'il s'agit d'une liste incomplète puisque dans ce document, par exemple, sans avoir chargé de couleur supplémentaire, nous utilisons \quotation{orange} -- qui n'est pas dans le \in{tableau}[tbl:predefined colours]-- pour les titres de section.}
+
+{\switchtobodyfont[small]
+\placetable
+  [here]
+  [tbl:predefined colours]
+  {\ConTeXt's predefined colours}
+{\starttabulate[|l|l|l|l|]
+\HL
+\NC{\bf Nom}
+\NC{\bf Tonalité claire}
+\NC{\bf Tonalité moyenne}
+\NC{\bf Tonalité foncée}
+\NR
+\HL
+\NC black
+\NR
+\NC white
+\NR
+\NC gray
+\NC lightgray
+\NC middlegray
+\NC darkgray
+\NR
+\NC red
+\NC lightred
+\NC middlered
+\NC darkred
+\NR
+\NC green
+\NC lightgreen
+\NC middlegreen
+\NC darkgreen
+\NR
+\NC blue
+\NC lightblue
+\NC middleblue
+\NC darkblue
+\NR
+\NC cyan
+\NC\NC middlecyan
+\NC darkcyan
+\NR
+\NC magenta
+\NC\NC middlemagenta
+\NC darmagenta
+\NR
+\NC yellow
+\NC\NC middleyellow
+\NC darkyellow
+\NR
+\HL
+\stoptabulate
+}}
+
+Il existe d'autres collections de couleurs qui ne sont pas chargées par défaut mais qui peuvent être chargées avec la commande \PlaceMacro{usecolors}  \tex{usecolors[CollectionName]} où \MyKey{CollectionName} peut être~:
+
+\startitemize[packed]
+\item \MyKey{crayola}, 235 couleurs imitant les nuances des marqueurs.
+\item \MyKey{dem},      91 couleurs.
+\item \MyKey{ema},     540 couleurs basées sur celles utilisées par Emacs.
+\item \MyKey{rainbow},  91 couleurs à utiliser dans les formules de mathématiques.
+\item \MyKey{ral},     213 couleurs provenant du {\em Deutsches
+  Institut für Gütesicherung und Kennzeichnung} (Institut allemand pour l'assurance qualité et l'étiquetage).
+\item \MyKey{rgb}, 223 couleurs.
+\item \MyKey{solarized}, 16 couleurs basées sur le schéma solarized.
+\item \MyKey{svg},      147 couleurs.
+\item \MyKey{x11},      450 couleurs standard pour X11.
+\item \MyKey{xwi},      124 couleurs.
+\stopitemize
+
+\startSmallPrint
+
+Les fichiers de définition des couleurs sont inclus dans le répertoire \MyKey{context/base/mkiv} de la distribution et son nom répond au schéma \MyKey{colo-imp-NOMBRE.mkiv}. Les informations que je viens de fournir sur les différentes collections de couleurs prédéfinies sont basées sur ma distribution particulière. Les collections spécifiques, ou le nombre de couleurs définies dans celles-ci, pourraient changer dans les versions futures.
+
+\stopSmallPrint
+
+Pour voir quelles couleurs contiennent chacune de ces collections, nous pouvons utiliser la commande \PlaceMacro{showcolor} \tex{showcolor[CollectionName]} décrite dans ce qui suit \in{section}[sec:visucolor]. 
+
+Pour utiliser certaines de ces couleurs, il faut d'abord les charger en mémoire avec la commande (\tex{usecolors[CollectionName]}), puis indiquer le nom de la couleur aux commandes \tex{color} ou \PlaceMacro{startcolor} \tex{startcolor}. Par exemple, la séquence suivant~: 
+
+
+% \page[preference] % TODO Garulfo on peut enlever ?
+
+\placefigure [force,here,none] [] {}{
+\startDemoHN%
+\usecolors[xwi]
+\color[darkgoldenrod]{Tweedledum and Tweedledee}
+\stopDemoHN}
+
+
+\stopsection
+
+% ** Subsection visualiser les couleurs dispos
+
+\startsection
+  [title=Visualier les couleurs disponibles,
+   reference=sec:visucolor]
+\PlaceMacro{showcolor}
+
+La commande \tex{showcolor} affiche une liste de couleurs dans laquelle vous pouvez voir l'apparence de la couleur, son apparence lorsque la couleur est passée en échelle de gris (impression noir et blanc par exemple), les composantes rouge, verte et bleue de la couleur, ainsi que le nom par lequel \ConTeXt\ la connaît. Utilisée sans argument, \tex{showcolor} affichera les couleurs utilisées dans le document actuel. Mais comme argument, nous pouvons indiquer l'une des collections prédéfinies de couleurs qui ont été discutées dans \in{section}[sec:predefined-colours], et ainsi, par exemple, \tex{showcolor[solarized]} nous montrera les 16 couleurs de cette collection~:
+
+
+\placefigure [force,here,none] [] {}{
+\startDemoHN
+\usecolors[solarized]
+\showcolor[solarized]
+\stopDemoHN}
+
+
+Si nous voulons voir les composantes rgb d'une couleur particulière, nous pouvons utiliser \PlaceMacro{showcolorcomponents} \tex{showcolorcomponents[ColourName]}. Ceci est utile si nous essayons de définir une couleur spécifique, pour voir la composition d'une couleur qui lui est proche. Par exemple, \tex{showcolorcomponents[darkgoldenrod]} nous montrera :
+
+\placefigure [force,here,none] [] {}{
+\startDemoHN
+\usecolors[xwi]
+\showcolorcomponents[darkgoldenrod]
+\stopDemoHN}
+
+
+
+
+\stopsection
+
+% ** Subsection définir ses propres couleurs 
+
+\startsection
+  [title=Definir ses propres couleurs]
+\PlaceMacro{definecolor}
+
+\tex{definecolor} nous permet soit de cloner une couleur existante, soit de définir une nouvelle couleur. Cloner une couleur existante est aussi simple que de lui donner un autre nom. Pour ce faire, vous devez écrire :
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\definecolor[NouvelleCouleur][Anciennecouleur]
+\stopDemoI}
+
+Ainsi, "{\em NouvelleCouleur}" sera exactement de la même couleur que "{\em Anciennecouleur}".
+
+Mais la principale utilisation de \tex{definecolor} est la création de nouvelles couleurs. Pour ce faire, la commande doit être utilisée de la manière suivante~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\definecolor[ColourName][Définition]
+\stopDemoI}
+
+où {\em Définition} peut se faire en appliquant jusqu'à six schémas de génération de couleurs différents :
+
+
+\startitemize[n]
+
+\item {\bf Couleurs RVB} : La définition des couleurs RVB est l'une des plus répandues ; elle repose sur l'idée qu'il est possible de représenter une couleur en mélangeant, par addition, les trois couleurs primaires : rouge (\quote{r} pour {\em rouge}), vert (\quote{g} pour {\em vert}) et bleu (\quote{b} pour {\em bleu}). Chacun de ces composants est indiqué par un nombre décimal compris entre 0 et 1.
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\definecolor [CouleurA]
+  [r=0.720, g=0.530, b=0.040]
+\color[CouleurA]{Texte Couleur A.}
+\stopDemoVW}
+
+\item {\bf Couleurs hexadécimales} : Cette façon de représenter les couleurs est également basée sur le schéma RVB, mais les composantes rouge, verte et bleue sont indiquées sous la forme de trois nombres hexadécimaux, le premier représentant la valeur du rouge, le deuxième la valeur du vert et le troisième la valeur du bleu. Par exemple~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\definecolor [CouleurB]
+  [x=B8860B]
+\color[CouleurB]{Texte Couleur B.}
+\stopDemoVW}
+
+
+\item {\bf Couleurs CMYK} : Ce modèle de génération des couleurs est ce qu'on appelle un \quotation{modèle soustractif} et repose sur le mélange de pigments des couleurs suivantes : cyan (\quote{c}), magenta (\quote{m}), jaune (\quote{y}, de {\em yellow}) et noir (\quote{k}, de {\em key} (key au sens valeur)). Chacun de ces composants est indiqué par un nombre décimal compris entre 0 et 1~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\definecolor [CouleurC]
+  [c=0.00, m=0.20, y=0.68, k=0.28]
+\color[CouleurC]{Texte Couleur C.}
+\stopDemoVW}
+
+
+\item {\bf Couleurs HSL/HSV} : Ce modèle de couleur est basé sur la mesure de la teinte (\quote{h}, de {\em hue}), de la saturation (\quote{s}) et de la luminescence (\quote{l} ou parfois \quote{v}, de {\em value}). La teinte correspond à un nombre compris entre 0 et 360 ; la saturation et la luminescence doivent être un nombre décimal compris entre 0 et 1. Par exemple~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\definecolor [CouleurD] [h=43.00, s=0.89, v=0.38]
+\color[CouleurD]{Texte Couleur D.}
+\stopDemoVW}
+
+\item {\bf Couleurs HWB} : Le modèle HWB est une norme suggérée pour CSS4 qui mesure la teinte (\quote{h}, de {\em hue}), et le niveau de blanc (\quote{w}, de {\em whiteness}) et de noir (\quote{b}, de {\em blackness}). La teinte correspond à un nombre compris entre 0 et 360, tandis que la blancheur et la noirceur sont représentées par un nombre décimal compris entre 0 et 1.
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW%
+\definecolor [CouleurE] [h=43.00, w=0.04, b=0.28]
+\color[CouleurE]{Texte Couleur E.}
+\stopDemoVW}
+
+\item {\bf Couleur échelle de gris} : basé sur un composant appelé (\quote{s}, de {\em scale}) qui mesure la quantité de gris. Il doit s'agir d'un nombre compris entre 0 et 1. Par exemple :
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW%
+\definecolor [CouleurF]  [s=0.65] %
+\color[CouleurF]{Texte Couleur F.}
+\stopDemoVW}
+
+\stopitemize
+
+Il est également possible de définir une nouvelle couleur à partir d'une autre couleur. Par exemple, la couleur dans laquelle les titres sont écrits dans cette introduction est définie comme suit
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW%
+\definecolor[CouleurG][0.8(orange)] %
+\definecolor[CouleurH][0.6(orange)] %
+\definecolor[CouleurI][0.4(orange)] %
+\definecolor[CouleurJ][0.2(orange)] %
+\color[CouleurG]{Texte Couleur G.} \\
+\color[CouleurH]{Texte Couleur H.} \\
+\color[CouleurI]{Texte Couleur I.} \\
+\color[CouleurJ]{Texte Couleur J.}
+\stopDemoVW}
+
+\stopsection
+
+
+\stopchapter
+
+\stopcomponent
+
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX_fra.tex"
+%%% End:
+%%% vim:set filetype=context tw=72 : %%%

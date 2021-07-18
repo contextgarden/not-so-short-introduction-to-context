@@ -1,0 +1,31 @@
+%------------------------------------------------------------------------------
+%                                      Notes de bas de page ou notes marginales
+
+\setupnote[footnote][location=none]
+
+
+\define\PlaceFootnote{%
+\margintext{%
+\placelocalnotes
+  [footnote]
+  [before={\vskip -1\openlineheight},
+   after={\blank[small]}]}}
+
+\setupnote[footnote]
+  [
+  location=none,
+  bodyfont=,
+  textcolor=ctr1color,
+  next=\PlaceFootnote,
+  ]
+
+\setupnotation[footnote]
+  [
+  headcolor=ctr1color,
+  alternative=serried,
+  align=flushinner,
+  bodyfont=\tf,
+  headstyle=\tfx,
+  ]
+  
+  

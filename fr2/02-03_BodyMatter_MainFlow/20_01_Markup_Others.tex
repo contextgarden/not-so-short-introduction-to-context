@@ -1,0 +1,271 @@
+\startcomponent 02-02-01-16_Markup_Maths
+
+\environment introCTX_env_00
+
+%==============================================================================
+
+\startsection
+  [title=Autres éléments spécialisés,
+  reference=sec:mkp:others]
+
+\TocChap
+
+\tex{startlines}
+\tex{starttyping}
+\tex{type}
+\tex{startlinenumbering}
+\tex{startchemical}
+\tex{startbuffer}
+\tex{starthiding} 
+\tex{startmode}
+
+% ** Subsection startlines ----------------------------------------------------
+
+\startsubsection
+  [title=Les poèmes,
+  reference=sec:startlines,]
+
+\tex{startlines}
+
+Comme nous le savons déjà (voir \in{section}[sec:linebreaks]), par défaut, \ConTeXt\ ignore les sauts de ligne du fichier source qu'il considère comme de simples espaces vides, sauf s'il y a deux ou plusieurs sauts de ligne consécutifs, auquel cas un saut de paragraphe sera inséré. Cependant, dans certaines situations, il peut être intéressant de respecter les sauts de ligne du fichier source original tels qu'ils ont été placés, par exemple, lors de l'écriture de poèmes. Pour cela, \ConTeXt\ nous offre l'environnement \MyKey{lines} dont le format est :
+
+\PlaceMacro{startlines}
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\startlines [Options] ... \stoplines
+\stopDemoI}
+
+où les options peuvent être l'une des suivantes, entre autres~:
+
+\startitemize
+
+\item {\tt\bf space} : Lorsque cette option est définie avec la valeur \MyKey{on}, en plus de respecter les sauts de ligne du fichier source, l'environnement respectera également les espaces vides du fichier source, en ignorant temporairement la règle d'absorption.
+
+\item {\tt\bf before} : Texte ou commande à exécuter avant d'entrer dans l'environnement.
+
+\item {\tt\bf after} : Texte ou commande à exécuter après avoir quitté l'environnement.
+
+\item {\tt\bf inbetween} : Texte ou commande à exécuter lors de l'entrée dans l'environnement.
+
+\item {\tt\bf indenting} : Valeur indiquant si les paragraphes doivent être indentés ou non dans l'environnement (voir \in{section}[sec:indentation]).
+
+\item {\tt\bf align} : Alignement des lignes dans l'environnement (voir \in{section}[sec:alignment]).
+
+\item {\tt\bf style} : Commande de style à appliquer dans l'environnement.
+
+\item {\tt\bf color} : Couleur à appliquer dans l'environnement.
+
+\stopitemize
+
+Ainsi par exemple~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+\startlines
+One-one was a race horse.
+Two-two was one too.
+One-one won one race.
+Two-two won one too.
+\stoplines
+\stopDemoVN}
+
+Nous pouvons également modifier le fonctionnement par défaut de l'environnement avec \PlaceMacro{setuplines} \tex{setuplines} et, comme pour de nombreuses commandes de \ConTeXt, il est également possible d'attribuer un nom à une configuration particulière de cet environnement. Nous le faisons avec la commande \PlaceMacro{definelines} \tex{definelines} dont la syntaxe est :
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\definelines [Nom] [Configuration]
+\stopDemoI}
+
+où, en tant que configuration, nous pouvons inclure les mêmes options que celles qui ont été expliquées de manière générale pour l'environnement. Une fois que nous avons défini notre environnement de ligne personnalisé, nous devons écrire pour l'insérer :
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\startlines[Nom] ... \stoplines
+\stopDemoI}
+
+
+
+\stopsubsection
+
+% ** Subsection starttyping type ----------------------------------------------
+
+\startsubsection
+  [title=Les verbatims et codes]
+
+\tex{starttyping}
+\tex{type}
+
+\stopsubsection
+
+% ** Subsection startlinenumbering --------------------------------------------
+
+\startsubsection
+  [title=Lignes numérotées,
+  reference=sec:linenumbering,]
+
+\tex{startlinenumbering}
+
+
+Dans certains types de textes, il est courant d'établir une certaine forme de numérotation des lignes, par exemple dans les textes sur la programmation informatique où il est relativement courant que les fragments de code proposés à titre d'exemple aient leurs lignes numérotées, ou encore dans les poèmes, les éditions critiques, etc. Pour toutes ces situations, \ConTeXt\ offre l'environnement {\tt linumbering} dont le format est le suivant
+
+\PlaceMacro{startlinenumbering} 
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\startlinenumbering[Options] ... \stoplinenumbering
+\stopDemoI}
+
+Les options disponibles sont les suivantes~:
+
+\startitemize
+
+\item {\tt\bf continue} : Dans le cas où il y a plusieurs parties de notre document nécessitant une numérotation des lignes, cette option fait en sorte que la numérotation recommence pour chaque partie (\MyKey{continue=no}, la valeur par défaut). En revanche, si la numérotation des lignes doit se poursuivre là où la partie précédente s'est arrêtée, nous choisissons \MyKey{continue=yes}.
+
+\item {\tt\bf start} : Indique le numéro de la première ligne dans les cas où nous ne voulons pas qu'il soit \quote{1}, ou qu'il corresponde à l'énumération précédente.
+
+\item {\tt\bf step} : Toutes les lignes incluses dans l'environnement seront numérotées, mais, au moyen de cette option, nous pouvons indiquer que le numéro n'est imprimé qu'à certains intervalles. Dans le cas des poèmes, par exemple, il est courant que le numéro n'apparaisse que par multiples de 5 (vers 5, 10, 15...).
+
+\stopitemize
+
+Toutes ces options peuvent être indiquées, en général pour tous les environnements {\em linenumbering} de notre document, avec \PlaceMacro{setuplinenumbering} \tex{setuplinenumbering}. Cette commande nous permet également de configurer d'autres aspects de la numérotation des lignes~:
+
+\startitemize
+
+\item {\tt\bf conversion} : Type de numérotation des lignes. Il peut s'agir de l'un de ceux expliqués sur \at{page}[Num:conversion] concernant la numérotation des chapitres et des sections.
+
+\item {\tt\bf style} : Commande (ou commandes) déterminant le style qu'aura la numérotation des lignes (police, taille, variante...).
+
+\item {\tt\bf color} : Couleur dans laquelle le numéro de ligne sera imprimé.
+
+\item {\tt\bf location} : localisation du numéro de ligne (lieu où il sera placé). Il peut s'agir de l'un des éléments suivants : text, begin, end, default, left, right, inner, outer, inleft, inright, margin, inmargin.
+
+\item {\tt\bf distance} : Distance entre le numéro de la ligne et la ligne elle-même.
+
+\item {\tt\bf align} : Alignement du numéro. Peut être : inner, outer, flushleft, flushright, left, right, middle ou auto.
+
+\item {\tt\bf command} : Commande à laquelle le numéro de ligne sera transmis en tant que paramètre avant l'impression.
+
+\item {\tt\bf width} : Largeur réservée à l'impression du numéro de ligne.
+
+\item {\tt\bf left, right, margin} :
+
+\stopitemize
+
+Nous pouvons également créer différentes configurations personnalisées de numérotation des lignes avec \PlaceMacro{definelinenumbering} \tex{definelinenumbering} de sorte que la configuration soit associée à un nom~:
+
+\PlaceMacro{startlinenumbering} 
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\definelinenumbering [Name] [Configuration]
+\stopDemoI}
+
+Une fois qu'une configuration spécifique a été définie et associée à un nom, nous pouvons l'utiliser avec la commande
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\startlinenumbering [Name] ... \stoplinenumbering
+\stopDemoI}
+
+\stopsubsection
+
+
+\stopsubsection
+
+% ** Subsection startchemical -------------------------------------------------
+
+\startsubsection
+  [title=La chimie]
+
+\tex{startchemical}\PlaceMacro{startchemical}
+  Cet environnement nous permet de placer des formules chimiques à l'intérieur. Si \TeX\ se distingue, entre autres, par sa capacité à composer correctement des textes contenant des formules mathématiques, \ConTeXt\ a cherché dès le départ à étendre cette capacité aux formules chimiques, et dispose de cet environnement où sont activées les commandes et les structures permettant d'écrire des formules chimiques.
+
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+\usemodule[chemic]
+\startchemical
+\chemical[SIX,B,R6,RZ6][\SL{COOH}]
+\stopchemical
+\stopDemoVN}
+
+\stopsubsection
+
+% ** Subsection startbuffer starthiding startmode -----------------------------
+
+\startsubsection
+  [
+    reference=sec:buffer,
+    title={Buffers, modes et \tex{starthiding}},
+  ]
+
+Il existe encore de nombreux environnements dans \ConTeXt\ que je n'ai même pas mentionnés, ou seulement de manière très approximative. À titre d'exemple :
+
+\startitemize
+  
+  
+\item {\tt\bf buffer}\PlaceMacro{startbuffer}\PlaceMacro{getbuffer}\PlaceMacro{typebuffer} {\em Tampons (Buffers)} sont des fragments de texte stockés en mémoire pour une réutilisation ultérieure. Un {\em tampon} est défini quelque part dans le document avec \cmd{startbuffer[BufferName] ... \backslash stopbuffer} et peut être récupéré aussi souvent que souhaité à un autre endroit du document avec \tex{getbuffer[BufferName]}. La commande \tex{typebuffer[BufferName]} affiche le texte du buffer en verbatim (sans traitement par \ConTeXt).
+
+\placefigure [force,here,none] [] {}
+{\startDemoVN
+\startbuffer[visite]
+Coucou \ConTeXt.
+\stopbuffer
+\getbuffer[visite]
+\getbuffer[visite]
+\stopDemoVN}
+
+
+\item {\tt\bf hiding}\PlaceMacro{starthiding}
+Le texte stocké dans cet environnement ne sera pas compilé et n'apparaîtra donc pas dans le document final. Ceci est utile pour désactiver temporairement la compilation de certains fragments du fichier source. On obtient la même chose en marquant une ou plusieurs lignes comme commentaire. Mais lorsque le fragment que l'on veut désactiver est relativement long, il est plus efficace que de marquer des dizaines ou des centaines de lignes du fichier source comme commentaire d'insérer la commande \tex{starthiding} au début du fragment, et \tex{stophiding} à la fin. 
+
+
+\item {\tt\bf mode}\PlaceMacro{startmode}
+Cet environnement est destiné à inclure dans le fichier source des fragments qui ne seront compilés que si le mode approprié est actif. L'utilisation des {\em modes} n'est pas le sujet de cette introduction, mais c'est un outil très intéressant si l'on veut pouvoir générer plusieurs versions avec des formats différents (une version écran et une papier, ou bien un version anglaise et une française), à partir d'un seul fichier source. Voici un exemple~:
+
+\placefigure [force,here,none] [] {}
+{\startDemoI
+\startmode[palatino]
+   \setupbodyfont[palatino,12pt]
+\stopmode
+
+\startmode[times]
+   \setupbodyfont[postscript,12pt]
+\stopmode
+
+\starttext
+\input knuth
+\stoptext
+\stopDemoI}
+
+\placefigure [force,here,none] [] {}
+{\startDemoC
+context --mode=palatino filename
+context --mode=times    filename
+\stopDemoC}
+
+ Un environnement complémentaire à celui-ci est \PlaceMacro{startnotmode}\tex{startnotmode}.
+
+\stopitemize
+
+Pour en savoir plus sur l'un de ces environnements (ou d'autres que je n'ai pas mentionnés), je vous suggère, en plus du \goto{wiki}[url(wiki)], de suivre les étapes suivantes~:
+
+
+\startitemize[n]
+
+\item Cherchez des informations sur l'environnement dans le manuel de référence \ConTeXt\. Ce manuel ne mentionne pas tous les environnements, mais il parle de chaque élément de la liste ci-dessus.
+
+\item Rédigez un document de test dans lequel l'environnement est utilisé.
+
+\item Consultez la liste officielle des commandes de \ConTeXt (voir \in{section}[sec:qrc-setup-fr]) pour connaître les options de configuration de l'environnement en question, puis testez-les pour voir exactement ce qu'elles font.
+  
+  
+\stopitemize
+\stopsubsection
+
+
+\stopsection
+
+%==============================================================================
+
+\stopcomponent
+
+%%% TeX-master: "../introCTX_fra.tex"

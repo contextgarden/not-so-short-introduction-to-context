@@ -1,0 +1,85 @@
+\startcomponent 02-02-01-14_Markup_Macrostructure
+
+\environment introCTX_env_00
+
+%==============================================================================
+
+\startsection
+  [title=Macro-structure du document,
+  reference=sec:macrostructure,]
+
+
+\TocChap
+
+
+\tex{startbodymatter}
+\tex{startfrontmatter}
+\tex{startappendices}
+\tex{startbackmatter}
+
+
+Les chapitres, sections, sous-sections, titres..., structurent le document ; ils l'organisent. Mais parallèlement à la structure résultant de ce type de commandes, il existe dans certains livres imprimés, notamment ceux issus du monde académique, un {\em macro-ordonnancement} du matériel du livre, qui tient compte non pas de son contenu mais de la fonction que chacune de ces grandes parties remplit dans le livre. C'est ainsi que l'on fait la différence entre~:
+
+
+\startitemize
+
+  \item {\bf Pages initiales ou préliminaires}, contenant la couverture, la page de titre, la page de remerciements, une page de dédicace, la table des matières, éventuellement une préface, un prologue, une page de présentation, etc.
+
+  \item {\bf Le corps principal} du document, qui contient le texte fondamental du document, divisé en parties, chapitres, sections, sous-sections, etc. Cette partie est généralement la plus étendue et la plus importante.
+
+  \item {\bf Annexes} composé de contenus complémentaires qui développent ou illustrent une question traitée dans le corps du document, ou fournissent une documentation supplémentaire non rédigée par l'auteur du corps du document, etc.
+
+  \item {\bf Pages finales} du document où l'on trouve habituellement l'épilogue, la bibliographie, des index, le glossaire, le colophon etc.
+
+
+\stopitemize
+
+Dans le fichier source, nous pouvons délimiter chacune de ces macro-sections (ou blocs) grâce aux environnements vus dans la \in{table}[tbl:macrostructure].
+
+
+{\switchtobodyfont[small]
+\placetable
+  [here]
+  [tbl:macrostructure]
+  {Environnements qui reflètent la macrostructure du document}
+{\starttabulate[|l|l|]
+\HL
+\NC {\bf Macro-section}
+\NC {\bf Nom \ConTeXt ~}
+\NC {\bf Commande}
+\NR
+\HL
+\NC Pages préliminaires
+\NC frontpart
+\NC \tex{startfrontmatter[Options]} \NC ~...~ \NC \tex{stopfrontmatter}
+\PlaceMacro{startfrontmatter}
+\NR
+\NC Corps principal
+\NC bodypart
+\NC \tex{startbodymatter  [Options]} \NC ~...~ \NC \tex{stopbodymatter}
+\PlaceMacro{startbodymatter}
+\NR
+\NC Annexes
+\NC appendix
+\NC \tex{startappendices  [Options]} \NC ~...~ \NC \tex{stopappendices}
+\PlaceMacro{startappendices}
+\NR
+\NC Pages finales
+\NC backpart
+\NC \tex{startbackmatter  [Options]} \NC ~...~ \NC \tex{stopbackmatter}
+\PlaceMacro{startbackmatter}
+\NR
+\HL
+\stoptabulate
+}}
+
+
+
+
+\stopsection
+
+%==============================================================================
+
+\stopcomponent
+
+%%% TeX-master: "../introCTX_fra.tex"

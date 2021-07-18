@@ -1,0 +1,61 @@
+\startcomponent 02-02-01-04_Markup_Framed
+
+\environment introCTX_env_00
+
+%==============================================================================
+
+\startsection
+  [title=Encadrements,
+  reference=sec:mkp:framed]
+
+
+\TocChap
+
+\tex{framed}
+\tex{startframed}
+\tex{startframedtext}
+\tex{defineframed}
+
+
+% ADDED Garulfo 
+Les cadres sont un élément essentiel de \ConTeXt . Ils permettent d'obtenir toute sorte de personnalisation et d'effets graphiques surlesquels nous reviendrons, mais surtout leur utilisation est omniprésente dans quantité d'élements de \ConTeXt\ et donc bien les comprendre ainsi que l'effet des différentes options est très prévieux.
+% ADDED Garulfo end
+
+Pour entourer un texte d'un cadre ou d'une grille, on utilise :
+
+\startitemize
+
+\item Les commandes \PlaceMacro{framed}\tex{framed} ou \PlaceMacro{inframed}\tex{inframed} si le texte est relativement bref et ne prend pas plus d'une ligne.
+
+\item L'environnement \PlaceMacro{startframedtext}\tex{startframedtext} pour les textes plus longs.
+
+% TODO Garulfo 
+% \item L'environnement \PlaceMacro{startframed} \tex{startframed}
+% TODO Garulfo end
+
+\stopitemize
+
+La différence entre \tex{framed} et \tex{inframed} réside dans le point à partir duquel le cadre est dessiné. Dans le cas de \tex{framed}, le cadre est positionné sur la ligne de base, sur laquelle reposent les lettres. Avec \tex{inframed}, c'est le mot qui est positionnés sur la ligne de base.
+
+\placefigure [force,here,none] [] {}
+{\startDemoHW
+\tfd
+Voici deux \framed{cadres} bien \inframed{encadrés}.
+
+\showboxes
+Voici deux \framed{cadres} bien \inframed{encadrés}.
+\stopDemoHW}
+
+Les deux, peuvent être personnalisés avec \PlaceMacro{setupframed} \tex{setupframed}, et \tex{startframedtext} est personnalisé avec \PlaceMacro{setupframedtext} \tex{setupframedtext}. Les options de personnalisation des deux commandes sont assez similaires. Elles nous permettent d'indiquer les dimensions du cadre ({\tt height, width, depth}), la forme des coins ({\tt framecorner}), qui peut être {\tt rectangular} ou ronde ({\tt round}), la couleur du cadre ({\tt framecolor}), l'épaisseur du trait ({\tt framethickness}), l'alignement du contenu ({\tt align}), la couleur du texte ({\tt foregroundcolor}), la couleur de l'arrière-plan ({\tt background} et {\tt backgroundcolor}), etc.
+
+Pour \tex{startframedtext}, il existe également une propriété apparemment étrange : {\tt frame=off} qui fait que le cadre n'est pas dessiné (il est toujours présent, mais invisible). Cette propriété existe parce que, le cadre entourant un paragraphe étant indivisible, il est courant que le paragraphe entier soit enfermé dans un environnement {\tt framedtext} avec l'option de dessin du cadre désactivée, afin de s'assurer qu'aucun saut de page n'est inséré dans un paragraphe.
+
+Nous pouvons également créer une version personnalisée de ces commandes avec \PlaceMacro{defineframed}\tex{defineframed} et \PlaceMacro{defineframedtext}\tex{defineframedtext}.
+
+\stopsection
+
+%==============================================================================
+
+\stopcomponent
+
+%%% TeX-master: "../introCTX_fra.tex"

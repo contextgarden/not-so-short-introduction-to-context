@@ -1,0 +1,467 @@
+\startcomponent 01-03_Preface
+
+\environment introCTX_env_00
+
+\setupnotation
+  [footnote]
+  [numberconversion=set 2]
+
+\startchapter
+  [title=Avant-propos%
+  \footnote{Cet  avant-propos    a   commencé   avec   l'intention    d'être   une
+    traduction|/|adaptation  à \ConTeXt\  de l'avant-propos de  \quotation{The \TeX
+      Book}, le document qui explique {\em tout  ce que vous devez savoir sur le
+      \TeX}.   En fin  de compte,  j'ai  dû m'en  écarter ;  cependant, j'en  ai
+    conservé quelques éléments  qui, je l'espère, pour ceux  qui le connaissent,
+    feront écho.},
+  bookmark=Avant-propos]
+
+\setupnotation
+  [footnote]
+  [numberconversion=n]
+
+Chère  lectrice,  Cher lecteur,  voici  un  document concernant  \ConTeXt\,  un
+système de composition de document dérivé  de \TeX, qui, lui même également, est
+un système de  composition créé entre 1977  et 1982 par {\sc Donald  E. Knuth} à
+l'Université de Stanford.
+
+\ConTeXt\  a été  conçu pour  la  création de  documents de  très haute  qualité
+typographique --  destinés à  être soit  imprimés sur  papier soit  affichés sur
+écran informatique. Il  ne s'agit pas d'un traitement de  texte, ni d'un éditeur
+de texte, mais, comme indiqué précédemment,  d'un {\em système}, ou encore d'une
+{\em suite d'outils}, destinés à la  composition de documents, c'est-à-dire à la
+mise en page  et à la visualisation  des différents éléments du  document sur la
+page de papier ou à l'écran. En résumé, \ConTeXt\ vise à fournir tous les outils
+nécessaires pour donner  aux documents la meilleure  apparence possible.  L'idée
+est  de pouvoir  générer des  documents qui,  en plus  d'être bien  écrits, sont
+également \quotation{beaux}.   A cet égard,  nous pouvons mentionner ici  ce que
+{\sc Donald E.  Knuth}  a écrit lors de la présentation de  \TeX (le système sur
+lequel est basé \ConTeXt\ )~:
+
+\startnarrower
+\it
+Si vous voulez simplement produire un document passablement bon -- quelque chose
+d'acceptable et d'essentiellement  lisible mais pas vraiment beau  -- un système
+plus simple suffira généralement. Avec \TeX\  l'objectif est de produire la {\em
+  meilleure} qualité  ; cela nécessite  de porter plus d'attention  aux détails,
+mais finalement  vous ne  trouverez pas  cela beaucoup  plus difficile,  et vous
+pourrez être particulièrement fier du produit fini.
+\stopnarrower
+
+Lorsque  nous préparons  un document  avec \ConTeXt,  nous indiquons  exactement
+comment celui-ci doit  être transformé en pages (ou en  écrans) avec une qualité
+typographique et une  précision de composition comparable à celle  que l'on peut
+obtenir grâce  aux meilleurs imprimeurs  du monde. Pour  ce faire, une  fois que
+nous avons appris le  système, nous n'avons guère besoin de  plus de travail que
+ce qui  est normalement nécessaire  pour taper  le document dans  n'importe quel
+traitement de texte ou éditeur de texte. En fait, une fois que nous avons acquis
+une  certaine aisance  avec \ConTeXt,  au total  notre travail  est probablement
+moindre si  nous gardons à l'esprit  que les principaux détails  de formatage du
+document sont  décrits globalement dans  \ConTeXt, et que nous  travaillons avec
+des fichiers texte qui  sont -- une fois que nous nous y  sommes habitués -- une
+façon beaucoup plus naturelle de traiter la création et l'édition de documents ;
+d'autant  plus que  ces types  de  fichiers sont  beaucoup plus  légers et  plus
+faciles à traiter que les lourds fichiers binaires des traitements de texte.
+
+%-------------------------------------------------------------------------------
+\startsubsubsubject{Documentation}
+
+Il existe une documentation considérable  sur \ConTeXt, presque exclusivement en
+anglais.  Par  exemple, ce que l'on  considère comme étant la  distribution {\em
+  officielle} de \ConTeXt\ -- appelée \suite-
+\footnote{Au moment de la  première version de ce texte, ceci  était vrai ; mais
+  au printemps 2020,  le Wiki ConTeXt a  été mis à jour et  nous devons supposer
+  qu'à partir de ce moment la distribution \quotation{officielle} de ConTeXt est
+  devenue LMTX.  Cependant, pour ceux qui  entrent dans le monde de ConTeXt pour
+  la première fois, je recommande  quand même d'utiliser \suite-{} puisque c'est
+  une  distribution plus  stable.   L'\in{annexe}[installation_suite]  explique
+  comment installer l'une ou l'autre des distributions.} --
+contient une documentation de quelques 180 fichiers PDF (la majorité en anglais,
+mais d'autres  en néerlandais et  en allemand)  avec notamment des  manuels, des
+exemples  et  des  articles  techniques  ;  et  sur  le  \goto{site  web  Pragma
+  ADE}[url(pragma)] (la  société qui a  donné naissance à  \ConTeXt) il y  a (le
+jour  où   j'ai  fait  le  décompte   en  mai  2020)  224   documents  librement
+téléchargeables, dont la plupart sont  distribués avec la \suite- mais également
+quelques   autres.    Cependant,   cette    énorme   documentation   n'est   pas
+particulièrement  utile durant  la phase  d'apprentissage de  \ConTeXt, car,  en
+général, ces documents ne s'adressent pas à un lecteur désireux d'apprendre mais
+novice, qui  ne connaît rien  du système.  Sur les  56 fichiers PDF  que \suite-
+appelle \quotation{manuels}, un seul suppose que  le lecteur ne connait rien sur
+\ConTeXt.   Il  s'agit du  document  intitulé  \from[excursion] ou  en  français
+\quotation{\ConTeXt\ Mark~IV,  une escapade}.  Mais  ce document, comme  son nom
+l'indique,  se limite  à  présenter  le système  et  à  expliquer comment  faire
+certaines choses  qui peuvent être  faites avec  \ConTeXt.  Ce serait  une bonne
+introduction s'il était suivi d'un manuel  de référence un peu plus structuré et
+systématique.  Mais  un tel  manuel n'existe  pas et  l'écart entre  le document
+\from[excursion] et le reste de la documentation est trop important.
+
+En 2001, un  \goto{manuel de référence}[url(manualref2001)] a été  rédigé ; mais
+malgré son titre,  d'une part il n'a  pas été conçu pour être  un manuel complet
+(la tâche étant titanesque), et d'autre part il était (est) destiné à la version
+précédente de \ConTeXt (appelé Mark~II)  et intégre donc des éléments obsolètes,
+ce qui perturbe l'apprentissage.
+
+En 2013,  ce manuel  \goto{a été  partiellement mis  à jour}[url(manualref2013)]
+mais  beaucoup de  ses  sections n'ont  pas  été réécrites  et  il contient  des
+informations relatives  à la fois à  \ConTeXt\ Mark~II et \ConTeXt\  Mark~IV (la
+version  actuelle), sans  toujours préciser  clairement quelles  informations se
+rapportent à chacune  des versions.  C'est peut-être la raison  pour laquelle ce
+manuel ne  se trouve  pas parmi  les documents  inclus dans  \suite-.  Pourtant,
+malgré ces défauts, et une fois lu \from[excursion], le manuel reste le meilleur
+document  pour continuer  à apprendre  \ConTeXt.  Autres  informations également
+toujours  très utiles  pour  démarrer  avec \ConTeXt,  celles  contenues le  sur
+\from[wiki], qui, au  moment où nous écrivons ces lignes,  est plein remaniement
+et  présente  une  structure  beaucoup  plus  claire,  bien  qu'elles  mélangent
+également des  explications qui ne  fonctionnent que dans Mark~II  avec d'autres
+pour  Mark~IV ou  pour  les  deux versions.   Ce  manque  de différenciation  se
+retrouve également dans la liste officielle des commandes \from[commandes]
+\footnote{Pour la liste, voir \in{section}[sec:qrc-setup-fr].}
+qui  comprend, pour  chacune d'elles,  l'ensemble des  options de  configuration
+possibles mais ne  précise pas quelles commandes ne fonctionnent  que dans l'une
+ou l'autre des versions. 
+
+Fondamentalement, cette  introduction a  été rédigée  en s'inspirant  des quatre
+sources    d'information    énumérées    préalablement   ~:    \from[excursion],
+\from[manualref2013],  le contenu  de \from[wiki],  et la  liste officielle  des
+commandes  \from[commandes],  en  plus,  bien  sûr, de  mes  propres  essais  et
+tribulations.  Ainsi,  cette introduction  résulte d'un  effort d'investigation,
+et, durant  un temps, j'ai  été tenté de l'appeler  \quotation{Ce que je  sais à
+  propos de  \ConTeXt\ Mark~IV} ou  \quotation{Ce que j'ai appris  sur \ConTeXt\
+  Mark~IV}. Finalement,  aussi vraie que  soit leur  teneur, ces titres  ont été
+écartés car  j'ai pensé  qu'ils risquaient de  dissuader certains  de s'investir
+dans  \ConTeXt. Il  est  certain,  malgré que  la  documentation  ait selon  moi
+certaines lacunes  , que \ConTeXt\  est un  outil vraiment utile  et polyvalent,
+pour lequel l'effort d'apprentissage vaut sans aucun doute la peine.  {\bf Grâce
+  à  \ConTeXt, nous  pouvons manipuler  et configurer  des documents  texte pour
+  réaliser des choses que ceux qui ne connaissent pas le système ne peuvent tout
+  simplement pas imaginer}.
+
+\startSmallPrint
+  Je ne peux pas empêcher -- parce que  je suis comme je suis -- que mes regrets
+  concernant les déficiences d'information ressurgissent  de temps en temps dans
+  ce document.  Je ne  veux pas qu'il y ait de malentendu ~: je suis immensément
+  reconnaissant aux créateurs de \ConTeXt\ d'avoir conçu un outil aussi puissant
+  et de l'avoir mis à la disposition du public.  C'est simplement que je ne peux
+  m'empêcher  de penser  que  cet outil  serait beaucoup  plus  populaire si  sa
+  documentation  était améliorée ~:  il  faut investir  beaucoup  de temps  pour
+  s'approprier \ConTeXt,  non pas  tant en raison  de sa  difficulté intrinsèque
+  (qui existe, mais qui n'est pas supérieure à celle d'autres outils spécialisés
+  similaires,  c'est  même  plutôt  le  contraire), mais  en  raison  du  manque
+  d'informations claires, complètes et systématiques, qui différencient les deux
+  versions de  ConTEXt, expliquent  ce qui fonctionne  dans chacune  d'elles et,
+  surtout, précisent à quoi sert chaque commande, argument et option.
+
+  Il est vrai  que de ce type d'information exigerait  un fort investissement en
+  temps.  Mais comme de nombreuses commandes partagent des options avec des noms
+  similaires, on  pourrait peut-être  rédiger une sorte  de {\em  glossaire} des
+  options,  ce  qui permettrait  également  de  détecter certaines  incohérences
+  produites lorsque  deux options du  même nom  font des choses  différentes, ou
+  lorsque  des  noms  d'options  différents sont  utilisés  dans  des  commandes
+  différentes pour faire la même chose.
+
+  Quant au  lecteur qui s'intéresse  à \ConTeXt pour  la première fois,  que mes
+  plaintes ne le dissuadent pas, car s'il est vrai que le manque d'informations,
+  claires   complètes  et   systématiques,  augmente   le  temps   nécessaire  à
+  l'apprentissage, du  moins pour  les sujets  traités dans  cette introduction,
+  j'ai  déjà  investi  ce temps,  de  sorte  que  le  lecteur n'aura  pas  à  le
+  refaire. Et  déjà avec  ce que  vous aurez  l'occasion d'apprendre  dans cette
+  introduction,  vous   pourrez  produire   des  documents  avec   de  puissants
+  utilitaires insoupçonnés.
+\stopSmallPrint
+
+\stopsubsubsubject
+%-------------------------------------------------------------------------------
+\startsubsubsubject{Incertitudes}
+
+Etant donné que ce qui est expliqué dans ce document provient essentiellement de
+mes  propres conclusions,  il est  probable que,  bien qu'ayant  personnellement
+vérifié  une grande  partie  de ce  qui est  exposé,  certaines déclarations  ou
+opinions soient  incorrectes ou non orthodoxes.   Bien évidemment, j'apprécierai
+toute correction,  toute nuance ou encore  précisions que vous accepterez  de me
+faire  parvenir  à \goto{joaquin@ataz.org}[url(mailto:joaquin@ataz.org)].   Pour
+limiter les  occasions d'erreur, j'ai  essayé de ne  pas aborder les  sujets sur
+lesquels je  n'ai pas  trouvé d'informations ou  que je n'ai  pas pu  (ou voulu)
+vérifier personnellement ; parce que parfois le résultat de mon test n'était pas
+concluant, d'autres fois parce que je n'ai  pas toujours tout essayé~: le nombre
+de commandes et  d'options de \ConTeXt est impressionnant, et  si je devais tout
+essayer, je n'aurais jamais réussi  à finaliser cette introduction. Néanmoins, à
+certaines occasions je n'ai pas pu  éviter de faire certaines {\em conjectures},
+c'est à  dire une déclaration  que je considère comme  probable mais dont  je ne
+suis  pas  totalement  sûr.   Dans  ce cas,  en  marge  du  paragraphe,  l'image
+\Conjecture{} qui peut être vue à gauche de cette ligne indiquera visuellement
+la présence d'une conjecture%
+\footnote{Je  n'ai  pas  dessiné  l'image  moi-même,  elle  provient  d'internet
+(\goto{https://es.dreamstime.com/}[url(https://es.dreamstime.com/icono-s\%C3\%B3lido-negro-para-la-conjetura-preocupaci\%C3\%B3n-y-duda-conjeturar-el-logotipo-image146773292)]), où il est indiqué qu'elle est libre de droit.}.
+D'autres fois, je n'ai pas eu d'autre choix que d'admettre que je ne sais pas et
+que je n'ai même pas d'hypothèse raisonnable  à ce sujet~: dans ce deuxième cas,
+l'image utilisée  est celle insérée ici  en marge du paragraphe  \Doubt~ afin de
+représenter plus que de simples conjectures, l'ignorance.
+Mais n'ayant  jamais été très  doué pour  les représentations graphiques,  je ne
+suis pas certain que les images sélectionnées parviennent vraiment à transmettre
+ces nuances.
+
+\stopsubsubsubject
+%-------------------------------------------------------------------------------
+\startsubsubsubject{Public visé}
+
+Autre aspect,  cette introduction a  été écrite pour  un lecteur qui  ne connaît
+rien à \TeX\ et \ConTeXt, bien  que j'espère qu'elle pourra également être utile
+à ceux  qui s'approchent  pour la  première fois  de \TeX\  or \LaTeX\  (le plus
+populaire  des outils  dérivés  de  \TeX).  Je  suis  cependant conscient  qu'en
+essayant  de  satisfaire  des  lecteurs  aussi différents,  je  risque  de  n'en
+satisfaire aucun. Par  conséquent, en cas de doute, j'ai  toujours été clair sur
+le fait que le principal destinataire de ce document est le nouvel arrivant dans
+le monde de \ConTeXt, le nouveau venu dans cet écosystème fascinant.
+
+Être  un néophyte  \ConTeXt\ n'implique  pas d'être  également néophyte  dans la
+manipulation des outils informatiques. Bien que cette introduction ne présuppose
+aucun  niveau  spécifique de  compétence  informatique  chez son  lecteur,  elle
+suppose  une  certaine  \quotation{aisance   raisonnable}  en  informatique  qui
+implique, par exemple, de connaître dans  les grandes lignes la différence entre
+un éditeur de texte  et un traitement de texte, de  savoir comment créer, ouvrir
+et manipuler  un fichier  texte, de  savoir comment  installer un  programme, de
+savoir comment ouvrir un terminal et y exécuter une commande... et un peu plus.
+
+\startSmallPrint
+
+  En  lisant les  parties de  cette introduction  déjà écrites  au moment  de la
+  rédaction, je me rends  compte que parfois, je m'emporte et  me lance dans des
+  problèmes  informatiques qui  ne  sont pas  nécessaires  à l'apprentissage  de
+  \ConTeXt\ et peuvent  effrayer le néophyte, tandis que d'autres  fois, je suis
+  occupé à expliquer  des choses assez évidentes qui peuvent  ennuyer le lecteur
+  expérimenté.  Je demande votre indulgence.  Rationnellement, je sais qu'il est
+  très difficile pour  un total débutant en traitement de  texte informatique de
+  connaître  l'existence même  de \ConTeXt\,  mais,  d'un autre  côté, dans  mon
+  environnement  professionnel, je  suis  entouré de  personnes  qui se  battent
+  continuellement en  utilisant les logiciels  de traitement de texte,  et elles
+  s'en sortent  raisonnablement bien,  mais néanmoins, n'ayant  jamais travaillé
+  avec des  fichiers texte, elles  ignorent des aspects aussi  élémentaires que,
+  par exemple,  ce qu'est  l'encodage ou  la différence entre  un éditeur  et un
+  traitement de texte.
+
+\stopSmallPrint
+
+Le fait que ce manuel ait été conçu pour des personnes qui ne connaissent rien à
+\ConTeXt\ ou à \TeX\ implique que  j'ai dû y inclure des informations concernant
+non pas  à \ConTeXt\ mais  à \TeX,  le système de  base mais j'ai  compris qu'il
+n'était pas  nécessaire de surcharger  le lecteur  avec des informations  qui ne
+l'intéressent guère, par exemple de savoir  si une telle commande qui fonctionne
+{\em de facto} provient  de \ConTeXt\ ou bien de \TeX.  Par conséquent, ce n'est
+qu'en certaines  occasions, lorsque je  l'ai considéré utile, qu'il  est précisé
+que certaines commandes appartiennent réellement à \TeX.
+
+\stopsubsubsubject
+%-------------------------------------------------------------------------------
+\startsubsubsubject{Structuration}
+
+En ce  qui concerne l'organisation  de ce document,  le contenu est  présenté en
+trois parties~:
+
+\startitemize
+
+%-------------------------------------------------------------------------------
+
+  \item {\bf  La première partie},  qui comprend les quatre  premiers Chapitres,
+    donne une  vue d'ensemble de \ConTeXt,  en expliquant ce que  c'est, comment
+    l'utiliser, en montrant un premier  exemple de transformation d'un document,
+    pour ensuite expliquer certains concepts fondamentaux de \ConTeXt\ ainsi que
+    certaines questions relatives aux fichiers sources de \ConTeXt\.
+
+    Dans l'ensemble  ces chapitres  sont destinés aux  lecteurs qui  ne savaient
+    travailler jusqu'à présent qu'avec des  traitements de texte. Un lecteur qui
+    connaît déjà l'utilisation des langages de balisage  peut sauter les deux
+    premiers  chapitres. Si  le  lecteur  connaît déjà  \TeX ou  \LaTeX, il  peut
+    également sauter une grande partie du contenu des Chapitres 3 et 4.  Mais je
+    vous recommande quand même de lire au moins~:
+
+    \startitemize
+
+      \item   les   informations   relatives    aux   commandes   de   \ConTeXt\
+        (\in{Chapitre}[cap:commands]), et en particulier sur la configuration de
+        son fonctionnement,  car c'est  là que  réside la  principale différence
+        dans les  conceptions et  syntaxes de \LaTeX\  et \ConTeXt.  Comme cette
+        introduction ne  concerne que  ce dernier, ces  différences ne  sont pas
+        expressément mentionnées comme telles, mais quiconque lit ce chapitre et
+        connaît  le  fonctionnement  de  \LaTeX\  comprendra  immédiatement  les
+        principales différences dans la syntaxe des deux languages, ainsi que la
+        façon  dont  \ConTeXt\  permet  de configurer  et  de  personnaliser  le
+        fonctionnement de presque toutes ses commandes.
+
+      \item  Les  informations relatives  à  la  gestion des  projets  \ConTeXt\
+        multi-fichiers  (\in{Chapitre}[cap:sourcefile]),  qui se  distingue  de  celles des  autres
+        systèmes basés sur \TeX.
+
+    \stopitemize
+
+%-------------------------------------------------------------------------------
+
+  \item {\bf La seconde partie}, qui comprend  les Chapitres 5 à 9, se concentre
+    sur ce  que nous  pouvons considérer comme l'aspect général d'un document~:
+
+    \startitemize
+
+      \item  Les  deux aspects  qui  affectent  principalement l'apparence  d'un
+        document sont les dimensions et la composition de ses pages ainsi que la
+        police utilisée.  Les  chapitres \in{}[cap:pages] et \in{}[cap:fontscol]
+        sont consacrés à ces deux questions.
+
+      \startitemize
+
+        \item Le \in{Chapitre}[cap:pages]  se concentre sur les  pages~: taille,
+          éléments  qui la  composent, conception  ou composition  (c'est-à-dire
+          répartition  des différents  éléments  sur la  page),  etc.  Pour  une
+          raison de  systématisme, des  aspects plus spécifiques  sont également
+          traités ici, comme ceux relatifs à la pagination et aux mécanismes qui
+          nous permettent de l'influencer.
+
+        \item  Le \in{Chapitre}[cap:fontscol]  explique les  commandes relatives
+          aux  polices et  à  leur  manipulation.  Une  explication  de base  de
+          l'utilisation et de la manipulation des couleurs est également incluse
+          ici, car,  bien que les couleurs  ne soient pas, à  proprement parler,
+          une {\em caractéristique}  de la police, elles influencent  de la même
+          manière l'apparence visuelle du document.
+
+      \stopitemize
+
+      \item Les chapitres \in{}[cap:structure]  et \in{}[cap:toc] se concentrent
+        sur  la structure  du document  et  les outils  que \ConTeXt\  met à  la
+        disposition de l'auteur pour la  rédaction de documents bien structurés.
+        Le \in{Chapitre}[cap:structure] se concentre  sur la structure elle-même
+        (divisions structurelles  du document) et le  \in{Chapitre}[cap:toc] sur
+        la valorisation de cette structure dans une table des matières.
+
+      \item Enfin, le \in{Chapitre}[cap:refpluslinks]  se concentre sur l'aspect
+        clé  de l'utilisation  de références  par un  document, références  vers
+        d'autres points du  même document (références internes)  mais aussi vers
+        des  documents  externes  (références externes).   Dans  cette  dernière
+        situation, nous n'aborderons que le cas de références impliquant un {\em
+          liens} vers  le document externe.  Ce  chapitre explique l'utilisation
+        de outil  de \ConTeXt pour la  gestion de ces références  qui permet des
+        {\em sauts} entre différents zones d'informations, internes ou externes,
+        et rend ainsi notre document {\em interactif}.
+
+    \stopitemize
+
+  Ces chapitres  n'ont pas  besoin d'être  lus dans  un ordre  particulier, sauf
+  peut-être  le   \in{Chapitre}[cap:toc],  qui  est  peut-être   plus  facile  à
+  comprendre si vous  avez d'abord lu le  \in{Chapitre}[cap:structure].  En tout
+  cas, j'ai  essayé de faire  en sorte que lorsqu'une  question se pose  dans un
+  chapitre ou une section, alors qu'elle  est traitée ailleurs dans ce document,
+  le texte  mentionne ce  fait et propose  un hyperlien vers  le point  où cette
+  question est traitée.  Je  ne suis cependant pas en mesure  de garantir que ce
+  sera toujours le cas.
+
+%-------------------------------------------------------------------------------
+
+  \item  Enfin,  {\bf  la   troisième  partie}  (\in{Chapitre}[cap:chartext]  et
+    suivants) se concentre sur des  aspects plus concrets, plus spécialisés. Non
+    seulement les  chapitres sont  maintenant indépendants  les uns  des autres,
+    mais également les  sections les unes des autres au  sein d'un même chapitre
+    (sauf, peut-être, dans le dernier chapitre).  Étant donné la grande quantité
+    de fonctionnalités proposées par  \ConTeXt\, cette troisième partie pourrait
+    être très vaste ; mais comme je  devine qu'en arrivant à ce stade le lecteur
+    sera capable de plonger lui-même dans la documentation de \ConTeXt\, je n'ai
+    considéré que les chapitres suivants~:
+
+    \startitemize 
+
+      \item  Les   chapitres  \in{}[cap:chartext]   et  \in{}[cap:parlinevspace]
+        traitent de ce que l'on pourrait appeler les {\em éléments clés} de tout
+        document texte~:  Le texte est constitué de caractères,  qui forment des
+        mots,  qui  sont regroupés  en  lignes,  qui  à  leur tour  forment  des
+        paragraphes,  qui  sont  séparés  les  uns  des  autres  par  un  espace
+        vertical...  Il  est évident que  toutes ces questions auraient  pu être
+        incluses dans  un seul chapitre. Mais  comme cela aurait été  trop long,
+        j'ai  divisé  cette  question  en  deux  chapitres,  l'un  traitant  des
+        caractères, des mots et des espaces horizontaux, et l'autre traitant des
+        lignes, des paragraphes et des espaces verticaux.
+
+      \item Le \in{Chapitre}[cap:specialparas] est une sorte de {\em pot-pourri}
+        qui traite des éléments et constructions  qui sont communs à de nombreux
+        documents,     principalement     s'ils      sont     académiques     ou
+        scientifico-techniques ~:  notes de  bas  de  page, listes  structurées,
+        descriptions, énumérations, etc.
+
+      \item  Enfin, le  \in{Chapitre}[cap:floats]  se concentre  sur les  objets
+        flottants insérés  dans un document et  en particulier les deux  cas les
+        plus répandus~: les images et les tableaux.
+
+  \stopitemize
+
+%-------------------------------------------------------------------------------
+
+  \item   Cette   introduction  à   \ConTeXt\   se   termine  par   trois 
+    \in{{\bf Annexes}.}[part:annexes] L'une concerne l'installation de \ConTeXt\ sur
+    un  ordinateur,  une  deuxième   annexe  présentent  plusieurs  dizaines  de
+    commandes qui permettent  de générer divers symboles  ( principalement, mais
+    pas  uniquement,  pour  un  usage mathématique),  et  une  troisième  annexe
+    rassemble les commandes \ConTeXt\ expliquées  ou mentionnées tout au long de
+    ce texte sous la forme d'une liste alphabétique.
+
+%-------------------------------------------------------------------------------
+
+\stopitemize
+
+\stopsubsubsubject
+%-------------------------------------------------------------------------------
+\startsubsubsubject{Reste à faire}
+
+
+De nombreux  points restent  à expliquer ~: le traitement  des citations  et des
+références  bibliographiques, la  rédaction de  textes spéciaux  (mathématiques,
+chimie...), la connexion avec XML, l'interface pour le code Lua, les modes et la
+compilation basée sur  les modes, la collaboration avec MetaPost  pour le design
+graphique, etc.  Par conséquent, comme ce document ne contient pas d'explication
+complète de  \ConTeXt\, et ne  prétend pas le  faire, j'ai intitulé  ce document
+\quotation{une courte  (?) introduction à  \ConTeXt\ Mark~IV)}, et  ajouté entre
+parenthèses l'observation  \quotation{pas trop  courte} car, de  toute évidence,
+elle l'est.  Un texte qui  laisse tant de choses  dans l'encrier et  qui dépasse
+pourtant   300    pages   n'est    certainement   pas    une   \quotation{courte
+  introduction}.  C'est parce  que j'essaie  de faire  comprendre au  lecteur la
+logique de  \ConTeXt\ ; ou  du moins  la logique telle  que je la  comprends. Il
+n'est  pas  destiné  à  être  un  manuel de  référence,  mais  plutôt  un  guide
+d'auto-apprentissage  qui  prépare  le  lecteur  à  réaliser  des  documents  de
+complexité moyenne  (ce qui inclut la  plupart des documents possibles)  et qui,
+surtout, lui apprend à {\em envisager et imaginer} ce qui peut être fait avec ce
+puissant outil  et à {\em  repérer} dans la  documentation comment le  faire. Ce
+document  n'est pas  non  plus  un tutoriel.   Les  tutoriels  sont conçus  pour
+augmenter progressivement la difficulté, afin que ce qui doit être enseigné soit
+appris pas à pas ; j'ai, en ce  sens, préféré, dès la deuxième partie, être plus
+systématique au  lieu d'ordonner le  sujet en  fonction de sa  difficulté. Mais,
+même si ce n'est pas un tutoriel, j'ai inclus de nombreux exemples.
+
+
+Il est possible que  le titre de ce document rappelle  à certains lecteurs celui
+écrit par {\sc Oetiker, Partl, Hyna  et Schlegl}, en  anglais
+\quotation{{\em The Not So Short Introduction to \LaTeX\ $2_{\epsilon}$}}
+et en français
+\quotation{{\em  Une  courte  (?)introduction à  \LaTeX\  $2_{\epsilon}$}}.
+Ce  document,
+\goto{disponible en 24 langues}[url(https://ctan.org/tex-archive/info/lshort)],
+est l'un des  meilleurs documents pour se familiariser avec  le monde de \LaTeX.
+Ce n'est pas une coïncidence, mais un hommage et un acte de gratitude~: grâce au
+travail généreux de  ceux qui écrivent de  tels textes, il est  possible pour de
+nombreuses personnes de s'initier à des outils utiles et puissants comme \LaTeX\
+et \ConTeXt.  Ces auteurs m'ont aidé à me lancer dans \LaTeX\ ; j'ai l'intention
+de faire de même  pour ceux qui veulent se lancer dans le  \ConTeXt, bien que je
+sois  limité au  public hispanophone,  qui,  par ailleurs,  manque tellement  de
+documentation dans sa langue.  J'espère que ce document répondra à cet objectif.
+
+\page[no]\blank
+
+\rightaligned{Joaquín Ataz-López}\\
+\rightaligned{Eté 2020}
+
+\stopsubsubsubject
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% TeX-master: "../introCTX_fra.tex"
+%%% coding: utf-8-unix
+%%% End:
+%%% vim:set filetype=context tw=72~: %%%

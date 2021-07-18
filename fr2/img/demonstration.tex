@@ -17,6 +17,8 @@
 
 %\showframe
 
+\setuppagenumbering[location=none]
+
 %------------------------------------------------------------------------------         
 \setupbodyfont[pagella]    
 \setupbodyfont[8pt]
@@ -58,8 +60,7 @@
            [footer]
            [pagenumber]
 
-
-
+           
 \setuphead [part]
   [placehead=yes,
     bodypartlabel=part,
@@ -67,7 +68,7 @@
     alternative=middle,
     after={\strut\vfill\page\setupbackgrounds[page][background=color,backgroundcolor=]},
 %    conversion=I,
-    style={\switchtobodyfont[24pt]\bf},
+    style={\switchtobodyfont[20pt]\bf},
     color=white,
     header=high,
     footer=ChapterFirstPage,
@@ -92,18 +93,18 @@
 
 \startuseMPgraphic{myattachmentsymbol}  % #1 - Draw a symbol, here a paperclip!
 path pa;
-numeric u; u=0.6mm;
+numeric u; u=0.5mm;
 numeric Ra; Ra=u/2;  numeric Rb; Rb=2.2Ra;  numeric Rc; Rc=1.5Rb;
 numeric La; La=3.5u; numeric Lb; Lb=-La/10; numeric Lc; Lc=1.2*La;
 
 pair a[];
-aa=(0,0);
-ab=(La,0);        ac=(La+Ra,-Ra);         ad=(La,-2Ra);
-ae=(Lb,-2Ra);     af=(Lb-Rb,-2Ra+Rb);     ag=(Lb,-2Ra+2Rb);
-ah=(Lc,-2Ra+2Rb); ai=(Lc+Rc,-2Ra+2Rb-Rc); aj=(Lc,-2Ra+2Rb-2Rc);
-ak=(1u,-2Ra+2Rb-2Rc);
+a0=(0,0);
+a1=(La,0);        a2=(La+Ra,-Ra);         a3=(La,-2Ra);
+a4=(Lb,-2Ra);     a5=(Lb-Rb,-2Ra+Rb);     a6=(Lb,-2Ra+2Rb);
+a7=(Lc,-2Ra+2Rb); a8=(Lc+Rc,-2Ra+2Rb-Rc); a9=(Lc,-2Ra+2Rb-2Rc);
+a10=(1u,-2Ra+2Rb-2Rc);
 
-pa := (aa--ab..ac..ad--ae..af..ag--ah..ai..aj--ak) rotated 45;
+pa := (a0--a1..a2..a3--a4..a5..a6--a7..a8..a9--a10) rotated 45;
 
 path pb;
 pb := fullcircle scaled (2.8*(Lc-Lb-Rb)) shifted (center(pa)) ;
@@ -112,13 +113,16 @@ pickup pencircle scaled (1.3*(Rb-Ra))   ;
 draw pa  withcolor white;
 \stopuseMPgraphic
 
+%------------------------------------------------------------------------------
 
 \definesymbol                             % #2 - Define the drawing as a symbol
   [myattachmentsym]
   [\useMPgraphic{myattachmentsymbol}]
 
-%\setupattachments                          % #3 - Use the symbol for attachment
-%  [symbol=myattachmentsym]
+%------------------------------------------------------------------------------
+
+\setupattachments                          % #3 - Use the symbol for attachment
+  [symbol=myattachmentsym]
 
 %------------------------------------------------------------------------------
 
@@ -133,7 +137,7 @@ Ceci est un petit texte pour illustrer les différentes possibilités  \ConTeXt\
 %-------------------------------------------------------------------------------
 
 \setupheadertexts[]
-\setupfootertexts[margin][pagenumber][]
+%\setupfootertexts[margin][pagenumber][]
 
 \startsetups[showframe]
 \setupbackgrounds [header,text,footer] [leftmargin,text,rightmargin] 
@@ -143,7 +147,7 @@ Ceci est un petit texte pour illustrer les différentes possibilités  \ConTeXt\
 \startsetups[showheaderfooter]
 \setupheadertexts[{\color[darkred]{Texte d'en-tête}}][{\color[darkred]{ici}}]
 \setupfootertexts[{\color[darkred]{Texte de pied de page}}][{\color[darkred]{et là}}]
-\setupfootertexts[margin][{\color[darkred]{\pagenumber}}][]
+\setupfootertexts[margin][{\hfill\color[darkred]{\pagenumber}\hfill}][]
 \stopsetups
 
 
@@ -177,7 +181,10 @@ Ceci est un petit texte pour illustrer les différentes possibilités  \ConTeXt\
 
 \startsection[title=Introduction]
 \index{introduction}
+Un petit texte introductif avec un lien non visible qui sera utilisé plus tard\reference[MaRef]{référence}.
 \stopsection
+
+
 
 %-------------------------------------------------------------------------------
 
@@ -193,16 +200,123 @@ La table des matière est présentée \at{page}[toc].
 
 \startbodymatter
 
-\startpart [title={Balisage}] 
+
+\startpart [title={Composition d'ensemble}] 
+
+%-------------------------------------------------------------------------------
+
+
+\startsection[title={Mise en page}]
+\setup[showframe]                         % <== pour ne plus visualiser le cadre
+Il s'agit de définir la place et le positionnement des différentes zones de la page.
+\stopsection
+
+\startsection[title={En-tête, pied et numérotation de page}]
+\setup[hide]
+\setup[showheaderfooter]
+
+\getbuffer \par \getbuffer
+
+\stopsection
 
 %-------------------------------------------------------------------------------
 
 \startsection[title=Paragraphes]
+\setup[hide]                              % <== pour ne plus visualiser le cadre
 \index{paragraphes}
 \getbuffer \par
 \color[darkred]{\getbuffer} \par
 \getbuffer
 \stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Polices]
+\definefontfeature
+  [mesfeaturesA]
+  [mode=node, 
+   language=dflt, 
+   protrusion=quality,  % for protrusion (dans les marges)
+   expansion=quality,   % for expansions (expansion des lettres)
+   script=latn, 
+   kern=no,            % for kerning
+   liga=no,            % ligatures communes
+   dlig=no,            % ligatures spécifiques (exemple st) 
+   calt=no,            % alternatives contextuelles
+   lnum=yes,            % lining numbers
+   onum=no,             % old style numbers,
+   ccmp=no,            % petites majuscules
+   ss04=no,            % stylistic swash
+   ]
+\definefontfeature
+  [mesfeaturesB]
+  [mode=node, 
+   language=dflt, 
+   protrusion=quality,  % for kerning
+   expansion=quality,   % for kerning
+   script=latn, 
+   kern=yes,            % for kerning
+   liga=yes,            % ligatures communes
+   dlig=yes,            % ligatures spécifiques (exemple st) 
+   calt=yes,            % alternatives contextuelles
+   lnum=no,            % lining numbers
+   onum=yes,             % old style numbers,
+   ccmp=yes,            % petites majuscules
+   ss04=yes,            % stylistic swash
+   ]
+%definedfont [name:garamondpremrpro*mesfeaturesA at 30 pt]%
+%t fi Qu 0123
+\color[darkred]{%
+\definedfont [name:texgyreadventor at 36 pt]%
+Amour
+
+\cap{\definedfont [name:garamondpremrpro*mesfeaturesB at 36 pt] Amour}
+
+\definedfont [name:garamondpremrpro*mesfeaturesB at 30 pt]%
+st fi Qu 0123
+}
+\stopsection
+
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Couleurs]
+\showcolorcomponents[gold,darkorange,firebrick,violetred,mediumorchid,royalblue3,seagreen3]
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Langue]
+\start
+\definedfont [name:garamondpremrpro*mesfeaturesB at 24 pt]
+\startalign[flushleft]
+\mainlanguage	[de]	\quotation{Inhalt}\par
+\color[darkred]{\mainlanguage	[fr]	\quotation{Contenu}\par}
+\mainlanguage	[en]	\quotation{Content}\par
+\stopalign
+
+\stop
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Interactivité]
+Cela permet d'activer par exemple :
+\startitemize[packed]
+\item les liens dans la table des matières,
+\item les liens d'une page à une autre,
+\item les liens vers Internet,
+\item les pièces jointes,
+\item les signets PDF.
+\stopitemize
+
+\stopsection
+
+\stoppart
+
+%===============================================================================
+
+\startpart[title={Éléments du flux principal}] 
 
 %-------------------------------------------------------------------------------
 
@@ -254,6 +368,26 @@ Ceci est un petit texte pour illustrer les différentes possibilités \ConTeXt\ 
 \getbuffer
 \stopquotation}
 \getbuffer
+\stopsection
+
+%-------------------------------------------------------------------------------
+
+\startsection[title=Mathématiques]
+
+\color[darkred]{
+\startformula \startalign
+  \NC f(x) \NC =  \startcases
+                      \NC 1,  \MC x >  0 \NR
+                      \NC 0,  \MC x >= 0 \NR
+                  \stopcases  \NR
+  \NC g(x) \NC = x^2 +2x +1   \NR
+
+\NC q \NC = \delta \frac{\partial p}{\partial x} = \delta(\phi) p_{vsat}(\theta) \frac{\partial \phi}{\partial x} \NR
+\NC   \NC = \left[ \frac{\delta_a}{\mu(\theta)} p_{vsat}(\theta)
+\right] \frac{\partial \phi}{\partial x} \NR
+\NC   \NC = k \frac{\partial \phi}{\partial x}\NR
+\stopalign \stopformula}
+
 \stopsection
 
 %-------------------------------------------------------------------------------
@@ -405,6 +539,14 @@ Et voilà.
 
 %-------------------------------------------------------------------------------
 
+\startsection[title=Colonnes]
+\startcolumns[separator=rule,color=darkred]
+{\tfxx \getbuffer \getbuffer \getbuffer \getbuffer \getbuffer \getbuffer}
+\stopcolumns
+\stopsection
+
+%-------------------------------------------------------------------------------
+
 \startsection[title=Section]
 
 \setuphead[subsection][color=darkred,style=bold]
@@ -441,35 +583,8 @@ Regardez la première et la dernière page de cette galerie (sur \color[darkred]
 
 %-------------------------------------------------------------------------------
 
-\startsection[title=Mathématiques]
-
-\color[darkred]{
-\startformula \startalign
-  \NC f(x) \NC =  \startcases
-                      \NC 1,  \MC x >  0 \NR
-                      \NC 0,  \MC x >= 0 \NR
-                  \stopcases  \NR
-  \NC g(x) \NC = x^2 +2x +1   \NR
-
-\NC q \NC = \delta \frac{\partial p}{\partial x} = \delta(\phi) p_{vsat}(\theta) \frac{\partial \phi}{\partial x} \NR
-\NC   \NC = \left[ \frac{\delta_a}{\mu(\theta)} p_{vsat}(\theta)
-\right] \frac{\partial \phi}{\partial x} \NR
-\NC   \NC = k \frac{\partial \phi}{\partial x}\NR
-\stopalign \stopformula}
-
-\stopsection
-
-%-------------------------------------------------------------------------------
-
 \startsection[title=Autres éléments spécialisés]
-\stopsection
 
-%-------------------------------------------------------------------------------
-
-\startsection[title=Colonnes]
-\startcolumns[separator=rule,color=darkred]
-{\tfxx \getbuffer \getbuffer \getbuffer \getbuffer \getbuffer \getbuffer}
-\stopcolumns
 \stopsection
 
 %-------------------------------------------------------------------------------
@@ -478,109 +593,7 @@ Regardez la première et la dernière page de cette galerie (sur \color[darkred]
 
 %===============================================================================
 
-\startpart [title={Composition d'ensemble}] 
-
-%-------------------------------------------------------------------------------
-
-
-\startsection[title={Mise en page}]
-\setup[showframe]
-Il s'agit de définir la place et le positionnement des différentes zones de la page.
-\stopsection
-
-\startsection[title={En-tête et pied de page}]
-\setup[hide]
-\setup[showheaderfooter]
-
-\getbuffer \par \getbuffer
-
-\stopsection
-
-%-------------------------------------------------------------------------------
-
-
-\startsection[title=Polices]
-\setup[hide]
-\definefontfeature
-  [mesfeaturesA]
-  [mode=node, 
-   language=dflt, 
-   protrusion=quality,  % for protrusion (dans les marges)
-   expansion=quality,   % for expansions (expansion des lettres)
-   script=latn, 
-   kern=no,            % for kerning
-   liga=no,            % ligatures communes
-   dlig=no,            % ligatures spécifiques (exemple st) 
-   calt=no,            % alternatives contextuelles
-   lnum=yes,            % lining numbers
-   onum=no,             % old style numbers,
-   ccmp=no,            % petites majuscules
-   ss04=no,            % stylistic swash
-   ]
-\definefontfeature
-  [mesfeaturesB]
-  [mode=node, 
-   language=dflt, 
-   protrusion=quality,  % for kerning
-   expansion=quality,   % for kerning
-   script=latn, 
-   kern=yes,            % for kerning
-   liga=yes,            % ligatures communes
-   dlig=yes,            % ligatures spécifiques (exemple st) 
-   calt=yes,            % alternatives contextuelles
-   lnum=no,            % lining numbers
-   onum=yes,             % old style numbers,
-   ccmp=yes,            % petites majuscules
-   ss04=yes,            % stylistic swash
-   ]
-%definedfont [name:garamondpremrpro*mesfeaturesA at 30 pt]%
-%t fi Qu 0123
-\color[darkred]{%
-\definedfont [name:texgyreadventor at 36 pt]%
-Amour
-
-\cap{\definedfont [name:garamondpremrpro*mesfeaturesB at 36 pt] Amour}
-
-\definedfont [name:garamondpremrpro*mesfeaturesB at 30 pt]%
-st fi Qu 0123
-}
-\stopsection
-
-%-------------------------------------------------------------------------------
-
-\startsection[title=Couleurs]
-\showcolorcomponents[gold,darkorange,firebrick,violetred,mediumorchid,royalblue3,seagreen3]
-\stopsection
-
-%-------------------------------------------------------------------------------
-
-\startsection[title=Langue]
-\start
-\definedfont [name:garamondpremrpro*mesfeaturesB at 24 pt]
-\startalign[flushleft]
-\mainlanguage	[de]	\quotation{Inhalt}\par
-\color[darkred]{\mainlanguage	[fr]	\quotation{Contenu}\par}
-\mainlanguage	[en]	\quotation{Content}\par
-\stopalign
-
-\stop
-\stopsection
-
-%-------------------------------------------------------------------------------
-
-\startsection[title=Interactivité]
-Cela permet d'activer par exemple :
-\startitemize[packed]
-\item les liens dans la table des matières,
-\item les liens d'une page à une autre,
-\item les liens vers Internet,
-\item les pièces jointes,
-\item les signets PDF.
-\stopsection
-
-%===============================================================================
-
-\startpart [title={Composition spécifique}] 
+\startpart [title={Compléments au flux principal}] 
 
 %-------------------------------------------------------------------------------
 
@@ -652,6 +665,8 @@ Regardez la \in{figure}[figdemo] \at{page}[figdemo].
 
 Regardez la \in{section}[secdemo] \at{page}[secdemo].
 
+Regardez la \in[MaRef] de la \at{page}[MaRef].
+
 \stopsection
 
 %-------------------------------------------------------------------------------
@@ -709,6 +724,7 @@ de \cite[author][ConTeXtExcursion] \cite[ConTeXtExcursion]
 \startsubsubject[title=Tableaux]
 \placelistoftables[criterium=all]
 \stopsubsubject
+\stopsection
 
 %-------------------------------------------------------------------------------
 \startsection[title=Index]

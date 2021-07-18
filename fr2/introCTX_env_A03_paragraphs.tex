@@ -1,0 +1,36 @@
+
+%------------------------------------------------------------------------------
+
+\setuptolerance[strict]               % how tolerant vs ‘ugly’ stretched spaces
+
+\setupalign[hz,                                         % hz for font expansion
+            hanging,                                   % hanging for protrusion
+            lesshyphenated,                      % two instructions added by j.
+            verytolerant,                       % to eliminate most hyphenation
+            stretch]                 % and get better interword spacing as well
+
+%------------------------------------------------------------------------------
+
+\setupwhitespace [big]                        % espace interparagraphes "grand"
+
+%------------------------------------------------------------------------------
+
+\setuptype
+  [color=darkmagenta]                      % Writing commands and code snippets
+
+\setuptyping
+  [color=darkmagenta,style={\switchtobodyfont[small,tt]}]
+
+%------------------------------------------------------------------------------
+
+% Truc de Jedi pour éviter les lignes veuves (lignes seules en bas de page) ou
+% orphelines (seules en haut de page)
+% https://dave.autonoma.ca/blog/2020/04/28/typesetting-markdown-part-8/
+
+\startsetups [mypenalties]
+\setdefaultpenalties
+\setpenalties\widowpenalties{3}{10000} %     3 == number of lines
+\setpenalties\clubpenalties {3}{10000} % 10000 == penalty between these 3 lines
+\stopsetups
+
+\setuplayout[setups=mypenalties]

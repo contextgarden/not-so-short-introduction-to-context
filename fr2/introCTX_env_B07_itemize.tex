@@ -1,0 +1,20 @@
+\setupitemize                  % liste à puce "compactées" et tirets en couleur
+  [packed,joinedup]
+  [indenting=none,                        % First line of paragraphs not indented
+   color=ctr1color]
+
+\definesymbol               % définition d'un symbole = un petit carré de 0.9ex
+  [symitemize1]
+  [{\blackrule[height=1.3ex,width=0.9ex,depth=-0.4ex,]}]
+
+\setupitemize       % et son utilisation pour le premier niveau de liste à puce
+  [1]
+  [packed,joinedup]
+  [color=ctr1color,
+  symbol=symitemize1]
+
+
+\setupitemize       % et son utilisation pour le premier niveau de liste à puce
+  [2]
+  [packed,joinedup]
+  []

@@ -1,0 +1,42 @@
+\startcomponent 02-02-01-16_Markup_Maths
+
+\environment introCTX_env_00
+
+%==============================================================================
+
+\startsection
+  [title=Les mathématiques,
+  reference=sec:mkp:math]
+
+\TocChap
+
+\tex{startformula}
+\tex{placeformula}
+\tex{startplaceformula}
+\tex{$...$}
+\tex{$...$}
+
+\tex{startformula} \PlaceMacro{startformula}
+Il s'agit d'un environnement destiné à la composition de formules mathématiques.
+
+\placefigure [force,here,none] [] {}
+{\startDemoVW
+\usemodule[newmat]
+
+Display math:
+\startformula
+q = \delta \frac{\partial p}{\partial x} = 
+\delta(\phi) p_{vsat}(\theta) \frac{\partial \phi}{\partial x} = 
+\left[ \frac{\delta_a}{\mu(\theta)} p_{vsat}(\theta) \right] \frac{\partial \phi}{\partial x} = 
+k \frac{\partial \phi}{\partial x}
+\stopformula
+\stopDemoVW}
+
+
+\stopsection
+
+%==============================================================================
+
+\stopcomponent
+
+%%% TeX-master: "../introCTX_fra.tex"

@@ -1,0 +1,58 @@
+\startcomponent 02-04-02-09_Typeset_Index
+
+\environment introCTX_env_00
+
+%==============================================================================
+
+\startsection
+  [title=Index,
+  reference=sec:typset:index]
+
+
+\TocChap
+
+% ** Subsection formater l'index
+
+\startsubsection
+  [title=Formatage de l'index]
+  \PlaceMacro{setupregister}
+
+Les index de sujets sont une application particulière d'une structure plus générale que \ConTeXt\ appelle \quotation{\em register} ; par conséquent l'index est formaté avec la commande :
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\setupregister[index][Configuration]
+\stopDemoI}
+
+Avec cette commande, nous pouvons~:
+
+\startitemize
+
+\head Déterminer à quoi ressemblera l'index avec ses différents éléments. A savoir :
+
+\startitemize
+
+\item Les titres de l'index qui sont généralement des lettres de l'alphabet. Par défaut, ils sont en minuscules. Avec {\tt alternative=A}, nous pouvons les mettre en majuscules.
+
+\item Les entrées elles-mêmes, et leur numéro de page. L'apparence dépend des options {\tt textstyle, textcolor, textcommand} et {\tt deeptextcommand} pour l'entrée elle-même, et {\tt pagestyle}, {\tt pagecolor} et {\tt pagecommand}, pour le numéro de page. Avec {\tt pagenumber=no}, on peut aussi générer un index des sujets sans numéro de page (mais je ne sais pas si cela peut être utile).
+
+\item L'option {\tt distance} spécifie la largeur de séparation entre le nom d'une entrée et les numéros de page ; mais elle mesure aussi la quantité d'indentation pour les sous-entrées.
+
+\stopitemize
+
+Les noms des options {\tt style}, {\tt textstyle}, {\tt pagestyle}, {\tt color}, {\tt textcolor}, et {\tt pagecolor} sont suffisamment clairs pour nous dire ce que chacune fait, je pense. Pour les options {\tt command}, {\tt pagecommand}, {\tt textcommand} et {\tt deeptextcommand}, je me réfère à l'explication des options de même nom dans \in{section}[sec:titlestyle], concernant la configuration des commandes de section.
+
+\item Pour définir l'apparence générale de l'index, ce qui inclut, entre autres, les commandes à exécuter avant ({\tt before}) ou après ({\tt after}) l'index, le nombre de colonnes qu'il doit avoir ({\tt n}), si les colonnes doivent être d'égale hauteur ou non ({\tt balance}), l'alignement des entrées ({\tt align}), etc.
+
+\stopitemize
+
+\stopsubsection
+
+
+\stopsection
+
+%==============================================================================
+
+\stopcomponent
+
+%%% TeX-master: "../introCTX_fra.tex"

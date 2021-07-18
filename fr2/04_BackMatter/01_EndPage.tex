@@ -1,0 +1,51 @@
+%%% File:     TitlePage.mkiv
+%%% Component:Cover, credits and table of contents
+%%% Author:   Joaquín Ataz-López
+%%% Begun:    April 2020
+%%% Concluded:August 2020
+%%%
+%%% Edited with: Emacs + AuTeX - And at times with vim + context-plugin
+%%%
+
+\startcomponent 04-01_EndPage
+
+\environment introCTX_env_00
+
+%-------------------------------------------------------------------------------
+                                                     % Front Cover with MetaPost
+\startuseMPgraphic{BackCover}
+
+StartPage ;
+
+fill unitsquare xscaled PaperWidth yscaled PaperHeight withcolor \MPcolor{purple} ; 
+
+draw textext.rt("\getvariable{document}{title}")
+     xsized (.8PaperWidth)
+     shifted (.1PaperWidth,.1PaperHeight)
+     withcolor white;                    
+                   
+
+StopPage ;
+
+\stopuseMPgraphic
+
+%------------------------------------------------------------------------------
+
+\defineoverlay[oBackCover][\useMPgraphic{BackCover}]
+
+\setupbackgrounds [leftpage]  [background={background,oBackCover},state=repeat]
+\setupbackgrounds [rightpage] [background={background},state=repeat]
+
+\startstandardmakeup[page=left]
+\stopstandardmakeup
+
+%------------------------------------------------------------------------------
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: electric-inent
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX_fra.tex"
+%%% End:
