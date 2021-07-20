@@ -36,10 +36,10 @@ Les fichiers sources constituent la donnée d'entrée.
 Il s'agit de ce qu'il y a de plus simple en informatique~: des fichiers textes. 
 Ce sont des fichiers lisibles sur tous les ordinateurs du monde, avec un simple éditeur de texte.
 
-Cette universalité se fait au prix de deux conditions.
+Cette universalité se fait au prix de deux conditions~: (1)
 Ces fichiers ne contiennent que des suites de caractères 
-(pas de couleur, pas de mise en page, pas d'images, pas de sons… rien que du texte).
-Et ils utilisent un codage particulier des caractères 
+(pas de couleur, pas de mise en page, pas d'images, pas de sons… rien que du texte), 
+et (2) ils utilisent un codage particulier des caractères 
 (c'est à dire des règles standards de représentation informatique des caractères)
 que l'on appelle \goto{UTF-8}[url(https://fr.wikipedia.org/wiki/UTF-8)]. 
 Ce codage, dorénavant utilisé par plus de 97\% des sites web, 
@@ -48,13 +48,12 @@ permet de représenter les milliers de caractères du répertoire universel des 
 
 \ConTeXt\ prend donc en entrée des fichiers textes. 
 Ces derniers servent de {\em contenant} au {\em contenu} informationnel de votre document. 
-Pour le texte à proprement parler de votre document (les mots, les paragraphes), 
-c'est assez facile à comprendre. 
+Pour le texte de votre document (les mots, les paragraphes), c'est assez facile à comprendre. 
 Mais la question se pose pour les autres informations que vous souhaitez exprimer, 
 par exemple \quotation{ici, il faut telle image}, \quotation{ce texte est un titre de chapitre}, \quotation{ce texte doit être en rouge}, \quotation{la page doit avoir un format A4}…
 
 Comme le fichier ne contient que des suites de caractères, 
-toutes ces informations (sémantique, couleurs, composition, mise en page...) 
+toutes ces informations (sémantique, structure, couleurs, composition, mise en page...) 
 vont devoir être décrites par des suites de caractères. Cela se fait en deux temps, avec les deux concepts suivants.
 
 \stopsubsubsubject
@@ -76,19 +75,18 @@ de \ConTeXt\ ce qui nécessite un peu d'effort et de rigueur.
 \startsubsubsubject [title={La composition et mise en page}]
 
 Une fois les différents types d'information repérés,
-l'utilisateur doit encore indiquer les règles de composition et de mise en page
-à appliquer à chaque type,
-c'est la {\em composition et mise en page}.
+l'utilisateur doit encore indiquer les règles de composition et de mise en page à appliquer à chacun.
 La science informatique a également développé pour cela des techniques et langages dédiés tels que 
 \goto{CSS}[url(https://fr.wikipedia.org/wiki/Feuilles_de_style_en_cascade)] (language de composition pour les éléments balisés avec HTML),
 et... \goto{\ConTeXt}[url(https://wiki.contextgarden.net)].
 
 Le langage \ConTeXt\ permet donc, au-delà du balisage, de configurer l'ensemble des règles de composition et de mise en page à appliquer.
-Ce qui est très appréciable et apprécié, c'est que la configuration par défaut donne d'excellents résultats et
-il suffit ensuite de la personnaliser, la compléter, la détailler.
 
-L'art de la composition étant particulièrement riche et vaste ( \quotation{tout est permis} et \quotation{l'imagination est la seule limite}),
-le vocabulaire de \ConTeXt\ l'est également, même s'il bénéficie d'un effort continu de standardisation depuis 1990.
+Ce qui est très appréciable et apprécié, c'est que la configuration par défaut donne d'excellents résultats.
+Il {\em suffit} ensuite de la personnaliser, la compléter, la détailler.
+On découvre alors que l'art de la composition est particulièrement riche et vaste 
+-- \quotation{tout est permis} et \quotation{l'imagination est la seule limite} --
+et le vocabulaire de \ConTeXt\ l'est également même s'il bénéficie d'un effort continu de standardisation.
 
 \stopsubsubsubject
 
@@ -96,7 +94,7 @@ On peut estimer au nombre de 100 les mots de vocabulaire
 qui couvriront la très grande majorité de vos besoins -- même pour des documents complexes -- 
 à la fois de balisage, de composition et de mise en page.
 
-Pour s'y repérer, ce document procéde en 4 parties.
+Pour progresser dans cet apprentissage, ce document procéde en 4 parties.
 
 \startsubsection [title={Les fichiers sources}]
 
@@ -434,14 +432,14 @@ Nous verrons en \in{Partie}[part:complements] le balisage et la composition des 
 
 \stopcolumns
 
-Pour finir cette introduction, la galerie suivante vous donnera un aperçu visuel
-de l'ensemble des différents éléments évoqués durant cette introduction.
 
 \stopsection
 
 
-
 \startsection[title=Galerie]
+
+Pour finir cette introduction, la galerie suivante vous donnera un aperçu visuel
+de l'ensemble des différents éléments évoqués durant cette introduction.
 
 % pdfjam demonstration.pdf  --nup 2x22 --frame true   --delta "1mm 2mm" --outfile resultat.pdf
 % pdfcrop resultat.pdf resultat.pdf
