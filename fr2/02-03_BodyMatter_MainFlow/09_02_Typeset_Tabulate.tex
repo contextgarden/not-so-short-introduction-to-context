@@ -1,0 +1,324 @@
+\startcomponent 02-04-01-09_Typeset_Tabulate
+
+\environment introCTX_env_00
+
+%==============================================================================
+
+\startsection
+  [title=Tabulate,
+  reference=sec:cmptabulate]
+
+
+\TocChap
+
+
+\startitemize[n]
+
+\item {\bf Délimiteur de colonnes} : le caractère \MyKey{\|} est utilisé pour délimiter les colonnes de la table. Ainsi, par exemple,  \MyKey{[\|lT\|rB\|]} décrira un tableau avec deux colonnes, dont l'une aura les caractéristiques associées aux indicateurs \MyKey{l} et \MyKey{T} (que nous verrons immédiatement après) et la deuxième colonne aura les caractéristiques associées aux indicateurs \MyKey{r} et \MyKey{B}. Un tableau simple à trois colonnes alignées à gauche, par exemple, serait décrit comme suit : \MyKey{[\|l\|l\|l\|]}.
+
+\item {\bf Détermination de la nature fondamentale des cellules d'une colonne:} La première chose à déterminer lorsque nous construisons notre tableau est de savoir si nous voulons que le contenu de chaque cellule soit écrit sur une seule ligne, ou si, au contraire, si le texte d'une colonne est trop long, nous voulons que notre tableau le répartisse sur deux lignes ou plus. Dans l'environnement {\tt tabulate}, cette question n'est pas tranchée cellule par cellule mais est considérée comme une caractéristique des colonnes.
+
+
+  \startitemize[a]
+
+\item {\em Cellules n'occupant qu'une ligne:} Si le contenu des cellules d'une colonne, quelle que soit leur longueur, doit être écrit sur une seule ligne, nous devons spécifier l'alignement du texte dans la colonne, qui peut être à gauche (\MyKey{l}, de {\em left}), à droite (\MyKey{r}, de {\em right}) ou centré
+    (\MyKey{c}, de {\em center}).
+
+
+    \startSmallPrint
+      
+En principe, ces colonnes seront aussi larges que nécessaire pour s'adapter à la cellule la plus large. Mais nous pouvons limiter la largeur de la colonne avec le spécificateur \MyKey{w(Width)}. Par exemple, \MyKey{[\|rw(2cm)\|c\|c\|]} décrira un tableau avec deux colonnes, la première alignée à droite et d'une largeur exacte de 2 centimètres, et les deux autres centrées et sans limitation de largeur.
+
+Il convient de noter que la limitation de la largeur des colonnes à une ligne peut entraîner le chevauchement du texte d'une colonne avec celui de la colonne suivante. Je vous conseille donc, lorsque vous avez besoin de colonnes de largeur fixe, de toujours utiliser des colonnes de cellules multilignes.
+
+    \stopSmallPrint
+    
+\item {\em Cellules pouvant occuper plus d'une ligne si nécessaire} : le spécificateur \MyKey{p} génère des colonnes dans lesquelles le texte de chaque cellule occupera autant de lignes que nécessaire. Si l'on indique simplement \MyKey{p}, la largeur de la colonne sera la pleine largeur disponible. Mais il est également possible d'indiquer \MyKey{p(Width)}, auquel cas la largeur sera celle expressément spécifiée. Ainsi, les exemples suivants :
+
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\startbuffer
+\NC Colonne 1\NC Colonne 2\NC Colonne 3\NC\NR
+\NC Ligne 1  \NC Texte 1.2\NC Texte 1.3\NC\NR
+\NC Ligne 2  \NC Texte 2.2\NC Texte 2.3\NC\NR
+\NC Ligne 3  \NC Texte 3.2\NC Texte 3.3\NC\NR
+\NC Ligne 4  \NC Texte 4.2\NC Texte 4.3\NC\NR
+\stopbuffer
+
+\starttabulate[|l|r|p|]
+\getbuffer
+\stoptabulate
+\blank[big]
+\starttabulate[|r|p(4cm)|cw(.2\textwidth)|]
+\getbuffer
+\stoptabulate
+\blank[big]
+\starttabulate[|p|p|p|]
+\getbuffer
+\stoptabulate
+\stopDemoVW}
+
+
+Le premier exemple créera un tableau avec trois colonnes, la première et la deuxième d'une seule ligne, alignées, respectivement, à gauche et à droite, et la troisième, qui occupera la largeur restante et la hauteur nécessaire pour accueillir tout son contenu. 
+Dans le deuxième exemple, la deuxième colonne mesurera exactement quatre centimètres de large, quel que soit son contenu (si elle ne tient pas dans cet espace, elle occupera plus d'une ligne), et la troisième a une largeur  proportionnelle à la largeur maximale de la ligne. Dans le dernier exemple, il y aura trois colonnes de largeur égales occupant l'espace disponible.
+
+  \stopitemize
+
+  \startSmallPrint
+
+Notez qu'en réalité, si une cellule est un quadrilatère, ce que fait le spécificateur \MyKey{p} est d'autoriser une hauteur variable pour les cellules d'une colonne, en fonction de la longueur du texte.
+  
+  \stopSmallPrint
+
+\item {\bf Ajout d'indications à la description de la colonne, sur le style et la variante de police à utiliser} : une fois que la nature de base de la colonne (largeur et hauteur, automatique ou fixe, des cellules) a été décidée, on peut encore ajouter, dans la description du contenu de la colonne, un caractère représentatif du {\em formatage} dans lequel il doit être écrit. Ces caractères peuvent être : \MyKey{B} pour le gras, \MyKey{I} pour l'italique, \MyKey{S} pour l'oblique, \MyKey{R} pour la lettre de style romain ou \MyKey{T} pour la lettre de style machine à écrire.
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\startbuffer
+\NC Colonne 1\NC Colonne 2\NC Colonne 3\NC\NR
+\NC Ligne 1  \NC Texte 1.2\NC Texte 1.3\NC\NR
+\NC Ligne 2  \NC Texte 2.2\NC Texte 2.3\NC\NR
+\NC Ligne 3  \NC Texte 3.2\NC Texte 3.3\NC\NR
+\NC Ligne 4  \NC Texte 4.2\NC Texte 4.3\NC\NR
+\stopbuffer
+
+\starttabulate[|lB|rI|pT|]
+\getbuffer
+\stoptabulate
+\stopDemoVW}
+
+\head {\bf Autres aspects supplémentaires qui peuvent être spécifiés dans la description des colonnes du tableau} :
+
+  \startitemize[1]
+
+\item {\em Colonnes avec formules mathématiques} : les spécificateurs \MyKey{m} et \MyKey{M} permettent d'activer le mode mathématique dans une colonne sans avoir à le spécifier dans chacune de ses cellules. Les cellules de cette colonne ne pourront pas contenir de texte normal.
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\startbuffer
+\NC Colonne 1\NC Colonne 2\NC Colonne 3\NC\NR
+\NC Ligne 1  \NC \int_{a}^{b} f(x) \NC\int_{a}^{b} f(x)\NC\NR
+\NC Ligne 2  \NC  c^2 = a^2 + b^2  \NC c^2 = a^2 + b^2 \NC\NR
+\stopbuffer
+
+\starttabulate[|lB|m|M|]
+\getbuffer
+\stoptabulate
+\stopDemoVW}
+
+\startSmallPrint
+
+
+Bien que \TeX, le prédécesseur de \ConTeXt\, ait été créé pour la composition de tout type de mathématiques, je n'ai pratiquement rien dit jusqu'à présent sur l'écriture des mathématiques. Dans le mode mathématique (que je n'expliquerai pas), \ConTeXt\ modifie nos règles normales et utilise même des polices différentes. Le mode maths a deux variations : l'une que nous pourrions appeler {\em linéaire} dans la mesure où la formule est logée dans une ligne contenant du texte normal (indicateur \MyKey{m}), et le {\em mode maths complet} qui affiche les formules dans un environnement où il n'y a pas de texte normal. La principale différence entre les deux modes, dans un tableau, est essentiellement la taille dans laquelle la formule sera écrite et l'espace horizontal et vertical qui l'entoure.
+
+    \stopSmallPrint
+
+  \item {\em Ajouter un espace blanc horizontal supplémentaire autour du contenu des cellules d'une colonne} : avec les indicateurs \MyKey{in}, \MyKey{jn} et \MyKey{kn}, nous pouvons ajouter un espace blanc supplémentaire à gauche du contenu de la colonne (\MyKey{in}), à droite (\MyKey{jn}) ou des deux côtés (\MyKey{kn}). Dans les trois cas, \MyKey{n} représente le nombre par lequel il faut multiplier l'espace blanc qui serait normalement laissé sans l'un de ces spécificateurs (par défaut, la moyenne est un {\em em}). Ainsi, par exemple, \MyKey{\|j2r\|} indiquera que nous sommes face à une colonne qui sera alignée à droite, et dans laquelle nous voulons un espace blanc d'une largeur de 1 {\em em}.
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\startbuffer
+\VL Colonne 1\VL Colonne 2\VL Colonne 3\VL\NR
+\VL Ligne 1  \VL Texte 1.2\VL Texte 1.3\VL\NR
+\VL Ligne 2  \VL Texte 2.2\VL Texte 2.3\VL\NR
+\stopbuffer
+
+\starttabulate[|i2l|j2l|k2l|]
+\getbuffer
+\stoptabulate
+\starttabulate[|l|j2l|k2l|]
+\getbuffer
+\stoptabulate
+\starttabulate[|i2l|l|k2l|]
+\getbuffer
+\stoptabulate
+\starttabulate[|i2l|j2l|l|]
+\getbuffer
+\stoptabulate
+\stopDemoVW}
+
+  \item {\em Ajout de texte avant ou après le contenu de chaque cellule d'une colonne}. Les spécificateurs {\tt b\{Text\}} et {\tt a\{Text\}} font en sorte que le texte entre accolades soit écrit avant (\MyKey{b}, de {\em before}) ou après (\MyKey{a}, de {\em after}) le contenu de la cellule.
+
+
+  \item {\em Appliquer une commande de formatage à l'ensemble de la colonne}. Les indicateurs \MyKey{B}, \MyKey{I}, \MyKey{S}, \MyKey{R}, \MyKey{T} que nous avons mentionnés précédemment ne couvrent pas toutes les possibilités de formatage : par exemple, il n'y a pas d'indicateur pour les petites capitales, ou pour {\em sans serif}, ou qui affecte la taille de la police. Avec l'indicateur \MyKey{f\backslash Command}, nous pouvons spécifier une commande de format qui sera automatiquement appliquée à toutes les cellules d'une colonne. Par exemple, \MyKey{\|lf\backslash cap\|} permet de composer le contenu de la colonne en petites capitales.
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\startbuffer
+\VL Colonne 1\VL Colonne 2\VL Colonne 3\VL\NR
+\VL Ligne 1  \VL Texte 1.2\VL Texte 1.3\VL\NR
+\VL Ligne 2  \VL Texte 2.2\VL Texte 2.3\VL\NR
+\stopbuffer
+
+\starttabulate[|lb{- }|la{.}|lf\cap|]
+\getbuffer
+\stoptabulate
+\stopDemoVW}
+
+
+\item {\em Application d'une commande quelconque à toutes les cellules de la colonne}. Enfin, l'indicateur \MyKey{h\backslash Command} appliquera la commande spécifiée à toutes les cellules de la colonne.
+
+\stopitemize
+
+\stopitemize
+
+
+Dans le \in{tableau}[tbl:examplestabulate], vous trouverez quelques exemples de chaînes de spécification de format de tableau.
+
+\placetable
+  [here]
+  [tbl:examplestabulate]
+  {Quelques exemples de la façon de spécifier le format des colonnes dans \tex{tabulate}}
+{\starttabulate[|lT|p(.6\textwidth)|]
+\HL
+\NC{\bf\rm Spécification du format}
+\NC{\bf Signification}
+\NR
+\HL
+\NC \|l\|
+\NC Génère une colonne dont la largeur est automatiquement alignée à gauche.
+\NR
+\NC \|rB\|
+\NC Génère une colonne dont la largeur est automatiquement alignée à droite, et en gras.
+\NR
+\NC \|cIm\|
+\NC Génère une colonne activée pour le contenu mathématique. Centré et en italique.
+\NR
+\NC \|j4cb\{---\}\|
+\NC Cette colonne aura un contenu centré, commencera par un tiret em (---) et ajoutera 2 {\em ems} d'espace blanc à droite.
+\NR
+\NC \|l\|p(.7\tex{textwidth})\|
+\NC génère deux colonnes : la première est alignée à gauche et de largeur automatique. La seconde occupe 70\% de la largeur totale de la ligne.
+\NR
+\HL
+\stoptabulate}
+
+Une fois le tableau conçu, il faut en saisir le contenu. Pour expliquer comment faire, je vais commencer par décrire comment remplir un tableau dans lequel des lignes séparent les lignes et les colonnes :
+
+\startitemize
+
+\item Nous commençons par dessiner une ligne horizontale. Dans un tableau, cela se fait avec la commande \PlaceMacro{HL} \tex{HL} (à partir de {\em Horizontal Line}).
+
+\item Ensuite, nous écrivons la première ligne : au début de chaque cellule, nous voulons indiquer qu'une nouvelle cellule commence et qu'une ligne verticale doit être tracée. Cela se fait avec la commande \PlaceMacro{VL} \tex{VL} (à partir de {\em Vertical Line}). Nous commençons donc avec cette commande, et nous écrivons le contenu de chaque cellule. Chaque fois que nous changeons de cellule, nous répétons la commande \tex{VL}.
+
+\item À la fin d'une ligne, nous indiquons expressément qu'une nouvelle ligne va être commencée avec la commande \PlaceMacro{NR} \tex{NR} (de {\em Next Row}). Ensuite, nous répétons la commande \tex{HL} pour tracer une nouvelle ligne horizontale.
+
+\item Et ainsi, une par une, nous écrivons toutes les lignes du tableau. Lorsque nous avons terminé, nous ajoutons, en supplément, une commande \tex{NR} et une autre \tex{HL} pour fermer la grille avec la ligne horizontale inférieure.
+
+\stopitemize
+
+
+Si nous ne voulons pas dessiner la grille de la table, nous supprimons les commandes \tex{HL} et remplaçons les commandes \tex{VL} par \PlaceMacro{NC}\tex{NC} (de l'option
+{\em New Column}).
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\starttabulate[|l|l|l|]
+\HL
+\VL Colonne 1\VL Colonne 2\VL Colonne 3\VL\NR
+\HL
+\VL Ligne 1  \VL Texte 1.2\VL Texte 1.3\VL\NR
+\VL Ligne 2  \VL Texte 2.2\VL Texte 2.3\VL\NR
+\HL
+\stoptabulate
+\stopDemoVW}
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\starttabulate[|l|l|l|]
+\NC Colonne 1\NC Colonne 2\NC Colonne 3\NC\NR
+\HL
+\TB
+\NC Ligne 1  \NC Texte 1.2\NC Texte 1.3\NC\NR
+\NC Ligne 2  \NC Texte 2.2\NC Texte 2.3\NC\NR
+\stoptabulate
+\stopDemoVW}
+
+Ce n'est pas particulièrement difficile lorsque l'on s'y habitue, même si lorsque l'on regarde le code source d'une table, il est difficile de se faire une idée de ce à quoi elle ressemblera. Dans \in{table}[tbl:tablecommands], nous voyons les commandes qui peuvent (et doivent) être utilisées dans un tableau. Il y en a certaines que je n'ai pas expliquées, mais je pense que la description que j'ai donnée est suffisante.
+
+Et maintenant, à titre d'exemple, je vais transcrire le code avec lequel la \in{table}[tbl:tablecommands] suivante a été écrite.
+
+
+\PlaceMacro{NN}
+\PlaceMacro{TB}
+\PlaceMacro{NB}
+
+\placefigure [force,here,none]
+  [fig:tablecommands]
+  {Commandes permettant de définir le contenu d'un tableau}
+{\startDemoVW
+\placetable
+  [here,force]
+  [tbl:tablecommands]
+  {Commandes permettant de définir le contenu d'un tableau}
+{\starttabulate[|lT|p|]
+\HL
+\NC {\bf Commande}
+\NC {\bf Signification}
+\NR
+\HL
+\NC \tex{HL}
+\NC Insère une ligne horizontale
+\NR
+\NC \tex{NR}
+\NC Commence une nouvelle ligne
+\NR
+\NC \tex{NC}
+\NC Commence une nouvelle colonne
+\NR
+\NC \tex{VL}
+\NC Commence une nouvelle colonne en insérant une ligne verticale de séparation
+\NR
+\NC \tex{EQ}
+\NC Commence une nouvelle colonne en insérant un symbole (\quotation{:} par défaut modifiable avec \tex[{setuptabulate[EQ={texte}]})
+\NR
+\NC \tex{NN}
+\NC Commence une colonne en mode mathématique
+\NR
+\NC \tex{TB}
+\NC Ajoute un espace vertical supplémentaire entre deux lignes
+\NR
+\NC \tex{NB}
+\NC Indique que la ligne suivante commence un bloc indivisible dans lequel il ne peut y avoir de saut de page.
+\NR
+\HL
+\stoptabulate}
+\stopDemoVW}
+
+
+Le lecteur remarquera qu'en général, j'ai utilisé une (voire deux) lignes de texte pour chaque cellule. Dans un vrai fichier source, je n'aurais utilisé qu'une ligne de texte pour chaque cellule ; dans l'exemple, j'ai séparé les lignes trop longues. L'utilisation d'une seule ligne par cellule me facilite l'écriture du tableau car ce que je fais, c'est écrire le contenu de chaque cellule, sans commandes de séparation des lignes ou des colonnes. Lorsque tout est écrit, je sélectionne le texte du tableau et je demande à mon éditeur de texte d'insérer \quotation{\tex{NC }} au début de chaque ligne. Ensuite, toutes les deux lignes (car le tableau a deux colonnes), j'insère une ligne qui ajoute la commande \tex{NR}, car toutes les deux colonnes commencent une nouvelle ligne. Enfin, à la main, j'insère les commandes \tex{HL} aux endroits où je veux qu'une ligne horizontale apparaisse. Il me faut presque plus de temps pour le décrire que pour le faire !
+
+Mais voyez aussi comment, dans un tableau, nous pouvons utiliser les commandes ordinaires de \ConTeXt. En particulier, dans ce tableau, nous utilisons continuellement \tex{tex} qui est expliqué dans \in{section}[sec:verbatim].
+
+Pour finir, l'environnement tabulate présente les commandes habituelles pour en définir des variantes, avec \tex{definetabulate}, etles configurer, avec \tex{setuptabulate}.
+
+\PlaceMacro{definetabulate}
+\PlaceMacro{setuptabulate}
+
+\placefigure [force,here,none]
+  [fig:tablecommands]
+  {Commandes pour définir et configurer ses environnements tabulate}
+{\startDemoVW
+\definetabulate [MonBeauTableau]  [|lk1B|lk1|]
+\setuptabulate
+  [MonBeauTableau]
+  [rulethickness=1mm, % épaisseur des filets
+   rulecolor=darkred, % couleur des filets
+   distance=1em,      % distance filets / texte
+   EQ={:},]
+\startMonBeauTableau
+\HL
+\NC Ligne 1  \EQ Texte 1.2\NC Texte 1.3\NC\NR
+\NC Ligne 2  \EQ Texte 2.2\NC Texte 2.3\NC\NR
+\HL
+\stopMonBeauTableau
+\stopDemoVW}
+
+
+\stopsection
+
+%==============================================================================
+
+\stopcomponent
+
+%%% TeX-master: "../introCTX_fra.tex"

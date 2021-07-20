@@ -20,8 +20,8 @@ for i=1 upto 200 :
 endfor ;
   
   
-pair Pa ; Pa = (PaperWidth*19/20, PaperWidth/2.5);
-pair Pb ; Pb = (PaperWidth*19/20, PaperHeight - (PaperWidth*2/20));
+pair Pa ; Pa := (PaperWidth*19/20, PaperWidth/2.5);
+pair Pb ; Pb := (PaperWidth*19/20, PaperHeight - (PaperWidth*2/20));
 
 picture Pict[] ;
 Pict[1] := textext.llft("\getvariable{document}{titleA}") 

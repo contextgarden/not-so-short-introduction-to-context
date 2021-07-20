@@ -34,9 +34,10 @@
 \startbodymatter
 
  
-\startpart        [title=Les fichiers sources,reference={part:src}]
+\startpart        [title=Les fichiers sources,
+                   reference=part:src]
 \setups           [background:B]
-
+f
 \component        01_Source_FirstDoc
 \component        02_Source_Commands
 \component        03_Source_Files
@@ -45,7 +46,8 @@
 
 %------------------------------------------------------------------------------
 
-\startpart        [title={Composition d'ensemble},reference=part:typset:global]
+\startpart        [title={Composition d'ensemble},
+                   reference=part:global]
 \setups           [background:C]
 
 \component        01_Typeset_PageLayout
@@ -61,7 +63,7 @@
 % %------------------------------------------------------------------------------
 
 \startpart        [title=Balisage et composition des éléments du flux principal,
-                   reference=cap:mainflow]
+                   reference=part:mainflow]
 
 \setups           [background:D]
 
@@ -156,7 +158,7 @@
 %------------------------------------------------------------------------------
 
 \startpart        [title=Balisage et composition des compléments au flux principal,
-                   reference=cap:complements]
+                   reference=part:complements]
 
 \setups           [background:E]
 
@@ -222,7 +224,8 @@
 
 \startappendices
 
-\startpart        [title=Appendices, reference=part:annexes]
+\startpart        [title=Appendices, 
+                   reference=part:annexes]
 
 \setups           [background:A]
 

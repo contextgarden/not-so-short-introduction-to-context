@@ -3,13 +3,26 @@
 \environment introCTX_env_00
 
 \startchapter
-  [title=Introduction\\et vue d'ensemble,reference=cap:panorama]
+  [title=Introduction\\~et vue d'ensemble,reference=cap:panorama]
 
 %==============================================================================
 
-Pour être à l'aise avec l'utilisation de \ConTeXt , comme pour toute technologie
-informatique, il en faut comprendre la logique sous-jacente. 
-La logique de \ConTeXt\ s'appuie sur trois concepts~:
+\ConTeXt\ est un {\em système de composition et de mise en page} 
+de documents électroniques. Il vise à donner à son utilisateur un contrôle le plus complet 
+et précis possible sur l'impression (sur papier) ou l'affichage (sur écran)
+des documents électroniques.
+
+\startitemize
+\item {\em La composition} au sens de l'imprimerie, consiste à mettre en forme
+      le contenu textuel pour préparer son impression, son affichage.
+\item {\em La mise en page}, toujours au sens de l'imprimerie, consiste à réunir 
+      et assembler tous les éléments qui constitueront la page finalisée
+      (textes mais aussi images, tableaux, couleurs...)
+\stopitemize
+
+Pour être à l'aise avec l'utilisation de \ConTeXt , comme avec toute technologie
+informatique, il est bon d'en comprendre la logique sous-jacente. 
+Celle de \ConTeXt\ s'appuie sur trois concepts~:
 
 \startitemize[n]
 \item les fichiers sources,
@@ -17,374 +30,418 @@ La logique de \ConTeXt\ s'appuie sur trois concepts~:
 \item la composition et la mise en page.
 \stopitemize
 
-L'objectif des deux premières parties est de donner une sorte 
-d'\quotation{essentiel en moins de 100 pages}, pour un fois l'esprit clair
-sur les grandes règles syntaxiques et le balisage, vous puissiez vous concentrer
-sur la composition, la mise en page, c'est à dire l'ensemble des configurations
-qui vous permettrons de personnaliser votre document.
+\startsubsubsubject [title={Les fichiers sources}]
 
-% * Section 1 - le fichier source =============================================
-
-
-\startsubsection [title=Les fichiers sources]
-
-Il s'agit de la donnée d'entrée et elle fera l'objet de la \in{Partie}[part:src].
-Quelle est la forme de la donnée d'entrée ?
-Et bien ce qu'il y a de plus simple en informatique~: des fichiers textes. 
+Les fichiers sources constituent la donnée d'entrée.
+Il s'agit de ce qu'il y a de plus simple en informatique~: des fichiers textes. 
 Ce sont des fichiers lisibles sur tous les ordinateurs du monde, avec un simple éditeur de texte.
 
 Cette universalité se fait au prix de deux conditions.
-Ils ne contiennent que des suites de caractères (pas de couleur, pas de mise en page, pas d'images, pas de sons… rien que du texte). 
-Ils utilisent un codage (c'est à dire des règles standards de représentation informatique) des caractères particulier, que l'on appelle \goto{UTF-8}[url(https://fr.wikipedia.org/wiki/UTF-8)]. Ce codage, dorénavant utilisé par plus de 97\% des sites web, permet de représenter les milliers de caractères du répertoire universel, c'est à dire des langues du monde.
+Ces fichiers ne contiennent que des suites de caractères 
+(pas de couleur, pas de mise en page, pas d'images, pas de sons… rien que du texte).
+Et ils utilisent un codage particulier des caractères 
+(c'est à dire des règles standards de représentation informatique des caractères)
+que l'on appelle \goto{UTF-8}[url(https://fr.wikipedia.org/wiki/UTF-8)]. 
+Ce codage, dorénavant utilisé par plus de 97\% des sites web, 
+permet de représenter les milliers de caractères du répertoire universel des caractères codés
+(c'est à dire la très grande majorité des caractères utilisés par les différentes langues du monde).
 
-Il y a d'autres codage possibles, mais dorénavant, il est plus que recommandé de travailler avec des fichiers codés en UTF-8. Et si vous rencontrez des difficultés, assurez vous que vos fichiers textes sont en UTF-8.
+\ConTeXt\ prend donc en entrée des fichiers textes. 
+Ces derniers servent de {\em contenant} au {\em contenu} informationnel de votre document. 
+Pour le texte à proprement parler de votre document (les mots, les paragraphes), 
+c'est assez facile à comprendre. 
+Mais la question se pose pour les autres informations que vous souhaitez exprimer, 
+par exemple \quotation{ici, il faut telle image}, \quotation{ce texte est un titre de chapitre}, \quotation{ce texte doit être en rouge}, \quotation{la page doit avoir un format A4}…
 
-\ConTeXt\ prend donc en entrée des fichiers textes. Ces derniers doivent donc  contenir le contenu de votre document. Pour ce qui est donc de la partie textuelle de votre document, c'est assez simple à envisager. Mais la question se pose pour ce qui n'est pas du texte, par exemple les informations telles que \quotation{ce texte est un titre de chapitre}, \quotation{ce texte doit être en rouge}, \quotation{ici, il faut une image}….
+Comme le fichier ne contient que des suites de caractères, 
+toutes ces informations (sémantique, couleurs, composition, mise en page...) 
+vont devoir être décrites par des suites de caractères. Cela se fait en deux temps, avec les deux concepts suivants.
 
-Comme le fichier ne contient que des suites de caractères, toutes ces informations, dites information de composition, à défaut d'être vue, vont donc devoir être décrite par… des suites de caractères puisque c'est la seule chose que l'on peut stocker dans un fichier texte.
+\stopsubsubsubject
 
-L'informatique a donc développé des techniques et langages de balisage tels que 
+\startsubsubsubject [title={Le balisage}]
+
+L'utilisateur doit distinguer les différents type d'information au sein des fichiers sources.
+La science informatique a développé pour cela des techniques et langages dits de {\em balisage} tels que 
 \goto{HTML}[url(https://fr.wikipedia.org/wiki/Hypertext_Markup_Language)],   
 \goto{Markdown}[url(https://daringfireball.net/projects/markdown/syntax)], 
 \goto{Org-mode}[url(https://orgmode.org/)], 
 et \goto{\ConTeXt}[url(https://wiki.contextgarden.net)].
 
-\stopsubsection
+Apprendre \ConTeXt\ implique donc d'apprendre le langage de balisage 
+de \ConTeXt\ ce qui nécessite un peu d'effort et de rigueur.
+
+\stopsubsubsubject 
+
+\startsubsubsubject [title={La composition et mise en page}]
+
+Une fois les différents types d'information repérés,
+l'utilisateur doit encore indiquer les règles de composition et de mise en page
+à appliquer à chaque type,
+c'est la {\em composition et mise en page}.
+La science informatique a également développé pour cela des techniques et langages dédiés tels que 
+\goto{CSS}[url(https://fr.wikipedia.org/wiki/Feuilles_de_style_en_cascade)] (language de composition pour les éléments balisés avec HTML),
+et... \goto{\ConTeXt}[url(https://wiki.contextgarden.net)].
+
+Le langage \ConTeXt\ permet donc, au-delà du balisage, de configurer l'ensemble des règles de composition et de mise en page à appliquer.
+Ce qui est très appréciable et apprécié, c'est que la configuration par défaut donne d'excellents résultats et
+il suffit ensuite de la personnaliser, la compléter, la détailler.
+
+L'art de la composition étant particulièrement riche et vaste ( \quotation{tout est permis} et \quotation{l'imagination est la seule limite}),
+le vocabulaire de \ConTeXt\ l'est également, même s'il bénéficie d'un effort continu de standardisation depuis 1990.
+
+\stopsubsubsubject
+
+On peut estimer au nombre de 100 les mots de vocabulaire
+qui couvriront la très grande majorité de vos besoins -- même pour des documents complexes -- 
+à la fois de balisage, de composition et de mise en page.
+
+Pour s'y repérer, ce document procéde en 4 parties.
+
+\startsubsection [title={Les fichiers sources}]
+
+Ils font l'objet de la \in{Partie}[part:src].
+Pour fixer rapidement les idées, nous commencerons par un premier exemple au \in{Chapitre}[cap:firstdoc]
+et nous découvrirons une première balise~: \tex{starttext}.
+La logique et les règles syntaxiques seront ensuite explicitées au \in{Chapitre}[cap:commands].
+Puis nous verrons comment organiser nos fichiers sources au \in{Chapitre}[cap:sourcefile] avec notamment~:
+
+\start
+\tfx
+\bTABLE[option=stretch]
+\setupTABLE[frame=off]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on]
+\bTR \bTD Organisation des fichiers sources \eTD \eTR
+\bTR \bTD \tex{startproject}                \eTD \eTR
+\bTR \bTD \tex{startproduct}                \eTD \eTR
+\bTR \bTD \tex{product}                     \eTD \eTR
+\bTR \bTD \tex{startcomponent}              \eTD \eTR
+\bTR \bTD \tex{component}                   \eTD \eTR
+\bTR \bTD \tex{startenvironment}            \eTD \eTR
+\bTR \bTD \tex{environment}                 \eTD \eTR
+\bTR \bTD \tex{usepath}                     \eTD \eTR
+\eTABLE
+\stop
+
+
+\stopsubsection 
 
 % * Section 2 - la composition et mise en page ================================
 
-\startsubsection [title=La composition d'ensemble]
+\startsection [title=La composition d'ensemble]
 
-Le langage \ConTeXt\ permet, au-delà du balisage, de configurer l'ensemble des règles de composition à appliquer. Ce qui est très appréciable et apprécié, c'est que la configuration par défaut donne d'excellents résultats. Il est agréable de pouvoir travailler en complétant et en améliorant une base de qualité.
+Nous verrons en \in{Partie}[part:global] les éléments de composition d'ensemble. 
+Ils sont désignés ainsi car ils affectent l'ensemble de la composition et mise en page du document final.
+Il s'agit des 7 sujets suivants~:
 
-Par contre, cela représente de nouveau un certain vocabulaire \ConTeXt\ à s'approprier. \ConTeXt\ bénéficie d'un important effort de standardisation durant les années, et vous aurez rapidement des réflexes en vous appuyant sur la base d'une centaine de commande que nous allons voir (100 commandes qui permettent de couvrir quasiment l'ensemble des besoins pour un document très complet comme une thèse ou un rapport d'étude). Le flux de travail est par contre très différents des logiciels auxquels certains utilisateurs sont habitués. Avec \ConTeXt\ il s'agit de remplacer par des lignes de texte les multiples sélection à la souris et navigation dans les menus et sous-menus graphiques que proposent certains logiciels. En quelque sorte, vous programmer la production du document de sortie. Cela représente un coût d'apprentissage non négigeable, par contre cela offre la force de la programmation~: organisation, systématisation, automatisation, reproduction…
+\startcolumns[n=2]
+\tfx
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]
+\bTR \bTD Mise en page                           \eTD \eTR 
+\bTR \bTD \tex{definepapersize}                  \eTD \eTR
+\bTR \bTD \tex{setuppapersize}                   \eTD \eTR
+\bTR \bTD \tex{setuplayout}                      \eTD \eTR
+\bTR \bTD \tex{setupbackgrounds}                 \eTD \eTR
+\bTR \bTD \tex{showframe}                        \eTD \eTR
+\eTABLE
 
-D'autres éléments que ceux cités précédemment seront abordés en premier, avec la \in{Partie}[part:typset:global]~: les éléments de composition d'ensemble. 
-Ils sont désignés ainsi car ils affectent l'ensemble de la composition et mise en page des documents. Il s'agit~:
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]                                                                                         
+\bTR \bTD En-tête, pied et numérotation de page  \eTD \eTR
+\bTR \bTD \tex{setupfootertexts}                 \eTD \eTR
+\bTR \bTD \tex{setupheadertexts}                 \eTD \eTR
+\bTR \bTD \tex{setuppagenumbering}               \eTD \eTR                                           
+\eTABLE
 
-\startitemize[n,columns,two]
-\item Mise en page
-\startitemize
-\item \tex{definepapersize}
-\item \tex{setuppapersize}
-\item \tex{setuplayout}
-\item \tex{setupbackgrounds}
-\item \tex{showframe}
-\stopitemize
-\item En-tête, pied et numérotation de page
-\startitemize
-\item \tex{setupfootertexts}
-\item \tex{setupheadertexts}
-\item \tex{setuppagenumbering}
-\stopitemize
-\item Paragraphes
-\startitemize
-\item \tex{starttext}
-\item \tex{par}
-\item \tex{\}
-\item \tex{setupinterlinespace}
-\item \tex{setupwhitespace}
-\item \tex{setupalign}
-\item \tex{setuptolerance}
-\stopitemize
-\item Polices
-\startitemize
-\item \tex{setupbodyfont}
-\item \tex{switchtobodyfont}
-\item \tex{definedfont}
-\item \tex{definefontfeature}
-\stopitemize
-\item Couleurs
-\startitemize
-\item \tex{usecolors}
-\item \tex{color}
-\item \tex{definecolor}
-\stopitemize
-\item Langue
-\startitemize
-\item \tex{language}
-\item \tex{mainlanguage}
-\item \tex{setcharacterspacing}
-\stopitemize
-\item Interactivité
-\startitemize
-\item \tex{setupattachments}
-\item \tex{setupinteraction}
-\stopitemize
-\stopitemize
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]                                                
+\bTR \bTD Paragraphes                            \eTD \eTR                 
+\bTR \bTD \tex{par}                              \eTD \eTR
+\bTR \bTD \tex{crlf}                             \eTD \eTR
+\bTR \bTD \tex{setupinterlinespace}              \eTD \eTR
+\bTR \bTD \tex{setupwhitespace}                  \eTD \eTR
+\bTR \bTD \tex{setupalign}                       \eTD \eTR
+\bTR \bTD \tex{setuptolerance}                   \eTD \eTR
+\eTABLE
 
-La \in{Partie}[part:typset:local] abordera ensuite la composition et le formatage des éléments dont nous auront traité du balisage dans la \in{Partie}[part:mkp]. Tous proposent des choix, des options, des possibilités de composition et de formatage. L'objectif sera de vous en donner les principales clés.
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]                                                                                                              
+\bTR \bTD Polices                                \eTD \eTR
+\bTR \bTD \tex{setupbodyfont}                    \eTD \eTR
+\bTR \bTD \tex{switchtobodyfont}                 \eTD \eTR
+\bTR \bTD \tex{definedfont}                      \eTD \eTR
+\bTR \bTD \tex{definefontfeature}                \eTD \eTR
+\eTABLE
 
-\stopsubsection
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]                                                                                                              
+\bTR \bTD Couleurs                               \eTD \eTR
+\bTR \bTD \tex{usecolors}                        \eTD \eTR
+\bTR \bTD \tex{color}                            \eTD \eTR
+\bTR \bTD \tex{definecolor}                      \eTD \eTR
+\eTABLE
 
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]                                                                                                             
+\bTR \bTD Langue                                 \eTD \eTR
+\bTR \bTD \tex{language}                         \eTD \eTR
+\bTR \bTD \tex{mainlanguage}                     \eTD \eTR
+\bTR \bTD \tex{setcharacterspacing}              \eTD \eTR
+\eTABLE
 
-
-% * Section 2 - le balisage ===================================================
-
-\startsubsection [title=Le balisage et la composition spécifique]
-
-Le langage de balisage de \ConTeXt\ va permettre de distinguer les différentes informations des fichiers sources~: \quotation{ce texte est un paragraphe}, \quotation{ceci est un titre}, \quotation{ici, il faut une image} etc. Il faut donc apprendre à écrire ce langage informatique et cela nécessite rigueur. Une logique et des règles sont à respecter pour une interprétation correcte par \ConTeXt\ et l'ordinateur. Cela sera traité également traité en \in{Partie}[part:src]. 
-
-% Certains caractères du répertoire universel vont être consacrés à \ConTeXt\ pour distinguer les balises du reste du texte. Il ne sera donc pas possible de les utiliser comme habituellement. Ces caractères ont été choisis intelligemment, cela ne pose donc pas de difficultés, mais c'est un pli à prendre.
-
-Le langage \ConTeXt\, comme tout langage, a ses règles mais aussi son vocabulaire, qu'il va falloir s'approprier. C'est l'objet de la \in{Partie}[part:mkp]. Et l'art de la composition étant particulièrement vaste ( \quotation{tout est permis} et \quotation{l'imagination est la seule limite}), le vocabulaire de \ConTeXt\ l'est également. Le document présent va donc tacher de vous transmettre les principaux éléments de vocabulaire ainsi que la logique et la structuration sous-jacentes afin d'en faciliter l'appprentissage. En particulier, nous distingueront, en plus des balises, deux familles d'information.
-
-La première famille concerne le {\bf flux principal} d'information qui se déroule linéairement de page en page, ou bien d'écran en écran. Il s'agit essentiellement des éléments suivants, en partant de la structuration la plus élémentaire à la plus macroscopique (sauf les quatre derniers éléments qui sont des éléments spécialisés)~:
-
-\startitemize[n,columns,two]
-\item Emphase de mots                      %-----------------------
-\startitemize                          
-\item \tex{em}                         
-\item \tex{definehighlight}            
-\item \tex{cap}                        
-\stopitemize                           
-\item Emphase de paragraphes                %-----------------------
-\startitemize                          
-\item \tex{startalign}                 
-\item \tex{setupnarrower}              
-\item \tex{startnarrower}              
-\stopitemize                           
-\item Encadrement                           %-----------------------
-\startitemize                          
-\item \tex{startframed}                
-\stopitemize                           
-\item Lignes et traits                      %-----------------------
-\startitemize                          
-\item \tex{starttextrule}              
-\item \tex{blackrule}                  
-\stopitemize                           
-\item Citations                             %-----------------------
-\startitemize                          
-\item \tex{quote}                      
-\item \tex{quotation}                  
-\item \tex{startquotation}             
-\stopitemize                           
-\item Mathématiques                         %-----------------------
-\startitemize                          
-\item \tex{startformula}               
-\item \tex{startcases}                 
-\item \tex{stopitemize}                
-\stopitemize                           
-\item Listes structurées                    %-----------------------
-\startitemize                          
-\item \tex{startitemize}                          
-\item \tex{item}                                  
-\stopitemize
-\item Description et énumération            %-----------------------
-\startitemize
-\item \tex{definedescription}
-\item \tex{defineenumeration}
-\stopitemize
-\item Textes tabulés                        %-----------------------
-\startitemize
-\item \tex{starttabulate}
-\item \tex{NR}
-\item \tex{NC}
-\stopitemize
-\item Tableaux                              %-----------------------
-\startitemize
-\item \tex{bTABLE}
-\item \tex{bTABLEbody}
-\item \tex{bTABLEhead}
-\item \tex{bTD}
-\item \tex{bTH}
-\item \tex{bTR}
-\stopitemize
-\item Images et Combinaisons                %-----------------------
-\startitemize
-\item \tex{externalfigure}
-\item \tex{startcombination}
-\stopitemize
-\item Objets flottants                      %-----------------------
-\startitemize
-\item \tex{startplacetable}
-\item \tex{startplacefigure}
-\item \tex{setupcaption}
-\stopitemize
-\item Colonnes                              %-----------------------
-\startitemize
-\item \tex{startcolumns}
-\stopitemize
-\item Section                               %-----------------------
-\startitemize
-\item \tex{startpart}
-\item \tex{startchapter}
-\item \tex{startsection}
-\item \tex{startsubsection}
-\item \tex{startsubsubsection}
-\item \tex{startsubsubsubsection}
-\setuphead
-\stopitemize
-\item Macro-structure                       %-----------------------
-\startitemize
-\item \tex{startfrontmatter}
-\item \tex{startbodymatter}
-\item \tex{startappendices}
-\item \tex{startbackmatter}
-\stopitemize
-\item Page de couverture et de titre
-\startitemize
-\item \tex{definemakeup}
-\item \tex{startmakeup}
-\stopitemize
-\item Autres éléments spécialisés           %-----------------------
-\startitemize
-\item \tex{startbuffer}
-\item \tex{getbuffer}
-\item \tex{startsetups}
-\item \tex{setups}
-\stopitemize
-
-\stopitemize
-La deuxième famille concerne les {\bf compléments au flux principal}. Ils permettent de l'enrichir, d'y naviguer, de faire des connexions complexes à d'autres informations. Ces éléments permettent de sortir des limites du flux linéaire principal et sont en ce sens tout à fait essentiels~:
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]                                                                                                 
+\bTR \bTD Interactivité                          \eTD \eTR
+\bTR \bTD \tex{setupattachments}                 \eTD \eTR
+\bTR \bTD \tex{setupinteraction}                 \eTD \eTR
+\eTABLE
+\stopcolumns
 
 
+\stopsection
 
-\startitemize[n,columns,two]
-\item Table des matières                    %-----------------------
-\startitemize
-\item \tex{setupcombinedlist}
-\item \tex{placecontent}
-\stopitemize
-\item Abréviations et glossaire             %-----------------------
-\startitemize
-\item \tex{abbreviation}
-\item \tex{placelistofabbreviations}
-\stopitemize
-\item Notes de bas de page                  %-----------------------
-\startitemize
-\item \tex{footnote}
-\item \tex{setupfootnotedefinition}
-\item \tex{setupfootnotes}
-\stopitemize
-\item Notes marginales                      %-----------------------
-\startitemize
-\item \tex{margintext}
-\stopitemize
-\item Pièces jointes                        %-----------------------
-\startitemize
-\item \tex{attachment}
-\stopitemize
-\item Références internes vers des          %-----------------------
-      illustrations, des sections,          %-----------------------
-\startitemize
-\item \tex{reference}
-\item \tex{at}
-\item \tex{in}
-\stopitemize
-\item Références externes vers internet,    %-----------------------
-\startitemize
-\item \tex{from}
-\item \tex{goto}
-\item \tex{useurl}
-\item \type{url()}
-\stopitemize
-\item Références bibliographiques           %-----------------------
-\startitemize
-\item \tex{cite}  
-\item \tex{placelistofpublications}
-\item \tex{usebtxdataset}
-\stopitemize
-\item Listes des images, tableaux...        %-----------------------
-\startitemize
-\item \tex{placelistoffigures}
-\item \tex{placelistoftables}
-\stopitemize
-\item Index                                 %-----------------------
-\startitemize
-\item \tex{index}
-\item \tex{placeindex}
-\stopitemize
-\stopitemize
+% * Section 2 ===================================================
 
-Le langage de balisage \ConTeXt\ nous permet ainsi, parmi l'ensemble des chaînes de caractères des fichiers sources, de distinguer les différents élements évoqués précedemment (et d'autres encore). Il s'agira alors, pour finir, d'expliciter ce qu'il faut en faire~: comment les mettre en page et les formater pour obtenir le document final.
+\startsection [title=Éléments du flux principal]
 
-\stopsubsection
+Nous verrons en \in{Partie}[part:mainflow] le balisage et la composition des éléments du {\bf flux principal} d'information qui se déroule linéairement de page en page, ou bien d'écran en écran. Il s'agit essentiellement des 17 éléments suivants, en partant du plus petit /  moins structurant, au plus macroscopique / plus structurant~:
+
+\startcolumns[n=2]
+\tfx
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]                                                                             
+\bTR \bTD Emphase de mots               \eTD \eTR
+\bTR \bTD \tex{em}                      \eTD \eTR
+\bTR \bTD \tex{definehighlight}         \eTD \eTR
+\bTR \bTD \tex{cap}                     \eTD \eTR
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm] 
+\bTR \bTD Emphase de paragraphes        \eTD \eTR
+\bTR \bTD \tex{startalign}              \eTD \eTR
+\bTR \bTD \tex{setupnarrower}           \eTD \eTR
+\bTR \bTD \tex{startnarrower}           \eTD \eTR
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm] 
+\bTR \bTD Encadrement                   \eTD \eTR         
+\bTR \bTD \tex{startframed}             \eTD \eTR  
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm] 
+\bTR \bTD Lignes et traits              \eTD \eTR                 
+\bTR \bTD \tex{starttextrule}           \eTD \eTR   
+\bTR \bTD \tex{blackrule}               \eTD \eTR   
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm] 
+\bTR \bTD Citations                     \eTD \eTR        
+\bTR \bTD \tex{quote}                   \eTD \eTR  
+\bTR \bTD \tex{quotation}               \eTD \eTR  
+\bTR \bTD \tex{startquotation}          \eTD \eTR  
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm] 
+\bTR \bTD Mathématiques                 \eTD \eTR
+\bTR \bTD \tex{startformula}            \eTD \eTR  
+\bTR \bTD \tex{startcases}              \eTD \eTR  
+\bTR \bTD \tex{stopitemize}             \eTD \eTR  
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm] 
+\bTR \bTD Listes structurées            \eTD \eTR
+\bTR \bTD \tex{startitemize}            \eTD \eTR  
+\bTR \bTD \tex{item}                    \eTD \eTR  
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm] 
+\bTR \bTD Description et énumération    \eTD \eTR
+\bTR \bTD \tex{definedescription}       \eTD \eTR
+\bTR \bTD \tex{defineenumeration}       \eTD \eTR
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm] 
+\bTR \bTD Textes tabulés                \eTD \eTR             
+\bTR \bTD \tex{starttabulate}           \eTD \eTR
+\bTR \bTD \tex{NR}                      \eTD \eTR
+\bTR \bTD \tex{NC}                      \eTD \eTR
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm] 
+\bTR \bTD Tableaux                      \eTD \eTR      
+\bTR \bTD \tex{bTABLE}                  \eTD \eTR
+\bTR \bTD \tex{bTABLEbody}              \eTD \eTR
+\bTR \bTD \tex{bTABLEhead}              \eTD \eTR
+\bTR \bTD \tex{bTD}                     \eTD \eTR
+\bTR \bTD \tex{bTH}                     \eTD \eTR
+\bTR \bTD \tex{bTR}                     \eTD \eTR
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm] 
+\bTR \bTD Images et Combinaisons        \eTD \eTR
+\bTR \bTD \tex{externalfigure}          \eTD \eTR
+\bTR \bTD \tex{setupexternalfigure}     \eTD \eTR
+\bTR \bTD \tex{startcombination}        \eTD \eTR
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm] 
+\bTR \bTD Objets flottants              \eTD \eTR                
+\bTR \bTD \tex{startplacetable}         \eTD \eTR
+\bTR \bTD \tex{startplacefigure}        \eTD \eTR
+\bTR \bTD \tex{setupcaption}            \eTD \eTR
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm] 
+\bTR \bTD Colonnes                      \eTD \eTR        
+\bTR \bTD \tex{startcolumns}            \eTD \eTR
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]
+\bTR \bTD Section                        \eTD \eTR
+\bTR \bTD \tex{startpart}                \eTD \eTR
+\bTR \bTD \tex{startchapter}             \eTD \eTR
+\bTR \bTD \tex{startsection}             \eTD \eTR
+\bTR \bTD \tex{startsubsection}          \eTD \eTR
+\bTR \bTD \tex{startsubsubsection}       \eTD \eTR
+\bTR \bTD \tex{startsubsubsubsection}    \eTD \eTR
+\bTR \bTD \tex{setuphead}                \eTD \eTR
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]
+\bTR \bTD Macro-structure                \eTD \eTR
+\bTR \bTD \tex{startfrontmatter}         \eTD \eTR
+\bTR \bTD \tex{startbodymatter}          \eTD \eTR
+\bTR \bTD \tex{startappendices}          \eTD \eTR
+\bTR \bTD \tex{startbackmatter}          \eTD \eTR
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]
+\bTR \bTD Page de couverture et de titre \eTD \eTR
+\bTR \bTD \tex{definemakeup}             \eTD \eTR
+\bTR \bTD \tex{startmakeup}              \eTD \eTR
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]
+\bTR \bTD Autres éléments spécialisés    \eTD \eTR
+\bTR \bTD \tex{startbuffer}              \eTD \eTR
+\bTR \bTD \tex{getbuffer}                \eTD \eTR
+\bTR \bTD \tex{startsetups}              \eTD \eTR
+\bTR \bTD \tex{setups}                   \eTD \eTR
+\eTABLE
+
+\stopcolumns
+
+\stopsection
+
+% * Section 2 ===================================================
+
+\startsection [title=Compléments au flux principal]
+
+Nous verrons en \in{Partie}[part:complements] le balisage et la composition des {\bf compléments au flux principal}. Ils permettent de l'enrichir, d'y naviguer, de faire des connexions complexes à d'autres informations. Ces éléments permettent de sortir des limites du flux linéaire principal et sont en ce sens tout à fait essentiels~:
 
 
+\startcolumns[n=2]
+\tfx
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]
+\bTR \bTD Table des matières             \eTD \eTR
+\bTR \bTD \tex{setupcombinedlist}        \eTD \eTR
+\bTR \bTD \tex{placecontent}             \eTD \eTR
+\eTABLE
 
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]
+\bTR \bTD Abréviations et glossaire      \eTD \eTR                         
+\bTR \bTD \tex{abbreviation}             \eTD \eTR
+\bTR \bTD \tex{placelistofabbreviations} \eTD \eTR
+\eTABLE
 
-%==============================================================================
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]
+\bTR \bTD Notes de bas de page           \eTD \eTR                    
+\bTR \bTD \tex{footnote}                 \eTD \eTR
+\bTR \bTD \tex{setupfootnotedefinition}  \eTD \eTR
+\bTR \bTD \tex{setupfootnotes}           \eTD \eTR
+\eTABLE
 
-% \startsubsection [title=Fil pédagogique du document]
-% 
-% Nous avons donc vu que la logique de \ConTeXt\ repose sur trois concepts~: 
-% les fichiers sources, le balisage, et la composition. 
-% Chacun de ces concepts va maintenant être approfondi selon la table ci-dessous, dans la logique évoquée ci-dessus :-).
-% 
-% \start
-% \tfx
-% \bTABLE[option=stretch]
-% \setupTABLE [frame=off]
-% \setupTABLE [c] [first] [style=bold]
-% \setupTABLE [c] [each]  [width=.15\textwidth]
-% \setupTABLE [c] [1]     [width=.4\textwidth]
-% =============================================================================================================================================================================================================================================
-% \bTR[style=bold,foregroundcolor=maincolor] 
-%      \bTD                                   \eTD \bTD Fichiers \par sources              \eTD \bTD Composition d'ensemble               \eTD \bTD Balisage                            \eTD \bTD Composition spécifique              \eTD \eTR
-% \bTR[style=bold,topframe=on,toffset=1ex,foregroundcolor=maincolor] 
-%      \bTD[topframe=off]                     \eTD \bTD \in{Partie}[part:src]              \eTD \bTD \in{Partie}[part:typset:global]      \eTD \bTD \in{Partie}[part:mkp]               \eTD \bTD \in{Partie}[part:typset:local]        \eTD \eTR 
-% =============================================================================================================================================================================================================================================
-% \bTR[topframe=on,toffset=1ex] 
-%      \bTD Fichiers sources                  \eTD \bTD {\bf\in{Chapitre}[cap:firstdoc]}   \eTD \bTD                                      \eTD \bTD                                     \eTD \bTD                                      \eTD \eTR
-% \bTR \bTD Règles syntaxiques                \eTD \bTD {\bf\in{Chapitre}[cap:commands]}   \eTD \bTD                                      \eTD \bTD                                     \eTD \bTD                                      \eTD \eTR
-% \bTR \bTD Organisation des fichiers         \eTD \bTD {\bf\in{Chapitre}[cap:sourcefile]} \eTD \bTD                                      \eTD \bTD                                     \eTD \bTD                                      \eTD \eTR
-% =============================================================================================================================================================================================================================================
-% \bTR[topframe=on,toffset=1ex] 
-%      \bTD Mise en page                      \eTD \bTD                                    \eTD \bTD {\bf\in{Chapitre}[cap:pages]}        \eTD \bTD                                     \eTD \bTD                                      \eTD \eTR
-% \bTR \bTD En-tête et pied de page           \eTD \bTD                                    \eTD \bTD {\bf\in{Chapitre}[sec:headerfooter]} \eTD \bTD                                     \eTD \bTD                                      \eTD \eTR
-% \bTR \bTD Polices                           \eTD \bTD                                    \eTD \bTD {\bf\in{Chapitre}[cap:fontscol]}     \eTD \bTD                                     \eTD \bTD                                      \eTD \eTR
-% \bTR \bTD Couleurs                          \eTD \bTD                                    \eTD \bTD {\bf\in{Chapitre}[sec:typset:colors]}\eTD \bTD                                     \eTD \bTD                                      \eTD \eTR
-% \bTR \bTD Langue                            \eTD \bTD                                    \eTD \bTD {\bf\in{Chapitre}[sec:langdoc]}      \eTD \bTD                                     \eTD \bTD                                      \eTD \eTR
-% \bTR \bTD Interactivité                     \eTD \bTD                                    \eTD \bTD {\bf\in{Chapitre}[sec:interactivity]}\eTD \bTD                                     \eTD \bTD                                      \eTD \eTR
-% =============================================================================================================================================================================================================================================
-% \bTR[style=bold,topframe=on,toffset=1ex,foregroundcolor=maincolor] 
-%      \bTD Flux principal                    \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Chapitre}[cap:mkp:mainflow]     \eTD \bTD \in{Chapitre}[cap:typset:mainflow]   \eTD \eTR 
-% \bTR \bTD Paragraphes                       \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:mkp:para]          \eTD \bTD \in{Section}[cap:parlinevspace]      \eTD \eTR
-% \bTR \bTD Emphase de mots                   \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:mkp:emphasew]      \eTD \bTD \in{Section}[cap:chartext]           \eTD \eTR
-% \bTR \bTD Emphase de paragraphes            \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:mkp:emphasep]      \eTD \bTD \in{Section}[sec:typset:emphasep]    \eTD \eTR
-% \bTR \bTD Encadrement                       \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:mkp:framed]        \eTD \bTD \in{Section}[sec:typset:framed]      \eTD \eTR
-% \bTR \bTD Lignes et traits                  \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:mkp:lines]         \eTD \bTD \in{Section}[sec:typset:lines]       \eTD \eTR
-% \bTR \bTD Citations                         \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:mkp:quotes]        \eTD \bTD \in{Section}[sec:typset:quotes]      \eTD \eTR
-% \bTR \bTD Listes structurées                \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:itemize]           \eTD \bTD \in{Section}[sec:typset:itemize]     \eTD \eTR
-% \bTR \bTD Description et énumération        \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:mkp:descenum]      \eTD \bTD \in{Section}[sec:typset:descenum]    \eTD \eTR
-% \bTR \bTD Textes tabulés                    \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:mkp:tabulate]      \eTD \bTD \in{Section}[sec:cmptabulate]        \eTD \eTR
-% \bTR \bTD Tableaux                          \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:tables]            \eTD \bTD \in{Section}[sec:typset:table]       \eTD \eTR
-% \bTR \bTD Images et Combinaisons            \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:mkp:images]        \eTD \bTD \in{Section}[sec:extimage]           \eTD \eTR
-% \bTR \bTD Objets flottants                  \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[cap:floats]            \eTD \bTD \in{Section}[sec:typset:floats]      \eTD \eTR
-% \bTR \bTD Section                           \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[cap:structure]         \eTD \bTD \in{Section}[sec:setuphead]          \eTD \eTR
-% \bTR \bTD Macro-structure                   \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:macrostructure]    \eTD \bTD \in{Section}[sec:typset:macrostr]    \eTD \eTR
-% \bTR \bTD Page de couverture et de titre    \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:mkp:cover]         \eTD \bTD \in{Section}[sec:typset:covers]      \eTD \eTR
-% \bTR \bTD Mathématiques                     \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:mkp:math]          \eTD \bTD \in{Section}[sec:typset:math]        \eTD \eTR
-% \bTR \bTD Colonnes                          \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD                                     \eTD \bTD \in{Section}[sec:multiplecolumns]    \eTD \eTR
-% \bTR \bTD Autres éléments spécialisés       \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:mkp:others]        \eTD \bTD                                      \eTD \eTR
-% =============================================================================================================================================================================================================================================
-% \bTR[style=bold,topframe=on,toffset=1ex,foregroundcolor=maincolor]                                                             
-%      \bTD Compléments au flux principal     \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Chapitre}[cap:mkp:complement]   \eTD \bTD \in{Chapitre}[cap:typset:complement] \eTD \eTR 
-% \bTR \bTD Table des matières                \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:content]           \eTD \bTD \in{Section}[sec:typset:content]     \eTD \eTR
-% \bTR \bTD Abréviations et glossaire         \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:mkp:abbrev]        \eTD \bTD \in{Section}[sec:typset:abbrev]      \eTD \eTR
-% \bTR \bTD Notes de bas de page              \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:mkp:notes]         \eTD \bTD \in{Section}[sec:confnotes]          \eTD \eTR
-% \bTR \bTD Notes marginales                  \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:mkp:margind]       \eTD \bTD \in{Section}[sec:margintext]         \eTD \eTR
-% \bTR \bTD Pièces jointes                    \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:mkp:attach]        \eTD \bTD \in{Section}[sec:typset:attach]      \eTD \eTR
-% \bTR \bTD Références internes               \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:references]        \eTD \bTD \in{Section}[sec:typset:refint]      \eTD \eTR
-% \bTR \bTD Références externes               \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:mkp:refext]        \eTD \bTD \in{Section}[sec:typset:refext]      \eTD \eTR
-% \bTR \bTD Références bibliographiques       \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:mkp:biblio]        \eTD \bTD \in{Section}[sec:typset:biblio]      \eTD \eTR
-% \bTR \bTD Listes des images, tableaux…      \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:lists]             \eTD \bTD \in{Section}[sec:typset:lists]       \eTD \eTR
-% \bTR \bTD Index                             \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Section}[sec:mkp:index]         \eTD \bTD \in{Section}[sec:typset:index]       \eTD \eTR
-% =============================================================================================================================================================================================================================================
-% \bTR[style=bold,topframe=on,toffset=1ex,foregroundcolor=maincolor]                                                             
-%      \bTD Personnalisé                      \eTD \bTD                                    \eTD \bTD                                      \eTD \bTD \in{Chapitre}[cap:definingcommands] \eTD \bTD \in{Chapitre}[cap:typset:custom]     \eTD \eTR
-% =============================================================================================================================================================================================================================================
-% \eTABLE                                                       
-% \stop   
-% 
-%    
-% \stopsubsection
-   
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]
+\bTR \bTD Notes marginales               \eTD \eTR                
+\bTR \bTD \tex{margintext}               \eTD \eTR
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]
+\bTR \bTD Pièces jointes                 \eTD \eTR              
+\bTR \bTD \tex{attachment}               \eTD \eTR
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]
+\bTR \bTD Références internes            \eTD \eTR                   
+\bTR \bTD \tex{reference}                \eTD \eTR
+\bTR \bTD \tex{at}                       \eTD \eTR
+\bTR \bTD \tex{in}                       \eTD \eTR
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]
+\bTR \bTD Références externes             \eTD \eTR                  
+\bTR \bTD \tex{from}                     \eTD \eTR
+\bTR \bTD \tex{goto}                     \eTD \eTR
+\bTR \bTD \tex{useurl}                   \eTD \eTR
+\bTR \bTD \type{url()}                   \eTD \eTR
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]
+\bTR \bTD Références bibliographiques    \eTD \eTR                           
+\bTR \bTD \tex{cite}                     \eTD \eTR
+\bTR \bTD \tex{placelistofpublications}  \eTD \eTR
+\bTR \bTD \tex{usebtxdataset}            \eTD \eTR
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]
+\bTR \bTD Listes des images, tableaux... \eTD \eTR                              
+\bTR \bTD \tex{placelistoffigures}       \eTD \eTR
+\bTR \bTD \tex{placelistoftables}        \eTD \eTR
+\eTABLE
+
+\bTABLE[frame=off,option=stretch]
+\setupTABLE[r][1][style=\bf,width=4cm,topframe=on,width=5cm]
+\bTR \bTD Index                          \eTD \eTR     
+\bTR \bTD \tex{index}                    \eTD \eTR
+\bTR \bTD \tex{placeindex}               \eTD \eTR
+\eTABLE
+
+\stopcolumns
+
+Pour finir cette introduction, la galerie suivante vous donnera un aperçu visuel
+de l'ensemble des différents éléments évoqués durant cette introduction.
+
+\stopsection
 
 
 
-\startsubsection[title=Galerie]
+\startsection[title=Galerie]
 
 % pdfjam demonstration.pdf  --nup 2x22 --frame true   --delta "1mm 2mm" --outfile resultat.pdf
 % pdfcrop resultat.pdf resultat.pdf
@@ -393,159 +450,92 @@ Le langage de balisage \ConTeXt\ nous permet ainsi, parmi l'ensemble des chaîne
 
 \start
 \setupexternalfigure[frame=on,height=6cm,interaction=yes,background=color,backgroundcolor=white]
-\tfx
 
 \startcombination[2*3]
-{\externalfigure[demonstration.pdf][page=1]}
-{}
-{\externalfigure[demonstration.pdf][page=2]}
-{}
-{\externalfigure[demonstration.pdf][page=3]}
-{}
-{\externalfigure[demonstration.pdf][page=4]}
-{}
-{\externalfigure[demonstration.pdf][page=5]}
-{\in{Balisage §}[sec:mkp:para]       - \in{Composition §}[cap:parlinevspace]  } 
-{\externalfigure[demonstration.pdf][page=6]} 
-{\in{Balisage §}[sec:mkp:emphasew]   - \in{Composition §}[cap:chartext]       } 
+{\externalfigure[demonstration.pdf][page=1] }{}
+{\externalfigure[demonstration.pdf][page=2] }{}
+{\externalfigure[demonstration.pdf][page=3] }{}
+{\externalfigure[demonstration.pdf][page=4] }{}
+{\goto{\externalfigure[demonstration.pdf][page=5]}[cap:pages]        }{}
+{\goto{\externalfigure[demonstration.pdf][page=6]}[sec:headerfooter] }{}
 \stopcombination
 
 \page
 
 \startcombination[2*3]
-{\externalfigure[demonstration.pdf][page=7]}
-{\in{Balisage §}[sec:mkp:emphasep]   - \in{Composition §}[sec:typset:emphasep]} 
-{\externalfigure[demonstration.pdf][page=8]}
-{\in{Balisage §}[sec:mkp:framed]     - \in{Composition §}[sec:typset:framed]  } 
-{\externalfigure[demonstration.pdf][page=9]}
-{\in{Balisage §}[sec:mkp:lines]      - \in{Composition §}[sec:typset:lines]   } 
-{\externalfigure[demonstration.pdf][page=10]}
-{\in{Balisage §}[sec:mkp:quotes]     - \in{Composition §}[sec:typset:quotes]  } 
-{\externalfigure[demonstration.pdf][page=11]}
-{\in{Balisage §}[sec:itemize]        - \in{Composition §}[sec:typset:itemize] } 
-{\externalfigure[demonstration.pdf][page=12]} 
-{\in{Balisage §}[sec:mkp:descenum]   - \in{Composition §}[sec:typset:descenum]} 
+{\externalfigure[demonstration.pdf][page=7] }{}
+{\externalfigure[demonstration.pdf][page=8] }{}
+{\externalfigure[demonstration.pdf][page=9] }{}
+{\externalfigure[demonstration.pdf][page=10]}{}
+{\externalfigure[demonstration.pdf][page=11]}{}
+{\externalfigure[demonstration.pdf][page=12]}{}
 \stopcombination
 
 \page
 
 \startcombination[2*3]
-{\externalfigure[demonstration.pdf][page=13]}
-{\in{Balisage §}[sec:mkp:tabulate]   - \in{Composition §}[sec:cmptabulate]    } 
-{\externalfigure[demonstration.pdf][page=14]}
-{\in{Balisage §}[sec:tables]         - \in{Composition §}[sec:typset:table]   } 
-{\externalfigure[demonstration.pdf][page=15]}
-{\in{Balisage §}[sec:mkp:images]     - \in{Composition §}[sec:extimage]       } 
-{\externalfigure[demonstration.pdf][page=16]}
-{}
-{\externalfigure[demonstration.pdf][page=17]}
-{\in{Balisage §}[cap:floats]         - \in{Composition §}[sec:typset:floats]  } 
-{\externalfigure[demonstration.pdf][page=18]}
-{}
+{\externalfigure[demonstration.pdf][page=13]}{}
+{\externalfigure[demonstration.pdf][page=14]}{}
+{\externalfigure[demonstration.pdf][page=15]}{}
+{\externalfigure[demonstration.pdf][page=16]}{}
+{\externalfigure[demonstration.pdf][page=17]}{}
+{\externalfigure[demonstration.pdf][page=18]}{}
 \stopcombination
 
 \page
 
 \startcombination[2*3]
-{\externalfigure[demonstration.pdf][page=19]}
-{\in{Balisage §}[cap:structure]      - \in{Composition §}[sec:setuphead]      } 
-{\externalfigure[demonstration.pdf][page=20]}
-{\in{Balisage §}[sec:macrostructure] - \in{Composition §}[sec:typset:macrostr]} 
-{\externalfigure[demonstration.pdf][page=21]}
-{\in{Balisage §}[sec:mkp:cover]      - \in{Composition §}[sec:typset:covers]  } 
-{\externalfigure[demonstration.pdf][page=22]}
-{\in{Balisage §}[sec:mkp:math]       - \in{Composition §}[sec:typset:math]    } 
-{\externalfigure[demonstration.pdf][page=23]}
-{\in{Balisage §}[sec:mkp:others] - \in{Composition §}[cap:typset:custom]}
-{\externalfigure[demonstration.pdf][page=24]} 
-{\in{Composition §}[sec:multiplecolumns] }
+{\externalfigure[demonstration.pdf][page=19]}{}
+{\externalfigure[demonstration.pdf][page=20]}{}
+{\externalfigure[demonstration.pdf][page=21]}{}
+{\externalfigure[demonstration.pdf][page=22]}{}
+{\externalfigure[demonstration.pdf][page=23]}{}
+{\externalfigure[demonstration.pdf][page=24]}{}
 \stopcombination
 
 \page
 
 \startcombination[2*3]
-{\externalfigure[demonstration.pdf][page=25]}
-{}
-{\externalfigure[demonstration.pdf][page=26]}
-{\in{Composition §}[cap:pages]}
-{\externalfigure[demonstration.pdf][page=27]}
-{\in{Composition §}[sec:headerfooter]}
-{\externalfigure[demonstration.pdf][page=28]}
-{\in{Composition §}[cap:fontscol]}
-{\externalfigure[demonstration.pdf][page=29]}
-{\in{Composition §}[sec:typset:colors]}
-{\externalfigure[demonstration.pdf][page=30]} 
-{\in{Composition §}[sec:langdoc]}
+{\externalfigure[demonstration.pdf][page=25]}{}
+{\externalfigure[demonstration.pdf][page=26]}{}
+{\externalfigure[demonstration.pdf][page=27]}{}
+{\externalfigure[demonstration.pdf][page=28]}{}
+{\externalfigure[demonstration.pdf][page=29]}{}
+{\externalfigure[demonstration.pdf][page=30]}{}
 \stopcombination
 
 \page
 
 \startcombination[2*3]
-{\externalfigure[demonstration.pdf][page=31]}
-{\in{Composition §}[sec:interactivity]}
-{\externalfigure[demonstration.pdf][page=32]}
-{}
-{\externalfigure[demonstration.pdf][page=33]}
-{\in{Balisage §}[sec:content]         - \in{Section}[sec:typset:content]    }
-{\externalfigure[demonstration.pdf][page=34]}
-{\in{Balisage §}[sec:mkp:abbrev]      - \in{Section}[sec:typset:abbrev]     }
-{\externalfigure[demonstration.pdf][page=35]}
-{\in{Balisage §}[sec:mkp:notes]       - \in{Section}[sec:confnotes]         }
-{\externalfigure[demonstration.pdf][page=36]} 
-{\in{Balisage §}[sec:mkp:margind]     - \in{Section}[sec:margintext]        }
+{\externalfigure[demonstration.pdf][page=31]}{}
+{\externalfigure[demonstration.pdf][page=32]}{}
+{\externalfigure[demonstration.pdf][page=33]}{}
+{\externalfigure[demonstration.pdf][page=34]}{}
+{\externalfigure[demonstration.pdf][page=35]}{}
+{\externalfigure[demonstration.pdf][page=36]}{}
 \stopcombination
 
 \page
 
 \startcombination[2*3]
-{\externalfigure[demonstration.pdf][page=37]}
-{\in{Balisage §}[sec:mkp:attach]      - \in{Composition §}[sec:typset:attach]     }
-{\externalfigure[demonstration.pdf][page=38]}
-{\in{Balisage §}[sec:references]      - \in{Composition §}[sec:typset:refint]     }
-{\externalfigure[demonstration.pdf][page=39]}
-{\in{Balisage §}[sec:mkp:refext]      - \in{Composition §}[sec:typset:refext]     }
-{\externalfigure[demonstration.pdf][page=40]}
-{\in{Balisage §}[sec:mkp:biblio]      - \in{Composition §}[sec:typset:biblio]     }
-{\externalfigure[demonstration.pdf][page=41]}
-{}
-{\externalfigure[demonstration.pdf][page=42]}
-{\in{Balisage §}[sec:lists]           - \in{Composition §}[sec:typset:lists]      }
+{\externalfigure[demonstration.pdf][page=37]}{}
+{\externalfigure[demonstration.pdf][page=38]}{}
+{\externalfigure[demonstration.pdf][page=39]}{}
+{\externalfigure[demonstration.pdf][page=40]}{}
+{\externalfigure[demonstration.pdf][page=41]}{}
+{\externalfigure[demonstration.pdf][page=42]}{}
 \stopcombination
 
 \page
 
 \startcombination[2*1]
-{\externalfigure[demonstration.pdf][page=43]}
-{\in{Balisage §}[sec:mkp:index]       - \in{Composition §}[sec:typset:index]      } 
-{\externalfigure[demonstration.pdf][page=44]}
-{}
+{\externalfigure[demonstration.pdf][page=43]}{}
+{\externalfigure[demonstration.pdf][page=44]}{}
 \stopcombination
 
 \stop
 
-\stopsubsection
-
-%%%%%%%%%%%%%%%%%% plus vite ================================================================
-
-\ConTeXt\ offre par défaut un grand nombre d'éléments de balisage ainsi que
-des outils pour en faire nos propres variations avec les commandes de type \tex{definexxx}.
-
-Nous allons les présenter dans un ordre de force et d'ampleur de structuration et croissante,
-c'est à dire en partant de simples mots mis en valeur, à listes, à tableaux, à des sections,
-jusqu'à la macrostructure du document (pages liminaires, annexes...). 
-
-La dernière section rassemble des éléments moins usités dans l'objectif
-de vous faire prendre conscience de leur existence.
-
-Par la suite, vous allez suivre un alternance de sections portant sur l'aspect balisage puis sur l'aspect composition 
-
-Pour rappel tous les éléments de composition dont nous allons parler maintenant
-ont vocation à être indiqués dans zone préambule du fichier source
-(voir \in{section}[sec:srcpreambule]) et mieux encore dans un fichier
-environnement (voir \in{section}[sec:srcenvfile]) qui sera lui-même
-appelé en préambule. Il est biensûr possible de les indiquer localement
-dans le corps de texte, pour un élément très spécifique, 
-mais ce n'est pas une bonne pratique.
+\stopsection
 
 
 %%%%%%%%%%%%%%%%%%
