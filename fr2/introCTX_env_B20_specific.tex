@@ -4,12 +4,19 @@
 \definedescription
     [description]
     [
-      alternative=hanging,
+      alternative=serried,
       width=fit,
-      distance=0.3cm,
+      distance=1ex,
       headstyle=\bf
     ]
-    
+
+ \definedescription
+    [DescOptions][description]
+    [
+      headstyle=\bf\tt,
+      alternative=left,
+      width=0.3\textwidth,
+    ] 
   \definedescription
     [semitable]
     [
@@ -17,7 +24,7 @@
       width=fit,
       distance=1cm,
       headcolor=darkmagenta,
-      headstyle=\tt,
+      headstyle=\bf\tt,
     ]
 
   %==============================================================================
@@ -55,6 +62,8 @@
                     after={\stopnarrower},
                   ]
 
+\definehighlight [people]       [style=\cap] 
+
   %------------------------------------------------------------------------------
   % Commands and abbreviations
 
@@ -85,18 +94,15 @@
   \define[1]\MyKey{\quotation{\tt #1}}
 
   
+
   % Partial chapter table of contents:
-  \def\Separate#1{#1;}
-  \def\TocChap{
-    \startnarrower\switchtobodyfont[small, sl]
-      {\bf Table of Contents:}
-      \setuplist
-        [section,subsection,subsubsection]
-        [pagenumber=no, textcommand=\Separate]
-      \setuplist[section][style=bold]
-      \placecontent[alternative=d]
-    \stopnarrower
-  }
+%  \def\Separate#1{#1;}
+\def\TocChap{%
+\setupcombinedlist[localcontent][list={section}]
+\setupinterlinespace[2.4ex] 
+{\bf Table des matières}
+\placecombinedlist[localcontent][alternative=c,criterium=local]
+\blank[2*big]}
 
   % Index
   \defineregister[macro]

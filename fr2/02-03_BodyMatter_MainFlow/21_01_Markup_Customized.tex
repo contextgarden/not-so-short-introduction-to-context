@@ -1,0 +1,202 @@
+\startcomponent 02-02-03_Markup_Customized
+
+\environment introCTX_env_00
+
+\startchapter
+  [title={Balisage personnalisés, définir de nouvelles commandes},
+   reference=cap:definingcommands]
+
+\TocChap
+
+  Nous venons de voir comment, avec \tex{defineQuelqueChose}, nous pouvons cloner une commande préexistante et développer une nouvelle version de celle-ci qui à partir de là, fonctionnera comme une nouvelle commande.
+
+En plus de cette possibilité, qui n'est disponible que pour certaines commandes spécifiques (quelques-unes, certes, mais pas toutes), \ConTeXt\ a un mécanisme général pour définir de nouvelles commandes qui est extrêmement puissant mais aussi, dans certaines de ses utilisations, assez complexe. Dans un texte comme celui-ci, destiné aux débutants, je pense qu'il est préférable de le présenter en commençant par certaines de ses utilisations les plus simples, puis en complexifiant. 
+
+% * ===========================================================================
+
+\startsection
+  [
+    reference=sec:define,
+    title=Mécanisme général pour définir de nouvelles commandes,
+      ]
+  \PlaceMacro{define}
+  \index{define}
+
+L'utilisation la plus simple de toutes est d'associer des bouts de texte à un mot, de sorte que chaque fois que ce mot apparaît dans le fichier source, il est remplacé par le texte qui lui est lié. Cela nous permettra, d'une part, d'économiser beaucoup de temps de frappe et, d'autre part, comme avantage supplémentaire, de réduire les possibilités de faire des erreurs de frappe, tout en s'assurant que le texte en question est toujours écrit de la même façon.
+
+Imaginons, par exemple, que nous sommes en train d'écrire un traité sur l'allitération dans les textes latins, où nous citons souvent la phrase latine \quotation{\em O Tite tute Tati, tibi tanta, tyranne, tulisti !}. (C'est toi-même, Titus Tatius, qui t'es fait, à toi, tyran, tant de torts !). Il s'agit d'une phrase assez longue dont deux des mots sont des noms propres et commencent par une majuscule, et où, avouons-le, même si nous aimons la poésie latine, il nous est facile de \quotation{trébucher} en l'écrivant. Dans ce cas, nous pourrions simplement mettre dans le préambule de notre fichier source :
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\define\Tite{\quotation{O Tite tute Tati, tibi tanta, tyranne, tulisti}}
+\stopDemoI}
+
+Sur la base d'une telle définition, chaque fois que la commande \tex{Tite} apparaîtra dans notre fichier source, elle sera remplacée par la séquence  indiquée~: la phrase elle même, prise comme argument de la commande \tex{quotation} qui met son argument entre guillemets en respectant les règles typographiques de la langue du document. Cela nous permet de garantir que la façon dont cette phrase apparaîtra sera toujours la même. Nous aurions également pu l'écrire en italique, avec une taille de police plus grande... comme bon nous semble. L'important, c'est que nous ne devons l'écrire qu'une seule fois et qu'elle sera reproduite dans tout le texte exactement comme elle a été écrite, aussi souvent que nous le voulons. Nous pourrions également créer deux versions de la commande, appelées \tex{Tite} et \tex{tite}, selon que la phrase doit être écrite en majuscules ou non. De plus, il suffira de modifier la définition et elle sera répercutée automatiquement dans l'ensemble du document.
+
+Le texte de remplacement peut être du texte pur, ou inclure des commandes, ou encore former des expressions mathématiques dans lesquelles il y a plus de chances de faire des fautes de frappe (du moins pour moi). Par exemple, si l'expression $(x_1,\ldots,x_n)$ doit apparaître régulièrement dans notre texte, nous pouvons créer une commande pour la représenter. Par exemple
+
+\placefigure [force,here,none] [] {}{
+\define\xvec{$(x_1,\ldots,x_n)$}
+\stopDemoI}
+
+de sorte que chaque fois que \tex{xvec} apparaît dans le code source, il sera remplacé par l'expression qui lui est associée durant la compilation par \ConTeXt.
+
+La syntaxe générale de la commande \tex{define} est la suivante :
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\define[NbrArguments]\NomCommande{TexteOuCodeDeSubstitution}
+\stopDemoI}
+
+où
+
+\startitemize[packed]
+
+  \item {\tt\bf NbreArguments} désigne le nombre d'arguments que la nouvelle commande prendra. Si elle n'a pas besoin d'en prendre, comme dans les exemples donnés jusqu'à présent, elle est omise.
+
+  \item {\tt\bf NomCommande} désigne le nom que portera la nouvelle commande. Les règles générales relatives aux noms de commande s'appliquent ici. Le nom peut être un caractère unique qui n'est pas une lettre, ou une ou plusieurs lettres sans inclure de caractère \quotation{non-lettre}.
+
+  \item {\tt\bf TexteOuCodeDeSubstitution} contient le texte ou le code source qui sera substitier à la commande à chacune des ses occurences dans le fichier source.
+
+\stopitemize
+
+La possibilité de fournir aux nouvelles commandes des arguments dans leur définition confère à ce mécanisme une grande souplesse, car elle permet de définir un texte de remplacement variable en fonction des arguments pris.
+
+Par exemple : imaginons que nous voulions écrire une commande qui produise l'ouverture d'une lettre commerciale. Une version très simple de cette commande serait la suivante
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\define\EnTetedeLettre{
+  \rightaligned{Anne Smith}\par
+  \rightaligned{Consultant}\par
+  Marseille, \date\par
+  Chère Madame,\par}
+\EnTetedeLettre
+\stopDemoVW}
+
+mais il serait préférable d'avoir une version de la commande qui écrirait le nom du destinataire dans l'en-tête. Cela nécessiterait l'utilisation d'un paramètre qui communiquerait le nom du destinataire à la nouvelle commande. Il faudrait donc redéfinir la commande comme suit~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\define[1]\EnTetedeLettre{
+  \rightaligned{Anne Smith}\par
+  \rightaligned{Consultant}\par
+  Marseille, \date\par
+  Chère Madame #1,\par}
+\EnTetedeLettre{Dupond}
+\stopDemoVW}
+
+Notez que nous avons introduit deux changements dans la définition. Tout d'abord, entre le mot clé \tex{define} et le nouveau nom de la commande, nous avons inclus un 1 entre crochets ([1]). Cela indique à \ConTeXt\ que la commande que nous définissons prendra un argument. 
+
+Plus loin, à la dernière ligne de la définition de la commande, nous avons écrit \quotation{\tt Chère Madame \#1}, en utilisant le caractère réservé \MyKey{\#}. Cela indique qu'à l'endroit du texte de remplacement où apparaît \MyKey{\#1}, le contenu du premier argument sera inséré. 
+
+Si elle avait deux paramètres, \MyKey{\#1} ferait référence au premier paramètre et \MyKey{\#2} au second. Afin d'appeler la commande (dans le fichier source) après le nom de la commande, les arguments doivent être inclus entre accolades, chaque argument ayant son propre ensemble. Ainsi, la commande que nous venons de définir doit être appelée de la manière suivante~: \MyKey{\tex{EnTetedeLettre}\{Nom du destinataire\}}, tel que cela est fait dans l'exemple.
+
+Nous pourrions encore améliorer la fonction précédente, car elle suppose que la lettre sera envoyée à une femme (elle met \quotation{chère Madame}), alors que nous pourrions peut-être inclure un autre paramètre pour distinguer les destinataires masculins et féminins. par exemple :
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+\define[2]\EnTetedeLettre{
+  \rightaligned{Anne Smith}\par
+  \rightaligned{Consultant}\par
+  Marseille, \date\par
+  #1\ #2,\par}
+\EnTetedeLettre{Cher Monsieur}{Antoine Dupond}
+\stopDemoVW}
+
+bien que cela ne soit pas très élégant (du point de vue de la programmation). Il serait préférable que des valeurs symboliques soient définies pour le premier argument (homme/femme ; 0/1 ; m/f) afin que la macro elle-même choisisse le texte approprié en fonction de cette valeur. Mais pour expliquer comment y parvenir, il faut aller plus en profondeur que ce que je pense que le lecteur novice peut comprendre à ce stade.
+
+\stopsection
+
+%===============================================================================
+
+\startsection
+  [
+    reference=sec:startstop,
+    title=Création de nouveaux environments,
+  ]
+
+  \PlaceMacro{definestartstop}
+  \index{definestartstop}
+
+Pour créer un nouvel environnement, \ConTeXt\ fournit la commande \tex{definestartstop} dont la syntaxe est la suivante :
+
+\placefigure [force,here,none] [] {}{
+\startDemoI
+\definestartstop[Nom][Configuration]
+\stopDemoI}
+
+\startSmallPrint
+
+  Dans la définition {\em officielle} de \tex{definestartstop} (voir \in{section}[sec:qrc-setup-fr]) il y a un argument supplémentaire que je n'ai pas mis ci-dessus parce qu'il est optionnel, et je n'ai pas été capable de trouver à quoi il sert \Doubt. Ni le manuel d'introduction \from[excursion], ni le manuel de référence ne l'expliquent. J'avais supposé que cet argument (qui doit être saisi entre le nom et la configuration) pouvait être le nom d'un environnement existant qui servirait de modèle initial pour le nouvel environnement, mais mes tests montrent que cette hypothèse était fausse. J'ai consulté la liste de diffusion \ConTeXt\ et je n'ai vu aucune utilisation de cet argument possible.
+
+\stopSmallPrint
+
+où
+
+\startitemize
+
+  \item {\bf Nom} est le nom que portera le nouvel environnement.
+
+  \item {\bf Configuration} nous permet de configurer le comportement du nouvel environnement. Nous disposons des valeurs suivantes avec lesquelles nous pouvons le configurer :
+
+  \startitemize
+
+    \item {\tt before~:} Commandes à exécuter avant d'entrer dans l'environnement.
+
+    \item {\tt after~:} Commandes à exécuter après avoir quitté l'environnement.
+
+    \item {\tt style~:} Style que doit avoir le texte du nouvel environnement.
+
+    \item {\tt setups~:} Ensemble de commandes créées avec \PlaceMacro{startsetups}\tex{startsetups ... \stopsetups}. Cette commande et son utilisation ne sont pas expliquées dans cette introduction.
+
+    \item {\tt color~:} Couleur à appliquer au texte
+
+    \item {\tt inbetween, left, right~:} Options non documentées que je n'ai pas réussi à faire fonctionner \Doubt. D'après les tests que j'ai effectués, indiquant une certaine valeur pour ces options, je ne vois aucun changement dans l'environnement. Il est possible que l'impact ne concerne pas l'environnement mais la commande qui semble créer avec \tex{Nom}. Une piste sur \goto{la liste de diffusions NTG-context}[url(https://ntg-context.ntg.narkive.com/Yv6mEMBy/definestartstop-not-functioning-before-after-keys)].
+
+  \stopitemize
+
+\stopitemize
+
+Un exemple de la définition d'un environnement pourrait être le suivant :
+
+\placefigure [force,here,none] [] {}{
+\startDemoHN
+\definestartstop
+  [TextWithBar]
+  [before=\bgroup\startmarginrule\noindentation,
+    after=\stopmarginrule\egroup,
+    style=\ss,
+    color=darkyellow]
+
+\starttext
+The first two fundamental laws of human stupidity state unambiguously
+that:
+\startTextWithBar
+  \startitemize[n,broad]
+    \item Always and inevitably we underestimate the number of stupid
+    individuals in the world.
+    \item The probability that a given person is stupid is independent
+    of any other characteristic of the same person.
+  \stopitemize
+\stopTextWithBar
+\stoptext
+\stopDemoHN}
+
+Si nous voulons que notre nouvel environnement soit un groupe (\in{section}[sec:groups]), de sorte que toute altération du fonctionnement normal de \ConTeXt\ qui se produit en son sein disparaisse en quittant l'environnement, nous devons inclure la commande \PlaceMacro{bgroup}\tex{bgroup} dans l'option \MyKey{before}, et la commande \PlaceMacro{egroup}\tex{egroup} dans l'option \MyKey{after}.
+
+\stopsection
+
+% * ===========================================================================
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX_fra.tex"
+%%% End:
+%%% vim:set filetype=context tw=75 : %%%

@@ -7,12 +7,11 @@
 %%% Edited with: Emacs + AuTeX - And at times with vim + context-plugin
 %%%
 
-\startproduct introCTX
+\startproduct     introCTX
 
-\environment introCTX_env_00
+\environment      introCTX_env_00
 
 \def\RevisionDate{\date[d=14, m=6, y=2021]}  % Date of the last modifications
-
 %==============================================================================
 
 \startfrontmatter
@@ -33,11 +32,10 @@
 
 \startbodymatter
 
- 
 \startpart        [title=Les fichiers sources,
-                   reference=part:src]
+                   reference=part:src] 
 \setups           [background:B]
-f
+
 \component        01_Source_FirstDoc
 \component        02_Source_Commands
 \component        03_Source_Files
@@ -69,87 +67,92 @@ f
 
 \TocChap
 
-\startchapter     [title=Emphase de mots]
+\startchapter     [title=Emphase de mots,reference=cap:emphword]
 \component        01_01_Markup_WordEmphasis
 \component        01_02_Typeset_WordEmphasis
 \stopchapter
 
-\startchapter     [title=Emphase de paragraphes]
+\startchapter     [title=Emphase de paragraphes,reference=cap:emphpara]
 \component        02_01_Markup_ParagraphsEmphasis
 \component        02_02_Typeset_ParagraphsEmphasis
 \stopchapter
 
-\startchapter     [title=Encadrement]
+\startchapter     [title=Encadrement,reference=cap:framed]
 \component        03_01_Markup_Framed
 \component        03_02_Typeset_Framed
 \stopchapter
 
-\startchapter     [title=Lignes et traits]
+\startchapter     [title=Lignes et traits,reference=cap:lines]
 \component        04_01_Markup_LinesRules
 \component        04_02_Typeset_LinesRules
 \stopchapter
 
-\startchapter     [title=Citations]
+\startchapter     [title=Citations,reference=cap:quotation]
 \component        05_01_Markup_Quotations
 \component        05_02_Typeset_Quotations
 \stopchapter
 
-\startchapter     [title=Mathématiques]
+\startchapter     [title=Mathématiques,reference=cap:maths]
 \component        06_01_Markup_Maths
 \component        06_02_Typeset_Maths
 \stopchapter
 
-\startchapter     [title=Listes structurées]
+\startchapter     [title=Listes structurées,reference=cap:itemize]
 \component        07_01_Markup_Itemize
 \component        07_02_Typeset_Itemize
 \stopchapter
 
-\startchapter     [title=Description et énumération]
+\startchapter     [title=Description et énumération,reference=cap:descenum]
 \component        08_01_Markup_DescriptionEnumeration
 \component        08_02_Typeset_DescriptionEnumeration
 \stopchapter
 
-\startchapter     [title=Textes tabulés]
+\startchapter     [title=Textes tabulés,reference=cap:tabulate]
 \component        09_01_Markup_Tabulate
 \component        09_02_Typeset_Tabulate
 \stopchapter
 
-\startchapter     [title=Tableaux]
+\startchapter     [title=Tableaux,reference=cap:table]
 \component        10_01_Markup_Tables
 \component        10_02_Typeset_Tables
 \stopchapter
 
-\startchapter     [title=Images et combinaisons]
+\startchapter     [title=Images et combinaisons,reference=cap:figures]
 \component        11_01_Markup_ImagesAndCombinaisons
 \component        11_02_Typeset_ImagesAndCombinaisons
 \stopchapter
 
-\startchapter     [title=Éléments flottants]
+\startchapter     [title=Éléments flottants,reference=cap:floats]
 \component        12_01_Markup_Floats
 \component        12_02_Typeset_Floats
 \stopchapter
 
-\startchapter     [title=Colonnes]
+\startchapter     [title=Colonnes,reference=cap:columns]
 \component        13_02_Typeset_Columns
 \stopchapter
 
-\startchapter     [title=Sections]
+\startchapter     [title=Sections,reference=cap:sections]
 \component        14_01_Markup_Sections
 \component        14_02_Typeset_Sections
 \stopchapter
 
-\startchapter     [title=Macro-structure]
+\startchapter     [title=Macro-structure,reference=cap:macrostruct]
 \component        15_01_Markup_Macrostructure
 \component        15_02_Typeset_Macrostructure 
 \stopchapter
 
-\startchapter     [title=Couvertures et page de titre]
+\startchapter     [title=Couvertures et page de titre,reference=cap:covers]
 \component        16_01_Markup_Covers
 \component        16_02_Typeset_Covers
 \stopchapter
 
-\startchapter     [title=Autres]
+\startchapter     [title=Autres,reference=cap:others]
 \component        20_01_Markup_Others
+\stopchapter
+
+\startchapter     [title=Commandes personnalisées,reference=cap:custom]
+\component        21_01_Markup_Customized
+\component        21_02_Typeset_Customized
 \stopchapter
 
 \stoppart
@@ -164,52 +167,52 @@ f
 
 \TocChap
 
-\startchapter     [title=Tables des matières]
+\startchapter     [title=Tables des matières,reference=cap:toc]
 \component        01_01_Markup_ToC
 \component        01_02_Typeset_ToC
 \stopchapter
 
-\startchapter     [title=Abréviations et glossaire]
+\startchapter     [title=Abréviations et glossaire,reference=cap:abbr]
 \component        02_01_Markup_Abbreviations
 \component        02_02_Typeset_Abbreviations
 \stopchapter
 
-\startchapter     [title=Notes de bas de page]
+\startchapter     [title=Notes de bas de page,reference=cap:notes]
 \component        03_01_Markup_Notes
 \component        03_02_Typeset_Notes
 \stopchapter
 
-\startchapter     [title=Notes marginales]
+\startchapter     [title=Notes marginales,reference=cap:margin]
 \component        04_01_Markup_Margindata
 \component        04_02_Typeset_Margindata
 \stopchapter
 
-\startchapter     [title=Pièces jointes]
+\startchapter     [title=Pièces jointes,reference=cap:attachment]
 \component        05_01_Markup_Attachments
 \component        05_02_Typeset_Attachments
 \stopchapter
 
-\startchapter     [title={Références internes vers des illustrations, des sections},]
+\startchapter     [title={Références internes vers des illustrations, des sections},reference=cap:refint]
 \component        06_01_Markup_ReferencesInternal
 \component        06_02_Typeset_ReferencesInternal
 \stopchapter
 
-\startchapter     [title=Références externes vers internet]
+\startchapter     [title=Références externes vers internet,reference=cap:refext]
 \component        07_01_Markup_ReferencesExternal
 \component        07_02_Typeset_ReferencesExternal
 \stopchapter
 
-\startchapter     [title=Références bibliographiques]
+\startchapter     [title=Références bibliographiques,reference=cap:refbiblio]
 \component        08_01_Markup_ReferencesBiblio
 \component        08_02_Typeset_ReferencesBiblio
 \stopchapter
 
-\startchapter     [title={Listes des images, tableaux…}]
+\startchapter     [title={Listes des images, tableaux…},reference=cap:lists]
 \component        09_01_Markup_Lists
 \component        09_02_Typeset_Lists
 \stopchapter
 
-\startchapter     [title=Index]
+\startchapter     [title=Index,reference=cap:index]
 \component        10_01_Markup_Index
 \component        10_02_Typeset_Index
 \stopchapter

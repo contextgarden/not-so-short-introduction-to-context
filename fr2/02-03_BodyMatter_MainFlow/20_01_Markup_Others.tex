@@ -95,6 +95,14 @@ où, en tant que configuration, nous pouvons inclure les mêmes options que cell
 \tex{starttyping}
 \tex{type}
 
+Une autre façon d'obtenir les caractères réservés est d'utiliser la commande \tex{type}. Cette commande envoie ce qu'elle prend comme argument au document final sans le traiter d'aucune manière, et donc sans l'interpréter. Dans le document final, le texte reçu de \tex{type} sera affiché dans la police monospace typique des terminaux informatiques et des machines à écrire.
+
+\startSmallPrint   % TODO garulfo à mieux expliciter
+
+  Normalement, nous devrions placer le texte que \tex{type} doit afficher entre accolades. Cependant, lorsque ce texte comprend lui-même des crochets ouvrants ou fermants, nous pouvons, à la place, enfermer le texte entre deux caractères égaux qui ne font pas partie du texte qui constitue l'argument de \tex{type}. Par exemple : \cmd{type*…*}, ou \cmd{type+…+}.
+
+\stopSmallPrint
+
 \stopsubsection
 
 % ** Subsection startlinenumbering --------------------------------------------

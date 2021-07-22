@@ -1,130 +1,103 @@
-%%% File:        b03_Commands.mkiv
-%%% Author:      Joaquín Ataz-López
-%%% Begun:       April 2020
-%%% Concluded:   April 2020
-
-% * Contents
-% Contents:    This is the central chapter for understanding the essence
-%              of ConTeXt. Some of its contents are based on TeX.  The
-%              use of reserved characters and the distinction between
-%              control symbols and control words. Knuth insists on the
-%              difference, but neither the ConTeXt documentation, nor in
-%              general, LaTeX documentation do so (despite a brief
-%              reference in Kopka). Yet I believe the distinction is
-%              important for understanding why, in TeX the command names
-%              cannot mix letters and non-letters.  As for the
-%              explanation of commands, there are decisions on
-%              «start-stop» constructions that I still hesitate to call
-%              «environments». But at times they also do so in the wiki.
-%              I am satisfied, on the other hand, with my explanation of
-%              \setup + \define using the \framed command as an example.
-%              Amon other additional concepts I would have also liked to
-%              introduce counters, but I have not found any documentation
-%              on the name of the main counters in ConTeXt. For example I
-%              have done various tests manipulating chapter counters by
-%              hand and.... zilch! Rien de rien. Nothing. This
-%              information, central for controlling ConTeXt, should be
-%              made explicit somewhere           lugar.
-
-%%% Edited with: Emacs + AuTeX - And at times with vim + context-plugin
-%%%
-
 \startcomponent 02-03_Commandes
 
 \environment introCTX_env_00
 
-% * En-tête de chapitre
 \startchapter
   [ reference=cap:commands,
-    title=Les commandes\\ et autres concepts\\ fondamentaux de \ConTeXt,
-    bookmark=Les commandes et autres concepts fondamentaux ConTeXt,
+    title={Règles syntaxiques},
   ]
+
+% * En-tête de chapitre
 
 \TocChap
 
-Nous avons déjà vu que dans le fichier source, avec le contenu réel de notre futur document formaté, nous insérons les instructions nécessaires pour expliquer à \ConTeXt\ comment nous voulons que notre contenu soit mis en forme. Nous pouvons appeler ces instructions \quotation{commandes}, \quotation{macros} ou \quotation{séquences de contrôle}.
+Nous venons de vois que le fichier source contient à la fois le contenu et les instructions de présentation de se contenu que doit respecter le document final.
+Cela se fait grâce au langage \ConTeXt\ qui sert à distinguer les différents type d'information dans un premier temps ({\em balisage}), puis à préciser les règles de composition et de mise en page à leur appliquer pour produire le document final. Pour cela \ConTeXt\ propose des \quotation{commandes}, aussi appelées \quotation{macros} ou \quotation{séquences de contrôle}.
 
 \startSmallPrint
 
-Du point de vue du fonctionnement interne de \ConTeXt\ (en fait, dufonctionnement de \TeX), il y a une différence entre les {\em primitives} et les{\em macros}. Une primitive est une instruction simple qui ne peut pas être décomposée en d'autres instructions plus simples. Une macro est une instructionqui peut être décomposée en d'autres instructions plus simples qui, à leur tour,peuvent peut-être aussi être décomposées en d'autres encore, et ainsi desuite. La plupart des instructions de \ConTeXt sont, en fait, des macros. Dupoint de vue du programmeur, la différence entre les macros et les primitivesest importante. Mais du point de vue de l'utilisateur, la question n'est pas siimportante : dans les deux cas, nous avons des instructions qui sont exécutéessans que nous ayons besoin de nous préoccuper de leur fonctionnement à un niveauinférieur. Par conséquent, la documentation \ConTeXt\ parle généralement d'une{\em commande} lorsqu'elle adopte le point de vue de l'utilisateur, et d'une{\em macro} lorsqu'elle adopte le point de vue du programmeur. Puisque nous neprenons que la perspective de l'utilisateur dans cette introduction,j'utiliserai l'un ou l'autre terme, les considérant comme synonymes.
+Du point de vue du fonctionnement interne de \ConTeXt\ (en fait, dufonctionnement de \TeX), il y a une différence entre les {\em primitives} et les {\em macros}. Une primitive est une instruction simple qui ne peut pas être décomposée en d'autres instructions plus simples. Une macro est une instruction qui peut être décomposée en d'autres instructions plus simples qui à leur tour peuvent être décomposées, et ainsi de suite, jusqu'à revenir aux primitives.
+La plupart des instructions de \ConTeXt sont, en fait, des macros. Du point de vue du programmeur, la différence entre les macros et les primitives est importante. Mais du point de vue de l'utilisateur, la question n'est pas si importante : dans les deux cas, nous avons des instructions qui sont exécutées sans que nous ayons besoin de nous préoccuper de leur fonctionnement à un niveau inférieur. Par conséquent, la documentation \ConTeXt\ parle généralement d'une {\em commande} lorsqu'elle adopte le point de vue de l'utilisateur, et d'une {\em macro} lorsqu'elle adopte le point de vue du programmeur. Puisque nous ne prenons que la perspective de l'utilisateur dans cette introduction,j'utiliserai l'un ou l'autre terme, les considérant comme synonymes.
 
-Les {\em commandes} sont des ordres donnés au programme \ConTeXt\ pour qu'il fasse quelque chose. Nous {\em contrôlons} les performances du programme par leur intermédiaire. Ainsi \cap{Knuth}, le père de \TeX, utilise le terme de {\em séquences de contrôle} pour se référer à la fois aux primitives et aux macros, et je pense que c'est le terme le plus précis de tous. Je l'utiliserai lorsque je penserai qu'il est important de distinguer entre {\em symboles de contrôle} et {\em mots de contrôle}.
+Les {\em commandes} sont des ordres donnés au programme \ConTeXt\ pour qu'il fasse quelque chose. Nous {\em contrôlons} les performances du programme par leur intermédiaire. Ainsi \people{Knuth}, le père de \TeX, utilise le terme de {\em séquences de contrôle} pour se référer à la fois aux primitives et aux macros, et je pense que c'est le terme le plus précis de tous. Je l'utiliserai lorsque je penserai qu'il est important de distinguer entre {\em symboles de contrôle} et {\em mots de contrôle}.
 
 \stopSmallPrint
 
-Les instructions de \ConTeXt\ sont essentiellement de deux sortes : les caractères réservés, et les commandes proprement dites.
+Les commandes de \ConTeXt\ sont essentiellement de deux sortes : les caractères réservés qui permettent le balisage, et les commandes proprement dites.
 
-%===============================================================================
-% ** 3.1 Les caractères réservés
+% * 3.1 Les caractères réservés ============================================
 
 \startsection
   [
     reference=sec:reserved characters,
-    title=Les caractères réservés de \ConTeXt,
+    title=Caractères réservés,
   ]
 
-Lorsque \ConTeXt\ lit le fichier source composé uniquement de caractères de texte, puisqu'il s'agit d'un fichier texte, il doit d'une manière ou d'une autre distinguer ce qui est le contenu textuel à mettre en forme, et les instructions  qu'il doit exécuter. Les caractères réservés de \ConTeXt\ sont ce qui lui permet de faire cette distinction. En principe, \ConTeXt\ suppose que chaque caractère du fichier source est un texte à traiter, sauf s'il s'agit de l'un des 11 caractères réservés qui doivent être traités comme une {\em instruction}.
+\index{balisage}
 
-Seulement 11 instructions ? Non. Il n'y a que 11 caractères réservés, mais l'un d'entre eux, le caractère de \quotation{\backslash}, a pour fonction de convertir le ou les caractères qui le suivent immédiatement en instruction, rendant ainsi le nombre potentiel de commandes illimité. \ConTeXt\ a environ 3000 commandes (en additionnant les commandes exclusives à Mark~II, Mark~IV et celles communes aux deux versions).
+Lorsque \ConTeXt\ parcourt le fichier source, composé uniquement de caractères de texte puisqu'il s'agit d'un fichier texte, il doit d'une manière ou d'une autre distinguer ce qui est le contenu textuel à composer et mettre en page des règles de compositions et de mise en page à proprement parler.
 
-Les caractères réservés sont les suivants :
+Ce sont les 11 caractères suivants, dits {\em caractères réservés}, qui permettent de faire cette distinction. Les cinq premiers sont vraiment essentiels au sens où il est très probable que vous les utilisiez régulièrement.
 
 {\switchtobodyfont[30pt]
-\midaligned{\cmd{ \% \{ \} \# \lettertilde\ \| \$ \_ \letterhat\ \&}}}
+\midaligned{\type<<{ } \ % ~ # $ ^ _ | &>>
+}}
+
 
 \ConTeXt\ les interprète de la façon suivante~:
 
-\semitable{\backslash}
-
-Ce caractère est le plus important pour nous~: il indique que ce qui vient immédiatement après ne doit pas être interprété comme du texte mais comme une instruction. Il est appelé \quotation{Caractère d'échappement} ou \quotation{Séquence d'échappement} (même s'il n'a rien à voir avec la touche \quotation{Esc} que l'on trouve sur la plupart des claviers).\footnote{Dans la terminologie informatique, la touche qui affecte l'interprétation du caractère suivant est appelée le \quotation{caractère d'échappement}. En revanche, la touche {\em escape key} des claviers est appelée ainsi car elle génère le caractère 27 en code ASCII, qui est utilisé comme caractère d'échappement dans cet encodage. Aujourd'hui, l'utilisation de la touche Echap est davantage associée à l'idée d'annuler une action en cours.}
-
-
-\startsemitable{\%}
-Indique à \ConTeXt\ que ce qui suit jusqu'à la fin de la ligne est un commentaire qui ne doit pas être traité ou inclus dans le fichier formaté final. L'introduction de commentaires dans le fichier source est extrêmement utile. Cela permet par exemple d'expliquer pourquoi quelque chose a été fait d'une certaine manière, comment tel ou tel effet graphique a été obtenu, garder un rapper d'une idée à compléter ou à réviser, d'une illustration à construire.
-
-  Il peut également être utilisé pour aider à localiser une erreur dans le fichier source, puisqu'en commentant une ligne, nous l'excluons de la compilation, et pouvons voir si elle est à l'origine de l'erreur de compilation. Le commentaire peut aussi être utilisé pour stocker deux versions différentes d'une même macro, et ainsi obtenir des résultats différents après la compilation ; ou pour empêcher la compilation d'un extrait dont nous ne sommes pas sûrs, mais sans le supprimer du fichier source au cas où nous voudrions y revenir plus tard ; ou pour partager des commentaires lros de l'édition en mode collaboratif d'un document... etc.
-
-  Avec la possibilité que notre fichier source contienne du texte que personne d'autre que nous ne puisse voir, nos utilisations de ce caractère ne sont limitées que par notre propre imagination. J'avoue que c'est l'un des utilitaires qui me manque le plus lorsque le seul remède pour écrire un texte est un logiciel de traitement de texte.
-\stopsemitable
-
 \startsemitable{\{}
-Ce caractère ouvre un groupe. Les groupes sont des blocs de texte auxquels on souhaite appliquer certaines effet ou affecter certaines caractéristiques. Nous en parlerons dans la \in{section} [sec:groupes].
+Ce caractère ouvre un groupe. C'est la base du balisage avec \ConTeXt. Les groupes sont des blocs de texte auxquels on souhaite appliquer certains effets ou affecter certaines caractéristiques. Nous en parlerons dans la \at{page} [sec:groups]. Dans une certaine mesure, vous pouvez le rapprocher de {\tt <div>} en \HTML.
 \stopsemitable
 
 \startsemitable{\}}
-Ce caractère cloture un groupe préalablement ouvert avec \MyKey{\{}.
+Ce caractère cloture un groupe préalablement ouvert avec \}.
+Dans une certaine mesure, vous pouvez le rapprocher de {\tt </div>} en \HTML.
 \stopsemitable
 
+\semitable{\backslash}
+Ce caractère indique à \ConTeXt\ que la chaîne de caractères qui le suit doit être interprété comme une commande et non pas comme du contenu textuel. Il est appelé {\em caractère d'échappement} ou {\em séquence d'échappement} 
+\footnote{Dans la terminologie informatique, un caractère d'échappement est un caractère qui déclenche une interprétation alternative du ou des caractères qui le suivent.}
 
-\startsemitable{\#}
-Ce caractère est utilisé pour définir les macros. Il fait référence aux arguments de la macro. Voir \in{section}[sec:define] dans ce chapitre.
+\startsemitable{\%}
+
+Indique à \ConTeXt\ que ce qui suit jusqu'à la fin de la ligne est un commentaire qui ne doit pas être traité ou inclus dans le fichier formaté final. L'introduction de commentaires dans le fichier source est extrêmement utile. Cela permet par exemple d'expliquer pourquoi quelque chose a été fait d'une certaine manière, comment tel ou tel effet graphique a été obtenu, garder un rappel d'une idée à compléter ou à réviser, d'une illustration à construire, d'une remarque pour un collègue.
+
+Il peut également être utilisé pour aider à localiser une erreur dans le fichier source, puisqu'en commentant une ligne, nous l'excluons de la compilation, et pouvons voir si elle est à l'origine de l'erreur de compilation. Le commentaire peut aussi être utilisé pour stocker deux versions différentes d'une même macro, et ainsi obtenir des résultats différents après la compilation ; ou pour empêcher la compilation d'un extrait dont nous ne sommes pas sûrs, mais sans le supprimer du fichier source au cas où nous voudrions y revenir plus tard ; ou pour partager des commentaires lors de l'édition en mode collaboratif d'un document... etc.
+
 \stopsemitable
 
 \startsemitable{\lettertilde}
-Introduit un espace blanc insécable dans le document pour éviter un saut de ligne entre les mots qu'il sépare, ce qui signifie que deux mots séparés par le caractère \type{~} resteront toujours sur la même ligne. Nous parlerons de cette instruction et de l'endroit où elle doit être utilisée dans \in{section} [sec:lettertilde].
+Ce caractère introduit un espace blanc insécable dans le document pour éviter un saut de ligne entre les mots qu'il sépare, ce qui signifie que deux mots séparés par le caractère \type{~} resteront toujours sur la même ligne. Nous parlerons de cette instruction et de l'endroit où elle doit être utilisée à la \at{page} [sec:lettertilde].
 \stopsemitable
 
-\startsemitable{\|}  % TODO Garulfo à vérifier
-Ce caractère est utilisé pour indiquer que deux mots joints par un élément de séparation constituent un mot composé qui peut être divisé par syllabes en la première composante, mais pas en la seconde. Voir \in{section} [sec:mots composés].
+\startsemitable{\#}
+Ce caractère est utilisé dans la définition de macros, de commandes. Il fait référence aux arguments de la macro. Voir \at{page}[sec:define].
 \stopsemitable
 
 \startsemitable{\$}
-Ce caractère est un {\em interrupteur} pour le mode mathématique. Il active ce mode s'il n'était pas activé, ou le désactive s'il l'était. En mode mathématique, \ConTeXt\ applique des polices et des règles différentes des polices normales, afin d'optimiser l'écriture des formules mathématiques. Bien que l'écriture des mathématiques soit une utilisation très importante de \ConTeXt\, je ne la développerai pas dans cette introduction. Étant un homme de lettres, je ne me sens pas à la hauteur !
+Ce caractère est un {\em interrupteur} pour le mode mathématique. Il active ce mode s'il n'était pas activé, ou le désactive s'il l'était. En mode mathématique, \ConTeXt\ applique des polices et des règles différentes des polices normales, afin d'optimiser l'écriture des formules mathématiques (voir \at{page}[cap:maths])
+\stopsemitable
+
+
+\startsemitable{\letterhat}
+Ce caractère est utilisé en mode mathématique pour indiquer que ce qui suit doit être mis en exposant. Ainsi, par exemple, pour obtenir $(x+i)^{n^3}$, il faut écrire \type[option=tex]{$(x+i)^{n^3}$}.
 \stopsemitable
 
 \startsemitable{\_}
 Ce caractère est utilisé en mode mathématique pour indiquer que ce qui suit doit être mis en indice. Ainsi, par exemple, pour obtenir $x_1$, il faut écrire \type[option=tex]{$x_1$}.
 \stopsemitable
 
-\startsemitable{\letterhat}
-Ce caractère est utilisé en mode mathématique pour indiquer que ce qui suit doit être mis en exposant. Ainsi, par exemple, pour obtenir $(x+i)^{n^3}$, il faut écrire \type[option=tex]{$(x+i)^{n^3}$}.
+\startsemitable{\|}
+Ce caractère a plusieurs utilisations selon l'environnement (texte courant, mathématiques, textes tabulés). En texte courant, et doublé, il indique que les deux mots qu'il sépare constituent un mot composé qui peut être divisé par syllabes dans le premier mot, mais pas dans le second. Voir \in{section} [sec:compound words].
 \stopsemitable
 
 \startsemitable{\&}
-  La documentation de \ConTeXt\ indique qu'il s'agit d'un caractère réservé, mais ne précise pas pourquoi. Ce caractère semble avoir essentiellement deux usages : il est utilisé pour aligner certains éléments verticalements dans les tableaux de base et, dans un contexte mathématique, dans les écritures matricielles \Doubt. Comme je suis un littéraire, je ne me sens pas capable de faire des tests supplémentaires pour voir à quoi sert précisément ce caractère réservé.
+\TeX\ et \LaTeX\ réservent ce caractère pour aligner certains éléments verticalement dans les tableaux de base et, un contexte mathématique, dans les équations ou les écritures matricielles. \ConTeXt\ n'utilise plus vraiment \Doubt ce caractère mais il reste réservé. Pour aligner les éléments verticalement, sans doute dans un soucis de standardisation, \ConTeXt\ invite plutôt à utiliser la commande \tex{NC} (nouvelle colonne)  que l'on retrouve dans les textes tabulés et dans les tableaux.
 \stopsemitable
 
-Concernant le choix des caractères réservés, il doit s'agir de caractères disponibles sur la plupart des claviers mais qui ne sont habituellement peu ou pas utilisés dans les écritures. Cependant, bien que peu courants, il est toujours possible que certains d'entre eux apparaissent dans nos documents, comme par exemple lorsque nous voulons écrire que quelque chose coûte 100 dollars (\$100), ou qu'en Espagne, le pourcentage de conducteurs de plus de 65 ans était de 16\% en 2018. Dans ces cas, nous ne devons pas écrire le caractère réservé directement, mais utiliser une {\em commande} qui produira le caractère réservé correctement dans le document final. La commande pour chacun des caractères réservés se trouve dans \in{table} [Caractères réservés].
+
+Concernant le choix des caractères réservés, il doit s'agir de caractères disponibles sur la plupart des claviers mais qui ne sont habituellement peu ou pas utilisés dans les écritures. Cependant, bien que peu courants, il est toujours possible que certains d'entre eux apparaissent dans nos documents, comme par exemple lorsque nous voulons écrire que quelque chose coûte 100 dollars (\$100), ou qu'en Espagne, le pourcentage de conducteurs de plus de 65 ans était de 16\% en 2018. Dans ces cas, nous ne devons pas écrire le caractère réservé directement, mais utiliser une {\em commande} qui produira le bon caractère dans le document final. La commande pour chacun des caractères réservés se trouve dans \in{table} [Caractères réservés].
 
 
 \placetable
@@ -135,52 +108,128 @@ Concernant le choix des caractères réservés, il doit s'agir de caractères di
   \HL
   \NC {\bf Caractère réservé} \NC {\bf Commande qui le génère}\NR
   \HL
-  \NC{\tt \backslash}   \NC\PlaceMacro{backslash}\tex{backslash}\NR\macro{reserved characters+\backslash backslash}
-  \NC{\tt \%}           \NC{\cmd{\%}}\NR\macro{reserved characters+\backslash \%}
   \NC{\tt \{}           \NC\cmd{\{}\NR\macro{reserved characters+\backslash \{}
   \NC{\tt \}}           \NC\cmd{\}}\NR\macro{reserved characters+\backslash \}}
-  \NC{\tt \#}           \NC\cmd{\#}\NR\macro{reserved characters+\backslash \#}
+  \NC{\tt \backslash}   \NC\PlaceMacro{backslash}\tex{backslash}\NR\macro{reserved characters+\backslash backslash}
+  \NC{\tt \%}           \NC{\cmd{\%}}\NR\macro{reserved characters+\backslash \%}
   \NC{\tt \lettertilde} \NC\PlaceMacro{lettertilde}\tex{lettertilde}\NR\macro{reserved characters+\backslash lettertilde}
-  \NC{\tt \|}           \NC\cmd{\|}\NR\macro{reserved characters+\backslash \|}
+  \NC{\tt \#}           \NC\cmd{\#}\NR\macro{reserved characters+\backslash \#}
   \NC{\tt \$}           \NC\cmd{\$}\NR\macro{reserved characters+\backslash \$}
-  \NC{\tt \_}           \NC\cmd{\_}\NR\macro{reserved characters+\backslash \_}
   \NC{\tt \letterhat}\NC\PlaceMacro{letterhat}\tex{letterhat}\NR\macro{reserved characters+\backslash letterhat}
+  \NC{\tt \_}           \NC\cmd{\_}\NR\macro{reserved characters+\backslash \_}
+  \NC{\tt \|}           \NC\cmd{\|}\NR\macro{reserved characters+\backslash \|}
   \NC{\tt \&}\NC\cmd{\&}\macro{reserved characters+\backslash \&}\NR
   \HL
 \stoptabulate}
 
-Une autre façon d'obtenir les caractères réservés est d'utiliser la commande \tex{type}. Cette commande envoie ce qu'elle prend comme argument au document final sans le traiter d'aucune manière, et donc sans l'interpréter. Dans le document final, le texte reçu de \tex{type} sera affiché dans la police monospace typique des terminaux informatiques et des machines à écrire.
-
-\startSmallPrint   % TODO garulfo à mieux expliciter
-
-  Normalement, nous devrions placer le texte que \tex{type} doit afficher entre accolades. Cependant, lorsque ce texte comprend lui-même des crochets ouvrants ou fermants, nous pouvons, à la place, enfermer le texte entre deux caractères égaux qui ne font pas partie du texte qui constitue l'argument de \tex{type}. Par exemple : \cmd{type*…*}, ou \cmd{type+…+}.
-
-\stopSmallPrint
-
-Si, par erreur, nous utilisons directement un des caractères réservés autrement que pour l'usage auquel il est destiné, parce que nous avons justement oublié qu'il s'agissait d'un caractère réservé ne pouvant être utilisé comme un caractère normal, trois choses peuvent se produire :
+Si par erreur nous utilisons incorrectement l'un des caractères réservés, trois choses peuvent se produire :
 
 
 \startitemize[n]
 
+\item 
+Le plus souvent, une erreur est générée lors de la compilation.
 
+\item Nous obtenons un résultat inattendu. Cela se produit surtout avec {\tt \lettertilde} et {\tt \%} ; dans le premier cas, au lieu du {\tt \lettertilde} attendu dans le document final, un espace blanc sera inséré ; et dans le second cas, tout ce qui se trouve après {\tt \%} sur la même ligne ne sera pas pris en compte par \ConTeXt\ qui le considèrera comme commentaire. L'utilisation incorrecte de {\tt \backslash} peut également produire un résultat inattendu si elle ou les caractères qui la suivent immédiatement constituent une commande connue de \ConTeXt. Cependant, le plus souvent, lorsque nous utilisons incorrectement {\tt \backslash}, nous obtenons une erreur de compilation.
 
-  \item Le plus souvent, une erreur est générée lors de la compilation.
+\item 
+Aucun problème ne se produit : cela se produit avec trois des caractères réservés utilisés principalement en mathématiques ({\tt _ ^ &}) : s'ils sont utilisés en dehors de cet environnement, ils sont traités comme des caractères normaux.
 
-  \item Nous obtenons un résultat inattendu. Cela se produit surtout avec \MyKey{\lettertilde} et \MyKey{\%} ; dans le premier cas, au lieu du \MyKey{\lettertilde} attendu dans le document final, un espace blanc sera inséré ; et dans le second cas, tout ce qui se trouve après \MyKey{\%} sur la même ligne ne sera pas pris en compte par \ConTeXt\ qui le considèrera comme commentaire. L'utilisation incorrecte de la \quotation{{\tt\backslash}} peut également produire un résultat inattendu si elle ou les caractères qui la suivent immédiatement constituent une commande connue de \ConTeXt\. Cependant, le plus souvent, lorsque nous utilisons incorrectement la \quotation{\tt\backslash}, nous obtenons une erreur de compilation.
+\startSmallPrint
+Le point 3 est ma conclusion. La vérité est que je n'ai trouvé aucun endroit dans la documentation de \ConTeXt\ qui nous indique où ces caractères réservés peuvent être utilisés \Conjecture{} directement ; dans mes tests, cependant, je n'ai vu aucune erreur lorsque cela est fait ; contrairement, par exemple, à \LaTeX.
+\stopSmallPrint
 
-  \item Aucun problème ne se produit : Cela se produit avec trois des caractères réservés utilisés principalement en mathématiques ({\tt _ ^ &}) : s'ils sont utilisés en dehors de cet environnement, ils sont traités comme des caractères normaux.
-  \startSmallPrint
-
-    Le point 3 est ma conclusion. La vérité est que je n'ai trouvé aucun endroit dans la documentation de \ConTeXt\ qui nous indique où ces caractères réservés peuvent être utilisés \Conjecture{} directement ; dans mes tests, cependant, je n'ai vu aucune erreur lorsque cela est fait ; contrairement, par exemple, à \LaTeX.
-
-  \stopSmallPrint
 \stopitemize
 
 \stopsection
 
-%==========================================================================
+% * 3.2 Les groupes et le balisage =========================================
 
-% ** 3.2 Les commandes à proprement parler
+\startsection
+  [
+   title=Balisage et groupes,
+   reference=sec:groups, 
+]
+
+Un groupe est un fragment bien défini du fichier source que \ConTeXt\ utilisé comme une {\em unité de travail}. (ce que cela signifie est expliqué plus loin). Chaque groupe a un début et une fin qui doivent être expressément indiqués. Un groupe commence :
+
+% TODO Garulfo : mettre les correspondances immédiatmeent ouverture / fermeture
+\startitemize [packed]
+
+  \item Avec le caractère réservé \MyKey{\{} ou avec la commande \PlaceMacro{bgroup}\tex{bgroup}.
+
+  \item Avec la commande \PlaceMacro{begingroup}\tex{begingroup}.
+
+  \item Avec la commande \PlaceMacro{start}\tex{start}
+
+  \item Avec l'ouverture de certains environnements (commande \tex{startSomething}).
+
+  \item En commençant un environnement mathématique (avec le caractère réservé
+  "\$").
+
+\stopitemize
+
+et est fermé
+
+\startitemize [packed]
+
+  \item Avec le caractère réservé \MyKey{\}} ou avec la commande \PlaceMacro{egroup}\tex{egroup}.
+
+  \item Avec la commande \PlaceMacro{endgroup}\tex{endgroup}.
+
+  \item Avec la commande \PlaceMacro{stop}\tex{stop}
+
+  \item Avec la fermeture de l'environnement (commande \tex{stopSomething}).
+
+  \item Lors de la sortie de l'environnement mathématique (avec le caractère réservé "\$").
+
+\stopitemize
+
+
+
+Certaines commandes génèrent aussi automatiquement un groupe, par exemple, \tex{hbox}, \tex{vbox} et, en général, les commandes liées à la création de {\em boîte}\footnote{La notion de {\em boîte} est également une notion centrale de \ConTeXt\, mais son explication n'est pas incluse dans cette introduction. Vous pouvez voir \goto{le manuel dédié}[url(https://www.pragma-ade.com/general/manuals/lowlevel-boxes.pdf)]}. En dehors de ces derniers cas (groupes générés automatiquement par certaines commandes), la manière de fermer un groupe doit être cohérente avec la manière dont il a été ouvert. Cela signifie qu'un groupe commencé avec \MyKey{\{} doit être fermé avec \MyKey{\}}, et qu'un groupe commencé avec \tex{begingroup} doit être fermé avec \tex{endgroup}.
+% TODO Garulfo : ne pas laisser cette réflexion qui est plus source de confusion qu'autre chose.
+Cette règle n'a qu'une seule exception~: un groupe commencé par \MyKey{\{} peut être fermé par \tex{egroup}, et le groupe commencé par \tex{bgroup} peut être fermé par \MyKey{\}} ; en réalité, cela signifie que \MyKey{\{} et \tex{bgroup} sont complètement synonymes et interchangeables, et de même pour \MyKey{\}} et \tex{egroup}.
+
+\startSmallPrint
+
+  Les commandes \PlaceMacro{bgroup}\tex{bgroup} et \PlaceMacro{egroup}\tex{egroup} ont été conçues pour pouvoir définir des commandes pour ouvrir un groupe et d'autres pour fermer un groupe. Par conséquent, pour des raisons internes à la syntaxe \TeX\, ces groupes ne pouvaient pas être ouverts et fermés avec des accolades, car cela aurait généré des accolades déséquilibrées dans le fichier source, ce qui aurait toujours provoqué une erreur lors de la compilation.
+
+  %TODO Garulfo : c'est un truc de jedi, pourquoi donner ça en introduction ? https://tex.stackexchange.com/questions/1930/when-should-one-use-begingroup-instead-of-bgroup, il faut mieux utiliser \begingroup
+
+  En revanche, les commandes \PlaceMacro{begingroup}\tex{begingroup} et \PlaceMacro{endgroup}\tex{endgroup} ne sont pas interchangeables avec les accolades ou les commandes \tex{bgroup ... \egroup}, car un groupe commencé avec \tex{begingroup} doit être fermé avec \tex{endgroup}. Ces dernières commandes ont été conçues pour permettre une vérification beaucoup plus approfondie des erreurs. En général, les utilisateurs normaux n'ont pas à les utiliser.
+
+\stopSmallPrint
+
+Nous pouvons avoir des groupes imbriqués (un groupe à l'intérieur d'un autre groupe), et dans ce cas, l'ordre dans lequel les groupes sont fermés doit être cohérent avec l'ordre dans lequel ils ont été ouverts : tout sous-groupe doit être fermé à l'intérieur du groupe dans lequel il a commencé. Il peut également y avoir des groupes vides générés avec la \MyKey{\{\}}. Un groupe vide n'a, en principe, aucun effet sur le document final, mais il peut être utile, par exemple, pour indiquer la fin du nom d'une commande.
+
+Le principal effet des groupes est d'encapsuler leur contenu : en règle générale, les définitions, les formats et les attributions de valeurs effectués au sein d'un groupe sont \quotation{oubliés} une fois que l'on quitte le groupe. De cette façon, si nous voulons que \ConTeXt\ modifie temporairement son mode de fonctionnement normal, le moyen le plus efficace est de créer un groupe et, au sein de celui-ci, de modifier ce fonctionnement. Ainsi, lorsque nous quitterons le groupe, toutes les valeurs et tous les formats antérieurs à celui-ci seront restaurés. Nous en avons déjà vu quelques exemples en mentionnant des commandes comme \tex{it}, \tex{bf}, \tex{sc}, etc. Mais cela ne se produit pas seulement avec les commandes de formatage : le groupe isole en quelque sorte son contenu, de sorte que toute modification de l'une des nombreuses variables internes que \ConTeXt\ gère en permanence, ne restera effective que tant que nous nous trouvons dans le groupe dans lequel cette modification a eu lieu. De même, une commande définie au sein d'un groupe ne sera pas connue en dehors de celui-ci.
+
+Ainsi, si nous traitons l'exemple suivant
+
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+\define\A{B}
+\A
+{
+  \define\A{C}
+  \A
+}
+\A
+\stopDemoVN}
+
+nous voyons que la première fois que nous exécutons la commande \tex{A}, le résultat correspond à celui de sa définition initiale (\quote{B}). Ensuite, nous avons créé un groupe et redéfini la commande \tex{A} au sein de celui-ci. Si nous l'exécutons maintenant au sein du groupe, la commande nous donnera la nouvelle définition (\quote{C} dans notre exemple), mais lorsque nous quittons le groupe dans lequel la commande \tex{A} a été redéfinie, si nous l'exécutons à nouveau, elle tapera \quote{B} une fois de plus. La définition faite au sein du groupe est \quotation{oubliée} une fois que nous l'avons quitté.
+
+Une autre utilisation possible des groupes concerne les commandes ou instructions conçues pour s'appliquer exclusivement au caractère qui est écrit après elles. Dans ce cas, si nous voulons que la commande s'applique à plus d'un caractère, nous devons inclure dans un groupe les caractères auxquels nous voulons que la commande ou l'instruction s'applique. Ainsi, par exemple, le caractère réservé \MyKey{\letterhat} qui, nous le savons déjà, convertit le caractère suivant en exposant lorsqu'il est utilisé dans l'environnement mathématique ; ainsi, si nous écrivons, par exemple, \MyKey{\$4^2x\$}, nous obtiendrons \quotation{$4^2x$ }. Mais si nous écrivons \MyKey{\$4^\{2x\}\$}, nous obtiendrons \quotation{$4^{2x}$}.
+
+Enfin, une troisième utilisation du regroupement est d'indiquer à \ConTeXt\ que ce qui est inclus dans le groupe doit être traité comme un seul élément. C'est la raison pour laquelle il a été dit précédemment (\in{section}[sec:syntax]) que dans certaines occasions, il est préférable d'enfermer le contenu d'une option de commande entre des crochets.
+
+
+\stopsection
+
+
+
+% * 3.3 commandes à proprement parler ==================================
 
 \startsection
   [
@@ -280,8 +329,8 @@ Cette \quote{astuce} ne fonctionnera pas correctement avec la commande \tex{defi
 
 \stopsection
  
-% =================================================================================================
-% ** 3.3 Le périmétre des commandes
+
+% * 3.4 Le périmétre des commandes =========================================
 
 \startsection
   [title=Périmètre des commandes]
@@ -376,8 +425,8 @@ D'autre part, le texte situé dans un environnement particulier constitue normal
 \stopsection
 
 
-%====================================================================== 
-% ** 3.4 Les options de fonctionnement des commandes
+% * 3.5 Les options de fonctionnement des commandes ========================
+
 \startsection
   [
     title=Options de fonctionnement des commandes,
@@ -512,8 +561,7 @@ Dans l'exemple que nous avons donné, nous avons configuré notre cadre spécial
 
 \stopsection
 
-% ===============================================================================
-% ** 3.5 Résumé sur la syntaxe
+% * 3.6 Résumé sur la syntaxe ==============================================
 
 \startsection
   [
@@ -660,91 +708,10 @@ Ainsi, chaque utilisateur est invité à compléter progressivement la documenta
 % ** 3.8 Autres concepts fondamentaux       <== HERE NEXT
 
 \startsection
-  [title=Autres concepts fondamentaux]
+  [title={Autres concepts fondamentaux, dimensions},
+  reference=sec:dimensions,]
 
-  Il existe d'autres notions, autres que les commandes, qui sont fondamentales pour comprendre la logique du fonctionnement de \ConTeXt\. Certaines d'entre elles, en raison de leur complexité, ne sont pas appropriées pour une introduction et ne seront donc pas abordées dans ce document ; mais il y a deux notions qu'il convient d'examiner maintenant : les groupes et les dimensions.
-
-
-\startsubsection
-  [reference=sec:groups, title=Groupes]
-
-Un groupe est un fragment bien défini du fichier source que \ConTeXt\ utilisé comme une {\em unité de travail}. (ce que cela signifie est expliqué plus loin). Chaque groupe a un début et une fin qui doivent être expressément indiqués. Un groupe commence :
-% TODO Garulfo : mettre les correspondances immédiatmeent ouverture / fermeture
-\startitemize [packed]
-
-  \item Avec le caractère réservé \MyKey{\{} ou avec la commande \PlaceMacro{bgroup}\tex{bgroup}.
-
-  \item Avec la commande \PlaceMacro{begingroup}\tex{begingroup}.
-
-  \item Avec la commande \PlaceMacro{start}\tex{start}
-
-  \item Avec l'ouverture de certains environnements (commande \tex{startSomething}).
-
-  \item En commençant un environnement mathématique (avec le caractère réservé
-  "\$").
-
-\stopitemize
-
-et est fermé
-
-\startitemize [packed]
-
-  \item Avec le caractère réservé \MyKey{\}} ou avec la commande \PlaceMacro{egroup}\tex{egroup}.
-
-  \item Avec la commande \PlaceMacro{endgroup}\tex{endgroup}.
-
-  \item Avec la commande \PlaceMacro{stop}\tex{stop}
-
-  \item Avec la fermeture de l'environnement (commande \tex{stopSomething}).
-
-  \item Lors de la sortie de l'environnement mathématique (avec le caractère réservé "\$").
-
-\stopitemize
-
-
-
-Certaines commandes génèrent aussi automatiquement un groupe, par exemple, \tex{hbox}, \tex{vbox} et, en général, les commandes liées à la création de {\em boîte}\footnote{La notion de {\em boîte} est également une notion centrale de \ConTeXt\, mais son explication n'est pas incluse dans cette introduction. Vous pouvez voir \goto{le manuel dédié}[url(https://www.pragma-ade.com/general/manuals/lowlevel-boxes.pdf)]}. En dehors de ces derniers cas (groupes générés automatiquement par certaines commandes), la manière de fermer un groupe doit être cohérente avec la manière dont il a été ouvert. Cela signifie qu'un groupe commencé avec \MyKey{\{} doit être fermé avec \MyKey{\}}, et qu'un groupe commencé avec \tex{begingroup} doit être fermé avec \tex{endgroup}.
-% TODO Garulfo : ne pas laisser cette réflexion qui est plus source de confusion qu'autre chose.
-Cette règle n'a qu'une seule exception~: un groupe commencé par \MyKey{\{} peut être fermé par \tex{egroup}, et le groupe commencé par \tex{bgroup} peut être fermé par \MyKey{\}} ; en réalité, cela signifie que \MyKey{\{} et \tex{bgroup} sont complètement synonymes et interchangeables, et de même pour \MyKey{\}} et \tex{egroup}.
-
-\startSmallPrint
-
-  Les commandes \PlaceMacro{bgroup}\tex{bgroup} et \PlaceMacro{egroup}\tex{egroup} ont été conçues pour pouvoir définir des commandes pour ouvrir un groupe et d'autres pour fermer un groupe. Par conséquent, pour des raisons internes à la syntaxe \TeX\, ces groupes ne pouvaient pas être ouverts et fermés avec des accolades, car cela aurait généré des accolades déséquilibrées dans le fichier source, ce qui aurait toujours provoqué une erreur lors de la compilation.
-
-  %TODO Garulfo : c'est un truc de jedi, pourquoi donner ça en introduction ? https://tex.stackexchange.com/questions/1930/when-should-one-use-begingroup-instead-of-bgroup, il faut mieux utiliser \begingroup
-
-  En revanche, les commandes \PlaceMacro{begingroup}\tex{begingroup} et \PlaceMacro{endgroup}\tex{endgroup} ne sont pas interchangeables avec les accolades ou les commandes \tex{bgroup ... \egroup}, car un groupe commencé avec \tex{begingroup} doit être fermé avec \tex{endgroup}. Ces dernières commandes ont été conçues pour permettre une vérification beaucoup plus approfondie des erreurs. En général, les utilisateurs normaux n'ont pas à les utiliser.
-
-\stopSmallPrint
-
-Nous pouvons avoir des groupes imbriqués (un groupe à l'intérieur d'un autre groupe), et dans ce cas, l'ordre dans lequel les groupes sont fermés doit être cohérent avec l'ordre dans lequel ils ont été ouverts : tout sous-groupe doit être fermé à l'intérieur du groupe dans lequel il a commencé. Il peut également y avoir des groupes vides générés avec la \MyKey{\{\}}. Un groupe vide n'a, en principe, aucun effet sur le document final, mais il peut être utile, par exemple, pour indiquer la fin du nom d'une commande.
-
-Le principal effet des groupes est d'encapsuler leur contenu : en règle générale, les définitions, les formats et les attributions de valeurs effectués au sein d'un groupe sont \quotation{oubliés} une fois que l'on quitte le groupe. De cette façon, si nous voulons que \ConTeXt\ modifie temporairement son mode de fonctionnement normal, le moyen le plus efficace est de créer un groupe et, au sein de celui-ci, de modifier ce fonctionnement. Ainsi, lorsque nous quitterons le groupe, toutes les valeurs et tous les formats antérieurs à celui-ci seront restaurés. Nous en avons déjà vu quelques exemples en mentionnant des commandes comme \tex{it}, \tex{bf}, \tex{sc}, etc. Mais cela ne se produit pas seulement avec les commandes de formatage : le groupe isole en quelque sorte son contenu, de sorte que toute modification de l'une des nombreuses variables internes que \ConTeXt\ gère en permanence, ne restera effective que tant que nous nous trouvons dans le groupe dans lequel cette modification a eu lieu. De même, une commande définie au sein d'un groupe ne sera pas connue en dehors de celui-ci.
-
-Ainsi, si nous traitons l'exemple suivant
-
-\placefigure [force,here,none] [] {}{
-\startDemoVN
-\define\A{B}
-\A
-{
-  \define\A{C}
-  \A
-}
-\A
-\stopDemoVN}
-
-nous voyons que la première fois que nous exécutons la commande \tex{A}, le résultat correspond à celui de sa définition initiale (\quote{B}). Ensuite, nous avons créé un groupe et redéfini la commande \tex{A} au sein de celui-ci. Si nous l'exécutons maintenant au sein du groupe, la commande nous donnera la nouvelle définition (\quote{C} dans notre exemple), mais lorsque nous quittons le groupe dans lequel la commande \tex{A} a été redéfinie, si nous l'exécutons à nouveau, elle tapera \quote{B} une fois de plus. La définition faite au sein du groupe est \quotation{oubliée} une fois que nous l'avons quitté.
-
-Une autre utilisation possible des groupes concerne les commandes ou instructions conçues pour s'appliquer exclusivement au caractère qui est écrit après elles. Dans ce cas, si nous voulons que la commande s'applique à plus d'un caractère, nous devons inclure dans un groupe les caractères auxquels nous voulons que la commande ou l'instruction s'applique. Ainsi, par exemple, le caractère réservé \MyKey{\letterhat} qui, nous le savons déjà, convertit le caractère suivant en exposant lorsqu'il est utilisé dans l'environnement mathématique ; ainsi, si nous écrivons, par exemple, \MyKey{\$4^2x\$}, nous obtiendrons \quotation{$4^2x$ }. Mais si nous écrivons \MyKey{\$4^\{2x\}\$}, nous obtiendrons \quotation{$4^{2x}$}.
-
-Enfin, une troisième utilisation du regroupement est d'indiquer à \ConTeXt\ que ce qui est inclus dans le groupe doit être traité comme un seul élément. C'est la raison pour laquelle il a été dit précédemment (\in{section}[sec:syntax]) que dans certaines occasions, il est préférable d'enfermer le contenu d'une option de commande entre des crochets.
-
-
-\stopsubsection
-
-\startsubsection
-  [reference=sec:dimensions, title=Dimensions]
+  Il existe d'autres notions, autres que les commandes, qui sont fondamentales pour comprendre la logique du fonctionnement de \ConTeXt\. Certaines d'entre elles, en raison de leur complexité, ne sont pas appropriées pour une introduction et ne seront donc pas abordées dans ce document ; mais il y a une notions qu'il convient d'examiner maintenant : les dimensions.
 
 
   Bien que nous puissions utiliser \ConTeXt\ parfaitement sans nous soucier des dimensions, nous ne pourrions pas utiliser toutes les possibilités de configuration sans leur accorder une certaine attention. Car, dans une large mesure, la perfection typographique atteinte par \TeX\ et ses dérivés réside dans la grande attention que le système accorde en interne aux dimensions. Les caractères ont des dimensions ; l'espace entre les mots, ou entre les lignes, ou entre les paragraphes ont des dimensions ; les lignes ont des dimensions ; les marges, les en-têtes et les pieds de page. Pour presque tous les éléments de la page auxquels nous pouvons penser, il existe des dimensions.
@@ -824,7 +791,6 @@ Avec cette instruction, nous demandons à \ConTeXt\ d'attribuer à \PlaceMacro{p
 % TODO Garulfo parskip : toujours pas une bonne idée d'utiliser en illustration une commande que l'utilisateur moyen n'utilise pas.
 
 
-\stopsubsection
 
 \stopsection
 
@@ -872,6 +838,8 @@ Pour savoir si ces commandes existent ou non, consultez la liste officielle des 
 C'est ainsi que l'apprentissage de \ConTeXt\ a été conçu : l'introduction explique en détail les cinq (en réalité quatre) aspects que j'ai mis en évidence, et bien d'autres encore : au fil de la lecture, une image claire de la séquence se formera dans notre esprit : {\em une commande pour exécuter la tâche} -- {\em une seconde commande pour configurer le comportement de la première} -- {\em une troisième commande pour créer un commande similaire à la première à partir d'un clône}. Nous apprendrons également certaines des principales structures de \ConTeXt, et nous saurons à quoi elles servent.
 
 \stopsection
+
+% * END 
 
 \stopchapter
 

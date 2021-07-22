@@ -1,5 +1,6 @@
 %------------------------------------------------------------------------------
 % pour la table des matières
+
 \setuplist
   [part]
   [
@@ -14,14 +15,55 @@
   [
     before={\blank[nowhite]},
     style=\tf,
-    margin=.5cm,
     aligntitle=yes
+    width=2.0cm,
+    margin=0.0cm,
   ]
 
 \setuplist
   [section]
   [
+    before={\blank[small]},
+    after={\blank[nowhite]},
     aligntitle=yes,
     style=\tfx,
-    margin=1.5cm
+    width=2.0cm,
+    margin=0.0cm,
   ]
+
+\setuplist
+  [subsection]
+  [
+    before={\blank[nowhite]},
+    after={\blank[nowhite]},
+    aligntitle=yes,
+    style=\tfx,
+    width=3.0cm,
+    margin=0.0cm,
+  ]  
+  
+\setuplist[part]
+ [ width=25mm,
+  margin=0mm,
+distance=5mm,
+numberalign=flushleft]
+
+\setuplist[chapter]
+ [ width=25mm,
+  margin=0mm,
+distance=5mm,
+numberalign=flushright]
+
+\setuplist[section]
+ [width=25mm,
+ margin=0mm,
+ style=\bfx,
+distance=10mm,
+numberalign=flushright]
+
+\setuplist[subsection]
+[width=25mm, 
+margin=0mm,
+distance=15mm,
+numberalign=flushright]
+

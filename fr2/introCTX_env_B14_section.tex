@@ -8,6 +8,9 @@
 %   [chapter={Chapitre~},
 %    appendix={Annexe~},
 %    part={Concept~},]
+
+\setuplabeltext [fr] [chapter={Chapitre~},appendix={Annexe~}]
+
   
 % This snippet defines a footer with page numbers. A name is assigned
 % to it, and then, when section commands are configured, this name is
@@ -22,13 +25,14 @@
 \setuphead
   [part]
   [placehead=yes,
-    bodypartlabel=part,
-    alternative=middle,
-    style={\switchtobodyfont[36pt]\bf},
-    color=purple,
-    before={\ \godown[4cm]},
-    header=high,
-    footer=ChapterFirstPage,]
+   page=right,
+   bodypartlabel=part,
+   alternative=middle,
+   style={\switchtobodyfont[36pt]\bf},
+   color=purple,
+   before={\ \godown[4cm]},
+   header=high,
+   footer=ChapterFirstPage,]
 
 \setuphead
   [title, chapter]
@@ -48,6 +52,7 @@
   [section, subject]
   [
     page=yes,
+    continue=no,      % nouvelle page même si derrière \startpart
     style={\bfc},
     before={\blank[2*big]},
     after=\blank,
