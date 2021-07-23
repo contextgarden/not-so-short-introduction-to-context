@@ -106,6 +106,39 @@ Nous pourrions encore améliorer la fonction précédente, car elle suppose que 
 
 bien que cela ne soit pas très élégant (du point de vue de la programmation). Il serait préférable que des valeurs symboliques soient définies pour le premier argument (homme/femme ; 0/1 ; m/f) afin que la macro elle-même choisisse le texte approprié en fonction de cette valeur. Mais pour expliquer comment y parvenir, il faut aller plus en profondeur que ce que je pense que le lecteur novice peut comprendre à ce stade.
 
+
+\startSmallPrint
+
+Parfois, lorsqu'un saut de ligne devient un espace blanc, nous pouvons nous retrouver avec un espace blanc indésirable et inattendu. En particulier lorsque nous écrivons des macros, où il est facile qu'un espace blanc \quotation{s'introduise} sans que nous nous en rendions compte. Pour éviter cela, nous pouvons utiliser le caractère réservé \MyKey{\%} qui, comme nous le savons, fait en sorte que la ligne où il apparaît ne soit pas traitée, ce qui implique que la coupure à la fin de la ligne ne sera pas non plus traitée. Ainsi, par exemple,
+
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+\define[3]\TestA{
+  {\em #1} {\bf #2} {\sc #3}
+}
+\define[3]\TestB{%
+  {\em #1}
+  {\bf #2}
+  {\sc #3}
+}
+\define[3]\TestC{%
+  {\em #1}%
+  {\bf #2}%
+  {\sc #3}%
+}
+
+\TestA{riri}{fifi}{loulou}
+
+\TestB{riri}{fifi}{loulou}
+
+\TestC{riri}{fifi}{loulou}
+\stopDemoVN}
+
+les commandes \tex{TestA} et \tex{TestB} écrivent le premier argument en italique, le second en gras et le troisième en petites capitales, mais la première insérera un espace entre chacun de ces arguments, alors que la seconde n'en n'insérera pas~: le caractère réservé \% empêche les sauts de ligne d'être traités et ils deviennent de simples espaces vides.
+
+\stopSmallPrint
+
+
 \stopsection
 
 %===============================================================================

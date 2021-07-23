@@ -4,16 +4,107 @@
 
 %==============================================================================
 
+% * Chapitre     caractère hors clavier
 \startchapter[title={Obtenir des caractères qui ne sont pas normalement accessibles à partir du clavier},reference=sec:obtainchar]
 
 \TocChap
-% **   Section    caractère hors clavier
 
 % TODO Garulfo : mettre tout cela en annexe, ou plus loin, ce n'est pas la priorité du débutant.
 
-Dans un fichier texte codé en UTF-8 (voir \in{section}[sec:encodage]), nous pouvons utiliser n'importe quel caractère ou symbole, aussi bien des langues vivantes que de nombreuses langues dites mortes. Mais, comme les possibilités d'un clavier sont limitées, la plupart des caractères et symboles autorisés en UTF-8 ne peuvent normalement pas être obtenus directement du clavier. C'est notamment le cas de nombreux diacritiques, c'est-à-dire des signes placés au-dessus (ou au-dessous) de certaines lettres, leur conférant une valeur particulière ; mais aussi de nombreux autres caractères comme les symboles mathématiques, les ligatures traditionnelles, etc. Nous pouvons obtenir beaucoup de ces caractères avec \ConTeXt\ en utilisant des commandes.
+Dans un fichier texte codé en UTF-8 (voir \in{section}[sec:encoding]), nous pouvons utiliser n'importe quel caractère ou symbole, aussi bien des langues vivantes que de nombreuses langues dites mortes. Mais, comme les possibilités d'un clavier sont limitées, la plupart des caractères et symboles autorisés en UTF-8 ne peuvent normalement pas être obtenus directement du clavier. C'est notamment le cas de nombreux diacritiques, c'est-à-dire des signes placés au-dessus (ou au-dessous) de certaines lettres, leur conférant une valeur particulière ; mais aussi de nombreux autres caractères comme les symboles mathématiques, les ligatures traditionnelles, etc. Nous pouvons obtenir beaucoup de ces caractères avec \ConTeXt\ en utilisant des commandes.
 
-% ***  Section diacritiques
+% ** Section - Encodage
+
+\startsection
+  [title=Codage des fichiers sources, reference=sec:encoding]
+\index{encode}
+
+Le ou les fichiers sources doivent être des fichiers texte. Dans la terminologie informatique, c'est le nom donné à un fichier contenant uniquement du texte lisible par l'homme et ne comportant pas de code binaire. Ces fichiers sont également appelés fichiers {\em texte texte simple} ou {\em texte texte brut}.
+
+Étant donné qu'en interne, les systèmes informatiques ne traitent que des nombres binaires, un fichier texte est en réalité constitué de {\em nombres} auxquels sont associés des  {\em caractères}. Une {\em table de correspondance} est utilisée pour définir cette association entre nombres et caractères. Plusieurs tables peuvent être utilisée. Aussi, le terme {\em codage d'un fichier texte} fait référence à la table qui est utilisée par le fichier en question.
+
+
+\startSmallPrint
+
+L'existence de différentes tables de codage pour les fichiers texte est une conséquence de l'histoire de l'informatique elle-même. Aux premiers stades du développement, lorsque la mémoire et la capacité de stockage des dispositifs informatiques étaient rares, il a été décidé d'utiliser une table appelée ASCII (qui signifie \quotation{\em American Standard Code for Information Interchange} (Codage américain standard pour l'échange d'informations) qui n'autorisait que 128 caractères et qui a été établie en 1963 par le comité de normalisation américain. Il est évident que 128 caractères ne suffisent pas à représenter tous les caractères et symboles utilisés dans toutes les langues du monde ; mais c'était plus que suffisant pour représenter l'anglais qui est, de toutes les langues occidentales, celle qui a le moins de caractères, car elle n'utilise pas de diacritiques (accents et autres marques au-dessus ou au-dessous ou à travers d'autres lettres). L'avantage d'utiliser l'ASCII était que les fichiers texte prenaient très peu de place, car 127 (le chiffre le plus élevé de la table) peut être représenté par un nombre binaire à 7 chiffres, et les premiers ordinateurs utilisaient l'octet comme unité de mesure de la mémoire, un nombre binaire à 8 chiffres. Tout caractère de la table peut tenir dans un seul octet. Comme l'octet a 8 chiffres et que l'ASCII n'en utilisait que 7, il restait même de la place pour ajouter d'autres caractères afin de représenter d'autres langues.
+
+  Mais lorsque l'utilisation des ordinateurs s'est développée, l'insuffisance de l'ASCII est devenue évidente et il a fallu développer des tables de caractères alternatifs incluant des caractères non connus de l'alphabet anglais, tels que le \quote{ñ} espagnol, les voyelles accentuées, le \quote{ç} catalan ou français, etc. En revanche, il n'y a pas eu d'accord initial sur ce que devaient être ces {\em tables alternatives} à l'ASCII, de sorte que différentes sociétés informatiques spécialisées se sont progressivement attaquées au problème chacune de leur côté. Ainsi, non seulement des tables spécifiques ont été créées pour différentes langues ou groupes de langues, mais aussi des tables différentes selon la société qui les avait créées (Microsoft, Apple, IBM, etc.). 
+
+   Ce n'est qu'avec l'augmentation de la mémoire des ordinateurs, la baisse du coût des dispositifs de stockage et l'augmentation correspondante de la capacité que l'idée de créer une table unique pouvant être utilisée pour toutes les langues est apparue. Mais, encore une fois, ce n'est pas une table unique contenant tous les caractères qui a été créée, mais un codage standard (appelé {\sc Unicode}) ainsi que différentes manières de le représenter (UTF-8, UTF-16, UTF-32, etc.). De tous ces systèmes, celui qui a fini par devenir la norme de facto est l'UTF-8, qui permet de représenter pratiquement toutes les langues vivantes, et de nombreuses langues déjà éteintes, ainsi que de nombreux symboles supplémentaires, le tout en utilisant des nombres de longueur variable (entre 1 et 4 octets), ce qui permet d'optimiser la taille des fichiers texte. Cette taille n'a pas trop augmenté par rapport aux fichiers utilisant l'ASCII pur.
+
+  Jusqu'à l'apparition de \XeTeX\, les systèmes basés sur \TeX\ -- qui est également né aux États-Unis et a donc l'anglais comme langue maternelle -- supposaient que l'codage était en ASCII pur ; ainsi, pour utiliser un codage différent, vous deviez l'indiquer d'une manière ou d'une autre dans le fichier source. 
+
+\stopSmallPrint
+
+\dontleavehmode\ConTeXt\ Mark~IV suppose que le codage du fichier source sera UTF-8. Cependant, sur les systèmes informatiques moins récents, un autre codage peut être utilisé par défaut. Je ne suis pas très sûr de l'codage par défaut que par défaut que Windows utilise, étant donné que la stratégie de Microsoft pour atteindre le grand public consiste à cacher la complexité (mais même si elle est cachée, cela ne signifie pas qu'elle a disparu !). Il n'y a pas beaucoup d'informations disponibles (ou je n'ai pas été en mesure de les trouver) concernant le système de codage qu'il utilise par défaut.
+
+% TODO Garulfo reformuler, simplifier
+
+Dans tous les cas, quel que soit le codage par défaut, tout éditeur de texte vous permet de d'enregistrer le fichier dans le codage souhaité. Les fichiers sources destinés à être traités par \ConTeXt\ Mark IV doivent être enregistrés en UTF-8, à moins, bien sûr, il y ait une très bonne raison d'utiliser un autre encodage (bien que je ne puisse pas je ne vois pas quelle pourrait être cette raison).
+
+Si l'on veut écrire un fichier écrit dans un autre codage (peut-être un ancien fichier), nous pouvons~: 
+
+
+\startitemize[a]
+
+
+\item Convertir le fichier en UTF-8, option recommandée, et il existe plusieurs outils pour le faire ; sous Linux, par exemple, les commandes {\tt iconv} ou {\tt recode}.
+
+\item Indiquer à \ConTeXt\ dans le fichier source que l'encodage n'est pas UTF-8. Pour ce faire, nous devons utiliser la commande \tex{enableregime}, dont la syntaxe est \tex{enableregime[codage]}, où {\em codage} fait référence au nom par lequel \ConTeXt\ connaît l'encodage réel du fichier en question. Dans la \in{table}[encodings], vous trouverez les différents encodages et les noms par lesquels \ConTeXt\\ les connaît.
+
+\stopitemize
+
+\PlaceMacro{enableregime}
+
+{\switchtobodyfont[small]
+  \placetable
+    [here]
+    [encodings]
+    {Références des principales tables de codage pour \ConTeXt}
+    {
+      \starttabulate[|l|l|l|]
+        \HL
+        \NC {\bf Codage} \NC {\bf Nom pour \ConTeXt} \NC{\bf Notes}\NR
+        \HL
+        \NC Windows CP 1250\NC cp1250, windows-1250\NC Western Europe\NR
+        \NC Windows CP 1251\NC cp1251, windows-1251\NC Cyrillic\NR
+        \NC Windows CP 1252\NC cp1252, win, windows-1252\NC Western Europe\NR
+        \NC Windows CP 1253\NC cp1253, windows-1253\NC Greek\NR
+        \NC Windows CP 1254\NC cp1254, windows-1254\NC Turkish\NR
+        \NC Windows CP 1257\NC cp1257, windows-1257\NC Baltic\NR
+        \NC ISO-8859-1, ISO Latin 1\NC iso-8859-1, latin1, il1\NC Western Europe\NR
+        \NC ISO-8859-2, ISO Latin 2\NC iso-8859-2, latin2, il2\NC Western Europe\NR
+        \NC ISO-8859-15, ISO Latin 9\NC iso-8859-15,  latin9,  il9\NC Western Europe\NR
+        \NC ISO-8859-7\NC iso-8859-7,  grk\NC Greek\NR
+        \NC Mac Roman\NC mac\NC Western Europe\NR
+        \NC IBM PC DOS\NC ibm\NC Western Europe\NR
+        \NC UTF-8\NC utf\NC Unicode\NR
+        \NC VISCII\NC vis,  viscii\NC Vietnamese\NR
+        \NC DOS CP 866\NC cp866, cp866nav\NC Cyrillic\NR
+        \NC KOI8\NC koi8-r, koi8-u, koi8-ru\NC Cyrillic\NR
+        \NC Mac Cyrillic\NC maccyr, macukr\NC Cyrillic\NR
+        \NC Others\NC cp855, cp866av, cp866mav, cp866tat, \NC Various\NR
+        \NC \NC ctt, dbk, iso88595, isoir111, mik, mls, \NC\NR
+        \NC \NC mnk, mos, ncc\NC\NR
+        \HL
+      \stoptabulate
+    }
+}
+
+\ConTeXt\ Mk~IV recommande fortement l'utilisation de UTF-8. Je suis d'accord avec cette recommandation. À partir d'ici dans cette introduction, nous pouvons supposer que l'encodage est toujours UTF-8.
+
+% TODO : Garulfo pas convaincu de l'utilité, message basculer tout en UTF-8 point barre
+
+\startSmallPrint
+
+Avec \tex{enableregime} \ConTeXt\ inclut la commande \PlaceMacro{useregime} \tex{useregime} qui prend en argument une ou plusieurs références de codage. Je n'ai trouvé aucune information sur cette commande ni sur la façon dont elle diffère de \tex{enableregime}, seulement quelques exemples de son utilisation \Conjecture. Je soupçonne que \tex{useregime} est conçu pour les projets complexes qui utilisent de nombreux fichiers sources, avec l'espoir que tous n'auront pas le même codage. Mais ce n'est qu'une supposition.
+
+\stopSmallPrint
+
+\stopsection
+
+
+% ** Section - diacritiques
 
 % TODO Garulfo et si on mettait tout cela en annexe ?
 
@@ -207,7 +298,7 @@ Le tréma hongrois fonctionne également avec la lettre \quote{o}, et la cédill
 
 \stopsection
 
-% ***  Section ligatures
+% ** Section - ligatures
 
 \startsection
   [
@@ -260,7 +351,7 @@ En plus des ligatures précédentes, que j'ai appelées {\em traditionnelles} pa
 
 \stopsection
 
-% ***  Section alphabet grec 
+% ** Section - alphabet grec 
 
 \startsection
   [title={Alphabet grec}]
@@ -308,7 +399,7 @@ Notez que pour les versions minuscules de certains caractères (epsilon, kappa, 
 
 \stopsection
 
-% ***  Section symboles
+% ** Section - symboles
 
 \startsection
   [
@@ -817,7 +908,7 @@ Je suis conscient que la manière dont elles sont organisées pourrait être am�
 
 \stopsection
 
-% ***  Section créer un caractère
+% ** Section - créer un caractère
 
 % TODO : garulfo peu approprié au débutant à mon avis
 
@@ -947,7 +1038,7 @@ Le reste des commandes de construction prend un seul argument -- le caractère a
 
 \stopsection
 
-% ***  SubSection utiliser des symboles
+% ** Section - utiliser des symboles
 
 \startsection
   [title={Utilisation de jeux de symboles prédéfinis}]

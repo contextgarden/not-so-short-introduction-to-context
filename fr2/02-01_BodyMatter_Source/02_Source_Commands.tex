@@ -7,23 +7,20 @@
     title={Règles syntaxiques},
   ]
 
-% * En-tête de chapitre
-
 \TocChap
 
-Nous venons de vois que le fichier source contient à la fois le contenu et les instructions de présentation de se contenu que doit respecter le document final.
-Cela se fait grâce au langage \ConTeXt\ qui sert à distinguer les différents type d'information dans un premier temps ({\em balisage}), puis à préciser les règles de composition et de mise en page à leur appliquer pour produire le document final. Pour cela \ConTeXt\ propose des \quotation{commandes}, aussi appelées \quotation{macros} ou \quotation{séquences de contrôle}.
+Nous venons de voir que le fichier source contient à la fois le contenu et les instructions de présentation de ce contenu à appliquer pour produire le document final. Cela se fait grâce au langage \ConTeXt\ qui sert à distinguer les différents type d'information dans un premier temps ({\em balisage}), puis à préciser les règles de composition et de mise en page à appliquer à chacun pour produire le document final. Pour cela \ConTeXt\ propose des \quotation{commandes}, aussi appelées \quotation{macros} ou \quotation{séquences de contrôle}.
 
 \startSmallPrint
 
-Du point de vue du fonctionnement interne de \ConTeXt\ (en fait, dufonctionnement de \TeX), il y a une différence entre les {\em primitives} et les {\em macros}. Une primitive est une instruction simple qui ne peut pas être décomposée en d'autres instructions plus simples. Une macro est une instruction qui peut être décomposée en d'autres instructions plus simples qui à leur tour peuvent être décomposées, et ainsi de suite, jusqu'à revenir aux primitives.
+Du point de vue du fonctionnement interne de \ConTeXt\ (en fait, du fonctionnement de \TeX), il y a une différence entre les {\em primitives} et les {\em macros}. Une primitive est une instruction simple qui ne peut pas être décomposée en d'autres instructions plus simples. Une macro est une instruction qui peut être décomposée en d'autres instructions plus simples qui à leur tour peuvent être décomposées, et ainsi de suite, jusqu'à revenir aux primitives.
 La plupart des instructions de \ConTeXt sont, en fait, des macros. Du point de vue du programmeur, la différence entre les macros et les primitives est importante. Mais du point de vue de l'utilisateur, la question n'est pas si importante : dans les deux cas, nous avons des instructions qui sont exécutées sans que nous ayons besoin de nous préoccuper de leur fonctionnement à un niveau inférieur. Par conséquent, la documentation \ConTeXt\ parle généralement d'une {\em commande} lorsqu'elle adopte le point de vue de l'utilisateur, et d'une {\em macro} lorsqu'elle adopte le point de vue du programmeur. Puisque nous ne prenons que la perspective de l'utilisateur dans cette introduction,j'utiliserai l'un ou l'autre terme, les considérant comme synonymes.
 
 Les {\em commandes} sont des ordres donnés au programme \ConTeXt\ pour qu'il fasse quelque chose. Nous {\em contrôlons} les performances du programme par leur intermédiaire. Ainsi \people{Knuth}, le père de \TeX, utilise le terme de {\em séquences de contrôle} pour se référer à la fois aux primitives et aux macros, et je pense que c'est le terme le plus précis de tous. Je l'utiliserai lorsque je penserai qu'il est important de distinguer entre {\em symboles de contrôle} et {\em mots de contrôle}.
 
 \stopSmallPrint
 
-Les commandes de \ConTeXt\ sont essentiellement de deux sortes : les caractères réservés qui permettent le balisage, et les commandes proprement dites.
+Le langage \ConTeXt\ s'appuie sur un certain nombre de règles syntaxiques, aussi bien valables pour l'aspect balisage (distinction des différents types d'informations contenus dans le fichier source) et l'aspect composition et mise en page des éléments balisés. C'est l'objet de ce chapitre.
 
 % * 3.1 Les caractères réservés ============================================
 
@@ -33,11 +30,12 @@ Les commandes de \ConTeXt\ sont essentiellement de deux sortes : les caractères
     title=Caractères réservés,
   ]
 
-\index{balisage}
+\index{source+balisage}
+\index{source+caractères réservés}
 
-Lorsque \ConTeXt\ parcourt le fichier source, composé uniquement de caractères de texte puisqu'il s'agit d'un fichier texte, il doit d'une manière ou d'une autre distinguer ce qui est le contenu textuel à composer et mettre en page des règles de compositions et de mise en page à proprement parler.
+Lorsque \ConTeXt\ parcourt le fichier source, composé uniquement de caractères de texte puisqu'il s'agit d'un fichier texte, il doit d'une manière ou d'une autre distinguer le contenu textuel à mettre en page des règles de mise en page à proprement parler.
 
-Ce sont les 11 caractères suivants, dits {\em caractères réservés}, qui permettent de faire cette distinction. Les cinq premiers sont vraiment essentiels au sens où il est très probable que vous les utilisiez régulièrement.
+Les 11 caractères suivants, dits {\em caractères réservés}, permettent de faire cette distinction. Les cinq premiers sont les plus fondamentaux car vous les utiliserez  systématiquement.
 
 {\switchtobodyfont[30pt]
 \midaligned{\type<<{ } \ % ~ # $ ^ _ | &>>
@@ -62,6 +60,9 @@ Ce caractère indique à \ConTeXt\ que la chaîne de caractères qui le suit doi
 \startsemitable{\%}
 
 Indique à \ConTeXt\ que ce qui suit jusqu'à la fin de la ligne est un commentaire qui ne doit pas être traité ou inclus dans le fichier formaté final. L'introduction de commentaires dans le fichier source est extrêmement utile. Cela permet par exemple d'expliquer pourquoi quelque chose a été fait d'une certaine manière, comment tel ou tel effet graphique a été obtenu, garder un rappel d'une idée à compléter ou à réviser, d'une illustration à construire, d'une remarque pour un collègue.
+
+Ce caractère masque également le caractère {\em fin de ligne}. \ConTeXt\
+considèrera donc la ligne suivante comme dans la continuité de la ligne où se trouve le caractère {\tt \%}.
 
 Il peut également être utilisé pour aider à localiser une erreur dans le fichier source, puisqu'en commentant une ligne, nous l'excluons de la compilation, et pouvons voir si elle est à l'origine de l'erreur de compilation. Le commentaire peut aussi être utilisé pour stocker deux versions différentes d'une même macro, et ainsi obtenir des résultats différents après la compilation ; ou pour empêcher la compilation d'un extrait dont nous ne sommes pas sûrs, mais sans le supprimer du fichier source au cas où nous voudrions y revenir plus tard ; ou pour partager des commentaires lors de l'édition en mode collaboratif d'un document... etc.
 
@@ -143,7 +144,225 @@ Le point 3 est ma conclusion. La vérité est que je n'ai trouvé aucun endroit 
 
 \stopsection
 
-% * 3.2 Les groupes et le balisage =========================================
+
+% * 3.2 Caractères =========================================================
+
+\startsection
+  [title={Caractères espace, tabulation, saut de ligne et tiret}]
+
+En plus des {\em caractères réservés} (\at{page}[sec:reserved characters]), 
+quatre autres caractères font l'objet d'interprétations spéciales par \ConTeXt~: ce sont les caractères espace, tabulation, saut de ligne et tiret.
+
+% *** 4.2.1 Espaces vides et tabulation
+
+\startsubsubsection
+  [title=Caractères espace et tabulation, reference=sec:spaces]
+\index{source+caractère espace}
+\index{source+caractère tabulation}
+
+Les tabulations et les espaces blancs des fichiers sources sont interprétés de la même manière, et une succession de plusieurs caractères espace et/ou caractères tabulation est interprétée comme un unique caractère espace.  \ConTeXt\  considère que le premier caractère espace {\em absorbe} les suivants et ne fait donc aucune différence entre un unique caractère espace et plusieurs caractères espaces et/ou tabulations successifs~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+Vins et fromages A.
+
+Vins   et    fromages B.
+
+Vins      et        fromages C. 
+\stopDemoVN}
+
+Cette interprétation est cohérente avec la règle typographique \quotation{les espaces ont une valeur unique et établie en lien avec la taille de la police utilisée}.
+
+\PlaceMacro{\textvisiblespace} 
+\PlaceMacro{space}
+
+Pour forcer l'introduction d'un caractère espace supplémentaire, deux principales possibilités~:
+\startitemize
+\item 
+soit la commande \cmd{\textvisiblespace} (une barre oblique inversée {\tt \backslash} suivie d'un espace représenté par {\tt \textvisiblespace}), qui introduit un espace qui \quotation{absorbera} les éventuels caractères espaces suivants.
+
+\item 
+soit le caractère réservé {\tt \lettertilde} vu précédemment, qui introduit un espace {\em insécable}  (les césures à son niveau sont interdites) et qui \quotation{n'absorbera pas} les éventuels caractères espaces suivants.
+\stopitemize
+
+Voici les exemples permettant d'observer les différents cas~: 
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+Vins et fromages A.        % base
+
+Vins\ et fromages B.       % équivalent
+
+Vins~et fromages C.        % équivalent
+
+Vins\  et fromages D.      % équivalent
+
+Vins~ et fromages E.       % 2 espaces introduits
+
+Vins \     et fromages F.  % 2 espaces introduits
+
+Vins ~ et fromages G.      % 3 espaces introduits
+
+Vins\ \ \ et\ \ \ \ \ \ fromages H.
+
+Vins~~~et~~~~~~fromages I.
+\stopDemoVW}
+
+D'autres méthodes pour définir précisément les espacements horizontaux dans le document final seront examinées \at{page}[sec:horizontal space1].
+
+\stopsubsubsection
+
+% *** 4.2.2 Saut de ligne  
+
+\startsubsubsection
+  [reference=sec:linebreaks, title=Caractère saut de ligne]
+\index{saut de ligne}
+
+Dans la plupart des éditeurs de texte, lorsqu'une ligne dépasse la largeur maximale, un saut de ligne est inséré automatiquement. On peut également insérer expressément un saut de ligne en appuyant sur la touche \quotation{Entrée} (\quotation{Return} ou \quotation{Enter}). Dans les deux cas, l'utilisateur visualise un saut de ligne mais, du point de vue encodage informatique, celui-ci est considéré comme un caractère à part entière.
+
+\ConTeXt{} applique les règles suivantes au caractère saut de ligne :
+
+\startitemize [a, large]
+
+\item Un caractère saut de ligne en fin d'une ligne {\em non vide}  (i.e. une ligne qui contient au moins un caractère autre que espace ou tabulation) est équivalent à un caractère espace blanc. Par conséquent, si des caractères espace ou tabulation sont présents autour du caractère saut de ligne, tous seront absorbés par le premier caractère saut de ligne ou espace. Au final un simple espace blanc sera inséré dans le document final.
+
+\item Deux caractères saut de ligne immédiatement consécutifs, ou bien uniquement espacés par des caractères espace et/ou tabulation, constituent une ligne {\em vide}. Ils sont alors interprétés comme un changement de paragraphe dans le fichier final.
+
+Au-delà de deux caractères saut de ligne immédiatement consécutifs, ou bien uniquement espacés par des caractères espace et/ou tabulation, \ConTeXt\ considère que le premier couple {\em absorbe} tous les suivants, il ne fait donc aucune différence entre une unique ligne vide et plusieurs~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoVN
+Vins et fromages A.
+Vins et fromages B.
+
+Vins et fromages C.
+
+
+ 
+Vins et fromages D.
+\stopDemoVN}
+
+Le contrôle de la distance de séparation entre les paragraphes, ne se fait donc pas en jouant sur le nombre de ligne vide dans le code source. 
+D'autres méthodes pour définir précisément les espacements verticaux dans le document final seront examinées \at{page}[sec:verticalspace], avec notamment les commandes
+\PlaceMacro{setupwhitespace} \tex{setupwhitespace}
+et
+\PlaceMacro{blank} \tex{blank}.
+
+
+\stopitemize
+
+Pour finir, mettons bien en évidence le traitement du {\em caractère spécial} de commentaire~: {\tt \%}. Nous avions indiqué précédemment \quotation{il indique à \ConTeXt\ que ce qui suit jusqu'à la fin de la ligne est un commentaire qui ne doit pas être traité ou inclus dans le fichier formaté final}. Le caractère saut de ligne faisant partie de la ligne en question, la présence d'un caractère {\tt \%} l'exclura du traitement par \ConTeXt\ qui considèra la ligne suivante comme étant dans la continuité de la ligne où se trouve le caractère {\tt \%}. Observons l'impact par un exemple~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoVW
+Vins et fromages A.%  0 espace introduit
+Vins et fromages B.
+ 
+Vins et fromages C. % 1 espace introduit
+Vins et fromages D.
+
+Vins et fromages E. % 1 espace introduit
+%                 % 0 espace introduit   
+Vins et fromages F.
+                  % ligne vide sans saut
+Vins et fromages G.
+\stopDemoVW}
+
+Vous remarquerez qu'à la première ligne, le {\tt \%} ayant masqué le caractère saut de ligne, \ConTeXt\ considère qu'il n'y a aucun caractère entre
+le {\tt .} de la première ligne et le {\tt V} de la seconde. De même l'avant dernière ligne n'est considérée que comme une succession de caractères espaces absorbés le saut de ligne de la ligne précédente, considéré lui me comme un caractère espace car en fin d'une ligne non vide.
+
+Nous reviendrons sur ces subtilités \at{page}[sec:define], en particulier dans le cas de la création de vos propres macro et commande.
+
+\stopsubsubsection
+
+% *** 4.2.3 trait d'union
+
+\startsubsubsection
+  [reference=sec:dashes, title=Caractère tiret]
+  \index{trait d’union}
+\index{tirets}
+
+Sur un clavier normal, il n'existe généralement qu'un seul caractère tiret {\tt -} que nous appelons \quotation{trait d'union}, mais un texte imprimé peut  utiliser jusqu'à quatre longueurs différentes de tiret (c'est un bon exemple de différence entre les caractères accessibles directement sur un clavier d'ordinateur et ceux utilisés par texte affiché sur écran ou imprimé sur papier).
+
+
+\startitemize[1,broad]
+
+\item tiret court (-), ou trait d'union, utilisé pour séparer les syllabes dans les césures en fin de ligne.
+
+\item tiret moyen (--), ou tiret demi-cadratin, légèrement plus longs que le précédente. Il a plusieurs usages dont ceux, pour certaines langues européennes (moins en anglais), de lister les énumérations, ou de séparer les chiffres les moins élevés des chiffres les plus élevés dans une fourchette de dates ou de pages ; \quotation{pp. 12--33}.
+
+\item tiret longs (---), ou tiret cadratin, utilisé comme des parenthèses pour inclure une phrase dans une autre.
+
+\item signe moins ($-$) pour représenter une soustraction ou un nombre négatif.
+
+\stopitemize
+
+Aujourd'hui, tous sont disponibles en encodage UTF-8, mais ils ne sont pas faciles à produire directement au clavier. 
+Aussi \TeX\ interprète différemment une succession de tirets simples dans le fichier source (voir \in{table} [tbl:rules]) et \ConTeXt\ propose  des commandes spécifiques.
+
+
+{\switchtobodyfont[small]
+\placetable
+  [here]
+  [tbl:rules]
+  {Rules/dashes in \ConTeXt}
+  {\starttabulate[|l|c|c|l|]
+    \HL
+    \NC {\bf Type de tiret}
+    \NC {\bf Apparence}
+    \NC {\bf Écriture \TeX}
+    \NC {\bf Commande \ConTeXt}
+    \NR
+    \HL
+    \NC Tiret court / trait d'union
+    \NC -
+    \NC {\tt -}
+    \NC \PlaceMacro{hyphen}\tex{hyphen}
+    \NR
+    \NC Tiret moyen / demi-cadratin
+    \NC --
+    \NC {\tt --}
+    \NC \PlaceMacro{endash}\tex{endash}
+    \NR
+    \NC Tiret long / cadratin
+    \NC ---
+    \NC {\tt ---}
+    \NC \PlaceMacro{emdash}\tex{emdash}
+    \NR
+    \NC Signe moins
+    \NC $-$
+    \NC {\tt \$-\$}
+    \NC \PlaceMacro{minus}\tex{minus}
+    \NR
+    \HL
+  \stoptabulate}
+}
+
+Les noms de commandes \tex{hyphen} et \tex{minus} sont ceux normalement utilisés en anglais. Bien que de nombreux professionnels de l'imprimerie les appellent \quote{tirets}, les termes de \TeX, à savoir \tex{endash} et \tex{emdash} sont également courants dans la terminologie de la composition. Les \quotation{\em en} et \quotation{\em em} sont les noms des unités de mesure utilisées en typographie. Une \quotation{en} représente la largeur d'un \quote{n} tandis que \quotation{em} est la largeur d'un \quote{m} dans la police utilisée.
+
+\stopsubsubsection
+
+\stopsection
+
+\startsubsubsection[title={Impact sur l'apparence du fichier source} ]
+
+Le traitement des caractères espace, tabulation, saut de ligne et {\tt \%}
+permettent de rendre clair et lisible le fichier source, sans que cela n'affecte le document final. Par exemple~:
+
+\placefigure [force,here,none] [] {}{
+\startDemoHN
+Cette phrase permet d'introduire 
+    \quotation{\em Une citation très importante} 
+%
+et de la discuter ensuite en évoquant
+    un premier point important,
+    un second point très important,
+    et une dernière anecdote amusante.
+\stopDemoHN}
+
+\stopsubsubsection
+
+% * 3.3 Les groupes et le balisage =========================================
 
 \startsection
   [
@@ -229,7 +448,7 @@ Enfin, une troisième utilisation du regroupement est d'indiquer à \ConTeXt\ qu
 
 
 
-% * 3.3 commandes à proprement parler ==================================
+% * 3.4 commandes à proprement parler ======================================
 
 \startsection
   [
@@ -330,7 +549,7 @@ Cette \quote{astuce} ne fonctionnera pas correctement avec la commande \tex{defi
 \stopsection
  
 
-% * 3.4 Le périmétre des commandes =========================================
+% * 3.5 Le périmétre des commandes =========================================
 
 \startsection
   [title=Périmètre des commandes]
@@ -425,7 +644,7 @@ D'autre part, le texte situé dans un environnement particulier constitue normal
 \stopsection
 
 
-% * 3.5 Les options de fonctionnement des commandes ========================
+% * 3.6 Les options de fonctionnement des commandes ========================
 
 \startsection
   [
@@ -561,7 +780,7 @@ Dans l'exemple que nous avons donné, nous avons configuré notre cadre spécial
 
 \stopsection
 
-% * 3.6 Résumé sur la syntaxe ==============================================
+% * 3.7 Résumé sur la syntaxe ==============================================
 
 \startsection
   [
@@ -661,7 +880,7 @@ Certaines règles syntaxiques sont à bien prendre en compte~:
  \stopsection
 
 % ==============================================================================
-% ** 3.6 Liste officielle des commandes
+% * 3.8 Liste officielle des commande ======================================
 
 
 \startsection
@@ -705,7 +924,7 @@ Ainsi, chaque utilisateur est invité à compléter progressivement la documenta
 % (add-hook 'emacs-lisp-mode-hook 'outshine-mode)
 
 
-% ** 3.8 Autres concepts fondamentaux       <== HERE NEXT
+% * 3.9 Autres concepts fondamentaux =======================================
 
 \startsection
   [title={Autres concepts fondamentaux, dimensions},
@@ -794,7 +1013,7 @@ Avec cette instruction, nous demandons à \ConTeXt\ d'attribuer à \PlaceMacro{p
 
 \stopsection
 
-% ** 3.9 ConTeXt en autodidacte
+% * 3.10 ConTeXt en autodidacte ============================================
 
 \startsection
   [title=Méthode d'auto apprentissage pour \ConTeXt]
