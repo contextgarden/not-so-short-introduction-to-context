@@ -316,19 +316,19 @@ Parmi les options les plus intéressantes, citons les suivantes :
 
 \DescOptions{purge, purgeall} Supprime les fichiers auxiliaires générés pendant le traitement.
 
-\DescOptions{result=sortie.pdf} indique le nom que doit porter le fichier PDF résultant. Par défaut, ce sera le même que le fichier source à traiter, avec l'extension \MyKey{.pdf}.
+\DescOptions{result=sortie.pdf} Indique le nom que doit porter le fichier PDF résultant. Par défaut, ce sera le même que le fichier source à traiter, avec l'extension \MyKey{.pdf}.
 
 \DescOptions{usemodule=list} Charge les modules qui sont indiqués avant d'exécuter \ConTeXt\ (un module est une extension de \ConTeXt, qui ne fait pas partie de son noyau, et qui lui fournit une utilité supplémentaire).
 
 \DescOptions{useenvironment=list} Charge les fichiers d'environnement qui sont spécifiés avant de lancer \ConTeXt\ (un fichier d'environnement est un fichier contenant des instructions de configuration).
 
-\DescOptions{version} indique la version de \ConTeXt.
+\DescOptions{version} Indique la version de \ConTeXt.
 
-\DescOptions{help} affiche des informations d'aide sur les options du programme.
+\DescOptions{help} Affiche des informations d'aide sur les options du programme.
 
 \DescOptions{noconsole} Supprime l'envoi de messages à l'écran pendant la compilation. Toutefois, ces messages seront toujours enregistrés dans le fichier \MyKey{.log}.
 
-\DescOptions{nonstopmode} Exécute la compilation sans s'arrêter sur les erreurs. Cela ne signifie pas que l'erreur ne se produira pas, mais que lorsque \ConTeXt\ rencontrera une erreur, même si elle est récupérable, il continuera la compilation jusqu'à ce qu'elle se termine ou jusqu'à ce qu'il rencontre une erreur irrécupérable.
+\DescOptions{nonstopmode} Exécute la compilation sans s'arrêter sur les erreurs. Cela ne signifie pas que l'erreur ne se produira pas, mais que lorsque \ConTeXt\ rencontrera une erreur, (même??) si elle est récupérable, il continuera la compilation jusqu'à ce qu'elle se termine ou jusqu'à ce qu'il rencontre une erreur irrécupérable.
 
 \DescOptions{batchmode} Il s'agit d'une combinaison des deux options précédentes. Il fonctionne sans interruption et ignore les messages à l'écran.
 
@@ -348,15 +348,15 @@ Elles se produisent lorsque nous orthographions mal le nom d'une commande. Dans 
 \stopdescription
 
 \startdescription{Erreurs par omission.} 
-Dans \ConTeXt\ il y a des instructions qui démarrent une tâche qu'il faut explicitement fermer ; comme le caractère réservé \quotation{\$} qui active le mode mathématique, qui est maintenu jusqu'à ce qu'on le désactive, et si on oublie de le désactiver, une erreur sera générée dès qu'on trouvera un texte ou une instruction qui n'a pas de sens dans le mode mathématique. Il en va de même si nous commençons un bloc de texte au moyen du caractère réservé \quotation{\{} ou d'une commande \tex{startUnTruc} et que, par la suite, la fermeture explicite n'est pas trouvée (\quotation{\}} ou \tex{stopUnTruc}).
+Dans \ConTeXt\ il y a des instructions qui démarrent une tâche qu'il faut explicitement fermer~; comme le caractère réservé \quotation{\$} qui active le mode mathématique, qui est maintenu jusqu'à ce qu'on le désactive, et si on oublie de le désactiver, une erreur sera générée dès qu'on trouvera un texte ou une instruction qui n'a pas de sens dans le mode mathématique. Il en va de même si nous commençons un bloc de texte au moyen du caractère réservé \quotation{\{} ou d'une commande \tex{startUnTruc} et que, par la suite, la fermeture explicite n'est pas trouvée (\quotation{\}} ou \tex{stopUnTruc}).
 \stopdescription
 
 \startdescription{Erreurs de conception.} 
-J'appelle ainsi les erreurs qui se produisent lorsque vous appelez une commande sans les fournir certains arguments qui sont obligatoire, ou lorsque les règles de syntaxe de la commande ne sont pas respectées.
+J'appelle ainsi les erreurs qui se produisent lorsque vous appelez une commande sans fournir certains arguments qui sont obligatoire, ou lorsque les règles de syntaxe de la commande ne sont pas respectées.
 \stopdescription
 
 \startdescription{Erreurs situationnelles.} 
-Certaines commandes sont destinées à ne fonctionner que dans certains contextes ou environnements, et sont donc inconnues en dehors de ceux-ci. Cela se produit, en particulier, avec le mode mathématique : certaines commandes \ConTeXt\ ne fonctionnent que lors de l'écriture de formules mathématiques et si elles sont appelées dans d'autres contextes, elles génèrent une erreur.
+Certaines commandes sont destinées à ne fonctionner que dans certains contextes ou environnements, et sont donc inconnues en dehors de ceux-ci. Cela se produit, en particulier, avec le mode mathématique~: certaines commandes \ConTeXt\ ne fonctionnent que lors de l'écriture de formules mathématiques et si elles sont appelées dans d'autres contextes, elles génèrent une erreur.
 \stopdescription
 
 
