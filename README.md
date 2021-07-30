@@ -122,4 +122,4 @@ But I am far from being able to write anything
 about any of those three aspects. Some member of the [ntg-context mailing list]( https://mailman.ntg.nl/pipermail/ntg-context/) has offered to 
 help me with it, but not immediately (we all have a lot of work).
 
-GarulfoPR trial
+GarulfoPR trial done
