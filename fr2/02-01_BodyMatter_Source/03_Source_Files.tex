@@ -21,17 +21,17 @@ En pensant aux lecteurs qui, jusqu'à présent, n'ont su travailler qu'avec des 
 
 En \ConTeXt\, nous pouvons utiliser un seul fichier source qui inclut absolument tout le contenu de notre document final ainsi que tous les détails s'y rapportant, dans ce cas nous parlons de \quotation{projet simple}, ou, au contraire, nous pouvons utiliser un certain nombre de fichiers sources qui partagent le contenu de notre document final, et dans ce cas nous parlons de \quotation{projet multi-fichier}.
 
-Les scénarios dans lesquels il est typique de travailler avec plus d'un fichier source sont les suivants :
+Les scénarios dans lesquels il est typique de travailler avec plus d'un fichier source sont les suivants~:
 
 \startitemize
 
-\item Si nous écrivons un document dans lequel plusieurs auteurs ont collaboré, chacun ayant sa propre partie différente des autres ; par exemple, si nous écrivons un livre hommage avec des contributions de différents auteurs, ou un numéro de magazine, etc.
+\item Si nous écrivons un document dans lequel plusieurs auteurs ont collaboré, chacun ayant sa propre partie différente des autres~; par exemple, si nous écrivons un livre hommage avec des contributions de différents auteurs, ou un numéro de magazine, etc.
 
 \item Si nous sommes en train d'écrire un long document où chaque partie (chapitre) a une autonomie relative, de sorte que l'arrangement final de ceux-ci permet plusieurs possibilités et sera décidé à la fin. Cela se produit assez fréquemment pour de nombreux textes académiques (manuels, introductions, etc.) où l'ordre des chapitres peut varier.
 
-\item Si nous rédigeons un certain nombre de documents connexes qui partagent certaines caractéristiques de style ou macro, il est alors intéressant de rassembler ces éléments dans des fichiers séparés, et ainsi utilisables directment dans d'autres projets. Ces fichiers constituent comme des modèles de composition de document.
+\item Si nous rédigeons un certain nombre de documents connexes qui partagent certaines caractéristiques de style ou macro, il est alors intéressant de rassembler ces éléments dans des fichiers séparés, et ainsi utilisables directement dans d'autres projets. Ces fichiers constituent comme des modèles de composition de document.
 
-\item Si, tout simplement, le document sur lequel nous travaillons est volumineux, de sorte que l'ordinateur ralentit soit lors de l'édition, soit lors de la compilation ; dans ce cas, le fait de répartir le matériel sur plusieurs fichiers sources accélérera considérablement la compilation de chacun.
+\item Si, tout simplement, le document sur lequel nous travaillons est volumineux, de sorte que l'ordinateur ralentit soit lors de l'édition, soit lors de la compilation~; dans ce cas, le fait de répartir le matériel sur plusieurs fichiers sources accélérera considérablement la compilation de chacun.
 
 \stopitemize
 
@@ -44,14 +44,14 @@ Les scénarios dans lesquels il est typique de travailler avec plus d'un fichier
   reference=sec:structure]
 
 In simple projects developed in a single source file, the structure is very simple and revolves around the \MyKey{text} environment that must essentially appear in the same file. We differentiate between the following parts of this file:
-
+% TRADUCTION ?
 % TODO Garulfo j'ai l'impression d'une redite 
 
 \startitemize
 
-\item {\bf Le préambule du document} : tout ce qui va de la première ligne du fichier jusqu'au début de l'environnement \MyKey{text} indiqué par la commande (\PlaceMacro{starttext}\PlaceMacro{stoptext}\tex{starttext}).
+\item {\bf Le préambule du document}~: tout ce qui va de la première ligne du fichier jusqu'au début de l'environnement \MyKey{text} indiqué par la commande (\PlaceMacro{starttext}\PlaceMacro{stoptext}\tex{starttext}).
  
-\item {\bf Le corps du document} : il s'agit du contenu de l'environnement \MyKey{text} ; ou en d'autres termes, tout ce qui se trouve entre \tex{starttext} et \tex{stoptext}.
+\item {\bf Le corps du document}~: il s'agit du contenu de l'environnement \MyKey{text}~; ou en d'autres termes, tout ce qui se trouve entre \tex{starttext} et \tex{stoptext}.
 
 \stopitemize
 
@@ -74,9 +74,9 @@ In simple projects developed in a single source file, the structure is very simp
 \stoptext    % Fin du contenu le reste sera ignoré
 \stopDemoI}
 
-Dans \in{figure}[img:ProyectoSimple] nous voyons un fichier source très simple. Absolument tout ce qui précède la commande \tex{starttext} (qui, dans l'image, se trouve à la ligne 5, en ne comptant que celles contenant du texte), constitue le préambule ; tout ce qui se trouve entre \tex{starttext} et \tex{stoptext} constitue le corps du document. Tout ce qui suit le stoptext sera ignoré.
+Dans \in{figure}[img:ProyectoSimple] nous voyons un fichier source très simple. Absolument tout ce qui précède la commande \tex{starttext} (qui, dans l'image, se trouve à la ligne 5, en ne comptant que celles contenant du texte), constitue le préambule~; tout ce qui se trouve entre \tex{starttext} et \tex{stoptext} constitue le corps du document. Tout ce qui suit le stoptext sera ignoré.
 
-Le préambule est utilisé pour inclure les commandes qui affectent le document dans son ensemble, celles qui déterminent sa configuration générale. Il n'est pas indispensable d'écrire une commande dans le préambule. S'il n'y en a pas, \ConTeXt\ adoptera une configuration par défaut qui n'est pas très développée mais qui pourrait faire l'affaire pour de nombreux documents. Dans un document bien planifié, le préambule contiendra toutes les commandes affectant le document dans son ensemble, comme les macros et les commandes personnalisées à utiliser dans le fichier source. Dans un préambule typique, cela pourrait inclure les éléments suivants :
+Le préambule est utilisé pour inclure les commandes qui affectent le document dans son ensemble, celles qui déterminent sa configuration générale. Il n'est pas indispensable d'écrire une commande dans le préambule. S'il n'y en a pas, \ConTeXt\ adoptera une configuration par défaut qui n'est pas très développée mais qui pourrait faire l'affaire pour de nombreux documents. Dans un document bien planifié, le préambule contiendra toutes les commandes affectant le document dans son ensemble, comme les macros et les commandes personnalisées à utiliser dans le fichier source. Dans un préambule typique, cela pourrait inclure les éléments suivants~:
 
 
 
@@ -95,12 +95,12 @@ Le préambule est utilisé pour inclure les commandes qui affectent le document 
 
 \item les paramètres pour nos propres macros (\in{section}[sec:definingcommands]).              
 
-\item Etc.
+\item etc.
 
 \stopitemize
 
 
-Le préambule est destiné à la configuration générale du document ; par conséquent, rien de ce qui concerne le contenu du document ou le texte à traiter ne doit y figurer. En théorie, tout texte traitable inclus dans le préambule sera ignoré, bien que parfois, s'il est présent, il provoquera une erreur de compilation. 
+Le préambule est destiné à la configuration générale du document~; par conséquent, rien de ce qui concerne le contenu du document ou le texte à traiter ne doit y figurer. En théorie, tout texte traitable inclus dans le préambule sera ignoré, bien que parfois, s'il est présent, il provoquera une erreur de compilation. 
 
 {\bf Le corps du document}, encadré entre les commandes \tex{starttext} et \tex{stoptext} comprend le contenu réel, c'est-à-dire le texte réel, ainsi que les commandes \ConTeXt\ qui s'applique à des parties spécifiques du texte contenu et non à l'ensemble du document.
 
@@ -109,7 +109,7 @@ Le préambule est destiné à la configuration générale du document ; par cons
 % * 4.3 - Gestion multi-fichiers
 
 % TODO Garulfo Pourquoi apprendre ici le TeX style?!
-
+% Il n'est pas toujours nécessaire d'avoir une structure plus complexe ; par ailleurs avec TeXworks il est facile de définir un document maître et de travailler dans un document lié !
 \startsection
   [title=Gestion multi-fichiers {\em à la \TeX}]
 
@@ -130,9 +130,9 @@ La commande \tex{input} insère le contenu du fichier qu'elle indique. Son forma
 
 où {\em NomFichier} est le nom du fichier à insérer. Notez qu'il n'est pas nécessaire de placer le nom du fichier entre des accolades, bien que la commande ne génère pas d'erreur si cela est fait. En revanche, il ne doit jamais être placé entre crochets. Si l'extension du fichier est \quotation{\type{.tex}}, elle peut être omise.
 
-Lorsque \ConTeXt\ compile un document et trouve une commande \tex{input}, il recherche le fichier indiqué et poursuit la compilation comme si ce fichier faisait partie du fichier qui l'a appelé. Lorsqu'il a terminé la compilation, il retourne au fichier d'origine et reprend là où il s'est arrêté ; le résultat pratique est donc que le contenu du fichier appelé au moyen de \tex{input} est inséré à l'endroit où il est appelé. Le fichier appelé par \tex{input} doit avoir un nom valide dans notre système d'exploitation et ne doit pas comporter d'espaces vides. \ConTeXt\ le cherchera dans le répertoire de travail, et s'il ne le trouve pas là, il le cherchera dans les répertoires inclus dans la variable de l'environnement TEXROOT. Si le fichier n'est finalement pas trouvé, il produira une erreur de compilation.
+Lorsque \ConTeXt\ compile un document et trouve une commande \tex{input}, il recherche le fichier indiqué et poursuit la compilation comme si ce fichier faisait partie du fichier qui l'a appelé. Lorsqu'il a terminé la compilation, il retourne au fichier d'origine et reprend là où il s'est arrêté~; le résultat pratique est donc que le contenu du fichier appelé au moyen de \tex{input} est inséré à l'endroit où il est appelé. Le fichier appelé par \tex{input} doit avoir un nom valide dans notre système d'exploitation et ne doit pas comporter d'espaces vides. \ConTeXt\ le cherchera dans le répertoire de travail, et s'il ne le trouve pas là, il le cherchera dans les répertoires inclus dans la variable de l'environnement TEXROOT. Si le fichier n'est finalement pas trouvé, il produira une erreur de compilation.
 
-L'utilisation la plus courante de la commande \tex{input} est la suivante~: un fichier est écrit, appelons-le \MyKey{principal.tex}, et il sera utilisé comme conteneur pour appeler, par le biais de la commande \tex{input}, les différents fichiers qui composent notre projet. Ceci est illustré dans l'exemple suivant :
+L'utilisation la plus courante de la commande \tex{input} est la suivante~: un fichier est écrit, appelons-le \MyKey{principal.tex}, et il sera utilisé comme conteneur pour appeler, par le biais de la commande \tex{input}, les différents fichiers qui composent notre projet. Ceci est illustré dans l'exemple suivant~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoI
@@ -151,7 +151,7 @@ L'utilisation la plus courante de la commande \tex{input} est la suivante~: un f
 \stoptext
 \stopDemoI}
 
-Notez comment, pour la configuration générale du document, nous avons appelé le fichier \quotation{MaConfiguration.tex} qui, nous le supposons, contient les commandes globales que nous voulons appliquer. Ensuite, entre les commandes \tex{starttext} et \tex{stoptext} nous appelons les différents fichiers qui contiennent le contenu des différentes parties de notre document. Si, à un moment donné, pour accélérer le processus de compilation, nous souhaitons ne pas compiler certains fichiers, il suffit de mettre une marque de commentaire au début de la ligne appelant ce ou ces fichiers. Par exemple, si nous sommes en train d'écrire le deuxième chapitre et que nous voulons le compiler simplement pour vérifier qu'il ne contient pas d'erreurs, nous n'avons pas besoin de compiler le reste et pouvons donc écrire :
+Notez comment, pour la configuration générale du document, nous avons appelé le fichier \quotation{MaConfiguration.tex} qui, nous le supposons, contient les commandes globales que nous voulons appliquer. Ensuite, entre les commandes \tex{starttext} et \tex{stoptext} nous appelons les différents fichiers qui contiennent le contenu des différentes parties de notre document. Si, à un moment donné, pour accélérer le processus de compilation, nous souhaitons ne pas compiler certains fichiers, il suffit de mettre une marque de commentaire au début de la ligne appelant ce ou ces fichiers. Par exemple, si nous sommes en train d'écrire le deuxième chapitre et que nous voulons le compiler simplement pour vérifier qu'il ne contient pas d'erreurs, nous n'avons pas besoin de compiler le reste et pouvons donc écrire~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoI
@@ -174,7 +174,7 @@ et seul le chapitre 2 sera compilé. Notez comment, d'autre part, changer l'ordr
 
 \startSmallPrint
 
-Lorsque nous excluons un fichier de la compilation d'un projet multi-fichier, nous gagnons en vitesse de traitement, mais parmis les conséquences, toutes les références que la partie en cours de compilation fait à d'autres parties non encore compilées ne fonctionneront plus. Voir \in{section}[sec:references].
+Lorsque nous excluons un fichier de la compilation d'un projet multi-fichier, nous gagnons en vitesse de traitement, mais parmi les conséquences, toutes les références que la partie en cours de compilation fait à d'autres parties non encore compilées ne fonctionneront plus. Voir \in{section}[sec:references].
 
 \stopSmallPrint
 
@@ -228,7 +228,7 @@ Le premier argument est similaire à \tex{Readfile}~: le nom d'un fichier entre 
   [title=Gestion multi-fichiers {\em à la \ConTeXt},
   reference=sec:srcprojects]
 
-Le troisième mécanisme que propose \ConTeXt\ pour les projets multi-fichiers est plus complexe et plus complet : il commence par faire une distinction entre différents fichiers les fichiers de projet, les fichiers de produit, les fichiers de composants et les fichiers d'environnement. 
+Le troisième mécanisme que propose \ConTeXt\ pour les projets multi-fichiers est plus complexe et plus complet~: il commence par faire une distinction entre différents fichiers, les fichiers de projet, les fichiers de produit, les fichiers de composants et les fichiers d'environnement. 
 
 \placefigure
   [force,here,none]
@@ -237,7 +237,7 @@ Le troisième mécanisme que propose \ConTeXt\ pour les projets multi-fichiers e
 {\externalfigure[project–structure.pdf][width=\textwidth]}
  
 
-Pour comprendre les relations et le fonctionnement de chacun de ces types de fichiers, je pense qu'il est préférable de les expliquer individuellement :
+Pour comprendre les relations et le fonctionnement de chacun de ces types de fichiers, je pense qu'il est préférable de les expliquer individuellement~:
 
 % *** 4.6.1 environnements
 
@@ -254,7 +254,7 @@ J'ai conservé le terme \quotation{fichiers d'environnement} pour ces types de f
 
 \stopSmallPrint
 
-Comme tous les fichiers source de \ConTeXt, les fichiers d'environnement sont des fichiers texte, et supposent que l'extension sera \quotation{\type{.tex}}, bien que si nous le voulons, nous pouvons la changer, peut-être en \quotation{\type{.env}}. Cependant, cela n'est généralement pas fait dans \ConTeXt. Le plus souvent, les fichiers d'environnement sont identifiés en commençant ou en terminant leur nom par \quotation{env}. Par exemple~: \quotation{\type{env_livreA.tex}} ou \quotation{\type{mon-livreA.tex}}. L'intérieur d'un tel fichier d'environnement ressemblerait à ce qui suit :
+Comme tous les fichiers source de \ConTeXt, les fichiers d'environnement sont des fichiers texte, et supposent que l'extension sera \quotation{\type{.tex}}, bien que si nous le voulons, nous pouvons la changer, peut-être en \quotation{\type{.env}}. Cependant, cela n'est généralement pas fait dans \ConTeXt. Le plus souvent, les fichiers d'environnement sont identifiés en commençant ou en terminant leur nom par \quotation{env}. Par exemple~: \quotation{\type{env_livreA.tex}} ou \quotation{\type{mon-livreA.tex}}. L'intérieur d'un tel fichier d'environnement ressemblerait à ce qui suit~:
 
 \placefigure [force,here,none] [] {}
 {\startDemoI
@@ -298,7 +298,7 @@ En ce qui concerne le nom de l'environnement, d'après mes tests, le nom que nou
 
 Les fichiers d'environnement ont été conçus pour fonctionner avec des composants et des produits (expliqués dans la section suivante). C'est pourquoi un ou plusieurs environnements peuvent être appelés depuis un composant ou un produit à l'aide de la commande \tex{environment}. Mais cette commande fonctionne également si elle est utilisée dans la zone de configuration (préambule) de tout fichier source \ConTeXt, même s'il ne s'agit pas d'un fichier source destiné à être compilé en parties.
 
-La commande \tex{environnement} peut être appelée en utilisant l'un des deux formats suivants :
+La commande \tex{environnement} peut être appelée en utilisant l'un des deux formats suivants~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoI
@@ -334,7 +334,7 @@ Un fichier de composant typique \quotation{\tt cmp_chapitre-1.tex} serait le sui
 \stopcomponent
 \stopDemoI}
 
-Et un fichier produit \quotation{\tt prd_livre-A.tex} rassemblant les composants ressemblerait à ce qui suit :
+Et un fichier produit \quotation{\tt prd_livre-A.tex} rassemblant les composants ressemblerait à ce qui suit~:
 
 \placefigure [force,here,none] [] {}
 {\startDemoI
@@ -362,7 +362,7 @@ Notez que le contenu réel de notre document sera réparti entre les différents
 % avant la commande \tex{startcomponent} <== pas nécessaire, hans met derrière
 % avant la commande \tex{startproduct}
 
-Dans un fichier de composant, nous pouvons appeler un ou plusieurs fichiers d'environnement avec \tex{environment FichierEnvironment}. Nous pouvons faire de même dans le fichier produit. Plusieurs fichiers d'environnement peuvent être chargés simultanément. Nous pouvons, par exemple, avoir notre collection préférée de macros et les différents styles que nous appliquons à nos documents dans différents fichiers. Notez toutefois que lorsque nous utilisons deux ou plusieurs environnements, ceux-ci sont chargés dans l'ordre dans lequel ils sont appelés, de sorte que si la même commande de configuration a été incluse dans plusieurs environnements et qu'elle a des valeurs différentes, ce sont les valeurs du dernier environnement chargé qui s'appliquent. D'autre part, les fichiers d'environnement ne sont chargés qu'une seule fois, donc dans les exemples précédents où l'environnement est appelé à partir du fichier produit et de fichiers composants spécifiques, si nous compilons le produit, c'est le moment où les environnements sont chargés, et dans l'ordre indiqué ; quand un environnement est appelé à partir de l'un des composants, \ConTeXt\ vérifiera si cet environnement est déjà chargé, auquel cas il ne fera rien.
+Dans un fichier de composant, nous pouvons appeler un ou plusieurs fichiers d'environnement avec \tex{environment FichierEnvironment}. Nous pouvons faire de même dans le fichier produit. Plusieurs fichiers d'environnement peuvent être chargés simultanément. Nous pouvons, par exemple, avoir notre collection préférée de macros et les différents styles que nous appliquons à nos documents dans différents fichiers. Notez toutefois que lorsque nous utilisons deux ou plusieurs environnements, ceux-ci sont chargés dans l'ordre dans lequel ils sont appelés, de sorte que si la même commande de configuration a été incluse dans plusieurs environnements et qu'elle a des valeurs différentes, ce sont les valeurs du dernier environnement chargé qui s'appliquent. D'autre part, les fichiers d'environnement ne sont chargés qu'une seule fois, donc dans les exemples précédents où l'environnement est appelé à partir du fichier produit et de fichiers composants spécifiques, si nous compilons le produit, c'est le moment où les environnements sont chargés, et dans l'ordre indiqué~; quand un environnement est appelé à partir de l'un des composants, \ConTeXt\ vérifiera si cet environnement est déjà chargé, auquel cas il ne fera rien.
 
 % TODO ADDED BY GARULFO Garulfo
 Si le fichier composant ne fait référence à aucun fichier environnement (ou fichier projet comme nous le verrons juste après), sa compilation directe n'appliquera pas les environnements appelés par le fichier produit.
@@ -379,7 +379,7 @@ Au contraire, si le fichier composant fait référence à un fichier environneme
 \index{structure+projet}
 \index{fichier+projet}
 
-La distinction entre produits et composants est suffisante dans la plupart des cas. Néanmoins, \ConTeXt\ possède un niveau encore plus élevé où l'on peut regrouper un certain nombre de produits : il s'agit du {\em projet}.
+La distinction entre produits et composants est suffisante dans la plupart des cas. Néanmoins, \ConTeXt\ possède un niveau encore plus élevé où l'on peut regrouper un certain nombre de produits~: il s'agit du {\em projet}.
 
 Un fichier projet typique se présenterait plus ou moins comme suit
 
@@ -397,17 +397,17 @@ Un fichier projet typique se présenterait plus ou moins comme suit
 \stopproject
 \stopDemoI}
 
-Un scénario dans lequel nous aurions besoin d'un projet serait, par exemple, lorsque nous devons éditer une collection de livres, tous avec les mêmes spécifications de format ; ou bien différentes traduction d'un même livre ; ou si nous éditons une revue~: la collection de livres, ou la revue en tant que telle, serait le projet ; chaque livre ou chaque numéro de revue serait un produit ; et chaque chapitre d'un livre ou chaque article d'un numéro de revue serait un composant.
+Un scénario dans lequel nous aurions besoin d'un projet serait, par exemple, lorsque nous devons éditer une collection de livres, tous avec les mêmes spécifications de format~; ou bien différentes traduction d'un même livre~; ou si nous éditons une revue~: la collection de livres, ou la revue en tant que telle, serait le projet~; chaque livre ou chaque numéro de revue serait un produit~; et chaque chapitre d'un livre ou chaque article d'un numéro de revue serait un composant.
 
-Les projets, en revanche, ne sont pas destinés à être compilés directement. Considérons que, par définition, chaque produit appartenant au projet (chaque livre de la collection, ou chaque numéro de revue) doit être compilé séparément et générer son propre PDF. Par conséquent, la commande \tex{product} incluse dans le projet pour indiquer quels produits appartiennent au projet, ne fait en fait rien : il s'agit simplement d'un rappel pour l'auteur.
+Les projets, en revanche, ne sont pas destinés à être compilés directement. Considérons que, par définition, chaque produit appartenant au projet (chaque livre de la collection, ou chaque numéro de revue) doit être compilé séparément et générer son propre PDF. Par conséquent, la commande \tex{product} incluse dans le projet pour indiquer quels produits appartiennent au projet, ne fait en fait rien~: il s'agit simplement d'un rappel pour l'auteur.
 
-Évidemment, certains pourraient demander pourquoi nous avons des projets s'ils ne peuvent pas être compilés : la réponse est que le fichier de projet lie certains environnements au projet. C'est pourquoi, si nous incluons la commande \PlaceMacro{projet}\tex{projet NomProjet} dans un fichier de composant ou de produit, \ConTeXt\ lira le fichier de projet et chargera automatiquement les environnements qui lui sont liés. C'est pourquoi la commande \tex{environnement} dans les projets doit venir après \tex{startproject} (comme pour les composants et produits)
+Évidemment, certains pourraient demander pourquoi nous avons des projets s'ils ne peuvent pas être compilés~: la réponse est que le fichier de projet lie certains environnements au projet. C'est pourquoi, si nous incluons la commande \PlaceMacro{projet}\tex{projet NomProjet} dans un fichier de composant ou de produit, \ConTeXt\ lira le fichier de projet et chargera automatiquement les environnements qui lui sont liés. C'est pourquoi la commande \tex{environnement} dans les projets doit venir après \tex{startproject} (comme pour les composants et produits)
 
 % TODO Garulfo : semble faux
 % ; cependant, dans les produits et les composants, \tex{environnement} doit venir {\em avant}. \tex{startproduct} ou \tex{startcomponent}. 
 
 Tout comme pour les commandes \tex{environnement} et \tex{composant}, la commande \tex{projet} nous permet d'indiquer le nom du projet entre crochets ou de ne pas utiliser de crochets du tout. Cela signifie que \tex{projet NomdeFichier} et \tex{Projet[NomdeFichier]} sont des commandes équivalentes.  {\bf Résumé des différentes manières de charger un environnement}  Il ressort de ce qui précède qu'un environnement peut être chargé par n'importe laquelle des
-procédures suivantes :
+procédures suivantes~:
 
 
 \startitemize[a, broad]
