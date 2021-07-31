@@ -17,6 +17,7 @@ order to increase the potential audience, a member of the [ntg-context mailing l
 |----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|
 | [<img src="es/introCTX_esp.png" width="200">](es/introCTX_esp.pdf)   | [<img src="en/introCTX_eng.png" width="200">](en/introCTX_eng.pdf)   | [<img src="fr/introCTX_fra.png" width="200">](fr/introCTX_fra_s.pdf) | [<img src="fr2/introCTX_fra.png" width="200">](fr2/introCTX_fra.pdf) |
 
+
 ## Author
 
 - Author : **🄯 2020-2021, Joaquín Ataz-López**
