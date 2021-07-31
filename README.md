@@ -17,7 +17,6 @@ order to increase the potential audience, a member of the [ntg-context mailing l
 |------------------------------------------------------------------------|----------------------------|----------------------------|
 | [![PDF Spanish version 1.6](/es/introCTX_esp.png)](es/introCTX_esp.pdf) | [![PDF English version 1.6](/en/introCTX_eng.png)](en/introCTX_eng.pdf) | [![PDF French version 1.6](/fr/introCTX_fra.png)](fr/introCTX_fra_s.pdf) |
 
-![](https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png | width=100)
 
 ## Author
 
