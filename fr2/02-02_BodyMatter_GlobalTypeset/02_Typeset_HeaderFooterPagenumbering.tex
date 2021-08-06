@@ -26,11 +26,11 @@ Si nous avons attribué une certaine taille à l'en-tête et au pied de page dan
 
 \startitemize[n]
 
-\item Utilisé avec un seul argument, il contient le texte de l'en-tête ou du pied de page qui sera placé au centre de la page. Par exemple : \tex{setupfootertexts[pagenumber]} écrira le numéro de page au centre du pied de page.
+\item Utilisé avec un seul argument, il contient le texte de l'en-tête ou du pied de page qui sera placé au centre de la page. Par exemple~: \tex{setupfootertexts[pagenumber]} écrira le numéro de page au centre du pied de page.
 
-\item Utilisé avec deux arguments, le contenu du premier argument sera placé sur le côté gauche de l'en-tête ou du pied de page, et celui du second argument sur le côté droit. Par exemple, \tex{setupheadertexts[Preface][pagenumber]} composera un en-tête de page dans lequel le mot \quotation{preface} sera écrit sur le côté gauche et le numéro de page sera imprimé sur le côté droit.
+\item Utilisé avec deux arguments, le contenu du premier argument sera placé sur le côté gauche de l'en-tête ou du pied de page, et celui du second argument sur le côté droit. Par exemple, \tex{setupheadertexts[Préface][pagenumber]} composera un en-tête de page dans lequel le mot \quotation{Préface} sera écrit sur le côté gauche et le numéro de page sera imprimé sur le côté droit.
 
-\item Si nous utilisons trois arguments, le premier indiquera {\em la zone} dans laquelle les deux autres doivent être imprimés. Par {\em zone} je fais référence aux {\em zones} qui se répartissent horizontalement au travers de la page, mentionnées dans \in{section}[sec:page-elements], autrement dit : edge (bord), margin (marge), text (texte)... Les deux autres arguments contiennent le texte à placer dans le bord, la marge de gauche et le bord, la marge de droite.
+\item Si nous utilisons trois arguments, le premier indiquera {\em la zone} dans laquelle les deux autres doivent être imprimés. Par {\em zone} je fais référence aux {\em zones} qui se répartissent horizontalement au travers de la page, mentionnées dans \in{section}[sec:page-elements], autrement dit~: edge (bord), margin (marge), text (texte)... Les deux autres arguments contiennent le texte à placer dans le bord, la marge de gauche et le bord, la marge de droite.
 
 \stopitemize
 
@@ -46,31 +46,31 @@ Une caractéristique importante de ces deux commandes est que, lorsqu'elles sont
 \setupheadertexts[Tweedledum][Tweedledee]
 \stopDemoI}
 
-La première commande écrira \quotation{et} au centre de l'en-tête et la seconde écrira \quotation{Tweedledum} à gauche et \quotation{Tweedledee} à droite, laissant la zone centrale intacte, puisqu'il n'a pas été demandé de la réécrire. L'en-tête qui en résulte se présente alors comme suit
+La première commande écrira \quotation{and} au centre de l'en-tête et la seconde écrira \quotation{Tweedledum} à gauche et \quotation{Tweedledee} à droite, laissant la zone centrale intacte, puisqu'il n'a pas été demandé de la réécrire. L'en-tête qui en résulte se présente alors comme suit~: 
 
 \color[maincolor] {Tweedledum\hfill and\hfill Tweedledee}
 
 \startSmallPrint
 
-  L'explication que je viens de donner du fonctionnement de ces commandes est ma conclusion après de nombreux tests. L'explication de ces commandes fournie dans \ConTeXt\ {\em excursion} est basée sur la version avec cinq arguments ; et celle du manuel de référence 2013 est basée sur la version avec trois arguments. Je pense que ma \Conjecture est plus claire.   D'autre part, je n'ai pas vu d'explication sur la raison pour laquelle le deuxième appel de commande n'écrase pas l'appel précédent, mais c'est ainsi que cela fonctionne si nous écrivons d'abord l'élément central dans l'en-tête ou le pied de page, puis ceux de chaque côté. Mais si nous écrivons d'abord les éléments de chaque côté dans l'en-tête ou le pied de page, l'appel ultérieur à la commande d'écriture de l'élément central effacera les en-têtes ou pieds de page précédents. Pourquoi ? Je n'en ai aucune idée. Je pense que ces petits détails introduisent une complication inutile et devraient être clairement expliqués dans la documentation officielle.
+  L'explication que je viens de donner du fonctionnement de ces commandes est ma conclusion après de nombreux tests. L'explication de ces commandes fournie dans \ConTeXt\ {\em excursion} est basée sur la version avec cinq arguments~; et celle du manuel de référence 2013 est basée sur la version avec trois arguments. Je pense que ma \Conjecture est plus claire.   D'autre part, je n'ai pas vu d'explication sur la raison pour laquelle le deuxième appel de commande n'écrase pas l'appel précédent, mais c'est ainsi que cela fonctionne si nous écrivons d'abord l'élément central dans l'en-tête ou le pied de page, puis ceux de chaque côté. Mais si nous écrivons d'abord les éléments de chaque côté dans l'en-tête ou le pied de page, l'appel ultérieur à la commande d'écriture de l'élément central effacera les en-têtes ou pieds de page précédents. Pourquoi~? Je n'en ai aucune idée. Je pense que ces petits détails introduisent une complication inutile et devraient être clairement expliqués dans la documentation officielle.
 
 \stopSmallPrint
 
-En outre, nous pouvons indiquer toute combinaison de texte et de commandes comme contenu de l'en-tête ou du pied de page. Mais aussi les valeurs suivantes :
+En outre, nous pouvons indiquer toute combinaison de texte et de commandes comme contenu de l'en-tête ou du pied de page. Mais aussi les valeurs suivantes~:
 
 \startitemize
 
-\item {\tt\bf date, currentdate} : écrira (l'un ou l'autre) la date du jour.
+\item {\tt\bf date, currentdate}~: écrira (l'un ou l'autre) la date du jour.
 
-\item {\tt\bf pagenumber} : écrira le numéro de page.
+\item {\tt\bf pagenumber}~: écrira le numéro de page.
 
-\item {\tt\bf part, chapter, section...} : écrira le titre correspondant à la partie, au chapitre, à la section... ou à toute autre division structurelle.
+\item {\tt\bf part, chapter, section...}~: écrira le titre correspondant à la partie, au chapitre, à la section... ou à toute autre division structurelle.
 
-\item {\tt\bf partnumber, chapternumber, sectionnumber...} : indique le numéro de la partie, du chapitre, de la section... ou de toute autre division structurelle.
+\item {\tt\bf partnumber, chapternumber, sectionnumber...}~: indique le numéro de la partie, du chapitre, de la section... ou de toute autre division structurelle.
 
 \stopitemize
 
-  {\bf Attention:} Ces noms symboliques ({\tt date, currentdate, pagenumber, chapter, chapternumber}, etc. ) ne sont interprétés comme tels que si le nom symbolique lui-même est le seul contenu de l'argument ; mais si nous ajoutons une autre commande de texte ou de formatage, ces mots seront interprétés littéralement, et ainsi, par exemple, si nous écrivons \tex{setupheadertexts[chapternumber]} nous obtiendrons le numéro du chapitre actuel ; mais si nous écrivons \tex{setupheadertexts[{Chapitre chapternumber}]} nous obtiendrons :   \quotation{Chapitre~chapternumber}. Dans ces cas, lorsque le contenu de la commande n'est pas seulement le mot symbolique, nous devons :
+  {\bf Attention~:} Ces noms symboliques ({\tt date, currentdate, pagenumber, chapter, chapternumber}, etc. ) ne sont interprétés comme tels que si le nom symbolique lui-même est le seul contenu de l'argument~; mais si nous ajoutons une autre commande de texte ou de formatage, ces mots seront interprétés littéralement, et ainsi, par exemple, si nous écrivons \tex{setupheadertexts[chapternumber]} nous obtiendrons le numéro du chapitre actuel~; mais si nous écrivons \tex{setupheadertexts[{Chapitre chapternumber}]} nous obtiendrons~:   \quotation{Chapitre~chapternumber}. Dans ces cas, lorsque le contenu de la commande n'est pas seulement le mot symbolique, nous devons~:
 
 \startitemize
 
@@ -106,24 +106,24 @@ Cependant, on peut aussi configurer cela globalement avec \tex{setupheader} et \
 
 \startitemize
 
-\item {\tt\bf state} : permet les valeurs suivantes : {\tt start, stop, empty, high, none, normal} ou {\tt nomarking}.
+\item {\tt\bf state}~: permet les valeurs suivantes~: {\tt start, stop, empty, high, none, normal} ou {\tt nomarking}.
   
-\item {\tt\bf style, leftstyle, rightstyle} : configuration du style de texte de l'en-tête et du pied de page. {\tt style} affecte toutes les pages, {\tt leftstyle} les pages paires et {\tt rightstyle} les pages impaires.
+\item {\tt\bf style, leftstyle, rightstyle}~: configuration du style de texte de l'en-tête et du pied de page. {\tt style} affecte toutes les pages, {\tt leftstyle} les pages paires et {\tt rightstyle} les pages impaires.
   
-\item {\tt\bf color, leftcolor, rightcolor} : couleur de l'en-tête ou du pied de page. Elle peut affecter toutes les pages (option {\tt color}) ou seulement les pages paires ({\tt leftcolor}) ou impaires ({\tt rightcolor}).
+\item {\tt\bf color, leftcolor, rightcolor}~: couleur de l'en-tête ou du pied de page. Elle peut affecter toutes les pages (option {\tt color}) ou seulement les pages paires ({\tt leftcolor}) ou impaires ({\tt rightcolor}).
   
-\item {\tt\bf width, leftwidth, rightwidth} : largeur de tous les en-têtes et pieds de page ({\tt width}) ou des en-têtes/pieds de page sur les pages paires ({\tt leftwidth}) ou impaires ({\tt rightwidth}).
+\item {\tt\bf width, leftwidth, rightwidth}~: largeur de tous les en-têtes et pieds de page ({\tt width}) ou des en-têtes/pieds de page sur les pages paires ({\tt leftwidth}) ou impaires ({\tt rightwidth}).
 
-\item {\tt\bf before} : commande à exécuter avant d'écrire l'en-tête ou le pied de page.
+\item {\tt\bf before}~: commande à exécuter avant d'écrire l'en-tête ou le pied de page.
 
-\item {\tt\bf after} : commande à exécuter après l'écriture de l'en-tête ou du pied de page.
+\item {\tt\bf after}~: commande à exécuter après l'écriture de l'en-tête ou du pied de page.
 
-\item {\tt\bf strut} : si renseigné avec \quotation{yes}, \ConTeXt\ va donner une profondeur et une hauteur en lien avec la police utilisée, même si le texte utilisé en question n'utilise que des lettres sans jambage (la patte du p, la partie supérieure d'un h...). En conséquence, un espace de séparation vertical est établi entre le texte de l'en-tête et le bord supérieur de la zone d'en-tête. Si renseigné avec \quotation{no}, la hauteur et la profondeur de ligne collent strictement au texte de l'en-tête et ce dernier vient buter contre le bord supérieur de la zone d'en-tête.
+\item {\tt\bf strut}~: si renseigné avec \quotation{yes}, \ConTeXt\ va donner une profondeur et une hauteur en lien avec la police utilisée, même si le texte utilisé en question n'utilise que des lettres sans jambage (la patte du p, la partie supérieure d'un h...). En conséquence, un espace de séparation vertical est établi entre le texte de l'en-tête et le bord supérieur de la zone d'en-tête. Si renseigné avec \quotation{no}, la hauteur et la profondeur de ligne collent strictement au texte de l'en-tête et ce dernier vient buter contre le bord supérieur de la zone d'en-tête.
 
 \stopitemize
 
 
-  Pour désactiver (voire modifier) les en-têtes et les pieds de page \quotation{localement}, c'est à dire sur une page particulière, utilisez les commandes 
+  Pour désactiver (voire modifier) les en-têtes et les pieds de page \quotation{localement}, c'est-à-dire sur une page particulière, utilisez les commandes 
 \PlaceMacro{\setupheader}\tex{\setupheader[state=empty]} 
 \PlaceMacro{\setupfooter}\tex{\setupfooter[state=empty]} 
 au sein de la page. Ces commandes agissent exclusivement sur la page où elles se trouvent.
@@ -182,16 +182,16 @@ au sein de la page. Ces commandes agissent exclusivement sur la page où elles s
   [title=Définir des en-têtes et des pieds de page spécifiques et les relier aux commandes de section]
 \PlaceMacro{definetext}
 
-Jusqu'à présent, le système d'en-tête et de pied de page de \ConTeXt\ nous permet de changer automatiquement le texte de l'en-tête ou du pied de page lorsque nous changeons de chapitre ou de section, ou lorsque nous changeons de page, si nous avons défini des en-têtes ou des pieds de page différents pour les pages paires et impaires. Mais ce qu'il ne permet pas, c'est de différencier la première page (du document, d'un chapitre ou d'une section) du reste des pages. Pour réaliser ce dernier point, nous devons : 
+Jusqu'à présent, le système d'en-tête et de pied de page de \ConTeXt\ nous permet de changer automatiquement le texte de l'en-tête ou du pied de page lorsque nous changeons de chapitre ou de section, ou lorsque nous changeons de page, si nous avons défini des en-têtes ou des pieds de page différents pour les pages paires et impaires. Mais ce qu'il ne permet pas, c'est de différencier la première page (du document, d'un chapitre ou d'une section) du reste des pages. Pour réaliser ce dernier point, nous devons~: 
 
 \startitemize [n, packed]
 
 \item Définir un en-tête ou un pied de page spécifique. 
-\item Le lier à la section à laquelle il doit s'applique.
+\item Le lier à la section à laquelle il doit s'appliquer.
   
 \stopitemize
 
-La définition d'en-têtes ou de pieds de page spécifiques s'effectue à l'aide de la fonction \tex{definetext}, dont la syntaxe est la suivante :
+La définition d'en-têtes ou de pieds de page spécifiques s'effectue à l'aide de la fonction \tex{definetext}, dont la syntaxe est la suivante~:
 
 
 \placefigure [force,here,none] [] {}
@@ -202,12 +202,12 @@ La définition d'en-têtes ou de pieds de page spécifiques s'effectue à l'aide
   [Content4] [Content5]
 \stopDemoI}
 
-où {\em Name} est le nom attribué à l'en-tête ou au pied de page dont il s'agit ; {\em Type} peut être {\tt header} ou {\tt footer}, selon celui que nous définissons, et les cinq arguments restants contiennent le contenu que nous voulons pour le nouvel en-tête ou pied de page, de manière similaire à la façon dont nous avons vu les fonctions \PlaceMacro{setupheadertexts}\tex{setupheadertexts} et \PlaceMacro{setupfootertexts}\tex{setupfootertexts}. 
+où {\em Name} est le nom attribué à l'en-tête ou au pied de page dont il s'agit~; {\em Type} peut être {\tt header} ou {\tt footer}, selon celui que nous définissons, et les cinq arguments restants contiennent le contenu que nous voulons pour le nouvel en-tête ou pied de page, de manière similaire à la façon dont nous avons vu les fonctions \PlaceMacro{setupheadertexts}\tex{setupheadertexts} et \PlaceMacro{setupfootertexts}\tex{setupfootertexts}. 
 
 Une fois cette opération effectuée, nous devons lier le nouvel en-tête ou le nouveau pied de page à une section particulière avec \tex{setuphead} en utilisant les options {\em header} et {\tt footer} (qui ne sont pas expliquées dans \in{Chapter}[cap:structure]).
 
 
-Ainsi, l'exemple suivant masquera l'en-tête de la première page de chaque chapitre et un numéro de page centré apparaîtra en pied de page :
+Ainsi, l'exemple suivant masquera l'en-tête de la première page de chaque chapitre et un numéro de page centré apparaîtra en pied de page~:
 
 \placefigure [here,force,none] [] {}
 {\startDemoI
