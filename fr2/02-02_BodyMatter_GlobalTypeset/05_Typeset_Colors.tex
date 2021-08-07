@@ -135,7 +135,7 @@ Pour les grandes portions de texte, il est préférable d'utiliser l'environneme
 \startcolor[ColourName] ... \stopcolor
 \stopDemoI}
 
-Ces deux commandes utiliset des couleurs prédéfinies que l'on désigne par leur nom (\in{section}[sec:predefined-colours]). Si nous voulons définir la couleur à la volée, nous pouvons utiliser la commande \tex{colored}. Par exemple :
+Ces deux commandes utilisent des couleurs prédéfinies que l'on désigne par leur nom (\in{section}[sec:predefined-colours]). Si nous voulons définir la couleur à la volée, nous pouvons utiliser la commande \tex{colored}. Par exemple~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoVN
@@ -238,7 +238,7 @@ Les fichiers de définition des couleurs sont inclus dans le répertoire \MyKey{
 
 Pour voir quelles couleurs contiennent chacune de ces collections, nous pouvons utiliser la commande \PlaceMacro{showcolor} \tex{showcolor[CollectionName]} décrite dans ce qui suit \in{section}[sec:visucolor]. 
 
-Pour utiliser certaines de ces couleurs, il faut d'abord les charger en mémoire avec la commande (\tex{usecolors[CollectionName]}), puis indiquer le nom de la couleur aux commandes \tex{color} ou \PlaceMacro{startcolor} \tex{startcolor}. Par exemple, la séquence suivant~: 
+Pour utiliser certaines de ces couleurs, il faut d'abord les charger en mémoire avec la commande (\tex{usecolors[CollectionName]}), puis indiquer le nom de la couleur aux commandes \tex{color} ou \PlaceMacro{startcolor} \tex{startcolor}. Par exemple, la séquence suivante~: 
 
 
 % \page[preference] % TODO Garulfo on peut enlever ?
@@ -269,7 +269,7 @@ La commande \tex{showcolor} affiche une liste de couleurs dans laquelle vous pou
 \stopDemoHN}
 
 
-Si nous voulons voir les composantes rgb d'une couleur particulière, nous pouvons utiliser \PlaceMacro{showcolorcomponents} \tex{showcolorcomponents[ColourName]}. Ceci est utile si nous essayons de définir une couleur spécifique, pour voir la composition d'une couleur qui lui est proche. Par exemple, \tex{showcolorcomponents[darkgoldenrod]} nous montrera :
+Si nous voulons voir les composantes rgb d'une couleur particulière, nous pouvons utiliser \PlaceMacro{showcolorcomponents} \tex{showcolorcomponents[ColourName]}. Ceci est utile si nous essayons de définir une couleur spécifique, pour voir la composition d'une couleur qui lui est proche. Par exemple, \tex{showcolorcomponents[darkgoldenrod]} nous montrera~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoHN
@@ -288,7 +288,7 @@ Si nous voulons voir les composantes rgb d'une couleur particulière, nous pouvo
   [title=Definir ses propres couleurs]
 \PlaceMacro{definecolor}
 
-\tex{definecolor} nous permet soit de cloner une couleur existante, soit de définir une nouvelle couleur. Cloner une couleur existante est aussi simple que de lui donner un autre nom. Pour ce faire, vous devez écrire :
+\tex{definecolor} nous permet soit de cloner une couleur existante, soit de définir une nouvelle couleur. Cloner une couleur existante est aussi simple que de lui donner un autre nom. Pour ce faire, vous devez écrire~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoI
@@ -304,12 +304,13 @@ Mais la principale utilisation de \tex{definecolor} est la création de nouvelle
 \definecolor[ColourName][Définition]
 \stopDemoI}
 
-où {\em Définition} peut se faire en appliquant jusqu'à six schémas de génération de couleurs différents :
+où {\em Définition} peut se faire en appliquant jusqu'à six schémas de génération de couleurs différents~:
 
 
 \startitemize[n]
 
-\item {\bf Couleurs RVB} : La définition des couleurs RVB est l'une des plus répandues ; elle repose sur l'idée qu'il est possible de représenter une couleur en mélangeant, par addition, les trois couleurs primaires : rouge (\quote{r} pour {\em rouge}), vert (\quote{g} pour {\em vert}) et bleu (\quote{b} pour {\em bleu}). Chacun de ces composants est indiqué par un nombre décimal compris entre 0 et 1.
+\item {\bf Couleurs RVB}~: La définition des couleurs RVB est l'une des plus répandues~; elle repose sur l'idée qu'il est possible de représenter une couleur en mélangeant, par addition, les trois couleurs primaires~: rouge (\quote{r} pour {\em rouge}), vert (\quote{g} pour {\em vert}) et bleu (\quote{b} pour {\em bleu}). Chacun de ces composants est indiqué par un nombre décimal compris entre 0 et 1.
+% changer "pour {\em vert}" par "pour {\em green}"
 
 \placefigure [force,here,none] [] {}{
 \startDemoVW
@@ -318,7 +319,7 @@ où {\em Définition} peut se faire en appliquant jusqu'à six schémas de gén�
 \color[CouleurA]{Texte Couleur A.}
 \stopDemoVW}
 
-\item {\bf Couleurs hexadécimales} : Cette façon de représenter les couleurs est également basée sur le schéma RVB, mais les composantes rouge, verte et bleue sont indiquées sous la forme de trois nombres hexadécimaux, le premier représentant la valeur du rouge, le deuxième la valeur du vert et le troisième la valeur du bleu. Par exemple~:
+\item {\bf Couleurs hexadécimales}~: Cette façon de représenter les couleurs est également basée sur le schéma RVB, mais les composantes rouge, verte et bleue sont indiquées sous la forme de trois nombres hexadécimaux, le premier représentant la valeur du rouge, le deuxième la valeur du vert et le troisième la valeur du bleu. Par exemple~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoVW
@@ -328,7 +329,7 @@ où {\em Définition} peut se faire en appliquant jusqu'à six schémas de gén�
 \stopDemoVW}
 
 
-\item {\bf Couleurs CMYK} : Ce modèle de génération des couleurs est ce qu'on appelle un \quotation{modèle soustractif} et repose sur le mélange de pigments des couleurs suivantes : cyan (\quote{c}), magenta (\quote{m}), jaune (\quote{y}, de {\em yellow}) et noir (\quote{k}, de {\em key} (key au sens valeur)). Chacun de ces composants est indiqué par un nombre décimal compris entre 0 et 1~:
+\item {\bf Couleurs CMYK}~: Ce modèle de génération des couleurs est ce qu'on appelle un \quotation{modèle soustractif} et repose sur le mélange de pigments des couleurs suivantes~: cyan (\quote{c}), magenta (\quote{m}), jaune (\quote{y}, de {\em yellow}) et noir (\quote{k}, de {\em key} (key au sens valeur)). Chacun de ces composants est indiqué par un nombre décimal compris entre 0 et 1~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoVW
@@ -338,7 +339,7 @@ où {\em Définition} peut se faire en appliquant jusqu'à six schémas de gén�
 \stopDemoVW}
 
 
-\item {\bf Couleurs HSL/HSV} : Ce modèle de couleur est basé sur la mesure de la teinte (\quote{h}, de {\em hue}), de la saturation (\quote{s}) et de la luminescence (\quote{l} ou parfois \quote{v}, de {\em value}). La teinte correspond à un nombre compris entre 0 et 360 ; la saturation et la luminescence doivent être un nombre décimal compris entre 0 et 1. Par exemple~:
+\item {\bf Couleurs HSL/HSV}~: Ce modèle de couleur est basé sur la mesure de la teinte (\quote{h}, de {\em hue}), de la saturation (\quote{s}) et de la luminescence (\quote{l} ou parfois \quote{v}, de {\em value}). La teinte correspond à un nombre compris entre 0 et 360~; la saturation et la luminescence doivent être un nombre décimal compris entre 0 et 1. Par exemple~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoVW
@@ -346,7 +347,7 @@ où {\em Définition} peut se faire en appliquant jusqu'à six schémas de gén�
 \color[CouleurD]{Texte Couleur D.}
 \stopDemoVW}
 
-\item {\bf Couleurs HWB} : Le modèle HWB est une norme suggérée pour CSS4 qui mesure la teinte (\quote{h}, de {\em hue}), et le niveau de blanc (\quote{w}, de {\em whiteness}) et de noir (\quote{b}, de {\em blackness}). La teinte correspond à un nombre compris entre 0 et 360, tandis que la blancheur et la noirceur sont représentées par un nombre décimal compris entre 0 et 1.
+\item {\bf Couleurs HWB}~: Le modèle HWB est une norme suggérée pour CSS4 qui mesure la teinte (\quote{h}, de {\em hue}), et le niveau de blanc (\quote{w}, de {\em whiteness}) et de noir (\quote{b}, de {\em blackness}). La teinte correspond à un nombre compris entre 0 et 360, tandis que la blancheur et la noirceur sont représentées par un nombre décimal compris entre 0 et 1.
 
 \placefigure [force,here,none] [] {}{
 \startDemoVW%
@@ -354,7 +355,7 @@ où {\em Définition} peut se faire en appliquant jusqu'à six schémas de gén�
 \color[CouleurE]{Texte Couleur E.}
 \stopDemoVW}
 
-\item {\bf Couleur échelle de gris} : basé sur un composant appelé (\quote{s}, de {\em scale}) qui mesure la quantité de gris. Il doit s'agir d'un nombre compris entre 0 et 1. Par exemple :
+\item {\bf Couleur échelle de gris}~: basé sur un composant appelé (\quote{s}, de {\em scale}) qui mesure la quantité de gris. Il doit s'agir d'un nombre compris entre 0 et 1. Par exemple~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoVW%
