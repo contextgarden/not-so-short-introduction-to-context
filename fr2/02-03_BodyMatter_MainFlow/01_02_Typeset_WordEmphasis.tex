@@ -11,7 +11,7 @@
 
 \TocChap
 
-L'élément de base de tous les documents textuels est le caractère : les caractères sont regroupés en mots, qui à leur tour forment des lignes qui constituent les paragraphes qui composent les pages.
+L'élément de base de tous les documents textuels est le caractère~: les caractères sont regroupés en mots, qui à leur tour forment des lignes qui constituent les paragraphes qui composent les pages.
 
 Le présent chapitre, qui commence par \quotation{\em caractère} (voyez la \in{section}[sec:obtainchar] pour obtenir certains caractères absent du clavier), explique certains des utilitaires de \ConTeXt\ relatifs aux caractères, aux mots et au texte.
 
@@ -35,13 +35,13 @@ Les lettres elles-mêmes peuvent être en majuscules ou en minuscules. Pour \Con
 
 \startitemize[packed]
 
-\item \PlaceMacro{word} \cmd{word\{texte\}} : convertit le texte pris comme argument en minuscules.
+\item \PlaceMacro{word} \cmd{word\{texte\}}~: convertit le texte pris comme argument en minuscules.
   
-\item \PlaceMacro{Word} \cmd{Word\{texte\}} : convertit en majuscule la première lettre du texte pris en argument.
+\item \PlaceMacro{Word} \cmd{Word\{texte\}}~: convertit en majuscule la première lettre du texte pris en argument.
   
-\item \PlaceMacro{Words} \cmd{Words\{texte\}} : convertit en majuscule la première lettre de chacun des mots pris comme argument ; les autres sont en minuscule.
+\item \PlaceMacro{Words} \cmd{Words\{texte\}}~: convertit en majuscule la première lettre de chacun des mots pris comme argument~; les autres sont en minuscule.
   
-\item \PlaceMacro{WORD} \cmd{WORD\{texte\}} ou \PlaceMacro{WORDS} \cmd{WORD\{texte\}} : écrit le texte pris comme argument en majuscules.
+\item \PlaceMacro{WORD} \cmd{WORD\{texte\}} ou \PlaceMacro{WORDS} \cmd{WORD\{texte\}}~: écrit le texte pris comme argument en majuscules.
  
 \stopitemize
 
@@ -55,7 +55,7 @@ Les lettres elles-mêmes peuvent être en majuscules ou en minuscules. Pour \Con
 \Word{\word  {ceCi esT UN tESt}}
 \stopDemoVN}
 
-Les commandes \PlaceMacro{cap} \tex{cap} et \PlaceMacro{Cap} \tex{Cap} sont très similaires à celles-ci~: elles mettent également en majuscules le texte qu'elles prennent comme argument, mais lui appliquent ensuite un facteur d'échelle égal à celui appliqué par le suffixe \quote{x} dans les commandes de changement de police (voir \in{section}[sec:quick-change]) de sorte que, dans la plupart des polices, les majuscules auront la même hauteur que les minuscules, ce qui nous donne une sorte d'effet de fausses petites capitales. Par rapport aux vraies petites capitales (voir \in{section}[sec:smallcaps]), celles-ci présentent les avantages suivants :
+Les commandes \PlaceMacro{cap} \tex{cap} et \PlaceMacro{Cap} \tex{Cap} sont très similaires à celles-ci~: elles mettent également en majuscules le texte qu'elles prennent comme argument, mais lui appliquent ensuite un facteur d'échelle égal à celui appliqué par le suffixe \quote{x} dans les commandes de changement de police (voir \in{section}[sec:quick-change]) de sorte que, dans la plupart des polices, les majuscules auront la même hauteur que les minuscules, ce qui nous donne une sorte d'effet de fausses petites capitales. Par rapport aux vraies petites capitales (voir \in{section}[sec:smallcaps]), celles-ci présentent les avantages suivants~:
 
 
 
@@ -76,9 +76,9 @@ La différence entre \cmd{cap} et \cmd{Cap} est que, tandis que le premier appli
 L'ONU, dont le \Cap{président} a son bureau au siège de l'\cap{oNu}...
 \stopDemoVN}
 
-Il faut noter, tout d'abord, la différence de taille entre la première fois que nous écrivons \quotation{ONU} (en majuscules) et la deuxième fois (en petites capitales, \quotation{\cap{oNu}}). Dans l'exemple, j'ai écrit \cmd{cap\{oNu\}} la deuxième fois pour que nous puissions voir que cela n'a pas d'importance si nous écrivons l'argument que prend \cmd{cap} en majuscules ou en minuscules : la commande convertit toutes les lettres en majuscules et applique ensuite un facteur de mise à l'échelle, contrairement à \cmd{Cap} qui ne met pas à l'échelle la première lettre.
+Il faut noter, tout d'abord, la différence de taille entre la première fois que nous écrivons \quotation{ONU} (en majuscules) et la deuxième fois (en petites capitales, \quotation{\cap{oNu}}). Dans l'exemple, j'ai écrit \cmd{cap\{oNu\}} la deuxième fois pour que nous puissions voir que cela n'a pas d'importance si nous écrivons l'argument que prend \cmd{cap} en majuscules ou en minuscules~: la commande convertit toutes les lettres en majuscules et applique ensuite un facteur de mise à l'échelle, contrairement à \cmd{Cap} qui ne met pas à l'échelle la première lettre.
 
-Ces commandes peuvent également être {\em imbriquées}, auquel cas le facteur d'échelle est appliqué une fois de plus, ce qui entraîne une réduction supplémentaire, comme dans l'exemple suivant où le mot \quotation{capital} de la première ligne est encore réduit :
+Ces commandes peuvent également être {\em imbriquées}, auquel cas le facteur d'échelle est appliqué une fois de plus, ce qui entraîne une réduction supplémentaire, comme dans l'exemple suivant où le mot \quotation{capital} de la première ligne est encore réduit~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoVN
@@ -86,7 +86,7 @@ Les Personnes, \cap{Les personnes qui ont amassé leur \cap{capital} au détrime
 \stopDemoVN}
 
 
-La commande \tex{nocap} appliquée à un texte auquel est appliqué \tex{cap}, annule l'effet de \tex{cap} dans le texte qui est son argument. Par exemple :
+La commande \tex{nocap} appliquée à un texte auquel est appliqué \tex{cap}, annule l'effet de \tex{cap} dans le texte qui est son argument. Par exemple~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoVN
@@ -152,11 +152,11 @@ Nous savons déjà (voir \in{section}[sec:reserved characters]) que dans le mode
 
 \startitemize
 
-\item \cmd{high\{Texte\}} : écrit le texte qu'il prend comme argument en exposant.
+\item \cmd{high\{Texte\}}~: écrit le texte qu'il prend comme argument en exposant.
 
-\item \cmd{low\{Texte\}} : écrit le texte qu'elle prend comme argument en indice.
+\item \cmd{low\{Texte\}}~: écrit le texte qu'elle prend comme argument en indice.
 
-\item \cmd{lohi\{texte 1\}\{Texte 2\}} : écrit les deux arguments l'un au-dessus de l'autre : en bas le premier argument, et en haut le second.
+\item \cmd{lohi\{texte 1\}\{Texte 2\}}~: écrit les deux arguments l'un au-dessus de l'autre~: en bas le premier argument, et en haut le second.
 
 \stopitemize
 
@@ -178,14 +178,14 @@ Ceci est un texte \high{en haut}, un autre \low{en bas}, et une combinaison \loh
 
  L'expression latine {\em verbatim} (de {\em verbum} $=$ {\em mot} avec le suffixe {\em atim}), qui pourrait être traduite par \quotation{littéral} ou \quotation{mot pour mot}, est utilisée dans les programmes de traitement de texte comme \ConTeXt\ pour désigner les fragments de texte qui ne doivent pas être transformé ni mis en forme,  ils doivent être affichés, tels quels, dans le fichier final. Pour cela, \ConTeXt\ utilise la commande \tex{type}, destinée aux textes courts qui n'occupent pas plus d'une ligne et l'environnement {\tt typing} destiné aux textes de plus d'une ligne. Ces commandes sont largement utilisées dans les livres d'informatique pour afficher les fragments de code, et \ConTeXt\ met en forme ces textes en lettres monospace comme le ferait une machine à écrire ou un terminal d'ordinateur. Dans les deux cas, le texte est envoyé dans le document final sans {\em traitement}, ce qui signifie qu'il peut utiliser des caractères réservés ou des caractères spéciaux qui seront transcrits {\em tel quel} dans le fichier final. De même, si l'argument de \tex{type}, ou le contenu de \tex{starttyping} comprend une commande, celle-ci sera {\em écrite} dans le document final, mais pas exécutée.
 
-La commande \tex{type} présente, en outre, la particularité suivante : son argument {\em peut} être contenu entre des crochets (comme c'est normal dans \ConTeXt), mais tout autre caractère peut être utilisé pour délimiter (entourer) l'argument.
+La commande \tex{type} présente, en outre, la particularité suivante~: son argument {\em peut} être contenu entre des crochets (comme c'est normal dans \ConTeXt), mais tout autre caractère peut être utilisé pour délimiter (entourer) l'argument.
 
 
 \startSmallPrint
 
-Lorsque \ConTeXt\ lit la commande \tex{type}, il suppose que le caractère qui n'est pas un espace blanc suivant immédiatement le nom de la commande agira comme un délimiteur de son argument ; il considère donc que le contenu de l'argument commence par le caractère suivant, et se termine par le caractère précédant la prochaine apparition du {\em délimiteur}.
+Lorsque \ConTeXt\ lit la commande \tex{type}, il suppose que le caractère qui n'est pas un espace blanc suivant immédiatement le nom de la commande agira comme un délimiteur de son argument~; il considère donc que le contenu de l'argument commence par le caractère suivant, et se termine par le caractère précédant la prochaine apparition du {\em délimiteur}.
 
-Quelques exemples nous aideront à mieux comprendre :
+Quelques exemples nous aideront à mieux comprendre~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoVW
@@ -196,9 +196,9 @@ Quelques exemples nous aideront à mieux comprendre :
 \stopDemoVW}
 
 
-Notez que dans le premier exemple, le premier caractère après le nom de la commande est un \quote{1}, dans le deuxième un \quote{\|} et dans le troisième un \quote{z} ; ainsi : dans chacun de ces cas, \ConTeXt\ considérera que l'argument de \tex{type} est tout ce qui se trouve entre ce caractère et la prochaine apparition du même caractère. Il en va de même pour le dernier exemple, qui est également très instructif, car en principe, on pourrait supposer que si le délimiteur d'ouverture de l'argument est un \quote{(}, celui de fermeture devrait être un \quote{)}, mais ce n'est pas le cas, car \quote{(} et \quote{)} sont des caractères différents et \tex{type}, comme je l'ai dit, recherche un délimiteur de fermeture identique au caractère utilisé au début de l'argument.
+Notez que dans le premier exemple, le premier caractère après le nom de la commande est un \quote{1}, dans le deuxième un \quote{\|} et dans le troisième un \quote{z}~; ainsi~: dans chacun de ces cas, \ConTeXt\ considérera que l'argument de \tex{type} est tout ce qui se trouve entre ce caractère et la prochaine apparition du même caractère. Il en va de même pour le dernier exemple, qui est également très instructif, car en principe, on pourrait supposer que si le délimiteur d'ouverture de l'argument est un \quote{(}, celui de fermeture devrait être un \quote{)}, mais ce n'est pas le cas, car \quote{(} et \quote{)} sont des caractères différents et \tex{type}, comme je l'ai dit, recherche un délimiteur de fermeture identique au caractère utilisé au début de l'argument.  % attention dans la deuxième ligne de l'exemple on a "µ" et pas "|"
 
-Il n'y a que deux cas où \tex{type} permet que les délimiteurs d'ouverture et de fermeture soient des caractères différents :
+Il n'y a que deux cas où \tex{type} permet que les délimiteurs d'ouverture et de fermeture soient des caractères différents~:
 
 
 
@@ -210,7 +210,7 @@ Il n'y a que deux cas où \tex{type} permet que les délimiteurs d'ouverture et 
 
 \stopitemize
 
- Toutefois, le fait que \tex{type} autorise n'importe quel délimiteur ne signifie pas que nous devrions utiliser des délimiteurs \quotation{bizarre}. Du point de vue de la lisibilité et de l'intelligibilité du fichier source, il est préférable de délimiter l'argument du \tex{type} par des accolades lorsque cela est possible, comme c'est le cas avec \ConTeXt\ ; et lorsque cela n'est pas possible, parce qu'il y a des accolades dans l'argument du \tex{type}, utilisez un symbole~: de préférence un qui ne soit pas un caractère réservé \ConTeXt\. Par exemple~: \cmd{type *Ceci est une accolade fermante :    \quote{\}}*}.
+ Toutefois, le fait que \tex{type} autorise n'importe quel délimiteur ne signifie pas que nous devrions utiliser des délimiteurs \quotation{bizarre}. Du point de vue de la lisibilité et de l'intelligibilité du fichier source, il est préférable de délimiter l'argument du \tex{type} par des accolades lorsque cela est possible, comme c'est le cas avec \ConTeXt\~; et lorsque cela n'est pas possible, parce qu'il y a des accolades dans l'argument du \tex{type}, utilisez un symbole~: de préférence un qui ne soit pas un caractère réservé \ConTeXt\. Par exemple~: \cmd{type *Ceci est une accolade fermante~:    \quote{\}}*}.
 
 
 \stopSmallPrint
@@ -218,13 +218,13 @@ Il n'y a que deux cas où \tex{type} permet que les délimiteurs d'ouverture et 
 \tex{type} et \tex{starttyping} peuvent être configurés avec \PlaceMacro{setuptype} \tex{setuptype} et \PlaceMacro{setuptyping} \tex{setuptyping}. Nous pouvons également créer une version personnalisée de ces éléments avec \PlaceMacro{definetype} \tex{definetype} et \PlaceMacro{definetyping} \tex{definetyping}. En ce qui concerne les options de configuration réelles de ces commandes, je me réfère à \MyKey{setup-fr.pdf} (dans le répertoire {\tt tex/texmf-context/doc/context/documents/general/qrcs}).
 
 
-Deux commandes très similaires à \tex{type} sont :
+Deux commandes très similaires à \tex{type} sont~:
 
 \startitemize
 
-\item \PlaceMacro{typ} \tex{typ} : fonctionne de manière similaire à \tex{type}, mais ne désactive pas les césures.
+\item \PlaceMacro{typ} \tex{typ}~: fonctionne de manière similaire à \tex{type}, mais ne désactive pas les césures.
 
-\item \PlaceMacro{tex}\tex{tex} : commande destinée à la rédaction de textes sur \TeX\ ou \ConTeXt\ : elle ajoute une barre oblique inversée (backslash ou antislash) devant le texte qu'elle prend comme argument. Sinon, cette commande diffère de \tex{type} en ce qu'elle traite certains des caractères réservés qu'elle trouve dans le texte qu'elle prend comme argument. En particulier, les crochets à l'intérieur de \tex{tex} seront traités de la même manière qu'ils le sont habituellement dans \ConTeXt.
+\item \PlaceMacro{tex}\tex{tex}~: commande destinée à la rédaction de textes sur \TeX\ ou \ConTeXt\~: elle ajoute une barre oblique inversée (backslash ou antislash) devant le texte qu'elle prend comme argument. Sinon, cette commande diffère de \tex{type} en ce qu'elle traite certains des caractères réservés qu'elle trouve dans le texte qu'elle prend comme argument. En particulier, les crochets à l'intérieur de \tex{tex} seront traités de la même manière qu'ils le sont habituellement dans \ConTeXt.
 
 \stopitemize
 
@@ -245,7 +245,7 @@ Deux commandes très similaires à \tex{type} sont :
 \startsubsubsection
   [title=Réglage automatique de l'espacement horizontal]
 
-L'espace entre les différents caractères et mots (appelé {\em espace horizontal} dans \TeX) est défini automatiquement par \ConTeXt :
+L'espace entre les différents caractères et mots (appelé {\em espace horizontal} dans \TeX) est défini automatiquement par \ConTeXt~:
 
 \startitemize
 
@@ -293,7 +293,7 @@ Ces espaces blancs supplémentaires fonctionnent pour l'anglais et peut-être po
   [title=Modification de l'espace entre les caractères et les mots]
 
 
-Modifier l'espace par défaut des caractères qui composent un mot est considéré comme une très mauvaise pratique d'un point de vue typographique, sauf dans les titres et les en-têtes. \ConTeXt\ fournit une commande pour modifier cet espace entre les caractères d'un mot~: \footnote{Il est typique de la philosophie de \ConTeXt\ d'inclure une commande pour faire quelque chose que la documentation \ConTeXt\ elle-même déconseille de faire. Bien que la perfection typographique soit recherchée, l'objectif est également de donner à l'auteur un contrôle absolu sur l'apparence de son document : qu'il soit meilleur ou moins bon est, en somme, de sa responsabilité.} \PlaceMacro{stretched} \tex{stretched}, dont la syntaxe est la suivante :
+Modifier l'espace par défaut des caractères qui composent un mot est considéré comme une très mauvaise pratique d'un point de vue typographique, sauf dans les titres et les en-têtes. \ConTeXt\ fournit une commande pour modifier cet espace entre les caractères d'un mot~: \footnote{Il est typique de la philosophie de \ConTeXt\ d'inclure une commande pour faire quelque chose que la documentation \ConTeXt\ elle-même déconseille de faire. Bien que la perfection typographique soit recherchée, l'objectif est également de donner à l'auteur un contrôle absolu sur l'apparence de son document~: qu'il soit meilleur ou moins bon est, en somme, de sa responsabilité.} \PlaceMacro{stretched} \tex{stretched}, dont la syntaxe est la suivante~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoI
@@ -306,9 +306,9 @@ où {\em Configuration} permet l'une des options suivantes~:
 
 \startitemize
 
-\item {\tt factor} : un nombre décimal qui influence la répartition de l'espace additionnel entre les mots et entre les lettres.
+\item {\tt factor}~: un nombre décimal qui influence la répartition de l'espace additionnel entre les mots et entre les lettres.
 
-\item {\tt width} : indique la largeur totale que doit avoir le texte soumis à la commande, de telle sorte que la commande calcule elle-même l'espacement nécessaire pour répartir les caractères dans cet espace. Par défaut, l'espacement horizontal ajouté comblera la longeur disponible sur la ligne pour le texte donné en argument. Si {\tt factor} devient trop important, alors \ConTeXt continuera de faire grandir les espaces sans respecter la valeur de largeur {\tt width} indiquée.
+\item {\tt width}~: indique la largeur totale que doit avoir le texte soumis à la commande, de telle sorte que la commande calcule elle-même l'espacement nécessaire pour répartir les caractères dans cet espace. Par défaut, l'espacement horizontal ajouté comblera la longeur disponible sur la ligne pour le texte donné en argument. Si {\tt factor} devient trop important, alors \ConTeXt continuera de faire grandir les espaces sans respecter la valeur de largeur {\tt width} indiquée.
 
   \startSmallPrint
 
@@ -316,13 +316,13 @@ D'après mes tests, lorsque la largeur établie avec l'option {\tt width} est in
 
   \stopSmallPrint
 
-\item {\tt\bf style} : la ou les commandes de style à appliquer au texte pris en argument.
+\item {\tt\bf style}~: la ou les commandes de style à appliquer au texte pris en argument.
 
-\item {\tt\bf color} : couleur dans laquelle le texte pris comme argument sera écrit.
+\item {\tt\bf color}~: couleur dans laquelle le texte pris comme argument sera écrit.
 
 \stopitemize
 
-Ainsi, dans l'exemple suivant, nous pouvons voir graphiquement comment la commande fonctionnerait lorsqu'elle est appliquée à la même phrase, mais avec des largeurs différentes :
+Ainsi, dans l'exemple suivant, nous pouvons voir graphiquement comment la commande fonctionnerait lorsqu'elle est appliquée à la même phrase, mais avec des largeurs différentes~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoHN
@@ -352,7 +352,7 @@ Ainsi, dans l'exemple suivant, nous pouvons voir graphiquement comment la comman
 
 \startSmallPrint
 
-Dans cet exemple, en l'absenc de {\tt factor}, on peut voir que la répartition de l'espace horizontal entre les différents caractères n'est pas uniforme. Les \quote{T} et \quote{e} dans \quotation{Texte} apparaissent toujours beaucoup plus proches les uns des autres que les autres caractères. Je n'ai pas réussi à trouver la raison de ce phénomène.
+Dans cet exemple, en l'absence de {\tt factor}, on peut voir que la répartition de l'espace horizontal entre les différents caractères n'est pas uniforme. Les \quote{T} et \quote{e} dans \quotation{Texte} apparaissent toujours beaucoup plus proches les uns des autres que les autres caractères. Je n'ai pas réussi à trouver la raison de ce phénomène.
   
 \stopSmallPrint
 
@@ -383,15 +383,15 @@ Il n'existe pas de commande \PlaceMacro{definestretched} \cmd{definestretched} q
   [
     reference=sec:horizontal space2,
     title={Commandes pour ajouter un espace horizontal entre les mots},
-  ]
+  ]  
 
-Nous savons déjà que pour augmenter l'espace entre les mots, il est inutile d'ajouter deux espaces vides consécutifs ou plus, car \ConTeXt\ absorbe tous les espaces vides consécutifs, comme expliqué dans \in{section}[sec:spaces]. Si nous souhaitons augmenter l'espace entre les mots, nous devons passer par l'une des commandes qui nous permet de le faire :
+Nous savons déjà que pour augmenter l'espace entre les mots, il est inutile d'ajouter deux espaces vides consécutifs ou plus, car \ConTeXt\ absorbe tous les espaces vides consécutifs, comme expliqué dans \in{section}[sec:spaces]. Si nous souhaitons augmenter l'espace entre les mots, nous devons passer par l'une des commandes qui nous permet de le faire~:
 
 
 
 \startitemize
 
-\item \cmd{,} insère un très petit espace vide (appelé espace mince) dans le document. Il est utilisé, par exemple, pour séparer les milliers dans un ensemble de chiffres (par exemple 1,000,000), ou pour séparer une simple virgule inversée des doubles virgules inversées. Par exemple :
+\item \cmd{,} insère un très petit espace vide (appelé espace mince) dans le document. Il est utilisé, par exemple, pour séparer les milliers dans un ensemble de chiffres (par exemple 1,000,000), ou pour séparer une simple virgule inversée des doubles virgules inversées. Par exemple~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoVN
@@ -404,12 +404,12 @@ Nous savons déjà que pour augmenter l'espace entre les mots, il est inutile d'
 
 % TODO garulfo la taille se réfère à em ou xheight, plutôt x non ?
 
-\item \PlaceMacro{enskip}\cmd{enskip}, \PlaceMacro{quad}\cmd{quad} et \PlaceMacro{qquad}\cmd{qquad} insèrent un espace blanc dans le document de respectivement un demi-{\em em}, 1{\em em} ou 2{\em ems}. N'oubliez pas que le {\em em} est une mesure qui dépend de la taille de la police et équivaut à la largeur d'un \quote{m}, qui coïncide normalement avec la taille en points de la police. Ainsi, en utilisant une police de 12 points, \cmd{enskip} nous donne un espace de 6 points, \cmd{quad} nous donne 12 points et \cmd{qquad} nous donne 24 points.
+\item \PlaceMacro{enskip}\cmd{enskip}, \PlaceMacro{quad}\cmd{quad} et \PlaceMacro{qquad}\cmd{qquad} insèrent un espace blanc dans le document de respectivement un demi-{\em em}, 1{\em em} ou 2{\em ems}. N'oubliez pas que le {\em em} est une mesure qui dépend de la taille de la police et équivaut à la largeur d'un \quote{M}, qui coïncide normalement avec la taille en points de la police. Ainsi, en utilisant une police de 12 points, \cmd{enskip} nous donne un espace de 6 points, \cmd{quad} nous donne 12 points et \cmd{qquad} nous donne 24 points.
 
 \stopitemize
 
 
-Outre ces commandes qui nous donnent des espaces vides de dimensions précises, les commandes \PlaceMacro{hskip}\cmd{hskip} et \PlaceMacro{hfill} \tex{hfill} introduisent des espaces horizontaux de dimensions variables :
+Outre ces commandes qui nous donnent des espaces vides de dimensions précises, les commandes \PlaceMacro{hskip}\cmd{hskip} et \PlaceMacro{hfill} \tex{hfill} introduisent des espaces horizontaux de dimensions variables~:
 
 \PlaceMacro{hskip}\cmd{hskip} nous permet d'indiquer exactement la quantité d'espace vide que nous voulons ajouter. L'espace indiqué peut être négatif, ce qui entraînera la superposition d'un texte sur un autre. Ainsi~:
 
@@ -456,7 +456,7 @@ hfill pousse \wordright{des deux côtés.} 2 hfills \hfill poussent \hfill simul
     title=Mots composés,
   ]
 
-Par \quotation{mots composés} dans cette section, j'entends les mots qui sont formellement compris comme étant un seul mot, plutôt que les mots qui sont simplement conjoints. Cette distinction n'est pas toujours facile à comprendre : \quotation{portemanteau} est clairement composé de deux mots (\quotation{porte + manteau}) mais aucun francophone ne penserait aux termes combinés d'une autre manière que comme un seul mot. D'autre part, nous avons des mots qui sont parfois combinés à l'aide d'un trait d'union ou d'une barre oblique inversée. Les deux mots ont des significations et des utilisations distinctes, mais ils sont joints (et peuvent dans certains cas devenir un seul mot, mais pas encore !) Ainsi, par exemple, nous pouvons trouver des mots comme \quotation{Français||Canadien} ou \quotation{(inter|)|communication} (bien que nous puissions aussi trouver \quotation{intercommunication} et découvrir que l'usage public a finalement accepté que les deux mots soient un seul mot. C'est ainsi que les langues évoluent).
+Par \quotation{mots composés} dans cette section, j'entends les mots qui sont formellement compris comme étant un seul mot, plutôt que les mots qui sont simplement conjoints. Cette distinction n'est pas toujours facile à comprendre~: \quotation{portemanteau} est clairement composé de deux mots (\quotation{porte + manteau}) mais aucun francophone ne penserait aux termes combinés d'une autre manière que comme un seul mot. D'autre part, nous avons des mots qui sont parfois combinés à l'aide d'un trait d'union ou d'une barre oblique inversée. Les deux mots ont des significations et des utilisations distinctes, mais ils sont joints (et peuvent dans certains cas devenir un seul mot, mais pas encore~!) Ainsi, par exemple, nous pouvons trouver des mots comme \quotation{Français||Canadien} ou \quotation{(inter|)|communication} (bien que nous puissions aussi trouver \quotation{intercommunication} et découvrir que l'usage public a finalement accepté que les deux mots soient un seul mot. C'est ainsi que les langues évoluent).
 
 Les mots composés posent quelques problèmes, principalement liés à leur éventuelle césure en fin de ligne. Si l'élément de jonction est un trait d'union, d'un point de vue typographique, il n'y a pas de problème de césure à la fin d'une ligne à cet endroit, mais nous devrions éviter une deuxième césure dans la deuxième partie du mot, car cela nous laisserait avec deux traits d'union consécutifs qui pourraient causer des difficultés de compréhension.
 
