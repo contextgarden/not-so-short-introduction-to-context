@@ -58,7 +58,7 @@ Sur la gauche\thinrules[n=3] centre décalé \thinrule sur la droite
 
 \startSmallPrint
 
-Je laisserai un certain nombre d'options sans explication. Le lecteur peut les consulter dans {\tt setup-fr.pdf} (voir \in{section}[sec:qrc-setup-fr]). Certaines options ne diffèrent des autres qu'en termes de nuance (c'est-à-dire qu'il n'y a pratiquement aucune différence entre elles), et je pense qu'il est plus rapide pour le lecteur d'essayer de {\em voir} la différence, que pour moi d'essayer de la transmettre avec des mots. Par exemple : l'épaisseur de la ligne que je viens de dire dépend de l'option {\tt rulethickness}. Mais elle est également affectée par les options {\tt height} et {\tt depth} (voir l'exemple ci-dessus).
+Je laisserai un certain nombre d'options sans explication. Le lecteur peut les consulter dans {\tt setup-fr.pdf} (voir \in{section}[sec:qrc-setup-fr]). Certaines options ne diffèrent des autres qu'en termes de nuance (c'est-à-dire qu'il n'y a pratiquement aucune différence entre elles), et je pense qu'il est plus rapide pour le lecteur d'essayer de {\em voir} la différence, que pour moi d'essayer de la transmettre avec des mots. Par exemple~: l'épaisseur de la ligne que je viens de dire dépend de l'option {\tt rulethickness}. Mais elle est également affectée par les options {\tt height} et {\tt depth} (voir l'exemple ci-dessus).
 
 \stopSmallPrint
 
@@ -78,7 +78,7 @@ Ainsi, \tex{hl[2]} génère une ligne horizontale de 3 ems et \tex{vl[2]} génè
 \PlaceMacro{fillinline} \tex{fillinline} est une autre commande (je pense dépréciée, voyez ensuite \tex{fillinrules}) permettant de créer des lignes horizontales de longueur précise. Elle prend en charge davantage de configuration dans laquelle nous pouvons indiquer (ou prédéterminer avec \PlaceMacro{setupfillinlines} \tex{setupfillinlines}) la largeur (option {\tt width}) en plus de quelques autres caractéristiques.
 
 Une particularité de cette commande est que le texte qui est écrit en argument sera placé à gauche de la ligne, séparant ce texte de la ligne par l'espace blanc nécessaire pour occuper toute la ligne. Attention, il faut bien penser à indiquer un changement de paragraphe entre deux lignes de ce type.
-Par exemple :
+Par exemple~:
 
 \placefigure [force,here,none] [] {}
 {\startDemoVW
@@ -91,7 +91,7 @@ Par exemple :
 Outre la largeur de la ligne, nous pouvons configurer la marge ({\tt margin}), la distance ({\tt distance}), l'épaisseur ({\tt rulethickness}) et la couleur ({\tt color}).
 
 \PlaceMacro{fillinrules}
-\tex{fillinrules} a un rôle très proche de \tex{fillinline} mais plus générale car elle permet d'insérer plus d'une ligne (option \MyKey{n}) et traite automatiquement le changement de ligne et de paragraphe.
+\tex{fillinrules} a un rôle très proche de \tex{fillinline} mais plus général car elle permet d'insérer plus d'une ligne (option \MyKey{n}) et traite automatiquement le changement de ligne et de paragraphe.
 
 \placefigure [force,here,none] [] {}
 {\startDemoVW
@@ -127,7 +127,7 @@ Un manuel spécifique aux lignes a été produit en 2018 intitulé \goto{Rules}[
 \startsubsection
   [title={Lignes liées au texte}]
 
-Bien que certaines des commandes que nous venons de voir puissent générer des lignes qui coexistent avec du texte sur la même ligne, ces commandes se concentrent en fait sur la mise en page de la ligne. Pour écrire des lignes liées à un certain texte, \ConTeXt\ a des commandes :
+Bien que certaines des commandes que nous venons de voir puissent générer des lignes qui coexistent avec du texte sur la même ligne, ces commandes se concentrent en fait sur la mise en page de la ligne. Pour écrire des lignes liées à un certain texte, \ConTeXt\ a des commandes~:
 
 
 \startitemize
@@ -138,7 +138,7 @@ Bien que certaines des commandes que nous venons de voir puissent générer des 
 
 \stopitemize
 
-Pour générer un texte entre les lignes, la commande habituelle est  \PlaceMacro{textrule} \tex{textrule}. Cette commande trace une ligne qui traverse toute la largeur de la page et écrit le texte qu'elle prend comme paramètre sur le côté gauche (mais pas dans la marge). Par exemple :
+Pour générer un texte entre les lignes, la commande habituelle est  \PlaceMacro{textrule} \tex{textrule}. Cette commande trace une ligne qui traverse toute la largeur de la page et écrit le texte qu'elle prend comme paramètre sur le côté gauche (mais pas dans la marge). Par exemple~:
 
 \placefigure [force,here,none] [] {}
 {\startDemoVN
@@ -147,7 +147,7 @@ Texte avant.
 Texte encore après.
 \stopDemoVN}
 
-\tex{textrule} permet un premier argument facultatif avec trois valeurs possibles : {\tt top}, {\tt middle} et \Doubt{\tt bottom} selon la position souhaitée par rapport au reste du texte.
+\tex{textrule} permet un premier argument facultatif avec trois valeurs possibles~: {\tt top}, {\tt middle} et \Doubt{\tt bottom} selon la position souhaitée par rapport au reste du texte.
 
 \placefigure [force,here,none] [] {}
 {\startDemoHN
