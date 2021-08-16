@@ -14,7 +14,7 @@
 \startsubsection
   [title=Descriptions]
 
-Comme c'est normalement le cas avec \ConTeXt, l'aspect qu'aura notre nouvelle construction peut être indiqué au moment de sa création, avec le dernier argument ou plus tard avec \tex{setupdescription} :
+Comme c'est normalement le cas avec \ConTeXt, l'aspect qu'aura notre nouvelle construction peut être indiqué au moment de sa création, avec le dernier argument ou plus tard avec \tex{setupdescription}~:
 
 \setup{setupdescription}
 
@@ -22,13 +22,13 @@ où {\em 1} est le nom (ou la liste de nom) de notre nouvelle description, et {\
 
 \startcommanddesc
 
-\starthead{alternative} cette option est celle qui contrôle fondamentalement l'apparence de la construction. Elle détermine le placement du titre par rapport à sa description. Ses valeurs possibles sont les suivantes : {\tt left, right, inmargin, inleft, inright, margin, leftmargin, rightmargin, innermargin, outermargin, serried, hanging}, leurs noms sont suffisamment clairs pour se faire une idée du résultat, même si, en cas de doute, il est préférable de faire un test pour voir ce que cela donne.\stophead
+\starthead{alternative} cette option est celle qui contrôle fondamentalement l'apparence de la construction. Elle détermine le placement du titre par rapport à sa description. Ses valeurs possibles sont les suivantes~: {\tt left, right, inmargin, inleft, inright, margin, leftmargin, rightmargin, innermargin, outermargin, serried, hanging}, leurs noms sont suffisamment clairs pour se faire une idée du résultat, même si, en cas de doute, il est préférable de faire un test pour voir ce que cela donne.\stophead
 
 \starthead{width} contrôle la largeur de la boîte dans laquelle le titre sera écrit. Selon la valeur de {\tt alternative}, cette distance fera également partie de l'indentation avec laquelle le texte explicatif sera écrit.\stophead
 
 \starthead{distance} contrôle la distance entre le titre et l'explication.\stophead
 
-\starthead{headstyle, headcolor, headcommand} affecte l'aspect du titre lui-même : Style ({\tt headstyle}) et couleur ({\tt headcolor}). Avec headcommand, on peut indiquer une commande à laquelle le texte du titre sera passé comme argument. Par exemple : {\tt headcommand=\backslash WORD} fera en sorte que le texte du titre soit tout en majuscules.\stophead
+\starthead{headstyle, headcolor, headcommand} affecte l'aspect du titre lui-même~: Style ({\tt headstyle}) et couleur ({\tt headcolor}). Avec headcommand, on peut indiquer une commande à laquelle le texte du titre sera passé comme argument. Par exemple~: {\tt headcommand=\backslash WORD} fera en sorte que le texte du titre soit tout en majuscules.\stophead
 
 \starthead{style, color} contrôle l'apparence du texte descriptif du titre.\stophead
 
@@ -40,7 +40,7 @@ où {\em 1} est le nom (ou la liste de nom) de notre nouvelle description, et {\
 \placefigure [force,here,none] [] {}
 {\startDemoVW%
 \startbuffer
-Il vient une heure où protester ne suffit plus : après la philosophie, il faut l'action.
+Il vient une heure où protester ne suffit plus~: après la philosophie, il faut l'action.
 \stopbuffer%
 \definedescription  [Concept]
   [alternative=left, 
@@ -85,13 +85,13 @@ Commençons par le commencement A.\par
 Commençons par le commencement B.
 
 \startsubExercice
-Celui ci est élémentaire A.\par
-Celui ci est élémentaire B.
+Celui-ci est élémentaire A.\par
+Celui-ci est élémentaire B.
 \stopsubExercice
 
 \startsubExercice
-Celui ci est un complément A.\par
-Celui ci est un complément B.
+Celui-ci est un complément A.\par
+Celui-ci est un complément B.
 \stopsubExercice
 
 \stopExercice
@@ -105,7 +105,7 @@ Pour chaque énumération, nous pouvons configurer chacun de ses niveaux sépar�
 \setup{setupenumeration}
 
 
-Pour contrôler la numérotation, il existe les commandes supplémentaires suivantes :
+Pour contrôler la numérotation, il existe les commandes supplémentaires suivantes~:
 
 \startcommanddesc
 \starthead{\tex{setEnumerationName}} définit la valeur de numérotation actuelle. \stophead
