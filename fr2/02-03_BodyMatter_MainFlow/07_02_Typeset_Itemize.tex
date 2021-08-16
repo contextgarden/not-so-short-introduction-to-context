@@ -23,7 +23,7 @@
 \startsubsubsection
   [title={Listes non ordonnées}]
 
-Par défaut, la liste générée par {\tt itemize} est une liste non ordonnée, dans laquelle le séparateur sera automatiquement sélectionné en fonction du niveau d'imbrication :
+Par défaut, la liste générée par {\tt itemize} est une liste non ordonnée, dans laquelle le séparateur sera automatiquement sélectionné en fonction du niveau d'imbrication~:
 
 \startitemize[packed, columns, two]\switchtobodyfont[small]
 \sym{\convertnumber{set 0}{1}} Pour le premier niveau d'imbrication.
@@ -40,7 +40,7 @@ Par défaut, la liste générée par {\tt itemize} est une liste non ordonnée, 
 
 Cependant, nous pouvons indiquer expressément que nous voulons que le symbole associé à un niveau particulier soit utilisé, simplement en passant le numéro du niveau comme argument. Ainsi, \tex{startitemize[4]} générera une liste non ordonnée dans laquelle le caractère \triangleright, sera utilisé comme séparateur, quel que soit le niveau d'imbrication de la liste.
 
-Nous pouvons également modifier le symbole prédéterminé pour chaque niveau avec \PlaceMacro{definesymbol} \tex{definesymbol} :
+Nous pouvons également modifier le symbole prédéterminé pour chaque niveau avec \PlaceMacro{definesymbol} \tex{definesymbol}~:
 
 \placefigure [force,here,none] [] {}
 {\startDemoHN
@@ -93,7 +93,7 @@ Pour générer une liste ordonnée, nous devons indiquer à {\tt itemize} le typ
 
 \stopitemize
 
-La différence entre {\tt n} et {\tt m} réside dans la police utilisée pour représenter le nombre : {\tt n} utilise la police activée à ce moment-là, tandis que {\tt m} utilise une police différente, plus élégante, presque calligraphique.
+La différence entre {\tt n} et {\tt m} réside dans la police utilisée pour représenter le nombre~: {\tt n} utilise la police activée à ce moment-là, tandis que {\tt m} utilise une police différente, plus élégante, presque calligraphique.
 
 \startSmallPrint
 
@@ -114,19 +114,19 @@ Je ne connais pas le nom de la police que {\tt m} utilise, et donc dans la liste
     title={Configuration basique des listes},
   ]
 
-Nous rappelons que \MyKey{itemize} permet deux arguments. Nous avons déjà vu comment le premier argument nous permet de sélectionner le type de liste que nous voulons. Mais nous pouvons également l'utiliser pour indiquer d'autres caractéristiques de la liste ; ceci est fait par les options suivantes pour \MyKey{itemize} dans son premier argument :
+Nous rappelons que \MyKey{itemize} permet deux arguments. Nous avons déjà vu comment le premier argument nous permet de sélectionner le type de liste que nous voulons. Mais nous pouvons également l'utiliser pour indiquer d'autres caractéristiques de la liste~; ceci est fait par les options suivantes pour \MyKey{itemize} dans son premier argument~:
 
 \startitemize
 
-\item {\tt columns} : cette option détermine que la liste est composée de deux colonnes ou plus. Après l'option colonnes, le nombre de colonnes souhaité doit être écrit sous forme de mots séparés par une virgule : {\tt two, three, four, five, six, seven, eight or nine}. {\tt columns} non suivi d'un nombre quelconque génère deux colonnes.
+\item {\tt columns}~: cette option détermine que la liste est composée de deux colonnes ou plus. Après l'option colonnes, le nombre de colonnes souhaité doit être écrit sous forme de mots séparés par une virgule~: {\tt two, three, four, five, six, seven, eight or nine}. {\tt columns} non suivi d'un nombre quelconque génère deux colonnes.
 
-\item {\tt intro} : cette option tente de ne pas séparer la liste, par un saut de ligne, du paragraphe qui la précède.  
+\item {\tt intro}~: cette option tente de ne pas séparer la liste, par un saut de ligne, du paragraphe qui la précède.  
 
-\item {\tt continue} : dans les listes ordonnées (numériques ou alphabétiques), cette option permet à la liste de poursuivre la numérotation à partir de la dernière liste numérotée. Si l'option {\tt continue} est utilisée, il n'est pas nécessaire d'indiquer le type de liste que l'on souhaite, car on suppose qu'elle sera identique à la dernière liste numérotée.
+\item {\tt continue}~: dans les listes ordonnées (numériques ou alphabétiques), cette option permet à la liste de poursuivre la numérotation à partir de la dernière liste numérotée. Si l'option {\tt continue} est utilisée, il n'est pas nécessaire d'indiquer le type de liste que l'on souhaite, car on suppose qu'elle sera identique à la dernière liste numérotée.
 
-\item {\tt packed} : est l'une des options les plus utilisées. Son utilisation permet de réduire au maximum l'espace vertical entre les différents {\em items} de la liste.
+\item {\tt packed}~: est l'une des options les plus utilisées. Son utilisation permet de réduire au maximum l'espace vertical entre les différents {\em items} de la liste.
 
-\item {\tt nowhite} produit un effet similaire à celui de {\tt packed}, mais plus radical : il réduit non seulement l'espace vertical entre les éléments, mais aussi l'espace vertical entre la liste et le texte environnant.
+\item {\tt nowhite} produit un effet similaire à celui de {\tt packed}, mais plus radical~: il réduit non seulement l'espace vertical entre les éléments, mais aussi l'espace vertical entre la liste et le texte environnant.
 
 \placefigure [force,here,none] [] {}
 {\startDemoVN
@@ -164,7 +164,7 @@ Texte introductif.
 Texte introductif.
 \stopDemoVN}
 
-\item {\tt joinedup :} assure le rôle de {\tt nowhite} mais entre un niveau d'item et son parent dans le cas de listes imbriquées.
+\item {\tt joinedup}~: assure le rôle de {\tt nowhite} mais entre un niveau d'item et son parent dans le cas de listes imbriquées.
 
 \placefigure [force,here,none] [] {}
 {\startDemoVW%
@@ -190,7 +190,7 @@ Texte introductif.
 
 
 
-\item {\tt broad} : augmente l'espace horizontal entre le séparateur d'élément et le texte de l'élément. L'espace peut être augmenté en multipliant un nombre par {\tt broad} comme dans, par exemple : \type{\startitemize[2*broad]}.
+\item {\tt broad}~: augmente l'espace horizontal entre le séparateur d'élément et le texte de l'élément. L'espace peut être augmenté en multipliant un nombre par {\tt broad} comme dans, par exemple~: \type{\startitemize[2*broad]}.
 
 \placefigure [force,here,none] [] {}
 {\startDemoVN
@@ -200,15 +200,15 @@ Texte introductif.
 \stopitemize
 \stopDemoVN}
 
-\item {\tt serried} : supprime l'espace horizontal entre le séparateur d'élément et le texte.
+\item {\tt serried}~: supprime l'espace horizontal entre le séparateur d'élément et le texte.
 
-\item {\tt intext} : supprime le retrait suspendu.
+\item {\tt intext}~: supprime le retrait suspendu.
 
-\item {\tt text} : supprime le retrait suspendu et réduit l'espace vertical entre les éléments.
+\item {\tt text}~: supprime le retrait suspendu et réduit l'espace vertical entre les éléments.
 
-\item {\tt repeat} : dans les listes imbriquées, la numérotation d'un niveau enfant {\em repeat} devient le même niveau que le niveau précédent. Ainsi, nous aurions, au premier niveau : 1, 2, 3, 4 ; au deuxième niveau : 1.1, 1.2, 1.3, etc. L'option doit être indiquée pour la liste intérieure, pas pour la liste extérieure.
+\item {\tt repeat}~: dans les listes imbriquées, la numérotation d'un niveau enfant {\em repeat} devient le même niveau que le niveau précédent. Ainsi, nous aurions, au premier niveau~: 1, 2, 3, 4~; au deuxième niveau~: 1.1, 1.2, 1.3, etc. L'option doit être indiquée pour la liste intérieure, pas pour la liste extérieure.
 
-\item {\tt margin, inmargin} : par défaut, le séparateur de liste est imprimé à gauche, mais à l'intérieur de la zone de texte elle-même ({\tt atmargin}). Les options {\tt margin} et {\tt inmargin} permettent de déplacer le séparateur vers la marge.
+\item {\tt margin, inmargin}~: par défaut, le séparateur de liste est imprimé à gauche, mais à l'intérieur de la zone de texte elle-même ({\tt atmargin}). Les options {\tt margin} et {\tt inmargin} permettent de déplacer le séparateur vers la marge.
 
 \stopitemize
 
@@ -225,21 +225,21 @@ Le deuxième argument, également facultatif, de \tex{startitemize} permet une c
 
 \startitemize
 
-\item {\tt before, after} : commandes à exécuter respectivement avant le démarrage ou après la fermeture de l'environnement itemize (à ne pas confondre avec ces options de l'argument 1, qui font référence aux espacements verticaux voir ci-dessus).
+\item {\tt before, after}~: commandes à exécuter respectivement avant le démarrage ou après la fermeture de l'environnement itemize (à ne pas confondre avec ces options de l'argument 1, qui font référence aux espacements verticaux voir ci-dessus).
 
-\item {\tt inbetween} : commande à exécuter entre deux {\tt items}.
+\item {\tt inbetween}~: commande à exécuter entre deux {\tt items}.
 
-\item {\tt beforehead, afterhead} : commande à exécuter avant ou après un élément saisi avec la commande \tex{head}.
+\item {\tt beforehead, afterhead}~: commande à exécuter avant ou après un élément saisi avec la commande \tex{head}.
 
-\item {\tt left, right} : caractère à imprimer à gauche ou à droite du séparateur. Par exemple, pour obtenir des listes alphabétiques dans lesquelles les lettres sont entourées de parenthèses, il faudrait écrire \tex{startitemize[a][left=(, right=)]}
+\item {\tt left, right}~: caractère à imprimer à gauche ou à droite du séparateur. Par exemple, pour obtenir des listes alphabétiques dans lesquelles les lettres sont entourées de parenthèses, il faudrait écrire \tex{startitemize[a][left=(, right=)]}
 
-\item {\tt stopper} : indique un caractère à écrire après le séparateur. Ne fonctionne que dans les listes ordonnées.
+\item {\tt stopper}~: indique un caractère à écrire après le séparateur. Ne fonctionne que dans les listes ordonnées.
 
-\item {\tt width, maxwidth} : largeur de l'espace réservé au séparateur et donc au retrait suspendu.
+\item {\tt width, maxwidth}~: largeur de l'espace réservé au séparateur et donc au retrait suspendu.
 
-\item {\tt factor} : nombre représentatif du facteur de séparation entre le séparateur et le texte.
+\item {\tt factor}~: nombre représentatif du facteur de séparation entre le séparateur et le texte.
 
-\item {\tt distance} : mesure de la distance entre le séparateur et le texte.
+\item {\tt distance}~: mesure de la distance entre le séparateur et le texte.
 
 \placefigure [force,here,none] [] {}
 {\startDemoVW%
@@ -266,22 +266,22 @@ Le deuxième argument, également facultatif, de \tex{startitemize} permet une c
 \stopDemoVW}
 
 
-\item {\tt leftmargin, rightmargin, margin} : marge à ajouter à gauche (leftmargin) ou à droite (rightmargin) des éléments. 
+\item {\tt leftmargin, rightmargin, margin}~: marge à ajouter à gauche (leftmargin) ou à droite (rightmargin) des éléments. 
 
 
 
-\item {\tt start} : numéro à partir duquel la numérotation des éléments commencera.
+\item {\tt start}~: numéro à partir duquel la numérotation des éléments commencera.
 
-\item {\tt symalign, itemalign, align} : alignement des éléments. Permet les mêmes valeurs que \tex{setupalign}. {\tt symalign} contrôle l'alignement du séparateur, {\tt itemalign} celui du texte de l'élément et {\tt align} contrôle les deux.
+\item {\tt symalign, itemalign, align}~: alignement des éléments. Permet les mêmes valeurs que \tex{setupalign}. {\tt symalign} contrôle l'alignement du séparateur, {\tt itemalign} celui du texte de l'élément et {\tt align} contrôle les deux.
 
-\item {\tt identing} : indentation de la première ligne des paragraphes
+\item {\tt identing}~: indentation de la première ligne des paragraphes
 à l'intérieur de l'environnement. Voir \in{section}[sec:indentation].
 
-\item {\tt indentnext} : indique si le paragraphe suivant l'environnement doit être indenté ou non. Les valeurs sont {\em yes, no} et {\tt auto}.
+\item {\tt indentnext}~: indique si le paragraphe suivant l'environnement doit être indenté ou non. Les valeurs sont {\em yes, no} et {\tt auto}.
 
-\item {\tt items} : dans les éléments saisis en entrée avec \tex{its}, indique le nombre de fois que le séparateur doit être reproduit.
+\item {\tt items}~: dans les éléments saisis en entrée avec \tex{its}, indique le nombre de fois que le séparateur doit être reproduit.
 
-\item {\tt style, color ; headstyle, headcolor ; marstyle, marcolor ; symstyle, symcolor} : ces options contrôlent le style et la couleur des éléments lors de leur saisie dans l'environnement avec les commandes \tex{item}, \tex{head}, \tex{mar} ou \tex{sym}.
+\item {\tt style, color ; headstyle, headcolor ; marstyle, marcolor ; symstyle, symcolor}~: ces options contrôlent le style et la couleur des éléments lors de leur saisie dans l'environnement avec les commandes \tex{item}, \tex{head}, \tex{mar} ou \tex{sym}.
 
 \stopitemize
 
