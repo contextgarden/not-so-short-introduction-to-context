@@ -18,7 +18,7 @@
 \startsubsection
   [title={Idées générales sur les tableaux et leur emplacement dans le document}]
 
-Les tableaux sont des objets structurés qui contiennent du texte, des formules ou même des images disposés dans une série de {\em cellules} qui permettent de visualiser graphiquement la relation entre le contenu de chaque cellule. Pour ce faire, les informations sont organisées en lignes et en colonnes : toutes les données (ou entrées) d'une même ligne ont une certaine relation entre elles, de même que toutes les données (ou entrées) d'une même colonne. Une cellule est l'intersection d'une ligne et d'une colonne, comme le montre la \in{figure}[fig:table].
+Les tableaux sont des objets structurés qui contiennent du texte, des formules ou même des images disposés dans une série de {\em cellules} qui permettent de visualiser graphiquement la relation entre le contenu de chaque cellule. Pour ce faire, les informations sont organisées en lignes et en colonnes~: toutes les données (ou entrées) d'une même ligne ont une certaine relation entre elles, de même que toutes les données (ou entrées) d'une même colonne. Une cellule est l'intersection d'une ligne et d'une colonne, comme le montre la \in{figure}[fig:table].
 
 
 \placefigure
@@ -44,9 +44,9 @@ Les tableaux sont idéaux pour afficher des textes ou des données qui sont lié
 De toutes les tâches liées à la composition d'un texte, la création de tableaux est la seule qui, à mon avis, est plus facile à réaliser dans un programme graphique (type traitement de texte) que dans \ConTeXt. Parce qu'il est plus facile de  {\em dessiner} le tableau (ce que l'on fait dans un programme de traitement de texte) que de le  {\em décrire} (ce que l'on fait quand on travaille avec \ConTeXt). Chaque changement de ligne et de colonne nécessite la présence d'une commande, ce qui signifie que l'implémentation du tableau prend beaucoup plus de temps, au lieu de simplement dire combien de lignes et de colonnes nous voulons.
 
 
-\ConTeXt\ a trois mécanismes différents pour produire des tableaux ; l'environnement {\tt tabulate} qui est recommandé pour les tableaux simples et qui est le plus directement inspiré des tableaux \TeX\ ; les tableaux dits {\em naturels (natural tables)}, inspirés des tableaux HTML, adaptés aux tableaux ayant des besoins de conception particuliers où, par exemple, toutes les lignes n'ont pas le même nombre de colonnes ; et les tableaux dits {\em extrèmes (extreme tables)}, clairement basés sur XML et recommandés pour les tableaux moyens ou longs qui prennent plus d'une page. Des trois, je n'expliquerai que les deux premiers. Les tableaux naturels sont également raisonnablement bien expliqués dans la \quotation{\ConTeXt\ Mark IV an excursion}, et pour les {\em extreme tables} il y a une \goto{documentation officielle}[url(https://www.pragma-ade.com/general/manuals/xtables-mkiv.pdf)] à leur sujet dans la documentation de la distribution \suite-.
+\ConTeXt\ a trois mécanismes différents pour produire des tableaux~; l'environnement {\tt tabulate} qui est recommandé pour les tableaux simples et qui est le plus directement inspiré des tableaux \TeX\~; les tableaux dits {\em naturels (natural tables)}, inspirés des tableaux HTML, adaptés aux tableaux ayant des besoins de conception particuliers où, par exemple, toutes les lignes n'ont pas le même nombre de colonnes~; et les tableaux dits {\em extrèmes (extreme tables)}, clairement basés sur XML et recommandés pour les tableaux moyens ou longs qui prennent plus d'une page. Des trois, je n'expliquerai que les deux premiers. Les tableaux naturels sont également raisonnablement bien expliqués dans la \quotation{\ConTeXt\ Mark IV an excursion}, et pour les {\em extreme tables} il y a une \goto{documentation officielle}[url(https://www.pragma-ade.com/general/manuals/xtables-mkiv.pdf)] à leur sujet dans la documentation de la distribution \suite-.
 
-Il se passe quelque chose de similaire à ce qui se passe avec les images pour les tableaux : il suffit d'écrire les commandes nécessaires à un moment donné du document pour générer un tableau et celui-ci sera inséré à cet endroit précis, ou bien nous pouvons utiliser la commande \PlaceMacro{placetable} \tex{placetable} pour insérer un tableau. Cette méthode présente quelques avantages :
+Il se passe quelque chose de similaire à ce qui se passe avec les images pour les tableaux~: il suffit d'écrire les commandes nécessaires à un moment donné du document pour générer un tableau et celui-ci sera inséré à cet endroit précis, ou bien nous pouvons utiliser la commande \PlaceMacro{placetable} \tex{placetable} pour insérer un tableau. Cette méthode présente quelques avantages~:
 
 
 \startitemize
@@ -59,7 +59,7 @@ Il se passe quelque chose de similaire à ce qui se passe avec les images pour l
 
 
 Le format de \tex{placetable} est similaire à ce que nous avons vu pour
-\tex{placefigure} (voir \in{section}[sec:placefigure]) :
+\tex{placefigure} (voir \in{section}[sec:placefigure])~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoI
@@ -80,7 +80,7 @@ De manière générale, nous pouvons définir la configuration des tableaux avec
 \PlaceMacro{starttabulate}
 
 Les tableaux les plus simples sont ceux réalisés avec l'environnement {\em
-  tabulate} dont le format est :
+  tabulate} dont le format est~:
 
 
 \placefigure [force,here,none] [] {}{
@@ -93,7 +93,7 @@ Les tableaux les plus simples sont ceux réalisés avec l'environnement {\em
 \stopDemoI}
 
 
-Où l'argument pris entre crochets décrit (en code) le nombre de colonnes que le tableau aura, et indique (parfois indirectement) leur largeur. Je dis que l'argument décrit le dessin {\em en code}, parce qu'à première vue il semble très cryptique : il consiste en une séquence de caractères, chacun ayant une signification particulière. Je vais l'expliquer petit à petit et par étapes dans la \in{section}[sec:cmptabulate], car je pense que de cette façon il est plus facile à comprendre.
+Où l'argument pris entre crochets décrit (en code) le nombre de colonnes que le tableau aura, et indique (parfois indirectement) leur largeur. Je dis que l'argument décrit le dessin {\em en code}, parce qu'à première vue il semble très cryptique~: il consiste en une séquence de caractères, chacun ayant une signification particulière. Je vais l'expliquer petit à petit et par étapes dans la \in{section}[sec:cmptabulate], car je pense que de cette façon il est plus facile à comprendre.
 
 \startSmallPrint
 
