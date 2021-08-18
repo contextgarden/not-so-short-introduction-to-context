@@ -24,13 +24,13 @@ La composition du texte peut être effectuée en plusieurs colonnes~:
  
 Dans tous ces cas, la plupart des commandes et des environnements fonctionneront parfaitement même si nous travaillons avec plus d'une colonne. Il existe cependant quelques limitations, principalement en ce qui concerne les objets flottants en général (voir \in{section}[sec:floating objects]) et avec les tableaux en particulier (\in{section}[sec:tables]) même s'ils ne sont pas flottants.
 
-En ce qui concerne le nombre de colonnes autorisées, \ConTeXt\ n'a pas de limite théorique. Cependant, il existe des limites physiques qui doivent être prises en compte :
+En ce qui concerne le nombre de colonnes autorisées, \ConTeXt\ n'a pas de limite théorique. Cependant, il existe des limites physiques qui doivent être prises en compte~:
 
 \startitemize
 
-\item la largeur du papier : un nombre illimité de colonnes nécessite une largeur illimitée de papier (si le document est destiné à être imprimé) ou d'écran (s'il s'agit d'un document destiné à être affiché sur écran). En pratique, compte tenu de la largeur {\em normale} des formats de papier commercialisés et utilisés pour composer les livres, et des écrans des appareils informatiques, il est difficile qu'un texte soit composé selon plus de quatre ou cinq colonnes.
+\item la largeur du papier~: un nombre illimité de colonnes nécessite une largeur illimitée de papier (si le document est destiné à être imprimé) ou d'écran (s'il s'agit d'un document destiné à être affiché sur écran). En pratique, compte tenu de la largeur {\em normale} des formats de papier commercialisés et utilisés pour composer les livres, et des écrans des appareils informatiques, il est difficile qu'un texte soit composé selon plus de quatre ou cinq colonnes.
 
-\item la taille de la mémoire de l'ordinateur : le manuel de référence de  \ConTeXt\ indique que, sur des systèmes  {\em normaux} (ni particulièrement puissants, ni particulièrement limités en ressources), il est possible de gérer entre 20 et 40 colonnes.
+\item la taille de la mémoire de l'ordinateur~: le manuel de référence de  \ConTeXt\ indique que, sur des systèmes  {\em normaux} (ni particulièrement puissants, ni particulièrement limités en ressources), il est possible de gérer entre 20 et 40 colonnes.
 
 \stopitemize
 
@@ -50,7 +50,7 @@ Dans cette section, je me concentrerai sur l'utilisation du mécanisme multi-col
 
 \PlaceMacro{startcolumns}
 
-La procédure normale pour insérer des parties de texte composées en plusieurs colonnes consiste à utiliser l'environnement {\tt columns} dont le format est :
+La procédure normale pour insérer des parties de texte composées en plusieurs colonnes consiste à utiliser l'environnement {\tt columns} dont le format est~:
 
 \placefigure [force,here,none] [] {}
 {\startDemoI
@@ -65,7 +65,7 @@ où {\em Configuration} nous permet de contrôler de nombreux aspects de l'envir
 \setupcolumns[Configuration]
 \stopDemoI}
 
-Dans les deux cas, les options de configuration sont les mêmes. Les plus importantes, classées selon leur fonction, sont les suivantes :
+Dans les deux cas, les options de configuration sont les mêmes. Les plus importantes, classées selon leur fonction, sont les suivantes~:
 
 \startitemize
 
@@ -73,19 +73,19 @@ Dans les deux cas, les options de configuration sont les mêmes. Les plus import
 
   \startitemize
     
-\item {\tt n} : contrôle le nombre de colonnes. Si cette option est omise, deux colonnes seront générées.
+\item {\tt n}~: contrôle le nombre de colonnes. Si cette option est omise, deux colonnes seront générées.
 
-  \item {\tt nleft, nright} : ces options sont utilisées dans la mise en page de documents recto-verso (voir \in{subsection}[sec:double-sided] de \in{section}[sec:pages-autres-matières]), pour établir le nombre de colonnes sur les pages de gauche (paires) et de droite (impaires) respectivement.
+  \item {\tt nleft, nright}~: ces options sont utilisées dans la mise en page de documents recto-verso (voir \in{subsection}[sec:double-sided] de \in{section}[sec:pages-autres-matières]), pour établir le nombre de colonnes sur les pages de gauche (paires) et de droite (impaires) respectivement.
 
-  \item {\tt distance} : espace entre les colonnes.
+  \item {\tt distance}~: espace entre les colonnes.
 
-  \item {\tt separator} : détermine ce qui marque la séparation entre les colonnes. Il peut s'agir de {\tt espace} (valeur par défaut) ou {\tt rule}, auquel cas une ligne (règle) sera générée entre les colonnes. Dans le cas où une règle est établie entre les colonnes, cette règle peut à son tour être configurée avec les deux options suivantes :
+  \item {\tt separator}~: détermine ce qui marque la séparation entre les colonnes. Il peut s'agir de {\tt espace} (valeur par défaut) ou {\tt rule}, auquel cas une ligne (règle) sera générée entre les colonnes. Dans le cas où une règle est établie entre les colonnes, cette règle peut à son tour être configurée avec les deux options suivantes~:
 
     \startitemize
       
-    \item {\tt rulecolor} : couleur du trait.
+    \item {\tt rulecolor}~: couleur du trait.
 
-    \item {\tt rulethickness} : épaisseur du trait.
+    \item {\tt rulethickness}~: épaisseur du trait.
 
     \stopitemize
 
@@ -97,9 +97,9 @@ Dans les deux cas, les options de configuration sont les mêmes. Les plus import
 
   \startitemize
 
-\item {\tt balance} : par défaut, \ConTeXt {\em équilibre (balance)} les colonnes, c'est-à-dire qu'il répartit le texte entre elles afin qu'elles aient plus ou moins la même quantité de texte. Cependant, nous pouvons définir cette option avec l'option \quotation{\tt no} : le texte ne commencera pas dans une colonne tant que la précédente ne sera pas pleine.
+\item {\tt balance}~: par défaut, \ConTeXt\ {\em équilibre (balance)} les colonnes, c'est-à-dire qu'il répartit le texte entre elles afin qu'elles aient plus ou moins la même quantité de texte. Cependant, nous pouvons définir cette option avec l'option \quotation{\tt no}~: le texte ne commencera pas dans une colonne tant que la précédente ne sera pas pleine.
 
-  \item {\tt direction} : détermine dans quel sens le texte est réparti entre les colonnes. Par défaut, l'ordre de lecture naturel est suivi (de gauche à droite), mais si vous donnez à cette option la valeur {\tt reverse}, l'ordre de lecture sera de droite à gauche.
+  \item {\tt direction}~: détermine dans quel sens le texte est réparti entre les colonnes. Par défaut, l'ordre de lecture naturel est suivi (de gauche à droite), mais si vous donnez à cette option la valeur {\tt reverse}, l'ordre de lecture sera de droite à gauche.
 
   \stopitemize
   
@@ -107,11 +107,11 @@ Dans les deux cas, les options de configuration sont les mêmes. Les plus import
 
   \startitemize
 
-\item {\tt tolerance} : un texte écrit sur plus d'une colonne signifie que la largeur de ligne à l'intérieur d'une colonne est plus petite, et comme expliqué lors de la description du mécanisme utilisé par \ConTeXt\ pour construire les lignes (\in{section}[sec:lines]), cela rend difficile la localisation des points optimaux pour insérer les sauts de ligne. Cette option nous permet de modifier temporairement la tolérance horizontale d'un environnement (voir \in{section}[sec:horizontaltolerance]), afin de faciliter la composition du texte et éviter les débordements.
+\item {\tt tolerance}~: un texte écrit sur plus d'une colonne signifie que la largeur de ligne à l'intérieur d'une colonne est plus petite, et comme expliqué lors de la description du mécanisme utilisé par \ConTeXt\ pour construire les lignes (\in{section}[sec:lines]), cela rend difficile la localisation des points optimaux pour insérer les sauts de ligne. Cette option nous permet de modifier temporairement la tolérance horizontale d'un environnement (voir \in{section}[sec:horizontaltolerance]), afin de faciliter la composition du texte et éviter les débordements.
 
-    \item {\tt align} : contrôle l'alignement horizontal des lignes dans l'environnement. Il peut prendre l'une des valeurs suivantes : {\tt right, flushright, left, flushleft, inner, flushinner, outer, flushouter, middle} ou {\tt broad}. Pour connaître la signification de ces options, voir \in{section}[sec:setupalign].
+    \item {\tt align}~: contrôle l'alignement horizontal des lignes dans l'environnement. Il peut prendre l'une des valeurs suivantes~: {\tt right, flushright, left, flushleft, inner, flushinner, outer, flushouter, middle} ou {\tt broad}. Pour connaître la signification de ces options, voir \in{section}[sec:setupalign].
 
-    \item {\tt color} : spécifie le nom de la couleur dans laquelle le texte de l'environnement sera écrit.
+    \item {\tt color}~: spécifie le nom de la couleur dans laquelle le texte de l'environnement sera écrit.
 
   \stopitemize
 
@@ -128,17 +128,17 @@ Parfois, pour positionner les flottants (des tableaux, des images, voir \in{sect
 \PlaceMacro{defineparagraphs}
 \PlaceMacro{setupparagraphs}
 
-Une version spécifique de la composition en plusieurs colonnes met en parallèle les paragraphes.  Dans ce type de construction, le texte est réparti sur deux colonnes (généralement, mais parfois plus de deux), mais il n'est pas autorisé à circuler librement entre elles, et garde au contraire un contrôle strict sur ce qui apparaîtra dans chaque colonne. Ceci est très utile, par exemple, pour générer des documents qui mettent en contraste deux versions d'un texte, comme la nouvelle et l'ancienne version d'une loi récemment modifiée, ou dans des éditions bilingues ; ou encore pour rédiger des glossaires pour des définitions de textes spécifiques où le texte à définir apparaît à gauche et la définition à droite, etc.
+Une version spécifique de la composition en plusieurs colonnes met en parallèle les paragraphes.  Dans ce type de construction, le texte est réparti sur deux colonnes (généralement, mais parfois plus de deux), mais il n'est pas autorisé à circuler librement entre elles, et garde au contraire un contrôle strict sur ce qui apparaîtra dans chaque colonne. Ceci est très utile, par exemple, pour générer des documents qui mettent en contraste deux versions d'un texte, comme la nouvelle et l'ancienne version d'une loi récemment modifiée, ou dans des éditions bilingues~; ou encore pour rédiger des glossaires pour des définitions de textes spécifiques où le texte à définir apparaît à gauche et la définition à droite, etc.
 
 Normalement, nous utiliserions le mécanisme de table pour traiter ce type de paragraphes, mais cela est dû au fait que la plupart des processeurs de texte ne sont pas aussi puissants que \ConTeXt\ qui possède les commandes \tex{defineparagraphs} et \tex{setupparagraphs} qui construisent ce type de paragraphe en utilisant le mécanisme de colonne, qui, bien qu'il ait des limites, est plus flexible que le mécanisme de table.
 
 \startSmallPrint
 
-  Pour autant que je sache, ces paragraphes n'ont pas de nom particulier. Je les ai appelés \quotation{Paragraphes parallèles} parce que cela me semble être un terme plus descriptif que celui que \ConTeXt\ utilise pour s'y référer : \quotation{paragraphes}.
+  Pour autant que je sache, ces paragraphes n'ont pas de nom particulier. Je les ai appelés \quotation{Paragraphes parallèles} parce que cela me semble être un terme plus descriptif que celui que \ConTeXt\ utilise pour s'y référer~: \quotation{paragraphes}.
 
 \stopSmallPrint
 
-Les commandes de base ici sont \tex{defineparagraphs} et  \tex{setupparagraphs}  dont la syntaxe est :
+Les commandes de base ici sont \tex{defineparagraphs} et  \tex{setupparagraphs}  dont la syntaxe est~:
 
 
 \placefigure [force,here,none] [] {}
@@ -165,11 +165,11 @@ Les origines de la ville de Murcie sont incertaines, mais il est prouvé qu'il a
 \stopMonTrio
 \stopDemoHN}
 
-Le fragment ci-dessus crée un environnement à trois colonnes appelé \MyKey{MonTrio}, puis configure la première colonne pour qu'elle occupe 10\% de la largeur de la ligne et soit écrite en gras, et configure la deuxième colonne pour qu'elle occupe 40\% de la largeur de la ligne. Comme la troisième colonne n'est pas configurée, elle aura la largeur restante, c'est-à-dire 50\%. Une fois l'environnement créé et configuré, nous pouvons l'utilisons.
+Le fragment ci-dessus crée un environnement à trois colonnes appelé \MyKey{MonTrio}, puis configure la première colonne pour qu'elle occupe 10\% de la largeur de la ligne et soit écrite en gras, et configure la deuxième colonne pour qu'elle occupe 40\% de la largeur de la ligne. Comme la troisième colonne n'est pas configurée, elle aura la largeur restante, c'est-à-dire 50\%. Une fois l'environnement créé et configuré, nous pouvons l'utiliser.
 
 Si nous voulions continuer à raconter l'histoire de Murcie, une nouvelle instance de l'environnement (\tex{startMonTrio}) serait nécessaire pour l'événement suivant, car il n'est pas possible d'inclure plusieurs {\em rangées} avec ce mécanisme. 
 
-De l'exemple qui vient d'être donné, je voudrais souligner les détails suivants :
+De l'exemple qui vient d'être donné, je voudrais souligner les détails suivants~:
 
 \startitemize
 
@@ -183,35 +183,35 @@ En ce qui concerne les options de configuration des paragraphes parallèles (\te
 
 \startitemize[columns, three, packed]\switchtobodyfont[small]
  
-\item {\tt n}: Nombre de colonne
+\item {\tt n}~: Nombre de colonne
 
-\item {\tt before}: Commande à éxécuter avant l'environnement
+\item {\tt before}~: Commande à éxécuter avant l'environnement
 
-\item {\tt after}: Commande à éxécuter après l'environnement
+\item {\tt after}~: Commande à éxécuter après l'environnement
 
-\item {\tt width}: Dimension, largeur de la colonne
+\item {\tt width}~: Dimension, largeur de la colonne
 
-\item {\tt distance}: Dimension, distance entre les colonnes
+\item {\tt distance}~: Dimension, distance entre les colonnes
 
-\item {\tt align}: Similaire à \tex{setupalign}
+\item {\tt align}~: Similaire à \tex{setupalign}
 
-\item {\tt inner}: Commande
+\item {\tt inner}~: Commande
 
-\item {\tt rule}: on off
+\item {\tt rule}~: on off
 
-\item {\tt rulethickness}: Dimension, épaisseur du trait de séparation
+\item {\tt rulethickness}~: Dimension, épaisseur du trait de séparation
 
-\item {\tt rulecolor}: Couleur  du trait
+\item {\tt rulecolor}~: Couleur  du trait
 
-\item {\tt style}: Style à appliquer au texte 
+\item {\tt style}~: Style à appliquer au texte 
 
-\item {\tt color}: Couleur à appliquer au texte 
+\item {\tt color}~: Couleur à appliquer au texte 
 
 \stopitemize
 
 \startSmallPrint
 
-La liste des options ci-dessus n'est pas complète ; j'ai exclu de la liste des options celles que je n'expliquerais pas normalement ici. J'ai également profité du fait que nous nous trouvions dans la section consacrée aux colonnes pour afficher la liste des options en triple colonne, bien que je ne l'aie pas fait avec l'une des commandes expliquées dans cette section, mais avec l'option {\tt columns} de l'environnement {\tt itemize}, auquel la section suivante est consacrée.
+La liste des options ci-dessus n'est pas complète~; j'ai exclu de la liste des options celles que je n'expliquerais pas normalement ici. J'ai également profité du fait que nous nous trouvions dans la section consacrée aux colonnes pour afficher la liste des options en triple colonne, bien que je ne l'aie pas fait avec l'une des commandes expliquées dans cette section, mais avec l'option {\tt columns} de l'environnement {\tt itemize}, auquel la section suivante est consacrée.
 
 \stopSmallPrint
 
