@@ -39,12 +39,12 @@ Les formats d'image autorisés sont {\tt pdf, mps, jpg, png, jp2, jbig, jbig2, j
 
 \startSmallPrint
 
-Parmi les formats pris en charge par \tex{externalfigure} figurent également certains formats vidéo. En particulier : QuickTime (extension .mov), Flash Video (extension .flv) et MPeg~4 (extension .mp4). Mais la plupart des lecteurs de PDF ne savent pas comment traiter les fichiers PDF contenant de la vidéo. Je ne peux pas me prononcer sur ce point, car je n'ai pas fait de tests.
+Parmi les formats pris en charge par \tex{externalfigure} figurent également certains formats vidéo. En particulier~: QuickTime (extension .mov), Flash Video (extension .flv) et MPeg~4 (extension .mp4). Mais la plupart des lecteurs de PDF ne savent pas comment traiter les fichiers PDF contenant de la vidéo. Je ne peux pas me prononcer sur ce point, car je n'ai pas fait de tests.
 
 \stopSmallPrint
 
 
-Il n'est pas nécessaire d'indiquer l'extension du fichier : \ConTeXt\ recherchera un fichier avec le nom spécifié et l'une des extensions des formats d'image connus. S'il y a plusieurs candidats, c'est d'abord le format PDF qui est utilisé s'il existe, et en son absence le format MPS (graphiques générés par MetaPost). En l'absence de ces deux formats, l'ordre suivant est suivi : jpeg, png, jpeg~2000, jbig et jbig2.
+Il n'est pas nécessaire d'indiquer l'extension du fichier~: \ConTeXt\ recherchera un fichier avec le nom spécifié et l'une des extensions des formats d'image connus. S'il y a plusieurs candidats, c'est d'abord le format PDF qui est utilisé s'il existe, et en son absence le format MPS (graphiques générés par MetaPost). En l'absence de ces deux formats, l'ordre suivant est suivi~: jpeg, png, jpeg~2000, jbig et jbig2.
 
 \startSmallPrint
 
@@ -53,18 +53,18 @@ Si le format réel de l'image ne correspond pas à l'extension du fichier qui la
 \stopSmallPrint
 
 
-Si l'image n'est pas placée seule en dehors d'un paragraphe, mais qu'elle est intégrée à un paragraphe de texte, et que sa hauteur est supérieure à l'interligne, la ligne sera ajustée pour éviter que l'image ne chevauche les lignes précédentes~ :
+Si l'image n'est pas placée seule en dehors d'un paragraphe, mais qu'elle est intégrée à un paragraphe de texte, et que sa hauteur est supérieure à l'interligne, la ligne sera ajustée pour éviter que l'image ne chevauche les lignes précédentes~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoVN
 Si l'image est intégrée à un paragraphe de texte, la hauteur de ligne sera ajustée pour éviter que l'image \externalfigure [cow-brown] [width=3em] ne chevauche les lignes précédentes et que l'ensemble reste lisible.
 \stopDemoVN}
 
-Par défaut, \ConTeXt\ cherche les images dans le répertoire de travail, dans son répertoire parent et dans le répertoire parent de ce répertoire. Nous pouvons indiquer l'emplacement d'un répertoire contenant les images avec lesquelles nous allons travailler en utilisant l'option {\tt directory} de la commande \tex{setupexternalfigures}, qui ajoutera ce répertoire au chemin de recherche. Si nous voulons que la recherche soit effectuée uniquement dans le répertoire d'images, nous devons également définir l'option {\tt location}. Ainsi, par exemple, pour que notre document recherche toutes les images dont nous avons besoin dans le répertoire \MyKey{img}, nous devons écrire :
+Par défaut, \ConTeXt\ cherche les images dans le répertoire de travail, dans son répertoire parent et dans le répertoire parent de ce répertoire. Nous pouvons indiquer l'emplacement d'un répertoire contenant les images avec lesquelles nous allons travailler en utilisant l'option {\tt directory} de la commande \tex{setupexternalfigures}, qui ajoutera ce répertoire au chemin de recherche. Si nous voulons que la recherche soit effectuée uniquement dans le répertoire d'images, nous devons également définir l'option {\tt location}. Ainsi, par exemple, pour que notre document recherche toutes les images dont nous avons besoin dans le répertoire \MyKey{img}, nous devons écrire~:   % paragraphe à supprimer ?? car repris ci-dessous avec commande "correcte"
 
 \PlaceMacro{setupexternalfigures}
 
-Par défaut, \ConTeXt\ cherche les images dans le répertoire de travail, dans son répertoire parent et dans le répertoire parent de ce dernier. Nous pouvons indiquer l'emplacement d'un répertoire contenant les images avec lesquelles nous allons travailler en utilisant l'option {\tt directory} de la commande \tex{setupexternalfigures}, qui ajoutera ce répertoire au chemin de recherche. Si nous voulons que la recherche soit effectuée uniquement dans le répertoire d'images, nous devons également définir l'option {\tt location}. Ainsi, par exemple, pour que notre document recherche toutes les images dont nous avons besoin dans le répertoire \MyKey{~/Images}, nous devons écrire :
+Par défaut, \ConTeXt\ cherche les images dans le répertoire de travail, dans son répertoire parent et dans le répertoire parent de ce dernier. Nous pouvons indiquer l'emplacement d'un répertoire contenant les images avec lesquelles nous allons travailler en utilisant l'option {\tt directory} de la commande \tex{setupexternalfigures}, qui ajoutera ce répertoire au chemin de recherche. Si nous voulons que la recherche soit effectuée uniquement dans le répertoire d'images, nous devons également définir l'option {\tt location}. Ainsi, par exemple, pour que notre document recherche toutes les images dont nous avons besoin dans le répertoire \MyKey{~/Images}, nous devons écrire~:
 
 
 \placefigure [force,here,none] [] {}{
@@ -75,13 +75,13 @@ Par défaut, \ConTeXt\ cherche les images dans le répertoire de travail, dans s
 
 \startSmallPrint
 
-Dans l'option {\tt directory} de \tex{setupexternalfigures}, nous pouvons inclure plus d'un répertoire, en les séparant par des virgules ; mais dans ce cas, nous devons mettre les répertoires entre accolades. Par exemple : \MyKey{directory=\{img, \lettertilde/images\}}.
+Dans l'option {\tt directory} de \tex{setupexternalfigures}, nous pouvons inclure plus d'un répertoire, en les séparant par des virgules~; mais dans ce cas, nous devons mettre les répertoires entre accolades. Par exemple~: \MyKey{directory=\{img, \lettertilde/images\}}.
 
-Dans {\tt directory}, nous utilisons toujours le caractère \quote{/} comme séparateur entre les répertoires ; y compris dans Microsoft Windows dont le système d'exploitation utilise le caractère \quote{\backslash} comme séparateur de répertoires.
+Dans {\tt directory}, nous utilisons toujours le caractère \quote{/} comme séparateur entre les répertoires~; y compris dans Microsoft Windows dont le système d'exploitation utilise le caractère \quote{\backslash} comme séparateur de répertoires.
 
 \stopSmallPrint
 
-\tex{externalfigure} est également capable d'utiliser des images hébergées sur Internet. Ainsi, par exemple, l'extrait suivant insère le logo CervanTeX directement depuis Internet dans le document. Il s'agit du groupe d'utilisateurs hispanophones de \TeX\ :
+\tex{externalfigure} est également capable d'utiliser des images hébergées sur Internet. Ainsi, par exemple, l'extrait suivant insère le logo CervanTeX directement depuis Internet dans le document. Il s'agit du groupe d'utilisateurs hispanophones de \TeX\~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoHN
@@ -119,7 +119,7 @@ Si \ConTeXt\ ne trouve pas l'image qui devrait être insérée, aucune erreur n'
   ]
 \PlaceMacro{placefigure}
 
-Les images peuvent être insérées directement. Mais il est préférable de le faire avec \tex{placefigure}. Cette commande à plusieurs implications vis à vis de \ConTeXt. Elle permet~ :
+Les images peuvent être insérées directement. Mais il est préférable de le faire avec \tex{placefigure}. Cette commande à plusieurs implications vis à vis de \ConTeXt. Elle permet~:
 
 \startitemize
 
@@ -129,7 +129,7 @@ Les images peuvent être insérées directement. Mais il est préférable de le 
 
 \item d'ajouter un titre à l'image, en créant un bloc combinant l'image et son titre, ce qui les rend indissociables.
 
-\item de définir automatiquement l'espace blanc (horizontal et vertical) entourant l'image et nécessaire sa bonne visualisation.
+\item de définir automatiquement l'espace blanc (horizontal et vertical) entourant l'image et nécessaire à sa bonne visualisation.
 
 \item de positionner l'image à l'endroit indiqué, en faisant {\em circuler} le texte autour d'elle si nécessaire.
 
@@ -140,7 +140,7 @@ Les images peuvent être insérées directement. Mais il est préférable de le 
 \stopitemize
   
 
-La syntaxe de cette commande est la suivante :
+La syntaxe de cette commande est la suivante~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoI
@@ -151,13 +151,13 @@ Elle hérite de la commande \tex{placefloat}.
 \setup{placefloat}
 
 
-The various arguments have the following meanings:
+The various arguments have the following meanings:  % À traduire Les différents arguments ont les significations suivantes~:
 
 \startitemize
 
 \item {\em Options} sont un ensemble d'indications qui font généralement référence à l'endroit où placer l'image. Comme ces options sont les mêmes dans cette commande et dans d'autres, je les expliquerai ensemble plus tard (dans \in{section}[sec:placingobjects]). Pour l'instant, je vais utiliser l'option {\tt here} à titre d'exemple. Elle indique à \ConTeXt\ que, dans la mesure du possible, il doit placer l'image exactement à l'endroit du document où se trouve la commande qui l'insère.
 
-\item {\em Etiquette} est une chaîne de texte permettant de se référer en interne à cet objet afin de pouvoir y faire référence (voir \in{section}[sec:references]).
+\item {\em Étiquette} est une chaîne de texte permettant de se référer en interne à cet objet afin de pouvoir y faire référence (voir \in{section}[sec:references]).
 
 \item {\em Titre} est le texte du titre à ajouter à l'image.
 
@@ -165,7 +165,7 @@ The various arguments have the following meanings:
 
 \stopitemize
 
-Par exemple~ :
+Par exemple~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoHW
@@ -176,14 +176,14 @@ Imaginons un texte introductif.
   [fig:cm2016group]
   {\ConTeXt\ Meeting Group 2016}
   {\externalfigure[https://meeting.contextgarden.net/2016/img/cm2016-group-photo.jpg]}
-Avez vous vu la \in{figure}[fig:cm2016group] ?
+Avez vous vu la \in{figure}[fig:cm2016group]~?
 \blank[big]
 {\bfa Liste des figures}
 \blank[small]
 \placelistoffigures
 \stopDemoHW}
 
-Comme nous pouvons le voir dans l'exemple, en insérant l'image (ce qui, soit dit en passant, a été fait directement à partir d'une image hébergée sur Internet), il y a quelques changements par rapport à ce qui se passe en utilisant directement la commande \tex{externalfigure}. Un espace vertical est ajouté, l'image est centrée et un titre est ajouté. Il s'agit de modifications {\em externes} évidentes à première vue. D'un point de vue interne, la commande a également produit d'autres effets non moins importants :
+Comme nous pouvons le voir dans l'exemple, en insérant l'image (ce qui, soit dit en passant, a été fait directement à partir d'une image hébergée sur Internet), il y a quelques changements par rapport à ce qui se passe en utilisant directement la commande \tex{externalfigure}. Un espace vertical est ajouté, l'image est centrée et un titre est ajouté. Il s'agit de modifications {\em externes} évidentes à première vue. D'un point de vue interne, la commande a également produit d'autres effets non moins importants~:
 
 
 \startitemize
@@ -198,7 +198,7 @@ Comme nous pouvons le voir dans l'exemple, en insérant l'image (ce qui, soit di
 
 \stopitemize
 
-En fait, \tex{placefigure}, malgré son nom, n'est pas seulement utilisé pour insérer des images. Nous pouvons insérer n'importe quoi avec elle, y compris du texte. Cependant, le texte ou les autres éléments insérés dans le document avec \tex{placefigure}, seront traités {\em comme s'il s'agissait d'une image}, même s'ils ne le sont pas ; ils seront ajoutés à la liste des images gérée en interne par \ConTeXt, et nous pouvons appliquer des transformations similaires à celles que nous utilisons pour les images telles que la mise à l'échelle ou la rotation, le cadrage, etc. Ainsi, l'exemple suivant :
+En fait, \tex{placefigure}, malgré son nom, n'est pas seulement utilisé pour insérer des images. Nous pouvons insérer n'importe quoi avec elle, y compris du texte. Cependant, le texte ou les autres éléments insérés dans le document avec \tex{placefigure}, seront traités {\em comme s'il s'agissait d'une image}, même s'ils ne le sont pas~; ils seront ajoutés à la liste des images gérée en interne par \ConTeXt, et nous pouvons appliquer des transformations similaires à celles que nous utilisons pour les images telles que la mise à l'échelle ou la rotation, le cadrage, etc. Ainsi, l'exemple suivant~:
 
 
 \placefigure [force,here,none] [] {}{
@@ -208,7 +208,7 @@ En fait, \tex{placefigure}, malgré son nom, n'est pas seulement utilisé pour i
   [here, force]
   [fig:testtext]
   {\tex{placefigure} avec des transformations textuelles.}
-  {\rotate[rotation=35]{\color[darkred]{\bfd Excellent !!!}}}
+  {\rotate[rotation=35]{\color[darkred]{\bfd Excellent~!!!}}}
 \stopDemoHN}
 
 
@@ -218,7 +218,7 @@ En fait, \tex{placefigure}, malgré son nom, n'est pas seulement utilisé pour i
 \startsubsection
   [title={Insertion d'images intégrées dans un bloc de texte}]
 
-À l'exception des très petites images, qui peuvent être intégrées dans une ligne sans trop perturber l'espacement des paragraphes, les images sont généralement insérées dans un paragraphe qui ne contient qu'elles (ou dit autrement, l'image peut être considérée comme un paragraphe à part entière). Si l'image est insérée avec \tex{placefigure} et que sa taille le permet, en fonction de ce que nous avons indiqué concernant son placement (voir \in{section}[sec:placingobjects]), \ConTeXt\ permettra au texte du paragraphe précédent et des paragraphes suivants de circuler autour de l'image. Cependant, si nous voulons nous assurer qu'une certaine image ne sera pas séparée d'un certain texte, nous pouvons utiliser l'environnement {\tt figuretext} \PlaceMacro{startfiguretext} dont la syntaxe est la suivante :
+À l'exception des très petites images, qui peuvent être intégrées dans une ligne sans trop perturber l'espacement des paragraphes, les images sont généralement insérées dans un paragraphe qui ne contient qu'elles (ou dit autrement, l'image peut être considérée comme un paragraphe à part entière). Si l'image est insérée avec \tex{placefigure} et que sa taille le permet, en fonction de ce que nous avons indiqué concernant son placement (voir \in{section}[sec:placingobjects]), \ConTeXt\ permettra au texte du paragraphe précédent et des paragraphes suivants de circuler autour de l'image. Cependant, si nous voulons nous assurer qu'une certaine image ne sera pas séparée d'un certain texte, nous pouvons utiliser l'environnement {\tt figuretext} \PlaceMacro{startfiguretext} dont la syntaxe est la suivante~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoHN
@@ -228,13 +228,13 @@ Texte
   [left]
   [fig:testtext]
   {\tex{placefigure} avec des transformations textuelles.}
-  {\rotate[rotation=20]{\color[darkred]{\bfd Excellent ce texte image!!!}}}
+  {\rotate[rotation=20]{\color[darkred]{\bfd Excellent ce texte image~!!!}}}
 Texte d'accompagnement qui peut contenir beaucoup d'information selon l'inspiration de l'auteur.
 \stopfiguretext
 \stopDemoHN}
 
 
-Les arguments de l'environnement sont exactement les mêmes que pour \tex{placefigure} et ont la même signification. Mais ici, les options ne sont plus des options de placement d'un objet flottant, mais des indications concernant l'intégration de l'image dans le paragraphe ; ainsi, par exemple, \MyKey{left} signifie ici que l'image sera placée sur la gauche tandis que le texte s'écoulera vers la droite, tandis que \MyKey{left, bottom} signifiera que l'image doit être placée sur le côté inférieur gauche du texte qui lui est associé.
+Les arguments de l'environnement sont exactement les mêmes que pour \tex{placefigure} et ont la même signification. Mais ici, les options ne sont plus des options de placement d'un objet flottant, mais des indications concernant l'intégration de l'image dans le paragraphe~; ainsi, par exemple, \MyKey{left} signifie ici que l'image sera placée sur la gauche tandis que le texte s'écoulera vers la droite, tandis que \MyKey{left, bottom} signifiera que l'image doit être placée sur le côté inférieur gauche du texte qui lui est associé.
 
 Le texte écrit dans l'environnement est ce qui circulera autour de l'image.
 
@@ -246,7 +246,7 @@ Texte
   [right,low]    % or middle
   [fig:testtext]
   {\tex{placefigure} avec des transformations textuelles.}
-  {\rotate[rotation=20]{\color[darkred]{\bfd Excellent ce texte image!!!}}}
+  {\rotate[rotation=20]{\color[darkred]{\bfd Excellent ce texte image~!!!}}}
 Texte d'accompagnement qui peut contenir beaucoup d'information selon l'inspiration de l'auteur.
 \stopfiguretext
 \stopDemoHN}
@@ -260,14 +260,14 @@ Texte d'accompagnement qui peut contenir beaucoup d'information selon l'inspirat
     title={Insertion combinée de deux ou plusieurs objets},
   ]
 
-Pour insérer deux ou plusieurs objets différents dans le document, de telle sorte que \ConTeXt\ les garde ensemble et les traite comme un seul objet, nous disposons de l'environnement \PlaceMacro{startcombination} \tex{startcombination} dont la syntaxe est :
+Pour insérer deux ou plusieurs objets différents dans le document, de telle sorte que \ConTeXt\ les garde ensemble et les traite comme un seul objet, nous disposons de l'environnement \PlaceMacro{startcombination} \tex{startcombination} dont la syntaxe est~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoI
 \startcombination[ModeAffichage] ... \stopcombinaison
 \stopDemoI}
 
-où {\em ModeAffichage} indique comment les objets doivent être ordonnés : s'ils doivent tous être ordonnés horizontalement, {\em ModeAffichage} indique seulement le nombre d'objets à combiner. Mais si l'on veut combiner les objets sur deux ou plusieurs lignes, il faudra indiquer le numéro de l'objet par ligne, suivi du nombre de lignes, et séparer les deux numéros par le caractère *. Par exemple :
+où {\em ModeAffichage} indique comment les objets doivent être ordonnés~: s'ils doivent tous être ordonnés horizontalement, {\em ModeAffichage} indique seulement le nombre d'objets à combiner. Mais si l'on veut combiner les objets sur deux ou plusieurs lignes, il faudra indiquer le numéro de l'objet par ligne, suivi du nombre de lignes, et séparer les deux numéros par le caractère *. Par exemple~:
 
 
 \placefigure [force,here,none] [] {}{
