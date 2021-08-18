@@ -14,7 +14,7 @@
 
 % **** Subsubsection fusionner
 \startsubsection[title={Fusionner des cellules}]
-Chaque cellule peut prendre les paramètres {\tt nc} et {\tt nr} auquels nous affectons des valeurs entières qui indiquent le nombre de cellule fusionnées, respectivement horizontalement (cell) et verticalement (row). Voyez plutôt~:
+Chaque cellule peut prendre les paramètres {\tt nc} et {\tt nr} auxquels nous affectons des valeurs entières qui indiquent le nombre de cellule fusionnées, respectivement horizontalement (cell) et verticalement (row). Voyez plutôt~:
 
 
 \placefigure [force,here,none]
@@ -45,7 +45,7 @@ Chaque cellule peut prendre les paramètres {\tt nc} et {\tt nr} auquels nous af
 
 
 % **** Subsubsection configure
-\startsubsection[title={Configurer le tableau : préciser les éléments à configurer}]
+\startsubsection[title={Configurer le tableau~: préciser les éléments à configurer}]
 
 La configuration d'un tableau se fait à plusieurs niveaux. Il est possible de configurer l'ensemble du tableau, une seule ou un ensemble de lignes, une seule ou un ensemble de colonnes, ou bien une seule ou un ensemble de cellules. Certaines options s'appliquent à l'ensemble du tableau, d'autre à des éléments particuliers. La commande clé est \tex{setuptable}.
 
@@ -112,13 +112,13 @@ ou
 
 \item Le second argument peut prendre plusieurs valeurs.
 \startitemize
-\item {\tt \bf n }   : Un entier indiquant le numéro de la ligne ou de la colonne que l'on souhaite modifier, ou bien une liste d'entier séparés par une virgule si l'on souhaite en modifier plusieurs : {\tt [3]} modifie la troisième ligne / colonne et {\tt [2,7,8]} affecte les deuxième, septième et huitième.
+\item {\tt \bf n }~: Un entier indiquant le numéro de la ligne ou de la colonne que l'on souhaite modifier, ou bien une liste d'entiers séparés par une virgule si l'on souhaite en modifier plusieurs~: {\tt [3]} modifie la troisième ligne / colonne et {\tt [2,7,8]} affecte les deuxième, septième et huitième.
 
-\item {\tt \bf first}: modifie la première ligne.
-\item {\tt \bf last} : modifie la dernière ligne.
-\item {\tt \bf odd}  : modifie toutes les lignes impaires.
-\item {\tt \bf even} : modifie toutes les lignes paires.
-\item {\tt \bf each} : modifie toutes les lignes. 
+\item {\tt \bf first}~: modifie la première ligne.
+\item {\tt \bf last}~: modifie la dernière ligne.
+\item {\tt \bf odd}~: modifie toutes les lignes impaires.
+\item {\tt \bf even}~: modifie toutes les lignes paires.
+\item {\tt \bf each}~: modifie toutes les lignes. 
 \stopitemize
 
 Et pour finir \tex{setuptable} permet aussi de configurer des cellules particulières
@@ -150,7 +150,7 @@ Et pour finir \tex{setuptable} permet aussi de configurer des cellules particuli
 \stopsubsubsection
 
 % **** Subsubsection
-\startsubsubsection[title={Configurer le tableau : les options de configuration}]
+\startsubsubsection[title={Configurer le tableau~: les options de configuration}]
 
 Les possibilités de configuration sont très nombreuses et sont assez proche de \tex{setupframed} car chaque environnement d'un tableau naturel se comporte de façon similaire à une \tex{framed} (voir \in{section}[sec:framed]).
 
@@ -208,12 +208,12 @@ Les possibilités de configuration sont très nombreuses et sont assez proche de
 
 \item{\bf Filets (ou traits)} Il est possible de sélectionner quelle partie du cadre d'une cellule, d'une ligne ou d'une colonne nous souhaitons afficher.
 \startitemize[packed]
-\item{\tt\bf frame=on/off} : par défaut frame vaut on et donc un cadre entoure la cellule.
-\item{\tt\bf topframe=on/off} : dessine ou non le trait du haut de la cellule.
-\item{\tt\bf bottomframe=on/off} : dessine ou non le trait du bas de la cellule.
-\item{\tt\bf leftframe=on/off} : dessine ou non le trait de gauche de la cellule.
-\item{\tt\bf rightframe=on/off} : dessine ou non le trait de droite de la cellule.
-\item{\tt\bf rulethickness=dimension} : l'épaisseur des traits entourant la cellule.
+\item{\tt\bf frame=on/off}~: par défaut frame vaut on et donc un cadre entoure la cellule.
+\item{\tt\bf topframe=on/off}~: dessine ou non le trait du haut de la cellule.
+\item{\tt\bf bottomframe=on/off}~: dessine ou non le trait du bas de la cellule.
+\item{\tt\bf leftframe=on/off}~: dessine ou non le trait de gauche de la cellule.
+\item{\tt\bf rightframe=on/off}~: dessine ou non le trait de droite de la cellule.
+\item{\tt\bf rulethickness=dimension}~: l'épaisseur des traits entourant la cellule.
 \item Pour pouvoir utiliser {\tt topframe, bottomframe,leftframe et rightframe} il faut au préalable mettre {\tt frame=off}.
 \stopitemize
 
@@ -234,14 +234,14 @@ Les possibilités de configuration sont très nombreuses et sont assez proche de
 \stopDemoHW}
 
 
-\item{\bf Style et couleurs}, les options de style et de couleur sont : 
+\item{\bf Style et couleurs}, les options de style et de couleur sont~: 
 
 \startitemize[packed]
-\item{\tt\bf color=nom de la couleur} : colorie le texte et le cadre ;
-\item{\tt\bf foregroundcolor=nom de la couleur} : colorie le texte ;
-\item{\tt\bf background=color, backgroundcolor=nom de la couleur} : Attention c'est en deux temps, le mot color indique que l'on veut utiliser {\tt backgroundcolor}, et  {\tt backgroundcolor} indique la couleur elle-même. On verra plus tard que background peut prendre d'autre valeur ;
-\item{\tt\bf framecolor=nom de la couleur} : la couleur des filets.
-\item{\tt\bf style=commande de style} : la couleur des filets.
+\item{\tt\bf color=nom de la couleur}~: colorie le texte et le cadre~;
+\item{\tt\bf foregroundcolor=nom de la couleur}~: colorie le texte~;
+\item{\tt\bf background=color, backgroundcolor=nom de la couleur}~: Attention c'est en deux temps, le mot color indique que l'on veut utiliser {\tt backgroundcolor}, et  {\tt backgroundcolor} indique la couleur elle-même. On verra plus tard que background peut prendre d'autre valeur~;
+\item{\tt\bf framecolor=nom de la couleur}~: la couleur des filets.
+\item{\tt\bf style=commande de style}~: la couleur des filets.
 \stopitemize
 
 
