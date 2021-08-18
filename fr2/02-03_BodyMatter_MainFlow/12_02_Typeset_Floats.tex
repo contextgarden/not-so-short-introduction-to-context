@@ -15,7 +15,7 @@
 \startsubsection
   [title={Configuration générale des objets flottants}]
 
-Nous avons déjà vu qu'avec \tex{placefloat} nous pouvons contrôler l'emplacement de l'objet flottant inséré et quelques autres détails. Il est également possible de configurer :
+Nous avons déjà vu qu'avec \tex{placefloat} nous pouvons contrôler l'emplacement de l'objet flottant inséré et quelques autres détails. Il est également possible de configurer~:
 
 
 \startitemize
@@ -42,12 +42,12 @@ En ce qui concerne les options configurables de ces dernières, je me réfère �
     title={Options d'insertion d'objets flottants},
   ]
 
-L'argument {\em Options} dans \tex{placefigure}, \tex{placetable} et \tex{placefloat} contrôle différents aspects concernant l'insertion de ces types d'objets. Il s'agit principalement de l'endroit de la page où l'objet sera inséré. Ici, plusieurs valeurs sont prises en charge, chacune d'une nature différente :
+L'argument {\em Options} dans \tex{placefigure}, \tex{placetable} et \tex{placefloat} contrôle différents aspects concernant l'insertion de ces types d'objets. Il s'agit principalement de l'endroit de la page où l'objet sera inséré. Ici, plusieurs valeurs sont prises en charge, chacune d'une nature différente~:
 
 
 \startitemize
 
-\item Certains des emplacements d'insertion sont établis par rapport à des éléments de la page ({\tt top, bottom inleft, inright, inmargin, margin, leftmargin, rightmargin, leftedge, rightedge, innermargin, inneredge, outeredge, inner, outer}). Il doit, bien entendu, s'agir d'un objet qui peut tenir dans la zone où il est destiné à être placé et un espace doit avoir été réservé pour cet élément dans la mise en page. À ce sujet, voir la section \in{}[sec:page-elements] et \in{}[sec:pagelayout].
+\item Certains des emplacements d'insertion sont établis par rapport à des éléments de la page ({\tt top, bottom, inleft, inright, inmargin, margin, leftmargin, rightmargin, leftedge, rightedge, innermargin, inneredge, outeredge, inner, outer}). Il doit, bien entendu, s'agir d'un objet qui peut tenir dans la zone où il est destiné à être placé et un espace doit avoir été réservé pour cet élément dans la mise en page. À ce sujet, voir la section \in{}[sec:page-elements] et \in{}[sec:pagelayout].
 
 \item Les autres emplacements d'insertion possibles sont davantage liés au texte entourant l'objet et indiquent où l'objet doit être placé pour que le texte circule autour de lui. Il s'agit essentiellement des valeurs {\tt left} et {\tt right}.
 
@@ -66,19 +66,19 @@ Ceci est un petit texte pour voir ce que donne l'insection d'une petite image. C
 \stopDemoHN}
 
 
-\item L'option {\tt here} est interprétée comme une recommandation de conserver l'objet à l'endroit du fichier source où il se trouve. Cette {\em recommandation} ne sera pas respectée si les exigences de pagination ne le permettent pas. Cette indication est renforcée si nous ajoutons l'option {\tt force} qui signifie exactement cela : forcer l'insertion de l'objet à cet endroit. Notez qu'en forçant l'insertion à un point particulier, la séquence des éléments du code source sera la même que celle du document final.
+\item L'option {\tt here} est interprétée comme une recommandation de conserver l'objet à l'endroit du fichier source où il se trouve. Cette {\em recommandation} ne sera pas respectée si les exigences de pagination ne le permettent pas. Cette indication est renforcée si nous ajoutons l'option {\tt force} qui signifie exactement cela~: forcer l'insertion de l'objet à cet endroit. Notez qu'en forçant l'insertion à un point particulier, la séquence des éléments du code source sera la même que celle du document final.
 
-\item Les autres options possibles concernent la page sur laquelle l'objet doit être inséré : {\tt page} l'insère sur une nouvelle page ;{\tt opposite} l'insère sur la page opposée à la page actuelle ; {\tt leftpage} sur une page paire ; {\tt rightpage} sur une page impaire.
+\item Les autres options possibles concernent la page sur laquelle l'objet doit être inséré~: {\tt page} l'insère sur une nouvelle page~;{\tt opposite} l'insère sur la page opposée à la page actuelle~; {\tt leftpage} sur une page paire~; {\tt rightpage} sur une page impaire.
 
 \stopitemize
 
-Il existe certaines options qui ne sont pas liées à l'emplacement de l'objet. Parmi elles :
+Il existe certaines options qui ne sont pas liées à l'emplacement de l'objet. Parmi elles~:
 
 \startitemize
 
-\item {\tt none} : Cette option permet de supprimer le titre.
+\item {\tt none}~: Cette option permet de supprimer le titre.
 
-\item {\tt split} : Cette option permet à l'objet de s'étendre sur plus d'une page. Il doit, bien entendu, s'agir d'un objet divisible par nature, comme un tableau. Lorsque cette option est utilisée et que l'objet est divisé, on ne peut plus dire qu'il est flottant.
+\item {\tt split}~: Cette option permet à l'objet de s'étendre sur plus d'une page. Il doit, bien entendu, s'agir d'un objet divisible par nature, comme un tableau. Lorsque cette option est utilisée et que l'objet est divisé, on ne peut plus dire qu'il est flottant.
 
 \stopitemize
 
@@ -91,13 +91,13 @@ Il existe certaines options qui ne sont pas liées à l'emplacement de l'objet. 
     title={Configuration des titres des objets flottants},
   ]
 
-À moins d'utiliser l'option \MyKey{none} dans \tex{placefloat}, par défaut, les objets flottants sont associés à un titre composé de trois éléments :
+À moins d'utiliser l'option \MyKey{none} dans \tex{placefloat}, par défaut, les objets flottants sont associés à un titre composé de trois éléments~:
 
 \startitemize
 
 \PlaceMacro{setuplabeltext}
 
-\item Le nom du type d'objet en question. Ce nom est exactement celui du type d'objet ; ainsi, si, par exemple, nous définissons un nouvel objet flottant appelé \quotation{Séquence} et que nous insérons une \quotation{Séquence} comme objet flottant, le titre sera \quotation{Séquence 1}. Il est aussi possible d'utiliser la commande \tex{setuplabeltext} (cf. \in{section}[sec:labels])~:
+\item Le nom du type d'objet en question. Ce nom est exactement celui du type d'objet~; ainsi, si, par exemple, nous définissons un nouvel objet flottant appelé \quotation{Séquence} et que nous insérons une \quotation{Séquence} comme objet flottant, le titre sera \quotation{Séquence 1}. Il est aussi possible d'utiliser la commande \tex{setuplabeltext} (cf. \in{section}[sec:labels])~:
 
 
 \placefigure [force,here,none] [] {}{
@@ -113,7 +113,7 @@ Il existe certaines options qui ne sont pas liées à l'emplacement de l'objet. 
 
   \startSmallPrint
 
-Malgré ce qui vient d'être dit, si la langue principale du document n'est pas l'anglais, le nom anglais des objets prédéfinis, comme par exemple les objets \MyKey{figure} ou \MyKey{table}, sera traduit ; Ainsi, par exemple, l'objet \MyKey{figure} dans les documents en français est appelé \MyKey{Figure}, tandis que l'objet \MyKey{table} esappelé \MyKey{Table}. Ces noms français pour les objets prédéfinis peuvent être modifiés avec \tex{setuplabeltext} comme expliqué dans \in{section}[sec:labels].
+Malgré ce qui vient d'être dit, si la langue principale du document n'est pas l'anglais, le nom anglais des objets prédéfinis, comme par exemple les objets \MyKey{figure} ou \MyKey{table}, sera traduit~; Ainsi, par exemple, l'objet \MyKey{figure} dans les documents en français est appelé \MyKey{Figure}, tandis que l'objet \MyKey{table} est appelé \MyKey{Table}. Ces noms français pour les objets prédéfinis peuvent être modifiés avec \tex{setuplabeltext} comme expliqué dans \in{section}[sec:labels].
     
   \stopSmallPrint
 
@@ -123,13 +123,13 @@ Malgré ce qui vient d'être dit, si la langue principale du document n'est pas 
 
 \stopitemize
 
-Avec \PlaceMacro{setupcaptions} \tex{setupcaptions} ou \PlaceMacro{setupcaption} \tex{setupcaption[TypeDeFlottant]}, nous pouvons modifier le système de numérotation et l'apparence du titre lui-même. La première commande affectera tous les titres de tous les objets, et la seconde n'affectera que le titre d'un type d'objet particulier :
+Avec \PlaceMacro{setupcaptions} \tex{setupcaptions} ou \PlaceMacro{setupcaption} \tex{setupcaption[TypeDeFlottant]}, nous pouvons modifier le système de numérotation et l'apparence du titre lui-même. La première commande affectera tous les titres de tous les objets, et la seconde n'affectera que le titre d'un type d'objet particulier~:
 
 \startitemize
 
 
 
-\item comme pour le système de numérotation (voir \in{section}[sec:numerotation]), il est contrôlé par les options {\tt number}, {\tt way}, {\tt prefixsegments} et {\tt numberconversion} :
+\item comme pour le système de numérotation (voir \in{section}[sec:numerotation]), il est contrôlé par les options {\tt number}, {\tt way}, {\tt prefixsegments} et {\tt numberconversion}~:
 
 
   \startitemize
@@ -144,7 +144,7 @@ Avec \PlaceMacro{setupcaptions} \tex{setupcaptions} ou \PlaceMacro{setupcaption}
     préfixe}, et quel sera ce dernier. Ainsi, {\tt prefixsegments=chapter} fait en sorte que le nombre d'objets commence toujours par le numéro de chapitre, tandis que {\tt prefixsegments=section} fera précéder le numéro d'objet du numéro de section et {\tt prefixsegments=chapter:section} combinera les deux.
 
 
-  \item {\tt numberconversion} contrôle le type de numération (voir \in{section}[sec:numerotation]). Les valeurs de cette option peuvent être :
+  \item {\tt numberconversion} contrôle le type de numération (voir \in{section}[sec:numerotation]). Les valeurs de cette option peuvent être~:
 des chiffres arabes (\MyKey{numbers}), 
 des lettres           minuscules (\MyKey{a}, \MyKey{characters}),
                       majuscules (\MyKey{A}, \MyKey{Characters}),
@@ -154,20 +154,20 @@ des chiffres romains  minuscules (\MyKey{i}, \MyKey{r}, \MyKey{romannumerals}
                       ou petites capitales (\MyKey{KR})).
 \stopitemize
 
-\item L'apparence du titre lui-même est contrôlée par de nombreuses options. Je vais les énumérer, mais pour une explication détaillée de la signification de chacune d'entre elles, je vous renvoie à \in{section}[sec:titlestyle] où est expliqué le contrôle de l'apparence des commandes de sectionnement, car les options sont largement similaires. Les options en question sont :
+\item L'apparence du titre lui-même est contrôlée par de nombreuses options. Je vais les énumérer, mais pour une explication détaillée de la signification de chacune d'entre elles, je vous renvoie à \in{section}[sec:titlestyle] où est expliqué le contrôle de l'apparence des commandes de sectionnement, car les options sont largement similaires. Les options en question sont~:
 
 \startitemize
 
-  \item Pour contrôler le format de tous les éléments du titre,
+  \item Pour contrôler le format de tous les éléments du titre~:
     {\tt style, color, command}.
 
-  \item Pour contrôler le format uniquement du nom du type d'objet :
+  \item Pour contrôler le format uniquement du nom du type d'objet~:
     {\tt headstyle, headcolor, headcommand, headseparator}.
 
-  \item Pour contrôler uniquement le format de la numérotation : {\tt
+  \item Pour contrôler uniquement le format de la numérotation~: {\tt
    numbercommand}.
 
-  \item Pour contrôler uniquement le format du titre lui-même :
+  \item Pour contrôler uniquement le format du titre lui-même~:
     {\tt textcommand}.
 
 
