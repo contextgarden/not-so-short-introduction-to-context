@@ -13,7 +13,7 @@
 
 Comme le lecteur le sait à ce stade (puisque cela a été expliqué dans \in{section}[sec:ctx]), MetaPost est parfaitement intégré à \ConTeXt\ (sous le nom de Metafun) et peut générer des images et des graphiques qui sont {\em programmés} de la même manière que les transformations de texte sont programmées. Il existe également un module d'extension pour \ConTeXt
 \footnote{Les modules d'extension de \ConTeXt\ donnent des fonctionnalités supplémentaires mais ne sont pas inclus dans cette introduction.} qui lui permet de fonctionner avec TiKZ.
-\footnote{Il s'agit d'un langage de programmation graphique destiné à fonctionner avec les systèmes basés sur \TeX. Il s'agit d'un \quotation{acronyme récurrent} de la phrase allemande \quotation{TiKZ ist keinen Zeichenprogramm} qui se traduit par : \quotation{TiKZ n'est pas un programme de dessin}. Les acronymes récursifs sont une sorte de blague de programmeurs. En laissant de côté MetaPost (que je ne sais pas utiliser), je pense que TiKZ est un excellent système pour programmer des images}.
+\footnote{Il s'agit d'un langage de programmation graphique destiné à fonctionner avec les systèmes basés sur \TeX. Il s'agit d'un \quotation{acronyme récurrent} de la phrase allemande \quotation{TiKZ ist keinen Zeichenprogramm} qui se traduit par~: \quotation{TiKZ n'est pas un programme de dessin}. Les acronymes récursifs sont une sorte de blague de programmeurs. En laissant de côté MetaPost (que je ne sais pas utiliser), je pense que TiKZ est un excellent système pour programmer des images}.
 Mais ces images ne sont pas traitées dans cette introduction (car cela obligerait probablement à doubler sa longueur). Je fais ici référence à l'utilisation d'images externes, qui résident dans un fichier sur notre disque dur ou qui sont téléchargées directement de l'Internet par \ConTeXt.
 
 
@@ -47,19 +47,19 @@ Le dernier argument de la commande \tex{externalfigure} nous permet d'indiquer c
 \stopitemize
 
 
-Les modifications de l'image qui peuvent être obtenues par cette voie sont les suivantes :
+Les modifications de l'image qui peuvent être obtenues par cette voie sont les suivantes~:
 
 \startdescription{Modification de la taille de l'image.}
 
-Nous pouvons le faire :
+Nous pouvons le faire~:
 
 \startitemize
 
-\item {\em En attribuant une largeur ou une hauteur précise}, ce qui se fait respectivement avec les options {\tt width} et {\tt height} ; si une seule des deux valeurs est ajustée, l'autre est automatiquement adaptée pour maintenir les proportions initiales de l'image.
+\item {\em En attribuant une largeur ou une hauteur précise}, ce qui se fait respectivement avec les options {\tt width} et {\tt height}~: si une seule des deux valeurs est ajustée, l'autre est automatiquement adaptée pour maintenir les proportions initiales de l'image.
 
   On peut attribuer une hauteur ou une largeur précise, ou l'indiquer en pourcentage de la hauteur de la page ou de la largeur de la ligne. Par exemple pour faire en sorte que l'image ait une largeur égale à 40\% de la largeur de ligne on indiquera \type{width=.4\textwidth}
 
-\item {\em Mise à l'échelle de l'image} : L'option {\tt xscale} permet de mettre l'image à l'échelle horizontalement ; {\tt yscale} permet de le faire verticalement et {\tt scale} permet de le faire horizontalement et verticalement. Ces trois options attendent un nombre représentatif du facteur d'échelle multiplié par 1000. En d'autres termes : {\tt scale=1000} laissera l'image dans sa taille d'origine, tandis que {\tt scale=500} la réduira de moitié, et {\tt scale=2000} la doublera.
+\item {\em Mise à l'échelle de l'image}~: L'option {\tt xscale} permet de mettre l'image à l'échelle horizontalement~: {\tt yscale} permet de le faire verticalement et {\tt scale} permet de le faire horizontalement et verticalement. Ces trois options attendent un nombre représentatif du facteur d'échelle multiplié par 1000. En d'autres termes~: {\tt scale=1000} laissera l'image dans sa taille d'origine, tandis que {\tt scale=500} la réduira de moitié, et {\tt scale=2000} la doublera.
 
   Une mise à l'échelle conditionnelle, qui n'est appliquée que si l'image dépasse certaines dimensions, est obtenue avec les options {\tt maxwidth} et {\tt maxheight} qui prennent une dimension. Par exemple, {\tt maxwidth=.2\backslash textwidth} ne redimensionnera l'image que si elle dépasse 20\% de la largeur de la ligne.
 
@@ -98,7 +98,7 @@ Pour faire tourner l'image, nous utilisons l'option {\tt orientation} qui prend 
 
   \startSmallPrint
 
-Le wiki implique que les rotations qui peuvent être obtenues avec cette option doivent être des multiples de 90 (90, 180 ou 270) mais pour obtenir une rotation différente, il faudrait utiliser la commande \tex{rotate}. Cependant, je n'ai eu aucun problème à appliquer une rotation de 45 degrés à une image avec seulement {\tt orientation=45}, sans avoir besoin d'utiliser la commande \tex{rotate}.
+Le wiki implique que les rotations qui peuvent être obtenues avec cette option doivent être des multiples de 90 (90, 180 ou 270) mais pour obtenir une rotation différente, il faudrait utiliser la commande \tex{rotate}. Cependant, je n'ai eu aucun problème à appliquer une rotation de 45 degrés à une image avec seulement {\tt orientation=45}, sans avoir besoin d'utiliser la commande \tex{rotate}.  % Le wiki "indique"?? et "mais que pour obtenir"??
 
   \stopSmallPrint
   
@@ -140,14 +140,14 @@ Outre les aspects déjà vus, qui impliquent une transformation de l'image à in
 
 % **** Subsubsection
 \startsubsubsection
-  [title={Commandes spécifiques pour transformer d'une image}]
+  [title={Commandes spécifiques pour transformer une image}]
  
 Il existe trois commandes dans \ConTeXt\ qui produisent une certaine transformation dans une image et peuvent être utilisées en combinaison avec \tex{externalfigure}. Il s'agit de~:
 
 \startitemize
-\item {\em Image miroir} : obtenue avec la commande \PlaceMacro{mirror} \tex{mirror}.
+\item {\em Image miroir}~: obtenue avec la commande \PlaceMacro{mirror} \tex{mirror}.
 
-\item {\em Découpe}~: cette opération est réalisée à l'aide de la commande \PlaceMacro{clip}\tex{clip} lorsque les dimensions de la largeur ({\tt width}), de la hauteur ({\tt height}), du décalage horizontal ({\tt hoffset}) et du décalage vertical ({\tt voffset}) sont données. Par exemple :
+\item {\em Découpe}~: cette opération est réalisée à l'aide de la commande \PlaceMacro{clip}\tex{clip} lorsque les dimensions de la largeur ({\tt width}), de la hauteur ({\tt height}), du décalage horizontal ({\tt hoffset}) et du décalage vertical ({\tt voffset}) sont données. Par exemple~:  %% Il semble manquer l'exemple !! ou ajouter "voir ci-dessous"
 
 \item {\em Rotation}~: Une troisième commande capable d'appliquer des transformations à une image est la commande \PlaceMacro{rotate} \tex{rotate}. Elle peut être utilisée en conjonction avec \tex{externalfigure} mais normalement, cela ne serait pas nécessaire étant donné que cette dernière dispose, comme nous l'avons vu, de l'option {\tt orientation} qui produit le même résultat.
 \stopitemize
