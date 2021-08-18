@@ -23,10 +23,10 @@
   [title=Les divisions structurelles d'un document]
 
 
-À l'exception des textes très courts (comme une lettre, par exemple), un document est généralement structuré en blocs ou en groupements de textes qui suivent généralement un ordre hiérarchique. Il n'y a pas de manière standard de nommer ces blocs : dans les romans, par exemple, les divisions structurelles sont généralement appelées \quotation{chapitres} bien que certains -- les plus longs -- aient des blocs plus grands généralement appelés \quotation{parties} qui regroupent un certain nombre de chapitres.  Les œuvres théâtrales font la distinction entre les \quotation{actes} et les \quotation{scènes}. Les manuels universitaires sont divisés (parfois) en \quotation{parties} et \quotation{leçons}, \quotation{sujets} ou \quotation{chapitres} qui, à leur tour, ont souvent des divisions internes également ; le même type de divisions hiérarchiques complexes existe souvent dans d'autres documents universitaires ou techniques (tels que des textes comme le présent texte consacré à l'explication d'un programme ou d'un système informatique. Même les lois sont structurées en \quotation{livres}, (les plus longs et les plus complexes, comme les Codes), \quotation{titres}, \quotation{chapitres}, \quotation{sections}, \quotation{sous-sections}. Les documents scientifiques et techniques peuvent également atteindre jusqu'à six, sept ou même parfois huit niveaux de profondeur.
+À l'exception des textes très courts (comme une lettre, par exemple), un document est généralement structuré en blocs ou en groupements de textes qui suivent généralement un ordre hiérarchique. Il n'y a pas de manière standard de nommer ces blocs~: dans les romans, par exemple, les divisions structurelles sont généralement appelées \quotation{chapitres} bien que certains -- les plus longs -- aient des blocs plus grands généralement appelés \quotation{parties} qui regroupent un certain nombre de chapitres.  Les œuvres théâtrales font la distinction entre les \quotation{actes} et les \quotation{scènes}. Les manuels universitaires sont divisés (parfois) en \quotation{parties} et \quotation{leçons}, \quotation{sujets} ou \quotation{chapitres} qui, à leur tour, ont souvent des divisions internes également~; le même type de divisions hiérarchiques complexes existe souvent dans d'autres documents universitaires ou techniques (tels que des textes comme le présent texte consacré à l'explication d'un programme ou d'un système informatique. Même les lois sont structurées en \quotation{livres}, (les plus longs et les plus complexes, comme les Codes), \quotation{titres}, \quotation{chapitres}, \quotation{sections}, \quotation{sous-sections}. Les documents scientifiques et techniques peuvent également atteindre jusqu'à six, sept ou même parfois huit niveaux de profondeur.
 
 
-Ce chapitre se concentre sur l'analyse du mécanisme que propose \ConTeXt\ pour mettre en oeuvre ces divisions structurelles. Je les désignerai par le terme général de \quotation{sections}.
+Ce chapitre se concentre sur l'analyse du mécanisme que propose \ConTeXt\ pour mettre en œuvre ces divisions structurelles. Je les désignerai par le terme général de \quotation{sections}.
 
 
 
@@ -37,7 +37,7 @@ Il n'existe pas de terme clair qui nous permette de nous référer de manière g
 
 \stopSmallPrint
 
-Chaque \quotation{section} (de manière générique) implique :
+Chaque \quotation{section} (de manière générique) implique~:
 
 \startitemize
 
@@ -125,13 +125,13 @@ En ce qui concerne les sections prédéfinies, les précisions suivantes doivent
 
 \item Dans le \in{tableau}[tbl:sectioned], les commandes de section sont présentées sous leur forme traditionnelle. Mais nous verrons tout de suite qu'elles peuvent également être utilisées comme des {\em environnements} (\tex{startchapter ... \stopchapter}, par exemple) et que c'est l'approche qui est réellement recommandée.
 
-\item Le tableau ne contient que les 6 premiers niveaux de section. Dans mes tests, cependant, j'ai trouvé jusqu'à 12 niveaux : Après \tex{subsubsubsection} vient \tex{subsubsubsubsection}, et ainsi de suite jusqu'à \tex{subsubsubsubsubsubsubsubsubsubsection}, ou \tex{subsubsubsubsubsubsubsubsubsubsubsubject}.
+\item Le tableau ne contient que les 6 premiers niveaux de section. Dans mes tests, cependant, j'ai trouvé jusqu'à 12 niveaux~: Après \tex{subsubsubsection} vient \tex{subsubsubsubsection}, et ainsi de suite jusqu'à \tex{subsubsubsubsubsubsubsubsubsubsection}, ou \tex{subsubsubsubsubsubsubsubsubsubsubsubject}.
 
 \startSmallPrint
 
-Mais il ne faut pas oublier que les niveaux inférieurs (trop profonds) indiqués ci-dessus ne sont guère susceptibles d'améliorer la compréhension d'un texte ! Tout d'abord, nous risquons d'avoir de grandes sections traitant inévitablement de plusieurs sujets, ce qui rendra difficile pour le lecteur d'en {\em saisir} le contenu. En outre, si l'on approfondit excessivement les niveaux, le lecteur risque de perdre le sens global du texte, et l'effet produit est celui d'une fragmentation excessive du matériel concerné. Je crois savoir qu'en général, quatre niveaux sont suffisants ; très occasionnellement, il peut être nécessaire d'aller jusqu'à six ou sept niveaux, mais une plus grande profondeur est rarement une bonne idée.
+Mais il ne faut pas oublier que les niveaux inférieurs (trop profonds) indiqués ci-dessus ne sont guère susceptibles d'améliorer la compréhension d'un texte~! Tout d'abord, nous risquons d'avoir de grandes sections traitant inévitablement de plusieurs sujets, ce qui rendra difficile pour le lecteur d'en {\em saisir} le contenu. En outre, si l'on approfondit excessivement les niveaux, le lecteur risque de perdre le sens global du texte, et l'effet produit est celui d'une fragmentation excessive du matériel concerné. Je crois savoir qu'en général, quatre niveaux sont suffisants~; très occasionnellement, il peut être nécessaire d'aller jusqu'à six ou sept niveaux, mais une plus grande profondeur est rarement une bonne idée.
 
-Du point de vue de l'écriture du fichier source, le fait que la création de sous-niveaux supplémentaires signifie l'ajout d'une autre \quotation{sub} au niveau précédent peut rendre le fichier source presque illisible : ce n'est pas une blague d'essayer de déterminer le niveau d'une commande nommée \quotation{subsubsubsubsubsection} puisque je dois compter toutes les \quotation{subs} ! Mon conseil est donc que si nous avons vraiment besoin de tant de niveaux de profondeur, à partir du cinquième niveau (sous-sous-section), nous ferions mieux de définir nos propres commandes de section (voir \in{section}[sec:definehead]) en leur donnant des noms plus clairs que les noms prédéfinis.
+Du point de vue de l'écriture du fichier source, le fait que la création de sous-niveaux supplémentaires signifie l'ajout d'une autre \quotation{sub} au niveau précédent peut rendre le fichier source presque illisible~: ce n'est pas une blague d'essayer de déterminer le niveau d'une commande nommée \quotation{subsubsubsubsubsection} puisque je dois compter toutes les \quotation{subs}~! Mon conseil est donc que si nous avons vraiment besoin de tant de niveaux de profondeur, à partir du cinquième niveau (sous-sous-section), nous ferions mieux de définir nos propres commandes de section (voir \in{section}[sec:definehead]) en leur donnant des noms plus clairs que les noms prédéfinis.
 
 \stopSmallPrint
 
@@ -140,7 +140,7 @@ Du point de vue de l'écriture du fichier source, le fait que la création de so
 
   \startSmallPrint
 
-La raison pour laquelle la version par défaut de \tex{part} n'imprime rien est que, selon le wiki \ConTeXt\, presque toujours le titre à ce niveau nécessite une mise en page spécifique ; et bien que cela soit vrai, cela ne me semble pas une raison suffisante, puisque, dans la pratique, les chapitres et les sections sont aussi souvent redéfinis, et le fait que les parties n'impriment rien oblige l'utilisateur novice à {\em plonger} dans la documentation pour voir ce qui ne va pas.
+La raison pour laquelle la version par défaut de \tex{part} n'imprime rien est que, selon le wiki \ConTeXt\, presque toujours le titre à ce niveau nécessite une mise en page spécifique~; et bien que cela soit vrai, cela ne me semble pas une raison suffisante, puisque, dans la pratique, les chapitres et les sections sont aussi souvent redéfinis, et le fait que les parties n'impriment rien oblige l'utilisateur novice à {\em plonger} dans la documentation pour voir ce qui ne va pas.
 
     
   \stopSmallPrint
@@ -159,7 +159,7 @@ La raison pour laquelle la version par défaut de \tex{part} n'imprime rien est 
     title=Syntaxe commune des commandes liées aux sections,
   ]
 
-Toutes les commandes de section, y compris les niveaux créés par l'utilisateur (voir \in{section}[sec:definehead]), permettent les formes alternatives de syntaxe suivantes (si, par exemple, nous utilisons le niveau \MyKey{section}) :
+Toutes les commandes de section, y compris les niveaux créés par l'utilisateur (voir \in{section}[sec:definehead]), permettent les formes alternatives de syntaxe suivantes (si, par exemple, nous utilisons le niveau \MyKey{section})~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoI
@@ -174,14 +174,14 @@ Dans les trois méthodes ci-dessus, les arguments entre crochets sont facultatif
 
 \startitemize
 
-  \item Dans la première forme syntaxique, que l'on pourrait appeler la \quotation{\em historique}, la commande prend deux arguments, l'un facultatif entre crochets, l'autre obligatoire entre accolades. L'argument facultatif sert à associer la commande à une étiquette qui sera utilisée pour les références internes (voir \in{section}[sec:références]). L'argument obligatoire entre crochets est le titre de la section.
+  \item Dans la première forme syntaxique, que l'on pourrait appeler  \quotation{\em historique}, la commande prend deux arguments, l'un facultatif entre crochets, l'autre obligatoire entre accolades. L'argument facultatif sert à associer la commande à une étiquette qui sera utilisée pour les références internes (voir \in{section}[sec:références]). L'argument obligatoire entre crochets est le titre de la section.
 
-  \item Les deux autres formes de syntaxe sont plutôt du style de \ConTeXt\ : tout ce que la commande doit savoir est communiqué par des valeurs et des options introduites entre crochets.
+  \item Les deux autres formes de syntaxe sont plutôt du style de \ConTeXt\~: tout ce que la commande doit savoir est communiqué par des valeurs et des options introduites entre crochets.
 
 
   \startSmallPrint
 
-Rappelez-vous que dans \in{sections}[sec:command scope] et \in{}[sec:command options] j'ai dit que dans \ConTeXt, la portée de la commande est indiquée entre crochets, et ses options entre crochets. Mais si l'on y réfléchit, le titre d'une commande de section particulière n'est pas le champ d'application de celle-ci, donc pour être cohérent avec la syntaxe générale, il ne devrait pas être introduit entre crochets, mais comme une option.  \ConTeXt\ permet cette exception car il s'agit de la façon historique de faire les choses dans \TeX, mais il fournit les formes alternatives de syntaxe qui sont plus cohérentes avec sa conception générale. 
+Rappelez-vous que dans \in{sections}[sec:command scope] et \in{}[sec:command options] j'ai dit que, dans \ConTeXt, la portée de la commande est indiquée entre crochets, et ses options entre crochets. Mais si l'on y réfléchit, le titre d'une commande de section particulière n'est pas le champ d'application de celle-ci, donc pour être cohérent avec la syntaxe générale, il ne devrait pas être introduit entre crochets, mais comme une option.  \ConTeXt\ permet cette exception car il s'agit de la façon historique de faire les choses dans \TeX, mais il fournit les formes alternatives de syntaxe qui sont plus cohérentes avec sa conception générale. 
 
   \stopSmallPrint
 
@@ -189,21 +189,21 @@ Rappelez-vous que dans \in{sections}[sec:command scope] et \in{}[sec:command opt
 
   \startitemize
 
-  \item {\tt\bf reference} : étiquette, ou référence, pour les références croisées.
+  \item {\tt\bf reference}~: étiquette, ou référence, pour les références croisées.
 
-  \item {\tt\bf title} : titre de la section qui sera utilisé dans le corps du document. 
+  \item {\tt\bf title}~: titre de la section qui sera utilisé dans le corps du document. 
 
-  \item {\tt\bf list} : Le titre de la section qui sera utilisé dans la table des matières.
+  \item {\tt\bf list}~: Le titre de la section qui sera utilisé dans la table des matières.
 
-  \item {\tt\bf marking} : Le titre de la section qui sera utilisé dans les en-têtes ou les pieds de page.
+  \item {\tt\bf marking}~: Le titre de la section qui sera utilisé dans les en-têtes ou les pieds de page.
 
-  \item {\tt\bf bookmark} : Le titre de la section qui sera utilisé en {\em signet} dans le fichier PDF.
+  \item {\tt\bf bookmark}~: Le titre de la section qui sera utilisé en {\em signet} dans le fichier PDF.
 
-  \item {\tt\bf ownnumber} : Cette option est utilisée dans le cas d'une section qui n'est pas automatiquement numérotée ; dans ce cas, cette option prendra le numéro attribué à la section en question.
+  \item {\tt\bf ownnumber}~: Cette option est utilisée dans le cas d'une section qui n'est pas automatiquement numérotée~; dans ce cas, cette option prendra le numéro attribué à la section en question.
 
   \stopitemize
 
-Bien entendu, les options \MyKey{list}, \MyKey{marking} et \MyKey{bookmark} ne doivent être utilisées que si nous voulons utiliser un titre différent pour remplacer le titre principal défini avec l'option \MyKey{title} . Ceci est très utile, par exemple, lorsque le titre est trop long pour l'en-tête ; bien que pour y parvenir, nous puissions également utiliser l'option \PlaceMacro{nomarking} \tex{nomarking} et \PlaceMacro{nolist} \tex{nolist} (quelque chose de très similaire). D'autre part, nous devons garder à l'esprit que si le texte du titre (l'option \quotation{title}) comprend des virgules, il devra être placé entre accolades, à la fois le texte complet et la virgule, afin que \ConTeXt\ sache que la virgule fait partie du titre. Il en va de même pour les options : \quotation{list}, \quotation{marking} et \quotation{bookmark}. Par conséquent, pour ne pas avoir à surveiller s'il y a ou non des virgules dans le titre, je pense que c'est une bonne idée de prendre l'habitude de toujours enfermer la valeur de l'une de ces options entre des accolades.
+Bien entendu, les options \MyKey{list}, \MyKey{marking} et \MyKey{bookmark} ne doivent être utilisées que si nous voulons utiliser un titre différent pour remplacer le titre principal défini avec l'option \MyKey{title} . Ceci est très utile, par exemple, lorsque le titre est trop long pour l'en-tête~; bien que pour y parvenir, nous puissions également utiliser l'option \PlaceMacro{nomarking} \tex{nomarking} et \PlaceMacro{nolist} \tex{nolist} (quelque chose de très similaire). D'autre part, nous devons garder à l'esprit que si le texte du titre (l'option \quotation{title}) comprend des virgules, il devra être placé entre accolades, à la fois le texte complet et la virgule, afin que \ConTeXt\ sache que la virgule fait partie du titre. Il en va de même pour les options~: \quotation{list}, \quotation{marking} et \quotation{bookmark}. Par conséquent, pour ne pas avoir à surveiller s'il y a ou non des virgules dans le titre, je pense que c'est une bonne idée de prendre l'habitude de toujours enfermer la valeur de l'une de ces options entre des accolades.
 
 \stopitemize
 
@@ -270,7 +270,7 @@ où
 
   \startSmallPrint
 
-En fait, la nouvelle commande hérite du modèle bien plus que ses caractéristiques initiales : elle devient une sorte d'instance personnalisée du modèle, mais partage avec lui, par exemple, le compteur interne qui contrôle la numérotation.
+En fait, la nouvelle commande hérite du modèle bien plus que ses caractéristiques initiales~: elle devient une sorte d'instance personnalisée du modèle, mais partage avec lui, par exemple, le compteur interne qui contrôle la numérotation.
 
   \stopSmallPrint
 
