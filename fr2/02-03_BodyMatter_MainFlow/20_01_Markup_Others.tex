@@ -27,7 +27,7 @@
 
 \tex{startlines}
 
-Comme nous le savons déjà (voir \in{section}[sec:linebreaks]), par défaut, \ConTeXt\ ignore les sauts de ligne du fichier source qu'il considère comme de simples espaces vides, sauf s'il y a deux ou plusieurs sauts de ligne consécutifs, auquel cas un saut de paragraphe sera inséré. Cependant, dans certaines situations, il peut être intéressant de respecter les sauts de ligne du fichier source original tels qu'ils ont été placés, par exemple, lors de l'écriture de poèmes. Pour cela, \ConTeXt\ nous offre l'environnement \MyKey{lines} dont le format est :
+Comme nous le savons déjà (voir \in{section}[sec:linebreaks]), par défaut, \ConTeXt\ ignore les sauts de ligne du fichier source qu'il considère comme de simples espaces vides, sauf s'il y a deux ou plusieurs sauts de ligne consécutifs, auquel cas un saut de paragraphe sera inséré. Cependant, dans certaines situations, il peut être intéressant de respecter les sauts de ligne du fichier source original tels qu'ils ont été placés, par exemple, lors de l'écriture de poèmes. Pour cela, \ConTeXt\ nous offre l'environnement \MyKey{lines} dont le format est~:
 
 \PlaceMacro{startlines}
 \placefigure [force,here,none] [] {}{
@@ -39,21 +39,21 @@ où les options peuvent être l'une des suivantes, entre autres~:
 
 \startitemize
 
-\item {\tt\bf space} : Lorsque cette option est définie avec la valeur \MyKey{on}, en plus de respecter les sauts de ligne du fichier source, l'environnement respectera également les espaces vides du fichier source, en ignorant temporairement la règle d'absorption.
+\item {\tt\bf space}~: Lorsque cette option est définie avec la valeur \MyKey{on}, en plus de respecter les sauts de ligne du fichier source, l'environnement respectera également les espaces vides du fichier source, en ignorant temporairement la règle d'absorption.
 
-\item {\tt\bf before} : Texte ou commande à exécuter avant d'entrer dans l'environnement.
+\item {\tt\bf before}~: Texte ou commande à exécuter avant d'entrer dans l'environnement.
 
-\item {\tt\bf after} : Texte ou commande à exécuter après avoir quitté l'environnement.
+\item {\tt\bf after}~: Texte ou commande à exécuter après avoir quitté l'environnement.
 
-\item {\tt\bf inbetween} : Texte ou commande à exécuter lors de l'entrée dans l'environnement.
+\item {\tt\bf inbetween}~: Texte ou commande à exécuter lors de l'entrée dans l'environnement.
 
-\item {\tt\bf indenting} : Valeur indiquant si les paragraphes doivent être indentés ou non dans l'environnement (voir \in{section}[sec:indentation]).
+\item {\tt\bf indenting}~: Valeur indiquant si les paragraphes doivent être indentés ou non dans l'environnement (voir \in{section}[sec:indentation]).
 
-\item {\tt\bf align} : Alignement des lignes dans l'environnement (voir \in{section}[sec:alignment]).
+\item {\tt\bf align}~: Alignement des lignes dans l'environnement (voir \in{section}[sec:alignment]).
 
-\item {\tt\bf style} : Commande de style à appliquer dans l'environnement.
+\item {\tt\bf style}~: Commande de style à appliquer dans l'environnement.
 
-\item {\tt\bf color} : Couleur à appliquer dans l'environnement.
+\item {\tt\bf color}~: Couleur à appliquer dans l'environnement.
 
 \stopitemize
 
@@ -69,14 +69,14 @@ Two-two won one too.
 \stoplines
 \stopDemoVN}
 
-Nous pouvons également modifier le fonctionnement par défaut de l'environnement avec \PlaceMacro{setuplines} \tex{setuplines} et, comme pour de nombreuses commandes de \ConTeXt, il est également possible d'attribuer un nom à une configuration particulière de cet environnement. Nous le faisons avec la commande \PlaceMacro{definelines} \tex{definelines} dont la syntaxe est :
+Nous pouvons également modifier le fonctionnement par défaut de l'environnement avec \PlaceMacro{setuplines} \tex{setuplines} et, comme pour de nombreuses commandes de \ConTeXt, il est également possible d'attribuer un nom à une configuration particulière de cet environnement. Nous le faisons avec la commande \PlaceMacro{definelines} \tex{definelines} dont la syntaxe est~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoI
 \definelines [Nom] [Configuration]
 \stopDemoI}
 
-où, en tant que configuration, nous pouvons inclure les mêmes options que celles qui ont été expliquées de manière générale pour l'environnement. Une fois que nous avons défini notre environnement de ligne personnalisé, nous devons écrire pour l'insérer :
+où, en tant que configuration, nous pouvons inclure les mêmes options que celles qui ont été expliquées de manière générale pour l'environnement. Une fois que nous avons défini notre environnement de ligne personnalisé, nous devons écrire pour l'insérer~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoI
@@ -99,7 +99,7 @@ Une autre façon d'obtenir les caractères réservés est d'utiliser la commande
 
 \startSmallPrint   % TODO garulfo à mieux expliciter
 
-  Normalement, nous devrions placer le texte que \tex{type} doit afficher entre accolades. Cependant, lorsque ce texte comprend lui-même des crochets ouvrants ou fermants, nous pouvons, à la place, enfermer le texte entre deux caractères égaux qui ne font pas partie du texte qui constitue l'argument de \tex{type}. Par exemple : \cmd{type*…*}, ou \cmd{type+…+}.
+  Normalement, nous devrions placer le texte que \tex{type} doit afficher entre accolades. Cependant, lorsque ce texte comprend lui-même des crochets ouvrants ou fermants, nous pouvons, à la place, enfermer le texte entre deux caractères égaux qui ne font pas partie du texte qui constitue l'argument de \tex{type}. Par exemple~: \cmd{type*…*}, ou \cmd{type+…+}.
 
 \stopSmallPrint
 
@@ -126,11 +126,11 @@ Les options disponibles sont les suivantes~:
 
 \startitemize
 
-\item {\tt\bf continue} : Dans le cas où il y a plusieurs parties de notre document nécessitant une numérotation des lignes, cette option fait en sorte que la numérotation recommence pour chaque partie (\MyKey{continue=no}, la valeur par défaut). En revanche, si la numérotation des lignes doit se poursuivre là où la partie précédente s'est arrêtée, nous choisissons \MyKey{continue=yes}.
+\item {\tt\bf continue}~: Dans le cas où il y a plusieurs parties de notre document nécessitant une numérotation des lignes, cette option fait en sorte que la numérotation recommence pour chaque partie (\MyKey{continue=no}, la valeur par défaut). En revanche, si la numérotation des lignes doit se poursuivre là où la partie précédente s'est arrêtée, nous choisissons \MyKey{continue=yes}.
 
-\item {\tt\bf start} : Indique le numéro de la première ligne dans les cas où nous ne voulons pas qu'il soit \quote{1}, ou qu'il corresponde à l'énumération précédente.
+\item {\tt\bf start}~: Indique le numéro de la première ligne dans les cas où nous ne voulons pas qu'il soit \quote{1}, ou qu'il corresponde à l'énumération précédente.
 
-\item {\tt\bf step} : Toutes les lignes incluses dans l'environnement seront numérotées, mais, au moyen de cette option, nous pouvons indiquer que le numéro n'est imprimé qu'à certains intervalles. Dans le cas des poèmes, par exemple, il est courant que le numéro n'apparaisse que par multiples de 5 (vers 5, 10, 15...).
+\item {\tt\bf step}~: Toutes les lignes incluses dans l'environnement seront numérotées, mais, au moyen de cette option, nous pouvons indiquer que le numéro n'est imprimé qu'à certains intervalles. Dans le cas des poèmes, par exemple, il est courant que le numéro n'apparaisse que par multiples de 5 (vers 5, 10, 15...).
 
 \stopitemize
 
@@ -138,23 +138,23 @@ Toutes ces options peuvent être indiquées, en général pour tous les environn
 
 \startitemize
 
-\item {\tt\bf conversion} : Type de numérotation des lignes. Il peut s'agir de l'un de ceux expliqués sur \at{page}[Num:conversion] concernant la numérotation des chapitres et des sections.
+\item {\tt\bf conversion}~: Type de numérotation des lignes. Il peut s'agir de l'un de ceux expliqués sur \at{page}[Num:conversion] concernant la numérotation des chapitres et des sections.
 
-\item {\tt\bf style} : Commande (ou commandes) déterminant le style qu'aura la numérotation des lignes (police, taille, variante...).
+\item {\tt\bf style}~: Commande (ou commandes) déterminant le style qu'aura la numérotation des lignes (police, taille, variante...).
 
-\item {\tt\bf color} : Couleur dans laquelle le numéro de ligne sera imprimé.
+\item {\tt\bf color}~: Couleur dans laquelle le numéro de ligne sera imprimé.
 
-\item {\tt\bf location} : localisation du numéro de ligne (lieu où il sera placé). Il peut s'agir de l'un des éléments suivants : text, begin, end, default, left, right, inner, outer, inleft, inright, margin, inmargin.
+\item {\tt\bf location}~: localisation du numéro de ligne (lieu où il sera placé). Il peut s'agir de l'un des éléments suivants~: text, begin, end, default, left, right, inner, outer, inleft, inright, margin, inmargin.
 
-\item {\tt\bf distance} : Distance entre le numéro de la ligne et la ligne elle-même.
+\item {\tt\bf distance}~: Distance entre le numéro de la ligne et la ligne elle-même.
 
-\item {\tt\bf align} : Alignement du numéro. Peut être : inner, outer, flushleft, flushright, left, right, middle ou auto.
+\item {\tt\bf align}~: Alignement du numéro. Peut être~: inner, outer, flushleft, flushright, left, right, middle ou auto.
 
-\item {\tt\bf command} : Commande à laquelle le numéro de ligne sera transmis en tant que paramètre avant l'impression.
+\item {\tt\bf command}~: Commande à laquelle le numéro de ligne sera transmis en tant que paramètre avant l'impression.
 
-\item {\tt\bf width} : Largeur réservée à l'impression du numéro de ligne.
+\item {\tt\bf width}~: Largeur réservée à l'impression du numéro de ligne.
 
-\item {\tt\bf left, right, margin} :
+\item {\tt\bf left, right, margin}~:  % Il manque une explication des options
 
 \stopitemize
 
@@ -205,7 +205,7 @@ Une fois qu'une configuration spécifique a été définie et associée à un no
     title={Buffers, modes et \tex{starthiding}},
   ]
 
-Il existe encore de nombreux environnements dans \ConTeXt\ que je n'ai même pas mentionnés, ou seulement de manière très approximative. À titre d'exemple :
+Il existe encore de nombreux environnements dans \ConTeXt\ que je n'ai même pas mentionnés, ou seulement de manière très approximative. À titre d'exemple~:
 
 \startitemize
   
@@ -263,7 +263,7 @@ Pour en savoir plus sur l'un de ces environnements (ou d'autres que je n'ai pas 
 
 \item Rédigez un document de test dans lequel l'environnement est utilisé.
 
-\item Consultez la liste officielle des commandes de \ConTeXt (voir \in{section}[sec:qrc-setup-fr]) pour connaître les options de configuration de l'environnement en question, puis testez-les pour voir exactement ce qu'elles font.
+\item Consultez la liste officielle des commandes de \ConTeXt\ (voir \in{section}[sec:qrc-setup-fr]) pour connaître les options de configuration de l'environnement en question, puis testez-les pour voir exactement ce qu'elles font.
   
   
 \stopitemize
