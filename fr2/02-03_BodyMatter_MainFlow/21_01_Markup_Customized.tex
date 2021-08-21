@@ -24,7 +24,7 @@ En plus de cette possibilité, qui n'est disponible que pour certaines commandes
 
 L'utilisation la plus simple de toutes est d'associer des bouts de texte à un mot, de sorte que chaque fois que ce mot apparaît dans le fichier source, il est remplacé par le texte qui lui est lié. Cela nous permettra, d'une part, d'économiser beaucoup de temps de frappe et, d'autre part, comme avantage supplémentaire, de réduire les possibilités de faire des erreurs de frappe, tout en s'assurant que le texte en question est toujours écrit de la même façon.
 
-Imaginons, par exemple, que nous sommes en train d'écrire un traité sur l'allitération dans les textes latins, où nous citons souvent la phrase latine \quotation{\em O Tite tute Tati, tibi tanta, tyranne, tulisti !}. (C'est toi-même, Titus Tatius, qui t'es fait, à toi, tyran, tant de torts !). Il s'agit d'une phrase assez longue dont deux des mots sont des noms propres et commencent par une majuscule, et où, avouons-le, même si nous aimons la poésie latine, il nous est facile de \quotation{trébucher} en l'écrivant. Dans ce cas, nous pourrions simplement mettre dans le préambule de notre fichier source :
+Imaginons, par exemple, que nous sommes en train d'écrire un traité sur l'allitération dans les textes latins, où nous citons souvent la phrase latine \quotation{\em O Tite tute Tati, tibi tanta, tyranne, tulisti~!}. (C'est toi-même, Titus Tatius, qui t'es fait, à toi, tyran, tant de torts~!). Il s'agit d'une phrase assez longue dont deux des mots sont des noms propres et commencent par une majuscule, et où, avouons-le, même si nous aimons la poésie latine, il nous est facile de \quotation{trébucher} en l'écrivant. Dans ce cas, nous pourrions simplement mettre dans le préambule de notre fichier source~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoI
@@ -41,7 +41,7 @@ Le texte de remplacement peut être du texte pur, ou inclure des commandes, ou e
 
 de sorte que chaque fois que \tex{xvec} apparaît dans le code source, il sera remplacé par l'expression qui lui est associée durant la compilation par \ConTeXt.
 
-La syntaxe générale de la commande \tex{define} est la suivante :
+La syntaxe générale de la commande \tex{define} est la suivante~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoI
@@ -62,7 +62,7 @@ où
 
 La possibilité de fournir aux nouvelles commandes des arguments dans leur définition confère à ce mécanisme une grande souplesse, car elle permet de définir un texte de remplacement variable en fonction des arguments pris.
 
-Par exemple : imaginons que nous voulions écrire une commande qui produise l'ouverture d'une lettre commerciale. Une version très simple de cette commande serait la suivante
+Par exemple~: imaginons que nous voulions écrire une commande qui produise l'ouverture d'une lettre commerciale. Une version très simple de cette commande serait la suivante
 
 \placefigure [force,here,none] [] {}{
 \startDemoVW
@@ -92,7 +92,7 @@ Plus loin, à la dernière ligne de la définition de la commande, nous avons é
 
 Si elle avait deux paramètres, \MyKey{\#1} ferait référence au premier paramètre et \MyKey{\#2} au second. Afin d'appeler la commande (dans le fichier source) après le nom de la commande, les arguments doivent être inclus entre accolades, chaque argument ayant son propre ensemble. Ainsi, la commande que nous venons de définir doit être appelée de la manière suivante~: \MyKey{\tex{EnTetedeLettre}\{Nom du destinataire\}}, tel que cela est fait dans l'exemple.
 
-Nous pourrions encore améliorer la fonction précédente, car elle suppose que la lettre sera envoyée à une femme (elle met \quotation{chère Madame}), alors que nous pourrions peut-être inclure un autre paramètre pour distinguer les destinataires masculins et féminins. par exemple :
+Nous pourrions encore améliorer la fonction précédente, car elle suppose que la lettre sera envoyée à une femme (elle met \quotation{chère Madame}), alors que nous pourrions peut-être inclure un autre paramètre pour distinguer les destinataires masculins et féminins. par exemple~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoVW
@@ -104,7 +104,7 @@ Nous pourrions encore améliorer la fonction précédente, car elle suppose que 
 \EnTetedeLettre{Cher Monsieur}{Antoine Dupond}
 \stopDemoVW}
 
-bien que cela ne soit pas très élégant (du point de vue de la programmation). Il serait préférable que des valeurs symboliques soient définies pour le premier argument (homme/femme ; 0/1 ; m/f) afin que la macro elle-même choisisse le texte approprié en fonction de cette valeur. Mais pour expliquer comment y parvenir, il faut aller plus en profondeur que ce que je pense que le lecteur novice peut comprendre à ce stade.
+bien que cela ne soit pas très élégant (du point de vue de la programmation). Il serait préférable que des valeurs symboliques soient définies pour le premier argument (homme/femme~; 0/1~; m/f) afin que la macro elle-même choisisse le texte approprié en fonction de cette valeur. Mais pour expliquer comment y parvenir, il faut aller plus en profondeur que ce que je pense que le lecteur novice peut comprendre à ce stade.
 
 
 \startSmallPrint
@@ -134,7 +134,7 @@ Parfois, lorsqu'un saut de ligne devient un espace blanc, nous pouvons nous retr
 \TestC{riri}{fifi}{loulou}
 \stopDemoVN}
 
-les commandes \tex{TestA} et \tex{TestB} écrivent le premier argument en italique, le second en gras et le troisième en petites capitales, mais la première insérera un espace entre chacun de ces arguments, alors que la seconde n'en n'insérera pas~: le caractère réservé \% empêche les sauts de ligne d'être traités et ils deviennent de simples espaces vides.
+les commandes \tex{TestA} et \tex{TestB} écrivent le premier argument en italique, le second en gras et le troisième en petites capitales, mais la première insérera un espace entre chacun de ces arguments, alors que la seconde n'en n'insérera pas~: le caractère réservé \% empêche les sauts de ligne d'être traités et ils deviennent de simples espaces vides. %% Il y a trois définitions, les deux premières ont le même résultat, seule la troisième n'insère pas d'espace entre les arguments ; mais le commentaire ne parle que de deux définitions
 
 \stopSmallPrint
 
@@ -152,7 +152,7 @@ les commandes \tex{TestA} et \tex{TestB} écrivent le premier argument en italiq
   \PlaceMacro{definestartstop}
   \index{definestartstop}
 
-Pour créer un nouvel environnement, \ConTeXt\ fournit la commande \tex{definestartstop} dont la syntaxe est la suivante :
+Pour créer un nouvel environnement, \ConTeXt\ fournit la commande \tex{definestartstop} dont la syntaxe est la suivante~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoI
@@ -171,27 +171,27 @@ où
 
   \item {\bf Nom} est le nom que portera le nouvel environnement.
 
-  \item {\bf Configuration} nous permet de configurer le comportement du nouvel environnement. Nous disposons des valeurs suivantes avec lesquelles nous pouvons le configurer :
+  \item {\bf Configuration} nous permet de configurer le comportement du nouvel environnement. Nous disposons des valeurs suivantes avec lesquelles nous pouvons le configurer~:
 
   \startitemize
 
-    \item {\tt before~:} Commandes à exécuter avant d'entrer dans l'environnement.
+    \item {\tt before}~: Commandes à exécuter avant d'entrer dans l'environnement.
 
-    \item {\tt after~:} Commandes à exécuter après avoir quitté l'environnement.
+    \item {\tt after}~: Commandes à exécuter après avoir quitté l'environnement.
 
-    \item {\tt style~:} Style que doit avoir le texte du nouvel environnement.
+    \item {\tt style}~: Style que doit avoir le texte du nouvel environnement.
 
-    \item {\tt setups~:} Ensemble de commandes créées avec \PlaceMacro{startsetups}\tex{startsetups ... \stopsetups}. Cette commande et son utilisation ne sont pas expliquées dans cette introduction.
+    \item {\tt setups}~: Ensemble de commandes créées avec \PlaceMacro{startsetups}\tex{startsetups ... \stopsetups}. Cette commande et son utilisation ne sont pas expliquées dans cette introduction.
 
-    \item {\tt color~:} Couleur à appliquer au texte
+    \item {\tt color}~: Couleur à appliquer au texte
 
-    \item {\tt inbetween, left, right~:} Options non documentées que je n'ai pas réussi à faire fonctionner \Doubt. D'après les tests que j'ai effectués, indiquant une certaine valeur pour ces options, je ne vois aucun changement dans l'environnement. Il est possible que l'impact ne concerne pas l'environnement mais la commande qui semble créer avec \tex{Nom}. Une piste sur \goto{la liste de diffusions NTG-context}[url(https://ntg-context.ntg.narkive.com/Yv6mEMBy/definestartstop-not-functioning-before-after-keys)].
+    \item {\tt inbetween, left, right}~: Options non documentées que je n'ai pas réussi à faire fonctionner \Doubt. D'après les tests que j'ai effectués, indiquant une certaine valeur pour ces options, je ne vois aucun changement dans l'environnement. Il est possible que l'impact ne concerne pas l'environnement mais la commande qui semble créer avec \tex{Nom}. Une piste sur \goto{la liste de diffusions NTG-context}[url(https://ntg-context.ntg.narkive.com/Yv6mEMBy/definestartstop-not-functioning-before-after-keys)].
 
   \stopitemize
 
 \stopitemize
 
-Un exemple de la définition d'un environnement pourrait être le suivant :
+Un exemple de la définition d'un environnement pourrait être le suivant~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoHN
