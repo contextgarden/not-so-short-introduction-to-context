@@ -26,7 +26,7 @@
 
 
 
-En principe, la table des matières contiendra absolument toutes les sections numérotées, bien que nous puissions limiter son niveau de profondeur avec la commande \PlaceMacro{setupcombinedlist} \tex{setupcombinedlist} (dont nous parlerons plus loin). Ainsi, par exemple :
+En principe, la table des matières contiendra absolument toutes les sections numérotées, bien que nous puissions limiter son niveau de profondeur avec la commande \PlaceMacro{setupcombinedlist} \tex{setupcombinedlist} (dont nous parlerons plus loin). Ainsi, par exemple~:
 
 
 \placefigure [force,here,none] [] {}{
@@ -45,7 +45,7 @@ Une particularité de cette commande est qu'elle est sensible à son emplacement
 
 \startSmallPrint
 
-Je ne suis pas vraiment sûr que la table des matières générée par défaut soit {\em complète}, je crois qu'elle comprend suffisamment de niveaux de section pour être complète dans la plupart des cas ; mais je soupçonne qu'elle ne dépassera pas le huitième niveau de section. Quoi qu'il en soit, comme mentionné ci-dessus, nous pouvons ajuster le niveau de sectionnement que la TdM atteint avec
+Je ne suis pas vraiment sûr que la table des matières générée par défaut soit {\em complète}, je crois qu'elle comprend suffisamment de niveaux de section pour être complète dans la plupart des cas~; mais je soupçonne qu'elle ne dépassera pas le huitième niveau de section. Quoi qu'il en soit, comme mentionné ci-dessus, nous pouvons ajuster le niveau de sectionnement que la TdM atteint avec
 
 \placefigure [force,here,none] [] {}{
 \startDemoI
@@ -59,15 +59,15 @@ Je ne suis pas vraiment sûr que la table des matières générée par défaut s
 
 \stopitemize
 
-% TODO Garulfo : il me semble que l'on doit pouvoir simplifier la formulation et éviter une certaine redondance.
+% TODO Garulfo~: il me semble que l'on doit pouvoir simplifier la formulation et éviter une certaine redondance.
 
-En ce qui concerne l'explication technique et détaillée, afin de bien comprendre le fonctionnement par défaut de \tex{placecontent}, il est essentiel de se rappeler que les différentes sections sont, en fait, des {\em environnements} pour \ConTeXt\ Mark~IV qui commencent par \tex{start{\em TypedeSection}} et se terminent par \tex{stop{\em TypedeSection}} et peuvent être contenues dans d'autres commandes de section de niveau inférieur. Donc, en tenant compte de cela, nous pouvons dire que \tex{placecontent} génère par défaut une table des matières qui comprendra uniquement~:
+En ce qui concerne l'explication technique et détaillée, afin de bien comprendre le fonctionnement par défaut de \tex{placecontent}, il est essentiel de se rappeler que les différentes sections sont, en fait, des {\em environnements} pour \ConTeXt\ Mark~IV qui commencent par \tex{start{\em TypedeSection}} et se terminent par \tex{stop{\em TypedeSection}} et peuvent être contenues dans d'autres commandes de section de niveau inférieur. Donc, en tenant compte de cela, nous pouvons dire que \tex{placecontent} génère par défaut une table des matières qui comprendra uniquement~: % "et peuvent être contenues dans..." ou plutôt "peuvent contenir d'autres commandes de niveau >inférieur<"
 
 \startitemize
 
 \item les éléments qui appartiennent à l'{\em environnement} (niveau de section) où la commande est placée. Cela signifie que la commande, lorsqu'elle est placée dans un chapitre, ne fera pas apparaître les sections et sous-sections des autres chapitres.
 
-\item les éléments qui ont un niveau de section inférieur au niveau correspondant au point où se trouve la commande. Cela signifie que si la commande se trouve dans un chapitre, seules les sections, les sous-sections et les autres niveaux inférieurs sont inclus ; Si la commande se trouve au niveau d'une section, seules les sous-sections, les sous-sous-sections et les autres niveaux inférieurs sont inclus.
+\item les éléments qui ont un niveau de section inférieur au niveau correspondant au point où se trouve la commande. Cela signifie que si la commande se trouve dans un chapitre, seules les sections, les sous-sections et les autres niveaux inférieurs sont inclus~; si la commande se trouve au niveau d'une section, seules les sous-sections, les sous-sous-sections et les autres niveaux inférieurs sont inclus.
 
 \stopitemize
 
@@ -75,7 +75,7 @@ En outre, pour que la table des matières soit générée, il faut que \tex{plac
 
 \startSmallPrint
 
-Je ne suis pas sûr d'avoir été clair dans l'explication ci-dessus. Peut-être qu'avec un exemple un peu plus détaillé que les précédents, nous pourrons mieux comprendre ce que je veux dire : imaginons la structure suivante d'un document :
+Je ne suis pas sûr d'avoir été clair dans l'explication ci-dessus. Peut-être qu'avec un exemple un peu plus détaillé que les précédents, nous pourrons mieux comprendre ce que je veux dire~: imaginons la structure suivante d'un document~:
 
 \vbox{ \startitemize[packed]
 
@@ -107,7 +107,7 @@ Je ne suis pas sûr d'avoir été clair dans l'explication ci-dessus. Peut-être
 
   \stopitemize}
 
-Ainsi : \tex{placecontent} placée avant le chapitre 1 générera une table des matières complète, similaire à celle générée par \tex{completecontent} mais sans titre. Mais si la commande est placée à l'intérieur du chapitre 1 et avant la section 1.1, la table des matières sera uniquement celle du chapitre ; et si elle est placée au début de la section 1.2, la table des matières sera uniquement le contenu de cette section. Mais si la commande est placée, par exemple, entre les sections 1.1 et 1.2, elle sera ignorée. Elle sera également ignorée si elle est placée à la fin d'une section, ou à la fin du document.
+Ainsi~: \tex{placecontent} placée avant le chapitre 1 générera une table des matières complète, similaire à celle générée par \tex{completecontent} mais sans titre. Mais si la commande est placée à l'intérieur du chapitre 1 et avant la section 1.1, la table des matières sera uniquement celle du chapitre~; et si elle est placée au début de la section 1.2, la table des matières sera uniquement le contenu de cette section. Mais si la commande est placée, par exemple, entre les sections 1.1 et 1.2, elle sera ignorée. Elle sera également ignorée si elle est placée à la fin d'une section, ou à la fin du document.
 
 \stopSmallPrint
 
@@ -166,13 +166,13 @@ Le fonctionnement par défaut de \tex{placecontent} vis-à-vis de la position de
 
 \startitemize
 
-item {\tt all} : la TdM sera complète, quel que soit l'endroit du fichier source où se trouve la commande.
+item {\tt all}~: la TdM sera complète, quel que soit l'endroit du fichier source où se trouve la commande.
 
-\item {\tt previous} : la table des matières n'inclura que les commandes de section (du niveau auquel nous nous trouvons) {\em précédent} la commande \tex{placecontent}. Cette option est destinée aux TdMs qui sont positionnées à en fin de document ou en fin de la section courante.
+\item {\tt previous}~: la table des matières n'inclura que les commandes de section (du niveau auquel nous nous trouvons) {\em précédent} la commande \tex{placecontent}. Cette option est destinée aux TdMs qui sont positionnées en fin de document ou en fin de la section courante.
 
-\item {\tt part, chapter, section, subsection...} : implique que la TdM doit être limitée au niveau de section indiqué.
+\item {\tt part, chapter, section, subsection...}~: implique que la TdM doit être limitée au niveau de section indiqué.
 
-\item {\tt component} : dans les projets multifichiers (voir \in{section} [sec-projects]), cette option génère uniquement la TdM correspondant au {\em composant} (component) où se trouve la commande \tex{placecontent} ou \tex{completecontent}.
+\item {\tt component}~: dans les projets multifichiers (voir \in{section} [sec-projects]), cette option génère uniquement la TdM correspondant au {\em composant} (component) où se trouve la commande \tex{placecontent} ou \tex{completecontent}.
 
 \stopitemize
 
@@ -193,7 +193,7 @@ L'option {\tt alternative} contrôle la présentation générale de la table des
 \placetable
   [here]
   [tbl:contentalternatives]
-  {\tfx Ways of formatting the table of contents}
+  {\tfx Ways of formatting the table of contents}  % à traduire ??
 {\switchtobodyfont[small]
 \starttabulate[|c|l|l|]
 \HL
@@ -293,26 +293,26 @@ Par ailleurs, je pense que pour apprécier réellement les différences entre le
   ]
   \PlaceMacro{setuplist}
 
-Nous avons vu que l'option {\tt alternative} de \tex{placecontent} ou \tex{completecontent} nous permet de contrôler la {\em mise en page} générale de la table des matières, c'est-à-dire les informations qui seront affichées pour chaque rubrique, et la présence ou non de sauts de ligne séparant les différentes rubriques. Les ajustements finaux de chaque entrée de la table des matières sont effectués avec la commande \tex{setuplist} dont la syntaxe est la suivante :
+Nous avons vu que l'option {\tt alternative} de \tex{placecontent} ou \tex{completecontent} nous permet de contrôler la {\em mise en page} générale de la table des matières, c'est-à-dire les informations qui seront affichées pour chaque rubrique, et la présence ou non de sauts de ligne séparant les différentes rubriques. Les ajustements finaux de chaque entrée de la table des matières sont effectués avec la commande \tex{setuplist} dont la syntaxe est la suivante~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoI
 \setuplist[Élement][Configuration]
 \stopDemoI}
 
-où {\em Élement} fait référence à un type particulier de section. Il peut s'agir de {\tt part}, {\tt chapter}, {\tt section}, etc. On peut également configurer plusieurs éléments en même temps, en les séparant par des virgules. {\em Configuration} offre jusqu'à 54 possibilités, dont beaucoup, comme d'habitude, ne sont pas expressément documentées ; mais cela n'empêche pas celles qui sont documentées, ou celles qui ne sont pas suffisamment claires, de permettre un ajustement très complet de la TdM.  Je vais maintenant expliquer les options les plus importantes, en les regroupant selon leur utilité, mais avant de les aborder, rappelons qu'une entrée de la TdM, selon la valeur de l'option {\tt alternative}, peut comporter jusqu'à trois éléments différents : Le numéro de section, le titre de la section et le numéro de page. Les options de configuration nous permettent de configurer les différents composants de manière globale ou séparée :
+où {\em Élement} fait référence à un type particulier de section. Il peut s'agir de {\tt part}, {\tt chapter}, {\tt section}, etc. On peut également configurer plusieurs éléments en même temps, en les séparant par des virgules. {\em Configuration} offre jusqu'à 54 possibilités, dont beaucoup, comme d'habitude, ne sont pas expressément documentées~; mais cela n'empêche pas celles qui sont documentées, ou celles qui ne sont pas suffisamment claires, de permettre un ajustement très complet de la TdM.  Je vais maintenant expliquer les options les plus importantes, en les regroupant selon leur utilité, mais avant de les aborder, rappelons qu'une entrée de la TdM, selon la valeur de l'option {\tt alternative}, peut comporter jusqu'à trois éléments différents~: Le numéro de section, le titre de la section et le numéro de page. Les options de configuration nous permettent de configurer les différents composants de manière globale ou séparée~:
 
 
 \startitemize
 
-\item {\bf Inclusion ou exclusion des différents composants} : Si nous avons choisi une alternative qui inclut, en plus du titre, le numéro de section et le numéro de page (alternatives \quote{a} \quote{b} \quote{c} ou \quote{d}), les options {\tt headnumber=no} ou {\tt pagenumber=no} indiquent pour le niveau spécifique que nous configurons,  que le numéro de section ({\tt headnumber}) ou le numéro de page ({\tt pagenumber}) ne doivent pas être affichés.
+\item {\bf Inclusion ou exclusion des différents composants}~: Si nous avons choisi une alternative qui inclut, en plus du titre, le numéro de section et le numéro de page (alternatives \quote{a} \quote{b} \quote{c} ou \quote{d}), les options {\tt headnumber=no} ou {\tt pagenumber=no} indiquent pour le niveau spécifique que nous configurons,  que le numéro de section ({\tt headnumber}) ou le numéro de page ({\tt pagenumber}) ne doivent pas être affichés.
 
-\item {\bf Couleur et style} : Nous savons déjà que l'entrée qui génère une section spécifique dans la TdM peut avoir (selon l'alternative) jusqu'à trois composants différents : le numéro de section, le titre et le numéro de page. Nous pouvons indiquer conjointement le style et la couleur des trois composants à l'aide des options {\tt style} et {\tt couleur}, ou le faire individuellement pour chaque composant au moyen des options
+\item {\bf Couleur et style}~: Nous savons déjà que l'entrée qui génère une section spécifique dans la TdM peut avoir (selon l'alternative) jusqu'à trois composants différents~: le numéro de section, le titre et le numéro de page. Nous pouvons indiquer conjointement le style et la couleur des trois composants à l'aide des options {\tt style} et {\tt couleur}, ou le faire individuellement pour chaque composant au moyen des options
 {\tt numberstyle}, {\tt textstyle} et {\tt pagestyle}  (pour le style) et
 {\tt numbercolor}, {\tt textcolor} ou {\tt pagecolor} pour la couleur.
 
 
-Pour contrôler l'apparence de chaque entrée, en plus du style lui-même, nous pouvons appliquer une commande à l'entrée entière ou à l'un de ses différents éléments. Pour cela, il existe les options {\tt command}, {\tt numbercommand}, {\tt pagecommand} et {\tt textcommand}. La commande indiquée ici peut être une commande standard \ConTeXt\ ou une commande de notre propre création. Le numéro de section, le texte du titre et le numéro de page seront passés comme arguments à l'option {\tt command}, tandis que le titre de la section sera passé comme argument à {\tt textcommand} et le numéro de page à {\tt pagecommand}. Ainsi, par exemple, la phrase suivante fera en sorte que les titres de section soient écrits en (fausses) petites majuscules :
+Pour contrôler l'apparence de chaque entrée, en plus du style lui-même, nous pouvons appliquer une commande à l'entrée entière ou à l'un de ses différents éléments. Pour cela, il existe les options {\tt command}, {\tt numbercommand}, {\tt pagecommand} et {\tt textcommand}. La commande indiquée ici peut être une commande standard \ConTeXt\ ou une commande de notre propre création. Le numéro de section, le texte du titre et le numéro de page seront passés comme arguments à l'option {\tt command}, tandis que le titre de la section sera passé comme argument à {\tt textcommand} et le numéro de page à {\tt pagecommand}. Ainsi, par exemple, la phrase suivante fera en sorte que les titres de section soient écrits en (fausses) petites majuscules~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoVW
@@ -335,19 +335,19 @@ Pour contrôler l'apparence de chaque entrée, en plus du style lui-même, nous 
 
 \stopDemoVW}
 
-\item {\bf Séparation des autres éléments de la TdM} : Les options {\tt before} et {\tt after} nous permettent d'indiquer les commandes qui seront exécutées avant ({\tt before}) et après ({\tt after}) la composition de l'entrée de la table des matières. Normalement, ces commandes sont utilisées pour définir l'espacement ou un élément de séparation (tel un trait horizontal) entre les entrées précédentes et suivantes.
+\item {\bf Séparation des autres éléments de la TdM}~: Les options {\tt before} et {\tt after} nous permettent d'indiquer les commandes qui seront exécutées avant ({\tt before}) et après ({\tt after}) la composition de l'entrée de la table des matières. Normalement, ces commandes sont utilisées pour définir l'espacement ou un élément de séparation (tel un trait horizontal) entre les entrées précédentes et suivantes.
 
-\item {\bf Indentation d'un élément} : défini avec l'option {\tt margin} qui nous permet de définir l'espace d'indentation gauche des entrées du niveau que nous configurons.
+\item {\bf Indentation d'un élément}~: défini avec l'option {\tt margin} qui nous permet de définir l'espace d'indentation gauche des entrées du niveau que nous configurons.
 
-\item {\bf Hyperliens intégrés à la TdM} : Par défaut, les entrées de l'index comprennent un hyperlien vers la page du document où commence la section en question. L'option {\tt interaction} permet de désactiver cette fonction ({\tt interaction=no}) ou de limiter la partie de l'entrée d'index où se trouvera l'hyperlien, qui peut être le numéro de section ({\tt interaction=number} ou {\tt interaction=sectionnumber}), le titre de la section ({\tt interaction=text} ou {\tt interaction=title}) ou le numéro de page ({\tt interaction=page} ou {\tt interaction=pagenumber}).
+\item {\bf Hyperliens intégrés à la TdM}~: Par défaut, les entrées de l'index comprennent un hyperlien vers la page du document où commence la section en question. L'option {\tt interaction} permet de désactiver cette fonction ({\tt interaction=no}) ou de limiter la partie de l'entrée d'index où se trouvera l'hyperlien, qui peut être le numéro de section ({\tt interaction=number} ou {\tt interaction=sectionnumber}), le titre de la section ({\tt interaction=text} ou {\tt interaction=title}) ou le numéro de page ({\tt interaction=page} ou {\tt interaction=pagenumber}).
 
 \item {\em Autres aspects}:
 
 \startitemize
 
-\item {\tt width et distance} : spécifient respectivement la largeur accordé à l'affichage du numéro et la distance de séparation entre l'espace d'affichage du numéro et le titre de la section. Il peut s'agir d'une dimension (ou du mot clé {\tt fit} pour {\tt width} qui définit la largeur exacte du numéro de section). 
+\item {\tt width et distance}~: spécifient respectivement la largeur accordé à l'affichage du numéro et la distance de séparation entre l'espace d'affichage du numéro et le titre de la section. Il peut s'agir d'une dimension (ou du mot clé {\tt fit} pour {\tt width} qui définit la largeur exacte du numéro de section). 
 
-\item {\tt numberalign} : indique l'alignement des éléments de numérotation ; il peut être {\tt left}, {\tt right}, {\tt middle}, {\tt flushright}, {\tt flushleft}, {\tt inner}, {\tt outer}
+\item {\tt numberalign}~: indique l'alignement des éléments de numérotation~; il peut être {\tt left}, {\tt right}, {\tt middle}, {\tt flushright}, {\tt flushleft}, {\tt inner}, {\tt outer}
 
 Voici un exemple qui combine ces trois dernières options~:
 
@@ -375,7 +375,7 @@ Voici un exemple qui combine ces trois dernières options~:
 \stopchapter
 \stopDemoVW}
 
-\item {\tt symbol} : permet de remplacer le numéro de section par un {\em symbole}. Trois valeurs possibles sont prises en charge : {\tt one}, {\tt two} et {\tt three}. La valeur {\tt none} de cette option supprime le numéro de section de la table des matières.
+\item {\tt symbol}~: permet de remplacer le numéro de section par un {\em symbole}. Trois valeurs possibles sont prises en charge~: {\tt one}, {\tt two} et {\tt three}. La valeur {\tt none} de cette option supprime le numéro de section de la table des matières.
 
 \stopitemize
 
@@ -446,7 +446,7 @@ Le mécanisme par lequel \ConTeXt\ construit la TdM implique que toutes les sect
 
 Par conséquent, si nous voulons qu'un type de section non numéroté particulier -- par exemple, {\tt subject} -- soit inclus dans la table des matières, nous devons modifier la valeur de l'option {\tt incrementnumber} pour ce type de section, en lui attribuant la valeur {\tt yes}, puis inclure ce type de section parmi ceux qui doivent être affichés dans la table des matières, ce qui se fait, comme expliqué précédemment, avec \tex{setupcombinedlist}.
 
-Nous pouvons ensuite, si nous le souhaitons, formater cette entrée en utilisant \tex{setuplist} de la même manière que les autres ; par exemple~:
+Nous pouvons ensuite, si nous le souhaitons, formater cette entrée en utilisant \tex{setuplist} de la même manière que les autres~; par exemple~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoVW
@@ -484,7 +484,7 @@ Nous pouvons ensuite, si nous le souhaitons, formater cette entrée en utilisant
 
 On peut envoyer soit une entrée (simulant l'existence d'une section qui n'existe pas réellement), soit une commande à la table des matières, à partir de n'importe quel point du fichier source.
  
-Pour envoyer une entrée qui simule l'existence d'une section qui n'existe pas réellement, utilisez la fonction \PlaceMacro{writetolist} \tex{writetolist} dont la syntaxe est :
+Pour envoyer une entrée qui simule l'existence d'une section qui n'existe pas réellement, utilisez la fonction \PlaceMacro{writetolist} \tex{writetolist} dont la syntaxe est~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoI
@@ -495,13 +495,13 @@ dans laquelle~:
 
 \startitemize
 
-\item Le premier argument indique le niveau que doit avoir cette entrée de section dans la table des matières : {\tt chapter}, {\tt section}, {\tt sous-section}, etc.
+\item Le premier argument indique le niveau que doit avoir cette entrée de section dans la table des matières~: {\tt chapter}, {\tt section}, {\tt sous-section}, etc.
 
-\item Le deuxième argument, qui est facultatif, permet de configurer cette entrée d'une manière particulière. Si l'entrée envoyée manuellement est omise, elle sera formatée comme le sont toutes les entrées du niveau indiqué par le premier argument ; je dois cependant signaler que dans mes tests, je n'ai pas réussi à le faire fonctionner.
+\item Le deuxième argument, qui est facultatif, permet de configurer cette entrée d'une manière particulière. Si l'entrée envoyée manuellement est omise, elle sera formatée comme le sont toutes les entrées du niveau indiqué par le premier argument~; je dois cependant signaler que dans mes tests, je n'ai pas réussi à le faire fonctionner.
 
 \startSmallPrint
 
-Tant dans la liste officielle des commandes de \ConTeXt\ (voir \in{section}[sec:qrc-setup-fr]) que dans le wiki, on nous dit que cet argument permet les \Doubt mêmes valeurs que \tex{setuplist} qui est la commande qui nous permet de formater les différentes entrées de la COT. Mais, j'insiste, dans mes tests je n'ai pas réussi à modifier de quelque manière que ce soit l'apparence de l'entrée de la TdM envoyée manuellement.
+Tant dans la liste officielle des commandes de \ConTeXt\ (voir \in{section}[sec:qrc-setup-fr]) que dans le wiki, on nous dit que cet argument permet les \Doubt mêmes valeurs que \tex{setuplist} qui est la commande qui nous permet de formater les différentes entrées de la COT. Mais, j'insiste, dans mes tests je n'ai pas réussi à modifier de quelque manière que ce soit l'apparence de l'entrée de la TdM envoyée manuellement. % que signifie COT ?
 
 \stopSmallPrint
 
@@ -511,7 +511,7 @@ Tant dans la liste officielle des commandes de \ConTeXt\ (voir \in{section}[sec:
 
 \stopitemize
 
-Ceci est utile, par exemple, si nous voulons envoyer une section non numérotée particulière, mais seulement celle-ci à la table des matières. Dans \in{section}[sec:toc with unnumbered secs], il est expliqué comment obtenir qu'une catégorie entière de sections non numérotées soit envoyée à la table des matières ; mais si nous voulons seulement y envoyer une occurrence particulière d'un type de section, il est plus pratique d'utiliser la commande \tex{writetolist} localement. Ainsi, par exemple, si nous voulons que la section de notre document contenant la bibliographie ne soit pas une section numérotée, mais qu'elle soit tout de même incluse dans la table des matières, nous devons écrire~:
+Ceci est utile, par exemple, si nous voulons envoyer une section non numérotée particulière, mais seulement celle-ci à la table des matières. Dans \in{section}[sec:toc with unnumbered secs], il est expliqué comment obtenir qu'une catégorie entière de sections non numérotées soit envoyée à la table des matières~; mais si nous voulons seulement y envoyer une occurrence particulière d'un type de section, il est plus pratique d'utiliser la commande \tex{writetolist} localement. Ainsi, par exemple, si nous voulons que la section de notre document contenant la bibliographie ne soit pas une section numérotée, mais qu'elle soit tout de même incluse dans la table des matières, nous devons écrire~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoVW
@@ -530,7 +530,7 @@ Ceci est utile, par exemple, si nous voulons envoyer une section non numérotée
 
 Voyez comment nous utilisons la version non numérotée de {\tt section}, qui est {\tt subject}, pour la section mais nous l'envoyons à l'index, manuellement, comme s'il s'agissait d'une section numérotée ({\tt section}).
 
-Une autre commande destinée à influencer manuellement la table des matières est \PlaceMacro{writebetweenlist} \tex{writebetweenlist} qui est utilisée pour envoyer non pas une entrée elle-même, mais une {\em commande} à la table des matières, depuis un point particulier du document. Par exemple, si nous voulons inclure une ligne entre deux éléments de la TdM, nous pouvons écrire ce qui suit à n'importe quel endroit du document situé entre les deux sections concernées :
+Une autre commande destinée à influencer manuellement la table des matières est \PlaceMacro{writebetweenlist} \tex{writebetweenlist} qui est utilisée pour envoyer non pas une entrée elle-même, mais une {\em commande} à la table des matières, depuis un point particulier du document. Par exemple, si nous voulons inclure une ligne entre deux éléments de la TdM, nous pouvons écrire ce qui suit à n'importe quel endroit du document situé entre les deux sections concernées~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoVW
