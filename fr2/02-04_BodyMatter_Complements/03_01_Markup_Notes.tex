@@ -24,33 +24,33 @@
 \tex{placenotes}
 
 
-Les notes sont des \quotation{éléments textuels secondaires employés à des fins diverses, comme clarifier ou prolonger le texte principal, fournir la référence bibliographique des sources, y compris les citations, renvoyer à d'autres documents ou énoncer le sens du texte}. [{\em Libro de Estilo de la Lengua española} (Guide de style de la langue espagnole), p. 195]. Elles sont particulièrement importantes dans les textes de nature académique. Elles peuvent être placés à différents endroits de la page ou du document. Aujourd'hui, les plus répandues sont celles qui sont situées en bas de page (appelées, par conséquent, notes de bas de page) ; parfois, elles sont également situées dans l'une des marges (notes de marge), à la fin de chaque chapitre ou section, ou à la fin du document (notes de fin de document). Dans les documents particulièrement complexes, il peut également y avoir différentes séries de notes : notes de l'auteur, notes du traducteur, mises à jour, etc. En particulier, dans les éditions critiques, l'appareil de notes peut devenir assez complexe et seuls quelques systèmes de composition sont capables de le supporter. \ConTeXt\ est l'un d'entre eux. De nombreuses commandes sont disponibles pour établir et configurer les différents types de notes. 
+Les notes sont des \quotation{éléments textuels secondaires employés à des fins diverses, comme clarifier ou prolonger le texte principal, fournir la référence bibliographique des sources, y compris les citations, renvoyer à d'autres documents ou énoncer le sens du texte}. [{\em Libro de Estilo de la Lengua española} (Guide de style de la langue espagnole), p. 195]. Elles sont particulièrement importantes dans les textes de nature académique. Elles peuvent être placés à différents endroits de la page ou du document. Aujourd'hui, les plus répandues sont celles qui sont situées en bas de page (appelées, par conséquent, notes de bas de page)~; parfois, elles sont également situées dans l'une des marges (notes de marge), à la fin de chaque chapitre ou section, ou à la fin du document (notes de fin de document). Dans les documents particulièrement complexes, il peut également y avoir différentes séries de notes~: notes de l'auteur, notes du traducteur, mises à jour, etc. En particulier, dans les éditions critiques, l'appareil de notes peut devenir assez complexe et seuls quelques systèmes de composition sont capables de le supporter. \ConTeXt\ est l'un d'entre eux. De nombreuses commandes sont disponibles pour établir et configurer les différents types de notes. 
 
-Pour expliquer cela, il est utile de commencer par indiquer les différents éléments qui peuvent être impliqués dans une note :
+Pour expliquer cela, il est utile de commencer par indiquer les différents éléments qui peuvent être impliqués dans une note~:
 
 
 \startitemize
 
-\item {\em Marque} ou note {\em ancre} : Signe placé dans le corps du texte pour indiquer qu'une note lui est associée. Tous les types de notes ne sont pas associés à une {\em ancre}, mais lorsqu'il y en a une, cette {\em ancre} apparaît à deux endroits : à l'endroit du texte principal auquel la note fait référence, et au début du texte de la note elle-même. C'est la présence de la même marque de référence à ces deux endroits qui permet d'associer la note au texte principal.
+\item {\em Marque} ou note {\em ancre}~: Signe placé dans le corps du texte pour indiquer qu'une note lui est associée. Tous les types de notes ne sont pas associés à une {\em ancre}, mais lorsqu'il y en a une, cette {\em ancre} apparaît à deux endroits~: à l'endroit du texte principal auquel la note fait référence, et au début du texte de la note elle-même. C'est la présence de la même marque de référence à ces deux endroits qui permet d'associer la note au texte principal.
 
-\item La note {\em ID ou identifiant} : La lettre, le chiffre ou le symbole qui identifie la note et la distingue des autres notes. Certaines notes, par exemple les notes de marge, peuvent ne pas avoir d'ID. Lorsque ce n'est pas le cas, l'identifiant coïncide normalement avec l'{\em ancre} de la note.
+\item La note {\em ID ou identifiant}~: La lettre, le chiffre ou le symbole qui identifie la note et la distingue des autres notes. Certaines notes, par exemple les notes de marge, peuvent ne pas avoir d'ID. Lorsque ce n'est pas le cas, l'identifiant coïncide normalement avec l'{\em ancre} de la note.
 
 \startSmallPrint
 
-Si nous pensons exclusivement aux notes de bas de page, nous ne verrons aucune différence entre ce que je viens d'appeler une {\em Marque} et l’{\em id}. Nous voyons clairement la différence dans d'autres types de notes : Les notes de ligne, par exemple, ont un id, mais pas de marque de référence.
+Si nous pensons exclusivement aux notes de bas de page, nous ne verrons aucune différence entre ce que je viens d'appeler une {\em Marque} et l’{\em id}. Nous voyons clairement la différence dans d'autres types de notes~: Les notes de ligne, par exemple, ont un id, mais pas de marque de référence.
     
 \stopSmallPrint
 
 
 \item {\em Texte} ou {\em Contenu} de la note, toujours situé à un endroit différent sur la page ou dans le document que la commande qui génère la note et indique son contenu.
 
-\item {\em Étiquette} associée à la note : Étiquette ou nom associé à une note qui n'apparaît pas dans le document final, mais qui permet d'y faire référence et de retrouver son identifiant ailleurs dans le document.
+\item {\em Étiquette} associée à la note~: Étiquette ou nom associé à une note qui n'apparaît pas dans le document final, mais qui permet d'y faire référence et de retrouver son identifiant ailleurs dans le document.
 
 \stopitemize
 
 % *** Subsection 
 \startsubsection
-  [title=Le types de notes dans \ConTeXt\ et les commandes associées]
+  [title=Les types de notes dans \ConTeXt\ et les commandes associées]
 
 Nous disposons de différents types de notes dans \ConTeXt. Pour l'instant, je me contenterai de les énumérer, en les décrivant en termes généraux et en fournissant des informations sur les commandes qui les génèrent. Plus tard, je développerai les deux premiers~:
 
@@ -59,7 +59,7 @@ Nous disposons de différents types de notes dans \ConTeXt. Pour l'instant, je m
 
 \item {\bf Notes de bas de page (footnotes)~:} Sans aucun doute la plus populaire, à tel point qu'il est courant que tous les types de notes soient désignés par le terme générique de {\em notes de bas de page}. Les notes de bas de page introduisent une {\em marque} avec l'{\em id} de la note à l'endroit du document où se trouve la commande, et insèrent le texte de la note elle-même en bas de la page où la marque apparaît. Elles sont créées avec la commande \tex{footnote}.
 
-\item {\bf Notes de fin de document (endnotes)~:} Ces notes, créées avec la commande \tex{endnote}, sont insérées à l'endroit du document où se trouve une marque portant l'identifiant de la note ; mais le contenu de la note est inséré à un autre endroit du document, et l'insertion est produite par une commande différente (\tex{placenotes}).
+\item {\bf Notes de fin de document (endnotes)~:} Ces notes, créées avec la commande \tex{endnote}, sont insérées à l'endroit du document où se trouve une marque portant l'identifiant de la note~; mais le contenu de la note est inséré à un autre endroit du document, et l'insertion est produite par une commande différente (\tex{placenotes}).
 
 \item {\bf Notes marginales (margin notes)~:} Comme leur nom l'indique, elles sont écrites dans la marge du texte et il n'y a pas d'identifiant ou de marque ou d'ancre générée automatiquement dans le corps du document. Les deux principales commandes (mais pas les seules) qui les créent sont \tex{inmargin} et \tex{margintext} (voir \in{section}[sec:margintext]).
 
@@ -77,7 +77,7 @@ Je vais maintenant développer exclusivement les deux premiers types de notes~:
 
 \startSmallPrint
 
-Cependant, pour le lecteur intéressé, je recommande une vidéo (en espagnol) accompagnée d'un texte (également en espagnol) sur les éditions critiques dans \ConTeXt, dont l'auteur est Pablo Rodríguez. Elle est disponible \goto{en ligne}[url(http://www.ediciones-criticas.tk/)]. Il est également très utile pour comprendre plusieurs des paramètres généraux des notes en général.
+Cependant, pour le lecteur intéressé, je recommande une vidéo (en espagnol) accompagnée d'un texte (également en espagnol) sur les éditions critiques dans \ConTeXt, dont l'auteur est Pablo Rodríguez. Elle est disponible \goto{en ligne}[url(http://www.ediciones-criticas.tk/)]. Elle est également très utile pour comprendre plusieurs des paramètres généraux des notes en général.
 
 \stopSmallPrint
 
@@ -94,7 +94,7 @@ Cependant, pour le lecteur intéressé, je recommande une vidéo (en espagnol) a
 
 La syntaxe des commandes \tex{footnotes} et \tex{endnotes} et les mécanismes de configuration et de personnalisation dont elles disposent sont assez similaires, puisque, en réalité, ces deux types de notes sont des instances particulières d'une construction plus générale (notes), dont d'autres instances peuvent être définies avec la commande \tex{definenote} (voir \in{section}[sec:definenote]).
 
-La syntaxe de la commande qui crée chacun de ces types de notes est la suivante :
+La syntaxe de la commande qui crée chacun de ces types de notes est la suivante~:
 
 \placefigure [force,here,none] [] {}
 {\startDemoI
@@ -116,7 +116,7 @@ En principe, toute commande qui peut être utilisée dans le texte principal peu
 
 \stopitemize
 
-Lorsque l'argument {\em Étiquette} a été utilisé pour définir une étiquette pour la note, la commande \PlaceMacro{note} \tex{note} nous permet de récupérer l'ID de la note en question. Cette commande affiche l'ID de la note associée à l'étiquette qu'elle prend en argument sur le document. Ainsi, par exemple :
+Lorsque l'argument {\em Étiquette} a été utilisé pour définir une étiquette pour la note, la commande \PlaceMacro{note} \tex{note} nous permet de récupérer l'ID de la note en question. Cette commande affiche l'ID de la note associée à l'étiquette qu'elle prend en argument sur le document. Ainsi, par exemple~:
 
 
 \placefigure [force,here,none] [] {}
@@ -152,7 +152,7 @@ En règle générale, il imprime le texte de la note au bas de la page sur laque
 
 \startSmallPrint
 
-% TODO Garulfo : ce n'est pas ainsi que cela fonctionne
+% TODO Garulfo~: ce n'est pas ainsi que cela fonctionne
 % footnotetext c'est comme footnote, sans afficher la marque
 
 % Mais dans certains environnements, \tex{footnote} insérera le texte de la note, non pas en bas de la page elle-même mais sous l'environnement. C'est le cas, par exemple dans l'environnement {\tt columns}. Dans ces cas, si nous voulons que les notes à l'intérieur de l'environnement soient situées en bas de la page, au lieu de \tex{footnote}, la commande que nous devons utiliser est \tex{footnotetext} en combinaison avec la commande \tex{note} mentionnée ci-dessus. La première, qui prend également en charge une étiquette comme argument facultatif, imprime uniquement le texte de la note et non la marque. Mais comme \tex{note} n'imprime que la marque sans le texte, la combinaison des deux nous permet de placer la note à l'endroit voulu. Ainsi, par exemple, nous pouvons écrire \tex{note[MonÉtiquette]} dans un tableau ou un environnement à plusieurs colonnes, puis, une fois sorti de cet environnement, \type{\footnotetext[MonÉtiquette]{texte de la note}}.
@@ -279,7 +279,7 @@ est une phrase avec des notes imbriquées.
 
 Nous pouvons créer des types spéciaux de notes avec la commande \tex{definenote}. Cela peut être utile dans les documents complexes où il y a des notes de différents auteurs, ou à des fins différentes, pour distinguer graphiquement chacun des types de notes dans notre document au moyen d'un format différent et d'une numérotation différente.
 
-La syntaxe de la commande \tex{definenote} est la suivante :
+La syntaxe de la commande \tex{definenote} est la suivante~:
 
 \placefigure [force,here,none] [] {}
 {\startDemoI
