@@ -13,13 +13,13 @@
 
 % * Section
 
-Les bords supérieur et inférieur et les marges droite et gauche ne contiennent généralement pas de texte d'aucune sorte. Cependant, \ConTeXt\ permet d'y placer certains éléments de texte. En particulier, les commandes suivantes sont disponibles à cet effet :
+Les bords supérieur et inférieur et les marges droite et gauche ne contiennent généralement pas de texte d'aucune sorte. Cependant, \ConTeXt\ permet d'y placer certains éléments de texte. En particulier, les commandes suivantes sont disponibles à cet effet~:
 
 \startitemize
 
-\item \PlaceMacro{setuptoptexts}\tex{setuptoptexts} : permet de placer du texte sur le bord supérieur de la page (au-dessus de la zone d'en-tête).
+\item \PlaceMacro{setuptoptexts}\tex{setuptoptexts}~: permet de placer du texte sur le bord supérieur de la page (au-dessus de la zone d'en-tête).
 
-\item \PlaceMacro{setupbottomtexts}\tex{setupbottomtexts} : permet de placer du texte au bord inférieur de la page (sous la zone de pied de page).
+\item \PlaceMacro{setupbottomtexts}\tex{setupbottomtexts}~: permet de placer du texte au bord inférieur de la page (sous la zone de pied de page).
 
 
 \item \PlaceMacro{margintext}\tex{margintext},
@@ -54,30 +54,30 @@ Quant aux commandes visant à placer du texte dans les marges du document, elles
 \stopDemoI}
 
 
-où {\em Reference} et {\em Configuration} sont des arguments optionnels ; le premier est utilisé pour d'éventuelles références croisées et le second nous permet de configurer le texte de la marge. Le dernier argument, entre crochets, contient le texte à placer dans la marge.
+où {\em Reference} et {\em Configuration} sont des arguments optionnels~; le premier est utilisé pour d'éventuelles références croisées et le second nous permet de configurer le texte de la marge. Le dernier argument, entre crochets, contient le texte à placer dans la marge.
 
 \inouter{\tfxx exemple de\\ \tex{inouter}, où l'on constate que le texte est dans la marge externe et justifié vers l'interne}
 Parmi ces commandes, une habituellement utilisée est \tex{margintext} car elle permet de placer le texte dans la marge de gauche de la page avec une justification à droite. Les autres commandes, comme leur nom l'indique, placent le texte dans la marge elle-même (droite ou gauche, intérieure ou extérieure), ou dans le bord (droit ou gauche, intérieur ou extérieur). Ces commandes sont étroitement liées à la mise en page car si, par exemple, nous utilisons \tex{inrightedge} mais que nous n'avons pas réservé d'espace dans la mise en page pour le bord droit, rien ne sera visible.
 
-Les options de configuration de \tex{margintext} sont les suivantes :
+Les options de configuration de \tex{margintext} sont les suivantes~:
 
 \startitemize
 
-\item {\tt\bf location} : indique dans quelle marge le texte sera placé. Elle peut être {\tt left}, {\tt right} ou, dans les documents recto-verso, {\tt outer} ou {\tt inner}. Par défaut, il s'agit de {\tt left} pour les documents recto et de {\tt outer} pour les documents recto-verso.
+\item {\tt\bf location}~: indique dans quelle marge le texte sera placé. Elle peut être {\tt left}, {\tt right} ou, dans les documents recto-verso, {\tt outer} ou {\tt inner}. Par défaut, il s'agit de {\tt left} pour les documents recto et de {\tt outer} pour les documents recto-verso.
 
-\item {\tt\bf width} : largeur disponible pour l'impression du texte. Par défaut, la largeur totale de la marge sera utilisée.
+\item {\tt\bf width}~: largeur disponible pour l'impression du texte. Par défaut, la largeur totale de la marge sera utilisée.
 
-\item {\tt\bf margin} : indique si le texte sera placé dans la {\tt margin} elle-même ou dans le {\tt edge}, voire directement au contact du texte principal avec  {\tt normal}.
+\item {\tt\bf margin}~: indique si le texte sera placé dans la {\tt margin} elle-même ou dans le {\tt edge}, voire directement au contact du texte principal avec  {\tt normal}.
 
-\item {\tt\bf align} : alignement du texte. Les mêmes valeurs sont utilisées ici que dans \in{\tex{setupalign}}[sec:setupalign].
+\item {\tt\bf align}~: alignement du texte. Les mêmes valeurs sont utilisées ici que dans \in{\tex{setupalign}}[sec:setupalign].
 
-\item {\tt\bf line} : permet d'indiquer un nombre de lignes de déplacement du texte dans la marge. Ainsi, {\tt line=1} déplacera le texte d'une ligne en dessous et {\tt ligne=-1} d'une ligne au-dessus.
+\item {\tt\bf line}~: permet d'indiquer un nombre de lignes de déplacement du texte dans la marge. Ainsi, {\tt line=1} déplacera le texte d'une ligne en dessous et {\tt ligne=-1} d'une ligne au-dessus.
 
-\item {\tt\bf style} : commande ou commandes permettant d'indiquer le style du texte à placer dans les marges.
+\item {\tt\bf style}~: commande ou commandes permettant d'indiquer le style du texte à placer dans les marges.
 
-\item {\tt\bf color} : couleur du texte des marges.
+\item {\tt\bf color}~: couleur du texte des marges.
 
-\item {\tt\bf command} : nom d'une commande à laquelle le texte à placer dans la marge sera passé en argument. Cette commande sera exécutée avant d'écrire le texte. Par exemple, si nous voulons dessiner un cadre autour du texte, nous pouvons utiliser \MyKey{[command=\{\backslash framed\}]}.
+\item {\tt\bf command}~: nom d'une commande à laquelle le texte à placer dans la marge sera passé en argument. Cette commande sera exécutée avant d'écrire le texte. Par exemple, si nous voulons dessiner un cadre autour du texte, nous pouvons utiliser \MyKey{[command=\{\backslash framed\}]}.
 
 \stopitemize
 
@@ -86,7 +86,7 @@ Les autres commandes offrent les mêmes options, à l'exception de {\tt location
 
 
 \startSmallPrint
-  En plus des options ci-dessus, ces commandes prennent également en charge d'autres options ({\tt strut, anchor, method, category, scope, option, hoffset, voffset, dy, bottomspace, threshold et stack}) que je n'ai pas mentionnées parce qu'elles ne sont pas documentées et que, franchement, je ne suis pas très sûr de leur utilité. Ceux qui ont des noms comme {\em distance}, on peut les deviner, mais le reste ? Le wiki ne mentionne que l'option {\tt stack}, disant qu'elle est utilisée pour émuler la commande \tex{marginpars} de \LaTeX, mais cela ne me semble pas très clair.
+  En plus des options ci-dessus, ces commandes prennent également en charge d'autres options ({\tt strut, anchor, method, category, scope, option, hoffset, voffset, dy, bottomspace, threshold et stack}) que je n'ai pas mentionnées parce qu'elles ne sont pas documentées et que, franchement, je ne suis pas très sûr de leur utilité. Ceux qui ont des noms comme {\em distance}, on peut les deviner, mais le reste~? Le wiki ne mentionne que l'option {\tt stack}, disant qu'elle est utilisée pour émuler la commande \tex{marginpars} de \LaTeX, mais cela ne me semble pas très clair.
 
 \stopSmallPrint
 
