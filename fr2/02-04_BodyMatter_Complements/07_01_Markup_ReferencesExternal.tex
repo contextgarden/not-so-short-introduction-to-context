@@ -34,7 +34,7 @@ C'est pourquoi \ConTeXt\ fournit deux utilitaires pour {\em la composition} des 
 
 Cette commande nous permet d'écrire une URL dans le préambule du document, en l'associant à un nom, de sorte que lorsque nous voulons l'utiliser ensuite dans notre document, nous pouvons l'invoquer par le nom qui lui est associé. Elle est particulièrement utile pour les URL qui seront utilisées plusieurs fois dans le document.
 
-Cette commande permet deux utilisations :
+Cette commande permet deux utilisations~:
 
 \startitemize[n, packed]
 
@@ -83,14 +83,14 @@ Le format d'affichage des URL écrites à l'aide de \tex{url} n'est pas celui é
 
 \startdescription{\tex{hyphenatedurl}}\PlaceMacro{hyphenatedurl}
 
-Cette commande est destinée aux URL qui seront écrits dans le texte de notre document, et \ConTeXt\  doit inclure des sauts de ligne dans l'URL, si nécessaire, afin de composer correctement le paragraphe. Son format est le suivant :
+Cette commande est destinée aux URL qui seront écrits dans le texte de notre document, et \ConTeXt\  doit inclure des sauts de ligne dans l'URL, si nécessaire, afin de composer correctement le paragraphe. Son format est le suivant~:
 
 \placefigure [force,here,none] [] {}
 {\startDemoI
 \hyphenatedurl{AdresseURL}
 \stopDemoI}
 
-Malgré le nom de la commande \PlaceMacro{hyphenatedurl} \tex{hyphenatedurl}, elle ne met pas de trait d'union dans le nom de l'URL. Ce qu'elle fait, c'est considérer que certains caractères courants dans les URL sont de bons points pour insérer un saut de ligne avant ou après eux. Nous pouvons ajouter les caractères que nous voulons à la liste des caractères pour lesquels un saut de ligne est autorisé. Nous disposons de trois commandes pour cela :
+Malgré le nom de la commande \PlaceMacro{hyphenatedurl} \tex{hyphenatedurl}, elle ne met pas de trait d'union dans le nom de l'URL. Ce qu'elle fait, c'est considérer que certains caractères courants dans les URL sont de bons points pour insérer un saut de ligne avant ou après eux. Nous pouvons ajouter les caractères que nous voulons à la liste des caractères pour lesquels un saut de ligne est autorisé. Nous disposons de trois commandes pour cela~:
 
 \placefigure [force,here,none] [] {}
 {\startDemoI
@@ -109,7 +109,7 @@ Ces commandes ajoutent, respectivement, les caractères qu'elles prennent comme 
 \tex{hyphenatedurl} peut être utilisée lorsqu'il faut écrire une URL qui apparaîtra telle quelle dans le document final. Elle peut même être utilisée comme dernier argument de \tex{useURL} dans la version de cette commande où le dernier argument récupère le texte cliquable à afficher dans le document final.
 
 
-Dans l'argument \tex{hyphenatedurl}, tous les caractères réservés peuvent être utilisés, sauf trois qui doivent être remplacés par des commandes :
+Dans l'argument \tex{hyphenatedurl}, tous les caractères réservés peuvent être utilisés, sauf trois qui doivent être remplacés par des commandes~:
 
 \startitemize[packed]
 
@@ -121,7 +121,7 @@ Dans l'argument \tex{hyphenatedurl}, tous les caractères réservés peuvent êt
 
 \stopitemize
 
-Chaque fois que \tex{hyphenatedurl} insère un saut de ligne, il exécute la commande \PlaceMacro{hyphenatedurlseparator} \tex{hyphenatedurlseparator}, qui, par défaut, ne fait rien. Mais si nous la redéfinissons, un caractère représentatif est inséré dans l'URL de manière similaire à ce qui se passe avec les mots normaux, où un trait d'union est inséré pour indiquer que le mot continue sur la ligne suivante. Par exemple :
+Chaque fois que \tex{hyphenatedurl} insère un saut de ligne, il exécute la commande \PlaceMacro{hyphenatedurlseparator} \tex{hyphenatedurlseparator}, qui, par défaut, ne fait rien. Mais si nous la redéfinissons, un caractère représentatif est inséré dans l'URL de manière similaire à ce qui se passe avec les mots normaux, où un trait d'union est inséré pour indiquer que le mot continue sur la ligne suivante. Par exemple~:
 
 \placefigure [force,here,none] [] {}
 {\startDemoVW
@@ -157,7 +157,7 @@ Chaque fois que \tex{hyphenatedurl} insère un saut de ligne, il exécute la com
 reference=sec:createlinks,
 title={Commandes d'insertion d'hyperlien dans le document}]
 
-Pour établir des liens vers des URL prédéfinis à l'aide de \tex{useURL}, nous pouvons utiliser la commande \PlaceMacro{from} \tex{from}, qui se limite à établir le lien, mais n'écrit aucun texte cliquable. Le texte par défaut de \tex{useURL} sera utilisé comme texte du lien. Sa syntaxe est la suivante :
+Pour établir des liens vers des URL prédéfinis à l'aide de \tex{useURL}, nous pouvons utiliser la commande \PlaceMacro{from} \tex{from}, qui se limite à établir le lien, mais n'écrit aucun texte cliquable. Le texte par défaut de \tex{useURL} sera utilisé comme texte du lien. Sa syntaxe est la suivante~:
 
 \placefigure [force,here,none] [] {}
 {\startDemoI
@@ -177,7 +177,7 @@ où {\em Nom} est le nom précédemment associé à une URL à l'aide de \tex{us
 \from[WhatIsCTX]
 \stopDemoVW}
 
-Pour créer des liens et les associer à un texte cliquable qui n'a pas été préalablement défini, nous disposons de la commande \PlaceMacro{goto} \tex{goto} qui est utilisée à la fois pour générer des liens internes et externes. Sa syntaxe est la suivante :
+Pour créer des liens et les associer à un texte cliquable qui n'a pas été préalablement défini, nous disposons de la commande \PlaceMacro{goto} \tex{goto} qui est utilisée à la fois pour générer des liens internes et externes. Sa syntaxe est la suivante~:
 
 \placefigure [force,here,none] [] {}
 {\startDemoI
@@ -185,20 +185,20 @@ Pour créer des liens et les associer à un texte cliquable qui n'a pas été pr
 \stopDemoI}
 
 où {\em Texte utilisé en lien}  est le texte à afficher dans le document final
-et sur lequel un clic de souris conduira le lecteur à la cible, et {\em Cible} peut être :
+et sur lequel un clic de souris conduira le lecteur à la cible, et {\em Cible} peut être~:
 
 \startitemize
 
 \item Une étiquette de notre document. Dans ce cas, \tex{goto} générera le saut de la même manière que, par exemple, les commandes \tex{in} ou \tex{at} déjà examinées. Mais contrairement à ces commandes, aucune information associée à l'étiquette ne sera récupérée.
 
-\item L'URL elle-même. Dans ce cas, il faut indiquer expressément qu'il s'agit d'une URL en écrivant la commande comme suit :
+\item L'URL elle-même. Dans ce cas, il faut indiquer expressément qu'il s'agit d'une URL en écrivant la commande comme suit~:
 
 \placefigure [force,here,none] [] {}
 {\startDemoI
 \goto{Texte utilisé en lien}[url(URL)]
 \stopDemoI}
 
-où URL, à son tour, peut être le nom précédemment associé à une URL au moyen de \tex{useURL}, ou l'URL elle-même, auquel cas, lors de l'écriture de l'URL, nous devons nous assurer que les caractères réservés de \ConTeXt sont écrits correctement dans \ConTeXt. L'écriture de l'URL selon les règles de \ConTeXt\ n'affectera pas la fonctionnalité du lien.
+où URL, à son tour, peut être le nom précédemment associé à une URL au moyen de \tex{useURL}, ou l'URL elle-même, auquel cas, lors de l'écriture de l'URL, nous devons nous assurer que les caractères réservés de \ConTeXt{} sont écrits correctement dans \ConTeXt. L'écriture de l'URL selon les règles de \ConTeXt\ n'affectera pas la fonctionnalité du lien.
 
 \stopitemize
 
