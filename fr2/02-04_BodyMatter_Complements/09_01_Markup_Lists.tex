@@ -17,14 +17,14 @@
 
 % * Section Listes
 
-En interne, pour \ConTeXt\, une table des matières n'est rien de plus qu'une {\em liste combinée}, qui, à son tour, comme son nom l'indique, consiste en une combinaison de listes simples. Par conséquent, la notion de base à partir de laquelle \ConTeXt\ construit la table des matières est celle d'une liste. Plusieurs listes sont combinées pour former une table des matières. Par défaut, \ConTeXt\ contient une liste combinée prédéfinie appelée \MyKey{content} et c'est avec elle que les commandes examinées jusqu'à présent fonctionnent : \tex{placecontent} et \tex{completecontent}.
+En interne, pour \ConTeXt\, une table des matières n'est rien de plus qu'une {\em liste combinée}, qui, à son tour, comme son nom l'indique, consiste en une combinaison de listes simples. Par conséquent, la notion de base à partir de laquelle \ConTeXt\ construit la table des matières est celle d'une liste. Plusieurs listes sont combinées pour former une table des matières. Par défaut, \ConTeXt\ contient une liste combinée prédéfinie appelée \MyKey{content} et c'est avec elle que les commandes examinées jusqu'à présent fonctionnent~: \tex{placecontent} et \tex{completecontent}.
 
 % ** Subsection listes de context
 
 \startsubsection
   [title=Listes de \ConTeXt]
 
-Dans \ConTeXt, une {\em liste} est plus précisément une liste d'éléments numérotés à propos desquels nous devons nous souhaitons conservers trois informations~:
+Dans \ConTeXt, une {\em liste} est plus précisément une liste d'éléments numérotés à propos desquels nous devons nous souhaitons conserver trois informations~:  % que faut-il supprimer : "nous devons" ou "nous souhaitons" ?
 
 \startitemize[n, packed]
 
@@ -38,11 +38,11 @@ Dans \ConTeXt, une {\em liste} est plus précisément une liste d'éléments num
 
 Cela est utilisé avec les sections numérotées, mais aussi avec d'autres éléments du document tels que les images, les tableaux, etc. En général, les éléments pour lesquels il existe une commande dont le nom commence par \tex{place} qui les positionne dans le document comme \tex{placetable}, \tex{placefigure}, etc.
 
-Dans tous ces cas, \ConTeXt\ génère automatiquement une liste des différentes occurrences du type d'élément en question, avec pour chaque occurence~: son numéro, son titre (ou texte) et sa page. Ainsi, par exemple, il existe une liste de chapitres, appelée {\tt chapter}, une autre de sections, appelée {\tt section} ; mais aussi une autre de tableaux (appelée {\tt table}) ou d'images (appelée {\tt figure}). Les listes générées automatiquement par \ConTeXt\ sont toujours appelées de la même manière que l'élément qu'elles stockent. 
+Dans tous ces cas, \ConTeXt\ génère automatiquement une liste des différentes occurrences du type d'élément en question, avec pour chaque occurence~: son numéro, son titre (ou texte) et sa page. Ainsi, par exemple, il existe une liste de chapitres, appelée {\tt chapter}, une autre de sections, appelée {\tt section}~; mais aussi une autre de tableaux (appelée {\tt table}) ou d'images (appelée {\tt figure}). Les listes générées automatiquement par \ConTeXt\ sont toujours appelées de la même manière que l'élément qu'elles stockent. 
 
-Une liste sera également générée automatiquement si nous créons, par exemple, un nouveau type de section numérotée : lorsque nous la créons, nous créons aussi implicitement la liste qui les stocke. Et si, pour une section non numérotée par défaut, nous activons l'option {\tt incrementnumber=yes}, ce qui en fait une section numérotée, nous créerons aussi implicitement une liste portant ce nom.
+Une liste sera également générée automatiquement si nous créons, par exemple, un nouveau type de section numérotée~: lorsque nous la créons, nous créons aussi implicitement la liste qui les stocke. Et si, pour une section non numérotée par défaut, nous activons l'option {\tt incrementnumber=yes}, ce qui en fait une section numérotée, nous créerons aussi implicitement une liste portant ce nom.
  
-Outre les listes implicites (définies automatiquement par \ConTeXt), nous pouvons créer nos propres listes avec \tex{definelist}, dont la syntaxe est la suivante
+Outre les listes implicites (définies automatiquement par \ConTeXt), nous pouvons créer nos propres listes avec \tex{definelist}, dont la syntaxe est la suivante~:
 
 \PlaceMacro{definelist}
 
@@ -51,20 +51,20 @@ Outre les listes implicites (définies automatiquement par \ConTeXt), nous pouvo
 \definelist[ListName][Configuration]
 \stopDemoI}
 
-Des éléments sont ajoutés de la liste~:
+Des éléments sont ajoutés à la liste~:
 
 \startitemize
 
-\item Dans les listes prédéfinies par \ConTeXt, ou créées par lui suite à la création d'un nouvel objet flottant (voir \in{section}[sec:definefloat]), automatiquement chaque fois qu'un élément de la liste est inséré dans le document, soit par une commande de section, soit par la commande \tex{placeQuoiQueCeSoit} pour les autres types de listes, par exemple : \tex{placefigure}, insère une image dans le document, mais elle insère également l'entrée correspondante dans la liste.
+\item Dans les listes prédéfinies par \ConTeXt, ou créées par lui suite à la création d'un nouvel objet flottant (voir \in{section}[sec:definefloat]), automatiquement chaque fois qu'un élément de la liste est inséré dans le document, soit par une commande de section, soit par la commande \tex{placeQuoiQueCeSoit} pour les autres types de listes, par exemple~: \tex{placefigure}, insère une image dans le document, mais elle insère également l'entrée correspondante dans la liste.
 
 \item Manuellement dans tout type de liste avec \tex{writetolist[ListName]}, déjà expliqué dans \in{subsection}[sec:manualtoc] de \in{section}[sec:manual adjustments]. La commande \tex{writebetweenlist} est également disponible. Elle a également été expliquée dans cette section.
 
 \stopitemize
 
-Une fois qu'une liste a été créée et que tous ses éléments y ont été inclus, les trois commandes de base qui s'y rapportent sont \PlaceMacro{setuplist}  \tex{setuplist}, \PlaceMacro{placelist} \tex{placelist} et \PlaceMacro{completetelist} \tex{completetelist}. La première nous permet de configurer l'aspect de la liste ; les deux dernières insèrent la liste en question à l'endroit du document où elle les trouve. La différence entre \tex{placelist} et \tex{completelist} est similaire à la différence entre \tex{placecontent} et \tex{completecontent}~: {\tt complete} introduit la liste dans une section dédiée, avec un titre dédié, de niveau {\tt chapter / title}. (voir les sections \in{}[sec:completecontent] et \in{}[sec:placecontent]).
+Une fois qu'une liste a été créée et que tous ses éléments y ont été inclus, les trois commandes de base qui s'y rapportent sont \PlaceMacro{setuplist}  \tex{setuplist}, \PlaceMacro{placelist} \tex{placelist} et \PlaceMacro{completetelist} \tex{completetelist}. La première nous permet de configurer l'aspect de la liste~; les deux dernières insèrent la liste en question à l'endroit du document où elle les trouve. La différence entre \tex{placelist} et \tex{completelist} est similaire à la différence entre \tex{placecontent} et \tex{completecontent}~: {\tt complete} introduit la liste dans une section dédiée, avec un titre dédié, de niveau {\tt chapter / title}. (voir les sections \in{}[sec:completecontent] et \in{}[sec:placecontent]).
 
 
-Donc, par exemple \tex{placelist[section]} insére une liste des sections, y compris un lien hypertexte vers celles-ci (si l'interactivité du document est activée et si, dans \tex{setuplist}, nous n'avons pas défini {\tt interaction=no}). Une liste de sections n'est pas exactement la même chose qu'une table des matières basée sur des sections : l'idée d'une table des matières inclut généralement aussi les niveaux supérieurs et inférieurs (sous-sections, sous-sous-sections, etc.). Mais une liste de sections ne comprendra que les sections elles-mêmes.
+Donc, par exemple \tex{placelist[section]} insére une liste des sections, y compris un lien hypertexte vers celles-ci (si l'interactivité du document est activée et si, dans \tex{setuplist}, nous n'avons pas défini {\tt interaction=no}). Une liste de sections n'est pas exactement la même chose qu'une table des matières basée sur des sections~: l'idée d'une table des matières inclut généralement aussi les niveaux supérieurs et inférieurs (sous-sections, sous-sous-sections, etc.). Mais une liste de sections ne comprendra que les sections elles-mêmes.
 
 \placefigure [force,here,none] [] {}{
 \startDemoVW
@@ -109,7 +109,7 @@ Les options de \tex{setuplist} ont déjà été expliquées dans \in{section}[se
     title={Listes ou index d'images, de tableaux et d'autres éléments},
   ]
 
-D'après ce qui a été dit jusqu'à présent, on peut voir que, puisque \ConTeXt\ crée automatiquement une liste d'images placées dans un document avec la commande \tex{placefigure}, générer une liste ou un index d'images à un point particulier de notre document est aussi simple que d'utiliser la commande \tex{placelist[figure]}. Et si nous voulons générer une liste avec un titre (similaire à ce que nous obtenons avec \tex{completecontent}), nous pouvons le faire avec \tex{completelist[figure]}. Nous pouvons faire de même avec les quatre autres types prédéfinis d'objets flottants dans \ConTeXt\ : tableaux (\MyKey{table}),  graphiques (\MyKey{graphic}), {\em intermezzos} (\MyKey{intermezzo}) et formules chimiques (\MyKey{chemical}). \ConTeXt\ comprend également des commandes qui les génère dans leur version sans titre  (\PlaceMacro{placelistoffigures} \tex{placelistoffigures}, \PlaceMacro{placelistoftables} \tex{placelistoftables}, \PlaceMacro{placelistofraphics} \tex{placelistofgraphics}, \PlaceMacro{placelistofintermezzi} \tex{placelistofintermezzi} et \PlaceMacro{placelistofchemicals} \tex{placelistofchemicals}), et d'autre qui les génère avec titre (\PlaceMacro{completelistoffigures} \tex{complettelistoffigures}, \PlaceMacro{complettelistoftables} \tex{completelistoftables}, \PlaceMacro{completelistofgraphics}. \tex{completelistofraphics}, \PlaceMacro{completelistofintermezzi}. \tex{completelistofintermezzi} et \PlaceMacro{completelistofchemicals}. \tex{completelistofchemicals}), de manière similaire à \tex{completecontent}. 
+D'après ce qui a été dit jusqu'à présent, on peut voir que, puisque \ConTeXt\ crée automatiquement une liste d'images placées dans un document avec la commande \tex{placefigure}, générer une liste ou un index d'images à un point particulier de notre document est aussi simple que d'utiliser la commande \tex{placelist[figure]}. Et si nous voulons générer une liste avec un titre (similaire à ce que nous obtenons avec \tex{completecontent}), nous pouvons le faire avec \tex{completelist[figure]}. Nous pouvons faire de même avec les quatre autres types prédéfinis d'objets flottants dans \ConTeXt\~: tableaux (\MyKey{table}),  graphiques (\MyKey{graphic}), {\em intermezzos} (\MyKey{intermezzo}) et formules chimiques (\MyKey{chemical}). \ConTeXt\ comprend également des commandes qui les génère dans leur version sans titre  (\PlaceMacro{placelistoffigures} \tex{placelistoffigures}, \PlaceMacro{placelistoftables} \tex{placelistoftables}, \PlaceMacro{placelistofraphics} \tex{placelistofgraphics}, \PlaceMacro{placelistofintermezzi} \tex{placelistofintermezzi} et \PlaceMacro{placelistofchemicals} \tex{placelistofchemicals}), et d'autre qui les génère avec titre (\PlaceMacro{completelistoffigures} \tex{complettelistoffigures}, \PlaceMacro{complettelistoftables} \tex{completelistoftables}, \PlaceMacro{completelistofgraphics}. \tex{completelistofraphics}, \PlaceMacro{completelistofintermezzi}. \tex{completelistofintermezzi} et \PlaceMacro{completelistofchemicals}. \tex{completelistofchemicals}), de manière similaire à \tex{completecontent}. 
 
 De la même manière, pour les objets flottants que nous avons nous-mêmes créés (voir \in{section}[sec:definefloat]), les commandes \tex{placelistof<FloatName>} et \tex{completetelistof<FloatName>} seront automatiquement créés.
 
