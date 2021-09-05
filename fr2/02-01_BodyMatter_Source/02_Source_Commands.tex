@@ -606,7 +606,7 @@ un argument.
 
 Certaines commandes fonctionnent par couple afin de déterminer leur portée, en indiquant précisément le moment où elles commencent à être appliquées et celui où elles cessent de l'être. Ces commandes sont donc présentées par paires~: l'une indique le moment où la commande doit être activée, et l'autre celui où cette action doit cesser. La commande \quotation{start}, suivie du nom de la commande, est utilisée pour indiquer le début de l'action, et la commande \quotation{stop}, également suivie du nom de la commande, pour indiquer la fin. Ainsi, par exemple, la commande \MyKey{itemize} devient \tex{startitemize} pour indiquer le début d'une {\em liste d'items} et \tex{stopitemize} pour indiquer la fin.
 
-Il n'y a pas de nom spécial pour ces paires de commandes dans la documentation officielle de \ConTeXt. Le manuel de référence et l'introduction les appellent simplement \quotation{start ... stop}. Parfois elles sont appelés {\em environnements}, qui est également le nom que \LaTeX\ donne à un type de construction similaire, mais cela présente un inconvénient dans \ConTeXt\ car ce terme \quotation{environnement} est également utilisé pour autre chose (un type spécial de fichier source que nous verrons lorsque nous parlerons des projets multifichiers dans \in{section}[sec-projets]). Néanmoins, puisque le terme environnement est clair, et que le contexte permettra de distinguer facilement si nous parlons de {\em commandes d'environnement} ou de {\em fichiers d'environnement}, j'utiliserai ce terme.
+Il n'y a pas de nom spécial pour ces paires de commandes dans la documentation officielle de \ConTeXt. Le manuel de référence et l'introduction les appellent simplement \quotation{start ... stop}. Parfois elles sont appelés {\em environnements}, qui est également le nom que \LaTeX\ donne à un type de construction similaire, mais cela présente un inconvénient dans \ConTeXt\ car ce terme \quotation{environnement} est également utilisé pour autre chose (un type spécial de fichier source que nous verrons lorsque nous parlerons des projets multifichiers dans \in{section}[sec:srcprojects]). Néanmoins, puisque le terme environnement est clair, et que le contexte permettra de distinguer facilement si nous parlons de {\em commandes d'environnement} ou de {\em fichiers d'environnement}, j'utiliserai ce terme.
 
 Les environnements consistent donc en une commande qui les ouvre, les commence, et une autre qui les ferme, les termine. Si le fichier source contient une commande d'ouverture d'environnement qui n'est pas fermée par la suite, une erreur est normalement générée.\footnote{Pas toujours, cela dépend de l'environnement en question et de la situation dans le reste du document. \ConTeXt\ diffère de \LaTeX\ à cet égard qui est beaucoup plus stricte.} D'autre part, ces types d'erreurs sont plus difficiles à trouver, car l'erreur peut se produire bien au-delà de l'endroit où se trouve la commande d'ouverture. Parfois, le fichier \MyKey{.log} nous montrera la ligne où commence l'environnement incorrectement fermé~; mais d'autres fois, l'absence d’une fermeture \footnote{test} d'environnement va impliquer une mauvaise interprétation par \ConTeXt\ qui soulignera le passage qu'il considère comme éronné et non pas le manque de fermeture d'environnement, ce qui signifie que le fichier \MyKey{.log} ne nous est pas d'une grande aide pour trouver où se situe le problème.
 
@@ -629,7 +629,7 @@ Dans l'exemple, vous pouvez voir comment l'environnement \MyKey{QuelqueChoseAutr
 
 En général, les commandes conçues comme {\em environnements} sont celles qui mettent en œuvre un changement destiné à être appliqué à des unités de texte au moins aussi grande que le paragraphe. Par exemple, l'environnement \MyKey{narrower} qui modifie les marges, n'a de sens que lorsqu'il est appliqué au niveau du paragraphe, ou l'environnement \MyKey{framedtext} qui encadre un ou plusieurs paragraphes. Ce dernier environnement peut nous aider à comprendre pourquoi certaines commandes sont conçues comme des environnements et d'autres comme des commandes individuelles~: si nous souhaitons encadrer un ou plusieurs mots, tous sur la même ligne, nous utiliserons la commande \tex{framed}, mais si ce que nous voulons encadrer est un paragraphe entier (ou plusieurs paragraphes), nous utiliserons l'environnement \MyKey{startframed} ou \MyKey{startframedtext}.
 
-D'autre part, le texte situé dans un environnement particulier constitue normalement un {\em groupe} (voir \in{section}[sec:groupes]), ce qui signifie que si une commande d'activation est trouvée à l'intérieur d'un environnement, parmi les commandes qui s'appliquent à tout le texte qui suit, cette commande ne s'appliquera que jusqu'à la fin de l'environnement dans lequel elle se trouvei. En fait, \ConTeXt\ a un {\em environnement} sans nom commençant par la commande \tex{start} (aucun autre texte ne suit~; juste {\em start}, c'est pourquoi je l'appelle un {\em environnement sans nom}) et se termine par la commande \tex{stop}. Je pense que la seule fonction de cette commande est de créer un groupe.
+D'autre part, le texte situé dans un environnement particulier constitue normalement un {\em groupe} (voir \in{section}[sec:groups]), ce qui signifie que si une commande d'activation est trouvée à l'intérieur d'un environnement, parmi les commandes qui s'appliquent à tout le texte qui suit, cette commande ne s'appliquera que jusqu'à la fin de l'environnement dans lequel elle se trouvei. En fait, \ConTeXt\ a un {\em environnement} sans nom commençant par la commande \tex{start} (aucun autre texte ne suit~; juste {\em start}, c'est pourquoi je l'appelle un {\em environnement sans nom}) et se termine par la commande \tex{stop}. Je pense que la seule fonction de cette commande est de créer un groupe.
 
 \startSmallPrint
 
@@ -863,7 +863,9 @@ Certaines règles syntaxiques sont à bien prendre en compte~:
 
 \item Nous devons également inclure le contenu de la valeur entre accolades si elle intègre elle-même des crochets. Sinon le premier crochet fermant sera considéré comme fermant non seulement la valeur mais aussi l'argument que nous sommes en train de définir. Voyez~:
 
-\startDemoVW
+\stopitemize
+
+\startDemoHN
 \startsection[title=mon titre[5] avec crochets]
   Du texte pour cette section
   NE FONCTIONNERA PAS
@@ -872,10 +874,7 @@ Certaines règles syntaxiques sont à bien prendre en compte~:
   Du texe pour cette section
   FONCTIONNERA
 \stopsection
-\stopDemoVW
-
-\stopitemize
-
+\stopDemoHN
 
  \stopsection
 

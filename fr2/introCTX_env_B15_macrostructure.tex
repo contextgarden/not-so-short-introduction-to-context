@@ -3,26 +3,34 @@
 
 \startsectionblockenvironment[bodypart]
 
+
 \setuphead[part][header=empty,footer=empty]
+
+% https://wiki.contextgarden.net/Command/setuphead#Modifying_the_page_before_a_chapter
 
 \setuphead
     [chapter]
     [after={\strut\blank[3*big]},
-     header=empty,footer=empty]
+     header=empty,
+     footer=empty]
 
 \setupfootertexts[text]                                                 % sides
     [{\framed[height=max,
              frame=off,
              offset=0pt,
+              width=0.4\textwidth,
              location=top,
-             align={high,flushright}]
+             strut=yes,
+             align={high,flushleft}]
      {\tfx\getmarking[section]}}]
-    [{\tfx Chap. \getmarking[chapter]}]
-    [{\tfx Chap. \getmarking[chapter]}]
+    [{\tfx\cap{\getmarking[chapter]}}]
+    [{\tfx\cap{\getmarking[chapter]}}]
     [{\framed[height=max,
               frame=off,
               offset=0pt,
+              width=0.4\textwidth,
               location=top,
+             strut=yes,
               align={high,flushright}]
      {\tfx\getmarking[section]}}]
 
@@ -55,8 +63,12 @@
 
 \setupfootertexts[text]                                                 % sides
     []
-    [{\framed[height=max,frame=off,offset=0pt,location=top,align={high,flushright}]{\tfx Chap. \getmarking[chapter]}}]
-    [{\framed[height=max,frame=off,offset=0pt,location=top,align={high,flushleft}] {\tfx Chap. \getmarking[chapter]}}]
+    [{\framed[height=max,frame=off,offset=0pt,
+             strut=yes,
+              width=0.4\textwidth,location=top,align={high,flushright}]{\tfx\cap{\getmarking[chapter]}}}]
+    [{\framed[height=max,frame=off,offset=0pt,
+             strut=yes,
+              width=0.4\textwidth,location=top,align={high,flushleft}] {\tfx\cap{\getmarking[chapter]}}}]
     []
 
 
@@ -96,16 +108,20 @@
     [{\framed[height=max,
              frame=off,
              offset=0pt,
+              width=0.4\textwidth,
              location=top,
+             strut=yes,
              align={high,flushright}]
-     {\tfx\getmarking[chapter]}}]
-    [{\tfx\labeltext{appendix} \getmarking[chapternumber]}]
+     {\tfx\cap{\getmarking[chapter]}}}]
     [{\framed[height=max,
               frame=off,
               offset=0pt,
+              width=0.4\textwidth,
+             strut=yes,
               location=top,
-              align={high,flushright}]
-     {\tfx\getmarking[chapter]}}]
+              align={high,flushleft}]
+     {\tfx\cap{\getmarking[chapter]}}}]
+    [{\tfx\labeltext{appendix} \getmarking[chapternumber]}]
 
 \setupfootertexts[margin]                                                 % sides
     []
@@ -117,5 +133,16 @@
 \setuphead  [section, subject]              [sectionsegments=2:3]
 \setuphead  [subsection, subsubject]        [sectionsegments=2:4]
 \setuphead  [subsubsection, subsubsubject]  [sectionsegments=2:5]
+
+\stopsectionblockenvironment
+
+
+%------------------------------------------------------------------------------
+
+\startsectionblockenvironment[backpart]
+
+\setupfootertexts[text]    [][][][]
+\setupfootertexts[margin]  [][][][]
+\setupbottomtexts[text]    [][][][]
 
 \stopsectionblockenvironment
