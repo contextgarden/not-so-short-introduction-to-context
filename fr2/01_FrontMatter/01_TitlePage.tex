@@ -6,6 +6,8 @@
                                                      % Front Cover with MetaPost
 \startuseMPgraphic{FrontCover}
 
+mark := \MPvar{mark} ;
+
 StartPage ;
 
 fill Page enlarged 5mm withcolor \MPcolor{purple} ;
@@ -24,6 +26,8 @@ pair Pa ; Pa := (PaperWidth*19/20, PaperWidth/2.5);
 pair Pb ; Pb := (PaperWidth*19/20, PaperHeight - (PaperWidth*2/20));
 
 picture Pict[] ;
+
+
 Pict[1] := textext.llft("\getvariable{document}{titleA}") 
            xsized (.750PaperWidth) 
            shifted Pa;
@@ -35,12 +39,19 @@ Pict[2] := textext.llft("\getvariable{document}{titleB}")
 Pict[3] := textext.llft("\getvariable{document}{titleC}") 
            xsized (.750PaperWidth) 
            shifted (lrcorner Pict[2] shifted (0mm,-10pt)); 
-           
+
+if mark == 1:           
 Pict[4] := textext.dflt("\getvariable{document}{author}") 
            xsized (.375PaperWidth) 
            rotated 90
            shifted Pb;                    
-           
+else :
+Pict[4] := textext.dlft("\getvariable{document}{author}") 
+           xsized (.375PaperWidth) 
+           rotated 90
+           shifted Pb;          
+fi;
+
 draw Pict[1] withcolor white ;
 draw Pict[2] withcolor white ;
 draw Pict[3] withcolor white ;
@@ -58,7 +69,9 @@ StopPage ;
 
 %------------------------------------------------------------------------------
 
-\defineoverlay[oFrontCover][\useMPgraphic{FrontCover}]
+\doifelse{\contextmark}{MKIV} %
+{\defineoverlay [oFrontCover][\useMPgraphic{FrontCover}{mark=1}]} %
+{\defineoverlay [oFrontCover][\useMPgraphic{FrontCover}{mark=2}]}
 
 \setupbackgrounds [leftpage]  [background={background},state=repeat]
 \setupbackgrounds [rightpage] [background={background,oFrontCover},state=repeat]
