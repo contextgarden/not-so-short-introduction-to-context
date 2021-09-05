@@ -11,14 +11,14 @@
      header=empty,footer=empty]
 
 \setupfootertexts[text]                                                 % sides
-    [{\tfx\getmarking[chapter]}]
     [{\framed[height=max,
              frame=off,
              offset=0pt,
              location=top,
              align={high,flushright}]
      {\tfx\getmarking[section]}}]
-    [{\tfx\getmarking[chapter]}]
+    [{\tfx Chap. \getmarking[chapter]}]
+    [{\tfx Chap. \getmarking[chapter]}]
     [{\framed[height=max,
               frame=off,
               offset=0pt,
@@ -34,8 +34,8 @@
 
  
 \setupbottomtexts[text]                                                 % sides
-    [{\tfx \in{\triangleleft ~ Table des matières}[sec:thetoc]}]
     []
+    [{\tfx \in{Table des matières ~ \triangleright}[sec:thetoc]}]
     [{\tfx \in{\triangleleft ~ Table des matières}[sec:thetoc]}]
     []
 
@@ -55,9 +55,11 @@
 
 \setupfootertexts[text]                                                 % sides
     []
-  [\hfill{\framed[height=max,frame=off,offset=0pt,location=top,align={high,flushright}]{\tfx\getmarking[chapter]}}]
+    [{\framed[height=max,frame=off,offset=0pt,location=top,align={high,flushright}]{\tfx Chap. \getmarking[chapter]}}]
+    [{\framed[height=max,frame=off,offset=0pt,location=top,align={high,flushleft}] {\tfx Chap. \getmarking[chapter]}}]
     []
-    [{\framed[height=max,frame=off,offset=0pt,location=top,align={high,flushright}]{\tfx\getmarking[chapter]}}]
+
+
   \setupfootertexts[margin]                                                 % sides
     []
     [\hfill{\tfx\bf\pagenumber}]
