@@ -54,7 +54,7 @@ meilleures stratégies pour faire face aux éventuelles erreurs.
 
   Il faut par contre éviter les {\em logiciels de traitement de texte} tels que,
   par exemple, \unhyphenated{\em LibreOffice Writer} ou {\em Microsoft Word} qui,
-  bien qu'ils soient capable de produire des fichiers de {\em texte brut},
+  bien qu'ils soient capables de produire des fichiers de {\em texte brut},
   enregistrent par défaut des fichiers binaires incompatibles avec \ConTeXt.
 
 \stopdescription
@@ -78,7 +78,7 @@ attend nos instructions.
 \stopSmallPrint
 
 Si une version de \ConTeXt\ est déjà installée, vous devriez obtenir un résultat
-similaire au suivant :
+similaire au suivant~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoC
@@ -107,21 +107,21 @@ d'installation se trouvent en \in{Annexe}[sec:installation] ainsi que sur le
   plateformes~: {\em Xpdf} et {\em MuPDF}.
 \stopdescription
 
-Merci au monde du {\em logiciel libre} !
+Merci au monde du {\em logiciel libre}~!
 
 \stopsection
 
 % * Section =================================================================
 
 \startsection
-  [title=La mise en oeuvre]
+  [title=La mise en œuvre]
 
 \startsubsubsection
   [title=Rédaction du fichier source]
 
   Commençons par ouvrir notre éditeur de texte et par créer un fichier appelé
   \quotation{\tt ex_premierdoc.tex} avec le contenu suivant (vous pouvez
-  récupérer le contenu en cliquand sur le trombone qui représente la pièce
+  récupérer le contenu en cliquant sur le trombone qui représente la pièce
   attachée associée à l'exemple).
 
 %---------------------------------------------------------------
@@ -211,7 +211,7 @@ Dans GNU Emacs, par exemple, en appuyant simultanément sur les touches Ctrl-x
 puis \quotation{Entrée} puis \quotation{f} un message apparaîtra nous informant de
 l'encodage actuel et nous demandant de sélectionner le nouvel encodage.
 
-Après avoir vérifié que l'encodage est correct et enregistré le fichier sur le
+Après avoir vérifié que l'encodage est correct et le fichier enregistré sur le
 disque, nous fermerons l'éditeur pour nous concentrer sur l'analyse de ce que
 nous avons écrit.
 
@@ -254,7 +254,7 @@ configuration générale du document. Tout ce qui suit \tex{stoptext} ne sera pa
 traité.
 
 Dans notre exemple, le préambule comprend quatre commandes de configuration
-globale :
+globale~:
 \startitemize[n]
 \item 
   une pour indiquer la langue de notre document (\tex{mainlanguage})
@@ -337,10 +337,10 @@ dans le répertoire où nous avons exécuté \MyKey{context}~:
 \item {\tt ex_premierdoc.tuc}
 \stopitemize
 
-Le premier est le résultat de notre traitement, c'est-à-dire : le fichier \PDF\
+Le premier est le résultat de notre traitement, c'est-à-dire~: le fichier \PDF\
 avec le contenu composé et mis en page. Le deuxième est le fichier dans lequel
 sont stockées toutes les informations qui ont été affichées à l'écran pendant la
-compilation ; le troisième est un fichier auxiliaire que \ConTeXt\ génère
+compilation~; le troisième est un fichier auxiliaire que \ConTeXt\ génère
 pendant la compilation et qui est utilisé pour construire les index et les
 références croisées. Pour le moment, si tout a fonctionné comme prévu, nous
 pouvons supprimer les deux fichiers {\tt .log} et {\tt .tuc}. S'il y a eu un
@@ -405,7 +405,7 @@ afin de répartir les blancs (les espaces vides entre les mots) de façon la plu
 homogène possible. Parce que les modèles de césure varient selon la langue, il
 est important d'avoir indiqué la langue du document avec \tex{mainlanguage[fr]}.
 
-En bref : \ConTeXt\ a interprété le fichier source et a généré un document
+En bref~: \ConTeXt\ a interprété le fichier source et a généré un document
 électronique répondant aux informations de balisage et de composition
 incluses. Les commentaires ont disparu et en ce qui concerne le balisage et les
 commandes, ce que nous obtenons ce n'est pas l'affichage de leur nom, mais le
@@ -425,21 +425,21 @@ résultat de leur application par \ConTeXt.
 
 La commande {\tt context} avec laquelle nous avons procédé au traitement de
 notre premier fichier source est, en fait, un {\em script} {\sc Lua},
-c'est-à-dire : un petit programme {\sc Lua} qui, après avoir effectué quelques
+c'est-à-dire~: un petit programme {\sc Lua} qui, après avoir effectué quelques
 vérifications et opérations, appelle \LuaTeX\ pour traiter le fichier source.
 
 Nous pouvons exécuter {\tt context} avec plusieurs options. Les options sont
 saisies immédiatement après le nom de la commande, précédées de deux traits
 d'union. Si nous voulons saisir plus d'une option, nous les séparons par un
 espace blanc. L'option {\tt help} nous donne une liste de toutes les options,
-avec une brève explication de chacune d'elles :
+avec une brève explication de chacune d'elles~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoC
 $ context --help
 \stopDemoC}
 
-Parmi les options les plus intéressantes, citons les suivantes :
+Parmi les options les plus intéressantes, citons les suivantes~:
 
 \DescOptions{interface} Comme je l'ai dit dans le chapitre d'introduction,
 l'interface de \ConTeXt\ est traduite en plusieurs langues. Par défaut, c'est
@@ -474,7 +474,7 @@ compilation. Toutefois, ces messages seront toujours enregistrés dans le fichie
 erreurs. Cela ne signifie pas que l'erreur ne se produira pas, mais que lorsque
 \ConTeXt\ rencontrera une erreur, (même??) si elle est récupérable, il
 continuera la compilation jusqu'à ce qu'elle se termine ou jusqu'à ce qu'il
-rencontre une erreur irrécupérable.
+rencontre une erreur irrécupérable.  % le (même??) est-il nécessaie ?
 
 \DescOptions{batchmode} Il s'agit d'une combinaison des deux options
 précédentes. Il fonctionne sans interruption et ignore les messages à l'écran.
@@ -501,9 +501,9 @@ l'une des quatre catégories suivantes~:
   compilateur une commande qu'il ne peut pas comprendre. Par exemple, écrire la
   commande \tex{TeX} en commettant l'erreur d'écrire le x final en minuscule
   (faisant la différence entre majuscules et minuscules, \ConTeXt\ considère que
-  \tex{TeX} et \tex{Tex} sont des commandes différentes). Autre exemple : écrire
+  \tex{TeX} et \tex{Tex} sont des commandes différentes). Autre exemple~: écrire
   les options entre accolades au lieu des crochets, ou bien encore ouvrir avec
-  une accolade mais fermer avec un crochet. Un dernier : utiliser un des
+  une accolade mais fermer avec un crochet. Un dernier~: utiliser un des
   caractères réservés (\in{section}[sec:reserved characters])comme s'il
   s'agissait d'un caractère normal.
 \stopdescription
@@ -521,7 +521,7 @@ l'une des quatre catégories suivantes~:
 
 \startdescription{Erreurs de conception.}  J'appelle ainsi les erreurs qui se
   produisent lorsque vous appelez une commande sans fournir certains arguments
-  qui sont obligatoire, ou lorsque les règles de syntaxe de la commande ne sont
+  qui sont obligatoires, ou lorsque les règles de syntaxe de la commande ne sont
   pas respectées.
 \stopdescription
 
@@ -535,9 +535,9 @@ l'une des quatre catégories suivantes~:
 
 
 Que faire lorsque {\tt context} nous avertit, pendant la compilation, qu'une
-erreur s'est produite ? La première chose est, évidemment, d'identifier quelle
+erreur s'est produite~? La première chose est, évidemment, d'identifier quelle
 est l'erreur. Pour ce faire, nous devrons parfois analyser le fichier {\tt .log}
-généré pendant la compilation ; mais encore plus souvent il suffira de remonter
+généré pendant la compilation~; mais encore plus souvent il suffira de remonter
 dans les messages produits par {\tt context} dans le terminal où il est exécuté.
 
 \placefigure [force,here,none] [] {}{
@@ -587,7 +587,7 @@ c'est dans cette ligne qu'il a rencontré une erreur. Le numéro de la ligne est
 commençant par \quotation{\tt tex error}. Le fichier \quotation{\tt
   ex_premierdoc.log} nous indiquera ces mêmes informations. Dans notre exemple,
 il ne s'agit pas d'un très gros fichier, car la source que nous compilions est
-très petite ; dans d'autres cas, il peut contenir une quantité écrasante
+très petite~; dans d'autres cas, il peut contenir une quantité écrasante
 d'informations. Mais nous devons nous y plonger. Si nous ouvrons \quotation{\tt
   context ex_premierdoc.log} avec un éditeur de texte, nous verrons que ce
 fichier enregistre tout ce que fait \ConTeXt. Nous devons y chercher une ligne
@@ -611,8 +611,8 @@ partie du chemin indiquant l'emplacement du fichier.
 
 Si nous prêtons attention aux trois lignes du message d'erreur, nous voyons que
 la première nous indique à quel numéro de ligne l'erreur s'est produite (ligne
-14) et de quel type d'erreur il s'agit : \quotation{\tt Undefined control
-  sequence}, ou, ce qui revient au même : \quotation{\tt Unknown control
+14) et de quel type d'erreur il s'agit~: \quotation{\tt Undefined control
+  sequence}, ou, ce qui revient au même~: \quotation{\tt Unknown control
   sequence}, c'est-à-dire une commande inconnue. Les lignes suivantes du fichier
 journal nous montrent la ligne 12, qui commence à l'endroit où l'erreur s'est
 produite. Donc il n'y a pas de doute, l'erreur est dans \tex{startext}. Nous le
@@ -633,7 +633,7 @@ cela consiste à changer l'emplacement de la commande \tex{stoptext} dans le
 fichier source. Rappelez-vous que \ConTeXt\ arrête de traiter le texte dès qu'il
 trouve cette commande. Par conséquent, si, dans mon fichier source, j'écris,
 plus ou moins à la hauteur du milieu, un \tex{stoptext} et que je compile, seule
-la première moitié sera traitée ; si l'erreur se répète, je saurai qu'elle se
+la première moitié sera traitée~; si l'erreur se répète, je saurai qu'elle se
 trouve dans la première moitié du fichier source, si elle ne se répète pas, cela
 signifie que l'erreur se trouve dans la deuxième moitié... et ainsi, petit à
 petit, en changeant l'emplacement de la commande \tex{stoptext}, nous pouvons
