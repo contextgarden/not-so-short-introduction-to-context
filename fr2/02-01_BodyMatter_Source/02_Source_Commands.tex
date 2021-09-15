@@ -242,7 +242,7 @@ Vins et fromages C.
 Vins et fromages D.
 \stopDemoVN}
 
-Le contrôle de la distance de séparation entre les paragraphes, ne se fait donc pas en jouant sur le nombre de ligne vide dans le code source. 
+Le contrôle de la distance de séparation entre les paragraphes, ne se fait donc pas en jouant sur le nombre de lignes vides dans le code source. 
 D'autres méthodes pour définir précisément les espacements verticaux dans le document final seront examinées \at{page}[sec:verticalspace], avec notamment les commandes
 \PlaceMacro{setupwhitespace} \tex{setupwhitespace}
 et
@@ -338,7 +338,7 @@ Aussi \TeX\ interprète différemment une succession de tirets simples dans le f
   \stoptabulate}
 }
 
-Les noms de commandes \tex{hyphen} et \tex{minus} sont ceux normalement utilisés en anglais. Bien que de nombreux professionnels de l'imprimerie les appellent \quote{tirets}, les termes de \TeX, à savoir \tex{endash} et \tex{emdash} sont également courants dans la terminologie de la composition. Les \quotation{\em en} et \quotation{\em em} sont les noms des unités de mesure utilisées en typographie. Une \quotation{en} représente la largeur d'un \quote{n} tandis que \quotation{em} est la largeur d'un \quote{m} dans la police utilisée.% la largeur d'un quote{M} ???
+Les noms de commandes \tex{hyphen} et \tex{minus} sont ceux normalement utilisés en anglais. Bien que de nombreux professionnels de l'imprimerie les appellent \quote{tirets}, les termes de \TeX, à savoir \tex{endash} et \tex{emdash} sont également courants dans la terminologie de la composition. Les \quotation{\em en} et \quotation{\em em} sont les noms des unités de mesure utilisées en typographie. Une \quotation{en} représente la largeur d'un \quote{n} tandis que \quotation{em} est la largeur d'un \quote{M} dans la police utilisée.% la largeur d'un quote{M}???
 
 \stopsubsubsection
 
@@ -407,16 +407,16 @@ et est fermé
 
 
 Certaines commandes génèrent aussi automatiquement un groupe, par exemple, \tex{hbox}, \tex{vbox} et, en général, les commandes liées à la création de {\em boîte}\footnote{La notion de {\em boîte} est également une notion centrale de \ConTeXt\, mais son explication n'est pas incluse dans cette introduction. Vous pouvez voir \goto{le manuel dédié}[url(https://www.pragma-ade.com/general/manuals/lowlevel-boxes.pdf)]}. En dehors de ces derniers cas (groupes générés automatiquement par certaines commandes), la manière de fermer un groupe doit être cohérente avec la manière dont il a été ouvert. Cela signifie qu'un groupe commencé avec \MyKey{\{} doit être fermé avec \MyKey{\}}, et qu'un groupe commencé avec \tex{begingroup} doit être fermé avec \tex{endgroup}.
-% TODO Garulfo : ne pas laisser cette réflexion qui est plus source de confusion qu'autre chose.
+% TODO Garulfo~: ne pas laisser cette réflexion qui est plus source de confusion qu'autre chose.
 Cette règle n'a qu'une seule exception~: un groupe commencé par \MyKey{\{} peut être fermé par \tex{egroup}, et le groupe commencé par \tex{bgroup} peut être fermé par \MyKey{\}}~; en réalité, cela signifie que \MyKey{\{} et \tex{bgroup} sont complètement synonymes et interchangeables, et de même pour \MyKey{\}} et \tex{egroup}.
 
 \startSmallPrint
 
   Les commandes \PlaceMacro{bgroup}\tex{bgroup} et \PlaceMacro{egroup}\tex{egroup} ont été conçues pour pouvoir définir des commandes pour ouvrir un groupe et d'autres pour fermer un groupe. Par conséquent, pour des raisons internes à la syntaxe \TeX\, ces groupes ne pouvaient pas être ouverts et fermés avec des accolades, car cela aurait généré des accolades déséquilibrées dans le fichier source, ce qui aurait toujours provoqué une erreur lors de la compilation.
 
-  %TODO Garulfo : c'est un truc de jedi, pourquoi donner ça en introduction ? https://tex.stackexchange.com/questions/1930/when-should-one-use-begingroup-instead-of-bgroup, il faut mieux utiliser \begingroup
+  %TODO Garulfo~: c'est un truc de jedi, pourquoi donner ça en introduction ? https://tex.stackexchange.com/questions/1930/when-should-one-use-begingroup-instead-of-bgroup, il faut mieux utiliser \begingroup
 
-  En revanche, les commandes \PlaceMacro{begingroup}\tex{begingroup} et \PlaceMacro{endgroup}\tex{endgroup} ne sont pas interchangeables avec les accolades ou les commandes \tex{bgroup ... \egroup}, car un groupe commencé avec \tex{begingroup} doit être fermé avec \tex{endgroup}. Ces dernières commandes ont été conçues pour permettre une vérification beaucoup plus approfondie des erreurs. En général, les utilisateurs normaux n'ont pas à les utiliser.  % dans \tex{bgroup ... \egroup} faut-il le \ devant egroup ?
+  En revanche, les commandes \PlaceMacro{begingroup}\tex{begingroup} et \PlaceMacro{endgroup}\tex{endgroup} ne sont pas interchangeables avec les accolades ou les commandes \tex{bgroup ... \egroup}, car un groupe commencé avec \tex{begingroup} doit être fermé avec \tex{endgroup}. Ces dernières commandes ont été conçues pour permettre une vérification beaucoup plus approfondie des erreurs. En général, les utilisateurs normaux n'ont pas à les utiliser.
 
 \stopSmallPrint
 
@@ -463,7 +463,7 @@ En fonction de ce qui suit immédiatement ce caractère d'échappement, une dist
 
 \item {\bf Symboles de contrôle.} Un symbole de contrôle commence par la séquence d'échappement (\quotation{\tt\backslash}) et consiste exclusivement en un caractère autre qu'une lettre, comme par exemple \quotation{\tex{,}}, \quotation{\tex{1}}, \quotation{\tex{'}} ou \quotation{\type{\%}}. Tout caractère ou symbole qui n'est pas une lettre au sens strict du terme peut être un symbole de contrôle, y compris les chiffres, les signes de ponctuation, les symboles et même un espace vide. Dans ce document, pour représenter un espace vide (espace blanc) lorsque sa présence doit être soulignée, le symbole que j'utilise est \textvisiblespace. En fait, \quotation{\cmd{\textvisiblespace}} (une barre oblique inversée suivie d'un espace blanc) est un symbole de contrôle couramment utilisé, comme nous pourrons bientôt le constater.
 
-% TODO Garulfo faire une bibliographie, ce n'est pas clair ici. si on présente du source, il faut utiliser l'environnement définir pour cela : start type code
+% TODO Garulfo faire une bibliographie, ce n'est pas clair ici. si on présente du source, il faut utiliser l'environnement définir pour cela~: start type code
   \startSmallPrint
     Un espace vide ou blanc est un caractère \quotation{invisible}, ce qui pose un problème dans un document comme celui-ci, où il faut parfois préciser clairement ce qui doit être écrit dans un fichier source. {\sc Knuth} était déjà conscient de ce problème et, dans son \quotation{The \TeX Book}, il a pris l'habitude de représenter les espaces vides importants par le symbole \quotation{\textvisiblespace}. Ainsi, par exemple, si nous voulions montrer que deux mots du fichier source doivent être séparés par deux espaces vides, nous écririons \quotation{word1␣␣word2}.
     \reference[note:espace invisible]{}
@@ -483,7 +483,7 @@ En fonction de ce qui suit immédiatement ce caractère d'échappement, une dist
 Lorsque \ConTeXt\ lit un fichier source et trouve le caractère d'échappement (\quotation{{\tt\backslash}}), il sait qu'une commande va suivre. Il lit alors le premier caractère qui suit la séquence d'échappement. Si ce n'est pas une lettre, cela signifie que la commande est un symbole de contrôle et ne consiste qu'en ce premier symbole. Mais d'un autre côté, si le premier caractère après la séquence d'échappement est une lettre, alors \ConTeXt\ continuera à lire chaque caractère jusqu'à ce qu'il trouve le premier caractère qui ne soit pas une lettre, et il saura alors que le nom de la commande est terminé. C'est pourquoi les noms de commande qui sont des mots de contrôle ne peuvent pas contenir de caractères autres que des lettres.
 
 Lorsque la \quotation{non-lettre} à la fin du nom de la commande est un espace vide, il est supposé que l'espace vide ne fait pas partie du texte à traiter, mais qu'il a été inséré exclusivement pour indiquer la fin du nom de la commande, donc \ConTeXt\ se débarrasse de cet espace. Cela produit un effet qui surprend les débutants, car lorsque l'effet de la commande en question implique d'écrire quelque chose dans le document final, la sortie écrite de la commande est liée au mot suivant. Par exemple, les deux phrases suivantes dans le fichier source produisent le résultat suivant~:
-% TODO Garulfo : cette remarque n'est pas à mettre en note de bas de page, trop important.
+% TODO Garulfo~: cette remarque n'est pas à mettre en note de bas de page, trop important.
 \footnote{{\bf Note~:} par convention, pour illustrer quelque chose dans cette introduction, les exemple de code source utilise une police à espacement fixe, une coloration syntaxique cohérente de \ConTeXt\ dans un cadre de fond gris. Le résultat de la compilation est présenté dans un cadre de fond de couleur jaune foncé.}
 
 \placefigure [force,here,none] [] {}{
@@ -572,7 +572,7 @@ Lorsque ces commandes sont exécutées dans un {\em groupe} (voir \in{section}[s
 In {\it The \TeX Book}, {\sc Knuth} explained \bf{everything} you need to know about \TeX.
 \stopDemoHN}
 
-crée deux groupes, l'un pour déterminer la portée de la commande \tex{it} (italique) et l'autre pour déterminer la portée de la commande \tex{sc} (petites capitales, small capital en anglais).
+crée deux groupes, l'un pour déterminer la portée de la commande \tex{it} (italique) et l'autre pour déterminer la portée de la commande \tex{sc} (petites capitales, small capital en anglais). % N'y a-t-il pas trois groupes, le troisième pour \bf ; sinon il faut expliquer pour \bf, je crois
 
 Au contraire de ce type de commande, il en existe d'autres qui nécessitent immédiatement une indication du texte auquel elles doivent être appliquées. Dans ce cas, le texte qui doit être affecté par la commande est placé entre des crochets immédiatement après la commande. Par exemple, nous pouvons citer la commande \tex{framed}~: cette commande dessine un cadre autour du texte qu'elle prend comme argument, par exemple~:
 
@@ -608,7 +608,7 @@ Certaines commandes fonctionnent par couple afin de déterminer leur portée, en
 
 Il n'y a pas de nom spécial pour ces paires de commandes dans la documentation officielle de \ConTeXt. Le manuel de référence et l'introduction les appellent simplement \quotation{start ... stop}. Parfois elles sont appelés {\em environnements}, qui est également le nom que \LaTeX\ donne à un type de construction similaire, mais cela présente un inconvénient dans \ConTeXt\ car ce terme \quotation{environnement} est également utilisé pour autre chose (un type spécial de fichier source que nous verrons lorsque nous parlerons des projets multifichiers dans \in{section}[sec:srcprojects]). Néanmoins, puisque le terme environnement est clair, et que le contexte permettra de distinguer facilement si nous parlons de {\em commandes d'environnement} ou de {\em fichiers d'environnement}, j'utiliserai ce terme.
 
-Les environnements consistent donc en une commande qui les ouvre, les commence, et une autre qui les ferme, les termine. Si le fichier source contient une commande d'ouverture d'environnement qui n'est pas fermée par la suite, une erreur est normalement générée.\footnote{Pas toujours, cela dépend de l'environnement en question et de la situation dans le reste du document. \ConTeXt\ diffère de \LaTeX\ à cet égard qui est beaucoup plus stricte.} D'autre part, ces types d'erreurs sont plus difficiles à trouver, car l'erreur peut se produire bien au-delà de l'endroit où se trouve la commande d'ouverture. Parfois, le fichier \MyKey{.log} nous montrera la ligne où commence l'environnement incorrectement fermé~; mais d'autres fois, l'absence d’une fermeture \footnote{test} d'environnement va impliquer une mauvaise interprétation par \ConTeXt\ qui soulignera le passage qu'il considère comme éronné et non pas le manque de fermeture d'environnement, ce qui signifie que le fichier \MyKey{.log} ne nous est pas d'une grande aide pour trouver où se situe le problème.
+Les environnements consistent donc en une commande qui les ouvre, les commence, et une autre qui les ferme, les termine. Si le fichier source contient une commande d'ouverture d'environnement qui n'est pas fermée par la suite, une erreur est normalement générée.\footnote{Pas toujours, cela dépend de l'environnement en question et de la situation dans le reste du document. \ConTeXt\ diffère de \LaTeX\ à cet égard qui est beaucoup plus strict.} D'autre part, ces types d'erreurs sont plus difficiles à trouver, car l'erreur peut se produire bien au-delà de l'endroit où se trouve la commande d'ouverture. Parfois, le fichier \MyKey{.log} nous montrera la ligne où commence l'environnement incorrectement fermé~; mais d'autres fois, l'absence d’une fermeture \footnote{test} d'environnement va impliquer une mauvaise interprétation par \ConTeXt\ qui soulignera le passage qu'il considère comme éronné et non pas le manque de fermeture d'environnement, ce qui signifie que le fichier \MyKey{.log} ne nous est pas d'une grande aide pour trouver où se situe le problème.
 
 Les environnements peuvent être imbriqués, ce qui signifie qu'un autre environnement peut être ouvert à l'intérieur d'un environnement existant. Dans de tels cas un environnement doit absolument être fermé à l'intérieur de l'environnement dans lequel il a été ouvert. En d'autres termes, l'ordre dans lequel les environnements sont fermés doit être cohérent avec l'ordre dans lequel ils ont été ouverts. Je pense que cela devrait être clair à partir de l'exemple suivant~:
 
@@ -629,7 +629,7 @@ Dans l'exemple, vous pouvez voir comment l'environnement \MyKey{QuelqueChoseAutr
 
 En général, les commandes conçues comme {\em environnements} sont celles qui mettent en œuvre un changement destiné à être appliqué à des unités de texte au moins aussi grande que le paragraphe. Par exemple, l'environnement \MyKey{narrower} qui modifie les marges, n'a de sens que lorsqu'il est appliqué au niveau du paragraphe, ou l'environnement \MyKey{framedtext} qui encadre un ou plusieurs paragraphes. Ce dernier environnement peut nous aider à comprendre pourquoi certaines commandes sont conçues comme des environnements et d'autres comme des commandes individuelles~: si nous souhaitons encadrer un ou plusieurs mots, tous sur la même ligne, nous utiliserons la commande \tex{framed}, mais si ce que nous voulons encadrer est un paragraphe entier (ou plusieurs paragraphes), nous utiliserons l'environnement \MyKey{startframed} ou \MyKey{startframedtext}.
 
-D'autre part, le texte situé dans un environnement particulier constitue normalement un {\em groupe} (voir \in{section}[sec:groups]), ce qui signifie que si une commande d'activation est trouvée à l'intérieur d'un environnement, parmi les commandes qui s'appliquent à tout le texte qui suit, cette commande ne s'appliquera que jusqu'à la fin de l'environnement dans lequel elle se trouvei. En fait, \ConTeXt\ a un {\em environnement} sans nom commençant par la commande \tex{start} (aucun autre texte ne suit~; juste {\em start}, c'est pourquoi je l'appelle un {\em environnement sans nom}) et se termine par la commande \tex{stop}. Je pense que la seule fonction de cette commande est de créer un groupe.
+D'autre part, le texte situé dans un environnement particulier constitue normalement un {\em groupe} (voir \in{section}[sec:groups]), ce qui signifie que si une commande d'activation est trouvée à l'intérieur d'un environnement, parmi les commandes qui s'appliquent à tout le texte qui suit, cette commande ne s'appliquera que jusqu'à la fin de l'environnement dans lequel elle se trouve. En fait, \ConTeXt\ a un {\em environnement} sans nom commençant par la commande \tex{start} (aucun autre texte ne suit~; juste {\em start}, c'est pourquoi je l'appelle un {\em environnement sans nom}) et se termine par la commande \tex{stop}. Je pense que la seule fonction de cette commande est de créer un groupe.
 
 \startSmallPrint
 
@@ -814,7 +814,7 @@ En résumant ce que nous avons vu jusqu'à présent, nous voyons que dans \ConTe
 
    \stopitemize
 
-% TODO Gaurlfo : peut être y'a t'il moyen de simplifier la présentation
+% TODO Gaurlfo~: peut être y'a t'il moyen de simplifier la présentation
 % et de donner des exemples
 
 
@@ -906,7 +906,7 @@ Ce document est fondamental pour apprendre à utiliser \ConTeXt, car c'est là q
 
 \MyKey{setup-fr.pdf} est donc fondamental pour l'apprentissage de \ConTeXt. Mais je préférerais vraiment, tout d'abord, qu'il nous dise si une commande ne fonctionne que dans Mark~II ou Mark~IV, et surtout, qu'au lieu de nous indiquer seulement la liste et le type d'arguments que chaque commande autorise, il nous dise à quoi servent ces arguments. Cela réduirait considérablement les lacunes de la documentation de \ConTeXt. Certaines commandes autorisent des arguments facultatifs que je ne mentionne même pas dans cette introduction parce que je ne sais pas à quoi ils servent et, puisqu'ils sont facultatifs, il n'est pas nécessaire de les mentionner. C'est extrêmement frustrant.
 
-La méthode mise en oeuvre par la communauté \ConTeXt\ est dorénavant de documenter tout cela dans le
+La méthode mise en œuvre par la communauté \ConTeXt\ est dorénavant de documenter tout cela dans le
 \goto{Wiki}[url(http://wiki.contextgarden.net)] avec une adresse web spécifique pour chaque commande, par exemple pour \tex{setupframed}~:
 \goto{https://wiki.contextgarden.net/index.php?title=Command/setupframed}[url(https://wiki.contextgarden.net/index.php?title=Command/setupframed)]
 
@@ -929,7 +929,7 @@ Ainsi, chaque utilisateur est invité à compléter progressivement la documenta
   [title={Autres concepts fondamentaux, dimensions},
   reference=sec:dimensions,]
 
-  Il existe d'autres notions, autres que les commandes, qui sont fondamentales pour comprendre la logique du fonctionnement de \ConTeXt\. Certaines d'entre elles, en raison de leur complexité, ne sont pas appropriées pour une introduction et ne seront donc pas abordées dans ce document~; mais il y a une notions qu'il convient d'examiner maintenant~: les dimensions.
+  Il existe d'autres notions, autres que les commandes, qui sont fondamentales pour comprendre la logique du fonctionnement de \ConTeXt\. Certaines d'entre elles, en raison de leur complexité, ne sont pas appropriées pour une introduction et ne seront donc pas abordées dans ce document~; mais il y a une notion qu'il convient d'examiner maintenant~: les dimensions.
 
 
   Bien que nous puissions utiliser \ConTeXt\ parfaitement sans nous soucier des dimensions, nous ne pourrions pas utiliser toutes les possibilités de configuration sans leur accorder une certaine attention. Car, dans une large mesure, la perfection typographique atteinte par \TeX\ et ses dérivés réside dans la grande attention que le système accorde en interne aux dimensions. Les caractères ont des dimensions~; l'espace entre les mots, ou entre les lignes, ou entre les paragraphes ont des dimensions~; les lignes ont des dimensions~; les marges, les en-têtes et les pieds de page. Pour presque tous les éléments de la page auxquels nous pouvons penser, il existe des dimensions.
@@ -960,10 +960,10 @@ l'unité de mesure. Les unités qui peuvent être utilisées se trouvent dans
 \stoptabulate
 }
 
-Les trois premières unités du \in{table} [tbl:measurements] sont des mesures standard de longueur~; la première est utilisée dans certaines parties du monde anglophone et les autres en dehors ou dans certaines parties de celui-ci. Les autres unités proviennent du monde de la typographie. Les deux dernières, pour lesquelles je n'ai pas mis d'équivalent, sont des unités de mesure relatives basées sur la police de caractères actuelle. Une \quotation{em} est égale à la largeur d'un \quotation{M} et une \quotation{ex} est égale à la hauteur d'une \quotation{x}. L'utilisation de mesures liées à la taille des polices permet de créer des macros qui offrent une mise en forme réussies quelle que soit le contexte d'utilisation puisque tout est mis en cohérence avec la taille de la police de caractère. C'est pourquoi, en général, elle est recommandée.
+Les trois premières unités du \in{table} [tbl:measurements] sont des mesures standard de longueur~; la première est utilisée dans certaines parties du monde anglophone et les autres en dehors ou dans certaines parties de celui-ci. Les autres unités proviennent du monde de la typographie. Les deux dernières, pour lesquelles je n'ai pas mis d'équivalent, sont des unités de mesure relatives basées sur la police de caractères actuelle. Une \quotation{em} est égale à la largeur d'un \quotation{M} et une \quotation{ex} est égale à la hauteur d'un \quotation{x}. L'utilisation de mesures liées à la taille des polices permet de créer des macros qui offrent une mise en forme réussies quelle que soit le contexte d'utilisation puisque tout est mis en cohérence avec la taille de la police de caractère. C'est pourquoi, en général, elle est recommandée.  %% attention à la ligne 341 on parle de {en} et ici de {ex}, normalement "ex". Peut-être aussi mettre en note de bas de page une remarque sur la distinction entre "em" dimension et "\em" commande de mise en évidence ?
 
 À de très rares exceptions près, nous pouvons utiliser l'unité de mesure de notre choix, car \ConTeXt\ la convertira en interne. Mais chaque fois qu'une dimension est indiquée, il est obligatoire d'indiquer l'unité de mesure, et même si nous voulons indiquer une mesure de \quotation{0}, nous devons dire \quote{0pt} ou \quote{0cm}. Entre le nombre et le nom de l'unité, on peut laisser ou non un espace vide. Si l'unité comporte une partie décimale, nous devons utiliser le \quotation{.} en séparateur décimal.
-% TODO Garulfo : une erreur ici. la virgule nêest pas toléré.
+% TODO Garulfo~: une erreur ici. la virgule nêest pas toléré.
 
 
 Les mesures sont généralement utilisées comme une option pour une commande. Mais nous pouvons également attribuer directement une valeur à une mesure interne de \ConTeXt\, tant que nous en connaissons le nom. Par exemple~:
@@ -1006,7 +1006,7 @@ Par exemple~:
 
 Avec cette instruction, nous demandons à \ConTeXt\ d'attribuer à \PlaceMacro{parskip}\tex{parskip} (indiquant la distance verticale entre les paragraphes qui doit plutôt être paramétrée avec \tex{setupwhitespace} mais nous avons besoin ici d'un exemple) une mesure {\em normal} de 3 points, mais que si la composition de la page l'exige, la mesure peut aller jusqu'à 5 points (3 plus 2) ou seulement 2 points (3 moins 1). Dans ces cas, il appartiendra à \ConTeXt\ de choisir la distance pour chaque page entre un minimum de 2 points et un maximum de 5 points.
 \index{setupwhitespace}
-% TODO Garulfo parskip : toujours pas une bonne idée d'utiliser en illustration une commande que l'utilisateur moyen n'utilise pas.
+% TODO Garulfo parskip~: toujours pas une bonne idée d'utiliser en illustration une commande que l'utilisateur moyen n'utilise pas.
 
 
 
@@ -1036,7 +1036,7 @@ Pour créer un document avec \ConTeXt, il suffit probablement de connaître les 
   \item Utiliser l'environnement {\em itemize} pour les listes, il sera expliqué en détail dans \in{section}[sec:itemize].
 
   \item ... et à peine plus.
-%TODO Garulfo : rajouter le layout
+%TODO Garulfo~: rajouter le layout
 \stopitemize
 
 Pour le reste, tout ce dont nous avons besoin, c'est de savoir que c'est possible. Certainement personne n'utilisera une fonctionnalité s'il ne sait pas qu'elle existe. Dans cette introduction, nous expliquons beaucoup d'entre elles~; mais, surtout, il est démontré à plusieurs reprises comment \ConTeXt\ se comporte face à un certain type de construction
@@ -1069,4 +1069,4 @@ C'est ainsi que l'apprentissage de \ConTeXt\ a été conçu~: l'introduction exp
 %%% TeX-master: "../introCTX_fra.tex"
 %%% coding: utf-8-unix
 %%% End:
-%%% vim:set filetype=context tw=72 : %%%
+%%% vim:set filetype=context tw=72~: %%%
