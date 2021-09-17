@@ -24,7 +24,7 @@
 
 \item {\em MesNotes} est le nom que nous attribuons à notre nouveau type de note.
 
-\item {\em Modèle} est le modèle de note qui sera utilisé initialement, soit par exemple {\tt footnote} et {\tt endnote}. Dans le premier cas, notre modèle de note fonctionnera comme des notes de bas de page, et dans le second cas, comme des notes de fin de document. Nous les définirons dans le fichier source avec la commande \tex{MesNotes} et nous utliseront \tex{placenotes[MesNotes]} (le nom que nous avons attribué à ces types de notes) à l'endroit où nous souhaitons les afficher dans le document final.
+\item {\em Modèle} est le modèle de note qui sera utilisé initialement, soit par exemple {\tt footnote} et {\tt endnote}. Dans le premier cas, notre modèle de note fonctionnera comme des notes de bas de page, et dans le second cas, comme des notes de fin de document. Nous les définirons dans le fichier source avec la commande \tex{MesNotes} et nous utliserons \tex{placenotes[MesNotes]} (le nom que nous avons attribué à ces types de notes) à l'endroit où nous souhaitons les afficher dans le document final.
 
 
 \item {\em Configuration} est un argument facultatif qui nous permet de distinguer notre nouveau type de notes de son modèle~: soit en définissant un format différent, soit un type de numérotation différent, soit les deux.
@@ -101,7 +101,7 @@ La syntaxe est similaire dans les deux cas~:
 
 % TODO Garulfo~: il va falloir nettoyer pour éclaircir le propos
 
-où {\em NoteType} fait référence au type de note que nous configurons ({\tt footnote}, {\tt endnote} ou le nom d'un type de note que nous avons nous-mêmes créé), et {\em configuration} contient les options de configuration particulières de la commande.
+où {\em NoteType} fait référence au type de note que nous configurons ({\tt footnote}, {\tt endnote} (ou le nom d'un type de note que nous avons nous-mêmes créé), et {\em configuration} contient les options de configuration particulières de la commande.
 
 Le problème est que les noms de ces deux commandes n'indiquent pas clairement la différence entre elles ni ce que chacune d'elles configure~; et le fait que de nombreuses options de ces commandes ne soient pas documentées n'aide pas beaucoup non plus. Après de nombreux tests, je n'ai pas été en mesure de parvenir à une conclusion qui me permettrait de comprendre pourquoi certaines choses sont configurées avec l'une, tandis que d'autres le sont avec l'autre,\footnote{Il existe une page dans le \goto{ \ConTeXt\ wiki} [url(https://wiki.contextgarden.net/Unexpected\_behavior)] que j'ai découverte par hasard (puisqu'elle n'est pas spécifiquement dédiée aux notes), qui suggère que la différence est que \tex{setupnotation} contrôle le texte de la note à insérer, et \tex{setupnote} l'environnement de la note dans laquelle elle sera placée (~?~) Mais ceci n'est pas cohérent avec le fait que, par exemple, la largeur du texte de la note (qui a à voir avec son {\em insertion}) est contrôlée par l'option {\tt width} de \tex{setupnote} et non par l'option \tex{setupnotation} du même nom. Ce qui est contrôlé dans ce cas c'est la largeur de l'espace pris pour afficher la marque, avant l'affichage du texte de la note.} sauf peut-être que, en raison des choix que j'ai faits pour le faire fonctionner, \tex{setupnotation} affecte toujours le texte de la note, ou l'ID qui est imprimé avec le texte de la note, alors que \tex{setupnote} a quelques options qui affectent la marque de la note insérée dans le texte principal.
 
@@ -277,7 +277,7 @@ Ce début de phrase \MesNotesBleuesA[refA]{coucou ici ceci est une note de bas d
 \PlaceMacro{notesenabledtrue}
 
 
-Les commandes \tex{notesenabledfalse} et \tex{notesenabledtrue} indiquent à \ConTeXt\ d'activer ou de désactiver la compilation des notes respectivement. Cette fonction peut être utile si l'on souhaite obtenir une version sans notes lorsque le document comporte des notes nombreuses et étendues. Dans mon expérience personnelle, par exemple, lorsque je corrige une thèse de doctorat, je préfère la lire une première fois en une seule fois, sans les notes, puis faire une seconde lecture avec les notes incorporées. % n'y a-t-il pas inversion des significations : "notesenabledfalse" PAS de compilation ?
+Les commandes \tex{notesenabledfalse} et \tex{notesenabledtrue} indiquent à \ConTeXt\ d'activer ou de désactiver la compilation des notes respectivement. Cette fonction peut être utile si l'on souhaite obtenir une version sans notes lorsque le document comporte des notes nombreuses et étendues. Dans mon expérience personnelle, par exemple, lorsque je corrige une thèse de doctorat, je préfère la lire une première fois en une seule fois, sans les notes, puis faire une seconde lecture avec les notes incorporées. % n'y a-t-il pas inversion des significations : "notesenabledfalse" PAS de compilation ? Le texte devrait être ?"... indiquent à \ConTeXt\ de désactiver ou d'activer la compilation..."
 
 \stopsubsection
 
