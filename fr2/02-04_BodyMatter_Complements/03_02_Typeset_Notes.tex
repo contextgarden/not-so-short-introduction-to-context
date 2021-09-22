@@ -24,7 +24,7 @@
 
 \item {\em MesNotes} est le nom que nous attribuons à notre nouveau type de note.
 
-\item {\em Modèle} est le modèle de note qui sera utilisé initialement, soit par exemple {\tt footnote} et {\tt endnote}. Dans le premier cas, notre modèle de note fonctionnera comme des notes de bas de page, et dans le second cas, comme des notes de fin de document. Nous les définirons dans le fichier source avec la commande \tex{MesNotes} et nous utliserons \tex{placenotes[MesNotes]} (le nom que nous avons attribué à ces types de notes) à l'endroit où nous souhaitons les afficher dans le document final.
+\item {\em Modèle} est le modèle de note qui sera utilisé initialement, soit par exemple {\tt footnote} et {\tt endnote}. Dans le premier cas, notre modèle de note fonctionnera comme des notes de bas de page, et dans le second cas, comme des notes de fin de document. Nous les définirons dans le fichier source avec la commande \tex{MesNotes} et nous utiliserons \tex{placenotes[MesNotes]} (le nom que nous avons attribué à ces types de notes) à l'endroit où nous souhaitons les afficher dans le document final.
 
 
 \item {\em Configuration} est un argument facultatif qui nous permet de distinguer notre nouveau type de notes de son modèle~: soit en définissant un format différent, soit un type de numérotation différent, soit les deux.
@@ -143,7 +143,7 @@ Je vais maintenant essayer d'organiser ce que j'ai découvert après avoir fait 
   \item Affichage ou non~: Option {\tt number} dans \tex{setupnotation}.
 
   \item Positionnement de la marque par rapport au texte de la note~: L'option {\tt alternative} dans \tex{setupnotation}~: elle peut prendre l'une des valeurs suivantes~: {\tt left, inleft, leftmargin, right, inright, rightmargin, inmargin, margin, innermargin, outermargin, serried, hanging, top, command}. Par défaut la marque est dans l'espace entre la marge et le texte. Avec {\tt hanging}
-la marque est intégré dans la zone de texte, de même avec {\tt serried} qui en plus intégre une identation lors des retours à la ligne du texte de la note.
+la marque est intégré dans la zone de texte, de même avec {\tt serried} qui en plus intègre une indentation lors des retours à la ligne du texte de la note.
 
   \item Style et couleur à appliquer à la marque dans le corps du texte~: L'option {\tt textstyle} et {\tt textcolor} dans \tex{setupnote}.
 
@@ -204,7 +204,7 @@ Cette option ne concerne que le cas où l'on souhaite définir manuellement une 
  
 \startitemize
  
-\item {\tt rule}, dans \tex{setupnote} détermine s'il y aura ou non une ligne (règle) entre la zone des notes et la zone de la page contenant le texte principal. Ses valeurs possibles sont {\tt yes, on, no} et {\tt off}. Les deux premières valeurs activent la règle et la dernière la désactive. Il est possible de configurer la ligne plus précisément en indiquant {\tt rule=command} et en définisant {\tt rulecommand} par exemple 
+\item {\tt rule}, dans \tex{setupnote} détermine s'il y aura ou non une ligne (règle) entre la zone des notes et la zone de la page contenant le texte principal. Ses valeurs possibles sont {\tt yes, on, no} et {\tt off}. Les deux premières valeurs activent la règle et la dernière la désactive. Il est possible de configurer la ligne plus précisément en indiquant {\tt rule=command} et en définissant {\tt rulecommand} par exemple 
 
 \placefigure [force,here,none] [] {}
 {\startDemoI
