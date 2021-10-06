@@ -204,7 +204,7 @@ Cette option ne concerne que le cas où l'on souhaite définir manuellement une 
  
 \startitemize
  
-\item {\tt rule}, dans \tex{setupnote} détermine s'il y aura ou non une ligne (règle) entre la zone des notes et la zone de la page contenant le texte principal. Ses valeurs possibles sont {\tt yes, on, no} et {\tt off}. Les deux premières valeurs activent la règle et la dernière la désactive. Il est possible de configurer la ligne plus précisément en indiquant {\tt rule=command} et en définissant {\tt rulecommand} par exemple 
+\item {\tt rule}, dans \tex{setupnote} détermine s'il y aura ou non une ligne (règle) entre la zone des notes et la zone de la page contenant le texte principal. Ses valeurs possibles sont {\tt yes, on, no} et {\tt off}. Les deux premières valeurs activent la règle et les deux dernières la désactivent. Il est possible de configurer la ligne plus précisément en indiquant {\tt rule=command} et en définissant {\tt rulecommand} par exemple 
 
 \placefigure [force,here,none] [] {}
 {\startDemoI
@@ -277,7 +277,7 @@ Ce début de phrase \MesNotesBleuesA[refA]{coucou ici ceci est une note de bas d
 \PlaceMacro{notesenabledtrue}
 
 
-Les commandes \tex{notesenabledfalse} et \tex{notesenabledtrue} indiquent à \ConTeXt\ d'activer ou de désactiver la compilation des notes respectivement. Cette fonction peut être utile si l'on souhaite obtenir une version sans notes lorsque le document comporte des notes nombreuses et étendues. Dans mon expérience personnelle, par exemple, lorsque je corrige une thèse de doctorat, je préfère la lire une première fois en une seule fois, sans les notes, puis faire une seconde lecture avec les notes incorporées. % n'y a-t-il pas inversion des significations : "notesenabledfalse" PAS de compilation ? Le texte devrait être ?"... indiquent à \ConTeXt\ de désactiver ou d'activer la compilation..."
+Les commandes \tex{notesenabledfalse} et \tex{notesenabledtrue} indiquent à \ConTeXt\ d'activer ou de désactiver la compilation des notes respectivement. Cette fonction peut être utile si l'on souhaite obtenir une version sans notes lorsque le document comporte des notes nombreuses et étendues. Dans mon expérience personnelle, par exemple, lorsque je corrige une thèse de doctorat, je préfère la lire une première fois en une seule fois, sans les notes, puis faire une seconde lecture avec les notes incorporées. % n'y a-t-il pas inversion des significations : "notesenabledfalse" PAS de compilation ? Le texte devrait être ?"... indiquent à \ConTeXt\ de désactiver ou d'activer la compilation..."  
 
 \stopsubsection
 
