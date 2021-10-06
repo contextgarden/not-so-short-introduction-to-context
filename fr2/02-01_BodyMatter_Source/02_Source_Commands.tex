@@ -14,7 +14,7 @@ Nous venons de voir que le fichier source contient à la fois le contenu et les 
 \startSmallPrint
 
 Du point de vue du fonctionnement interne de \ConTeXt\ (en fait, du fonctionnement de \TeX), il y a une différence entre les {\em primitives} et les {\em macros}. Une primitive est une instruction simple qui ne peut pas être décomposée en d'autres instructions plus simples. Une macro est une instruction qui peut être décomposée en d'autres instructions plus simples qui à leur tour peuvent être décomposées, et ainsi de suite, jusqu'à revenir aux primitives.
-La plupart des instructions de \ConTeXt sont, en fait, des macros. Du point de vue du programmeur, la différence entre les macros et les primitives est importante. Mais du point de vue de l'utilisateur, la question n'est pas si importante~: dans les deux cas, nous avons des instructions qui sont exécutées sans que nous ayons besoin de nous préoccuper de leur fonctionnement à un niveau inférieur. Par conséquent, la documentation \ConTeXt\ parle généralement d'une {\em commande} lorsqu'elle adopte le point de vue de l'utilisateur, et d'une {\em macro} lorsqu'elle adopte le point de vue du programmeur. Puisque nous ne prenons que la perspective de l'utilisateur dans cette introduction,j'utiliserai l'un ou l'autre terme, les considérant comme synonymes.
+La plupart des instructions de \ConTeXt sont, en fait, des macros. Du point de vue du programmeur, la différence entre les macros et les primitives est importante. Mais du point de vue de l'utilisateur, la question n'est pas si importante~: dans les deux cas, nous avons des instructions qui sont exécutées sans que nous ayons besoin de nous préoccuper de leur fonctionnement à un niveau inférieur. Par conséquent, la documentation \ConTeXt\ parle généralement d'une {\em commande} lorsqu'elle adopte le point de vue de l'utilisateur, et d'une {\em macro} lorsqu'elle adopte le point de vue du programmeur. Puisque nous ne prenons que la perspective de l'utilisateur dans cette introduction, j'utiliserai l'un ou l'autre terme, les considérant comme synonymes.
 
 Les {\em commandes} sont des ordres donnés au programme \ConTeXt\ pour qu'il fasse quelque chose. Nous {\em contrôlons} les performances du programme par leur intermédiaire. Ainsi \people{Knuth}, le père de \TeX, utilise le terme de {\em séquences de contrôle} pour se référer à la fois aux primitives et aux macros, et je pense que c'est le terme le plus précis de tous. Je l'utiliserai lorsque je penserai qu'il est important de distinguer entre {\em symboles de contrôle} et {\em mots de contrôle}.
 
@@ -753,7 +753,7 @@ Cette possibilité n'existe pas seulement pour le cas concret de la commande \te
 
 \startitemize[packed]
 
-  \item Tout d'abord, elle clone une commande particulière qui supporte toute une série d'option et de configurations. Par cette opération, le clone {\em hérite} de la commande initiale et de sa configuration par défaut.
+  \item Tout d'abord, elle clone une commande particulière qui supporte toute une série d'options et de configurations. Par cette opération, le clone {\em hérite} de la commande initiale et de sa configuration par défaut.
 
   \item Il associe ce clone au nom d'une nouvelle commande.
 
@@ -820,7 +820,7 @@ En résumant ce que nous avons vu jusqu'à présent, nous voyons que dans \ConTe
 
    Les arguments introduits entre crochets peuvent être de différent type~: un nom symbolique (dont \ConTeXt\ connaît la signification), une mesure ou une dimension, un nombre, le nom d'une autre commande.
 
-   Ils peuvent prendre trois forme différentes~:.
+   Ils peuvent prendre trois formes différentes~:.
 
 \startitemize
 
@@ -947,7 +947,7 @@ l'unité de mesure. Les unités qui peuvent être utilisées se trouvent dans
   \NC {\bf Nom} \NC {\bf Notation dans \ConTeXt}\NC {\bf Équivalent}\NR
 \NC Inch\NC in\NC 1 in $=$ 2.54 cm\NR
 \NC Centimètre\NC cm\NC 2.54 cm $=$ 1 inch\NR
-\NC Millimètre\NC mm\NC 100 mm $=$ 1 cm\NR
+\NC Millimètre\NC mm\NC 10 mm $=$ 1 cm\NR
 
 \NC Point\NC pt\NC 72.27 pt $=$ 1 inch\NR
 \NC Big point\NC bp\NC 72 bp $=$ 1 inch\NR
@@ -988,7 +988,7 @@ Nous pouvons utiliser \tex{MaDimensionA 10mm} (sans le signe égal) mais aussi \
 
 Toutefois, l'attribution d'une valeur directement à une mesure interne est considérée comme une \quotation{inelegant}. En général, il est recommandé d'utiliser les commandes qui contrôlent cette variable, et de le faire dans le préambule du fichier source. Le contraire donne lieu à des fichiers sources très difficiles à déboguer car toutes les commandes de configuration ne se trouvent pas au même endroit, et il est vraiment difficile d'obtenir une certaine cohérence dans les caractéristiques typographiques. %  considérée comme inélégant ou une « inelegant » si on considère le mot anglais !!!
 
-Certaines des dimensions utilisées par \ConTeXt\ sont \quotation{élastique}, c'est-à-dire que, selon le contexte, elles peuvent prendre l'une ou l'autre mesure. Ces mesures sont attribuées avec la syntaxe suivante~:
+Certaines des dimensions utilisées par \ConTeXt\ sont \quotation{élastiques}, c'est-à-dire que, selon le contexte, elles peuvent prendre l'une ou l'autre mesure. Ces mesures sont attribuées avec la syntaxe suivante~:
 
 \placefigure [force,here,none] [] {}{
 \startDemoI
@@ -1015,7 +1015,7 @@ Avec cette instruction, nous demandons à \ConTeXt\ d'attribuer à \PlaceMacro{p
 % * 3.10 ConTeXt en autodidacte ============================================
 
 \startsection
-  [title=Méthode d'auto apprentissage pour \ConTeXt]
+  [title=Méthode d'auto-apprentissage pour \ConTeXt]
 
 
   Section ajoutée au dernier moment, lorsque je me suis rendu compte que j'étais moi-même tellement imprégné de l'esprit de \ConTeXt\ que j'étais capable de deviner l'existence de certaines commandes.
@@ -1053,7 +1053,7 @@ Pour le reste, tout ce dont nous avons besoin, c'est de savoir que c'est possibl
 
 Pour savoir si ces commandes existent ou non, consultez la liste officielle des commandes (voir \in{section}[sec:qrc-setup-fr]), qui nous informera également des options de configuration que ces commandes prennent en charge. Bien qu'à première vue, les noms de ces options puissent sembler cryptiques, nous verrons rapidement que certaines options sont répétées dans de nombreuses commandes et qu'elles fonctionnent de la même manière ou de manière très similaire dans toutes ces commandes. Si nous avons des doutes sur ce que fait une option, ou sur son fonctionnement, il suffira de générer un document et de le tester. Nous pouvons également consulter l'abondante documentation de \ConTeXt\. Comme il est courant dans le monde des logiciels libres, \suite- inclut les sources de presque toute sa documentation dans la distribution. Un utilitaire comme \MyKey{grep} (pour les systèmes GNU Linux) peut nous aider à rechercher si la commande ou l'option sur laquelle nous avons des doutes est utilisée dans l'un de ces fichiers sources afin d'avoir un exemple sous la main.
 
-C'est ainsi que l'apprentissage de \ConTeXt\ a été conçu~: l'introduction explique en détail les cinq (en réalité quatre) aspects que j'ai mis en évidence, et bien d'autres encore~: au fil de la lecture, une image claire de la séquence se formera dans notre esprit~: {\em une commande pour exécuter la tâche} -- {\em une seconde commande pour configurer le comportement de la première} -- {\em une troisième commande pour créer un commande similaire à la première à partir d'un clône}. Nous apprendrons également certaines des principales structures de \ConTeXt, et nous saurons à quoi elles servent.
+C'est ainsi que l'apprentissage de \ConTeXt\ a été conçu~: l'introduction explique en détail les cinq (en réalité quatre) aspects que j'ai mis en évidence, et bien d'autres encore~: au fil de la lecture, une image claire de la séquence se formera dans notre esprit~: {\em une commande pour exécuter la tâche} -- {\em une seconde commande pour configurer le comportement de la première} -- {\em une troisième commande pour créer une commande similaire à la première à partir d'un clône}. Nous apprendrons également certaines des principales structures de \ConTeXt, et nous saurons à quoi elles servent.
 
 \stopsection
 
