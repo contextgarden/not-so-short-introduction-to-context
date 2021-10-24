@@ -1,0 +1,840 @@
+%%% File:     b06_Fonts.mkiv
+%%% Author:   Joaquín Ataz-López
+%%% Begun:    March 2020
+%%% Concluded: June 2020
+%%% Title:  This chapter was the first chapter I began. I came back to
+%%%         it often because I wanted it to include the use of
+%%%         fonts installed on our system. But I didn't
+%%%         succeed in getting the instructions in the wiki to
+%%%         work. Recently (August) I discovered fonttest which
+%%%         can be accessed after running mtxrun --script server --auto
+%%%         I need to investigate further. This "sees" the fonts
+%%%         installed on my system and tells me what code I need
+%%%         to use them. But I stll don't understand how it
+%%%         works. The key might possibly lie in the "Fonts
+%%%         out of ConTeXt" manual, but i struggle to understand it.
+%%%
+%%% Edited with: Emacs + AuTeX - And at times vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent b06_Fonts.mkiv
+
+\startchapter
+  [
+    reference=sec:fontscol,
+    title=Шрифты и цвета в Context\\ \ConTeXt,
+    bookmark=Fonts and colours in ConTeXt,
+  ]
+
+\TocChap
+
+\startsection
+  [title=Типографские шрифты, включенные в\\ \suite-]
+
+Система шрифтов \ConTEXt предлагает множество возможностей, но она также довольно сложна. Я не буду анализировать все расширенные возможности шрифтов в этом руководстве, но ограничусь предположением, что мы работаем с некоторыми из 21 шрифта, предоставленного с установкой \ConTEXt Standalone, которые показаны в таблице 6.1.
+( \in{table}[tbl:ctx-fonts]).
+
+{\switchtobodyfont[small]
+  \placetable
+    [here]
+    [tbl:ctx-fonts]
+    {Шрифты, включенные в дистрибутив \ConTeXt\}
+    \starttabulate[|l|l|w{2cm}|]
+      \HL
+      \NC{\bf Официальное имя}\NC{\bf Название в \ConTeXt}\NC{\bf Примеры}\NR
+      \HL
+      \NC Latin Modern \NC modern, modern-base\NC{\switchtobodyfont[modern] Emily Brontë's book}\NR
+      \NC Antykwa Poltawskiego\NC antykwapoltawskiego\NC{\switchtobodyfont[antykwapoltawskiego] Emily Brontë's book}\NR
+      \NC Antykwa Toruńska\NC antykwa\NC{\switchtobodyfont[antykwa] Emily Brontë's book}\NR
+      \NC Cambria \NC cambria\NC{\switchtobodyfont[cambria] Emily Brontë's book}\NR
+      \NC DejaVu\NC dejavu\NC{\switchtobodyfont[dejavu] Emily Brontë's book}\NR
+      \NC DejaVu Condensed\NC dejavu-condensed\NC{\switchtobodyfont[dejavu-condensed] Emily Brontë's book}\NR
+      \NC Gentium \NC gentium\NC{\switchtobodyfont[gentium] Emily Brontë's book}\NR
+      \NC Iwona\NC iwona\NC{\switchtobodyfont[iwona] Emily Brontë's book}\NR
+      \NC Latin Modern Variable\NC modernvariable, modern-variable\NC{\switchtobodyfont[modernvariable] Emily Brontë's book}\NR
+      \NC PostScript\NC postscript\NC  {\switchtobodyfont[postscript] Emily Brontë's book}\NR
+      \NC TeX Gyre Adventor\NC adventor, avantgarde\NC{\switchtobodyfont[adventor] Emily Brontë's book}\NR
+      \NC TeX Gyre Bonum\NC bonum, bookman\NC{\switchtobodyfont[bonum] Emily Brontë's book}\NR
+      \NC TeX Gyre Cursor\NC cursor, courier\NC{\switchtobodyfont[cursor] Emily Brontë's book}\NR
+      \NC TeX Gyre Heros\NC heros, helvetica\NC{\switchtobodyfont[heros] Emily Brontë's book}\NR
+      \NC TeX Gyre Schola\NC schola, schoolbook\NC{\switchtobodyfont[schola] Emily Brontë's book}\NR
+      \NC Tex Gyre Chorus\NC chorus, chancery\NC{\switchtobodyfont[chorus] Emily Brontë's book}\NR
+      \NC Tex Gyre Pagella\NC pagella, palatino\NC{\switchtobodyfont[pagella] Emily Brontë's book}\NR
+      \NC Tex Gyre Termes\NC termes, times\NC{\switchtobodyfont[termes] Emily Brontë's book}\NR
+      \NC Euler\NC eulernova\NC{\switchtobodyfont[eulernova] Emily Brontë's book}\NR
+      \NC Stix2\NC stix\NC{\switchtobodyfont[stix] Emily Brontë's book}\NR
+      \NC Xits\NC xits\NC{\switchtobodyfont[xits,8pt] Emily Brontë's book}\NR
+      \HL
+    \stoptabulate
+}
+
+В центральном столбце  \in{table}[tbl:ctx-fonts] (таблицы 6.1) указано имя или имена, по которым \ConTEXt распознает рассматриваемый шрифт. Когда есть два имени, они синонимичны. В последнем столбце приведен пример используемого шрифта. Что касается порядка, в котором отображаются шрифты, первый - это шрифт, который \ConTEXt использует по умолчанию, а остальные шрифты расположены в алфавитном порядке, а последние три шрифта специально разработаны для математики. Обратите внимание, что шрифт Euler не может напрямую представлять буквы с ударением, поэтому мы получаем шрифт Bront's, а не Brontë's.
+
+Для читателей из мира Windows и его шрифтов по умолчанию я укажу, что {\em heros} эквивалентен Arial в Windows, а {\em
+termes} -- так же, как Times New Roman. Они не совсем одинаковы, но достаточно похожи, до такой степени, что нужно быть очень наблюдательным, чтобы заметить разницу.
+
+  \startSmallPrint
+
+Шрифты, используемые Windows, не являются бесплатными программами {\em free software} (на самом деле почти ничто в Windows не является бесплатным), поэтому они не могут быть включены в дистрибутив \ConTEXt. Однако, если \ConTEXt установлен в Windows, эти шрифты уже установлены и могут использоваться как любой другой шрифт, установленный в системе, в которой работает \ConTEXt. Однако в этом введении я не буду касаться того, как использовать шрифты, уже установленные в системе. Справку по этому поводу можно найти в вики \ConTEXt \goto{\ConTeXt\ wiki}[url(wiki)].
+   
+  \stopSmallPrint
+
+\stopsection
+
+\startsection
+  [title=Особенности шрифта]
+
+\startsubsection
+  [title={Шрифты, {\em стили} и варианты стилей}]
+
+Терминология, касающаяся шрифтов, несколько сбивает с толку, поскольку иногда то, что называется шрифтом, на самом деле представляет собой {\em семейство шрифтов}, которое включает в себя различные стили и варианты, которые имеют общий базовый дизайн. Я не буду вдаваться в вопрос, какая терминология более правильная; Меня интересует только пояснение терминологии, используемой в \ConTEXt. Там он делает различие между шрифтами, стилями и вариантами (или альтернативами) для каждого стиля. {\em Шрифты}, включенные в дистрибутив \ConTEXt (на самом деле это семейства шрифтов), - это те, которые мы видели в предыдущем разделе. Теперь мы рассмотрим {\em стили} и {\em alternatives}.
+
+\subsubsubject{Стили шрифтов}
+
+\dontleavehmode{\sc Donald E. Knuth} разработал шрифт {\em Computer Modern} для \TEX, придав ему три различных {\em стиля}: римский {\em roman}, без засечек {\em sans serif}  и телетайп {\em teletype}. Римский стиль -- это дизайн, в котором символы украшены декоративными элементами, известными в типологической терминологии как засечки, поэтому этот стиль шрифта также известен как засечки. Этот стиль считался обычным стилем или стилем по умолчанию. Стиль без засечек, как следует из его названия, лишен этих расцветок и, следовательно, является более простым и стилизованным шрифтом, иногда известным под другими названиями, например на испанском языке - {\em paloseco}; этот шрифт может быть основным шрифтом в документе, но он также подходит для использования в определенных фрагментах текста, основной шрифт которого имеет римский стиль, например, заголовок или заголовки страниц. Наконец, стиль телетайпа был включен в {\em Computer Modern}, поскольку он был разработан для написания книг, связанных с компьютерным программированием, с включением больших участков компьютерного кода, который традиционно представлен в печатных материалах в моноширинном стиле, имитирующем компьютерные терминалы и старые пишущие машинки.
+
+  \startSmallPrint
+
+К этим трем стилям шрифтов можно добавить четвертый стиль, предназначенный для математических фрагментов. Но поскольку \TEX автоматически использует этот стиль, когда входит в математический режим, и не включает в себя команды для его явного включения или отключения, а также не имеет вариантов или альтернатив других стилей, его обычно не следует рассматривать как стиль должным образом. так называемый.
+
+\ConTEXt включает команды для двух возможных дополнительных стилей: рукописного и каллиграфического. Я не совсем уверен в различии между ними, поскольку, с одной стороны, ни один из шрифтов, включенных в дистрибутив \ConTEXt, не включает эти стили в свой дизайн, а с другой стороны, как мне кажется, каллиграфическое письмо также является рукописным. Эти команды, которые ConTEXt включает для включения таких стилей, если они используются со шрифтом, который их не реализует, не вызовут никаких ошибок при компиляции: просто ничего не происходит.
+
+  \stopSmallPrint
+
+\subsubsubject{Альтернативные формы шрифтов}
+
+Каждый {\em стиль} допускает несколько альтернативных форм, и именно так их называет \ConTEXt ({\em alternative}):
+
+\startitemize[2,packed]
+
+\item Regular or normal (\MyKey{tf}, from {\em typeface}).
+\item Bold (\MyKey{bf}, from {\em boldface}).
+\item Italic (\MyKey{it} from {\em italic})
+\item BoldItalic (\MyKey{bi} from {\em bold italic})
+\item Slanted (\MyKey{sl} from {\em slanted})
+\item BoldSlanted (\MyKey{bs} from {\em bold slanted})
+\item Small caps (\MyKey{sc} from {\em small caps})
+\item Medieval (\MyKey{os} from {\em old style})
+  
+\stopitemize
+
+Эти {\em альтернативы}, как следует из их названия, являются взаимоисключающими: когда одна из них включена, другие отключаются. Вот почему \ConTEXt предоставляет команды для их включения, но не для их отключения; потому что, когда мы включаем альтернативу, мы отключаем ту, которую использовали до этого; и поэтому, например, если мы пишем курсивом и включаем полужирный шрифт, то курсив будет отключен. Если мы хотим использовать полужирный шрифт и курсив одновременно, нам не нужно включать то и другое, а, скорее, включить альтернативу, которая включает оба («bi»).
+
+С другой стороны, необходимо иметь в виду, что, хотя \ConTEXt предполагает, что каждый шрифт будет иметь эти альтернативы, и поэтому предоставляет команды для их включения, чтобы функционировать и производить некоторый ощутимый эффект в окончательном документе, этим командам нужен шрифт иметь определенные формы в своем дизайне для каждого стиля и альтернативы.
+
+\startSmallPrint
+
+В частности, многие шрифты не различают наклонные и курсивные буквы по своему дизайну или не включают специальные формы для маленьких заглавных букв.
+
+\stopSmallPrint
+
+\subsubsubject{Разница между курсивом и наклонным шрифтом}
+
+Сходство типографской функции, выполняемой курсивом и наклонными буквами, заставляет многих путать эти две альтернативы. Наклонная буква получается слегка поворачивая правильную форму. Но курсив подразумевает - по крайней мере, в некоторых шрифтах - другой дизайн, в котором буквы кажутся наклоненными, потому что они нарисованы так, чтобы выглядеть так; но на самом деле подлинного наклона нет. Это можно увидеть в следующем примере, в котором мы написали одно и то же слово три раза одного и того же размера, достаточно большого, чтобы можно было легко оценить различия. В первой версии используется обычная форма, во второй - наклонная, а в третьей - курсив:
+
+\midaligned{\switchtobodyfont[20pt,rm] %
+  \framed{{\rm italics} -- {\sl italics} -- {\it italics}} }%
+
+Обратите внимание, как дизайн символов одинаков в первых двух примерах, но в третьем есть тонкие различия в штрихах некоторых букв, что очень очевидно, особенно в том, как нарисована буква \quote{a}, хотя различия на самом деле встречаются почти у всех символов.
+
+Обычное использование курсивных и наклонных букв схоже, и каждый человек решает, использовать ли тот или другой. Здесь есть свобода, хотя мы должны указать, что документ будет лучше набран и будет выглядеть лучше, если использование курсива и наклонных букв будет последовательным. Более того, во многих шрифтах разница в дизайне между курсивом и наклонным шрифтом незначительна, поэтому не имеет значения, используем ли мы тот или другой.
+
+С другой стороны, курсив и наклон - это альтернативы шрифту, что в основном означает две вещи:
+
+\startitemize[n]
+
+\item Мы можем использовать их только тогда, когда они определены в шрифте.
+
+\item При включении одного из них мы отключаем альтернативу, которая использовалась до этого.
+  
+\stopitemize
+
+Вместе с командами для курсива и наклона \ConTEXt\ предлагает дополнительные команды для {\em emphasising} выделения определенного текста. Его использование подразумевает тонкие различия по сравнению с курсивом или наклонным шрифтом. \in{section}[sec:emphasis] См. Раздел 6.5.1.
+
+\stopsubsection
+
+\startsubsection
+  [title=Размер шрифта]
+
+Все шрифты, обрабатываемые \ConTEXt{}, основаны на векторной графике, поэтому теоретически они могут отображаться с любым размером шрифта, хотя, как мы увидим, это зависит от фактических инструкций, которые мы используем для определения размера шрифта. Если не указано иное, предполагается, что размер шрифта будет 12 пунктов.
+
+\startSmallPrint
+
+Все шрифты, используемые ConTEXt{}, основаны на векторной графике и, следовательно, являются шрифтами Opentype или Type 1, что означает, что шрифты, происхождение которых предшествует этой технологии, были повторно реализованы. В частности, шрифт \TEX\ по умолчанию, {\em Computer Modern}, разработанный Кнутом, существовал только в определенных размерах, поэтому был переработан в дизайн под названием \emph{Latin Modern}, используемый \ConTEXt{}, хотя во многих документах он продолжает называться {\em Computer Modern} из-за сильной символики и этот шрифт до сих пор используется в системах \TEX{}, с тех пор как они появились и были разработаны {\sc Knuth} вместе с другой программой под названием \METAFONT{}, направленной на разработку шрифтов, которые могли бы работать с \TEX{}.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:mainfont,
+    title=Установка основного шрифта документа,
+  ]
+\PlaceMacro{setupbodyfont}
+
+По умолчанию, если не указан какой-либо другой шрифт, \ConTEXt{} будет использовать в качестве основного шрифта {\em Latin Modern Roman} 12 пунктов. Этот шрифт был первоначально разработан {\sc  Knuth} для реализации в \TEX{}. Это элегантный шрифт в римском стиле с большими пропорциональными и декоративными «штрихами» \quotation{flourishes} -- так называемыми засечками {\em serifs} - в определенных штрихах, который очень подходит как для печатных текстов, так и для отображения на экране; хотя - и это личное мнение - он не очень подходит для маленьких экранов, таких как смартфон, потому что {\em serifs} или расцветки, как правило, накапливаются, затрудняя чтение.
+
+Чтобы установить другой шрифт, мы используем \tex{setupbodyfont}, который позволяет нам не только изменять фактический шрифт, но также его размер и стиль. Если мы хотим применить это ко всему документу, нам нужно включить его в преамбулу исходного файла. Но если мы просто хотим изменить шрифт в определенный момент, именно здесь нам нужно включить то, что следует ниже.
+
+Формат \tex{setupbodyfont}:
+
+\type{\setupbodyfont[Options]}
+
+где различные параметры команды позволяют нам указать:
+
+\startitemize
+
+\item {\bf Название шрифта}, которое может быть любым из символьных названий шрифтов, приведенных в  \in{table}[tbl:ctx-fonts].
+
+\item {\bf Размер}, который может быть обозначен либо его размерами (с использованием точки в качестве единицы измерения), либо некоторыми символическими названиями. Но обратите внимание, что хотя ранее я сказал, что шрифты, используемые \ConTEXt{}, можно масштабировать практически до любого размера, в \tex{setupbodyfont} в \ConTEXt поддерживаются только размеры, состоящие из целых чисел от 4 до 12, а также значения 14.4 и 17.3. По умолчанию предполагается, что размер составляет 12 пунктов.
+
+\tex{setupbodyfont}, устанавливает то, что мы можем назвать {\em базовым} размером документа; другими словами, {\em нормальный} размер символа, на основе которого рассчитываются другие размеры, например заголовки и сноски. Когда мы меняем основной размер с помощью  \tex{setupbodyfont}, все остальные размеры, рассчитанные на основе основного шрифта, также меняются.
+
+Помимо прямого указания размера символа (10pt, 11pt, 12pt и т.д.), Мы также можем использовать некоторые символические имена, которые вычисляют применяемый размер символа на основе текущего размера. Речь идет о символических именах, от самых больших до самых маленьких: big, small, script, x, scriptscript и xx. Так, например, если мы хотим установить основной текст с помощью  \tex{setupbodyfont}, размер которого превышает 12 пунктов, мы можем сделать это с помощью \MyKey{big}.
+
+\item {\bf стиль шрифта}, который, как мы уже указали, может быть римским (с засечками) или без засечек (san serif), или стилем пишущей машинки, а для некоторых шрифтов - рукописным и каллиграфическим стилем. \tex{setupbodyfont} позволяет использовать разные символические имена для обозначения разных стилей. Они находятся в таблице \in[tab:ctx-stylesstbdf]:
+
+
+  {\switchtobodyfont[script] %
+    \placetable %
+      [here, force] %
+      [tab:ctx-stylesstbdf] %
+      {Стили в setupbodyfont} %
+      {\startxtable %
+        \startxrow [topframe=on, bottomframe=on]%
+          \startxcell \bf Стили \stopxcell %
+          \startxcell \bf Допустимые символические имена\stopxcell %
+        \stopxrow %
+        \startxrow %
+          \startxcell Roman \stopxcell %
+          \startxcell \tt rm, roman, serif, regular \stopxcell %
+        \stopxrow %
+        \startxrow %
+          \startxcell Sans Serif \stopxcell %
+          \startxcell \tt ss, sans, support, sansserif\stopxcell %
+        \stopxrow %
+        \startxrow %
+          \startxcell Monospaced \stopxcell %
+          \startxcell \tt tt, modo, type, teletype \stopxcell %
+        \stopxrow %
+        \startxrow %
+          \startxcell Handwritten \stopxcell %
+          \startxcell \tt hw, handwritten \stopxcell %
+        \stopxrow %
+        \startxrow [bottomframe=on]%
+          \startxcell Calligraphic \stopxcell %
+          \startxcell \tt cg, calligraphic\stopxcell %
+        \stopxrow %
+      \stopxtable} %
+  }
+
+ Насколько я могу судить, разные имена, поддерживаемые для каждого из стилей, полностью синонимичны.
+ 
+\stopitemize
+
+\startsubsubject
+  [
+    reference=sec:see-font,
+    title=Посмотрите, как выглядит шрифт,
+  ]
+
+Прежде чем принять решение об использовании определенного шрифта в нашем документе, мы обычно хотим увидеть, как он выглядит. Это почти всегда можно сделать из операционной системы, поскольку обычно есть какая-то утилита для проверки внешнего вида шрифтов, установленных в системе; но для удобства сам  \ConTeXt{} предлагает утилиту, которая позволяет нам видеть внешний вид любого из шрифтов, включенных в  \ConTeXt{}. Это \tex{showbodyfont}, который генерирует таблицу с примерами указанного нами шрифта.
+
+Формат  \tex{showbodyfont} следующий:
+
+\type{\showbodyfont [Options]}
+
+где мы можем указать в качестве параметров в точности те же символические имена, что и в \tex{setupbodyfont}. Так, например, \tex{showbodyfont[schola, 8pt]} покажет нам таблицу ниже, в которой есть различные примеры шрифта schola с базовым размером 8 пунктов:
+
+	\showbodyfont[schola,8pt]\bigskip
+
+Обратите внимание, что в первой строке и столбце таблицы есть определенные команды. Далее, когда значение этих команд будет объяснено, мы еще раз взглянем на таблицы, созданные \tex{showbodyfont}.
+
+Если мы хотим увидеть полный диапазон символов определенного шрифта, мы можем использовать команду\PlaceMacro{showfont}\tex{showfont[FontName]}. Эта команда покажет основной дизайн каждого из персонажей без применения команд для стилей и альтернатив.
+
+\stopsubsubject
+
+\stopsection
+
+\startsection
+  [title=Изменение шрифта или некоторых функций шрифта]
+
+\startsubsection
+  [title=Команды \tex{setupbodyfont} and \tex{switchtobodyfont}]
+\PlaceMacro{switchtobodyfont}\PlaceMacro{setupbodyfont}
+
+Чтобы изменить шрифт, стиль или размер, мы можем использовать ту же команду, с помощью которой мы установили шрифт в начале документа, когда мы не хотим использовать шрифт \ConTEXt по умолчанию: \tex{setupbodyfont}. Все, что нам нужно сделать, это разместить эту команду в том месте документа, где мы хотим изменить шрифт. Это приведет к постоянному изменению шрифта, что означает, что это напрямую повлияет на основной шрифт и косвенно на все шрифты, связанные с ним.
+
+Очень похож на \tex{setupbodyfont}, \tex{switchtobodyfont}. Обе команды позволяют нам изменять одни и те же аспекты шрифта (сам шрифт, стиль и размер), но внутри они работают по-разному и предназначены для разных целей. Первый (\tex{setupbodyfont}) предназначен для {\em установки} основного шрифта (и обычно единственного) в документе; наличие в документе более одного основного шрифта не является обычным и типографически правильным (поэтому он и называется {\em основным} шрифтом). Напротив, \tex{switchtobodyfont} предназначен для написания некоторых частей текста другим шрифтом или для присвоения определенного шрифта особому типу абзаца, который мы хотим определить в нашем документе.
+
+Помимо вышеперечисленного - что фактически влияет на внутреннее функционирование каждой из этих двух команд - с точки зрения пользователя есть некоторые различия между использованием той или другой команды. Особенно:
+
+\startitemize[n]
+
+\item Как мы уже знаем, \tex{setupbodyfont} ограничен определенным диапазоном размеров, тогда как \tex{switchtobodyfont} позволяет нам указать практически любой размер, так что, если шрифт недоступен в этом размере, он будет масштабироваться до него.
+
+\item \tex{switchtobodyfont} не влияет на текстовые элементы каким-либо образом, кроме того, где он используется, в отличие от \tex{setupbodyfont} , который, как упоминалось выше, устанавливает основной шрифт и, изменяя его, также изменяет шрифт всех текстовых элементов, шрифт которых рассчитывается. на основе основного шрифта.
+
+\stopitemize
+
+Обе команды, с другой стороны, изменяют не только шрифт, стиль и размер, но и другие аспекты, связанные со шрифтом, такие как, например, межстрочный интервал.
+
+\startSmallPrint
+
+  \tex{setupbodyfont} генерирует ошибку компиляции, если запрашивается недопустимый размер шрифта; но не генерирует его, если запрашивается несуществующий шрифт, и в этом случае будет включен шрифт по умолчанию ({\em Latin Modern Roman}). \tex{switchtobodyfont} действует так же в отношении шрифта, а с точки зрения размера, как я уже сказал, пытается достичь этого путем масштабирования шрифта. Однако есть шрифты, которые нельзя масштабировать до определенных размеров, и в этом случае снова будет включен шрифт по умолчанию.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:quick-change,
+    title={Быстро меняющийся стиль, альтернатива и размер},
+  ]
+
+\subsubsubject{Изменение стиля и альтернативы}
+
+Помимо \tex{switchtobodyfont}, \ConTEXt\ предоставляет набор команд, которые позволяют нам быстро изменять стиль, альтернативу или размер. Что касается этих команд, вики \ConTEXt\ предупреждает нас, что иногда, когда они появляются в начале абзаца, они могут вызывать некоторые нежелательные побочные эффекты, поэтому рекомендуется, чтобы в таких случаях данной команде предшествовала команда \PlaceMacro{dontleavehmode}\tex{dontleavehmode} command. 
+
+{\switchtobodyfont[small] %
+\placetable[here][tab:ctx-styles]
+  {Команды для переключения между разными стилями}
+  {
+    \starttabulate[|l|l|]
+      \HL
+      \NC {\bf Style} \NC {\bf Команды, которые его включают}\NR
+      \HL
+      \NC Roman\NC\type{\rm}, \type{\roman}, \type{\serif}, \type{\regular}\NR\PlaceMacro{rm}\PlaceMacro{roman}\PlaceMacro{serif}\PlaceMacro{regular}
+      \NC Sans Serif\NC\type{\ss}, \type{\sans}, \type{\support}, \type{\sansserif}\NR\PlaceMacro{ss}\PlaceMacro{sans}\PlaceMacro{support}\PlaceMacro{sansserif}
+      \NC Monospaced\NC\type{\tt}, \type{\mono}, \type{\teletype},\NR\PlaceMacro{tt}\PlaceMacro{mono}\PlaceMacro{teletype}
+      \NC Handwritten\NC\type{\hw}, \type{\handwritten},\NR\PlaceMacro{hw}\PlaceMacro{handwritten}
+      \NC Calligraphic\NC\type{\cf}, \type{\calligraphic}\PlaceMacro{cf}\PlaceMacro{calligraphic}\NR
+      \HL
+    \stoptabulate
+  }}
+
+
+\in{Table}[tab:ctx-styles] содержит команды, позволяющие изменять стиль без изменения каких-либо других аспектов; а также
+\in{table}[tab:ctx-alternatives]содержит команды, которые позволяют нам исключительно изменять альтернативу.
+
+
+{\switchtobodyfont[small] %
+  \placetable[here][tab:ctx-alternatives]
+  {Команды для включения конкретной альтернативы}
+  {
+    \starttabulate[|l|l|]
+      \HL
+      \NC {\bf Alternative} \NC {\bf Команды, которые его включают}\NR
+      \HL
+      \NC Normal           \NC\type{\tf}, \type{\normal}\NR\PlaceMacro{tf}\PlaceMacro{normal}
+      \NC Italic          \NC\type{\it}, \type{\italic}\NR\PlaceMacro{it}\PlaceMacro{italic}
+      \NC Bold          \NC\type{\bf}, \type{\bold}\NR\PlaceMacro{bf}\PlaceMacro{bold}
+      \NC Bold-italic  \NC\type{\bi}, \type{\bolditalic}, \type{\italicbold}\NR\PlaceMacro{bi}\PlaceMacro{bolditalic}\PlaceMacro{italicbold}
+      \NC Slanted        \NC\type{\sl}, \type{\slanted}\NR\PlaceMacro{sl}\PlaceMacro{slanted}
+      \NC Bold-slanted\NC\type{\bs}, \type{\boldslanted}, \type{\slantedbold}\NR\PlaceMacro{bs}\PlaceMacro{boldslanted}\PlaceMacro{slantedbold}
+      \NC Small caps       \NC\type{\sc}, \type{\smallcaps}\NR\PlaceMacro{sc}\PlaceMacro{smalcaps}
+      \NC Medieval         \NC\type{\os}, \type{\mediaeval}\PlaceMacro{os}\PlaceMacro{mediaeval}\NR
+    \stoptabulate
+  }
+}
+
+Все эти команды сохраняют свою эффективность до тех пор, пока явно не будет включен другой стиль или альтернатива или пока не завершится {\em group}, в которой объявлена команда. Поэтому, когда мы хотим, чтобы команда воздействовала только на часть текста, мы должны заключить эту часть в группу, как в следующем примере, где каждый раз появляется слово {\em thought}, когда оно является существительное, а не глагол, оно выделено курсивом, создавая для него группу.
+
+\startDoubleExample
+
+\starttyping
+I thought a {\it thought} but 
+the {\it thought} I thought wasn't
+the {\it thought} I thought I thought.
+If the {\it thought} I thought I thought
+had been the {\it thought} I thought
+I wouldn't have thought so much!
+\stoptyping
+
+I thought a {\it thought}, but 
+the {\it thought} I thought, wasn't
+the {\it thought} I thought I thought.
+If the {\it thought} I thought I thought
+had been the {\it thought} I thought
+I wouldn't have thought so much!
+
+\stopDoubleExample
+
+\subsubsubject[sec:sufijos de tamaño]{Суффиксы для одновременного изменения альтернативы и размера}
+\PlaceMacro{rmx}\PlaceMacro{rmxx}\PlaceMacro{rma}\PlaceMacro{rmb}\PlaceMacro{rmc}\PlaceMacro{rmd}
+\PlaceMacro{ssx}\PlaceMacro{ssxx}\PlaceMacro{ssa}\PlaceMacro{ssb}\PlaceMacro{ssc}\PlaceMacro{ssd}
+\PlaceMacro{ttx}\PlaceMacro{ttxx}\PlaceMacro{tta}\PlaceMacro{ttb}\PlaceMacro{ttc}\PlaceMacro{ttd}
+\PlaceMacro{tfx}\PlaceMacro{tfxx}\PlaceMacro{tfa}\PlaceMacro{tfb}\PlaceMacro{tfc}\PlaceMacro{tfd}
+\PlaceMacro{itx}\PlaceMacro{itxx}\PlaceMacro{ita}\PlaceMacro{itb}\PlaceMacro{itc}\PlaceMacro{itd}
+\PlaceMacro{bfx}\PlaceMacro{bfxx}\PlaceMacro{bfa}\PlaceMacro{bfb}\PlaceMacro{bfc}\PlaceMacro{bfd}
+\PlaceMacro{bix}\PlaceMacro{bixx}\PlaceMacro{bia}\PlaceMacro{bib}\PlaceMacro{bic}\PlaceMacro{bid}
+\PlaceMacro{slx}\PlaceMacro{slxx}\PlaceMacro{sla}\PlaceMacro{slb}\PlaceMacro{slc}\PlaceMacro{sld}
+\PlaceMacro{bsx}\PlaceMacro{bsxx}\PlaceMacro{bsa}\PlaceMacro{bsb}\PlaceMacro{bsc}\PlaceMacro{bsd}
+
+Команды, которые изменяют стиль или альтернативу в их двухбуквенной версии(\tex{tf}, \tex{it}, \tex{bf} и т.д.), Позволяют использовать ряд суффиксов {\em suffixes}, влияющих на размер шрифта. Суффиксы a, b, c и d увеличивают размер шрифта, умножая его на $1.2$, $1.2^2$ ($=1.44$), $1.2^3$ ($=1.728$) или $1.2^4$ ($=2.42$) соответственно. См. Пример:
+
+\type{\tf test, \tfa test, \tfb test, \tfc test, \tfd test}
+
+{\color[red]{\tf test, \tfa test, \tfb test, \tfc test, \tfd test}}
+
+суффиксы x и xx уменьшают размер шрифта, умножая его на 0,8 и 0,6 соответственно:
+
+\type{\tf test, \tfx test, \tfxx test}
+
+{\color[red]{\tf test, \tfx test, \tfxx test}}
+
+Суффиксы \quote{x} и \quote{xx}, применяемые к \tex{tfx}, позволяют нам сократить команду, так что \tex{tfx} может быть записан как \PlaceMacro{tx}\tex{tx} and \tex{tfxx} as \PlaceMacro{txx}\tex{txx}.
+
+Доступность этих различных суффиксов зависит от фактической реализации шрифта. Согласно справочному руководству \ConTeXt{}  2013 (предназначенному в основном для Mark II) единственный суффикс, который гарантированно работает всегда, - это \quote{x}, а остальные могут быть или не быть реализованы; или они могут быть просто альтернативой.
+
+В любом случае, чтобы избежать сомнений, мы можем использовать \tex{showbodyfont}, о котором я говорил ранее (в \in{section}[sec:see-font]). Эта команда отображает диаграмму, которая не только позволяет нам оценить внешний вид шрифта, но также увидеть, как шрифт выглядит в каждом из его стилей и альтернатив, а также какие суффиксы изменения размера доступны.
+
+Давайте еще раз посмотрим на таблицу с \tex{showbodyfont}:
+
+\showbodyfont[modern]
+
+Если мы внимательно посмотрим на таблицу, мы увидим, что первый столбец содержит стили шрифтов (\tex{rm}, \tex{ss} и \tex{tt}). Первая строка слева содержит альтернативы (\tex{tf}, \tex{sc}, \tex{sl}, \tex{it}, \tex{bf}, \tex{bs} и \tex{bi}), а правая часть первой строки содержит другие доступные суффиксы, хотя только с обычной альтернативой.
+
+Важно отметить, что изменение размера шрифта, сделанное любым из этих суффиксов, приведет к изменению размера шрифта только в строгом смысле, оставляя неизменными другие значения, обычно связанные с размером шрифта, такие как межстрочный интервал.
+
+\subsubsubject{Настройка коэффициента масштабирования суффиксов}
+  
+Чтобы настроить коэффициент масштабирования, мы можем использовать \PlaceMacro{definebodyfontenvironment}\tex{definebodyfontenvironment}, формат которого может быть:
+
+\starttyping
+\definebodyfontenvironment[particular size][scaled]
+\definebodyfontenvironment[default][scaled]
+\stoptyping
+
+В первой версии мы переопределили масштабирование для определенного размера основного шрифта, установленного \tex{setupbodyfont} или \tex{switchtobodyfont}. Например:
+
+\type{\definebodyfontenvironment[10pt][a=12pt,b=14pt,c=2, d=3]}
+
+обеспечит, что, когда основной шрифт составляет 10 пунктов, суффикс \quote{a} изменит его на 12 пунктов, суффикс \quote{b} на 14, суффикс \quote{c} умножит исходный шрифт на 2, а суффикс \quote{d} на 3. Обратите внимание, что для a и ba указан фиксированный размер, но для c и da указан коэффициент умножения исходного размера.
+
+Но когда первый аргумент \tex{definebodyfontenvironment}  равен  \MyKey{default}, тогда мы будем переопределять значение масштабирования для всех возможных размеров шрифта, и в качестве значения масштабирования мы можем ввести только число множителя. Итак, если, например, мы напишем:
+
+\type{\definebodyfontenvironment[default][a=1.3,b=1.6,c=2.5,d=4]}
+
+мы будем указывать, что независимо от размера основного шрифта, суффикс a следует умножить на 1,3, b на 1,6, c на 2 и d на 4.
+
+Помимо суффиксов xx, x, a, b, c и d, с помощью \tex{definebodyfontenvironment} мы можем присвоить значение масштабирования ключевым словам \MyKey{big}, \MyKey{small}, \MyKey{script} и \MyKey{scriptscript}. Эти значения присваиваются всем размерам, связанным с этими ключевыми словами в \tex{setupbodyfont} and \tex{switchtobodyfont}. Они также применяются в следующих командах, о пользе которых можно судить (я думаю) из их имени:
+
+\startitemize[1,packed]
+
+\item \PlaceMacro{smallbold}\tex{smallbold}
+\item \PlaceMacro{smallslanted}\tex{smallslanted}
+\item \PlaceMacro{smallboldslanted}\tex{smallboldslanted}
+\item \PlaceMacro{smallslantedbold}\tex{smallslantedbold}
+\item \PlaceMacro{smallbolditalic}\tex{smallbolditalic}
+\item \PlaceMacro{smallitalicbold}\tex{smallitalicbold}
+\item \PlaceMacro{smallbodyfont}\tex{smallbodyfont}
+\item \PlaceMacro{bigbodyfont}\tex{bigbodyfont}
+  
+\stopitemize
+
+Если мы хотим увидеть размеры определенного шрифта по умолчанию, мы можем использовать\PlaceMacro{showbodyfontenvironment}\tex{showbodyfontenvironment[Font]}. Эта команда, примененная, например, к современному шрифту, дает следующий результат:
+
+If we want to see the default sizes of a particular font, we can use
+\PlaceMacro{showbodyfontenvironment}\tex{showbodyfontenvironment[Font]}.
+This command, applied to the {\tt modern} font, for example, gives the
+following result:
+
+\showbodyfontenvironment[modern]
+
+\stopsubsection
+
+\startsubsection
+  [title={Определение команд и ключевых слов для размеров, стилей и альтернатив шрифтов}]
+
+Достаточно предопределенных команд для изменения размера шрифта, стилей и вариантов.
+Кроме того, \ConTEXt\ позволяет нам:
+
+\startitemize[n]
+
+\item Добавить собственную команду для изменения стиля, размера или варианта шрифта.
+
+\item Чтобы добавить синонимы к именам стилей или вариантов, распознаваемым \tex{switchtobodyfont}.
+  
+\stopitemize
+
+Для этого он предоставляет следующие команды:
+
+\startitemize
+
+\item \PlaceMacro{definebodyfontswitch}\tex{definebodyfontswitch}:
+позволяет нам определить команду для изменения размера шрифта. Например, если мы хотим определить команду \tex{eight}  (или  \tex{viii command} \footnote{Помните, что, за исключением случая управляющих символов, имена команд \ConTEXt\ могут состоять только из букв.}), чтобы установить шрифт размером 8 пунктов, нам нужно написать:
+
+  {\tfx\type{\definebodyfontswitch[eight][8pt]}} или
+  {\tfx\type{\definebodyfontswitch[viii][8pt]}}
+
+\item \PlaceMacro{definefontstyle}\tex{definefontstyle}:
+позволяет нам определить одно или несколько слов, которые можно использовать в \tex{setupbodyfont} или \tex{switchtobodyfont} для установки определенного стиля шрифта; так, например, если мы хотим вызвать {\em sans serif} без засечек что-то еще (например, по-испански это называется  \quotation{paloseco}), мы можем написать
+
+  \type{\definefontstyle[paloseco][ss]}
+
+Особенность \tex{definefontstyle} заключается в том, что он позволяет одновременно связывать несколько слов с одним и тем же стилем, поэтому, продолжая испанский пример:
+
+  \type{\definefontstyle[paloseco, sosa, sinrebordes][ss]}
+
+\item \PlaceMacro{definealternativestyle}\tex{definealternativestyle}:
+позволяет связать имя с вариантом шрифта. Это имя может функционировать как команда или распознаваться опцией {\tt style} команд, которые позволяют нам настроить применяемый стиль. Так, например, следующий фрагмент
+
+  \type{\definealternativestyle[strong][\bf][]}
+
+включит команду \tex{strong} и ключевое слово \MyKey{strong}, которое будет распознаваться опцией {\tt style} команд, допускающих эту опцию. Мы могли бы сказать \quotation{bold}, но это слово уже используется для \ConTeXt\, поэтому в качестве альтернативы я выбрал термин, используемый в HTML, а именно \quotation{strong}.
+
+  \startSmallPrint
+  
+  Я не знаю, что делает третий аргумент \tex{definealternativestyle}. Он не является необязательным и поэтому не может быть пропущен; но единственная информация, которую я нашел по нему, находится в справочном руководстве \ConTEXt\, где этот третий аргумент, как утверждается, относится только к заголовкам глав и разделов, «где, кроме \tex{cap}, мы должны подчиняться используемому здесь шрифту» (??)
+
+  \stopSmallPrint
+
+\stopitemize
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [title=Прочие вопросы, связанные с использованием некоторых альтернатив]
+
+Среди различных вариантов шрифта есть два, использование которых требует определенных пояснений:
+
+\startsubsection
+  [
+    reference=sec:emphasis,
+    title={Italic, slanted and emphasis},
+  ]
+
+И курсив, и наклонные буквы используются в основном для типографского выделения фрагмента текста, чтобы привлечь к нему внимание. Другими словами, чтобы это {\em подчеркнуть}.
+
+Конечно, мы можем выделить текст, явно включив курсив или наклон. Но \ConTeXt\ предлагает альтернативную команду, которая гораздо более полезна и интересна и предназначена специально для выделения фрагмента текста. Это команда \PlaceMacro{em}\tex{em} от ударения по словам. В отличие от \tex{it} и \tex{sl}, которые являются чисто типографскими командами, \tex{em} -- {\em концептуальная команда}; она работает по-другому, поэтому она более универсальна, до такой степени, что документация \ConTeXt{} рекомендует использовать \tex{em} вместо \tex{it} или \tex{sl}. Когда мы используем эти две последние команды, мы сообщаем \ConTeXt{}, какую альтернативу шрифта мы хотим использовать; но когда мы используем \tex{em}, мы сообщая ему, какой эффект мы хотим произвести, оставляя \ConTEXt{} решать, как это сделать. Обычно, чтобы добиться эффекта выделения или выделения чего-либо, мы включаем курсив или наклон, но это зависит от контекста. Поэтому, если мы используем \tex{em} в тексте, который уже выделен курсивом или наклонен, команда выделит это в противоположном направлении - в данном случае в вертикальном тексте.
+
+Отсюда следующий пример:
+
+\startDoubleExample
+
+\startlines
+\starttyping
+
+{\em One of the most beautiful 
+orchids in the world is the 
+{\em Thelymitra variegata} 
+or Southern Queen of Sheba.}
+\stoptyping
+\stoplines
+
+
+{\em One of the most beautiful orchids in the world is the {\em
+ Thelymitra variegata} or Southern Queen of Sheba}.
+ 
+\stopDoubleExample
+
+Обратите внимание, что первый \tex{em} включает курсив (на самом деле наклонный, но см. Ниже), а второй \tex{em} отключает его и вместо этого помещает слова  \quotation{Thelymitra variegata} в нормальный вертикальный стиль.
+
+Еще одним преимуществом \tex{em} является то, что он не является альтернативой, поэтому не отключает альтернативу, которая у нас была раньше, и поэтому, например, в тексте, выделенном полужирным шрифтом, с \tex{em} мы получим полужирный наклон без необходимости явно вызывать  \tex{bs}. Точно так же, если команда \tex{bs} появляется в тексте, который уже выделен, это выделение не исчезнет.
+
+По умолчанию \tex{em} включает наклонный, а не курсивный, но мы можем изменить это с помощью \tex{setupbodyfontenvironment[default][em=italic]}.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:smallcaps,
+    title=Маленькие заглавные и фейковые малые заглавные,
+  ]
+
+Маленькие заглавные буквы - это типографский ресурс, который часто намного лучше, чем использование прописных (заглавных) букв. Маленькие заглавные буквы придают нам форму заглавной буквы, но сохраняют высоту такой же, как и строчные буквы в строке. Вот почему маленькие заглавные буквы - это стилистический вариант нижнего регистра. Маленькие заглавные буквы заменяют заглавные буквы в определенных контекстах и особенно полезны для написания римских цифр или названий глав. В академических текстах также принято использовать маленькие заглавные буквы для написания имен цитируемых авторов.
+
+Проблема в том, что не во всех шрифтах реализованы маленькие заглавные буквы, а те, которые имеют, не всегда делают это для некоторых {\em font styles} шрифтов. Более того, поскольку прописные буквы являются альтернативой курсиву, полужирному или наклонному шрифту, в соответствии с общими правилами, изложенными в этой главе, все эти типографские элементы нельзя использовать одновременно.
+
+Эти проблемы можно решить, используя {\em fake small caps} которые \ConTeXt\ позволяет нам создавать с помощью команд \tex{cap} and \tex{Cap}, по этому поводу смотри \in{section}[sec:Upper-Lower-Fake].
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [title=Использование и настройка цвета]
+
+\ConTeXt\  предоставляет команды для изменения цвета всего документа, некоторых его элементов или определенных частей текста. Он также предоставляет команды для загрузки сотен предопределенных цветов в память и для просмотра их компонентов.
+
+
+\startsubsection
+  [title=Порядок набора фрагментов текста в цвете]
+
+Большинство настраиваемых команд \ConTeXt позволяют использовать параметр под названием \MyKey{color}, который позволяет нам указать цвет, которым должен быть написан текст, на который воздействует эта команда. Так, например, чтобы указать, что заголовки глав написаны синим цветом, нам нужно всего лишь написать:
+
+\vbox{\starttyping
+  \setuphead
+    [chapter]
+    [color=blue]
+\stoptyping}
+
+Используя эту процедуру, мы можем раскрасить заголовки, заголовки, сноски, заметки на полях, столбцы и строки, таблицы, заголовки таблиц или изображений и т. Д. Преимущество использования этой процедуры заключается в том, что конечный результат будет согласованным (все тексты, выполняющие одну и ту же функцию будут написаны одним цветом) и их проще изменить глобально.
+
+Мы также можем раскрасить часть или фрагмент текста напрямую, хотя, чтобы избежать чрезмерного использования цветов, что неприятно с типографской точки зрения, или непоследовательного использования, в целом рекомендуется избегать прямого окрашивания и использовать то, что мы может вызвать l {\em semantic colouring} семантическую окраску, то есть вместо, например, написания
+
+\type{\color[red]{Очень важный текст}}
+
+мы определяем команду для очень важного текста, которому присвоен цвет. Например
+
+\starttyping
+\definehighlight[important][color=red]
+\important{Очень важный текст}
+\stoptyping
+
+\stopsubsection
+
+\startsubsection
+  [title=Изменение цвета фона и переднего плана документа]
+\PlaceMacro{setupbackgrounds}\PlaceMacro{setupcolors}
+
+Если мы хотим изменить цвет всего документа, в зависимости от того, хотим ли мы изменить цвет фона или цвет переднего плана (текста), мы будем использовать  \tex{setupbackgrounds} и \tex{setupcolors}. Так, например
+
+\starttyping
+\setupbackgrounds
+  [page]
+  [background=color,backgroundcolor=blue]
+\stoptyping
+
+Эта команда установит синий цвет фона страниц. В качестве значения для \MyKey{backgroundcolor} мы можем использовать название любого из предопределенных цветов.
+
+Чтобы глобально изменить цвет переднего плана по всему документу (от точки, в которую вставлена команда), используйте \tex{setupcolors}, где параметр \MyKey{textcolor} управляет цветом текста. Например:
+
+\type{\setupcolors[textcolor=red]}
+
+будет видно, что цвет текста красный.
+
+\stopsubsection
+
+\startsubsection
+  [title=Команды для раскрашивания отдельных фрагментов текста]
+\PlaceMacro{color}\PlaceMacro{colored}
+
+Общая команда для раскрашивания небольших участков текста:
+
+\type{\color[ColourName]{Text to colour}}
+
+Для больших частей текста предпочтительно использовать
+
+\type{\startcolor[ColourName] ... \stopcolor}
+
+Оба названы в честь определенного цвета. Если мы хотим определять цвет «на лету», мы можем использовать команду \tex{colored}. Например:
+
+\startDoubleExample
+
+\starttyping
+Three \colored[r=0.1, g=0.8, b=0.8]
+{coloured} cats    
+\stoptyping
+
+Three \colored[r=0.1, g=0.8, b=0.8]{coloured} cats.
+  
+\stopDoubleExample
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:predefined-colours,
+    title=Предопределенные цвета,
+  ]
+% Эта информация взята из справочного руководства. Но я подозреваю, что предопределенных цветов гораздо больше. Например, «основной цвет», используемый в этом документе, основан на оранжевом цвете, не определенном в списке предопределенных цветов.
+
+  \ConTeXt\ загружает наиболее распространенные предопределенные цвета, перечисленные в  \in{table}[tbl:predefined colours]. \footnote{Этот список можно найти в справочном руководстве и вики \ConTeXt\, но я почти уверен, что это неполный список, поскольку в этом документе, например, без загрузки какого-либо дополнительного цвета мы используем \quotation{orange} - которого нет в \in{table}[tbl:predefined colours] - для заголовков разделов.}
+
+{\switchtobodyfont[small]
+\placetable
+  [here]
+  [tbl:predefined colours]
+  {Предопределенные цвета \ConTeXt}
+{\starttabulate[|l|l|l|l|]
+\HL
+\NC{\bf Name}
+\NC{\bf Light tone}
+\NC{\bf Medium tone}
+\NC{\bf Dark tone}
+\NR
+\HL
+\NC black
+\NR
+\NC white
+\NR
+\NC gray
+\NC lightgray
+\NC middlegray
+\NC darkgray
+\NR
+\NC red
+\NC lightred
+\NC middlered
+\NC darkred
+\NR
+\NC green
+\NC lightgreen
+\NC middlegreen
+\NC darkgreen
+\NR
+\NC blue
+\NC lightblue
+\NC middleblue
+\NC darkblue
+\NR
+\NC cyan
+\NC\NC middlecyan
+\NC darkcyan
+\NR
+\NC magenta
+\NC\NC middlemagenta
+\NC darmagenta
+\NR
+\NC yellow
+\NC\NC middleyellow
+\NC darkyellow
+\NR
+\HL
+\stoptabulate
+}}
+
+Существуют и другие коллекции цветов, которые не загружаются по умолчанию, но которые можно загрузить с помощью команды
+
+\PlaceMacro{usecolors}\type{\usecolors[CollectionName]}
+
+где CollectionName может быть
+
+\startitemize[packed]
+\item \MyKey{crayola}, 235 colours imitating marker shades.
+\item \MyKey{dem}, 91 colours.
+\item \MyKey{ema}, 540 colour definitions based on colours used by Emacs.
+\item \MyKey{rainbow}, 91 colours for use in maths formulas.
+\item \MyKey{ral}, 213 colour definitions from the {\em Deutsches
+  Institut für Gütesicherung und Kennzeichnung} (German Institute for Quality Assurance and Labelling).
+\item \MyKey{rgb}, 223 colours.
+\item \MyKey{solarized}, 16 colours based on the solarized scheme.
+\item \MyKey{svg}, 147 colours.
+\item \MyKey{x11}, 450 standard colours for X11.
+\item \MyKey{xwi}, 124 colours.
+\stopitemize
+
+\startSmallPrint
+
+Файлы определения цвета включены в каталог  \MyKey{context/base/mkiv} дистрибутива, а его имя соответствует схеме \MyKey{colo-imp-NOMBRE.mkiv}. Информация, которую я только что предоставил о различных коллекциях предопределенных цветов, основана на моем конкретном распределении. Конкретные коллекции или количество определенных в них цветов могут измениться в будущих версиях.
+
+\stopSmallPrint
+
+Чтобы увидеть, какие цвета содержит каждая из этих коллекций, мы можем использовать команду \PlaceMacro{showcolor}tex{showcolor[CollectionName]}, описанную ниже. Чтобы использовать некоторые из этих цветов, нам сначала нужно загрузить их в память с помощью команды (\tex{usecolors[CollectionName]}), а затем мы должны сообщить командам \tex{color} или \PlaceMacro{startcolor}\tex{startcolor} имя цвета. Например следующая последовательность: \page[preference]
+
+\starttyping
+\usecolors[xwi]
+\color[darkgoldenrod]{Tweedledum and Tweedledee}
+\stoptyping
+\page[no]
+
+будет написано:
+
+\usecolors[xwi]\color[darkgoldenrod]{Tweedledum and Tweedledee}
+\page[preference]
+
+\stopsubsection
+
+\startsubsection
+  [title=Чтобы увидеть доступные цвета]
+\PlaceMacro{showcolor}
+
+Команда \tex{showcolor}  показывает список цветов, в которых вы можете видеть внешний вид цвета, его внешний вид, когда цвет используется в серой шкале, красный, зеленый и синий компоненты цвета, а также имя, по которому \ConTeXt\ знает его. При использовании без аргументов \tex{showcolor} покажет цвета, используемые в текущем документе. Но в качестве аргумента мы можем указать любую из предопределенных коллекций цветов, которые обсуждались в разделе \in{section}[sec:predefined-colours], и поэтому, например, \tex{showcolor[solarized]} покажет нам 16 солнечных цветов из этой коллекции:
+
+\showcolor[solarized]
+
+Если мы хотим увидеть компоненты RGB определенного цвета, мы можем использовать \PlaceMacro{showcolorcomponents}\tex{showcolorcomponents[ColourName]}. Это полезно, если мы пытаемся определить конкретный цвет, чтобы увидеть состав какого-то цвета, который ему близок. Например, \tex{showcolorcomponents[darkgoldenrod]} покажет нам:
+
+
+\startframedtext[width=\textwidth]\switchtobodyfont[small]
+\showcolorcomponents[darkgoldenrod]
+\stopframedtext
+
+\stopsubsection
+
+\startsubsection
+  [title=Определение собственных цветов]
+\PlaceMacro{definecolor}
+
+\tex{definecolor} позволяет нам либо клонировать существующий цвет, либо определить новый цвет. Клонировать существующий цвет так же просто, как создать для него альтернативное имя. Для этого вам нужно будет написать:
+
+\type{\definecolor[New colour][Old colour]}
+
+Это гарантирует, что {\em New colour} будет точно такого же цвета, что и «“{\em Old colour}».
+
+Но в основном \tex{definecolor} используется для создания новых цветов. Для этого команду нужно использовать следующим образом:
+
+\type{\definecolor[ColourName][Definition]}
+
+где {\em Definition} может быть выполнено путем применения до шести различных схем генерации цвета:
+
+\startitemize
+
+\item {\bf RGB colours}: определение цветов RGB является одним из самых распространенных; он основан на идее, что можно представить цвет путем добавления трех основных цветов: красного (\quote{r}  для {\em красного}), зеленого (\quote{g} для {\em зеленого}) и синего (\quote{b} для {\em синего}). Каждый из этих компонентов обозначается десятичным числом от 0 до 1.
+
+  \type{\definecolor[lime 1][r=0.75, g=1, b=0]}: \definecolor[lime 1]
+       [r=0.75, g=1, b=0] \color[lime 1]{Text in “lime 1”}.
+
+\item {\bf Hex colours}: этот способ представления цветов также основан на схеме RGB, но красный, зеленый и синий компоненты указаны как трехбайтовые шестнадцатеричное число, в котором первый байт представляет значение красного, второй - зеленого, а третий - синего. Например:
+
+
+  \type{\definecolor[lime 2][x=BFFF00]}: \definecolor[lime 2][x=BFFF00]
+  \color[lime 2]{Text in “lime 2”}.
+
+\item {\bf CMYK colours}:  эта модель генерации цвета называется \quotation{субтрактивной моделью}  и основана на смеси пигментов следующих цветов: cyan (\quote{c}), magenta (\quote{m}), yellow (\quote{y}, from {\em yellow}) and black (\quote{k}, from {\em key}). Каждый из этих компонентов обозначается десятичным числом от 0 до 1:
+
+  \type{\definecolor[lime 3][c=0.25, m=0, y=1, k=0]}:
+  \definecolor[lime 3][c=0.25, m=0, y=1, k=0] \color[lime 3]{Text in
+   “lime 3”}.
+
+\item {\bf HSL/HSV}: Эта цветовая модель основана на измерении оттенка (\quote{h}, от {\em hue}), насыщенности (\quote {s}) и люминесценции (\quote {l} или иногда \quote{v}, от {\em значение}). Оттенок соответствует числу от 0 до 360; насыщенность и люминесценция должны быть десятичным числом от 0 до 1.
+
+  \type{\definecolor[lime 4][h=75, s=1, v=1]}: \definecolor[lime
+    4][h=75, s=1, v=1] \color[lime 4]{Text in “lime 4”}
+
+\item {\bf HWB colours}: Модель HWB - это предлагаемый стандарт для CSS4, который измеряет оттенок (\quote {h}, от {\em hue}), а также уровень белого (\quote{w}, от {\em whiteness}) и черного (\quote{b}, из {\em blackness}). Оттенок соответствует числу от 0 до 360, тогда как белизна и черный цвет представлены десятичным числом от 0 до 1.
+
+  \type{\definecolor[Azure][h=75, w=0.2, b=0.7]}
+  \definecolor[Azure][h=75, w=0.2, b=0.7]\color[Azure]{Text in
+   “Azure”}.
+
+  % \type{\definecolor[lima 5][h=75, w=0, b=0]}
+  % \definecolor[lima 5][h=75, w=0.2, b=0.7]\color[lima 5]{Texto en
+  %   color “lima 5”}.
+
+\item {\bf Greyscale}: на основе компонента с именем (\quote{s}, от {\em scale}), который измеряет количество серого. Это должно быть число от 0 до 1. Например:
+
+  \type{\definecolor[light grey][s=0.65]}: \definecolor[light grey][s=0.65] \color[light grey]{Text in “light grey”}.
+  
+\stopitemize
+
+Также возможно определить новый цвет из другого цвета. Например, цвет, которым написаны заголовки во введении, определяется как
+
+\type{\definecolor[maincolour][0.6(orange)]}
+
+\stopsubsection
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:
+%%% vim:set filetype=context tw=72 : %%%

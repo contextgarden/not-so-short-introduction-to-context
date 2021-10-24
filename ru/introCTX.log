@@ -1,0 +1,4411 @@
+resolvers       > trees > analyzing 'home:texmf'
+
+open source     > level 1, order 1, name '/usr/share/texmf/tex/context/base/mkiv/cont-yes.mkiv'
+system          > 
+system          > ConTeXt  ver: 2017.05.15 21:48 MKIV beta  fmt: 2021.6.23  int: english/english
+system          > 
+system          > 'cont-new.mkiv' loaded
+open source     > level 2, order 2, name '/usr/share/texmf/tex/context/base/mkiv/cont-new.mkiv'
+close source    > level 2, order 2, name '/usr/share/texmf/tex/context/base/mkiv/cont-new.mkiv'
+system          > files > jobname 'introCTX', input './introCTX.mkiv', result 'introCTX'
+fonts           > latin modern fonts are not preloaded
+languages       > language 'en' is active
+open source     > level 2, order 3, name '/home/elem/contex-projects/intro/rus/introCTX.mkiv'
+open source     > level 3, order 4, name 'introCTX_env.mkiv'
+open source     > level 4, order 5, name '/usr/share/texmf/tex/context/fonts/mkiv/type-imp-dejavu.mkiv'
+close source    > level 4, order 5, name '/usr/share/texmf/tex/context/fonts/mkiv/type-imp-dejavu.mkiv'
+close source    > level 3, order 5, name 'introCTX_env.mkiv'
+open source     > level 3, order 6, name '00_FrontMatter/a01_TitlePage.mkiv'
+system          > jobfiles > unknown tex file '../introCTX_env.mkiv'
+metapost        > initializing instance 'metafun' using format 'metafun'
+metapost        > loading 'metafun' as '/usr/share/texmf/metapost/context/base/mpiv/metafun.mpiv' using method 'default'
+metapost        > initializing number mode 'scaled'
+backend         > xmp > using file '/usr/share/texmf/tex/context/base/mkiv/lpdf-pdx.xml'
+pages           > flushing realpage 1, userpage 2, subpage 1
+
+Underfull \hbox (badness 10000) in paragraph at lines 61--64
+
+
+\hbox(0.0+0.0)x426.79135, direction TLT
+.\glue(\rightskip) 0.0
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 71--73
+
+
+\hbox(0.0+0.0)x426.79135, direction TLT
+.\glue(\rightskip) 0.0
+
+pages           > flushing realpage 2, userpage 2
+structure       > sectioning > title @ level 2 : 0.0 -> Оглавление
+fonts           > bodyfont '30pt' is defined (can better be done global)
+fonts           > bodyfont '36pt' is defined (can better be done global)
+fonts           > bodyfont '24pt' is defined (can better be done global)
+pages           > flushing realpage 3, userpage 3
+pages           > flushing realpage 4, userpage 4
+close source    > level 3, order 6, name '00_FrontMatter/a01_TitlePage.mkiv'
+open source     > level 3, order 7, name '00_FrontMatter/a02_Preface.mkiv'
+fonts           > typescripts > unknown library 'sl'
+pages           > flushing realpage 5, userpage 5
+structure       > sectioning > title @ level 2 : 0.0 -> Предисловие\footnote {Это предисловие было задумано как перевод |/| адаптации к \ConTeXt \ предисловия к \quote {The \TeX Book}, документу, который объясняет {\em всё, что вам нужно знать о \TeX }. В конце концов, мне пришлось отклониться от этого; однако я сохранил некоторые фрагменты, которые, надеюсь, для тех, кто знает это, предложат некоторые {\em отголоски} этого.}
+fonts           > bodyfont '30pt' is defined (can better be done global)
+fonts           > bodyfont '36pt' is defined (can better be done global)
+fonts           > bodyfont '24pt' is defined (can better be done global)
+references      > unknown reference '[a02_Preface.mkiv][installation_suite]'
+pages           > flushing realpage 6, userpage 6
+references      > unknown reference '[a02_Preface.mkiv][sec:qrc-setup-en]'
+pages           > flushing realpage 7, userpage 7
+
+Underfull \hbox (badness 2547) in paragraph at lines 66--66
+ [][][]
+
+\hbox(25.91641+3.25543)x75.58197, glue set 2.94557, direction TLT
+.\glue(\leftskip) 0.0 plus 16.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(8.37114+3.25543)x0.0, direction TLT
+.etc.
+
+
+Underfull \hbox (badness 2547) in paragraph at lines 66--66
+ [][][]
+
+\hbox(28.45303+3.25543)x75.58197, glue set 2.94556, direction TLT
+.\glue(\leftskip) 0.0 plus 16.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(8.37114+3.25543)x0.0, direction TLT
+.etc.
+
+pages           > flushing realpage 8, userpage 8
+pages           > flushing realpage 9, userpage 9
+pages           > flushing realpage 10, userpage 10
+close source    > level 3, order 7, name '00_FrontMatter/a02_Preface.mkiv'
+pages           > flushing realpage 11, userpage 11
+structure       > sectioning > part @ level 1 : 1 -> Что такое \ConTeXt \ и как мы работаем\\ с ним
+fonts           > bodyfont '40pt' is defined (can better be done global)
+fonts           > bodyfont '48pt' is defined (can better be done global)
+fonts           > bodyfont '32pt' is defined (can better be done global)
+open source     > level 3, order 8, name '01_BodyMatter/b01_Introduction.mkiv'
+pages           > flushing realpage 12, userpage 12
+structure       > sectioning > chapter @ level 2 : 1.1 -> \ConTeXt : общий обзор
+fonts           > bodyfont '30pt' is defined (can better be done global)
+fonts           > bodyfont '36pt' is defined (can better be done global)
+fonts           > bodyfont '24pt' is defined (can better be done global)
+fonts           > typescripts > unknown library 'sl'
+structure       > sectioning > section @ level 3 : 1.1.1 -> Что же тогда такое \ConTeXt ?
+pages           > flushing realpage 13, userpage 13
+structure       > sectioning > section @ level 3 : 1.1.2 -> Верстка текстов
+pages           > flushing realpage 14, userpage 14
+structure       > sectioning > section @ level 3 : 1.1.3 -> Языки разметки
+pages           > flushing realpage 15, userpage 15
+structure       > sectioning > section @ level 3 : 1.1.4 -> \TeX \ и его производные
+pages           > flushing realpage 16, userpage 16
+structure       > sectioning > subsection @ level 4 : 1.1.4.1 -> Движки \TeX 
+setup           > error in line 130, namespace 'structure', key 'выведенные из \TeX '
+structure       > sectioning > subsection @ level 4 : 1.1.4.2 -> Форматы
+pages           > flushing realpage 17, userpage 17
+structure       > sectioning > section @ level 3 : 1.1.5 -> \ConTeXt 
+pages           > flushing realpage 18, userpage 18
+structure       > sectioning > subsection @ level 4 : 1.1.5.1 -> Краткая история \ConTeXt 
+pages           > flushing realpage 19, userpage 19
+
+Underfull \hbox (badness 6047) in paragraph at lines 221--221
+ [][][]
+
+\hbox(25.91641+2.5725)x75.58197, glue set 3.92743, direction TLT
+.\glue(\leftskip) 0.0 plus 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(6.615+2.5725)x0.0, direction TLT
+.etc.
+
+references      > unknown reference '[b01_Introduction.mkiv][installation_suite]'
+structure       > sectioning > subsubsubsubject @ level 6 : 1.1.5.1.0.0 -> LMTX и другие альтернативные реализации Mark~IV
+references      > unknown reference '[b01_Introduction.mkiv][sec:alias]'
+structure       > sectioning > subsection @ level 4 : 1.1.5.2 -> \ConTeXt \ против \LaTeX 
+pages           > flushing realpage 20, userpage 20
+structure       > sectioning > subsection @ level 4 : 1.1.5.3 -> Хорошее понимание динамики работы с \ConTeXt 
+pages           > flushing realpage 21, userpage 21
+pages           > flushing realpage 22, userpage 22
+structure       > sectioning > subsection @ level 4 : 1.1.5.4 -> Получение помощи для \ConTeXt 
+setup           > error in line 312, namespace 'adaptlayout', key '+2'
+layouts         > textheight adapted with '0.0pt' at page '23'
+close source    > level 3, order 8, name '01_BodyMatter/b01_Introduction.mkiv'
+open source     > level 3, order 9, name '01_BodyMatter/b02_FirstDoc.mkiv'
+pages           > flushing realpage 23, userpage 23
+structure       > sectioning > chapter @ level 2 : 1.2 -> Наш первый исходный файл
+fonts           > bodyfont '30pt' is defined (can better be done global)
+fonts           > bodyfont '36pt' is defined (can better be done global)
+fonts           > bodyfont '24pt' is defined (can better be done global)
+fonts           > typescripts > unknown library 'sl'
+structure       > sectioning > section @ level 3 : 1.2.1 -> Подготовка к эксперименту:\\ основные инструменты:
+pages           > flushing realpage 24, userpage 24
+references      > unknown reference '[b02_FirstDoc.mkiv][installation_suite]'
+structure       > sectioning > section @ level 3 : 1.2.2 -> Сам эксперимент
+structure       > sectioning > subsubsubject @ level 5 : 1.2.2.0.0 -> Запись исходного файла
+pages           > flushing realpage 25, userpage 25
+structure       > sectioning > subsubsubject @ level 5 : 1.2.2.0.0 -> Кодировка символов файла
+setup           > error in line 147, namespace 'structure', key 'написанного для \ConTeXt '
+structure       > sectioning > subsubsubject @ level 5 : 1.2.2.0.0 -> Взглянем на содержимое нашего первого исходного файла
+pages           > flushing realpage 26, userpage 26
+structure       > sectioning > subsubsubject @ level 5 : 1.2.2.0.0 -> Обработка исходного файла
+pages           > flushing realpage 27, userpage 27
+floatblocks     > 1 saved
+structure       > sectioning > section @ level 3 : 1.2.3 -> Структура нашего\\ тестового файла
+pages           > flushing realpage 28, userpage 28
+floatblocks     > 1 moved
+floatblocks     > '1' moved
+setup           > error in line 246, namespace 'structure', key 'как запустить \quotation {{\tt context}}'
+structure       > sectioning > section @ level 3 : 1.2.4 -> Некоторые дополнительные сведения о том
+pages           > flushing realpage 29, userpage 29
+structure       > sectioning > section @ level 3 : 1.2.5 -> Managing errors
+pages           > flushing realpage 30, userpage 30
+floatblocks     > unknown float type 'here'
+floatblocks     > '2' placed
+pages           > flushing realpage 31, userpage 31
+close source    > level 3, order 9, name '01_BodyMatter/b02_FirstDoc.mkiv'
+open source     > level 3, order 10, name '01_BodyMatter/b03_Commands.mkiv'
+pages           > flushing realpage 32, userpage 32
+structure       > sectioning > chapter @ level 2 : 1.3 -> Команды и другие базовые концепции\\ \ConTeXt 
+fonts           > bodyfont '30pt' is defined (can better be done global)
+fonts           > bodyfont '36pt' is defined (can better be done global)
+fonts           > bodyfont '24pt' is defined (can better be done global)
+fonts           > typescripts > unknown library 'sl'
+structure       > sectioning > section @ level 3 : 1.3.1 -> Зарезервированные символы \ConTeXt 
+pages           > flushing realpage 33, userpage 33
+fonts           > bodyfont '25pt' is defined (can better be done global)
+fonts           > bodyfont '30pt' is defined (can better be done global)
+fonts           > bodyfont '20pt' is defined (can better be done global)
+
+Underfull \hbox (badness 10000) in paragraph at lines 70--72
+
+
+\hbox(0.0+0.0)x426.79135, direction TLT
+.\glue(\rightskip) 0.0
+
+
+Underfull \hbox (badness 1102) in paragraph at lines 78--78
+ [][]\3>dejavu-8pt-rm-tf-0--0 Этот сим-вол яв-ля-ет-ся для нас са-мым важ-ным: он ука-зы-ва-ет на то, что то, что идет
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.22668, direction TLT
+.\glue(\leftskip) 32.06874
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\latelua0 <function 486>
+.\hbox(8.37114+3.25543)x0.0, glue set - 32.06874fil, direction TLT
+..\glue 0.0 plus 1.0fil minus 1.0fil
+..\hbox(8.37114+3.25543)x32.06874, direction TLT
+...\hbox(8.37114+3.25543)x32.06874, glue set 28.45274fil, direction TLT []
+.\penalty 10000
+.etc.
+
+pages           > flushing realpage 34, userpage 34
+
+Underfull \hbox (badness 2547) in paragraph at lines 119--119
+ [][][]
+
+\hbox(28.45303+3.25543)x75.58197, glue set 2.94556, direction TLT
+.\glue(\leftskip) 0.0 plus 16.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(8.37114+3.25543)x0.0, direction TLT
+.etc.
+
+floatblocks     > '3' placed
+pages           > flushing realpage 35, userpage 35
+
+Underfull \hbox (badness 6047) in paragraph at lines 165--165
+ [][][]
+
+\hbox(25.91641+2.5725)x75.58197, glue set 3.92743, direction TLT
+.\glue(\leftskip) 0.0 plus 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(6.615+2.5725)x0.0, direction TLT
+.etc.
+
+structure       > sectioning > section @ level 3 : 1.3.2 -> Сами команды
+
+Underfull \hbox (badness 6047) in paragraph at lines 195--195
+ [][][]
+
+\hbox(25.91641+2.5725)x75.58197, glue set 3.92743, direction TLT
+.\glue(\leftskip) 0.0 plus 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(6.615+2.5725)x0.0, direction TLT
+.etc.
+
+pages           > flushing realpage 36, userpage 36
+pages           > flushing realpage 37, userpage 37
+structure       > sectioning > section @ level 3 : 1.3.3 -> Область действия команд
+setup           > error in line 275, namespace 'structure', key 'которые требуют или не требуют указания области действия'
+structure       > sectioning > subsection @ level 4 : 1.3.3.1 -> Команды
+pages           > flushing realpage 38, userpage 38
+setup           > error in line 313, namespace 'structure', key 'требующие явного указания того'
+setup           > error in line 313, namespace 'structure', key 'где они начинаются и заканчиваются (среды)'
+structure       > sectioning > subsection @ level 4 : 1.3.3.2 -> Команды
+pages           > flushing realpage 39, userpage 39
+
+Underfull \hbox (badness 6047) in paragraph at lines 346--346
+ [][][]
+
+\hbox(25.91641+2.5725)x75.58197, glue set 3.92743, direction TLT
+.\glue(\leftskip) 0.0 plus 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(6.615+2.5725)x0.0, direction TLT
+.etc.
+
+structure       > sectioning > section @ level 3 : 1.3.4 -> Опции командных операций
+setup           > error in line 364, namespace 'structure', key 'которые могут работать по-разному'
+structure       > sectioning > subsection @ level 4 : 1.3.4.1 -> Команды
+pages           > flushing realpage 40, userpage 40
+setup           > error in line 424, namespace 'structure', key 'которые настраивают'
+setup           > error in line 424, namespace 'structure', key 'как другие\\ команды работают (\cmd {setupSomething})'
+structure       > sectioning > subsection @ level 4 : 1.3.4.2 -> Команды
+pages           > flushing realpage 41, userpage 41
+structure       > sectioning > subsection @ level 4 : 1.3.4.3 -> Настройка индивидуальных версий настраиваемых команд (\cmd {defineSomething})
+structure       > sectioning > section @ level 3 : 1.3.5 -> Краткое описание синтаксиса команд и параметров, а также использования квадратных и фигурных скобок при их вызове
+pages           > flushing realpage 42, userpage 42
+references      > unknown reference '[b03_Commands.mkiv][sec:qrc-setup-en]'
+pages           > flushing realpage 43, userpage 43
+structure       > sectioning > section @ level 3 : 1.3.6 -> Официальный список команд \\ \ConTeXt \, reference
+structure       > sectioning > section @ level 3 : 1.3.7 -> Определение новых команд
+structure       > sectioning > subsection @ level 4 : 1.3.7.1 -> Общий механизм определения\\ новых команд
+pages           > flushing realpage 44, userpage 44
+pages           > flushing realpage 45, userpage 45
+structure       > sectioning > subsection @ level 4 : 1.3.7.2 -> Создание новой среды
+
+Underfull \hbox (badness 6047) in paragraph at lines 703--703
+ [][][]
+
+\hbox(28.45303+2.5725)x75.58197, glue set 3.92741, direction TLT
+.\glue(\leftskip) 0.0 plus 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(6.615+2.5725)x0.0, direction TLT
+.etc.
+
+
+Underfull \hbox (badness 2547) in paragraph at lines 726--726
+ [][][]
+
+\hbox(28.45303+3.25543)x75.58197, glue set 2.94556, direction TLT
+.\glue(\leftskip) 0.0 plus 16.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(8.37114+3.25543)x0.0, direction TLT
+.etc.
+
+pages           > flushing realpage 46, userpage 46
+
+Overfull \hbox (3.67545pt too wide) in paragraph at lines 784--786
+ [][][] \3>dejavu-8pt-rm-it-0--0 Always and inevitably we underestimate the number of stupid individuals
+
+\hbox(8.37114+3.25543)x303.29352, glue set - 1.0, direction TLT
+.\glue(\leftskip) 16.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\glue 0.0
+.etc.
+
+structure       > sectioning > section @ level 3 : 1.3.8 -> Другие базовые концепции
+structure       > sectioning > subsection @ level 4 : 1.3.8.1 -> Группы
+pages           > flushing realpage 47, userpage 47
+
+Overfull \hbox (15.60904pt too wide) in paragraph at lines 847--848
+ [][]\3>dejavu-6pt-ss-tf-0--0 Ко-ман-ды [] \3>dejavu-8pt-tt-tf-4--4 \begingroup \3>dejavu-6pt-ss-tf-0--0 и [] \3>dejavu-8pt-tt-tf-4--4 \endgroup\3>dejavu-6pt-ss-tf-0--0 ,на-про-тив, невза-и-мо-за-ме-ня-е-мы с фи-гур-ны-ми скоб-ка-ми или ко-ман-да-ми \3>dejavu-8pt-tt-tf-4--4 \bgroup  ... \egroup\3>dejavu-6pt-ss-tf-0--0 ,по- 
+
+\hbox(4.66113+1.28906)x426.79135, glue set - 1.0, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 578>
+.\3>dejavu-6pt-ss-tf-0--0 К
+.etc.
+
+pages           > flushing realpage 48, userpage 48
+structure       > sectioning > subsection @ level 4 : 1.3.8.2 -> Размеры
+floatblocks     > '4' placed
+pages           > flushing realpage 49, userpage 49
+structure       > sectioning > section @ level 3 : 1.3.9 -> Метод самообучения для \ConTeXt 
+references      > unknown reference '[b03_Commands.mkiv][sec:fontscol]'
+pages           > flushing realpage 50, userpage 50
+close source    > level 3, order 10, name '01_BodyMatter/b03_Commands.mkiv'
+open source     > level 3, order 11, name '01_BodyMatter/b04_SourceFile.mkiv'
+pages           > flushing realpage 51, userpage 51
+structure       > sectioning > chapter @ level 2 : 1.4 -> Исходные файлы и проекты
+fonts           > bodyfont '30pt' is defined (can better be done global)
+fonts           > bodyfont '36pt' is defined (can better be done global)
+fonts           > bodyfont '24pt' is defined (can better be done global)
+fonts           > typescripts > unknown library 'sl'
+structure       > sectioning > section @ level 3 : 1.4.1 -> Кодировка исходных файлов
+pages           > flushing realpage 52, userpage 52
+references      > unknown reference '[b04_SourceFile.mkiv][кодировках]'
+floatblocks     > '5' placed
+
+Underfull \hbox (badness 6047) in paragraph at lines 108--108
+ [][][]
+
+\hbox(25.91641+2.5725)x75.58197, glue set 3.92743, direction TLT
+.\glue(\leftskip) 0.0 plus 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(6.615+2.5725)x0.0, direction TLT
+.etc.
+
+pages           > flushing realpage 53, userpage 53
+setup           > error in line 116, namespace 'structure', key 'которые \ConTeXt \ обрабатываются особым образом'
+structure       > sectioning > section @ level 3 : 1.4.2 -> Символы в исходных файлах
+references      > unknown reference '[b04_SourceFile.mkiv][sec: зарезервированные символы]'
+structure       > sectioning > subsection @ level 4 : 1.4.2.1 -> Пробелы (пустые пространства) и табуляции
+pages           > flushing realpage 54, userpage 54
+structure       > sectioning > subsection @ level 4 : 1.4.2.2 -> Разрывы строк
+structure       > sectioning > subsection @ level 4 : 1.4.2.3 -> Rules/dashes
+pages           > flushing realpage 55, userpage 55
+floatblocks     > '6' placed
+structure       > sectioning > section @ level 3 : 1.4.3 -> Простые и многофайловые проекты
+pages           > flushing realpage 56, userpage 56
+structure       > sectioning > section @ level 3 : 1.4.4 -> Структура исходного файла в простых проектах
+floatblocks     > '7' placed
+references      > unknown reference '[b04_SourceFile.mkiv][sec:mainfont]'
+pages           > flushing realpage 57, userpage 57
+structure       > sectioning > section @ level 3 : 1.4.5 -> Многофайловое управление в стиле \TeX 
+structure       > sectioning > subsection @ level 4 : 1.4.5.1 -> Команда \tex {input}
+
+Overfull \hbox (1.95145pt too wide) in paragraph at lines 402--403
+[][]\3>dejavu-8pt-rm-tf-0--0 Об-ра-ти-те вни-ма-ние, как для об-щей кон-фи-гу-ра-ции до-ку-мен-та мы на-зва-ли файл [][]« MyConfiguration.tex[]»,
+
+\hbox(8.37114+3.25543)x426.79135, glue set - 1.0, direction TLT
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 579>
+.\3>dejavu-8pt-rm-tf-0--0 О
+.\3>dejavu-8pt-rm-tf-0--0 б
+.etc.
+
+pages           > flushing realpage 58, userpage 58
+structure       > sectioning > subsection @ level 4 : 1.4.5.2 -> \tex {ReadFile} и \tex {readfile}
+pages           > flushing realpage 59, userpage 59
+structure       > sectioning > section @ level 3 : 1.4.6 -> \ConTeXt \ проекты как таковые
+structure       > sectioning > subsection @ level 4 : 1.4.6.1 -> Файлы {\em среды }
+
+Underfull \hbox (badness 10000) in paragraph at lines 502--503
+[][]\3>dejavu-8pt-rm-tf-0--0 Дру-ги-ми сло-ва-ми, опре-де-ле-ния и ко-ман-ды на-строй-ки вхо-дят в \3>dejavu-8pt-tt-tf-0--0 \startenvironment \3>dejavu-8pt-rm-tf-0--0 и
+
+\hbox(6.07813+1.77734)x426.79135, glue set 5.78787, direction TLT
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 597>
+.\3>dejavu-8pt-rm-tf-0--0 Д
+.\3>dejavu-8pt-rm-tf-0--0 р
+.etc.
+
+pages           > flushing realpage 60, userpage 60
+structure       > sectioning > subsection @ level 4 : 1.4.6.2 -> Компоненты и продукты
+pages           > flushing realpage 61, userpage 61
+structure       > sectioning > subsection @ level 4 : 1.4.6.3 -> Проекты как таковые
+structure       > sectioning > subsection @ level 4 : 1.4.6.4 -> Общие аспекты сред,\\ компонентов, продуктов и проектов
+pages           > flushing realpage 62, userpage 62
+
+Underfull \hbox (badness 3323) in paragraph at lines 635--636
+ [][]\3>dejavu-8pt-rm-tf-0--0 В про-тив-ном слу-чае, со-глас-но мо-им те-стам, имя, на-пи-сан-ное по-сле texstartproduct или
+
+\hbox(6.07813+1.77734)x426.79135, glue set 3.21861, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 614>
+.\3>dejavu-8pt-rm-tf-0--0 В
+.etc.
+
+close source    > level 3, order 11, name '01_BodyMatter/b04_SourceFile.mkiv'
+pages           > flushing realpage 63, userpage 63
+structure       > sectioning > part @ level 1 : 2 -> Глобальные аспекты документа
+fonts           > bodyfont '40pt' is defined (can better be done global)
+fonts           > bodyfont '48pt' is defined (can better be done global)
+fonts           > bodyfont '32pt' is defined (can better be done global)
+open source     > level 3, order 12, name '01_BodyMatter/b05_Pages.mkiv'
+pages           > flushing realpage 64, userpage 64
+structure       > sectioning > chapter @ level 2 : 2.5 -> Страницы и разбивка документов \\на страницы
+fonts           > bodyfont '30pt' is defined (can better be done global)
+fonts           > bodyfont '36pt' is defined (can better be done global)
+fonts           > bodyfont '24pt' is defined (can better be done global)
+fonts           > typescripts > unknown library 'sl'
+structure       > sectioning > section @ level 3 : 2.5.1 -> Page size
+structure       > sectioning > subsection @ level 4 : 2.5.1.1 -> Установка размеров страницы
+
+Underfull \hbox (badness 2608) in paragraph at lines 55--56
+[][]\3>dejavu-8pt-rm-tf-0--0 где оба ар-гу-мен-та при-ни-ма-ют сим-во-ли-че-ские име-на.[][] Пер-вый ар-гу-мент, ко-то-рый я на-звал
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.96655, direction TLT
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 580>
+.\3>dejavu-8pt-rm-tf-0--0 г
+.\3>dejavu-8pt-rm-tf-0--0 д
+.etc.
+
+pages           > flushing realpage 65, userpage 65
+
+Underfull \hbox (badness 6047) in paragraph at lines 81--81
+ [][][]
+
+\hbox(28.45303+2.5725)x75.58197, glue set 3.92741, direction TLT
+.\glue(\leftskip) 0.0 plus 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(6.615+2.5725)x0.0, direction TLT
+.etc.
+
+references      > unknown reference '[b05_Pages.mkiv][sec:qrc-setup-en]'
+structure       > sectioning > subsection @ level 4 : 2.5.1.2 -> Использование нестандартных размеров страниц
+structure       > sectioning > subsubsubject @ level 5 : 2.5.1.2.0 -> Альтернативный синтаксис \tex {setuppapersize}
+pages           > flushing realpage 66, userpage 66
+
+Underfull \hbox (badness 10000) in paragraph at lines 124--125
+ [][][][] \3>dejavu-8pt-tt-bf-0--0 topspace (верх-нее про-стран-ство), backspace (ниж-нее про-стран-ство), offset (сме-ще-ние)\3>dejavu-8pt-rm-tf-0--0 ,
+
+\hbox(8.37114+3.25543)x426.79135, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 499>
+.\glue 0.0
+.etc.
+
+structure       > sectioning > subsubsubject @ level 5 : 2.5.1.2.0 -> Определение нестандартного размера страницы
+structure       > sectioning > subsection @ level 4 : 2.5.1.3 -> Изменение размера страницы в любом месте документа
+structure       > sectioning > subsection @ level 4 : 2.5.1.4 -> Настройка размера страницы в соответствии с ее содержимым
+pages           > flushing realpage 67, userpage 67
+
+Underfull \hbox (badness 2547) in paragraph at lines 177--177
+ [][][]
+
+\hbox(28.45303+3.25543)x75.58197, glue set 2.94556, direction TLT
+.\glue(\leftskip) 0.0 plus 16.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(8.37114+3.25543)x0.0, direction TLT
+.etc.
+
+structure       > sectioning > section @ level 3 : 2.5.2 -> Элементы на странице
+pages           > flushing realpage 68, userpage 68
+
+Underfull \hbox (badness 2717) in paragraph at lines 265--266
+ \3>dejavu-8pt-rm-tf-0--0 (вы-со-та тек-ста). В свою оче-редь, пе-ре-мен-ная [][]« \3>dejavu-8pt-tt-tf-0--0 height[]\3>dejavu-8pt-rm-tf-0--0 » из-ме-ря-ет-ся как сум-ма [][]« \3>dejavu-8pt-tt-tf-0--0 header[]\3>dejavu-8pt-rm-tf-0--0 »,
+
+\hbox(8.37114+3.25543)x426.79135, glue set 3.00868, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 (
+.\3>dejavu-8pt-rm-tf-0--0 в
+.\3>dejavu-8pt-rm-tf-0--0 ы
+.\discretionary (penalty 50) []
+.etc.
+
+floatblocks     > 2 saved
+
+Underfull \hbox (badness 2376) in paragraph at lines 277--278
+[][]\3>dejavu-8pt-rm-tf-0--0 На эта-пе ма-ке-та на-ше-го до-ку-мен-та мы мо-жем уви-деть все раз-ме-ры стра-ни-цы с по-мо-щью
+
+\hbox(5.83203+1.77734)x426.79135, glue set 2.87752, direction TLT
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 482>
+.\3>dejavu-8pt-rm-tf-0--0 Н
+.\3>dejavu-8pt-rm-tf-0--0 а
+.etc.
+
+structure       > sectioning > section @ level 3 : 2.5.3 -> Page layout (\tex {setuplayout})
+pages           > flushing realpage 69, userpage 69
+floatblocks     > 2 moved
+floatblocks     > '8' moved
+structure       > sectioning > subsection @ level 4 : 2.5.3.1 -> Assigning a size to the different page components
+pages           > flushing realpage 70, userpage 70
+structure       > sectioning > subsubsubject @ level 5 : 2.5.3.1.0 -> Размещение логической страницы на физической странице
+structure       > sectioning > subsubsubject @ level 5 : 2.5.3.1.0 -> Получение ширины и высоты текстовой области
+pages           > flushing realpage 71, userpage 71
+structure       > sectioning > subsection @ level 4 : 2.5.3.2 -> Адаптация макета страницы
+structure       > sectioning > subsection @ level 4 : 2.5.3.3 -> Использование нескольких макетов страниц
+pages           > flushing realpage 72, userpage 72
+setup           > error in line 429, namespace 'structure', key 'связанные с макетом страницы'
+structure       > sectioning > subsection @ level 4 : 2.5.3.4 -> Прочие вопросы
+structure       > sectioning > subsubsection @ level 5 : 2.5.3.4.1 ->  Различение нечетных и четных страниц
+structure       > sectioning > subsubsection @ level 5 : 2.5.3.4.2 -> Страницы с более чем одним столбцом
+structure       > sectioning > section @ level 3 : 2.5.4 -> Нумерация страниц
+pages           > flushing realpage 73, userpage 73
+
+Underfull \hbox (badness 2626) in paragraph at lines 502--504
+ \3>dejavu-8pt-rm-tf-0--0 араб-ской ([][]« \3>dejavu-8pt-tt-tf-0--0 n[]\3>dejavu-8pt-rm-tf-0--0 », [][]« \3>dejavu-8pt-tt-tf-0--0 numbers[]\3>dejavu-8pt-rm-tf-0--0 »), строч-ны-ми бук-ва-ми ([][]« \3>dejavu-8pt-tt-tf-0--0 a[]\3>dejavu-8pt-rm-tf-0--0 », [][]« \3>dejavu-8pt-tt-tf-0--0 characters[]\3>dejavu-8pt-rm-tf-0--0 »), про-пис-ны-ми бук-ва-ми
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.97464, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 а
+.\3>dejavu-8pt-rm-tf-0--0 р
+.\3>dejavu-8pt-rm-tf-0--0 а
+.\3>dejavu-8pt-rm-tf-0--0 б
+.etc.
+
+pages           > flushing realpage 74, userpage 74
+structure       > sectioning > section @ level 3 : 2.5.5 -> Принудительные или предлагаемые разрывы страниц
+structure       > sectioning > subsection @ level 4 : 2.5.5.1 -> Команда \tex {page}
+pages           > flushing realpage 75, userpage 75
+structure       > sectioning > subsection @ level 4 : 2.5.5.2 -> Соединение определенных строк или абзацев для предотвращения вставки между ними разрыва страницы
+
+Underfull \hbox (badness 7151) in paragraph at lines 622--623
+[][]\3>dejavu-8pt-rm-tf-0--0 Неко-то-рые сре-ды Con-T[]Xt дей-стви-тель-но по-ме-ща-ют свое со-дер-жи-мое в бокс. На-при-мер,
+
+\hbox(6.21094+2.07617)x426.79135, glue set 4.15472, direction TLT
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 615>
+.\3>dejavu-8pt-rm-tf-0--0 Н
+.\3>dejavu-8pt-rm-tf-0--0 е
+.etc.
+
+pages           > flushing realpage 76, userpage 76
+structure       > sectioning > section @ level 3 : 2.5.6 -> Верхние и нижние колонтитулы
+structure       > sectioning > subsection @ level 4 : 2.5.6.1 -> Команды для определения содержимого верхних и нижних колонтитулов
+
+Underfull \hbox (badness 6047) in paragraph at lines 665--665
+ [][][]
+
+\hbox(25.91641+2.5725)x75.58197, glue set 3.92743, direction TLT
+.\glue(\leftskip) 0.0 plus 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(6.615+2.5725)x0.0, direction TLT
+.etc.
+
+pages           > flushing realpage 77, userpage 77
+structure       > sectioning > subsection @ level 4 : 2.5.6.2 -> Форматирование верхних и нижних колонтитулов
+
+Underfull \hbox (badness 10000) in paragraph at lines 707--708
+ [][][][] \3>dejavu-8pt-tt-bf-0--0 state\3>dejavu-8pt-rm-tf-0--0 : до-пус-ка-ет сле-ду-ю-щие зна-че-ния: \3>dejavu-8pt-tt-tf-0--0 start, stop, empty, high, none, normal \3>dejavu-8pt-rm-tf-0--0 или
+
+\hbox(8.37114+3.25543)x426.79135, glue set 6.61354, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 569>
+.\glue 0.0
+.etc.
+
+pages           > flushing realpage 78, userpage 78
+structure       > sectioning > subsection @ level 4 : 2.5.6.3 -> Определение конкретных верхних и нижних колонтитулов и связывание их с командами раздела
+structure       > sectioning > section @ level 3 : 2.5.7 -> Вставка текстовых элементов по краям и полям страницы
+
+Underfull \hbox (badness 1939) in paragraph at lines 788--804
+ []\3>dejavu-8pt-rm-tf-0--0  \3>dejavu-8pt-tt-tf-0--0 \inleftedge\3>dejavu-8pt-rm-tf-0--0 , [] \3>dejavu-8pt-tt-tf-0--0 \inleftmargin\3>dejavu-8pt-rm-tf-0--0 , [] \3>dejavu-8pt-tt-tf-0--0 \inmargin\3>dejavu-8pt-rm-tf-0--0 , [] \3>dejavu-8pt-tt-tf-0--0 \inother\3>dejavu-8pt-rm-tf-0--0 , [] \3>dejavu-8pt-tt-tf-0--0 \inouter\3>dejavu-8pt-rm-tf-0--0 , [] \3>dejavu-8pt-tt-tf-0--0 \inouteredge\3>dejavu-8pt-rm-tf-0--0 , [] \3>dejavu-8pt-tt-tf-0--0 \inoutermargin\3>dejavu-8pt-rm-tf-0--0 ,
+
+\hbox(6.1211+1.71875)x426.79135, glue set 2.68745, direction TLT
+.\glue(\leftskip) 12.0
+.\latelua0{commands.enhanceregister("macro",98)}
+.\boundary=1
+.\3>dejavu-8pt-rm-tf-0--0  
+.\boundary=2
+.etc.
+
+pages           > flushing realpage 79, userpage 79
+
+Underfull \hbox (badness 6047) in paragraph at lines 843--843
+ [][][]
+
+\hbox(28.45303+2.5725)x75.58197, glue set 3.92741, direction TLT
+.\glue(\leftskip) 0.0 plus 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(6.615+2.5725)x0.0, direction TLT
+.etc.
+
+pages           > flushing realpage 80, userpage 80
+
+Overfull \hbox (98.69693pt too wide) in paragraph at lines 853--855
+[][]\3>dejavu-8pt-rm-tf-0--0 Мы так-же мо-жем со-здать на-шу соб-ствен-ную на-стра-и-ва-е-мую ко-ман-ду с по-мо-щью [] \3>dejavu-8pt-tt-tf-0--0 \definemargindata[Name][Configuration] 
+
+\hbox(6.21094+1.77734)x426.79135, glue set - 1.0, direction TLT
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 504>
+.\3>dejavu-8pt-rm-tf-0--0 М
+.\3>dejavu-8pt-rm-tf-0--0 ы
+.etc.
+
+close source    > level 3, order 12, name '01_BodyMatter/b05_Pages.mkiv'
+system          > jobfiles > unknown tex file '01_BodyMatter/b06_Fonts.mkiv'
+open source     > level 3, order 13, name '01_BodyMatter/b07_Structure.mkiv'
+pages           > flushing realpage 81, userpage 81
+structure       > sectioning > chapter @ level 2 : 2.6 -> Структура документа
+fonts           > bodyfont '30pt' is defined (can better be done global)
+fonts           > bodyfont '36pt' is defined (can better be done global)
+fonts           > bodyfont '24pt' is defined (can better be done global)
+fonts           > typescripts > unknown library 'sl'
+structure       > sectioning > section @ level 3 : 2.6.1 -> Структурные подразделения в документах
+pages           > flushing realpage 82, userpage 82
+structure       > sectioning > section @ level 3 : 2.6.2 -> Типы разделов и их иерархия
+floatblocks     > '9' placed
+
+Underfull \hbox (badness 3179) in paragraph at lines 128--129
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 Таб-ли-ца со-дер-жит толь-ко пер-вые 6 уров-ней раз-де-ла. Од-на-ко в сво-их те-стах я об-на-ру-
+
+\hbox(8.37114+3.25543)x426.79135, glue set 3.17116, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 558>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 3930) in paragraph at lines 128--129
+ \3>dejavu-8pt-rm-tf-0--0 жил до 12 уров-ней: по-сле texsubsubsubsection идет \3>dejavu-8pt-tt-tf-0--0 \subsubsubsubsection\3>dejavu-8pt-rm-tf-0--0 , и так да-лее
+
+\hbox(6.07813+1.77734)x426.79135, glue set 3.40202, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 ж
+.\3>dejavu-8pt-rm-tf-0--0 и
+.\3>dejavu-8pt-rm-tf-0--0 л
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.etc.
+
+pages           > flushing realpage 83, userpage 83
+setup           > error in line 157, namespace 'structure', key 'общий для команд раздела'
+structure       > sectioning > section @ level 3 : 2.6.3 -> Синтаксис
+pages           > flushing realpage 84, userpage 84
+structure       > sectioning > section @ level 3 : 2.6.4 -> Формат и конфигурация разделов и их заголовков
+structure       > sectioning > subsection @ level 4 : 2.6.4.1 -> Команды \tex {setuphead} и \tex {setupheads}
+pages           > flushing realpage 85, userpage 85
+structure       > sectioning > subsection @ level 4 : 2.6.4.2 -> Части заголовка раздела
+
+Underfull \hbox (badness 2547) in paragraph at lines 296--296
+ [][][]
+
+\hbox(28.45303+3.25543)x75.58197, glue set 2.94556, direction TLT
+.\glue(\leftskip) 0.0 plus 16.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(8.37114+3.25543)x0.0, direction TLT
+.etc.
+
+pages           > flushing realpage 86, userpage 86
+structure       > sectioning > subsection @ level 4 : 2.6.4.3 -> Контроль нумерации \\(в пронумерованных разделах)
+pages           > flushing realpage 87, userpage 87
+
+Underfull \hbox (badness 10000) in paragraph at lines 369--370
+[][]\3>dejavu-8pt-rm-tf-0--0 Эта ко-ман-да так-же поз-во-ля-ет нам из-ме-нить шаб-лон для ав-то-ма-ти-че-ско-го уве-ли-че-ния;
+
+\hbox(6.21094+1.77734)x426.79135, glue set 4.73889, direction TLT
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 593>
+.\3>dejavu-8pt-rm-tf-0--0 Э
+.\3>dejavu-8pt-rm-tf-0--0 т
+.etc.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 369--370
+\3>dejavu-8pt-rm-tf-0--0 та-ким об-ра-зом, мы мо-жем, на-при-мер, под-счи-тать гла-вы или раз-де-лы по-пар-но или
+
+\hbox(6.21094+1.66406)x426.79135, glue set 5.7968, direction TLT
+.\3>dejavu-8pt-rm-tf-0--0 т
+.\3>dejavu-8pt-rm-tf-0--0 а
+.\discretionary (penalty 50) []
+.\3>dejavu-8pt-rm-tf-0--0 к
+.\3>dejavu-8pt-rm-tf-0--0 и
+.etc.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 369--370
+\3>dejavu-8pt-rm-tf-0--0 по три. Итак, \3>dejavu-8pt-tt-tf-0--0 \setupheadnumber[section][+5] \3>dejavu-8pt-rm-tf-0--0 даст гла-вы с но-ме-ра-ми 5 из пя-ти; и
+
+\hbox(6.07813+1.66406)x426.79135, glue set 5.31674, direction TLT
+.\3>dejavu-8pt-rm-tf-0--0 п
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.\3>dejavu-8pt-rm-tf-0--0 т
+.\3>dejavu-8pt-rm-tf-0--0 р
+.etc.
+
+pages           > flushing realpage 88, userpage 88
+structure       > sectioning > subsection @ level 4 : 2.6.4.4 -> Цвет и стиль заголовка
+pages           > flushing realpage 89, userpage 89
+structure       > sectioning > subsection @ level 4 : 2.6.4.5 -> Расположение номера и текста заголовка
+pages           > flushing realpage 90, userpage 90
+setup           > error in line 536, namespace 'structure', key 'которые необходимо выполнить до или после печати заголовка'
+structure       > sectioning > subsection @ level 4 : 2.6.4.6 -> Команды или действия
+
+Underfull \hbox (badness 2547) in paragraph at lines 539--539
+ [][][]
+
+\hbox(25.91641+3.25543)x75.58197, glue set 2.94557, direction TLT
+.\glue(\leftskip) 0.0 plus 16.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(8.37114+3.25543)x0.0, direction TLT
+.etc.
+
+pages           > flushing realpage 91, userpage 91
+structure       > sectioning > subsection @ level 4 : 2.6.4.7 -> Другие настраиваемые функции
+structure       > sectioning > subsection @ level 4 : 2.6.4.8 -> Другие параметры \tex {setuphead} options
+
+Underfull \hbox (badness 2547) in paragraph at lines 581--581
+ [][][]
+
+\hbox(28.45303+3.25543)x75.58197, glue set 2.94556, direction TLT
+.\glue(\leftskip) 0.0 plus 16.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(8.37114+3.25543)x0.0, direction TLT
+.etc.
+
+structure       > sectioning > section @ level 3 : 2.6.5 -> Определение новых команд раздела
+pages           > flushing realpage 92, userpage 92
+structure       > sectioning > section @ level 3 : 2.6.6 -> Макроструктура документа
+floatblocks     > '10' placed
+pages           > flushing realpage 93, userpage 93
+close source    > level 3, order 13, name '01_BodyMatter/b07_Structure.mkiv'
+open source     > level 3, order 14, name '01_BodyMatter/b08_Lists.mkiv'
+pages           > flushing realpage 94, userpage 94
+structure       > sectioning > chapter @ level 2 : 2.7 -> Оглавление, указатели, списки
+fonts           > bodyfont '30pt' is defined (can better be done global)
+fonts           > bodyfont '36pt' is defined (can better be done global)
+fonts           > bodyfont '24pt' is defined (can better be done global)
+fonts           > typescripts > unknown library 'sl'
+structure       > sectioning > section @ level 3 : 2.7.1 -> Содержание
+structure       > sectioning > subsection @ level 4 : 2.7.1.1 -> Общий вид содержания
+pages           > flushing realpage 95, userpage 95
+references      > unknown reference '[b08_Lists.mkiv][(https://wiki.contextgarden.net/Table_of_Contents##Page_numbering_in_ToC)]'
+structure       > sectioning > subsection @ level 4 : 2.7.1.2 -> Полностью автоматическое оглавление с заголовком
+pages           > flushing realpage 96, userpage 96
+
+Underfull \hbox (badness 1859) in paragraph at lines 102--103
+[][]\3>dejavu-8pt-rm-tf-0--0 га-ран-ти-ру-ет, что со-дер-жа-ние, со-здан-ное с по-мо-щью \3>dejavu-8pt-tt-tf-0--0 \completecontent\3>dejavu-8pt-rm-tf-0--0 , бу-дет на-име-но-вать-ся
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.65076, direction TLT
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 639>
+.\3>dejavu-8pt-rm-tf-0--0 г
+.\3>dejavu-8pt-rm-tf-0--0 а
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 2.7.1.3 -> Автоматическое оглавление без заголовка
+pages           > flushing realpage 97, userpage 97
+structure       > sectioning > subsection @ level 4 : 2.7.1.4 -> Элементы для включения в ТОС: параметр {\tt criterium}
+structure       > sectioning > subsection @ level 4 : 2.7.1.5 -> Макет оглавления: альтернативный вариант: опция {\tt alternative}
+pages           > flushing realpage 98, userpage 98
+floatblocks     > '11' placed
+structure       > sectioning > subsection @ level 4 : 2.7.1.6 -> Формат записей оглавления
+pages           > flushing realpage 99, userpage 99
+structure       > sectioning > subsection @ level 4 : 2.7.1.7 -> Ручная корректировка таблицы содержания
+
+Underfull \hbox (badness 10000) in paragraph at lines 347--348
+[][]\3>dejavu-8pt-rm-tf-0--0 Мы уже объ-яс-ни-ли две ос-нов-ные ко-ман-ды для со-зда-ния оглав-ле-ний (\3>dejavu-8pt-tt-tf-0--0 \placecontent \3>dejavu-8pt-rm-tf-0--0 и
+
+\hbox(6.21094+1.77734)x426.79135, glue set 4.58759, direction TLT
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 581>
+.\3>dejavu-8pt-rm-tf-0--0 М
+.\3>dejavu-8pt-rm-tf-0--0 ы
+.etc.
+
+pages           > flushing realpage 100, userpage 100
+structure       > sectioning > subsubsection @ level 5 : 2.7.1.7.1 -> Включение ненумерованных разделов в TOC
+structure       > sectioning > subsubsection @ level 5 : 2.7.1.7.2 -> Ручное добавление записей в оглавление
+references      > unknown reference '[b08_Lists.mkiv][sec:qrc-setup-en]'
+
+Underfull \hbox (badness 6047) in paragraph at lines 416--416
+ [][][]
+
+\hbox(28.45303+2.5725)x75.58197, glue set 3.92741, direction TLT
+.\glue(\leftskip) 0.0 plus 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(6.615+2.5725)x0.0, direction TLT
+.etc.
+
+pages           > flushing realpage 101, userpage 101
+
+Underfull \hbox (badness 2547) in paragraph at lines 420--420
+ [][][]
+
+\hbox(28.45303+3.25543)x75.58197, glue set 2.94556, direction TLT
+.\glue(\leftskip) 0.0 plus 16.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(8.37114+3.25543)x0.0, direction TLT
+.etc.
+
+
+Underfull \hbox (badness 1067) in paragraph at lines 433--434
+[][]\3>dejavu-8pt-rm-tf-0--0 По-смот-ри-те, как мы ис-поль-зу-ем нену-ме-ро-ван-ную вер-сию раз-де-ла \3>dejavu-8pt-tt-tf-0--0 section\3>dejavu-8pt-rm-tf-0--0 , ко-то-рый яв-ля-ет-ся
+
+\hbox(6.07813+1.77734)x426.79135, glue set 2.20297, direction TLT
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 633>
+.\3>dejavu-8pt-rm-tf-0--0 П
+.\3>dejavu-8pt-rm-tf-0--0 о
+.etc.
+
+setup           > error in line 443, namespace 'structure', key 'принадлежащий к типу раздела'
+setup           > error in line 443, namespace 'structure', key 'который включен в оглавление'
+structure       > sectioning > subsubsection @ level 5 : 2.7.1.7.3 -> Исключить конкретный раздел из оглавления
+setup           > error in line 464, namespace 'structure', key 'который отличается по оглавлению от заголовка в теле документа'
+structure       > sectioning > subsubsection @ level 5 : 2.7.1.7.4 -> Текст заголовка раздела
+
+Overfull \hbox (17.65808pt too wide) in paragraph at lines 469--470
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 Со-зда-ние раз-де-ла не с тра-ди-ци-он-ным син-так-си-сом (\3>dejavu-8pt-tt-tf-0--0 SectionType{Title}\3>dejavu-8pt-rm-tf-0--0 ), а с \3>dejavu-8pt-tt-tf-0--0 \SectionType [Options]
+
+\hbox(8.37114+3.25543)x426.79135, glue set - 1.0, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 581>
+.\glue 0.0
+.etc.
+
+pages           > flushing realpage 102, userpage 102
+structure       > sectioning > section @ level 3 : 2.7.2 -> Списки, комбинированные списки и оглавление на основе списка
+structure       > sectioning > subsection @ level 4 : 2.7.2.1 -> Списки в \ConTeXt 
+
+Underfull \hbox (badness 1308) in paragraph at lines 524--525
+\3>dejavu-8pt-rm-tf-0--0 ну-ме-ро-ван-но-го раз-де-ла: ко-гда мы со-зда-дим его, мы неяв-но со-зда-дим так-же спи-сок, в ко-то-
+
+\hbox(4.26563+1.77734)x426.79135, glue set 2.3578, direction TLT
+.\3>dejavu-8pt-rm-tf-0--0 н
+.\3>dejavu-8pt-rm-tf-0--0 у
+.\discretionary (penalty 50) []
+.\3>dejavu-8pt-rm-tf-0--0 м
+.\3>dejavu-8pt-rm-tf-0--0 е
+.etc.
+
+pages           > flushing realpage 103, userpage 103
+
+Underfull \hbox (badness 1622) in paragraph at lines 536--541
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 Вруч-ную в лю-бом ви-де спис-ка с по-мо-щью \3>dejavu-8pt-tt-tf-0--0 \Writetolist [ListName]\3>dejavu-8pt-rm-tf-0--0 , уже объ-яс-нен-но-го в
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.53319, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 578>
+.\glue 0.0
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 2.7.2.2 -> Списки или указатели изображений, таблиц и других элементов
+
+Underfull \hbox (badness 1082) in paragraph at lines 564--574
+ \3>dejavu-8pt-rm-tf-0--0 мое с дру-ги-ми че-тырь-мя пред-опре-де-лен-ны-ми ти-па-ми пла-ва-ю-щих объ-ек-тов в Con-T[]Xt: таб-
+
+\hbox(6.21094+2.07617)x426.79135, glue set 2.21268, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 м
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 е
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.etc.
+
+
+Underfull \hbox (badness 2762) in paragraph at lines 564--574
+ \3>dejavu-8pt-rm-tf-0--0 ли-цы ([][]« \3>dejavu-8pt-tt-tf-0--0 table[]\3>dejavu-8pt-rm-tf-0--0 »), гра-фи-ка ([][]« \3>dejavu-8pt-tt-tf-0--0 graphic[]\3>dejavu-8pt-rm-tf-0--0 »), \3>dejavu-8pt-rm-it-0--0 intermezzos \3>dejavu-8pt-rm-tf-0--0 (([][]« \3>dejavu-8pt-tt-tf-0--0 intermezzo[]\3>dejavu-8pt-rm-tf-0--0 ») и хи-ми-че-ские фор-му-лы
+
+\hbox(8.37114+3.25543)x426.79135, glue set 3.02577, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 л
+.\3>dejavu-8pt-rm-tf-0--0 и
+.\discretionary (penalty 50) []
+.\3>dejavu-8pt-rm-tf-0--0 ц
+.etc.
+
+
+Underfull \hbox (badness 5847) in paragraph at lines 564--574
+ []\3>dejavu-8pt-rm-tf-0--0  \3>dejavu-8pt-tt-tf-0--0 \placelistofintermezzi \3>dejavu-8pt-rm-tf-0--0 и [] \3>dejavu-8pt-tt-tf-0--0 \placelistofchemicals\3>dejavu-8pt-rm-tf-0--0 ), и еще од-ну, ко-то-рая ге-не-ри-ру-ет их
+
+\hbox(6.1211+1.77734)x426.79135, glue set 3.88425, direction TLT
+.\glue(\leftskip) 12.0
+.\latelua0{commands.enhanceregister("macro",158)}
+.\boundary=1
+.\3>dejavu-8pt-rm-tf-0--0  
+.\boundary=2
+.etc.
+
+
+Underfull \hbox (badness 6284) in paragraph at lines 564--574
+ \3>dejavu-8pt-rm-tf-0--0 с за-го-лов-ком: ([] \3>dejavu-8pt-tt-tf-0--0 \completelistoffigures\3>dejavu-8pt-rm-tf-0--0 , [] \3>dejavu-8pt-tt-tf-0--0 \completelistoftables\3>dejavu-8pt-rm-tf-0--0 , [] \3>dejavu-8pt-tt-tf-0--0 \completelistofgraphics\3>dejavu-8pt-rm-tf-0--0 ,
+
+\hbox(6.1211+1.71875)x426.79135, glue set 3.9774, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 с
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.\3>dejavu-8pt-rm-tf-0--0 з
+.\3>dejavu-8pt-rm-tf-0--0 а
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 2.7.2.3 -> Комбинированные списки
+pages           > flushing realpage 104, userpage 104
+structure       > sectioning > section @ level 3 : 2.7.3 -> Индекс (указатель)
+structure       > sectioning > subsection @ level 4 : 2.7.3.1 -> Создание индекса
+pages           > flushing realpage 105, userpage 105
+structure       > sectioning > subsubsection @ level 5 : 2.7.3.1.1 -> Предварительное определение записей в указателе и маркировка точек в исходном файле, которые ссылаются на них
+pages           > flushing realpage 106, userpage 106
+structure       > sectioning > subsubsection @ level 5 : 2.7.3.1.2 -> Создание окончательного индекса
+pages           > flushing realpage 107, userpage 107
+
+Underfull \hbox (badness 6842) in paragraph at lines 742--743
+ [][]\3>dejavu-8pt-rm-tf-0--0 Раз-ни-ца меж-ду \3>dejavu-8pt-tt-tf-0--0 \placeindex \3>dejavu-8pt-rm-tf-0--0 и \3>dejavu-8pt-tt-tf-0--0 \completeindex \3>dejavu-8pt-rm-tf-0--0 ана-ло-гич-на раз-ни-це меж-ду \3>dejavu-8pt-tt-tf-0--0 \content \3>dejavu-8pt-rm-tf-0--0 и
+
+\hbox(6.1211+1.77734)x426.79135, glue set 4.09203, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 610>
+.\3>dejavu-8pt-rm-tf-0--0 Р
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 2.7.3.2 -> Форматирование предметного указателя
+
+Underfull \hbox (badness 1117) in paragraph at lines 767--768
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 Са-ми за-пи-си и но-мер их стра-ни-цы. Внеш-ний вид за-ви-сит от па-ра-мет-ров \3>dejavu-8pt-tt-tf-0--0 textstyle,
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.23615, direction TLT
+.\glue(\leftskip) 36.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 620>
+.\glue 0.0
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 2.7.3.3 -> Создание других индексов
+
+Underfull \hbox (badness 10000) in paragraph at lines 788--789
+ [][]\3>dejavu-8pt-rm-tf-0--0 Что-бы со-здать до-пол-ни-тель-ный ин-декс в на-шем до-ку-мен-те, мы ис-поль-зу-ем ко-ман-ду
+
+\hbox(6.21094+1.77734)x426.79135, glue set 4.70647, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 518>
+.\3>dejavu-8pt-rm-tf-0--0 Ч
+.etc.
+
+pages           > flushing realpage 108, userpage 108
+
+Underfull \hbox (badness 4144) in paragraph at lines 806--807
+ [][]\3>dejavu-6pt-ss-tf-0--0 Со-зда-ние но-во-го ин-дек-са поз-во-ля-ет ко-ман-де \3>dejavu-8pt-tt-tf-4--4 \IndexName \3>dejavu-6pt-ss-tf-0--0 от-ме-чать его за-пи-си, а ко-ман-ды \3>dejavu-8pt-tt-tf-4--4 \placeIndexName \3>dejavu-6pt-ss-tf-0--0 и 
+
+\hbox(4.59082+1.24805)x426.79135, glue set 3.46136, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 500>
+.\3>dejavu-6pt-ss-tf-0--0 С
+.etc.
+
+close source    > level 3, order 14, name '01_BodyMatter/b08_Lists.mkiv'
+open source     > level 3, order 15, name '01_BodyMatter/b09_References.mkiv'
+pages           > flushing realpage 109, userpage 109
+structure       > sectioning > chapter @ level 2 : 2.8 -> Литературные ссылки и гиперлинки
+fonts           > bodyfont '30pt' is defined (can better be done global)
+fonts           > bodyfont '36pt' is defined (can better be done global)
+fonts           > bodyfont '24pt' is defined (can better be done global)
+fonts           > typescripts > unknown library 'sl'
+structure       > sectioning > section @ level 3 : 2.8.1 -> Типы ссылок
+pages           > flushing realpage 110, userpage 110
+structure       > sectioning > section @ level 3 : 2.8.2 -> Внутренние ссылки
+structure       > sectioning > subsection @ level 4 : 2.8.2.1 -> Метка в референтной цели
+pages           > flushing realpage 111, userpage 111
+
+Underfull \hbox (badness 6047) in paragraph at lines 134--134
+ [][][]
+
+\hbox(25.91641+2.5725)x75.58197, glue set 3.92743, direction TLT
+.\glue(\leftskip) 0.0 plus 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(6.615+2.5725)x0.0, direction TLT
+.etc.
+
+pages           > flushing realpage 112, userpage 112
+
+Underfull \hbox (badness 6047) in paragraph at lines 176--176
+ [][][]
+
+\hbox(25.91641+2.5725)x75.58197, glue set 3.92743, direction TLT
+.\glue(\leftskip) 0.0 plus 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(6.615+2.5725)x0.0, direction TLT
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 2.8.2.2 -> Команды в исходной точке отсчета для извлечения данных из целевой точки
+structure       > sectioning > subsubsection @ level 5 : 2.8.2.2.1 -> Основные команды для получения информации с метки
+pages           > flushing realpage 113, userpage 113
+
+Overfull \hbox (10.45578pt too wide) in paragraph at lines 5--19
+[]\3>dejavu-8pt-tt-tf-4--4 In \in{section}[sec:target labels], that begins on \at{page} 
+
+\hbox(6.27835+2.44157)x206.2825, direction TLT
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\hbox(6.27835+2.44157)x0.0, direction TLT
+.\3>dejavu-8pt-tt-tf-4--4 I
+.\3>dejavu-8pt-tt-tf-4--4 n
+.etc.
+
+setup           > error in line 277, namespace 'structure', key 'связанной с меткой'
+setup           > error in line 277, namespace 'structure', key 'с помощью команды \tex {ref}'
+structure       > sectioning > subsubsection @ level 5 : 2.8.2.2.2 -> Получение информации
+pages           > flushing realpage 114, userpage 114
+setup           > error in line 310, namespace 'structure', key 'куда ведет ссылка'
+structure       > sectioning > subsubsection @ level 5 : 2.8.2.2.3 -> Определение того
+
+Overfull \hbox (0.62369pt too wide) in paragraph at lines 24--70
+ [][]\3>dejavu-8pt-tt-tf-4--4 Таким образом, мы также можем найти главы или другие текстовые элементы \somewhere {before}{after} [sec:references]
+
+\hbox(6.615+2.5725)x426.79135, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\latelua0 <function 479>
+.\hbox(6.615+2.5725)x0.0, direction TLT
+.\3>dejavu-8pt-tt-tf-4--4 Т
+.etc.
+
+pages           > flushing realpage 115, userpage 115
+setup           > error in line 378, namespace 'structure', key 'чтобы избежать дублирования этикеток'
+structure       > sectioning > subsection @ level 4 : 2.8.2.3 -> Автоматическая генерация префиксов
+structure       > sectioning > section @ level 3 : 2.8.3 -> Интерактивные электронные документы
+structure       > sectioning > subsection @ level 4 : 2.8.3.1 -> Включение интерактивности в документах
+pages           > flushing realpage 116, userpage 116
+structure       > sectioning > subsection @ level 4 : 2.8.3.2 -> Базовая конфигурация для интерактивности
+structure       > sectioning > section @ level 3 : 2.8.4 -> Гиперссылки на внешние документы
+pages           > flushing realpage 117, userpage 117
+structure       > sectioning > subsection @ level 4 : 2.8.4.1 -> Команды, которые помогают набирать гиперссылки, но не создают их
+pages           > flushing realpage 118, userpage 118
+pages           > flushing realpage 119, userpage 119
+setup           > error in line 605, namespace 'structure', key 'создающие ссылку'
+structure       > sectioning > subsection @ level 4 : 2.8.4.2 -> Команды
+structure       > sectioning > section @ level 3 : 2.8.5 -> Создание закладок в окончательном PDF-файле
+pages           > flushing realpage 120, userpage 120
+close source    > level 3, order 15, name '01_BodyMatter/b09_References.mkiv'
+pages           > flushing realpage 121, userpage 121
+structure       > sectioning > part @ level 1 : 3 -> Специфические вопросы
+fonts           > bodyfont '40pt' is defined (can better be done global)
+fonts           > bodyfont '48pt' is defined (can better be done global)
+fonts           > bodyfont '32pt' is defined (can better be done global)
+open source     > level 3, order 16, name '01_BodyMatter/b10_CharText.mkiv'
+pages           > flushing realpage 122, userpage 122
+structure       > sectioning > chapter @ level 2 : 3.10 -> Символы, слова, текст и горизонтальное пространство
+fonts           > bodyfont '30pt' is defined (can better be done global)
+fonts           > bodyfont '36pt' is defined (can better be done global)
+fonts           > bodyfont '24pt' is defined (can better be done global)
+fonts           > typescripts > unknown library 'sl'
+structure       > sectioning > section @ level 3 : 3.10.1 -> Получение символов, которые обычно не доступны с клавиатуры
+references      > unknown reference '[b10_CharText.mkiv][sec:encoding)'
+floatblocks     > 3 saved
+pages           > flushing realpage 123, userpage 123
+floatblocks     > 3 moved
+floatblocks     > '12' moved
+floatblocks     > '13' placed
+structure       > sectioning > subsection @ level 4 : 3.10.1.1 -> Традиционные лигатуры
+pages           > flushing realpage 124, userpage 124
+references      > unknown reference '[b10_CharText.mkiv][sec:fontscol]'
+floatblocks     > '14' placed
+structure       > sectioning > subsection @ level 4 : 3.10.1.2 -> Греческие буквы
+floatblocks     > 4 saved
+structure       > sectioning > subsection @ level 4 : 3.10.1.3 -> Различные символы
+references      > unknown reference '[b10_CharText.mkiv][app:symbols]'
+pages           > flushing realpage 125, userpage 125
+floatblocks     > 4 moved
+floatblocks     > '15' moved
+structure       > sectioning > subsection @ level 4 : 3.10.1.4 -> {Определение символов} 
+pages           > flushing realpage 126, userpage 126
+pages           > flushing realpage 127, userpage 127
+
+Underfull \hbox (badness 10000) in paragraph at lines 311--312
+ [][]\3>dejavu-8pt-rm-tf-0--0 На пер-вый взгляд, \3>dejavu-8pt-mm-mb--1 \\3>dejavu-8pt-tt-tf-0--0 buildtextgrave \3>dejavu-8pt-rm-tf-0--0 ка-жет-ся из-лиш-ним, учи-ты-вая, что у нас есть
+
+\hbox(6.1211+1.77734)x426.79135, glue set 5.26387, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 617>
+.\3>dejavu-8pt-rm-tf-0--0 Н
+.etc.
+
+fonts           > bodyfont '30pt' is defined (can better be done global)
+fonts           > bodyfont '36pt' is defined (can better be done global)
+fonts           > bodyfont '24pt' is defined (can better be done global)
+
+Underfull \hbox (badness 10000) in paragraph at lines 316--318
+ 
+
+\hbox(0.0+0.0)x426.79135, direction TLT
+.\glue(\leftskip) 12.0
+.\glue(\rightskip) 0.0
+
+structure       > sectioning > subsection @ level 4 : 3.10.1.5 -> Использование предопределенных наборов символов
+
+Underfull \hbox (badness 5288) in paragraph at lines 336--337
+ [][][][] \3>dejavu-8pt-tt-bf-0--0 mvs \3>dejavu-8pt-rm-tf-0--0 вклю-ча-ет [][]« astronomic[]», [][]« zodiac[]», [][]« europe[]», [][]« martinvogel 1[]», [][]« martinvogel 2[]» and
+
+\hbox(8.37114+3.25543)x426.79135, glue set 3.75449, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 630>
+.\glue 0.0
+.etc.
+
+open source     > level 4, order 17, name '/usr/share/texmf/tex/context/base/mkiv/symb-imp-mvs.mkiv'
+close source    > level 4, order 17, name '/usr/share/texmf/tex/context/base/mkiv/symb-imp-mvs.mkiv'
+fonts           > symbols > library 'mvs' loaded
+open source     > level 4, order 18, name '/usr/share/texmf/tex/context/base/mkiv/symb-run.mkiv'
+close source    > level 4, order 18, name '/usr/share/texmf/tex/context/base/mkiv/symb-run.mkiv'
+fonts           > defining > forced type 'ttf' of 'marvosym' not found
+fonts           > defining > font with asked name 'marvosym' is not found using lookup 'file'
+fonts           > defining > unknown font 'marvosym', loading aborted
+fonts           > defining > unable to define 'marvosym.ttf' as 'currentsymbolfont--0'
+pages           > flushing realpage 128, userpage 128
+structure       > sectioning > section @ level 3 : 3.10.2 -> Форматы специальных символов
+pages           > flushing realpage 129, userpage 129
+structure       > sectioning > subsection @ level 4 : 3.10.2.1 -> Верхний регистр, нижний регистр и псевдо маленькие заглавные буквы
+references      > unknown reference '[b10_CharText.mkiv][sec:smallcaps]'
+pages           > flushing realpage 130, userpage 130
+structure       > sectioning > subsection @ level 4 : 3.10.2.2 -> Надстрочный или подстрочный текст
+pages           > flushing realpage 131, userpage 131
+structure       > sectioning > subsection @ level 4 : 3.10.2.3 -> Verbatim текст
+pages           > flushing realpage 132, userpage 132
+structure       > sectioning > section @ level 3 : 3.10.3 -> Межсимвольные и межсловные интервалы
+structure       > sectioning > subsection @ level 4 : 3.10.3.1 -> Автоматическая установка горизонтального пространства
+pages           > flushing realpage 133, userpage 133
+structure       > sectioning > subsection @ level 4 : 3.10.3.2 -> Изменение расстояния между символами в слове
+pages           > flushing realpage 134, userpage 134
+pages           > flushing realpage 135, userpage 135
+columns         > balanced in '17' step(s)
+
+Underfull \hbox (badness 6047) in paragraph at lines 725--725
+ [][][]
+
+\hbox(28.45303+2.5725)x75.58197, glue set 3.92741, direction TLT
+.\glue(\leftskip) 0.0 plus 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(6.615+2.5725)x0.0, direction TLT
+.etc.
+
+references      > unknown reference '[b10_CharText.mkiv][sec:qrc- setup-en]'
+structure       > sectioning > subsection @ level 4 : 3.10.3.3 -> Команды для добавления горизонтального пробела между словами
+references      > unknown reference '[b10_CharText.mkiv][sec:пробелы]'
+pages           > flushing realpage 136, userpage 136
+structure       > sectioning > section @ level 3 : 3.10.4 -> Составные слова
+structure       > sectioning > section @ level 3 : 3.10.5 -> Язык текста
+pages           > flushing realpage 137, userpage 137
+structure       > sectioning > subsection @ level 4 : 3.10.5.1 -> Установка и изменение языка
+floatblocks     > 5 saved
+pages           > flushing realpage 138, userpage 138
+floatblocks     > 5 moved
+floatblocks     > '16' moved
+structure       > sectioning > subsection @ level 4 : 3.10.5.2 -> Настройка языка
+pages           > flushing realpage 139, userpage 139
+setup           > error in line 1057, namespace 'structure', key 'связанные с определенными языками'
+structure       > sectioning > subsection @ level 4 : 3.10.5.3 -> Ярлыки
+
+Underfull \hbox (badness 2547) in paragraph at lines 1069--1069
+ [][][]
+
+\hbox(25.91641+3.25543)x75.58197, glue set 2.94557, direction TLT
+.\glue(\leftskip) 0.0 plus 16.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(8.37114+3.25543)x0.0, direction TLT
+.etc.
+
+pages           > flushing realpage 140, userpage 140
+structure       > sectioning > subsection @ level 4 : 3.10.5.4 -> Некоторые языковые команды
+setup           > error in line 1097, namespace 'structure', key 'связанные с датой'
+structure       > sectioning > subsubsection @ level 5 : 3.10.5.4.1 -> Команды
+structure       > sectioning > subsubsection @ level 5 : 3.10.5.4.2 -> Команда \tex {translate}
+pages           > flushing realpage 141, userpage 141
+structure       > sectioning > subsubsection @ level 5 : 3.10.5.4.3 -> Команды \tex {quote} и \tex {quotation}
+
+Underfull \hbox (badness 4467) in paragraph at lines 1189--1190
+ \3>dejavu-8pt-rm-tf-0--0 которая делает это, используя тот факт, что \3>dejavu-8pt-mm-mb--1 \\3>dejavu-8pt-tt-tf-0--0 quote \3>dejavu-8pt-rm-tf-0--0 и \3>dejavu-8pt-mm-mb--1 \\3>dejavu-8pt-tt-tf-0--0 quote \3>dejavu-8pt-rm-tf-0--0 являются фактическими
+
+\hbox(6.07813+1.77734)x426.79135, glue set 3.55095, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 к
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 т
+.\3>dejavu-8pt-rm-tf-0--0 о
+.etc.
+
+pages           > flushing realpage 142, userpage 142
+close source    > level 3, order 18, name '01_BodyMatter/b10_CharText.mkiv'
+open source     > level 3, order 19, name '01_BodyMatter/b11_ParasLines.mkiv'
+pages           > flushing realpage 143, userpage 143
+structure       > sectioning > chapter @ level 2 : 3.11 -> Параграфы, строки и\\ вертикальные пространства
+fonts           > bodyfont '30pt' is defined (can better be done global)
+fonts           > bodyfont '36pt' is defined (can better be done global)
+fonts           > bodyfont '24pt' is defined (can better be done global)
+fonts           > typescripts > unknown library 'sl'
+references      > unknown reference '[b11_ParasLines.mkiv][sec:fontscol]'
+structure       > sectioning > section @ level 3 : 3.11.1 -> Параграфы и их характеристики
+
+Underfull \hbox (badness 5260) in paragraph at lines 37--38
+ \3>dejavu-8pt-rm-tf-0--0 абзацами, а иногда и комбинацией обеих процедур, хотя в некоторых местах это не
+
+\hbox(6.21094+1.77734)x426.79135, glue set 3.75053, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 а
+.\3>dejavu-8pt-rm-tf-0--0 б
+.\3>dejavu-8pt-rm-tf-0--0 з
+.\3>dejavu-8pt-rm-tf-0--0 а
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.11.1.1 -> Автоматический отступ в первых строках абзацев
+pages           > flushing realpage 144, userpage 144
+
+Underfull \hbox (badness 10000) in paragraph at lines 59--60
+ [][][][] \3>dejavu-8pt-tt-bf-0--0 yes\3>dejavu-8pt-rm-tf-0--0 : включить \3>dejavu-8pt-rm-it-0--0 nor-mal \3>dejavu-8pt-rm-tf-0--0 отступ абзаца. Некоторые абзацы, которым предшествует
+
+\hbox(8.37114+3.25543)x426.79135, glue set 5.91649, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 573>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 1062) in paragraph at lines 59--60
+ \3>dejavu-8pt-rm-tf-0--0 дополнительный вертикальный интервал, например, первый абзац разделов или абзацы,
+
+\hbox(6.21094+1.66406)x426.79135, glue set 2.20068, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-rm-tf-0--0 д
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 п
+.\3>dejavu-8pt-rm-tf-0--0 о
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.11.1.2 -> Отступ специального абзаца
+pages           > flushing realpage 145, userpage 145
+structure       > sectioning > section @ level 3 : 3.11.2 -> Вертикальное пространство между параграфами
+structure       > sectioning > subsection @ level 4 : 3.11.2.1 -> \tex {setupwhitespace}
+
+Underfull \hbox (badness 3579) in paragraph at lines 151--152
+ [][][][] \3>dejavu-8pt-tt-bf-0--0 small, me-dium, big\3>dejavu-8pt-rm-tf-0--0 : в этих вставках соответственно маленькое, среднее или большое
+
+\hbox(8.37114+3.25543)x426.79135, glue set 3.29858, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 570>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 151--152
+ \3>dejavu-8pt-rm-tf-0--0 вертикальное пространство. Фактический размер пространства, вставляемого этими
+
+\hbox(5.96875+1.66406)x426.79135, glue set 5.10988, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-rm-tf-0--0 в
+.\3>dejavu-8pt-rm-tf-0--0 е
+.\3>dejavu-8pt-rm-tf-0--0 р
+.\3>dejavu-8pt-rm-tf-0--0 т
+.etc.
+
+references      > unknown reference '[b11_ParasLines.mkiv][sec:sizes]'
+
+Underfull \hbox (badness 3019) in paragraph at lines 165--166
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 Символьные значения small, me-dium, big и т. Д. Рассчитываются на основе размера
+
+\hbox(8.37114+3.25543)x426.79135, glue set 3.11703, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 581>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 169--170
+ [][]\3>dejavu-8pt-rm-tf-0--0 Если для вертикального интервала между абзацами установлено значение, доступны
+
+\hbox(6.21094+1.77734)x426.79135, glue set 4.7341, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 492>
+.\3>dejavu-8pt-rm-tf-0--0 Е
+.etc.
+
+
+Underfull \hbox (badness 5696) in paragraph at lines 169--170
+ \3>dejavu-8pt-rm-tf-0--0 две дополнительные команды: [] \3>dejavu-8pt-tt-tf-0--0 \now-hi-tes-pa-ce\3>dejavu-8pt-rm-tf-0--0 , которая удаляет лишние пробелы между
+
+\hbox(6.21094+1.77734)x426.79135, glue set 3.85123, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 д
+.\3>dejavu-8pt-rm-tf-0--0 в
+.\3>dejavu-8pt-rm-tf-0--0 е
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.etc.
+
+
+Underfull \hbox (badness 6047) in paragraph at lines 173--173
+ [][][]
+
+\hbox(25.91641+2.5725)x75.58197, glue set 3.92743, direction TLT
+.\glue(\leftskip) 0.0 plus 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(6.615+2.5725)x0.0, direction TLT
+.etc.
+
+pages           > flushing realpage 146, userpage 146
+structure       > sectioning > subsection @ level 4 : 3.11.2.2 -> Paragraphs with no extra vertical space between them
+
+Underfull \hbox (badness 10000) in paragraph at lines 182--183
+ \3>dejavu-8pt-rm-tf-0--0 дополнительным вертикальным пространством, мы, конечно, можем изменить общую
+
+\hbox(6.21094+1.77734)x426.79135, glue set 5.169, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 д
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 п
+.\3>dejavu-8pt-rm-tf-0--0 о
+.etc.
+
+
+Underfull \hbox (badness 3579) in paragraph at lines 186--187
+ \3>dejavu-8pt-rm-tf-0--0 между абзацами в среде. Если этот параметр не указан, дополнительное вертикальное
+
+\hbox(6.21094+1.77734)x426.79135, glue set 3.29756, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 м
+.\3>dejavu-8pt-rm-tf-0--0 е
+.\3>dejavu-8pt-rm-tf-0--0 ж
+.\3>dejavu-8pt-rm-tf-0--0 д
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.11.2.3 -> Добавление дополнительного вертикального пространства в определенном месте документа
+structure       > sectioning > subsection @ level 4 : 3.11.2.4 -> \tex {setupblank} and \tex {defineblank}
+pages           > flushing realpage 147, userpage 147
+
+Underfull \hbox (badness 5064) in paragraph at lines 217--218
+ [][]\3>dejavu-8pt-rm-tf-0--0 Как и в случае с \3>dejavu-8pt-tt-tf-0--0 \se-tupw-hi-tes-pa-ce\3>dejavu-8pt-rm-tf-0--0 , пробел, вставленный \3>dejavu-8pt-tt-tf-0--0 \blank\3>dejavu-8pt-rm-tf-0--0 , когда его значение
+
+\hbox(6.21094+1.77734)x426.79135, glue set 3.703, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 583>
+.\3>dejavu-8pt-rm-tf-0--0 К
+.etc.
+
+
+Underfull \hbox (badness 2221) in paragraph at lines 217--218
+ \3>dejavu-8pt-rm-tf-0--0 допускающим некоторую корректировку. Мы можем изменить это с помощью [][]“ \3>dejavu-8pt-tt-tf-0--0 fi-xed[]\3>dejavu-8pt-rm-tf-0--0 ”, с
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.81303, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 д
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 п
+.\3>dejavu-8pt-rm-tf-0--0 у
+.etc.
+
+
+Underfull \hbox (badness 1888) in paragraph at lines 217--218
+ \3>dejavu-8pt-rm-tf-0--0 возможностью позже восстановить значение по умолчанию с помощью ([][]“ \3>dejavu-8pt-tt-tf-0--0 fle-xi-ble[]\3>dejavu-8pt-rm-tf-0--0 ”). Так,
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.6634, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 в
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 з
+.\3>dejavu-8pt-rm-tf-0--0 м
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.11.2.5 -> Другие процедуры для достижения большего вертикального пространства
+
+Underfull \hbox (badness 1067) in paragraph at lines 238--239
+ [][]\3>dejavu-6pt-ss-tf-0--0 Как мы знаем, \3>dejavu-8pt-tt-tf-4--4 \blank \3>dejavu-6pt-ss-tf-0--0 также допускает точное измерение в качестве аргумента. Следовательно, с точки зрения 
+
+\hbox(4.59082+1.24805)x426.79135, glue set 2.20389, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 581>
+.\3>dejavu-6pt-ss-tf-0--0 К
+.etc.
+
+
+Underfull \hbox (badness 1325) in paragraph at lines 238--239
+ \3>dejavu-6pt-ss-tf-0--0 тонкие различия. Так, например, две последовательные команды \3>dejavu-8pt-tt-tf-4--4 \blank \3>dejavu-6pt-ss-tf-0--0 не могут быть накоплены, и когда это 
+
+\hbox(4.66113+1.24805)x426.79135, glue set 2.37001, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-6pt-ss-tf-0--0 т
+.\3>dejavu-6pt-ss-tf-0--0 о
+.\3>dejavu-6pt-ss-tf-0--0 н
+.\3>dejavu-6pt-ss-tf-0--0 к
+.etc.
+
+pages           > flushing realpage 148, userpage 148
+structure       > sectioning > section @ level 3 : 3.11.3 -> Как \ConTeXt \ строит строки,\\ образующие абзацы
+
+Underfull \hbox (badness 1314) in paragraph at lines 280--281
+ \3>dejavu-8pt-rm-tf-0--0 искусства книгопечатания. Наконец, изучив все возможности, Con-T[]Xt выбирает наименее
+
+\hbox(6.21094+2.07617)x426.79135, glue set 2.36148, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 и
+.\3>dejavu-8pt-rm-tf-0--0 с
+.\3>dejavu-8pt-rm-tf-0--0 к
+.\3>dejavu-8pt-rm-tf-0--0 у
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.11.3.1 -> Использование зарезервированного символа \quote {{\tt \lettertilde }}
+
+Underfull \hbox (badness 2875) in paragraph at lines 304--305
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 IВ группах чисел, разделенных пробелом. Например, \3>dejavu-8pt-tt-tf-0--0 5~357~891\3>dejavu-8pt-rm-tf-0--0 . Хотя в этих случаях
+
+\hbox(8.37114+3.25543)x426.79135, glue set 3.06499, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 563>
+.\glue 0.0
+.etc.
+
+pages           > flushing realpage 149, userpage 149
+structure       > sectioning > subsection @ level 4 : 3.11.3.2 -> Перенос слов
+
+Underfull \hbox (badness 3281) in paragraph at lines 347--348
+ \3>dejavu-8pt-rm-tf-0--0 (например, Con-T[]Xt никогда не разбивает слово на две части, если в этих частях нет
+
+\hbox(6.21094+2.07617)x426.79135, glue set 3.20436, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 (
+.\3>dejavu-8pt-rm-tf-0--0 н
+.\3>dejavu-8pt-rm-tf-0--0 а
+.\3>dejavu-8pt-rm-tf-0--0 п
+.etc.
+
+pages           > flushing realpage 150, userpage 150
+
+Underfull \hbox (badness 1400) in paragraph at lines 355--356
+ \3>dejavu-8pt-rm-tf-0--0 никогда не будет расставлено через дефис. Того же эффекта можно добиться, используя
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.41295, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 н
+.\3>dejavu-8pt-rm-tf-0--0 и
+.\3>dejavu-8pt-rm-tf-0--0 к
+.\3>dejavu-8pt-rm-tf-0--0 о
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.11.3.3 -> Уровень допуска для разрывов строк
+
+Underfull \hbox (badness 1675) in paragraph at lines 377--378
+ \3>dejavu-8pt-rm-tf-0--0 в том, что автор (или наборщик) просматривает эти исключительные случаи после того,
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.56126, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 в
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.\3>dejavu-8pt-rm-tf-0--0 т
+.\3>dejavu-8pt-rm-tf-0--0 о
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.11.3.4 -> Принудительный разрыв строки в определенной точке
+pages           > flushing realpage 151, userpage 151
+
+Overfull \hbox (21.2927pt too wide) in paragraph at lines 5--79
+[]\3>dejavu-8pt-tt-tf-4--4 On the corner of the old quarter I saw him \emph{swagger} along
+
+\hbox(6.27835+2.44157)x206.2825, direction TLT
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\hbox(6.27835+2.44157)x0.0, direction TLT
+.\3>dejavu-8pt-tt-tf-4--4 O
+.\3>dejavu-8pt-tt-tf-4--4 n
+.etc.
+
+
+Overfull \hbox (10.45578pt too wide) in paragraph at lines 5--79
+\3>dejavu-8pt-tt-tf-4--4 like the\break tough guys do when they walk, hands always in
+
+\hbox(4.59082+1.28906)x206.2825, direction TLT
+.\begindir TLT
+.\3>dejavu-8pt-tt-tf-4--4 l
+.\3>dejavu-8pt-tt-tf-4--4 i
+.\3>dejavu-8pt-tt-tf-4--4 k
+.\3>dejavu-8pt-tt-tf-4--4 e
+.etc.
+
+
+Overfull \hbox (24.905pt too wide) in paragraph at lines 5--79
+\3>dejavu-8pt-tt-tf-4--4 their overcoat pockets, so no one can know which of them carries
+
+\hbox(4.5586+1.24805)x206.2825, direction TLT
+.\begindir TLT
+.\3>dejavu-8pt-tt-tf-4--4 t
+.\3>dejavu-8pt-tt-tf-4--4 h
+.\3>dejavu-8pt-tt-tf-4--4 e
+.\3>dejavu-8pt-tt-tf-4--4 i
+.etc.
+
+
+Underfull \hbox (badness 3428) in paragraph at lines 435--436
+ [][]\3>dejavu-8pt-rm-tf-0--0 Разрыв строки не следует путать с разрывом абзаца. Разрыв строки просто завершает
+
+\hbox(6.21094+1.77734)x426.79135, glue set 3.25223, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 630>
+.\3>dejavu-8pt-rm-tf-0--0 Р
+.etc.
+
+pages           > flushing realpage 152, userpage 152
+structure       > sectioning > section @ level 3 : 3.11.4 -> Межстрочный интервал
+
+Underfull \hbox (badness 4686) in paragraph at lines 460--461
+ [][][][] \3>dejavu-8pt-tt-tf-0--0 \se-tu-pin-ter-li-nes-pa-ce [..In-ter-li-ne spa-ce..]\3>dejavu-8pt-rm-tf-0--0 , где \3>dejavu-8pt-rm-it-0--0 In-ter-li-ne spa-ce \3>dejavu-8pt-rm-tf-0--0 это точное значение
+
+\hbox(8.37114+3.25543)x426.79135, glue set 3.60805, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 618>
+.\glue 0.0
+.etc.
+
+
+Overfull \hbox (3.15417pt too wide) in paragraph at lines 470--471
+ [][][][] \3>dejavu-8pt-tt-tf-0--0 \se-tu-pin-ter-li-nes-pa-ce [..,..=..,..]\3>dejavu-8pt-rm-tf-0--0 . В этом режиме межстрочный интервал устанавливается
+
+\hbox(8.37114+3.25543)x426.79135, glue set - 1.0, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 573>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 1521) in paragraph at lines 470--471
+ \3>dejavu-8pt-rm-tf-0--0 путем явного изменения базовых показателей, с помощью которых Con-TEXt вычисляет
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.47946, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-rm-tf-0--0 п
+.\3>dejavu-8pt-rm-tf-0--0 у
+.\3>dejavu-8pt-rm-tf-0--0 т
+.\3>dejavu-8pt-rm-tf-0--0 е
+.etc.
+
+
+Underfull \hbox (badness 1540) in paragraph at lines 470--471
+ \3>dejavu-8pt-rm-tf-0--0 межстрочное пространство. Посредством этого подхода \3>dejavu-8pt-tt-tf-0--0 \se-tu-pin-ter-li-nes-pa-ce \3>dejavu-8pt-rm-tf-0--0 эти меры
+
+\hbox(6.1211+1.66406)x426.79135, glue set 2.4883, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-rm-tf-0--0 м
+.\3>dejavu-8pt-rm-tf-0--0 е
+.\3>dejavu-8pt-rm-tf-0--0 ж
+.\3>dejavu-8pt-rm-tf-0--0 с
+.etc.
+
+
+Underfull \hbox (badness 3884) in paragraph at lines 480--481
+ \3>dejavu-8pt-rm-tf-0--0 с помощью \3>dejavu-8pt-tt-tf-0--0 \se-tu-pin-ter-li-nes-pa-ce[Na-me]\3>dejavu-8pt-rm-tf-0--0 . Чтобы вернуться к нормальному межстрочному
+
+\hbox(6.21094+1.77734)x426.79135, glue set 3.39021, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 с
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.\3>dejavu-8pt-rm-tf-0--0 п
+.\3>dejavu-8pt-rm-tf-0--0 о
+.etc.
+
+structure       > sectioning > section @ level 3 : 3.11.5 -> Прочие вопросы, касающиеся строк
+structure       > sectioning > subsection @ level 4 : 3.11.5.1 -> Преобразование разрывов строк в исходном файле в разрывы строк в окончательном документе
+pages           > flushing realpage 153, userpage 153
+
+Underfull \hbox (badness 1072) in paragraph at lines 509--510
+ [][][][] \3>dejavu-8pt-tt-bf-0--0 in-den-ting\3>dejavu-8pt-rm-tf-0--0 : Значение, указывающее, следует ли делать отступ абзацев в среде (см. sec-
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.20598, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 602>
+.\glue 0.0
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.11.5.2 -> Нумерация строк
+
+Underfull \hbox (badness 1077) in paragraph at lines 555--556
+ \3>dejavu-8pt-rm-tf-0--0 в текстах по компьютерному программированию, где относительно часто фрагменты кода,
+
+\hbox(6.07813+1.77734)x426.79135, glue set 2.2091, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 в
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.\3>dejavu-8pt-rm-tf-0--0 т
+.\3>dejavu-8pt-rm-tf-0--0 е
+.etc.
+
+pages           > flushing realpage 154, userpage 154
+
+Underfull \hbox (badness 2809) in paragraph at lines 575--576
+ [][][][] \3>dejavu-8pt-tt-bf-0--0 con-ver-sion\3>dejavu-8pt-rm-tf-0--0 : Тип нумерации строк. Это может быть любой из описанных на pa-ge 88
+
+\hbox(8.37114+3.25543)x426.79135, glue set 3.04366, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 519>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 2173) in paragraph at lines 596--597
+ [][]\3>dejavu-8pt-rm-tf-0--0 Мы также можем создавать различные настраиваемые конфигурации нумерации строк с
+
+\hbox(6.07813+1.77734)x426.79135, glue set 2.79454, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 478>
+.\3>dejavu-8pt-rm-tf-0--0 М
+.etc.
+
+structure       > sectioning > section @ level 3 : 3.11.6 -> Горизонтальное и вертикальное выравнивание
+pages           > flushing realpage 155, userpage 155
+structure       > sectioning > subsection @ level 4 : 3.11.6.1 -> Горизонтальное выравнивание
+
+Underfull \hbox (badness 1721) in paragraph at lines 628--629
+ \3>dejavu-8pt-rm-tf-0--0 к выравниванию по левому краю, а \3>dejavu-8pt-tt-tf-0--0 flush-left \3>dejavu-8pt-rm-tf-0--0 - к выравниванию по правому краю. В
+
+\hbox(6.1211+1.77734)x426.79135, glue set 2.58551, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-rm-tf-0--0 к
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.\3>dejavu-8pt-rm-tf-0--0 в
+.\3>dejavu-8pt-rm-tf-0--0 ы
+.etc.
+
+
+Underfull \hbox (badness 1102) in paragraph at lines 628--629
+ \3>dejavu-8pt-tt-tf-0--0 right \3>dejavu-8pt-rm-tf-0--0 и \3>dejavu-8pt-tt-tf-0--0 left\3>dejavu-8pt-rm-tf-0--0 . Но \3>dejavu-8pt-rm-bf-0--0 внимание\3>dejavu-8pt-rm-tf-0--0 : здесь значение слов обманчиво. Хотя \3>dejavu-8pt-rm-it-0--0 left \3>dejavu-8pt-rm-tf-0--0 означает [][]“ left[]”,
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.2277, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-tt-tf-0--0 r
+.\3>dejavu-8pt-tt-tf-0--0 i
+.\3>dejavu-8pt-tt-tf-0--0 g
+.\3>dejavu-8pt-tt-tf-0--0 h
+.etc.
+
+pages           > flushing realpage 156, userpage 156
+
+Underfull \hbox (badness 2980) in paragraph at lines 647--648
+ [][]\3>dejavu-6pt-ss-tf-0--0 Для этого \3>dejavu-8pt-tt-tf-4--4 \se-tu-pa-lign \3>dejavu-6pt-ss-tf-0--0 позволяет использовать большее значение расстановки переносов \3>dejavu-8pt-tt-tf-4--4 mo-rehyp-he-na-tion\3>dejavu-6pt-ss-tf-0--0 , что 
+
+\hbox(4.66113+1.28906)x426.79135, glue set 3.10388, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 610>
+.\3>dejavu-6pt-ss-tf-0--0 Д
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.11.6.2 -> Вертикальное выравнивание
+structure       > sectioning > subsubsubject @ level 5 : 3.11.6.2.0 -> Вертикальный уровень допуска
+
+Underfull \hbox (badness 1635) in paragraph at lines 683--684
+ \3>dejavu-8pt-rm-tf-0--0 горизонтального пространства, допустимого в строке (горизонтальный допуск) с помощью
+
+\hbox(6.07813+1.77734)x426.79135, glue set 2.54132, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 г
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 р
+.\3>dejavu-8pt-rm-tf-0--0 и
+.etc.
+
+
+Underfull \hbox (badness 1107) in paragraph at lines 683--684
+ []\3>dejavu-8pt-rm-tf-0--0  \3>dejavu-8pt-tt-tf-0--0 \se-tup-to-le-ran-ce\3>dejavu-8pt-rm-tf-0--0 , мы также можем изменить его вертикальный допуск, то есть допуск на
+
+\hbox(6.1211+1.77734)x426.79135, glue set 2.2303, direction TLT
+.\glue(\leftskip) 12.0
+.\latelua0{commands.enhanceregister("macro",391)}
+.\boundary=1
+.\3>dejavu-8pt-rm-tf-0--0  
+.\boundary=2
+.etc.
+
+structure       > sectioning > subsubsubject @ level 5 : 3.11.6.2.0 -> Контроль над вдовами и сиротами (widows and orphans)
+pages           > flushing realpage 157, userpage 157
+
+Underfull \hbox (badness 1270) in paragraph at lines 696--697
+ [][]\3>dejavu-8pt-rm-tf-0--0 Выполнение этого элемента управления означает, что Con-T[]Xt не будет вставлять разрыв
+
+\hbox(6.21094+2.07617)x426.79135, glue set 2.33527, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 599>
+.\3>dejavu-8pt-rm-tf-0--0 В
+.etc.
+
+close source    > level 3, order 19, name '01_BodyMatter/b11_ParasLines.mkiv'
+open source     > level 3, order 20, name '01_BodyMatter/b12_SpecialParas.mkiv'
+pages           > flushing realpage 158, userpage 158
+structure       > sectioning > chapter @ level 2 : 3.12 -> Специальные конструкции и абзацы
+fonts           > bodyfont '30pt' is defined (can better be done global)
+fonts           > bodyfont '36pt' is defined (can better be done global)
+fonts           > bodyfont '24pt' is defined (can better be done global)
+fonts           > typescripts > unknown library 'sl'
+structure       > sectioning > section @ level 3 : 3.12.1 -> Сноски и концевые примечания
+pages           > flushing realpage 159, userpage 159
+structure       > sectioning > subsection @ level 4 : 3.12.1.1 -> TТипы заметок в \ConTeXt \ и связанные с ними команды
+
+Underfull \hbox (badness 1596) in paragraph at lines 51--52
+ [][][][] \3>dejavu-8pt-rm-bf-0--0 Foot-no-tes: \3>dejavu-8pt-rm-tf-0--0 Сноски: несомненно, самые популярные, поскольку для всех типов заметок
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.5204, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 518>
+.\glue 0.0
+.etc.
+
+
+Overfull \hbox (0.87271pt too wide) in paragraph at lines 51--52
+ \3>dejavu-8pt-rm-tf-0--0 принято называть сноски \3>dejavu-8pt-rm-it-0--0 foot-no-tes\3>dejavu-8pt-rm-tf-0--0 . Сноски представляют собой метку \3>dejavu-8pt-rm-it-0--0 mark \3>dejavu-8pt-rm-tf-0--0 с идентификатором
+
+\hbox(6.21094+1.77734)x426.79135, glue set - 1.0, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-rm-tf-0--0 п
+.\3>dejavu-8pt-rm-tf-0--0 р
+.\3>dejavu-8pt-rm-tf-0--0 и
+.\3>dejavu-8pt-rm-tf-0--0 н
+.etc.
+
+
+Underfull \hbox (badness 1960) in paragraph at lines 53--54
+ \3>dejavu-8pt-rm-tf-0--0 в то место в документе, где обнаружена отметка с идентификатором примечания; но
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.69978, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-rm-tf-0--0 в
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.\3>dejavu-8pt-rm-tf-0--0 т
+.\3>dejavu-8pt-rm-tf-0--0 о
+.etc.
+
+references      > unknown reference '[b12_SpecialParas.mkiv][sec:lnumbering]'
+
+Underfull \hbox (badness 1728) in paragraph at lines 57--58
+ \3>dejavu-8pt-rm-tf-0--0 команды [] \3>dejavu-8pt-tt-tf-0--0 \lne-no-te\3>dejavu-8pt-rm-tf-0--0 , которая настраивается с помощью [] \3>dejavu-8pt-tt-tf-0--0 \se-tu-pli-ne-no-te\3>dejavu-8pt-rm-tf-0--0 . Эта команда не
+
+\hbox(6.1211+1.66406)x426.79135, glue set 2.58597, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-rm-tf-0--0 к
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 м
+.\3>dejavu-8pt-rm-tf-0--0 а
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.12.1.2 -> Внимательный взгляд на сноски и концевые сноски
+references      > unknown reference '[b12_SpecialParas.mkiv][sec:Definenote]'
+pages           > flushing realpage 160, userpage 160
+backend         > references > no internal reference 0
+references      > unknown reference '[b12_SpecialParas.mkiv][humpty]'
+
+Underfull \hbox (badness 1394) in paragraph at lines 139--140
+ \3>dejavu-6pt-ss-tf-0--0 аргумента, печатает только текст примечания, но не метку. Но поскольку \3>dejavu-8pt-tt-tf-4--4 \no-te \3>dejavu-6pt-ss-tf-0--0 печатает только метку без 
+
+\hbox(4.66113+1.24805)x426.79135, glue set 2.40929, direction TLT
+.\glue(\leftskip) 36.0
+.\3>dejavu-6pt-ss-tf-0--0 а
+.\3>dejavu-6pt-ss-tf-0--0 р
+.\3>dejavu-6pt-ss-tf-0--0 г
+.\3>dejavu-6pt-ss-tf-0--0 у
+.etc.
+
+references      > redundant reference '*0' in namespace 'b12_SpecialParas.mkiv'
+backend         > references > no internal reference 0
+references      > unknown reference '[b12_SpecialParas.mkiv][noteB]'
+references      > unknown reference '[b12_SpecialParas.mkiv][noteC]'
+
+Underfull \hbox (badness 1215) in paragraph at lines 170--171
+ \3>dejavu-8pt-rm-tf-0--0 команды ([] \3>dejavu-8pt-tt-tf-0--0 \pla-ce-no-tes[end-no-te]\3>dejavu-8pt-rm-tf-0--0 ), которая в том месте, где она расположена, вставляет
+
+\hbox(6.1211+1.66406)x426.79135, glue set 2.30298, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-rm-tf-0--0 к
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 м
+.\3>dejavu-8pt-rm-tf-0--0 а
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.12.1.3 -> Местные заметки
+
+Underfull \hbox (badness 7291) in paragraph at lines 183--184
+ [][][]\3>dejavu-8pt-rm-tf-0--0 Среда \3>dejavu-8pt-tt-tf-0--0 \startlo-cal-foot-no-tes \3>dejavu-8pt-rm-tf-0--0 означает, что включенные в нее сноски считаются \3>dejavu-8pt-rm-it-0--0 lo-cal
+
+\hbox(6.1211+1.66406)x426.79135, glue set 4.18112, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 563>
+.\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\hbox(0.0+0.0)x0.0, direction TLT []
+...\hbox(0.0+0.0)x0.0, direction TLT []
+.etc.
+
+
+Underfull \hbox (badness 1077) in paragraph at lines 183--184
+ \3>dejavu-8pt-rm-tf-0--0 документа, где найдена команда \3>dejavu-8pt-tt-tf-0--0 \pla-ce-lo-cal-foot-no-tes\3>dejavu-8pt-rm-tf-0--0 , которая может находиться или не
+
+\hbox(6.1211+1.77734)x426.79135, glue set 2.21184, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 д
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 к
+.\3>dejavu-8pt-rm-tf-0--0 у
+.etc.
+
+pages           > flushing realpage 161, userpage 161
+structure       > sectioning > subsection @ level 4 : 3.12.1.4 -> Creating and using customised types of notes
+
+Underfull \hbox (badness 1688) in paragraph at lines 206--207
+ \3>dejavu-8pt-rm-tf-0--0 а во втором случае как концевые сноски, хотя для вставки их в документ мы бы не
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.56807, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-rm-tf-0--0 а
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.\3>dejavu-8pt-rm-tf-0--0 в
+.\3>dejavu-8pt-rm-tf-0--0 о
+.etc.
+
+references      > unknown reference '[b12_SpecialParas.mkiv][sec:qrc-setup-en]'
+structure       > sectioning > subsection @ level 4 : 3.12.1.5 -> Настройка примечаний
+pages           > flushing realpage 162, userpage 162
+
+Underfull \hbox (badness 2035) in paragraph at lines 266--267
+ [][]\3>dejavu-8pt-rm-tf-0--0 Теперь я попытаюсь упорядочить то, что я узнал после проведения некоторых тестов с
+
+\hbox(5.83203+1.77734)x426.79135, glue set 2.73108, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 504>
+.\3>dejavu-8pt-rm-tf-0--0 Т
+.etc.
+
+
+Overfull \hbox (12.7909pt too wide) in paragraph at lines 284--285
+ [][][][] \3>dejavu-8pt-rm-it-0--0 Нумерация буквами\3>dejavu-8pt-rm-tf-0--0 : \3>dejavu-8pt-tt-tf-0--0 A, Cha-rac-ter, Cha-rac-ters, a, cha-rac-ter, cha-rac-ters\3>dejavu-8pt-rm-tf-0--0 в зависимости
+
+\hbox(8.37114+3.25543)x426.79135, glue set - 1.0, direction TLT
+.\glue(\leftskip) 48.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 581>
+.\glue 0.0
+.etc.
+
+pages           > flushing realpage 163, userpage 163
+
+Underfull \hbox (badness 1389) in paragraph at lines 286--287
+ [][][][] \3>dejavu-8pt-rm-it-0--0 Нумерация словами\3>dejavu-8pt-rm-tf-0--0 . Другими словами, мы пишем слово, обозначающее число, и,
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.40674, direction TLT
+.\glue(\leftskip) 48.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 570>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 1502) in paragraph at lines 291--292
+ [][][][] \3>dejavu-8pt-rm-it-0--0 Событие, определяющее перезапуск нумерации заметок\3>dejavu-8pt-rm-tf-0--0 : Это зависит от параметра
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.46986, direction TLT
+.\glue(\leftskip) 36.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 530>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 301--302
+ \3>dejavu-8pt-tt-tf-0--0 right, in-right, right-mar-gin, in-mar-gin, mar-gin, in-ner-mar-gin, ou-ter-mar-gin, se-rried,
+
+\hbox(6.07813+1.71875)x426.79135, direction TLT
+.\glue(\leftskip) 36.0
+.\3>dejavu-8pt-tt-tf-0--0 r
+.\3>dejavu-8pt-tt-tf-0--0 i
+.\3>dejavu-8pt-tt-tf-0--0 g
+.\3>dejavu-8pt-tt-tf-0--0 h
+.etc.
+
+
+Underfull \hbox (badness 3701) in paragraph at lines 315--316
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 Наличие или отсутствие гиперссылки, позволяющей переходить между отметкой в
+
+\hbox(8.37114+3.25543)x426.79135, glue set 3.33392, direction TLT
+.\glue(\leftskip) 36.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 572>
+.\glue 0.0
+.etc.
+
+pages           > flushing realpage 164, userpage 164
+
+Underfull \hbox (badness 1112) in paragraph at lines 354--355
+ [][][][] \3>dejavu-8pt-rm-bf-0--0 Пространство между заметками или между заметками и текстом: \3>dejavu-8pt-rm-tf-0--0 тут возможны
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.23503, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 518>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 3058) in paragraph at lines 360--361
+ [][][][] \3>dejavu-8pt-tt-tf-0--0 be-fo-re \3>dejavu-8pt-rm-tf-0--0 в \3>dejavu-8pt-tt-tf-0--0 \se-tup-no-ta-tion\3>dejavu-8pt-rm-tf-0--0 : команда или комнады, которые должны быть выполнены
+
+\hbox(8.37114+3.25543)x426.79135, glue set 3.1304, direction TLT
+.\glue(\leftskip) 36.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 647>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 1033) in paragraph at lines 360--361
+ \3>dejavu-8pt-rm-tf-0--0 перед вставкой текста примечания. Служит для вставки дополнительных интервалов,
+
+\hbox(5.96875+1.77734)x426.79135, glue set 2.17957, direction TLT
+.\glue(\leftskip) 36.0
+.\3>dejavu-8pt-rm-tf-0--0 п
+.\3>dejavu-8pt-rm-tf-0--0 е
+.\3>dejavu-8pt-rm-tf-0--0 р
+.\3>dejavu-8pt-rm-tf-0--0 е
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.12.1.6 -> Временное исключение заметок при компиляции
+structure       > sectioning > section @ level 3 : 3.12.2 -> Абзацы с несколькими столбцами
+
+Underfull \hbox (badness 3179) in paragraph at lines 391--392
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 Как особенность определенных конструкций, таких как, например, структурированные
+
+\hbox(8.37114+3.25543)x426.79135, glue set 3.16942, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 580>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 399--400
+ [][]\3>dejavu-8pt-rm-tf-0--0 Что касается количества разрешенных столбцов, то Con-T[]Xt не имеет теоретических
+
+\hbox(6.21094+2.07617)x426.79135, glue set 4.45888, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 508>
+.\3>dejavu-8pt-rm-tf-0--0 Ч
+.etc.
+
+
+Underfull \hbox (badness 1603) in paragraph at lines 403--404
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 Ширина бумаги: неограниченное количество столбцов требует неограниченной ширины
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.52295, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 582>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 403--404
+ \3>dejavu-8pt-rm-tf-0--0 бумаги (если документ должен быть распечатан) или экрана (если это документ,
+
+\hbox(6.21094+1.77734)x426.79135, glue set 4.37683, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-rm-tf-0--0 б
+.\3>dejavu-8pt-rm-tf-0--0 у
+.\3>dejavu-8pt-rm-tf-0--0 м
+.\3>dejavu-8pt-rm-tf-0--0 а
+.etc.
+
+
+Underfull \hbox (badness 1062) in paragraph at lines 405--406
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 Размер памяти компьютера: в справочном руководстве Con-T[]Xt указано, что в \3>dejavu-8pt-rm-it-0--0 обычных
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.2013, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 519>
+.\glue 0.0
+.etc.
+
+pages           > flushing realpage 165, userpage 165
+
+Underfull \hbox (badness 1226) in paragraph at lines 415--416
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 Возможность, предлагаемая некоторыми конструкциями, такими как структурированные
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.3075, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 508>
+.\glue 0.0
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.12.2.1 -> Среда \tex {startcolumns}
+pages           > flushing realpage 166, userpage 166
+
+Underfull \hbox (badness 1226) in paragraph at lines 477--478
+ [][][][] \3>dejavu-8pt-tt-tf-0--0 align\3>dejavu-8pt-rm-tf-0--0 : контролирует горизонтальное выравнивание линий в среде. Может принимать
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.30666, direction TLT
+.\glue(\leftskip) 36.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 644>
+.\glue 0.0
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.12.2.2 -> Параллельные абзацы
+
+Underfull \hbox (badness 2951) in paragraph at lines 491--492
+ [][][]\3>dejavu-8pt-rm-tf-0--0 Конкретный вариант многоколоночной композиции - параллельные абзацы. В этом типе
+
+\hbox(6.21094+1.66406)x426.79135, glue set 3.09424, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 482>
+.\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\hbox(0.0+0.0)x0.0, direction TLT []
+...\hbox(0.0+0.0)x0.0, direction TLT []
+.etc.
+
+pages           > flushing realpage 167, userpage 167
+
+Underfull \hbox (badness 1571) in paragraph at lines 566--567
+ \3>dejavu-8pt-rm-tf-0--0 бы новый экземпляр среды (\3>dejavu-8pt-tt-tf-0--0 \start-Mur-cia-Facts\3>dejavu-8pt-rm-tf-0--0 ), потому что с помощью этого механизма
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.5077, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 б
+.\3>dejavu-8pt-rm-tf-0--0 ы
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.\3>dejavu-8pt-rm-tf-0--0 н
+.etc.
+
+
+Underfull \hbox (badness 2707) in paragraph at lines 578--579
+ [][]\3>dejavu-8pt-rm-tf-0--0 Что касается параметров конфигурации для параллельных абзацев (\3>dejavu-8pt-tt-tf-0--0 \se-tup-pa-ra-graphs\3>dejavu-8pt-rm-tf-0--0 ), я
+
+\hbox(6.21094+1.77734)x426.79135, glue set 3.00522, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 509>
+.\3>dejavu-8pt-rm-tf-0--0 Ч
+.etc.
+
+pages           > flushing realpage 168, userpage 168
+structure       > sectioning > section @ level 3 : 3.12.3 -> Структурированные списки
+
+Underfull \hbox (badness 10000) in paragraph at lines 624--625
+ [][]\3>dejavu-8pt-rm-tf-0--0 Когда информация представлена упорядоченно, читателю легче ее понять. Но если
+
+\hbox(6.07813+1.77734)x426.79135, glue set 4.78975, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 622>
+.\3>dejavu-8pt-rm-tf-0--0 К
+.etc.
+
+
+Underfull \hbox (badness 1067) in paragraph at lines 624--625
+ \3>dejavu-8pt-rm-tf-0--0 расположение также заметно визуально, то это подчеркивает для читателя тот факт, что
+
+\hbox(6.07813+1.77734)x426.79135, glue set 2.20517, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 р
+.\3>dejavu-8pt-rm-tf-0--0 а
+.\3>dejavu-8pt-rm-tf-0--0 с
+.\3>dejavu-8pt-rm-tf-0--0 п
+.etc.
+
+
+Underfull \hbox (badness 2285) in paragraph at lines 626--627
+ [][]\3>dejavu-8pt-rm-tf-0--0 Списки состоят из последовательности \3>dejavu-8pt-rm-it-0--0 текстовых элементов \3>dejavu-8pt-rm-tf-0--0 (которые я буду называть
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.8413, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 597>
+.\3>dejavu-8pt-rm-tf-0--0 С
+.etc.
+
+
+Underfull \hbox (badness 1024) in paragraph at lines 626--627
+ \3>dejavu-8pt-rm-it-0--0 элементами\3>dejavu-8pt-rm-tf-0--0 ), каждому из которых предшествует символ, который помогает выделить его,
+
+\hbox(6.07813+1.77734)x426.79135, glue set 2.17224, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-it-0--0 э
+.\3>dejavu-8pt-rm-it-0--0 л
+.\3>dejavu-8pt-rm-it-0--0 е
+.\3>dejavu-8pt-rm-it-0--0 м
+.etc.
+
+
+Underfull \hbox (badness 1173) in paragraph at lines 626--627
+ \3>dejavu-8pt-rm-tf-0--0 постепенно увеличивается. Язык HTML обычно вызывает списки, в которых разделителем
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.27354, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 п
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 с
+.\3>dejavu-8pt-rm-tf-0--0 т
+.etc.
+
+
+Underfull \hbox (badness 3780) in paragraph at lines 626--627
+ \3>dejavu-8pt-rm-tf-0--0 нам ссылаться на каждый элемент по его номеру или идентификатору; и дает имена
+
+\hbox(6.07813+1.77734)x426.79135, glue set 3.35806, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 н
+.\3>dejavu-8pt-rm-tf-0--0 а
+.\3>dejavu-8pt-rm-tf-0--0 м
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.etc.
+
+
+Underfull \hbox (badness 3668) in paragraph at lines 628--629
+ [][]\3>dejavu-8pt-rm-tf-0--0 Con-T[]Xt автоматически управляет нумерацией или алфавитным порядком разделителя в
+
+\hbox(6.07813+2.07617)x426.79135, glue set 3.32422, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 593>
+.\3>dejavu-8pt-rm-tf-0--0 C
+.etc.
+
+
+Underfull \hbox (badness 2671) in paragraph at lines 634--635
+ [][]\3>dejavu-6pt-ss-tf-0--0 В любом случае следует указать, что чрезмерное использование вложенности в списки может иметь эффект, 
+
+\hbox(4.66113+1.24805)x426.79135, glue set 2.99164, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 508>
+.\3>dejavu-6pt-ss-tf-0--0 В
+.etc.
+
+
+Underfull \hbox (badness 1102) in paragraph at lines 642--643
+ [][]\3>dejavu-8pt-rm-tf-0--0 где два аргумента являются необязательными. Первый позволяет использовать в качестве
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.22652, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 628>
+.\3>dejavu-8pt-rm-tf-0--0 г
+.etc.
+
+
+Underfull \hbox (badness 3229) in paragraph at lines 642--643
+ \3>dejavu-8pt-rm-tf-0--0 содержимого символические имена, которым Con-T[]Xt присвоил точное значение; второй
+
+\hbox(5.96875+2.07617)x426.79135, glue set 3.18636, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 с
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 д
+.\3>dejavu-8pt-rm-tf-0--0 е
+.etc.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 642--643
+ \3>dejavu-8pt-rm-tf-0--0 аргумент, который используется редко, позволяет присвоить определенные значения
+
+\hbox(5.96875+1.77734)x426.79135, glue set 5.22475, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 а
+.\3>dejavu-8pt-rm-tf-0--0 р
+.\3>dejavu-8pt-rm-tf-0--0 г
+.\3>dejavu-8pt-rm-tf-0--0 у
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.12.3.1 -> Выбор типа списка и разделителя между {\em элементами}
+structure       > sectioning > subsubsection @ level 5 : 3.12.3.1.1 -> Неупорядоченные списки
+
+Underfull \hbox (badness 5637) in paragraph at lines 653--654
+ \3>dejavu-8pt-rm-tf-0--0 список, в котором разделитель будет автоматически выбран в зависимости от уровня
+
+\hbox(6.21094+1.77734)x426.79135, glue set 3.83612, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 с
+.\3>dejavu-8pt-rm-tf-0--0 п
+.\3>dejavu-8pt-rm-tf-0--0 и
+.\3>dejavu-8pt-rm-tf-0--0 с
+.etc.
+
+pages           > flushing realpage 169, userpage 169
+structure       > sectioning > subsubsection @ level 5 : 3.12.3.1.2 -> Упорядоченные списки
+open source     > level 4, order 21, name '/usr/share/texmf/tex/context/fonts/mkiv/type-imp-antykwa.mkiv'
+close source    > level 4, order 21, name '/usr/share/texmf/tex/context/fonts/mkiv/type-imp-antykwa.mkiv'
+fonts           > defining > font with asked name 'AntykwaTorunska-Regular' is not found using lookup 'file'
+fonts           > defining > unknown font 'AntykwaTorunska-Regular', loading aborted
+fonts           > defining > unable to define 'AntykwaTorunska-Regular' as 'antykwa-6pt-rm-tf-0--0'
+fonts           > defining > font with asked name 'AntykwaTorunska-Regular' is not found using lookup 'file'
+fonts           > virtual math > loading font 'antykwamath' subfont 1 with name 'file:AntykwaTorunska-Regular*virtualmath' at 5pt is skipped, not found
+fonts           > defining > forced type 'tfm' of 'mi-anttri' not found
+fonts           > defining > font with asked name 'mi-anttri' is not found using lookup 'file'
+fonts           > virtual math > loading font 'antykwamath' subfont 2 with name 'mi-anttri.tfm' at 5pt is skipped, not found
+fonts           > virtual math > loading font 'antykwamath' subfont 3 with name 'mi-anttri.tfm' at 5pt is skipped, not found
+fonts           > defining > forced type 'tfm' of 'sy-anttrz' not found
+fonts           > defining > font with asked name 'sy-anttrz' is not found using lookup 'file'
+fonts           > virtual math > loading font 'antykwamath' subfont 4 with name 'sy-anttrz.tfm' at 5pt is skipped, not found
+fonts           > defining > forced type 'tfm' of 'ex-anttr' not found
+fonts           > defining > font with asked name 'ex-anttr' is not found using lookup 'file'
+fonts           > virtual math > loading font 'antykwamath' subfont 5 with name 'ex-anttr.tfm' at 5pt is skipped, not found
+fonts           > defining > font with asked name 'AntykwaTorunska-Regular' is not found using lookup 'file'
+fonts           > virtual math > loading font 'antykwamath' subfont 1 with name 'file:AntykwaTorunska-Regular*virtualmath' at 6pt is skipped, not found
+fonts           > defining > forced type 'tfm' of 'mi-anttri' not found
+fonts           > defining > font with asked name 'mi-anttri' is not found using lookup 'file'
+fonts           > virtual math > loading font 'antykwamath' subfont 2 with name 'mi-anttri.tfm' at 6pt is skipped, not found
+fonts           > virtual math > loading font 'antykwamath' subfont 3 with name 'mi-anttri.tfm' at 6pt is skipped, not found
+fonts           > defining > forced type 'tfm' of 'sy-anttrz' not found
+fonts           > defining > font with asked name 'sy-anttrz' is not found using lookup 'file'
+fonts           > virtual math > loading font 'antykwamath' subfont 4 with name 'sy-anttrz.tfm' at 6pt is skipped, not found
+fonts           > defining > forced type 'tfm' of 'ex-anttr' not found
+fonts           > defining > font with asked name 'ex-anttr' is not found using lookup 'file'
+fonts           > virtual math > loading font 'antykwamath' subfont 5 with name 'ex-anttr.tfm' at 6pt is skipped, not found
+structure       > sectioning > subsection @ level 4 : 3.12.3.2 -> Введение элементов в список
+pages           > flushing realpage 170, userpage 170
+
+Underfull \hbox (badness 1472) in paragraph at lines 796--797
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 The \3>dejavu-8pt-tt-tf-0--0 \sym{Text} \3>dejavu-8pt-rm-tf-0--0 команда вводит элемент, в котором текст, используемый в качестве
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.45209, direction TLT
+.\glue(\leftskip) 36.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 497>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 1635) in paragraph at lines 804--805
+ [][]\3>dejavu-8pt-rm-tf-0--0 Есть две дополнительные команды для ввода элементов, комбинация которых дает очень
+
+\hbox(6.21094+1.66406)x426.79135, glue set 2.53966, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 563>
+.\3>dejavu-8pt-rm-tf-0--0 Е
+.etc.
+
+pages           > flushing realpage 171, userpage 171
+structure       > sectioning > subsection @ level 4 : 3.12.3.3 -> Базовая конфигурация списка
+
+Underfull \hbox (badness 2818) in paragraph at lines 844--845
+ [][][][] \3>dejavu-8pt-tt-tf-0--0 co-lumns\3>dejavu-8pt-rm-tf-0--0 : этот параметр определяет, что список состоит из двух или более столбцов.
+
+\hbox(8.37114+3.25543)x426.79135, glue set 3.04694, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 640>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 2680) in paragraph at lines 848--849
+ [][][][] \3>dejavu-8pt-tt-tf-0--0 con-ti-nue\3>dejavu-8pt-rm-tf-0--0 : в упорядоченных списках (числовых или алфавитных) эта опция заставляет
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.99387, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 610>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 1242) in paragraph at lines 852--853
+ [][][][] \3>dejavu-8pt-tt-tf-0--0 now-hi-te: \3>dejavu-8pt-rm-tf-0--0 производит эффект, похожий на \3>dejavu-8pt-tt-tf-0--0 pac-ked\3>dejavu-8pt-rm-tf-0--0 , но более радикальный: он не только
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.31966, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 637>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 5245) in paragraph at lines 852--853
+ \3>dejavu-8pt-rm-tf-0--0 уменьшает вертикальное пространство между элементами, но также и вертикальное
+
+\hbox(4.26563+1.77734)x426.79135, glue set 3.74484, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-rm-tf-0--0 у
+.\3>dejavu-8pt-rm-tf-0--0 м
+.\3>dejavu-8pt-rm-tf-0--0 е
+.\3>dejavu-8pt-rm-tf-0--0 н
+.etc.
+
+pages           > flushing realpage 172, userpage 172
+structure       > sectioning > subsection @ level 4 : 3.12.3.4 -> Дополнительная настройка списка
+
+Underfull \hbox (badness 1147) in paragraph at lines 884--885
+ [][][][] \3>dejavu-8pt-tt-tf-0--0 be-fo-rehead, af-ter-head\3>dejavu-8pt-rm-tf-0--0 : команда, запускаемая до или после ввода элемента с помощью
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.25722, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 590>
+.\glue 0.0
+.etc.
+
+
+Overfull \hbox (5.3534pt too wide) in paragraph at lines 892--893
+ [][][][] \3>dejavu-8pt-tt-tf-0--0 width, max-width\3>dejavu-8pt-rm-tf-0--0 : ширина пространства, зарезервированного для разделителя и, следовательно,
+
+\hbox(8.37114+3.25543)x426.79135, glue set - 1.0, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 630>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 1902) in paragraph at lines 909--910
+ [][][][] \3>dejavu-8pt-tt-tf-0--0 items\3>dejavu-8pt-rm-tf-0--0 : в элементах, введенных как in-put с \3>dejavu-8pt-tt-tf-0--0 \its\3>dejavu-8pt-rm-tf-0--0 , указывает, сколько раз должен быть
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.6709, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 635>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 911--912
+ [][][][] \3>dejavu-8pt-tt-tf-0--0 sty-le, co-lor; headsty-le, head-co-lor; marsty-le, mar-co-lor; symsty-le, sym-co-lor\3>dejavu-8pt-rm-tf-0--0 : эти
+
+\hbox(8.37114+3.25543)x426.79135, glue set 21.15678, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 632>
+.\glue 0.0
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.12.3.5 -> Простые списки с помощью команды \tex {items}
+pages           > flushing realpage 173, userpage 173
+
+Underfull \hbox (badness 10000) in paragraph at lines 947--948
+ [][]\3>dejavu-8pt-rm-tf-0--0 Параметры конфигурации, поддерживаемые этой командой, являются подмножеством
+
+\hbox(6.07813+1.77734)x426.79135, glue set 5.48776, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 546>
+.\3>dejavu-8pt-rm-tf-0--0 П
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.12.3.6 -> Предварительное определение поведения списка и создание наших собственных типов списков
+
+Underfull \hbox (badness 2158) in paragraph at lines 965--966
+ [][]\3>dejavu-8pt-rm-tf-0--0 В предыдущих разделах мы видели, как указать, какой тип списка нам нужен и какие
+
+\hbox(5.96875+1.77734)x426.79135, glue set 2.78757, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 614>
+.\3>dejavu-8pt-rm-tf-0--0 В
+.etc.
+
+
+Underfull \hbox (badness 2134) in paragraph at lines 965--966
+ \3>dejavu-8pt-rm-tf-0--0 характеристики он должен иметь. Но делать это каждый раз, когда вызывается список,
+
+\hbox(5.96875+1.66406)x426.79135, glue set 2.77715, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 х
+.\3>dejavu-8pt-rm-tf-0--0 а
+.\3>dejavu-8pt-rm-tf-0--0 р
+.\3>dejavu-8pt-rm-tf-0--0 а
+.etc.
+
+
+Underfull \hbox (badness 3826) in paragraph at lines 971--972
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 Заранее определите \3>dejavu-8pt-rm-it-0--0 нормальное \3>dejavu-8pt-rm-tf-0--0 поведение элементов \3>dejavu-8pt-tt-tf-0--0 ite-mi-ze \3>dejavu-8pt-rm-tf-0--0 и \3>dejavu-8pt-tt-tf-0--0 \items \3>dejavu-8pt-rm-tf-0--0 в преамбуле
+
+\hbox(8.37114+3.25543)x426.79135, glue set 3.37277, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 595>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 973--974
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 Создавайте собственные индивидуальные списки. Например: список с алфавитной
+
+\hbox(8.37114+3.25543)x426.79135, glue set 5.37306, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 519>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 2126) in paragraph at lines 973--974
+ \3>dejavu-8pt-rm-tf-0--0 нумерацией, который мы хотим назвать \3>dejavu-8pt-rm-it-0--0 Lis-tAlp-ha\3>dejavu-8pt-rm-tf-0--0 , список, пронумерованный римскими
+
+\hbox(6.07813+1.77734)x426.79135, glue set 2.77211, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-rm-tf-0--0 н
+.\3>dejavu-8pt-rm-tf-0--0 у
+.\3>dejavu-8pt-rm-tf-0--0 м
+.\3>dejavu-8pt-rm-tf-0--0 е
+.etc.
+
+
+Underfull \hbox (badness 2150) in paragraph at lines 977--978
+ [][]\3>dejavu-8pt-rm-tf-0--0 Первого мы достигаем с помощью команд \3>dejavu-8pt-tt-tf-0--0 \se-tu-pi-te-mi-ze \3>dejavu-8pt-rm-tf-0--0 и \3>dejavu-8pt-tt-tf-0--0 \se-tu-pi-tems\3>dejavu-8pt-rm-tf-0--0 . Второй требует
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.7839, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 539>
+.\3>dejavu-8pt-rm-tf-0--0 П
+.etc.
+
+
+Underfull \hbox (badness 1436) in paragraph at lines 977--978
+ \3>dejavu-8pt-rm-tf-0--0 использования команды[] \3>dejavu-8pt-tt-tf-0--0 \de-fi-nei-tem-group \3>dejavu-8pt-rm-tf-0--0 или [] \3>dejavu-8pt-tt-tf-0--0 \de-fi-nei-tems\3>dejavu-8pt-rm-tf-0--0 . Первый создаст среду списка,
+
+\hbox(6.07813+1.77734)x426.79135, glue set 2.43169, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 и
+.\3>dejavu-8pt-rm-tf-0--0 с
+.\3>dejavu-8pt-rm-tf-0--0 п
+.\3>dejavu-8pt-rm-tf-0--0 о
+.etc.
+
+structure       > sectioning > section @ level 3 : 3.12.4 -> Описания и перечисления
+structure       > sectioning > subsection @ level 4 : 3.12.4.1 -> Descriptions
+pages           > flushing realpage 174, userpage 174
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--93
+ [][]\3>dejavu-8pt-tt-tf-4--4 Place something in a certain context, or typeset a text with the typesetting system called \ConTeXt. The ability
+
+\hbox(6.615+2.5725)x426.79135, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\latelua0 <function 593>
+.\hbox(6.615+2.5725)x0.0, direction TLT
+.\3>dejavu-8pt-tt-tf-4--4 P
+.etc.
+
+
+Underfull \hbox (badness 6078) in paragraph at lines 1043--1044
+ [][][][] \3>dejavu-8pt-tt-tf-0--0 al-ter-na-ti-ve\3>dejavu-8pt-rm-tf-0--0 : эта опция принципиально контролирует внешний вид конструкции. Он
+
+\hbox(8.37114+3.25543)x426.79135, glue set 3.933, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 519>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 1264) in paragraph at lines 1045--1046
+ \3>dejavu-8pt-rm-tf-0--0 значения \3>dejavu-8pt-tt-tf-0--0 al-ter-na-ti-ve \3>dejavu-8pt-rm-tf-0--0 это расстояние также будет частью отступа, с которым написан
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.33105, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-rm-tf-0--0 з
+.\3>dejavu-8pt-rm-tf-0--0 н
+.\3>dejavu-8pt-rm-tf-0--0 а
+.\3>dejavu-8pt-rm-tf-0--0 ч
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.12.4.2 -> Перечисления
+pages           > flushing realpage 175, userpage 175
+
+Underfull \hbox (badness 1490) in paragraph at lines 1070--1072
+ [][]\3>dejavu-8pt-rm-tf-0--0 Эта структура может быть очень полезной, например, для написания формул, задач или
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.46211, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 631>
+.\3>dejavu-8pt-rm-tf-0--0 Э
+.etc.
+
+structure       > sectioning > section @ level 3 : 3.12.5 -> Линии и рамки
+
+Underfull \hbox (badness 5147) in paragraph at lines 1136--1137
+ \3>dejavu-8pt-rm-tf-0--0 управления текстом, но очень слаб в управлении графической информацией. Хочу не
+
+\hbox(6.21094+1.77734)x426.79135, glue set 3.72276, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 у
+.\3>dejavu-8pt-rm-tf-0--0 п
+.\3>dejavu-8pt-rm-tf-0--0 р
+.\3>dejavu-8pt-rm-tf-0--0 а
+.etc.
+
+pages           > flushing realpage 176, userpage 176
+
+Underfull \hbox (badness 4531) in paragraph at lines 1138--1139
+ [][]\3>dejavu-8pt-rm-tf-0--0 Однако в следующих разделах я ограничусь объяснением того, как создавать простые
+
+\hbox(6.21094+1.77734)x426.79135, glue set 3.56854, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 603>
+.\3>dejavu-8pt-rm-tf-0--0 О
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.12.5.1 -> Простые линии
+
+Underfull \hbox (badness 2435) in paragraph at lines 1170--1171
+ [][]\3>dejavu-8pt-rm-tf-0--0 Строки меньшего размера можно создать с помощью команд[] \3>dejavu-8pt-tt-tf-0--0 \hl \3>dejavu-8pt-rm-tf-0--0 и [] \3>dejavu-8pt-tt-tf-0--0 \vl\3>dejavu-8pt-rm-tf-0--0 . Первый создает
+
+\hbox(6.1211+1.66406)x426.79135, glue set 2.90115, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 635>
+.\3>dejavu-8pt-rm-tf-0--0 С
+.etc.
+
+
+Underfull \hbox (badness 1184) in paragraph at lines 1170--1171
+ \3>dejavu-8pt-rm-tf-0--0 который позволяет нам вычислить длину линии. В \3>dejavu-8pt-tt-tf-0--0 \hl \3>dejavu-8pt-rm-tf-0--0 число измеряет длину в \3>dejavu-8pt-rm-it-0--0 ems \3>dejavu-8pt-rm-tf-0--0 (нет
+
+\hbox(6.1211+1.77734)x426.79135, glue set 2.27946, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 к
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 т
+.\3>dejavu-8pt-rm-tf-0--0 о
+.etc.
+
+
+Underfull \hbox (badness 1852) in paragraph at lines 1172--1173
+ [][]\3>dejavu-8pt-rm-tf-0--0 Таким образом, \3>dejavu-8pt-tt-tf-0--0 \hl[3] \3>dejavu-8pt-rm-tf-0--0 генерирует горизонтальную линию в 3 ems, а \3>dejavu-8pt-tt-tf-0--0 \vl[3] \3>dejavu-8pt-rm-tf-0--0 генерирует
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.64839, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 582>
+.\3>dejavu-8pt-rm-tf-0--0 Т
+.etc.
+
+pages           > flushing realpage 177, userpage 177
+
+Underfull \hbox (badness 1762) in paragraph at lines 1174--1175
+ [][][]\3>dejavu-8pt-tt-tf-0--0 \fi-llin-li-ne \3>dejavu-8pt-rm-tf-0--0 -- еще одна команда для создания горизонтальных линий точной длины. Он
+
+\hbox(6.1211+1.66406)x426.79135, glue set 2.60399, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 558>
+.\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\hbox(0.0+0.0)x0.0, direction TLT []
+.etc.
+
+
+Underfull \hbox (badness 6047) in paragraph at lines 1192--1192
+ [][][]
+
+\hbox(25.91641+2.5725)x75.58197, glue set 3.92743, direction TLT
+.\glue(\leftskip) 0.0 plus 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(6.615+2.5725)x0.0, direction TLT
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.12.5.2 -> Строки, связанные с текстом
+
+Underfull \hbox (badness 6047) in paragraph at lines 1233--1233
+ [][][]
+
+\hbox(28.45303+2.5725)x75.58197, glue set 3.92741, direction TLT
+.\glue(\leftskip) 0.0 plus 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(6.615+2.5725)x0.0, direction TLT
+.etc.
+
+pages           > flushing realpage 178, userpage 178
+structure       > sectioning > subsection @ level 4 : 3.12.5.3 -> Слова или тексты в рамке
+structure       > sectioning > section @ level 3 : 3.12.6 -> Другие среды и конструкции, представляющие интерес
+pages           > flushing realpage 179, userpage 179
+
+Underfull \hbox (badness 1571) in paragraph at lines 1342--1344
+ \3>dejavu-8pt-rm-tf-0--0 чтобы абзац с цитатой визуально выделялся на странице. Но следует отметить, что в
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.50732, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-rm-tf-0--0 ч
+.\3>dejavu-8pt-rm-tf-0--0 т
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 б
+.etc.
+
+pages           > flushing realpage 180, userpage 180
+
+Underfull \hbox (badness 1082) in paragraph at lines 1354--1355
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 Информацию о среде ищите в справочном руководстве Con-T[]Xt. В этом руководстве не
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.2126, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 566>
+.\glue 0.0
+.etc.
+
+close source    > level 3, order 21, name '01_BodyMatter/b12_SpecialParas.mkiv'
+open source     > level 3, order 22, name '01_BodyMatter/b13_Floats.mkiv'
+pages           > flushing realpage 181, userpage 181
+structure       > sectioning > chapter @ level 2 : 3.13 -> Изображения, таблицы и другие плавающие объекты
+fonts           > bodyfont '30pt' is defined (can better be done global)
+fonts           > bodyfont '36pt' is defined (can better be done global)
+fonts           > bodyfont '24pt' is defined (can better be done global)
+fonts           > typescripts > unknown library 'sl'
+
+Underfull \hbox (badness 2951) in paragraph at lines 25--26
+ [][]\3>dejavu-8pt-rm-tf-0--0 Эта глава в основном посвящена плавающим объектам (поплавкам). Но, продолжая эту
+
+\hbox(6.21094+1.77734)x426.79135, glue set 3.09326, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 639>
+.\3>dejavu-8pt-rm-tf-0--0 Э
+.etc.
+
+structure       > sectioning > section @ level 3 : 3.13.1 -> Что такое плавающие объекты и что они делают?
+
+Underfull \hbox (badness 3189) in paragraph at lines 33--34
+ [][]\3>dejavu-8pt-rm-tf-0--0 Если бы документ содержал только \3>dejavu-8pt-rm-it-0--0 обычный \3>dejavu-8pt-rm-tf-0--0 текст, разбить его на страницы было бы
+
+\hbox(6.28906+1.77734)x426.79135, glue set 3.17245, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 648>
+.\3>dejavu-8pt-rm-tf-0--0 Е
+.etc.
+
+
+Underfull \hbox (badness 2460) in paragraph at lines 35--36
+ \3>dejavu-8pt-rm-tf-0--0 оставляя большое пустое пространство внизу, так что рассматриваемый объект и текст,
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.912, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 с
+.\3>dejavu-8pt-rm-tf-0--0 т
+.\3>dejavu-8pt-rm-tf-0--0 а
+.etc.
+
+
+Underfull \hbox (badness 1577) in paragraph at lines 37--38
+ [][]\3>dejavu-8pt-rm-tf-0--0 Поэтому рекомендуется избегать появления больших пустых вертикальных пространств; а
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.50906, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 628>
+.\3>dejavu-8pt-rm-tf-0--0 П
+.etc.
+
+pages           > flushing realpage 182, userpage 182
+
+Underfull \hbox (badness 1112) in paragraph at lines 43--44
+ [][]\3>dejavu-8pt-rm-tf-0--0 Это фиксируется с помощью \3>dejavu-8pt-rm-it-0--0 нумерации \3>dejavu-8pt-rm-tf-0--0 плавающих объектов (после распределения их по
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.23244, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 566>
+.\3>dejavu-8pt-rm-tf-0--0 Э
+.etc.
+
+
+Underfull \hbox (badness 1331) in paragraph at lines 43--44
+ \3>dejavu-8pt-rm-tf-0--0 категориям), так что вместо ссылки на изображение как [][]“ предыдущее изображение[]” или
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.37094, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 к
+.\3>dejavu-8pt-rm-tf-0--0 а
+.\3>dejavu-8pt-rm-tf-0--0 т
+.\3>dejavu-8pt-rm-tf-0--0 е
+.etc.
+
+structure       > sectioning > section @ level 3 : 3.13.2 -> Внешние изображения
+
+Underfull \hbox (badness 1609) in paragraph at lines 52--53
+ [][]\3>dejavu-8pt-rm-tf-0--0 Как читатель на данном этапе знает (поскольку это было объяснено в sec-tion 1.5), Con-
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.52667, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 648>
+.\3>dejavu-8pt-rm-tf-0--0 К
+.etc.
+
+
+Underfull \hbox (badness 4242) in paragraph at lines 52--53
+ \3>dejavu-8pt-rm-tf-0--0 T[]Xt отлично интегрирован с Me-ta-Post и может генерировать изображения и графику,
+
+\hbox(6.21094+2.07617)x426.79135, glue set 3.48918, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 T
+.\kern -1.36552
+.\hbox(5.83203+0.0)x5.83984, shifted 2.07617, direction TLT
+..\3>dejavu-8pt-rm-tf-0--0 E
+.\kern -1.02393
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.13.2.1 -> Прямая вставка изображений
+
+Underfull \hbox (badness 3769) in paragraph at lines 66--67
+ [][][][] \3>dejavu-8pt-rm-it-0--0 Na-me \3>dejavu-8pt-rm-tf-0--0 может быть либо именем файла, содержащего изображение, либо веб-адресом
+
+\hbox(8.37114+3.25543)x426.79135, glue set 3.35503, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 637>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 1024) in paragraph at lines 66--67
+ \3>dejavu-8pt-rm-tf-0--0 изображения, найденного в Интернете, либо символическим именем, которое мы ранее
+
+\hbox(6.21094+1.66406)x426.79135, glue set 2.17464, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-rm-tf-0--0 и
+.\3>dejavu-8pt-rm-tf-0--0 з
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 б
+.etc.
+
+pages           > flushing realpage 183, userpage 183
+
+Underfull \hbox (badness 1067) in paragraph at lines 68--69
+ \3>dejavu-8pt-rm-tf-0--0 преобразования к изображению до того, как оно будет вставлено в наш документ. Мы
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.20369, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-rm-tf-0--0 п
+.\3>dejavu-8pt-rm-tf-0--0 р
+.\3>dejavu-8pt-rm-tf-0--0 е
+.\3>dejavu-8pt-rm-tf-0--0 о
+.etc.
+
+
+Underfull \hbox (badness 5939) in paragraph at lines 88--89
+ \3>dejavu-8pt-rm-tf-0--0 так, чтобы изображение не перекрывало предыдущие строки, как в пример, который
+
+\hbox(6.21094+1.77734)x426.79135, glue set 3.90524, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 т
+.\3>dejavu-8pt-rm-tf-0--0 а
+.\3>dejavu-8pt-rm-tf-0--0 к
+.\3>dejavu-8pt-rm-tf-0--0 ,
+.etc.
+
+
+Underfull \hbox (badness 1365) in paragraph at lines 90--91
+ \3>dejavu-8pt-rm-tf-0--0 и в родительском каталоге этого каталога. Мы можем указать местоположение каталога,
+
+\hbox(5.83203+1.77734)x426.79135, glue set 2.39372, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 и
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.\3>dejavu-8pt-rm-tf-0--0 в
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.etc.
+
+pages           > flushing realpage 184, userpage 184
+
+Underfull \hbox (badness 1077) in paragraph at lines 105--106
+ [][]\3>dejavu-8pt-tt-tf-0--0 \ex-ter-nal-fi-gu-re \3>dejavu-8pt-rm-tf-0--0 также может использовать изображения, размещенные в Интернете. Так,
+
+\hbox(6.21094+1.71875)x426.79135, glue set 2.21144, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 497>
+.\3>dejavu-8pt-tt-tf-0--0 \
+.etc.
+
+references      > unknown reference '[b13_Floats.mkiv][sec: startcombination]'
+structure       > sectioning > subsection @ level 4 : 3.13.2.2 -> Вставка изображений с помощью \tex {placefigure}
+
+Underfull \hbox (badness 2856) in paragraph at lines 140--141
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 чтобы знать, что изображение вставляется, которое должно быть включено в список
+
+\hbox(8.37114+3.25543)x426.79135, glue set 3.05762, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 482>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 7344) in paragraph at lines 146--147
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 для автоматической установки пустого пространства (по горизонтали и вертикали),
+
+\hbox(8.37114+3.25543)x426.79135, glue set 4.18915, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 606>
+.\glue 0.0
+.etc.
+
+pages           > flushing realpage 185, userpage 185
+floatblocks     > '17' placed
+
+Underfull \hbox (badness 1675) in paragraph at lines 198--199
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 Прежде всего, изображение было вставлено в [][]“ список изображений[]”, который Con-T[]Xt
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.56224, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 519>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 2932) in paragraph at lines 209--210
+ \3>dejavu-8pt-rm-tf-0--0 преобразования, аналогичные тем, которые мы используем для изображений, такие как
+
+\hbox(6.21094+1.77734)x426.79135, glue set 3.08571, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 п
+.\3>dejavu-8pt-rm-tf-0--0 р
+.\3>dejavu-8pt-rm-tf-0--0 е
+.\3>dejavu-8pt-rm-tf-0--0 о
+.etc.
+
+pages           > flushing realpage 186, userpage 186
+floatblocks     > '18' placed
+structure       > sectioning > subsection @ level 4 : 3.13.2.3 -> Вставка изображений, интегрированных в текстовый блок
+
+Underfull \hbox (badness 1092) in paragraph at lines 246--247
+ \3>dejavu-8pt-rm-tf-0--0 варианты больше не варианты размещения плавающего объекта, а указания относительно
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.22174, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 в
+.\3>dejavu-8pt-rm-tf-0--0 а
+.\3>dejavu-8pt-rm-tf-0--0 р
+.\3>dejavu-8pt-rm-tf-0--0 и
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.13.2.4 -> Конфигурация и преобразование вставленных изображений
+structure       > sectioning > subsubsection @ level 5 : 3.13.2.4.1 -> Параметры команды вставки, вызывающие некоторую трансформацию изображения
+
+Underfull \hbox (badness 2418) in paragraph at lines 262--263
+ [][][]\3>dejavu-8pt-rm-tf-0--0 Последний аргумент в команде \3>dejavu-8pt-tt-tf-0--0 \ex-ter-nal-fi-gu-re \3>dejavu-8pt-rm-tf-0--0 позволяет нам выполнять определенные
+
+\hbox(6.1211+1.77734)x426.79135, glue set 2.89308, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 519>
+.\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\hbox(0.0+0.0)x0.0, direction TLT []
+.etc.
+
+pages           > flushing realpage 187, userpage 187
+
+Underfull \hbox (badness 1360) in paragraph at lines 270--271
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 В тот момент, когда мы вставляем конкретное изображение. В этом случае настройка
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.38892, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 599>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 290--291
+ [][][][] \3>dejavu-8pt-rm-it-0--0 Масштабирование изображения\3>dejavu-8pt-rm-tf-0--0 : опция \3>dejavu-8pt-tt-tf-0--0 xs-ca-le \3>dejavu-8pt-rm-tf-0--0 масштабирует изображение по
+
+\hbox(8.37114+3.25543)x426.79135, glue set 6.49951, direction TLT
+.\glue(\leftskip) 36.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 630>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 1590) in paragraph at lines 290--291
+ \3>dejavu-8pt-rm-tf-0--0 масштабирования, умноженное на 1000. То есть: \3>dejavu-8pt-tt-tf-0--0 sca-le=1000 \3>dejavu-8pt-rm-tf-0--0 оставит изображение в
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.51837, direction TLT
+.\glue(\leftskip) 36.0
+.\3>dejavu-8pt-rm-tf-0--0 м
+.\3>dejavu-8pt-rm-tf-0--0 а
+.\3>dejavu-8pt-rm-tf-0--0 с
+.\3>dejavu-8pt-rm-tf-0--0 ш
+.etc.
+
+
+Underfull \hbox (badness 1735) in paragraph at lines 292--293
+ \3>dejavu-8pt-tt-tf-0--0 height\3>dejavu-8pt-rm-tf-0--0 , которые принимают размер. Например, \3>dejavu-8pt-tt-tf-0--0 max-width=.2\3>dejavu-8pt-mm-mb--1 \\3>dejavu-8pt-tt-tf-0--0 text-width \3>dejavu-8pt-rm-tf-0--0 масштабирует
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.59084, direction TLT
+.\glue(\leftskip) 36.0
+.\3>dejavu-8pt-tt-tf-0--0 h
+.\3>dejavu-8pt-tt-tf-0--0 e
+.\3>dejavu-8pt-tt-tf-0--0 i
+.\3>dejavu-8pt-tt-tf-0--0 g
+.etc.
+
+
+Underfull \hbox (badness 4366) in paragraph at lines 312--313
+ \3>dejavu-8pt-rm-tf-0--0 параметр \3>dejavu-8pt-tt-tf-0--0 fra-me=on\3>dejavu-8pt-rm-tf-0--0 , и настроить его цвет (\3>dejavu-8pt-tt-tf-0--0 fra-me-co-lor\3>dejavu-8pt-rm-tf-0--0 ), расстояние между рамкой и
+
+\hbox(6.1211+1.77734)x426.79135, glue set 3.52492, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-rm-tf-0--0 п
+.\3>dejavu-8pt-rm-tf-0--0 а
+.\3>dejavu-8pt-rm-tf-0--0 р
+.\3>dejavu-8pt-rm-tf-0--0 а
+.etc.
+
+
+Underfull \hbox (badness 6493) in paragraph at lines 318--319
+ [] []\3>dejavu-8pt-rm-tf-0--0  [] В дополнение к уже рассмотренным
+
+\hbox(8.37114+3.25543)x426.79135, glue set 4.02284, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\latelua0 <function 633>
+.\glue -12.0
+.\latelua0{commands.enhancelist(310)}
+.etc.
+
+
+Underfull \hbox (badness 7486) in paragraph at lines 318--319
+ \3>dejavu-8pt-tt-tf-0--0 \se-tu-pex-ter-nal-fi-gu-res \3>dejavu-8pt-rm-tf-0--0 мы можем настроить другие аспекты, например, где искать
+
+\hbox(6.1211+1.77734)x426.79135, glue set 4.21873, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-tt-tf-0--0 \
+.\3>dejavu-8pt-tt-tf-0--0 s
+.\3>dejavu-8pt-tt-tf-0--0 e
+.\discretionary (penalty 50) []
+.etc.
+
+structure       > sectioning > subsubsection @ level 5 : 3.13.2.4.2 -> Специальные команды для преобразования изображения
+pages           > flushing realpage 188, userpage 188
+structure       > sectioning > section @ level 3 : 3.13.3 -> Tables
+structure       > sectioning > subsection @ level 4 : 3.13.3.1 -> Общие представления о таблицах и их размещении в документе
+
+Underfull \hbox (badness 2334) in paragraph at lines 380--381
+ [][]\3>dejavu-8pt-rm-tf-0--0 Таблицы - это структурированные объекты, которые содержат текст, формулы или даже
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.85979, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 504>
+.\3>dejavu-8pt-rm-tf-0--0 Т
+.etc.
+
+
+Underfull \hbox (badness 2418) in paragraph at lines 380--381
+ \3>dejavu-8pt-rm-tf-0--0 изображения, расположенные в серии \3>dejavu-8pt-rm-it-0--0 cells\3>dejavu-8pt-rm-tf-0--0 , которые позволяют нам графически увидеть
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.89455, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 и
+.\3>dejavu-8pt-rm-tf-0--0 з
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 б
+.etc.
+
+pages           > flushing realpage 189, userpage 189
+floatblocks     > '19' placed
+
+Underfull \hbox (badness 3989) in paragraph at lines 388--389
+ [][]\3>dejavu-8pt-rm-tf-0--0 Таблицы идеально подходят для
+
+\hbox(6.21094+1.10547)x162.71758, glue set 3.41803, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 635>
+.\3>dejavu-8pt-rm-tf-0--0 Т
+.etc.
+
+
+Underfull \hbox (badness 1377) in paragraph at lines 388--389
+ \3>dejavu-8pt-rm-tf-0--0 отображения текста или данных,
+
+\hbox(6.21094+1.66406)x162.71758, glue set 2.4001, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 т
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 б
+.etc.
+
+
+Underfull \hbox (badness 2285) in paragraph at lines 388--389
+ \3>dejavu-8pt-rm-tf-0--0 которые связаны друг с другом,
+
+\hbox(4.26563+1.77734)x162.71758, glue set 2.84079, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 к
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 т
+.\3>dejavu-8pt-rm-tf-0--0 о
+.etc.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 388--389
+ \3>dejavu-8pt-rm-tf-0--0 потому что, поскольку каждая
+
+\hbox(4.26563+1.77734)x162.71758, glue set 5.30435, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 п
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 т
+.\3>dejavu-8pt-rm-tf-0--0 о
+.etc.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 388--389
+ \3>dejavu-8pt-rm-tf-0--0 из них заблокирована в своей
+
+\hbox(6.21094+1.66406)x162.71758, glue set 4.6818, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 и
+.\3>dejavu-8pt-rm-tf-0--0 з
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.\3>dejavu-8pt-rm-tf-0--0 н
+.etc.
+
+
+Underfull \hbox (badness 7256) in paragraph at lines 388--389
+ \3>dejavu-8pt-rm-tf-0--0 собственной ячейке, даже если
+
+\hbox(6.21094+1.10547)x162.71758, glue set 4.17378, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 с
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 б
+.\3>dejavu-8pt-rm-tf-0--0 с
+.etc.
+
+
+Underfull \hbox (badness 3758) in paragraph at lines 388--389
+ \3>dejavu-8pt-rm-tf-0--0 ее содержимое или содержимое
+
+\hbox(4.26563+1.66406)x162.71758, glue set 3.35248, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 е
+.\3>dejavu-8pt-rm-tf-0--0 е
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.\3>dejavu-8pt-rm-tf-0--0 с
+.etc.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 388--389
+ \3>dejavu-8pt-rm-tf-0--0 остальных ячеек изменяется,
+
+\hbox(4.26563+1.08984)x162.71758, glue set 9.60477, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 с
+.\3>dejavu-8pt-rm-tf-0--0 т
+.\3>dejavu-8pt-rm-tf-0--0 а
+.etc.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 390--391
+ [][]\3>dejavu-8pt-rm-tf-0--0 Из всех задач, связанных с
+
+\hbox(5.83203+1.10547)x162.71758, glue set 6.90683, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 590>
+.\3>dejavu-8pt-rm-tf-0--0 И
+.etc.
+
+
+Underfull \hbox (badness 1102) in paragraph at lines 390--391
+ \3>dejavu-8pt-rm-tf-0--0 набором текста, создание таблиц
+
+\hbox(6.21094+1.66406)x162.71758, glue set 2.22601, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 н
+.\3>dejavu-8pt-rm-tf-0--0 а
+.\3>dejavu-8pt-rm-tf-0--0 б
+.\3>dejavu-8pt-rm-tf-0--0 о
+.etc.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 390--391
+ \3>dejavu-8pt-rm-tf-0--0 - единственная, которую, на
+
+\hbox(4.26563+1.77734)x162.71758, glue set 7.96896, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 -
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.\3>dejavu-8pt-rm-tf-0--0 е
+.\3>dejavu-8pt-rm-tf-0--0 д
+.etc.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 390--391
+ \3>dejavu-8pt-rm-tf-0--0 мой взгляд, проще выполнить
+
+\hbox(5.96875+1.66406)x162.71758, glue set 6.04884, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 м
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 й
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.etc.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 390--391
+ \3>dejavu-8pt-rm-tf-0--0 в графической программе (тип
+
+\hbox(6.07813+1.66406)x162.71758, glue set 4.85376, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 в
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.\3>dejavu-8pt-rm-tf-0--0 г
+.\3>dejavu-8pt-rm-tf-0--0 р
+.etc.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 390--391
+ \3>dejavu-8pt-rm-tf-0--0 текстового процессора), чем
+
+\hbox(6.07813+1.66406)x162.71758, glue set 11.28372, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 т
+.\3>dejavu-8pt-rm-tf-0--0 е
+.\3>dejavu-8pt-rm-tf-0--0 к
+.\3>dejavu-8pt-rm-tf-0--0 с
+.etc.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 390--391
+ \3>dejavu-8pt-rm-tf-0--0 в Con-T[]Xt. Потому что проще
+
+\hbox(5.9375+2.07617)x162.71758, glue set 5.19002, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 в
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.\3>dejavu-8pt-rm-tf-0--0 C
+.\3>dejavu-8pt-rm-tf-0--0 o
+.etc.
+
+
+Underfull \hbox (badness 1354) in paragraph at lines 390--391
+ \3>dejavu-8pt-rm-it-0--0 нарисовать \3>dejavu-8pt-rm-tf-0--0 таблицу (это то, что
+
+\hbox(6.21094+1.77734)x162.71758, glue set 2.38533, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-it-0--0 н
+.\3>dejavu-8pt-rm-it-0--0 а
+.\3>dejavu-8pt-rm-it-0--0 р
+.\3>dejavu-8pt-rm-it-0--0 и
+.etc.
+
+
+Underfull \hbox (badness 2653) in paragraph at lines 392--393
+ [][]\3>dejavu-8pt-rm-tf-0--0 Con-T[]Xt имеет три различных механизма для создания таблиц; среда \3>dejavu-8pt-tt-tf-0--0 ta-bu-la-te\3>dejavu-8pt-rm-tf-0--0 , которая
+
+\hbox(6.21094+2.07617)x426.79135, glue set 2.98503, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 518>
+.\3>dejavu-8pt-rm-tf-0--0 C
+.etc.
+
+
+Underfull \hbox (badness 2393) in paragraph at lines 392--393
+ \3>dejavu-8pt-rm-tf-0--0 рекомендуется для простых таблиц и которая больше всего вдохновлена T[]X ta-bles; так
+
+\hbox(6.21094+2.07617)x426.79135, glue set 2.88544, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 р
+.\3>dejavu-8pt-rm-tf-0--0 е
+.\3>dejavu-8pt-rm-tf-0--0 к
+.\3>dejavu-8pt-rm-tf-0--0 о
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.13.3.2 -> Простые таблицы со средой {\tt tabulate}
+pages           > flushing realpage 190, userpage 190
+
+Underfull \hbox (badness 3281) in paragraph at lines 437--438
+ [][][][] \3>dejavu-8pt-rm-bf-0--0 Co-lumns de-li-mi-ter\3>dejavu-8pt-rm-tf-0--0 : символ [][]“ \3>dejavu-8pt-tt-tf-0--0 |[]\3>dejavu-8pt-rm-tf-0--0 ” используется для разделения столбцов таблицы. Так,
+
+\hbox(8.37114+3.25543)x426.79135, glue set 3.20432, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 626>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 1226) in paragraph at lines 448--449
+ [][]\3>dejavu-6pt-ss-tf-0--0 Следует отметить, что ограничение ширины однострочных столбцов может привести к тому, что текст в 
+
+\hbox(4.66113+1.24805)x426.79135, glue set 2.30937, direction TLT
+.\glue(\leftskip) 48.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 599>
+.\3>dejavu-6pt-ss-tf-0--0 С
+.etc.
+
+
+Underfull \hbox (badness 1163) in paragraph at lines 452--453
+ \3>dejavu-8pt-rm-tf-0--0 сколько необходимо. Если мы просто укажем [][]“ \3>dejavu-8pt-tt-tf-0--0 p[]\3>dejavu-8pt-rm-tf-0--0 ”, ширина столбца будет равна всей
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.26907, direction TLT
+.\glue(\leftskip) 36.0
+.\3>dejavu-8pt-rm-tf-0--0 с
+.\3>dejavu-8pt-rm-tf-0--0 к
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 л
+.etc.
+
+pages           > flushing realpage 191, userpage 191
+
+Underfull \hbox (badness 10000) in paragraph at lines 477--478
+ [][][][] \3>dejavu-8pt-rm-it-0--0 Столбцы с математическими формулами\3>dejavu-8pt-rm-tf-0--0 : спецификаторы [][]“ \3>dejavu-8pt-tt-tf-0--0 m[]\3>dejavu-8pt-rm-tf-0--0 ” и [][]“ \3>dejavu-8pt-tt-tf-0--0 M[]\3>dejavu-8pt-rm-tf-0--0 ” включают
+
+\hbox(8.37114+3.25543)x426.79135, glue set 4.7524, direction TLT
+.\glue(\leftskip) 36.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 632>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 1502) in paragraph at lines 485--486
+ [][][][] \3>dejavu-8pt-rm-it-0--0 Добавление дополнительных горизонтальных пробелов вокруг содержимого ячеек в
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.46896, direction TLT
+.\glue(\leftskip) 36.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 522>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 1152) in paragraph at lines 489--490
+ \3>dejavu-8pt-rm-tf-0--0 которая автоматически применяется ко всем ячейкам в столбце. Например,[][]“ \3>dejavu-8pt-tt-tf-0--0 |lf\3>dejavu-8pt-mm-mb--1 \\3>dejavu-8pt-tt-tf-0--0 sc|[]\3>dejavu-8pt-rm-tf-0--0 ”
+
+\hbox(8.37114+3.25543)x426.79135, glue set 2.26068, direction TLT
+.\glue(\leftskip) 36.0
+.\3>dejavu-8pt-rm-tf-0--0 к
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 т
+.\3>dejavu-8pt-rm-tf-0--0 о
+.etc.
+
+floatblocks     > 6 saved
+
+Underfull \hbox (badness 1558) in paragraph at lines 527--528
+ [][]\3>dejavu-8pt-rm-tf-0--0 После того, как таблица была спроектирована, необходимо ввести ее содержимое. Чтобы
+
+\hbox(6.21094+1.66406)x426.79135, glue set 2.49849, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 638>
+.\3>dejavu-8pt-rm-tf-0--0 П
+.etc.
+
+pages           > flushing realpage 192, userpage 192
+floatblocks     > 6 moved
+floatblocks     > '20' moved
+
+Underfull \hbox (badness 4168) in paragraph at lines 537--538
+ \3>dejavu-8pt-rm-tf-0--0 дополнительно команду \3>dejavu-8pt-tt-tf-0--0 \NR \3>dejavu-8pt-rm-tf-0--0 и еще одну команду \3>dejavu-8pt-tt-tf-0--0 \HL\3>dejavu-8pt-rm-tf-0--0 , чтобы закрыть сетку нижней
+
+\hbox(6.21094+1.77734)x426.79135, glue set 3.47095, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-rm-tf-0--0 д
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\3>dejavu-8pt-rm-tf-0--0 п
+.\3>dejavu-8pt-rm-tf-0--0 о
+.etc.
+
+floatblocks     > '21' placed
+pages           > flushing realpage 193, userpage 193
+structure       > sectioning > section @ level 3 : 3.13.4 -> Общие аспекты изображений, таблиц и других плавающих объектов
+pages           > flushing realpage 194, userpage 194
+
+Underfull \hbox (badness 1173) in paragraph at lines 652--653
+ [][]\3>dejavu-8pt-rm-tf-0--0 Первые три аргумента, заключенные в квадратные скобки, необязательны. Последние два
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.27464, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 626>
+.\3>dejavu-8pt-rm-tf-0--0 П
+.etc.
+
+floatblocks     > no block given
+floatblocks     > '22' placed
+
+Underfull \hbox (badness 2547) in paragraph at lines 662--662
+ [][][]
+
+\hbox(25.91641+3.25543)x75.58197, glue set 2.94557, direction TLT
+.\glue(\leftskip) 0.0 plus 16.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\begindir TLT
+.\boundary=1
+.\hbox(8.37114+3.25543)x0.0, direction TLT
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.13.4.1 -> Параметры вставки плавающих объектов
+
+Underfull \hbox (badness 10000) in paragraph at lines 676--677
+ \3>dejavu-8pt-tt-tf-0--0 tom in-left, in-right, in-mar-gin, mar-gin, left-mar-gin, right-mar-gin, lef-ted-ge, righ-ted-
+
+\hbox(6.1211+1.71875)x426.79135, direction TLT
+.\glue(\leftskip) 24.0
+.\3>dejavu-8pt-tt-tf-0--0 t
+.\3>dejavu-8pt-tt-tf-0--0 o
+.\3>dejavu-8pt-tt-tf-0--0 m
+.\glue(\spaceskip) 4.8164
+.etc.
+
+pages           > flushing realpage 195, userpage 195
+
+Underfull \hbox (badness 2856) in paragraph at lines 678--679
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 Другие возможные места вставки больше связаны с текстом, окружающим объект, и
+
+\hbox(8.37114+3.25543)x426.79135, glue set 3.05823, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 486>
+.\glue 0.0
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.13.4.2 -> Настройка заголовков плавающих объектов
+pages           > flushing realpage 196, userpage 196
+
+Underfull \hbox (badness 1412) in paragraph at lines 735--736
+ \3>dejavu-8pt-tt-tf-0--0 pre-fix-seg-ments=chap-ter \3>dejavu-8pt-rm-tf-0--0 заставляет количество объектов всегда начинаться с номера
+
+\hbox(6.21094+1.71875)x426.79135, glue set 2.41896, direction TLT
+.\glue(\leftskip) 36.0
+.\3>dejavu-8pt-tt-tf-0--0 p
+.\3>dejavu-8pt-tt-tf-0--0 r
+.\3>dejavu-8pt-tt-tf-0--0 e
+.\discretionary (penalty 50) []
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.13.4.3 -> Комбинированная вставка двух и более объектов
+
+Underfull \hbox (badness 3138) in paragraph at lines 780--781
+ [][]\3>dejavu-8pt-rm-tf-0--0 где \3>dejavu-8pt-rm-it-0--0 Or-de-ring \3>dejavu-8pt-rm-tf-0--0 указывает, как объекты должны быть упорядочены: если все они должны
+
+\hbox(6.21094+1.77734)x426.79135, glue set 3.15503, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 540>
+.\3>dejavu-8pt-rm-tf-0--0 г
+.etc.
+
+pages           > flushing realpage 197, userpage 197
+
+Underfull \hbox (badness 1590) in paragraph at lines 806--807
+ [][]\3>dejavu-8pt-rm-tf-0--0 С другой стороны, посмотрите, как каждый элемент, объединяемый в \3>dejavu-8pt-tt-tf-0--0 \start-com-bi-na-tion\3>dejavu-8pt-rm-tf-0--0 ,
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.5153, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 500>
+.\3>dejavu-8pt-rm-tf-0--0 С
+.etc.
+
+
+Underfull \hbox (badness 1122) in paragraph at lines 808--809
+ \3>dejavu-8pt-rm-tf-0--0 но и любые блоки, такие как текст внутри среды\3>dejavu-8pt-tt-tf-0--0 \start-fra-med-text\3>dejavu-8pt-rm-tf-0--0 , таблицы и т.д. Чтобы
+
+\hbox(6.21094+1.77734)x426.79135, glue set 2.23953, direction TLT
+.\glue(\leftskip) 12.0
+.\3>dejavu-8pt-rm-tf-0--0 н
+.\3>dejavu-8pt-rm-tf-0--0 о
+.\glue(\spaceskip) 2.54297 plus 1.27148 minus 0.84766
+.\3>dejavu-8pt-rm-tf-0--0 и
+.etc.
+
+structure       > sectioning > subsection @ level 4 : 3.13.4.4 -> Общая конфигурация плавающих объектов
+
+Underfull \hbox (badness 1521) in paragraph at lines 815--816
+ [][]\3>dejavu-8pt-rm-tf-0--0 Мы уже видели, что с помощью \3>dejavu-8pt-tt-tf-0--0 \pla-ce-float \3>dejavu-8pt-rm-tf-0--0 мы можем контролировать местоположение
+
+\hbox(6.1211+1.77734)x426.79135, glue set 2.47975, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 633>
+.\3>dejavu-8pt-rm-tf-0--0 М
+.etc.
+
+setup           > error in line 825, namespace 'float', key 'figure'
+references      > unknown reference '[b13_Floats.mkiv][sec:qrc-setup-en]'
+structure       > sectioning > section @ level 3 : 3.13.5 -> Определение дополнительных плавающих объектов
+pages           > flushing realpage 198, userpage 198
+
+Underfull \hbox (badness 1009) in paragraph at lines 863--864
+ [][]\3>dejavu-8pt-rm-tf-0--0 И здесь проявляется гениальность Con-T[]Xt: простая команда для управления плавающими
+
+\hbox(5.9375+2.07617)x426.79135, glue set 2.16498, direction TLT
+.\glue(\leftskip) 12.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 582>
+.\3>dejavu-8pt-rm-tf-0--0 И
+.etc.
+
+
+Underfull \hbox (badness 4660) in paragraph at lines 871--872
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 Добавьте к команде определения местоположения плавающего объекта (\3>dejavu-8pt-tt-tf-0--0 \pla-ce-float\3>dejavu-8pt-rm-tf-0--0 )
+
+\hbox(8.37114+3.25543)x426.79135, glue set 3.6026, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 611>
+.\glue 0.0
+.etc.
+
+
+Underfull \hbox (badness 4441) in paragraph at lines 873--874
+ [][][][] \3>dejavu-8pt-rm-tf-0--0 Создавайте команды, включая имя объекта, для всех действий плавающего объекта.
+
+\hbox(8.37114+3.25543)x426.79135, glue set 3.54482, direction TLT
+.\glue(\leftskip) 24.0
+.\localpar
+..\localinterlinepenalty=0
+..\localbrokenpenalty=0
+..\localleftbox=null
+..\localrightbox=null
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\latelua0 <function 581>
+.\glue 0.0
+.etc.
+
+pages           > flushing realpage 199, userpage 199
+floatblocks     > '23' placed
+close source    > level 3, order 22, name '01_BodyMatter/b13_Floats.mkiv'
+pages           > flushing realpage 200, userpage 200
+close source    > level 2, order 22, name '/home/elem/contex-projects/intro/rus/introCTX.mkiv'
+close source    > level 1, order 22, name '/usr/share/texmf/tex/context/base/mkiv/cont-yes.mkiv'
+(\end occurred inside a group at level 11)
+
+### simple group (level 11) entered at line 1077 ({)
+### semi simple group (level 10) entered at line 1077 (\begingroup)
+### simple group (level 9) entered at line 1077 ({)
+### simple group (level 8) entered at line 1077 ({)
+### simple group (level 7) entered at line 1077 ({)
+### semi simple group (level 6) entered at line 1077 (\begingroup)
+### simple group (level 5) entered at line 1077 ({)
+### simple group (level 4) entered at line 1077 ({)
+### semi simple group (level 3) entered at line 533 (\begingroup)
+### semi simple group (level 2) entered at line 533 (\begingroup)
+### simple group (level 1) entered at line 573 ({)
+### bottom level
+backend         > bookmarks > confusing level change at level 2 around '1 ConTeXt: общий обзор'
+
+system          > structure > start used structure
+
+used structure  > text: introCTX
+used structure  >   environment: introCTX_env.mkiv
+used structure  >   product: introCTX.mkiv
+used structure  >     component: a01_TitlePage.mkiv
+used structure  >     component: a02_Preface.mkiv
+used structure  >     component: b01_Introduction.mkiv
+used structure  >     component: b02_FirstDoc.mkiv
+used structure  >     component: b03_Commands.mkiv
+used structure  >     component: b04_SourceFile.mkiv
+used structure  >     component: b05_Pages.mkiv
+used structure  >     component: b07_Structure.mkiv
+used structure  >     component: b08_Lists.mkiv
+used structure  >     component: b09_References.mkiv
+used structure  >     component: b10_CharText.mkiv
+used structure  >     component: b11_ParasLines.mkiv
+used structure  >     component: b12_SpecialParas.mkiv
+used structure  >     component: b13_Floats.mkiv
+
+system          > structure > stop used structure
+
+
+system          > files > start used files
+
+used file       >    1: filename=cont-yes.mkiv filetype=tex foundname=/usr/share/texmf/tex/context/base/mkiv/cont-yes.mkiv usedmethod=database
+used file       >    2: filename=publ-imp-default.lua filetype=scripts foundname=/usr/share/texmf/tex/context/base/mkiv/publ-imp-default.lua usedmethod=database
+used file       >    3: filename=cont-new.mkiv filetype=tex foundname=/usr/share/texmf/tex/context/base/mkiv/cont-new.mkiv usedmethod=database
+used file       >    4: filename=lang-us.lua filetype=scripts foundname=/usr/share/texmf/tex/context/patterns/mkiv/lang-us.lua usedmethod=database
+used file       >    5: filename=/home/elem/contex-projects/intro/rus/introCTX.mkiv foundname=/home/elem/contex-projects/intro/rus/introCTX.mkiv usedmethod=direct
+used file       >    6: filename=introCTX_env.mkiv foundname=introCTX_env.mkiv usedmethod=direct
+used file       >    7: filename=lang-ru.lua filetype=scripts foundname=/usr/share/texmf/tex/context/patterns/mkiv/lang-ru.lua usedmethod=database
+used file       >    8: filename=type-imp-dejavu.mkiv filetype=tex foundname=/usr/share/texmf/tex/context/fonts/mkiv/type-imp-dejavu.mkiv usedmethod=database
+used file       >    9: filename=dejavu-math.lfg filetype=tex foundname=/usr/share/texmf/tex/context/fonts/mkiv/dejavu-math.lfg usedmethod=database
+used file       >   10: filename=/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf format=ttf foundname=/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf usedmethod=direct
+used file       >   11: filename=texgyredejavu-math filetype=otf format=otf foundname=/usr/share/texmf/fonts/opentype/public/tex-gyre-math/texgyredejavu-math.otf usedmethod=database
+used file       >   12: filename=00_FrontMatter/a01_TitlePage.mkiv foundname=00_FrontMatter/a01_TitlePage.mkiv usedmethod=direct
+used file       >   13: filename=metafun.mpiv filetype=mp foundname=/usr/share/texmf/metapost/context/base/mpiv/metafun.mpiv usedmethod=database
+used file       >   14: filename=mp-base.mpiv filetype=mp format=mp foundname=/usr/share/texmf/metapost/context/base/mpiv/mp-base.mpiv usedmethod=database
+used file       >   15: filename=mp-tool.mpiv filetype=mp format=mp foundname=/usr/share/texmf/metapost/context/base/mpiv/mp-tool.mpiv usedmethod=database
+used file       >   16: filename=mp-mlib.mpiv filetype=mp format=mp foundname=/usr/share/texmf/metapost/context/base/mpiv/mp-mlib.mpiv usedmethod=database
+used file       >   17: filename=mp-luas.mpiv filetype=mp format=mp foundname=/usr/share/texmf/metapost/context/base/mpiv/mp-luas.mpiv usedmethod=database
+used file       >   18: filename=mp-page.mpiv filetype=mp format=mp foundname=/usr/share/texmf/metapost/context/base/mpiv/mp-page.mpiv usedmethod=database
+used file       >   19: filename=mp-butt.mpiv filetype=mp format=mp foundname=/usr/share/texmf/metapost/context/base/mpiv/mp-butt.mpiv usedmethod=database
+used file       >   20: filename=mp-shap.mpiv filetype=mp format=mp foundname=/usr/share/texmf/metapost/context/base/mpiv/mp-shap.mpiv usedmethod=database
+used file       >   21: filename=mp-grph.mpiv filetype=mp format=mp foundname=/usr/share/texmf/metapost/context/base/mpiv/mp-grph.mpiv usedmethod=database
+used file       >   22: filename=mp-grid.mpiv filetype=mp format=mp foundname=/usr/share/texmf/metapost/context/base/mpiv/mp-grid.mpiv usedmethod=database
+used file       >   23: filename=mp-form.mpiv filetype=mp format=mp foundname=/usr/share/texmf/metapost/context/base/mpiv/mp-form.mpiv usedmethod=database
+used file       >   24: filename=mp-figs.mpiv filetype=mp format=mp foundname=/usr/share/texmf/metapost/context/base/mpiv/mp-figs.mpiv usedmethod=database
+used file       >   25: filename=mp-func.mpiv filetype=mp format=mp foundname=/usr/share/texmf/metapost/context/base/mpiv/mp-func.mpiv usedmethod=database
+used file       >   26: filename=mp-apos.mpiv filetype=mp format=mp foundname=/usr/share/texmf/metapost/context/base/mpiv/mp-apos.mpiv usedmethod=database
+used file       >   27: filename=mp-abck.mpiv filetype=mp format=mp foundname=/usr/share/texmf/metapost/context/base/mpiv/mp-abck.mpiv usedmethod=database
+used file       >   28: filename=lpdf-pdx.xml filetype=tex foundname=/usr/share/texmf/tex/context/base/mkiv/lpdf-pdx.xml usedmethod=database
+used file       >   29: filename=/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf format=ttf foundname=/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf usedmethod=direct
+used file       >   30: filename=/usr/share/fonts/truetype/dejavu/DejaVuSerif-Italic.ttf format=ttf foundname=/usr/share/fonts/truetype/dejavu/DejaVuSerif-Italic.ttf usedmethod=direct
+used file       >   31: filename=/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf format=ttf foundname=/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf usedmethod=direct
+used file       >   32: filename=00_FrontMatter/a02_Preface.mkiv foundname=00_FrontMatter/a02_Preface.mkiv usedmethod=direct
+used file       >   33: filename=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf format=ttf foundname=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf usedmethod=direct
+used file       >   34: filename=/usr/share/fonts/truetype/dejavu/DejaVuSans-Oblique.ttf format=ttf foundname=/usr/share/fonts/truetype/dejavu/DejaVuSans-Oblique.ttf usedmethod=direct
+used file       >   35: filename=img/miniconjecture.jpg format=tex foundname=img/miniconjecture.jpg usedmethod=direct
+used file       >   36: filename=img/minidoubt.jpg format=tex foundname=img/minidoubt.jpg usedmethod=direct
+used file       >   37: filename=01_BodyMatter/b01_Introduction.mkiv foundname=01_BodyMatter/b01_Introduction.mkiv usedmethod=direct
+used file       >   38: filename=logo10 filetype=afm format=afm foundname=/usr/share/texlive/texmf-dist/fonts/afm/hoekwater/mflogo-font/logo10.afm usedmethod=database
+used file       >   39: filename=logo10.pfb filetype=pfb format=pfb foundname=/usr/share/texlive/texmf-dist/fonts/type1/hoekwater/mflogo-font/logo10.pfb usedmethod=database
+used file       >   40: filename=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf format=ttf foundname=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf usedmethod=direct
+used file       >   41: filename=01_BodyMatter/b02_FirstDoc.mkiv foundname=01_BodyMatter/b02_FirstDoc.mkiv usedmethod=direct
+used file       >   42: filename=img/rain.pdf format=tex foundname=img/rain.pdf usedmethod=direct
+used file       >   43: filename=/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf format=ttf foundname=/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf usedmethod=direct
+used file       >   44: filename=01_BodyMatter/b03_Commands.mkiv foundname=01_BodyMatter/b03_Commands.mkiv usedmethod=direct
+used file       >   45: filename=01_BodyMatter/b04_SourceFile.mkiv foundname=01_BodyMatter/b04_SourceFile.mkiv usedmethod=direct
+used file       >   46: filename=/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Oblique.ttf format=ttf foundname=/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Oblique.ttf usedmethod=direct
+used file       >   47: filename=/usr/share/fonts/truetype/dejavu/DejaVuSerif-BoldItalic.ttf format=ttf foundname=/usr/share/fonts/truetype/dejavu/DejaVuSerif-BoldItalic.ttf usedmethod=direct
+used file       >   48: filename=01_BodyMatter/b05_Pages.mkiv foundname=01_BodyMatter/b05_Pages.mkiv usedmethod=direct
+used file       >   49: filename=img/PageLayout.png format=tex foundname=img/PageLayout.png usedmethod=direct
+used file       >   50: filename=01_BodyMatter/b07_Structure.mkiv foundname=01_BodyMatter/b07_Structure.mkiv usedmethod=direct
+used file       >   51: filename=01_BodyMatter/b08_Lists.mkiv foundname=01_BodyMatter/b08_Lists.mkiv usedmethod=direct
+used file       >   52: filename=01_BodyMatter/b09_References.mkiv foundname=01_BodyMatter/b09_References.mkiv usedmethod=direct
+used file       >   53: filename=01_BodyMatter/b10_CharText.mkiv foundname=01_BodyMatter/b10_CharText.mkiv usedmethod=direct
+used file       >   54: filename=symb-imp-mvs.mkiv filetype=tex foundname=/usr/share/texmf/tex/context/base/mkiv/symb-imp-mvs.mkiv usedmethod=database
+used file       >   55: filename=symb-run.mkiv filetype=tex foundname=/usr/share/texmf/tex/context/base/mkiv/symb-run.mkiv usedmethod=database
+used file       >   56: filename=lang-es.lua filetype=scripts foundname=/usr/share/texmf/tex/context/patterns/mkiv/lang-es.lua usedmethod=database
+used file       >   57: filename=01_BodyMatter/b11_ParasLines.mkiv foundname=01_BodyMatter/b11_ParasLines.mkiv usedmethod=direct
+used file       >   58: filename=01_BodyMatter/b12_SpecialParas.mkiv foundname=01_BodyMatter/b12_SpecialParas.mkiv usedmethod=direct
+used file       >   59: filename=type-imp-antykwa.mkiv filetype=tex foundname=/usr/share/texmf/tex/context/fonts/mkiv/type-imp-antykwa.mkiv usedmethod=database
+used file       >   60: filename=lm.lfg filetype=tex foundname=/usr/share/texmf/tex/context/fonts/mkiv/lm.lfg usedmethod=database
+used file       >   61: filename=antykwa-math.lfg filetype=tex foundname=/usr/share/texmf/tex/context/fonts/mkiv/antykwa-math.lfg usedmethod=database
+used file       >   62: filename=mkiv-base.map filetype=map format=map foundname=/usr/share/texmf/fonts/map/pdftex/context/mkiv-base.map usedmethod=database
+used file       >   63: filename=msam10.tfm filetype=tfm format=tfm foundname=/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm usedmethod=database
+used file       >   64: filename=msbm10.tfm filetype=tfm format=tfm foundname=/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm usedmethod=database
+used file       >   65: filename=01_BodyMatter/b13_Floats.mkiv foundname=01_BodyMatter/b13_Floats.mkiv usedmethod=direct
+used file       >   66: filename=img/cow-brown.pdf format=tex foundname=img/cow-brown.pdf usedmethod=direct
+used file       >   67: filename=/home/elem/.texlive2017/texmf-var/luatex-cache/context/b47c3d3cee7cb6c86268d0595268c442/schemes/http-www-cervantex-es-files-cervantex-cervanTeXcolor-small.jpg foundname=/home/elem/.texlive2017/texmf-var/luatex-cache/context/b47c3d3cee7cb6c86268d0595268c442/schemes/http-www-cervantex-es-files-cervantex-cervanTeXcolor-small.jpg usedmethod=direct
+used file       >   68: filename=img/tablas_eng.jpg format=tex foundname=img/tablas_eng.jpg usedmethod=direct
+used file       >   69: filename=msam10.pfb filetype=pfb format=pfb foundname=/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb usedmethod=database
+
+system          > files > stop used files
+
+
+system          > options > start commandline options
+
+used option     > currentrun="3"
+used option     > fulljobname="./introCTX.mkiv"
+used option     > input="./introCTX.mkiv"
+used option     > kindofrun="2"
+used option     > maxnofruns="9"
+used option     > no-parse-first-line="true"
+
+system          > options > stop commandline options
+
+system          > options > start commandline files
+
+used file       >    1: ./introCTX.mkiv
+
+system          > options > stop commandline files
+
+
+references      > start problematic references
+
+references      > unknown >    2: [a02_Preface.mkiv][installation_suite]
+references      > unknown >    2: [a02_Preface.mkiv][sec:qrc-setup-en]
+references      > unknown >    4: [b01_Introduction.mkiv][installation_suite]
+references      > unknown >    2: [b01_Introduction.mkiv][sec:alias]
+references      > unknown >    4: [b02_FirstDoc.mkiv][installation_suite]
+references      > unknown >    2: [b03_Commands.mkiv][sec:fontscol]
+references      > unknown >    6: [b03_Commands.mkiv][sec:qrc-setup-en]
+references      > unknown >    2: [b04_SourceFile.mkiv][sec: зарезервированные символы]
+references      > unknown >    2: [b04_SourceFile.mkiv][sec:mainfont]
+references      > unknown >    2: [b04_SourceFile.mkiv][кодировках]
+references      > unknown >    2: [b05_Pages.mkiv][sec:qrc-setup-en]
+references      > unknown >    1: [b08_Lists.mkiv][(https://wiki.contextgarden.net/Table_of_Contents##Page_numbering_in_ToC)]
+references      > unknown >    4: [b08_Lists.mkiv][sec:qrc-setup-en]
+references      > unknown >    2: [b10_CharText.mkiv][app:symbols]
+references      > unknown >    2: [b10_CharText.mkiv][sec:encoding), мы можем использовать любой символ или символ, как живых языков, так и многих уже вымерших. Но, поскольку возможности клавиатуры ограничены, большинство символов и символов, разрешенных в UTF-8, обычно не могут быть получены непосредственно с клавиатуры. Это особенно падеж с множеством диакритических знаков, то есть знаки, помещенные над (или под) определенными буквами, придавая им особую ценность; но также и со многими другими символами, такими как математические символы, традиционные лигатуры и т. д. Мы можем получить многие из этих символов с помощью \ConTeXt \ с помощью команд. \startsubsection [title={Диакритические знаки и специальные буквы}]
+references      > unknown >    4: [b10_CharText.mkiv][sec:fontscol]
+references      > unknown >    2: [b10_CharText.mkiv][sec:qrc- setup-en]
+references      > unknown >    2: [b10_CharText.mkiv][sec:smallcaps]
+references      > unknown >    2: [b10_CharText.mkiv][sec:пробелы]
+references      > unknown >    2: [b11_ParasLines.mkiv][sec:fontscol]
+references      > unknown >    2: [b11_ParasLines.mkiv][sec:sizes]
+references      > unknown >    4: [b12_SpecialParas.mkiv][humpty]
+references      > unknown >    2: [b12_SpecialParas.mkiv][noteB]
+references      > unknown >    2: [b12_SpecialParas.mkiv][noteC]
+references      > unknown >    2: [b12_SpecialParas.mkiv][sec:Definenote]
+references      > unknown >    2: [b12_SpecialParas.mkiv][sec:lnumbering]
+references      > unknown >    6: [b12_SpecialParas.mkiv][sec:qrc-setup-en]
+references      > unknown >    2: [b13_Floats.mkiv][sec: startcombination]
+references      > unknown >    2: [b13_Floats.mkiv][sec:qrc-setup-en]
+
+references      > stop problematic references
+
+
+mkiv lua stats  > scheme handling time: 0.447 seconds, 2 processed, threshold 86400 seconds, loaded: http:1https:1, reused: none
+mkiv lua stats  > used config file: /usr/share/texmf/web2c/texmfcnf.lua;/usr/share/texlive/texmf-dist/web2c/texmfcnf.lua
+mkiv lua stats  > used cache path: readable+writable: '/home/elem/.texlive2017/texmf-var/luatex-cache/context/b47c3d3cee7cb6c86268d0595268c442'
+mkiv lua stats  > resource resolver: loadtime 0.086 seconds, 1 scans with scantime 0.000 seconds, 0 shared scans, 69 found files, scanned paths: /home/elem/texmf
+mkiv lua stats  > stored bytecode data: 404 modules (0.491 sec), 91 tables (0.022 sec), 495 chunks (0.513 sec)
+mkiv lua stats  > traced context: maxstack: 1241, freed: 10, unreachable: 1231
+mkiv lua stats  > cleaned up reserved nodes: 74 nodes, 10 lists of 455
+mkiv lua stats  > node memory usage: 17 hlist, 8 vlist, 5 rule, 2 boundary, 2 local_par, 4 dir, 67 glue, 2 kern, 8 penalty, 286 attribute, 63 glue_spec, 71 attribute_list, 2 temp, 2 late_lua, 2 user_defined, 2 pdf_setmatrix, 1 pdf_save, 1 pdf_restore
+mkiv lua stats  > node list callback tasks: 7 unique task lists, 14 instances (re)created, 41151 calls
+mkiv lua stats  > h-node processing time: 3.343 seconds including kernel
+mkiv lua stats  > attribute processing time: 0.739 seconds front- and backend
+mkiv lua stats  > used backend: pdf (backend for directly generating pdf output)
+mkiv lua stats  > jobdata time: 0.242 seconds saving, 0.074 seconds loading
+mkiv lua stats  > callbacks: 80195 direct, 11231 indirect, 91426 total
+mkiv lua stats  > randomizer: resumed with value 0.53213523865311
+mkiv lua stats  > positions: 2726 collected, 2703 regular, 23 special
+mkiv lua stats  > v-node processing time: 0.260 seconds 
+mkiv lua stats  > loaded patterns: en::2 es::54 ru::20, load time: 0.000
+mkiv lua stats  > interactive elements: 591 references, 796 destinations
+mkiv lua stats  > result saved in file: introCTX.pdf, compresslevel 3, objectcompresslevel 3
+mkiv lua stats  > margin data: 28 entries, 0 pending
+mkiv lua stats  > loaded fonts: 14 files: dejavusans-bold.ttf, dejavusans-oblique.ttf, dejavusans.ttf, dejavusansmono-bold.ttf, dejavusansmono-oblique.ttf, dejavusansmono.ttf, dejavuserif-bold.ttf, dejavuserif-bolditalic.ttf, dejavuserif-italic.ttf, dejavuserif.ttf, logo10.afm, msam10.tfm, msbm10.tfm, texgyredejavu-math.otf
+mkiv lua stats  > font engine: otf 3.029, afm 1.512, tfm 1.000, 67 instances, 53 shared in backend, 4 common vectors, 49 common hashes, load time 2.469 seconds 
+mkiv lua stats  > metapost processing time: 0.004 seconds, loading: 0.027, execution: 0.003, n: 2, average: 0.017, instances: 1, memory: 2.364 M
+mkiv lua stats  > math processing time: 0.042 seconds 
+mkiv lua stats  > graphics processing time: 0.521 seconds including tex, 40 processed images, 14 unique asked, 2 bad names
+mkiv lua stats  > pdf annotations: 591 links (591 unique), 0 special
+mkiv lua stats  > cross referencing: 777 identified, 29 unknown
+mkiv lua stats  > used platform: linux-64, type: unix, binary subtree: usr
+mkiv lua stats  > luatex banner: this is luatex, version 1.0.4 (tex live 2017/debian)
+mkiv lua stats  > control sequences: 49294 of 65536 + 100000
+mkiv lua stats  > lua properties: engine: lua, used memory: 234 MB (ctx: 231 MB), hash type: lua, hash chars: min(64,40), symbol mask: utf (τεχ)
+mkiv lua stats  > runtime: 17.66 seconds, 200 processed pages, 200 shipped pages, 11.325 pages/second
+
