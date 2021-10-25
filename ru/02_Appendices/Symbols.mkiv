@@ -1,0 +1,530 @@
+%%% File:       Symbols.mkiv
+%%% Author:     Joaquín Ataz-López
+%%% Begun:      April 2020
+%%% Concluded:  July 2020
+%%% Contents: Это приложение началось как часть главы, посвященной написанию исходного файла. Я начал включать в него команды, которые генерируют символы, которые обычно недоступны с клавиатуры. Но вскоре я понял, что A) у меня не было надежных команд генерации символов, которые работали бы в ConTeXt и B) Даже если бы он оставался неполным, стоило составить список команд, которые я бы лично проверил, чтобы убедиться, что они работал.
+%%% Но по мере того, как список увеличивался, глава, где они были бы расположены, будет непропорционально. Поэтому я решил поместить их все в приложение, которое имеет то преимущество, что его легче найти. Во введении я оставил только команды для создания диакритических знаков и греческих букв, а все остальное я поместил в приложение. Все команды здесь я проверил лично. Однако я знаю, что способ их каталогизации открыт для дискуссий: это проблема незнания математики.
+%%%
+%%% Edited: Emacs + AuTeX - And at times vim + context-plugin
+%%%
+
+\environment introCTX_env.mkiv
+
+\startcomponent Symbols.mkiv
+
+\startchapter
+  [
+    reference=app:symbols,
+    title={Команды для генерации математических и нематематических символов},
+  ]
+
+В следующих таблицах вы найдете команды, которые генерируют различные символы, которые я проверял один за другим; большинство из них (но не все) предпочтительно использовать в математике.
+
+Я понимаю, что их расположение может быть улучшено. Проблема в том, что, поскольку я больше разбираюсь в литературе, я не знаю, для чего многие из этих символов используются в математике; и часто я даже не уверен, действительно ли это символы, используемые в математике. Вот почему я сделал группу символов, которые, как я уверен, не используются в математике, а что касается остальных, я сгруппировал различные символы в соответствии с определенными узнаваемыми формами (треугольники, квадраты, звездочки, ромбы, стрелки, точки). Я расположил остальные символы, {\em вероятно} они используются в математике, в алфавитном порядке (из команды, которая их генерирует).
+
+Более того, таблицы не являются исчерпывающими. Я уверен, что существует гораздо больше символов, которые можно сгенерировать с помощью \ConTeXt, хотя я не нашел ни одного документа или веб-страницы, которые бы собирали их все. Собранные здесь, по большей части, символы, которые работают в \TeX\ или в \LaTeX, и которые, как я убедился, также работают в \ConTeXt. Многие из этих символов работают только в математическом режиме в \LaTeX\ (заключены в \quote {\$}). В \ConTeXt, как легко увидеть в следующих таблицах, это необходимо только в очень немногих случаях.
+
+
+{\smallbodyfont
+
+\subsubsubject{Деньги и символы для легального использования}
+
+\starttabulate[|l|l|l|l|l|l|]
+\HL
+\NC\copyright\NC{\tt\backslash copyright}
+\NC\registered\NC{\tt\backslash registered}
+\NC\textcent\NC{\tt\backslash textcent}
+\NR
+\NC\textcircledP\NC{\tt\backslash textcircledP}
+\NC\textcurrency\NC{\tt\backslash textcurrency}
+\NC\textdollar\NC{\tt\backslash textdollar}
+\NR
+\NC\textdong\NC{\tt\backslash textdong}
+\NC\texteuro\NC{\tt\backslash texteuro}
+\NC\textflorin\NC{\tt\backslash textflorin}
+\NR
+\NC\textsterling\NC{\tt\backslash textsterling}
+\NC\textyen\NC{\tt\backslash textyen}
+\NC\trademark\NC{\tt\backslash trademark}
+\NR
+\HL
+\stoptabulate
+
+\page[preference]
+
+\subsubsubject{Треугольники, круги, квадраты и другие формы}
+
+\starttabulate[|l|l|l|l|l|l|]
+\HL
+\NC\triangle\NC{\tt\backslash triangle}
+\NC\bigcirc\NC{\tt\backslash bigcirc}
+\NC\square\NC{\tt\backslash square}
+\NR
+\NC\triangleleft\NC{\tt\backslash triangleleft}
+\NC\circ\NC{\tt\backslash circ}
+\NC\blacksquare\NC{\tt\backslash blacksquare}
+\NR
+\NC\triangleright\NC{\tt\backslash triangleright}
+\NC\bullet\NC{\tt\backslash bullet}
+\NC\boxdot\NC{\tt\backslash boxdot}
+\NR
+\NC\triangledown\NC{\tt\backslash triangledown}
+\NC\circledast\NC{\tt\backslash circledast}
+\NC\boxminus\NC{\tt\backslash boxminus}
+\NR
+\NC\blacktriangledown\NC{\tt\backslash blacktriangledown}
+\NC\circledcirc\NC{\tt\backslash circledcirc}
+\NC\boxplus\NC{\tt\backslash boxplus}
+\NR
+\NC\blacktriangleleft\NC{\tt\backslash blacktriangleleft}
+\NC\circleddash\NC{\tt\backslash circleddash}
+\NC\boxtimes\NC{\tt\backslash boxtimes}
+\NR
+\NC\blacktriangleright\NC{\tt\backslash blacktriangleright}
+\NC\bigoplus\NC{\tt\backslash bigoplus}
+\NC\ast\NC{\tt\backslash ast}
+\NR
+\NC\blacktriangle\NC{\tt\backslash blacktriangle}
+\NC\bigotimes\NC{\tt\backslash bigotimes}
+\NC\maltese\NC{\tt\backslash maltese}
+\NR
+\NC\triangleq\NC{\tt\backslash triangleq}
+\NC\oplus\NC{\tt\backslash oplus}
+\NC\star\NC{\tt\backslash star}
+\NR
+\NC\diamond\NC{\tt\backslash diamond}
+\NC\ominus\NC{\tt\backslash ominus}
+\NC\clubsuit\NC{\tt\backslash clubsuit}
+\NR
+\NC\lozenge\NC{\tt\backslash lozenge}
+\NC\otimes\NC{\tt\backslash otimes}
+\NC\heartsuit\NC{\tt\backslash heartsuit}
+\NR
+\NC\blacklozenge\NC{\tt\backslash blacklozenge}
+\NC\oslash\NC{\tt\backslash oslash}
+\NC\spadesuit\NC{\tt\backslash spadesuit}
+\NR
+\NC\diamondsuit\NC{\tt\backslash diamondsuit}
+\NC\odot\NC{\tt\backslash odot}
+\NC\varnothing\NC{\tt\backslash varnothing}
+\NR
+\HL
+\stoptabulate
+
+\subsubsubject{Стрелки:}
+
+\starttabulate[|l|l|l|l|l|l|]
+\HL
+\NC\leftarrow\NC{\tt\backslash leftarrow, \backslash gets}
+\NC\rightarrow\NC{\tt\backslash rightarrow, \backslash to}
+\NC\leftrightarrow\NC{\tt\backslash leftrightarrow}
+\NR
+\NC\nleftarrow\NC{\tt\backslash nleftarrow}
+\NC\nrightarrow\NC{\tt\backslash nrightarrow}
+\NC\Leftrightarrow\NC{\tt\backslash Leftrightarrow}
+\NR
+\NC\longleftarrow\NC{\tt\backslash longleftarrow}
+\NC\longrightarrow\NC{\tt\backslash longrightarrow}
+\NC\longleftrightarrow\NC{\tt\backslash longleftrightarrow}
+\NR
+\NC\Lleftarrow\NC{\tt\backslash Lleftarrow}
+\NC\Rrightarrow\NC{\tt\backslash Rrightarrow}
+\NC\Longleftrightarrow\NC{\tt\backslash Longleftrightarrow}
+\NR
+\NC\nLeftarrow\NC{\tt\backslash nLeftarrow}
+\NC\nRightarrow\NC{\tt\backslash nRightarrow}
+\NC\leftrightharpoons\NC{\tt\backslash leftrightharpoons}
+\NR
+\NC\Lsh\NC{\tt\backslash Lsh}
+\NC\Rsh\NC{\tt\backslash Rsh}
+\NC\leftrightsquigarrow\NC{\tt\backslash leftrightsquigarrow}
+\NR
+\NC\mapsfrom\NC{\tt\backslash mapsfrom}
+\NC\mapsto\NC{\tt\backslash mapsto}
+\NC\nLeftrightarrow\NC{\tt\backslash nLeftrightarrow}
+\NR
+\NC\longmapsfrom\NC{\tt\backslash longmapsfrom}
+\NC\longmapsto\NC{\tt\backslash longmapsto}
+\NC\nleftrightarrow\NC{\tt\backslash nleftrightarrow}
+\NR
+\NC\Mapsfrom\NC{\tt\backslash Mapsfrom}
+\NC\Mapsto\NC{\tt\backslash Mapsto}
+\NC\rightleftarrows\NC{\tt\backslash rightleftarrows}
+\NR
+\NC\Longmapsfrom\NC{\tt\backslash Longmapsfrom}
+\NC\Longmapsto\NC{\tt\backslash Longmapsto}
+\NC\rightleftharpoons\NC{\tt\backslash rightleftharpoons}
+\NR
+\NC\leftarrowtail\NC{\tt\backslash leftarrowtail}
+\NC\rightarrowtail\NC{\tt\backslash rightarrowtail}
+\NC\updownarrow\NC{\tt\backslash updownarrow}
+\NR
+\NC\twoheadleftarrow\NC{\tt\backslash twoheadleftarrow}
+\NC\twoheadrightarrow\NC{\tt\backslash twoheadrightarrow}
+\NC\Updownarrow\NC{\tt\backslash Updownarrow}
+\NR
+\NC\circlearrowleft\NC{\tt\backslash circlearrowleft}
+\NC\circlearrowright\NC{\tt\backslash circlearrowright}
+\NC\updownarrows\NC{\tt\backslash updownarrows}
+\NR
+\NC\curvearrowleft\NC{\tt\backslash curvearrowleft}
+\NC\curvearrowright\NC{\tt\backslash curvearrowright}
+\NC\uparrow\NC{\tt\backslash uparrow}
+\NR
+\NC\hookleftarrow\NC{\tt\backslash hookleftarrow}
+\NC\hookrightarrow\NC{\tt\backslash hookrightarrow}
+\NC\Uparrow\NC{\tt\backslash Uparrow}
+\NR
+\NC\leftharpoondown\NC{\tt\backslash leftharpoondown}
+\NC\rightharpoondown\NC{\tt\backslash rightharpoondown}
+\NC\upuparrows\NC{\tt\backslash upuparrows}
+\NR
+\NC\leftharpoonup\NC{\tt\backslash leftharpoonup}
+\NC\rightharpoonup\NC{\tt\backslash rightharpoonup}
+\NC\twoheaduparrow\NC{\tt\backslash twoheaduparrow}
+\NR
+\NC\leftleftarrows\NC{\tt\backslash leftleftarrows}
+\NC\rightrightarrows\NC{\tt\backslash rightrightarrows}
+\NC\upharpoonleft\NC{\tt\backslash upharpoonleft}
+\NR
+\NC\looparrowleft\NC{\tt\backslash looparrowleft}
+\NC\looparrowright\NC{\tt\backslash looparrowright}
+\NC\upharpoonright\NC{\tt\backslash upharpoonright}
+\NR
+\NC\swarrow\NC{\tt\backslash swarrow}
+\NC\searrow\NC{\tt\backslash searrow}
+\NC\downarrow\NC{\tt\backslash downarrow}
+\NR
+\NC\nwarrow\NC{\tt\backslash nwarrow}
+\NC\nearrow\NC{\tt\backslash nearrow}
+\NC\Downarrow\NC{\tt\backslash Downarrow}
+\NR
+\NC\leftsquigarrow\NC{\tt\backslash leftsquigarrow}
+\NC\leadsto\NC{\tt\backslash leadsto, \backslash rightsquigarrow}
+\NC\downdownarrows\NC{\tt\backslash downdownarrows}
+\NR
+\NC$\iff$\NC{\tt\$\backslash iff\$}
+\NC\twoheaddownarrow\NC{\tt\backslash twoheaddownarrow}
+\NC\downharpoonleft\NC{\tt\backslash downharpoonleft}
+\NR
+\NC$\implies$\NC{\tt \$\backslash implies\$}
+\NC\NC
+\NC\downharpoonright\NC{\tt\backslash downharpoonright}
+\NR
+\HL
+\stoptabulate
+
+\subsubsubject{Пунктуация}
+
+\starttabulate[|l|l|l|l|l|l|]
+\HL
+\NC\because\NC{\tt\backslash because}
+\NC\cdot\NC{\tt\backslash cdot}
+\NC\cdotp\NC{\tt\backslash cdotp}
+\NR
+\NC\cdots\NC{\tt\backslash cdots}
+\NC\centerdot\NC{\tt\backslash centerdot}
+\NC\colon\NC{\tt\backslash colon}
+\NR
+\NC\ddots\NC{\tt\backslash ddots}
+\NC\dots\NC{\tt\backslash dots}
+\NC\ldotp\NC{\tt\backslash ldotp}
+\NR
+\NC\ldots\NC{\tt\backslash ldots}
+\NC\textellipsis\NC{\tt\backslash textellipsis}
+\NC\therefore\NC{\tt\backslash therefore}
+\NR
+\NC\vdots\NC{\tt\backslash vdots}
+\NC\quotedblbase\NC{\tt\backslash quotedblbase}
+\NC\quotedbl\NC{\tt\backslash quotedbl}
+\NR
+\HL
+\stoptabulate
+
+\subsubsubject{Символы в основном для математического использования:}
+
+\starttabulate[|l|l|l|l|l|l|]
+\HL
+\NC\aleph\NC{\tt\backslash aleph}
+\NC\amalg\NC{\tt\backslash amalg}
+\NC\angle\NC{\tt\backslash angle}
+\NR
+\NC\approx\NC{\tt\backslash approx}
+\NC\approxeq\NC{\tt\backslash approxeq}
+\NC\asymp\NC{\tt\backslash asymp}
+\NR
+\NC\backsim\NC{\tt\backslash backsim}
+\NC\backslash\NC{\tt\backslash backslash}
+\NC\barwedge\NC{\tt\backslash barwedge}
+\NR
+\NC\between\NC{\tt\backslash between}
+\NC\bigcap\NC{\tt\backslash bigcap}
+\NC\bigcup\NC{\tt\backslash bigcup}
+\NR
+\NC\bigsqcup\NC{\tt\backslash bigsqcup}
+\NC\biguplus\NC{\tt\backslash biguplus}
+\NC\bigvee\NC{\tt\backslash bigvee}
+\NR
+\NC\bigwedge\NC{\tt\backslash bigwedge}
+\NC\bot\NC{\tt\backslash bot}
+\NC\bowtie\NC{\tt\backslash bowtie}
+\NR
+\NC\Bumpeq\NC{\tt\backslash Bumpeq}
+\NC$\cap$\NC{\tt\$\backslash cap\$}
+\NC\Cap\NC{\tt\backslash Cap}
+\NR
+\NC\circeq\NC{\tt\backslash circeq}
+\NC\complement\NC{\tt\backslash complement}
+\NC\cong\NC{\tt\backslash cong}
+\NR
+\NC\coprod\NC{\tt\backslash coprod}
+\NC\cup\NC{\tt\backslash cup}
+\NC\Cup\NC{\tt\backslash Cup}
+\NR
+\NC\curlyeqprec\NC{\tt\backslash curlyeqprec}
+\NC\curlyeqsucc\NC{\tt\backslash curlyeqsucc}
+\NC\curlyvee\NC{\tt\backslash curlyvee}
+\NR
+\NC\curlywedge\NC{\tt\backslash curlywedge}
+\NC$\dashv$\NC{\tt\$\backslash dashv\$}
+\NC\dagger\NC{\tt\backslash dagger, dag}
+\NR
+\NC\ddagger\NC{\tt\backslash ddagger, ddag}
+\NC\diamondsuit\NC{\tt\backslash diamondsuit}
+\NC\div\NC{\tt\backslash div}
+\NR
+\NC\divideontimes\NC{\tt\backslash divideontimes}
+\NC\doteq\NC{\tt\backslash doteq}
+\NC\doteqdot\NC{\tt\backslash doteqdot}
+\NR
+\NC\dotplus\NC{\tt\backslash dotplus}
+\NC\ell\NC{\tt\backslash ell}
+\NC\emptyset\NC{\tt\backslash emptyset}
+\NR
+\NC\eqcirc\NC{\tt\backslash eqcirc}
+\NC\eqslantgtr\NC{\tt\backslash eqslantgtr}
+\NC\eqslantless\NC{\tt\backslash eqslantless}
+\NR
+\NC\equiv\NC{\tt\backslash equiv}
+\NC\eth\NC{\tt\backslash eth}
+\NC\exists\NC{\tt\backslash exists}
+\NR
+\NC\exists!\NC{\tt\backslash exists!}
+\NC\fallingdotseq\NC{\tt\backslash fallingdotseq}
+\NC\flat\NC{\tt\backslash flat}
+\NR
+\NC\forall\NC{\tt\backslash forall}
+\NC\frown\NC{\tt\backslash frown}
+\NC\geq\NC{\tt\backslash geq, \backslash ge}
+\NR
+\NC\geqslant\NC{\tt\backslash geqslant}
+\NC\gg\NC{\tt\backslash gg}
+\NC\ggg\NC{\tt\backslash ggg}
+\NR
+\NC\gnapprox\NC{\tt\backslash gnapprox}
+\NC\gneqq\NC{\tt\backslash gneqq}
+\NC\gnsim\NC{\tt\backslash gnsim}
+\NR
+\NC\gtrapprox\NC{\tt\backslash gtrapprox}
+\NC\gtrdot\NC{\tt\backslash gtrdot}
+\NC\gtreqless\NC{\tt\backslash gtreqless}
+\NR
+\NC\gtreqqless\NC{\tt\backslash gtreqqless}
+\NC\gtrless\NC{\tt\backslash gtrless}
+\NC\gtrsim\NC{\tt\backslash gtrsim}
+\NR
+\NC\hbar\NC{\tt\backslash hbar}
+\NC\heartsuit\NC{\tt\backslash heartsuit}
+\NC\hslash\NC{\tt\backslash hslash}
+\NR
+\NC\iiiint\NC{\tt\backslash iiiint}
+\NC\Im\NC{\tt\backslash Im}
+\NC\imath\NC{\tt\backslash imath}
+\NR
+\NC$\in$\NC{\tt\$\backslash in\$}
+\NC\infty\NC{\tt\backslash infty}
+\NC$\int$\NC{\tt\$\backslash int\$}
+\NR
+\NC\intercal\NC{\tt\backslash intercal}
+\NC\jmath\NC{\tt\backslash jmath}
+\NC\land\NC{\tt\backslash land} 
+\NR
+\NC\leftthreetimes\NC{\tt\backslash leftthreetimes}
+\NC\leq\NC{\tt\backslash leq, \backslash le}
+\NC\leqq\NC{\tt\backslash leqq}
+\NR
+\NC\leqslant\NC{\tt\backslash leqslant}
+\NC\lessapprox\NC{\tt\backslash lessapprox}
+\NC\lessdot\NC{\tt\backslash lessdot}
+\NR
+\NC\lesseqgtr\NC{\tt\backslash lesseqgtr}
+\NC\lesseqqgtr\NC{\tt\backslash lesseqqgtr}
+\NC\lessgtr\NC{\tt\backslash lessgtr}
+\NR
+\NC\lesssim\NC{\tt\backslash lesssim}
+\NC\ll\NC{\tt\backslash ll}
+\NC\lll\NC{\tt\backslash lll}
+\NR
+\NC\lnapprox\NC{\tt\backslash lnapprox}
+\NC\lneq\NC{\tt\backslash lneq}
+\NC\lneqq\NC{\tt\backslash lneqq}
+\NR
+\NC\lnsim\NC{\tt\backslash lnsim}
+\NC\lor\NC{\tt\backslash lor}
+\NC\ltimes\NC{\tt\backslash ltimes}
+\NR
+\NC\measuredangle\NC{\tt\backslash measuredangle}
+\NC\models\NC{\tt\backslash models}
+\NC\mp\NC{\tt\backslash mp}
+\NR
+\NC\multimap\NC{\tt\backslash multimap}
+\NC\nVDash\NC{\tt\backslash nVDash}
+\NC\nabla\NC{\tt\backslash nabla}
+\NR
+\NC\natural\NC{\tt\backslash natural}
+\NC\ncong\NC{\tt\backslash ncong}
+\NC\neq\NC{\tt\backslash neq}
+\NR
+\NC\neg\NC{\tt\backslash neg o \backslash lnot}
+\NC\nexists\NC{\tt\backslash nexists}
+\NC\ngeq\NC{\tt\backslash ngeq}
+\NR
+\NC\ngtr\NC{\tt\backslash ngtr}
+\NC\ni\NC{\tt\backslash ni}
+\NC\nleq\NC{\tt\backslash nleq}
+\NR
+\NC\nless\NC{\tt\backslash nless}
+\NC\nmid\NC{\tt\backslash nmid}
+\NC\not\approx\NC{\tt\backslash not\backslash approx}
+\NR
+\NC\not\equiv\NC{\tt\backslash not\backslash equiv}
+\NC\not\sim\NC{\tt\backslash not\backslash sim}
+\NC\not\simeq\NC{\tt\backslash not\backslash simeq}
+\NR
+\NC\notin\NC{\tt\backslash notin}
+\NC\nparallel\NC{\tt\backslash nparallel}
+\NC\nprec\NC{\tt\backslash nprec}
+\NR
+\NC\nsim\NC{\tt\backslash nsim}
+\NC\nsubseteq\NC{\tt\backslash nsubseteq}
+\NC\nsucc\NC{\tt\backslash nsucc}
+\NR
+\NC\nsupseteq\NC{\tt\backslash nsupseteq}
+\NC\ntriangleleft\NC{\tt\backslash ntriangleleft}
+\NC\ntrianglelefteq\NC{\tt\backslash ntrianglelefteq}
+\NR
+\NC\ntriangleright\NC{\tt\backslash ntriangleright}
+\NC\ntrianglerighteq\NC{\tt\backslash ntrianglerighteq}
+\NC\nvdash\NC{\tt\backslash nvdash}
+\NR
+\NC\nvDash\NC{\tt\backslash nvDash}
+\NC$\oint$\NC{\tt\$\backslash oint\$}
+\NC\parallel\NC{\tt\backslash parallel}
+\NR
+\NC\partial\NC{\tt\backslash partial}
+\NC\perp\NC{\tt\backslash perp}
+\NC\perthousand\NC{\tt\backslash perthousand}
+\NR
+\NC\pm\NC{\tt\backslash pm}
+\NC\prec\NC{\tt\backslash prec}
+\NC\preccurlyeq\NC{\tt\backslash preccurlyeq}
+\NR
+\NC\preceq\NC{\tt\backslash preceq}
+\NC\precnsim\NC{\tt\backslash precnsim}
+\NC\precsim\NC{\tt\backslash precsim}
+\NR
+\NC\prime\NC{\tt\backslash prime}
+\NC\prod\NC{\tt\backslash prod}
+\NC\propto\NC{\tt\backslash propto}
+\NR
+\NC\Re\NC{\tt\backslash Re}
+\NC\rightthreetimes\NC{\tt\backslash rightthreetimes}
+\NC\risingdotseq\NC{\tt\backslash risingdotseq}
+\NR
+\NC\rtimes\NC{\tt\backslash rtimes}
+\NC\sharp\NC{\tt\backslash sharp}
+\NC\sim\NC{\tt\backslash sim}
+\NR
+\NC\simeq\NC{\tt\backslash simeq}
+\NC\smile\NC{\tt\backslash smile}
+\NC\sphericalangle\NC{\tt\backslash sphericalangle}
+\NR
+\NC\sqcap\NC{\tt\backslash sqcap}
+\NC\sqcup\NC{\tt\backslash sqcup}
+\NC\sqsubset\NC{\tt\backslash sqsubset}
+\NR
+\NC$\sqsubseteq$\NC{\tt\$\backslash sqsubseteq\$}
+\NC\sqsupset\NC{\tt\backslash sqsupset}
+\NC\sqsupseteq\NC{\tt\backslash sqsupseteq}
+\NR
+\NC\subset\NC{\tt\backslash subset}
+\NC\Subset\NC{\tt\backslash Subset}
+\NC\subseteq\NC{\tt\backslash subseteq}
+\NR
+\NC\subsetneq\NC{\tt\backslash subsetneq}
+\NC\succ\NC{\tt\backslash succ}
+\NC\succcurlyeq\NC{\tt\backslash succcurlyeq}
+\NR
+\NC\succeq\NC{\tt\backslash succeq}
+\NC\succnsim\NC{\tt\backslash succnsim}
+\NC\succsim\NC{\tt\backslash succsim}
+\NR
+\NC\sum\NC{\tt\backslash sum}
+\NC$\supset$\NC{\tt\$\backslash supset\$}
+\NC\Supset\NC{\tt\backslash Supset}
+\NR
+\NC\supseteq\NC{\tt\backslash supseteq}
+\NC\supsetneq\NC{\tt\backslash supsetneq}
+\NC\surd\NC{\tt\backslash surd}
+\NR
+\NC\textpm\NC{\tt\backslash textpm}
+\NC\times\NC{\tt\backslash times}
+\NC\top\NC{\tt\backslash top}
+\NR
+\NC\triangle\NC{\tt\backslash triangle}
+\NC\uplus\NC{\tt\backslash uplus}
+\NC\vDash\NC{\tt\backslash vDash}
+\NR
+\NC\Vdash\NC{\tt\backslash Vdash}
+\NC\vee\NC{\tt\backslash vee o \backslash lor}
+\NC\veebar\NC{\tt\backslash veebar}
+\NR
+\NC$\Vert$\NC{\tt\$\backslash Vert\$}
+\NC\Vvdash\NC{\tt\backslash Vvdash}
+\NC\wedge\NC{\tt\backslash wedge o \backslash land}
+\NR
+\NC\wp\NC{\tt\backslash wp}
+\NC\wr\NC{\tt\backslash wr}
+\NR
+\HL
+\stoptabulate
+
+\subsubsubject{Другие символы}
+\starttabulate[|l|l|l|l|l|l|]
+\HL
+\NC\P\NC{\tt\backslash P}
+\NC\S\NC{\tt\backslash S}
+\NC\celsius\NC{\tt\backslash celsius}
+\NR
+\NC\checkmark\NC{\tt\backslash checkmark}
+\NC\mho\NC{\tt\backslash mho}
+\NC\ohm\NC{\tt\backslash ohm}
+\NR
+\NC\textdegree\NC{\tt\backslash textdegree}
+\NC\textnumero\NC{\tt\backslash textnumero}
+\NC\textvisiblespace\NC{\tt\backslash textvisiblespace}
+\NR
+\HL
+\stoptabulate
+}
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% TeX-master: "../introCTX.mkiv"
+%%% coding: utf-8-unix
+%%% End:
