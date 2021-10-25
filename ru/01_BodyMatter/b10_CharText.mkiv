@@ -27,7 +27,7 @@
 
 \TocChap
 
-Основным основным элементом всех текстовых документов является символ: символы сгруппированы в слова, которые, в свою очередь, образуют строки, составляющие абзацы, составляющие страницы. 
+Основным основным элементом всех текстовых документов является символ: символы сгруппированы в слова, которые, в свою очередь, образуют строки, составляющие абзацы, составляющие страницы.
 
 Текущая глава, начинающаяся с «символа» \quotation{{\em character}}, объясняет некоторые утилиты \ConTeXt\, относящиеся к символам, словам и тексту.
 
@@ -72,16 +72,16 @@
       \HL
     \stoptabulate
 }
- 
+
 В \in{table}[tbl:diacritics] мы находим команды и сокращения, которые позволяют нам получать эти диакритические знаки. Во всех случаях неважно, используем ли мы команду или сокращение. В таблице я использовал букву \quote{u} в качестве примера, но эти команды работают с любой гласной (большинство из них \footnote{Из команд, найденных в \in{table}[tbl:diacritics], тильда не работает с буквой \quote{e}, и я не знаю почему.}), а также с некоторыми согласными и некоторыми полугласными звуками.
- 
+
   \startitemize
 
   \item Поскольку большинство сокращенных команд представляют собой {\em управляющие символы} (см. \in{section}[sec:commands themselves]), буква, на которой должен стоять диакритический знак, может быть написана сразу после команды или отделена от нее. Так, например: чтобы получить португальский \quote{\~a}, мы можем написать символы \tex{=a} или \cmd{=\textvisiblespace a}. \footnote{Помните, что в этом документе мы представляем пробелы , когда важно, чтобы мы их видели, с помощью \quote{\textvisiblespace}.} Но в случае breve (\tex{u}), когда мы имеем дело с {\em контрольным словом}, пробел является обязательным.
 
   \item В случае длинной версии команды буква с диакритическим знаком будет первой буквой имени команды. Так, например, \tex{emacron} поместит макрон над строчной буквой  \quote{e} (\emacron), \tex{Emacron} сделает то же самое над прописной буквой \quote{E} (\Emacron), а tex{Amacron} сделает то же самое над прописной буквой  \quote{A} (\Amacron).
 
-   
+
   \stopitemize
 
 Хотя команды в таблице \in{table}[tbl:diacritics] работают с гласными и некоторыми согласными, существуют и другие команды для создания некоторых диакритических знаков и специальных букв, которые работают только с одной или несколькими буквами. Они представлены в таблице \in{table}[tbl:morediacritics].
@@ -144,7 +144,7 @@
     \NC\oe, \OE\NC{\tt \backslash oe, \backslash OE}\NC{\tt \backslash oeligature, \backslash OEligature}\PlaceMacro{oe}\PlaceMacro{oeligature}\NR
     \HL
   \stoptabulate
-}    
+}
 
 Лигатура, которая раньше была традиционной для испанского (кастильского) и которая обычно не встречается в шрифтах сегодня, - это \quote{Đ}: сокращение, включающее \quote{D} и \quote{E}. Насколько мне известно, в \ConTeXt\ нет команды, которая позволяла бы нам использовать это, \footnote{В \LaTeX, напротив, мы можем использовать команду \MyKey{fontenc} package.}, реализованную в пакете fontenc. но мы можем создать ее, как описано в \in{section}[sec:create characters].
 
@@ -192,7 +192,7 @@
     \NC Psi\NC\psi, \Psi\NC{\tt \backslash psi, \backslash Psi}\NR\PlaceMacro{psi}
     \NC Omega\NC\omega, \Omega\NC{\tt \backslash omega, \backslash Omega}\PlaceMacro{omega}\NR
     \HL
-    
+
   \stoptabulate
 }}
 
@@ -237,7 +237,7 @@
   \item Создание нового символа с помощью одной из команд создания составного символа, которую мы увидим сразу после.
 
  \stopitemize
-  
+
 \stopitemize
 
 В качестве примера первого использования давайте вернемся к разделам, посвященным лигатурам (\in{}[sec:ligatures]). Там я рассказал о традиционной испанской лигатуре, которую сегодня обычно не встретишь в шрифтах:  \quote{Đ}. Мы могли бы связать этот символ, например, с командой \cmd{decontract}, чтобы символ был сгенерирован всякий раз, когда мы пишем  \cmd{decontract}. Мы делаем это с помощью:
@@ -305,7 +305,7 @@
 \item {\tt \backslash buildtextcedilla} добавляет седиль под символом, который принимает в качестве аргумента (\quote{\zcedilla}).
 \item {\tt \backslash buildtextgrave} добавляет серьезный акцент над символом, который он принимает в качестве аргумента (\quote{\zgrave}).
 \item {\tt \backslash buildtextmacron} добавляет небольшую полосу под символом, который он принимает в качестве аргумента (\quote{\zmacron}).
-  
+
 \stopitemize
 
 На первый взгляд, {\tt \backslash buildtextgrave} кажется излишним, учитывая, что у нас есть {\tt \backslash buildtextaccent}; Однако, если вы проверите серьезный акцент, созданный с помощью первой из этих двух команд, он выглядит немного лучше. В следующем примере показан результат обеих команд с достаточным размером шрифта, чтобы оценить разницу:
@@ -336,7 +336,7 @@
 \item {\tt\bf mvs} включает \quotation{astronomic}, \quotation{zodiac}, \quotation{europe}, \quotation{martinvogel~1}, \quotation{martinvogel~2} and \quotation{martinvogel~3}.
 
 \item {\tt\bf nav} включает \quotation{navigation~1}, \quotation{navigation~2} and \quotation{navigation~3}.
-  
+
 \stopitemize
 
 \startSmallPrint
@@ -439,13 +439,13 @@
 \startitemize[packed]
 
 \item \PlaceMacro{word}\cmd{word\{text\}}: преобразует текст, взятый в качестве аргумента, в нижний регистр.
-  
+
 \item \PlaceMacro{Word}\cmd{Word\{text\}}: преобразует первую букву текста, взятого в качестве аргумента, в верхний регистр.
-  
+
 \item \PlaceMacro{Words}\cmd{Words\{text\}}: преобразует первую букву каждого слова, взятого в качестве аргумента, в верхний регистр; остальные в нижнем регистре.
-  
+
 \item \PlaceMacro{WORD}\cmd{WORD\{text\}} или \PlaceMacro{WORDS}\cmd{WORDS\{text\}}: записывает текст, взятый в качестве аргумента, в верхнем регистре.
-  
+
 \stopitemize
 
 Очень похожи на эти команды \PlaceMacro{cap}\cmd{cap} и \PlaceMacro{Cap}\cmd{Cap}: они также используют заглавные буквы в тексте, который они принимают в качестве аргумента, но затем применяют к нему коэффициент масштабирования, равный тому, который применяется суффиксом \quote{x} в командах изменения шрифта (см. 2), так что в большинстве шрифтов заглавные буквы будут той же высоты, что и строчные буквы, что дает нам эффект {\em псевдо} маленьких заглавных букв. По сравнению с настоящими маленькими крышками (см. \in{section}[sec:smallcaps]) они имеют следующие преимущества:
@@ -467,11 +467,11 @@
 \startDoubleExample
 
 \starttyping
-The UN, whose \Cap{president} has his 
+The UN, whose \Cap{president} has his
 office at \cap{uN} headquarters...
 \stoptyping
-  
-The UN, whose \Cap{president} has his 
+
+The UN, whose \Cap{president} has his
 office at \cap{uN} headquarters...
 
 \stopDoubleExample
@@ -484,15 +484,15 @@ office at \cap{uN} headquarters...
 
 \starttyping
 \cap{People who have amassed their
-\cap{capital} at the expense of others 
+\cap{capital} at the expense of others
 are more often than not
-{\bf decapitated} in revolutionary 
+{\bf decapitated} in revolutionary
 times}.
 \stoptyping
 
-\cap{People who have amassed their \cap{capital} 
+\cap{People who have amassed their \cap{capital}
 at the expense of others are
-more often than not {\bf decapitated} in revolutionary 
+more often than not {\bf decapitated} in revolutionary
 times}.
 
 \stopDoubleExample
@@ -503,12 +503,12 @@ times}.
 
 \starttyping
 \cap{When I was One I had just begun,
-when I was Two I was \nocap{nearly} 
+when I was Two I was \nocap{nearly}
 new (A.A. Milne)}.
 \stoptyping
 
 \cap{When I was one I had just begun,
-when I was two I was \nocap{nearly} 
+when I was two I was \nocap{nearly}
 new (A.A. Milne)}.
 
 \stopDoubleExample
@@ -669,7 +669,7 @@ new (A.A. Milne)}.
 Согласно моим тестам, когда ширина, установленная с помощью параметра {\tt width}, меньше ширины, необходимой для представления текста с  {\em factor}, равным 0,25, параметр {\em width} и этот factor игнорируются. Я предполагаю, что это потому, что \cmd{stretch} позволяет нам только {\em увеличивать} расстояние между символами в слове, но не уменьшать его. Но я не понимаю, почему ширина, необходимая для представления текста с коэффициентом 0,25, используется в качестве минимальной меры для параметра {\tt width}, а не {\em natural width} текста (с factor от 0).
 
     According to my tests, when the width established with the {\tt width} option is less than that required to represent the text with a {\em factor} equal to 0.25, the {\em width} option and this factor are ignored. I guess that's because \cmd{stretched} allows us only {\em to increase} the space between the characters in a word, not reduce it. But I don't understand why the width required to represent the text with a factor of 0.25 is used as a minimum measure for the {\tt width} option, and not the {\em natural width} of the text (with a factor of 0).
-    
+
   \stopSmallPrint
 
 
@@ -700,7 +700,7 @@ new (A.A. Milne)}.
 \startSmallPrint
 
 В этом примере можно увидеть, что распределение горизонтального пространства между разными символами неоднородно. \quote{x} и \quote{t} в \quotation{text} и \quote{e} и \quote{b} в \quotation{test} всегда располагаются гораздо ближе друг к другу, чем другие символы. Мне не удалось выяснить, почему это происходит.
-  
+
 \stopSmallPrint
 
 При использовании без аргументов команда будет использовать всю ширину линии. С другой стороны, в тексте, который является аргументом этой команды, команда \\ переопределяется и вместо разрыва строки вставляется горизонтальный пробел. Например:
@@ -711,10 +711,10 @@ new (A.A. Milne)}.
 \startcolumns[n=2]
 
 \starttyping
-\stretched{test\\text}    
+\stretched{test\\text}
 \stoptyping
 
-\stretched{test\\text}  
+\stretched{test\\text}
 
 \stopcolumns
 
@@ -770,7 +770,7 @@ This is \hskip 2.5cm 2.5 centimetres\\
 \startDoubleExample
 
 \starttyping
-This is farce rather than 
+This is farce rather than
 \hskip -1cm comedy
 \stoptyping
 
@@ -812,7 +812,7 @@ On both\hfill sides
 \item Мы можем использовать две последовательные вертикальные черты (вертикальные черты) и написать, например, \MyKey{Испанский \|\|Аргентинский}.
 
 \item Две вертикальные полосы могут иметь элемент соединения |/| разделения между двумя словами, заключенными между ними, как, например, \MyKey{joining\|/\|separating}.
- 
+
 
 \stopitemize
 
@@ -1041,7 +1041,7 @@ On both\hfill sides
 
 \item {\tt\bf spacing}:  возможные значения для этого параметра: «широкий» \MyKey{broad}  или «упакованный» \MyKey{packed}. В первом случае (широком) будут применяться правила расстановки интервалов между словами на английском языке, что означает, что после точки и когда следует другой символ, будет добавлено определенное количество дополнительного пробела. С другой стороны, \MyKey{spacing=packed} не позволит применять эти правила. Для английского языка по умолчанию используется широкий.
 
-\item {\tt\bf leftquote, rightquote}: укажет символы (или команды), соответственно, которые \cmd{quote} будут использоваться слева и справа от текста, являющегося его аргументом (для этой команды см.\at{page}[sec:quote]). 
+\item {\tt\bf leftquote, rightquote}: укажет символы (или команды), соответственно, которые \cmd{quote} будут использоваться слева и справа от текста, являющегося его аргументом (для этой команды см.\at{page}[sec:quote]).
 
 \item {\tt\bf leftquotation, rightquotation}: укажите символы (или команды), соответственно, которые \cmd{quotation} будет использовать слева и справа от текста, являющегося его аргументом (для этой команды см. \at{page}[sec:quote])
 
@@ -1052,7 +1052,7 @@ On both\hfill sides
 \startsubsection
   [
     reference=sec:labels,
-    title=Ярлыки, связанные с определенными языками,
+    title={Ярлыки, связанные с определенными языками}
   ]
 
 Многие команды \ConTeXt\ автоматически генерируют определенные тексты (или  {\em labels}), как, например, команда \cmd{placetable}, которая записывает метку \quotation{Table xx} под вставляемой таблицей, или \cmd{placefigure}, который вставляет метку \quotation{Figure xx}.
@@ -1092,7 +1092,7 @@ On both\hfill sides
 \startsubsubsection
   [
     reference=sec:dates,
-    title=Команды, связанные с датой,
+    title={Команды, связанные с датой}
   ]
   \PlaceMacro{currentdate}\PlaceMacro{date}\PlaceMacro{month}
 
@@ -1104,18 +1104,18 @@ On both\hfill sides
 
 Чтобы указать другой формат даты, \MyKey{dd} или \MyKey{day} представляют дни, \MyKey{mm} месяцы (в числовом формате), MyKey{month} месяцы в алфавитном формате строчными буквами и \MyKey{MONTH} в верхнем регистре. Что касается года, то \MyKey{yy} будет записывать только последние цифры, а \MyKey{year} или \MyKey{y} - все четыре. Если нам нужен какой-то разделительный элемент между компонентами даты, мы должны написать это прямо. Например
 
-  \type{\currentdate[weekday, dd, month]} 
+  \type{\currentdate[weekday, dd, month]}
 
   when run on 9 September 2020 will write \quotation{Wednesday 9 September}.
-  
+
 \item \tex{date}: эта команда, запущенная без аргументов, выдает точно такой же результат, что и \cmd{currentdate}, то есть фактическая дата в стандартном формате. Однако в качестве аргумента может быть указана конкретная дата. Для этого даны два аргумента: с помощью первого аргумента мы можем указать день (\MyKey{d}), месяц (\MyKey{m}) и год (\MyKey{y}), соответствующие дате, которую мы хотим представить, а вторым аргументом (необязательным) мы можем указать формат представляемой даты. Например, если мы хотим знать, в какой день недели встречались Джон Леннон и Пол Маккартни, событие, которое, согласно Википедии, произошло 6 июля 1957 года, мы могли бы написать
 
   \type{\date[d=6, m=7, y=1957][weekday]}
 
-  and so we would find out that such an historical event happened on a Saturday. 
+  and so we would find out that such an historical event happened on a Saturday.
 
 \item \tex{month} принимает число в качестве аргумента и возвращает название месяца, соответствующего этому числу.
-  
+
 \stopitemize
 
 \stopsubsubsection
@@ -1140,7 +1140,7 @@ On both\hfill sides
 так что если мы вставим {\em buffer} в ту точку документа, где активирован испанский, будут воспроизводиться испанские фразы, но если в той точке документа, где вставлен буфер, активирован английский, английские фразы будут вставлен. Таким образом:
 
 %\startpacked
-\language[es]  
+\language[es]
 \startbuffer
   \starttabulate[|*{4}{lw(.25\textwidth)|}]
     \NC \translate[es=Su carta de fecha, en=Your letter dated]
