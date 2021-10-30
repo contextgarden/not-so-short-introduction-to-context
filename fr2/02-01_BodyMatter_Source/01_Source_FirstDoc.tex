@@ -17,7 +17,7 @@ meilleures stratégies pour faire face aux éventuelles erreurs.
 \startsection
   [title=Les outils nécessaires]
 
-  Pour écrire et compiler un premier fichier source, nous aurons besoins de
+  Pour écrire et compiler un premier fichier source, nous aurons besoin de
   trois outils installés sur notre système d'exploitation~: un éditeur de texte,
   une distribution \ConTeXt, et un visualisateur de fichiers \PDF.
 
@@ -26,7 +26,7 @@ meilleures stratégies pour faire face aux éventuelles erreurs.
   tous les systèmes d'exploitation en proposent un par défaut. Tous sont
   utilisables, il en existe des simples, des complexes, des puissants, des
   payants, des gratuits, des spécialisés, des généralistes, etc.  Si vous avez
-  des habitudes en la matières, conservez les. Sinon mon conseil est, dans un
+  des habitudes en la matière, conservez les. Sinon mon conseil est, dans un
   premier temps, de choisir un éditeur simple, afin de ne pas ajouter à la
   difficulté de l'apprentissage de \ConTeXt\ la difficulté d'apprendre à
   utiliser l'éditeur. Bien qu'il soit souvent vrai que les programmes les plus
@@ -302,7 +302,7 @@ $ context ex_premierdoc
 
   De nombreux éditeurs de texte vous permettent de compiler le document sur
   lequel vous travaillez sans ouvrir un terminal. Ces logiciels lancent
-  \ConTeXt\ en tache de fond. Pour bien comprendre ce qu'il se passe nous allons
+  \ConTeXt\ en tache de fond. Pour bien comprendre ce qu'il se passe, nous allons
   faire cette opération \quotation{à la main}. De plus, en procédant de la sorte
   nous visualisons les messages émis en {\em sortie} par le programme {\tt
     context}.
@@ -416,7 +416,7 @@ résultat de leur application par \ConTeXt.
 \stopsection
 
 
-\stopsection
+\stopsection       %%% il y a deux \stopsection consécutives !!!!
 
 % * Section =================================================================
 
@@ -472,14 +472,14 @@ compilation. Toutefois, ces messages seront toujours enregistrés dans le fichie
 
 \DescOptions{nonstopmode} Exécute la compilation sans s'arrêter sur les
 erreurs. Cela ne signifie pas que l'erreur ne se produira pas, mais que lorsque
-\ConTeXt\ rencontrera une erreur, (même??) si elle est récupérable, il
+\ConTeXt\ rencontrera une erreur, si elle est récupérable, il
 continuera la compilation jusqu'à ce qu'elle se termine ou jusqu'à ce qu'il
-rencontre une erreur irrécupérable.  % le (même??) est-il nécessaie ?
+rencontre une erreur irrécupérable.  % le «"même" si elle est récup» est-il nécessaie ?
 
 \DescOptions{batchmode} Il s'agit d'une combinaison des deux options
 précédentes. Il fonctionne sans interruption et ignore les messages à l'écran.
 
-Pour les premières utilisation et pour l'apprentissage de \ConTeXt, je ne pense
+Pour les premières utilisations et pour l'apprentissage de \ConTeXt, je ne pense
 pas que ce soit une bonne idée d'utiliser les trois dernières options, car
 lorsqu'une erreur se produit, nous n'aurons aucune idée de l'endroit où elle se
 trouve ou de ce qui l'a produite. Et, croyez-moi chers lecteurs, tôt ou tard,
@@ -589,11 +589,11 @@ commençant par \quotation{\tt tex error}. Le fichier \quotation{\tt
 il ne s'agit pas d'un très gros fichier, car la source que nous compilions est
 très petite~; dans d'autres cas, il peut contenir une quantité écrasante
 d'informations. Mais nous devons nous y plonger. Si nous ouvrons \quotation{\tt
-  context ex_premierdoc.log} avec un éditeur de texte, nous verrons que ce
+  ex_premierdoc.log} avec un éditeur de texte, nous verrons que ce
 fichier enregistre tout ce que fait \ConTeXt. Nous devons y chercher une ligne
 qui commence par un avertissement d'erreur \quotation{\tt tex error}, pour cela
 nous pouvons utiliser la fonction de recherche de texte de l'éditeur. Nous
-trouverons les lignes d'erreur suivantes~:
+trouverons les lignes d'erreur suivantes~:  % je crois que le mot context est de trop
 
 \placefigure [force,here,none] [] {}{  
 \startDemoC
@@ -603,15 +603,16 @@ tex error  > tex error on line 12 in file ex_premierdoc.tex: ! Undefined control
 \startSmallPrint
 
 {\bf Note~:} La première ligne informant de l'erreur, dans le fichier
-\quotation{\tt context ex_premierdoc.log} est très longue. Pour que cela soit
+\quotation{\tt ex_premierdoc.log} est très longue. Pour que cela soit
 présentable ici, en tenant compte de la largeur de la page, j'ai supprimé une
-partie du chemin indiquant l'emplacement du fichier.
+partie du chemin indiquant l'emplacement du fichier.  % idem : je crois que le mot context est de trop
+
 \stopSmallPrint
 
 
 Si nous prêtons attention aux trois lignes du message d'erreur, nous voyons que
 la première nous indique à quel numéro de ligne l'erreur s'est produite (ligne
-14) et de quel type d'erreur il s'agit~: \quotation{\tt Undefined control
+12) et de quel type d'erreur il s'agit~: \quotation{\tt Undefined control
   sequence}, ou, ce qui revient au même~: \quotation{\tt Unknown control
   sequence}, c'est-à-dire une commande inconnue. Les lignes suivantes du fichier
 journal nous montrent la ligne 12, qui commence à l'endroit où l'erreur s'est
@@ -639,7 +640,7 @@ signifie que l'erreur se trouve dans la deuxième moitié... et ainsi, petit à
 petit, en changeant l'emplacement de la commande \tex{stoptext}, nous pouvons
 localiser l'emplacement de l'erreur.
 
-Une autre astuce consiste à mettre en commentaire le paquets de lignes douteuses
+Une autre astuce consiste à mettre en commentaire le paquet de lignes douteuses
 avec le caractère \quotation{\%} (certains éditeurs de texte proposent une
 fonction pour commenter et décommenter tout un paquet de ligne automatiquement).
 
