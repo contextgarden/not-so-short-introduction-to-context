@@ -270,11 +270,9 @@ globale~:
   chapitres.
 \stopitemize
 
-Nous l'avons déjà dit, le contenu à proprement parler du document est encadré
-par les commandes \tex{starttext} et \tex{stoptext}. Entre elles, nous devons
-inclure tout le texte que nous voulons que \ConTeXt\ traite, ainsi que les
-commandes qui ne doivent pas affecter le document entier mais seulement des
-fragments de celui-ci.
+Le contenu à proprement parler du document est donc balisé (encadré) par les
+commandes \tex{starttext} et \tex{stoptext}. Il doit contenir le texte et les
+commandes complémentaires à appliquer à ses différents morceaux.
 
 Nous verrons à la \in{section}[sec:srcprojects] que pour des documents
 volumineux, nécessitant plusieurs fichiers sources, d'autres commandes
@@ -347,7 +345,7 @@ pouvons supprimer les deux fichiers {\tt .log} et {\tt .tuc}. S'il y a eu un
 problème, les informations contenues dans ces fichiers peuvent nous aider à
 localiser la source du problème et à déterminer comment le résoudre.
 
-Si nous n'avons pas obtenu ces résultats, c'est probablement dû au moins à l'un
+Si nous n'avons pas obtenu ces fichiers, c'est probablement dû au moins à l'un
 des points suivants~:
 
 \startitemize [n]
@@ -377,8 +375,8 @@ des points suivants~:
 
 \stopitemize
 
-En cas de problème, nous devrons donc vérifier chacune de ces possibilités, et
-les corriger, jusqu'à ce que la compilation se déroule correctement.
+En cas de problème, nous devrons donc vérifier chacun de ces scénarios, et
+corriger les erreurs, jusqu'à ce que la compilation se déroule correctement.
 
 \startSmallPrint
   Si après l'exécution de {\tt context}, le terminal a commencé à émettre des
@@ -406,17 +404,14 @@ homogène possible. Parce que les modèles de césure varient selon la langue, i
 est important d'avoir indiqué la langue du document avec \tex{mainlanguage[fr]}.
 
 En bref~: \ConTeXt\ a interprété le fichier source et a généré un document
-électronique répondant aux informations de balisage et de composition
-incluses. Les commentaires ont disparu et en ce qui concerne le balisage et les
-commandes, ce que nous obtenons ce n'est pas l'affichage de leur nom, mais le
-résultat de leur application par \ConTeXt.
+électronique répondant aux informations de balisage et de composition incluses
+dans ce fichier source. Les commentaires ont disparu et en ce qui concerne le
+balisage et les commandes, ce que nous obtenons ce n'est pas l'affichage de leur
+nom, mais le résultat de leur application par \ConTeXt.
 
 \stopsubsubsection
 
 \stopsection
-
-
-\stopsection       %%% il y a deux \stopsection consécutives !!!!
 
 % * Section =================================================================
 
@@ -448,7 +443,8 @@ demander d'utiliser la version néerlandaise (nl), française (fr), italienne
 (it), allemande (de) ou roumaine (ro).
 
 \DescOptions{purge, purgeall} Supprime les fichiers auxiliaires générés pendant
-le traitement.
+le traitement. {\tt purgeall} supprime aussi les fichiers {\tt .tuc} et {\tt
+  synctex.gz}.
 
 \DescOptions{result=sortie.pdf} Indique le nom que doit porter le fichier PDF
 résultant. Par défaut, ce sera le même que le fichier source à traiter, avec
@@ -472,9 +468,9 @@ compilation. Toutefois, ces messages seront toujours enregistrés dans le fichie
 
 \DescOptions{nonstopmode} Exécute la compilation sans s'arrêter sur les
 erreurs. Cela ne signifie pas que l'erreur ne se produira pas, mais que lorsque
-\ConTeXt\ rencontrera une erreur, si elle est récupérable, il
-continuera la compilation jusqu'à ce qu'elle se termine ou jusqu'à ce qu'il
-rencontre une erreur irrécupérable.  % le «"même" si elle est récup» est-il nécessaie ?
+\ConTeXt\ rencontrera une erreur, si elle est récupérable, il continuera la
+compilation jusqu'à ce qu'elle se termine ou jusqu'à ce qu'il rencontre une
+erreur irrécupérable.
 
 \DescOptions{batchmode} Il s'agit d'une combinaison des deux options
 précédentes. Il fonctionne sans interruption et ignore les messages à l'écran.

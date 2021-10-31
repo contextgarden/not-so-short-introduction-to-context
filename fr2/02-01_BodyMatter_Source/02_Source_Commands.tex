@@ -9,18 +9,50 @@
 
 \TocChap
 
-Nous venons de voir que le fichier source contient à la fois le contenu et les instructions de présentation de ce contenu à appliquer pour produire le document final. Cela se fait grâce au langage \ConTeXt\ qui sert à distinguer les différents types d'information dans un premier temps ({\em balisage}), puis à préciser les règles de composition et de mise en page à appliquer à chacun pour produire le document final. Pour cela \ConTeXt\ propose des \quotation{commandes}, aussi appelées \quotation{macros} ou \quotation{séquences de contrôle}.
+Nous venons de voir que le fichier source contient à la fois le contenu du
+document final et les instructions de présentation de ce contenu. Cela se fait
+grâce au langage \ConTeXt\ qui sert dans un premier temps à indiquer les
+différents types d'information dont le contenu est constitué (par {\em
+  balisage}), puis à préciser les règles de composition et de mise en page à
+leur appliquer respectivement. Pour cela \ConTeXt\ propose des
+\quotation{commandes}, aussi appelées \quotation{macros} ou \quotation{séquences
+  de contrôle}.
+
+Le langage \ConTeXt\ s'appuie sur un certain nombre de règles syntaxiques, aussi
+bien valables pour les aspects balisage que pour les aspects composition et mise
+en page des éléments balisés. C'est l'objet de ce chapitre.
 
 \startSmallPrint
 
-Du point de vue du fonctionnement interne de \ConTeXt\ (en fait, du fonctionnement de \TeX), il y a une différence entre les {\em primitives} et les {\em macros}. Une primitive est une instruction simple qui ne peut pas être décomposée en d'autres instructions plus simples. Une macro est une instruction qui peut être décomposée en d'autres instructions plus simples qui à leur tour peuvent être décomposées, et ainsi de suite, jusqu'à revenir aux primitives.
-La plupart des instructions de \ConTeXt sont, en fait, des macros. Du point de vue du programmeur, la différence entre les macros et les primitives est importante. Mais du point de vue de l'utilisateur, la question n'est pas si importante~: dans les deux cas, nous avons des instructions qui sont exécutées sans que nous ayons besoin de nous préoccuper de leur fonctionnement à un niveau inférieur. Par conséquent, la documentation \ConTeXt\ parle généralement d'une {\em commande} lorsqu'elle adopte le point de vue de l'utilisateur, et d'une {\em macro} lorsqu'elle adopte le point de vue du programmeur. Puisque nous ne prenons que la perspective de l'utilisateur dans cette introduction, j'utiliserai l'un ou l'autre terme, les considérant comme synonymes.
+Du point de vue du fonctionnement interne de \ConTeXt\ (en fait, du
+fonctionnement de \TeX), il y a une différence entre les {\em primitives} et les
+{\em macros}. Une primitive est une instruction simple qui ne peut pas être
+décomposée en d'autres instructions plus simples. Une macro est une instruction
+qui peut être décomposée en d'autres instructions plus simples qui à leur tour
+peuvent être décomposées, et ainsi de suite, jusqu'à revenir aux primitives.
 
-Les {\em commandes} sont des ordres donnés au programme \ConTeXt\ pour qu'il fasse quelque chose. Nous {\em contrôlons} les performances du programme par leur intermédiaire. Ainsi \people{Knuth}, le père de \TeX, utilise le terme de {\em séquences de contrôle} pour se référer à la fois aux primitives et aux macros, et je pense que c'est le terme le plus précis de tous. Je l'utiliserai lorsque je penserai qu'il est important de distinguer entre {\em symboles de contrôle} et {\em mots de contrôle}.
+La plupart des instructions de \ConTeXt sont, en fait, des macros. Du point de
+vue du programmeur, la différence entre les macros et les primitives est
+importante. Mais du point de vue de l'utilisateur, la question n'est pas si
+importante~: dans les deux cas, nous avons des instructions qui sont exécutées
+sans que nous ayons besoin de nous préoccuper de leur fonctionnement à un niveau
+inférieur. Par conséquent, la documentation \ConTeXt\ parle généralement d'une
+{\em commande} lorsqu'elle adopte le point de vue de l'utilisateur, et d'une
+{\em macro} lorsqu'elle adopte le point de vue du programmeur. Puisque nous ne
+prenons que la perspective de l'utilisateur dans cette introduction,
+j'utiliserai l'un ou l'autre terme, les considérant comme synonymes.
+
+Les {\em commandes} sont des ordres donnés au programme \ConTeXt\ pour qu'il
+fasse quelque chose. Nous {\em contrôlons} les performances du programme par
+leur intermédiaire. Ainsi \people{Knuth}, le père de \TeX, utilise le terme de
+{\em séquences de contrôle} pour se référer à la fois aux primitives et aux
+macros, et je pense que c'est le terme le plus précis de tous. Je l'utiliserai
+lorsque je penserai qu'il est important de distinguer entre {\em symboles de
+  contrôle} et {\em mots de contrôle}.
 
 \stopSmallPrint
 
-Le langage \ConTeXt\ s'appuie sur un certain nombre de règles syntaxiques, aussi bien valables pour l'aspect balisage (distinction des différents types d'informations contenus dans le fichier source) et l'aspect composition et mise en page des éléments balisés. C'est l'objet de ce chapitre.
+
 
 % * 3.1 Les caractères réservés ============================================
 

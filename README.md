@@ -13,9 +13,9 @@ Initially written in Spanish, this document interested several people, and in
 order to increase the potential audience, a member of the [ntg-context mailing list]( https://mailman.ntg.nl/pipermail/ntg-context/)
 (native English speaker, who wishes to remain anonymous) has proceeded to translate my text into English.
 
-| [Spanish v1.6](es/introCTX_esp.pdf)                                  | [English v1.6](en/introCTX_eng.pdf)                                  | [French v1.6](fr/introCTX_fra_s.pdf)                                 | [French v2.0alpha](fr2/introCTX_fra.pdf)                             | [Russian v1.6](ru/introCTX_rus_s.pdf)                                |
-|----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|
-| [<img src="es/introCTX_esp.png" width="200">](es/introCTX_esp.pdf)   | [<img src="en/introCTX_eng.png" width="200">](en/introCTX_eng.pdf)   | [<img src="fr/introCTX_fra.png" width="200">](fr/introCTX_fra_s.pdf) | [<img src="fr2/introCTX_fra.png" width="200">](fr2/introCTX_fra.pdf) | [<img src="ru/introCTX_rus.png" width="200">](ru/introCTX_rus_s.pdf) |
+| [Spanish v1.6](es/introCTX_esp.pdf)                                  | [English v1.6](en/introCTX_eng.pdf)                                  | [French v1.6](fr/introCTX_fra.pdf)                                 | [French v2.0alpha](fr2/introCTX_fra.pdf)                             | [Russian v1.6](ru/introCTX_rus.pdf)                                |
+|----------------------------------------------------------------------|----------------------------------------------------------------------|--------------------------------------------------------------------|----------------------------------------------------------------------|--------------------------------------------------------------------|
+| [<img src="es/introCTX_esp.png" width="200">](es/introCTX_esp.pdf)   | [<img src="en/introCTX_eng.png" width="200">](en/introCTX_eng.pdf)   | [<img src="fr/introCTX_fra.png" width="200">](fr/introCTX_fra.pdf) | [<img src="fr2/introCTX_fra.png" width="200">](fr2/introCTX_fra.pdf) | [<img src="ru/introCTX_rus.png" width="200">](ru/introCTX_rus.pdf) |
 
 
 ## Author
