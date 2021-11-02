@@ -226,7 +226,7 @@ le texte qui le suit et ce jusqu'à la fin de la ligne sur laquelle il se
 trouve. Cette fonctionnalité est utilisée pour écrire des commentaires dans le
 fichier source que seul l'auteur pourra lire, car ils ne seront pas incorporés
 au document final. Dans cet exemple, je l'ai par exemple utilisé pour attirer
-l'attention sur certaines lignes, en expliquant ce qu'elles font.
+l'attention sur certaines lignes, en expliquant ce qu'elles font. % il n'y a pas de première ligne commençant par "%"
 
 Les lignes suivantes commencent par le caractère \quotation{\type{\}} qui est
 un autre des caractères réservés de \ConTeXt\ et indique que ce qui suit
@@ -244,7 +244,7 @@ source.
 \PlaceMacro{starttext}
 \PlaceMacro{stoptext}
 
-\index{préambule}
+\index{préambule}   % attention, dans le document final il y a une ligne suplémentaire entre le paragraphe précédent (Les lignes suivantes...) et le suivant (À la 8\high{ème} ; est-ce normal ?
 
 À la 8\high{ème} ligne non vide de notre exemple et à la dernière ligne se
 trouvent les commandes essentielles \tex{starttext} et \tex{stoptext}~: elles
@@ -478,7 +478,7 @@ précédentes. Il fonctionne sans interruption et ignore les messages à l'écra
 Pour les premières utilisations et pour l'apprentissage de \ConTeXt, je ne pense
 pas que ce soit une bonne idée d'utiliser les trois dernières options, car
 lorsqu'une erreur se produit, nous n'aurons aucune idée de l'endroit où elle se
-trouve ou de ce qui l'a produite. Et, croyez-moi chers lecteurs, tôt ou tard,
+trouve ou de ce qui l'a produite. Et, croyez-moi, chers lecteurs, tôt ou tard,
 une erreur de compilation se produira.
 
 \stopsection
