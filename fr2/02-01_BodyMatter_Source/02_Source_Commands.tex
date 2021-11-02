@@ -115,7 +115,7 @@ Ce caractère est un {\em interrupteur} pour le mode mathématique. Il active ce
 
 \startsemitable{\letterhat}
 Ce caractère est utilisé en mode mathématique pour indiquer que ce qui suit doit être mis en exposant. Ainsi, par exemple, pour obtenir $(x+i)^{n^3}$, il faut écrire \type[option=tex]{$(x+i)^{n^3}$}.
-\stopsemitable % à la compilation apparaît ici une ligne vide !!! C'est peut-être l'effet de la formule mathématique, mais c'est gênant ! J'ai testé et cela n'apparaît pas. Est-ce un effet du semitable ?
+\stopsemitable % à la compilation apparaît ici une ligne vide !!! C'est peut-être l'effet de la formule mathématique, mais c'est gênant ! J'ai testé et cela n'apparaît pas. 
 
 \startsemitable{\_}
 Ce caractère est utilisé en mode mathématique pour indiquer que ce qui suit doit être mis en indice. Ainsi, par exemple, pour obtenir $x_1$, il faut écrire \type[option=tex]{$x_1$}.
@@ -130,7 +130,7 @@ Ce caractère a plusieurs utilisations selon l'environnement (texte courant, mat
 \stopsemitable
 
 
-Concernant le choix des caractères réservés, il doit s'agir de caractères disponibles sur la plupart des claviers mais qui ne sont habituellement peu ou pas utilisés dans les écritures. Cependant, bien que peu courants, il est toujours possible que certains d'entre eux apparaissent dans nos documents, comme par exemple lorsque nous voulons écrire que quelque chose coûte 100 dollars (\$100), ou qu'en Espagne, le pourcentage de conducteurs de plus de 65 ans était de 16\% en 2018. Dans ces cas, nous ne devons pas écrire le caractère réservé directement, mais utiliser une {\em commande} qui produira le bon caractère dans le document final. La commande pour chacun des caractères réservés se trouve dans \in{table} [Caractères réservés]. % Le tableau est nommé Tableau, il faudrait peut-être écrire "dans le \in{tableau} [...]
+Concernant le choix des caractères réservés, il doit s'agir de caractères disponibles sur la plupart des claviers mais qui ne sont habituellement peu ou pas utilisés dans les écritures. Cependant, bien que peu courants, il est toujours possible que certains d'entre eux apparaissent dans nos documents, comme par exemple lorsque nous voulons écrire que quelque chose coûte 100 dollars (\$100), ou qu'en Espagne, le pourcentage de conducteurs de plus de 65 ans était de 16\% en 2018. Dans ces cas, nous ne devons pas écrire le caractère réservé directement, mais utiliser une {\em commande} qui produira le bon caractère dans le document final. La commande pour chacun des caractères réservés se trouve dans le \in{tableau} [Caractères réservés]. % Le tableau est nommé Tableau, il faudrait peut-être écrire "dans le \in{tableau} [...]
 
 
 \placetable
@@ -330,7 +330,7 @@ Sur un clavier normal, il n'existe généralement qu'un seul caractère tiret {\
 \stopitemize
 
 Aujourd'hui, tous sont disponibles en encodage UTF-8, mais ils ne sont pas faciles à produire directement au clavier. 
-Aussi \TeX\ interprète différemment une succession de tirets simples dans le fichier source (voir \in{table} [tbl:rules]) et \ConTeXt\ propose  des commandes spécifiques. % \in{tableau}[...] en accord avec le titre du tableau
+Aussi \TeX\ interprète différemment une succession de tirets simples dans le fichier source (voir \in{tableau} [tbl:rules]) et \ConTeXt\ propose  des commandes spécifiques. % \in{tableau}[...] en accord avec le titre du tableau
 
 
 {\switchtobodyfont[small]
@@ -370,7 +370,7 @@ Aussi \TeX\ interprète différemment une succession de tirets simples dans le f
   \stoptabulate}
 }
 
-Les noms de commandes \tex{hyphen} et \tex{minus} sont ceux normalement utilisés en anglais. Bien que de nombreux professionnels de l'imprimerie les appellent \quote{tirets}, les termes de \TeX, à savoir \tex{endash} et \tex{emdash} sont également courants dans la terminologie de la composition. Les \quotation{\em en} et \quotation{\em em} sont les noms des unités de mesure utilisées en typographie. Une \quotation{en} représente la largeur d'un \quote{n} tandis que \quotation{em} est la largeur d'un \quote{M} dans la police utilisée.% la largeur d'un quote{M}??? IMPORTANT : les deux unités sont ex et em. Si on utilise en comme unité, par exemple dans \blank[3en] on obtient une erreur. Deplus le TeXBook parle de ex et em (page 270 - 1986 + final corrections 1992)
+Les noms de commandes \tex{hyphen} et \tex{minus} sont ceux normalement utilisés en anglais. Bien que de nombreux professionnels de l'imprimerie les appellent \quote{tirets}, les termes de \TeX, à savoir \tex{endash} et \tex{emdash} sont également courants dans la terminologie de la composition. Les \quotation{\em en} et \quotation{\em em} sont les noms des unités de mesure utilisées en typographie. Une \quotation{en} représente la largeur d'un \quote{n} tandis que \quotation{em} est la largeur d'un \quote{M} dans la police utilisée.% em = la largeur d'un quote{M} IMPORTANT : les deux unités sont ex et em. en est défini par Knuth comme 1/2 em (page 71) et n'est utilisé que dans les noms de commandes (endash, enskip enspace..., pages 71,352) Si on utilise en comme unité, par exemple dans \blank[3en] on obtient une erreur. De plus le TeXBook parle de ex et em (pages 270 et 433 ex et quad - 1986 + final corrections 1992) ex est la hauteur du x et em la largeur du M. Je ne vois pas comment faire la distinction en <> ex dans le texte. NB ex peut être plus petit que en ! (je crois, voir page 433)On pourrait peut-être écrire: La \quotation{\em em} est une unité de mesure typographique et représente la largeur d'un \quote{M} dans la police utilisée~; il correspond aussi à la hauteur de police et s'appelle \quotation{quadratin}. La \quotation{\em en} vaut un \quotation{demi-em}.
 
 \stopsubsubsection
 
@@ -413,7 +413,7 @@ Un groupe est un fragment bien défini du fichier source que \ConTeXt\ utilise c
 
   \item Avec la commande \PlaceMacro{start}\tex{start}
 
-  \item Avec l'ouverture de certains environnements (commande \tex{startSomething}).   %  startQuelqueChose ???
+  \item Avec l'ouverture de certains environnements (commande \tex{startSomething}).   %  startUnTruc comme dans le fichier 01_Source_FirstDoc ligne 514 ???
 
   \item En commençant un environnement mathématique (avec le caractère réservé
   "\$").
@@ -430,7 +430,7 @@ et est fermé
 
   \item Avec la commande \PlaceMacro{stop}\tex{stop}
 
-  \item Avec la fermeture de l'environnement (commande \tex{stopSomething}).   % stopQuelqueChose ??
+  \item Avec la fermeture de l'environnement (commande \tex{stopSomething}).   % stopUnTruc ??
 
   \item Lors de la sortie de l'environnement mathématique (avec le caractère réservé "\$").
 
@@ -454,7 +454,7 @@ Cette règle n'a qu'une seule exception~: un groupe commencé par \MyKey{\{} peu
 
 Nous pouvons avoir des groupes imbriqués (un groupe à l'intérieur d'un autre groupe), et dans ce cas, l'ordre dans lequel les groupes sont fermés doit être cohérent avec l'ordre dans lequel ils ont été ouverts~: tout sous-groupe doit être fermé à l'intérieur du groupe dans lequel il a commencé. Il peut également y avoir des groupes vides générés avec la \MyKey{\{\}}. Un groupe vide n'a, en principe, aucun effet sur le document final, mais il peut être utile, par exemple, pour indiquer la fin du nom d'une commande.
 
-Le principal effet des groupes est d'encapsuler leur contenu~: en règle générale, les définitions, les formats et les attributions de valeurs effectués au sein d'un groupe sont \quotation{oubliés} une fois que l'on quitte le groupe. De cette façon, si nous voulons que \ConTeXt\ modifie temporairement son mode de fonctionnement normal, le moyen le plus efficace est de créer un groupe et, au sein de celui-ci, de modifier ce fonctionnement. Ainsi, lorsque nous quitterons le groupe, toutes les valeurs et tous les formats antérieurs à celui-ci seront restaurés. Nous en avons déjà vu quelques exemples en mentionnant des commandes comme \tex{it}, \tex{bf}, \tex{sc}, etc. Mais cela ne se produit pas seulement avec les commandes de formatage~: le groupe isole en quelque sorte son contenu, de sorte que toute modification de l'une des nombreuses variables internes que \ConTeXt\ gère en permanence, ne restera effective que tant que nous nous trouvons dans le groupe dans lequel cette modification a eu lieu. De même, une commande définie au sein d'un groupe ne sera pas connue en dehors de celui-ci. % Je ne me souviens pas d'avoit déjà rencontre \tex{it}... En fait c'est la première mention, si on fait une recherche dans le document
+Le principal effet des groupes est d'encapsuler leur contenu~: en règle générale, les définitions, les formats et les attributions de valeurs effectués au sein d'un groupe sont \quotation{oubliés} une fois que l'on quitte le groupe. De cette façon, si nous voulons que \ConTeXt\ modifie temporairement son mode de fonctionnement normal, le moyen le plus efficace est de créer un groupe et, au sein de celui-ci, de modifier ce fonctionnement. Ainsi, lorsque nous quitterons le groupe, toutes les valeurs et tous les formats antérieurs à celui-ci seront restaurés. Nous en avons déjà vu quelques exemples en mentionnant des commandes comme \tex{it}, \tex{bf}, \tex{sc}, etc. Mais cela ne se produit pas seulement avec les commandes de formatage~: le groupe isole en quelque sorte son contenu, de sorte que toute modification de l'une des nombreuses variables internes que \ConTeXt\ gère en permanence, ne restera effective que tant que nous nous trouvons dans le groupe dans lequel cette modification a eu lieu. De même, une commande définie au sein d'un groupe ne sera pas connue en dehors de celui-ci. % Je ne me souviens pas d'avoit déjà rencontre \tex{it}... En fait c'est la première mention, si on fait une recherche dans le document l'explication se trouve en partie, comme exemple, quatre pages plus loin
 
 Ainsi, si nous traitons l'exemple suivant
 
@@ -497,7 +497,7 @@ En fonction de ce qui suit immédiatement ce caractère d'échappement, une dist
 
 % TODO Garulfo faire une bibliographie, ce n'est pas clair ici. si on présente du source, il faut utiliser l'environnement définir pour cela~: start type code
   \startSmallPrint
-    Un espace vide ou blanc est un caractère \quotation{invisible}, ce qui pose un problème dans un document comme celui-ci, où il faut parfois préciser clairement ce qui doit être écrit dans un fichier source. {\sc Knuth} était déjà conscient de ce problème et, dans son \quotation{The \TeX Book}, il a pris l'habitude de représenter les espaces vides importants par le symbole \quotation{\textvisiblespace}. Ainsi, par exemple, si nous voulions montrer que deux mots du fichier source doivent être séparés par deux espaces vides, nous écririons \quotation{word1␣␣word2}.% le nom de Knuth n'est pas mis en sc !!!!!
+    Un espace vide ou blanc est un caractère \quotation{invisible}, ce qui pose un problème dans un document comme celui-ci, où il faut parfois préciser clairement ce qui doit être écrit dans un fichier source. {\sc Knuth} était déjà conscient de ce problème et, dans son \quotation{The \TeX Book}, il a pris l'habitude de représenter les espaces vides importants par le symbole \quotation{\textvisiblespace}. Ainsi, par exemple, si nous voulions montrer que deux mots du fichier source doivent être séparés par deux espaces vides, nous écririons \quotation{word1␣␣word2}.% le nom de Knuth n'est pas mis en sc !!!!! peut-être n'y a-t-il pas de sc dans cette taille de police
     \reference[note:espace invisible]{}  
   \stopSmallPrint
 
@@ -514,9 +514,9 @@ En fonction de ce qui suit immédiatement ce caractère d'échappement, une dist
 
 Lorsque \ConTeXt\ lit un fichier source et trouve le caractère d'échappement (\quotation{{\tt\backslash}}), il sait qu'une commande va suivre. Il lit alors le premier caractère qui suit la séquence d'échappement. Si ce n'est pas une lettre, cela signifie que la commande est un symbole de contrôle et ne consiste qu'en ce premier symbole. Mais d'un autre côté, si le premier caractère après la séquence d'échappement est une lettre, alors \ConTeXt\ continuera à lire chaque caractère jusqu'à ce qu'il trouve le premier caractère qui ne soit pas une lettre, et il saura alors que le nom de la commande est terminé. C'est pourquoi les noms de commande qui sont des mots de contrôle ne peuvent pas contenir de caractères autres que des lettres.
 
-Lorsque la \quotation{non-lettre} à la fin du nom de la commande est un espace vide, il est supposé que l'espace vide ne fait pas partie du texte à traiter, mais qu'il a été inséré exclusivement pour indiquer la fin du nom de la commande, donc \ConTeXt\ se débarrasse de cet espace. Cela produit un effet qui surprend les débutants, car lorsque l'effet de la commande en question implique d'écrire quelque chose dans le document final, la sortie écrite de la commande est liée au mot suivant. Par exemple, les deux phrases suivantes dans le fichier source produisent le résultat suivant~:
+Lorsque la \quotation{non-lettre} à la fin du nom de la commande est un espace vide, il est supposé que l'espace vide ne fait pas partie du texte à traiter, mais qu'il a été inséré exclusivement pour indiquer la fin du nom de la commande, donc \ConTeXt\ se débarrasse de cet espace. Cela produit un effet qui surprend les débutants, car lorsque l'effet de la commande en question implique d'écrire quelque chose dans le document final, la sortie écrite de la commande est liée au mot suivant. Par exemple, les deux phrases suivantes dans le fichier source produisent le résultat suivant~: %L'appel de note est sur la dernière ligne de la page, la note déborde en-dessous et n'est aps complète. Comme le dit TODO, ci-dessous, ne pas mettre en note de bas de page et ce serait mieux de mettre le texte beaucoup plus haut dans le manuel, car cette façon de présenter à déjà été utilisée auparavant (je crois).
 % TODO Garulfo~: cette remarque n'est pas à mettre en note de bas de page, trop important.
-\footnote{{\bf Note~:} par convention, pour illustrer quelque chose dans cette introduction, les exemples de code source utilise une police à espacement fixe, une coloration syntaxique cohérente de \ConTeXt\ dans un cadre de fond gris. Le résultat de la compilation est présenté dans un cadre de fond de couleur jaune foncé.}
+\footnote{{\bf Note~:} par convention, pour illustrer quelque chose dans cette introduction, les exemples de code source utilise une police à espacement fixe, une coloration syntaxique cohérente de \ConTeXt\ dans un cadre de fond gris. Le résultat de la compilation est présenté dans un cadre de fond de couleur jaune foncé.} % modifier ce texte pour que cela corresponde à la forme non colorée des pages : introCTX_fra_p.pdf
 
 \placefigure [force,here,none] [] {}{
 \startDemoHN
@@ -604,9 +604,9 @@ Lorsque ces commandes sont exécutées dans un {\em groupe} (voir \in{section}[s
 In {\it The \TeX Book}, {\sc Knuth} explained \bf{everything} you need to know about \TeX.
 \stopDemoHN}
 
-crée deux groupes, l'un pour déterminer la portée de la commande \tex{it} (italique) et l'autre pour déterminer la portée de la commande \tex{sc} (petites capitales, small capital en anglais).
+crée deux groupes, l'un pour déterminer la portée de la commande \tex{it} (italique) et l'autre pour déterminer la portée de la commande \tex{sc} (petites capitales, small capital en anglais). % il semble qu'il y a deux problèmes avec \bf{everything} : 1) la forme de son utilisation n'est pas expliquée, alors qu'elle semble faire partie de la série \it, \sc,... et 2) la mise en gras n'est pas limitée à everything, mais va jusqu'au bout de la ligne ; \bf{everything} active \bf puis crée un groupe {everything} qui n'a pas d'effet !!!!
 
-Au contraire de ce type de commande, il en existe d'autres qui nécessitent immédiatement une indication du texte auquel elles doivent être appliquées. Dans ce cas, le texte qui doit être affecté par la commande est placé entre des crochets immédiatement après la commande. Par exemple, nous pouvons citer la commande \tex{framed}~: cette commande dessine un cadre autour du texte qu'elle prend comme argument, par exemple~: % 1) il aurait été plus simple de dire aussi que c'est ce que l'on observe avec \bf{everything} et 2) il ne s'agit  pas de crochets, mais d'ACCOLADES !!
+Au contraire de ce type de commande, il en existe d'autres qui nécessitent immédiatement une indication du texte auquel elles doivent être appliquées. Dans ce cas, le texte qui doit être affecté par la commande est placé entre des crochets immédiatement après la commande. Par exemple, nous pouvons citer la commande \tex{framed}~: cette commande dessine un cadre autour du texte qu'elle prend comme argument, par exemple~: % 1) il aurait été plus simple de dire aussi que c'est ce que l'on observe avec \bf{everything}(en fait NON : voir ci-dessus) et 2) il ne s'agit  pas de crochets, mais d'ACCOLADES !!
 
 \placefigure [force,here,none] [] {}{
 \startDemoHN
@@ -640,7 +640,7 @@ Certaines commandes fonctionnent par couple afin de déterminer leur portée, en
 
 Il n'y a pas de nom spécial pour ces paires de commandes dans la documentation officielle de \ConTeXt. Le manuel de référence et l'introduction les appellent simplement \quotation{start ... stop}. Parfois elles sont appelés {\em environnements}, qui est également le nom que \LaTeX\ donne à un type de construction similaire, mais cela présente un inconvénient dans \ConTeXt\ car ce terme \quotation{environnement} est également utilisé pour autre chose (un type spécial de fichier source que nous verrons lorsque nous parlerons des projets multifichiers dans \in{section}[sec:srcprojects]). Néanmoins, puisque le terme environnement est clair, et que le contexte permettra de distinguer facilement si nous parlons de {\em commandes d'environnement} ou de {\em fichiers d'environnement}, j'utiliserai ce terme.
 
-Les environnements consistent donc en une commande qui les ouvre, les commence, et une autre qui les ferme, les termine. Si le fichier source contient une commande d'ouverture d'environnement qui n'est pas fermée par la suite, une erreur est normalement générée.\footnote{Pas toujours, cela dépend de l'environnement en question et de la situation dans le reste du document. \ConTeXt\ diffère de \LaTeX\ à cet égard qui est beaucoup plus strict.} D'autre part, ces types d'erreurs sont plus difficiles à trouver, car l'erreur peut se produire bien au-delà de l'endroit où se trouve la commande d'ouverture. Parfois, le fichier \MyKey{.log} nous montrera la ligne où commence l'environnement incorrectement fermé~; mais d'autres fois, l'absence d’une fermeture \footnote{test} d'environnement va impliquer une mauvaise interprétation par \ConTeXt\ qui soulignera le passage qu'il considère comme éronné et non pas le manque de fermeture d'environnement, ce qui signifie que le fichier \MyKey{.log} ne nous est pas d'une grande aide pour trouver où se situe le problème.
+Les environnements consistent donc en une commande qui les ouvre, les commence, et une autre qui les ferme, les termine. Si le fichier source contient une commande d'ouverture d'environnement qui n'est pas fermée par la suite, une erreur est normalement générée.\footnote{Pas toujours, cela dépend de l'environnement en question et de la situation dans le reste du document. \ConTeXt\ diffère de \LaTeX\ à cet égard qui est beaucoup plus strict.} D'autre part, ces types d'erreurs sont plus difficiles à trouver, car l'erreur peut se produire bien au-delà de l'endroit où se trouve la commande d'ouverture. Parfois, le fichier \MyKey{.log} nous montrera la ligne où commence l'environnement incorrectement fermé~; mais d'autres fois, l'absence d’une fermeture \footnote{test} d'environnement va impliquer une mauvaise interprétation par \ConTeXt\ qui soulignera le passage qu'il considère comme éronné et non pas le manque de fermeture d'environnement, ce qui signifie que le fichier \MyKey{.log} ne nous est pas d'une grande aide pour trouver où se situe le problème. % utilité de la \footnote{test} ?
 
 Les environnements peuvent être imbriqués, ce qui signifie qu'un autre environnement peut être ouvert à l'intérieur d'un environnement existant. Dans de tels cas un environnement doit absolument être fermé à l'intérieur de l'environnement dans lequel il a été ouvert. En d'autres termes, l'ordre dans lequel les environnements sont fermés doit être cohérent avec l'ordre dans lequel ils ont été ouverts. Je pense que cela devrait être clair à partir de l'exemple suivant~:
 
@@ -708,7 +708,7 @@ et celui d'une version personnalisée~:
 \stopDemoVN}
 
 
-Dans le deuxième exemple, nous avons indiqué entre les crochets une largeur et une hauteur spécifiques pour le cadre qui entoure le texte qu'il prend comme argument. À l'intérieur des crochets, les différentes options de configuration sont séparées par une virgule~; les espaces vides et même les sauts de ligne (à condition qu'il ne s'agisse pas d'un double saut de ligne) entre deux ou plusieurs options, ne sont pas pris en considération afin que, par exemple, les quatre versions suivantes de la même commande produisent exactement le même résultat~:
+Dans le deuxième exemple, nous avons indiqué entre les crochets une largeur et une hauteur spécifiques pour le cadre qui entoure le texte qu'il prend comme argument. À l'intérieur des crochets, les différentes options de configuration sont séparées par une virgule~; les espaces vides et même les sauts de ligne (à condition qu'il ne s'agisse pas d'un double saut de ligne) entre deux ou plusieurs options, ne sont pas pris en considération afin que, par exemple, les quatre versions suivantes de la même commande produisent exactement le même résultat~:  % Dans le document compilé il y a une ligne vide après la césure du mot argument à la deuxième linge !!
 
 \placefigure [force,here,none] [] {}{
 \startDemoVW
@@ -773,7 +773,7 @@ En continuant avec l'exemple du \tex{framed}, il est évident que si notre docum
 \startDemoI
 \defineframed
   [MonCadre]
-  [MaConfigurationPourCadre]
+  [MaConfigurationPourCadre]    % [ConfigurationPourMonCadre]
 \stopDemoI}
 
 où {\em MonCadre} est le nom attribué au type particulier de cadre à configurer~; et {\em MaConfigurationPourCadre} est la configuration particulière associée à ce nom. % ici j'aurais utiliser "ConfigurationPourMonCadre"
@@ -903,7 +903,7 @@ Certaines règles syntaxiques sont à bien prendre en compte~:
   NE FONCTIONNERA PAS
 \stopsection
 \startsection[title={mon titre[5] avec crochets}]
-  Du texe pour cette section
+  Du texte pour cette section
   FONCTIONNERA
 \stopsection
 \stopDemoHN
@@ -927,7 +927,7 @@ Parmi la documentation de \ConTeXt\, il existe un document particulièrement imp
 
 \startSmallPrint
 
-  En fait, la \MyKey{qrc} possède sept versions de ce document, une pour chacune des langues disposant d'une interface \ConTeXt\~: allemand, tchèque, français, néerlandais, anglais, italien et roumain. Pour chacune de ces langues, il existe deux documents dans le répertoire~: un appelé \MyKey{setup-LangCode} (où LangCode est le code en deux lettres d'identification des langues internationales) et un second document appelé \MyKey{setup-mapping-LangCode}. Ce second document contient une liste de commandes par ordre alphabétique et indique la commande {\em prototype}, mais sans les informations des valeurs possibles pour chaque argument.
+  En fait, la \MyKey{qrc} possède sept versions de ce document, une pour chacune des langues disposant d'une interface \ConTeXt\~: allemand, tchèque, français, néerlandais, anglais, italien et roumain. Pour chacune de ces langues, il existe deux documents dans le répertoire~: un appelé \MyKey{setup-LangCode} (où LangCode est le code international en deux lettres d'identification des langues) et un second document appelé \MyKey{setup-mapping-LangCode}. Ce second document contient une liste de commandes par ordre alphabétique et indique la commande {\em prototype}, mais sans les informations des valeurs possibles pour chaque argument.
 
 \stopSmallPrint
 
@@ -967,8 +967,8 @@ Ainsi, chaque utilisateur est invité à compléter progressivement la documenta
   Bien que nous puissions utiliser \ConTeXt\ parfaitement sans nous soucier des dimensions, nous ne pourrions pas utiliser toutes les possibilités de configuration sans leur accorder une certaine attention. Car, dans une large mesure, la perfection typographique atteinte par \TeX\ et ses dérivés réside dans la grande attention que le système accorde en interne aux dimensions. Les caractères ont des dimensions~; l'espace entre les mots, ou entre les lignes, ou entre les paragraphes ont des dimensions~; les lignes ont des dimensions~; les marges, les en-têtes et les pieds de page. Pour presque tous les éléments de la page auxquels nous pouvons penser, il existe des dimensions.
 
 Dans \ConTeXt\ les dimensions sont indiquées par un nombre décimal suivi par
-l'unité de mesure. Les unités qui peuvent être utilisées se trouvent dans
-\in{table}[tbl:measurements].
+l'unité de mesure. Les unités qui peuvent être utilisées se trouvent dans le
+\in{tableau}[tbl:measurements].
 
 
 \placetable
@@ -992,7 +992,7 @@ l'unité de mesure. Les unités qui peuvent être utilisées se trouvent dans
 \stoptabulate
 }
 
-Les trois premières unités du \in{table} [tbl:measurements] sont des mesures standard de longueur~; la première est utilisée dans certaines parties du monde anglophone et les autres en dehors ou dans certaines parties de celui-ci. Les autres unités proviennent du monde de la typographie. Les deux dernières, pour lesquelles je n'ai pas mis d'équivalent, sont des unités de mesure relatives basées sur la police de caractères actuelle. Une \quotation{em} est égale à la largeur d'un \quotation{M} et une \quotation{ex} est égale à la hauteur d'un \quotation{x}. L'utilisation de mesures liées à la taille des polices permet de créer des macros qui offrent une mise en forme réussies quelle que soit le contexte d'utilisation puisque tout est mis en cohérence avec la taille de la police de caractère. C'est pourquoi, en général, elle est recommandée.  %% attention à la ligne 341 on parle de {en} et ici de {ex}, normalement "ex". Peut-être aussi mettre en note de bas de page une remarque sur la distinction entre "em" dimension et "\em" commande de mise en évidence ?
+Les trois premières unités du \in{tableau} [tbl:measurements] sont des mesures standard de longueur~; la première est utilisée dans certaines parties du monde anglophone et les autres en dehors ou dans certaines parties de celui-ci. Les autres unités proviennent du monde de la typographie. Les deux dernières, pour lesquelles je n'ai pas mis d'équivalent, sont des unités de mesure relatives basées sur la police de caractères actuelle. Une \quotation{em} est égale à la largeur d'un \quotation{M} et une \quotation{ex} est égale à la hauteur d'un \quotation{x}. L'utilisation de mesures liées à la taille des polices permet de créer des macros qui offrent une mise en forme réussies quelle que soit le contexte d'utilisation puisque tout est mis en cohérence avec la taille de la police de caractère. C'est pourquoi, en général, elle est recommandée.  %% attention voir le commentaire à la ligne 373. Peut-être aussi mettre en note de bas de page une remarque sur la distinction entre "em" dimension et "\em" commande de mise en évidence ?\
 
 À de très rares exceptions près, nous pouvons utiliser l'unité de mesure de notre choix, car \ConTeXt\ la convertira en interne. Mais chaque fois qu'une dimension est indiquée, il est obligatoire d'indiquer l'unité de mesure, et même si nous voulons indiquer une mesure de \quotation{0}, nous devons dire \quote{0pt} ou \quote{0cm}. Entre le nombre et le nom de l'unité, on peut laisser ou non un espace vide. Si l'unité comporte une partie décimale, nous devons utiliser le \quotation{.} en séparateur décimal.
 % TODO Garulfo~: une erreur ici. la virgule nêest pas toléré.
@@ -1018,7 +1018,7 @@ Les mesures sont généralement utilisées comme une option pour une commande. M
 
 Nous pouvons utiliser \tex{MaDimensionA 10mm} (sans le signe égal) mais aussi \tex{MaDimensionA10mm} sans espace entre le nom de la mesure et sa valeur.
 
-Toutefois, l'attribution d'une valeur directement à une mesure interne est considérée comme une \quotation{inelegant}. En général, il est recommandé d'utiliser les commandes qui contrôlent cette variable, et de le faire dans le préambule du fichier source. Le contraire donne lieu à des fichiers sources très difficiles à déboguer car toutes les commandes de configuration ne se trouvent pas au même endroit, et il est vraiment difficile d'obtenir une certaine cohérence dans les caractéristiques typographiques. %  considérée comme inélégant ou « inelegant » si on considère le mot anglais !!!
+Toutefois, l'attribution d'une valeur directement à une mesure interne est considérée comme une \quotation{inelegant}. En général, il est recommandé d'utiliser les commandes qui contrôlent cette variable, et de le faire dans le préambule du fichier source. Le contraire donne lieu à des fichiers sources très difficiles à déboguer car toutes les commandes de configuration ne se trouvent pas au même endroit, et il est vraiment difficile d'obtenir une certaine cohérence dans les caractéristiques typographiques. %  "considérée comme \quotation{inélégant}" ou "considérée comme \quotation{inelegant}" si on considère le mot anglais !!!
 
 Certaines des dimensions utilisées par \ConTeXt\ sont \quotation{élastiques}, c'est-à-dire que, selon le contexte, elles peuvent prendre l'une ou l'autre mesure. Ces mesures sont attribuées avec la syntaxe suivante~:
 
@@ -1039,7 +1039,7 @@ Par exemple~:
 Avec cette instruction, nous demandons à \ConTeXt\ d'attribuer à \PlaceMacro{parskip}\tex{parskip} (indiquant la distance verticale entre les paragraphes qui doit plutôt être paramétrée avec \tex{setupwhitespace} mais nous avons besoin ici d'un exemple) une mesure {\em normale} de 3 points, mais que si la composition de la page l'exige, la mesure peut aller jusqu'à 5 points (3 plus 2) ou seulement 2 points (3 moins 1). Dans ces cas, il appartiendra à \ConTeXt\ de choisir la distance pour chaque page entre un minimum de 2 points et un maximum de 5 points.
 \index{setupwhitespace}
 % TODO Garulfo parskip~: toujours pas une bonne idée d'utiliser en illustration une commande que l'utilisateur moyen n'utilise pas.
-
+%ADel : on pourrait utiliser une comande d'espace horizontal ?
 
 
 \stopsection
@@ -1061,9 +1061,9 @@ Pour créer un document avec \ConTeXt, il suffit probablement de connaître les 
 
   \item Créer un fichier source ou un projet complet quelconque~; ceci est expliqué dans le \in{Chapitre}[cap:sourcefile] de cette introduction.
 
-  \item Définir la police principale du document, la changer et changer sa couleur (\in{Chapitre}[sec:fontscol]).
+  \item Définir la police principale du document, la changer et changer sa couleur (\in{Chapitre}[sec:fontscol]).   % référence non définie, à venir ?
 
-  \item Structurer le contenu de notre document, avec des chapitres, des sections, des sous-sections, etc. Tout cela est expliqué dans le \in{Chapitre}[cap:structure].
+  \item Structurer le contenu de notre document, avec des chapitres, des sections, des sous-sections, etc. Tout cela est expliqué dans le \in{Chapitre}[cap:structure].   % référence non définie, à venir ?
 
   \item Utiliser l'environnement {\em itemize} pour les listes, il sera expliqué en détail dans \in{section}[sec:itemize].
 
