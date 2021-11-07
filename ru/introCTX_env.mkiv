@@ -4,13 +4,15 @@
 %%% Created:   March 2020
 %%% File edited with: Emacs + AucTeX - vim
 %
-% Этот файл содержит преамбулу введения в контекст.  Вначале я скопировал его из источника файла about.pdf, 
-%включенного в документацию по ConTeXt Standalone, и оттуда некоторые вещи были изменены в соответствии с необходимостью.
+% Этот файл содержит преамбулу введения в контекст.  Вначале я скопировал его из источника файла about.pdf,
+% включенного в документацию по ConTeXt Standalone, и оттуда некоторые вещи были изменены в соответствии с необходимостью.
 
 \startenvironment introCTX_env.mkiv
 
-  \mainlanguage[ru][leftquotation=«, rightquotation=»] % Основной язык - Русский
-    
+  % \mainlanguage[ru][leftquotation=«, rightquotation=»] % Основной язык - Русский
+  \setuplanguage[ru][leftquotation=«, rightquotation=»] % Основной язык - Русский
+  \mainlanguage[ru] % Основной язык - Русский
+
   \setupbodyfont[dejavu,8pt] % Основной шрифт документа
 
   % Макет страницы Page layout
@@ -67,7 +69,7 @@
   % Настройка PARTS, CHAPTERS, SECTIONS и т.д.
 
   % Этот фрагмент определяет нижний колонтитул с номерами страниц. Ему присваивается имя, а затем, когда команды раздела настроены, это имя назначается первой странице части и главы.
-  
+
   \definetext[ChapterFirstPage]
     [footer]
     [pagenumber]
@@ -119,7 +121,7 @@
       sectionsegments=2:4,
     ]
 
-  \define[1]\PlacePoint{#1.} 
+  \define[1]\PlacePoint{#1.}
 
   \setuphead
     [subsubsection,subsubsubject]
@@ -188,7 +190,7 @@
   % Команды и абревиатуры
 
   % Предположение: напечатает значок предположения на полях
-  
+
   \define\Conjecture
     {\inmargin[line=1]{\externalfigure[miniconjecture.jpg][width=1cm]}}
 
@@ -208,7 +210,7 @@
 
   % PalClave:  tt and guillemets (angle quotes)
   % \define[1]\PalClave{«{\tt #1}»}
-       
+
   % MyKey: tt and double inverted commas
   \define[1]\MyKey{\quotation{\tt #1}}
 
