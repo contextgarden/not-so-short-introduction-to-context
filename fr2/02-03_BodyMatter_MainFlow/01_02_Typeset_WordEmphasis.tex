@@ -21,7 +21,7 @@ Le présent chapitre, qui commence par \quotation{\em caractère} (voyez la \in{
 \startsubsection
   [title={Formatages spéciaux des caractères}]
 
-À proprement parler, ce sont les commandes de {\em formatage} qui affectent la police utilisée, sa taille, son style ou sa variante. Ces commandes sont expliquées dans le \in{Chapitre} [sec:fontscol]. Cependant, d'un point de vue plus {\em général}, nous pouvons également considérer les commandes qui modifient d'une manière ou d'une autre les caractères qu'elles prennent comme argument (modifiant ainsi leur apparence) comme des commandes de formatage du texte. Nous allons examiner certaines de ces commandes dans cette section. D'autres, telles que le texte souligné ou aligné avec des lignes au-dessus ou au-dessous du texte courant (par exemple, lorsque nous voulons fournir de l'espace pour répondre à une question) seront vues dans \in{section}[sec:FramesLines].
+À proprement parler, ce sont les commandes de {\em formatage} qui affectent la police utilisée, sa taille, son style ou sa variante. Ces commandes sont expliquées dans le \in{Chapitre} [sec:fontscol]. Cependant, d'un point de vue plus {\em général}, nous pouvons également considérer les commandes qui modifient d'une manière ou d'une autre les caractères qu'elles prennent comme argument (modifiant ainsi leur apparence) comme des commandes de formatage du texte. Nous allons examiner certaines de ces commandes dans cette section. D'autres, telles que le texte souligné ou aligné avec des lignes au-dessus ou au-dessous du texte courant (par exemple, lorsque nous voulons fournir de l'espace pour répondre à une question) seront vues dans \in{section}[sec:FramesLines].% référence [sec:fontscol] non définie
 
 % ***  SubSection majuscules, minuscules et fausses petites majuscules
 
@@ -61,7 +61,7 @@ Les commandes \PlaceMacro{cap} \tex{cap} et \PlaceMacro{Cap} \tex{Cap} sont trè
 
 \startitemize[n]
 
-item \tex{cap} et \tex{Cap} fonctionnent avec n'importe quelle police, contrairement aux vraies petites capitales qui ne fonctionnent qu'avec les polices et les styles qui les incluent expressément.
+\item \tex{cap} et \tex{Cap} fonctionnent avec n'importe quelle police, contrairement aux vraies petites capitales qui ne fonctionnent qu'avec les polices et les styles qui les incluent expressément.
 
 \item Les vraies petites capitales, quant à elles, sont une variante de la police qui, en tant que telle, est incompatible avec toute autre variante telle que le gras, l'italique ou l'incliné. En revanche, \tex{cap} et \tex{Cap} sont entièrement compatibles avec toutes les variantes de police.
   
@@ -125,7 +125,7 @@ Dans l'une ou l'autre des deux commandes, la configuration permet trois options~
 \setup{setupinitial}
 
 % TODO Garulfo bug ici inital ne marche pas dans DemoVN
-
+% confirmé !!
 \placefigure [force,here,none] [] {}{
 \startDemoVN
 \setupinitial
@@ -352,7 +352,7 @@ Ainsi, dans l'exemple suivant, nous pouvons voir graphiquement comment la comman
 
 \startSmallPrint
 
-Dans cet exemple, en l'absence de {\tt factor}, on peut voir que la répartition de l'espace horizontal entre les différents caractères n'est pas uniforme. Les \quote{T} et \quote{e} dans \quotation{Texte} apparaissent toujours beaucoup plus proches les uns des autres que les autres caractères. Je n'ai pas réussi à trouver la raison de ce phénomène.
+Dans cet exemple, en l'absence de {\tt factor}, on peut voir que la répartition de l'espace horizontal entre les différents caractères n'est pas uniforme. Les \quote{T} et \quote{e} dans \quotation{Texte} apparaissent toujours beaucoup plus proches les uns des autres que les autres caractères. Je n'ai pas réussi à trouver la raison de ce phénomène.  % le mot " Texte " n'existe pas dans l'exemple !
   
 \stopSmallPrint
 
@@ -403,7 +403,7 @@ Nous savons déjà que pour augmenter l'espace entre les mots, il est inutile d'
 \item \PlaceMacro{\textvisiblespace} \PlaceMacro{space} \cmd{space} ou \quotation{\cmd{\textvisiblespace}} (une barre oblique inversée suivie d'un espace vide que j'ai représenté par \quotation{\textvisiblespace}, car il s'agit d'un caractère invisible) introduit un espace vide supplémentaire.
 
 % TODO garulfo la taille se réfère à em ou xheight, plutôt x non ?
-
+% AlanoDel Non, pas xheight qui est la hauteur d'œil, qui n'est pas liée directement à em. en est comme écrit 1/2 em et pas hauteur/largeur de "n" ! C'est toute la question que j'ai soulevé dans "02_Source_Commands.tex" en lignes 373 et 995
 \item \PlaceMacro{enskip}\cmd{enskip}, \PlaceMacro{quad}\cmd{quad} et \PlaceMacro{qquad}\cmd{qquad} insèrent un espace blanc dans le document de respectivement un demi-{\em em}, 1{\em em} ou 2{\em ems}. N'oubliez pas que le {\em em} est une mesure qui dépend de la taille de la police et équivaut à la largeur d'un \quote{M}, qui coïncide normalement avec la taille en points de la police. Ainsi, en utilisant une police de 12 points, \cmd{enskip} nous donne un espace de 6 points, \cmd{quad} nous donne 12 points et \cmd{qquad} nous donne 24 points.
 
 \stopitemize

@@ -1,0 +1,34 @@
+\setuppapersize[A7,landscape]
+\showframe
+\setupbodyfont[8pt]
+\starttext
+
+\setupbackgrounds [page]
+  [background=color, backgroundcolor=middlecyan]
+\setupbackgrounds [footer]
+  [background=color, backgroundcolor=middlemagenta]
+\setupbackgrounds [footer] [leftmargin]
+  [background=color, backgroundcolor=middlered]
+\setupbackgrounds [text]
+  [background=color, backgroundcolor=lightgray]
+\setupbackgrounds [text]   [rightmargin]
+  [background=color, backgroundcolor=middleyellow]
+
+\starttyping[option=tex]
+\setupbackgrounds [page]
+  [background=color, backgroundcolor=middlecyan]
+
+\setupbackgrounds [footer]
+  [background=color, backgroundcolor=middlemagenta]
+
+\setupbackgrounds [footer] [leftmargin]
+  [background=color, backgroundcolor=middlered]
+
+\setupbackgrounds [text]
+  [background=color, backgroundcolor=lightgray]
+
+\setupbackgrounds [text]   [rightmargin]
+  [background=color, backgroundcolor=middleyellow]
+\stoptyping
+
+\stoptext
