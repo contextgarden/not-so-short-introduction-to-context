@@ -1,0 +1,115 @@
+%%% vim:set filetype=context tw=72 : %%%
+%%% File:      introCTX.tex
+%%% Title:     A not so short introduction to ConTeXt Mark IV
+%%% Author:    Joaquín Ataz-López
+%%% Begun:     March 2020
+%%% Concluded: August 2020
+%%%
+%%% Edited with: Emacs + AuTeX - And at times with vim + context-plugin
+%%%
+
+\environment introCTX_env.mkiv
+
+\startproduct introCTX.tex
+
+  % Date of the last time modifications were introduced:
+  \def\RevisionDate{\date[d=2, m=1, y=2021]}
+
+  %   Why am I not using frontmatter, bodymatter and appendices?
+  %   Fundamentally because I only see sense in this division if we want
+  %   to establish different page numbering, or renumbering of chapters.
+  %   But since I have to do this latter anyway, since I have not
+  %   figured out how to maintain chapter numbering each time there is a
+  %   change of part I see no sense in introducing a new division
+
+  % Add bookmarks to the PDF. This command does not work if it is in the
+  % preamble
+  \placebookmarks[chapter, section, subsection, subsubsection]
+
+  \component 00_FrontMatter/a01_TitlePage.tex
+  \component 00_FrontMatter/a02_Preface.tex
+
+  % First Part: What is ConTeXt
+  \startpart
+    [title=Co je to \ConTeXt\ a~jak s ním pracujeme]
+
+    % We begin by setting the headers and footers for this part
+
+    \setupheadertexts
+      [{\tfx\getmarking[chapter]}]
+
+    \setupheadertexts
+      [{\tfx Kapitola \getmarking[chapternumber]}]
+      [{\tfx\hbox to 2em{\hss\pagenumber}}]
+
+      % We set chapter counter to zero.
+      \setupheadnumber[chapter][0]
+
+      % Chapters making up this part
+      \component 01_BodyMatter/b01_Introduction.tex
+      \component 01_BodyMatter/b02_FirstDoc.tex
+      \component 01_BodyMatter/b03_Commands.tex
+      \component 01_BodyMatter/b04_SourceFile.tex
+
+  \stoppart
+
+  % Second Part: Global aspects
+  \startpart
+    [title=Celkový pohled na dokument]
+
+    % I am readjusting the chapter counter, since the part command has
+    % returned it to zero. I have not figured out how to indicate that
+    % chapter numbers should follow in sequence throughout the entire
+    % document.
+%    \setupheadnumber[chapter][4]
+
+    \component 01_BodyMatter/b05_Pages.tex
+    \component 01_BodyMatter/b06_Fonts.tex
+    \component 01_BodyMatter/b07_Structure.tex
+    \component 01_BodyMatter/b08_Lists.tex
+    \component 01_BodyMatter/b09_References.tex
+
+  \stoppart
+
+  % Third Part: Particular issues
+  \startpart
+    [title=Particular issues]
+
+    % Once again we readjust the chapter counter
+    \setupheadnumber[chapter][9]
+
+    \component 01_BodyMatter/b10_CharText.tex
+    \component 01_BodyMatter/b11_ParasLines.tex
+    \component 01_BodyMatter/b12_SpecialParas.tex
+    \component 01_BodyMatter/b13_Floats.tex
+
+  \stoppart
+
+  % Last Part: Appendices
+  \setuphead[part][number=no] % No numbering for this part
+
+  \startpart
+    [title=Appendices]
+
+    % Readjust the headers
+
+    \setupheadertexts
+      [{\tfx Appendix \getmarking[chapternumber]}]
+      [{\tfx\hbox to 2em{\hss\pagenumber}}]
+
+      \setuplabeltext[en][chapter=Appendix ]
+      \setuphead[chapter][conversion=A]
+
+      \component 02_Appendices/Installation.tex
+      \component 02_Appendices/Symbols.tex
+      \component 02_Appendices/Macros.tex
+
+  \stoppart
+
+\stopproduct
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% End:
