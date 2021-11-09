@@ -31,7 +31,7 @@
 
   % First Part: What is ConTeXt
   \startpart
-    [title=Co je to \ConTeXt\ a~jak s ním pracujeme]
+    [title=Co je \ConTeXt\ a~jak s ním pracujeme]
 
     % We begin by setting the headers and footers for this part
 
@@ -55,13 +55,7 @@
 
   % Second Part: Global aspects
   \startpart
-    [title=Celkový pohled na dokument]
-
-    % I am readjusting the chapter counter, since the part command has
-    % returned it to zero. I have not figured out how to indicate that
-    % chapter numbers should follow in sequence throughout the entire
-    % document.
-%    \setupheadnumber[chapter][4]
+    [title=Dokument jako celek a jeho struktura]
 
     \component 01_BodyMatter/b05_Pages.tex
     \component 01_BodyMatter/b06_Fonts.tex
@@ -73,10 +67,7 @@
 
   % Third Part: Particular issues
   \startpart
-    [title=Particular issues]
-
-    % Once again we readjust the chapter counter
-    \setupheadnumber[chapter][9]
+    [title=Vybrané oblasti úpravy dokumentu]
 
     \component 01_BodyMatter/b10_CharText.tex
     \component 01_BodyMatter/b11_ParasLines.tex
@@ -89,15 +80,15 @@
   \setuphead[part][number=no] % No numbering for this part
 
   \startpart
-    [title=Appendices]
+    [title=Přílohy]
 
     % Readjust the headers
 
     \setupheadertexts
-      [{\tfx Appendix \getmarking[chapternumber]}]
+      [{\tfx Příloha \getmarking[chapternumber]}]
       [{\tfx\hbox to 2em{\hss\pagenumber}}]
 
-      \setuplabeltext[en][chapter=Appendix ]
+      \setuplabeltext[en][chapter=Příloha ]
       \setuphead[chapter][conversion=A]
 
       \component 02_Appendices/Installation.tex
