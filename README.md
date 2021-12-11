@@ -1,5 +1,7 @@
 # A not so short introduction to ConTeXt
 
+[![CI](https://github.com/contextgarden/not-so-short-introduction-to-context/actions/workflows/main.yml/badge.svg)](https://github.com/contextgarden/not-so-short-introduction-to-context/actions/workflows/main.yml)
+
 It can sometimes be useful to **help someone get started** with the 
 **wonderful and fascinating typesetting and document composition system** that is [**ConTeXt**](https://wiki.contextgarden.net).
 
