@@ -824,9 +824,10 @@ Partons ici de l'hypothèse que vous avez un fichier BiBTeX {\tt .bib} qui conti
 
 \placefigure [force,here,none] [] {}
 {\startDemoHN%
-\usebtxdataset [introCTX_biblio.bib]%
-\showbtxdatasetfields%
-%\showbtxdatasetcompleteness
+\usebtxdataset[default][introCTX_biblio.bib]
+\setupbtx[dataset=default]
+\showbtxdatasetfields[default]
+%\showbtxdatasetcompleteness[default]
 
 Une première citation~: \cite[title][Hagen2017metafun]
 de \cite[author][Hagen2017metafun] (\cite[Hagen2017metafun])
@@ -839,8 +840,8 @@ de \cite[author][ConTeXtExcursion] (\cite[ConTeXtExcursion])
 \stopsubject
 \stopDemoHN}
 
-
-\usebtxdataset [introCTX_biblio.bib]%
+\usebtxdataset[default][introCTX_biblio.bib]
+\setupbtx[dataset=default]
 
 Une première citation~: \cite[title][Hagen2017metafun]
 de \cite[author][Hagen2017metafun] (\cite[Hagen2017metafun])

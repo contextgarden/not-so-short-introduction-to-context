@@ -89,7 +89,7 @@ Dans les deux cas, les options de configuration sont les mêmes. Les plus import
 
     \stopitemize
 
-  \item {\tt maxwidth}: Largeur maximale que peuvent avoir les colonnes + l'espace entre elles.
+  \item {\tt maxwidth}~: Largeur maximale que peuvent avoir les colonnes + l'espace entre elles.
 
   \stopitemize
 
@@ -115,7 +115,7 @@ Dans les deux cas, les options de configuration sont les mêmes. Les plus import
 
   \stopitemize
 
-\stopitemize
+\stopitemize  % il y a deux \stopitemize, pourquoi avoir utiliser \starthead... \stophead plutôt que \item ?
 
 Parfois, pour positionner les flottants (des tableaux, des images, voir \in{section}[cap:floats]) dans un contexte de composition en colonne, dans le cas où ces flottants couvrent toute la largeur des colonnes, il est préférable de commencer par quitter l'environnement columns avec \tex{stopcolumns}, de positionner le flottant avec, par exemple, \tex{startplacefigure}, et de reprendre ensuite avec \tex{stopplacefigure} puis  \tex{startcolumns}.
 

@@ -911,8 +911,8 @@ Pour générer un index par sujet, nous avons besoin de~:
 
 % *** Subsection définir les entrées et les points de marquage
 
-\subsubsection{The prior definition of the entries in the index and the
-marking of the points in the source file that refer to them}
+\startsubsubsection[title={The prior definition of the entries in the index and the
+marking of the points in the source file that refer to them}]
 
 The fundamental work is in the second step. It is true that computer
 systems also facilitate it in the sense that we can do a global text search
@@ -962,7 +962,8 @@ as \quotation{Hodgkin's disease}, since the more inclusive term is
 
 \stopSmallPrint
 
-If the index has several levels of depth (up to three are allowed) to associate a particular index entry with a specific level the \quote{+} character is used. As follows:
+If the index has several levels of depth (up to three are allowed) to associate
+a particular index entry with a specific level the \quote{+} character is used. As follows:
 
 \starttyping
 \index{Entry 1+Entry 2}
@@ -1054,9 +1055,10 @@ In \tex{seeindex} we can also use the \quote{+} sign to indicate sub-levels
 
 for either of its two arguments in square brackets.
 
+\stopsubsubsection
 % *** Subsection générer l'index final
 
-\subsubsection{Generating the final index}
+\startsubsubsection[title={Generating the final index}]
 
 Once we have marked all the entries for the index in our source file, the
 actual generation of the index is carried out using the
@@ -1075,6 +1077,8 @@ to the difference between \tex{content} and \tex{completecontent} (see
 generating the index and inserting it, while \tex{completeindex} previously
 inserts a new chapter in the final document, called \quotation{Index} by
 default, inside which the index will be typeset.
+
+\stopsubsubsection
 
 \stopsubsection
 
@@ -1095,7 +1099,9 @@ Avec cette commande, nous pouvons~:
 
 \startitemize
 
-\head Déterminer à quoi ressemblera l'index avec ses différents éléments. A savoir :
+\starthead
+Déterminer à quoi ressemblera l'index avec ses différents éléments. A savoir :
+\stophead
 
 \startitemize
 
