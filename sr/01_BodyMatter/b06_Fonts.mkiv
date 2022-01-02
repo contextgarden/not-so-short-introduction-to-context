@@ -1,17 +1,17 @@
-%%% File:     b06_Fonts.mkiv
-%%% Author:   Joaquín Ataz-López
-%%% Begun:    March 2020
+%%% File:      b06_Fonts.mkiv
+%%% Author:    Joaquín Ataz-López
+%%% Begun:     March 2020
 %%% Concluded: June 2020
-%%% Title:  Ово поглавље сам прво почео да пишем. Често сам се враћао на
-%%%         њега јер сам желео да се у њега укључи употреба фонтова
-%%%         инсталираних на систему. Али на викију нисам успео да
-%%%         пронађем инструкције за рад. Недавно (у августу) сам открио
-%%%         fonttest којем може да се приступи када извршите
-%%%         mtxrun --script server --auto. Потребно је још истраживања.
-%%%         Ово „види” фонтове инсталиране на мом систему и говори ми
-%%%         који кôд треба да користим да би могао да их употребим. Али
-%%%         још увек не разумем како ради. Могуће је да кључ лежи у
-%%%         упутству „Fonts out of ConTeXt”, али га тешко разумем.
+%%% Садржај:   Ово поглавље сам прво почео да пишем. Често сам се враћао на
+%%%            њега јер сам желео да се у њега укључи употреба фонтова
+%%%            инсталираних на систему. Али на викију нисам успео да
+%%%            пронађем инструкције за рад. Недавно (у августу) сам открио
+%%%            fonttest којем може да се приступи када извршите
+%%%            mtxrun --script server --auto. Потребно је још истраживања.
+%%%            Ово „види” фонтове инсталиране на мом систему и говори ми
+%%%            који кôд треба да користим да би могао да их употребим. Али
+%%%            још увек не разумем како ради. Могуће је да кључ лежи у
+%%%            упутству „Fonts out of ConTeXt”, али га тешко разумем.
 %%%
 %%% Edited with: Emacs + AuTeX - And at times vim + context-plugin
 %%%
@@ -101,7 +101,7 @@ Bront's уместо Brontë's.
     извршава \ConTeXt. Ипак, у овом уводу се нећу бавити начином употребе
     фонтова који су већ инсталирани на систему. Помоћ у вези тога можете
     пронаћи на \goto{\ConTeXt\ викију}[url(wiki)].
-    
+
   \stopSmallPrint
 
 \stopsection
@@ -159,7 +159,7 @@ roman}, {\em sans serif} и {\em teletype}. {\em Roman} стил је дизај
     оваквих стилова, ако се користе са фонтом који их не имплементира, неће
     изазвати никакву грешку приликом компајлирања: једноставно се ништа неће
     догодити.
-  
+
   \stopSmallPrint
 
 \subsubsubject{Алтернативне форме фонта}
@@ -177,7 +177,7 @@ roman}, {\em sans serif} и {\em teletype}. {\em Roman} стил је дизај
 \item Црни коси (\MyKey{bs} од {\em bold slanted})
 \item Капитал (\MyKey{sc} од {\em small caps})
 \item Средњовековни (\MyKey{os} од {\em old style})
-  
+
 \stopitemize
 
 Ове {\em алтернативе} су, као што им име наговештава, узајамно
@@ -239,7 +239,7 @@ roman}, {\em sans serif} и {\em teletype}. {\em Roman} стил је дизај
 
 \item Када укључујемо једну од њих, искључујемо алтернативу која се до
 тада користила.
-  
+
 \stopitemize
 
 Уз команде за курзив и коса слова, \ConTeXt\ обезбеђује и додатне
@@ -377,7 +377,7 @@ small, script, x, scriptscript и xx.  Тако на пример, ако жел
 
   Колико ја знам, ова различита имена која се подржавају за сваки од
 стилова су синоними.
- 
+
 \stopitemize
 
 \startsubsection
@@ -552,7 +552,7 @@ schola када је основна величина 8 тачака:
 \startDoubleExample
 
 \starttyping
-I thought a {\it thought} but 
+I thought a {\it thought} but
 the {\it thought} I thought wasn't
 the {\it thought} I thought I thought.
 If the {\it thought} I thought I thought
@@ -560,7 +560,7 @@ had been the {\it thought} I thought
 I wouldn't have thought so much!
 \stoptyping
 
-I thought a {\it thought}, but 
+I thought a {\it thought}, but
 the {\it thought} I thought, wasn't
 the {\it thought} I thought I thought.
 If the {\it thought} I thought I thought
@@ -626,9 +626,9 @@ I wouldn't have thought so much!
 Важно је приметити да ће промена величине фонта било којим од ових
 суфикса то урадити само у буквалном смислу, док ће остале вредности
 обично придружене величини фонта, као што је проред, остати нетакнуте.
-  
+
 \subsubsubject{Прилагођавање фактора скалирања суфикса}
-  
+
 Ако желимо да прилагодимо фактор скалирања можемо да употребимо команду
 \PlaceMacro{definebodyfontenvironment}\tex{definebodyfontenvironment}
 чији је формат:
@@ -661,11 +661,11 @@ I wouldn't have thought so much!
 да је множи са 1,3, b са 1,6, c са 2 и d са 4.
 
 Као и суфиксе xx, x, a, b, c и d, командом
-\tex{definebodyfontenvironment} можемо да доделимо вредности скалирања и
+\cmd{definebodyfontenvironment} можемо да доделимо вредности скалирања и
 за кључне речи \MyKey{big}, \MyKey{small}, \MyKey{script} и
 \MyKey{scriptscript}.  Ове вредности се додељују свим величинама
-придруженим овим речима у командама \tex{setupbodyfont} и
-\tex{switchtobodyfont}. Такође се примењују и на следеће команде, чија
+придруженим овим речима у командама \cmd{setupbodyfont} и
+\cmd{switchtobodyfont}. Такође се примењују и на следеће команде, чија
 корисност (барем тако мислим) може да се изведе из њиховог имена:
 
 \startitemize[1,packed]
@@ -678,7 +678,7 @@ I wouldn't have thought so much!
 \item \PlaceMacro{smallitalicbold}\tex{smallitalicbold}
 \item \PlaceMacro{smallbodyfont}\tex{smallbodyfont}
 \item \PlaceMacro{bigbodyfont}\tex{bigbodyfont}
-  
+
 \stopitemize
 
 Ако желимо да видимо подразумеване величине одређеног фонта, можемо да
@@ -705,9 +705,9 @@ I wouldn't have thought so much!
 \item Додамо своју команду за измену стила фонта, величине или
   варијанте.
 
-\item Додамо синониме за стилове или варијанте имена која препознаје
-  команда \tex{switchtobodyfont}.
-  
+\item Додамо синониме за имена стилова или варијанти које препознаје
+  команда \cmd{switchtobodyfont}.
+
 \stopitemize
 
 За то он обезбеђује следеће команде:
@@ -814,7 +814,7 @@ I wouldn't have thought so much!
 
 {\em Једна од најлепших
 орхидеја света је
-{\em Thelymitra variegata} 
+{\em Thelymitra variegata}
 или Јужна Краљица од Сабе.}
 \stoptyping
 \stoplines
@@ -822,7 +822,7 @@ I wouldn't have thought so much!
 
 {\em Једна од најлепших орхидеја света је {\em Thelymitra\\
 variegata} или Јужна Краљица од Сабе.}
- 
+
 \stopDoubleExample
 
 Приметите да прво \tex{em} укључује курзив (уствари коса слова,
@@ -897,7 +897,7 @@ variegata} или Јужна Краљица од Сабе.}
 Употребом ове процедуре можемо да обојимо наслове, заглавља, фусноте,
 маргиналне напомене, линије и штрафте, табеле, наслове табела или слика,
 итд. Предност је што ће коначни резултат бити конзистентан (сви текстови
-који врше исту функцију ће бити исписивани истом бојом) и моћи ће лакше 
+који врше исту функцију ће бити исписивани истом бојом) и моћи ће лакше
 глобално да се промени.
 
 Фрагмент текста можемо и директно да обојимо, мада да би се спречила
@@ -968,7 +968,7 @@ variegata} или Јужна Краљица од Сабе.}
 \stoptyping
 
 Три \colored[r=0.1, g=0.8, b=0.8]{обојене} мачке.
-  
+
 \stopDoubleExample
 
 \stopsubsection
@@ -978,7 +978,7 @@ variegata} или Јужна Краљица од Сабе.}
     reference=sec:predefined-colours,
     title=Предефинисане боје,
   ]
-  % Ове инфорамције долазе из референтног упутства. Али претпостављам да
+  % Ове информације долазе из референтног упутства. Али претпостављам да
   % има зназно више предефинисаних боја. На пример, „главна боја"
   % употребљена у овом документу је базирана наранџастој која није
   % дефинисана у листи предефинисаних боја.
@@ -1079,11 +1079,11 @@ variegata} или Јужна Краљица од Сабе.}
 
 Да бисмо видели боје које свака од ових колекција садржи, можемо да
 употребимо команду
-\PlaceMacro{showcolor}\tex{showcolor[ИмеКолекције]} која је описана
+\PlaceMacro{showcolor}\cmd{showcolor[ИмеКолекције]} која је описана
 испод. Да бисмо користили неке од ових боја, најпре морамо да их учитамо
-у меморију командом (\tex{usecolors[ИмеКолекције]}), па затим морамо
+у меморију командом (\cmd{usecolors[ИмеКолекције]}), па затим морамо
 задамо \tex{color} или
-\PlaceMacro{startcolor}\tex{startcolor} командама име боје.
+\PlaceMacro{startcolor}\cmd{startcolor} командама име боје.
 На пример, следећи низ: \page[preference]
 
 \starttyping
@@ -1109,17 +1109,17 @@ variegata} или Јужна Краљица од Сабе.}
 користе у текућем документу.  Али, као аргумент можемо да наведемо било
 коју од предефинисаних колекција боја о којима смо говорили у
 \in{одељку}[sec:predefined-colours], тако да ће
-\tex{showcolor[solarized]} на пример, да нам прикаже 16 solarized боја у
+\cmd{showcolor[solarized]} на пример, да нам прикаже 16 solarized боја у
 тој колекцији:
 
 \showcolor[solarized]
 
 Ако желимо да видимо rgb компоненте одређене боје, можемо да употребимо
 команду
-\PlaceMacro{showcolorcomponents}\tex{showcolorcomponents[ИмеБоје]}.  Ово
+\PlaceMacro{showcolorcomponents}\cmd{showcolorcomponents[ИмеБоје]}.  Ово
 је корисно ако покушавамо да дефинишемо одређену боју, тако да видимо
 састав неке боје која јој је слична. На пример,
-\tex{showcolorcomponents[darkgoldenrod]} ће да нам прикаже:
+\cmd{showcolorcomponents[darkgoldenrod]} ће да нам прикаже:
 
 \startframedtext[width=\textwidth]\switchtobodyfont[small]
 \showcolorcomponents[darkgoldenrod]
@@ -1208,7 +1208,7 @@ whiteness}) и црне (\quote{b}, од {\em blackness}). Нијанса одг
   \type{\definecolor[svetlo siva][s=0.65]}
   \definecolor[svetlo siva][s=0.65]\color[svetlo siva]{Текст у
   „svetlo siva”}.
-  
+
 \stopitemize
 
 Такође је могуће да се дефинише нова боја из неке друге боје. На пример,
