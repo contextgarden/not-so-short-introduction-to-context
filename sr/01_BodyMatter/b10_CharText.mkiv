@@ -1,0 +1,1834 @@
+%%% File:         b10_CharText.mkiv
+%%% Author:       Joaquín Ataz-López
+%%% Begun:        July 2020
+%%% concluded:    July 2020
+%%% Садржај:      Ово је уствари скуп разних тема које су покренуте у
+%                 овом поглављу, а критеријум који их је ујединио је донекле форсиран:
+%                 Одељак 1 би могао да се нађе у поглављу посвећеном изворном фајлу
+%                 (уствари је и био у његовој првој верзији); 2 у поглављу посвећеном
+%                 фонтовима: јер мада они нису карактеристика самог формата, донекле су
+%                 слични. 3 је хоризонтални размак; у првим верзијама сам га поставио
+%                 заједно са вертикалним размаком у поглавље под називом „Размаци”. 4. и
+%                 5. је теже да се лоцирају. На крају сам изабрао ово поглавље, које је
+%                 уствари „потпури”.
+%%%
+%%% Edited by: Emacs + AuTeX - And at times vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent b10_CharText.mkiv
+
+\startchapter
+  [title={Карактери, речи, текст и хоризонтални размак}]
+
+\TocChap
+
+Основни централни елемент свих текст докумената је карактер: карактери
+се групишу у речи, које формирају линије, које формирају пасусе, а који
+формирају странице.
+
+Ово поглавље које почиње од \quotation{{\em карактера}} објашњава неке
+од алата система \ConTeXt\ који се тичу карактера, речи и текста.
+
+\startsection
+  [
+     title={Добијање карактера којима нормално не\\може да се приступи са
+тастатуре},
+     bookmark=Добијање карактера којима нормално не може да се приступи са
+тастатуре
+  ]
+
+У текст фајлу кодираном као UTF-8 (погледајте \in{одељак}[sec:encoding])
+можемо да користимо било који карактер или симбол, и из живих и из
+многих изумрлих језика. Али, пошто су могућности тастатуре ограничене,
+већина карактера и симбола који су дозвољени у UTF-8 обично не може да
+директно да се приступи са тастатуре. Ово је посебно случај са многим
+дијакритицима, тј. знацима који се постављају изнад (или испод)
+одређених слова, и који им дају посебну вредност; али такође и многи
+остали карактери као што су математички симболи, традиционалне лигатуре,
+итд. Многе од ових карактера у систему \ConTeXt\ можемо добити користећи
+команде.
+
+\startsubsection
+  [title={Дијакритици и специјална слова}]
+
+Скоро сви западни језици имају дијакритике (уз важан изузетак највећег
+дела енглеског језика), а у општем случају, тастатуре могу да генеришу
+дијакритике који одговарају регионалним језицима. Тако шпанска тастатура
+може да генерише све дијакритике потребне у шпанском језику (углавном
+акценте и дијерезис) као и неке дијакритичке знаке који се користе у
+осталим језицима, као што је каталонски (гравис акценти и дијерезис) или
+француски (седиј, гравис и циркумфлекс акценти); мада не и неке који се
+користе, на пример, у португалском језику као што је тилда над неким
+самогласницима у речима као што је \quotation{navegaç\~ao}.
+
+\TeX\ је дизајниран у Сједињеним Америчким Државама где тастатуре у
+општем случају не омогућавају добијање дијакритика; зато му је Доналд
+Кнут направио скуп команди којима можемо да добијемо скоро све познате
+дијакритичке знаке (барем оне у у језицима који користе латиницу). Ако
+користимо шпанску тастатуру, нема много смисла употребљавати ове команде
+за оне дијакритике који могу да се добију директно са тастатуре. Ипак је
+важно знати да ове команде постоје, и како се називају, јер шпанским
+(или италијанским, или француским…) тастатурама не можемо да генеришемо
+све могуће дијакритике.
+
+\placetable
+  [here]
+  [tbl:diacritics]
+  {\tfx Акценти и остали дијакритици}
+  {
+    \starttabulate[|l|l|l|l|]
+      \HL
+      \NC{\bf Име}\NC{\bf Карактер}\NC{\bf Скраћеница}\NC{\bf Команда}\NR
+      \HL
+      \NC Акут акцент\NC\'u\NC{\tt\backslash'u}\NC{\tt\backslash
+        uacute}\NR\PlaceMacro{aacute}\PlaceMacro{eacute}\PlaceMacro{iacute}\PlaceMacro{oacute}\PlaceMacro{uacute}
+      \NC Гравис акцент\NC\`u\NC{\tt\backslash`u}\NC{\tt\backslash
+        ugrave}\NR\PlaceMacro{agrave}\PlaceMacro{egrave}\PlaceMacro{igrave}\PlaceMacro{ograve}\PlaceMacro{ugrave}
+      \NC Циркумфлекс
+      акцент\NC\^u\NC{\tt\backslash^u}\NC{\tt\backslash
+        ucircumflex}\NR\PlaceMacro{acircumflex}\PlaceMacro{ecircumflex}\PlaceMacro{icircumflex}\PlaceMacro{ocircumflex}\PlaceMacro{ucircumflex}
+      \NC Дијерезис или умлаут (трема)
+      \NC\"u\NC{\tt\backslash”u}\NC{\tt\backslash udiaeresis,
+        \backslash
+        uumlaut}\NR\PlaceMacro{adiaeresis}\PlaceMacro{ediaeresis}\PlaceMacro{idiaeresis}\PlaceMacro{odiaeresis}\PlaceMacro{udiaeresis}
+      \NC Тилда\NC\~u\NC{\tt\backslash\lettertilde u}\NC{\tt\backslash
+        utilde}\NR\PlaceMacro{atilde}\PlaceMacro{etilde}\PlaceMacro{itilde}\PlaceMacro{otilde}\PlaceMacro{utilde}
+      \NC Макрон\NC\=u\NC{\tt\backslash=u}\NC{\tt\backslash
+        umacron}\NR\PlaceMacro{amacron}\PlaceMacro{emacron}\PlaceMacro{imacron}\PlaceMacro{omacron}\PlaceMacro{umacron}
+      \NC Брев\NC\u u\NC{\tt\backslash u u}\NC{\tt\backslash
+        ubreve}\PlaceMacro{u}\PlaceMacro{abreve}\PlaceMacro{ebreve}\PlaceMacro{obreve}\PlaceMacro{ibreve}\PlaceMacro{ubreve}\NR
+      \HL
+    \stoptabulate
+}
+
+  У \in{табели}[tbl:diacritics] се налазе команде и скраћенице којима
+можемо да добијемо ове дијакритике. У свим случајевима није битно да ли
+користимо команду или скраћеницу. У табели сам користио слово \quote{u}
+као пример, али ове команде функционишу за сваки самогласник (односно за
+већину њих\footnote{Од свих команди које се налазе у
+\in{табели}[tbl:diacritics], тилда не функционише са словом \quote{e} и
+није ми јасно зашто.}), а и за неке сугласнике и полусамогласнике.
+
+  \startitemize
+
+  \item Пошто су већина скраћених команди {\em контролни симболи}
+(погледајте \in{одељак}[sec:commands themselves]), слово на којем треба
+да се нађе дијакритик може да се напише непосредно након команде, или
+одвојено од ње. Тако на пример: ако желимо да добијемо португалско
+\quote{\~a}, можемо да напишемо \tex{=a} или
+\cmd{=\textvisiblespace a} карактере.\footnote{Упамтите да када је у
+овом документу важно да се виде, размаке представљамо са
+\quote{\,\textvisiblespace\,}.} Али у случају брев (\tex{u}), ради се о {\em
+контролној речи}, па је размак обавезан.
+
+  \item У случају дугачке верзије команде, слово на које се поставља
+дијакритик ће бити прво слово имена команде. Тако на пример,
+\tex{emacron} ће да постави макрон изнад малог слова \quote{e}
+(\emacron), \tex{Emacron} ће урадити исто за велико слово \quote{E}
+(\Emacron), док ће \tex{Amacron} урадити исто за велико слово \quote{A}
+(\Amacron).
+
+  \stopitemize
+
+Мада команде у \in{табели}[tbl:diacritics] раде са самогласницима и
+неким сугласницима, постоје остале команде за генерисање неких
+дијакритика и специјалних слова које функционишу само за једно или
+неколико слова. Оне су приказане у \in{табели}[tbl:morediacritics].
+
+{\switchtobodyfont[small]
+\placetable
+  [here]
+  [tbl:morediacritics]
+  {\tfx Још дијакритика и специјалних слова}
+  {
+    \starttabulate[|l|l|l|l|]
+      \HL
+      \NC{\bf Име}\NC{\bf Карактер}\NC{\bf Скраћеница}\NC{\bf Команда}\NR
+      \HL
+      \NC Скандинавско O\NC\o, \O\NC{\tt \backslash o, \backslash O}\NC\NR\PlaceMacro{o}
+      \NC Скандинавско A\NC\aring, \Aring\NC{\tt \backslash aa, \backslash AA, \{\backslash r a\}, \{\backslash r A\}}\NC{\tt \backslash aring, \backslash Aring}\NR\PlaceMacro{aa}\PlaceMacro{r}\PlaceMacro{aring}
+      \NC Пољско L\NC\l, Ł\L\NC{\tt \backslash l, \backslash L}\NC\NR\PlaceMacro{l}
+      \NC Немачко есцет\NC\SS\NC{\tt \backslash ss, \backslash SS}\NC\NR\PlaceMacro{ss}
+      \NC \quote{i} and \quote{j} без тачке\NC\i, \j\NC{\tt \backslash i, \backslash j}\NC\NR\PlaceMacro{i}\PlaceMacro{j}
+      \NC Мађарски умлаут\NC\H u, \H U\NC{\tt\backslash H u}, {\tt\backslash H U}\NC\NR\PlaceMacro{H}
+      \NC Седиј\NC\c c, \c C\NC{\tt \backslash c c, \backslash c C}\NC{\tt \backslash ccedilla, \backslash Ccedilla}\PlaceMacro{c}\PlaceMacro{ccedilla}\PlaceMacro{kcedilla}\PlaceMacro{lcedilla}\PlaceMacro{ncedilla}\PlaceMacro{rcedilla}\PlaceMacro{scedilla}\PlaceMacro{tcedilla}\NR
+      \HL
+    \stoptabulate
+  }
+}
+
+Желео бих да истакнем да неке од команди у горњој табели генеришу
+карактере од осталих карактера, док друге команде раде само ако фонт
+који користимо поседује дати карактер. На пример, што се тиче немачког
+есцет (ß), табела приказује две команде, али само један карактер, јер
+фонт који овде користим поседује само верзал верзију немачког есцет (што
+је уобичајено у фонтовима).
+
+Вероватно је то разлог што не могу да добијем  верзал скандинавског A
+мада команде \MyKey{\{\backslash r A\}} и \cmd{Aring} раде како треба.
+
+Мађарски умлаут такође ради са словом \quote{o}, а седиј са словима
+\quote{k}, \quote{l}, \quote{n}, \quote{r}, \quote{s} и \quote{t}, у
+верзалу и у куренту. Потребно је редом употребити команде \cmd{kcedilla},
+\cmd{lcedilla}, \cmd{ncedilla} ...
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:ligatures,
+    title={Традиционалне лигатуре},
+  ]
+  % Требало би да постоји још један одељак само о лигатурама које
+  % ConTeXt аутоматски генерише као могућност коју обезбеђује фонт. Али
+  % на крају у поглављу о фонтовима, нисам говорио о могућностима разних
+  % фонтова, а није могло да се пронађе погодно место на које би магао
+  % да се смести овај одељак.
+
+Лигатура се формира спајањем две ли више графема које се обично пишу
+одвојено. Ово \quotation{стапање} два карактера је често почело као
+врста скраћивања у рукописним текстовима, све док коначно нису достигли
+одређену типографску самосталност. Неке од њих су чак биле део карактера
+који се обично дефинишу у типографском фонту, као што су амперсанд,
+\quote{\&}, који је настао као сажимање латинске копуле (конјункције)
+\quotation{et}, или немачко есцет односно оштро С (ß), које је, као што
+му име наговештава, почело као комбинација \quote{s} и \quote{z}. У
+неким дизајнима фонтова, чак и данас можемо пратити порекло ових
+карактера; или можда их ја видим јер знам да су ту. Тачније, \quote{\&}
+у фонту Pagella и \quote{ß} у фонту Bookman.
+
+Као вежбу, предлажем (након читања \in{поглавља}[sec:fontscol], где се
+објашњава како се то ради) да покушате приказати ове карактере тим
+фонтовима у довољној величини (на пример, 30 pt) како би могли да уочите
+њихове компоненте.
+
+Остале традиционалне лигатуре које нису постале толико популарне, али се
+данас још увек повремено користе, су латински завршеци \quotation{oe} и
+\quotation{ae} који су повремено писане као \quote{\oe} или \quote{\ae}
+како би се назначило да у латинском формирају дифтонг. Ове лигатуре се у
+систему \ConTeXt\ добијају командама из \in{табеле}[tbl:ligatures]
+
+\placetable
+  [here]
+  [tbl:ligatures]
+  {Традиционалне лигатуре}
+{
+  \starttabulate[|l|l|l|]
+    \HL
+    \NC {\bf Лигатура}\NC {\bf Скраћеница}\NC {\bf Команда}\NR
+    \HL
+    \NC\ae, \AE\NC{\tt \backslash ae, \backslash AE}\NC{\tt \backslash aeligature, \backslash AEligature}\NR\PlaceMacro{ae}\PlaceMacro{aeligature}
+    \NC\oe, \OE\NC{\tt \backslash oe, \backslash OE}\NC{\tt \backslash oeligature, \backslash OEligature}\PlaceMacro{oe}\PlaceMacro{oeligature}\NR
+    \HL
+  \stoptabulate
+}
+
+Лигатура која је у шпанском (кастиљском) била традиционална и која се
+данас обично не налази у фонтовима је \quote{Đ}: сажимање \quote{D} и
+\quote{E}. Колико знам, у \ConTeXt\ не постоји команда која нам
+омогућава да то урадимо,\footnote{Док у \LaTeX\ можемо да употребимо
+команду \cmd{DH} коју имплементира пакет \MyKey{fontenc}.} али можемо да
+је сами креирамо, као што је објашњено у \in{одељку}[sec:create
+characters].
+
+Уз претходне лигатуре, које сам назвао {\em традиционалне} јер имају
+порекло у рукописима, након проналаска штампарске пресе развијене су
+одређене штампане лигатуре које ћу да зовем \quotation{типографске
+лигатуре}, које \ConTeXt\ посматра као алате фонта и којима аутоматски
+управља програм, мада можемо утицати на начин на који се ради са тим
+алатима (укључујући и лигатуре) командом
+\PlaceMacro{definefontfeature}\tex{definefontfeature} (која у овом уводу
+није објашњена).
+
+\stopsubsection
+
+\startsubsection
+  [title={Грчка слова}]
+
+У математичким и физичким формулама је уобичајена употреба грчких слова.
+\ConTeXt\ је из тог разлога омогућио генерисање свих слова грчког
+алфабета, и малих и великих. Овде се команда гради од енглеског имена
+датог слова. Ако се први карактер напише малим словом, добиће се мало
+грчко слово, а ако се напише великим словом, добиће се велико грчко
+слово. На пример, команда \cmd{mu} ће да генерише курент верзију овог
+слова (\mu), док ће \cmd{Mu} да генерише верзал верзију (Μ).
+\in{Табела}[tbl:greekletters] приказује које команде генеришу свако
+слово грчког алфабета, мала и велика слова.
+
+{\smallbodyfont
+\placetable
+  [here]
+  [tbl:greekletters]
+  {Грчки алфабет}
+{
+  \starttabulate[|l|l|l|]
+    \HL
+    \NC {\bf Српско име}\NC {\bf Карактер (к/в)}\NC {\bf Команде (к/в)}\NR
+    \HL
+    \NC Алфа\NC\alpha, \Alpha\NC{\tt \backslash alpha, \backslash Alpha}\NR\PlaceMacro{alpha}
+    \NC Бета\NC\beta, \Beta\NC{\tt \backslash beta, \backslash Beta}\NR\PlaceMacro{beta}
+    \NC Гама\NC\gamma, \Gamma\NC{\tt \backslash gamma, \backslash Gamma}\NR\PlaceMacro{gamma}
+    \NC Делта\NC\delta, \Delta\NC{\tt \backslash delta, \backslash Delta}\NR\PlaceMacro{delta}
+    \NC Епсилон\NC\epsilon, \varepsilon, \Epsilon\NC{\tt \backslash epsilon, \backslash varepsilon, \backslash Epsilon}\NR\PlaceMacro{epsilon}\PlaceMacro{varepsilon}
+    \NC Зета\NC\zeta, \Zeta\NC{\tt \backslash zeta, \backslash Zeta}\NR\PlaceMacro{zeta}
+    \NC Ета\NC\eta, \Eta\NC{\tt \backslash eta, \backslash Eta}\NR\PlaceMacro{eta}
+    \NC Тета\NC\theta, \vartheta, \Theta\NC{\tt \backslash theta, \backslash vartheta, \backslash Theta}\NR\PlaceMacro{theta}\PlaceMacro{vartheta}
+    \NC Јота\NC\iota, \Iota\NC{\tt \backslash iota, \backslash Iota}\NR\PlaceMacro{iota}
+    \NC Капа\NC\kappa, \varkappa, \Kappa\NC{\tt \backslash kappa, \backslash varkappa, \backslash Kappa}\NR\PlaceMacro{kappa}\PlaceMacro{varkappa}
+    \NC Ламбда\NC\lambda, \Lambda\NC{\tt \backslash lambda, \backslash Lambda}\NR\PlaceMacro{lambda}
+    \NC Ми\NC\mu, \Mu\NC{\tt \backslash mu, \backslash Mu}\NR\PlaceMacro{mu}
+    \NC Ни\NC\nu, \Nu\NC{\tt \backslash nu, \backslash Nu}\NR\PlaceMacro{nu}
+    \NC Кси\NC\xi, \Xi\NC{\tt \backslash xi, \backslash Xi}\NR\PlaceMacro{xi}
+    \NC Омикрон\NC\omicron, \Omicron\NC{\tt \backslash omicron, \backslash Omicron}\NR\PlaceMacro{omicron}
+    \NC Пи\NC\pi, \varpi, \Pi\NC{\tt \backslash pi, \backslash varpi, \backslash Pi}\NR\PlaceMacro{pi}\PlaceMacro{varpi}
+    \NC Ро\NC\rho, \varrho, \Rho\NC{\tt \backslash rho, \backslash varrho, \backslash Rho}\NR\PlaceMacro{rho}\PlaceMacro{varrho}
+    \NC Сигма\NC\sigma, \varsigma, \Sigma\NC{\tt \backslash sigma, \backslash varsigma, \backslash Sigma}\NR\PlaceMacro{sigma}\PlaceMacro{varsigma}
+    \NC Тау\NC\tau, \Tau\NC{\tt \backslash tau, \backslash Tau}\NR\PlaceMacro{tau}
+    \NC Ипсилон\NC\upsilon, \Upsilon\NC{\tt \backslash upsilon, \backslash Upsilon}\NR\PlaceMacro{upsilon}
+    \NC Фи\NC\phi, \varphi, \Phi\NC{\tt \backslash phi, \backslash varphi, \backslash Phi}\NR\PlaceMacro{phi}\PlaceMacro{varphi}
+    \NC Хи\NC\chi, \Chi\NC{\tt \backslash chi, \backslash Chi}\NR\PlaceMacro{chi}
+    \NC Пси\NC\psi, \Psi\NC{\tt \backslash psi, \backslash Psi}\NR\PlaceMacro{psi}
+    \NC Омега\NC\omega, \Omega\NC{\tt \backslash omega, \backslash Omega}\PlaceMacro{omega}\NR
+    \HL
+
+  \stoptabulate
+}}
+
+Запазите како курент верзије неких карактера (епсилон, капа, тета, пи,
+ро, сигма и фи) имају две могуће варијанте.
+
+\stopsubsection
+
+\startsubsection
+  [title={Разни симболи}]
+
+Уз карактере које смо управо видели, \TeX\ (па дакле и \ConTeXt)
+обезбеђује команде за генерисане било ког броја симбола. Постоји много
+таквих команди. У \in{додатку}[app:symbols] представљам проширену листу
+која ипак није комплетна.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:create characters,
+    title={Дефинисање карактера}
+  ]
+  \PlaceMacro{definecharacter}
+
+Ако је потребно да користимо било који карактер којем не може да се
+приступи са наше тастатуре, увек можемо да пронађемо веб страницу са тим
+карактерима и да их копирамо у наш изворни фајл. Ако користимо UTF-8
+кодирање (као што се и препоручује) то ће скоро увек да функционише. А
+на \ConTeXt\ викију такође постоји страница пуна симбола који просто
+могу да се копирају и налепе у наш документ. Да бисте дошли до ње,
+кликните \goto{на следећи линк}[url(wikisymbols)].
+
+Међутим, ако неки од ових карактера треба да користимо више пута, онда
+копирање/налепљивање баш и није ефикасан начин. Било би добро да се
+дефинише карактер који се придружи команди, а она ће га генерисати сваки
+пут када нам је потребан. То се ради командом \cmd{definecharacter} чија
+је синтакса:
+
+{\tt \backslash definecharacter {\em Име} {\em Карактер}}
+
+где
+
+\startitemize
+
+\item {\bf Име} представља име које се придружује новом карактеру. То не
+би требало да буде име неке постојеће команде, јер би је тако преписали.
+
+\item {\bf Карактер} представља карактер који се генерише сваки пут када
+извршимо \cmd{{\em Име}}. Постоји три начина да наведемо овај карактер:
+
+  \startitemize
+
+  \item Просто га напишемо или га налепимо у изворни фајл (ако смо га
+копирали из неког другог електронског документа или веб странице).
+
+  \item Тако што наведемо број придружен том карактеру у фонту који
+тренутно користимо. Да бисте видели карактере који постоје у фонту, као
+и бројеве који су им придружени, употребите команду \cmd{showfont[{\em
+Име фонта}]}.
+
+  \item Тако што изградимо нови карактер једном од команди за изградњу
+композитних карактера које ћемо ускоро упознати.
+
+  \stopitemize
+
+\stopitemize
+
+Као пример првог начина употребе, вратимо се на тренутак на одељке који
+се баве лигатурама (\in{}[sec:ligatures]). Тамо сам говорио и
+традиционалним лигатурама у шпанском језику које у данашњим фонтовима
+углавном не можемо да пронађемо: \quote{Đ}. Овај карактер би могло да
+придружимо, на пример, команди \cmd{decontract} тако да се карактер
+генерише кадгод напишемо \cmd{decontract}. То можемо да урадимо са:
+
+\type{\definecharacter decontract Đ}
+
+\startSmallPrint
+
+  Ако пожелимо да изградимо карактер који се не налази у нашем фонту и
+  не може да се добије нашом тастатуром, као што је случај у примеру
+  који сам управо навео, најпре морамо да пронађемо неки текст у којем
+  постоји тај карактер, копирамо га и налепимо у нашу дефиницију. У
+  датом примеру, \quote{Đ} сам копирао са Википедије.
+
+\stopSmallPrint
+
+\ConTeXt\ такође обезбеђује и неке команде које нам омогућавају да
+креирамо композитне карактере и које могу да се користе у комбинацији са
+\cmd{definecharacter}. Под појмом композитни карактери подразумевам
+карактере који имају дијакритике. Ево тих команди:
+
+\PlaceMacro{buildmathaccent}\PlaceMacro{buildtextaccent}\PlaceMacro{buildtextbootomcomma}\PlaceMacro{buildtextbottomdot}\PlaceMacro{buildtextcedilla}\PlaceMacro{buildtextgrave}\PlaceMacro{buildtextmacron}\PlaceMacro{buildtexttognek}
+\starttyping
+  \buildmathaccent Акцент Карактер
+  \buildtextaccent Акцент Карактер
+  \buildtextbottomcomma Карактер
+  \buildtextbottomdot Карактер
+  \buildtextcedilla Карактер
+  \buildtextgrave Карактер
+  \buildtextmacron Карактер
+  \buildtextognek Карактер
+\stoptyping
+
+На пример: као што већ знамо, \ConTeXt\ подразумевано нуди команде за
+писање само одређених слова са седиј дијакритиком (c, k, l, n, r, s и
+t), који се обично имплементирају у фонтовима. Ако желимо да користимо
+\quote{b} могли би да употребимо команду \cmd{buildtextcedilla} на
+следећи начин:
+
+\type{\definecharacter bcedilla {\buildtextcedilla b}}
+
+\definecharacter bcedilla {\buildtextcedilla b}
+
+Ова команда ће да креира нову \cmd{bcedilla} команду која ће да генерише
+слово \quote{b} са седиј: \quote{\bcedilla}. Ове команде буквално
+\quotation{изграђују} нови карактер који ће се генерисати чак и ако га
+наш фонт нема. Оно што ове команде раде је да преклопе један карактер
+преко другог, па затим том резултату дају име.
+
+\startSmallPrint
+
+  У мојим тестовима команде \cmd{buildmathaccent} или
+  \cmd{buildtextognek} нису прорадиле. Тако да их надаље нећу помињати.
+
+\stopSmallPrint
+
+{\tt \backslash buildtextaccent} као аргумент узима два карактера и
+преклапа један преко другог, мало издижући један од њих. Мада се назива
+\quotation{buildtextaccent}, није обавезно да било који од карактера
+који се проследе као аргументи буде акценат; али резултат преклапања ће
+бити бољи ако је тако, јер у том случају је мање вероватно да ће
+преклапање акцента преко карактера преписати део карактера. С друге
+стране, на преклапање два који под уобичајеним околностима имају исту
+основну линију утиче чињеница да команда мало издиже један од карактера
+изнад другог. То је разлог што ови команду не можемо да употребимо за
+добијање на пример сажимања \quote{Đ} које је поменуто изнад, јер ако у
+нашем изворном фајлу напишемо
+
+\type{\definecharacter decontract {\buildtextaccent D E}}
+\definecharacter decontract {\buildtextaccent D E}
+
+благо померање изнад основне линије слова \quote{D} које прави ова
+команда значи да ефекат који се добија командом
+(\quotation{\decontract}) није баш како треба. Али ако висина карактера
+то дозвољава, могли би да креирамо комбинацију. На пример
+
+
+\type{\definecharacter unusual {\buildtextaccent \_ "}}
+\definecharacter unusual {\buildtextaccent \_ "}
+
+би дефинисало \quote{\unusual} карактер који би био придружен команди
+\cmd{unusual}.
+
+Остале build команде прихватају један аргумент -- карактер којем ће се
+додати дијакритик генерисан сваком командом. Испод ћу приказати пример
+сваке од њих, изграђен на слову \quote{z}:
+
+\definecharacter zcomma {\buildtextbottomcomma z}
+\definecharacter zdot {\buildtextbottomdot z}
+\definecharacter zcedilla {\buildtextcedilla z}
+\definecharacter zgrave {\buildtextgrave z}
+\definecharacter zmacron {\buildtextmacron z}
+
+\startitemize
+
+\item {\tt \backslash buildtextbottomcomma} додаје запету испод
+карактера који узима као аргумент (\quote{\zcomma}).
+\item {\tt \backslash buildtextbottomdot} додаје тачку испод карактера
+који узима као аргумент (\quote{\zdot}).
+\item {\tt \backslash buildtextcedilla} додаје седиј испод карактера
+који узима као аргумент (\quote{\zcedilla}).
+\item {\tt \backslash buildtextgrave} додаје гравис акценат изнад
+карактера који узима као аргумент (\quote{\zgrave}).
+\item {\tt \backslash buildtextmacron} додаје малу црту испод карактера
+који узима као аргумент (\quote{\zmacron}).
+
+\stopitemize
+
+На први поглед, изгледа да је {\tt \backslash buildtextgrave} сувишно
+јер имамо {\tt \backslash buildtextaccent}; међутим, ако проверите
+гравис акценат који се генерише првом од ове две команде, он изгледа
+мало боље. Следећи пример приказује резултат обе команде, на величини
+фонта која је довољна да се лако види разлика:
+
+\definecharacter zgraveb {\buildtextaccent ` z}
+
+{\switchtobodyfont[30pt]
+\midaligned{\framed{\zgrave\ -- \zgraveb}}
+}
+
+\stopsubsection
+
+\startsubsection
+  [title={Употреба предефинисаних скупова симбола}]
+
+\suite- уз сам \ConTeXt\ доноси и већи број предефинисаних скупова
+симбола које можемо да користимо у својим документима. Ови скупови се
+називају \MyKey{cc}, \MyKey{cow}, \MyKey{font\-awe\-some}, \MyKey{jmn},
+\MyKey{mvs} и \MyKey{nav}. Сваки од њих има и неке подскупове:
+
+\startitemize[packed]
+
+\item {\tt\bf cc} поседује \quotation{cc}.
+
+\item {\tt\bf cow} поседује \quotation{cownormal} и \quotation{cowcontour}.
+
+\item {\tt\bf fontawesome} поседује \quotation{fontawesome}.
+
+\item {\tt\bf jmn} поседује \quotation{navigation~1},
+\quotation{navigation~2},  \quotation{navigation~3} и \quotation{navigation~4}.
+
+\item {\tt\bf mvs} поседује \quotation{astronomic}, \quotation{zodiac},
+\quotation{europe}, \quotation{martinvogel~1}, \quotation{martinvogel~2}
+и \quotation{mar\-tin\-vogel~3}.
+
+\item {\tt\bf nav} поседује \quotation{navigation~1},
+\quotation{navigation~2} и \quotation{navigation~3}.
+
+\stopitemize
+
+\startSmallPrint
+
+  Вики такође помиње и скуп под називом {\tt\bf was} који поседује
+  {\language[en]{\quotation{wasy general}, \quotation{wasy music},
+  \quotation{wasy astronomy}, \quotation{wasy  astrology},
+  \quotation{wasy geometry}, \quotation{wasy physics} и \quotation{wasy
+  apl}}}. Али ја у својој дистрибуцији нисам успео да их пронађем, и сви
+  моји покушаји да их добијем нису успели.
+
+\stopSmallPrint
+
+Да би се видело који симболи се налазе у сваком од ових скупова, користи
+се следећа синтакса:
+
+\PlaceMacro{usesymbols}\PlaceMacro{showsymbolset}
+\starttyping
+  \usesymbols[Скуп]
+  \showsymbolset[Подскуп]
+\stoptyping
+
+На пример: ако желимо да видимо симболе који постоје у
+\quotation{mvs/zodiac}, онда у изворном фајлу треба да напишемо:
+
+\starttyping
+  \usesymbols[mvs]
+  \showsymbolset[zodiac]
+\stoptyping
+
+и добићемо следећи резултат:
+
+\usesymbols[mvs]
+%\startcolumns[n=2]
+
+  \showsymbolset[zodiac]
+
+%\stopcolumns
+
+Запазите да се уз симбол наводи и његово име. Команда
+\PlaceMacro{symbol}\tex{symbol} нам омогућава да употребимо било који од
+симбола. Њена синтакса је следећа:
+
+{\tt \backslash symbol[Подскуп][ИмеСимбола]}
+
+где је {\em Подскуп} један од подскупова придружен било ком од скупова
+које смо претходно учитали командом \cmd{usesymbols}. На пример, ако
+желимо да употребимо астролошки симбол који је придружен Водолији
+(налази се у mvs/zodiac) требало би да напишемо
+
+\starttyping
+  \usesymbols[mvs]
+  \symbol[zodiac][Aquarius]
+\stoptyping
+\usesymbols[mvs]
+
+што ће нам дати \quotation{\symbol[zodiac][Aquarius]}, и то ће се за све
+намене и сврхе третирати као \quotation{карактер}, па на њега утиче
+активна величина фонта када се штампа. Можемо такође да употребимо и
+\cmd{definecharacter} да команди придружимо жељени симбол. На пример
+
+\type{\definecharacter Aries {\symbol[zodiac][Aries]}}
+\definecharacter Aries {\symbol[zodiac][Aries]}
+
+ће да креира нову команду под именом \cmd{Aries} која ће да генерише
+карактер \quotation{\Aries}.
+
+Ове симболе би такође могли да користимо, на пример, у окружењу
+набрајања. На пример:
+
+\starttyping
+\usesymbols[mvs]
+\definesymbol[1][{\symbol[martinvogel 2][PointingHand]}]
+\definesymbol[2][{\symbol[martinvogel 2][CheckedBox]}]
+\startitemize[packed]
+\item ставка \item ставка
+ \startitemize[packed]
+ \item ставка \item ставка
+ \stopitemize
+\item ставка
+\stopitemize
+\stoptyping
+
+ће да произведе
+
+{
+\usesymbols[mvs]
+\definesymbol[1][{\symbol[martinvogel 2][PointingHand]}]
+\definesymbol[2][{\symbol[martinvogel 2][CheckedBox]}]
+\startitemize[packed]
+\item ставка \item ставка
+ \startitemize[packed]
+ \item ставка \item ставка
+ \stopitemize
+\item ставка
+\stopitemize
+}
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [title={Специјално форматирање карактера}]
+
+У ужем смислу, команде {\em форматирања} утичу на фонт који се
+користи, његову величину, стил или варијанту. Ове команде су објашњене у
+\in{поглављу}[sec:fontscol]. Међутим, ако се посматра {\em уопштено}, за
+команде форматирања можемо да сматрамо и оне које на неки начин мењају
+карактере који им се проследе као аргумент (дакле оне које им мењају
+изглед). У овом одељку ћемо се упознати са неким од тих команди. Остале,
+као што су подвучени или текст са линијом изнад или испод текста (нпр.
+где желимо да обезбедимо простор за одговор на питање) ћемо видети у
+\in{одељку}[sec:FramesLines].
+
+\startsubsection
+  [
+    reference=sec:Upper-Lower-Fake,
+    title={Верзал, курент и лажни капитал},
+  ]
+
+Сама слова могу бити у верзалу или у куренту. За \ConTeXt, верзал и
+курент слова су различити карактери, тако да ће у принципу словослагати
+слова као што су написана. Међутим, постоји група команди које нам
+омогућавају да обезбедимо да се текст који им се проследи као аргумент
+увек пише у верзалу или у куренту:
+
+\startitemize[packed]
+
+\item \PlaceMacro{word}\cmd{word\{текст\}}: конвертује текст који узима
+као аргумент у курент.
+
+\item \PlaceMacro{Word}\cmd{Word\{текст\}}: конвертује прво слово текста
+који узима као аргумент у верзал.
+
+\item \PlaceMacro{Words}\cmd{Words\{текст\}}: конвертује прво слово
+сваке речи које узима као аргумент у верзал; остатак слова је у куренту.
+
+\item \PlaceMacro{WORD}\cmd{WORD\{текст\}} или
+  \PlaceMacro{WORDS}\cmd{WORDS\{текст\}}: пише текст који узима као
+  аргумент у верзалу.
+
+\stopitemize
+
+\PlaceMacro{cap}\cmd{cap} и \PlaceMacro{Cap}\cmd{Cap} су врло сличне
+овим командама: оне текст који узимају као аргумент такође претварају у
+верзал, али на њега примењују и фактор скалирања, исти као онај који се
+примењује \quote{x} суфиксом у командама промене фонта (погледајте
+\in{одељак}[sec:quick-change]) тако да ће, у већини фонтова, верзал бити
+исте висине као и курент, чиме добијамо јену врсту ефекта {\em лажног
+капитала}. У поређењу са правим капиталом (погледајте
+\in{одељак}[sec:smallcaps]) ово има следеће предности:
+
+\startitemize[n]
+
+\item \cmd{cap} и \cmd{Cap} ће радити са било којим фонтом, за разлику
+од правог капитала који функционише само са фонтовима и стиловима који
+га заиста имају.
+
+\item С друге стране, прави капитал је варијанта фонта, која као таква
+није компатибилна са било којом другом варијантом као што је црни слог,
+курзив или коси слог.  Међутим, \cmd{cap} и \cmd{Cap} су потпуно
+компатибилне са било којом варијантом фонта.
+
+\stopitemize
+
+Разлика између \cmd{cap} и \cmd{Cap} је у томе што ова прва примењује
+фактор скалирања на сва слова речи које чине њен аргумент, док \cmd{Cap}
+уопште не примењује скалирање на прво слово сваке речи, чиме се добија
+ефекат сличан оном који се добија када се у тексту писаном капиталом
+употреби верзал.  Ако се текст који се прослеђује команди \quote{caps}
+састоји од неколико речи, одржаваће се величина верзал слова у првом
+слову сваке речи.
+
+\page[bigpreference]
+
+Па тако, у следећем примеру
+
+\startDoubleExample
+
+\starttyping
+УН, чији \Cap{председник} има своју
+канцеларију у седишту \cap{уН} ...
+\stoptyping
+
+УН, чији \Cap{председник} има своју
+канцеларију у седишту \cap{уН} ...
+
+\stopDoubleExample
+
+најпре треба да запазимо разлику у величини између првог пута када смо
+написали \quotation{UN} (у верзалу) и другог пута (у капиталу,
+\quotation{\cap{UN}}). У примеру сам други пут написао \cmd{cap\{uN\}}
+тако да можемо видети да нема разлике ако је аргумент који узима команда
+\cmd{cap} у верзалу или куренту: команда конвертује сва слова у верзал,
+па онда примењује фактор скалирања; за разлику од команде \cmd{Cap} која
+не скалира прво слово.
+
+Ове команде могу и да се {\em угнезде}, па се у том случају фактор
+скалирања примењује још једном, чиме се величина додатно смањује, као
+што се види у наредном примеру где се реч \quotation{капитал} у првој
+линији још једном скалира:
+
+\startDoubleExample
+
+\starttyping
+\cap{Људи који су нагомилали свој
+\cap{капитал} на штету других су у
+револуциона времена чешће
+{\bf обезглављивани} него што нису}.
+\stoptyping
+
+\cap{Људи који су нагомилали свој \cap{капитал} на штету других су у
+револуционарна времена чешће {\bf обезглављивани} него што нису}.
+
+\stopDoubleExample
+
+
+Команда \cmd{nocap} примењена на текст над којим је примењена команда
+\cmd{cap} поништава \cmd{cap} ефекат у тексту који је њен аргумент. На
+пример:
+
+\startDoubleExample
+
+\starttyping
+\cap{When I was One I had just begun,
+when I was Two I was \nocap{nearly}
+new (A.A. Milne)}.
+\stoptyping
+
+\cap{When I was one I had just begun,
+when I was two I was \nocap{nearly}
+new (A.A. Milne)}.
+
+\stopDoubleExample
+
+Начин на који команда \cmd{cap} функционише можемо да конфигуришемо
+помоћу команде \PlaceMacro{setupcapitals}\cmd{setupcapitals}, а можемо и
+да дефинишемо различите верзије команде, тако да свака има своје
+сопствено име и одређену конфигурацију. Ово можемо да урадимо помоћу
+\PlaceMacro{definecapitals}\cmd{definecapitals}.
+
+Обе команде раде на сличан начин:
+
+\starttyping
+\definecapitals[Име][Конфигурација]
+\setupcapitals[Име][Конфигурација]
+\stoptyping
+
+Параметар \quotation{Име} у команди \cmd{setupcapitals} није обавезан.
+Ако се не употреби, конфигурација утиче на саму команду \cmd{cap}. Ако
+се употреби, морамо да наведемо име које је претходно командом
+\cmd{definecapitals} додељено некој одређеној конфигурацији.
+
+У ове команде, конфигурација омогућава подешавање три опције:
+\quotation{{\tt title}}, \quotation{{\tt sc}} и \quotation{{\tt style}},
+при чему прва и друга прихватају за вредност \quotation{yes} и
+\quotation{no}. Са \quotation{{\tt title}} наводимо да ли ће
+капитализација да утиче и на наслове (што је подразумевано), а са
+\quotation{{\tt sc}} наводимо да ли команда треба да буде прави капитал
+(\quotation{yes}), или лажни капитал (\quotation{no}). Подразумевано
+користи лажни капитал, који има предност да команда ради чак и када
+употребљавате фонт који нема имплементирану капитал варијанту. Трећа
+вредност \quotation{{\tt style}} нам омогућава да наведемо команду стила
+која ће се применити на текст на који утиче команда \cmd{cap}.
+
+\stopsubsection
+
+\startsubsection
+  [title={Текст у експоненту или индексу}]
+
+Већ знамо (погледајте \in{одељак}[sec:reserved characters]) да ће у
+математичком режиму резервисани карактери \MyKey{_} и \MyKey{^}
+конвертовати карактер или групу која непосредно следи у експонент или
+индекс. Да би се тај ефекат постигао и ван математичког режима,
+\ConTeXt\ обезбеђује следеће команде:
+
+\startitemize
+
+\item \PlaceMacro{high}\cmd{high\{Текст\}}: текст који узима као
+аргумент исписује у експоненту.
+
+\item \PlaceMacro{low}\cmd{low\{Текст\}}: текст који узима као аргумент
+исписује у индексу.
+
+\item \PlaceMacro{lohi}\cmd{lohi\{Индекс\}\{Експонент\}}: исписује оба
+аргумента, један изнад другог: први аргумент на дну, а изнад њега други
+аргумент, чиме се постиже занимљив ефекат:
+
+  \startDoubleExample
+
+    \starttyping
+      \lohi{испод}{изнад}
+    \stoptyping
+
+    \lohi{испод}{изнад}
+
+\stopDoubleExample
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:verbatim,
+    title={Дословни текст},
+  ]
+  \PlaceMacro{type}\PlaceMacro{starttyping}
+
+Латински израз {\em verbatim} (од {\em verbum} $=$ {\em реч} + суфикс
+{\em atim}), који може да се преведе као \quotation{дословно} или
+\quotation{реч за реч}, се користи у програмима за обраду текста као што
+је \ConTeXt\ да се означи да фрагменти текста не би уопште требало да се
+обраде, већ да се у финални фајл препишу онако како су написани.
+\ConTeXt\ за ово употребљава команду \tex{type}. Она је намењена за
+кратке текстове који не заузимају више од једне линије, а окружење {\tt
+typing} је намењено за текстове који су дужи од једне линије. Ове
+команде се често користе у компјутерским књигама за приказивање
+фрагмената кода, и \ConTeXt\ ове текстове форматира словима фиксне
+ширине, као што би изгледао откуцан писаћом машином или на екрану
+компјутерског терминала. У оба случаја се текст шаље у финални документ
+без {\em обраде}, што значи да у њима смеју да се нађу резервисани
+карактери или специјални карактери који ће се у финални фајл пренети
+{\em какви јесу}. Исто тако, ако аргумент команде \tex{type}, или
+садржај окружења \tex{starttyping} садржи команду, она ће се {\em
+исписати} у финални документ, неће се извршити.
+
+Комада \tex{type} има и следећу особеност: њен аргумент {\em може} да се
+налази унутар витичастих заграда (као што је уобичајено у систему
+\ConTeXt), али за ограђивање (окруживање) аргумента може да се користи
+и било који други карактер.
+
+\startSmallPrint
+
+  Када \ConTeXt\ чита \tex{type} команду, он претпоставља да карактер
+  који није размак непосредно иза имена команде служи као граничник
+  њеног аргумента; тако да сматра да садржај аргумента почиње са
+  наредним карактером, а завршава се са карактером испред наредног
+  појављивања {\em граничника}.
+
+  Неки примери ће нам помоћи да ово лакше разумемо:
+
+  \starttyping
+    \type 1Станлио о Олио1
+    \type |Станлио и Олио|
+    \type zСтанлио и Олиоz
+    \type (Станлио и Олио(
+  \stoptyping
+
+  Запазите да је у првом примеру први карактер након имена команде
+  \quote{1}, у другом \quote{\|}, а у трећем \quote{z}; дакле: у сваком
+  од ових случајева, \ConTeXt\ ће сматрати да је аргумент команде
+  \tex{type} све до наредног појављивања тог истог карактера. Исто важи
+  и за последњи пример, који је врло поучан, јер у принципу бисмо могли
+  да претпоставимо да ако је отварајући граничник аргумента \quote{(},
+  онда затварајући треба да буде \quote{)}, али то није тако, јер су
+  \quote{(} и \quote{)} различити карактери, а команда \tex{type}, као
+  што сам рекао, тражи карактер затварајућег граничника који је исти као
+  и претходни карактер који се употребио да започне аргумент.
+
+  Постоје само два случајева у којима команда \tex{type} дозвољава да
+  отварајући и затварајући граничник буду различити карактери:
+
+  \startitemize
+
+  \item Ако је отварајући граничник карактер \quote{\{}, он сматра да ће
+  затварајући граничник бити \quote{\}}.
+
+  \item Ако је отварајући граничник \quote{<<}, он сматра да ће
+  затварајући граничник да буде \quote{>>}. Овај случај је јединствен и у
+  томе што се два узастопна карактера користе као граничници.
+
+  \stopitemize
+
+Међутим: чињеница да команда \tex{type} омогућава било који граничник не
+значи да би требало да користимо \quotation{чудне} граничнике. Ако се
+посматра из угла {\em читљивости} и {\em разумљивости} изворног фајла,
+најбоље је да се аргумент команде \tex{type} огради витичастим заградама
+где је то могуће, као што је и уобичајено у систему \ConTeXt; а када то
+није могуће јер се витичасте заграде налазе у аргументу команде
+\tex{type}, употребите симбол: по могућству онај који није један од
+\ConTeXt\ резервисаних карактера. На пример: \cmd{type *Ово је
+затварајућа витичаста заграда: \quote{\}}*}.
+
+
+\stopSmallPrint
+
+\def\hyphenatedurlseparator{\curvearrowright} И \cmd{type} и
+\cmd{starttyping} могу да се конфигуришу командама
+\PlaceMacro{setuptype}\cmd{setuptype} и
+\PlaceMacro{setuptyping}\cmd{setuptyping}. Такође можемо да креирамо
+прилагођене верзије ових команди са
+\PlaceMacro{definetype}\cmd{definetype} и
+\PlaceMacro{definetyping}\cmd{definetyping}. Што се тиче актуелних
+опција конфигурације за ове команде, упућујем на \MyKey{setup-en.pdf} (у
+директоријуму
+{\tt\hyphenatedfilename{tex/texmf-context/doc/context/documents/general/qrcs}).}
+
+Две врло сличне команде команди \tex{type} су:
+
+\startitemize
+
+\item \PlaceMacro{typ}\tex{typ}: функционише слични као и \tex{type},
+али не искључује поделу речи на крају редова.
+
+\item \PlaceMacro{tex}\tex{tex}: команда која је намењена писању
+текстова о \TeX\ или \ConTeXt: она додаје обрнуту косу црту испред
+текста који узима као аргумент. Иначе, ова команда се разликује од
+команде \tex{type} у томе да обрађује неке од резервисаних карактера на
+које наиђе у тексту који јој се проследи као аргумент. Тачније,
+витичасте заграде унутар \tex{tex} ће се третирати на исти начин на који
+се и иначе третирају у систему \ConTeXt.
+
+\stopitemize
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:horizontal space1,
+    title={Размак између карактера и речи},
+  ]
+
+\startsubsection
+  [title=Аутоматско постављање хоризонталног размака]
+
+\ConTeXt\ размак између различитих карактера и речи (који се у \TeX\
+назива {\em хоризонтални размак}) обично поставља аутоматски:
+
+\startitemize
+
+\item Размак између карактера који чине реч дефинише сам фонт, што, осим
+у случају фонтова фиксне ширине, обично значи већу или мању количину
+празног простора у зависности од тога који карактери се раздвајају, па
+је тако на пример, размак између \quote{Л} и \quote{У} (\quote{ЛУ})
+обично мањи од размака између \quote{П} и \quote{Р} (\quote{ПР}).
+Међутим, изузев ових могућих варијација у зависности од комбинације
+слова у питању и које су предефинисане у фонту, размак између карактера
+који чине реч је, у општем случају, фиксна и непроменљива мера.
+
+\item За разлику од тога, размак између речи на истој линији може бити
+еластичнији.
+
+  \startitemize
+
+  \item У случају речи у линији чија ширина мора бити иста као ширина
+  осталих линија у пасусу, један од механизама које \ConTeXt\ користи да
+  добије линије исте ширине је варијација размака између речи, што је
+  детаљније објашњено у \in{одељку}[sec:lines]. У овим случајевима,
+  \ConTeXt\ ће да успостави потпуно исти хоризонтални размак између свих
+  речи у линији (осим за правила дата испод), и обезбедиће да је размак
+  између речи у различитим линијама пасуса што је могуће сличнији.
+
+  \item Међутим, уз потребу да се простор између речи развуче или скупи
+  тако да се линије поравнају, у зависности од активног језика
+  \ConTeXt\ узима у обзир и одређена типографска правила, па се тако на
+  пример у неким деловима енглеске типографске традиције након тачке на
+  крају реченице умеће додатни размак.
+
+    \startSmallPrint
+
+      Овај додатни размак функционише за енглески и можда још неке
+      језике (мада је исто тако тачно да данас у многим случајевима
+      издавачи на енглеском језику не умећу додатни размак након тачке),
+      али не и за шпански или српски за које је типографска традиција
+      другачија. Тако да ову функцију можемо привремено да укључимо
+      помоћу \PlaceMacro{setupspacing}\cmd{setupspacing[broad]} и да је
+      искључимо са \cmd{setupspacing[packed]}. Такође бисмо могли и да
+      променимо подразумевану конфигурацију за шпански (а и за било који
+      други језик, укључујући и српски), као што је објашњено у
+      \in{одељку}[sec:langconfig].
+
+    \stopSmallPrint
+
+  \stopitemize
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [title=Промена размака између карактера у речи]
+
+Измена подразумеваног размака између карактера који чине реч се из угла
+типографије сматра за врло лошу праксу, осим у насловима. \ConTeXt\ ипак
+обезбеђује команду за промену овог размака између карактера у
+речи:\footnote{За филозофију система \ConTeXt\ је врло типично да се
+обезбеди команда која ради нешто што сама \ConTeXt\ документација
+саветује да се не ради. Мада се иде за типографском перфекцијом, циљ је
+и да се аутору омогући апсолутна контрола над изгледом свог документа:
+на аутору је одговорност да ли је то боље или лошије.}
+\PlaceMacro{stretched}\cmd{stretched}, чија је синтакса:
+
+\type{\stretched[Конфигурација]{Текст}}
+
+где {\em Конфигурација} омогућава било коју од следећих опција:
+
+\startitemize
+
+\item {\tt factor}: цео или децимални број који представља размак који
+треба да се постигне. Не би требало да буде сувише велики број. Фактор
+од 0.05 је већ видљив голим оком.
+
+\item {\tt width}: наводи укупну ширину коју мора да има текст достављен
+команди, тако да ће сама команда да израчуна неопходно размицање тако да
+распореди карактере у тај простор.
+
+  \startSmallPrint
+
+    Према мојим тестовима, када је ширина постављена опцијом {\tt width}
+    мања од оне која је неопходна да се текст представи уз {\em factor}
+    од 0.25, опција {\em width} и овај фактор се игноришу. Претпостављам
+    да је то зато што нам команда \cmd{stretched} омогућава само да {\em
+    увећамо} размак између карактера у речи, а не и да га смањимо. Али
+    не разумем зашто је ширина потребна да се представи текст уз фактор
+    од 0.25 узета као минимална мера за опцију {\tt width}, а не {\em
+    природна ширина} текста (са фактором 0).
+
+  \stopSmallPrint
+
+
+\item {\tt\bf style}: команда или команде стила које се примењују на
+текст који се узима као аргумент.
+
+\item {\tt\bf color}: боја којом ће се исписати текст узет као аргумент.
+
+\stopitemize
+
+Тако у наредном примеру можемо графички видети како би команда радила
+када би се применила на исту реченицу, али са различитим ширинама:
+
+\startDoubleExample\smallbodyfont
+
+\starttyping
+\stretched[width=4cm]{\tt test text}
+\stretched[width=6cm]{\tt test text}
+\stretched[width=8cm]{\tt test text}
+\stretched[width=9cm]{\tt test text}
+\stoptyping
+
+\stretched[width=4cm]{\tt тест текст}
+\stretched[width=6cm]{\tt тест текст}
+\stretched[width=8cm]{\tt тест текст}
+\stretched[width=9cm]{\tt тест текст}
+
+\stopDoubleExample
+
+\startSmallPrint
+
+  У овом примеру се може видети да расподела хоризонталног размака
+  између различитих карактера није униформна. \quote{x} и \quote{t} у
+  \quotation{text}, а \quote{e} и \quote{b} и \quotation{test}, се увек
+  појављују ближе један уз други него остали карактери. Нисам успео да
+  пронађем разлог зашто се то дешава.
+
+\stopSmallPrint
+
+Ако се примени без аргумената, команда ће употребити пуну ширину линије.
+С друге стране, унутар текста који представља аргумент ове команде,
+команда \cmd{\backslash} се редефинише, па уместо прелома линије умеће
+хоризонтални размак. На пример:
+
+\startDoubleExample
+
+\starttyping
+\stretched{\tt тест\\текст}
+\stoptyping
+
+\stretched{\tt тест\\тест}
+
+\stopDoubleExample
+
+Подразумевану конфигурацију команде можемо да променимо користећи
+команду \PlaceMacro{setupstretched}\cmd{setupstretched}.
+
+\startSmallPrint
+
+  Не постоји команда \PlaceMacro{definestretched}\cmd{definestretched}
+  која би нам омогућила да поставимо прилагођене конфигурације
+  придружене \Doubt имену команде, међутим, у званичној листи команди
+  (погледајте \in{одељак}[sec:qrc-setup-en]) пише да
+  \cmd{setupstretched} долази од
+  \PlaceMacro{setupcharacterkerning}\cmd{setupcharacterkerning} и
+  постоји команда
+  \PlaceMacro{definecharacterkerning}\cmd{de\-fi\-ne\-cha\-rac\-ter\-ker\-ning}.
+  Ипак, у мојим тестовима овом последњом командом нисам успео да
+  поставим било какву прилагођену конфигурацију за команду
+  \cmd{stretched}, мада морам признати да баш и нисам уложио много
+  времена у то.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:horizontal space2,
+    title={Команде за додавање хоризонталног размака између речи},
+  ]
+
+Већ знамо да ако желимо да повећамо размак између речи, то нећемо
+постићи додавање два или више узастопна размака, јер \ConTeXt\ апсорбује
+све узастопне размаке, као што је објашњено у \in{одељку}[sec:spaces].
+Ако желимо већи размак између речи, морамо да употребимо неку од команди
+које нам то омогућавају:
+
+\startitemize
+
+\item \cmd{,} умеће у документ врло мали размак (који се назива танки
+размак). Користи се, на пример, за раздвајање хиљада у бројевима (нпр.
+1.000.000), или за раздвајање обрнутог апострофа од обрнутих навода. На
+пример: \quotation{\color[darkmagenta]{{\tt
+1\backslash,473\backslash,451}}} производи \quotation{1\,473\,451}.
+
+\item \PlaceMacro{\textvisiblespace}\PlaceMacro{space}\cmd{space} или
+\quotation{\cmd{\textvisiblespace}}
+(обрнута коса црта иза које следи размак, који сам представио са
+\quotation{\,\textvisiblespace\,}, пошто је невидљив) уноси додатни
+размак.
+
+\item \PlaceMacro{enskip}\cmd{enskip}, \PlaceMacro{quad}\cmd{quad} и
+\PlaceMacro{qquad}\cmd{qquad} умећу у документ редом размак ширине пола
+{\em ема}, 1 {\em ем} или 2 {\em ема}. Присетите се да је {\em ем} мера
+која зависи од величине фонта и износи ширину слова \quote{m}, која се
+обично подудара са величином фонта у тачкама. Дакле, ако се користи фонт
+величине 12 тачака, \cmd{enskip} уноси размак од 6 тачака, \cmd{quad}
+размак од 12 тачака, а \cmd{qquad} размак од 24 тачака.
+
+\stopitemize
+
+Уз ове команде које уносе размаке прецизне димензије, команде
+\PlaceMacro{hskip}\cmd{hskip} и \PlaceMacro{hfill}\cmd{hfill} уносе
+хоризонтални размак променљиве ширине:
+
+\PlaceMacro{hskip}\cmd{hskip} нам омогућава да наведемо тачно колико
+празног простора желимо да додамо. Овако:
+
+
+\startDoubleExample
+
+\starttyping
+Ово је \hskip 1cm 1 центиметар\\
+Ово је \hskip 2cm 2 центиметра\\
+Ово је \hskip 2.5cm 2,5 центиметра\\
+\stoptyping
+
+Ово је \hskip 1cm 1 центиметар\\
+Ово је \hskip 2cm 2 центиметра\\
+Ово је \hskip 2.5cm 2,5 центиметра\\
+
+\stopDoubleExample
+
+Наведени размак може да буде и негативан, па се у том случају текст пише
+преко другог. Овако:
+
+\startDoubleExample
+
+\starttyping
+Ово је пре фарса него
+\hskip -1cm комедија
+\stoptyping
+
+Ово је пре фарса него \hskip -1cm комедија
+
+\stopDoubleExample
+
+\cmd{hfill}, са друге стране, уноси онолико празног простора колико је
+потребно да се заузме комплетна линија, па на тај начин можемо да
+постигнемо ефекат десно поравнатог текста, центрираног текста или текста
+на обе стране линије, као што је приказано у наредном примеру:
+
+\startDoubleExample
+\starttyping
+\hfill На десној страни\\
+На обе\hfill стране
+\stoptyping
+
+\hfill На десној страни\\
+На обе\hfill стране
+
+\stopDoubleExample
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:compound words,
+    title=Сложенице,
+  ]
+
+Под \quotation{сложеницама} у овом одељку подразумевам речи које се
+формално схватају као једна реч, а не просто спојене две речи. Није увек
+једноставно схватити ту разлику: \quotation{радиоактиван} је јасно
+састављено од две речи (\quotation{радио + активан}) али нико ко говори
+српски неће помислити о сложеници на било који други начин осим као на
+једну реч. С друге стране, имамо речи које понекад спајају уз помоћ
+цртице (полусложенице). Те две речи имају одвојена значења и употребе,
+али су спојене (а у неким случајевима могу да постану и једна реч, мада
+не још увек!). Тако на пример, можемо да пронађемо речи као што су
+\quotation{француско||канадски} или \quotation{радио||техника}.
+
+Сложенице пред \ConTeXt\ постављају неке проблеме који се углавном тичу
+њихове потенцијалне поделе на крају реда. Ако је цртица елемент који их
+спаја, онда из типографске перспективе нема проблема поделе на крају
+реда, али би требало да избегнемо поделу у другом делу речи јер на тај
+начин две узастопне цртице отежавају разумљивост.
+
+Постоји команда \quotation{{\tt\|\|}} која систему \ConTeXt\ говори да
+две речи чине полусложеницу. Ова команда не почиње са обрнутом косом
+цртом и дозвољава два различита начина коришћења:
+
+\startitemize
+
+\item Можемо да употребимо две узастопне вертикалне црте и да напишемо,
+на пример, \MyKey{горе\|\|доле}.
+
+\item Између две вертикалне црте може да се налази симбол
+спајања|/|раздвајања, као на пример, у \MyKey{спајање\|/\|раздвајање}.
+
+\stopitemize
+
+У оба случаја \ConTeXt\  ће знати да има посла са сложеницом, па ће
+применити одговарајућа правила растављања на крају реда за тај тип речи.
+Разлика између употребе две узастопне вертикалне линије и окруживања
+граничника речи њима је што у првом случају \ConTeXt\ користи граничник
+који је предефинисан као
+\PlaceMacro{setuphyphenmark}\cmd{setuphyphenmark}, или другим речима
+цртицу, што је подразумевано \MyKey{--}). Дакле, ако напишемо
+\MyKey{слика\|\|рам}, \ConTeXt\ ће генерисати \quotation{слика||рам}.
+
+Командом \cmd{setuphyphenmark} можемо да променимо подразумевани
+граничник (у случајевима када су нам потребне две вертикалне црте).
+Вредности које су дозвољене за ови команду су \MyKey{--, ---, -, ~, (,
+), =, /}. Међутим, имајте на уму да вредност \MyKey{=} постаје eм црта
+(исто што и \MyKey{---}).
+
+Уобичајена употреба \MyKey{\|\|} је са цртицама, јер се оне обично
+користи у полусложеницама. Али понекада граничник може да буде заграда,
+ако желимо на пример, \quotation{(међу)простор}, или може бити коса
+црта, као у \quotation{улаз/излаз}. Ако у овим случајевима желимо да се
+примењују уобичајена правила поделе речи на крају реда за сложенице,
+могли би да напишемо \MyKey{(међу\|)\|простор} или
+\MyKey{улаз\|/\|излаз}. Као што сам раније рекао, сматра се да је
+\MyKey{\|=\|} скраћеница за \MyKey{\|---\|} и као граничник умеће ем
+црту (---).
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:langdoc,
+    title={Језик текста},
+  ]
+
+Карактери који чине речи обично припадају неком језику. За \ConTeXt\ је
+важно да зна на којем језику пишемо текст, јер од тога зависи много
+битних детаља. Неке од њих су:
+
+\startitemize[packed]
+
+\item Растављање речи на крају реда.
+\item Излазни формат неких речи.
+\item Одређена словослагачка питања везана за типографску традицију
+језика о којем је реч.
+
+\stopitemize
+
+\startsubsection
+  [title=Постављање и измена језика]
+
+\ConTeXt\ претпоставља да је језик енглески. Можемо да га променимо
+једном од следеће две процедуре:
+
+\startitemize
+
+\item Користећи команду \PlaceMacro{mainlanguage}\cmd{mainlanguage} у
+преамбули да поставимо главни језик документа.
+
+\item Користећи команду \PlaceMacro{language}\cmd{language} намењену за
+промену активног језика на неком месту у документу.
+
+\stopitemize
+
+Обе команде очекују аргумент који се састоји од неког идентификатора
+језика (или кода). За идентификацију језика може да се користи или
+међународни двословни кôд језика наведен у ISO 639-1, а то је исто што
+се употребљава, на пример, на вебу, или енглеско име језика о ком је
+реч.
+
+\in{Табела}[tbl:languages] приказује комплетну листу језика које
+подржава \ConTeXt, заједно са ISO кодом за сваки језик, а тамо где
+постоје, и кодове одређених варијанти које могу експлицитно да се
+наведу.\footnote{\in{Табела}[tbl:languages] приказује кратак преглед
+листе која се добија следећим командама:\\
+  \PlaceMacro{usemodule}\type{\usemodule[languages-system]}\\
+  \PlaceMacro{loadinstalledlanguages}\type{\loadinstalledlanguages}\\
+  \PlaceMacro{showinstalledlanguages}\type{\showinstalledlanguages}\\
+  Ако овај документ читате доста касније од времена када је написан
+  (2020), могуће је да \ConTeXt\ садржи и додатне језике, тако да би
+  била добра идеја да покренете ове команде и видите ажурирану листу
+  језика.\\Током 2020. је додата подршка за српски језик --- {\em прим.
+  прев.}}
+
+{\switchtobodyfont[script]
+\placetable
+  [here]
+  [tbl:languages]
+  {Језичка подршка у систему \ConTeXt}
+{\starttabulate[|l|l|p(.6\textwidth)|]
+\HL
+\NC{\bf Језик} \NC {\bf ISO кôд} \NC {\bf Језик} (варијанте)
+\NR
+\HL
+\NC Afrikaans
+\NC af, afrikaans
+\NR
+\NC Arabic
+\NC ar, arabic
+\NC ar-ae, ar-bh, ar-dz, ar-eg, ar-in, ar-ir, ar-jo, ar-kw, ar-lb, ar-ly, ar-ma, ar-om, ar-qa, ar-sa, ar-sd, ar-sy, ar-tn, ar-ye
+\NR
+\NC Catalan
+\NC ca, catalan
+\NR
+\NC Czech
+\NC cs, cz, czech
+\NR
+\NC Croatian
+\NC hr, croatian
+\NR
+\NC Danish
+\NC da, danish
+\NR
+\NC Dutch
+\NC nl, nld, dutch
+\NR
+\NC English
+\NC en, eng, english
+\NC en-gb, uk, ukenglish, en-us, usenglish
+\NR
+\NC Estonian
+\NC et, estonian
+\NR
+\NC Finnish
+\NC fi, finnish
+\NR
+\NC French
+\NC fr, fra, french
+\NR
+\NC German
+\NC de, deu, german
+\NC de-at, de-ch, de-de
+\NR
+\NC Greek
+\NC gr, greek
+\NR
+\NC Greek (ancient)
+\NC agr, ancientgreek
+\NR
+\NC Hebrew
+\NC he, hebrew
+\NR
+\NC Hungarian
+\NC hu, hungarian
+\NR
+\NC Italian
+\NC it, italian
+\NR
+\NC Japanese
+\NC ja, japanese
+\NR
+\NC Korean
+\NC kr, korean
+\NR
+\NC Latin
+\NC la, latin
+\NR
+\NC Lithuanian
+\NC lt, lithuanian
+\NR
+\NC Malayalam
+\NC ml, malayalam
+\NR
+\NC Norwegian
+\NC nb, bokmal, no, norwegian
+\NC nn, nynorsk
+\NR
+\NC Persian
+\NC pe, fa, persian
+\NR
+\NC Polish
+\NC pl, polish
+\NR
+\NC Portuguese
+\NC pt, portughese
+\NC pt-br
+\NR
+\NC Romanian
+\NC ro, romanian
+\NR
+\NC Russian
+\NC ru, russian
+\NR
+\NC Slovak
+\NC sk, slovak
+\NR
+\NC Slovenian
+\NC sl, slovene, slovenian
+\NR
+\NC Spanish
+\NC es, sp, spanish
+\NC es-es, es-la
+\NR
+\NC Swedish
+\NC sv, swedish
+\NR
+\NC Thai
+\NC th, thai
+\NR
+\NC Turkish
+\NC tr, turkish
+\NC tk, turkmen
+\NR
+\NC Ukranian
+\NC ua, ukrainian
+\NR
+\NC Vietnamese
+\NC vi, vietnamese
+\NR
+\HL
+\stoptabulate
+}}
+
+Тако на пример, ако желимо да као главни језик документа поставимо шпански
+(кастиљански), могли би да употребимо било коју од следеће три команде:
+
+\starttyping
+\mainlanguage[es]
+\mainlanguage[spanish]
+\mainlanguage[sp]
+\stoptyping
+Ако одређени језик желимо да укључимо {\em унутар} документа, можемо да
+употребимо или команду \cmd{language[Кôд језика]}, или специфичну
+команду која активира тај језик. Тако на пример, \PlaceMacro{en}\cmd{en}
+активира енглески језик, \PlaceMacro{fr}\cmd{fr} активира француски,
+\PlaceMacro{es}\cmd{es} шпански, или \PlaceMacro{ca}\cmd{ca} каталонски.
+Једном када се неки језик активира, он остаје активан све док
+експлицитно не променимо језик, или док се не затвори група у којој је
+дошло до промене језика. Тако да језици функционишу као и команде за
+промену фонтова. Међутим, запазите да језик који се постави командом
+\cmd{language} или неком од њених скраћеница (\cmd{en}, \cmd{fr},
+\PlaceMacro{de}\cmd{de}, итд.) не утиче на језик којим се штампају
+ознаке (погледајте \in{одељак}[sec:labels]).
+
+\startSmallPrint
+
+  Мада може бити заморно да се обележи језик свих речи и израза које
+  користимо у свом документу, а које нису на главном језику документа,
+  веома је важно да се то уради ако желимо да на крају имамо документ
+  који је правилно сложен, посебно ако је у питању било какав
+  професионални рад. Не би требало да обележимо комплетан текст, већ
+  само онај који није на главном језику. Обележавање језика понекада
+  може да се аутоматизује употребом макроа. На пример, оригинални језик
+  овог документа у којем се често цитирају \ConTeXt\ команде је
+  енглески, па сам направио макро који, осим што команде исписује у
+  одређеном формату и боји, обележава их као енглеску реч. У свом
+  професионалном раду морам често да цитирам много француске и
+  италијанске библиографије, тако да сам у своју библиографску базу
+  података унео поље које чува језик рада, тако да у цитирањима и
+  листама библиографских референци могу да аутоматизујем навођење
+  језика.
+
+  Ако у истом документу користимо два језика који користе различите
+  алфабете (на пример енглески и српски, или енглески и грчки), постоји
+  трик којим се избегава потреба да се обележава језик израза који се
+  исписују различитим алфабетом: изменом подешавања главног језика
+  (погледајте наредни одељак) тако да се учитају и подразумевани шаблони
+  за поделу речи на крају реда за језик који користи другачији алфабет.
+  На пример, ако желимо да користимо енглески и старогрчки, следећом
+  командом неће бити потребе да ручно означавамо језик текста на грчком:
+
+  \type{\setuplanguage[en][patterns={en, agr}]}
+
+  Ово функционише само зато јер енглески и грчки не користе исти
+  алфабет, тако да не може дођи до конфликта у шаблонима за растављање
+  речи на крају реда та два језика, па одједном можемо да учитамо оба.
+  Али за два језика који користе исти алфабет, истовремено учитавање
+  шаблона за поделу речи на крају реда ће несумњиво да доведе до
+  неправилног раздвајања речи на крају реда.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:langconfig,
+    title=Конфигурисање језика,
+  ]
+  \PlaceMacro{setuplanguage}
+
+\dontleavehmode\ConTeXt\ функционисање одређених алата придружује
+одређеном језику који је активан у датом тренутку. Подразумевано
+придруживање може да се промени командом \cmd{setuplanguage} чија је
+синтакса:
+
+\type{\setuplanguage[Језик][Конфигурација]}
+
+где је {\em Језик} кôд језика који желимо да конфигуришемо, а {\em
+Конфигурација} садржи одређену конфигурацију коју желимо да поставимо
+(или да изменимо) за тај језик. Тачније, дозвољено је до 32 различите
+опције конфигурације, али ја ћу се бавити само са онима које изгледају
+пригодно за уводни текст као то је овај:
+
+\startitemize
+
+\item {\tt\bf date}: омогућава нам да конфигуришемо подразумевани формат
+датума. Погледајте даље на \at{страници}[sec:dates].
+
+\item {\tt\bf lefthyphenmin, righthyphenmin}: минимални број карактера
+који морају бити са леве или десне стране да би се извршила подела речи
+на крају реда. На пример \cmd{setuplanguage[en][lefthyphenmin=4]} неће
+делити било коју реч која лево од потенцијалне цртице поделе има мање од
+4 карактера.
+
+\item {\tt\bf spacing}: могуће вредности ове опције су \MyKey{broad} или
+\MyKey{packed}. У првом случају (broad), примениће се правила раздвајања
+речи у енглеском језику, што значи да ће се након тачке на крају
+реченице иза које следи неки други карактер додати одређена количина
+додатног размака. С друге стране, \MyKey{spacing=packed} ће спречити
+примену ових правила. За енглески језик, вредност broad је
+подразумевана.
+
+\item {\tt\bf leftquote, rightquote}: наводе карактере (или команде),
+редом, које ће команда \cmd{quote} користити лево и десно од текста који
+је њен аргумент (у вези ове команде, погледајте
+\at{страницу}[sec:quote]).
+
+\item {\tt\bf leftquotation, rightquotation}: наводе карактере (или
+команде), редом, које ће команда \cmd{quotation} користити лево и десно
+од текста који је њен аргумент (у вези ове команде, погледајте
+\at{страницу}[sec:quote]).
+
+
+\stopitemize%%%@@@
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:labels,
+    title=Ознаке које се придружују одређеним језицима,
+  ]
+
+Многе од \ConTeXt\ команди аутоматски генеришу одређене текстове (или
+{\em ознаке}), као на пример, команда \cmd{placetable} која исписује
+ознаку \quotation{Табела xx} испод табеле коју умеће, или
+\cmd{placefigure} која умеће ознаку \quotation{Слика xx}.
+
+Ове {\em ознаке} зависе од језика подешеног са \cmd{mainlanguage} (али
+не ако је језик постављен са \cmd{language}) и можемо да их променимо са
+
+\PlaceMacro{setuplabeltext}\type{\setuplabeltext[Језик][Кључ=Ознака]}
+
+где је {\em Кључ} израз под којим \ConTeXt\ познаје ознаку, а {\em
+Ознака} је текст који желимо да \ConTeXt\ генерише. Тако на пример,
+
+\type{\setuplabeltext[es][figure=Imagen~]}
+
+би подесило да када је главни језик шпански, слике које се умећу
+командом \cmd{placefigure} не називају \quotation{Figure x}, већ
+\quotation{Imagen x}. Запазите да након текста саме ознаке мора да се
+остави размак, како би се обезбедило да се ознака не прикачи за наредни
+карактер. У примеру сам употребио резервисани карактер
+\quotation{\lettertilde}; такође сам могао да напишем и
+\MyKey{[figure=Imagen\{ \}]} постављајући размак унутар витичастих
+заграда тако да га \ConTeXt\ не уклони.
+
+Које ознаке можемо да редефинишемо командом \cmd{setuplabeltext}?
+\ConTeXt\ документација није комплетна онако како би неко очекивао у
+овом тренутку. Референтно упутство из 2013. године (које највише
+објашњава ову команду) помиње \MyKey{chapter}, \MyKey{table},
+\MyKey{figure}, \MyKey{appendix}… \Conjecture и додаје \quotation{остале
+сличне текст елементе}. Можемо претпоставити да ће имена бити енглеска
+имена елемената о којима се ради.
+
+\startSmallPrint
+
+  Једна од предности {\em слободног либре софтвера} је да су кориснику
+  доступни изворни фајлови; тако да их можемо погледати. Ја сам то
+  учинио, и {\em њушкајући} кроз изворне фајлове система \ConTeXt,
+  открио сам фајл \MyKey{lang-txt.lua}, који се налази у {\tt
+  tex/texmf-context/tex/context/base/mkiv} и за који мислим да је онај
+  који садржи предефинисане ознаке и њихове различите преводе; тако да
+  ако \ConTeXt\ било када генерише редефинисани текст који желимо да
+  променимо, треба да отворимо овај фајл и да пронађемо име те ознаке.
+  На овај начин можемо видети име које је придружено ознаци.
+
+\stopSmallPrint
+
+Ако негде у документ желимо да уметнемо текст придружен одређеној
+ознаци, то можемо урадити командом
+\PlaceMacro{labeltext}\cmd{labeltext}. Тако на пример, ако желим да
+укажем на табелу, и да обезбедим да је назовем на исти начин на који је
+назива \ConTeXt\ у команди \cmd{placetable}, могу да напишем:
+\quotation{{\tt Као што приказује \backslash labeltext\{table\}на
+наредној страници.}} Овај текст ће у документу чији је
+\cmd{mainlanguage} српски да произведе: \quotation{Као што приказује
+\labeltext{table}на наредној страници.}
+
+\startSmallPrint
+
+  Неке од ознака које могу да се редефинишу командом
+  \cmd{setuplabeltext} су подразумевано празне; као на пример,
+  \MyKey{chapter} или \MyKey{section}. То је зато што \ConTeXt\
+  подразумевано не додаје ознаке командама поделе. Ако желимо да
+  променимо ово подразумевано понашање, потребно је да у преамбули
+  документа редефинишемо само ове ознаке, па тако на пример,
+  \cmd{setuplabeltext[chapter=Поглавље\lettertilde]} подешава да испред
+  поглавља стоји реч \quotation{Поглавље}.
+
+\stopSmallPrint
+
+Коначно, важно је истаћи да мада у општем случају \ConTeXt\ команде које
+као аргумент прихватају неколико опција раздвојених запетама, последња
+опција може да се заврши запетом и не дешава се ништа лоше. У команди
+\tex{setuplabeltext} би то проузроковало грешку приликом компајлирања.
+
+\stopsubsection
+
+\startsubsection
+  [title=Неке команде које се тичу језика]
+
+\startsubsubsection
+  [
+    reference=sec:dates,
+    title=Команде у вези датума,
+  ]
+  \PlaceMacro{currentdate}\PlaceMacro{date}\PlaceMacro{month}
+
+\ConTeXt\ поседује три команде везане за датум које свој излаз производе
+на језику који је активан у време када се изврше. То су:
+
+\startitemize
+
+\item \tex{currentdate}: када се изврши без аргумената у документу чији
+је главни језик српски, враћа системски датум у формату \quotation{Дан.
+Месец Година}. На пример: \quotation{11. септембар 2020}. Али можемо да
+јој наложимо да користи другачији формат (што би се догодило у САД и
+неким другом деловима света енглеског говорног подручја који следе свој
+систем стављања месеца пре дана, па отуда неславни датум 9/11), или да
+додамо и име дана у недељи ({\tt weekday}), или само неке елементе
+датума ({\tt day, month, year})
+
+  За назначавање другачијег формата датуме, \MyKey{dd} или \MyKey{day}
+  представља дане, \MyKey{mm} месеце (као бројеве), \MyKey{month} месеце
+  написане малим словима, а \MyKey{MONTH} великим. Што се тиче године,
+  \MyKey{yy} ће исписати само последње цифре, док ће \MyKey{year} или
+  \MyKey{y} да испише све четири. Ако између компоненти желимо и неки
+  граничник, морамо да га експлицитно напишемо. На пример
+
+  \type{\currentdate[weekday, dd, month]}
+
+  ће када се изврши 9. септембра 2020 да испише \quotation{среда 9
+  септембар}.
+
+\item \tex{date}: ова команда, када се изврши без аргумената, производи
+потпуно исти резултат као и \cmd{currentdate}, што значи тренутни датум
+у стандардном формату. Међутим, као аргумент може да јој се наведе неки
+одређени датум. За ово су потребна два аргумента: првим аргументом
+наводимо дан (\MyKey{d}), месец (\MyKey{m}) и годину (\MyKey{y}) који
+одговарају датуму који желимо да наведемо, док другим аргументом (који
+није обавезан) наводимо формат приказаног датума. На пример, ако желимо
+да знамо дан у недељи када су се упознали Џон Ленон и Пол Мeкартни, што
+је према Википедији догађај који се догодио 6. јула 1957.  године,
+требало би да напишемо
+
+  \type{\date[d=6, m=7, y=1957][weekday]}
+
+ па бисмо сазнали да се тај историјски догађај десио у суботу.
+
+\item \tex{month} као аргумент узима број и враћа име месеца који
+одговара том броју.
+
+\stopitemize
+
+\stopsubsubsection
+
+\startsubsubsection
+  [title=Команда \tex{translate}]
+  \PlaceMacro{translate}
+
+Команда translate подржава низ фрази придружених одређеном језику, тако
+да ће у зависности од језика који је активан у неко време, у финални
+документ да се уметне једна или друга. У следећем примеру се користи
+команда translate да придружи четири фразе на шпанском и српском, које
+се чувају у меморијском баферу (што се тиче {\tt buffer} окружења,
+погледајте \in{одељак}[sec:buffer]):
+
+\starttyping
+\startbuffer
+  \starttabulate[|*{4}{lw(.25\textwidth)|}]
+    \NC \translate[es=Su carta de fecha, sr=Ваше писмо датирано]
+    \NC \translate[es=Su referencia, sr=Ваша референца]
+    \NC \translate[es=Nuestra referencia, sr=Наша референца]
+    \NC \translate[es=Fecha, sr=Датум] \NC\NR
+  \stoptabulate
+\stopbuffer
+\stoptyping
+
+па ако {\em бафер} уметнемо на место у документу на којем је активан
+шпански језик, исписаће се шпанске фразе, али ако је то место у
+документу на којем је активан српски језик, уметнуће се српске фразе.
+Дакле:
+
+%\startpacked
+\language[es]
+\startbuffer
+  \starttabulate[|*{4}{lw(.25\textwidth)|}]
+    \NC \translate[es=Su carta de fecha, sr=Ваше писмо датирано]
+    \NC \translate[es=Su referencia, sr=Ваша референца]
+    \NC \translate[es=Nuestra referencia, sr=Наша референца]
+    \NC \translate[es=Fecha, sr=Датум] \NC\NR
+  \stoptabulate
+\stopbuffer
+
+\starttyping
+\language[es]
+\getbuffer
+\stoptyping
+
+ће да генерише
+
+\example{\getbuffer}
+
+док ће
+\starttyping
+\language[sr]
+\getbuffer
+\stoptyping
+
+да генерише
+
+\sr\example{\getbuffer}
+
+%\stoppacked
+
+\stopsubsubsection
+
+\startsubsubsection
+  [
+    reference=sec:quote,
+    title=Команде \tex{quote} и \tex{quotation},
+  ]
+  \PlaceMacro{quote}\PlaceMacro{quotation}
+
+Једна од најчешћих типографских грешака у текст документима се дешава
+када се знаци цитирања (полунаводници или наводници) отворе, али се експлицитно
+не затворе. Да би се то спречило, \ConTeXt\ обезбеђује команде
+\cmd{quote} и \cmd{quotation} које цитирају текст који им се зада као
+аргумент; \cmd{quote} ће употребити полунаводнике, док ће \cmd{quotation} да
+употреби знаке навода.
+
+Ове команде зависе од активног језика па користе подразумевани карактер
+или команду постављену за дати језик којим се отвара или затвара цитат
+(погледајте \in{одељак}[sec:langconfig]); па тако на пример, ако желимо
+да користимо шпански као подразумевани стил за знаке навода -- угласте
+заграде) типичне за шпански, италијански, француски, написали бисмо:
+
+\type{\setuplanguage[es][leftquotation=«, rightquotation=»]}.
+
+Међутим, ове команде не обрађују угњеждене наводе; мада можемо креирати
+алат који то ради, а који користи чињеницу да су \cmd{quote} и
+\cmd{quotation} уствари примене онога што \ConTeXt\ назива {\em
+delimitedtext}, и да командом
+\PlaceMacro{definedelimitedtext}\cmd{definedelimitedtext} може да се
+креира још примена. Тако ће наредни пример:
+
+\starttyping
+\definedelimitedtext
+  [CommasLevelA]
+  [left=«, right=»]
+
+\definedelimitedtext
+  [CommasLevelB]
+  [left=“, right=”]
+
+\definedelimitedtext
+  [CommasLevelC]
+  [left=`, right=']
+\stoptyping
+
+да креира три команде које ће омогућити до три различита нивоа цитирања.
+Први ниво са угластим наводницима, други са обичним наводницима, а трећи
+са полунаводницима.
+
+Наравно, ако енглески користимо као главни језик, онда ће се аутоматски
+користити полунаводи и наводи (од запета, не равни као у овом документу!).
+
+\stopsubsubsection
+
+\stopsubsection
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:
+%%% vim:set filetype=context tw=72 : %%%

@@ -1,0 +1,31 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: GitHub Checkout
+        uses: actions/checkout@v2
+
+      - name: Download ConTeXt and Compile
+        run: |
+          wget -O context.zip http://lmtx.pragma-ade.nl/install-lmtx/context-linux-64.zip 
+          unzip context.zip -d context
+          cd context/
+          sh install.sh >/dev/null
+          cd tex/texmf-linux-64/bin
+          CTXPATH=`pwd`
+          declare -A languages=(["en"]="eng" ["es"]="esp" ["ru"]="rus" ["fr"]="fra" ["fr2"]="fra")
+          for lang in "${!languages[@]}"
+          do
+          cd $GITHUB_WORKSPACE/$lang
+          echo "Compiling $lang version..."
+          tlang=${languages[$lang]}
+          extension="mkiv"
+          if [[ $tlang == "fra" ]]; then
+          extension="tex"
+          fi
+          $CTXPATH/context "introCTX_$tlang.$extension" >/dev/null
+          done

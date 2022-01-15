@@ -1,5 +1,7 @@
 # A not so short introduction to ConTeXt
 
+[![CI](https://github.com/contextgarden/not-so-short-introduction-to-context/actions/workflows/main.yml/badge.svg)](https://github.com/contextgarden/not-so-short-introduction-to-context/actions/workflows/main.yml)
+
 It can sometimes be useful to **help someone get started** with the 
 **wonderful and fascinating typesetting and document composition system** that is [**ConTeXt**](https://wiki.contextgarden.net).
 
@@ -13,14 +15,14 @@ Initially written in Spanish, this document interested several people, and in
 order to increase the potential audience, a member of the [ntg-context mailing list]( https://mailman.ntg.nl/pipermail/ntg-context/)
 (native English speaker, who wishes to remain anonymous) has proceeded to translate my text into English.
 
-| [Spanish v1.6](es/introCTX_esp.pdf)                                  | [English v1.6](en/introCTX_eng.pdf)                                  | [French v1.6](fr/introCTX_fra.pdf)                                 | [French v2.0alpha](fr2/introCTX_fra.pdf)                             | [Russian v1.6](ru/introCTX_rus.pdf)                                |
-|----------------------------------------------------------------------|----------------------------------------------------------------------|--------------------------------------------------------------------|----------------------------------------------------------------------|--------------------------------------------------------------------|
-| [<img src="es/introCTX_esp.png" width="200">](es/introCTX_esp.pdf)   | [<img src="en/introCTX_eng.png" width="200">](en/introCTX_eng.pdf)   | [<img src="fr/introCTX_fra.png" width="200">](fr/introCTX_fra.pdf) | [<img src="fr2/introCTX_fra.png" width="200">](fr2/introCTX_fra.pdf) | [<img src="ru/introCTX_rus.png" width="200">](ru/introCTX_rus.pdf) |
+| [Spanish v1.6](es/introCTX_esp.pdf)                                  | [English v1.6](en/introCTX_eng.pdf)                                  | [French v1.6](fr/introCTX_fra.pdf)                                 | [French v2.0alpha](fr2/introCTX_fra.pdf)                             | [Russian v1.6](ru/introCTX_rus.pdf)                                | [Serbian v1.6](sr/introCTX_srb.pdf)                                |
+|----------------------------------------------------------------------|----------------------------------------------------------------------|--------------------------------------------------------------------|----------------------------------------------------------------------|--------------------------------------------------------------------|--------------------------------------------------------------------|
+| [<img src="es/introCTX_esp.png" width="200">](es/introCTX_esp.pdf)   | [<img src="en/introCTX_eng.png" width="200">](en/introCTX_eng.pdf)   | [<img src="fr/introCTX_fra.png" width="200">](fr/introCTX_fra.pdf) | [<img src="fr2/introCTX_fra.png" width="200">](fr2/introCTX_fra.pdf) | [<img src="ru/introCTX_rus.png" width="200">](ru/introCTX_rus.pdf) | [<img src="sr/introCTX_srb.png" width="200">](sr/introCTX_srb.pdf) |
 
 
 ## Author
 
-- Author : **🄯 2020-2021, Joaquín Ataz-López**
+- Author : **©2020–2021, Joaquín Ataz-López**
 - Original title: **Una introducción (no demasiado breve) a ConTeXt MarkIV**
 - English Translation: A good friend who wishes to remain anonymous.
 
@@ -70,6 +72,8 @@ well the spirit of the FDL licence, in considerably less space.
   -  additionnal content, updated layout, reorganized source code only available in French
 - July 31, 2021: Version 2.0alpha  (French only) 
   - Global reorganization of the content. Attention: the content still needs to be reviewed and adapted to fit this new reorganization.
+- December 13, 2021: Version 1.6
+  - Version 1.6 translated to Serbian
 
 ## Communication history
 

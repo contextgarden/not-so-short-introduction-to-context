@@ -1,0 +1,192 @@
+%%% vim:set filetype=context tw=72 : %%%
+%%% File:     TitlePage.mkiv
+%%% Component:Cover, credits and table of contents
+%%% Author:   Joaquín Ataz-López
+%%% Begun:    April 2020
+%%% Concluded:August 2020
+%%%
+%%% Edited with: Emacs + AuTeX - And at times with vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent a01_TitlePage.mkiv
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Насловна страна
+% Копирао сам документ о luatex и context (који је део документације
+% о context. Донекле сам га изменио јер мој наслов има три линије,
+% док оригинал има само две, а променио сам и боју позадине).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \setvariables
+    [document]
+    [titleA=Не баш,
+    titleB=кратак увод,
+    titleC=у \ConTeXt\ Mark~IV,
+    author=Хоакин Атас-Лопес]
+
+  \startpagemakeup
+
+    \startMPcode
+
+      StartPage ;
+
+        fill Page enlarged 5mm withcolor \MPcolor{purple} ;
+        draw anchored.lrt(image(draw textext("\getvariable{document}{titleA}")  xsized(.750PaperWidth)      withcolor white),(lrcorner Page) shifted (-PaperWidth/20, PaperWidth/2.2)) ;
+        draw anchored.lrt(image(draw textext("\getvariable{document}{titleB}")  xsized(.750PaperWidth)      withcolor white),(lrcorner Page) shifted (-PaperWidth/20, PaperWidth/3.1)) ;
+        draw anchored.lrt(image(draw textext("\getvariable{document}{titleC}")  xsized(.750PaperWidth)      withcolor white),(lrcorner Page) shifted (-PaperWidth/20, PaperWidth/5)) ;
+        draw anchored.urt(image(draw textext("\getvariable{document}{author}")   xsized(.375PaperWidth) rotated 90 withcolor white),(urcorner Page) shifted (-PaperWidth/20,-PaperWidth/20)) ;
+
+        setbounds currentpicture to Page ;
+
+      StopPage ;
+
+    \stopMPcode
+
+  \stoppagemakeup
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Признања
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  {
+    \page[yes]
+    \page[blank]\parindent0pt
+    \ \vfill
+
+    \switchtobodyfont[small]
+    {\bf Не баш кратак увод у \ConTeXt\ Mark~IV}\\
+   Верзија 1.6 [\RevisionDate]\\
+    \blank
+
+    % Хтео сам да употребим „copyleft” симбол, али нисам пронашао начин
+    % да га генеришем. Симбол се генерише помоћу \mirror{\copyright},
+    % али се након њега умеће прилично лош прелом линије. Копирање и
+    % налепљивање са интернета не функционише, није ми јасно зашто. (Ово
+    % није први пут да се то дешава).
+    % Ево једног могућег решења… (прим. прев.)
+
+    {\dontleavehmode \mirror{\hbox{\copyright}}} 2020-2021, Joaquín Ataz-López\\
+    \blank
+    Наслов оригинала: Una introducción (no demasiado breve) a \ConTeXt\ Mark~IV\\
+    Превод на српски: добар пријатељ који жели да остане анониман.
+
+    Аутор овог текста (и његов преводилац на српски) дозвољава слободну
+    дистрибуцију и употребу, укључујући и право на умножавање и редистрибуцију
+    садржаја овог документа у дигиталном облику под условима да се потврђује
+    ауторство и да се не укључује у било који софтверски пакет или скуп програма,
+    или у документацију чији услови употребе или дистрибуције не укључују слободно
+    право прималаца да је копирају и дистрибуирају. Исто тако, даје се дозвола за
+    превођење овог документа, под условом да се наведе ауторство оригиналног
+    документа и да се преведени текст дистрибуира под FDL лиценцом коју објављује
+    {\em Free Software Foundation, Creative Commons} лиценцом која дозвољава копирање
+    и редистрибуцију, или неком сличном лиценцом.
+
+    Уз све ово, издавање или оглашавање или превођење овог документа у папирном
+    облику захтева писмену личну ауторову дозволу.
+
+    % То није потпуно слободна лиценца јер не дозвољава да се документ оглашава у
+    % папирном облику. Сврха тога је да се неки „паметњаковић” спречи да овај
+    % документ објави као књигу. Ипак, без обзира на ово ограничење, верујем да
+    % лиценца прилично добро наставља да преноси дух FDL лиценце, у много мање
+    % простора.
+
+    \setupnotation[numberconversion=set 0]
+    Историја верзија:
+
+    \startitemize[packed]\smallbodyfont
+
+      \item \date[y=2020, m=8, d=18]: Верзија 1.0 (само на шпанском):
+        оригинални документ.
+
+      \item \date[y=2020, m=8, d=23]: Верзија 1.1 (само на шпанском): исправка
+        мањих грешака, ауторових грешака у куцању и неразумевања.
+
+      \item \date[y=2020, m=9, d=3]: Верзија 1.15 (само на шпанском): још
+        грешака, грешака у куцању и неразумевања.
+
+      \item \date[y=2020, m=9, d=5]: Верзија 1.16 (само на шпанском): још
+        грешака, грешака у куцању и неразумевања, као и неке врло ситне
+        измене које (надам се) чине текст јаснијим.
+
+      \item \date[y=2020, m=9, d=6]: Верзија 1.17 (само на шпанском): број
+        ситних грешака које проналазим је невероватан. Једноставно би требало
+        да престанем са поновним читањем ако желим да их више не проналазим!
+
+      \item \date[y=2020, m=10, d=21]: Верзија 1.5 (само на шпанском): унос
+        сугестија и исправки грешака које су пријавили корисници NTG-context
+        мејлинг листе.
+
+      \item \RevisionDate: Верзија 1.6: исправке које су предложене након
+        пажљивог читања документа, приликом његовог превођења на енглески
+        језик. Ово је прва верзија на енглеском.
+
+    \stopitemize
+
+  }
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Садржај
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \starttitle
+    [title={Садржај}]
+
+    % Заглавље
+    \setupheadertexts
+      [\tfx Садржај]
+      [\tfx\pagenumber]
+
+    % Формат ставки у садржају
+    \setuplist
+      [part]
+      [
+        before={\blank[2*big]},
+        after={\blank[big]},
+        style=\bfa,
+        aligntitle=yes,
+      ]
+
+    \setuplist
+      [chapter]
+      [
+        before=\blank,
+        style=\bf,
+        margin=.5cm,
+        aligntitle=yes
+      ]
+
+    \setuplist
+      [section]
+      [
+        aligntitle=yes,
+        style=\tfx,
+        margin=1.5cm
+      ]
+
+    % Хајде да дефинишемо своју листу (под називом Toc)
+    \definecombinedlist
+      [Toc]
+      [part, chapter, section]
+      [level=subsection, alternative=c]
+
+    % и уметнемо је у контекст мањег размака између линија
+    \start
+      \setupwhitespace[none]
+      \switchtobodyfont[11pt]
+      \setupinterlinespace[small]
+      \placeToc
+    \stop
+
+  \stoptitle
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: electric-indent
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:
+

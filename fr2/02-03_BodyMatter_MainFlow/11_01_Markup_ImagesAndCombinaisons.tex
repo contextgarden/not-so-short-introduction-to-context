@@ -60,7 +60,6 @@ Si l'image n'est pas placée seule en dehors d'un paragraphe, mais qu'elle est i
 Si l'image est intégrée à un paragraphe de texte, la hauteur de ligne sera ajustée pour éviter que l'image \externalfigure [cow-brown] [width=3em] ne chevauche les lignes précédentes et que l'ensemble reste lisible.
 \stopDemoVN}
 
-Par défaut, \ConTeXt\ cherche les images dans le répertoire de travail, dans son répertoire parent et dans le répertoire parent de ce répertoire. Nous pouvons indiquer l'emplacement d'un répertoire contenant les images avec lesquelles nous allons travailler en utilisant l'option {\tt directory} de la commande \tex{setupexternalfigures}, qui ajoutera ce répertoire au chemin de recherche. Si nous voulons que la recherche soit effectuée uniquement dans le répertoire d'images, nous devons également définir l'option {\tt location}. Ainsi, par exemple, pour que notre document recherche toutes les images dont nous avons besoin dans le répertoire \MyKey{img}, nous devons écrire~:   % paragraphe à supprimer ?? car repris ci-dessous avec commande "correcte"
 
 \PlaceMacro{setupexternalfigures}
 
