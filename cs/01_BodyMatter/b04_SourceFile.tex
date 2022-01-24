@@ -1,8 +1,1022 @@
+\environment ../introCTX_env.mkiv
+
+\startcomponent b04_SourceFile.mkiv
+
+\startchapter
+  [reference=cap:sourcefile, title=Zdrojové soubory a~projekty]
+
+\TocChap
+
+Jak již víme, při práci s~\ConTeXt{}em vždy začínáme textovým souborem 
+ve kterém je spolu s~obsahem výsledného dokumentu již zahrnuta řada pokynů, 
+které informují \ConTeXt\ o~transformacích, 
+které musí použít k~vygenerování našeho finálně správně naformátovaného 
+dokumentu v~PDF ze zdrojového souboru.
+
+Myslíme na čtenáře, kteří dosud uměli pracovat pouze se slovem
+procesory, myslím, že stojí za to strávit nějaký čas se zdrojovým souborem
+samotným. Nebo spíše se zdrojovými soubory, protože jsou chvíle, kdy existuje pouze
+jeden zdrojový soubor a~další, když k~průchodu použijeme více zdrojových souborů
+u~závěrečného dokumentu. V~tomto posledním případě můžeme mluvit
+o~\quotation{vícenásobné projekty}. 
+
+\startsection
+  [title=Kódování zdrojových souborů, reference=sec:encoding]
+
+Zdrojové soubory musí být textové soubory. V~počítačové terminologii je to pak
+název souboru, který obsahuje pouze text čitelný pro člověka, který
+neobsahuje binární kód. Tyto soubory se také nazývají 
+{\em jednoduché textové} nebo {\em prosté textové} soubory.
+
+Protože interně počítačové systémy zpracovávají pouze binární čísla, textový soubor
+se ve skutečnosti skládá z~{\em čísel}, která představují {\em znaky}. A~{\em tabulka} 
+se používá ke spojení čísla se znakem. Pro textové soubory tam
+je několik možných tabulek. Termín {\em kódování textového souboru} odkazuje
+na konkrétní znak|-|odpovídající tabulce, kterou konkrétní textový soubor používá. 
+
+\startSmallPrint
+
+  Existence různých kódovacích tabulek pro textové soubory je
+  důsledek historie samotné informatiky. Na začátku
+  vývojové fáze, kdy paměť a~úložná kapacita počítače
+  zařízení byla vzácná, bylo rozhodnuto použít tabulku nazvanou ASCII (což
+  znamená \quotation{{\em Americký standardní kód pro výměnu informací}})
+  který umožňoval pouze 128 znaků a~byl založen v~roce 1963 v~USA
+  výbor pro standardy. Je zřejmé, že 128 znaků je málo pro
+  představu všech znaků a~symbolů používaných ve všech jazycích
+  světa; ale na reprezentaci angličtiny to bylo víc než dost
+  Západní jazyk, ten, který má méně znaků, protože
+  nepoužívá žádnou diakritiku (přízvuky a~jiné značky nad nebo pod nebo skrz
+  jiná písmena). Výhodou použití ASCII bylo, že textové soubory
+  zabírají velmi málo místa, protože 127 (nejvyšší číslo v~tabulce) může
+  být reprezentováno 7místným binárním číslem a~prvními použitými počítači
+  používající byte jako jednotku pro měření paměti, 8místné binární číslo. Žádný
+  znak v~tabulce by se nevešel do jednoho bajtu. Protože bajt má 8
+  číslice a~ASCII používaly pouze 7 číslic, zbylo dokonce místo na přidání
+  některých dalších znaků reprezentující jiné jazyky. 
+
+  Ale když se používání počítačů rozšířilo, ASCII se stala nedostatečnou
+  a~bylo nutné vyvinout {\em alternativní} tabulky, které budou
+  zahrnovat znaky neznámé anglické abecedě, jako je španělština
+  \quote{ñ}, samohlásky s~diakritikou, katalánština nebo francouzština \quote{ç} atd. Na
+  na druhé straně neexistovala žádná počáteční shoda ohledně toho, co tyto 
+  {\em alternativní tabulky} ASCII by měly být, takže jiný specializované
+  počítačové firmy se s~problémem postupně vypořádaly samy. Proto nejen
+  byly vytvořeny specifické tabulky pro různé jazyky nebo skupiny
+  jazyků, ale i~různé tabulky podle firmy, které je
+  vytvořili (Microsoft, Apple, IBM atd.).
+
+  Bylo to pouze s~nárůstem paměti počítače a~nižšími náklady
+  úložných zařízení a~tomu odpovídajícímu zvýšení kapacity, že myšlenka
+  vytvoření jedné tabulky, která by mohla být použita pro všechny jazyky.
+  Ale znovu, ve skutečnosti to nebyla jediná tabulka obsahující všechny
+  znaky, které byly vytvořeny, ale standardní kódování (nazývané 
+  {\sc Unicode}) spolu s~různými způsoby jeho znázornění (UTF-8, UTF-16,
+  UTF-32 atd.) Ze všech těchto systémů se nakonec stal
+  de facto standardem jen UTF-8, což umožňuje reprezentovat
+  prakticky jakýkoli živý jazyk a~mnoho již zaniklých jazyků,
+  stejně jako další čtenné  symboly, všechny používající čísla proměnné délky
+  (mezi 1 a~4 byty), což zase pomáhá optimalizovat velikost
+  textových souborů. Tato velikost se nezvětšila {\em příliš} ve srovnání se soubory
+  pomocí čistého ASCII. 
+
+  Než se objevil \XeTeX\, systémy založené na \TeX{}u\ -- který se také zrodil
+  v~USA, a~proto má angličtinu jako svůj rodný jazyk -- předpokládá se, 
+  že kódování bylo v~čistém ASCII; takže pro použití jiného kódování jste to měli
+  nějak indikovat ve zdrojovém souboru. 
+
+\stopSmallPrint
+
+\dontleavehmode\ConTeXt\ Mark~IV předpokládá, že kódování bude UTF-8.
+V~méně aktuálních počítačových systémech však může být jiné kódování
+stále používané ve výchozím nastavení. Nejsem si příliš jistý výchozím kódováním
+které Windows používá, vzhledem k~tomu, že strategie Microsoftu pro oslovování
+širší veřejnosti spočívá ve skrytí složitosti (ale i~když je skrytá, je
+neznameno, že by zmizela!). K~dispozici není mnoho informací
+(nebo jsem je nemohl najít) ohledně kódovacího systému, který používá
+ve výchozím stavu.
+
+V~každém případě, bez ohledu na výchozí kódování, jakýkoli textový editor vám umožní
+uložit soubor v~požadovaném kódování. Zdrojové soubory které mají být
+zpracované \ConTeXt\ Mark IV musí být uloženy v~UTF-8, pokud ovšem
+existuje velmi dobrý důvod pro použití jiného kódování (i~když já si
+nedokážu představit, jaký by mohl být tento důvod).
+
+Pokud chceme zapsat soubor napsaný v~jiném kódování (možná starém
+soubor) můžeme
+
+\startitemize[a]
+
+\item Převeďte soubor na UTF-8, doporučené možnosti, a~existující
+různé nástroje k~tomu; v~Linuxu například příkazy 
+{\tt iconv} nebo {\tt recode}.
+
+\item Řekněte \ConTeXt{}u\ ve zdrojovém souboru, že kódování není UTF-8. Na
+to musíme použít příkaz \tex{enableregime}, jehož syntaxe
+je:
+
+\PlaceMacro{enableregime}{\tt \color[hlavní barva]{\backslash enableregime[{\em Encoding}]}}
+
+kde {\em Encoding} odkazuje na jméno, pod kterým \ConTeXt\ zná skutečné
+kódování daného souboru. V~\in{table}[kódování] musíte
+najít různá kódování a~názvy, pod kterými je \ConTeXt\ zná.
+
+\stopitemize
+
+{\switchtobodyfont[small]
+  \placetable
+    [here]
+    [encodings]
+    {Main encodings in \ConTeXt}
+    {
+      \starttabulate[|l|l|l|]
+        \HL
+        \NC {\bf Encoding} \NC {\bf Name(s) in \ConTeXt} \NC{\bf Notes}\NR
+        \HL
+        \NC Windows CP 1250\NC cp1250, windows-1250\NC Western Europe\NR
+        \NC Windows CP 1251\NC cp1251, windows-1251\NC Cyrillic\NR
+        \NC Windows CP 1252\NC cp1252, win, windows-1252\NC Western Europe\NR
+        \NC Windows CP 1253\NC cp1253, windows-1253\NC Greek\NR
+        \NC Windows CP 1254\NC cp1254, windows-1254\NC Turkish\NR
+        \NC Windows CP 1257\NC cp1257, windows-1257\NC Baltic\NR
+        \NC ISO-8859-1, ISO Latin 1\NC iso-8859-1, latin1, il1\NC Western Europe\NR
+        \NC ISO-8859-2, ISO Latin 2\NC iso-8859-2, latin2, il2\NC Western Europe\NR
+        \NC ISO-8859-15, ISO Latin 9\NC iso-8859-15,  latin9,  il9\NC Western Europe\NR
+        \NC ISO-8859-7\NC iso-8859-7,  grk\NC Greek\NR
+        \NC Mac Roman\NC mac\NC Western Europe\NR
+        \NC IBM PC DOS\NC ibm\NC Western Europe\NR
+        \NC UTF-8\NC utf\NC Unicode\NR
+        \NC VISCII\NC vis,  viscii\NC Vietnamese\NR
+        \NC DOS CP 866\NC cp866, cp866nav\NC Cyrillic\NR
+        \NC KOI8\NC koi8-r, koi8-u, koi8-ru\NC Cyrillic\NR
+        \NC Mac Cyrillic\NC maccyr, macukr\NC Cyrillic\NR
+        \NC Others\NC cp855, cp866av, cp866mav, cp866tat, \NC Various\NR
+        \NC \NC ctt, dbk, iso88595, isoir111, mik, mls, \NC\NR
+        \NC \NC mnk, mos, ncc\NC\NR
+        \HL
+      \stoptabulate
+    }
+}
+
+\ConTeXt\ MkIV důrazně doporučuje použití UTF-8. Souhlasím s~tímto
+doporučením. Od tohoto okamžiku v~tomto úvodu můžeme předpokládat, že
+kódování je vždy UTF-8.    
+
+\startSmallPrint
+
+   Spolu s~\tex{enableregime} \ConTeXt\ obsahuje příkaz
+   \PlaceMacro{useregime}\tex{useregime} což nám umožňuje používat kód
+   jednoho nebo jiného kódování jako argument. Nenašel jsem žádné informace
+o~tento příkazu ani to, jak se liší od \tex{enableregime}, pouze některé
+   příklady jeho použití \Conjecture. Mám podezření, že \tex{useregime} je
+   navržen pro složité projekty, které používají mnoho zdrojových souborů,
+s~očekáváním, že ne všechny budou mít stejné kódování. Ale je to jen odhad.
+
+\stopSmallPrint
+
+\stopsection
+
+\startsection
+  [title=Znaky ve zdrojovém souboru (souborech), se kterými \ConTeXt\ zachází zvláštním způsobem] 
+
+{\em Speciální znaky} je označení, které dám skupině znaků,
+které se liší od {\em vyhrazených znaků}. Jak je vidět
+v~\in{kapitole}[sec:rezervované znaky] jsou takové, které mají speciální
+význam pro \ConTeXt\ a~nelze je tedy přímo použít jako znaky
+v~zdrojových souborech. Spolu s~nimi existuje další skupina znaků,
+ačkoliv s~nimi \ConTeXt\ zachází, když je najde ve zdroji,
+podle zvláštních pravidel. Tato skupina obsahuje prázdné
+mezery (bílá místa), tabulátory, zalomení řádků a~pomlčky.
+
+\startsubsection
+  [title=Prázdné mezery (prázdné místo) a~tabulátory, reference=sec:spaces]
+
+S~tabulátory a~mezerami se ve zdrojovém souboru pro všechny zachází se
+stejnými záměry a~účely. Znak tabulátoru (klávesa Tab na klávesnici) bude
+transformován na bílé místo pomocí \ConTeXt{}u. A~prázdná místa jsou pohlcena
+do jakéhokoli jiného prázdného místa (nebo karty) bezprostředně za nimi. Tedy to
+není absolutně žádný rozdíl ve zdrojovém souboru k~zápisu
+
+\type{Tweedledum a~Tweedledee.}
+
+nebo
+
+\type{Tweedledum a~Tweedledee.} 
+
+\ConTeXt{} považuje tyto dvě věty za naprosto stejné. Proto,
+pokud chceme vložit další mezeru mezi slova,
+je potřeba použít nějaké \ConTeXt{} příkazy, které to dělají. Normálně to bude fungovat
+s~\quotation{\cmd{\textvisiblespace}}, což znamená {\tt\backslash}
+znak následovaný mezerou. Existují ale i~jiné postupy
+na které se podíváme v~\in{kapitole}[sec:horizontální prostor1] týkající se
+horizontálních prostorů.
+
+Absorpce po sobě jdoucích prázdných míst nám umožňuje napsat zdrojový
+soubor vizuálně zvýrazněním částím, které bychom chtěli zvýraznit, jednoduše tím
+zvýšíme nebo snížíme použité odsazení, s~klidem na duši
+s~vědomím, že to žádným způsobem neovlivní konečný dokument. Tady
+v~následujícím příkladu
+
+\starttyping
+
+Hudební skupina z~Madridu na konci sedmdesátých let {\em La Romántica
+   Banda Local} napsala písně eklektického stylu, které bylo velmi obtížné
+kategorizovat. O~svém synovi „El Egipcio“ například řekli:
+\quotation{{\em Esto es una farsa más que una comedia, página muy seria
+   de la histeria musical; sueños de princesa, vicios de gitano pueden en
+   su mano acariciar la verdad}}, míchání slov, frází prostě,
+mají vnitřní rytmus (comedia-histeria-seria, gitano-mano).
+
+\stoptyping
+
+můžete vidět, jak jsou některé řádky mírně odsazeny doprava. Tyto
+řádky, které jsou součástí bitů, se zobrazí kurzívou. Mít tyto
+odsazení pomáhá (autorovi) vidět, kde končí kurzíva.
+
+\startSmallPrint
+
+   Někdo by si mohl myslet, jaký nepořádek! Musím se obtěžovat s~odsazením řádků?
+   Pravdou je, že toto speciální odsazení se u~mého textu děje automaticky
+   pomocí editoru (GNU Emacs), když upravuje zdrojový soubor \ConTeXt{}u\. Tohle je
+   taková malá nápověda, díky které se rozhodnete pracovat s~tímto určitým
+   textovým editorem a~ne s~jinými.
+
+\stopSmallPrint
+
+Pravidlo, že prázdná místa jsou absorbována, platí výhradně pro po sobě jdoucí
+prázdná místa ve zdrojovém souboru. Pokud tedy prázdná skupina
+(\MyKey{\{\}}), je umístěna ve zdrojovém souboru mezi dvě prázdná místa,
+ačkoli prázdná skupina ve výsledném souboru nic nevytvoří, jeho
+přítomnost zajistí, že tyto dva polotovary nebudou po sobě jdoucí. Například,
+pokud napíšeme \MyKey{Tweedledum \{\} a~Tweedledee}, dostaneme
+\quotation{\color[red]{Tweedledum {} a~Tweedledee}}, kde, když se podíváte
+dostatečně blízko, uvidíte dvě po sobě jdoucí mezery mezi prvními dvěma
+slovy.
+
+Totéž se však stane s~vyhrazeným znakem \MyKey{\lettertilde},
+jeho efektem je generování prázdného místa, i~když tady ve skutečnosti není:
+mezera následovaná znakem \lettertilde\ toto nepohltí
+a~prázdné místo za \lettertilde\ také nebude absorbováno.
+
+\stopsubsection
+
+\startsubsection
+  [reference=sec:linebreaks, title=Konce řádků]
+
+Ve většině textových editorů, když řádek překročí maximální šířku, dojde
+automaticky k~zalomení řádku. Můžeme také výslovně vložit zalomení řádku
+stisknutím klávesy \quotation{Enter} nebo \quotation{Return}.
+
+\ConTeXt{} aplikuje na zalomení řádků následující pravidla:
+
+\startitemize[a, broad]
+
+\item Zalomení jednoho řádku se ve všech směrech rovná prázdnému místu. 
+Pokud tedy bezprostředně před nebo po zalomení řádku existuje
+jakékoli prázdné místo nebo tabulátor, budou pohlceny zalomením řádku nebo
+první prázdné místo a~v~konečném dokumentu bude jednoduché prázdné místo
+vloženo.
+
+\item Dva nebo více po sobě jdoucích zalomení řádku vytvoří zalomení odstavce. Pro
+tyto dva konce řádků jsou považovány za po sobě jdoucí, pokud tam není
+mezera nebo tabulátor mezi prvním a~druhým zalomením řádku (protože
+ty jsou pohlceny zalomením prvního řádku); což ve zkratce znamená
+jeden nebo více po sobě jdoucích řádků, které jsou ve zdrojovém souboru zcela prázdné
+(bez jakéhokoli znaku nebo pouze s~prázdnými mezerami nebo tabulátory) se stanou
+koncem odstavce.
+
+\stopitemize
+
+Všimněte si, že jsem řekl \quotation{dva nebo více po sobě jdoucích zalomení řádku} a~pak
+\quotation{jeden nebo více prázdných po sobě jdoucích řádků}, což znamená, že pokud chceme
+zvětšit separaci mezi odstavci, neděláme tak jednoduše
+vložení dalšího konce řádku. K~tomu musíme použít příkaz který
+zvětšuje vertikální prostor. Pokud chceme jen jednu linii oddělení navíc,
+můžeme použít příkaz \PlaceMacro{blank}\tex{blank}. Ale jsou i~další
+postupy pro zvětšení vertikálního prostoru. odkazuji na
+\in{section}[sec:verticalspace].
+
+\startSmallPrint
+
+   V~některých případech, když se konec řádku stane prázdným místem, můžeme skončit
+   s~nějakým nežádoucím a~neočekávaným bílým místem. Zvlášť když jsme
+   napsali makro, kde je snadné pro prázdné místo \quotation{se propašovat
+   v} aniž bychom si to uvědomovali. Abychom tomu zabránili, můžeme použít
+   vyhrazený znak \MyKey{\%}, který, jak víme, způsobí že řádek, kde se objeví
+   nezpracovat, znamená, že konce řádku také nebudou zpracovány. Tedy například příkaz
+
+\vbox{
+\starttyping
+\define[3]\Test{
+  {\em #1}
+  {\bf #2}
+  {\sc #3}
+}
+\stoptyping
+}
+
+který píše svůj první argument kurzívou, druhý tučně a~třetí
+malými písmeny, vloží mezi každý z~těchto argumentů mezeru,
+zatímco
+
+\starttyping
+\define[3]\Test{%
+  {\em #1}%
+  {\bf #2}%
+  {\sc #3}%
+}
+\stoptyping
+
+nevloží mezi ně žádné prázdné místo, protože vyhrazený znak
+\% zabrání zpracování zalomení řádků a~stane se pouze prázdným místem.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\startsubsection
+  [reference=sec:dashes, title=Pravidla/pomlčky]
+
+Pomlčky jsou dobrým příkladem rozdílu mezi počítačovou klávesnicí
+a~tištěný text. Na normální klávesnici je obvykle pouze jeden znak
+pomlčky (nebo pravidlo, typograficky), kterou nazýváme pomlčka nebo
+(\MyKey{-}); ale tištěný text používá až čtyři různé délky
+pravidla:
+
+\startitemize[1,broad]
+
+\item Krátká pravidla (pomlčky), jako jsou ta, která se používají k~oddělení slabik
+dělení slov na konci řádku (-).
+
+\item Středně velká pravidla (en pomlčky nebo en pravidla), o~něco delší než
+předchozí (--). Mají řadu použití, včetně některých Evropských
+jazyků (méně v~angličtině) začátek řádku dialogu, nebo pro
+oddělení menších od větších číslic v~rozsahu dat nebo stránek;
+\quotation{pp. 12--33}.
+
+\item Dlouhá pravidla (em pomlčky nebo em pravidla) (---), používané jako závorky
+zahrnout jednu větu do druhé.
+
+\item Znaménko mínus ($-$) představuje odečítání nebo záporné číslo.
+
+\stopitemize
+
+Dnes jsou všechny výše uvedené a~další kromě toho dostupné v~kódování UTF-8.
+Ale protože je nelze všechny vygenerovat jedinou klávesou na klávesnici,
+není je tak snadné vytvořit ve zdrojovém souboru. Naštěstí \TeX\ vidí
+do našeho konečného dokumentu a~musí zahrnout více pravidel/pomlček, než by mohlo být
+vytvořené klávesnicí a~jednoduchý postup k~tomu navržený.
+\ConTeXt{} doplnil tento postup také přidáním příkazů, které
+vytváří tyto různé druhy pravidel. Můžeme použít dva přístupy
+generování čtyř druhů pravidel: buď běžným způsobem \ConTeXt{}
+příkazem nebo přímo z~klávesnice. Tyto postupy jsou uvedeny
+v~\in{table}[tbl:rules]:
+
+{\switchtobodyfont[small]
+\placetable
+  [here]
+  [tbl:rules]
+  {Rules/dashes in \ConTeXt}
+  {\starttabulate[|l|c|c|l|]
+    \HL
+    \NC {\bf Type of rule}
+    \NC {\bf Appearance}
+    \NC {\bf Written directly}
+    \NC {\bf Command}
+    \NR
+    \HL
+    \NC Hyphen
+    \NC -
+    \NC {\tt -}
+    \NC \PlaceMacro{hyphen}\tex{hyphen}
+    \NR
+    \NC En rule
+    \NC --
+    \NC {\tt --}
+    \NC \PlaceMacro{endash}\tex{endash}
+    \NR
+    \NC Em rule
+    \NC ---
+    \NC {\tt ---}
+    \NC \PlaceMacro{emdash}\tex{emdash}
+    \NR
+    \NC Minus sign
+    \NC $-$
+    \NC {\tt \$-\$}
+    \NC \PlaceMacro{minus}\tex{minus}
+    \NR
+    \HL
+  \stoptabulate}
+}
+
+Názvy příkazů \tex{hyphen} a~\tex{minus} jsou normálně používané
+v~angličtině. Zatímco mnozí v~polygrafickém průmyslu jim říkají \quote{pravidla},
+Termíny \TeX{}u, jmenovitě \tex{endash} a~\tex{emdash} jsou také běžné
+v~sázecí terminologie. \quotation{{\em en}} a~\quotation{{\em em}}
+jsou názvy měrných jednotek používaných v~typografii. \quotation{cs}
+představuje šířku \quote{n}, zatímco \quote{em} je šířka
+\quote{m} v~používaném písmu.
+
+\stopsection
+
+\startsection
+  [title=Jednoduché a~vícesouborové projekty]
+
+V~\ConTeXt{}u\ můžeme použít pouze jeden zdrojový soubor, který obsahuje úplně
+všechen obsah našeho konečného dokumentu, jakož i~všechny související podrobnosti
+v~tom případě mluvíme o~\quotation{jednoduchých projektech}, nebo, bychom
+oproti tomu mohli použít řadu zdrojových souborů, které sdílejí obsah
+našeho závěrečného dokumentu, o~kterém v~tomto případě mluvíme jako
+o~\quotation{vícenásobních projektech}.
+
+Scénáře, kdy je typické pracovat s~více než jedním zdrojovým souborem
+jsou následující:
+
+\startitemize
+
+\item Pokud píšeme dokument, který má několik spolupracujících autorů, 
+každý se svou částí odlišnou od ostatních;
+například, pokud píšeme festschrift s~příspěvky od různých
+autorů, nebo číslo časopisu atd.
+
+\item Pokud píšeme dlouhý dokument, kde má každá část (kapitola)
+relativní autonomii, tak jejich konečné uspořádání umožňuje
+několik možností a~bude rozhodnuto na konci. K~tomu dochází
+s~relativní četností pro mnoho akademických textů (příručky, úvody
+a~podobné), kde se pořadí kapitol může lišit.
+
+\item Pokud píšeme řadu souvisejících dokumentů, které sdílejí nějaké
+stylové vlastnosti.
+
+\item Pokud, zjednodušeně řečeno, dokument, na kterém pracujeme, je velký, např
+počítač se zpomalí buď při jeho editaci nebo kompilaci; v~tomto případě,
+rozdělení materiálu do několika zdrojových souborů značně urychlí kompilaci pro každou z~nich.
+
+\item Také, pokud jsme napsali řadu maker, která chceme použít
+některé (nebo všechny) na naše dokumenty, nebo pokud jsme vygenerovali šablonu, která
+ovládá nebo upravuje naše dokumenty a~my je na ně chceme aplikovat atd.
+
+\stopitemize
+
+\stopsection
+
+\startsection
+  [title=Struktura zdrojového souboru v~jednoduchých projektech,
+  reference=sec:structure]
+
+V~jednoduchých projektech vyvinutých v~jediném zdrojovém souboru je struktura velmi
+jednoduchá a~točí se kolem prostředí \MyKey{textu}, který se musí
+v~podstatě objevit ve stejném souboru. Rozlišujeme následující
+části tohoto souboru:
+
+\startitemize
+
+\item {\bf Preambule dokumentu}: vše od prvního řádku
+v~souboru až na začátek prostředí \MyKey{textu}
+(\PlaceMacro{starttext}\PlaceMacro{stoptext}\tex{starttext}).
+
+\item {\bf Tělo dokumentu}: toto je
+prostředí dokumentu \MyKey{text}; nebo jinými slovy všechno mezi
+\tex{starttext} a~\tex{stoptext}.
+
+\stopitemize
+
+\placefigure
+   [here]
+   [img:ProyectoSimple]
+   {\tfx soubor obsahující jednoduchý projekt}
+{\startframedtext
+\starttyping
+% První řádek dokumentu
+
+% oblasti preambule:
+% Obsahuje globální konfiguraci
+% příkazy pro dokument
+
+\starttext % Zde začíná tělo dokumentu
+
+...
+... % Obsah dokumentu
+...
+
+\stoptext % Konec dokumentu
+
+\stoptyping
+\stopframedtext}
+
+V~\in{figure}[img:ProyectoSimple] vidíme velmi jednoduchý zdrojový soubor.
+Absolutně vše před příkazem \tex{starttext} (který je
+v~obrázku na řádku 5, počítají se pouze ty s~nějakým textem), tvoří
+preambule; vše mezi \tex{starttext} a~\tex{stoptext} tvoří
+tělo dokumentu. Cokoli po stoptextu bude ignorováno.
+
+{\bf Preambule} se používá k~zahrnutí příkazů, které mají ovlivnit
+dokument jako celek, tedy ty, které určují jeho celkovou konfiguraci. Tady
+není podstatné psát žádný příkaz do preambule. Pokud žádný není,
+\ConTeXt\ převezme výchozí konfiguraci, která není příliš vyvinutá,
+ale může to udělat pro mnoho dokumentů. V~dobře naplánovaném dokumentu preambule
+bude obsahovat všechny příkazy ovlivňující dokument jako celek, např
+makra a~přizpůsobené příkazy pro použití ve zdrojovém souboru. V~typické
+preambule by to mohlo zahrnovat následující:
+
+\startitemize[zabaleno]
+
+\item Označení hlavního jazyka dokumentu (viz
+   \in{section}[sec:langdoc]).
+
+\item Označení velikosti papíru
+   (\in{section}[sec:papersize]) a~rozložení stránky
+   (\in{section}[sec:pagelayout]).
+
+\item Vlastnosti hlavního písma dokumentů
+   (\in{section}[sec:mainfont]).
+
+\item Přizpůsobení příkazů sekce, které mají být použity
+   (\in{section}[sec:setuphead]) a~v~případě potřeby definice
+   nové příkazy sekce (\in{section}[sec:definehead]).
+
+\item Rozložení záhlaví a~zápatí
+   (\in{section}[sec:headerfooter]).
+
+\item Nastavení pro naše vlastní makra
+   (\in{section}[sec:definingcommands]).
+
+\item atd.
+
+\stopitemize
+
+Preambule je určena pro celkovou konfiguraci dokumentu;
+tedy nic, co má společného s~{\em obsahem} dokumentu, popř
+měl by tam být zpracovatelný text. Teoreticky zahrnuje jakýkoli zpracovatelný text
+v~preambuli bude ignorován, i~když někdy, pokud tam je,
+způsobí chybu při kompilaci.
+
+{\bf Tělo dokumentu}, zarámované mezi \tex{starttext}
+a~příkazy \tex{stoptext} zahrnují skutečný obsah, což znamená zpracovatelný
+text spolu s~příkazy \ConTeXt{}u\, které by neměly ovlivnit celek
+dokumentu.
+
+\stopsection
+
+\startsection
+  [title=Správa více souborů ve stylu \TeX{}u]
+
+Aby bylo možné pracovat s~více než jedním zdrojovým souborem, \TeX\ obsahoval
+prvotní soubor nazvaný \tex{input}, která také funguje v~\ConTeXt{}u, ačkoliv
+později obsahuje dva specifické příkazy, které do jisté míry zdokonalují způsob
+funkce \tex{input}.
+
+\stopsection
+
+\startsubsection[title={Příkaz input}, reference={input},]
+\PlaceMacro{input}
+
+Příkaz \tex{input} vloží obsah souboru, který označuje. Jeho
+formát je:
+
+\type{\input Název souboru}
+
+kde {\em FileName} je název souboru, který se má vložit. Všimněte si, že není
+nutné, aby byl název souboru uzavřen ve složených závorkách,
+i~když to nevyvolá chybu, pokud se to udělá. Nemělo by však nikdy
+umístit do hranatých závorek. Pokud je přípona souboru
+\quotation{\type{.tex}}, lze jej vynechat.
+
+Když \ConTeXt\ kompiluje dokument a~najde příkaz \tex{input},
+vyhledá to uvedený soubor a~pokračuje v~kompilaci, jako by tento soubor byl
+část souboru, který jej nazval. Po dokončení kompilace se vrátí
+do původního souboru a~pokračuje od místa, kde skončil; praktickým
+výsledkem je tedy, že obsah souboru volaný pomocí
+\tex{input} se vloží do bodu, kde se to volá. Soubor nazvaný
+s~\tex{input} musí mít platný název v~našem operačním systému a~ne
+prázdná místa v~názvu. \ConTeXt\ to bude hledat v~pracovním
+adresáři, a~pokud jej tam nenajde, vyhledá jej
+v~adresáři obsaženém v~proměnné prostředí TEXROOT. Pokud
+soubor nebyl nakonec nalezen, způsobí chybu kompilace.
+
+Nejběžnější použití příkazu \tex{input} je následující: soubor je
+nazvěme to \MyKey{principal.tex} a~toto bude použito jako
+kontejner pro volání různých souborů pomocí příkazu \tex{input}
+které tvoří náš projekt. To je znázorněno na následujícím příkladu:
+
+\startframedtext\switchtobodyfont[small]
+\starttyping
+% Obecné konfigurační příkazy:
+
+  \input MyConfiguration
+
+\starttext
+
+  \input PageTitle
+  \input Preface
+  \input Chap1
+  \input Chap2
+  \input Chap3
+
+  ...
+
+\stoptext
+\stoptyping
+\stopframedtext
+
+Všimněte si, jak jsme pro obecnou konfiguraci dokumentu nazvali
+soubor \quotation{MyConfiguration.tex}, o~kterém předpokládáme, že obsahuje globální
+příkazy, které chceme použít. Poté mezi příkazy \tex{starttext}
+a~\tex{stoptext} nazýváme několik souborů, které obsahují obsah souboru
+různé části našeho dokumentu. Pokud v~danou chvíli pro urychlení
+kompilační proces, chceme vynechat kompilaci některých souborů, vše, co potřebujeme
+udělat, je umístit značku komentáře na začátek řádku volajícího nebo
+ty soubory. Například když píšeme třetí kapitolu a~chceme
+zkompilovat jej jednoduše, abychom zkontrolovali, že v~něm nejsou žádné chyby, nepotřebujeme
+zkompilovat zbytek, a~proto můžeme psát:
+
+\startframedtext\switchtobodyfont[small]
+\starttyping
+% Obecné konfigurační příkazy:
+
+  \input MyConfiguration
+
+\starttext
+
+  % \input PageTitle
+  % \input Preface
+  % \input Chap1
+  % \input Chap2
+
+  \input Chap3
+
+  ...
+
+\stoptext
+\stoptyping
+\stopframedtext
+
+a~bude zkompilována pouze kapitola 3. Všimněte si, jak se naopak mění
+pořadí kapitol je stejně jednoduché jako změna volání pořadí řádků.
+
+\startSmallPrint
+
+   Když vyloučíme soubor ve vícesouborovém projektu z~kompilace,
+   získáme na rychlosti zpracování, ale v~důsledku toho všechny reference, které
+   část, která je zkompilována, převede na jiné části, které ještě nebyly zkompilovány
+   již nebude fungovat. Viz \in{section}[sec:reference].
+
+\stopSmallPrint
+
+Je důležité, aby bylo jasné, že když pracujeme pouze s~\tex{input}
+hlavního souboru, ten, který volá všechny ostatní, musí obsahovat
+\tex{starttext} a~\tex{stoptext} příkazy, protože pokud ostatní soubory
+jej zahrnují, dojde k~chybě. To na druhou stranu znamená, že
+nemůžeme přímo kompilovat různé soubory, které tvoří projekt,
+ale musí je nutně zkompilovat z~hlavního souboru, což je ten, který
+obsahuje základní strukturu dokumentu.
+
+\stopsubsection
+
+\startsubsection
+  [title=\tex{ReadFile} a~\tex{readfile}]
+\PlaceMacro{ReadFile}\PlaceMacro{readfile}
+
+Jak jsme právě viděli, pokud \ConTeXt\ nenalezne soubor volaný
+s~\tex{input}, vygeneruje chybu. Pro situaci, kdy chceme
+vložit soubor, pouze pokud existuje, ale s~možností, že existovat
+nemusí, \ConTeXt\ nabízí variantu příkazu \tex{input}. To je
+
+\type{\ReadFile{FileName}}
+
+Tento příkaz je ve všech ohledech podobný \tex{input} s~jedinou
+výjimkou, že pokud soubor, který se má vložit, není nalezen, bude pokračovat
+kompilace bez generování jakékoli chyby. Také se liší od
+\tex{input} ve své syntaxi, protože víme, že s~\tex{input} tomu není
+nutné vložit název souboru, který má být vložen mezi složené
+závorky. Ale s~\tex{ReadFile} to je nutné. Pokud nepoužijeme složené
+závorky, \ConTeXt\ si bude myslet, že název hledaného souboru je
+stejný jako první znak, který následuje za příkazem \tex{ReadFile},
+následuje přípona \type{.tex}. Pokud tedy například píšeme
+
+\type{\ReadFile MyFile}
+
+\ConTeXt\ pochopí, že soubor ke čtení je volán
+\quotation{\type{M.tex}}, protože znak bezprostředně za příkazem
+\tex{ReadFile} (s~výjimkou prázdných mezer, které jsou, jak víme, na
+konci názvu příkazem ignorovány) je \quote{M}. Protože \ConTeXt\ nemůže normálně
+najít soubor s~názvem \quotation{\type{M.tex}} a~\tex{ReadFile}
+pokud soubor nenajde, vygeneruje chybu, \ConTeXt\ bude pokračovat
+kompilace za \quote{M} v~\quotation{\type{MyFile}} a~vloží
+text \quotation{\type{yFile}}.
+
+Jemnější verze \tex{ReadFile} je \tex{readfile}, jejíž formát je stejný
+
+\type{\readfile{Název souboru}{TextIfExists}{TextIfNotExists}}
+
+První argument je podobný \tex{ReadFile}: název souboru
+uzavřeno mezi složené závorky. Druhý argument obsahuje text který má 
+být zapsán, pokud soubor existuje, před vložením obsahu souboru.
+Třetí argument obsahuje text, který má být zapsán, pokud jde o~nenalezený soubor. 
+To znamená, že v~závislosti na tom, zda byl či nebyl soubor zadán
+jak je nalezen první argument, druhý argument (pokud soubor existuje) nebo
+třetí (pokud soubor neexistuje) bude spuštěn.
+
+\stopsubsection
+
+\stopsection 
+
+\startsection
+   [title=\ConTeXt\ projekty jako takové,
+   reference=sec-projects]
+
+Třetí mechanismus, který \ConTeXt\ nabízí pro vícesouborové projekty, je více
+komplexní a~kompletní: začíná rozlišováním mezi soubory projektu,
+soubory produktu, soubory součástí a~soubory prostředí. Pro pochopení
+vztahy a~fungování každého z~těchto typů souborů, myslím, že ano
+nejlépe je vysvětlit každý zvlášť:
+
+\startsubsection
+   [reference=environments, title={{\em Environment} soubory}]
+\PlaceMacro{startenvironment}\PlaceMacro{environment}
+
+Soubor prostředí je soubor, který ukládá makra a~konfigurace
+specifického styl, který má být aplikován na několik dokumentů,
+zda se jedná o~zcela nezávislé dokumenty nebo součásti komplexu
+dokumentů. Soubor prostředí tedy může obsahovat vše, co bychom chtěli
+normálně napsat před \tex{starttext}; to je: obecná konfigurace
+dokumentu.
+
+\startSmallPrint
+
+Pro tyto druhy jsem zachoval termín \quotation{soubory prostředí}, 
+abychom se neodchýlili od oficiální terminologie \ConTeXt{}u\, dokonce
+i~když věřím, že lepší termín by byl pravděpodobně \quotation{format
+soubory} nebo \quotation{globální konfigurační soubory}.
+
+\stopSmallPrint
+
+Stejně jako všechny zdrojové soubory \ConTeXt{}u\ jsou soubory prostředí textové soubory
+a~předpokládejme, že rozšíření bude \quotation{\type{.tex}}, i~když pokud bychom
+chtěli můžeme to změnit, třeba na \quotation{\type{.env}}. Obvykle to tak
+není však provedeno v~\ConTeXt{}u\. Nejčastěji je soubor prostředí
+identifikován tak, že název začíná nebo končí \quote{env}. Pro
+příklad:\quotation{\type{MyMacros_env.tex}} nebo
+\quotation{\type{env_MyMacros.tex}}. Uvnitř takového souboru prostředí
+by vypadalo nějak takto:
+
+\startframedtext\switchtobodyfont[malé]
+\starttyping
+
+\startenvironment MyEnvironment
+
+  \mainlanguage[en]
+
+  \setupbodyfont
+    [modern]
+
+  \setupwhitespace
+    [big]
+
+  ...
+
+\stopenvironment
+
+\stoptyping
+\stopframedtext
+
+Nebo jinými slovy, definice a~konfigurační příkazy jsou součástí
+\tex{startenvironment} a~\tex{stopenvironment}. Okamžitě následuje
+\tex{startenvironment} napíšeme jméno, kterým chceme identifikovat
+prostředí a~poté zahrneme všechny příkazy, které bychom chtěli
+v~našem prostředí, ze kterého se má skládat.
+
+\startSmallPrint
+
+S~ohledem na název prostředí podle mých testů název
+přidaný bezprostředně za \tex{startenvironment} je pouze orientační
+a~kdybychom to nepojmenovali, pak se nic (špatného) nestane.
+
+\stopSmallPrint
+
+Soubory prostředí byly určeny pro práci s~komponentami a~produkty
+(vysvětleno v~další části). To je důvod, proč může jedno nebo více prostředí
+být voláno z~komponenty nebo produktu pomocí \tex{prostředí}
+příkazu. Tento příkaz ale také funguje, pokud je použit v~konfiguraci
+oblast (preambule) libovolného zdrojového souboru \ConTeXt{}u\, i~když to není
+zdrojový soubor určený k~sestavení po částech.
+
+Příkaz \tex{environment} lze volat pomocí kteréhokoli z~těchto dvou
+následující formátů:
+
+\type{\environment soubor}
+
+\type{\environment[Soubor]}
+
+V~obou případech bude účinek tohoto příkazu spočívat v~načtení obsahu
+souboru brán jako argument. Pokud tento soubor není nalezen, bude pokračovat
+kompilace normálním způsobem bez generování jakékoli chyby. Pokud
+přípona souboru je \quotation{\type{.tex}}, lze ji vynechat.
+
+\stopsubsection 
+
+\startsubsection
+  [reference=components and products, title=Komponenty a~produkty]
+\PlaceMacro{startcomponent}\PlaceMacro{startproduct}\PlaceMacro{product}
+
+Pokud si představíme knihu, kde je každá kapitola v~jiném zdrojovém souboru,
+pak bychom řekli, že kapitoly jsou {\em komponenty} a~kniha je
+{\em produkt}. To znamená, že {\em komponenta} je autonomní
+součást {\em produktu}, která může mít svůj vlastní styl a~může být sestavena
+nezávisle. Každá komponenta bude mít jiný soubor a~navíc
+bude soubor produktu, který spojí všechny součásti dohromady.
+
+Typický soubor součásti by byl následující
+
+\startframedtext\switchtobodyfont[small]
+\starttyping
+
+\environment MyEnvironment
+\environment MyMacros
+
+\startcomponent Chapter1
+
+  \startchapter[title={Chapter 1}]
+
+  ...
+
+\stopcomponent
+
+\stoptyping
+\stopframedtext
+
+A~soubor produktu by vypadal následovně: 
+
+\startframedtext\switchtobodyfont[small]
+\starttyping
+
+\environment MyEnvironment
+\environment MyMacros
+
+\startproduct MyBook
+
+  \component Chapter1
+  \component Chapter2
+  \component Chapter3
+
+  ...
+
+\stopproduct
+
+\stoptyping
+\stopframedtext
+
+Upozorňujeme, že skutečný obsah našeho dokumentu bude distribuován mezi
+různé \quote{component} soubory a~soubor produktu je omezen na
+stanovení pořadí komponenty. Na druhou stranu,
+(jednotlivé) komponenty a~produkty lze sestavit přímo.
+Kompilace produktu vygeneruje soubor PDF obsahující všechny komponenty
+tohoto produktu. Pokud je naopak jedna z~komponent sestavena
+jednotlivě vygeneruje soubor pdf obsahující pouze zkompilované
+komponenty.
+
+V~souboru komponentů a~před příkazem \tex{startcomponent} se
+může volat jeden nebo více souborů prostředí pomocí \tex{environment
+Název prostředí}. Totéž můžeme udělat dříve v~souboru produktu
+\tex{startproduct}. Několik souborů prostředí lze načíst současně.
+Můžeme mít například naši oblíbenou sbírku maker
+a~různé styly, které aplikujeme na naše dokumenty, všechny v~různých souborech. Prosím
+všimněte si však, že když používáme dvě nebo více prostředí, ta se načítají
+v~pořadí, ve kterém jsou volány, takže pokud je stejná konfigurace,
+příkaz byl zahrnut ve více než jednom prostředí a~také ano
+jiné hodnoty, budou platit hodnoty naposledy načteného prostředí. Na
+na druhou stranu jsou soubory prostředí načteny pouze jednou, takže
+v~předchozích příkladech, ve kterých je prostředí voláno ze souboru produktu
+a~konkrétní dílčí soubory, pokud zkompilujeme produkt, to je čas, kdy
+prostředí se načtou a~v~uvedeném pořadí; když
+prostředí je voláno z~kterékoli komponenty, \ConTeXt\ zkontroluje, zda
+toto prostředí je již načteno, v~takovém případě neudělá nic.
 
 
---------------------
-Czech version
---------------------
+Název komponenty, která je volána z~produktu, musí být názvem souboru, 
+který obsahuje danou komponentu, ačkoli pokud je přípona tohoto souboru \quotation{\type{.tex}}, 
+lze ji vynechat.
 
-TO BE DONE!
---------------------
+\stopsubsection
+
+\startsubsection
+  [title=Projekty jako takové]
+\PlaceMacro{startproject}\PlaceMacro{project}
+
+Rozlišení mezi produkty a~komponenty je ve většině případů dostatečné. 
+Stejně tak \ConTeXt\ má ještě vyšší úroveň, 
+kde můžeme seskupit řadu produktů: toto je {\em project}.
+
+Typický soubor projektu by vypadal víceméně následovně
+
+\startframedtext\switchtobodyfont[small]
+\starttyping
+
+\startproject MyCollection
+
+  \environment MyEnvironment
+  \environment MyMacros
+
+  \product Book01
+  \product Book02
+  \product Book03
+
+  ...
+
+\stopproject
+
+\stoptyping
+\stopframedtext
+
+Scénář, kdy bychom potřebovali projekt, by byl například kde
+potřebujeme upravit sbírku knih, všechny ve stejném formátu
+specifikace; nebo kdybychom editovali časopis: sbírku knih,
+nebo časopis jako takový by byl projekt; každá kniha nebo každý deník,
+problém by byl produkt; a~každá kapitola knihy nebo každý článek
+v~deníku by byl komponentou.
+
+Na druhou stranu projekty nejsou určeny k~přímému sestavování.
+Vezměte v~úvahu, že podle definice každý produkt patřící do projektu (každý
+kniha ve sborníku nebo každé číslo časopisu) může být kompilován 
+samostatně a~vygenerovat si vlastní PDF. Proto příkaz \tex{product}
+je zahrnut v~něm, aby bylo uvedeno, jaké produkty skutečně patří do
+projektu, nedělá nic: je to pouze připomínka pro autora.
+
+Je jasné, že by se někteří mohli ptát, proč máme projekty, když je nelze zkompilovat:
+odpověď je, že soubor projektu propojuje určitá prostředí s~projektem.
+To je důvod, proč, pokud zahrneme projekt \PlaceMacro{project}\tex{projekt
+ProjectName} v~souboru komponenty nebo produktu, \ConTeXt\ přečte
+soubor projektu a~automaticky načte prostředí s~ním spojená.
+Proto musí následovat příkaz \tex{environment} v~projektech
+\tex{startproject}; nicméně v~produktech a~komponentách \tex{prostředí}
+musí přijít {\em dříve} \tex{startproduct} nebo \tex{startcomponent}
+
+Stejně jako u~příkazů \tex{environment} a~\tex{component},
+i~příkaz \tex{project} nám umožňuje zadat název projektu buď uvnitř
+hranaté závorky nebo hranaté závorky nepoužívat vůbec. Tohle znamená tamto
+\tex{project FileName} a~\tex{Project[FileName]} jsou ekvivalentní příkazy.
+
+{\bf Souhrn různých způsobů načítání prostředí}
+
+Z~výše uvedeného vyplývá, že prostředí může být načteno kterýmkoli
+z~následující postupy:
+
+\startitemize[a, board]
+
+\item Před vložením příkazu \tex{environment EnvironmentName}
+\tex{starttext} nebo \tex{startcomponent}. Tím se zatíží prostředí pro
+pouze kompilace příslušného souboru.
+
+\item Vložením příkazu \tex{environment EnvironmentName} do
+souborů produktu před \tex{startproduct}. Tím dojde k~zatížení prostředí, když
+produkt je zkompilován, ale ne, pokud jsou zkompilovány jeho součásti
+jednotlivě.
+
+\item Vložením příkazu \tex{project} do produktu nebo prostředí:
+tím se načtou všechna prostředí spojená s~projektem (v~projektu
+soubor).
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [title={Společné aspekty prostředí,\\ komponenty, produkty a~projekty}]
+
+\startdescription{Názvy prostředí, komponent, produktů a~projektů:}
+
+Již jsme viděli, že u~všech těchto prvků po \tex{start}
+příkazu, který spouští určité prostředí, komponentu, produkt nebo
+projekt, se jeho název zadává přímo. Toto jméno se zpravidla musí shodovat
+s~názvem souboru obsahujícího prostředí, komponentu nebo produkt
+protože například když \ConTeXt\ kompiluje produkt
+a~do souboru produktu se musí načíst prostředí nebo komponenta, nemáme žádnou možnost
+vědět, který soubor je toto prostředí nebo komponenta, pokud soubor nemá
+stejný název jako prvek, který se má načíst.
+
+Jinak podle mých testů název napsaný za \tex{startproduct}
+nebo \tex{startenvironment} v~souborech produktu a~prostředí je pouze
+orientační. Pokud je vynechán nebo se neshoduje s~názvem souboru,
+nic zlého se neděje. V~případě komponentů je však důležité,
+že název komponenty odpovídá názvu souboru, který to obsahuje.
+
+\stopdescription
+
+\description{Struktura adresářů projektu:}
+
+Víme, že \ConTeXt\ standardně hledá soubory v~pracovním adresáři
+a~v~cestě označené proměnnou TEXROOT. Když však použijeme
+příkazy \tex{project}, \tex{product}, \tex{component} nebo \tex{environment}
+předpokládá se, že projekt má adresářovou strukturu, ve které se společné
+prvky nacházejí v~nadřazeném adresáři a~ty specifické v~některých
+podřízený adresářích. Pokud tedy soubor uvedený v~pracovním adresáři není
+nalezen, bude vyhledán v~nadřazeném adresáři a~pokud není
+také tam,pak v~adresáři rodičů tohoto adresáře a~tak dále. 
+
+\stopsubsection
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent

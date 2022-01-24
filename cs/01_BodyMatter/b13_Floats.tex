@@ -1,8 +1,1333 @@
+\environment ../introCTX_env.mkiv
+
+\startcomponent b13_Floats.mkiv
+
+\startchapter
+  [title={Obrázky, tabulky a~další plovoucí objekty}]
+
+\TocChap
+
+Tato kapitola je především o~plovoucích předmětech (plovoucích). 
+Ale v~návaznosti na tento koncept jej využívá k~vysvětlení dvou typů objektů, 
+které nemusí být nutně plovoucí, ačkoli jsou často konfigurovány, jako by byly: 
+externí obrázky a~tabulky. Při pohledu na obsah této kapitoly by si někdo mohl myslet, 
+že je to všechno velmi neuspořádané: začíná to povídáním o~plovoucích objektech, 
+pak pokračuje povídáním o~obrázcích a~tabulkách a~končí se znovu povídáním o~plovoucích objektech. 
+Důvody této nepořádnosti jsou {\em pedagogické}: obrázky a~tabulky lze vysvětlit, 
+aniž bychom příliš trvali na tom, že jsou normálně plovoucí; a~přesto, když je začneme zkoumat, 
+hodně nám pomůže zjištění, že, překvapení, už víme o~dvou plovoucích objektech.
+
+\startsection
+  [
+    reference=sec:floating objects,
+    title={Co jsou plovoucí objekty a~co dělají?},
+  ]
+
+Pokud by dokument obsahoval pouze {\em normální} text, bylo by stránkování relativně snadné: 
+znalost maximální výšky textové oblasti stránky stačí k~měření výšky různých odstavců, 
+abyste věděli, kam vložit konce stránek. Problém je v~tom, že v~mnoha dokumentech jsou objekty, 
+fragmenty nebo nedělitelné bloky textu, jako je obrázek, tabulka, vzorec, orámovaný odstavec atd.
+
+Někdy mohou tyto objekty zabírat velkou část stránky, což zase představuje problém, 
+že pokud je musíte vložit na určité místo v~dokumentu, nemusí se vejít na aktuální stránku 
+a~musí být náhle přerušeny, takže velký prázdný prostor ve spodní části, takže dotyčný objekt a~text, 
+který za ním následuje, se přesune na další stránku. Pravidla dobré sazby však naznačují, 
+že kromě poslední stránky kapitoly by mělo být na každé stránce stejné množství textu.
+
+Je proto vhodné vyhnout se výskytu velkých prázdných vertikálních mezer; 
+a~{\em plovoucí} objekty jsou hlavním mechanismem, jak toho dosáhnout. 
+\quotation{plovoucí objekt} je takový, který nemusí být umístěn v~přesném bodě dokumentu, 
+ale může se kolem něj {\em pohybovat} nebo {\em vznášet}. Cílem je umožnit
+\ConTeXt{}u\ rozhodnout 
+o~nejlepším místě, z~hlediska stránkování, k~umístění takových objektů 
+a~dokonce jim povoluji přesunout se na jinou stránku; 
+ale vždy se snažte nevzdálit se příliš daleko od bodu zahrnutí do zdrojového souboru.
+
+Proto neexistují žádné objekty, které by musely být plovoucí. 
+Ale jsou předměty, které občas potřebují být plovoucí. Rozhodnutí je každopádně na autorovi 
+nebo osobě odpovědné za sazbu, jde-li o~dvě různé osoby.
+
+Možnost změny přesného umístění nedělitelného předmětu nepochybně velmi usnadňuje sazbu pěkně 
+vyvážených stránek; ale problém, který s~tím souvisí, je ten, že jelikož v~době psaní originálu nevíme, 
+kde přesně takový objekt skončí, je těžké na něj odkazovat. Pokud jsme tedy například 
+do svého dokumentu právě vložil příkaz, který vkládá obrázek a~v~dalším odstavci jej chci popsat 
+a~napsat o~něm něco jako: \quotation{Jak můžete vidět z~předchozího obrázku}, 
+když postava {\em plave} mohl by být klidně umístěn {\em za} co jsem právě napsal 
+a~výsledkem je nekonzistence: čtenář hledá obrázek {\em před} textem, 
+který na něj odkazuje a~nemůže jej najít, protože plovoucí obrázek skončil za tímto odkazem.
+
+Toto je opraveno {\em číslováním} plovoucích objektů (po jejich rozdělení do kategorií), 
+takže namísto odkazování na obrázek jako \quotation{předchozí obrázek} nebo \quotation{další obrázek} 
+budeme odkazovat na něj jako \quotation{obrázek 1.3}, 
+protože můžeme použít vnitřní referenční mechanismus \ConTeXt{}u, abychom zajistili, 
+že číslo obrázku bude vždy aktuální (viz \in{section}[sec:reference]). 
+Číslování těchto druhů objektů na druhou stranu usnadňuje vytvoření jejich rejstříku (index tabulek, grafů, obrázků, rovnic atd.). 
+Jak to udělat, viz (\in{section}[sec:lists]).
+
+Mechanismus pro práci s~plovoucími objekty v~\ConTeXt{}u\ je poměrně sofistikovaný 
+a~občas tak abstraktní, že nemusí být vhodný pro začátečníky. 
+Proto v~této kapitole začnu vysvětlením pomocí dvou konkrétních případů: obrázků a~tabulek. 
+Pak se to pokusím poněkud zobecnit, abychom pochopili, jak rozšířit mechanismus na další druhy objektů.
+
+\stopsection
+
+\startsection
+  [title={Externí obrázky}]
+
+Jak čtenář v~této fázi ví (protože to bylo vysvětleno v~\in{section}[sec:ctx]), 
+\ConTeXt\ je dokonale integrován s~MetaPostem a~může generovat obrázky a~grafiku, 
+které jsou {\em naprogramované} ve velké míře stejným způsobem, 
+jako se programují transformace textu. Existuje také rozšiřující modul 
+pro \ConTeXt\footnote{\ConTeXt\ rozšiřující moduly, které mu poskytují další nástroje, 
+ale nejsou zahrnuty v~tomto úvodu.}, který mu umožňuje pracovat s~TiKZ.
+\footnote{Toto je grafický programovací jazyk určený pro práci se systémy založenými na
+\TeX{}u. 
+Je to \quotation{rekurzivní zkratka} z~německé věty \quotation{TiKZ ist keinen Zeichenprogramm}, 
+což v~překladu znamená: \quotation{TiKZ není kreslící program}. 
+Rekurzivní zkratky jsou jakýmsi žertem programátorů. Když pomineme MetaPost (který neumím používat), 
+domnívám se, že TiKZ je skvělý systém pro programování grafiky.} 
+Ale takovými obrázky se v~tomto úvodu nezabýváme (to by si pravděpodobně vynutilo zdvojnásobení jeho délky). 
+Mám zde na mysli použití externích obrázků, které jsou umístěny v~souboru na našem pevném disku 
+nebo jsou staženy přímo z~internetu pomocí \ConTeXt{}u.
+
+\startsubsection
+  [title={Přímé vkládání obrázků}]
+  \PlaceMacro{externalfigure}
+
+K~přímému vložení obrázku (ne jako plovoucího objektu) použijeme příkaz \tex{externalfigure}, 
+jehož syntaxe je
+
+\type{\externalfigure [Název] [Konfigurace]}
+
+kde
+
+\startitemize
+
+\item {\em Jméno} může být buď název souboru obsahujícího obrázek, 
+nebo webová adresa obrázku nalezeného na internetu, nebo symbolický název, 
+který jsme dříve přiřadili k~obrázku pomocí příkazu \PlaceMacro{useexternalfigure}\tex{useexternalfigure}, 
+jehož formát je podobný formátu \tex{externalfigure}, i~když vyžaduje první argument se symbolickým názvem, 
+který bude spojen s~daným obrázkem.
+
+\item {\em Konfigurace} je volitelný argument, který nám umožňuje aplikovat určité transformace na obrázek předtím, 
+než je vložen do našeho dokumentu. Tento argument blíže prozkoumáme v~\in{section}[sec:configimage].
+
+\stopitemize
+
+Povolené formáty obrázků jsou pdf, mps, jpg, png, jp2, jbig, jbig2, jb2, svg, eps, gif nebo tif. 
+\ConTeXt\ umí přímo spravovat osm z~nich, zatímco zbytek (svg, eps, gif nebo tif) 
+je třeba před otevřením převést pomocí externího nástroje, který se mění podle formátu, 
+a~proto musí být nainstalován do systému tak, aby \ConTeXt\ mohl manipulovat s~těmito druhy souborů.
+
+\startSmallPrint
+
+Mezi formáty podporované \tex{externalfigure} jsou také některé video formáty. 
+Konkrétně: QuickTime (přípona .mov), Flash Video (přípona .flv) a~MPeg~4 (přípona .mp4). 
+Většina přehrávačů PDF však neví, jak zacházet se soubory PDF s~vloženým videem. 
+Nemohu k~tomu moc říct, protože jsem žádné testy nedělal.
+
+\stopSmallPrint
+
+Příponu souboru není třeba uvádět: \ConTeXt\ vyhledá soubor se zadaným názvem a~jednou z~přípon 
+známých formátů obrázků. Je-li více kandidátů, použije se nejprve formát PDF, pokud existuje 
+a~v~případě jeho absence formát MPS (grafika generovaná MetaPostem). Pokud tyto dva neexistují, 
+postupuje se v~následujícím pořadí: jpeg, png, jpeg~2000, jbig a~jbig2.
+
+\startSmallPrint
+
+Pokud skutečný formát obrázku neodpovídá příponě souboru, ve kterém je uložen, 
+\ConTeXt\ jej nemůže otevřít, pokud neoznačíme aktuální formát obrázku pomocí volby {\tt method}.
+
+\stopSmallPrint
+
+Pokud obrázek není umístěn samostatně mimo odstavec, ale je integrován do textového odstavce 
+a~jeho výška je větší než řádkování, řádek se upraví tak, aby se předešlo překrývání obrázku 
+s~předchozími řádky, jako příklad, který doprovází tento řádek\externalfigure[kráva-hnědá][šířka=2.5em].
+
+\ConTeXt\ standardně vyhledává obrázky v~pracovním adresáři, ve svém nadřazeném adresáři 
+a~v~nadřazeném adresáři tohoto adresáře. Umístění adresáře obsahujícího obrázky, 
+se kterými budeme pracovat, můžeme označit pomocí volby {\tt directory} příkazu \tex{setupexternalfigures}, 
+která přidá tento adresář do vyhledávací cesty. Pokud chceme, aby vyhledávání probíhalo pouze 
+v~adresáři s~obrázky, musíme nastavit i~volbu {\tt location}. Takže například, 
+aby náš dokument hledal všechny obrázky, které potřebujeme v~adresáři \MyKey{img}, 
+měli bychom napsat:
+
+\starttyping
+  \setupexternalfigures
+    [directory=img, location=global]
+\stoptyping
+
+\startSmallPrint
+
+Ve volbě {\tt directory} v~\tex{setupexternalfigures} můžeme zahrnout více než jeden adresář 
+a~oddělit je čárkami; ale v~tomto případě musíme adresáře uzavřít do složených závorek. 
+Například \MyKey{directory=\{img, \lettertilde/imágenes\}}.
+
+V~{\tt adresáři} vždy používáme znak \quote{/} jako oddělovač mezi adresáři; 
+včetně systému Microsoft Windows, jehož operační systém používá jako oddělovač adresářů
+\quote{\textbackslash}.
+
+\stopSmallPrint
+
+\tex{externalfigure} je také schopen používat obrázky hostované na internetu. 
+Takže například následující úryvek vloží logo CervanTeX přímo z~internetu do dokumentu. 
+Toto je \TeX\ španělsky mluvící uživatelská skupina:
+\footnote{Internetové adresy jsou velmi dlouhé a~pro zobrazení příkladu se dvěma sloupci není 
+k~dispozici mnoho místa. Aby tedy pořadí v~levém sloupci správně seděla, 
+vložil jsem do webové adresy zalomení řádku. Pokud někdo chce příklad zkopírovat a~vložit, 
+nebude to fungovat, pokud se tento konec řádku neodstraní.}
+
+\startDoubleExample
+\starttyping
+\externalfigure
+[http://www.cervantex.es/files/
+cervantex/cervanTeXcolor-small.jpg]
+\stoptyping
+
+\externalfigure
+[http://www.cervantex.es/files/cervantex/cervanTeXcolor-small.jpg]
+
+\stopDoubleExample
+
+\startSmallPrint
+
+Když je dokument obsahující vzdálený soubor poprvé zkompilován, je stažen ze serveru 
+a~uložen do adresáře mezipaměti LuaTeXu. Tento soubor v~mezipaměti se používá při následných kompilacích. 
+Normálně se vzdálený obrázek stáhne znovu, pokud je obrázek v~mezipaměti starší než 1 den. 
+Chcete-li změnit tento práh, podívejte se na \goto{\ConTeXt\ wiki}[url(https://wiki.contextgarden.net/Using_Graphics)].
+
+\stopSmallPrint
+
+Pokud \ConTeXt\ nenajde obrázek, který by měl být vložen, nevygeneruje se žádná chyba, 
+ale místo obrázku bude vložen textový blok s~informacemi o~obrázku, který tam má být. 
+Velikost tohoto bloku bude velikost obrázku (pokud ji \ConTeXt\ zná) nebo jinak standardní velikost. 
+Příklad toho je v~\in{section}[sec:startcombination].
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:placefigure,
+    title={ Vložení obrázku pomocí \tex{placefigure}},
+  ]
+  \PlaceMacro{placefigure}
+
+Obrázky lze vkládat přímo. Ale je lepší to udělat pomocí \tex{placefigure}. Tento příkaz způsobí
+v~\ConTeXt{}u: 
+
+\startitemize
+
+\item že ví, že se vkládá obrázek, který musí být začleněn do seznamu obrázků v~dokumentu, 
+který pak lze použít, pokud si přejeme, k~vytvoření indexu obrázků.
+
+\item přiřazení čísla obrázku, a~tím  usnadnění interní odkazy na něj.
+
+\item přidání názvu k~obrázku a~vytvoření textového bloku mezi obrázkem a~jeho názvem, 
+což znamená, že je nelze oddělit.
+
+\item automatické nastavení bílého prostoru (horizontálního a~vertikálního) potřebného 
+pro správné zobrazení obrázku.
+
+\item že umístí obrázek na vyznačené místo a~text kolem něj v~případě potřeby obtéká.
+
+\item že převede obrázek na plovoucí objekt, pokud je to možné, 
+s~přihlédnutím k~jeho velikosti a~specifikacím umístění.
+\footnote{Toto je můj závěr, vzhledem k~tomu, že mezi možnostmi umístění jsou takové, 
+jako je {\tt force} nebo  \Conjecture {\tt split}, které odporují skutečné představě o~plovoucím objektu.}
+
+\stopitemize
+  
+\stopfigure
+
+Syntaxe tohoto příkazu je následující:
+
+\type{\placefigure[Možnosti] [Štítek] {Název} {Obrázek}}
+
+Různé argumenty mají následující význam: 
+
+\startitemize
+
+\item {\em Options} je sada indikací, které obecně odkazují na umístění obrázku. 
+Protože jsou tyto možnosti v~tomto a~dalších příkazech stejné, 
+vysvětlím je společně později (v~\in{section}[sec:placeingobjects]). 
+Prozatím budu pro příklady používat volbu {\tt here}. Říká \ConTeXt{}u\, že pokud je to možné, 
+má umístit obrázek přesně do bodu v~dokumentu, kde se nachází příkaz, který jej vkládá.
+
+\item {\em Label} je textový řetězec, který interně odkazuje na tento objekt, 
+abychom na něj mohli odkazovat (viz \in{section}[sec:reference]).
+
+\item {\em Title} je text titulku, který má být přidán k~obrázku.
+
+\item {\em Image} je příkaz, který vloží obrázek.
+
+\stopitemize
+
+Například
+
+\starttyping
+  \placefigure
+    [here]
+    [fig:texknuth]
+    {\TeX\ logo and photo of {\sc Knuth}}
+    {\externalfigure[https://i.ytimg.com/vi/8c5Rrfabr9w/maxresdefault.jpg]}
+\stoptyping
+
+  \placefigure
+    [here]
+    [fig:texknuth]
+    {\TeX\ logo and photo of {\sc Knuth}}
+    {
+      \externalfigure
+        [https://i.ytimg.com/vi/8c5Rrfabr9w/maxresdefault.jpg]
+        [scale=600]
+    }
+
+Jak můžeme vidět na příkladu, vložením obrázku (které bylo mimochodem provedeno přímo z~obrázku 
+hostovaného na internetu) došlo k~určitým změnám ohledně toho, co se stane při přímém použití příkazu 
+\tex{externalfigure}. Přidá se svislý prostor, obrázek se vycentruje a~přidá se název. 
+To jsou {\em externí} změny zřejmé na první pohled. Z~vnitřního hlediska má příkaz také další 
+neméně důležité efekty:
+
+\startitemize
+
+\item Nejprve byl obrázek vložen do \quotation{seznamu obrázků}, který \ConTeXt\ interně udržuje 
+pro objekty vložené do dokumentu. To zase znamená, že se obrázek objeví v~indexu obrázků, 
+který lze vygenerovat pomocí \tex{placelist[figure]} (viz \in{section}[sec:lists]), 
+ačkoli existují dva specifické příkazy pro generování indexu obrázků, které jsou 
+  \PlaceMacro{placelistoffigures}\tex{placelistoffigures} nebo
+  \PlaceMacro{completelistoffigures}\tex{completelistoffigures}.
+
+\item Za druhé, obrázek byl propojen se štítkem, který byl přidán jako druhý argument do příkazu 
+\tex{placefigure}, což znamená, že od této chvíle na něj můžeme pomocí tohoto štítku vytvářet 
+interní odkazy (viz \in{section}[sec:reference]).
+
+\item Konečně se obrázek stal plovoucím, což znamená, že pokud by se pro potřeby sazby (stránkování) 
+potřeboval přesunout, \ConTeXt\ by změnil své umístění.
+
+\stopitemize
+
+Ve skutečnosti \tex{placefigure}, navzdory svému názvu, neslouží pouze k~vkládání obrázků. 
+Můžeme s~ním vložit cokoliv, včetně textu. Avšak s~textem nebo jinými položkami vloženými do dokumentu 
+pomocí \tex{placefigure} bude zacházeno {\em jako by to byl obrázek}, i~když tomu tak není; 
+budou přidány do seznamu obrázků interně spravovaných pomocí \ConTeXt{}u a~můžeme použít transformace 
+podobné těm, které používáme pro obrázky, jako je změna měřítka nebo rotace, orámování atd. 
+Tedy následující příklad: 
+
+\placefigure
+  [here, force]
+  [fig:testtext]
+  {Using \backslash placefigure for text transformations}
+  {\rotate[rotation=180]{\framed{\tfd Test text}}}
+
+čehož je dosaženo následovně:
+
+\starttyping
+\placefigure
+  [here, force]
+  [fig:testtext]
+  {Using \backslash placefigure for text transformations}
+  {\rotate[rotation=180]{\framed{\tfd Test text}}}
+\stoptyping
+
+\stopsubsection
+
+\startsubsection
+  [title={Vkládání obrázků integrovaných do textového bloku}]
+
+S~výjimkou velmi malých obrázků, které lze integrovat do řádku bez přílišného narušení mezer 
+mezi odstavci, se obrázky obvykle vkládají do odstavce, který obsahuje pouze je (nebo jinými slovy, 
+obrázek lze považovat za odstavec v~jeho vlastní právo). Pokud je obrázek vložen pomocí 
+\tex{placefigure} a~jeho velikost to dovoluje, v~závislosti na tom, co jsme uvedli ohledně 
+jeho umístění (viz \in{section}[sec:placingobjects]), \ConTeXt\ povolí text z~předchozího 
+a~následujícího odstavce obtékají obraz. Pokud však chceme zajistit, že určitý obrázek nebude 
+oddělen od určitého textu, můžeme použít prostředí {\tt \PlaceMacro{startfiguretext}figuretext}, 
+jehož syntaxe je následující:
+
+\starttyping
+  \startfiguretext
+    [Options]
+    [Label]
+    {Title}
+    {Image}
+
+    ... Text
+
+  \stopfiguretext
+\stoptyping
+
+Argumenty prostředí jsou úplně stejné jako pro \tex{placefigure} a~mají stejný význam. 
+Ale zde již nejsou možnosti pro umístění plovoucího objektu, ale indikace týkající se integrace 
+obrázku do odstavce; takže například \MyKey{left} zde znamená, že obrázek bude umístěn vlevo,
+z~atímco text poteče vpravo, zatímco \MyKey{left, bottom} bude znamenat, 
+že obrázek musí být umístěn vlevo dole v~textu s~ním spojeného. 
+
+Text napsaný v~prostředí je to, co bude obtékat obraz.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:configimage,
+    title={Vložená konfigurace a~transformace obrázků},
+  ]
+
+\startsubsubsection
+  [title={Vložení možnosti příkazu, které způsobí určitou transformaci obrázku}]
+  \PlaceMacro{setupexternalfigures}
+
+Poslední argument v~příkazu \tex{externalfigure} nám umožňuje provést určité úpravy 
+vloženého obrázku. Můžeme provést tyto úpravy: 
+
+\startitemize
+
+\item Obecně pro všechny obrázky, které se mají vložit do dokumentu; nebo pro vložení všech obrázků 
+z~určitého bodu. V~tomto případě provedeme úpravu příkazem \tex{setupexternalfigures}.
+
+\item Pro konkrétní obrázek, který chceme do dokumentu vložit několikrát. V~tomto případě se úprava 
+provádí v~posledním argumentu příkazu \tex{useexternalfigure}, který spojuje externí postavu se 
+symbolickým názvem.
+
+\item Přesně ve chvíli, kdy vkládáme konkrétní obrázek. V~tomto případě se úprava provádí 
+v~samotném příkazu \tex{externalfigure}.
+
+\stopitemize
+
+Změny v~obrazu, kterých lze dosáhnout touto cestou, jsou následující:
+
+\startdescription{Změna velikosti obrázku.}
+
+Můžeme udělat toto:
+
+\startitemize
+
+\item {\em Přiřazením přesné šířky nebo výšky} se něco udělá s~možnostmi {\tt width} a~{\tt height}; 
+pokud je upravena pouze jedna ze dvou hodnot, druhá se automaticky přizpůsobí tak, 
+aby byl zachován poměr.
+
+  Můžeme přiřadit přesnou výšku nebo šířku nebo je uvést jako procento výšky stránky nebo 
+  šířky řádku. Například:
+
+  \type{width=.4\textwidth}
+
+  zajistí, že obrázek bude mít šířku rovnou 40\% šířky čáry.
+
+\item {\em Změna měřítka obrázku}: Volba {\tt xscale} změní měřítko obrázku vodorovně; 
+{\tt yscale} to udělá vertikálně a~{\tt scale} to udělá horizontálně a~vertikálně. 
+Tyto tři možnosti očekávají číslo reprezentující faktor měřítka vynásobené 1000. 
+To znamená: {\tt scale=1000} ponechá obrázek v~původní velikosti, zatímco {\tt scale=500} 
+jej zmenší na polovinu, a~{\tt scale=2000} zdvojnásobí svou velikost.
+
+  Podmíněné měřítko, které se použije pouze v~případě, že obrázek překročí určité rozměry, 
+se získá pomocí voleb {\tt maxwidth} a~{\tt maxheight}, které převezmou rozměr. 
+Například {\tt maxwidth=.2\backslash textwidth} změní měřítko obrázku pouze v~případě, že se ukáže, 
+že je větší než 20\% šířky čáry. 
+
+\stopitemize  
+
+\stopdescription
+
+\startdescription{Otáčení obrázku.}
+
+K~otočení obrázku používáme volbu {\tt orientace}, která přebírá číslo reprezentující počet stupňů 
+natočení, které budou použity. Otáčení se provádí proti směru hodinových ručiček.
+
+  \startSmallPrint
+
+     Z~wiki vyplývá, že rotace, kterých lze dosáhnout touto volbou, musí být násobky 90 (90, 180 
+     nebo 270), ale abychom dosáhli jiné rotace, museli bychom použít příkaz \tex{rotate}. 
+     Neměl jsem však žádný problém použít otočení o~45 stupňů na obrázek pouze s~{\tt orientací=45}, 
+     aniž bych musel použít příkaz \tex{rotate}. 
+
+\stopSmallPrint
+  
+\stopdescription
+
+\startdescription{Zarámování obrázku.}
+
+Můžeme také obklopit obrázek rámečkem pomocí možnosti {\tt frame=on} a~nakonfigurovat jeho barvu 
+({\tt framecolor}), vzdálenost mezi rámečkem a~obrázkem ({\tt frameoffset}), tloušťku čáry, 
+která kreslí rám ({\tt rulethickness}) nebo tvaru jeho rohů ({\tt framecorner}), 
+které mohou být zaoblené ({\tt round}) nebo obdélníkové.
+
+\stopdescription
+
+\startdescription{Další konfigurovatelné aspekty obrázků.} 
+
+Kromě již viděných aspektů, které znamenají transformaci obrázku, který se má vložit, 
+můžeme pomocí \tex{setupexternalfigures} nakonfigurovat další aspekty, například kde hledat 
+obrázek (volba {\tt directory}), zda by se měl obrázek hledat pouze v~uvedeném adresáři ({\tt location=global}) 
+nebo zda by měl obsahovat také pracovní adresář a~jeho nadřazené adresáře ({\tt location=local}) 
+a~zda obrázek bude nebo nebude interaktivní ({\tt interakce}) atd.
+  
+\stopdescription
+
+\stopsubsubsection
+
+\startsubsubsection
+   [title={Specifické příkazy pro transformaci obrázku}]
+
+V~\ConTeXt{}u\ jsou tři příkazy, které vytvářejí určitou transformaci v~obrázku 
+a~lze je použít v~kombinaci s~\tex{externalfigure}. Tady jsou:
+
+\startitemize
+  
+\item {\em Zrcadlový obraz}: dosaženo pomocí příkazu \PlaceMacro{mirror}\tex{mirror}.
+
+\item {\em Clipping}: toho lze dosáhnout pomocí příkazu \PlaceMacro{clip}\tex{clip}, 
+když šířka ({\tt width}), výška ({\tt height}), horizontální odsazení 
+({\tt jsou uvedeny rozměry hoffset}) a~vertikální odsazení ({\tt voffset}). Například:
+
+\starttyping
+\clip
+  [width=2cm, height=1cm, hoffset=3mm, voffset=5mm]
+  {\externalfigure[logo.pdf]}
+\stoptyping
+
+\item {\em Rotace.}
+   Třetí příkaz schopný aplikovat transformace na obrázek je příkaz \PlaceMacro{rotate}\tex{rotate}. 
+Může být použit ve spojení s~\tex{externalfigure}, ale normálně by to nebylo nutné vzhledem k~tomu, 
+že druhý má, jak jsme viděli, volbu {\tt orientace}, která poskytuje stejný výsledek.
+
+\startSmallPrint
+
+\stopSmallPrint
+
+\stopitemize 
+
+Typické použití těchto příkazů je s~obrázky, ale ve skutečnosti působí na {\em boxy}. 
+To je důvod, proč je můžeme použít na jakýkoli text jednoduše tak, 
+že jej uzavřeme do rámečku (což příkaz provede automaticky), což způsobí zvláštní efekty, 
+jako jsou následující: 
+
+\startDoubleExample
+\vbox{\starttyping
+  \mirror{Test text}\\
+  \rotate[rotation=20] {Test text}
+\stoptyping}
+
+\vbox{  \mirror{Test text}\\
+  \rotate[rotation=20]
+     {Test text}}
+
+\stopDoubleExample
+
+\stopsubsubsection
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+   [
+     reference=sec:tables,
+     title={Tabulky},
+   ]
+
+\startsubsection
+   [title={Obecné představy o~tabulkách a~jejich umístění v~dokumentu}] 
+
+Tabulky jsou strukturované objekty, které obsahují text, vzorce nebo dokonce obrázky uspořádané 
+do série {\em buněk}, které nám umožňují graficky vidět vztah mezi obsahem každé buňky. 
+K~tomu jsou informace uspořádány do řádků a~sloupců: všechna data (nebo položky) ve stejném řádku 
+mají mezi sebou určitý vztah, stejně jako všechna data (nebo položky) ve stejném sloupci. 
+Buňka je průsečík řádku se sloupcem, jak je znázorněno na \in{figure}[fig:tabulce].
+
+\placefigure
+  [right]
+  [fig:table]
+  {Image of a~simple table}
+  {\externalfigure[tablas_eng][width=.6\textwidth]}
+
+Tabulky jsou ideální pro zobrazení textu nebo dat, které spolu souvisejí, 
+protože každá je uzamčena ve své vlastní buňce, i~když se její obsah nebo obsah zbývajících buněk 
+mění, relativní pozice jedné vůči ostatním se nezmění.
+
+Ze všech úkonů spojených se sazbou textu je tvorba tabulek jedinou, podle mého názoru, 
+snadněji proveditelnou v~grafickém programu (typ textového procesoru) než
+v~\ConTeXt{}u. 
+Protože je jednodušší {\em nakreslit} tabulku (což je to, co děláte v~programu pro zpracování textu), 
+než {\em to popsat}, což je to, co děláme, když pracujeme s~\ConTeXt{}em. Každá změna řádku 
+a~sloupce vyžaduje přítomnost příkazu, což znamená, že implementace tabulky trvá mnohem déle, 
+místo toho, abychom jednoduše řekli, kolik řádků a~sloupců chceme.
+
+\ConTeXt\ má tři různé mechanismy pro vytváření tabulek; prostředí {\tt tabulate}, 
+které se doporučuje pro jednoduché tabulky a~které je nejvíce přímo inspirováno tabulkami
+\TeX{}u; tzv. {\em natural tables}, inspirované HTML tabulkami, vhodné pro tabulky se speciálními 
+požadavky na design, kde například nemají všechny řádky stejný počet sloupců; 
+a~takzvané {\em extrémní tabulky}, jasně založené na XML a~doporučené pro střední nebo 
+dlouhé tabulky, které zabírají více než jednu stránku. Ze tří vysvětlím pouze první. 
+Přirozené tabulky jsou poměrně dobře vysvětleny v~\quotation{\ConTeXt\ Mark IV exkurze} 
+a~pro {\em extrémní tabulky} je o~nich dokument v~dokumentaci \suite-.
+
+Něco podobného,se děje s~obrázky, které se vyskytují v~tabulkách: můžeme jednoduše napsat 
+potřebné příkazy v~určitém bodě dokumentu pro vygenerování tabulky a~ta bude vložena přesně 
+v~tomto bodě, nebo můžeme použít \PlaceMacro{placetable}\tex příkaz {placetable} pro vložení tabulky. 
+To má některé výhody:
+
+\startitemize
+
+\item \ConTeXt\ očísluje tabulku a~přidá ji do seznamu tabulek umožňujících vnitřní odkazy 
+na tabulku (prostřednictvím jejího číslování) a~zahrnout ji do případného rejstříku tabulek.
+
+\item Získáme flexibilitu v~umístění tabulek v~dokumentu, čímž si usnadníme úlohu stránkování.
+
+\stopitemize
+
+Formát \tex{placetable} je podobný tomu, co jsme viděli
+\tex{placefigure} (viz \in{section}[sec:placefigure]): 
+
+\type{\placetable[Options] [Label] {Title} {table}}
+
+Odkazuji na sekce \in{}[sec:umístění objektů] a~\in{}[sec:confcaptions] ohledně možností 
+týkajících se umístění tabulky a~konfigurace nadpisu. Mezi možnostmi je však jedna, 
+která se zdá být určena výhradně pro tabulky. Toto je volba \MyKey{split}, která, když je nastavena, 
+opravňuje \ConTeXt\ rozšířit tabulku na dvě nebo více stránek, v~takovém případě tabulka již 
+nemůže být plovoucím objektem.
+
+Obecně můžeme konfiguraci pro tabulky nastavit příkazem \PlaceMacro{setuptables}\tex{setuptables}. 
+Stejně jako u~obrázků je také možné generovat index tabulek pomocí
+\PlaceMacro{placelistoftables}\tex{placelistoftables} nebo \PlaceMacro{completelistoftables}\tex{completelistoftables}.
+V~tomto ohledu viz \in{section}[sec:variouslists]. 
+
+\stopsubsection
+
+\startsubsection
+   [title={Jednoduché tabulky s~prostředím {\tt tabulate}}]
+\PlaceMacro{starttabulate}
+
+Nejjednodušší tabulky jsou ty, kterých se dosáhne pomocí {\em
+   tabulate} prostředí, jehož formát je:
+
+\vbox{\starttyping
+   \starttabulate[Rozvržení sloupců tabulky]
+     ... % Obsah tabulky
+     ...
+     ...
+   \stoptabulate
+\stoptyping} 
+
+Kde argument v~hranatých závorkách popisuje (v~kódu) počet sloupců, které tabulka bude mít 
+a~(někdy nepřímo) udává jejich šířku. Říkám, že argument popisuje design {\em v~kódu}, 
+protože na první pohled působí velmi tajemně: skládá se z~posloupnosti znaků, 
+z~nichž každý má zvláštní význam. Vysvětlím to postupně a~po krocích, protože si myslím, 
+že takto je to srozumitelnější.
+
+\startSmallPrint
+
+   Toto je typický případ, kdy obrovské množství aspektů, které můžeme konfigurovat, znamená, 
+že k~jejich popisu potřebujeme hodně textu. Zdá se, že je to ďábelsky obtížné. 
+Ve skutečnosti pro většinu tabulek, které jsou postaveny v~praxi, stačí body 1 a~2. 
+Zbytek jsou další možnosti, o~kterých je užitečné vědět, že existují, ale nejsou nezbytné 
+pro sazbu tabulky.
+
+\stopSmallPrint
 
 
---------------------
-Czech version
---------------------
+\startitemize[n] 
 
-TO BE DONE!
---------------------
+\item {\bf Oddělovač sloupců}: znak \MyKey{\|} se používá k~oddělování sloupců tabulky. 
+Takže například \MyKey{[\|lT\|rB\|]} bude popisovat tabulku se dvěma sloupci, 
+z~nichž jeden by měl vlastnosti spojené s~indikátory \MyKey{l} a~\MyKey{T} 
+(který uvidíme hned za ním) a~druhý sloupec bude mít vlastnosti spojené s~\MyKey{r} a~\MyKey{B}. 
+Jednoduchá třísloupcová tabulka zarovnaná doleva by například byla popsána jako \MyKey{[\|l\|l\|l\|]}.
+
+\item {\bf Určení základní povahy buněk ve sloupci:} První věc, kterou je třeba určit, 
+když sestavujeme naši tabulku, je, zda chceme, aby byl obsah každé buňky zapsán na jeden řádek, 
+nebo zda naopak , pokud je text libovolného sloupce příliš dlouhý, chceme, 
+aby jej naše tabulka rozložila na dva nebo více řádků. V~prostředí {\tt tabulate} se 
+o~této otázce nerozhoduje buňka po buňce, ale je považována za charakteristiku sloupců.
+
+   \startitemize[a]
+
+\item {\em Jednořádkové buňky:} Pokud má být obsah buněk ve sloupci, bez ohledu na jejich délku, 
+zapsán na jeden řádek, musíme určit zarovnání textu ve sloupci, který lze ponechat (\MyKey{l}, 
+od {\em left}), vpravo (\MyKey{r}, od {\em right}) nebo na střed
+     (\MyKey{c}, z~{\em center}).
+
+
+     \startSmallPrint
+
+V~zásadě budou tyto sloupce tak široké, aby se vešly do nejširší buňky. 
+Ale můžeme omezit šířku sloupce pomocí specifikátoru \MyKey{w(Width)}. 
+Například \MyKey{[\|rw(2cm)\|c\|c\|]} bude popisovat tabulku se dvěma sloupci, 
+z~nichž první je zarovnán doprava a~má přesnou šířku 2 centimetry, a~další dva uprostřed 
+a~bez omezení šířky.
+
+      Je třeba poznamenat, že omezení šířky v~jednořádkových sloupcích může způsobit, 
+že text v~jednom sloupci překryje text v~dalším sloupci. Takže moje rada je, 
+že když potřebujeme sloupce s~pevnou šířkou, vždy používejte víceřádkové sloupce buněk.
+
+    \stopSmallPrint
+    
+  \item {\em Buňky, které mohou v~případě potřeby zabírat více než jeden řádek}: 
+specifikátor \MyKey{p} generuje sloupce, ve kterých text v~každé buňce zabere tolik řádků, 
+kolik je potřeba. Pokud jednoduše zadáme \MyKey{p}, šířka sloupce bude plná dostupná šířka. 
+Ale je také možné uvést \MyKey{p(Width)}, v~takovém případě bude šířka přesně specifikovaná. 
+Tedy následující příklady:
+
+\starttyping
+\starttabulate[|l|r|p|]
+\starttabulate[|l|p(4cm)|]
+\starttabulate[|r|p(.6\textwidth)|]
+\starttabulate[|p|p|p|]
+\stoptyping
+
+První příklad vytvoří tabulku se třemi sloupci, prvním a~druhým z~jednoho řádku, 
+zarovnanými doleva a~doprava, a~třetím, který zabere zbývající šířku a~výšku potřebnou 
+k~uložení veškerého jejího obsahu. Ve druhém příkladu bude druhý sloupec měřit přesně čtyři centimetry 
+na šířku bez ohledu na jeho obsah; ale pokud se do toho prostoru nevejde, zabere více než jeden řádek. 
+Třetí příklad vypočítá šířku druhého sloupce v~poměru k~maximální šířce čáry a~v~posledním příkladu 
+budou tři sloupce, jejichž šířka bude mít stejnou šířku.
+
+  \stopitemize
+
+
+  \startSmallPrint
+
+    Všimněte si, že ve skutečnosti, pokud je buňka čtyřúhelník, specifikátor \MyKey{p} autorizuje 
+proměnnou výšku buněk ve sloupci v~závislosti na délce textu.
+    
+  \stopSmallPrint
+
+\item {\bf Přidání označení k~popisu sloupce, o~stylu a~variantě písma, které se má použít}: 
+jakmile se rozhodne o~základní povaze sloupce (šířka a~výška buněk, automatická nebo pevná), 
+může ještě přidat do popisu obsahu sloupce znak reprezentující {\em formát}, 
+ve kterém musí být zapsán. Tyto znaky mohou být \MyKey{B} pro tučné písmo, \MyKey{I} pro kurzívu, 
+\MyKey{S} pro šikmé písmo, \MyKey{R} pro písmo v~římském stylu nebo \MyKey{T} pro styl {\em typewriter} 
+nápis.
+
+
+\starthead {\bf Další aspekty, které lze specifikovat v~popisu sloupců tabulky}:\stophead
+
+   \startitemize[1]
+
+   \item {\em Sloupce s~matematickými vzorci}: specifikátory \MyKey{m} a~\MyKey{M} umožňují matematický 
+režim ve sloupci, aniž by bylo nutné jej uvádět v~každé z~jeho buněk. Buňky v~tomto sloupci nebudou 
+schopny pojmout normální text.
+
+%     \startSmallPrint
+
+\startSmallPrint
+
+      Přestože \TeX, předchůdce \ConTeXt{}u, vznikl pro sazbu jakéhokoli druhu matematiky, 
+až dosud jsem o~psaní matematiky téměř nic neřekl. V~matematickém režimu (který nebudu vysvětlovat) 
+\ConTeXt\ mění naše normální pravidla a~dokonce používá jiné fonty. 
+Matematický režim má dvě varianty: jeden bychom mohli nazvat {\em lineární} v~tom, 
+že vzorec je umístěn v~řádku obsahujícím normální text (indikátor \MyKey{m}) 
+a~{\em kompletní matematický režim}, který zobrazuje vzorce v~prostředí, kde není normální text. 
+Hlavním rozdílem mezi těmito dvěma režimy v~tabulce je v~podstatě velikost, 
+ve které bude vzorec zapsán, a~horizontální a~vertikální prostor, který jej obklopuje.
+
+    \stopSmallPrint
+
+  \item {\em Přidat další horizontální bílé místo kolem obsahu buněk ve sloupci}: 
+pomocí indikátorů \MyKey{in}, \MyKey{jn} a~\MyKey{kn} můžeme přidat další bílé místo vlevo obsahu 
+sloupce (\MyKey{in}), vpravo (\MyKey{jn}) nebo na obě strany (\MyKey{kn}). 
+Ve všech třech případech představuje \MyKey{n} číslo, kterým se vynásobí prázdné místo, 
+které by normálně zůstalo bez jednoho z~těchto specifikátorů (standardně je průměr {\em em}). 
+Takže například \MyKey{\|j2r\|} bude indikovat, že stojíme před sloupcem, který bude zarovnán doprava 
+a~ve kterém chceme prázdné místo o~šířce 1 {\em em}.
+
+  \item {\em Přidání textu před nebo za obsah každé buňky ve sloupci}. Specifikátory {\tt b\{Text\}} 
+a~{\tt a\{Text\}} způsobí, že text mezi složenými závorkami bude zapsán před (\MyKey{b}, 
+z~{\em before}) nebo za ( \MyKey{a}, od {\em after}) obsah buňky.
+
+  \item {\em Použití příkazu format na celý sloupec}. Indikátory \MyKey{B}, \MyKey{I}, \MyKey{S}, 
+\MyKey{R} \MyKey{T}, které jsme zmínili dříve, nepokrývají všechny možnosti formátu: 
+např. není tam žádný indikátor pro malá písmena nebo pro {\em sans serif}, 
+nebo který ovlivňuje velikost písma. Pomocí indikátoru \MyKey{h\backslash command} 
+můžeme zadat příkaz formátu, který se automaticky použije na všechny buňky ve sloupci. 
+Například \MyKey{\|lf\backslash sc\|} vysází obsah sloupce velkými písmeny.
+
+  \item {\em Použití libovolného příkazu na všechny buňky ve sloupci}. Nakonec indikátor
+\MyKey{h\backslash příkaz}
+
+použije zadaný příkaz na všechny buňky ve sloupci.
+
+
+\stopitemize
+
+\stopitemize
+
+V~\in{table}[tbl:examplestabulate] jsou uvedeny některé příklady řetězců specifikace formátu tabulky.
+
+\placetable
+   [tady]
+   [tbl:examplestabulate]
+   {Některé příklady, jak určit formát sloupců v~{\tt tabulate}}
+{\starttabulate[|lT|p(.6\textwidth)|]
+\HL
+\NC{\bf\rm Specifikátor formátu}
+\NC{\bf Význam}
+\NR
+\HL
+\NC \|l\|
+\NC Vygeneruje sloupec, jehož šířka je automaticky zarovnána doleva.
+\NR
+\NC \|rB\|
+\NC Vygeneruje sloupec, jehož šířka je automaticky zarovnána doprava a~je uvedena tučně.
+\NR
+\NC \|cIm\|
+\NC Vygeneruje sloupec povolený pro matematický obsah. Na střed a~kurzívou.
+\NR
+\NC \|j4cb\{---\}\|
+\NC Tento sloupec bude mít obsah vystředěný, bude začínat em pomlčkou (---) a~přidá 2 {\em ems} mezery vpravo.
+\NR
+\NC \|l\|p(.7\tex{šířka textu})\|
+\NC generuje dva sloupce: první je zarovnán doleva a~má automatickou šířku. Druhá zabírá 70\% celkové šířky čáry.
+\NR
+\HL
+\stoptabulate}
+
+Jakmile je tabulka navržena, je třeba zadat její obsah. Abych vysvětlil, jak to udělat, 
+začnu popisem, jak by měla být vyplněna tabulka, kde máme linky oddělující řádky a~sloupce:
+
+\startitemize
+
+\item Vždy začínáme nakreslením vodorovné čáry. V~tabulce se to provede příkazem \PlaceMacro{HL}\tex{HL} 
+(z~{\em Horizontal Line}).
+
+\item Poté napíšeme první řádek: na začátku každé buňky musíme označit, že začíná nová buňka 
+a~že je třeba nakreslit svislou čáru. To se provádí příkazem \PlaceMacro{VL}\tex{VL} 
+(z~{\em Vertical Line}). Začneme tedy tímto příkazem a~zapíšeme obsah každé buňky. Pokaždé, 
+když měníme buňky, opakujeme příkaz \tex{VL}.
+
+\item Na konci řádku výslovně označíme, že bude spuštěn nový řádek příkazem \PlaceMacro{NR}\tex{NR} 
+(z~{\em Next Row}). Poté zopakujeme \tex{HL} a~nakreslíme novou vodorovnou čáru.
+
+\item A~tak jeden po druhém zapíšeme všechny řádky tabulky. Když skončíme, 
+přidáme jako další příkaz \tex{NR} a~další \tex{HL} pro uzavření mřížky spodní vodorovnou čarou.
+
+\stopitemize
+
+Pokud nechceme kreslit mřížku tabulky, odstraníme příkazy \tex{HL} a~nahradíme příkazy \tex{VL} 
+příkazy \PlaceMacro{NC}\tex{NC} (z~{\em Nový sloupec}).
+
+Není to nijak zvlášť obtížné, když to pochopíme, i~když se podíváme na zdrojový kód tabulky, 
+je těžké získat představu, jak bude vypadat. V~\in{table}[tbl:tablecommands] vidíme příkazy, 
+které mohou (a~musí) být použity v~tabulce. Jsou některé, které jsem nevysvětlil, ale myslím, 
+že popis, který jsem uvedl, stačí.
+
+\placetable
+   [tady, síla]
+   [tbl:tablecommands]
+   {Příkazy k~použití v~tabulce}
+{\starttabulate[|l|p(.6\textwidth)|]
+\HL
+\NC {\bf Příkaz}
+\NC {\bf Význam}
+\NR
+\HL
+\NC \tex{HL}
+\NC Vloží vodorovnou čáru
+\NR
+\NC \tex{NC}
+\NC Začne nový sloupec
+\NR
+\NC \tex{NR}
+\NC Začne nový řádek
+\NR
+\NC \tex{VL}
+\NC Vloží svislou čáru ohraničující sloupec (používá se místo \tex{NC})
+\NR
+\NC \PlaceMacro{NN}\tex{NN}
+\NC Začne sloupec v~matematickém režimu (používá se místo \tex{NC})
+\NR
+\NC \PlaceMacro{TB}\tex{TB}
+\NC Přidá další vertikální mezeru mezi dva řádky
+\NR
+\NC \PlaceMacro{NB}\tex{NB}
+\NC Označuje, že další řádek začíná nedělitelný blok, ve kterém nemůže být konec stránky
+\NR
+\HL
+\stoptabulate}
+
+A~nyní jako příklad přepíšu kód, kterým byl napsán \in{table}[tbl:tablecommands].
+
+\starttyping
+\placetable
+   [tady]
+   [tbl:tablecommands]
+   {Příkazy k~použití v~tabulce}
+{\starttabulate[|l|p(.6\textwidth)|]
+\HL
+\NC {\bf Příkaz}
+\NC {\bf Význam}
+\NR
+\HL
+\NC \tex{HL}
+\NC Vloží vodorovnou čáru
+\NR
+\NC \tex{NC}
+\NC Začne nový sloupec
+\NR
+\NC \tex{NR}
+\NC Začne nový řádek
+\NR
+\NC \tex{VL}
+\NC Vloží svislou čáru ohraničující sloupec (používá se místo \tex{NC})
+\NR
+\NC \tex{NN}
+\NC Začne sloupec v~matematickém režimu (používá se místo \tex{NC})
+\NR
+\NC \tex{TB}
+\NC Přidá další vertikální mezeru mezi dva řádky
+\NR
+\NC \tex{NB}
+\NC Označuje, že další řádek začíná nedělitelný blok, ve kterém nemůže být konec stránky
+\NR
+\HL
+\stoptabulate}
+\stoptyping
+
+Čtenář si všimne, že jsem obecně použil jeden (nebo dva) řádky textu pro každou buňku. 
+Ve skutečném zdrojovém souboru bych pro každou buňku použil pouze řádek textu; 
+v~příkladu jsem rozdělil řádky, které jsou příliš dlouhé. Použití jednoho řádku na buňku mi 
+usnadňuje psaní tabulky, protože to, co dělám, je psát obsah každé buňky bez příkazů
+k~oddělení řádků nebo sloupců. Když je vše napsáno, vyberu text z~tabulky a~požádám svůj textový editor, 
+aby na začátek každého řádku vložil \quotation{\tex{NC }}. Poté každé dva řádky 
+(protože tabulka má dva sloupce) vložím řádek, který přidá příkaz \tex{NR}, 
+protože každé dva sloupce začíná nový řádek. Nakonec ručně vložím příkazy \tex{HL} do bodů, kde chci, 
+aby se objevila vodorovná čára. Skoro déle mi trvá to popsat, než to udělat!
+
+Ale také se podívejte, jak v~rámci tabulky můžeme používat běžné příkazy
+\ConTeXt{}u. 
+Zejména v~této tabulce neustále používáme \tex{tex}, což je vysvětleno v~\in{section}[sec:verbatim].
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+   [title={Aspekty společné pro obrázky, tabulky a~další plovoucí objekty}]
+
+Již víme, že obrázky a~tabulky nemusí být plovoucí objekty, ale jsou dobrými kandidáty, 
+aby tomu tak bylo, i~když je třeba je vložit do dokumentu pomocí příkazů \tex{placefigure} nebo 
+\tex{placetable}. Kromě těchto dvou příkazů se stejnou strukturou máme
+v~\ConTeXt{}u\ příkaz \PlaceMacro{placechemical}\tex{placechemical} (pro vložení chemických vzorců), 
+příkaz \PlaceMacro{placegraphic}\tex{placegraphic} (pro vložení grafiky) 
+a~příkaz \PlaceMacro{placeintermezzo}\tex{placeintermezzo} pro vložení struktury, 
+kterou \ConTeXt\ nazývá {\em Intermezzo} a~která tuším odkazuje na fragmenty orámovaného textu. 
+Všechny tyto příkazy jsou zase konkrétními aplikacemi obecnějšího příkazu, 
+kterým je \PlaceMacro{placefloat}\tex{placefloat}, jehož syntaxe je následující:
+
+\type{\placefloat [Název] [Možnosti] [Štítek] {Název} {Obsah}}
+
+Všimněte si, že \tex{placefloat} je identický s~\tex{placefigure} a~\tex{placetable} 
+kromě prvního argumentu, který v~\tex{placefloat} přebírá jméno plovoucího objektu. Je to proto, 
+že {\em každý typ plovoucího objektu lze do dokumentu vložit dvěma různými příkazy}: 
+\tex{placefloat[TypeName]} nebo \tex{placeTypeName}. Jinými slovy: \tex{placefloat[figure]} 
+a~\tex{placefigure} jsou přesně stejné příkazy, stejně jako \tex{placefloat[table]} 
+je stejný příkaz jako \tex{placetable}.
+
+Proto budu od nynějška mluvit o~\tex{placefloat}, ale mějte na paměti, že vše, co řeknu, 
+bude platit také pro \tex{placefigure} nebo \tex{placetable}, což jsou specifické aplikace uvedeného příkazu.
+
+Argumenty \tex{placefloat} jsou:
+
+\startitemize
+
+\item {\em Jméno} odkazuje na dotyčný plovoucí objekt. Může to být nějaký předem určený plovoucí 
+objekt ({\tt obrázek, tabulka, chemikálie, intermezzo}) nebo plovoucí objekt vytvořený námi 
+pomocí \tex{definefloat} (viz \in{section}[sec:definefloat]).
+
+\item {\em Možnosti} Série symbolických slov, která \ConTeXt{}u\ říkají, jak má vložit objekt. 
+Velká většina z~nich odkazuje na to {\em kam} vložit. To uvidíme v~další části.
+
+\item {\em Štítek} Označení pro budoucí interní odkazy na tento objekt.
+
+\item {\em Název} Text nadpisu, který se má přidat k~objektu. Ohledně jeho konfigurace 
+viz \in{section}[sec:confcaptions].
+
+\item {\em Obsah} To samozřejmě závisí na typu objektu. Pro obrázky je to obvykle příkaz 
+\tex{externalimage}; pro tabulky, příkazy, které vytvoří tabulku; pro {\em intermezzi}, 
+fragment textu v~rámečku; atd.
+
+\stopitemize
+
+První tři argumenty, které jsou uvedeny v~hranatých závorkách, jsou volitelné. Poslední dva 
+(které jsou uvedeny mezi složenými závorkami) jsou povinné, i~když mohou být prázdné. 
+Takže například:
+\cmd{placefloat\{\}\{\}} vloží:
+
+\placefloat{}{}
+
+v~dokumentu.
+
+\startitemize
+
+{\bf Poznámka:} Vidíme, že \ConTeXt\ uvažoval, že objekt, který má být vložen, byl obrázek, 
+protože byl očíslován jako obrázek a~zahrnut v~seznamu obrázků \Conjecture. To mě nutí předpokládat, 
+že obrázky jsou výchozí plovoucí objekty.
+
+\stopitemize 
+
+\startsubsection
+   [
+     reference=sec:placeingobjects,
+     title={Možnosti vložení plovoucího objektu},
+   ]
+
+Argument {\em Options} v~\tex{placefigure}, \tex{placetable} a~\tex{placefloat} řídí různé aspekty 
+týkající se vkládání těchto typů objektů. Hlavně místo na stránce, kam bude objekt vložen. 
+Zde je podporováno několik hodnot, každá jiné povahy:
+
+\startitemize
+
+\item Některá místa vložení jsou stanovena ve vztahu k~prvkům stránky ({\tt top, bottom inleft, 
+inright, inmargin, margin, leftmargin, rightmargin, leftedge, rightedge, innermargin, inneredge, 
+vnější hrana, vnitřní, vnější}). Musí se samozřejmě jednat o~objekt, který se vejde do oblasti, 
+kde má být umístěn, a~pro tento prvek musí být v~rozvržení stránky vyhrazeno místo. 
+Ohledně toho viz sekce \in{}[sec:page-elements] a~\in{}[sec:pagelayout].
+
+\item Další možná místa vložení se více vztahují k~textu obklopujícímu objekt a~jsou indikací, 
+kam by měl být objekt umístěn, aby kolem něj text obtékal. V~zásadě hodnoty {\tt left} a~{\tt right}.
+
+\item Volba {\tt here} je interpretována jako doporučení ponechat objekt na místě ve zdrojovém souboru, 
+kde se nachází. Toto {\em doporučení} nebude respektováno, pokud to požadavky na stránkování neumožňují. 
+Tato indikace je posílena, pokud přidáme volbu {\tt force}, což znamená přesně
+toto: vynutit vložení objektu do tohoto bodu. Všimněte si, že po vynucení vložení v~určitém bodě 
+již objekt nebude plovoucí.
+
+\item Další možné volby se týkají stránky, na kterou má být objekt vložen: \MyKey{stránka} jej vloží 
+na novou stránku; \MyKey{opposite} jej vloží na stránku naproti aktuální; \MyKey{leftpage} 
+na sudé stránce; \MyKey{rightpage} na liché stránce.
+  
+\stopitemize
+
+Existují některé možnosti, které nesouvisejí s~umístěním objektu.
+Mezi nimi:
+
+\startitemize
+
+\item {\tt none}: Tato volba potlačí název.
+
+\item {\tt split}: Tato volba umožňuje objektu rozšířit se na více než jednu stránku. 
+Musí to být samozřejmě předmět, který je od přírody dělitelný, například
+tabulka. Když je tato možnost použita a~objekt je rozdělen, nelze již říci, že je plovoucí.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+   [
+     reference=sec:confcaptions,
+     title={Konfigurace názvů plovoucích objektů},
+   ]
+
+Pokud nepoužijeme volbu \MyKey{none} v~\tex{placefloat}, ve výchozím nastavení jsou plovoucí objekty 
+spojeny s~názvem, který se skládá ze tří prvků:
+
+\startitemize
+
+\item Jméno daného typu objektu. Toto jméno je přesně stejné jako jméno typu objektu; 
+takže pokud například definujeme nový plovoucí objekt s~názvem \quotation{sekvence} 
+a~vložíme \quotation{sekvenci} jako plovoucí objekt, bude nadpis \quotation{sekvence 1}. 
+Jednoduše zadejte název objektu velkým písmenem.
+
+  \startSmallPrint
+
+    Navzdory tomu, co bylo právě řečeno, pokud hlavním jazykem dokumentu není angličtina, 
+bude přeložen anglický název pro předdefinované objekty, jako jsou například objekty \MyKey{figure} 
+nebo \MyKey{table}; Takže například objekt \MyKey{figure} v~dokumentech ve španělštině se nazývá 
+\MyKey{Figura}, zatímco objekt \MyKey{table} se nazývá \MyKey{Tabla}. Tyto španělské názvy 
+pro předdefinované objekty lze změnit pomocí \tex{setuplabeltext}, jak je vysvětleno v~\in{section}[sec:labels].
+    
+  \stopSmallPrint
+
+\item Jeho číslo. Ve výchozím nastavení jsou objekty číslovány podle kapitol, 
+takže první tabulka v~kapitole 3 bude tabulka \quote{3.1}.
+
+\item Jeho obsah. Zavedeno jako argument \tex{placefloat}.
+
+\stopitemize
+
+Pomocí \PlaceMacro{setupcaptions}\tex{setupcaptions} nebo \PlaceMacro{setupcaption}\tex{setupcaption[Object]} 
+můžeme změnit systém číslování a~vzhled samotného titulku. První příkaz ovlivní všechny názvy 
+všech objektů a~druhý ovlivní pouze název určitého typu objektu:
+
+\startitemize
+
+\item Pokud jde o~systém číslování, je řízen volbami {\tt number}, {\tt way}, {\tt prefixsegments} 
+a~{\tt numberconversion}:
+
+  \startitemize
+
+  \item {\tt číslo} může přijmout {\tt ano}, {\tt ne} nebo
+    {\tt none} hodnoty a~řídí, zda bude číslo nebo ne.
+
+  \item {\tt way} udává, zda bude číslování v~celém dokumentu sekvenční ({\tt way=bytext}), 
+nebo zda bude znovu začínat na začátku každé kapitoly ({\tt way=bychapter}) 
+nebo oddílu ( {\tt way=bysection}). V~případě restartu je vhodné koordinovat hodnotu této volby 
+s~volbou {\tt prefixsegments}.
+
+  \item {\tt prefixsegments} udává, zda číslo bude mít {\em prefix} a~co to bude. 
+{\tt prefixsegments=chapter} tedy způsobí, že počet objektů vždy začíná číslem kapitoly, 
+zatímco {\tt prefixsegments=section} bude před číslem objektu s~číslem sekce.
+
+\item {\tt numberconversion} řídí druh číslování. Hodnoty pro tuto možnost mohou být: Arabská čísla
+     (\MyKey{čísla}), malá písmena (\MyKey{a},
+     \MyKey{znaky}), velká písmena (\MyKey{A},
+     \MyKey{Characters}), malá písmena \MyKey{KA}), velká římská čísla (\MyKey{I}, \MyKey{R},
+     \MyKey{Romannumerals}), malá písmena (\MyKey{i},
+     \MyKey{r}, \MyKey{romannumerals} nebo malá písmena
+     (\MyKey{KR})).
+
+   \stopitemize
+
+\item Vzhled samotného titulku je řízen mnoha možnostmi. Uvedu je, ale pro podrobné vysvětlení 
+významu každého z~nich odkazuji na \in{section}[sec:titlestyle], kde je vysvětleno ovládání vzhledu 
+příkazů dělení, protože možnosti jsou z~velké části stejný. Jedná se o~tyto možnosti:
+
+  \startitemize
+
+  \item Chcete-li ovládat formát všech prvků titulku,
+    {\tt styl, barva, příkaz}.
+
+  \item Chcete-li ovládat pouze formát názvu pro daný druh objektu:
+    {\tt headstyle, headcolor, headcommand, headseparator}.
+
+  \item Chcete-li ovládat pouze formát číslování: {\tt
+    číselný příkaz}.
+
+  \item Chcete-li ovládat pouze formát samotného titulku:
+    {\tt textový příkaz}.
+
+  \stopitemize
+
+\item Můžeme také ovládat další aspekty, jako je vzdálenost mezi různými prvky, které tvoří nadpis, 
+šířka nadpisu, jeho umístění vzhledem k~objektu atd. Zde odkazuji na informace
+v~\goto{\ConTeXt\ wiki}[url(wiki)] týkající se možností, které lze konfigurovat pomocí tohoto příkazu.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+   [
+     reference=sec:startcombination,
+     title={Kombinované vložení dvou nebo více objektů},
+   ]
+
+Pro vložení dvou nebo více různých objektů do dokumentu tak, aby je \ConTeXt\ držel pohromadě 
+a~zacházel s~nimi jako s~jedním objektem, máme prostředí \PlaceMacro{startcombination}\tex{startcombination}, 
+jehož syntaxe je:
+
+\type{\startcombination[Ordering] ... \stopcombination}
+
+kde {\em Ordering} udává, jak by měly být objekty seřazeny: pokud je všechny potřeba seřadit 
+vodorovně, {\em Ordering} udává pouze počet objektů, které mají být kombinovány. Pokud ale chceme 
+objekty spojit do dvou nebo více řádků, budeme muset uvést číslo objektu na řádek, 
+za ním počet řádků a~obě čísla oddělit znakem *. Například:
+
+\starttyping
+\startcombination[3*2]
+  {\externalfigure[test1]}
+  {\externalfigure[test2]}
+  {\externalfigure[test3]}
+  {\externalfigure[test4]}
+  {\externalfigure[test5]}
+  {\externalfigure[test6]}
+\stopcombination
+\stoptyping
+
+což vytvoří následující zarovnání obrázků.
+
+\startcombination[3*2]
+  {\externalfigure[test1]}
+  {\externalfigure[test2]}
+  {\externalfigure[test3]}
+  {\externalfigure[test4]}
+  {\externalfigure[test5]}
+  {\externalfigure[test6]}
+\stopcombination
+
+V~předchozím příkladu obrázky, které jsem zkombinoval, ve skutečnosti neexistují, 
+a~proto místo obrázků \ConTeXt\ vygeneroval textová pole s~informacemi o~nich.
+
+Podívejte se na druhou stranu, jak je každý prvek, který má být kombinován v~\tex{startcombination}, 
+uzavřen ve složených závorkách.
+
+Ve skutečnosti nám \tex{startcombination} nejen umožňuje spojovat a~zarovnávat obrázky, 
+ale jakýkoli druh {\em boxu}, jako jsou texty v~prostředí \tex{startframedtext}, tabulky atd. 
+Ke konfiguraci kombinace můžeme použít příkaz \tex{setupcombination} a~můžeme také vytvořit 
+předkonfigurované kombinace pomocí \PlaceMacro{definecombination}\tex{definecombination}.
+
+\stopsubsection
+
+\startsubsection
+   [title={Obecná konfigurace plovoucích objektů}]
+
+Již jsme viděli, že pomocí \tex{placefloat} můžeme ovládat umístění vkládaného plovoucího objektu 
+a~některé další detaily. Je také možné nakonfigurovat:
+
+\startitemize
+
+\item Globální charakteristiky určitého typu plovoucího objektu. To se provádí pomocí 
+\PlaceMacro{setupfloat}\cmd{setupfloat[Název typu plovoucího objektu]}.
+
+\item Globální charakteristiky všech plovoucích objektů v~našem dokumentu. To se provádí pomocí 
+\PlaceMacro{setupfloats}\tex{setupfloats}.
+
+\stopitemize
+
+Mějte na paměti, že stejně jako \tex{placefloat[figure]} je ekvivalentní \tex{placefigure}, 
+\tex{setupfloat[figure]} je ekvivalentní \tex{setupfigures} a~\tex{setupfloat[table ]} 
+je ekvivalentní \tex{setuptables}.
+
+Co se týče konfigurovatelných možností, odkazuji na oficiální seznam příkazů \ConTeXt\ (\in{section}[sec:qrc-setup-cs]).
+
+\stopsubsection
+
+\startsection
+   [
+     reference=sec:definefloat,
+     title={Definování dalších plovoucích objektů},
+   ]
+   \PlaceMacro{definefloat}
+
+Příkaz \tex{definefloat} nám umožňuje definovat vlastní plovoucí objekty. Jeho syntaxe je:
+
+\type{\definefloat [Jednotné jméno] [Množné číslo] [Konfigurace]}
+
+Kde argument {\em Konfigurace} je volitelný argument, který nám umožňuje uvést konfiguraci 
+tohoto nového objektu již v~době jeho vytvoření. Můžeme to udělat i~později pomocí 
+\tex{setupfloat[Jména v~jednotném čísle]}.
+
+Vzhledem k~tomu, že tímto oddílem končíme náš úvod, využiji toho, abych se dostal trochu hlouběji 
+do zdánlivé {\em džungle} příkazů \ConTeXt{}u\, které, jakmile je pochopíme, není tolik {\em
+džunglí}, ale ve skutečnosti je docela racionální.
+
+Začněme tím, že se sami sebe zeptáme, k~čemu vlastně je plovoucí objekt
+\ConTeXt{}u, přičemž odpověď zní, že je to objekt s~následujícími vlastnostmi:
+
+\startitemize
+
+\item má určitou volnost s~ohledem na své umístění na stránce;
+
+\item což znamená, že je k~němu přidružen {\em seznam}, který mu umožňuje číslovat tyto druhy objektů 
+a~případně generovat jejich index;
+
+\item má název;
+
+\item když objekt se skutečně chová jako plovoucí, musí se s~ním zacházet jako s~nedělitelnou jednotkou, 
+což znamená (v~terminologii \TeX{}u) {\em uzavřen v~tzv. boxu}.
+
+\stopitemize
+
+Jinými slovy, plovoucí objekt se ve skutečnosti skládá ze tří prvků: samotného objektu, 
+seznamu s~ním spojeného a~názvu. K~ovládání samotného objektu potřebujeme pouze jeden příkaz 
+pro nastavení jeho umístění a~další pro vložení objektu do dokumentu; 
+pro nastavení aspektů seznamu postačují obecné příkazy pro řízení seznamu a~pro nastavení 
+aspektů názvu obecné příkazy pro řízení názvu.
+
+A~zde přichází na řadu genialita \ConTeXt{}u\: jednoduchý příkaz pro ovládání plovoucích objektů 
+(\tex{setupfloats}) a~jednoduchý příkaz pro vkládání plovoucích objektů: \tex{placefloat}, 
+mohl být navržen: ale co \ConTeXt\ dělá:
+
+\startitemize[n]
+
+\item Navrhněte příkaz k~propojení názvu s~konkrétní konfigurací plovoucího objektu. 
+Toto je příkaz \tex{definefloat}, který ve skutečnosti nepropojuje jedno jméno, ale dvě jména, 
+jedno v~jednotném čísle a~jedno v~množném čísle.
+
+\item Vytvořte společně s~globálním konfiguračním příkazem plovoucích objektů příkaz, 
+který nám umožňuje konfigurovat pouze určitý typ objektu: \tex{setupfloat[Object]}.
+
+\item Přidejte do příkazu umístění plovoucího objektu (\tex{placefloat}), argument, 
+který nám umožňuje rozlišovat mezi jedním nebo druhým typem: (\tex{placefloat[Object]}).
+
+\item Vytvoří příkazy, včetně názvu objektu, pro všechny akce plovoucího objektu. 
+Některé z~těchto příkazů (které jsou ve skutečnosti klony jiných obecnějších příkazů) 
+budou používat název objektu v~jednotném čísle a~jiné jej budou používat v~množném čísle.
+  
+\stopitemize
+
+Když tedy vytvoříme nový plovoucí objekt a~řekneme \ConTeXt{}u\, jaké je jeho jméno v~jednotném 
+a~množném čísle, \ConTeXt:
+
+\startitemize
+
+\item Vyhradí místo v~paměti pro uložení specifické konfigurace daného typu objektu.
+
+\item Vytvoří nový seznam s~jednotným jménem tohoto typu objektu, protože plovoucí objekty jsou 
+spojeny se seznamem.
+
+\item Vytvoří nový druh \quotation{title} propojený s~tímto novým typem objektu, 
+aby byla zachována přizpůsobená konfigurace těchto titulků.
+
+\item A~nakonec vytvoří skupinu nových příkazů specifických pro tento nový typ objektu, 
+jehož jméno je ve skutečnosti synonymem pro obecnější příkaz.
+  
+\stopitemize 
+
+V~\in{table}[tbl:floatcommands] můžeme vidět příkazy, které se automaticky vytvoří,
+když definujeme nový plovoucí objekt, a~také obecnější příkazy, jejichž synonyma jsou:
+
+\placetable
+   [tady]
+   [tbl:floatcommands]
+   {Příkazy, které se automaticky vytvářejí při vytvoření nového plovoucího objektu}
+{\switchtobodyfont[malé]
+\starttabulate[|lT|lT|lT|]
+\HL
+\NC{\bf\rm příkaz}
+\NC{\bf\rm Synonymum}
+\NC{\bf\rm příklad}
+\NR
+\HL
+\NC\backslash úplný seznam<PluralName>
+\NC\backslash completelist[PluralName]
+\NC\backslash úplný seznam čísel
+\NR
+\NC\backslash <JednotnéJméno>
+\NC\backslash placefloat[Jednotné jméno]
+\NC\backslash obrázku
+\NR
+\NC\backslash seznam<Množné jméno>
+\NC\backslash[PluralName]
+\NC\backslash seznam obrázků
+\NR
+\NC\backslash nastavení???<JednotnéJméno>
+\NC\backslash setupfloat[SingulárníNázev]
+\NC\backslash nastavení
+\NR
+\HL
+\stoptabulate
+}
+
+\startSmallPrint
+
+   Ve skutečnosti jsou vytvořeny některé další příkazy, které jsou synonymem k~předchozím, 
+a~protože jsem je nezahrnul do vysvětlení kapitoly, vynechal jsem je z~\in{table}[tbl:floatcommands]: \tex{start<JménoSingulární >}, 
+\tex{start<JménoSingulární>text} a~\tex{startplace<JménoSingulární>}.
+
+\stopSmallPrint
+
+Příkaz používaný pro obrázky jsem použil jako příklad příkazů vytvořených při definování 
+nového plovoucího objektu; a~udělal jsem to, protože obrázky, jako tabulky a~zbytek floatů 
+předdefinovaných pomocí \ConTeXt{}u, jsou skutečnými případy \tex{definefloat}:
+
+\starttyping
+\definefloat[chemical][chemicals]
+\definefloat[figure][figures]
+\definefloat[table][tables]
+\definefloat[intermezzo][intermezzi]
+\definefloat[graphic][graphics]
+\stoptyping
+
+Konečně vidíme, že ve skutečnosti \ConTeXt\ žádným způsobem nekontroluje žádný druh materiálu 
+obsaženého v~každém konkrétním plovoucím objektu; předpokládá, že jde o~práci autora. To je důvod, 
+proč můžeme také vkládat text pomocí příkazů \tex{placefigure} nebo \tex{placetable}. Avšak text, 
+který je vložen pomocí \tex{placefigure}, je zahrnut v~seznamu obrázků, a~pokud je vložen pomocí 
+\tex{placetable} v~seznamu tabulek.
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+\endinput
+
