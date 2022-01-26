@@ -1,8 +1,1268 @@
+%%% File:     b06_Fonts.mkiv
+%%% Author:   Joaquín Ataz-López
+%%% Begun:    March 2020
+%%% Concluded: June 2020
+%%% Title:  This chapter was the first chapter I began. I came back to
+%%%         it often because I wanted it to include the use of
+%%%         fonts installed on our system. But I didn't
+%%%         succeed in getting the instructions in the wiki to
+%%%         work. Recently (August) I discovered fonttest which
+%%%         can be accessed after running mtxrun --script server --auto
+%%%         I need to investigate further. This "sees" the fonts
+%%%         installed on my system and tells me what code I need
+%%%         to use them. But I stll don't understand how it
+%%%         works. The key might possibly lie in the "Fonts
+%%%         out of ConTeXt" manual, but i struggle to understand it.
+%%%
+%%% Edited with: Emacs + AuTeX - And at times vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent b06_Fonts.mkiv
+
+\startchapter
+  [
+    reference=sec:fontscol,
+    title=Fonts and colours in\\ \ConTeXt,
+    bookmark=Fonts and colours in ConTeXt,
+  ]
+
+\TocChap
+
+\startsection
+  [title=Typografická písma zahrnutá v\\ \suite-]
+
+Fonty \ConTeXt{}u\ nabízí mnoho možností, ale také poměrně dost
+složitých. Nebudu se zabývat všemi pokročilými možnostmi písma.
+v~této příručce, ale omezím se na předpoklad, že budeme pracovat s~některými
+z~21 písem, která jsou součástí instalace \ConTeXt\ Standalone,
+těmi, které jsou uvedeny v~\in{tabulka}[tbl:ctx-fonts].
 
 
---------------------
-Czech version
---------------------
+{\switchtobodyfont[small]
+  \placetable
+    [here]
+    [tbl:ctx-fonts]
+    {Fonts included in the \ConTeXt\ distribution}
+    \starttabulate[|l|l|w{2cm}|]
+      \HL
+      \NC{\bf Oficialní jméno}\NC{\bf Jména v~\ConTeXt{}u}\NC{\bf Příklad}\NR
+      \HL
+      \NC Latin Modern \NC modern, modern-base\NC{\switchtobodyfont[modern] Emily Brontë's book}\NR
+      \NC Antykwa Poltawskiego\NC antykwapoltawskiego\NC{\switchtobodyfont[antykwapoltawskiego] Emily Brontë's book}\NR
+      \NC Antykwa Toruńska\NC antykwa\NC{\switchtobodyfont[antykwa] Emily Brontë's book}\NR
+      \NC Cambria \NC cambria\NC{\switchtobodyfont[cambria] Emily Brontë's book}\NR
+      \NC DejaVu\NC dejavu\NC{\switchtobodyfont[dejavu] Emily Brontë's book}\NR
+      \NC DejaVu Condensed\NC dejavu-condensed\NC{\switchtobodyfont[dejavu-condensed] Emily Brontë's book}\NR
+      \NC Gentium \NC gentium\NC{\switchtobodyfont[gentium] Emily Brontë's book}\NR
+      \NC Iwona\NC iwona\NC{\switchtobodyfont[iwona] Emily Brontë's book}\NR
+      \NC Latin Modern Variable\NC modernvariable, modern-variable\NC{\switchtobodyfont[modernvariable] Emily Brontë's book}\NR
+      \NC PostScript\NC postscript\NC  {\switchtobodyfont[postscript] Emily Brontë's book}\NR
+      \NC TeX Gyre Adventor\NC adventor, avantgarde\NC{\switchtobodyfont[adventor] Emily Brontë's book}\NR
+      \NC TeX Gyre Bonum\NC bonum, bookman\NC{\switchtobodyfont[bonum] Emily Brontë's book}\NR
+      \NC TeX Gyre Cursor\NC cursor, courier\NC{\switchtobodyfont[cursor] Emily Brontë's book}\NR
+      \NC TeX Gyre Heros\NC heros, helvetica\NC{\switchtobodyfont[heros] Emily Brontë's book}\NR
+      \NC TeX Gyre Schola\NC schola, schoolbook\NC{\switchtobodyfont[schola] Emily Brontë's book}\NR
+      \NC Tex Gyre Chorus\NC chorus, chancery\NC{\switchtobodyfont[chorus] Emily Brontë's book}\NR
+      \NC Tex Gyre Pagella\NC pagella, palatino\NC{\switchtobodyfont[pagella] Emily Brontë's book}\NR
+      \NC Tex Gyre Termes\NC termes, times\NC{\switchtobodyfont[termes] Emily Brontë's book}\NR
+      \NC Euler\NC eulernova\NC{\switchtobodyfont[eulernova] Emily Brontë's book}\NR
+      \NC Stix2\NC stix\NC{\switchtobodyfont[stix] Emily Brontë's book}\NR
+      \NC Xits\NC xits\NC{\switchtobodyfont[xits,8pt] Emily Brontë's book}\NR
+      \HL
+    \stoptabulate
+}
 
-TO BE DONE!
---------------------
+Prostřední sloupec \in{tabulka}[tbl:ctx-fonts] označuje název nebo
+jména, pod kterými \ConTeXt\ zná dané písmo. Pokud existují dvě
+jména, jedná se o~synonyma. V~posledním sloupci je uveden příklad písma
+který se používá. Co se týče pořadí, v~jakém jsou písma zobrazena, první z~nich je
+písmo, které \ConTeXt\ používá ve výchozím nastavení, a~zbývající písma jsou v~pořadí
+abecedním, zatímco poslední tři písma jsou speciálně navržena
+pro matematiku. Všimněte si, že Eulerovo písmo nemůže přímo reprezentovat
+písmena s~diakritikou, takže dostaneme Bront's, nikoli Brontë's.
+
+
+Pro čtenáře, kteří přicházejí ze světa Windows a~jeho výchozích písem, 
+uvedu, že {\em heros} je v~systému Windows ekvivalentem Arialu, zatímco {\em
+termes} je stejné jako Times New Roman. Nejsou úplně stejná
+ale jsou si natolik podobné, že by bylo třeba být velmi 
+všímavý, aby je člověk rozeznal.
+
+  \startSmallPrint
+
+
+ Písma používaná systémem Windows nejsou {\em volný software} (ve skutečnosti téměř
+    nic ve Windows není {\em volný software}), takže je nelze
+    zahrnout do \ConTeXt{}u. Pokud je však \ConTeXt\ nainstalován na
+    Windows, pak jsou tato písma již nainstalována a~mohou
+    být použita stejně, jako jakákoli jiná písma nainstalovaná v~systému se spuštěným
+   \ConTeXt{}em. V~tomto úvodu se však nebudu zabývat tím, jak 
+    používat písma již nainstalovaná v~systému. Nápovědu lze nalézt
+    na \goto{\ConTeXt\ wiki}[url(wiki)].
+
+    
+  \stopSmallPrint
+
+\stopsection
+
+\startsection
+  [title=Vlastnosti písma]
+
+\startsubsection
+  [title={Písma, {\em styly} a~varianty stylů}]
+
+
+Terminologie týkající se fontů je poněkud matoucí, protože někdy
+to, co se nazývá písmo, je ve skutečnosti rodina písem, která zahrnuje
+různé styly a~varianty, které mají společný základní design. Nebudu se zabývat 
+otázkou, která terminologie je správnější; chci
+pouze objasnit terminologii používanou v~\ConTeXt{}u. Tam,
+se rozlišuje mezi písmy, styly a~variantami (resp.
+alternativami) pro každý styl. Písma {\em} obsažená v~\ConTeXt{}u
+(ve skutečnosti se jedná o~rodiny písem) jsou ty, které jsme viděli
+v~předchozí části. Nyní se podíváme na {\em styly} a~{\em
+alternativy}.
+
+\subsubsubject{Styly písma}
+
+\dontleavehmode{\sc Donald E. Knuth} navrhl {\em Computer Modern}
+písmo pro \TeX a dal mu tři různé {\em styly} zvané {\em roman},
+{\em sans serif} a~{\em teletype}. Styl {\em roman} je designem
+kde jsou znaky ozdobně rozvolněné, známé v~typologickém designu,
+proto je tento styl písma známý také jako {\em serif}.
+Tento styl byl považován za {\em normalní} nebo
+výchozí styl. Styl {\em sans serif}, jak naznačuje jeho název, postrádá ozdobnost
+a~je tedy jednodušší, stylizovanější, někdy se používá i~jako font.
+známý pod jinými názvy, např. ve španělštině {\em paloseco}; toto písmo může být
+hlavním písmem v~dokumentu, ale je také vhodné pro použití
+v~některých částech textu, kterých hlavním písmem je {\em roman}.
+jako například nadpisy nebo záhlaví stránek. A~konečně styl {\em
+teletype} byl zařazen do stylu {\em Computer Roman}, protože
+byl navržen pro psaní knih týkajících se počítačového programování, které zahrnují
+rozsáhlé části v~počítačovém {\em kódu}, který je konvenčně
+v~tištěných materiálech zobrazován monospace stylem, který napodobuje
+počítačových terminálů a~starých psacích strojů.
+
+  \startSmallPrint
+
+
+
+Čtvrtý styl určený pro matematické fragmenty, by mohl být přidán k~těmto tří 
+ {\em stylům}. Ale protože \TeX\ automaticky používá tento
+    styl, když přejde do matematického režimu, a~neobsahuje příkazy pro jeho povolení nebo zakázání, ani nemá {\em varianty}
+    nebo alternativy ostatních stylů, není obvyklé o~něm přemýšlet jako o{\em stylu}.
+
+
+\ConTeXt\ obsahuje příkazy pro dva další možné styly:
+  ručně psaný a~kaligrafický. Nejsem si úplně jistý, rozdílem
+  mezi nimi, protože na jedné straně žádný z~fontů
+  obsažen \ConTeXt{}u tyto styly neobsahuje.
+  a~na druhou stranu, jak vidím, kaligrafické písmo je v~tomto případě také spíše
+  ručně psané písmo. Tyto příkazy, které \ConTeXt\ obsahuje, pro umožnění
+  těchto stylů, pokud budou použity s~písmem, které je neimplementuje,
+  nezpůsobí žádnou chybu při kompilaci: prostě se nic nestane.
+  
+  \stopSmallPrint
+
+\subsubsubject{Alternativní formy písma}
+
+Každý {\em styl} povoluje učitý počet alternativních forem, proto je 
+\ConTeXt\ nazývá, ({\em alternativy}):
+
+\startitemize[2,packed]
+
+\item Regular or normal (\MyKey{tf}, z~{\em typeface}).
+\item Bold (\MyKey{bf}, z~{\em boldface}).
+\item Italic (\MyKey{it} z~{\em italic})
+\item BoldItalic (\MyKey{bi} z~{\em bold italic})
+\item Slanted (\MyKey{sl} z~{\em slanted})
+\item BoldSlanted (\MyKey{bs} z~{\em bold slanted})
+\item Small caps (\MyKey{sc} z~{\em small caps})
+\item Medieval (\MyKey{os} z~{\em old style})
+  
+\stopitemize
+
+
+Tyto {\em alternativy}, jak už jejich název napovídá, se vzájemně ovlivňují: 
+když je jedna z~nich povolena, ostatní jsou zakázány. To je důvod, proč
+\ConTeXt\ poskytuje příkazy pro jejich povolení, ale ne pro zakázání.
+Protože když povolíme alternativu, zakážeme tu, kterou jsme předtím povolovali.
+a~tak například, pokud píšeme kurzívou
+a~povolíme tučné písmo, bude kurzíva zakázána. Pokud chceme používat tučné písmo
+a~kurzívu současně, nemusíme povolit jedno a~pak druhé,
+ale spíše povolit alternativu, která zahrnuje obojí (\MyKey{bi}).
+
+
+Na druhou stranu je třeba mít na paměti, že ačkoli \ConTeXt\ 
+předpokládá, že každé písmo bude mít tyto alternativy, a~tudíž
+poskytuje příkazy, které umožňují, aby fungovaly a~produkovaly nějaké
+vnímatelné efekty ve výsledném dokumentu, potřebují tyto příkazy, aby písmo.
+mělo ve svém návrhu specifické formy pro každý styl a~alternativu.
+
+\startSmallPrint
+
+Zejména mnoho písem nerozlišuje ve svém designu mezi.
+  šikmými a~kurzivními písmeny, nebo neobsahují speciální tvary pro malé kapitálky. 
+
+\stopSmallPrint
+
+\subsubsubject{Rozdíl mezi kurzívou a~šikmými písmeny}
+
+
+Podobnost typografické funkce kurzívy a~šikmého písma
+vede mnoho lidí k~záměně těchto dvou alternativ. 
+Šikmé písmeno vzniká mírným pootočením pravidelného tvaru. Ale
+kurzíva znamená - alespoň v~některých písmech - odlišný design ve tvaru písmene.
+kde se {\em zdá}, že písmena jsou nakloněná, protože byla nakreslena
+tak, aby to tak vypadalo, ale ve skutečnosti se nejedná o~skutečný náklon. To může být
+v~následujícím příkladu, ve kterém jsme napsali stejné slovo
+třikrát ve stejné velikosti, aby bylo snadno rozpoznatelné.
+rozdíly. V~první verzi je použita základná podoba,
+v~druhém šikmá a~ve třetím kurzíva:
+
+\midaligned{\switchtobodyfont[20pt,rm] %
+  \framed{{\rm italics} -- {\sl italics} -- {\it italics}} }%
+
+
+Všimněte si, že design znaků je v~prvních dvou dílech stejný.
+ale ve třetím příkladu jsou jemné rozdíly v~tazích
+některých písmen, což je velmi zřejmé, zejména v~tom, jak vypadá \quote{a}.
+ačkoli rozdíly se ve skutečnosti vyskytují téměř ve všech případech.
+znaků.
+
+
+Obvyklá použití kurzívy a~šikmých písmen jsou podobná a~každá osoba
+se rozhodne, zda použije jedno nebo druhé. Zde je volnost, i~když
+měli bychom zdůraznit, že dokument bude lépe napsán a~bude vypadat
+lépe, pokud je použití kurzívního a~šikmého písma {\em konzistentní}.
+V~mnoha písmech je navíc rozdíl v~designu mezi kurzivou a~šikmými písmy
+zanedbatelný, takže je jedno, zda použijeme jedno nebo druhé.
+nebo druhou.
+
+Na druhou stranu, jak kurzíva, tak šikmé písmo jsou alternativami písma, které
+znamená především dvě věci:
+
+\startitemize[n]
+
+\item Můžeme je použít pouze tehdy, jsou-li definovány v~písmu.
+
+\item Povolením jedné z~nich deaktivujeme alternativu, která
+  která byla do té doby používána.
+  
+\stopitemize
+
+Spolu s~příkazy pro kurzívu a~šikmé písmo nabízí \ConTeXt\ 
+další příkazy pro {\em zdůraznění} určitého textu. Jeho použití
+znamená jemné rozdíly ve srovnání s~kurzivou nebo šikmým písmem. Viz
+\in{sekce}[sek:zvýraznění].
+
+\stopsubsection
+
+\startsubsection
+  [title=Velikost písma]
+
+Všechna písma, se kterými \ConTeXt pracuje, jsou založena na vektorové grafice.
+takže teoreticky mohou být zobrazena v~libovolné velikosti písma, ačkoli, jak
+uvidíme, záleží to na skutečných instrukcích, které používáme k~určení
+velikosti písma. Pokud není uvedeno jinak, předpokládá se, že velikost písma
+bude 12 bodů.
+
+\startSmallPrint
+
+Všechna písma používaná v~\ConTeXt{}u jsou založena na vektorové grafice
+a~Proto jsou to písma Opentype nebo Type 1, což znamená, že písma, jenž
+ vznikly před touto technologií, byly implementovány znovu. Konkrétně se jedná o,
+ výchozí písmo \TeX{}u, {\em Computer Modern}, které navrhl {\sc Knuth},
+ existovalo pouze v~určitých velikostech, a~proto bylo znovu implementováno v~designu nazvaném
+ \emph{Latin Modern}, který používá \ConTeXt, ačkoli v~mnoha dokumentech
+ se nadále nazývá {\em Computer Modern} kvůli silné
+ symbolice, kterou toto písmo stále má v~systému \TeX{}, odkdy
+ začaly a~byly vyvinuty {\sc Knuthem} spolu s~dalším programem nazvaným
+ \MetaFont{}, jehož cílem bylo navrhnout písma, která by mohla pracovat s~\TeX{}.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:mainfont,
+    title=Nastavení hlavního písma dokumentu,
+  ]
+\PlaceMacro{setupbodyfont}
+
+Ve výchozím nastavení, pokud není uvedeno jiné písmo, \ConTeXt{} použije
+{\em Latin Modern Roman} o~velikosti 12 bodů jako hlavní písmo. Toto písmo bylo
+původně navrhl {\sc Knuth} pro implementaci v~\TeX{}u. Je to
+elegantní písmo římského stylu s~velkou proporční a~dekorativní 
+\quotation{kresbou} - nazývanými {\em serifs} - v~některých tazích,
+které je velmi vhodné jak pro tištěné texty, tak pro zobrazení na
+obrazovce; ačkoli -- a~to je osobní názor -- není tak
+vhodné pro malé obrazovky, jako je {\em smartphone}, protože {\em
+serify} nebo ozdoby mají tendenci se hromadit, což ztěžuje čtení.
+
+Pro nastavení jiného písma použijeme \tex{setupbodyfont}, který nám umožní ne
+jen změnit skutečné písmo, ale také jeho velikost a~styl. Když
+chceme, aby to platilo pro celý dokument, musíme to zahrnout do položky
+preambuli zdrojového souboru. Pokud však chceme jednoduše změnit písmo v~místě
+v~určitém bodě, musíme do něj zahrnout to, co následuje.
+
+Formát \tex{setupbodyfont} je:
+
+\type{\setupbodyfont[Options]}
+
+kde různé možnosti příkazu umožňují uvést:
+
+\startitemize
+
+\item {\bf Jméno písma}, což může být kterýkoli ze symbolických názvů písem
+nalezené v~\in{tabulce}[tbl:ctx-fonts].
+
+\item {\bf Velikost}, která může být označena buď rozměry
+(s~použitím bodu jako měrné jednotky) nebo určitými symbolickými
+názvy. Všimněte si však, že i~když jsem dříve uvedl, že písma používaná
+v~\ConTeXt{}u lze škálovat prakticky na libovolnou velikost, v~\tex{setupbodyfont} 
+se používají pouze velikosti skládající se z~celých čísel mezi 4 a~12, stejně jako velikosti
+14,4 a~17,3, jsou v~\ConTeXt{}u podporovány. Ve výchozím nastavení se předpokládá
+velikost 12 bodů.
+
+
+   \tex{setupbodyfont}, vytváří něco, co bychom mohli nazvat {\em základní
+  velikost} dokumentu; jinými slovy {\em normální} velikost znaků.
+  na jejímž základě se vypočítávají další velikosti, například nadpisy
+  a~poznámky pod čarou. Když změníme hlavní velikost pomocí \tex{setupbodyfont}.
+  všechny ostatní velikosti vypočtené na základě hlavního písma se také změní.
+  změní.
+
+Kromě přímo uvedené velikosti znaků (10pt, 11pt, 12pt atd.)
+můžeme také použít některé symbolické názvy, které vypočítají velikost znaku pro
+použítí na základě aktuální velikosti. Jedná se o~tyto symbolické názvy,
+od největšího po nejmenší: big, small, script, x, scriptscript a~xx.
+Pokud tedy například chceme nastavit text těla pomocí \tex{setupbodyfont}.
+který je větší než 12 bodů, můžeme tak učinit pomocí \MyKey{big}.
+
+\item {\bf Styl písma}, který, jak jsme již uvedli, může být roman
+(se serify), nebo bez serifů (san serif), nebo styl psacího stroje
+a~u~některých písem ručně psaný a~kaligrafický styl. \tex{setupbodyfont}
+umožňuje různé symbolické názvy pro označení různých stylů. Jsou
+v~tabulce \in[tab:ctx-stylesstbdf]:
+
+  {\switchtobodyfont[script] %
+    \placetable %
+      [here, force] %
+      [tab:ctx-stylesstbdf] %
+      {Styles in setupbodyfont} %
+      {\startxtable %
+        \startxrow [topframe=on, bottomframe=on]%
+          \startxcell \bf Styl \stopxcell %
+          \startxcell \bf Symbolické jména povoleny\stopxcell %
+        \stopxrow %
+        \startxrow %
+          \startxcell Roman \stopxcell %
+          \startxcell \tt rm, roman, serif, regular \stopxcell %
+        \stopxrow %
+        \startxrow %
+          \startxcell Sans Serif \stopxcell %
+          \startxcell \tt ss, sans, support, sansserif\stopxcell %
+        \stopxrow %
+        \startxrow %
+          \startxcell Styl psacího stroje \stopxcell %
+          \startxcell \tt tt, modo, type, teletype \stopxcell %
+        \stopxrow %
+        \startxrow %
+          \startxcell Ručne psaný \stopxcell %
+          \startxcell \tt hw, handwritten \stopxcell %
+        \stopxrow %
+        \startxrow [bottomframe=on]%
+          \startxcell Kaligrafický \stopxcell %
+          \startxcell \tt cg, calligraphic\stopxcell %
+        \stopxrow %
+      \stopxtable} %
+  }
+
+
+Pokud mohu posoudit, různé názvy podporované pro jednotlivé
+ styly jsou zcela synonymní.
+
+\stopitemize
+
+\startsubsubject
+  [
+    reference=sec:see-font,
+    title=Náhled, jak písmo vypadá
+  ]
+
+Before deciding to use a~particular font in our document, we would
+normally want to see what it looks like. This can almost always be done
+from the operating system as there is usually some utility to examine
+the appearance of the fonts installed on the system; but for
+convenience, \ConTeXt\ itself offers a~utility that allows us to see
+the appearance of any of the fonts enabled in \ConTeXt\. This is
+\tex{showbodyfont}, that generates a~table with examples of the font we
+indicate.
+
+Než se rozhodneme použít v~dokumentu určité písmo, obvykle bychom se 
+ chtěli podívat, jak vypadá. To lze téměř vždy provést
+z~operačního systému, protože obvykle existuje nějaká utilita, která umožňuje prozkoumat
+vzhled písem nainstalovaných v~systému; ale v~případě
+\ConTeXt{}u se nabízí nástroj, který nám umožňuje vidět
+vzhled kteréhokoli z~písem povolených v~\ConTeXt{}u. Jedná se
+o~\tex{showbodyfont}, který vygeneruje tabulku s~příklady písma, které jsme
+označili.
+
+Formát \tex{showbodyfont} je nasledující:
+
+\type{\showbodyfont [Options]}
+
+where we can indicate as options precisely the same symbolic names as in
+\tex{setupbodyfont}. So, for example, \tex{showbodyfont[schola, 8pt]}
+will show us the table below, in which there are different examples of
+the schola font at a~base size of 8 points:
+
+\showbodyfont[schola,8pt]\bigskip
+
+
+Všimněte si, že v~prvním řádku a~sloupci jsou určité příkazy.
+tabulky. Dále, když byl význam těchto příkazů
+vysvětlen, podíváme se ještě jednou do tabulky generované příkazem
+\tex{showbodyfont}.
+
+Pokud chceme zobrazit kompletní rozsah znaků v~určitém písmu,
+můžeme použít příkaz \PlaceMacro{showfont}\tex{showfont[FontName]}.
+Tento příkaz zobrazí hlavní konstrukci každého ze znaků
+bez použití příkazů pro styly a~alternativy.
+
+
+\stopsubsubject
+
+\stopsection
+
+\startsection
+  [title=Změna písma nebo některých funkcí písma]
+
+\startsubsection
+  [title=Příkazy \tex{setupbodyfont} a~\tex{switchtobodyfont}]
+\PlaceMacro{switchtobodyfont}\PlaceMacro{setupbodyfont}
+
+Pro změnu písma, stylu nebo velikosti můžeme použít stejný příkaz, kterým jsme
+stanovili písmo na začátku dokumentu, když 
+nechceme použít výchozí písmo \ConTeXt{}u: \tex{setupbodyfont}. Vše, co potřebujeme,
+je umístit tento příkaz na místo v~dokumentu, kde si přejeme
+změnit písmo. Tím dojde k~{\em trvalé} změně písma,
+což znamená, že přímo ovlivní hlavní písmo a~nepřímo všechny ostatní
+písma, která s~ním souvisejí.
+
+Velmi podobné \tex{setupbodyfont} je \tex{switchtobodyfont}. Oba
+nám umožňují měnit stejné aspekty písma (písmo
+samotný styl a~velikost), ale vnitřně fungují odlišně
+a~jsou určeny pro různá použití. První z~nich (\tex{setupbodyfont}) je
+určen pro {\em nastavení} hlavního (a~obvykle jediného) písma.
+v~dokumentu; není to ani běžné, ani typograficky správné mít
+v~dokumentu více než jedno hlavní písmo (proto se nazývá {\em
+hlavní} písmo). Naproti tomu \tex{switchtobodyfont} je určen pro psaní.
+některé části textu jiným písmem nebo k~přiřazení určitého písma k~jinému písmu.
+speciálnímu druhu odstavce, který chceme v~dokumentu definovat.
+
+Apart from the above -- which actually affects the internal functioning
+of each of these two commands -- from the user's point of view there are
+some differences between the use of one or the other command. In
+particular:
+
+Kromě výše uvedeného - který skutečně ovlivňuje vnitřní fungování
+každého z~těchto dvou příkazů -- z~pohledu uživatele existují
+některé rozdíly mezi použitím jednoho nebo druhého příkazu.
+Zejména:
+
+\startitemize[n]
+
+\item Jak již víme, \tex{setupbodyfont} je omezen na konkrétní
+rozsah velikostí, zatímco \tex{switchtobodyfont} nám umožňuje označit
+prakticky libovolnou velikost, takže pokud písmo v~dané velikosti není k~dispozici,
+bude na ni škálováno.
+
+\item \tex{switchtobodyfont} nijak neovlivňuje textové prvky
+kromě místa, kde je použito, na rozdíl od \tex{setupbodyfont}, které, jak
+je uvedeno výše, nastavuje hlavní písmo a~jeho změnou také
+změní písmo všech textových prvků, jejichž písmo je vypočteno 
+na základě hlavního písma.
+
+
+\stopitemize
+
+Na druhou stranu oba příkazy mění nejen písmo, ale i~styl
+a~také další aspekty spojené s~písmem, jako 
+například mezery mezi řádky.
+
+\startSmallPrint
+
+\tex{setupbodyfont} generuje chybu při kompilaci, pokud je použito nepovolené písmo
+  ale nevyvolá ji, pokud je požadována neexistující velikost písma.
+  v~takovém případě je výchozí písmo ({\em Latin Modern Roman}).
+  bude povoleno. \tex{switchtobodyfont} se chová stejně, pokud jde
+o~velikost, jak jsem již řekl, snaží se toho
+  dosáhnout zmenšením písma. Existují však písma, která nelze
+  škálovat na určité velikosti, v~takovém případě by výchozí písmo bylo
+  opět povoleno.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:quick-change,
+    title={Rychlá změna stylu, alternativy a~velikosti},
+  ]
+
+\subsubsubject{Změna stylu a~alternativy}
+
+Kromě příkazu \tex{switchtobodyfont} poskytuje \ConTeXt\ sadu příkazů.
+které nám umožňují rychle změnit styl, alternativu nebo velikost. S~pomocí
+\ConTeXt\ wiki nás upozorňuje, že někdy,
+když se objeví na začátku odstavce, mohou způsobit některé
+nežádoucí vedlejší účinky, takže doporučuje, aby v~takových případech příkaz
+předcházel příkaz
+\PlaceMacro{dontleavehmode}\tex{dontleavehmode}.
+
+{\switchtobodyfont[small] %
+\placetable[here][tab:ctx-styles]
+  {Příkazy pro změnu mezi jednotlivými styly}
+  {
+    \starttabulate[|l|l|]
+      \HL
+      \NC {\bf Styl} \NC {\bf Příkazy, které to umožňují}\NR
+      \HL
+      \NC Roman\NC\type{\rm}, \type{\roman}, \type{\serif}, \type{\regular}\NR\PlaceMacro{rm}\PlaceMacro{roman}\PlaceMacro{serif}\PlaceMacro{regular}
+      \NC Sans Serif\NC\type{\ss}, \type{\sans}, \type{\support}, \type{\sansserif}\NR\PlaceMacro{ss}\PlaceMacro{sans}\PlaceMacro{support}\PlaceMacro{sansserif}
+      \NC Monospaced\NC\type{\tt}, \type{\mono}, \type{\teletype},\NR\PlaceMacro{tt}\PlaceMacro{mono}\PlaceMacro{teletype}
+      \NC Handwritten\NC\type{\hw}, \type{\handwritten},\NR\PlaceMacro{hw}\PlaceMacro{handwritten}
+      \NC Calligraphic\NC\type{\cf}, \type{\calligraphic}\PlaceMacro{cf}\PlaceMacro{calligraphic}\NR
+      \HL
+    \stoptabulate
+  }}
+
+
+\in{Tabulka}[tab:ctx-styles] obsahuje příkazy, které nám umožňují měnit
+styl, aniž by se změnil jakýkoli jiný aspekt;
+a~\in{tabulka}[tab:ctx-alternatives] obsahuje příkazy, které nám umožňují
+měnit výhradně alternativu.
+
+{\switchtobodyfont[small] %
+  \placetable[here][tab:ctx-alternatives]
+  {Příkazy pro povolení konkretní alternativy}
+  {
+    \starttabulate[|l|l|]
+      \HL
+      \NC {\bf Alternative} \NC {\bf Commands that enable it}\NR
+      \HL
+      \NC Normal           \NC\type{\tf}, \type{\normal}\NR\PlaceMacro{tf}\PlaceMacro{normal}
+      \NC Italic          \NC\type{\it}, \type{\italic}\NR\PlaceMacro{it}\PlaceMacro{italic}
+      \NC Bold          \NC\type{\bf}, \type{\bold}\NR\PlaceMacro{bf}\PlaceMacro{bold}
+      \NC Bold-italic  \NC\type{\bi}, \type{\bolditalic}, \type{\italicbold}\NR\PlaceMacro{bi}\PlaceMacro{bolditalic}\PlaceMacro{italicbold}
+      \NC Slanted        \NC\type{\sl}, \type{\slanted}\NR\PlaceMacro{sl}\PlaceMacro{slanted}
+      \NC Bold-slanted\NC\type{\bs}, \type{\boldslanted}, \type{\slantedbold}\NR\PlaceMacro{bs}\PlaceMacro{boldslanted}\PlaceMacro{slantedbold}
+      \NC Small caps       \NC\type{\sc}, \type{\smallcaps}\NR\PlaceMacro{sc}\PlaceMacro{smalcaps}
+      \NC Medieval         \NC\type{\os}, \type{\mediaeval}\PlaceMacro{os}\PlaceMacro{mediaeval}\NR
+    \stoptabulate
+  }
+}
+
+Všechny tyto příkazy si zachovávají svou účinnost, dokud není použit jiný styl nebo
+alternativa výslovně povolena, nebo {\em skupina}, v~jejímž rámci
+deklarován příkaz, skončí. Pokud tedy chceme, aby příkaz ovlivnil
+pouze část textu, musíme tuto část textu uzavřít do příkazu
+skupiny, jako v~následujícím příkladu, kde pokaždé,když se objeví slovo {\em
+myšlenka}, pokud se jedná o~podstatné jméno, nikoli o~sloveso, je uvedeno kurzívou,
+se vytvoří pro něj skupina.
+
+\startDoubleExample
+
+\starttyping
+Myslel jsem si {\it myšlenku} ale 
+{\it myšlenka}, kterou jsem si myslel nebyla
+{\it myšlenka}, kterou jsem si myslel, že jsem si myslel.
+Kdyby {\it myšlenka} kterou jsem si myslel, že jsem si myslel
+byla {\it myšlenka}, kterou jsem si myslel
+Nemusel bych myslet tak moc!
+\stoptyping
+
+Myslel jsem si {\it myšlenku} ale 
+{\it myšlenka}, kterou jsem si myslel nebyla
+{\it myšlenka}, kterou jsem si myslel, že jsem si myslel.
+Kdyby {\it myšlenka} kterou jsem si myslel, že jsem si myslel
+byla {\it myšlenka}, kterou jsem si myslel
+Nemusel bych myslet tak moc!
+
+\stopDoubleExample
+
+\subsubsubject[sec:sufijos de tamaño]{Přípony pro změnu alternativ a~velikosti naráz}
+\PlaceMacro{rmx}\PlaceMacro{rmxx}\PlaceMacro{rma}\PlaceMacro{rmb}\PlaceMacro{rmc}\PlaceMacro{rmd}
+\PlaceMacro{ssx}\PlaceMacro{ssxx}\PlaceMacro{ssa}\PlaceMacro{ssb}\PlaceMacro{ssc}\PlaceMacro{ssd}
+\PlaceMacro{ttx}\PlaceMacro{ttxx}\PlaceMacro{tta}\PlaceMacro{ttb}\PlaceMacro{ttc}\PlaceMacro{ttd}
+\PlaceMacro{tfx}\PlaceMacro{tfxx}\PlaceMacro{tfa}\PlaceMacro{tfb}\PlaceMacro{tfc}\PlaceMacro{tfd}
+\PlaceMacro{itx}\PlaceMacro{itxx}\PlaceMacro{ita}\PlaceMacro{itb}\PlaceMacro{itc}\PlaceMacro{itd}
+\PlaceMacro{bfx}\PlaceMacro{bfxx}\PlaceMacro{bfa}\PlaceMacro{bfb}\PlaceMacro{bfc}\PlaceMacro{bfd}
+\PlaceMacro{bix}\PlaceMacro{bixx}\PlaceMacro{bia}\PlaceMacro{bib}\PlaceMacro{bic}\PlaceMacro{bid}
+\PlaceMacro{slx}\PlaceMacro{slxx}\PlaceMacro{sla}\PlaceMacro{slb}\PlaceMacro{slc}\PlaceMacro{sld}
+\PlaceMacro{bsx}\PlaceMacro{bsxx}\PlaceMacro{bsa}\PlaceMacro{bsb}\PlaceMacro{bsc}\PlaceMacro{bsd}
+
+Příkazy, které mění styl nebo alternativu ve své dvoupísmenné verzi (\tex{tf}, \tex{it}, \tex{bf} atd.), umožňují řadu  {\em přípon}, které ovlivňují velikost písma. Přípony a, b, c a~d zvětšují velikost písma a~násobí ji o~$1,2$, $1,2^2$ ($=1,44$), $1,2^3$ ($=1,728$) nebo $1,2^4$ ($=2,42$). Viz příklad:
+
+\type{\tf test, \tfa test, \tfb test, \tfc test, \tfd test}
+
+{\color[red]{\tf test, \tfa test, \tfb test, \tfc test, \tfd test}}
+
+přípony x a~xx zmenšují velikost písma a~násobí ji čísly 0,8 a~0,6.
+v~tomto pořadí:
+
+\type{\tf test, \tfx test, \tfxx test}
+
+{\color[red]{\tf test, \tfx test, \tfxx test}}
+
+Přípony \quote{x} a~\quote{xx} aplikované na \tex{tf} nám umožňují
+zkrátit příkaz, takže \tex{tfx} lze zapsat jako
+\PlaceMacro{tx}\tex{tx} a~\tex{tfxx} jako \PlaceMacro{txx}\tex{txx}.
+
+
+Dostupnost těchto různých přípon závisí na aktuálním stavu.
+implementaci písma. Podle reference příručky \ConTeXt{}u 2013
+(určené především pro Mark~II) jediná přípona zaručená pro to
+vždy fungovat, je \quote{x} a~ostatní mohou, ale nemusí být
+implementovány; nebo mohou být jen pro některé alternativy.
+
+Každopádně, abychom předešli pochybnostem, můžeme použít \tex{showbodyfont}, o~kterém jsem mluvil.
+(v~\in{sekci}[sec:see-font]). Tento příkaz zobrazí
+graf, který nám umožní nejen ocenit vzhled písma,
+ale také vidět, jak písmo vypadá v~každém ze svých stylů
+a~alternativách a~také jaké přípony pro změnu velikosti jsou k~dispozici.
+
+Podívejme se ještě jednou na tabulku zobrazující \tex{showbodyfont}:
+
+\showbodyfont[modern]
+
+
+Pokud se na tabulku podíváme pozorněji, zjistíme, že první sloupec
+obsahuje styly písma (\tex{rm}, \tex{ss} a~\tex{tt}). První
+řádek obsahuje vlevo alternativy (\tex{tf}, \tex{sc},
+\tex{sl}, \tex{it}, \tex{bf}, \tex{bs} a~\tex{bi}), zatímco vpravo
+první řádek obsahuje ostatní dostupné přípony, ačkoli na druhé straně jsou přípony
+pouze s~pravidelnou alternativou.
+
+Je důležité si uvědomit, že změna velikosti písma provedená některým z~těchto typů
+přípony změní pouze velikost písma v~užším slova smyslu, přičemž zůstane zachována
+ostatní hodnoty obvykle spojené s~velikostí písma, jako je velikost řádku, zůstanou nedotčeny.
+  
+\subsubsubject{Přizpůsobení měřítka přípon}
+  
+To customise the scaling factor we can use
+\PlaceMacro{definebodyfontenvironment}\tex{definebodyfontenvironment}
+whose format can be:
+
+Pro přizpůsobení měřítkového faktoru můžeme použít
+\PlaceMacro{definebodyfontenvironment}\tex{definebodyfontenvironment}
+jehož formát může být:
+
+\starttyping
+\definebodyfontenvironment[particular size][scaled]
+\definebodyfontenvironment[default][scaled]
+\stoptyping
+
+V~první verzi bychom nadefinovali měřítko pro určitou velikost.
+hlavního písma nastaveného pomocí \tex{setupbodyfont} nebo pomocí
+\tex{switchtobodyfont}. Například:
+
+\type{\definebodyfontenvironment[10pt][a=12pt,b=14pt,c=2, d=3]}
+
+
+by zajistil, že když je hlavní písmo 10 bodů, přípona \quote{a}
+by se změnila na 12 bodů, přípona \quote{b} na 14 bodů, přípona \quote{c}
+by původní písmo vynásobila dvěma a~přípona \quote{d} třema. Poznámka
+že pro a~a~b je uveden pevný rozměr, ale pro c a~d
+je uveden násobek původní velikosti.
+
+Pokud je však první argument \tex{definebodyfontenvironment} roven
+\MyKey{default}, pak budeme předefinovávat hodnotu měřítka pro všechny hodnoty
+možných velikostí písma a~jako hodnotu škálování můžeme zadat pouze hodnotu
+násobícího číslo. Pokud tedy například napíšeme:
+
+\type{\definebodyfontenvironment[default][a=1.3,b=1.6,c=2.5,d=4]}
+
+naznačujeme, že bez ohledu na velikost hlavního písma
+a~přípona by měla být vynásobena koeficientem 1,3, b koeficientem 1,6, c koeficientem 2 a~d koeficientem
+4.
+
+Stejně jako přípony xx, x, a, b, c a~d,
+s~\tex{definebodyfontenvironment} můžeme přiřadit hodnotu škálování k~znakům
+\MyKey{big}, \MyKey{small}, \MyKey{script} a~\MyKey{scriptscript} klíčová
+slova. Tyto hodnoty jsou přiřazeny všem velikostem přidruženým k~těmto klíčovým
+slovům v~\tex{setupbodyfont} a~\tex{switchtobodyfont}. Jsou také
+použity v~následujících příkazech, jejichž užitečnost lze odvodit
+z~jejich názvu:
+
+\startitemize[1,packed]
+
+\item \PlaceMacro{smallbold}\tex{smallbold}
+\item \PlaceMacro{smallslanted}\tex{smallslanted}
+\item \PlaceMacro{smallboldslanted}\tex{smallboldslanted}
+\item \PlaceMacro{smallslantedbold}\tex{smallslantedbold}
+\item \PlaceMacro{smallbolditalic}\tex{smallbolditalic}
+\item \PlaceMacro{smallitalicbold}\tex{smallitalicbold}
+\item \PlaceMacro{smallbodyfont}\tex{smallbodyfont}
+\item \PlaceMacro{bigbodyfont}\tex{bigbodyfont}
+  
+\stopitemize
+
+Pokud chceme zobrazit výchozí velikosti určitého písma, můžeme použít příkaz
+\PlaceMacro{showbodyfontenvironment}\tex{showbodyfontenvironment[Font]}.
+Tento příkaz použitý například na písmo {\tt modern} poskytne
+následující výsledek:
+
+\showbodyfontenvironment[modern]
+
+\stopsubsection
+
+\startsubsection
+  [title={Definování příkazů a~klíčových slov pro velikosti, styly a~alternativy písma}]
+
+
+Předdefinované příkazy pro změnu velikosti, stylů a~variant písma jsou
+dostatečné. \ConTeXt\ nám navíc umožňuje:
+
+\startitemize[n]
+
+\item Přidání vlastního příkazu pro změnu stylu, velikosti nebo varianty písma.
+
+\item Přidání synonym k~názvům stylů nebo variant rozpoznaných pomocí
+  \tex{switchtobodyfont}.
+  
+\stopitemize
+
+K~tomu slouží následující příkazy:
+
+\startitemize
+
+\item \PlaceMacro{definebodyfontswitch}\tex{definebodyfontswitch}:
+umožňuje definovat příkaz pro změnu velikosti písma. Například pokud
+chceme definovat příkaz \tex{osm} (nebo \tex{viii
+příkaz}\footnote{Zapomeňte, že s~výjimkou řídicích symbolů,
+\ConTeXt\ názvy příkazů mohou sestávat pouze z~písmen.}) pro nastavení velikosti 8 pt
+potřebujeme napsat:
+
+  {\tfx\type{\definebodyfontswitch[eight][8pt]}} nebo
+  {\tfx\type{\definebodyfontswitch[viii][8pt]}}
+
+\item \PlaceMacro{definefontstyle}\tex{definefontstyle}: umožňuje nám
+definovat jedno nebo více slov, která lze použít v~\tex{setupbodyfont} nebo
+\tex{switchtobodyfont} nastavit určitý styl písma; takže například,
+kdybychom chtěli nazvat {\em sans serif} něčím jiným (např. v~příkazu
+španělštině se nazývá \quotation{paloseco}), můžeme napsat
+
+  \type{\definefontstyle[paloseco][ss]}
+
+  Zvláštností \tex{definefontstyle} je, že umožňuje použít několik slov.
+  současně přiřazeno stejnému stylu, takže, abychom mohli pokračovat
+  španělským příkladem:
+
+  \type{\definefontstyle[paloseco, sosa, sinrebordes][ss]}
+
+\item \PlaceMacro{definealternativestyle}\tex{definealternativestyle}:
+umožňuje přiřadit jméno k~variantě písma. Toto jméno může
+fungovat jako příkaz nebo být rozpoznán jako volba {\tt stylu}
+příkazů, které nám umožňují nastavit styl, který se má použít. Takže pro
+příklad následující fragment
+
+  \type{\definealternativestyle[strong][\bf][]}
+
+  povolí příkaz \tex{strong} a~klíčové slovo \MyKey{strong}.
+  které bude rozpoznáno volbou {\tt style} příkazů, které
+  tuto volbu umožňují. Mohli jsme říci \quotation{bold}, ale toto slovo
+  se již v~ConTeXtu používá, proto jsem zvolil výraz používaný v~HTML,
+  a~to \quotation{strong} jako alternativu.
+
+  \startSmallPrint
+
+    Nevím, co znamená třetí argument
+    \tex{definealternativestyle}. Není nepovinný, a~proto
+    nemůže být \Doubt vynechán; ale jediné informace, které jsem o~něm našel, jsou tyto
+    v~referenční příručce \ConTeXt\, kde se o~tomto třetím argumentu říká.
+    že je relevantní pouze pro názvy kapitol a~oddílů \quotation{{\em
+    kde se kromě \tex{cap} musíme řídit i~zde použitým písmem}}. (??)
+
+  \stopSmallPrint
+
+\stopitemize
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [title=Další záležitosti týkající se používání některých alternativních řešení]
+
+Mezi různými alternativami písma existují dvě, jejichž použití
+vyžaduje určitá upřesnění:
+
+\startsubsection
+  [
+    reference=sec:emphasis,
+    title={Kurzíva, šikmé písmo a~zvýraznění},
+  ]
+
+Kurzíva i~šikmá písmena se používají hlavně pro typografické účely
+zvýraznění části textu, aby se na něj upozornilo.
+Jinými slovy, aby jej {zdůraznily}.
+
+Text můžeme samozřejmě zdůraznit tím, že výslovně povolíme kurzívu nebo
+šikmé písmo. \ConTeXt\ však nabízí alternativní příkaz, který je mnohem vhodnější.
+užitečnější a~zajímavější a~je určen speciálně pro zvýraznění
+fragmentu textu. Jedná se o~příkaz \PlaceMacro{em}\tex{em} ze slova
+{\em emphasis}. Na rozdíl od \tex{it} a~\tex{sl}, které jsou čistě
+typografické příkazy, \tex{em} je {\em konceptuální} příkaz; pracuje s~ním
+jinak, takže je univerzálnější, a~to až do té míry, že \ConTeXt{}
+dokumentace doporučuje používat \tex{em} před \tex{it} nebo
+\tex{sl}. Při použití těchto dvou posledních příkazů říkáme
+\ConTeXt{}u, jakou alternativu písma chceme použít; ale když použijeme příkaz
+\tex{em}, říkáme mu, jaký efekt chceme vytvořit, a~necháváme to na
+\ConTeXt{}u, aby rozhodl, jak toho dosáhnout.  Obvykle se pro dosažení efektu
+zdůraznění nebo zvýraznění něčeho, povolíme kurzívu nebo
+šikmé písmo, ale to závisí na kontextu. Pokud tedy použijeme \tex{em} v~příkazu
+textu, který je již napsán kurzívou -- nebo je nakloněn --, příkaz bude
+zvýrazní opačným způsobem -- v~tomto případě svislým textem.
+
+Proto následující příklad:
+
+\startDoubleExample
+
+\startlines
+\starttyping
+
+{\em Jedna z~nejkrásnějších 
+orchidejí na světě je 
+{\em Thelymitra variegata}. 
+neboli Jižní královna ze Sáby.}
+\stoptyping
+\stoplines
+
+
+{\em Jedna z~nejkrásnějších 
+orchidejí na světě je  {\em
+ Thelymitra variegata} neboli Jižní královna ze Sáby}.
+ 
+\stopDoubleExample
+
+Všimněte si, že první \tex{em} umožňuje psaní kurzívou (ve skutečnosti šikmou, ale viz.
+níže) a~že druhý \tex{em} ji vypíná a~místo toho vkládá
+slova \quotation{Thelymitra variegata} normálním vzpřímeným stylem.
+
+Další výhodou \tex{em} je to, že není alternativou, takž
+nezakáže alternativu, kterou jsme měli předtím, a~tak například v~textu
+který je tučně, pomocí \tex{em} získáme tučné šikmé písmo, aniž bychom potřebovali
+explicitně volat \tex{bs}. Podobně, pokud se příkaz \tex{bf}
+objeví v~textu, který je již zvýrazněn, toto zvýraznění
+nepřestane.
+
+Ve výchozím nastavení \tex{em} umožňuje spíše šikmou než kurzívu, ale můžeme.
+změnit pomocí \tex{setupbodyfontenvironment[default][em=italic]}.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:smallcaps,
+    title=Malé kapitálky a~falešne malé kapitálky,
+  ]
+
+Malé kapitálky jsou typografickým prostředkem, který je často mnohem lepší než
+použití velkých písmen. Malé kapitálky nám dávají tvar
+velkého písmene, ale zachovávají stejnou výšku jako malá písmena na
+řádku. Proto jsou malé kapitálky stylistickou variantou malých písmen. Malé
+kapitálky nahrazují v~určitých kontextech velká písmena a~jsou zvláště
+užitečná při psaní římských číslic nebo názvů kapitol. V~akademických textech
+je také zvykem používat malá písmena pro psaní jmen citovaných autorů.
+
+Problémem je, že ne všechna písma používají malé kapitálky, a~ta, která je používají.
+to ne vždy dělají pro některé ze svých stylů písma. Kromě toho,
+protože malé kapitálky jsou alternativou kurzívy, tučného písma nebo šikmého písma,
+v~souladu s~obecnými pravidly, která jsme uvedli v~této kapitole, se všechny
+tyto typografické vlastnosti nemohly použit současně.
+
+Tyto problémy lze vyřešit použitím {\em falešných malých kapitálek}, které
+\ConTeXt\ umožňuje vytvořit pomocí příkazů \tex{cap} a~\tex{Cap};
+v~tomto ohledu viz \in{sekce}[sekce:Upper-Lower-Fake].
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [title=Použití a~konfigurace barev]
+
+
+\ConTeXt\ poskytuje příkazy pro změnu barvy celého
+dokumentu, některých jeho prvků nebo určitých částí textu. 
+Poskytuje také příkazy pro nahrání stovek předdefinovaných barev
+do paměti a~pro zobrazení jejich složek.
+
+\startsubsection
+  [title=Postupy pro barevnou sazbu fragmentů textu]
+
+
+Většina konfigurovatelných příkazů \ConTeXt{}u umožňuje volbu nazvanou
+\MyKey{color}, která nám umožňuje určit barvu, ve které
+má být zapsán příkazem ovlivněný text. Tak například pro to
+že názvy kapitol se mají psát modře, stačí napsat:
+
+\vbox{\starttyping
+  \setuphead
+    [chapter]
+    [color=blue]
+\stoptyping}
+
+Pomocí tohoto postupu můžeme obarvit názvy, nadpisy, poznámky pod čarou, okraje,
+poznámky, sloupce a~čáry, tabulky, názvy tabulek nebo obrázků atd. Výhodou
+tohoto postupu je to, že konečný výsledek bude konzistentní (všechny
+texty, které plní stejnou funkci, budou napsány stejným způsobem.
+barvou) a~snadněji se globálně mění. 
+
+
+Část nebo fragment textu můžeme také přímo obarvit, ačkoli, abychom
+se vyhli příliš pestrému použití barev, které nejsou příjemné z~pohledu
+typografického hlediska, nebo nekonzistentnímu použití, je obecně vhodné
+vyhnout se přímému vybarvování a~používat to, co bychom mohli nazvat {\em
+sémantické barvení}, tj. místo psaní např.
+
+\type{\color[red]{Velmi důležitý text}}
+
+definujeme příkaz pro velmi důležitý text, kterému je přiřazena barva. Pro
+například
+
+\starttyping
+\definehighlight[important][color=red]
+\important{Velmi důležitý text}
+\stoptyping
+
+\stopsubsection
+
+\startsubsection
+  [title=Změna barvy pozadí a~popředí dokumentu]
+\PlaceMacro{setupbackgrounds}\PlaceMacro{setupcolors}
+
+Pokud chceme změnit barvu celého dokumentu v~závislosti na tom
+zda chceme změnit barvu pozadí nebo barvu dokumentu, nebo zda chceme změnit barvu
+popředí (textu), použijeme \tex{setupbackgrounds} nebo
+\tex{setupcolors}. Takže například
+
+\starttyping
+\setupbackgrounds
+  [page]
+  [background=color,backgroundcolor=blue]
+\stoptyping
+
+Tento příkaz nastaví barvu pozadí stránek na modrou. Jako hodnota
+pro \MyKey{backgroundcolor} můžeme použít název některého z~předdefinovaných názvů.
+barvy.
+
+
+Globální změna barvy popředí v~celém dokumentu (od
+od místa vložení příkazu) použijte \tex{setupcolors}, kde
+volba \MyKey{textcolor} řídí barvu textu. Například:
+
+\type{\setupcolors[textcolor=red]}
+
+uvidíte, že barva textu je červená.
+
+\stopsubsection
+
+\startsubsection
+  [title=Příkazy pro obarvení jednotlivých textových\\ fragmentů]
+\PlaceMacro{color}\PlaceMacro{colored}
+
+Obecný příkaz pro obarvení malých částí textu je:
+
+\type{\color[ColourName]{Text to zabarvení}}
+
+Pro větší části textu je vhodnější používat
+
+\type{\startcolor[ColourName] ... \stopcolor}
+
+Obě jsou pojmenovány podle nějaké předem definované barvy. Pokud chceme definovat
+barvu za běhu, můžeme použít příkaz \tex{colored}. Například:
+
+\startDoubleExample
+
+\starttyping
+Tři \colored[r=0.1, g=0.8, b=0.8]
+{zabarvené} kočky    
+\stoptyping
+
+Tři \colored[r=0.1, g=0.8, b=0.8]{zabarvené} kočky.
+  
+\stopDoubleExample
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:predefined-colours,
+    title=Předdefinované barvy,
+  ]
+  % This information comes from the reference manual. But I
+  % suspect there are considerably more predefined colours. For
+  % example the "maincolor" used in this document is based on
+  % the orange not defined in the list of predefined colours.
+
+\ConTeXt\ načte nejběžnější předdefinované barvy uvedené v~seznamu
+  \in{tabulka}[tbl:predefined colors].\footnote{Tento seznam lze nalézt v~referenční příručce a~na wiki \ConTeXt{}u, ale jsem si docela jistý, že je to neúplný seznam, protože v~tomto dokumentu, aniž bychom načetli nějakou další barvu, používáme například \quotation{oranžová} - která není v~\in{tabulka}[tbl:predefined colors]-- pro názvy sekcí.}
+
+{\switchtobodyfont[small]
+\placetable
+  [here]
+  [tbl:predefined colours]
+  {\ConTeXt's predefined colours}
+{\starttabulate[|l|l|l|l|]
+\HL
+\NC{\bf Jméno}
+\NC{\bf Světlý odstín}
+\NC{\bf Střední odstín}
+\NC{\bf Tmavý odstín}
+\NR
+\HL
+\NC black
+\NR
+\NC white
+\NR
+\NC gray
+\NC lightgray
+\NC middlegray
+\NC darkgray
+\NR
+\NC red
+\NC lightred
+\NC middlered
+\NC darkred
+\NR
+\NC green
+\NC lightgreen
+\NC middlegreen
+\NC darkgreen
+\NR
+\NC blue
+\NC lightblue
+\NC middleblue
+\NC darkblue
+\NR
+\NC cyan
+\NC\NC middlecyan
+\NC darkcyan
+\NR
+\NC magenta
+\NC\NC middlemagenta
+\NC darmagenta
+\NR
+\NC yellow
+\NC\NC middleyellow
+\NC darkyellow
+\NR
+\HL
+\stoptabulate
+}}
+
+
+Existují i~další kolekce barev, které se ve výchozím nastavení nenačítají, ale které mohu
+načíst příkazem
+
+\PlaceMacro{usecolors}\type{\usecolors[CollectionName]}
+
+kde CollectionName může být 
+
+\startitemize[packed]
+\item \MyKey{crayola}, 235 barev imitujících odstíny fixů.
+\item \MyKey{dem}, 91 barev.
+\item \MyKey{ema}, 540 definice barev založené na barvách používaných v~systému Emacs..
+\item \MyKey{rainbow}, 91 barvy pro použití v~matematických vzorcích.
+\item \MyKey{ral}, 213 definice barev ze {\em Deutsches
+  Institut für Gütesicherung und Kennzeichnungí} (Německý institut pro zajišťování kvality a~označování).
+\item \MyKey{rgb}, 223 barev.
+\item \MyKey{solarized}, 16 barev na základě solárního schématu.
+\item \MyKey{svg}, 147 barev.
+\item \MyKey{x11}, 450 standardních barev pro X11.
+\item \MyKey{xwi}, 124 barev.
+\stopitemize
+
+\startSmallPrint
+
+  Soubory s~definicemi barev jsou obsaženy
+v~\MyKey{context/base/mkiv} adresář distribuce a~jeho název
+  odpovídá schématu \MyKey{colo-imp-NOMBRE.mkiv}. Informace 
+  o~různých kolekcích předdefinovaných barev, které jsem právě uvedl
+  jsou založeny na mé konkrétní distribuci. Konkrétní kolekce, resp.
+  počet barev v~nich definovaných, se mohou změnit v~budoucích
+  verzích.
+
+\stopSmallPrint
+
+Abychom zjistili, jaké barvy obsahuje každá z~těchto kolekcí, můžeme použít příkaz
+\PlaceMacro{showcolor}\tex{showcolor[CollectionName]} příkaz popsaný v~kapitole 2.
+v~následujícím textu. Abychom mohli některé z~těchto barev použít, musíme je nejprve načíst
+do paměti pomocí příkazu (\tex{usecolors[CollectionName]}) a~poté
+musíme příkazem \tex{color} nebo
+\PlaceMacro{startcolor}\tex{startcolor} přikázat název barvy.
+Například následující sekvence: \page[preference]
+
+\starttyping
+\usecolors[xwi]
+\color[darkgoldenrod]{Tweedledum a~Tweedledee}
+\stoptyping
+\page[no]
+
+napíše
+\usecolors[xwi]\color[darkgoldenrod]{Tweedledum a~Tweedledee}
+\page[preference]
+
+\stopsubsection
+
+\startsubsection
+  [title=Zobrazení dostupných barev]
+\PlaceMacro{showcolor}
+
+Příkaz \tex{showcolor} zobrazí seznam barev, ve kterých můžete vidět
+vzhled barvy, její vzhled, když je barva použita
+v~stupnici šedi, červené, zelené a~modré
+a~název, pod kterým ji \ConTeXt\ zná. Používá se bez argumentu
+\tex{showcolor} zobrazí barvy použité v~aktuálním dokumentu. Ale
+jako argument můžeme uvést libovolnou z~předdefinovaných kolekcí barev
+barev, které byly popsány v~\in{sekci}[sec:predefined-colours],
+a~takže například \tex{showcolor[solarized]} nám zobrazí 16 barev.
+solarizovaných v~této kolekci:
+
+\showcolor[solarized]
+
+Pokud chceme zobrazit složky rgb určité barvy, můžeme použít příkaz
+\PlaceMacro{showcolorcomponents}\tex{showcolorcomponents[ColourName]}.
+To je užitečné, pokud se snažíme definovat určitou barvu, abychom viděli
+složení nějaké barvy, která je jí blízká. Například,
+\tex{showcolorcomponents[darkgoldenrod]} nám ukáže:
+
+\startframedtext[width=\textwidth]\switchtobodyfont[small]
+\showcolorcomponents[darkgoldenrod]
+\stopframedtext
+
+\stopsubsection
+
+\startsubsection
+  [title=Definování vlastních barev]
+\PlaceMacro{definecolor}
+
+
+\tex{definecolor} nám umožňuje buď klonovat existující barvu, nebo definovat
+novou barvu. Klonování existující barvy je stejně jednoduché jako vytvoření 
+jejího alternativního názvu. K~tomu je třeba napsat:
+
+\type{\definecolor[Nová barva][Stará barva]}
+
+Tím se zajistí, že "{\em Nová barva}" bude mít přesně stejnou barvu jako
+"{\em Stará barva}".
+
+Hlavní použití \tex{definecolor} však spočívá ve vytváření nových barev. Chcete-li provést
+je třeba příkaz použít následujícím způsobem:
+
+\type{\definecolor[ColourName][Definition]}
+
+kde {\em Definition} může být provádena použitím až šesti různých
+barevných schémat:
+
+\startitemize
+
+
+\item {\bf RGB barvy}: Definice barev RGB je jedním
+z~nejrozšířenější; vychází z~myšlenky, že barvy je možné
+znázornit smícháním tří základních barev sčítáním:
+červené (\quote{r} pro {\em červená}), zelené (\quote{g} pro {\em zelená})
+a~modré (\quote{b} pro {\em modrá}). Každá z~těchto složek je označena
+jako desetinné číslo mezi 0 a~1.
+
+  \type{\definecolor[lime 1][r=0.75, g=1, b=0]}: \definecolor[lime 1]
+       [r=0.75, g=1, b=0] \color[lime 1]{Text in “lime 1”}.
+
+\item {\bf Hex barvy}: Tento způsob reprezentace barev je také
+založen na schématu RGB, ale červená, zelená a~modrá složka jsou
+označeny jako tříbajtové hexadecimální číslo, ve kterém první bajt
+představuje hodnotu červené barvy, druhý hodnotu zelené barvy a~třetí 
+hodnotu modré barvy. Například:
+
+  \type{\definecolor[lime 2][x=BFFF00]}: \definecolor[lime 2][x=BFFF00]
+  \color[lime 2]{Text in “lime 2”}.
+
+
+\item {\bf Barvy CMYK}: Tento model generování barev je to, co
+se nazývá \quotation{subtraktivní model} a~je založen na směsi
+pigmentů těchto barev: azurová (\quote{c}), purpurová
+(\quote{m}), žlutá (\quote{y}, z~{\em yellow}) a~černá (\quote{k},
+z~{\em key}). Každá z~těchto složek je označena jako desetinné číslo.
+mezi 0 a~1:
+
+  \type{\definecolor[lime 3][c=0.25, m=0, y=1, k=0]}:
+  \definecolor[lime 3][c=0.25, m=0, y=1, k=0] \color[lime 3]{Text in
+   “lime 3”}.
+
+\item {\bf HSL/HSV}: Tento barevný model je založen na měření odstínu.
+(\quote{h}, z~{\em hue}), sytosti (\quote{s}) a~luminiscence
+(\quote{l} nebo někdy \quote{v}, z~{\em value}). Odstín odpovídá
+číslu v~rozmezí 0 až 360; sytost a~luminiscence musí odpovídat číslu
+desetinným číslem mezi 0 a~1. Například:
+
+  \type{\definecolor[lime 4][h=75, s=1, v=1]}: \definecolor[lime
+    4][h=75, s=1, v=1] \color[lime 4]{Text in “lime 4”}
+
+
+\item {\bf HWB barvy}: Model HWB je navrhovaným standardem pro CSS4.
+který měří odstín (\quote{h}, z~{\em hue}) a~úroveň
+bílé (\quote{w}, z~{\em whiteness}) a~černé (\quote{b}, z~{\em
+blackness}). Odstín odpovídá číslu v~rozmezí 0 až 360, kdežto
+bělost a~čerň jsou reprezentovány desetinným číslem v~rozmezí 0 až 360.
+a~1.
+
+  \type{\definecolor[Azure][h=75, w=0.2, b=0.7]}
+  \definecolor[Azure][h=75, w=0.2, b=0.7]\color[Azure]{Text in
+   “Azure”}.
+
+  % \type{\definecolor[lima 5][h=75, w=0, b=0]}
+  % \definecolor[lima 5][h=75, w=0.2, b=0.7]\color[lima 5]{Texto en
+  %   color “lima 5”}.
+
+\item {\bf Stupnice šedé}: vychází z~komponenty nazvané (\quote{s}, z~{\em scale}), která měří množství šedé. Musí to být číslo mezi 0 a~1. Například:
+
+  \type{\definecolor[light grey][s=0.65]}: \definecolor[light grey][s=0.65] \color[light grey]{Text in “light grey”}.
+  
+\stopitemize
+
+It is also possible to define a~new colour from another colour. For
+example, the colour in which titles are written in this introduction is
+defined as
+
+Je také možné definovat novou barvu z~jiné barvy. 
+Například barva, ve které jsou v~tomto úvodu napsány nadpisy, je
+definována jako
+
+\type{\definecolor[maincolour][0.6(orange)]}
+
+\stopsubsection
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:
+%%% vim:set filetype=context tw=72 : %%%

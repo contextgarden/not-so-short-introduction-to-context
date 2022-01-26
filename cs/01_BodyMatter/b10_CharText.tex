@@ -1,8 +1,1267 @@
+%%% File:         b10_CharText.mkiv
+%%% Author:       Joaquín Ataz-López
+%%% Begun:        July 2020
+%%% concluded:    July 2020
+%%% Contents:     It is actually an amalgamation of issues that are
+%%% raised in this chapter, and the criterion that
+%%% unified them is somewhat forced: Section 1 could be in
+%%% the chapter dedicated to the source file (in fact
+%%% was in the first version of it);  2 in the
+%%% chapter dedicated to fonts: because although they are not
+%%% characteristics of the format itself, they are
+%%% somewhat similar. 3 is horizontal space; in the
+%%% first versions I put it together with  vertical space in
+%%% a chapter titled "Blank space". The 4th and 5th
+%%% are more difficult to locate. I finally opted for this
+%%% chapter that is a "poutpurri".
+%%%
+%%% Edited by: Emacs + AuTeX - And at times vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent b10_CharText.mkiv
+
+\startchapter
+  [title={Znaky, slova, text a~horizontální prostor}]
+
+\TocChap
+
+Základním prvkem všech textových dokumentů je znak: znaky jsou seskupeny do slov, která pak tvoří řádky, z~nichž se skládají odstavce, z~nichž se skládají stránky.
+
+Tato kapitola, počínaje \quotation{{\em znakem}}, vysvětluje některé nástroje \ConTeXt{}u týkající se znaků, slov a~textu.
+
+\startsection
+  [title={Získání znaků, které nejsou běžně dostupné z~klávesnice}]
 
 
---------------------
-Czech version
---------------------
+V~textovém souboru kódovaném jako UTF-8 (viz \in{sekce}[sec:encoding]) můžeme použít libovolný znak nebo symbol, a~to jak z~živých jazyků, tak z~mnoha již zaniklých. Protože jsou však možnosti klávesnice omezené, většinu znaků a~symbolů povolených v~UTF-8 obvykle nelze získat přímo z~klávesnice. To se týká zejména mnoha diakritických znamének, tj. znaků umístěných nad (nebo pod) určitými písmeny, které jim dávají zvláštní hodnotu; ale také mnoha dalších znaků, jako jsou matematické symboly, tradiční ligatury atd. Mnoho těchto znaků můžeme získat v~\ConTeXt{}u pomocí příkazů.
 
-TO BE DONE!
---------------------
+\startsubsection
+  [title={Diakritika a~speciální písmena}]
+
+
+Téměř všechny západní jazyky mají diakritiku (s~významnou výjimkou angličtiny) a~klávesnice obecně umí generovat diakritiku odpovídající regionálním jazykům. Španělská klávesnice tedy dokáže vygenerovat veškerou diakritiku potřebnou pro španělštinu (v~podstatě přízvuky a~diaerézu) a~také některá diakritická znaménka používaná v~jiných jazycích, jako je katalánština (grave accents a~cedillas) nebo francouzština (cedillas, grave a~circumflex accents); ne však například některá znaménka používaná v~portugalštině, jako je tilda na některých samohláskách ve slovech jako \quotation{navegaç\~ao}.
+
+
+\TeX\ byl navržen ve Spojených státech, kde klávesnice většinou neumožňují používat diakritiku; Donald Knuth mu proto dal sadu příkazů, které umožňují získat téměř všechny známé diakritické znaky (alespoň v~jazycích používajících latinku). Pokud používáme španělskou klávesnici, nemá příliš smysl používat tyto příkazy k~získání diakritiky, kterou lze získat přímo z~klávesnice. Přesto je důležité vědět, že tyto příkazy existují a~jaké jsou, protože španělská (nebo italská, nebo francouzská...) klávesnice nám neumožňuje generovat všechny možné diakritické znaky.
+
+\placetable
+  [here]
+  [tbl:diacritics]
+  {\tfx Přízvuky a~další diakritická znaménka}
+  {
+    \starttabulate[|l|l|l|l|]
+      \HL
+      \NC{\bf Jméno}\NC{\bf Znak}\NC{\bf Zkratka}\NC{\bf Příkaz}\NR
+      \HL
+      \NC Acute accent\NC\'u\NC{\tt\backslash'u}\NC{\tt\backslash
+        uacute}\NR\PlaceMacro{aacute}\PlaceMacro{eacute}\PlaceMacro{iacute}\PlaceMacro{oacute}\PlaceMacro{uacute}
+      \NC Grave accent\NC\`u\NC{\tt\backslash`u}\NC{\tt\backslash
+        ugrave}\NR\PlaceMacro{agrave}\PlaceMacro{egrave}\PlaceMacro{igrave}\PlaceMacro{ograve}\PlaceMacro{ugrave}
+      \NC Circumflex
+      accent\NC\^u\NC{\tt\backslash^u}\NC{\tt\backslash
+        ucircumflex}\NR\PlaceMacro{acircumflex}\PlaceMacro{ecircumflex}\PlaceMacro{icircumflex}\PlaceMacro{ocircumflex}\PlaceMacro{ucircumflex}
+      \NC Dieresis or umlaut
+      \NC\"u\NC{\tt\backslash”u}\NC{\tt\backslash udiaeresis,
+        \backslash
+        uumlaut}\NR\PlaceMacro{adiaeresis}\PlaceMacro{ediaeresis}\PlaceMacro{idiaeresis}\PlaceMacro{odiaeresis}\PlaceMacro{udiaeresis}
+      \NC Tilde\NC\~u\NC{\tt\backslash\lettertilde u}\NC{\tt\backslash
+        utilde}\NR\PlaceMacro{atilde}\PlaceMacro{etilde}\PlaceMacro{itilde}\PlaceMacro{otilde}\PlaceMacro{utilde}
+      \NC Macron\NC\=u\NC{\tt\backslash=u}\NC{\tt\backslash
+        umacron}\NR\PlaceMacro{amacron}\PlaceMacro{emacron}\PlaceMacro{imacron}\PlaceMacro{omacron}\PlaceMacro{umacron}
+      \NC Breve\NC\u u\NC{\tt\backslash u~u}\NC{\tt\backslash
+        ubreve}\PlaceMacro{u}\PlaceMacro{abreve}\PlaceMacro{ebreve}\PlaceMacro{obreve}\PlaceMacro{ibreve}\PlaceMacro{ubreve}\NR
+      \HL
+    \stoptabulate
+}
+  
+V~\in{tabulce}[tbl:diakritika] nalezneme příkazy a~zkratky, které nám umožňují tuto diakritiku získat. Ve všech případech není důležité, zda použijeme příkaz nebo zkratku. V~tabulce jsem jako příklad použil písmeno \quote{u}, ale tyto příkazy fungují s~jakoukoli samohláskou (většina z~nich\footnote{Z příkazů nalezených v~\in{tabulce}[tbl:diakritika] tilda nefunguje s~písmenem \quote{e}, a~nevím proč.}) a~také s~některými souhláskami a~polosamohláskami.
+
+  \startitemize
+
+  \item Protože většina zkrácených příkazů jsou {\em řídicí symboly} (viz
+\in{sekce}[sekce:samotné příkazy]), může být písmeno, na které má diakritika dopadnout, napsáno bezprostředně za příkazem nebo od něj odděleno. Tak například: pro získání portugalského \quote{\~a} můžeme napsat znaky \tex{=a} nebo \cmd{=\textvisiblespace a}.\footnote{Pamatujte, že v~tomto dokumentu reprezentujeme prázdné mezery, pokud je důležité, aby byly vidět, pomocí \quote{\textvisiblespace}.}. Ale v~případě breve (\tex{u}), kdy se jedná o~{\em řídící slovo}, je prázdná mezera povinná.
+
+\item V~případě dlouhé verze příkazu bude písmeno, na které diakritika připadá, prvním písmenem názvu příkazu. Takže například \tex{emacron} umístí makron nad malé písmeno \quote{e} (\emacron), \tex{Emacron} udělá totéž nad velké písmeno \quote{E}. (\Emacron), zatímco \tex{Amacron} udělá totéž nad velkým písmenem \quote{A}. (\Amacron).
+    
+  \stopitemize
+
+
+Zatímco příkazy v~\in{tabulce}[tbl:diacritics] pracují se samohláskami a~některými souhláskami, existují další příkazy pro generování některých diakritických znamének a~speciálních písmen, které pracují pouze s~jedním nebo několika písmeny. Jsou uvedeny v~\in{tabulce}[tbl:morediacritics].
+
+
+{\switchtobodyfont[small]
+\placetable
+  [here]
+  [tbl:morediacritics]
+  {\tfx More diacritics and special letters}
+  {
+    \starttabulate[|l|l|l|l|]
+      \HL
+      \NC{\bf Jméno}\NC{\bf Znak}\NC{\bf Zkratka}\NC{\bf Příkaz}\NR
+      \HL
+      \NC Skandinávské O\NC\o, \O\NC{\tt \backslash o, \backslash O}\NC\NR\PlaceMacro{o}
+      \NC Skandinávské A\NC\aring, \Aring\NC{\tt \backslash aa, \backslash AA, \{\backslash r a\}, \{\backslash r A\}}\NC{\tt \backslash aring, \backslash Aring}\NR\PlaceMacro{aa}\PlaceMacro{r}\PlaceMacro{aring}
+      \NC Polské L\NC\l, \L\NC{\tt \backslash l, \backslash L}\NC\NR\PlaceMacro{l}
+      \NC Německé Eszett\NC\SS\NC{\tt \backslash ss, \backslash SS}\NC\NR\PlaceMacro{ss}
+      \NC \quote{i} and \quote{j} bez tečky\NC\i, \j\NC{\tt \backslash i, \backslash j}\NC\NR\PlaceMacro{i}\PlaceMacro{j}
+      \NC Maďarské umlaut\NC\H u, \H U\NC{\tt\backslash H u}, {\tt\backslash H U}\NC\NR\PlaceMacro{H}
+      \NC Cedilla\NC\c c, \c C\NC{\tt \backslash c c, \backslash c C}\NC{\tt \backslash ccedilla, \backslash Ccedilla}\PlaceMacro{c}\PlaceMacro{ccedilla}\PlaceMacro{kcedilla}\PlaceMacro{lcedilla}\PlaceMacro{ncedilla}\PlaceMacro{rcedilla}\PlaceMacro{scedilla}\PlaceMacro{tcedilla}\NR
+      \HL
+    \stoptabulate
+  }
+}
+
+
+Rád bych upozornil, že některé příkazy ve výše uvedené tabulce generují znaky z~jiných znaků, zatímco jiné příkazy fungují pouze v~případě, že font, který používáme, je pro daný znak výslovně určen. Takže pokud jde o~německý Eszett (ß), v~tabulce jsou uvedeny dva příkazy, ale pouze jeden znak, protože písmo, které zde pro tento text používám, poskytuje pouze velkou verzi německého Eszett (což je něco zcela běžného). 
+
+To je pravděpodobně důvod, proč nemohu dostat skandinávské A~jako velké písmeno, i~když \MyKey{\{\backslash r A\}} a~\cmd{Aring} fungují správně.
+
+Maďarská umlaut funguje také s~písmenem \quote{o} a~cedilla s~písmeny \quote{k}, \quote{l}, \quote{n}, \quote{r}, \quote{s} a~\quote{t}, v~malém nebo velkém písmu. Příkazy, které se mají použít, jsou \cmd{kcedilla}, \cmd{lcedilla}, \cmd{ncedilla} ... v~tomto pořadí.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:ligatures,
+    title={Traditional ligatures},
+  ]
+  % There should be another section just for ligatures
+  % automatically generated by ConTeXt as a font feature.
+  % But in the end in the font chapter, I did not talk about
+  % features of various fonts, and there was no where to
+  % put this section.
+
+
+Ligatura vzniká spojením dvou nebo více grafémů, které se obvykle píší samostatně. Toto spojení dvou znaků často začínalo jako druh zkratky v~ručně psaných textech, až nakonec dosáhlo určité typografické nezávislosti. Některé z~nich byly dokonce zařazeny mezi znaky, které jsou obvykle definovány v~typografickém písmu, jako například ampersand, \quote{\&}, který vznikl jako zkrácení latinské kopuly (spojky) \quotation{et}, nebo německý Eszett (ß), který, jak jeho název napovídá, vznikl jako kombinace \quote{s} a~\quote{z}. V~některých vzorech písma můžeme i~dnes vystopovat původ těchto dvou znaků; nebo je možná vidím, protože vím, že tam jsou. Zejména u~písma Pagella pro \quote{\&} a~u~písma Bookman pro \quote{ß}.
+
+Jako cvičení doporučuji (po přečtení \in{Kapitoly}[sec:fontscol], kde je vysvětleno, jak na to) zkusit reprezentovat tyto znaky těmito písmy v~dostatečně velké velikosti (například 30 pt), aby bylo možné zjistit jejich složky.
+
+Dalšími tradičními ligaturami, které se nestaly tak populárními, ale dodnes se občas používají, jsou latinské koncovky \quotation{oe} a~\quotation{ae}, které se občas psaly jako \quote{\oe} nebo \quote{ae} na znamení, že v~latině tvoří diftong. Těchto ligatur lze v~\ConTeXt{}u dosáhnout pomocí příkazů uvedených v~\in{tabulce}[tbl:ligatures].
+
+\placetable
+  [here]
+  [tbl:ligatures]
+  {Tradiční ligatury}
+{
+  \starttabulate[|l|l|l|]
+    \HL
+    \NC {\bf Ligatury}\NC {\bf Zkratky}\NC {\bf Příkaz}\NR
+    \HL
+    \NC\ae, \AE\NC{\tt \backslash ae, \backslash AE}\NC{\tt \backslash aeligature, \backslash AEligature}\NR\PlaceMacro{ae}\PlaceMacro{aeligature}
+    \NC\oe, \OE\NC{\tt \backslash oe, \backslash OE}\NC{\tt \backslash oeligature, \backslash OEligature}\PlaceMacro{oe}\PlaceMacro{oeligature}\NR
+    \HL
+  \stoptabulate
+}    
+
+Ligatura, která bývala ve španělštině (kastilštině) tradiční a~která se dnes v~písmech obvykle nevyskytuje, je \quote{Đ}: zkrácení \quote{D} a~\quote{E}. Pokud je mi známo, neexistuje v~\ConTeXt{}u žádný příkaz, který by nám umožnil toto použít,\footnote{V \LaTeX{}u naopak můžeme použít příkaz \cmd{DH} implementovaný balíčkem \MyKey{fontenc}.} ale můžeme si ho vytvořit, jak je vysvětleno v~\in{sekci}[sekce:vytváření znaků].
+
+Vedle předchozích ligatur, které jsem nazval {\em tradiční}, protože pocházejí z~rukopisu, se po vynálezu knihtisku vyvinuly určité ligatury tištěného textu, které budu nazývat \quotation{typografické ligatury}, které \ConTeXt\ považuje za pomůcky písma a~které program spravuje automaticky, ačkoli můžeme ovlivnit, jak se s~těmito pomůckami písma zachází (včetně ligatur) pomocí \PlaceMacro{definefontfeature}\tex{definefontfeature}. (v~tomto úvodu není vysvětleno).
+
+\stopsubsection
+
+\startsubsection
+  [title={Řecká písmena}]
+
+V~matematických a~fyzikálních vzorcích se běžně používají řecké znaky. Proto \ConTeXt\ zahrnoval možnost generování celé řecké abecedy, velkých i~malých písmen. Zde je příkaz postaven na anglickém názvu daného řeckého písmene. Pokud je první znak napsán malými písmeny, získáme malé řecké písmeno, a~pokud je napsán velkými písmeny, získáme velké řecké písmeno. Například příkaz \cmd{mu} vygeneruje malou verzi tohoto písmene (\mu), zatímco \cmd{Mu} vygeneruje velkou verzi (Μ). V~\in{tabulce}[tbl:greekletters] vidíme, který příkaz generuje jednotlivá písmena řecké abecedy, malá i~velká.
+
+{\smallbodyfont
+\placetable
+  [here]
+  [tbl:greekletters]
+  {Řecká abeceda}
+{
+  \starttabulate[|l|l|l|]
+    \HL
+    \NC {\bf Anglické jméno}\NC {\bf Znakr (lc/uc)}\NC {\bf Příkaz (lc/uc)}\NR
+    \HL
+    \NC Alpha\NC\alpha, \Alpha\NC{\tt \backslash alpha, \backslash Alpha}\NR\PlaceMacro{alpha}
+    \NC Beta\NC\beta, \Beta\NC{\tt \backslash beta, \backslash Beta}\NR\PlaceMacro{beta}
+    \NC Gamma\NC\gamma, \Gamma\NC{\tt \backslash gamma, \backslash Gamma}\NR\PlaceMacro{gamma}
+    \NC Delta\NC\delta, \Delta\NC{\tt \backslash delta, \backslash Delta}\NR\PlaceMacro{delta}
+    \NC Epsilon\NC\epsilon, \varepsilon, \Epsilon\NC{\tt \backslash epsilon, \backslash varepsilon, \backslash Epsilon}\NR\PlaceMacro{epsilon}\PlaceMacro{varepsilon}
+    \NC Zeta\NC\zeta, \Zeta\NC{\tt \backslash zeta, \backslash Zeta}\NR\PlaceMacro{zeta}
+    \NC Eta\NC\eta, \Eta\NC{\tt \backslash eta, \backslash Eta}\NR\PlaceMacro{eta}
+    \NC Theta\NC\theta, \vartheta, \Theta\NC{\tt \backslash theta, \backslash vartheta, \backslash Theta}\NR\PlaceMacro{theta}\PlaceMacro{vartheta}
+    \NC Iota\NC\iota, \Iota\NC{\tt \backslash iota, \backslash Iota}\NR\PlaceMacro{iota}
+    \NC Kappa\NC\kappa, \varkappa, \Kappa\NC{\tt \backslash kappa, \backslash varkappa, \backslash Kappa}\NR\PlaceMacro{kappa}\PlaceMacro{varkappa}
+    \NC Lambda\NC\lambda, \Lambda\NC{\tt \backslash lambda, \backslash Lambda}\NR\PlaceMacro{lambda}
+    \NC Mu\NC\mu, \Mu\NC{\tt \backslash mu, \backslash Mu}\NR\PlaceMacro{mu}
+    \NC Nu\NC\nu, \Nu\NC{\tt \backslash nu, \backslash Nu}\NR\PlaceMacro{nu}
+    \NC Xi\NC\xi, \Xi\NC{\tt \backslash xi, \backslash Xi}\NR\PlaceMacro{xi}
+    \NC Omicron\NC\omicron, \Omicron\NC{\tt \backslash omicron, \backslash Omicron}\NR\PlaceMacro{omicron}
+    \NC Pi\NC\pi, \varpi, \Pi\NC{\tt \backslash pi, \backslash varpi, \backslash Pi}\NR\PlaceMacro{pi}\PlaceMacro{varpi}
+    \NC Rho\NC\rho, \varrho, \Rho\NC{\tt \backslash rho, \backslash varrho, \backslash Rho}\NR\PlaceMacro{rho}\PlaceMacro{varrho}
+    \NC Sigma\NC\sigma, \varsigma, \Sigma\NC{\tt \backslash sigma, \backslash varsigma, \backslash Sigma}\NR\PlaceMacro{sigma}\PlaceMacro{varsigma}
+    \NC Tau\NC\tau, \Tau\NC{\tt \backslash tau, \backslash Tau}\NR\PlaceMacro{tau}
+    \NC Ypsilon\NC\upsilon, \Upsilon\NC{\tt \backslash upsilon, \backslash Upsilon}\NR\PlaceMacro{upsilon}
+    \NC Phi\NC\phi, \varphi, \Phi\NC{\tt \backslash phi, \backslash varphi, \backslash Phi}\NR\PlaceMacro{phi}\PlaceMacro{varphi}
+    \NC Chi\NC\chi, \Chi\NC{\tt \backslash chi, \backslash Chi}\NR\PlaceMacro{chi}
+    \NC Psi\NC\psi, \Psi\NC{\tt \backslash psi, \backslash Psi}\NR\PlaceMacro{psi}
+    \NC Omega\NC\omega, \Omega\NC{\tt \backslash omega, \backslash Omega}\PlaceMacro{omega}\NR
+    \HL
+    
+  \stoptabulate
+}}
+
+Všimněte si, že u~malých písmen některých znaků (epsilon, kappa, theta, pi, rho, sigma a~phi) existují dvě možné varianty.
+
+\stopsubsection
+
+\startsubsection
+  [title={Různé symboly}]
+
+Spolu se znaky, které jsme právě viděli, nabízí \TeX\ (a~tedy i~\ConTeXt) příkazy pro generování libovolného počtu symbolů. Takových příkazů je mnoho. Rozšířený, i~když neúplný seznam jsem uvedl v~\in{Příloze}[app:symbols].
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:create characters,
+    title={Definování znaků}
+  ]
+  \PlaceMacro{definecharacter}
+
+
+Pokud potřebujeme použít znaky, které nejsou dostupné z~klávesnice, můžeme vždy najít webovou stránku s~těmito znaky a~zkopírovat je do zdrojového souboru. Pokud používáme kódování UTF-8 (jak je doporučeno), bude to fungovat téměř vždy. Ale také na wiki \ConTeXt{}u je stránka s~hromadou symbolů, které lze jednoduše zkopírovat a~vložit do našeho dokumentu. Chcete-li je získat, klikněte \goto{na tento odkaz}[url(wikisymbols)].
+
+Pokud však potřebujeme některý z~daných znaků použít vícekrát, není kopírování a~vkládání nejefektivnějším způsobem. Bylo by vhodnější definovat znak tak, aby byl spojen s~příkazem, který jej pokaždé vygeneruje. K~tomu slouží příkaz \cmd{definecharacter}, jehož syntaxe je:
+
+{\tt \backslash definecharacter {\em Jméno} {\em Znaku}}
+
+kde
+
+\startitemize
+
+\item {\bf Jméno} je jméno přiřazené novému znaku. Nemělo by to být jméno existujícího příkazu, protože by se tím tento příkaz přepsal.
+
+je znak generovaný při každém spuštění \cmd{{\em Name}}. Tento znak můžeme označit třemi způsoby:
+
+  \startitemize
+
+ \item Jednoduchým zapsáním nebo vložením do zdrojového souboru (pokud jsme jej zkopírovali z~jiného elektronického dokumentu nebo webové stránky).
+
+  \item Uvedením čísla přiřazeného danému znaku v~písmu, které právě používáme. Chceme-li zobrazit znaky obsažené v~písmu a~čísla s~nimi spojená, můžeme použít \cmd{showfont[{\em Font name}] command}.
+
+  \item Vytvoření nového znaku pomocí některého z~příkazů pro tvorbu složených znaků, které uvidíme bezprostředně poté.
+    
+  \stopitemize
+  
+\stopitemize
+
+Jako příklad prvního použití se na chvíli vraťme k~oddílům věnovaným ligaturám (\in{}[sec:ligatures]). Tam jsem hovořil o~tradiční ligatuře ve španělštině, kterou dnes v~písmech obvykle nenajdeme: \quote{Đ}. Tento znak bychom mohli přiřadit například k~příkazu \cmd{decontract}, takže se bude generovat vždy, když napíšeme \cmd{decontract}. Uděláme to pomocí:
+
+\type{\definecharacter decontract Đ}
+
+\startSmallPrint
+
+Chceme-li vytvořit nový znak, který není v~našem písmu a~nelze jej získat z~klávesnice, jako je tomu v~případě příkladu, který jsem právě uvedl, musíme nejprve najít nějaký text, kde se tento znak nachází, zkopírovat jej a~být schopni jej vložit do naší definice. Ve skutečném příkladu, který jsem právě uvedl, jsem původně zkopíroval \quote{Đ} z~Wikipedie.
+  
+\stopSmallPrint
+
+\ConTeXt\ obsahuje také některé příkazy, které umožňují vytvářet složené znaky a~které lze použít v~kombinaci s~\cmd{definecharacter}. Složenými znaky myslím znaky, které mají také diakritiku. Příkazy jsou následující:
+
+\PlaceMacro{buildmathaccent}\PlaceMacro{buildtextaccent}\PlaceMacro{buildtextbootomcomma}\PlaceMacro{buildtextbottomdot}\PlaceMacro{buildtextcedilla}\PlaceMacro{buildtextgrave}\PlaceMacro{buildtextmacron}\PlaceMacro{buildtexttognek}
+\starttyping
+  \buildmathaccent Accent Character
+  \buildtextaccent Accent Character
+  \buildtextbottomcomma Character
+  \buildtextbottomdot Character
+  \buildtextcedilla Character
+  \buildtextgrave Character
+  \buildtextmacron Character
+  \buildtextognek Character
+\stoptyping
+
+
+Například: jak již víme, \ConTeXt\ má ve výchozím nastavení pouze příkazy pro psaní určitých písmen s~cedulkou (c, k, l, n, r, s~y t), která jsou obvykle součástí písem. Pokud bychom chtěli použít \quote{b}, mohli bychom použít příkaz \cmd{buildtextcedilla} takto:
+
+\type{\definecharacter bcedilla {\buildtextcedilla b}}
+
+\definecharacter bcedilla {\buildtextcedilla b}
+
+Tento příkaz vytvoří nový příkaz \cmd{bcedilla}, který vygeneruje \quote{b} s~cedulkou: \quote{\bcedilla}. Tyto příkazy doslova \quote{vybudují} nový znak, který bude vygenerován, i~když ho naše písmo nemá. Tyto příkazy slouží k~překrytí jednoho znaku jiným a~následnému pojmenování tohoto překrytí.
+
+\startSmallPrint
+
+Při testech se mi nepodařilo zprovoznit \cmd{buildmathaccent} ani \cmd{buildtextognek}. Proto se o~nich od této chvíle již nebudu zmiňovat.
+  
+\stopSmallPrint
+
+
+{\tt \backslash buildtextaccent} přijme jako argumenty dva znaky a~jeden z~nich překryje druhým, přičemž jeden z~nich mírně zvýší. Ačkoli se nazývá \quotation{buildtextaccent}, není nutné, aby některý ze znaků přijatých jako argumenty byl přízvukem; překrytí však poskytne lepší výsledky, pokud tomu tak je, protože v~tomto případě se překrytím přízvuku na znak sníží pravděpodobnost, že se přízvuk přepíše. Na druhou stranu překrývání dvou znaků, které mají za normálních podmínek stejnou základní linii, je ovlivněno tím, že příkaz jeden ze znaků mírně vyzdvihne nad druhý. Proto nemůžeme tento příkaz použít například k~získání výše zmíněné zkratky \quote{Đ}, protože pokud napíšeme např. 
+
+\type{\definecharacter decontract {\buildtextaccent D E}}
+\definecharacter decontract {\buildtextaccent D E}
+
+v~našem zdrojovém souboru, mírné vyvýšení nad základní linii \quote{D}, které tento příkaz vytváří, znamená, že efekt (\quote{\decontract}), který vytváří, není příliš dobrý. Pokud to však výška znaků umožňuje, mohli bychom vytvořit kombinaci. Například,
+
+
+\type{\definecharacter unusual {\buildtextaccent \_ "}}
+\definecharacter unusual {\buildtextaccent \_ "}
+
+by definoval znak \quote{\unusual}, který by byl spojen s~příkazem \cmd{unusual}.
+
+Ostatní příkazy pro sestavení mají jediný argument - znak, ke kterému diakritika vygenerovaná jednotlivými příkazy přidá. Níže uvedu příklad každého z~nich, sestaveného na základě písmene \quote{z}:
+
+\definecharacter zcomma {\buildtextbottomcomma z}
+\definecharacter zdot {\buildtextbottomdot z}
+\definecharacter zcedilla {\buildtextcedilla z}
+\definecharacter zgrave {\buildtextgrave z}
+\definecharacter zmacron {\buildtextmacron z}
+
+\startitemize
+
+\item {\tt \backslash buildtextbottomcomma} přidá čárku pod znak, který bere jako argument (\quote{\zcomma}).
+\item {\tt \backslash buildtextbottomdot} přidá tečku pod znak, který přebírá jako argument (\quote{\zdot}).
+\item {\tt \backslash buildtextcedilla} přidá cedilku pod znak, který přebírá jako argument (\quote{\zcedilla}).
+\item {\tt \backslash buildtextgrave} přidá nad znak, který přebírá jako argument, velké přízvučné znaménko (\quote{\zgrave}).
+\item {\tt \backslash buildtextmacron} přidá malý proužek pod znak, který bere jako argument. (\quote{\zmacron}).
+  
+\stopitemize
+
+Na první pohled se zdá, že příkaz {\tt \backslash buildtextgrave} je zbytečný, protože máme příkaz {\tt \backslash buildtextaccent}; pokud však zkontrolujete přízvuk grave vytvořený prvním z~těchto dvou příkazů, vypadá to o~něco lépe. Následující příklad ukazuje výsledek obou příkazů při dostatečné velikosti písma, aby bylo možné ocenit rozdíl:
+
+\definecharacter zgraveb {\buildtextaccent ` z}
+
+{\switchtobodyfont[30pt]
+\midaligned{\framed{\zgrave\ -- \zgraveb}}
+}
+
+\stopsubsection
+
+\startsubsection
+  [title={Použití předdefinovaných sad symbolů}]
+
+\suite- obsahuje spolu se samotným \ConTeXt{}em řadu předdefinovaných sad symbolů, které můžeme v~dokumentech používat. Tyto sady se nazývají \MyKey{cc}, \MyKey{cow}, \MyKey{fontawesome}, \MyKey{jmn}, \MyKey{mvs} a~\MyKey{nav}. Každá z~těchto množin obsahuje také některé podmnožiny:
+
+
+\startitemize[packed]
+
+\item {\tt\bf cc} zahrnuje \quotation{cc}.
+
+\item {\tt\bf cow} zahrnuje \quotation{cownormal} a~\quotation{cowcontour}.
+
+\item {\tt\bf fontawesome} zahrnuje \quotation{fontawesome}.
+
+\item {\tt\bf jmn} zahrnuje \quotation{navigation~1}, \quotation{navigation~2},  \quotation{navigation~3} a~\quotation{navigation~4}.
+
+\item {\tt\bf mvs} zahrnuje \quotation{astronomic}, \quotation{zodiac}, \quotation{europe}, \quotation{martinvogel~1}, \quotation{martinvogel~2} and \quotation{martinvogel~3}.
+
+\item {\tt\bf nav} zahrnuje \quotation{navigation~1}, \quotation{navigation~2} a~\quotation{navigation~3}.
+  
+\stopitemize
+
+\startSmallPrint
+
+ Wiki také uvádí sadu nazvanou {\tt\bf was}, která zahrnuje \quotation{wasy general}, \quotation{wasy music}, \quotation{wasy astronomy}, \quotation{wasy astrology}, \quotation{wasy geometry}, \quotation{wasy physics} a~\quotation{wasy apl}. Ale ve své distribuci jsem je nenašel a~mé testy, kterými jsem se k~nim snažil dostat, selhaly.
+  
+\stopSmallPrint
+
+Pro zobrazení konkrétních symbolů obsažených v~každé z~těchto sad se používá následující syntaxe:
+
+\PlaceMacro{usesymbols}\PlaceMacro{showsymbolset}
+\starttyping
+  \usesymbols[Set]
+  \showsymbolset[Subset]
+\stoptyping
+
+Například: chceme-li zobrazit symboly obsažené v~\quotation{mvs/zodiac}, pak do zdrojového souboru musíme zapsat:
+
+\starttyping
+  \usesymbols[mvs]
+  \showsymbolset[zodiac]
+\stoptyping
+
+a~dostaneme následující výsledek:
+
+\usesymbols[mvs]
+%\startcolumns[n=2]
+
+  \showsymbolset[zodiac]
+
+%\stopcolumns
+
+Všimněte si, že u~každého symbolu je uveden nejen jeho název, ale i~symbol. Příkaz \PlaceMacro{symbol}\tex{symbol} nám umožňuje použít kterýkoli ze symbolů. Jeho syntaxe je:
+
+{\tt \backslash symbol[Subset][SymbolName]}
+
+kde podmnožina je jedna z~podmnožin přidružených k~některé z~množin, které jsme dříve načetli pomocí \cmd{usesymbols}. Pokud bychom například chtěli použít astrologický symbol spojený s~Vodnářem (nalezený v~mvs/zodiac), museli bychom napsat
+
+\starttyping
+  \usesymbols[mvs]
+  \symbol[zodiac][Vodnář]
+\stoptyping
+\usesymbols[mvs]
+
+čímž získáme \quotation{\symbol[zodiac][Vodnář]}, která se pro všechny účely považuje za \quotation{znak}, a~proto je ovlivněna velikostí písma, která je aktivní při tisku. Můžeme také použít \cmd{definecharacter} pro přiřazení daného symbolu k~příkazu. Například
+
+\type{\definecharacter Aries {\symbol[zodiac][Aries]}}
+\definecharacter Aries {\symbol[zodiac][Aries]}
+
+vytvoří nový příkaz \cmd{Aries}, který vygeneruje znak \quotation{Aries}.
+
+Tyto symboly bychom mohli použít také například v~prostředí seznamu. Například:
+
+\starttyping
+\usesymbols[mvs]
+\definesymbol[1][{\symbol[martinvogel 2][PointingHand]}]
+\definesymbol[2][{\symbol[martinvogel 2][CheckedBox]}]
+\startitemize[packed]
+\item věc \item věc
+ \startitemize[packed]
+ \item věc \item věc
+ \stopitemize
+\item věc
+\stopitemize
+\stoptyping
+
+vytvoří
+
+{
+\usesymbols[mvs]
+\definesymbol[1][{\symbol[martinvogel 2][PointingHand]}]
+\definesymbol[2][{\symbol[martinvogel 2][CheckedBox]}]
+\startitemize[packed]
+\item věc \item věc
+ \startitemize[packed]
+ \item věc \item věc
+ \stopitemize
+\item věc
+\stopitemize
+}
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [title={Speciální formáty znaků}]
+
+Přesněji řečeno jsou to příkazy {\em formátu}, které ovlivňují použité písmo, jeho velikost, styl nebo variantu. Tyto příkazy jsou vysvětleny v~{kapitole}[sec:fontscol]. Avšak při širším pohledu můžeme za formátovací příkazy považovat i~příkazy, které nějakým způsobem mění znaky, které berou jako argument (a~mění tak jejich vzhled). Na některé z~těchto příkazů se podíváme v~této části. Jiné, jako je podtržený nebo řádkovaný text s~řádky nad nebo pod textem (např. tam, kde chceme poskytnout prostor pro odpověď na otázku), uvidíme v~\in{sekci}[sec:FramesLines].
+
+\startsubsection
+  [
+    reference=sec:Upper-Lower-Fake,
+    title={Velká písmena, malá písmena a~falešná malá písmena},
+  ]
+
+Samotná písmena mohou být velká nebo malá. Pro \ConTeXt\ jsou velká a~malá písmena odlišné znaky, takže v~zásadě bude psát písmena tak, jak je najde napsaná. Existuje však skupina příkazů, které nám umožňují zajistit, aby text, který berou jako argument, byl vždy napsán velkými nebo malými písmeny:
+
+\startitemize[packed]
+
+\item \PlaceMacro{word}\cmd{word\{text\}}: převede text převzatý jako argument na malá písmena.
+  
+\item \PlaceMacro{Word}\cmd{Word\{text\}}: převede první písmeno textu převzatého jako argument na velké písmeno.
+  
+\item \PlaceMacro{Words}\cmd{Words\{text\}}: převede první písmeno každého ze slov přijatých jako argument na velká písmena; ostatní písmena jsou malá.
+  
+\item \PlaceMacro{WORD}\cmd{WORD\{text\}} nebo
+  \PlaceMacro{WORDS}\cmd{WORDS\{text\}}: zapíše text převzatý jako argument velkými písmeny.
+  
+\stopitemize
+
+Velmi podobné těmto příkazům jsou \PlaceMacro{cap}\cmd{cap} a~\PlaceMacro{cap}.
+\PlaceMacro{Cap}\cmd{Cap}: ty také píší text, který přebírají, s~velkým písmenem.
+ ale pak na něj použijí faktor škálování, který se rovná faktoru použitému v~příkazu
+přípona \quote{x} v~příkazech pro změnu písma (viz.
+\in{sekce}[sek:quick-change]), takže ve většině písem budou velká písmena mít
+stejnou výšku jako malá písmena, což nám dává jakýsi {\em falešný}
+efekt malých písmen. Ve srovnání s~pravými malými písmeny (viz
+\in{sekci}[sec:smallcaps]) mají následující výhody:
+
+\startitemize[n]
+
+\item \cmd{cap} a~\cmd{Cap} budou fungovat s~jakýmkoli písmem, na rozdíl od
+skutečných malých kapitálek, které fungují pouze s~písmy a~styly, které je výslovně
+obsahují.
+
+\item Pravé malé kapitálky jsou naopak variantou písma, která,
+  jako taková je nekompatibilní s~jakoukoli jinou variantou, jako je tučné písmo, kurzíva nebo
+  šikmé písmo. Nicméně \cmd{cap} a~\cmd{Cap} jsou plně kompatibilní s~jakoukoliv
+  variantou písma.
+
+\stopitemize
+
+Rozdíl mezi \cmd{cap} a~\cmd{Cap} spočívá v~tom, že zatímco \cmd{Cap}
+aplikuje škálovací faktor na všechna písmena slov, která tvoří jeho
+argument, \cmd{Cap} nepoužije žádné škálování na první písmeno každého slova
+tak dosáhneme podobného efektu, jako když použijeme skutečné
+kapiálky v~textu malými písmeny. Pokud se text, který se bere jako argument
+v~\quote{kapitálkách} skládá z~několika slov, velikost velkého písmene v~příkazu
+prvního písmene každého slova bude zachována.
+
+\page[bigpreference]
+
+V~následujícím příkladu tedy
+
+\startDoubleExample
+
+\starttyping
+OSN, jejíž \Cap{prezident} má svou 
+kancelář v~sídle \cap{oSN}...
+\stoptyping
+  
+OSN, jejíž \Cap{prezident} má svou 
+kancelář v~sídle \cap{oSN}...
+
+\stopDoubleExample
+
+musíme si především všimnout rozdílu ve velikosti mezi prvním
+\quotation{OSN} (velkými písmeny) a~podruhé (malými kapitálkami
+\quotation{\cap{OSN}}). V~příkladu jsem napsal \cmd{cap\{oSN\}}.
+podruhé, abychom viděli, že nezáleží na tom, jestli argument napíšeme podruhé.
+který \cmd{cap} přijímá, velkými nebo malými písmeny: příkaz převede všechny
+na velká písmena a~pak použije škálovací koeficient; na rozdíl od příkazu
+\cmd{Cap}, který první písmeno neškáluje.
+
+Tyto příkazy mohou být také {\em vnořené}, v~takovém případě by se škálování použilo ještě jednou, což by vedlo k~dalšímu zmenšení, jako v~následujícím příkladu, kde je slovo \quotation{kapitál} v~prvním řádku opět zmenšeno:
+
+\startDoubleExample
+
+\starttyping
+\cap{Lidé, kteří nashromáždili svůj
+\cap{kapitál} na úkor ostatních 
+jsou nejčastěji
+{\bf dekapitováni} v~revolučních 
+dobách}.
+\stoptyping
+
+
+\cap{Lidé, kteří nashromáždili svůj
+\cap{kapitál} na úkor ostatních 
+jsou nejčastěji
+{\bf dekapitováni} v~revolučních 
+dobách}.
+
+\stopDoubleExample
+
+
+Příkaz \cmd{nocap} aplikovaný na text, na který je aplikován \cmd{cap}, zruší efekt \cmd{cap} v~textu, který je jeho argumentem. Například:
+
+\startDoubleExample
+
+\starttyping
+\cap{Když mi byl Jeden, právě jsem začínal,
+když mi byly dva roky, byl jsem \nocap{nearly} 
+nový (A. A. Milne)}.
+\stoptyping
+
+\cap{Když mi byl Jeden, právě jsem začínal,
+když mi byly dva roky, byl jsem \nocap{nearly} 
+nový (A. A. Milne)}.
+
+\stopDoubleExample
+
+Pomocí \PlaceMacro{setupcapitals}\cmd{setupcapitals} můžeme nastavit, jak bude \cmd{cap} fungovat, a~můžeme také definovat různé verze příkazu, z~nichž každá bude mít vlastní název a~specifickou konfiguraci. To můžeme provést pomocí \PlaceMacro{definecapitals}\cmd{definecapitals}.
+
+Oba příkazy fungují podobně:
+
+\starttyping
+\definecapitals[Name][Configuration]
+\setupcapitals[Name][Configuration]
+\stoptyping
+
+Parametr \quotation{Name} v~\cmd{setupcapitals} je nepovinný. Pokud není použit, konfigurace ovlivní samotný příkaz \cmd{cap}. Pokud je použit, je třeba, aby název, který jsme předtím přiřadili v~\cmd{definecapitals}, byl přiřazen nějaké aktuální konfiguraci.
+
+
+V~obou příkazech, konfigurace umožňuje tři možnosti: \quotation{{\tt title}}, \quotation{{\tt sc}} a~\quotation{{\tt style}}, přičemž první a~druhý umožňuje jako hodnoty \quotation{yes} a~\quotation{no}. Pomocí \quotation{{\tt title}} určujeme, zda se psaní velkých písmen bude týkat i~nadpisů (což se ve výchozím nastavení děje), a~pomocí \quotation{{\tt sc}} určujeme, zda má být příkaz psán skutečně malými písmeny (\quotation{yes}), nebo falešnými malými písmeny (\quotation{no}). Ve výchozím nastavení se používají falešné malé kapitálky, což má tu výhodu, že příkaz funguje, i~když používáte písmo, které nemá implementovány malé kapitálky. Třetí hodnota \quotation{{\tt style}} nám umožňuje určit příkaz stylu, který má být použit na text ovlivněný příkazem \cmd{cap}.
+
+\stopsubsection
+
+\startsubsection
+  [title={Text s~horním nebo dolním indexem}]
+
+Již víme (viz \in{sekce}[sec:reserved characters]), že v~matematickém režimu rezervované znaky \MyKey{_} a~\MyKey{^} převedou znak nebo skupinu, která bezprostředně následuje, na horní nebo dolní index. Pro dosažení tohoto efektu mimo matematický režim obsahuje \ConTeXt\ následující příkazy:
+
+\startitemize
+
+\item \PlaceMacro{high}\cmd{high\{Text\}}: zapíše text, který bere jako argument, jako horní index.
+
+\item \PlaceMacro{low}\cmd{low\{Text\}}: zapíše text, který bere jako argument, jako dolní index.
+
+\item \PlaceMacro{lohi}\\cmd{lohi\{Podpis\}\{Superscript\}}: zapíše oba argumenty, jeden nad druhým: dole první argument a~nahoře druhý, což přináší zajímavý efekt:
+
+  \startDoubleExample
+
+    \starttyping
+      \lohi{dole}{hore}
+    \stoptyping
+
+    \lohi{dole}{hore}
+
+\stopDoubleExample
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:verbatim,
+    title={Doslovný text},
+  ]
+  \PlaceMacro{type}\PlaceMacro{starttyping}
+
+Latinský výraz {\em verbatim} (z~{\em verbum} $=$ {\em word} + přípona {\em atim}), který by se dal přeložit jako \quotation{doslovně} nebo \quotation{slovo za slovo}, se používá v~programech pro zpracování textu, jako je \ConTeXt\, pro označení fragmentů textu, které by se neměly vůbec zpracovávat, ale měly by se vysypat tak, jak jsou napsány, do výsledného souboru. \ConTeXt\ k~tomu používá příkaz \tex{typ} určený pro krátké texty, které nezabírají více než jeden řádek, a~prostředí {\tt typing} určené pro texty delší než jeden řádek. Tyto příkazy se hojně používají v~počítačových knihách pro zobrazení fragmentů kódu a~\ConTeXt\ tyto texty formátuje monospace písmem, jako by to dělal psací stroj nebo počítačový terminál. V~obou případech je text odeslán do konečného dokumentu bez {\em zpracování}, což znamená, že mohou používat vyhrazené znaky nebo speciální znaky, které budou ve výsledném souboru přepsány {\em tak, jak jsou}. Stejně tak, pokud argument \tex{type} nebo obsah \tex{starttyping} obsahuje příkaz, bude tento příkaz {\em zapsán} do konečného dokumentu, ale nebude proveden.
+
+Příkaz \tex{type} má kromě toho následující zvláštnost: jeho argument {\em může} být obsažen v~kudrnatých závorkách (jak je v~\ConTeXt obvyklé), ale k~ohraničení (obklopení) argumentu lze použít jakýkoli jiný znak.
+
+\startSmallPrint
+
+Když \ConTeXt\ čte příkaz \tex{typ}, předpokládá, že znak, který není prázdnou mezerou bezprostředně za názvem příkazu, bude sloužit jako oddělovač jeho argumentu; proto se domnívá, že obsah argumentu začíná dalším znakem a~končí znakem před dalším výskytem {\em oddělovače}.
+
+
+  K~lepšímu pochopení nám pomůže několik příkladů:
+
+  \starttyping
+    \type 1Tweedledum a~Tweedledee1
+    \type |Tweedledum a~Tweedledee|
+    \type zTweedledum a~Tweedledeez
+    \type (Tweedledum a~Tweedledee(
+  \stoptyping
+
+ Všimněte si, že v~prvním příkladu je prvním znakem za názvem příkazu \quote{1}, ve druhém \quote{\|} a~ve třetím \quote{z}; takže: v~každém z~těchto případů bude \ConTeXt\ považovat za argument \tex{type} vše mezi tímto znakem a~dalším výskytem téhož znaku. Totéž platí pro poslední příklad, který je také velmi poučný, protože v~zásadě bychom mohli předpokládat, že pokud je úvodním oddělovačem argumentu \quote{(}, měl by být i~závěrečným oddělovačem \quote{)}, ale není tomu tak, protože \quote{(} a~\quote{)} jsou různé znaky a~\tex{type}, jak jsem řekl, hledá závěrečný oddělovač, který je stejný jako znak použitý na začátku argumentu.
+
+Existují pouze dva případy, kdy \tex{type} umožňuje, aby úvodní a~závěrečný oddělovač byly různé znaky:
+
+  \startitemize
+
+\item Pokud je úvodním oddělovačem znak \quote{\{}, myslí si, že závěrečným oddělovačem bude \quote{\}}.
+
+  \item Pokud je úvodním oddělovačem znak \quote{<<}, myslí si, že uzavíracím oddělovačem bude \quote{>>}. Tento případ je jedinečný také tím, že jako oddělovače jsou použity dva po sobě jdoucí znaky.
+
+
+  \stopitemize
+
+
+Nicméně: skutečnost, že \tex{type} umožňuje libovolný oddělovač, neznamená, že bychom měli používat oddělovače \quotation{weird}. Z~hlediska {\em čitelnosti} a~{\em srozumitelnosti} zdrojového souboru je nejlepší ohraničit argument \tex{type} kulatými závorkami, kde je to možné, jak je to běžné v~\ConTeXt{}u; a~když to možné není, protože v~argumentu \tex{type} jsou kulaté závorky, použít symbol: nejlépe takový, který není vyhrazeným znakem \ConTeXt{}u. Například: \cmd{type *Jedná se o~uzavírací kudrnatou závorku: \quote{\}}*}.
+
+
+\stopSmallPrint
+
+Oba \tex{type} i~\tex{starttyping} lze konfigurovat pomocí \PlaceMacro{setuptype}\tex{setuptype} a~\PlaceMacro{setuptyping}\tex{setuptyping}. Můžeme také vytvořit jejich přizpůsobenou verzi pomocí \PlaceMacro{definetype}\tex{definetype} a~\PlaceMacro{definetyping}\tex{definetyping}. Pokud jde o~vlastní konfigurační možnosti těchto příkazů, odkazuji na \MyKey{setup-cs.pdf} (v~adresáři {\tt tex/texmf-context/doc/context/documents/general/qrcs}.
+
+Dva velmi podobné příkazy jako \tex{type} jsou:
+
+\startitemize
+
+\item \PlaceMacro{typ}\tex{typ}: funguje podobně jako \tex{typ}, ale nezakáže spojovník.
+
+\item \PlaceMacro{tex}\tex{tex}: příkaz určený pro psaní textů o~\TeX{}u nebo \ConTeXt{}u: přidává zpětnou mezeru před text, který bere jako argument. Jinak se tento příkaz liší od \tex{type} tím, že zpracovává některé vyhrazené znaky, které najde v~textu, který bere jako argument. Zejména s~kudrnatými závorkami uvnitř \tex{tex} bude zacházet stejným způsobem, jakým s~nimi obvykle zachází v~\ConTeXt.
+
+\stopitemize
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:horizontal space1,
+    title={Mezery mezi znaky a~slovy},
+  ]
+
+\startsubsection
+  [title=Automatické nastavení horizontálního prostoru]
+
+Mezera mezi jednotlivými znaky a~slovy (v~\TeX{}u nazývaná {\em horizontální mezera}) je obvykle nastavena automaticky pomocí \ConTeXt{}u:
+
+\startitemize
+
+\item Mezera mezi znaky, které tvoří slovo, je definována samotným písmem, které s~výjimkou písem s~pevnou šířkou obvykle používá větší či menší množství bílé plochy v~závislosti na oddělovaných znacích, a~tak například mezera mezi \quote{A} a~\quote{V}. (\quote{AV}) je obvykle menší než mezera mezi \quote{A} a~\quote{X} (\quote{AX}). Kromě těchto možných odchylek, které závisí na kombinaci příslušných písmen a~jsou předem definovány písmem, je však mezera mezi znaky, které tvoří slovo, obecně pevnou a~neměnnou mírou.
+
+\item Naproti tomu mezera mezi slovy na stejném řádku může být pružnější.
+
+  \startitemize
+
+ \item V~případě slov v~řádku, jejichž šířka musí být stejná jako šířka ostatních řádků v~odstavci, je změna mezer mezi slovy jedním z~mechanismů, které \ConTeXt\ používá k~dosažení řádků stejné šířky, jak je podrobněji vysvětleno v~\in{sekci}[sec:lines]. V~těchto případech \ConTeXt\ vytvoří přesně stejnou vodorovnou mezeru mezi všemi slovy v~řádku (s~výjimkou níže uvedených pravidel), přičemž zajistí, aby mezera mezi slovy v~různých řádcích odstavce byla co nejpodobnější.
+
+  \item Kromě nutnosti zvětšit nebo zmenšit mezery mezi slovy, aby bylo možné řádky ospravedlnit, však \ConTeXt\ v~závislosti na aktivním jazyce bere v~úvahu určitá typografická pravidla, podle nichž typografická tradice spojená s~daným jazykem přidává na některých místech bílé místo navíc, jako je tomu například v~některých částech anglické typografické tradice, která přidává bílé místo navíc za tečku.
+
+    \startSmallPrint
+
+ Tyto dodatečné bílé mezery fungují v~angličtině a~možná i~v~některých dalších jazycích (i~když je také pravda, že v~mnoha případech se dnes vydavatelé v~angličtině rozhodují, že za tečkou nebudou dělat mezeru navíc), ale ne ve španělštině, kde je typografická tradice jiná. Proto můžeme tuto funkci dočasně povolit pomocí \PlaceMacro{setupspacing}\cmd{setupspacing[broad]} a~zakázat pomocí \cmd{setupspacing[packed]}. Můžeme také změnit výchozí konfiguraci pro španělštinu (a~pro jakýkoli jiný jazyk včetně angličtiny), jak je vysvětleno v~\in{sekci}[sec:langconfig].
+
+    \stopSmallPrint
+
+  \stopitemize
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [title=Změna mezery mezi znaky ve slově]
+
+Změna výchozí mezery pro znaky, které tvoří slovo, je z~typografického hlediska považována za velmi špatný postup, s~výjimkou nadpisů a~titulků. \ConTeXt\ však poskytuje příkaz pro změnu této mezery mezi znaky ve slově:\footnote{Je velmi typické pro filozofii \ConTeXt{}u, protože obsahuje příkaz pro něco, co sama dokumentace \ConTeXt{}u nedoporučuje. Přestože se usiluje o~typografickou dokonalost, cílem je také dát autorovi absolutní kontrolu nad vzhledem jeho dokumentu: zda je lepší nebo horší, je zkrátka na jeho odpovědnosti.}. \PlaceMacro{stretched}\cmd{stretched}, jehož syntaxe je následující:
+
+\type{\stretched[Configuration]{Text}}
+
+kde {\em Konfigurace} umožňuje některou z~následujících možností:
+
+\startitemize
+
+\item {\tt factor}: celé nebo desetinné číslo, které vyjadřuje vzdálenost, kterou je třeba získat. Nemělo by to být příliš vysoké číslo. Faktor 0,05 je již viditelný pouhým okem.
+
+\item {\tt width}: udává celkovou šířku, kterou musí mít text předkládaný příkazu tak, aby příkaz sám vypočítal potřebné rozestupy pro rozložení znaků v~tomto prostoru. 
+  \startSmallPrint
+
+    Podle mých testů, pokud je šířka nastavená pomocí možnosti {\tt width} menší než šířka potřebná k~zobrazení textu s~{\em factor} rovným 0,25, možnost {\em width} a~tento faktor jsou ignorovány. Hádám, že je to proto, že \cmd{stretched} nám umožňuje pouze {\em zvětšit} mezeru mezi znaky ve slově, nikoliv ji zmenšit. Nerozumím však tomu, proč se jako minimální míra pro volbu {\tt width} používá šířka potřebná k~zobrazení textu s~faktorem 0,25, a~ne {\em natural width} textu (s~faktorem 0).
+    
+  \stopSmallPrint
+
+
+\item {\tt\bf style}: příkaz nebo příkazy stylu, které se použijí na text převzatý jako argument.
+
+\item {\tt\bf color}: barva, ve které bude text převzatý jako argument napsán.
+
+\stopitemize
+
+V~následujícím příkladu si tedy můžeme názorně ukázat, jak by příkaz fungoval při použití na stejnou větu, ale s~různou šířkou:
+
+\startDoubleExample\smallbodyfont
+
+\starttyping
+\stretched[width=4cm]{\bf test text}
+\stretched[width=6cm]{\bf test text}
+\stretched[width=8cm]{\bf test text}
+\stretched[width=9cm]{\bf test text}
+\stoptyping
+
+\stretched[width=4cm]{\bf test text}
+\stretched[width=6cm]{\bf test text}
+\stretched[width=8cm]{\bf test text}
+\stretched[width=9cm]{\bf test text}
+
+\stopDoubleExample
+
+\startSmallPrint
+
+Na tomto příkladu je vidět, že rozložení horizontálního prostoru mezi jednotlivými znaky není rovnoměrné. Písmena \quote{x} a~\quote{t} v~\quotation{text} a~\quote{e} a~\quote{b} v~\quotation{test} jsou vždy mnohem blíže u~sebe než ostatní znaky. Nepodařilo se mi zjistit, proč k~tomu dochází.
+  
+\stopSmallPrint
+
+Při použití bez argumentů použije příkaz celou šířku řádku. Na druhou stranu v~textu, který je argumentem tohoto příkazu, je příkaz \cmd{\backslash} nadefinován a~místo zalomení řádku vloží vodorovnou mezeru. Například:
+
+\startcolumns[n=2]
+
+\starttyping
+\stretched{test\\text}    
+\stoptyping
+
+\stretched{test\\text}  
+
+\stopcolumns
+
+Výchozí konfiguraci příkazu můžeme přizpůsobit pomocí příkazu
+\PlaceMacro{setupstretched}\cmd{setupstretched}.
+
+\startSmallPrint
+
+Neexistuje žádný příkaz \PlaceMacro{definestretched}\cmd{definestretched}, který by nám umožnil nastavit přizpůsobené konfigurace spojené s~názvem příkazu \Doubt, nicméně v~oficiálním seznamu příkazů (viz \in{sekci}[odd: qrc-setup-cs]) je uvedeno, že \cmd{setupstretched} pochází z~\PlaceMacro{setupcharacterkerning}\cmd{setupcharacterkerning} a~že existuje \PlaceMacro{definecharacterkerning}\cmd{de\-fi\-ne\-cha\-rac\-ter\-ker\-ning}. Při mých testech se mi však nepodařilo nastavit žádnou přizpůsobenou konfiguraci pro \cmd{stretched} pomocí posledně jmenovaného příkazu, i~když musím přiznat, že jsem tomu také nevěnoval mnoho času.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:horizontal space2,
+    title={Příkazy pro přidání vodorovné mezery mezi slova},
+  ]
+
+Již víme, že pro zvětšení mezery mezi slovy je zbytečné.
+přidat dvě nebo více po sobě jdoucích mezer, protože \ConTeXt\ absorbuje všechny 
+po sobě jdoucí mezery, jak je vysvětleno v~\in{sekci}[sec:spaces]. Pokud
+chceme zvětšit mezeru mezi slovy, musíme přejít k~jednomu z~následujících kroků
+příkazů, které nám to umožňují:
+
+\startitemize
+
+\item \cmd{,} vloží do dokumentu velmi malé prázdné místo (tzv. tenkou mezeru). Používá se například k~oddělení tisíců v~souboru čísel (např. 1 000 000) nebo k~oddělení jednoduché uvozovky od dvojité uvozovky. Např: \quotation{\color[darkmagenta]{{\tt 1\backslash,473\backslash,451}}} vytvoří \quotation{1\,473\,451}.
+
+\item \PlaceMacro{\textvisiblespace}\PlaceMacro{space}\cmd{space} nebo \quotation{\cmd{\textvisiblespace}}. (zpětné lomítko následované mezerou, kterou jsem vzhledem k~tomu, že se jedná o~neviditelný znak, reprezentoval jako \quotation{\textvisiblespace}) zavádí další mezeru.
+
+\item \PlaceMacro{enskip}\cmd{enskip}, \PlaceMacro{quad}\cmd{quad} a~\PlaceMacro{qquad}\cmd{qquad} vloží do dokumentu prázdné místo o~velikosti půl {\em em}, 1 {\em em} nebo 2 {\em em}. Nezapomeňte, že {\em em} je míra závislá na velikosti písma a~odpovídá šířce \quote{m}, která se obvykle shoduje s~velikostí písma v~bodech. Při použití písma o~velikosti 12 bodů nám tedy \cmd{enskip} poskytne mezeru 6 bodů, \cmd{quad} 12 bodů a~\cmd{qquad} 24 bodů.
+
+\stopitemize
+
+Vedle těchto příkazů, které nám poskytují prázdný prostor v~přesných rozměrech, zavádějí příkazy \PlaceMacro{hskip}\cmd{hskip} a~\PlaceMacro{hfill}\cmd{hfill} vodorovný prostor různých rozměrů:
+
+
+\PlaceMacro{hskip}\cmd{hskip} nám umožňuje přesně určit, kolik prázdného místa chceme přidat. Tedy:
+
+
+\startDoubleExample
+
+\starttyping
+Toto je \hskip 1cm 1 centimetr\\
+Toto jsou \hskip 2cm 2 centimetri\\
+Toto je \hskip 2.5cm 2.5 centimetru\\
+\stoptyping
+
+Toto je \hskip 1cm 1 centimetr\\
+Toto jsou \hskip 2cm 2 centimetri\\
+Toto je \hskip 2.5cm 2.5 centimetru\\
+
+\stopDoubleExample
+
+Uvedená mezera může být záporná, což způsobí překrytí jednoho textu druhým. Tedy:
+
+\startDoubleExample
+
+\starttyping
+Je to spíše fraška než 
+\hskip -1cm komedie
+\stoptyping
+
+Je to spíše fraška než \hskip -1cm komedie
+
+\stopDoubleExample
+
+\cmd{hfill} zase zavede tolik bílého místa, kolik je potřeba, aby zabíralo celý řádek, což nám umožňuje vytvářet zajímavé efekty, jako je text zarovnaný doprava, vycentrovaný text nebo text na obou stranách řádku, jak ukazuje následující příklad:
+
+\startDoubleExample
+\starttyping
+\hfill Na pravé straně\\
+Na obou \hfill stranách
+\stoptyping
+
+\hfill Na pravé straně\\
+Na obou \hfill stranách
+
+\stopDoubleExample
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:compound words,
+    title=Složená slova,
+  ]
+
+
+V~této části mám na mysli slova, která jsou formálně chápána jako jedno slovo, a~ne slova, která jsou jednoduše spojena. Není vždy snadné toto rozlišení pochopit: \quotation{rainbow} se zjevně skládá ze dvou slov (\quotation{rain + bow}), ale žádný anglicky mluvící člověk by o~těchto spojených výrazech nepřemýšlel jinak než jako o~jednom slově. Na druhé straně máme slova, která se někdy kombinují pomocí spojovníku nebo zpětného lomítka. Obě slova mají odlišný význam a~použití, ale jsou spojena (a~v~některých případech se mohou stát jedním slovem, ale zatím ne!). Tak například můžeme najít slova jako \quotation{French||Canadian} nebo \quotation{(inter|)|communication} (i~když můžeme také najít \quotation{intercommunication} a~zjistit, že mluvící veřejnost nakonec přijala obě slova jako jediné slovo. Tak se jazyk vyvíjí).
+
+Složená slova představují pro \ConTeXt\ určité problémy, které souvisejí především s~jejich možným spojováním na konci řádku. Pokud je spojovacím prvkem pomlčka, pak z~typografického hlediska není problém s~pomlčkou na konci řádku v~tomto místě, ale museli bychom se vyhnout druhé pomlčce v~druhé části slova, protože by nám zůstaly dvě po sobě jdoucí pomlčky, což by mohlo způsobit problémy s~porozuměním.
+
+Příkaz \quotation{{\tt\|\|}} slouží k~tomu, aby \ConTeXt\ sdělil, že dvě slova tvoří složené slovo. Tento příkaz výjimečně nezačíná zpětným lomítkem a~umožňuje dvě různá použití:
+
+\startitemize
+
+\item Můžeme použít dvě po sobě jdoucí svislé čárky (fajfky) a~napsat například \MyKey{Spanish\|\|Argentine}.
+
+\item Dvě svislé čárky mohou mít spojovací |/|oddělovací prvek mezi dvěma slovy, jako například \MyKey{spojovací\|/\|oddelovací}.
+  
+
+\stopitemize
+
+V~obou případech \ConTeXt\ pozná, že se jedná o~složené slovo, a~použije příslušná pravidla pro spojování tohoto typu slov. Rozdíl mezi použitím dvou po sobě jdoucích svislých čárek (fajfek) nebo orámováním oddělovače slov jimi je v~tom, že v~prvním případě \ConTeXt\ použije oddělovač, který je předdefinován jako \PlaceMacro{setuphyphenmark}\cmd{setuphyphenmark}, nebo jinými slovy pomlčku, která je výchozí (\MyKey{--}). Pokud tedy napíšeme \MyKey{obrázek\|\|rámeček}, \ConTeXt\ vygeneruje \quotation{Obrázek||rámeček}.
+
+Pomocí \cmd{setuphyphenmark} můžeme změnit výchozí oddělovač (v~případě, že potřebujeme dvě roury). Přípustné hodnoty pro tento příkaz jsou \MyKey{--, ---, -, ~, (, ), =, /}. Mějte však na paměti, že hodnota \MyKey{=} se stane pomlčkou (stejně jako \MyKey{---}).
+
+
+Obvyklé použití \MyKey{\|\|} je s~pomlčkami, protože se obvykle používá mezi složenými slovy. Příležitostně však může být oddělovačem závorka, pokud chceme například \quotation{(inter)space}, nebo to může být lomítko vpřed, jako v~\quotation{vstup/výstup}. Pokud chceme, aby v~těchto případech platila běžná pravidla pro spojování složených slov, můžeme napsat \MyKey{(inter\|)\|prostor} nebo \MyKey{vstup\|/\|výstup}. Jak jsem již řekl, \MyKey{\|=\|} je považováno za zkratku \MyKey{\|---\|} a~vkládá pomlčku jako oddělovač (---).
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:langdoc,
+    title={Jazyk textu},
+  ]
+
+Znaky tvoří slova, která obvykle patří do některého jazyka. Pro \ConTeXt je důležité znát jazyk, ve kterém píšeme, protože na něm závisí řada důležitých věcí. Především:
+
+\startitemize[packed]
+
+\item Spojování slov.
+\item Výstupní formát určitých slov.
+\item Určité záležitosti týkající se sazby spojené s~tradicí sazby daného jazyka.
+
+\stopitemize
+
+\startsubsection
+  [title=Nastavení a~změna jazyka]
+
+\ConTeXt\ předpokládá, že jazykem bude angličtina. To lze změnit dvěma postupy:
+
+\startitemize
+  
+\item Pomocí příkazu \PlaceMacro{mainlanguage}\cmd{mainlanguage}, který se používá v~preambuli pro změnu hlavního jazyka dokumentu.
+
+\item Pomocí příkazu \PlaceMacro{language}\cmd{language}, který slouží ke změně aktivního jazyka na libovolném místě dokumentu.
+
+\stopitemize
+
+Oba příkazy očekávají argument tvořený libovolným identifikátorem jazyka (nebo kódem). K~identifikaci jazyka se používá buď dvoupísmenný mezinárodní kód jazyka uvedený v~normě ISO 639-1, který je stejný jako kód používaný například na webu, nebo anglický název daného jazyka, případně někdy nějaká zkratka názvu v~angličtině.
+
+V~\in{tabulce}[tbl:languages] nalezneme kompletní seznam jazyků podporovaných \ConTeXt{}em spolu s~ISO kódem pro každý z~těchto jazyků a~případně i~kódem pro některé výslovně uvedené jazykové varianty.\footnote{\in{Tabulka}[tbl:languages] obsahuje shrnutí seznamu získaného pomocí následujících příkazů:\\
+  \PlaceMacro{usemodule}\type{\usemodule[languages-system]}\\
+  \PlaceMacro{loadinstalledlanguages}\type{\loadinstalledlanguages}\\
+  \PlaceMacro{showinstalledlanguages}\type{\showinstalledlanguages}\\
+ Pokud budete číst tento dokument dlouho po jeho napsání (2020), je možné, že \ConTeXt\ bude obsahovat další jazyky, takže by bylo dobré použít tyto příkazy pro zobrazení aktualizovaného seznamu jazyků}
+
+{\switchtobodyfont[script]
+\placetable
+  [here]
+  [tbl:languages]
+  {Podpora jazyků v~\ConTeXt{}u}
+{\starttabulate[|l|l|p(.6\textwidth)|]
+\HL
+\NC{\bf Jazyk} \NC {\bf Kód ISO} \NC {\bf Jazykové varianty} 
+\NR
+\HL
+\NC Afrikaans
+\NC af, afrikaans
+\NR
+\NC Arabic
+\NC ar, arabic
+\NC ar-ae, ar-bh, ar-dz, ar-eg, ar-in, ar-ir, ar-jo, ar-kw, ar-lb, ar-ly, ar-ma, ar-om, ar-qa, ar-sa, ar-sd, ar-sy, ar-tn, ar-ye
+\NR
+\NC Catalan
+\NC ca, catalan
+\NR
+\NC Czech
+\NC cs, cz, czech
+\NR
+\NC Croatian
+\NC hr, croatian
+\NR
+\NC Danish
+\NC da, danish
+\NR
+\NC Dutch
+\NC nl, nld, dutch
+\NR
+\NC English
+\NC en, eng, english
+\NC en-gb, uk, ukenglish, en-us, usenglish
+\NR
+\NC Estonian
+\NC et, estonian
+\NR
+\NC Finnish
+\NC fi, finnish
+\NR
+\NC French
+\NC fr, fra, french
+\NR
+\NC German
+\NC de, deu, german
+\NC de-at, de-ch, de-de
+\NR
+\NC Greek
+\NC gr, greek
+\NR
+\NC Greek (ancient)
+\NC agr, ancientgreek
+\NR
+\NC Hebrew
+\NC he, hebrew
+\NR
+\NC Hungarian
+\NC hu, hungarian
+\NR
+\NC Italian
+\NC it, italian
+\NR
+\NC Japanese
+\NC ja, japanese
+\NR
+\NC Korean
+\NC kr, korean
+\NR
+\NC Latin
+\NC la, latin
+\NR
+\NC Lithuanian
+\NC lt, lithuanian
+\NR
+\NC Malayalam
+\NC ml, malayalam
+\NR
+\NC Norwegian
+\NC nb, bokmal, no, norwegian
+\NC nn, nynorsk
+\NR
+\NC Persian
+\NC pe, fa, persian
+\NR
+\NC Polish
+\NC pl, polish
+\NR
+\NC Portuguese
+\NC pt, portughese
+\NC pt-br
+\NR
+\NC Romanian
+\NC ro, romanian
+\NR
+\NC Russian
+\NC ru, russian
+\NR
+\NC Slovak
+\NC sk, slovak
+\NR
+\NC Slovenian
+\NC sl, slovene, slovenian
+\NR
+\NC Spanish
+\NC es, sp, spanish
+\NC es-es, es-la
+\NR
+\NC Swedish
+\NC sv, swedish
+\NR
+\NC Thai
+\NC th, thai
+\NR
+\NC Turkish
+\NC tr, turkish
+\NC tk, turkmen
+\NR
+\NC Ukranian
+\NC ua, ukrainian
+\NR
+\NC Vietnamese
+\NC vi, vietnamese
+\NR
+\HL
+\stoptabulate
+}}
+
+Chceme-li například nastavit španělštinu (kastilštinu) jako hlavní jazyk dokumentu, můžeme použít některou z~následujících tří možností:
+
+\starttyping
+\mainlanguage[es]
+\mainlanguage[spanish]
+\mainlanguage[sp]
+\stoptyping
+
+Pro aktivaci určitého jazyka {\em uvnitř} dokumentu můžeme použít buď příkaz \cmd{language[Language code]}, nebo konkrétní příkaz pro aktivaci daného jazyka. Tak například \PlaceMacro{en}\cmd{en} aktivuje angličtinu, \PlaceMacro{fr}\cmd{fr} aktivuje francouzštinu, \PlaceMacro{es}\cmd{es} aktivuje španielštinu, \PlaceMacro{ca}\cmd{ca} aktivuje katalánštinu. Jakmile je aktuální jazyk aktivován, zůstane jím, dokud výslovně nepřepneme na jiný jazyk nebo dokud skupinu, ve které byl jazyk aktivován, nezavřeme. Jazyky tedy fungují stejně jako příkazy pro změnu písma. Všimněte si však, že jazyk nastavený příkazem \cmd{language} nebo některou z~jeho zkratek (\cmd{en}, \cmd{fr}, \PlaceMacro{de}\cmd{de} atd.) nemá vliv na jazyk, ve kterém se tisknou popisky (viz \in{sekce}[sec:labels]).
+
+\startSmallPrint
+
+Ačkoli může být pracné označit jazyk všech slov a~výrazů, které v~dokumentu používáme a~které nepatří do hlavního jazyka dokumentu, je důležité tak učinit, pokud chceme získat správně napsaný výsledný dokument, zejména v~odborné práci. Neměli bychom označovat celý text, ale pouze tu část, která nepatří do hlavního jazyka. Někdy je možné označování jazyka automatizovat pomocí makra. Například pro tento dokument, v~němž jsou průběžně citovány příkazy \ConTeXt\, jejichž původním jazykem je angličtina, jsem navrhl makro, které kromě toho, že příkaz zapíše v~příslušném formátu a~barvě, označí jej jako anglické slovo. Ve své odborné práci, kde potřebuji citovat velké množství francouzské a~italské bibliografie, jsem do své bibliografické databáze začlenil pole pro zjišťování jazyka díla, abych mohl automatizovat uvádění jazyka v~citacích a~seznamech bibliografických odkazů.
+
+Pokud v~jednom dokumentu používáme dva jazyky, které používají různé abecedy (například angličtinu a~řečtinu nebo angličtinu a~ruštinu), existuje trik, díky kterému nebudeme muset označovat jazyk výrazů sestavených pomocí alternativní abecedy: upravte nastavení hlavního jazyka (viz další část) tak, aby se načetly i~výchozí vzory spojovníku pro jazyk, který používá jinou abecedu. Chceme-li například používat angličtinu a~starořečtinu, následující příkaz nás ušetří nutnosti označovat jazyk textů v~řečtině:
+
+  \type{\setuplanguage[en][patterns={en, agr}]}
+
+Funguje to jen proto, že angličtina a~řečtina používají jinou abecedu, takže v~obou jazycích nemůže dojít k~rozporu ve vzorcích spojovníku, a~proto můžeme načíst oba jazyky současně. Ale ve dvou jazycích, které používají stejnou abecedu, povede současné načtení vzorů spojovníku nutně k~nevhodnému spojování.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:langconfig,
+    title=Konfigurace jazyka,
+  ]
+  \PlaceMacro{setuplanguage}
+
+\dontleavehmode\ConTeXt\ spojuje fungování určitých nástrojů s~konkrétním jazykem, který je v~daném okamžiku aktivní. Výchozí přiřazení lze změnit pomocí \cmd{setuplanguage}, jehož syntaxe je:
+
+\type{\setuplanguage[Language][Configuration]}
+
+kde {\em Jazyk} je kód jazyka, který chceme konfigurovat, a~{\em Konfigurace} obsahuje konkrétní konfiguraci, kterou chceme pro daný jazyk nastavit (nebo změnit). Konkrétně je povoleno až 32 různých konfiguračních možností, ale já se budu zabývat pouze těmi, které se zdají být vhodné pro úvodní text, jako je tento:
+
+\startitemize
+
+\item {\tt\bf date}: umožňuje nastavit výchozí formát data. Viz dále na \at{page}[sec:dates].
+
+\item {\tt\bf lefthyphenmin, righthyphenmin}: minimální počet znaků, které musí být vlevo nebo vpravo, aby bylo podporováno spojování slov. Například \cmd{setuplanguage[cs][lefthyphenmin=4]} neprovede pomlčku u~žádného slova, pokud jsou nalevo od případné pomlčky méně než 4 znaky.
+
+\item {\tt\bf spacing}: možné hodnoty pro tuto volbu jsou \MyKey{broad} nebo \MyKey{packed}. V~prvním případě (široký) budou použita pravidla pro odstupňování slov v~angličtině, což znamená, že za tečkou a~dalším znakem bude přidáno určité množství prázdného místa navíc. Na druhé straně \MyKey{spacing=packed} zabrání použití těchto pravidel. Pro češtinu je výchozí nastavení broad.
+
+\item {\tt\bf leftquote, rightquote}: označují znaky (resp. příkazy), které \cmd{quote} použije vlevo a~vpravo od textu, který je jeho argumentem (pro tento příkaz viz \at{strana}[sec:quote]).
+
+\item {\tt\bf leftquotation, rightquotation}: označuje znaky (nebo příkazy), které \cmd{quotation} použije vlevo a~vpravo od textu, který je jeho argumentem (pro tento příkaz viz \at{strana}[sec:quote]).
+
+\stopitemize%%%@@@
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:labels,
+    title=Štítky spojené s~jednotlivými jazyky
+  ]
+
+Mnoho příkazů \ConTeXt{}u automaticky generuje určité texty (nebo {\em štítky}), jako například příkaz \cmd{placetable}, který pod vloženou tabulku zapíše štítek \quotation{Table xx}, nebo \cmd{placefigure}, který vloží štítek \quotation{Figure xx}.
+
+Tyto {\em štítky} jsou citlivé na jazyk nastavený pomocí \cmd{mainlanguage}. (ale ne, pokud jsou nastaveny pomocí \cmd{language}) a~můžeme je změnit pomocí příkazu
+
+\PlaceMacro{setuplabeltext}\type{\setuplabeltext[Language][Key=Label]}
+
+kde {\em Key} je výraz, podle kterého \ConTeXt\ zná popisek, a~{\em Label} je text, který má \ConTeXt\ vygenerovat. Takže například,
+
+\type{\setuplabeltext[es][figure=Imagen~]}
+
+uvidíte, že pokud je hlavním jazykem španělština, obrázky vložené pomocí \cmd{placefigure} se nenazývají \quotation{Figure x}, ale \quotation{Imagen x}. Všimněte si, že za samotným textem na štítku musí být ponechána prázdná mezera, aby se zajistilo, že štítek nebude připojen k~dalšímu znaku. V~příkladu jsem použil vyhrazený znak \quotation{\lettertilde}; mohl jsem také napsat \MyKey{[figure=Imagen\{ \}]} a~uzavřít prázdnou mezeru mezi kudrnaté závorky, abych zajistil, že se jí \ConTeXt\ nezbaví.
+
+Jaké štítky můžeme předefinovat pomocí \cmd{setuplabeltext}? Dokumentace \ConTeXt\ není v~tomto bodě tak úplná, jak bychom mohli doufat. Referenční příručka 2013 (která o~tomto příkazu vysvětluje nejvíce) uvádí \MyKey{chapter}, \MyKey{table}, \MyKey{figure}, \MyKey{appendix}.... \Conjecture a~přidává \quotation{další srovnatelné textové prvky}. Můžeme předpokládat, že názvy budou anglickými názvy daného prvku.
+
+\startSmallPrint
+
+Jednou z~výhod {\em svobodného softwaru} je, že zdrojové soubory jsou dostupné uživateli, takže se do nich můžeme podívat. Udělal jsem to a~{\em slíděním} ve zdrojových souborech \ConTeXt{}u jsem objevil soubor \MyKey{lang-txt. lua}, dostupný v~{\tt tex/texmf-context/tex/context/base/mkiv}, který podle mého názoru obsahuje předdefinované štítky a~jejich různé překlady; takže pokud kdykoli \ConTeXt\ vygeneruje nadefinovaný text, který chceme změnit, abychom viděli název štítku, který je s~tímto textem spojen, můžeme otevřít dotyčný soubor a~najít ten, který chceme změnit. Tímto způsobem můžeme zjistit, jaké jméno štítku je s~ním spojeno.
+
+\stopSmallPrint
+
+If we want to insert the text associated with a~certain label somewhere in the document, we can do so with the \PlaceMacro{labeltext}\cmd{labeltext} command. So, for example, if I~want to refer to a~table, to ensure that I~name it in the same way that \ConTeXt\ calls it in the \cmd{placetable} command, I~can write: \quotation{{\tt Just as shown in the \backslash labeltext\{table\} on the next page.}.} This text, in a~document where \cmd{mainlanguage} is English, will produce: \quotation{Just as shown in the \labeltext{table} on the next page.}
+
+\startSmallPrint
+
+Některé štítky, které lze nadefinovat pomocí \cmd{setuplabeltext}, jsou ve výchozím nastavení prázdné; například \MyKey{chapter} nebo \MyKey{section}. Je to proto, že \ConTeXt\ ve výchozím nastavení nepřidává štítky k~příkazům pro vytváření sekcí. Chceme-li tuto výchozí operaci změnit, stačí tyto štítky nadefinovat v~preambuli našeho dokumentu, a~tak například \cmd{setuplabeltext[chapter=Chapter\lettertilde]} uvidí, že kapitolám předchází slovo \quotation{Chapter}.
+
+\stopSmallPrint
+
+Nakonec je důležité zdůraznit, že ačkoli obecně v~\ConTeXt{}u příkazy, které umožňují jako argument několik čárkou oddělených možností, může poslední možnost končit čárkou a~nic špatného se nestane. V~\tex{setuplabeltext} by to při kompilaci vyvolalo chybu.
+
+
+\stopsubsection
+
+\startsubsection
+  [title=Některé příkazy související s~jazykem]
+
+\startsubsubsection
+  [
+    reference=sec:dates,
+    title=Date-related commands,
+  ]
+  \PlaceMacro{currentdate}\PlaceMacro{date}\PlaceMacro{month}
+
+\ConTeXt\ má tři příkazy související s~datem, které v~době svého spuštění vytvářejí výstup v~aktivním jazyce. Jedná se o~tyto příkazy:
+
+\startitemize
+
+\item \tex{currentdate}: spuštěn bez argumentů v~dokumentu, jehož hlavním jazykem je angličtina, vrací systémové datum ve formátu \quotation{Day Month Year}. Například: \quotation{11 September 2020}. Můžeme mu však také říci, aby použil jiný formát (jak by se stalo v~USA a~některých dalších částech anglicky mluvícího světa, které se řídí svým systémem uvádění měsíce před dnem, odtud nechvalně známé datum 11. září), nebo aby zahrnul název dne v~týdnu ({\tt weekday}), nebo aby zahrnul pouze některé prvky data ({\tt day, month, year}). 
+
+Chcete-li označit jiný formát data, \MyKey{dd} nebo \MyKey{day} představují dny, \MyKey{mm} měsíce (ve formátu čísel), \MyKey{month} měsíce v~abecedním formátu malými písmeny a~\MyKey{MONTH} velkými písmeny. Pokud jde o~rok, \MyKey{yy} zapíše pouze poslední číslice, zatímco \MyKey{year} nebo \MyKey{y} zapíše všechny čtyři. Pokud chceme mezi složkami data nějaký oddělovací prvek, musíme jej zapsat výslovně. Například
+
+  \type{\currentdate[weekday, dd, month]} 
+
+  při spuštění 9. září 2020 napíše \quotation{středa 9. září}.
+  
+\item \tex{date}: tento příkaz, spuštěný bez jakéhokoli argumentu, vytvoří přesně stejný výstup jako \cmd{currentdate}, tedy aktuální datum ve standardním formátu. Jako argument však lze zadat konkrétní datum. K~tomu slouží dva argumenty: prvním argumentem můžeme uvést den (\MyKey{d}), měsíc (\MyKey{m}) a~rok (\MyKey{y}) odpovídající datu, které chceme reprezentovat, zatímco druhým argumentem (nepovinným) můžeme uvést formát data, které má být reprezentováno. Chceme-li například zjistit, který den v~týdnu se setkali John Lennon a~Paul McCartney, což je událost, která se podle Wikipedie odehrála 6. července 1957, můžeme napsat
+
+  \type{\date[d=6, m=7, y=1957][weekday]}
+
+  a~tak bychom zjistili, že se taková historická událost stala v~sobotu. 
+
+\item \tex{month} přijímá jako argument číslo a~vrací název měsíce odpovídající tomuto číslu.
+
+\stopitemize
+
+\stopsubsubsection
+
+\startsubsubsection
+  [title=Příkaz \tex{přeložit}]
+  \PlaceMacro{translate}
+
+Příkaz přeložit podporuje řadu frází spojených s~určitým jazykem, takže do výsledného dokumentu bude vložena ta či ona fráze v~závislosti na jazyce, který je v~daném okamžiku aktivní. V~následujícím příkladu je příkaz translate použit k~přiřazení čtyř frází ke španělštině a~angličtině, které jsou uloženy ve vyrovnávací paměti (pokud jde o~prostředí {\tt buffer}, viz \in{sekce}[sek:buffer]):
+
+\starttyping
+\startbuffer
+  \starttabulate[|*{4}{lw(.25\textwidth)|}]
+    \NC \translate[es=Su carta de fecha, en=Your letter dated]
+    \NC \translate[es=Su referencia, en=Your reference]
+    \NC \translate[es=Nuestra referencia, en=Our reference]
+    \NC \translate[es=Fecha, en=Date] \NC\NR
+  \stoptabulate
+\stopbuffer
+\stoptyping
+
+takže pokud vložíme vyrovnávací paměť {\em buffer} na místo v~dokumentu, kde je aktivována španělština, budou přehrávány španělské fráze, ale pokud je na místě v~dokumentu, kam je vyrovnávací paměť vložena, aktivována angličtina, budou vloženy anglické fráze. Tedy:
+
+%\startpacked
+\language[es]  
+\startbuffer
+  \starttabulate[|*{4}{lw(.25\textwidth)|}]
+    \NC \translate[es=Su carta de fecha, en=Your letter dated]
+    \NC \translate[es=Su referencia, en=Your reference]
+    \NC \translate[es=Nuestra referencia, en=Our reference]
+    \NC \translate[es=Fecha, en=Date] \NC\NR
+  \stoptabulate
+\stopbuffer
+
+\starttyping
+\language[es]
+\getbuffer
+\stoptyping
+
+vygeneruje
+
+\example{\getbuffer}
+
+while
+\starttyping
+\language[en]
+\getbuffer
+\stoptyping
+
+vygeneruje
+
+{\en\example{\getbuffer}}
+
+%\stoppacked
+
+\stopsubsubsection
+
+\startsubsubsection
+  [
+    reference=sec:quote,
+    title=Příkazy \tex{quote} a~\tex{quotation},
+  ]
+  \PlaceMacro{quote}\PlaceMacro{quotation}
+
+Jedna z~nejčastějších typografických chyb v~textových dokumentech vzniká, když jsou uvozovky (jednoduché nebo dvojité) otevřeny, ale nejsou výslovně uzavřeny. Aby k~tomu nedocházelo, \ConTeXt\ nabízí příkazy \cmd{quote} a~\cmd{quotation}, které citují text, který je jejich argumentem; \cmd{quote} použije jednoduché uvozovky a~\cmd{quotation} použije dvojité uvozovky.
+
+Tyto příkazy jsou jazykově citlivé v~tom smyslu, že pro otevírání a~zavírání uvozovek používají výchozí znaky nebo sadu příkazů pro daný jazyk (viz.
+\in{sekce}[sec:langconfig]); takže například pokud chceme použít španělštinu jako výchozí styl pro dvojité uvozovky - guillemety nebo chevrony (úhlové závorky)) typické pro španělštinu, italštinu a~francouzštinu, napíšeme:
+
+\type{\setuplanguage[es][leftquotation=«, rightquotation=»]}.
+
+Tyto příkazy však nezvládají vnořené uvozovky; ačkoli můžeme vytvořit nástroj, který to udělá, s~využitím toho, že \cmd{quote} a~\cmd{quotation} jsou skutečné aplikace toho, co \ConTeXt\ nazývá {\em delimitedtext}, a~že je možné definovat další aplikace pomocí \PlaceMacro{definedelimitedtext}\cmd{definedelimitedtext}. Tedy následující příklad:
+
+\starttyping
+\definedelimitedtext
+  [CommasLevelA]
+  [left=«, right=»]
+
+\definedelimitedtext
+  [CommasLevelB]
+  [left=“, right=”]
+
+\definedelimitedtext
+  [CommasLevelC]
+  [left=`, right=']
+\stoptyping
+
+vytvoří tři příkazy, které umožní až tři různé úrovně citování. První úroveň s~postranními uvozovkami, druhá s~dvojitými uvozovkami a~třetí s~jednoduchými uvozovkami.
+
+Samozřejmě pokud používáme jako hlavní jazyk angličtinu, pak se automaticky použijí výchozí jednoduché a~dvojité uvozovky (kudrnaté, nikoli rovné, jak najdete v~tomto dokumentu!).
+
+\stopsubsubsection
+
+\stopsubsection
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:
+%%% vim:set filetype=context tw=72 : %%%
