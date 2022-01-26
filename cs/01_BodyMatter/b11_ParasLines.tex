@@ -1,8 +1,712 @@
 
+%%% Soubor:   b11_ParasLines.mkiv
+%%% Autor:    Joaquín Ataz-López
+%%% Začátek:  srpen 2020
+%%% Ukončeno: Srpen 2020
+% Obsah:  Tato kapitola je ucelenější než předchozí. Velká část "TeXBook" je %      věnována vysvětlení vertikálního prostoru a v ConTeXt an Excursion se %      kapitola s názvem "Mezery" týká vertikálního prostoru
+%%%% Upraveno pomocí: Emacs + AuTeX - a občas vim + kontextový plugin
+%%%
 
---------------------
-Czech version
---------------------
+\environment ../introCTX_env.mkiv
 
-TO BE DONE!
---------------------
+\startcomponent b11_ParasLines.mkiv
+
+\startchapter 
+  [title={Odstavce, řádky a\\svislá mezera}, 
+  bookmark={Odstavce, řádky a svislá mezera}]
+
+\TocChap
+
+Celkový vzhled dokumentu je dán především velikostí a rozvržením stránek, které jsme si ukázali v kapitole \in{Chapter}[cap:pages], zvoleným písmem, o němž pojednává kapitola \in{Chapter}[sec:fontscol], a dalšími záležitostmi, jako jsou mezery mezi řádky, zarovnání odstavců a rozestupy mezi nimi atd.Tato kapitola se zaměřuje na tyto další záležitosti.
+
+\startsection [title={Odstavce a jejich charakteristika}]
+
+Odstavec je pro \ConTeXt\ základní jednotkou textu. Existují dva postupy pro začátek odstavce:
+
+\startitemize[n]
+
+  \item Vložení jednoho nebo více po sobě jdoucích prázdných řádků do zdrojového souboru.
+
+  \item Příkazy \PlaceMacro{par}\tex{par} nebo \PlaceMacro{endgraf}\tex{endgraf}.
+
+\stopitemize
+
+Obvykle se používá první z těchto postupů, protože je jednodušší a vytváří zdrojové soubory, které jsou lépe čitelné a srozumitelné. Vkládání odřádkování pomocí explicitního příkazu se obvykle provádí pouze uvnitř makra (viz \in{sekce}[sek:define]) nebo v buňce tabulky (viz\in{sekce}[sek:tables]).
+
+V dobře typizovaném dokumentu je z typografického hlediska důležité, aby se odstavce od sebe vizuálně odlišovaly. Toho se obvykle dosahuje dvěma postupy: mírným odsazením prvního řádku každého odstavce nebo mírným zvětšením mezery mezi odstavci, někdy i kombinací obou postupů, i když na některých místech se to nedoporučuje, protože je to považováno za nadbytečné.
+
+\startSmallPrint
+
+  S tím úplně nesouhlasím. Prosté odsazení prvního řádku ne vždy dostatečně vizuálně zvýrazní oddělení odstavců; zvětšení mezer, které není doprovázeno odsazením, však působí problémy v případě odstavce, který začíná na začátku stránky, a my si proto nemusíme být jisti, zda se jedná o nový odstavec, nebo o pokračování z předchozí stránky. Kombinace obou postupů pochybnosti odstraňuje.
+
+\stopSmallPrint
+
+Podívejme se nejprve, jak se pomocí \ConTeXt{}u provádí odsazování řádků a odstavců.
+
+\startsubsection 
+  [ reference=sec:indentation, 
+  title={Automatické odsazování prvních řádků odstavců}, 
+  ]
+
+Automatické vkládání malé odrážky na první řádek odstavců je ve výchozím nastavení vypnuto. Můžeme ji povolit, opět zakázat a po jejím povolení určit rozsah odsazení pomocí příkazu\PlaceMacro{setupindenting}\cmd{set\-up\-in-den\-ting}, který umožňuje určit, zda má být odsazení povoleno, nebo ne:
+
+\startitemize[packed]
+
+  \item {\tt\bf always}: všechny odstavce budou odsazeny bez ohledu na to, zda jsou odsazeny.
+
+  \item {\tt\bf yes}: povolí {\em normální} odsazení odstavce. Některé odstavce, kterým předchází dodatečná svislá mezera, například první odstavec sekcí nebo odstavce následující za určitými prostředími, nebudou odsazeny.
+
+  \item {\tt\bf no, not, never, none}: vypne automatické odsazování prvního řádku v odstavcích.
+
+\stopitemize
+
+V případech, kdy jsme povolili automatické odsazování, můžeme stejným příkazem také určit, jak velké odsazení má být. K tomu můžeme výslovně použít rozměr (například 1,5 cm) nebo symbolická slova \MyKey{small}, \MyKey{medium} a \MyKey{big}, která označují, že chceme malé, střední nebo velké odsazení.
+
+\startSmallPrint
+
+  V některých typech písma (mimo jiné ve španělštině) bylo výchozí odsazení dva čtverčíky. V typografii byl čtverčík (původně \em{quad, quadrat}) kovový distanční prvek používaný při sazbě na stroji. Termín se později ujal jako obecné označení pro dvě běžné velikosti mezer v typografii, bez ohledu na použitou formu sazby. Čtverčík je mezera, která je široká jedno em; stejně široká jako výška písma (Wikipedie).  U dvanáctibodového písma by tedy čtverčík měl šířku 12 bodů a výšku 12 bodů. \ConTeXt\ má dva čtverčíkové příkazy: \tex{quad}, který generuje jednu mezeru výše uvedeného druhu, a \tex{qquad}, který generuje dvojnásobek tohoto množství, ale na základě použitého písma. Odsazení dvou čtveřic s písmenem o velikosti 11 bodů bude měřit 22 bodů a s písmenem o velikosti 12 bodů 24 bodů.
+
+\stopSmallPrint
+
+Pokud je odsazování povoleno a nechceme, aby byl určitý odstavec odsazen, musíme použít příkaz \PlaceMacro{noindentation}\tex{noindentation}.
+
+\startSmallPrint
+
+  Obecně ve svých dokumentech zapínám automatické odsazování pomocí \cmd{set\-up\-in\-den\-ting[yes, big]}. V tomto dokumentu jsem to však neudělal, protože kdybych odsazování povolil, velký počet krátkých vět a příkladů by vedl k vizuálně nepřehlednému vzhledu stránek.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\startsubsection
+  [title=Speciální odsazení odstavce]
+
+Jedním z grafických postupů pro zvýraznění odstavce je odsazení pravé nebo levé (nebo obou) strany odstavce. To se používá například pro blokové citace.
+
+\ConTeXt\ má prostředí, které nám umožňuje změnit odsazení odstavce a zvýraznit text v odstavci. Jedná se o prostředí \MyKey{narrower}:
+
+\PlaceMacro{startnarrower}\type{\startnarrower [Options] ... \stopnarrower}
+
+kde {\em Options} může být:
+
+\startitemize
+
+  \item {\tt\bf left}: odsazení levého okraje.
+
+  \item {\tt\bf Num*left}: odsazení levého okraje vynásobením {\em normal} odsazení číslem {\em Num}. (například {\tt 2*left}).
+
+  \item {\tt\bf right}: odsazení pravého okraje.
+
+  \item {\tt\bf Num*right}: odsazení pravého okraje vynásobením {\em normal} odsazení číslem {\em Num}. (například {\tt 2*right}).
+
+  \item {\tt\bf middle}: odsazení obou okrajů. Toto je výchozí nastavení.
+
+  \item {\tt\bf Num*middle}: odsazení obou stran, přičemž se odsazení {\em normal} vynásobí číslem {\em Num}.
+
+\stopitemize
+
+Při vysvětlování možností jsem se zmínil o {\em odsazení normal}; to se týká velikosti levého a pravého odsazení, které \MyKey{narrower} používá ve výchozím nastavení. Toto {\em množství} lze nakonfigurovat pomocí nástroje \PlaceMacro{setupnarrower}\tex{setupnarrower}, který umožňuje následující konfigurační možnosti:
+
+\startitemize[packed]
+
+  \item {\tt\bf left}: velikost odsazení, které se použije na levý okraj.
+
+  \item {\tt\bf right}: velikost odsazení pravého okraje.
+
+  \item {\tt\bf middle}: velikost odsazení, které se použije na oba okraje.
+
+  \item {\tt\bf before}: příkaz, který se spustí před vstupem do prostředí.
+
+  \item {\tt\bf after}: příkaz, který se spustí po opuštení prostředí.
+
+\stopitemize
+
+Pokud chceme v dokumentu používat různé konfigurace užšího prostředí, 
+můžeme každé z nich přiřadit jiný název pomocí 
+\PlaceMacro{definenarrower}\type{\definenarrower [Name] [Configuration]}.
+
+kde {\em Name} je název spojený s touto konfigurací a kde {\em Configuration} umožňuje stejné hodnoty jako \tex{setupnarrower}.
+
+\stopsubsection
+
+\stopsection
+
+\startsection 
+  [ 
+    reference=sec:verticalspace,
+    title={Svislá mezera mezi odstavci}, 
+  ]
+
+\startsubsection [title=\tex{setupwhitespace}]
+
+Jak již víme z (\in{sekce}[sec:linebreaks]), \ConTeXt{}u nezáleží na tom, kolik po sobě jdoucích prázdných řádků je ve zdrojovém souboru: jeden nebo více prázdných řádků vloží do konečného dokumentu jeden zlom odstavce. Chcete-li zvětšit mezeru mezi odstavci, nepomůže přidání dalšího prázdného řádku do zdrojového souboru. Místo toho je tato funkce řízena příkazem \PlaceMacro{setupwhitespace}\tex{setupwhitespace}, který umožňuje následující hodnoty:
+
+\startitemize
+
+  \item {\tt\bf none}: znamená, že mezi odstavci nebude žádná další svislá mezera.
+
+  \item {\tt\bf small, medium, big}: vloží malou, střední nebo velkou vertikální mezeru. Skutečná velikost mezery vložené těmito hodnotami závisí na velikosti písma.
+
+  \item {\tt\bf line, halfline, quarterline}: změří dodatečné prázdné místo v poměru k výšce řádků a vloží řádek navíc, půlřádek nebo čtvrtřádek navíc.
+
+  \item {\tt\bf DIMENSION}: určuje skutečný rozměr mezery mezi odstavci. Například \tex{setupwhitespace[5pt]}.
+
+\stopitemize
+
+Obecně platí, že není vhodné nastavovat přesný rozměr jako hodnotu pro \tex{setupwhitespace}. Je vhodnější používat symbolické hodnoty small, medium, big, halfline nebo quarterline. Je tomu tak ze dvou důvodů:
+
+\startitemize
+
+  \item Symbolické hodnoty jsou pružné rozměry (viz \in{sekce}[sec:dimensions]), což znamená, že mají {\em normální} rozměry, ale je povoleno určité zmenšení nebo zvětšení této hodnoty, což pomáhá \ConTeXt{}u při sazbě stránek tak, aby zlomy odstavců byly esteticky podobné. Pevná míra odstupu mezi odstavci však ztěžuje dosažení dobrého stránkování dokumentu.
+
+  \item Symbolické hodnoty small, medium, big, atd. se vypočítávají na základě velikosti písma, takže pokud se v určitých částech změní, změní se i velikost svislých mezer mezi odstavci a konečný výsledek bude vždy harmonický. Naopak pevně danou hodnotu svislého odstupu změny velikosti písma neovlivní, což se obvykle projeví v dokumentu se špatně rozloženým bílým místem (z estetického hlediska) a neodpovídajícím pravidlům typografické úpravy.
+
+\stopitemize
+
+Pokud byla nastavena hodnota pro vertikální řádkování odstavců, jsou k dispozici dva další příkazy: \PlaceMacro{nowhitespace}\tex{nowhitespace}, který odstraňuje jakoukoli dodatečnou mezeru mezi jednotlivými odstavci, a \PlaceMacro{whitespace}\tex{whitespace}, který dělá opak. Tyto příkazy jsou však zapotřebí jen zřídka, protože \ConTeXt\ samotný vertikální odstup mezi odstavci zvládá docela dobře, zejména pokud byl jeden z předdefinovaných rozměrů vložen jako hodnota, vypočtená z aktuální velikosti aktivního písma a odstupu.
+
+\startSmallPrint
+
+  Význam \tex{nowhitespace} je zřejmý. Ne však nutně samotný \tex{whitespace}, protože jaký smysl má nařizovat svislé řádkování pro konkrétní odstavce, když svislé řádkování již bylo obecně stanoveno \Conjecture pro všechny odstavce? Při psaní pokročilých maker však může být \tex{whitespace} užitečný v kontextu cyklu, který má učinit rozhodnutí na základě hodnoty určité podmínky. To je víceméně pokročilé programování a nebudu se jím zde zabývat.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\startsubsection [title={Odstavce, mezi kterými není žádná svislá mezera navíc}]
+
+Pokud chceme, aby určité části našeho dokumentu měly odstavce, které nejsou odděleny další svislou mezerou, můžeme samozřejmě upravit obecnou konfiguraci \tex{setupwhitespace}, ale to je svým způsobem v rozporu s filozofií \ConTeXt{}u, podle které by obecné konfigurační příkazy měly být umístěny výhradně v preambuli zdrojového souboru, aby bylo dosaženo konzistentního a snadno změnitelného obecného vzhledu dokumentů. Proto prostředí \MyKey{packed}, jehož obecná syntaxe je následující
+
+\PlaceMacro{startpacked}\type{\startpacked [Space] ... \stoppacked}
+
+kde {\em Space} je nepovinný argument udávající, jaká vertikální mezera je požadována mezi odstavci v prostředí. Pokud není uveden, nebude použita žádná svislá mezera navíc.
+
+\stopsubsection
+
+\startsubsection [title={Přidání dalšího svislého prostoru v určitém místě dokumentu}]
+
+Pokud v určitém místě dokumentu nestačí normální svislé mezery mezi odstavci, můžeme použít příkaz \PlaceMacro{blank}\tex{blank}. Při použití bez argumentů vloží \tex{blank} stejnou vertikální mezeru, jaká byla nastavena příkazem \tex{setupwhitespace}. Můžeme však uvést buď konkrétní rozměr mezi hranatými závorkami, nebo jednu ze symbolických hodnot vypočtených z velikosti písma: small, medium nebo big. Tyto rozměry můžeme také vynásobit celým číslem a tak dále, například \tex{blank[3*medium]} vloží ekvivalent tří středních řádkových zlomů. Můžeme také spojit dvě velikosti dohromady, například \tex{blank[2*big, medium]} vloží dva velké a střední zlomy.
+
+Protože příkaz \tex{blank} je určen ke zvětšení svislé mezery mezi odstavci, nemá žádný účinek, pokud je mezi dva odstavce, jejichž mezera má být zvětšena, vložen stránkový zlom; a pokud vložíme dva nebo více příkazů \tex{blank} za sebou, použije se pouze jeden z nich (ten s největší mezerou, která má být vložena). Žádný účinek nemá ani příkaz \tex{blank} umístěný za zlomem stránky. V těchto případech však můžeme vložení svislé mezery vynutit pomocí symbolického slova \MyKey{force} jako volby příkazu. Chceme-li tedy například, aby se názvy kapitol v našem dokumentu objevovaly dále na stránce, takže celková délka stránky bude menší než délka ostatních stránek (což je poměrně častá typografická praxe), musíme v konfiguraci příkazu \tex{chapter} napsat např:
+
+\starttyping
+\setuphead 
+  [chapter] 
+  [ 
+    page=yes, 
+    before={\blank[4cm, force]}, 
+    after={\blank[3*medium]}  
+  ]
+\stoptyping
+
+Tato sekvence příkazů zajistí, že kapitoly budou vždy začínat na nové stránce a že se popisek kapitoly posune o čtyři centimetry dolů. Bez použití volby \MyKey{force} to nebude fungovat.
+
+\stopsubsection
+
+\startsubsection 
+  [title=\tex{setupblank} a \tex{defineblank}]
+\PlaceMacro{setupblank}\PlaceMacro{defineblank}
+
+Dříve jsem uvedl, že \tex{blank}, použitý bez argumentů, je ekvivalentní \tex{blank[big]}. To však můžeme změnit pomocí \tex{setupblank}, například nastavením \tex{setupblank[0,5cm]} nebo \tex{setupblank[medium]}. Při použití bez argumentů nastaví \tex{setupblank} hodnotu na velikost aktuálního písma.
+
+Stejně jako u \tex{setupwhitespace} je bílé místo vložené pomocí \tex{blank}, pokud je jeho hodnota jednou z předdefinovaných symbolických hodnot, pružným rozměrem, který umožňuje určité přizpůsobení. Tuto hodnotu můžeme změnit pomocí \MyKey{fixed} s možností pozdějšího obnovení výchozí hodnoty pomocí (\MyKey{flexible}). Tak například pro text ve dvou sloupcích se doporučuje nastavit \tex{setupblank[fixed, line]} a při návratu k jednomu sloupci \tex{setupblank[flexible, default]}.
+
+Pomocí \tex{defineblank} můžeme přiřadit určitou konfiguraci k názvu. Obecný formát tohoto příkazu je:
+
+\type{\defineblank [Name] [Configuration]}
+
+Jakmile je naše konfigurace bílého místa definována, můžeme ji použít pomocí \tex{blank[ConfigurationName]}.
+
+\stopsubsection
+
+\startsubsection [title={Další postupy pro dosažení většího vertikálního prostoru}]
+
+V \TeX{}u je příkazem, který vkládá vertikální mezeru navíc, 
+\PlaceMacro{vskip}\tex{vskip}. Tento příkaz, stejně jako téměř všechny 
+příkazy \TeX{}u, funguje také v \ConTeXt{}u, ale jeho použití se důrazně 
+nedoporučuje, protože narušuje vnitřní fungování některých maker \ConTeXt{}u. 
+Místo něj se doporučuje použít \PlaceMacro{godown}\tex{godown}, jehož syntaxe je:
+
+\type{\godown[Dimension]}
+
+kde {\em Dimension} musí být číslo bez nebo s desetinnými místy, následované měrnou jednotkou. Například \tex{godown[5cm]} posune stránku o 5 centimetrů dolů; pokud je však změna stránky menší než toto množství, \tex{godown} se posune pouze na další stránku. Podobně \tex{godown} nebude mít žádný účinek na začátku stránky, ačkoli ho můžeme {\em obelstít} například tím, že napíšeme \quotation{\cmd{\textvisiblespace \backslash godown[3cm]}}\footnote{Připomeňme si, že v tomto dokumentu používáme znak \quote{\textvisiblespace} k vyjádření prázdného místa, pokud je pro nás důležité, abychom ho viděli.}, který nejprve vloží prázdné místo, které bude znamenat, že již nejsme na začátku stránky, a poté se posune o tři centimetry dolů.
+
+\startSmallPrint
+
+  Jak víme, \tex{blank} umožňuje jako argument zadat i přesný rozměr.  Z hlediska uživatele je tedy zápis \tex{blank[3cm]} nebo \tex{godown[3cm]} prakticky stejný. Existují však mezi nimi některé jemné rozdíly. Tak například dva po sobě jdoucí příkazy \tex{blank} nelze kumulovat, a pokud se tak stane, použije se pouze ten, který ukládá větší vzdálenost. Naproti tomu dva nebo více příkazů \tex{godown} se mohou dokonale kumulovat.
+
+\stopSmallPrint
+
+Dalším poměrně užitečným příkazem \TeX{}u, jehož použití v\ConTeXt{}u nečiní žádné problémy, je \PlaceMacro{vfill}\tex{vfill}. Tento příkaz vloží flexibilní vertikální prázdné místo až na konec stránky. Je to, jako by příkaz {\em zatlačil} dolů to, co je napsáno za ním. To umožňuje zajímavé efekty, například jak umístit určitý odstavec na dno stránky tím, že jej jednoduše předřadíte příkazu \tex{vfill}. Efekt \tex{vfill} je nyní obtížné ocenit, pokud jeho použití není kombinováno s vynucenými stránkovými zlomy, protože nemá smysl tlačit odstavec nebo řádek textu dolů, pokud odstavec, jak roste, roste nahoru.
+
+Chceme-li například zajistit, aby byl řádek umístěn na konci stránky,měli bychom napsat:
+
+\starttyping
+\vfill
+Řádek na spodní straně
+\page[yes]
+\stoptyping
+
+Stejně jako všechny ostatní příkazy, které vkládají svislou mezeru, nemá \tex{vfill} na začátku stránky žádný účinek. Můžeme jej však {\em obelstít} tím, že před něj vložíme vynucenou mezeru. Tak například:
+
+\starttyping
+\page[yes]
+\vfill
+Prostřední čára
+\vfill
+\page[yes]
+\stoptyping
+
+vertikálně vycentruje větu \quotation{prostřední řádek} na stránce.
+
+\stopsubsection
+
+\stopsection
+
+\startsection 
+  [ 
+    reference=sec:lines, 
+    title={Jak \ConTeXt\ vytváří řádky tvořící odstavce}, 
+  ]
+
+Jedním z hlavních úkolů systému pro sazbu je převzít dlouhý řetězec slov a rozdělit jej na jednotlivé řádky vhodné velikosti. Například každý odstavec v tomto textu byl rozdělen na řádky o šířce 15 cm, ale autor se nemusel starat o takové detaily, protože \ConTeXt\ vybírá body zlomu po zvážení každého odstavce jako celku, takže poslední slova odstavce mohou skutečně ovlivnit rozdělení prvního řádku. Výsledkem je, že mezera mezi slovy v celém odstavci je co nejjednotnější.
+
+\startSmallPrint
+
+  Právě v tomto ohledu si můžeme nejlépe všimnout odlišného způsobu práce textových procesorů a lepší kvality dosažené v systémech, jako je \ConTeXt. Textový procesor totiž po dosažení konce řádku a přechodu na další upraví bílé místo v právě ukončeném řádku, aby umožnil pravé zarovnání. To dělá s každým řádkem a na konci bude mít každý řádek v odstavci jiný mezislovní odstup.  To může způsobit velmi špatný efekt (např. \quote{rivers} bílé místo procházející textem). \ConTeXt\ naproti tomu zpracovává odstavec jako celek a pro každý řádek vypočítá, kolik bodů zlomu je přípustných, a velikost mezislovního odstupu, který by vznikl v důsledku zlomu řádku. Protože bod zlomu na řádku ovlivňuje potenciální body zlomu na dalších řádcích, může být celkový počet možností velmi vysoký; to však pro \ConTeXt\ nepředstavuje problém.  Konečné rozhodnutí učiní na základě celého odstavce a zajistí, aby mezera mezi slovy na každém řádku byla {\em co nejpodobnější}, což vede k mnohem lepšímu sazbě odstavců; vizuálně jsou kompaktnější.
+
+\stopSmallPrint
+
+Za tímto účelem \ConTeXt\ testuje různé alternativy a každé z nich přiřadí hodnotu {\em badness} na základě jejích parametrů. Ty byly stanoveny po důkladném studiu umění typografie. Po prozkoumání všech možností nakonec \ConTeXt\ vybere nejméně vhodnou možnost (tu s nejmenší hodnotou špatnosti). Obecně to funguje docela dobře, ale nevyhnutelně se vyskytnou případy, kdy jsou vybrány body zlomu řádků, které nejsou nejlepší nebo které se nám nezdají být nejlepší. Proto někdy budeme chtít programu říci, že některá místa nejsou dobrými body zlomu. V jiných případech pak budeme chtít vynutit zlom v určitém bodě.
+
+\startsubsection 
+  [ 
+    reference=sec:lettertilde, 
+    title={Použití vyhrazeného znaku \quote{{\tt\lettertilde}}}, 
+  ]
+
+Hlavními kandidáty na body zlomu jsou samozřejmě bílé mezery mezi slovy. K označení toho, že určitá mezera by nikdy neměla být nahrazena zlomem řádku, používáme, jak již víme, vyhrazený znak \quote{\lettertilde}, který \TeX\ nazývá {\em tie}, spojující dvě slova dohromady.
+
+Obecně se doporučuje používat tuto nezlomitelnou mezeru v následujících případech:
+
+\startitemize[packed]
+
+  \item Mezi částmi, které tvoří zkratku. Například {\tt U\lettertilde S}.
+
+  \item Mezi zkratkami a termínem, na který se vztahují. Například {\tt Dr\lettertilde Anne Ruben} nebo {\tt p.\lettertilde 45}.
+
+  \item Mezi čísly a termínem, který je s nimi spojen. Například {\tt Elizabeth\lettertilde II}, {\tt 45\lettertilde volumes}.
+
+  \item Mezi číslicemi a symboly, které jim předcházejí nebo za nimi následují, pokud se nejedná o horní indexy. Například {\tt 73\lettertilde km}, {\tt \$\lettertilde 53}; avšak {\tt 35'}.
+
+  \item V procentech vyjádřeno slovy. Například {\tt dvacet\lettertilde pro\lettertilde cent}.
+
+  \item Ve skupinách čísel oddělených bílým místem. Například {\tt 5\lettertilde 357\lettertilde 891}. Ačkoli v těchto případech je vhodnější použít tzv. {\em tenká mezera}, kterého se v \ConTeXt{}u dosahuje příkazem \tex{,}, a tedy zapsat {\tt 5\backslash,357\backslash,891}.
+
+  \item Aby zkratka nebyla jedinou položkou na daném řádku. Například:
+
+  \starttyping 
+    Existují odvětví, jako je zábava, komunikační média, obchod atd.  
+  \stoptyping
+
+\stopitemize
+
+K těmto případům {\sc Knuth} (otec \TeX{}u) přidává následující doporučení:
+
+\startitemize[packed]
+
+  \item Po zkratce, která není na konci věty.
+
+  \item V odkazu na části dokumentu, jako jsou kapitoly, přílohy, obrázky atd. Například {\tt Chapter\lettertilde 12}.
+
+  \item Mezi křestním jménem a iniciálou druhého jména osoby nebo mezi iniciálou křestního jména a příjmením. Například {\tt Donald\lettertilde E. Knuth}, {\tt A.\lettertilde Einstein}.
+
+  \item Mezi matematickými symboly ve spojení s názvy. Například {\tt dimension\lettertilde \$d\$}, {\tt width\lettertilde \$w\$}.
+
+  \item Mezi symboly v sérii. Například {\tt \{1,\lettertilde 2, \backslash dots,\lettertilde \$n\$\}}.
+
+  \item Když se číslo striktně váže s předložkou. Například {\tt od 0 do\lettertilde 1}.
+
+  \item Když jsou matematické symboly vyjádřeny slovy. Například {\tt rovná se\lettertilde a\lettertilde \$n\$}.
+
+  \item V seznamech v rámci odstavce. Například: {\tt (1)\lettertilde zelená, 
+  (2)\lettertilde červená, (3)\lettertilde modrá}.
+
+\stopitemize
+
+Mnoho případů? Typografická dokonalost má bezpochyby svou cenu v podobě dodatečného úsilí. Je jasné, že pokud nechceme, nemusíme tato pravidla uplatňovat, ale není na škodu je znát. Kromě toho - a tady mluvím ze své zkušenosti - jakmile si na jejich uplatňování (nebo na kterékoli z nich) zvykneme, stane se to automatickým. Je to podobné, jako když při psaní slov dáváme přízvuk (jak to musíme dělat ve španělštině): těm z nás, kteří to dělají, pokud jsme zvyklí psát je automaticky, netrvá napsání slova s přízvukem o nic déle než u slova bez přízvuku.
+
+\stopsubsection
+
+\startsubsection [title=Slovní spojení]
+
+S výjimkou jazyků, které se skládají převážně z jednoslabičných slov, je poměrně obtížné dosáhnout optimálního výsledku, pokud jsou body přerušení řádku pouze v mezislovním prostoru. Proto \ConTeXt\ analyzuje také možnost vložení řádkového zlomu mezi dvě slabiky slova; a k tomu je nezbytné, aby znal jazyk, ve kterém je text napsán, protože pravidla pro spojování jsou pro každý jazyk jiná. Proto je důležitý příkaz \tex{mainlanguage} v preambuli dokumentu.
+
+Může se stát, že \ConTeXt\ nedokáže slovo vhodně spojit. Někdy to může být způsobeno tím, že jeho vlastní pravidla pro dělení slov stojí v cestě tomuto úkolu (\ConTeXt\ například nikdy nerozdělí slovo na dvě části, pokud tyto části nemají minimální počet písmen); nebo proto, že slovo je nejednoznačné. Koneckonců, co by \ConTeXt\ mohl udělat se slovem \quotation{unionised}? Toto slovo by se mohlo objevit ve větě jako \quotation{the unionised workforce}, ale mohlo by se také objevit v chemickém textu jako \quotation{an unionised particle}. (tj. un-ionised). A co kdyby se \ConTeXt\ musel vypořádat se slovem \quotation{manslaughter} jako posledním slovem na stránce před zlomem stránky. Může toto slovo rozdělit jako man-slaughter (správně), ale může ho také rozdělit jako mans-laughter (nejednoznačně).
+
+Ať už je důvod jakýkoli, pokud nejsme spokojeni s tím, jak bylo slovo rozděleno, nebo je to nesprávné, můžeme to změnit tak, že výslovně označíme potenciální místa, kde lze slovo rozdělit pomocí kontrolního symbolu \tex{-}.Tak například, pokud by nám \quotation{unionised} dělalo problémy, mohli bychom jej ve zdrojovém souboru zapsat jako \MyKey{union\backslash-ised}; nebo pokud bychom měli problém s \quotation{manslaughter}, mohli bychom zapsat \MyKey{man\backslash-slaughter}.
+
+Pokud je problémové slovo v našem dokumentu použito vícekrát, pak je vhodné ukázat, jak by mělo být v naší preambuli rozděleno pomocí příkazu \PlaceMacro{hyphenation}\tex{hyphenation}: tento příkaz, který je určen k zařazení do preambule zdrojového souboru, přijímá jako argument jedno nebo více slov (oddělených čárkami) a určuje body, ve kterých mohou být rozdělena pomlčkou. Například:
+
+\type{\hyphenation{union-ised, man-slaughter}}
+
+Pokud slovo, které je předmětem tohoto příkazu, neobsahuje spojovník, bude to mít za následek, že slovo nebude nikdy spojeno. Stejného efektu lze dosáhnout použitím příkazu \PlaceMacro{hbox}\tex{hbox}, který vytvoří kolem slova nedělitelný vodorovný rámeček, nebo příkazem \PlaceMacro{unhyphenated}\tex{unhyphenated}, který zabrání spojování slova nebo slov, která bere jako argumenty. Zatímco \tex{hyphenation} působí globálně, \tex{hbox} a \tex{unhyphenated} působí lokálně, což znamená, že příkaz \tex{hyphenation} ovlivňuje všechny výskyty slov obsažených v jeho argumentu v dokumentu; na rozdíl od \tex{hbox} nebo \tex{unhyphenated}, které působí pouze v místě zdrojového souboru, kde se s nimi setkáte.
+
+\startSmallPrint
+
+  Interně je fungování spojovníku řízeno proměnnými \TeX\ \PlaceMacro{pretolerance}\tex{pretolerance} a \PlaceMacro{tolerance}\tex{tolerance}. První z nich řídí přípustnost dělení provedeného pouze na bílém místě. Ve výchozím nastavení je to 100, ale pokud ji změníme například na 10\,000, pak bude \ConTeXt\ vždy považovat za přípustné, aby došlo k rozdělení řádku, které neznamená rozdělení slov podle slabik, což znamená, že {\em de facto} odstraňujeme dělení na základě slabik. Zatímco kdybychom například nastavili hodnotu \tex{pretolerance} na -1, nutili bychom \ConTeXt\ pokaždé použít spojovník na konci řádku.
+
+  Pro \tex{pretolerance} můžeme přímo nastavit libovolnou hodnotu tak, že ji jednoduše přiřadíme v našem dokumentu. Například:
+
+  \type{\pretolerance=10000}
+
+  ale můžeme také manipulovat s touto hodnotou pomocí hodnot \MyKey{lesshyphenation} a \MyKey{morehyphenation} v \tex{setupalign}. V tomto ohledu viz \in{sekce}[sec:setupalign].
+
+\stopSmallPrint
+
+\stopsubsection
+
+\startsubsection 
+  [ 
+    reference=sec:horizontaltolerance, 
+    title={Úroveň tolerance pro zalomení řádků}, 
+  ]
+
+Při hledání možných bodů zlomu řádku je \ConTeXt\ obvykle přísný, což znamená, že raději nechá slovo přesáhnout pravý okraj, protože ho nedokázal spojit, a raději nevkládá zlom řádku před slovo, pokud by to vedlo k příliš velkému zvětšení mezislovního prostoru na daném řádku. Toto výchozí chování obvykle poskytuje optimální výsledky a jen výjimečně některé řádky poněkud vystupují na pravé straně. Myšlenka je taková, že autor (nebo sazeč) tyto výjimečné případy po dokončení dokumentu přezkoumá a učiní příslušné rozhodnutí, kterým může být \tex{break}. příkaz před slovem, které přesahuje, nebo může také znamenat jiné znění odstavce tak, že se toto slovo přesune na jiné místo.
+
+V některých případech však může být nízká tolerance \ConTeXt{}u problémem. V těchto případech mu můžeme říci, aby byl tolerantnější k bílým místům v řádcích. K tomu slouží příkaz \PlaceMacro{setuptolerance}\tex{setuptolerance}, který nám umožňuje změnit úroveň tolerance při výpočtu zlomů řádků, které \ConTeXt\ nazývá \quotation{horizontální tolerance}. (protože ovlivňuje horizontální prostor) a \quotation{vertikální tolerance} při výpočtu zlomů stránek. O tom budeme hovořit v \in{sekci}[sec:VerticalAlignment].
+
+Vodorovná tolerance (která ovlivňuje zalomení řádků) je ve výchozím nastavení nastavena na hodnotu \MyKey{verystrict}. Tuto hodnotu můžeme změnit nastavením některé z následujících hodnot: \MyKey{strict},\MyKey{tolerant}, \MyKey{verytolerant} nebo \MyKey{stretch}. Takže například,
+
+\type{\setuptolerance[horizontal, verytolerant]}
+
+téměř znemožní, aby řádek přesáhl pravý okraj, i když to znamená vytvoření velmi velké a nevzhledné mezery mezi slovy na řádku.
+
+\stopsubsection
+
+\startsubsection 
+  [title={Vynucení zalomení řádku v určitém bodě}]
+
+Pro vynucení zalomení řádku v určitém bodě použijeme příkazy \PlaceMacro{break}\tex{break}, \PlaceMacro{crlf}\tex{crlf} nebo \PlaceMacro{\backslash}{\tt\backslash\backslash}. První z nich, \tex{break}, způsobí v místě, kde je umístěn, zalomení řádku, což s největší pravděpodobností způsobí, že řádek, na kterém je příkaz umístěn, bude esteticky deformován a mezi slovy na tomto řádku bude obrovské množství bílého místa. Jak je vidět na následujícím příkladu, ve kterém je\tex{break} příkaz na třetím řádku (ve zdrojovém fragmentu vlevo) vede k druhému docela ošklivému řádku (ve formátovaném textu vpravo).
+
+\startDoubleExample
+
+\starttyping
+On the corner of the old quarter I saw
+him \emph{swagger} along like
+the\break tough guys do when they walk,
+hands always in their overcoat pockets,
+so no one can know which of them carries
+the dagger.
+\stoptyping
+
+On the corner of the old quarter I saw him {\em swagger} along like
+the\break tough guys do when they walk, hands always in their overcoat
+pockets, so no one can know which of them carries the dagger.
+
+\stopDoubleExample
+
+To avoid this effect, we can use the \cmd{\backslash} or \tex{crlf}
+commands that also insert a forced line break, but they fill in the
+original line with enough blank space to align it to the left:
+
+\startDoubleExample
+
+\starttyping
+On the corner of the old quarter I saw
+him \emph{swagger} along like
+the\\ tough guys do when they walk,
+hands always in their overcoat pockets,
+so no one can know which of them carries
+the dagger.
+\stoptyping
+
+On the corner of the old quarter I saw him {\em swagger} along like the\\
+tough guys do when they walk, hands always in their overcoat pockets, so no
+one can know which of them carries the dagger.
+
+\stopDoubleExample
+
+Pokud vím, na {\em normálních} řádcích nejsou rozdíly mezi \cmd{\backslash} a \tex{crlf}; ale v názvu sekce rozdíl je:
+
+\startitemize
+
+  \item {\tt\bf\backslash\backslash} generuje zalomení řádku v těle dokumentu, ale ne při přenosu názvu oddílu do obsahu.
+
+  \item {\bf\tex{crlf}} generuje zalomení řádku, které se použije jak v těle dokumentu, tak při přenosu názvu oddílu do obsahu.
+
+\stopitemize
+
+Přerušení řádku by nemělo být zaměňováno s přerušením odstavce. Zlom řádku jednoduše ukončuje aktuální řádek a začíná další řádek, ale zůstáváme ve stejném odstavci, takže vzdálenost mezi původním řádkem a novým řádkem bude určena normálním odstupem v rámci odstavce. Proto existují pouze tři scénáře, kdy lze doporučit vynucení zlomu řádku:
+
+\startitemize
+
+  \item Ve výjimečných případech, kdy \ConTeXt\ nenalezne vhodný zlom řádku, takže řádek vyčnívá vpravo. V těchto případech (které se vyskytují velmi zřídka, hlavně když řádek obsahuje nedělitelné {\em boxy} nebo {\em doslovný} text [viz \in{sekce}[sec:verbatim]]) může být užitečné vynutit zlom řádku pomocí \tex{break}. těsně před slovem, které vyčnívá do pravého okraje.
+
+  \item V odstavcích, které jsou vlastně tvořeny jednotlivými řádky, z nichž každý obsahuje informace nezávislé na předchozích řádcích, např. v záhlaví dopisu, kde první řádek může obsahovat jméno odesílatele, druhý jméno příjemce a třetí datum; nebo v textu o autorství díla, kde jeden řádek obsahuje jméno autora, druhý jeho funkci nebo akademickou pozici a třetí řádek třeba datum atd. V těchto případech je třeba zalomení řádku vynutit pomocí příkazů \cmd{\backslash} nebo \tex{crlf}. Je také běžné, že tyto druhy odstavců jsou zarovnány doprava.
+
+  \item Při psaní básní nebo podobných druhů textů oddělit jeden verš od druhého. I když v tomto druhém případě je vhodnější použít prostředí {\tt lines} vysvětlené v \in{sekci}[sec:startlines].
+
+\stopitemize
+
+\stopsubsection
+
+\stopsection
+
+\startsection [title=Meziřádkový prostor]
+
+Meziřádkový prostor je vzdálenost mezi řádky, které tvoří paragraf. \ConTeXt\ ji vypočítá automaticky na základě aktuálně použitého písma a především na základě základní velikosti nastavené pomocí \tex{setupbodyfont} nebo \tex{switchtobodyfont}.
+
+Prostor mezi řádky můžeme ovlivnit pomocí příkazu \PlaceMacro{setupinterlinespace}\tex{setupinterlinespace}, který umožňuje tři různé druhy syntaxe:
+
+\startitemize
+
+  \item \tex{setupinterlinespace [..Meziřádkový prostor..]}, kde {\em Meziřádkový prostor} je přesná hodnota nebo symbolické slovo, které přiřazuje předem definovaný meziprostor:
+
+  \startitemize
+
+    \item Pokud se jedná o přesnou hodnotu, může to být rozměr (například 15pt) nebo jednoduché, celé či desetinné číslo (například 1,2). V tomto druhém případě je číslo interpretováno jako \quotation{počet řádků} na základě výchozího meziřádkového prostoru \ConTeXt{}u.
+
+    \item Pokud se jedná o symbolické slovo, může to být \MyKey{small}, \MyKey{medium} nebo \MyKey{big}, z nichž každý použije malou, střední nebo velkou meziřádkovou mezeru, vždy na základě výchozí meziřádkové mezery \ConTeXt\.
+
+  \stopitemize
+
+  \item \tex{setupinterlinespace [..,..=..,.]}. V tomto režimu se mezisvazkový prostor nastavuje explicitní změnou založených měr, pomocí kterých \ConTeXt\ počítá příslušné mezisvazkové mezery. V tomto režimu se mezery nastavují explicitní změnou měr, na jejichž základě \ConTeXt\ vypočítává příslušné mezery. Již dříve jsem uvedl, že řádkování se vypočítává na základě konkrétního písma a jeho velikosti, ale to bylo jen pro zjednodušení: písmo a jeho velikost ve skutečnosti slouží k tomu, aby se stanovily určité míry, na jejichž základě se vypočítává meziřádkový prostor. Pomocí tohoto přístupu \tex{setupinterlinespace} se tyto míry upraví, a tím se změní i meziřádkový prostor. Skutečné míry a hodnoty, s nimiž lze tímto postupem manipulovat (jejichž význam nebudu vysvětlovat, protože přesahuje rámec jednoduchého {\em úvodu}), jsou tyto:  {\tt line, height, depth, minheight, mindepth, distance, top, bottom, stretch} a {\tt shrink}.
+
+  \item \tex{setupinterlinespace [Název]}. V tomto režimu nastavíme nebo nakonfigurujeme specifický a přizpůsobený typ řádkování, který byl dříve definován pomocí \PlaceMacro{defineinterlinespace}\tex{defineinterlinespace}.
+
+\stopitemize
+
+Pomocí
+
+\type{\defineinterlinespace [Name] [Configuration]}
+
+můžeme určitou konfiguraci meziřádkového prostoru přiřadit konkrétnímu názvu, který pak můžeme jednoduše spustit v určitém bodě našeho dokumentu pomocí \tex{setupinterlinespace[Name]}. Pro návrat k normálnímu meziřádkovému prostoru bychom pak museli napsat \tex{setupinterlinespace[reset]}.
+
+\stopsection
+
+\startsection 
+  [title={Ostatní záležitosti týkající se řádkování}]
+
+\startsubsection 
+  [ 
+    reference=sec:startlines, 
+    title={Převod zalomení řádků ve zdrojovém souboru na zalomení řádků ve výsledném dokumentu}, 
+  ]
+
+Jak již víme (viz \in{sekce}[sec:linebreaks]), \ConTeXt\ ve výchozím nastavení ignoruje zlomy řádků ve zdrojovém souboru, které považuje za prosté prázdné mezery, pokud se nevyskytují dva nebo více po sobě jdoucích zlomů řádků, v takovém případě se vloží zlom odstavce. Mohou však nastat situace, kdy máme zájem respektovat řádkové zlomy v původním zdrojovém souboru tak, jak tam byly vloženy, například při psaní poezie. K tomu nám \ConTeXt\ nabízí prostředí \MyKey{lines}, jehož formát je:
+
+\PlaceMacro{startlines}\type{\startlines [Options] ... \stoplines}
+
+kde mohou být mimo jiné tyto možnosti:
+
+\startitemize
+
+  \item {\tt\bf space}: Pokud je tato volba nastavena s hodnotou \MyKey{on}, bude prostředí kromě respektování zlomů řádků ve zdrojovém souboru respektovat také prázdné mezery ve zdrojovém souboru a dočasně ignorovat pravidlo absorpce.
+
+  \item {\tt\bf before}: Text nebo příkaz, který se má spustit před vstupem do prostředí.
+
+  \item {\tt\bf after}: Text nebo příkaz, který se má spustit po ukončení prostředí.
+
+  \item {\tt\bf inbetween}: Text nebo příkaz, který se spustí při vstupu do prostředí.
+
+  \item {\tt\bf indenting}: Hodnota udávající, zda mají být odstavce v prostředí odsazeny (viz \in{sekce}[sec:indentation]).
+
+  \item {\tt\bf align}: Zarovnání řádků v prostředí (viz \in{sekce}[sec:alignment]).
+
+  \item {\tt\bf style}: Příkaz stylu, který se použije v prostředí.
+
+  \item {\tt\bf color}: Barva, která se použije v prostředí.
+
+\stopitemize
+
+Tak například,
+
+% TODO ??
+\startDoubleExample
+\starttyping
+  \startlines
+    One-one was a race horse.
+    Two-two was one too.
+    One-one won one race.
+    Two-two won one too.
+  \stoplines
+\stoptyping
+
+  \startlines
+    One-one was a race horse.
+    Two-two was one too.
+    One-one won one race.
+    Two-two won one too.
+  \stoplines
+\stopDoubleExample
+
+Můžeme také upravit výchozí způsob práce s prostředím pomocí \PlaceMacro{setuplines}\tex{setuplines} a stejně jako u mnoha jiných příkazů \ConTeXt{}u je možné přiřadit konkrétní konfiguraci tohoto prostředí jméno. To provedeme příkazem \PlaceMacro{definelines}\tex{definelines}, jehož syntaxe je:
+
+\type{\definelines [Name] [Configuration]}
+
+kde jako konfiguraci můžeme zahrnout stejné možnosti, které byly vysvětleny obecně pro prostředí. Jakmile jsme si definovali vlastní řádkové prostředí, měli bychom pro jeho vložení napsat:
+
+\type{\startlines[Name] ... \stoplines}
+
+\stopsubsection
+
+\startsubsection 
+  [ 
+    reference=sec:linenumbering, 
+    title={Číslování řádků}, 
+  ]
+
+V některých typech textů je běžné zavést určitý druh číslování řádků, například v textech o počítačovém programování, kde je poměrně běžné, že fragmenty kódu nabízené jako příklady jsou číslovány, nebo v básních, kritických edicích atd. Pro všechny tyto situace nabízí \ConTeXt\ prostředí {\tt linenumbering}, jehož formát je
+
+\PlaceMacro{startlinenumbering}\type{\startlinenumbering [Options] ... \stoplinenumbering}
+
+K dispozici jsou tyto možnosti:
+
+\startitemize
+
+  \item {\tt\bf continue}: V případech, kdy existuje více než jedna část dokumentu, která vyžaduje číslování řádků, tato volba zajistí, že číslování začne znovu pro každou část (\MyKey{continue=no}, výchozí hodnota). Na druhou stranu, pokud má číslování řádků pokračovat od místa, kde skončila předchozí část, zvolíme \MyKey{continue=yes}.
+
+  \item {\tt\bf start}: Uvádí číslo prvního řádku v případech, kdy nechceme, aby to bylo \quote{1}, nebo aby odpovídalo předchozímu výčtu.
+
+  \item {\tt\bf step}: Pomocí této volby můžeme určit, že se číslo bude tisknout pouze v určitých intervalech. Například u básní je běžné, že se číslo objevuje pouze v násobcích 5 (verše 5, 10, 15...).
+
+\stopitemize
+
+Všechny tyto možnosti lze obecně pro všechna prostředí {\em linenumbering} v našem dokumentu označit pomocí \PlaceMacro{setuplinenumbering}\tex{setuplinenumbering}. Tento příkaz nám takéumožňuje konfigurovat další aspekty číslování řádků:
+
+\startitemize
+
+  \item {\tt\bf conversion}: Typ číslování řádků. Může to být kterýkoli z těch, které jsou vysvětleny na \at{page}[Num:conversion] ohledně číslování kapitol a oddílů.
+
+  \item {\tt\bf style}: Příkaz (nebo příkazy) určující styl číslování řádků (písmo, velikost, varianta...).
+
+  \item {\tt\bf color}: Barva, kterou se číslo řádku vytiskne.
+
+  \item {\tt\bf location}: Kde bude umístěno číslo řádku. Může to být kterákoli z následujících položek: text, begin, end, default, left, right, inner, outer, inleft, inright, margin, inmargin.
+
+  \item {\tt\bf distance}: Vzdálenost mezi číslem řádku a samotným řádkem.
+
+  \item {\tt\bf align}: Zarovnání čísel. Může být: vnitřní, vnější, flushleft, flushright, left, right, middle nebo auto.
+
+  \item {\tt\bf command}: Příkaz, kterému bude číslo řádku předáno jako parametr před tiskem.
+
+  \item {\tt\bf width}: Šířka vyhrazená pro tisk čísla řádku.
+
+  \item {\tt\bf left, right, margin}:
+
+\stopitemize
+
+Můžeme také vytvořit různé přizpůsobené konfigurace číslování řádků pomocí \PlaceMacro{definelinenumbering}\tex{definelinenumbering} tak, aby konfigurace byla spojena s názvem:
+
+\type{\definelinenumbering [Name] [Configuration]}
+
+Jakmile je konkrétní konfigurace definována a přiřazena k názvu,můžeme ji použít pomocí
+
+\type{\startlinenumbering [Name] ... \stoplinenumbering}
+
+\stopsubsection
+
+\stopsection
+
+\startsection 
+  [ 
+    reference=sec:alignment, 
+    title={Horizontální a vertikální zarovnání}, 
+  ]
+
+Příkaz, který obecně ovládá zarovnání textu, je \PlaceMacro{setupalign}\cmd{set\-up\-align}. Tento příkaz se používá k ovládání horizontálního i vertikálního zarovnání.
+
+\startsubsection 
+  [ 
+    reference=sec:setupalign, 
+    title={Horizontální zarovnání}, 
+  ]
+
+%TODO justifikaci ?
+Pokud {\em přesná} šířka řádku textu nezabírá celou možnou šířku, vzniká problém, jak naložit s bílými znaky.\footnote{Pod pojmem {\em přesná} šířka mám na mysli šířku řádku {\em předtím}, než \ConTeXt\ upraví velikost mezislovní mezery, aby umožnil justifikaci.} V zásadě můžeme v tomto ohledu udělat tři věci:
+
+\startitemize[n]
+
+  \item Nahromadíme ji na jedné ze dvou stran čáry: pokud ji nahromadíme na levé straně, čára bude vypadat {\em trochu posunutá} doprava, zatímco pokud ji nahromadíme na pravé straně, čára zůstane na levé straně. V prvním případě hovoříme o {\em zarovnání doprava} a v druhém o {\em zarovnání doleva}. Ve výchozím nastavení používá \ConTeXt\ zarovnání vlevo na poslední řádek odstavců.
+
+  Pokud je několik po sobě jdoucích řádků zarovnáno vlevo, je pravá strana nepravidelná; pokud je však zarovnání vpravo, vypadá nerovnoměrně levá strana. Pro pojmenování možností, které zarovnávají jednu nebo druhou stranu, \ConTeXt\ nenastavuje stranu, na které jsou zarovnány, ale stranu, na které jsou nerovnoměrné. Proto volba {\tt flushright} vede k zarovnání vlevo a {\tt flushleft} k zarovnání vpravo. Jako zkratky {\tt flushright} a {\tt flushleft} podporuje \tex{setupalign} také hodnoty {\tt right} a {\tt left}. Ale {\bf pozor}: zde je význam slov zavádějící. Přestože {\em left} znamená \quotation{left} a {\em right} znamená \quotation{right}, \tex{setupalign[left]} zarovnává vpravo a \tex{setupalign[right]} zarovnává vlevo. Pokud by čtenáře zajímalo, proč byla tato poznámka učiněna, stálo by za to citovat z \ConTeXt\ wiki:  \quotation{ConTeXt používá volby flushleft a flushright. Zarovnání vpravo a vlevo je ve všech příkazech, které akceptují volbu zarovnání, obrácené oproti obvyklým směrům, ve smyslu \quotation{ragged left} a \quotation{ragged right}. Bohužel, když Hans poprvé psal tuto část ConTeXtu, měl na mysli zarovnání \quote{ragged right} a \quote{ragged left}, nikoli \quote{flush left} a \quote{flush right}. A teď, když už to takhle nějakou dobu funguje, není možné to změnit, protože změna by porušila zpětnou kompatibilitu se všemi existujícími dokumenty, které to používají.}.
+
+  V dokumentech připravených pro oboustranný tisk jsou kromě pravého a levého okraje také vnitřní a vnější okraje. Hodnoty {\tt flushinner}. (nebo jednoduše {\tt inner}) a {\tt flushouter}. (nebo jednoduše {\tt outer}) v těchto případech určují odpovídající zarovnání.
+
+  \item Rozložte ji na oba okraje. Výsledkem bude vycentrování čáry. Volba \tex{setupalign}, která toto provádí, je {\tt middle}.
+
+  \item Rozdělte jej mezi všechna slova tvořící řádek,v případě potřeby zvětšením mezislovní mezery tak, aby byl řádek přesně stejně široký jako prostor, který je pro něj k dispozici. V těchto případech hovoříme o {\em justified lines}. To je také výchozí hodnota \ConTeXt{}u, proto v \tex{setupalign} není žádná zvláštní volba pro její stanovení. Pokud jsme však zarovnání zarovnané ve výchozím nastavení změnili, můžeme jej obnovit pomocí \tex{setupalign[reset]}.
+
+\stopitemize
+
+Hodnoty pro \tex{setupalign}, které jsme právě viděli ({\tt right, flushright, left, flushleft, inner, flushinner, outer, flushouter} a {\tt middle}), lze kombinovat s {\tt broad}, což vede k poněkud hrubšímu zarovnání.
+
+\startSmallPrint
+
+  Další dvě možné hodnoty \tex{setupalign}, které ovlivňují horizontální zarovnání, souvisejí s dělením slov na konci řádku, protože to, zda se tak stane, závisí na tom, zda je míra {přesného} řádku větší nebo menší; to zase ovlivňuje zbývající bílé místo.
+
+  Za tímto účelem \tex{setupalign} umožňuje hodnotu {\tt morehyphenation}, která způsobí, že \ConTeXt\ bude pracovat obtížněji při hledání bodů zlomu na základě spojovníku, a {\tt lesshyphenation}, která má opačný účinek. Při použití \tex{setupalign[horizontal, morehyphenation]} se zmenší zbývající bílé místo v řádcích, a proto bude zarovnání méně patrné. Naopak při použití \tex{setupalign[horizontal, lesshyphenation]} zůstane více bílého místa a zarovnání bude viditelnější.
+
+\stopSmallPrint
+
+\tex{setupalign} je určen k zařazení do preambule a ovlivnění celého dokumentu nebo k zařazení na určité místo a ovlivnění všeho od tohoto místa až do konce. Pokud chceme změnit zarovnání pouze jednoho nebo několika řádků, můžeme použít:
+
+\startitemize
+
+  \item Prostředí \MyKey{alignment}, určené k ovlivnění několika řádků. Jeho obecný formát je:
+
+  \PlaceMacro{startalignment}\type{\startalignment [Options] ... \stopalignment}
+
+  kde {\em Options} jsou libovolné z možností přípustných pro \tex{setupalign}.
+
+  \item Příkazy \PlaceMacro{leftaligned}\tex{leftaligned}, \PlaceMacro{midaligned}\tex{midaligned} nebo \PlaceMacro{rightaligned}\tex{rightaligned} způsobují zarovnání vlevo, na střed nebo vpravo; pokud chceme, aby poslední slovo v odstavci (ale pouze toto, nikoli zbytek řádku) bylo zarovnáno vpravo, můžeme použít \PlaceMacro{wordright}\tex{wordright}. Všechny tyto příkazy vyžadují, aby se text, který má být ovlivněn, nacházel mezi kudrnatými závorkami.
+
+  \startSmallPrint
+
+    Na druhou stranu si všimněte, že pokud slova \MyKey{right} a \MyKey{left} v příkazu \tex{setupalign} způsobí opačné zarovnání, než naznačuje jejich název, nestane se tak v případě příkazů \tex{leftaligned} a \tex{rightaligned}, které způsobí přesně takové zarovnání, jaké naznačuje jejich název: {\tt left} vlevo a {\tt right} vpravo.
+
+  \stopSmallPrint
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection 
+  [ 
+    reference={sec:VerticalAlignment}, 
+    title={Vertikální zarovnání}, 
+  ]
+
+Jestliže horizontální zarovnání přichází v úvahu, když šířka řádku nezabírá celý prostor, který má k dispozici, vertikální zarovnání ovlivňuje výšku celé stránky: jestliže {\em přesná} výška textu na stránce nezabírá celou výšku, co uděláme se zbývajícím bílým prostorem? Můžeme ho nahromadit nahoře (\MyKey{height}), což znamená, že text na stránce bude posunut dolů; můžeme ho nahromadit dole (\MyKey{bottom}) nebo ho rozdělit mezi odstavce (\MyKey{line}). Výchozí hodnota pro svislé zarovnání je \MyKey{bottom}.
+
+\subsubject{Vertikální úroveň tolerance}
+
+Stejným způsobem, jakým můžeme měnit úroveň tolerance \ConTeXt{}u, pokud jde o velikost přípustné horizontální mezery v řádku (horizontální tolerance) pomocí \PlaceMacro{setuptolerance}\tex{setuptolerance}, můžeme měnit i jeho vertikální toleranci, tj. toleranci pro mezery mezi odstavci větší, než jakou \ConTeXt ve výchozím nastavení považuje za přiměřenou pro dobře nastavenou stránku.Možné hodnoty pro vertikální toleranci jsou stejné jako pro horizontální toleranci: {\tt verystrict, strict, tolerant} a {\tt verytolerant}. Výchozí hodnota je \tex{setuptolerance [vertical, strict]}.
+
+\subsubsubject{Kontrola vdov a sirotků}
+
+Jedním z aspektů, který nepřímo ovlivňuje vertikální vyrovnání, je kontrola vdov a sirotků. Oba jevy znamenají, že zlom stránky způsobí, že jeden řádek odstavce je izolován na jiné stránce než zbytek odstavce. To se nepovažuje za typograficky vhodné. Pokud je řádek, který je oddělen od zbytku odstavce, první na stránce, hovoříme o {\em ovdovělém řádku}; pokud je řádek oddělený od svého odstavce poslední na stránce, hovoříme o {\em osiřelém řádku}.
+
+Ve výchozím nastavení \ConTeXt\ neimplementuje kontrolu, která by zajistila, že se tyto řádky nebudou vyskytovat. To však můžeme změnit změnou některých vnitřních proměnných \ConTeXt{}u: \PlaceMacro{widowpenalty}\tex{widowpenalty} kontroluje widowedlines a \PlaceMacro{clubpenalty}\tex{clubpenalty} kontroluje orphanedlines. Následující prohlášení v preambuli našeho dokumentu tedy zajistí, že tato kontrola bude provedena:
+
+\starttyping
+\widowpenalty=10000
+\clubpenalty=10000
+\stoptyping
+
+Provedení této kontroly znamená, že \ConTeXt\ se vyhne vložení zlomu stránky, který odděluje první nebo poslední řádek odstavce od stránky, na které se nachází zbytek. Toto zamezení bude více či méně důsledné v závislosti na hodnotě, kterou přiřadíme proměnným. Při hodnotě 10{,}000{, }jakou jsem použil v příkladu, bude kontrola absolutní; při hodnotě například 150 nebude kontrola tak přísná a občas se mohou vyskytnout některé rozšířené nebo osiřelé řádky, kdy je alternativa z typografického hlediska horší.
+
+\stopsubsection
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Místní proměnné:
+%%% mode: ConTeXt
+%%% kódování: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% "vim:set filetype=context tw=75 : %%%

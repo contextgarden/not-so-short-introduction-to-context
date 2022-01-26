@@ -1,8 +1,652 @@
 
+%%% Soubor:   b09_References.mkiv
+%%% Autor:    Joaquín Ataz-López
+%%% Začátek:  červenec 2020
+%%% Ukončeno: Srpen 2020
+%%% Obsah:    Stejně jako předchozí kapitola byla i tato kapitola původně 
+%           považována za oddíl kapitoly 12. Ale když jsem ji začal psát, 
+%           viděl jsem, že ovlivňuje dokument jako celek, a tak změnila 
+%           místo.  V tomto případě informace zásadně pocházejí z wiki.
+%%%% Upraveno pomocí: Emacs + AuTeX - A občas vim + context-plugin%%%
 
---------------------
-Czech version
---------------------
+\environment ../introCTX_env.mkiv
 
-TO BE DONE!
---------------------
+\startcomponent b09_References.mkiv
+
+\startchapter [title=Reference a hypertextové odkazy]
+
+\TocChap
+
+\startsection [title=Referenční typy]
+
+Vědecké a technické dokumenty obsahují velké množství odkazů:
+
+\startitemize
+
+\item Někdy odkazují na jiné dokumenty, které jsou základem pro to, co je řečeno, nebo které jsou v rozporu s tím, co je vysvětlováno, nebo které rozvíjejí či dále rozvádějí myšlenku, o níž se pojednává, atd. V těchto případech se říká, že odkaz je {\em externí}, a pokud má být dokument akademicky přísný, má odkaz formu {\em citací} z literatury.
+
+\item Běžně se však stává, že dokument v jednom ze svých oddílů odkazuje na jiný oddíl, a v takovém případě se říká, že odkaz je {\em interní}. Interní odkaz se vyskytuje také tehdy, když je v dokumentu komentován určitý aspekt konkrétního obrázku, tabulky, poznámky nebo prvku podobné povahy, přičemž se na něj odkazuje číslem nebo stránkou, na které se nachází.
+
+Z důvodu přesnosti je třeba, aby interní odkazy směřovaly na přesné a snadno identifikovatelné místo v dokumentu. Proto jsou tyto odkazy vždy odkazem buď na číslované prvky (jako například, když řekneme \quotation{viz tabulka 3.2} nebo \quotation{kapitola 7}), nebo na čísla stránek. Neurčité odkazy typu \quotation{jak jsme již řekli} nebo \quotation{jak uvidíme dále} nejsou pravými odkazy a neexistuje žádný zvláštní požadavek, ani žádný zvláštní nástroj pro jejich sazbu. Osobně také odrazuji své studenty doktorského a magisterského studia od jakéhokoli obvyklého používání této praktiky.
+
+\startSmallPrint
+
+Interní odkazy se také běžně nazývají \quotation{křížové odkazy}, ačkoli v tomto dokumentu budu jednoduše používat termín \quotation{odkazy} obecně a \quotation{interní odkazy}, pokud chci být konkrétní.
+
+\stopSmallPrint
+
+\stopitemize
+
+Abych objasnil terminologii, kterou používám pro odkazy, budu místo v dokumentu, kde je odkaz zaveden, nazývat {\em původ} a místo, na které ukazuje, {\em cíl}. Takto viděno bychom řekli, že odkaz je interní, pokud jsou původ a cíl ve stejném dokumentu, a externí, pokud jsou původ a cíl v různých dokumentech.
+
+Z hlediska sazby dokumentu:
+
+\startitemize
+
+\item Externí odkazy nepředstavují žádný zvláštní problém, a proto v zásadě nevyžadují žádný nástroj pro jejich zavedení: všechna potřebná data z cílového dokumentu jsou mi k dispozici a mohu je použít v referenci. Pokud je však výchozím dokumentem elektronický dokument a cílový dokument je rovněž dostupný na webu, pak je možné do odkazu zahrnout hypertextový odkaz, který umožňuje přejít přímo na cílový dokument. V těchto případech lze říci, že původní dokument je {\em interaktivní}.
+
+\item Naproti tomu interní odkazy představují výzvu pro sazbu dokumentu, protože každý, kdo má zkušenosti s přípravou středně dlouhých vědeckých a technických dokumentů, ví, že je téměř nevyhnutelné, aby se číslování stránek, oddílů, obrázků, tabulek, vět nebo podobných údajů, které jsou uvedeny v odkazu, v průběhu přípravy dokumentu měnilo, což velmi ztěžuje jeho aktualizaci.
+
+\startSmallPrint
+
+V předpočítačových dobách se autoři vyhýbali vnitřním odkazům, a ty, které byly nevyhnutelné, jako například obsah (který, pokud je doplněn číslem stránky každé části, je příkladem vnitřního odkazu), se psaly na konci.
+
+\stopSmallPrint
+
+\stopitemize
+
+Dokonce i ty nejomezenější systémy pro sazbu, jako jsou textové procesory, umožňují zahrnout určitý druh vnitřních křížových odkazů, jako je například obsah. To však není nic ve srovnání s komplexním mechanismem správy odkazů obsaženým v \ConTeXt{}u, který může kombinovat mechanismus správy interních odkazů zaměřený na udržování odkazů v aktuálním stavu s použitím hypertextových odkazů, což se samozřejmě netýká pouze externích odkazů.
+
+\stopsection
+
+\startsection
+[
+reference=sec:references,
+title=Interní reference,
+]
+
+K vytvoření vnitřního odkazu jsou zapotřebí dvě věci:
+
+\startitemize[n]
+
+\item Štítek nebo identifikátor v cílovém bodě. \ConTeXt\ při kompilaci přiřadí k tomuto štítku konkrétní data. Jaké údaje budou přiřazeny, závisí na druhu štítku; může to být číslo sekce, číslo poznámky, číslo obrázku, číslo přiřazené k určité položce v číslovaném seznamu, název sekce atd.
+
+\item Příkaz v bodě původu, který načte data přiřazená ke štítku spojeným s cílovým bodem a vloží je do bodu původu. Příkaz se liší podle toho, která data ze štítku chceme vložit do bodu původu.
+
+\stopitemize
+
+Když přemýšlíme o referenci, děláme to ve smyslu \quotation{původ~\longrightarrow~cíl}, takže by se mohlo zdát, že nejdříve by měly být vysvětleny záležitosti týkající se původu a teprve potom ty, které se týkají cíle. Domnívám se však, že je snazší pochopit logiku odkazů, pokud je vysvětlení obrácené.
+
+\startsubsection
+[
+reference=sec:target labels,
+title=Štítek v referenčním cíli,
+]
+
+V této kapitole se pod pojmem {\em štítek} rozumí textový řetězec, který bude spojen s cílovým bodem odkazu a interně používán pro získání určitých informací o cílovém bodu odkazu, jako je například číslo stránky, číslo oddílu atd. Ve skutečnosti informace spojené s každým štítkem závisí na postupu jeho vytvoření. \ConTeXt\ tyto štítky nazývá {\em reference}, ale myslím, že tento druhý termín, protože má mnohem širší význam, je méně jasný.
+
+Štítek přidružený k cílovému odkazu:
+
+\startitemize
+
+\item Potřebuje, aby každý potenciální cíl v dokumentu byl jedinečný, aby jej bylo možné bez pochybností identifikovat. Pokud použijeme stejný štítek pro různé cíle, \ConTeXt\ nevyhodí chybu při kompilaci, ale způsobí, že všechny odkazy budou směřovat na první štítek, který najde (ve zdrojovém souboru), což bude mít vedlejší účinek, že některé z našich odkazů mohou být chybné, a co hůř, že si jich nevšimneme. Proto je důležité se při vytváření štítku ujistit, že nový štítek, který přiřazujeme, již nebyl přiřazen dříve.
+
+\item Může obsahovat písmena, číslice, interpunkční znaménka, prázdná místa atd. Tam, kde se vyskytují prázdná místa, stále platí obecná pravidla \ConTeXt{}u týkající se těchto druhů znaků (viz. \in{sekce}[sec:spaces]), takže například \quotation{\type{Můj pěkný štítek}} a \quotation{\type{Můj   pěkný   štítek}} jsou považovány za stejné, i když je v obou použit jiný počet prázdných míst.
+
+\stopitemize
+
+Protože není nijak omezeno, které znaky mohou být součástí štítku a kolik jich může být, radím používat takové názvy štítků, které jsou jasné a pomohou nám porozumět zdrojovému souboru, až ho třeba budeme číst dlouho poté, co byl původně napsán. Proto příklad, který jsem uvedl dříve (\quotation{Můj pěkný štítek}), není dobrým příkladem, protože nám neříká nic o cíli, na který štítek ukazuje. Pro tento nadpis by byl například lepší štítek \quotation{sec:Cílové štítky}.
+
+Pro přiřazení konkrétního cíle ke štítku existují v zásadě dva postupy:
+
+\startitemize[n]
+
+\item Pomocí argumentu nebo volby příkazu se vytvoří prvek, na který bude ukazovat popisek. Z tohoto hlediska všechny příkazy, které vytvářejí nějakou strukturu nebo textový prvek otevřený jako referenční cíl, obsahují volbu \MyKey{reference}, která se používá k zahrnutí štítku. Někdy je místo {\em volby} značkou obsah celého argumentu.
+
+Dobrým příkladem toho, co se snažím říci, jsou příkazy sekce, které, jak víme z (\in{sekce}[sec:sectionsyntax]), umožňují několik druhů syntaxe. V klasické syntaxi je příkaz zapsán jako:
+
+\type{\section[Štítek]{Název}}
+
+a v syntaxi specifické pro \ConTeXt\ je příkaz zapsán jako
+
+\starttyping
+\startsection 
+  [title=Název, reference=Štítek, ...   ]
+\stoptyping
+
+V obou případech příkaz předpokládá zavedení štítku, který bude spojen s daným oddílem (nebo kapitolou, pododdílem atd.).
+
+Řekl jsem, že tato možnost se nachází ve {\em všech příkazech}, které umožňují vytvořit textový prvek, který je možným cílem odkazu. Jedná se o všechny textové prvky, které lze číslovat, mimo jiné o oddíly, plovoucí objekty všeho druhu (tabulky, obrázky a podobně), poznámky pod čarou nebo poznámky na konci textu, citace, číslované seznamy, popisy, definice atd.
+
+\startSmallPrint
+
+Pokud je štítek zadán přímo jako argument, a nikoli jako volba, které je přiřazena hodnota, je možné pomocí \ConTeXt{}u přiřadit několik štítků k jednomu cíli. Například:
+
+\type{\chapter[štítek1, štítek2, štítek3] {Moje kapitola}}
+
+Není mi jasné, jakou výhodu by mohlo mít několik různých označení pro jeden cíl, a mám podezření, že to lze udělat ne proto, že by to přinášelo výhody, ale kvůli nějakému {\em internímu} požadavku \ConTeXt{}u platnému pro určité druhy argumentů.
+
+\stopSmallPrint
+
+\item Pomocí příkazů \PlaceMacro{pagereference}\tex{pagereference},\PlaceMacro{reference}\tex{reference} nebo \PlaceMacro{textreference}\tex{textreference}, jejichž syntaxe je:
+
+\starttyping
+\pagereference[štítek]
+\reference[štítek]{Text}
+\textreference[štítek]{Text}
+\stoptyping
+
+\startitemize
+
+\item Štítek vytvořený pomocí \tex{pagereference} umožňuje získat číslo stránky.
+
+\item Štítky vytvořené pomocí \tex{reference} a \tex{textreference} umožňují získat číslo stránky a text, který je s nimi spojen a který je uveden jako argument.
+
+Jak v \tex{reference}, tak v \tex{textreference} text, který je spojen se značkou, zmizí jako takový z konečného dokumentu v místě, kde je umístěn příkaz (cíl reference), ale může být načten a znovu se objevit v místě původu reference.
+
+\stopitemize
+
+\stopitemize
+
+Již dříve jsem uvedl, že každý štítek je spojen s určitými informacemi týkajícími se cílového bodu. Jaké informace to jsou, závisí na typu štítku, o který se jedná:
+
+\startitemize
+
+\item Všechny štítky {\em pamatují} (v tom smyslu, že umožňují načtení) číslo stránky příkazu, který je vytvořil. U štítků připojených k oddílům, které mohou mít několik stránek, bude toto číslo odpovídat číslu stránky, na které daný oddíl začíná.
+
+\item Štítky vložené příkazem, který vytváří číslovaný textový prvek (oddíl, poznámku, tabulku, obrázek atd.) {\em si pamatují} číslo přiřazené k tomuto prvku (číslo oddílu, číslo poznámky atd.)
+
+\item Pokud má tento prvek {\em název}, jako je tomu například u sekcí, ale také u tabulek, pokud byly vloženy pomocí příkazu \tex{placetable}, budou si tento název pamatovat.
+
+\item Štítky vytvořené pomocí \tex{pagereference} si pouze {\em pamatují} číslo stránky.
+
+\item Příkazy vytvořené pomocí \tex{reference} nebo \tex{textreference} si pamatují také text, který je s nimi spojen a který tyto příkazy přijímají jako argument.
+
+\startSmallPrint
+
+Ve skutečnosti si nejsem jistý skutečným rozdílem mezi příkazy \tex{reference} a \tex{textreference}. Domnívám se, že je možné, že návrh těchto tří příkazů, které umožňují vytváření štítků, se snaží běžet paralelně se třemi příkazy, které umožňují získávání informací ze štítků (což uvidíme za chvíli); ale pravdou je, že podle mých testů se \tex{reference} a \tex{textreference} zdají být nadbytečnými příkazy.
+
+\stopSmallPrint
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+[title=Příkazy v referenčním bodě původu pro získání dat z cílového bodu]
+
+Příkazy, které vysvětlím dále, načítají informace ze štítků a navíc, pokud je náš dokument interaktivní, vytvářejí spojení s referenčním cílem. Důležité na těchto příkazech jsou však informace, které se ze štítku načítají. Chceme-li pouze vygenerovat spojení, aniž bychom ze štítku načítali jakékoli informace, musíme použít příkaz \tex{goto}, který je vysvětlen v \in{sekci}[sec:createlinks].
+
+\startsubsection[title=Základní příkazy pro získávání informací ze štítku]
+
+Vzhledem k tomu, že každý štítek spojený s cílovým bodem může obsahovat různé informace, je logické, že \ConTeXt\ obsahuje tři různé příkazy pro získání těchto informací: podle toho, které informace z referenčního cílového bodu chceme získat, použijeme jeden nebo druhý z těchto příkazů:
+
+\startitemize
+
+\item Příkaz \tex{at} umožňuje získat číslo stránky štítku.
+
+\item U štítků, které si kromě čísla stránky pamatují i číslo prvku (číslo oddílu, číslo poznámky, číslo položky, číslo tabulky atd.), umožňuje příkaz \tex{in} toto číslo získat.
+
+\item Konečně u štítků, které si pamatují text spojený se štítkem (název sekce, název obrázku vložený pomocí \tex{placefigure} atd.), umožňuje příkaz \tex{about} tento text načíst.
+
+\stopitemize
+
+Tři příkazy \PlaceMacro{at}\tex{at} \PlaceMacro{in}\tex{in}
+\PlaceMacro{about}\tex{about} mají stejnou syntaxi:
+
+\starttyping
+\at{Text}[štítek]
+\in{Text}[štítek]
+\about{Text}[štítek]
+\stoptyping
+
+\startitemize
+
+\item Štítek je štítek, ze kterého chceme získat informace.
+
+\item Text je text napsaný těsně před informací, kterou chceme příkazem získat. Mezi text a údaje štítku, které příkaz načítá, se vloží neoddělitelná mezera, a pokud je funkce interaktivity zapnuta tak, že příkaz kromě načtení informace vygeneruje odkaz, který nám umožní přejít na cílové místo, bude text uvedený jako argument součástí odkazu (bude to text, na který lze kliknout).
+
+\stopitemize
+
+V následujícím příkladu vidíme, jak \tex{in} získá číslo sekce a \tex{at} číslo stránky.
+
+\startDoubleExample
+\starttyping
+V \in{sekci}[sec:target labels], která 
+začíná na \at{page}[sec:target labels], 
+jsou vysvětleny vlastnosti štítků 
+používaných pro interní odkazy.
+\stoptyping
+
+V \in{sekci}[sec:target labels], která začíná na \at{page} [sec:target labels] jsou vysvětleny vlastnosti štítků používaných pro interní odkazy.
+
+\stopDoubleExample
+
+Všimněte si, že \ConTeXt\ automaticky vytvořil hypertextové odkazy (viz. \in{sekce}[sec:interactivity]) a že text, který \tex{in} a \tex{at} přebírají jako argument, je součástí odkazu. Kdybychom to však napsali jinak, výsledek by byl:
+
+\startDoubleExample
+\starttyping
+V části \in{}[sec:targetlabels], která 
+začíná na str. \at{}[sec:target labels], 
+jsou vysvětleny vlastnosti štítků 
+používaných pro interní odkazy.\stoptyping
+
+V části \in{}[sec:target labels], která začíná na stránce \at{}[sec:target labels], jsou vysvětleny vlastnosti štítků používaných pro interní odkazy.
+
+\stopDoubleExample
+
+Text zůstává stejný, ale slova {\em section} a {\em page}, která odkazu předcházejí, nejsou v odkazu obsažena, protože již nejsou součástí příkazu.
+
+Pokud \ConTeXt\ není schopen najít popisek, na který ukazují příkazy \tex{at}, \tex{in} nebo \tex{about}, nedojde k chybě při kompilaci, ale tam, kde by se informace získané těmito příkazy měly objevit v konečném dokumentu, se objeví \quotation{??}.
+
+\startSmallPrint
+
+Existují dva důvody, proč \ConTeXt\ nemůže najít štítek:
+
+\startitemize[n]
+
+\item Při psaní jsme udělali chybu.
+
+\item Zpracováváme pouze část dokumentu a značka ukazuje na dosud nezpracovanou část (viz. \in{sections}[input] a\in{}[sec-projects]).
+
+\stopitemize
+
+V prvním případě bude třeba chybu opravit. Proto je dobré, když dokončíme kompilaci celého dokumentu (a druhý případ již není možný), vyhledat v PDF všechny výskyty citace {??} a zkontrolovat, zda v dokumentu nejsou {\em rozbité} odkazy.
+
+\stopSmallPrint
+
+\stopsubsubsection
+
+\startsubsubsection
+[title=Získání informací spojených se štítkem pomocí příkazu \tex{ref}]\PlaceMacro{ref}
+
+Každý z \tex{at}, \tex{in} a \tex{about} načte některé prvky štítku. K dispozici je další příkaz, který nám umožňuje zachránit některý prvek štítku, který je uveden. Jedná se o příkaz \tex{ref}, jehož syntaxe je:
+
+\typ{\ref[Element k načtení][štítek]}
+
+kde první argument může být:
+
+\startitemize
+
+\item {\tt text}: vrací text přiřazený štítku.
+
+\item {\tt název}: vrací název přiřazený štítku.
+
+\item {\tt number}: vrací číslo spojené se štítkem. Například v sekcích číslo sekce.
+
+\item {\tt page}: vrací číslo stránky.
+
+\item {\tt realpage}: vrací skutečné číslo stránky.
+
+\item {\tt default}: vrací to, co \ConTeXt\ považuje za {\em přirozený} prvek štítku. Obecně se to shoduje s tím, co vrací {\tt číslo}.
+
+\stopitemize
+
+Ve skutečnosti je \tex{ref} mnohem přesnější než \tex{at}, \tex{in} nebo \tex{about}, a tak například rozlišuje mezi číslem stránky a skutečným číslem stránky. Číslo stránky se nemusí shodovat se skutečným číslem, pokud například číslování stránek dokumentu začalo na 1500 (protože tento dokument navazuje na předchozí) nebo pokud byly stránky preambule číslovány římskými číslicemi a při pohledu na ně bylo číslování znovu zahájeno. Podobně \tex{ref} rozlišuje {\em text} a {\em název} spojený s odkazem, což například \tex{about} nedělá.
+
+Pokud je \tex{ref} použit k získání informací ze štítku, který takové informace neobsahuje (např. název štítku spojený s poznámkou pod čarou), vrátí příkaz prázdný řetězec.
+
+\stopsubsubsection
+
+\startsubsubsection[title=Zjištění{,} kam vede odkaz]
+
+\ConTeXt\ má také dva příkazy, které jsou citlivé na {\em adresu odkazu}. Pomocí \quotation{adresy odkazu} chci určit, zda se cíl odkazu ve zdrojovém souboru nachází před nebo za původem. Příklad: píšeme náš dokument a chceme odkázat na sekci, která by se mohla nacházet ještě před nebo za sekcí, kterou píšeme v konečném obsahu. Jen jsme se ještě nerozhodli. V této situaci by bylo užitečné mít příkaz, který zapíše jeden nebo druhý v závislosti na tom, zda cíl nakonec přijde před nebo za původ v konečném dokumentu. Pro takové potřeby \ConTeXt\ nabízí příkaz \PlaceMacro{somewhere} \tex{somewhere}, jehož syntaxe je:
+
+\type{\somewhere{Text, pokud má být před}{Text, pokud má být za}[štítek]}.
+
+\page[preference]
+
+Například v následujícím textu:
+
+\starttyping
+Adresu hypertextového odkazu lze také zjistit pomocí příkazu \type{\somewhere}. Tímto způsobem můžeme také najít kapitoly nebo jiné textové prvky \somewhere {před}{po} [sec:references] a diskutovat o jejich popisu na jiném místě 
+\somewhere{před}{po} [sec:interaktivita].
+\stoptyping
+
+\startnarrower\switchtobodyfont[small]
+
+\color[red]{Adresu hypertextového odkazu lze také zjistit pomocí příkazu \type{\somewhere}. Tímto způsobem můžeme najít kapitoly nebo jiné textové prvky \somewhere {před}{po}[sek:odkazy] a diskutovat o jejich popisu na jiném místě \somewhere {před}{po}[sek:interaktivita].}.
+
+\stopnarrower
+
+\startSmallPrint
+
+Pro tento příklad jsem v této kapitole použil dva skutečné štítky ve zdrojovém souboru.
+
+\stopSmallPrint
+
+Dalším příkazem, který je schopen zjistit, zda štítek, na který ukazuje, je před nebo za, je \PlaceMacro{atpage}\tex{atpage}, jehož syntaxe je:
+
+\type{\atpage[štítek]}
+
+Tento příkaz je docela podobný předchozímu, ale místo toho, aby nám umožnil napsat text sám, v závislosti na tom, zda je popisek před nebo za, \tex{atpage} vloží výchozí text pro každý z obou případů a, pokud je dokument interaktivní, vloží také hypertextový odkaz.
+
+Text, který \tex{atpage} vloží, je text spojený se štítky \MyKey{precedingpage} v případě {\em štítek}, který přebírá jako argument, je {\em před} příkazem, a \MyKey{hereafter} v opačném případě.
+
+\startSmallPrint
+
+Když jsem dospěl k tomuto bodu, zradilo mě předchozí rozhodnutí: v této kapitole jsem se rozhodl nazývat to, co \ConTeXt\ nazývá \quotation{odkaz}, \quotation{štítek}. Zdálo se mi to jasnější. Ale některé textové fragmenty generované příkazy \ConTeXt\, jako například \tex{atpage}, se také nazývají \quotation{štítky} (tentokrát v jiném smyslu). (Viz. \in{section}[sec:labels]). Doufám, že to čtenáře nezmate. Myslím, že kontext nám umožňuje správně rozlišit, který zrůzných významů {\em štítek} mám v každém případě na mysli.
+
+\stopSmallPrint
+
+Proto můžeme text vložený pomocí \tex{atpage} měnit stejným způsobem jako text jakéhokoli jiného štítku:
+
+\starttyping
+\setuplabeltext[cs][precedingpage=Nový text]
+\setuplabeltext[cs][hereafter=Nový text]
+\stoptyping
+
+\startSmallPrint
+
+V tomto bodě se domnívám, že je v \suite- (distribuce, kterou používám) malá chyba. Při zkoumání názvů předdefinovaných štítků v \ConTeXt\, které lze změnit pomocí \tex{setuplabeltext}, jsou dva páry štítků, které jsou kandidáty na použití pomocí \tex{atpage}: 
+
+\startitemize[packed]
+
+\item \MyKey{předchozí stránka} a \MyKey{následující stránka}.
+\item \MyKey{hencefore} a \MyKey{hereafter}.
+
+\stopitemize
+
+Mohli bychom předpokládat, že \tex{atpage} použije buď první, nebo druhou dvojici. Ve skutečnosti však pro položky předcházející použije \MyKey{precedingpage} a pro ty následující použije \MyKey{hereafter}, což je podle mého názoru nekonzistentní.
+
+\stopSmallPrint
+
+\stopsubsubsection
+
+\stopsubsection
+
+\startsubsection
+[title=Automatické generování předpon pro zamezení duplicitních štítků]
+
+V rozsáhlém dokumentu není vždy snadné vyhnout se duplicitě značek. Proto je vhodné zavést určitý řád do způsobu, jakým vybíráme štítky, které použijeme. Jedním z postupů, který pomáhá, je používání předpon pro štítky, které se liší podle typu štítku. Například \quotation{sec:} pro oddíly, \quotation{fig:} pro obrázky, \quotation{tbl:} pro tabulky atd.
+
+S ohledem na tuto skutečnost obsahuje \ConTeXt\ soubor nástrojů, které umožňují:
+
+\startitemize
+
+\item \ConTeXt{}u samotnému automaticky generovat popisky pro všechny přípustné prvky.
+
+\item Každému ručně generovanému štítku převzít předponu, ať už tu, kterou jsme si sami předem určili, nebo automaticky generovanou \ConTeXt{}em.
+
+\stopitemize
+
+Podrobné vysvětlení tohoto mechanismu je zdlouhavé, a přestože jde nepochybně o užitečné nástroje, nemyslím si, že jsou nezbytné. A protože je nelze vysvětlit několika slovy, raději je nevysvětluji a odkazuji na to, co je o nich uvedeno v referenční příručce \ConTeXt\ nebo ve \goto{wiki}[url(https://wiki.contextgarden.net/References)] o této problematice.
+
+% Pokud se rozhodneme psát vlastní štítky, příkazem, který nám může pomoci vyhnout
+% se duplicitám, je \tex{showreferences}: tento příkaz zobrazí seznam
+% všech zavedených štítků v dokumentu.
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+[
+reference=sec:interactivity,
+title=Interaktivní elektronické dokumenty,
+]
+
+Interaktivní mohou být pouze elektronické dokumenty, ale ne všechny elektronické dokumenty. {\em Elektronický} dokument je takový, který je uložen v počítačovém souboru a lze jej otevřít a číst přímo na obrazovce. Na druhé straně elektronický dokument, který je vybaven nástroji, které umožňují uživateli s ním pracovat, je interaktivní, to znamená, že s ním můžeme dělat více než jen číst. O interaktivitu se jedná například tehdy, když dokument obsahuje tlačítka, která provádějí nějakou akci, nebo odkazy, jejichž prostřednictvím můžeme přejít na jiné místo v dokumentu nebo na externí dokument; nebo když jsou v dokumentu oblasti, kam může uživatel psát, nebo jsou v něm videa či zvukové klipy, které lze přehrát, atd.
+
+Všechny dokumenty generované \ConTeXt{}em jsou elektronické (protože \ConTeXt\ generuje PDF, které je z definice elektronickým dokumentem), ale ne vždy jsou interaktivní. Aby byly interaktivní, je nutné to výslovně uvést, jak je uvedeno v následující části.
+
+Mějte však na paměti, že ačkoli \ConTeXt\ generuje interaktivní PDF, k tomu, abychom tuto interaktivitu ocenili, potřebujeme čtečku PDF, která ji umí, protože ne všechny čtečky PDF umožňují používat hypertextové odkazy, tlačítka a podobné prvky, které jsou pro interaktivní dokumenty vhodné.
+
+\startsubsection
+[title=Zapnutí interaktivity v dokumentech]
+\PlaceMacro{setupinteraction}
+
+\ConTeXt\ standardně nepoužívá interaktivní funkce, pokud to není výslovně uvedeno, což se obvykle děje v preambuli dokumentu. Příkaz, který tuto utilitu zapíná, je:
+
+\type{\setupinteraction[state=start]}
+
+Za normálních okolností by se tento příkaz použil pouze jednou, a to v preambuli dokumentu, když chceme vygenerovat interaktivní dokument. Ve skutečnosti jej však můžeme používat jak často chceme, a to změnou stavu interaktivity dokumentu. Příkaz \MyKey{state=start} interaktivitu zapíná, zatímco \MyKey{state=stop} ji vypíná, takže můžeme interaktivitu vypnout v některých kapitolách nebo {\em částech} našeho dokumentu, kde to chceme.
+
+\startSmallPrint
+
+Nenapadá mě žádný důvod, proč bychom chtěli mít v interaktivních dokumentech neinteraktivní části. Ale na filozofii \ConTeXt{}u je důležité, aby něco bylo technicky možné, i když to pravděpodobně nepoužijeme, takže nabízí postup, jak to udělat. Právě tato filosofie dává \ConTeXt{}u tolik možností a zabraňuje tomu, aby tak jednoduchý úvod, jako je tento, byl {\em stručný}.
+
+\stopSmallPrint
+
+Jakmile je interakce navázána:
+
+\startitemize
+
+\item Některé příkazy \ConTeXt{}u již obsahují hypertextové odkazy. Tedy:
+
+\startitemize
+
+\item Příkazy pro vytváření obsahů, které budou v zásadě, pokud není výslovně uvedeno jinak, interaktivní, tj. kliknutím na položku v obsahu se přejde na stránku, kde začíná daná část.
+
+\item Příkazy pro interní odkazy, které jsme viděli v první části této kapitoly, kdy kliknutím na ně automaticky přejdete na cíl odkazu.
+
+\item Poznámky pod čarou a závěrečné poznámky, kde se po kliknutí na kotvu poznámky v hlavním textu dostaneme na stránku, kde je poznámka napsána, a po kliknutí na značku poznámky v textu poznámky se dostaneme na místo v hlavním textu, kde bylo volání provedeno.
+
+\item atd.
+
+\stopitemize
+
+\item Je povolena možnost používat další příkazy určené speciálně pro interaktivní dokumenty, jako jsou například prezentace. Ty využívají řadu nástrojů spojených s interaktivitou, jako jsou tlačítka, nabídky, překryvy obrázků, vložený zvuk nebo video atd. Vysvětlení toho všeho by bylo příliš dlouhé a kromě toho jsou prezentace poněkud zvláštním druhem dokumentu. Proto na následujících řádcích popíšu jednu funkci spojenou s interaktivitou: hypertextové odkazy.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+[title=Základní konfigurace pro interaktivitu]
+
+\tex{setupinteraction}, kromě povolení nebo zakázání interakce, umožňuje nastavit některé záležitosti s ní spojené; především, ale nejen, barvu a styl odkazů. K tomu slouží následující volby příkazu:
+
+\startitemize
+
+\item {\tt color}: řídí {\em normální} barvu odkazů.
+
+\item {\tt contrastcolor}: určuje barvu odkazů, jejichž cíl je na stejné stránce jako původ. Doporučuji, aby tento volitelný prvek byl nastaven na stejný obsah jako předchozí.
+
+\item {\tt style}: řídí styl odkazu.
+
+\item {\tt název, podnázev, autor, datum, klíčové slovo}: Hodnoty přiřazené těmto volbám budou převedeny do metadat PDF generovaného \ConTeXt{}em.
+
+\item {\tt kliknutí}: Tato volba určuje, zda se má odkaz při kliknutí na něj zobrazit.
+
+\stopitemize
+
+\stopsubsection
+
+\stopsection
+
+\startsection[title=Hypertextové odkazy na externí dokumenty]
+
+Budu rozlišovat mezi příkazy, které nevytvářejí odkaz, ale pomáhají zadat adresu URL odkazu, a příkazy, které vytvářejí hypertextový odkaz. Podívejme se na ně odděleně:
+
+\startsubsection
+[title={Příkazy, které pomáhají při sazbě hypertextových odkazů, ale nevytvářejí je}]
+
+Adresy URL bývají velmi dlouhé a obsahují znaky všech typů, dokonce i znaky, které jsou v \ConTeXt{}u vyhrazené a nelze je použít přímo. Kromě toho, pokud je nutné URL zobrazit v dokumentu, je velmi obtížné odstavec napsat, protože URL může přesáhnout délku řádku a nikdy neobsahuje prázdná místa, která lze použít k vložení zalomení řádku. V adrese URL navíc není rozumné vkládat do slov spojovník, aby se vložil zlom řádku, protože čtenář by jen stěží poznal, zda spojovník skutečně tvoří součást adresy URL.
+
+Proto \ConTeXt\ poskytuje dva nástroje pro {\em sazbu} URL. První z nich je určena především pro adresy URL, které budou použity interně, ale nebudou zobrazeny v dokumentu. Druhý je určen pro adresy URL, které musí být zapsány v textu dokumentu. Podívejme se na něodděleně:
+
+\startdescription{\tex{useURL}}\PlaceMacro{useURL}
+
+Tento příkaz nám umožňuje zapsat adresu URL do preambule dokumentu a přiřadit ji ke jménu, takže když ji chceme použít v našem dokumentu, můžeme ji vyvolat pomocí jména, které je s ní spojeno. Je to užitečné zejména u adres URL, které budou v dokumentu použity několikrát.
+
+\page[preference]
+
+Příkaz umožňuje dvě použití:
+
+\startitemize[n, packed]
+
+\item \type{\useURL[Přidružený název][URL]}
+\item \type{\useURL [Přidružený název] [URL] [] [Text odkazu]}
+
+\stopitemize
+
+\startitemize
+
+\item V první verzi je adresa URL jednoduše spojena se jménem, pod kterým bude vyvolána v našem dokumentu. Ale pak, abychom mohli URL použít, budeme muset při jeho vyvolání nějak uvést, který klikací text se v dokumentu zobrazí.
+
+\item V druhé verzi obsahuje poslední argument klikací text. Třetí argument existuje pro případ, že chceme rozdělit adresu URL na dvě části, takže první část obsahuje přístupovou adresu a druhá část název konkrétního dokumentu nebo stránky, kterou chceme otevřít. Příklad: adresa dokumentu, který vysvětluje, co je to \ConTeXt\:\\\color[blue]{\hyphenatedurl{http://www.pragma-ade.com/general/manuals/what-is-context.pdf}}. 
+Tuto adresu můžeme zapsat celou do druhého argumentu a třetí část ponechat prázdnou:
+
+\starttyping
+\useURL [WhatIsCTX] 
+  [http://www.pragma-ade.com/general/manuals/what-is-context.pdf]
+  [] 
+  [Co je \ConTeXt?]
+\stoptyping
+
+ale můžeme ji také rozdělit na dva argumenty:
+
+\starttyping
+\useURL [WhatIsCTX] 
+  [http://www.pragma-ade.com/general/manuals/] 
+  [what-is-context.pdf] 
+  [Co je \ConTeXt?]
+\stoptyping
+
+V obou případech budeme mít tuto adresu spojenou se slovem \MyKey{WhatIsCTX}, takže pro vložení odkazu na tuto adresu použijeme příkaz, který používáme pro vytvoření odkazu; místo samotné adresy URL můžeme jednoduše napsat \MyKey{WhatIsCTX}.
+
+Chceme-li v kterémkoli místě textu reprodukovat adresu URL, kterou jsme spojili se jménem pomocí \tex{useURL}, můžeme použít \tex{url[Přidružené jméno]}, který vloží adresu URL spojenou s tímto jménem do dokumentu. Tento příkaz však, přestože zapíše adresu URL, nevytvoří žádný odkaz.
+
+\startSmallPrint
+
+Formát, ve kterém se zobrazují adresy URL zapsané pomocí \tex{url}, není ten, který se obecně nastavuje pomocí \tex{setupinteraction}, ale ten, který se specificky nastavuje pro tento příkaz pomocí \PlaceMacro{setupurl}\tex{setupurl}, 
+který umožňuje nastavit styl (volba {\tt style}) a barvu (volba {\tt colour}).
+
+\stopSmallPrint
+
+\stopitemize
+
+\stopdescription
+
+\startdescription{\tex{hyphenatedurl}}\PlaceMacro{hyphenatedurl}
+
+Tento příkaz je určen pro adresy URL, které budou zapsány v textu našeho dokumentu, a má \ConTeXt\ zahrnout do adresy URL zalomení řádků, pokud je to nutné pro správnou sazbu odstavce. Jeho formát je:
+
+\type{\hyphenatedurl{URLadresa}}
+
+Navzdory názvu příkazu \PlaceMacro{hyphenatedurl}\tex{hyphenatedurl} se název adresy URL nepřevádí na pomlčku. Bere však v úvahu, že některé znaky běžné v adresách URL jsou vhodným místem pro vložení zalomení řádku před nebo za ně. Můžeme přidat požadované znaky do seznamu znaků, u kterých je povolen zlom řádku. K tomu máme k dispozici tři příkazy:
+
+\starttyping
+\sethyphenatedurlnormal{Znaky}
+\sethyphenatedurlbefore{Znaky}
+\sethyphenatedurlafter{Znaky}
+\stoptyping\PlaceMacro{sethyphenatedurlnormal}\PlaceMacro{sethyphenatedurlbefore}\PlaceMacro{sethyphenatedurlafter}
+
+Tyto příkazy přidávají znaky, které berou jako argumenty, do seznamu znaků podporujících zalomení řádku před seznam znaků podporujících pouze zalomení řádku a za seznam znaků umožňujících pouze zpětné zalomení řádku.
+
+\tex{hyphenatedurl} lze použít vždy, když je třeba zapsat adresu URL, která se ve výsledném dokumentu objeví v nezměněné podobě. Lze jej dokonce použít jako poslední argument příkazu \tex{useURL} ve verzi tohoto příkazu, kde poslední argument vybírá text, na který lze kliknout a který se zobrazí v konečném dokumentu. Například:
+
+\starttyping
+\useURL [WhatIsCTX] 
+  [http://www.pragma-ade.com/general/manuals/what-is-context.pdf] 
+  [] 
+  [\hyphenatedurl{http://www.pragma-ade.com/general/manuals/what-is-context.pdf}]
+\stoptyping
+
+V argumentu \tex{hyphenatedurl} lze použít všechny vyhrazené znaky kromě tří, které musí být nahrazeny příkazy:
+
+\startitemize[packed]
+
+\item \%{} musí být nahrazena
+\PlaceMacro{letterpercent}\tex{letterpercent}
+
+\item \#{} musí být nahrazen \PlaceMacro{letterhash}\tex{letterhash}
+
+\item \backslash{} musí být nahrazena položkou 
+\PlaceMacro{letterescape}\tex{letterescape} nebo 
+\PlaceMacro{letterbackslash}\tex{letterbackslash}.
+
+\stopitemize
+
+Pokaždé, když \tex{hyphenatedurl} vloží zalomení řádku, provede příkaz \\\PlaceMacro{hyphenatedurlseparator}\tex{hyphenatedurlseparator}, který ve výchozím nastavení nic neudělá. Pokud jej však nadefinujeme, vloží se do adresy URL reprezentativní znak podobně jako u normálních slov, kdy se vloží pomlčka, která označuje, že slovo pokračuje na dalším řádku. Například:
+
+\type{\def\hyphenatedurlseparator{\curvearrowright}}
+
+\def\hyphenatedurlseparator{\curvearrowright}
+
+zobrazí následující obzvláště dlouhou webovou adresu:
+
+\startnarrower\switchtobodyfont[11pt]
+
+\color[blue]{\hyphenatedurl{https://support.microsoft.com/?scid=http://support.microsoft.com:80/support/kb/articles/Q208/4/27.ASP&NoWebContent=1}.}
+
+\stopnarrower
+
+\stopdescription
+
+\stopsubsection
+
+\startsubsection
+[
+reference=sec:createlinks,
+title=Příkazy, které vytvářejí spojení,
+]
+
+Pro vytvoření odkazů na předdefinované adresy URL pomocí \tex{useURL} můžeme použít příkaz \PlaceMacro{from}\tex{from}, který se omezuje na vytvoření odkazu, ale nezapisuje žádný text, na který by bylo možné kliknout. Jako text odkazu se použije výchozí text v \tex{useURL}. Jeho syntaxe je:
+
+\typ{\from[Název]}
+
+kde {\em Název} je název dříve přiřazený k adrese URL pomocí \tex{useURL}.
+
+K vytvoření odkazů a jejich přiřazení ke klikacímu textu, který nebyl předem definován, slouží příkaz \PlaceMacro{goto}\tex{goto}, který se používá jak k vytváření interních, tak externích odkazů. Jeho syntaxe je:
+
+\typ{\goto{Klikatelný text}[Cíl]}
+
+kde {\em Klikatelný text} je text, který se má zobrazit ve výsledném dokumentu a kde se kliknutím myší vytvoří skok, a {\em Cíl} může být:
+
+\startitemize
+
+\item Štítek z našeho dokumentu. V tomto případě \tex{goto} vygeneruje skok podobným způsobem jako například již zkoumané příkazy \tex{in} nebo \tex{at}. Na rozdíl od těchto příkazů však nebudou získány žádné informace spojené se štítkem.
+
+\item Samotná adresa URL. V tomto případě musí být výslovně uvedeno, že se jedná o URL, a to zapsáním příkazu následujícím způsobem:
+
+\typ{\goto{Klikatelný text}[url(URL)]}
+
+kde URL zase může být název, který byl dříve přiřazen k URL pomocí \tex{useURL}, nebo samotné URL, v tomto případě musíme při zápisu URL zajistit, aby byly vyhrazené znaky \ConTeXt{}u správně zapsány v \ConTeXt{}u. Zápis adresy URL podle pravidel \ConTeXt{}u neovlivní funkčnost odkazu.
+
+\stopitemize
+
+\stopsubsection
+
+\stopsection
+
+\startsection[title=Vytvoření záložek ve finálním PDF]
+
+Soubory PDF mohou mít interní seznam záložek obsahu, který umožňuje čtenáři zobrazit obsah dokumentu ve zvláštním okně programu pro prohlížení PDF a pohybovat se v něm pouhým kliknutím na jednotlivé oddíly a pododdíly.
+
+Ve výchozím nastavení \ConTeXt\ neposkytuje výstupnímu PDF seznam záložek obsahu, ačkoli je to tak jednoduché, když do něj vložíte příkaz \PlaceMacro{placebookmarks}\tex{placebookmarks}, jehož syntaxe je:
+
+\typ{\placebookmarks[Seznam sekcí]}
+
+kde {\em Seznam sekcí} je čárkou oddělený seznam úrovní sekcí, které se mají objevit v seznamu obsahu. 
+
+U tohoto příkazu mějte na paměti následující poznámky:
+
+\startitemize
+
+\item Podle mých testů \tex{placebookmarks} nefunguje, pokud je v preambuli dokumentu. Ale v těle dokumentu (mezi \tex{starttext} a \tex{stoptext} nebo mezi \tex{startproduct} a \tex{stopproduct}) nezáleží na tom, kam jej umístíte: seznam záložek bude zahrnovat i oddíly nebo pododdíly před příkazem. Domnívám se však, že pro správné pochopení zdrojového souboru je nejrozumnější umístit příkaz na začátek.
+
+\item Typy oddílů definované uživatelem (pomocí \tex{definehead}) nejsou vždy umístěny na správném místě v seznamu záložek. Je vhodnější je vyloučit.
+
+\item Pokud název oddílu v kterémkoli oddílu obsahuje poznámku pod čarou nebo poznámku pod čarou, považuje se text poznámky pod čarou za součást záložky.
+
+\item Jako argument můžeme místo seznamu sekcí jednoduše uvést symbolické slovo \MyKey{all}, které, jak jeho název napovídá, bude obsahovat všechny sekce; podle mých testů však toto slovo kromě toho, co jsou jistě sekce, obsahuje i texty umístěné tamtéž pomocí některých nesekčních příkazů, takže výsledný seznam je poněkud nepředvídatelný.
+
+\stopitemize
+
+Ne všechny programy pro prohlížení souborů PDF umožňují zobrazovat záložky a mnohé programy, které tuto funkci mají, ji nemají ve výchozím nastavení aktivovanou. Proto se pro kontrolu výsledku této funkce musíme ujistit, že náš program pro čtení PDF tuto funkci podporuje a má ji aktivovanou. Myslím, že si vzpomínám, že například Acrobat ve výchozím nastavení záložky nezobrazuje, přestože na jeho panelu nástrojů je tlačítko pro jejich zobrazení.
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Místní proměnné:
+%%% mode: ConTeXt 
+%%% mode: auto-fill
+%%% kódování: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:
+%%% vim:set filetype=context tw=72 : %%%
