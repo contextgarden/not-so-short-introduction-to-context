@@ -1,8 +1,787 @@
 
+%%% Soubor: b07_Structure.mkiv%% Autor:  Ataz-López%%% Začátek: Joaquín Ataz-López:      2020%% Ukončeno: Květen 2020%%% Název:  Toto je druhá kapitola, kterou jsem řešil, a z% mého pohledu jedna z nejdůležitějších. Jednu po druhé jsem zkoušel% možnosti nastavení hlavy a nebyl jsem schopen zjistit, co% některé dělají nebo jak je zprovoznit.  Mám podezření, že je to% (1) tím, že jsem s ConTeXtem teprve začínal pracovat a v červenci,% srpnu už jsem se v něm cítil mnohem lépe, ale v té době mi to všechno% připadalo jako čínština, a (2) tím, že jsem své testy prováděl v% dokumentu, kde jsem sekce psal klasickým stylem (\kapitola nebo \oddíl místo \začátek kapitoly nebo% \oddíl).%%%% Upraveno pomocí: Emacs + AuTeX - A občas vim + kontextový plugin%%%
 
---------------------
-Czech version
---------------------
+\environment ../introCTX_env.mkiv
 
-TO BE DONE!
---------------------
+\startcomponent b07_Structure.mkiv
+
+\startchapter [ reference=cap:structure, title=Struktura dokumentu, ]
+
+\TocChap
+
+\startsection [title=Strukturální členění v dokumentech]
+
+S výjimkou velmi krátkých textů (jako je například dopis) je dokument obvykle strukturován do bloků nebo textových skupin, které mají zpravidla hierarchické uspořádání. Neexistuje žádný standardní způsob pojmenování těchto bloků: například u románů se strukturní členění obvykle nazývá \quotation{kapitoly}, ačkoli některé - ty delší - mají větší bloky obvykle nazývané \quotation{části}, které seskupují několik kapitol dohromady.  V divadelních dílech se rozlišují \quotation{aktů} a \quotation{scén}. Akademické příručky se (někdy) dělí na \quotation{části} a \quotation{lekce}, \quotation{témata} nebo \quotation{kapitoly}, které zase často mají i vnitřní členění; stejný druh složitého hierarchického členění se často vyskytuje i v jiných akademických nebo technických dokumentech (například v textech, jako je tento, věnovaný vysvětlení počítačového programu nebo systému. Dokonce i zákony jsou strukturovány do \quotation{knihy} (nejdelší a nejsložitější, jako jsou zákoníky), \quotation{nadpisy}, \quotation{kapitoly}, \quotation{oddíly}, \quotation{pododdíly}. Vědecké a technické dokumenty mohou také dosahovat až šesti, sedmi nebo někdy dokonce osmiúrovňové hloubky vnoření těchto druhů členění.
+
+Tato kapitola se zaměřuje na analýzu mechanismu, který \ConTeXt\ nabízí pro podporu těchto strukturálních dělení. Budu je označovat souhrnným termínem \quotation{sekce}.
+
+\startSmallPrint
+
+  Neexistuje jasný termín, který by umožňoval obecně označit všechny tyto druhy strukturálního dělení. Termín \quotation{oddíl}, který jsem zvolil, se zaměřuje spíše na strukturální dělení než na cokoli jiného, i když nevýhodou je, že jedno z předem určených strukturálních dělení \ConTeXt{}u se nazývá \quotation{oddíl}. Doufám, že to nezpůsobí zmatek, a věřím, že z kontextu bude dostatečně snadné určit, zda mluvíme o sekci jako o obecném a celkovém odkazu na strukturální dělení, nebo o konkrétním dělení, které \ConTeXt\ nazývá sekcí.
+
+\stopSmallPrint
+
+Každá \quotation{oddíl} (obecně řečeno) znamená:
+
+\startitemize \item Přiměřeně rozsáhlé {\em strukturní členění dokumentu}, které může zahrnovat další členění nižší úrovně. Z tohoto pohledu \quotation{oddíly} znamenají textové bloky s hierarchickým vztahem mezi nimi. Na dokument jako celek lze z hlediska jeho oddílů nahlížet jako na strom. Dokument {\em jako takový} je kmenem, každá jeho kapitola je větví, která zase může mít větve, které se mohou také dělit atd.
+
+  Jasná struktura je velmi důležitá pro čtení a pochopení dokumentu. Tento úkol je však na autorovi, nikoli na sazeči. A přestože není úkolem \ConTeXt\, aby z nás udělal lepší autory, než jsme, celá řada příkazů sekcí, které obsahuje a kde je hierarchie mezi nimi zcela jasná, by nám mohla pomoci psát lépe strukturované dokumenty.
+
+  \item A {\em structure name}, který bychom mohli nazvat jeho \quotation{title}.  nebo \quotation{label}. Toto jméno struktury se vypíše:
+
+  \startitemize
+
+    \item Vždy (nebo téměř vždy) v místě dokumentu, kde začíná strukturní členění.
+
+    \item Někdy také v obsahu, v záhlaví nebo zápatí stránek, na kterých se nachází daná část.
+
+  \stopitemize
+
+    \ConTeXt\ nám umožňuje automatizovat všechny tyto úkoly tak, že stačí pouze jednou uvést, jakými formátovacími prvky má být název strukturní jednotky vytištěn a zda má či nemá být uveden také v obsahu nebo v záhlaví či zápatí. K tomu \ConTeXt\ potřebuje pouze vědět, kde každá strukturní jednotka začíná a končí, jak se jmenuje a na jaké hierarchické úrovni se nachází.
+
+\stopitemize
+
+\stopsection
+
+\startsection [ reference=sec:sectiontypes, title=Typy sekcí a jejich hierarchie, ]
+
+\ConTeXt\ rozlišuje mezi {\em číslovanými} a {\em nečíslovanými} sekcemi. První z nich, jak už název napovídá, jsou číslovány automaticky a posílají se do obsahu a někdy také do záhlaví a/nebo zápatí stránek.
+
+\ConTeXt\ má hierarchicky uspořádané předdefinované příkazy sekcí, které se nacházejí v \in{tabulka}[tbl:sectioned].
+
+\placetable 
+	[here] 
+	[tbl:sectioned] 
+	{Příkazy sekcí v \ConTeXt}
+{
+  \starttabulate[|l|l|l|]
+\HL
+\NC {\bf Level}
+\NC {\bf Numbered sections}
+\NC {\bf Unnumbered sections}
+\NR
+\HL
+\NC 1
+\NC{\tt \backslash part}\PlaceMacro{part}\PlaceMacro{startpart}
+\NC --
+\NR
+\NC 2
+\NC{\tt \backslash chapter}\PlaceMacro{chapter}\PlaceMacro{startchapter}
+\NC{\tt \backslash title}\PlaceMacro{title}\PlaceMacro{starttitle}
+\NR
+\NC 3
+\NC{\tt \backslash section}\PlaceMacro{section}\PlaceMacro{startsection}
+\NC{\tt \backslash subject}\PlaceMacro{subject}\PlaceMacro{startsubject}
+\NR
+\NC 4
+\NC{\tt \backslash subsection}\PlaceMacro{subsection}\PlaceMacro{startsubsection}
+\NC{\tt \backslash subsubsubject}\PlaceMacro{subsubsubject}\PlaceMacro{startsubsubject}
+\NR
+\NC 5
+\NC{\tt \backslash subsubsection}\PlaceMacro{subsubsection}\PlaceMacro{startsubsubsection}
+\NC{\tt \backslash subsubsubject}\PlaceMacro{subsubsubject}\PlaceMacro{startsubsubsubject}
+\NR
+\NC 6
+\NC{\tt \backslash subsubsubsection}\PlaceMacro{subsubsubsection}\PlaceMacro{startsubsubsubsection}
+\NC{\tt \backslash subsubsubsubject}\PlaceMacro{subsubsubsubject}\PlaceMacro{startsubsubsubsubject}
+\NR
+\NC ...
+\NC ...
+\NC ...
+\NR
+\HL
+\stoptabulate
+}
+
+Pokud jde o předdefinované oddíly, je třeba uvést následující upřesnění:
+
+\startitemize
+
+    \item V \in{tabulka}[tbl:sectioned] jsou příkazy sekcí zobrazeny v tradiční podobě. Hned ale uvidíme, že je lze použít také jako {\em environments} (\tex{startchapter ... \stopchapter}) a že právě tento přístup se doporučuje.
+
+\item Tabulka obsahuje pouze prvních 6 úrovní sekcí. Při testech jsem však našel až 12 úrovní: Po \tex{subsubsubsection} následuje 
+\tex{subsubsubsubsection} a tak dále až k 
+\tex{subsubsubsubsubsubsubsubsubsection}, nebo 
+\tex{subsubsubsubsubsubsubsubsubsubject}.
+
+  \startSmallPrint
+
+    Měli bychom však mít na paměti, že výše uvedené (příliš hluboké) nižší úrovně sotva mohou zlepšit porozumění textu! Především je pravděpodobné, že budeme mít rozsáhlé oddíly, které se budou nevyhnutelně zabývat několika záležitostmi, a to čtenáři ztíží {\em grasp} jejich obsahu. Přílišná hloubka úrovní může také znamenat, že čtenář ztratí celkový smysl textu, a výsledkem bude přílišná roztříštěnost příslušné látky. Mám za to, že obecně stačí čtyři úrovně; velmi výjimečně může být potřeba jít do šesti nebo sedmi úrovní, ale větší hloubka by byla dobrým nápadem jen zřídka.
+
+        Z hlediska psaní zdrojového souboru může skutečnost, že vytvoření dalších podúrovní znamená přidání dalšího \quotation{sub} k předchozí úrovni, způsobit, že zdrojový soubor je téměř nečitelný: není legrace snažit se zjistit úroveň příkazu s názvem \quotation{subsubsubsubsubsection}, protože musím spočítat všechny \quotation{subs}! Takže radím, že pokud opravdu potřebujeme tolik úrovní hloubky, bylo by lepší od páté úrovně (subsubsection) definovat vlastní příkazy sekcí (viz \in{section}[sec:definehead]) a dát jim srozumitelnější názvy než předdefinované.
+
+  \stopSmallPrint
+
+  \item Nejvyšší úroveň sekce (\tex{part}) existuje pouze pro číslované názvy a má tu zvláštnost, že název části není vytištěn.  I když se však název netiskne, je zavedena prázdná stránka (na které můžeme předpokládat, že se název vytiskne, jakmile uživatel příkaz překonfiguruje) a číslování {\em part} je zohledněno při výpočtu číslování kapitol a dalších oddílů.
+
+  \startSmallPrint
+
+    Důvodem, proč výchozí verze \tex{part} nic netiskne, je podle wiki \ConTeXt to, že téměř vždy nadpis na této úrovni vyžaduje specifický layout; a i když je to pravda, nezdá se mi to jako dostatečně dobrý důvod, protože v praxi se často předefinovávají i kapitoly a sekce a skutečnost, že části nic netisknou, nutí začínajícího uživatele, aby se {\em dip} do dokumentace a zjistil, co je špatně.      \stopSmallPrint
+
+    \item Ačkoli první úrovní členění je \quotation{part}, je pouze teoretická a abstraktní. V konkrétním dokumentu bude první úrovní členění ta, která odpovídá prvnímu příkazu členění v dokumentu. To znamená, že v dokumentu, který neobsahuje části, ale kapitoly, bude první úrovní kapitola.  Pokud však dokument neobsahuje ani kapitoly, ale pouze oddíly, bude hierarchie pro tento dokument začínat oddíly.
+
+\stopitemize
+
+\stopchapter
+
+\startsection [ reference=sec:sectionyntax, 
+			title=Syntaxe společná pro příkazy sekcí, 
+			]
+
+Všechny příkazy sekcí, včetně všech úrovní vytvořených uživatelem (viz \in{sekce}[sec:definehead]), umožňují následující alternativní formy syntaxe (pokud například používáme úroveň \MyKey{section}):
+
+\vbox{\starttyping
+\section [Label] {Title}
+\section [Options]
+\startsection [Options] [Variables] ... \stopsection
+\stoptyping}
+
+Ve třech výše uvedených způsobech jsou argumenty v hranatých závorkách nepovinné a lze je vynechat. Budeme se jim věnovat samostatně, ale nejprve je vhodné objasnit, že ve značce IV je doporučován právě třetí z těchto tří přístupů.
+
+\startitemize
+
+  \item V první syntaktické podobě, kterou bychom mohli nazvat \quotation{{\em classic}}, příkaz přijímá dva argumenty, jeden nepovinný v hranatých závorkách a druhý povinný v závorkách. Nepovinný argument slouží k přiřazení příkazu ke značce, která bude použita pro vnitřní odkazy (viz \in{sekce}[sec:references]). Povinným argumentem mezi kulatými závorkami je název sekce.
+
+   \item Další dvě formy syntaxe jsou spíše ve stylu \ConTeXt\: vše, co příkaz potřebuje vědět, je sděleno prostřednictvím hodnot a možností zavedených mezi hranaté závorky.
+
+  \startSmallPrint
+
+        Připomeňme si, že v \in{sekcích}[sec:command scope] a \in{}[sec:command options] jsem uvedl, že v \ConTeXt je rozsah příkazu uveden v kulatých závorkách a jeho volby v hranatých závorkách. Ale když se nad tím zamyslíme, název konkrétního sekčního příkazu není rozsahem jeho použití, takže aby byl v souladu s obecnou syntaxí, neměl by být uveden mezi kudrnatými závorkami, ale jako volba.  \ConTeXt\ umožňuje tuto výjimku, protože se jedná o klasický způsob práce v \TeX{}u, ale poskytuje alternativní formy syntaxe, které jsou více v souladu s jeho celkovým návrhem.
+
+  \stopSmallPrint
+
+  Možnosti jsou typu přiřazení hodnoty (OptionName=Value) a jsou následující:
+
+  \startitemize
+
+  \item {\tt\bf reference}: Označení pro křížové odkazy.
+
+  \item {\tt\bf title}: Název sekce, který bude vytištěn v těle dokumentu.
+
+  \item {\tt\bf list}: Název oddílu, který bude vytištěn v obsahu.
+
+  \item {\tt\bf marking}: Název oddílu, který se má tisknout v záhlaví nebo zápatí stránky.
+
+  \item {\tt\bf bookmark}: Název oddílu, který má být převeden na záložku {\em
+  bookmark} v souboru PDF.
+
+  \item {\tt\bf ownnumber}: V tomto případě bude tato volba obsahovat číslo přidělené danému oddílu.
+
+  \stopitemize
+
+  Volby   \MyKey{list}, \MyKey{marking} a \MyKey{bookmark} by se samozřejmě měly používat pouze tehdy, pokud chceme použít jiný název, který nahradí hlavní název nastavený pomocí \MyKey{title}. možnost. To je velmi užitečné například v případě, kdy je nadpis pro záhlaví příliš dlouhý; ačkoli k tomu můžeme použít také příkazy 
+ \PlaceMacro{nomarkingí}\tex{nomarking} a 
+ \PlaceMacro{nolist}\tex{nolist} (něco velmi podobného). Na druhou stranu musíme mít na paměti, že pokud text nadpisu (volba \quotation{title}) obsahuje nějaké čárky, bude třeba jej uzavřít do kudrnatých závorek, a to jak celý text, tak čárku, aby ConTeXt věděl, že čárka je součástí nadpisu. Totéž platí pro volby: \quotation{list}, \quotation{marking} a \quotation{bookmark}. Proto, abychom nemuseli hlídat, zda jsou v názvu nějaké čárky, je podle mě dobré si zvyknout hodnotu některé z těchto možností vždy uzavírat do kudrnatých závorek.
+
+\stopitemize
+
+Následující řádky tedy například vytvoří kapitolu s názvem \quotation{A Test Chapter} spojenou se štítkem \quotation{test} pro křížové odkazy, přičemž záhlaví bude \quotation{Chapter test} namísto \quotation{A Test Chapter}.
+
+\vbox{\starttyping
+\chapter 
+[ 
+	title={A Test Chapter}, 
+	reference={test}, 
+	marking={Chapter test} 
+]
+\stoptyping}
+
+Syntaxe \tex{startSectionType} změní sekci na {\em environment}. Je to více v souladu se skutečností, že, jak jsem řekl na začátku, na pozadí je každá sekce odlišným blokem textu, ačkoli \ConTeXt ve výchozím nastavení nepovažuje {\em environments} generované příkazy sekcí za {\em groups}. Stejně tak tento postup doporučuje Mark~IV; dost možná proto, že tento způsob vytváření sekcí vyžaduje, abychom výslovně uvedli, kde každá sekce začíná a končí, což usnadňuje konzistentní strukturu a pravděpodobně má lepší podporu pro výstupy XML a EPUB. Pro výstup XML je to vlastně nezbytné.
+
+Při použití \tex{startSectionName} je povoleno použít jednu nebo více proměnných jakoargumenty mezi hranatými závorkami. Jejich hodnotu pak můžeme později použít na jiných místech dokumentu pomocí příkazu\PlaceMacro{structureuservariable}\tex{structureuservariable}.
+
+\startSmallPrint
+
+  Uživatelské proměnné umožňují velmi pokročilé použití \ConTeXt\ díky tomu, že v závislosti na hodnotě konkrétní proměnné lze rozhodovat o tom, zda fragment zkompilovat, nebo ne, případně jakým způsobem, nebo s jakou šablonou. Tyto nástroje \ConTeXt{}u však přesahují rozsah materiálu, kterým se chci v tomto úvodu zabývat.
+
+\stopSmallPrint
+
+\stopsection
+
+\startsection 
+[ reference=sec:setuphead, 
+title=Formát a konfigurace sekcí a jejich názvů, 
+]
+
+\startsubsection 
+[title=Příkazy \tex{setuphead} a \tex{setupheads}]\PlaceMacro{setuphead}\PlaceMacro{setupheads}
+
+Ve výchozím nastavení přiřazuje \ConTeXt\ každé úrovni řezu určité vlastnosti, které ovlivňují především (ale nejen) formát, v jakém je nadpis zobrazen v hlavním textu dokumentu, ale ne způsob, jakým je nadpis zobrazen v obsahu nebo v záhlaví a zápatí. Tyto vlastnosti můžeme změnit pomocí příkazu \tex{setuphead}, jehož syntaxe je:
+
+\type{\setuphead[Sections][Options]}
+
+kde
+
+\startitemize
+
+    \item {\tt\bf Sections} odkazuje na název jedné nebo více sekcí (oddělených čárkami), které mají být příkazem ovlivněny. Může to být:
+
+  \startitemize
+
+  \item Kterákoli z předdefinovaných sekcí (část, kapitola, nadpis atd.), v tomto případě na ně můžeme odkazovat buď podle názvu, nebo podle úrovně. Pro odkaz na ně podle jejich úrovně použijeme slovo \quotation{{\tt sekce-{\em NumLevel}}}, kde {\em NumLevel} je číslo úrovně příslušné sekce. Takže \MyKey{section-1} se rovná \MyKey{part}, \MyKey{section-2} se rovná \MyKey{chapter} atd.
+
+  \item Jakýkoli druh sekce, který jsme sami definovali. V tomto ohledu viz \in{sekce}[sec:definehead].
+
+  \stopitemize
+
+  \item {\tt\bf Options} jsou možnosti konfigurace. Jsou typu explicitního přiřazení hodnoty (OptionName=value). Počet způsobilých voleb je velmi vysoký (přes šedesát), a proto je vysvětlím rozdělením do kategorií podle jejich funkce. Musím však upozornit, že se mi nepodařilo zjistit, k čemu některé z těchto voleb slouží a jak se používají. O těchto možnostech tedy nebudu hovořit.
+
+\stopitemize
+
+Dříve jsem uvedl, že \tex{setuphead} ovlivňuje sekce, které jsou výslovně uvedeny. To však neznamená, že by úprava určité sekce neměla nijak ovlivnit ostatní sekce, pokud nebyly v příkazu výslovně uvedeny. Ve skutečnosti je tomu právě naopak: úprava určité sekce ovlivňuje ostatní sekce {\em které jsou s ní propojeny}, i když to v příkazu nebylo výslovně uvedeno. vazba mezi jednotlivými sekcemi je dvojího druhu:
+
+\startitemize
+
+    \item Nečíslované příkazy jsou propojeny s odpovídajícím číslovaným příkazem stejné úrovně, takže změna vzhledu číslovaného příkazu ovlivní nečíslovaný příkaz stejné úrovně, ale ne naopak: změna nečíslovaného příkazu nemá vliv na číslovaný příkaz. To například znamená, že pokud změníme nějaký aspekt příkazu \MyKey{chapter}. (úroveň 2), změníme tento aspekt také v \MyKey{title}; ale změna \MyKey{title} neovlivní \MyKey{chapter}.
+
+    \item Příkazy jsou hierarchicky propojeny, takže pokud změníme {\em určité vlastnosti} v určité úrovni, změna ovlivní všechny úrovně, které následují po ní. K tomu dochází pouze u některých funkcí. Například barva: pokud stanovíme, že podsekce se budou zobrazovat červeně, změníme na červenou i podsekce, podsekce atd. Totéž se však neděje u jiných funkcí, jako je například styl písma.
+
+\stopitemize
+
+Spolu s \tex{setuphead} \ConTeXt\ poskytuje příkaz \tex{setupheads}, který globálně ovlivňuje všechny příkazy sekcí. Na wiki \ConTeXt\ je v souvislosti s tímto příkazem uvedeno, že podle některých lidí nefunguje.  Podle mých testů tento příkaz pro některé možnosti funguje, ale pro jiné ne.  Zejména nefunguje s volbou \MyKey{style}, což je zarážející, protože styl nadpisů je s největší pravděpodobností jediná věc, kterou bychom chtěli změnit globálně, aby ovlivnila všechny nadpisy. Podle mých testů však funguje s jinými možnostmi, jako je například \MyKey{number} nebo \MyKey{color}. Takže například \tex{setupheads[color=blue]} zajistí, že všechny nadpisy v našem dokumentu budou vytištěny modře.
+
+Protože jsem trochu líný na to, abych se obtěžoval testovat každou možnost, jestli funguje nebo ne s \tex{setupheads} (nezapomeňte, že jich je více než šedesát), v následujícím textu budu odkazovat pouze na \tex{setuphead}.
+
+Nakonec: než se budeme zabývat konkrétními možnostmi, měli bychom si všimnout něčeho, co je uvedeno ve wiki \ConTeXt\, i když to pravděpodobně není uvedeno na správném místě: některé možnosti fungují pouze tehdy, pokud používáme syntaxi \cmd{start{\em SectionName}}.
+
+\startSmallPrint
+
+  Tyto informace jsou obsaženy v souvislosti s \tex{setupheads}, ale ne v \tex{setuphead}, kde je vysvětlena většina možností a kde se zdá, že je to nejrozumnější místo, pokud to má být řečeno pouze na jednom místě. Na druhou stranu se informace zmiňuje pouze o volbě \MyKey{insidesection}, aniž by bylo jasné, zda se tak děje i u jiných voleb.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\startsubsection 
+[ 
+reference=sec:title parts, 
+title=Části názvu sekce, 
+]
+
+Než se pustíme do konkrétních možností, které nám umožňují nastavit vzhled nadpisů, je vhodné začít upozorněním, že nadpis oddílu může mít až tři různé části, které \ConTeXt\ umožňuje formátovat společně nebo odděleně. Tyto prvky nadpisu jsou následující:
+
+\startitemize
+
+  \item {\bf Samotný název}, tedy text, ze kterého se skládá. V zásadě se tento nadpis zobrazuje vždy, s výjimkou sekcí typu \MyKey{part}, kde se nadpis standardně nezobrazuje. Volbou, která určuje, zda se nadpis zobrazí, nebo ne, je \MyKey{placehead}, jejíž hodnoty mohou být \MyKey{yes}, \MyKey{no}.  \MyKey{hidden}, \MyKey{empty} nebo \Doubt\MyKey{section}. Význam prvních dvou je jasný. Nejsem si však jistý výsledkem zbývajících hodnot této možnosti.
+
+  Pokud tedy chceme, aby se nadpis zobrazoval v sekcích první úrovně, mělo by být naše nastavení následující:
+
+    \vbox{\starttyping 
+     \setuphead 
+     	[part] 
+	[placehead=yes] 
+     \stoptyping}
+
+  Jak již víme, názvy některých oddílů lze automaticky odesílat do záhlaví a obsahu. Pomocí voleb {\tt list} a {\tt marking} příkazů sekcí můžeme uvést alternativní název, který se má posílat místo něj. Při psaní nadpisu je také možné použít příkazy \PlaceMacro{nolist}\tex{nolist} nebo \PlaceMacro{nomarking}\tex{nomarking}, aby byly určité části nadpisu v obsahu nebo v záhlaví nahrazeny elipsami.  
+Například:
+
+    \vbox{\starttyping 
+    \chapter{Vlivy \nomarking{19. století} impresionismu \nomarking{v 21. století}}  
+    \stoptyping}
+
+    Do záhlaví napíše \quotation{Vlivy ... impresionismu ...}.
+
+  \item {\bf Číslování}. To platí pouze pro číslované oddíly (part, chapter, section, subsection...), nikoliv pro nečíslované (title, subject, subsubject). Ve skutečnosti to, zda je určitý oddíl číslován nebo ne, závisí na volbách \MyKey{number} a \MyKey{incrementnumber}, jejichž možné hodnoty jsou \MyKey{yes} a \MyKey{no}. V číslovaných sekcích jsou obě nastaveny jako {\tt yes} a v nečíslovaných sekcích jako {\tt no}.
+
+  \startSmallPrint
+
+   Proč existují dvě možnosti ovládání stejné věci? Protože ve skutečnosti tyto dvě možnosti řídí dvě věci: jedna je, zda je sekce číslována, nebo ne ({\tt incrementnumber}), a druhá, zda se číslo zobrazí, nebo ne ({\tt number}). Pokud je pro sekci nastaveno {\tt incrementnumber=yes} a {\tt number=no}, získáme sekci, která je navenek (vizuálně) nečíslovaná, ale uvnitř stále počítaná. To by bylo užitečné pro zařazení takového oddílu do obsahu, protože obvykle by obsahoval pouze číslované oddíly. V tomto ohledu viz \in{sekce}[sec:toc s nečíslovanými sekcemi] v \in{sekce}. [sec:manual adjustments].
+
+  \stopSmallPrint
+
+  \item {\bf Štítek} pro název. V zásadě je tento prvek v názvech prázdný. Můžeme mu však přiřadit hodnotu a v takovém případě se před číslem a vlastním názvem vypíše štítek, který jsme této úrovni přiřadili. Například v názvech kapitol můžeme chtít, aby se vytisklo slovo \quotation{Chapter} nebo slovo \quotation{Part} pro části.  K tomu nepoužíváme příkaz \tex{setuphead}, ale příkaz \tex{setuplabeltext}, který nám umožňuje přiřadit textovou hodnotu štítkům různých úrovní členění. Chceme-li tedy například v našem dokumentu před nadpisy kapitol napsat \quotation{Chapter}, měli bychom nastavit:
+
+    \vbox{\starttyping 
+    	\setuplabeltext 
+	[chapter=Chapter~] 
+     \stoptyping}
+
+  V příkladu jsem za přiřazený název vložil vyhrazený znak \quotation{\lettertilde}, který za slovo vloží nezlomitelnou mezeru. Pokud nám nevadí, že mezi označením a číslem dojde ke zlomu řádku, můžeme jednoduše přidat prázdnou mezeru. Tato mezera (ať už jakéhokoli druhu) je však důležitá; bez ní bude číslo spojeno se štítkem a místo \quotation{Chapter 1} bychom viděli například \quotation{Chapter 1}.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection 
+[title=Kontrola číslování\\ (v číslovaných sekcích)]
+
+Již víme, že předdefinované číslované oddíly (část, kapitola, oddíl...) a to, zda je určitý oddíl číslován či nikoli, závisí na volbách \MyKey{number} a \MyKey{incrementnumber} nastavených pomocí \tex{setuphead}.
+
+Ve výchozím nastavení je číslování různých úrovní automatické, pokud jsme volbě \MyKey{yes} nepřidělili hodnotu \MyKey{ownnumber}.Pokud \MyKey{ownumber=yes}, musí být uvedeno číslo přiřazené každému příkazu. To se provádí:
+
+\startitemize
+
+  \item Pokud je příkaz vyvolán pomocí klasické syntaxe, přidáním argumentu s číslem před text nadpisu. Například:\\
+  \cmd{kapitola\{13\}\{Název kapitoly\}} vytvoří kapitolu, které bylo ručně přiřazeno číslo 13.
+
+    \item Pokud byl příkaz vyvolán se syntaxí specifickou pro \ConTeXt\ (\tex{Section Type [Options]} nebo \tex{startSection Type [Options]}), s volbou \MyKey{ownnumber}. Například:\\\type{\chapter[title={Chapter title}, ownnumber=13]}, vytvoří kapitolu, které bylo ručně přiřazeno číslo 13.
+
+\stopitemize
+
+Když \ConTeXt\ automaticky čísluje, používá vnitřní počítadla, která ukládají čísla různých úrovní; existuje tedy počítadlo pro části, další pro kapitoly, další pro oddíly atd. Pokaždé, když \ConTeXt\ najde příkaz sekce, provede následující akce:
+
+\startitemize[packed]
+
+  \item Zvýší čítač přiřazený úrovni odpovídající tomuto příkazu o \quote{1}.
+
+  \item Vynuluje přidružené čítače na všech úrovních pod úrovní daného příkazu na 0.
+
+\stopitemize
+
+To například znamená, že při každém nalezení nové kapitoly se čítač kapitol zvýší o 1 a všechny příkazy sekce, podsekce, podsekce atd. se vrátí na hodnotu 0; čítač částí však není ovlivněn.
+
+Chcete-li změnit číslo, od kterého se má začít počítat, použijte příkaz\PlaceMacro{setupheadnumber}\tex{setupheadnumber} takto:
+
+\type{\setupheadnumber[SectionType][Number from which to count]}
+
+kde {\em Number from which to count} je číslo, od kterého se počítají oddíly jakéhokoli typu. Pokud je tedy {\em Number from which to count} rovno nule, bude první sekce 1; pokud je rovno 10, bude první sekce 11.
+
+Tento příkaz nám také umožňuje změnit vzor pro automatický přírůstek, takže můžeme například dosáhnout toho, aby se kapitoly nebo oddíly počítaly po dvou nebo po třech. Takže \tex{setupheadnumber[section][+5]}zobrazí kapitoly číslované jako 5 z pěti; a \tex{setupheadnumber[chapter][14, +5]}zobrazí, že první kapitola začíná číslem 15 (14+1), druhá bude 20 (15+5), třetí 25 atd.
+
+Ve výchozím nastavení se číslování oddílů zobrazuje arabskými číslicemi a je zahrnuto číslování všech předchozích úrovní. To znamená: v dokumentu, v němž existují části, kapitoly, oddíly a pododdíly, bude konkrétní pododdíl označovat, které části, kapitole a oddílu odpovídá. Čtvrtý pododdíl druhého oddílu třetí kapitoly první části tedy bude \quotation{1.3.2.4}.
+
+Dvě základní možnosti, které určují způsob zobrazení čísel, jsou:
+
+\startitemize
+
+  \item {\tt\bf převod:} Řídí typ číslování, které bude použito. Umožňuje řadu hodnot v závislosti na požadovaném typu číslování: \reference[Num:conversion]{Numerical conversion}
+
+  \startitemize
+
+    \item {\bf Číslování arabskými číslicemi}: Klasické číslování: 1, 2, 3, ... se získá pomocí hodnot {\tt n, N} nebo {\tt numbers}.
+
+    \item {\bf Číslování římskými číslicemi}. Tři způsoby, jak to udělat:
+
+    \startitemize[packed]
+
+      \item Velká římská čísla: {\tt I, R, Romannumerals}.     
+      \item Malá římská čísla: {\tt i, r, Romannumerals}.      
+      \item Římská čísla malými písmeny: {\tt KR, RK}.
+
+    \stopitemize
+
+    \item {\bf Číslování pomocí písmen}. Tři způsoby, jak to udělat:
+
+    \startitemize[packed]
+
+      \item Velká písmena: {\tt A, Character}      
+      \item Malá písmena: {\tt a, character}      
+      \item Malá písmena: {\tt AK, KA}        
+      
+     \stopitemize
+
+  \item {\bf Číslování slovy}. To znamená, že píšeme slovo, které označuje číslo. Tak například z \quotation{3} se stane \quotation{Three}. Existují dva způsoby, jak to udělat:
+
+  \startitemize[packed]
+
+    \item Slova začínající velkým písmenem: {\tt Words}.    
+    \item Slova psaná malými písmeny: {\tt word}.
+
+  \stopitemize
+
+  \item {\bf Číslování pomocí symbolů}: Číslování pomocí symbolů používá různé sady symbolů, v nichž je každému symbolu přiřazena číselná hodnota. Vzhledem k tomu, že sady symbolů používané \ConTeXt{}em mají velmi omezený počet, je vhodné tento typ číslování používat pouze tehdy, pokud maximální počet, kterého lze dosáhnout, není příliš vysoký. \ConTeXt\ poskytuje čtyři různé sady symbolů: {\tt set~0, set~1, set~2 a set~3}. Níže jsou uvedeny symboly, které každá z těchto sad používá pro číslování. Všimněte si, že maximální počet, kterého lze dosáhnout, je 9 v {\tt set~0} a {\tt set~1} a 12 v {\tt set~2} a {\tt set~3}:
+
+        \startitemize[empty, packed]\reference[examples of conversion set]{}      
+        \item Set 0: \dorecurse{9}{\convertnumber{set 0}{#1}\quad}\par 
+        \item Set 1: \dorecurse{9}{\convertnumber{set 1}{#1}\quad}\par 
+        \item Set 2: \dorecurse{12}{\convertnumber{sada 2}{#1}\quad}\par 
+        \item Set 3: \dorecurse{12}{\convertnumber{sada 3}{#1}\quad}\par
+
+    \stopitemize
+
+  \stopitemize
+
+  \item {\tt\bf sectionsegments:} Tato volba nám umožňuje určit, zda se má zobrazit číslování předchozích úrovní. Můžeme určit, které předchozí úrovně budou zobrazeny. To se provádí určením počáteční a poslední úrovně, která se má zobrazit. Identifikace úrovně může být provedena jejím číslem (část=1, kapitola=2, sekce=3 atd.) nebo názvem (část, kapitola, sekce atd.).  Tak například \MyKey{sectionsegments=2:3} označuje, že se má zobrazit číslování kapitol a sekcí. Je to úplně stejné, jako když řeknete \MyKey{sectionsegments=chapter:section}. Chceme-li naznačit, že se mají zobrazit všechna čísla nad určitou úrovní, můžeme jako hodnotu \MyKey{optionsegments} použít příkaz {\em InitialLevel:*} nebo {\em InitialLevel:*}.  Například \MyKey{sectionsegments=3:*} znamená, že číslování se zobrazí od úrovně 3 (sekce).
+
+\stopitemize
+
+Představte si tedy například, že chceme, aby části byly číslovány římskými číslicemi s velkými písmeny; kapitoly arabskými číslicemi, ale bez uvedení čísla části, ke které patří; oddíly a pododdíly arabskými číslicemi včetně čísel kapitol a oddílů a pododdíly velkými písmeny. Měli bychom psát následující:
+
+\vbox{\starttyping 
+\setuphead[part][conversion=I] 
+\setuphead[chapter] [conversion=n, sectionegments=2] 
+\setuphead[section] [conversion=n, sectionegments=2:3] 
+\setuphead[subsection] [conversion=n, sectionsgments=2:4] 
+\setuphead[subsubsection][conversion=A, sectionsegments=5]
+\stoptyping}
+
+\stopsubsection
+
+\startsubsection 
+[ 
+	reference=sec:titlestyle, 
+	title=Barva a styl titulku, 
+	]
+
+K dispozici jsou následující možnosti ovládání stylu a barvy:
+
+\startitemize
+
+    \item {\bf Styl} se ovládá pomocí voleb \MyKey{style}, \MyKey{numberstyle} a \MyKey{textstyle} podle toho, zda chceme ovlivnit celý nadpis, pouze číslování nebo pouze text. Pomocí kterékoli z těchto možností můžeme zahrnout příkazy, které ovlivňují písmo, konkrétně: konkrétní písmo, styl (roman, sans serif nebo ty\-pe\-wri\-ter), alternativu (kurzíva, tučné písmo, šikmé písmo...) a velikost.  Pokud chceme uvést pouze jednu vlastnost stylu, můžeme to udělat buď pomocí názvu stylu (například \quotation{bold} pro tučné písmo), nebo uvedením jeho zkratky (\quotation{bf}), nebo příkazu, který jej generuje (\tex{bf}, v případě tučného písma). Chceme-li označit několik znaků současně, musíme to udělat pomocí příkazů, které je generují, a zapsat je jeden po druhém.  Na druhou stranu mějte na paměti, že pokud označíme pouze jeden rys, ostatní rysy stylu se automaticky vytvoří s výchozími hodnotami dokumentu, a proto se málokdy doporučuje vytvořit pouze jeden rys stylu.
+
+    \item {\bf Barva} se nastavuje pomocí možností \MyKey{color}, \MyKey{numbercolor} a \MyKey{textcolor} podle toho, zda chceme nastavit barvu celého nadpisu, nebo jen barvu číslování či textu.  Zde uvedená barva může být jednou z předdefinovaných barev \ConTeXt{}u nebo jinou barvou, kterou jsme sami definovali a které jsme předtím přiřadili jméno. Nemůžeme zde však přímo použít příkaz pro definici barvy.
+
+\stopitemize
+
+Kromě těchto šesti možností je k dispozici ještě pět dalších možností, které umožňují vytvořit některé sofistikovanější funkce, s nimiž můžeme dělat prakticky cokoli. Jedná se o tyto možnosti: Začněme vysvětlením prvních tří možností: \MyKey{command}, \MyKey{numbercommand}, \MyKey{textcommand}, \MyKey{deepnumbercommand} a \MyKey{deeptextcommand}:
+
+\startitemize
+
+  \item {\tt\bf command} označuje příkaz, který bude mít dva argumenty, číslo a název sekce. Může to být běžný \ConTeXt\ příkaz nebo příkaz, který jsme sami definovali.
+
+  \item {\tt\bf numbercommand} je podobný příkazu \MyKey{command}, ale tento příkaz přijímá pouze argument s číslem sekce.
+
+  \item {\tt\bf textcommand} je také podobný \MyKey{command}, ale přijímá pouze argument s textem názvu.
+
+\stopitemize
+
+Tyto tři možnosti nám umožňují dělat prakticky cokoli, co chceme. Pokud například chci, aby byly oddíly zarovnány doprava, uzavřeny v rámečku a mezi číslem a textem byl zalomení řádku, mohu jednoduše vytvořit příkaz, který to udělá, a pak tento příkaz uvést jako hodnotu příkazu \MyKey{command}. Toho by se dosáhlo pomocí následujících řádků:
+
+\vbox{\starttyping
+\define[2]\AlignSection 
+   {\framed[frame=on, width=broad,align=flushright]{#1\\#2}}
+
+\setuphead 
+[section] 
+[command=\AlignSection]
+\stoptyping}
+
+Pokud současně nastavíme volby \MyKey{command} a \MyKey{style}, použije se příkaz na nadpis i s jeho stylem. To například znamená, že pokud jsme nastavili \MyKey{textstyle=\backslash em} a \MyKey{textcommand=\backslash WORD}, příkaz \tex{WORD} (který text, který bere jako argument, píše velkými písmeny), bude na nadpis aplikován jeho styl, tj.: \cmd{WORD\{\backslash em Title text\}}. Pokud chceme, aby to bylo naopak, tj. že se styl aplikuje na obsah nadpisu po aplikaci příkazu, měli bychom místo možností \MyKey{textcommand} a \MyKey{numbercommand} použít možnosti \MyKey{deeptextcommand} a \MyKey{deepnumbercommand}. To by ve výše uvedeném příkladu vygenerovalo\MyKey{\color[darkmagenta]{\{\backslash em\backslash WORD\{Title
+text\}\}}}.
+
+Ve většině případů by nebyl rozdíl v tom, zda to uděláte tak či onak. V některých případech však může být.
+
+\stopsubsection
+
+\startsubsection 
+[title=Umístění čísla a textu názvu]
+
+Volba \MyKey{alternative} řídí dvě věci současně: umístění číslování vzhledem k textu nadpisu a umístění samotného nadpisu (včetně čísla a textu) vzhledem ke stránce, na které je zobrazen, a obsahu oddílu. Jedná se o dvě různé věci, ale protože se obě řídí stejnou volbou, jsou řízeny současně.
+
+Umístění nadpisu ve vztahu ke stránce a prvnímu odstavci obsahu sekce je řízeno následujícími možnými hodnotami \MyKey{alternative}:
+
+\startitemize
+
+  \item {\tt\bf text:} Název oddílu je integrován s prvním odstavcem jeho obsahu. Efekt je podobný tomu, který se vytváří v \LaTeX{}u pomocí \tex{paragraph} a \tex{subparagraph}.
+
+  \item {\tt\bf odstavec:} Název oddílu bude samostatným odstavcem.
+
+  \item {\tt\bf normal:} Název sekce bude umístěn na výchozí místo, které \ConTeXt\ poskytuje pro daný typ sekce. Obvykle je to \MyKey{paragraph}.
+
+  \item {\tt\bf middle:} Nadpis se píše jako samostatný, vycentrovaný odstavec. Pokud se jedná o číslovaný příkaz, číslo a text jsou odděleny na různých řádcích a oba jsou vycentrovány.
+
+    Podobného efektu jako při použití \MyKey{alternative=middle} se dosáhne při použití volby \MyKey{align}, která řídí zarovnání nadpisů. Může nabývat hodnot \MyKey{left}, \MyKey{middle} nebo \MyKey{flushright}.  Pokud však nadpis pomocí této volby vycentrujeme, číslo a text se zobrazí na stejném řádku.
+
+  \item {\tt\bf margintext:} Tato volba způsobí, že se celý nadpis (číslování a text) vytiskne v prostoru vyhrazeném pro okraj.
+
+\stopitemize
+
+Umístění čísla ve vztahu k textu nadpisu udávají následující možné hodnoty \MyKey{alternative}:
+
+\startitemize
+
+  \item {\tt\bf margin/inmargin:} Název je samostatný odstavec. Číslování se zapisuje do prostoru vyhrazeného pro okraj. Nepřišel jsem na to, jaký je rozdíl mezi použitím \MyKey{margin} a \MyKey{inmargin}.
+
+  \item {\tt\bf reverse:} Nadpis tvoří samostatný odstavec, ale běžné pořadí je obrácené a nejprve je vytištěn text a pak číslo.
+
+  \item {\tt\bf top/bottom:} U nadpisů, jejichž text zabírá více než jeden řádek, tyto dvě volby určují, zda bude číslování zarovnáno s prvním řádkem nadpisu nebo s posledním řádkem.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [title=Příkazy nebo akce, které je třeba provést před nebo po vytištění titulu]
+
+Je možné uvést jeden nebo více příkazů, které se provedou předtím. (možnost \MyKey{before}) nebo po (možnost \MyKey{after}). Tyto volby se hojně používají k vizuálnímu označení nadpisu. \MyKey{before=\backslash blank} přidá prázdné místo.
+Chceme-li přidat ještě více místa, můžeme napsat \MyKey{before=\{\backslash
+blank[3*big]\}}.V tomto případě jsme obklopili hodnotu volby
+kroucenými závorkami, abychom se vyhnuli chybě. Mohli bychom také vizuálně označit
+vzdálenost mezi předchozím a následujícím textem pomocí
+\MyKey{before=\backslash hairline, after=\backslash hairline}, což
+by nakreslil vodorovnou čáru před a za nadpisem.
+
+Velmi podobné volbám \MyKey{before} a \MyKey{after} jsou volby \MyKey{before} a \MyKey{after}.
+\MyKey{commandbefore} a \Conjecture \MyKey{commandafter}.
+Podle mých testů usuzuji, že rozdíl spočívá v tom, že první z nich
+dvě provádějí akce před a po zahájení psaní nadpisu jako
+zatímco druhé dva se vztahují k příkazům, které budou provedeny
+před a po zadání {\em textu nadpisu}.
+
+Pokud chceme před nadpis vložit zlom stránky, musíme použít příkaz
+\MyKey{page}, která umožňuje kromě jiných hodnot i "ano" pro vložení
+zalomení stránky, "vlevo" pro vložení tolika zalomení stránky, kolik je potřeba, aby se
+zajistit, aby nadpis začínal na sudé stránce, "vpravo" pro zajištění toho, aby nadpis
+název začíná na liché stránce, nebo "no", pokud chceme zakázat zalamování stránek.
+nucený zlom stránky. Tato volba naopak pro úrovně nižší než
+\MyKey{chapter}, bude fungovat pouze v případě, že použijeme \MyKey{continue=no},
+jinak nebude fungovat, pokud je oddíl, pododdíl nebo příkaz na adrese
+první stránce kapitoly.
+
+\startSmallPrint
+
+Ve výchozím nastavení začínají kapitoly v \ConTeXt{}u na nové stránce. Pokud je
+ že oddíly začínají také na nové stránce, je problém v tom.
+vzniká problém, co udělat s první sekcí kapitoly, která,
+je třeba na začátku kapitoly: pokud je tato sekce také na začátku kapitoly, je třeba ji zařadit na první stránku.
+začíná stránkový zlom, skončíme se stránkou, která otevírá kapitolu.
+obsahuje pouze název kapitoly, což není příliš estetické.
+Proto můžeme nastavit volbu \MyKey{continue}, název, musím
+říci, že mi není příliš jasný: pokud \MyKey{continue=yes}, bude stránka
+se nebude vztahovat na oddíly, které jsou na první stránce
+kapitoly. Pokud \MyKey{continue=no}, zlom stránky se použije i tak.
+
+\stopSmallPrint
+
+Pokud místo příkazů sekcí použijeme prostředí sekcí (\cmd{start
+...  \backslash stop}), máme k dispozici také volbu \MyKey{insidesection},
+pomocí které můžeme označit jeden nebo více příkazů, které budou provedeny jednou.
+nadpis byl napsán a my jsme již uvnitř sekce. Tato stránka
+nám například umožní zajistit, aby se ihned po zadání příkazu
+začátku kapitoly bude automaticky napsán obsah.
+with (\MyKey{insidesection=\backslash placecontent})
+
+\stopsubsection
+
+\startsubsection
+  [title=Další konfigurovatelné funkce]
+
+Kromě těch, které jsme již viděli, můžeme nakonfigurovat následující funkce
+další funkce pomocí \tex{setuphead}:
+
+\startitemize
+
+\item {\bf Meziřádky}. Ovládá se pomocí \MyKey{interlinespace}, který
+  přebírá jako svou hodnotu název dříve vytvořeného příkazu interlinea
+  pomocí \tex{defineinterlinespace} a nakonfigurovaného příkazem
+  \tex{nastavení meziprostoru}.
+
+  \item {\bf Zarovnání}. Volba \MyKey{align} ovlivňuje zarovnání
+  odstavce obsahujícího nadpis. Mimo jiné může mít hodnotu
+  následující hodnoty: \MyKey{flushleft}. (vlevo), \MyKey{flushright}.
+  (vpravo), \MyKey{middle} (centred), \MyKey{inner} (inner margin) a
+  \MyKey{outer} (outer margin.
+
+  \item {\bf Okraj}. Pomocí možnosti \MyKey{margin} můžeme ručně nastavit.
+  okraj nadpisu.
+
+  \item {\bf Odsazení prvního odstavce}. Hodnota
+  \MyKey{indentnext} (která může být "ano", "ne" nebo "auto") řídí
+  zda první řádek prvního odstavce oddílu bude nebo nebude odsazen.
+  bude odsazen. Zda má být odsazen, nebo ne (v dokumentu
+  kde je první řádek odstavců obecně odsazen) je to otázka
+  otázkou vkusu.
+
+  \item {\bf Šířka}. Ve výchozím nastavení zabírají nadpisy potřebnou šířku
+  pokud tato šířka není větší než šířka řádku, v takovém případě je šířka
+  nadpis zabere více než jeden řádek. Ale s \MyKey{width}
+  můžeme nadpisu přiřadit konkrétní šířku. Příkaz
+  \MyKey{numberwidth} a \MyKey{textwidth} přiřadíme v tomto pořadí
+  šířku číslování nebo šířku textu nadpisu.
+
+  \item {\bf Oddělení čísla a textu}. Příkazy \MyKey{distance}.
+  \MyKey{textdistance} nám umožňují řídit vzdálenost
+  oddělující číslo od jeho textu.
+
+  \item Styl záhlaví a zápatí sekcí. K tomu používáme volbu
+  \MyKey{header} a \MyKey{footer}.
+
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+[title=Další možnosti \tex{setuphead}]
+
+S možnostmi, které jsme již viděli, můžeme vidět, že konfigurace
+jsou možnosti konfigurace nadpisů sekcí téměř neomezené. Nicméně,
+\tex{setuphead} má asi třicet možností, které jsem \Doubt
+jsem nezmínil.  Většinou proto, že jsem nezjistil, k čemu slouží a jak.
+se používají, několik proto, že jejich vysvětlení by mě nutilo jít do podrobností.
+aspekty, kterými se v tomto úvodu nehodlám zabývat.
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:definehead,
+    title=Definice nových příkazů sekcí,
+  ]
+\PlaceMacro{definehead}
+
+Vlastní příkazy sekcí můžeme definovat pomocí \tex{definehead}, jehož
+syntaxe je:
+
+\type{\definehead[CommandName][Model][Configuration]}
+
+kde
+
+\startitemize
+
+  \item {\bf CommandName} představuje název nového příkazu sekce.
+  bude mít.
+
+  \item {\bf Model} představuje název existujícího příkazu sekce, který bude
+  bude použit jako model, z něhož bude nový příkaz zpočátku dědit.
+  všechny jeho vlastnosti.
+
+  \startSmallPrint
+
+    Ve skutečnosti nový příkaz zdědí mnohem více než jen svůj počáteční příkaz
+    vlastnosti od vzoru: stává se jakýmsi přizpůsobeným
+    instancí modelu, ale sdílí s ním například interní příkaz
+    čítač, který řídí číslování.
+
+
+  \stopSmallPrint
+
+  \item {\bf Configuration} is the customised configuration of our new
+  command. Here we can use exactly the same options as in
+  \tex{setuphead}.
+
+\stopitemize
+
+Nový příkaz není nutné konfigurovat v okamžiku jeho zadání.
+vytvoření. To lze provést později pomocí \tex{setuphead} a ve skutečnosti v
+příkladech uvedených v příručkách \ConTeXt\ a na jeho wiki se zdá, že je to
+normální způsob.
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:macrostructure,
+    title=Makrostruktura dokumentu,
+  ]
+
+Kapitoly, oddíly, pododdíly, nadpisy... strukturují dokument; jsou to kapitoly, oddíly, pododdíly, nadpisy...
+organizují jej. Ale spolu se strukturou vyplývající z těchto druhů
+příkazů, v některých tištěných knihách, zejména v těch, které pocházejí z tzv.
+akademické sféry, existuje jakýsi druh {\em macro-ordering} knihy.
+s ohledem nikoli na obsah, ale na funkci, kterou každá z nich plní.
+z těchto velkých částí v knize plní. Tímto způsobem rozlišujeme
+mezi:
+
+\startitemize
+
+  \item Úvodní část dokumentu obsahující titulní stranu,
+  stranu s poděkováním, stranu s věnováním, obsah,
+  případně předmluvu, prezentační stránku atd.
+
+  \item Hlavní část dokumentu, která obsahuje základní informace.
+  text dokumentu, rozdělený do částí, kapitol, oddílů,
+  pododdíly atd. Tato část je obvykle nejrozsáhlejší a
+  důležitá.
+
+  \item Doplňkový materiál tvořený dodatky nebo přílohami, které
+  rozvíjejí nebo ilustrují některé otázky, jimiž se zabývá hlavní část, nebo
+  poskytují dodatečnou dokumentaci, kterou nenapsal autor hlavního textu.
+  hlavní části apod.
+
+  \item Závěrečná část dokumentu, kde můžeme nalézt
+  bibliografii, rejstříky, slovníčky atd.
+
+\stopitemize
+
+Ve zdrojovém souboru můžeme každou z těchto částí ohraničit pomocí příkazu
+prostředí, které vidíme v \in{tabulka}[tbl:macrostructure].
+
+
+{\switchtobodyfont[small]
+\placetable
+  [here]
+  [tbl:macrostructure]
+  {Prostředí, které odráží makrostrukturu dokumentu}
+{\starttabulate[|l|l|]
+\HL
+\NC {\bf Část dokumentu}
+\NC {\bf Příkaz}
+\NR
+\HL
+\NC Počáteční část
+\NC\backslash startfrontmatter [Options] ... \backslash stopfrontmatter
+\NR\PlaceMacro{startfrontmatter}
+\NC Hlavní tělo
+\NC\backslash startbodymatter [Options] ... \backslash stopbodymatter
+\NR\PlaceMacro{startbodymatter}
+\NC Přílohy
+\NC\backslash startappendices \ [Options] ... \backslash stopappendices
+\NR\PlaceMacro{startappendices}
+\NC Závěrečná část
+\NC\backslash startbackmatter [Options] ... \backslash stopbackmatter\PlaceMacro{startbackmatter}
+\NR
+\HL
+\stoptabulate
+}}
+
+Tato čtyři prostředí umožňují stejné čtyři možnosti: \MyKey{page},
+\MyKey{before}, \MyKey{after} a \MyKey{number}, a jejich hodnoty a
+jsou stejné jako v \tex{setuphead} (viz.
+\in{sekce}[sek:setuphead]), i když bychom měli poznamenat, že zde se jedná o
+\MyKey{number=no} zruší číslování všech sekcí.
+příkazů v prostředí.
+
+Zahrnout některou z těchto velkých sekcí do našeho dokumentu má smysl pouze tehdy, když
+pokud mezi nimi chceme vytvořit nějaký druh rozlišení. Snad
+záhlaví nebo číslování stránek ve frontmatteru. Konfigurace každého z těchto
+bloků se provádí pomocí
+\PlaceMacro{setupsectionblock}\tex{setupsectionblock}, jehož syntaxe je:
+
+\type{\setupsectionblock [Block name] [Options]}
+
+kde {\em Název bloku} může být {\tt frontpart}, {\tt bodypart}, {\tt
+dodatek} nebo {\tt zadní část} a volby mohou být stejné jako právě
+zmíněné: \MyKey{page},\MyKey{number}, \MyKey{before} a \MyKey{after}.
+Takže například pro zajištění toho, že v {\em frontmatter} bude
+stránky číslovány římskými čísly, v preambuli našeho dokumentu
+bychom měli napsat:
+
+\starttyping
+\setupsectionblock
+  [frontpart]
+  [
+    before={\setuppagenumbering[conversion=Romannumerals]}
+  ]
+\stoptyping
+
+Výchozí konfigurace \ConTeXt{}u pro tyto čtyři bloky znamená, že:
+
+\startitemize
+
+  \item Tyto čtyři bloky začínají novou stránku.
+
+  \item Číslování sekcí se mění v každém z těchto bloků:
+
+  \startitemize
+
+    \item V {\tt frontmatter} a {\tt backmatter} se ve výchozím nastavení všechny
+    číslované oddíly nečíslovány.
+
+    \item V {\tt bodymatter} mají kapitoly arabské číslování.
+
+    \item V {\tt appendices} jsou kapitoly číslovány velkými písmeny.
+    písmeny.
+
+  \stopitemize
+
+\stopitemize
+
+Je také možné vytvářet nové bloky oddílů pomocí příkazů
+\PlaceMacro{definesectionblock}\tex{definesectionblock}.
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:
+%%% vim:set filetype=context tw=72 : %%%

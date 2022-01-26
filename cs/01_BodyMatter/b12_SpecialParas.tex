@@ -1,8 +1,1335 @@
+%%% File:      b12_SpecialParas.mkiv
+%%% Author:    Joaquín Ataz-López
+%%% Begun:     July 2020
+%%% Concluded: August 2020
+%%% Contents:  This chapter is a big final mishmash. Everything
+%%%            that could not be clearly located elsewhere, is
+%%%            here. I decided on the final structure when
+%%%            I was writing this chapter, since when starting
+%%%            to deal with certain material I became aware
+%%%            that it could be placed elsewhere.
+%%%
+%%% Edited: Emacs + AuTeX - And at times vim + context-plugin
+%%%
+
+\environment ../introCTX_env.mkiv
+
+\startcomponent b12_SpecialParas.mkiv
+
+\startchapter
+  [title={Speciální konstrukce a odstavce}]
+
+\TocChap
+
+\startsection 
+   [title={Poznámky pod čarou a závěrečné poznámky}]
+
+Poznámky jsou \quotation{druhotné textové prvky, které slouží k různým účelům, jako je objasnění nebo rozšíření hlavního textu, uvedení bibliografických odkazů na zdroje včetně citací, odkazů na jiné dokumenty nebo vyjádření smyslu textu}. [{\em Libro de Estilo de la Lengua española} (Příručka španělského jazyka), s. 195]. Jsou důležité zejména v textech akademické povahy. Mohou být umístěny na různých místech stránky nebo dokumentu. Dnes jsou nejrozšířenější ty, které se nacházejí v patě stránky (nazývají se proto poznámky pod čarou); někdy jsou také umístěny na některém z okrajů (poznámky na okraji), na konci každé kapitoly či oddílu nebo na konci dokumentu (poznámky na konci). Ve zvláště složitých dokumentech mohou existovat také různé {\em řady} poznámek: poznámky autora, poznámky překladatele, aktualizace atd. Zejména v kritických edicích může být poznámkový aparát poměrně složitý a jen několik málo systémů pro sazbu je schopno jej podporovat. \ConTeXt\ je jedním z nich. K dispozici je řada příkazů pro vytváření a konfiguraci různých typů poznámek. 
+
+Pro vysvětlení je užitečné začít tím, že poukážeme na různé prvky, které mohou být součástí poznámky:
+
+\startitemize
+
+\item {\em Značka} nebo poznámka {\em Kotva}: Značka umístěná v těle textu, která označuje, že je k němu připojena poznámka. Ne všechny typy poznámek mají přiřazenu {\em kotva}, ale pokud je s nimi spojena, objevuje se tato {\em kotva} na dvou místech: v místě hlavního textu, na který poznámka odkazuje, a na začátku samotného textu poznámky. Přítomnost stejné referenční značky na obou místech umožňuje, aby poznámka byla spojena s hlavním textem.
+
+\item Poznámka {\em ID nebo identifikátor}: Písmeno, číslo nebo symbol, který identifikuje poznámku a odlišuje ji od ostatních poznámek. Některé poznámky, například poznámky na okraji, mohou ID postrádat. Pokud tomu tak není, ID se obvykle shoduje s {\em kotva}.
+
+  \startSmallPrint
+
+    Pokud budeme uvažovat výhradně o poznámkách pod čarou, neuvidíme žádný rozdíl mezi tím, co jsem právě nazval {\em odkazová značka}, a {\em id}. U ostatních druhů poznámek rozdíl jasně vidíme: Například řádkové poznámky mají id, ale nemají referenční značku.      \stopSmallPrint
+
+\item {\em Text} nebo {\em Obsah} poznámky, která se vždy nachází na jiném místě stránky nebo dokumentu než příkaz, který poznámku vytváří a označuje její obsah.
+
+\item {\em Štítek} spojená s poznámkou: Štítek nebo název spojený s poznámkou, který se nezobrazuje ve výsledném dokumentu, ale umožňuje na něj odkazovat a vyhledávat jeho ID na jiném místě dokumentu.
+
+\stopitemize
+
+\startsubsection 
+   [title=Typy poznámek v \ConTeXt\ a příkazy s nimi spojené]
+
+V \ConTeXt{}u máme různé typy poznámek. Prozatím je pouze vyjmenuji, popíši je obecně a uvedu informace o příkazech, které je vytvářejí. Později se budu věnovat prvním dvěma:
+
+\startitemize
+
+\item {\bf Poznámky pod čarou:} Nepochybně nejoblíbenější, a to do té míry, že je běžné, že se všechny typy poznámek označují obecně jako {\em poznámky pod čarou}. Poznámky pod čarou zavádějí značku {\em} s identifikátorem {\em id} poznámky v místě dokumentu, kde se příkaz nachází, a vkládají vlastní text poznámky na konec stránky, kde se značka objevuje. Vytvářejí se příkazem \tex{footnote}.
+
+\item {\bf Koncové poznámky:} Tyto poznámky, které se vytvářejí příkazem \tex{koncová poznámka}, se vkládají na místo v dokumentu, kde se nachází značka s ID poznámky; obsah poznámky se však vkládá na jiné místo v dokumentu a vložení se provádí jiným příkazem (\tex{placenotes}).
+
+\item {\bf Poznámky k okraji:} Jak již název napovídá, píší se na okraj textu a nemají žádné ID ani automaticky generovanou značku či kotvu v těle dokumentu. Dva hlavní příkazy (nikoli však jediné), které je vytvářejí, jsou \tex{inmargin} a \tex{margintext}.
+
+\item {\bf Poznámky k řádku:} Typ poznámky typický pro prostředí, kde jsou řádky číslovány, jako například v případě \tex{startlinenumbering ... \stoplinenumbering} (viz \in{section}[sec:linenumbering]). Poznámka, která je obvykle napsána dole, odkazuje na konkrétní číslo řádku. Generují se příkazem \PlaceMacro{linenote}\tex{linenote}, který se konfiguruje pomocí \PlaceMacro{setuplinenote}\tex{setuplinenote}. Tento příkaz nevytiskne v těle textu žádnou značku {\em}, ale v samotné poznámce vypíše číslo řádku, na který se poznámka vztahuje (používá se jako {\em ID}).
+
+\stopitemize
+
+Nyní se budu věnovat výhradně prvním dvěma typům poznámek:
+
+\startitemize
+
+\item Poznámky k okrajům jsou zpracovány jinde (\in{section}[sec:margintext]).
+
+\item Poznámky k řádkům mají velmi specializované použití (zejména v kritických edicích) a domnívám se, že v úvodním dokumentu, jako je tento, stačí, aby čtenář věděl, že existují.
+
+  \startSmallPrint
+
+    Zájemcům však doporučuji video (ve španělštině) doplněné textem (rovněž ve španělštině) o kritických edicích v \ConTeXt, jehož autorem je Pablo Rodríguez. Je k dispozici na adrese \goto{tento odkaz}[url(http://www.ediciones-criticas.tk/)]. Je také docela užitečný pro pochopení několika obecných nastavení poznámek obecně.
+
+  \stopSmallPrint
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [title=Podrobný pohled na poznámky pod čarou a poznámky na konci] 
+\PlaceMacro{footnote}\PlaceMacro{endnote}
+
+Syntaxe příkazů poznámek pod čarou a poznámek na konci a mechanismy jejich konfigurace a přizpůsobení jsou dosti podobné, protože ve skutečnosti jsou oba typy poznámek zvláštními instancemi obecnější konstrukce (poznámky), jejíž další instance lze nastavit příkazem \tex{definenote} (viz \in{section}[sec:definenote]).
+
+Syntaxe příkazu, který vytvoří každý z těchto typů poznámek, je následující:
+
+\starttyping
+\footnote[Label]{Text}
+\footnote[Label]{Text}
+\stoptyping
+
+kde
+
+\startitemize
+
+\item {\em Label} je nepovinný argument, který poznámce přiřadí štítek, který nám umožní odkazovat na ni jinde v dokumentu.
+
+\item {\em Text} je obsah poznámky. Může být libovolně dlouhý a může obsahovat speciální odstavce a nastavení, i když je třeba poznamenat, že pokud jde o poznámky pod čarou, správné rozložení stránky je v dokumentech s hojnými a příliš dlouhými poznámkami poměrně obtížné.
+
+  \startSmallPrint
+
+    V zásadě lze v textu poznámky použít jakýkoli příkaz, který lze použít v hlavním textu. Podařilo se mi však ověřit, že některé konstrukce a znaky, které v hlavním textu nepředstavují žádný problém, generují chybu při kompilaci, pokud se vyskytují v textu poznámky. Tyto případy jsem zjistil při testování, ale nijak jsem je neuspořádal.
+
+  \stopSmallPrint
+
+\stopitemize
+
+Pokud byl argument {\em Label} použit k nastavení štítku pro poznámku, příkaz \PlaceMacro{note}\tex{note} nám umožní získat ID dané poznámky. Tento příkaz vypíše ID poznámky spojené se štítkem, který přebírá jako argument, v dokumentu. Tedy např:
+
+\startDoubleExample
+\switchtobodyfont[small]
+\setupnotation[footnote][width=-1cm]
+\vbox{\starttyping
+Humpty Dumpty\footnote[humpty]{Pravděpodobně nejznámější postava anglické říkanky} 
+seděla na zdi, Humpty Dumpty\note[humpty] 
+měl velký pád.\\
+Všichni královi koně a všichni královi muži nemohli dát 
+Humptyho\note[humpty] zase dohromady
+\stoptyping}
+
+Humpty Dumpty\footnote[humpty]{pravděpodobně nejznámější anglická postavička z říkanky} seděl na zdi,\\ Humpty Dumpty\note[humpty] měl velký pád.\\
+Všichni královští koně a všichni královští muži\\
+Nemohli dát Humptyho\note[humpty] znovu dohromady.
+
+\stopDoubleExample
+
+Hlavní rozdíl mezi \tex{footnote} a \tex{endnote} je v místě, kde se poznámka objevuje:
+
+\startdescription{\tex{footnote}}
+
+Text poznámky se zpravidla vytiskne v dolní části stránky, na které se příkaz nachází, takže značka poznámky a její text (nebo začátek textu, pokud má být rozložen na dvě stránky) se objeví na stejné stránce. Za tímto účelem \ConTeXt\ provede nezbytné úpravy při sazbě stránky tak, že vypočítá prostor potřebný pro umístění poznámky ve spodní části stránky.
+
+\startSmallPrint
+
+  V některých prostředích však \tex{footnote} vloží text poznámky nikoli na konec stránky, ale pod prostředí. To je například případ tabulek nebo prostředí {\tt columns}. Chceme-li, aby se v těchto případech poznámky uvnitř prostředí nacházely ve spodní části stránky, měli bychom místo příkazu \tex{footnote} použít příkaz \tex{footnote} v kombinaci s výše uvedeným příkazem \tex{footnote}. První z nich, který rovněž podporuje popisek jako nepovinný argument, vytiskne pouze text poznámky, ale nikoli značku. Protože však \tex{note} vytiskne pouze značku bez textu, kombinace obou příkazů nám umožní umístit poznámku na požadované místo. Můžeme tedy například napsat \tex{note[MyLabel]} v rámci tabulky nebo vícesloupcového prostředí, a jakmile se z tohoto prostředí dostaneme, můžeme napsat \type{\footnotetext[MyLabel]{Text poznámky}}.
+
+Dalším příkladem použití \tex{footnotext} v kombinaci s \tex{note} jsou poznámky uvnitř jiných poznámek. Například:
+
+\startDoubleExample
+%\switchtobodyfont[small]
+\setupnotation[footnote][width=-1cm]
+\starttyping
+Tato%
+\footnote{nebo tato\note[noteB], chcete-li.}%
+\footnotetext[noteB]
+{nebo možná i tato\note[noteC].}
+\footnotetext[noteC]{může být něco úplně jiného.}
+je věta s vnořenými poznámkami.
+\stoptyping
+
+Tato%
+\footnote{nebo tato\footnote[noteB], chcete-li.}%
+\footnotetext[noteB]{nebo možná i tato\footnote[noteC].}\footnotetext[noteC]{mohlo by to být něco úplně jiného.} 
+je věta s vnořenými poznámkami.
+
+\stopDoubleExample
+
+\stopSmallPrint
+
+\stopdescription
+
+\startdescription{\tex{endnote}}
+
+  vytiskne pouze kotvu poznámky v místě zdrojového souboru, kde se nachází. Vlastní obsah poznámky se vloží na jiné místo v dokumentu pomocí jiného příkazu (\PlaceMacro{placenotes}\tex{placenotes[endnote]}), který v místě, kde se nachází, vloží obsah {\em všech} poznámek na konci dokumentu (nebo dané kapitoly či oddílu).
+
+\stopdescription
+
+\stopsubsection
+
+\startsubsection 
+[
+ reference=sec:localfootnotes, 
+ title={Místní poznámky}, 
+ ] 
+ \PlaceMacro{startlocalfootnotes}\PlaceMacro{placelocalfootnotes}
+
+Prostředí \tex{startlocalfootnotes} znamená, že poznámky pod čarou v něm obsažené jsou považovány za {\em lokální} poznámky, což znamená, že jejich číslování bude resetováno a že obsah poznámek nebude automaticky vložen spolu s ostatními poznámkami, ale pouze v tom místě dokumentu, kde se nachází příkaz \tex{placelocalfootnotes}, což může, ale nemusí být uvnitř prostředí.
+
+\stopsubsection
+
+\startsubsection 
+[ 
+reference=sec:definenote, 
+title={Vytváření a používání přizpůsobených typů poznámek}, 
+]  
+\PlaceMacro{definenote}
+
+Speciální typy poznámek můžeme vytvořit pomocí příkazu \tex{definenote}. To může být užitečné ve složitých dokumentech, kde jsou poznámky od různých autorů, nebo pro různé účely, abychom graficky odlišili jednotlivé typy poznámek v našem dokumentu pomocí jiného formátu a jiného číslování.
+
+Syntaxe \tex{definenote} je následující:
+
+\type{\definenote[Name][Model][Configuration]}
+
+kde
+
+\startitemize
+
+\item {\em Name} je název, který přiřadíme našemu novému typu poznámky.
+
+\item {\em Model} je model poznámky, který bude použit na začátku. Může to být {\tt footnote} nebo {\tt endnote}; v prvním případě bude náš model poznámky fungovat jako poznámky pod čarou a v druhém případě jako poznámky na konci, ačkoli pro jejich vložení do dokumentu bychom nepoužili \PlaceMacro{placenotes}\tex{placenotes[endnote]}, ale \tex{placenotes[Name]}. (název, který jsme těmto druhům poznámek přiřadili).
 
 
---------------------
-Czech version
---------------------
+  \startSmallPrint
 
-TO BE DONE!
---------------------
+    Teoreticky je tento argument volitelný, i když při mých testech některé poznámky vytvořené bez něj nebyly vidět a neměl jsem trpělivost zjišťovat, co bylo příčinou.
+
+  \stopSmallPrint
+
+\item {\em Konfigurace} je nepovinný druhý argument, který nám umožňuje odlišit náš nový typ poznámek od jeho vzoru: buď nastavením jiného formátu, nebo jiného typu číslování, nebo obojího.
+
+  \startSmallPrint
+
+    Podle oficiálního seznamu příkazů \ConTeXt\ (viz \in{section}[sec:qrc-setup-cs]) jsou nastavení, která lze zadat při vytváření nového typu poznámky, založena na nastaveních, která lze zadat později pomocí \tex{setupnote}. Jak však brzy uvidíme, ve skutečnosti existují dva možné příkazy pro nastavení poznámek: \tex{setupnote} a \cmd{setupnotation}. Proto se domnívám, že je vhodnější tento argument při vytváření typu poznámky vynechat a naše nové poznámky pak nastavit pomocí příslušných příkazů. Alespoň se to lépe vysvětluje.
+
+  \stopSmallPrint
+
+\stopitemize
+
+Například následující položka vytvoří nový typ poznámky s názvem \quotation{Modrá poznámka}, který bude podobný poznámkám pod čarou, ale jeho obsah bude vytištěn tučně a modře:
+
+\starttyping
+\definenote [BlueNote] [footnote]
+\setupnotation 
+[BlueNote] 
+[color=blue, style=bf]
+\stoptyping
+
+Jakmile vytvoříme nový typ poznámky, např. {\em BlueNote}, bude k dispozici příkaz umožňující jeho použití. V našem příkladu to bude \tex{BlueNote}, jehož syntaxe bude podobná jako \tex{footnote}:
+
+\type{\BlueNote[Label]{Text}}
+
+\stopsubsection
+
+\startsubsection 
+   [title=Konfigurace poznámek] 
+   \PlaceMacro{setupnote}\PlaceMacro{setupnotation}
+
+Konfigurace poznámek (poznámky pod čarou nebo poznámky na konci, poznámky vytvořené pomocí \tex{definenote} a také řádkové poznámky vytvořené pomocí \tex{linenote}) se provádí pomocí dvou příkazů: \tex{setupnote} a \tex{setupnotation}\footnote{\tex{setupnote} má 35 {přímých} konfiguračních možností a 45 dalších možností zděděných z \tex{setupframed}; \tex{setupnotation} má 45 přímých konfiguračních možností a dalších 23 zděděných z \PlaceMacro{setupcounter}\tex{setupcounter}. Protože tyto volby nejsou zdokumentovány, a přestože u mnoha z nich můžeme jejich užitečnost zjistit z jejich názvu, musíme si ověřit, zda je naše intuice pravdivá, či nikoli; a také s ohledem na to, že mnohé z těchto voleb umožňují řadu hodnot a všechny je třeba otestovat... Uvidíte, že pro napsání tohoto výkladu jsem musel provést poměrně velké množství testů; a přestože provedení jednoho testu je rychlé, provedení mnoha testů je pomalé a nudné. Proto doufám, že mi čtenář promine, když vám řeknu, že kromě dvou obecných konfiguračních příkazů pro poznámky, které uvádím v hlavním textu a na které se v následujícím výkladu zaměřím, vynechám ve výkladu další čtyři potenciální možnosti konfigurace:
+
+
+  \startitemize
+
+  \item \PlaceMacro{setupnotes}\tex{setupnotes} a \PlaceMacro{setupnotations}\tex{setupnotations}: Jinými slovy, stejný název, ale v množném čísle. Na wiki se píše, že jednotné a množné číslo příkazu jsou synonyma, a já tomu věřím.
+
+  \item \PlaceMacro{setupfootnotes}\tex{setupfootnotes} a \PlaceMacro{setupendnotes}\tex{setupendnotes}: Předpokládáme, že se jedná o specifické aplikace pro poznámky pod čarou a poznámky na konci. Možná by však bylo jednodušší vysvětlit konfiguraci poznámek na základě těchto příkazů, protože se mi nepodařilo zprovoznit první možnost ({\tt numberconversion}), kterou jsem zkoušel pomocí \tex{setupfootnotes}, ačkoli vím, že ostatní možnosti těchto příkazů fungují... Byl jsem příliš líný na to, abych k mnoha testům, které jsem už musel udělat, abych mohl napsat to, co následuje, přidal testy potřebné k zahrnutí těchto dvou příkazů do vysvětlení.\blank[small]
+
+   Jsem však toho názoru (na základě několika náhodných testů, které jsem provedl), že vše, co funguje v těchto dvou příkazech, ale jejichž vysvětlení vynechávám, funguje i v příkazech, u kterých vysvětlení uvádím.
+
+  \stopitemize}. Syntaxe obou je podobná:
+
+\starttyping
+\setupnote[NoteType][Configuration]
+\setupnotation[NoteType][Configuration]
+\stoptyping
+
+kde {\em NoteType} odkazuje na druh poznámky, kterou konfigurujeme ({\tt footnote}, {\tt endnote} nebo název nějakého typu poznámky, který jsme sami vytvořili), a {\em konfigurace} obsahuje konkrétní konfigurační možnosti příkazu.
+
+Problémem je, že z názvů těchto dvou příkazů není příliš jasné, jaký je mezi nimi rozdíl a co který z nich konfiguruje; příliš nepomáhá ani skutečnost, že mnoho možností těchto příkazů není zdokumentováno. Po dlouhém zkoušení jsem nebyl schopen dospět k žádnému závěru, který by mi umožnil pochopit, proč se některé věci konfigurují pomocí jednoho, zatímco jiné pomocí druhého,\footnote{Je zde stránka \goto{ \ConTeXt\ wiki} [url(https://wiki.contextgarden.net/Unexpected\_behavior)] kterou jsem objevil (není věnována přímo poznámkám), která naznačuje změnu v \tex{setupnotation} ovládání textových poznámek, dle jejich vložení, a \tex{setupnote} prostředí poznámek dle toho, kam budou vloženy (?) To však neodpovídá skutečnosti, že například šířka textu poznámky (která souvisí s jejím {\em insertion}) je řízena volbou {\tt width} v \tex{setupnote} a nikoli stejnojmennou volbou \tex{setupnotation}. To, co je zde řízeno, je šířka mezery mezi značkou a textem poznámky.} Snad s výjimkou toho, že kvůli volbám, které jsem provedl, aby to fungovalo, \tex{setupnotation} vždy ovlivňuje text poznámky nebo ID, které je vytištěno s textem poznámky, zatímco \tex{setupnote} má některé volby, které ovlivňují značku pro poznámku vloženou do hlavního textu.
+
+Nyní se pokusím uspořádat to, co jsem zjistil po provedení několika testů s různými možnostmi obou příkazů. Většinu voleb obou příkazů ponechám stranou, protože nejsou zdokumentovány a nemohl jsem vyvodit žádné závěry o tom, k čemu slouží a za jakých podmínek by se měly používat:
+\startitemize
+
+\starthead {\bf ID použité pro značku:} Poznámky jsou vždy označeny číslem. Zde můžeme nastavit následující: \stophead
+
+  \startitemize
+
+  \item {\em První číslo}: řídí se podle {\tt start} v \tex{setupnotation}. Jeho hodnota musí být celé číslo a používá se k zahájení počítání not.
+
+  \item {\em Systém číslování}, který závisí na volbě {\tt numberconversion} v \tex{setupnotation}. Jeho hodnoty mohou být:
+
+  \startitemize[packed]
+
+  \item {\em Arabské číslice}: {\tt n, N} nebo {\tt čísla}.
+
+  \item {\em Římské číslice}: {\tt I, R, římské číslice, i, r, římské číslice}. První tři jsou velká písmena římských číslic a poslední tři malá písmena.
+
+  \item {\em Číslování písmeny}: {\tt A, Znak, Znaky, a, znak, znaky} v závislosti na tom, zda chceme, aby písmena byla velká (první tři možnosti) nebo malá (ostatní).
+
+  \item {\em Číslování slovy}. Jinými slovy, napíšeme slovo, které označuje číslo, a tak se například z \quote{3} stane \quote{3}. Jsou možné dva způsoby. Volba {\tt Words} zapisuje slova velkými písmeny a {\tt words} malými písmeny.
+
+  \item {\em Číslování pomocí symbolů}: v závislosti na zvolené možnosti můžeme použít čtyři různé sady symbolů: {\tt set~0, set~1, set~2} o {\tt set~3}. Na stránce \at{page}[příklady konverzní sady] je příklad symbolů použitých v každé z těchto možností.
+
+  \stopitemize
+
+\item {\em Událost, která určuje opětovné spuštění číslování not}: To závisí na volbě {\tt way} v \tex{setupnotation}. Pokud je hodnota {\tt bytext}, budou všechny poznámky v dokumentu číslovány postupně bez obnovení číslování. Při hodnotě {\tt byapter, bysection, bysubsection atd.} se počítadlo poznámek vynuluje při každé změně kapitoly, sekce nebo podsekce, zatímco při hodnotě {\tt byblock} se číslování vynuluje při každé změně bloků v makrostruktuře dokumentu (viz \in{section}[sec:macrostructure]). Hodnota {\tt bypage} způsobí, že se počítadlo poznámek restartuje při každé změně stránky.
+
+  \stopitemize
+
+\starthead {\bf Nastavení značky poznámky:} \stophead
+
+  \startitemize
+
+  \item Zda se má zobrazit, nebo ne: {\tt number} možnost v \tex{setupnotation}.
+
+  \item Umístění značky ve vztahu k textu poznámky: {\tt alternative} v \tex{setupnotation}: může nabývat některé z následujících hodnot: {\tt left, inleft, leftmargin, right, inright, rightmargin, inmargin, margin, innermargin, outermargin, serried, hanging, top, command}.
+
+  \item Formát značky v samotné poznámce: {\tt numbercommand} v \tex{setupnotation}.      
+  
+  \item Formát značky v těle textu: Formát textu: {\tt textcommand} v \tex{setupnote}.
+
+    \startSmallPrint Volby {\tt numbercommand} a {\tt textcommand} se musí skládat z příkazu, který přebírá obsah značky jako argument. Může se jednat o příkaz, který si definujete sami. Zjistil jsem však, že fungují i jednoduché formátovací příkazy (\tex{bf}, \tex{it} atd.), ačkoli se nejedná o příkazy, které by musely přijímat argument.
+
+\stopSmallPrint
+
+  \item Vzdálenost mezi značkou a textem (v samotné poznámce): Možnosti {\tt distance} a {\tt width} v položce \tex{setupnotation}. Nepodařilo se mi zjistit, jaký je rozdíl (pokud vůbec nějaký je) mezi použitím jedné nebo druhé možnosti.
+
+  \item Existence nebo neexistence hypertextového odkazu umožňujícího přechod mezi značkou v hlavním textu a značkou v poznámce: Možnost {\tt interaction} v \tex{setupnote}. Při hodnotě {\tt yes} bude odkaz existovat, při hodnotě {\tt no} nebude.
+
+  \stopitemize
+
+\starthead {\bf Konfigurace samotného textu poznámky.} \stophead Můžeme ovlivnit následující aspekty:
+
+  \startitemize
+
+  \item umístění položky: závisí na volbě {\tt location} v \tex{setupnote}. 
+
+    \startSmallPrint V zásadě již víme, že poznámky pod čarou se umísťují na konec stránky ({\tt location=page}) a poznámky na konci stránky v místě, kde se nachází \tex{placenotes[endnote]}. ({\tt location=text}), můžeme však tuto funkci upravit a nastavit poznámky pod čarou například jako {\tt location=text}, což způsobí, že poznámky pod čarou budou fungovat podobně jako poznámky na konci, takže se objeví v tom místě dokumentu, kde se nachází příkaz \tex{placenotes[footnote]} nebo příkaz specifický pro poznámky pod čarou \tex{placefootnotes}. Tímto postupem bychom mohli například vytisknout poznámky pod odstavcem, ve kterém se nacházejí.
+
+    \stopSmallPrint
+
+  \item Oddělení odstavců mezi poznámkami: ve výchozím nastavení je každá poznámka vytištěna ve vlastním odstavci, ale můžeme nechat všechny poznámky na stejné stránce vytisknout v jednom odstavci nastavením volby {\tt paragraph} v \tex{setupnote} na \MyKey{yes}. 
+
+  \item Styl, ve kterém bude zapsán samotný text poznámky: volba {\tt style} v \tex{setupnotation}.
+
+  \item Velikost písmen: volba {\tt bodyfont} v \tex{setupnote}.
+
+     \startSmallPrint
+
+      Tato možnost je určena pouze pro případ, kdy chceme ručně nastavit velikost písma pro poznámky pod čarou. Téměř nikdy není dobré to dělat, protože ve výchozím nastavení \ConTeXt\ nastaví velikost písma v poznámkách pod čarou tak, aby bylo menší než hlavní text, ale s velikostí {\em která je úměrná} velikosti písma v hlavním textu.
+
+    \stopSmallPrint
+
+  \item Levý okraj textu poznámky: volba {\tt margin} v \tex{setupnotation}.
+
+  \item Maximální šířka: možnost {\tt width} v \tex{setupnote}.
+
+  \item Počet sloupců: volba {\tt n} v \tex{setupnote} určuje, zda bude text poznámky ve dvou nebo více sloupcích. Hodnota \quote{n} musí být celé číslo.
+
+  \stopitemize
+
+\item {\bf Mezera mezi poznámkami nebo mezi poznámkami a textem:} zde máme následující možnosti:
+
+  \startitemize
+
+  \item {\tt rule} v \tex{setupnote} určuje, zda mezi oblastí poznámky a oblastí stránky s hlavním textem bude nebo nebude umístěna čára (pravidlo). Jeho možné hodnoty jsou {\tt yes, on, no} a {\tt off}. První dvě hodnoty pravidlo zapínají a poslední ho vypínají.
+
+  \item {\tt before}, in \tex{setupnotation}: příkaz nebo příkazy, které se spustí před vložením textu poznámky. Slouží k vložení dalších mezer, dělících čar mezi poznámky atd.
+
+  \item {\tt after}, in \tex{setupnotation}: příkaz nebo příkazy, které se spustí po vložení textu poznámky.
+
+\stopitemize
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection [title={Dočasné vyloučení poznámek při kompilaci}] 
+\PlaceMacro{notesenabledfalse}\PlaceMacro{notesenabledtrue}
+
+Příkazy \tex{notesenabledfalse} a \tex{notesenabledtrue} říkají \ConTeXt\, aby povolil, resp. zakázal kompilaci poznámek. Tato funkce může být užitečná, pokud si přejeme získat verzi bez poznámek v případě, že dokument obsahuje četné a rozsáhlé poznámky. Z mé osobní zkušenosti například v případě, že opravuji doktorskou práci, dávám přednost tomu, abych si ji přečetl poprvé najednou, bez poznámek, a poté provedl druhé čtení se zapracovanými poznámkami.
+
+\stopsubsection
+
+\stopsection
+
+\startsection 
+[ 
+reference=sec:multiplecolumns, 
+title={Odstavce s více sloupci},
+ ]
+
+Vytipování textu ve více než jednom sloupci je možnost, kterou lze zavést:
+
+\startitemize[a]
+
+\item Jako obecná vlastnost rozvržení stránky.
+
+\item Jako vlastnost některých konstrukcí, například strukturovaných seznamů nebo poznámek pod čarou či poznámek na konci textu.
+
+\item Jako funkce aplikovaná na určité odstavce v dokumentu.  
+
+\stopitemize 
+
+V každém z těchto případů bude většina příkazů a prostředí fungovat bez problémů, i když pracujeme s více než jedním sloupcem. Existují však určitá omezení; především ve vztahu k plovoucím objektům obecně (viz \in{section}[sec:floating objects]) a zejména k tabulkám (\in{section}[sec:tables]), i když nejsou plovoucí.
+
+Pokud jde o počet povolených sloupců, \ConTeXt\ nemá žádné teoretické omezení. Existují však fyzikální limity, které je třeba vzít v úvahu:
+
+\startitemize
+
+\item Šířka papíru: neomezený počet sloupců vyžaduje neomezenou šířku papíru (pokud má být dokument vytištěn) nebo obrazovky (pokud se jedná o dokument určený k zobrazení na obrazovce). V praxi, s ohledem na {\em normální} šířku papírů, které se prodávají a používají pro tvorbu knih, a obrazovek počítačových zařízení, je obtížné, aby se text složený z více než čtyř nebo pěti sloupců dobře vešel.
+
+\item Velikost paměti počítače: referenční příručka \ConTeXt\ uvádí, že v {\em normálních} systémech (ani zvlášť výkonných, ani zvlášť omezených ve zdrojích) lze zpracovat 20 až 40 sloupců.
+
+\stopitemize
+
+V této části se zaměřím na použití vícesloupcového mechanismu ve speciálních odstavcích nebo fragmentech, protože
+
+\startitemize
+
+\item Více sloupců jako možnost rozvržení stránky již bylo diskutováno (v \in{subsection}[sec:pages-columns] sekce \in{section}[sec:pages-other-matters]).
+
+\item Možnosti, které nabízejí některé konstrukce, jako jsou strukturované seznamy nebo poznámky pod čarou, sazba textu ve více než jednom sloupci, jsou diskutovány ve vztahu k dané konstrukci nebo prostředí.
+
+\stopitemize
+
+\stopcolumns
+
+\startsubsection 
+[title={Prostředí \tex{startcolumns}}] 
+\PlaceMacro{startcolumns}
+
+Obvyklý postup pro vkládání fragmentů složených z několika sloupců do dokumentu je použití prostředí {\tt columns}, jehož formát je:
+
+\type{\startcolumns[Configuration] ... \stopcolumns}
+
+kde {\em Konfigurace} nám umožňuje ovládat mnoho aspektů prostředí. Požadovanou konfiguraci můžeme uvést při každém volání prostředí, nebo přizpůsobit výchozí fungování prostředí pro všechna volání prostředí, čehož dosáhneme pomocí příkazu 
+
+\PlaceMacro{setupcolumns}\type{\setupcolumns[Configuration]}
+
+V obou případech jsou možnosti konfigurace stejné. Nejdůležitější z nich, seřazené podle funkce, jsou následující:
+
+\startitemize
+
+\item {\bf Možnosti, které určují počet sloupců a mezeru mezi nimi:}
+
+  \startitemize \item {\tt n}: řídí počet sloupců. Pokud je tento parametr vynechán, budou vygenerovány dva sloupce.
+
+  \item {\tt nleft, nright}: tyto volby se používají při oboustranném rozvržení dokumentu (viz \in{subsection}[sec:double-sided] of \in{section}[sec:pages-other-matters]) pro určení počtu sloupců na levé (sudé), resp. pravé (liché) stránce.
+
+  \item {\tt distance}: mezera mezi sloupci.
+
+  \item {\tt separator}: určuje, co bude oddělovat sloupce. Může to být {\tt mezera} (výchozí hodnota) nebo {\tt pravidlo}, v takovém případě bude mezi sloupci vytvořena čára (pravidlo). V případě, že je mezi sloupci vytvořeno pravidlo, lze toto pravidlo zase nakonfigurovat pomocí následujících dvou možností:
+
+    \startitemize \item {\tt rulecolor}: barva řádku.
+
+    \item {\tt rulethickness}: tloušťka čáry.
+
+    \stopitemize
+
+  \item {\tt maxwidth}: maximální šířka sloupců + mezera mezi nimi.
+
+  \stopitemize
+
+\item {\bf Možnosti, které řídí rozložení textu ve sloupcích:}
+
+  \startitemize
+
+  \item {\tt balance}: ve výchozím nastavení \ConTeXt\ {\em balances} rozdělí text mezi sloupce tak, aby měly víceméně stejné množství textu. Tuto volbu však můžeme nastavit pomocí příkazu \quotation{{\tt no}} text nezačne ve sloupci, dokud nebude předchozí sloupec zaplněn.
+
+  \item {\tt direction}: určuje, jakým směrem se text rozdělí mezi sloupce. Ve výchozím nastavení je dodrženo přirozené pořadí čtení (zleva doprava), ale při zadání této volby s hodnotou {\tt reverse} je výsledkem pořadí zprava doleva.
+
+  \stopitemize 
+  
+  \starthead {\bf Možnosti ovlivňující sazbu textu v prostředí:} \stophead
+
+  \startitemize
+
+    \item {\tt tolerance}: text napsaný ve více než jednom sloupci znamená, že šířka řádku v rámci sloupce je menší, a jak bylo vysvětleno při popisu mechanismu, který \ConTeXt\ používá pro konstrukci řádků (\in{section}[sec:lines]), to ztěžuje nalezení optimálních bodů pro vkládání zlomů řádků. Tato volba nám umožňuje dočasně změnit vodorovnou toleranci v prostředí (viz \in{section}[sec:horizontaltolerance]), aby se usnadnila sazba textu.
+
+    \item {\tt align}: řídí horizontální zarovnání řádků v prostředí. Může nabývat některé z následujících hodnot: {\tt right, flushright, left, flushleft, inner, flushinner, outer, flushouter, middle} nebo {\tt broad}. Význam těchto voleb viz \in{section}[sec:setupalign].
+
+    \item {\tt color}: určuje název barvy, ve které bude text v prostředí napsán.
+
+  \stopitemize
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection [title={Paralelní odstavce}] 
+\PlaceMacro{definineparagraphs}\PlaceMacro{setupparagraphs}
+
+Specifickou verzí vícesloupcové kompozice jsou paralelní odstavce.  V tomto typu konstrukce je text rozdělen do dvou sloupců (obvykle, i když někdy i více než dvou), ale není mu dovoleno mezi nimi volně plynout, místo toho je zachována přísná kontrola nad tím, co se v jednotlivých sloupcích objeví. To je velmi užitečné například při tvorbě dokumentů, které kontrastují dvě verze textu, jako je nová a stará verze nedávno novelizovaného zákona, nebo ve dvojjazyčných vydáních; nebo také při psaní glosářů pro specifické definice textu, kde se text, který má být definován, objevuje vlevo a definice vpravo apod.
+
+Normálně bychom pro zpracování těchto typů odstavců použili mechanismus tabulek, ale je to proto, že většina textových procesorů není tak výkonná jako \ConTeXt\, který má příkazy \tex{defineparagraphs} a \tex{setupparagraphs}, které vytvářejí tento typ odstavců pomocí mechanismu sloupců, který je sice omezený, ale flexibilnější než mechanismus tabulek.
+
+\startSmallPrint
+
+  Pokud vím, tyto paragrafy nemají žádný zvláštní název. Nazval jsem je \quotation{parallel paragraphs}, protože mi to připadá jako popisnější termín než ten, který pro ně používá \ConTeXt{}: \quotation{{\em paragraphs}}.
+
+\stopSmallPrint
+
+Základním příkazem je zde \tex{defineparagraphs}, jehož syntaxe je:
+
+\typ{\definičníodstavce[Název][Configuration]}
+
+kde {\em Název} je název, který této konstrukci dáme, a {\em Konfigurace} jsou vlastnosti, které bude mít, a které lze také později nastavit příkazem
+
+\typ{\setupparagraphs[Name][Column][Configuration]}
+
+kde {\em Název} je název zadaný při vytváření, {\em Sloupec} je nepovinný argument umožňující konfigurovat konkrétní sloupec a {\em Konfigurace} nám umožňuje určit, jak bude fungovat v praxi.
+
+Například:
+
+\starttyping
+\definineparagraphs 
+[MurciaFacts] 
+[n=3, before={\blank},after={\blank}]
+
+\setupparagraphs 
+[MurciaFacts][1] 
+[width=.1\textwidth, style=bold]
+
+\setupparagraphs 
+[MurciaFacts][2] 
+[width=.4\textwidth]
+\stoptyping
+
+Výše uvedený fragment by vytvořil třísloupcové prostředí s názvem MurciaFacts a poté by nastavil, aby první sloupec zabíral 10 procent šířky řádku a byl napsán tučně, a druhý sloupec by zabíral 40 procent šířky řádku. Protože třetí sloupec není nastaven, bude mít zbývající šířku, tj. 50 \%.
+
+Po vytvoření prostředí můžeme na jeho základě napsat stručnou historii Murcie:
+
+\vbox{\starttyping 
+  \startMurciaFacts 
+     825 
+     \MurciaFacts 
+     Město Murcia založeno.  
+     \MurciaFacts Původ města Murcia je nejistý, ale existují důkazy, že jej pod názvem Madina (nebo Medina) Mursiya nechal založit v roce 825 emír al-Andalus Abderramán II., pravděpodobně na místě mnohem staršího osídlení.  \stopMurciaFacts
+     \stoptyping}
+
+\defineparagraphs
+[MurciaFacts] 
+[n=3, before={\blank},after={\blank}]
+
+\setupparagraphs 
+[MurciaFacts][1] 
+[width=.1\textwidth, style=bold]
+
+\setupparagraphs 
+[MurciaFacts][2] 
+[width=.4\textwidth]
+
+\example{\startMurciaFacts 
+825 
+\MurciaFacts 
+Město Murcia založeno. 
+ \MurciaFacts Původ města Murcia je nejistý, ale existují důkazy, že jej pod názvem Madina (nebo Medina) Mursiya nechal založit v roce 825 emír al-Andalus Abderramán II., a to pravděpodobně na místě mnohem starší osady.  
+ \stopMurciaFacts}
+
+Pokud bychom chtěli pokračovat ve vyprávění příběhu o Murcii, byla by pro další událost nutná nová instance prostředí (\tex{startMurciaFacts}), protože tímto mechanismem nelze zahrnout několik {\em řádků}. 
+
+Na základě právě uvedeného příkladu bych rád zdůraznil následující podrobnosti:
+
+\startitemize
+
+\item Jakmile je prostředí vytvořeno například pomocí \\ \tex{defineparagraphs[MaryPoppins]}, stane se z něj normální prostředí, které začíná \tex{startMaryPoppins} a končí \tex{stopMaryPoppins}.
+
+\item Vytvoří se také příkaz \tex{MaryPoppins}, který se v prostředí používá k určení okamžiku změny sloupce.
+
+\stopitemize
+
+Pokud jde o možnosti konfigurace paralelních odstavců (\tex{setupparagraphs}), chápu, že v této fázi úvodu a s ohledem na právě uvedený příklad je čtenář již připraven zjistit účel jednotlivých možností, takže níže uvedu pouze název a typ možností a případně jejich možné hodnoty. Nezapomeňte však, že \tex{setupparagraphs [Name] [Configuration]} nastavuje konfigurace, které ovlivňují celé prostředí, zatímco \tex{setupparagraphs [Name] [NumColumn] [Configuration]} aplikuje konfigurace výhradně na uvedený sloupec.
+
+\startitemize[columns, three, packed]\switchtobodyfont[small]
+
+\item {\tt n}: Číslo
+
+\item {\tt before}: Příkaz
+
+\item {\tt after}: Příkaz
+
+\item {\tt width}: Rozměr
+
+\item {\tt distance}: Rozměr
+
+\item {\tt align}: Odvozeno od \tex{setupalign}
+
+\item {\tt inner}: Příkaz
+
+\item {\tt rule}: zapnuto vypnuto
+
+\item {\tt rulethickness}: Rozměr
+
+\item {\tt rulecolor}: barva pravidla
+
+\item {\tt style}: Styl Příkaz
+
+\item {\tt color}: Barva
+
+\stopitemize
+
+\startSmallPrint
+
+  Výše uvedený seznam možností není úplný; vyloučil jsem z něj ty, které bych zde normálně nevysvětloval. Využil jsem také toho, že se nacházíme v části věnované sloupcům, abych zobrazil seznam možností v trojicích sloupců, i když jsem to neudělal pomocí žádného z příkazů vysvětlených v této části, ale pomocí volby {\tt columns} v prostředí {\tt itemize}, kterému je věnována následující část.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\stopsection
+
+\startsection 
+[ 
+reference=sec:itemize, 
+title={Strukturované seznamy}, 
+]
+
+Pokud jsou informace prezentovány uspořádaně, jsou pro čtenáře snáze uchopitelné. Pokud je však uspořádání vnímatelné i vizuálně, zvýrazní to pro čtenáře skutečnost, že zde máme strukturovaný text. Proto existují určité {\em konstrukce} nebo {\em mechanismy}, které se snaží zdůraznit vizuální uspořádání textu, a tím přispívají k jeho strukturovanosti. Z nástrojů, které \ConTeXt\ k tomuto účelu autorovi zpřístupňuje, je nejdůležitějším nástrojem, který je předmětem této části, prostředí {\tt itemize}, které slouží k vytváření toho, co bychom mohli nazvat {\em strukturované seznamy}.
+
+Seznamy se skládají z posloupnosti {\em textových prvků} (které budu nazývat {\em elementy}), přičemž každému z nich předchází znak, který jej pomáhá zvýraznit a odlišit od ostatních a který budu nazývat \quotation{separator}. Oddělovačem může být číslo, písmeno nebo symbol. Obvykle (ale ne vždy) jsou {\em položky} odstavce a seznam je formátován tak, aby byla zajištěna {\em viditelnost} oddělovače pro každý prvek; obvykle se použije závěsná odrážka, která jej zvýrazní \footnote{V typografii se odrážka, která se vztahuje na všechny řádky odstavce kromě prvního, nazývá {\em závěsná odrážka}, což usnadňuje nalezení prvního slova nebo znaku odstavce.}. V případě vnořených seznamů se odsazení každého z nich postupně zvětšuje. Jazyk HTML obvykle nazývá seznamy, kde je oddělovačem číslo nebo znak, který se postupně zvětšuje, {\em uspořádané seznamy}, což znamená, že každý {\em prvek} seznamu bude mít jiný oddělovač, který nám umožní odkazovat na každý prvek podle jeho čísla nebo identifikátoru; a dává název {\em neuspořádané seznamy}, kde je pro každý prvek seznamu použit stejný znak nebo symbol.
+
+\ConTeXt\ automaticky řídí číslování nebo abecední řazení oddělovače v číslovaných seznamech, stejně jako odsazení, které musí mít vnořené seznamy; a v případě vnořených neuspořádaných seznamů se také stará o výběr jiného znaku nebo symbolu, který umožňuje na první pohled rozlišit úroveň {\em položky} v seznamu podle symbolu, který mu předchází.
+
+\startSmallPrint
+
+  V referenční příručce se uvádí, že maximální úroveň vnoření v seznamech je 4, ale předpokládám, že to platilo v roce 2013, kdy byla příručka napsána. Podle mých testů se zdá, že vnořování seznamů {\em uspořádaných} není nijak omezeno (v mých testech jsem dosáhl až 15 úrovní vnoření). Zatímco pro neuspořádané seznamy se zdá, že také neexistuje omezení v tom smyslu, že bez ohledu na to, kolik vnoření zahrneme, nebude vygenerována žádná chyba; ale pro neuspořádané seznamy \ConTeXt\ použije výchozí symboly pouze pro prvních devět úrovní vnoření. 
+
+  V každém případě je třeba zdůraznit, že nadměrné používání vnořování v seznamech může mít opačný účinek, než jaký zamýšlíme, a to ten, že se čtenář cítí ztracen a není schopen najít jednotlivé položky v celkové struktuře seznamu. Z tohoto důvodu se osobně domnívám, že ačkoli jsou seznamy mocným nástrojem pro strukturování textu, téměř nikdy není dobré překračovat třetí úroveň vnoření; a i třetí úroveň bychom měli používat jen v určitých případech, kdy to dokážeme zdůvodnit.  \stopSmallPrint
+
+Obecným nástrojem pro psaní seznamů v \ConTeXt\ je prostředí \tex{itemize}, jehož syntaxe je následující:
+
+\PlaceMacro{startitemize}\type{\startitemize[Options][Configuration] ... \stopitemize}
+
+kde oba argumenty jsou nepovinné. První z nich umožňuje používat symbolické názvy jako obsah, kterému \ConTeXt přiřadil přesný význam; druhý argument, který se používá jen zřídka, umožňuje přiřadit určité hodnoty určitým proměnným, které ovlivňují fungování prostředí.
+
+\startsubsection 
+[ 
+reference=sec:itemize_select-list-type, 
+title={Výběr druhu seznamu a oddělovače mezi {\em položkami}},
+ ]
+
+\startsubsection 
+[title={Uspořádané seznamy}]
+
+Ve výchozím nastavení je seznam vytvořený pomocí {\tt itemize} neuspořádaný seznam, ve kterém se automaticky vybere oddělovač v závislosti na úrovni vnoření:
+
+\startitemize[packed, columns, two]\switchtobodyfont[small]
+
+\sym{\convertnumber{set 0}{1}} Pro první úroveň vnoření.
+
+\sym{\convertnumber{set 0}{2}} Pro druhou úroveň vnoření.
+
+\sym{\convertnumber{set 0}{3}} Pro třetí úroveň vnoření.
+
+\sym{\convertnumber{set 0}{4}} Pro čtvrtou úroveň vnoření.
+
+\sym{\convertnumber{set 0}{5}} Pro pátou úroveň vnoření.
+
+\sym{\convertnumber{set 0}{6}} Pro šestou úroveň vnoření.
+
+\sym{\convertnumber{set 0}{7}} Pro sedmou úroveň vnoření.
+
+\sym{\convertnumber{set 0}{8}} Pro osmou úroveň vnoření.
+
+\sym{\convertnumber{set 0}{9}} Pro devátou úroveň vnoření.
+
+\stopitemize
+
+Můžeme však výslovně uvést, že chceme použít symbol spojený s určitou úrovní, a to jednoduše předáním čísla úrovně jako argumentu. Příkaz \tex{startitemize[4]} tedy vygeneruje neuspořádaný seznam, ve kterém bude jako oddělovač použit znak \triangleright\, bez ohledu na úroveň vnoření seznamu.
+
+Předem určený symbol pro každou úroveň můžeme také upravit pomocí \PlaceMacro{definesymbol}\tex{definesymbol}:
+
+\type{\definesymbol[Level]{Symbol spojený s úrovní}}
+
+Například
+
+\type{\definesymbol[1][\diamond]}
+
+způsobí, že první úroveň neuspořádaných seznamů bude používat symbol \diamond\,. Stejným příkazem můžeme přiřadit některé symboly vyšším úrovním vnoření než devět. Tedy např.
+
+\type{\definesymbol[10][\copyright]}
+
+přiřadí mezinárodní symbol {\em copyright}: \copyright\, na úroveň vnoření 10.
+
+\stopsubsubsection
+
+\startsubsubsection
+ [title=Souřadné seznamy]
+
+Pro vytvoření uspořádaného seznamu musíme zadat {\tt itemize} druh uspořádání, které chceme. Může to být:
+
+\startitemize[intro, packed, 2*broad, columns, three]
+\switchtobodyfont[small]
+
+\sym{{\bf n}} 1, 2, 3, 4, ...
+
+\sym{{\bf m}} {\switchtobodyfont[antykwa]1, 2, 3, 4, ...}
+
+\sym{{\bf g}} \alpha, \beta, \gamma, \delta, ...
+
+\sym{{\bf G}} \Alpha, \Beta, \Gamma, \Delta, ...
+
+\sym{{\bf a}} a, b, c, d, ...
+
+\sym{{\bf A}} A, B, C, D, ...
+
+\sym{{\bf KA}} \cap{a, b, c, d, ...}
+
+\sym{}
+
+\sym{{\bf r}} i, ii, iii, iv, ...
+
+\sym{{\bf R}} I, II, III, IV, ...
+
+\sym{{\bf KR}} \cap{i, ii, iii, iv, ...}
+
+\stopitemize
+
+Rozdíl mezi {\tt n} a {\tt m} spočívá v písmu použitém pro znázornění čísla: {\tt n} používá písmo, které je v daném okamžiku povoleno, zatímco {\tt m} používá jiné, elegantnější, téměř kaligrafické písmo.
+
+\startSmallPrint
+
+  Neznám název písma, které {\tt m} používá, a proto jsem ve výše uvedeném seznamu nemohl přesně znázornit typ čísel, která tato volba generuje. Doporučuji čtenářům, aby si to sami vyzkoušeli.
+
+\stopSmallPrint
+
+\stopsubsubsection
+
+\stopsubsection
+
+\startsubsection 
+[ 
+reference=sec:itemize_item-type, 
+title={Vložení položek do seznamu}, 
+]
+
+Položky seznamu vytvořeného příkazem \tex{startitemize} se zpravidla zadávají příkazem \PlaceMacro{item}\tex{item}, který má také verzi ve formě prostředí, která je vhodnější pro styl Mark~IV:
+\PlaceMacro{startitem}\tex{startitem ... \stopitem}. Tedy následující příklad:
+
+\startDoubleExample
+\starttyping
+\startitemize[a, packed]
+\startitem První prvek \stopitem
+\startitem Druhý prvek \stopitem
+\startitem Třetí prvek \stopitem
+\stopitemize
+\stoptyping
+
+\startitemize[a, packed]
+\startitem První prvek \stopitem
+\startitem Druhý prvek \stopitem
+\startitem Třetí prvek \stopitem
+\stopitemize
+\stopDoubleExample
+
+vede k naprosto stejnému výsledku jako
+
+\startDoubleExample
+\starttyping
+\startitemize[a, packed]
+\item První prvek
+\item Druhý prvek
+\item Třetí prvek
+\stopitemize
+\stoptyping
+
+\startitemize[a, packed]
+\item První prvek
+\item Druhý prvek
+\item Třetí prvek
+\stopitemize
+
+\stopDoubleExample
+
+\tex{item} nebo \tex{startitem} je příkaz {\em obecně} pro vložení položky do seznamu. Spolu s ním existují následující doplňkové příkazy pro případy, kdy chceme dosáhnout speciálního výsledku:
+
+\startitemize[3*broad]
+
+\sym{\PlaceMacro{head}\tex{head}} Tento příkaz by měl být použit místo \tex{item}, pokud se chceme vyhnout vložení zlomu stránky za danou položku.
+
+  \startSmallPrint
+
+    Běžnou konstrukcí je zařazení vnořeného seznamu nebo textového bloku bezprostředně pod prvek seznamu, takže prvek seznamu v jistém smyslu funguje jako {\em titulek}. vnořeného seznamu nebo textového bloku. V těchto případech by nebylo vhodné mezi tímto prvkem a následujícími odstavci udělat stránkový zlom. Použijeme-li pro vložení těchto prvků \tex{head} místo \tex{item}, \ConTeXt\ {\em se bude snažit} (pokud je to možné) neoddělovat takový prvek od následujícího bloku.
+
+  \stopSmallPrint
+
+\sym{\PlaceMacro{sym}\tex{sym}} Příkaz \type{\sym{Text}} zadá položku, ve které je text použitý jako argument \tex{sym} použit jako {\em oddělovač}, nikoli jako číslo nebo symbol. Tento seznam je například sestaven z položek zadaných pomocí \tex{sym} místo \tex{item}.
+
+\sym{\PlaceMacro{sub}\tex{sub}} Tento příkaz, který by se měl používat pouze v uspořádaných seznamech (kde je každá položka uvozena číslem nebo písmenem v abecedním pořadí), způsobí, že položka, která je jím zadána, si ponechá číslo předchozí položky, a aby bylo zřejmé, že se číslo opakuje a že se nejedná o chybu, je vlevo vytištěn znak \quote{+}. To může být užitečné, pokud se odvoláváme na předchozí seznam, u kterého navrhujeme úpravy, ale kde by mělo být v zájmu přehlednosti zachováno číslování původního seznamu.
+
+\sym{\PlaceMacro{mar}\tex{mar}} Tento příkaz zachová číslování položek, ale přidá písmeno nebo znak na okraj (který je mu předán jako argument mezi kudrnaté závorky). Nejsem si úplně jistý, nakolik je užitečný.
+
+\stopitemize
+
+Existují dva další příkazy pro zadávání položek, jejichž kombinace přináší velmi {\em zajímavé} efekty, a pokud to mohu říci, myslím, že je lepší je vysvětlit na příkladu. \PlaceMacro{ran}\tex{ran} (zkratka {\em rozsah}) a \PlaceMacro{its}\tex{its}, zkratka {\em položky}. První z nich přebírá argument (mezi kudrnatými závorkami) a druhá opakuje symbol použitý jako oddělovač v seznamu x-krát (standardně 4krát, ale můžeme to změnit pomocí volby {\tt items}). Následující příklad ukazuje, jak mohou tyto dva příkazy spolupracovat při vytváření seznamu, který napodobuje dotazník:
+
+\vbox{\starttyping 
+Po přečtení následujícího úvodu odpovězte na následující otázky:
+
+\startitemize[5, packed][width=8em, distance=2em, items=5]
+\ran{Ne \hss Ano}
+\its Nikdy nebudu používat \ConTeXt, je příliš složitý.
+\its Budu ho používat jen pro psaní velkých knih.
+\its Budu ho používat vždy.
+\its Líbí se mi tak moc, že své další dítě pojmenuji \quotation{Hans}, jako poctu Hansi Hagenovi.
+\stopitemize
+\stoptyping}
+
+%\startlocalfootnotes
+\example{Po přečtení tohoto úvodu odpovězte na následující otázky:
+
+\startitemize[5, packed][width=8em, distance=2em, items=5]
+\ran{Ne \hss Ano}
+\its Nikdy nebudu používat \ConTeXt, je to příliš složité.
+\its Budu ho používat jen pro psaní velkých knih.
+\its Vždycky ho budu používat.
+\its Mám ho tak rád, že své další dítě pojmenuji \quotation{Hans}, jako poctu Hansi Hagenovi.
+\stopitemize%\placelocalfootnotes
+}
+%\stoplocalfootnotes
+
+\stopsubsection
+
+\startsubsection 
+[ 
+reference=sec:itemize_arg1, 
+title={Základní konfigurace seznamu}, 
+]
+
+Připomínáme, že \MyKey{itemize} umožňuje použít dva argumenty. Již jsme viděli, že první argument nám umožňuje vybrat typ seznamu, který chceme. Můžeme jej však použít i k určení dalších vlastností seznamu; k tomu slouží následující volby pro \MyKey{itemize} v jeho prvním argumentu:
+
+\startitemize
+
+\item {\tt columns}: tato volba určuje, že seznam se skládá ze dvou nebo více sloupců. Za volbou sloupce je třeba zapsat požadovaný počet sloupců jako slova oddělená čárkou: dva, tři, čtyři, pět, šest, sedm, osm nebo devět. {\tt columns}, za kterým nenásleduje žádné číslo, generuje dva sloupce.
+
+\item {\tt intro}: tato volba se snaží neoddělovat seznam zalomením řádku od odstavce, který mu předchází.  
+
+\item {\tt continue}: v uspořádaných seznamech (číselných nebo abecedních) tato volba způsobí, že seznam bude pokračovat v číslování od posledního číslovaného seznamu. Pokud je použita volba {\tt continue}, není nutné uvádět, jaký typ seznamu chceme, protože se předpokládá, že bude stejný jako poslední číslovaný seznam.
+
+\item {\tt packed}: je jednou z nejpoužívanějších možností. Její použití způsobí, že vertikální prostor mezi jednotlivými {\em položkami} v seznamu se co nejvíce zmenší.
+
+\item {\tt nowhite:} vytváří podobný efekt jako {\tt packed}, ale drastičtější: zmenšuje nejen svislou mezeru mezi položkami, ale také svislou mezeru mezi seznamem a okolním textem.
+
+\item {\tt broad}: zvětší vodorovnou mezeru mezi oddělovačem položek a textem položky. Mezeru lze zvětšit vynásobením čísla číslem {\tt široký} jako například \type{\startitemize[2* široký]}.
+
+\item {\tt serried}: odstraní vodorovnou mezeru mezi oddělovačem položek a textem.
+
+\item {\tt intext}: odstraní závěsnou odrážku.
+
+\item {\tt text}: odstraní závěsnou zarážku a zmenší vertikální mezeru mezi položkami.
+
+\item {\tt repeat}: ve vnořených seznamech způsobí, že číslování podřízené úrovně {\em repeat} je na stejné úrovni jako předchozí úroveň. Takto bychom měli na první úrovni: 1, 2, 3, 4; na druhé úrovni: 1.1, 1.2, 1.3 atd. Volba musí být uvedena pro vnitřní seznam, nikoli pro vnější seznam.
+
+\item {\tt margin, inmargin}: ve výchozím nastavení je oddělovač seznamu vytištěn vlevo, ale uvnitř textové oblasti ({\tt atmargin}). Volby {\tt margin} a {\tt inmargin} přesunou oddělovač na okraj.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection 
+[ 
+reference=sec:itemize_arg2, 
+title={Dodatečná konfigurace seznamu}, 
+]
+
+Druhý argument, rovněž nepovinný, v \tex{startitemize} umožňuje podrobnější a důkladnější konfiguraci seznamů.
+
+\startitemize
+
+\item {\tt before, after}: příkazy, které se spustí před spuštěním, resp. po uzavření prostředí itemize.
+
+\item {\tt inbetween}: příkaz, který se spustí mezi dvěma {\tt items}.
+
+\item {\tt beforehead, afterhead}: příkaz, který se spustí před nebo za položkou zadanou příkazem \tex{head}.
+
+\item {\tt left, right}: znak, který se má vytisknout vlevo nebo vpravo od oddělovače. Chceme-li například získat abecední seznamy, v nichž jsou písmena obklopena závorkami, museli bychom napsat:
+
+  \type{\startitemize[a][left=(, right=)]}
+
+\item {\tt stopper}: označuje znak, který se zapíše za oddělovač. Funguje pouze v uspořádaných seznamech.
+
+\item {\tt width, maxwidth}: šířka prostoru vyhrazeného pro oddělovač, a tedy pro závěsnou odrážku.
+
+\item {\tt factor}: reprezentativní číslo oddělovacího faktoru mezi oddělovačem a textem.
+
+\item {\tt distance}: míra vzdálenosti mezi oddělovačem a textem.
+
+\item {\tt leftmargin, rightmargin, margin}: margin, který se přidá k levému (leftmargin) nebo pravému (rightmargin) okraji položek. 
+
+\item {\tt start}: číslo, od kterého bude číslování položek začínat.
+
+\item {\tt symalign, itemalign, align}: zarovnání položek. Umožňuje stejné hodnoty jako \tex{setupalign}. {\tt symalign} řídí zarovnání oddělovače; {\tt itemalign} textu položky a {\tt align} zarovnání obou.
+
+\item {\tt identing}: odsazení prvního řádku v odstavcíchv prostředí. Viz \in{section}[sec:indentation]
+
+\item {\tt indentnext}: určuje, zda má být odstavec za prostředím odsazen, nebo ne. Hodnoty jsou {\em ano, ne} a {\tt auto}.
+
+\item {\tt items}: v položkách zadaných pomocí \tex{its} udává počet opakování oddělovače.
+
+\item {\tt style, color; headstyle, headcolor; marstyle, marcolor; symstyle, symcolor}: tyto volby řídí styl a barvu položek, které jsou vloženy do prostředí pomocí příkazů \tex{item}, \tex{head}, \tex{mar} nebo \tex{sym}.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection 
+[ 
+reference=příkaz sec:items, 
+title={Jednoduché seznamy s příkazem \tex{items}}, 
+] 
+ \PlaceMacro{items}
+
+Alternativou prostředí {\tt itemize} pro velmi jednoduché nečíslované seznamy, kde položky nejsou příliš velké, je příkaz \tex{položky}, jehož syntaxe je:
+
+\type{\items[Configuration]{Položka 1, Položka 2, ..., položka n}}
+
+Jednotlivé položky seznamu jsou od sebe odděleny čárkami. Například:
+
+\startDoubleExample
+\startframedtext[frame=off, before=, after=]
+\starttyping
+Grafické soubory mohou mít mimo jiné tyto přípony:
+
+\items{png, jpg, tiff, bmp}   
+\stoptyping
+\stopframedtext
+
+Grafické soubory mohou mít mimo jiné tyto přípony:
+
+\items{png, jpg, tiff, bmp}
+
+\stopDoubleExample
+
+Konfigurační možnosti podporované tímto příkazem jsou podmnožinou možností {\tt itemize}, s výjimkou dvou specifických možností pro tento příkaz: 
+
+\startitemize 
+
+\item {\tt symbol}: tato volba určuje typ seznamu, který bude vygenerován. Podporuje stejné hodnoty jako {\tt itemize} pro výběr určitého typu seznamu. 
+
+\item {\tt n}: tato volba určuje, od kterého čísla položky bude oddělovač.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection 
+[ 
+reference=sec:setupitemize, 
+title={Předurčení chování seznamu a vytvoření vlastních typů seznamů}, 
+] 
+
+V předchozích částech jsme si ukázali, jak určit, jaký typ seznamu chceme a jaké vlastnosti by měl mít. Dělat to však při každém volání seznamu je neefektivní a obvykle to vede k vytvoření nesouvislého dokumentu, v němž má každý seznam svůj vlastní vzhled, aniž by však jednotlivé vzhledy splňovaly nějaká kritéria.
+
+Preferovaný výsledek pro tuto oblast:
+
+\startitemize
+
+\item Předurčuje {\em normální} chování {\tt itemize} a \tex{items} v preambuli dokumentu.
+
+\item Vytváření vlastních seznamů na míru. Například: abecedně číslovaný seznam, který chceme nazvat {\em ListAlpha}, seznam číslovaný římskými číslicemi ({\em ListRoman}) atd.  \stopitemize
+
+Prvního dosáhneme pomocí příkazů \tex{setupitemize} a \tex{setupitems}. Druhé vyžaduje použití buď příkazu \PlaceMacro{defineitemgroup}\tex{defineitemgroup}, nebo \PlaceMacro{defineitems}\tex{defineitems}. První vytvoří prostředí seznamu podobné příkazu {\tt itemize} a druhý příkaz podobný příkazu {\tt items}.
+
+\stopsubsection
+
+\stopsection
+
+\startsection [title={Popisy a výčty}]
+
+Popisy a výčty jsou dvě konstrukce, které umožňují konzistentní sazbu odstavců nebo skupin odstavců, které rozvíjejí, popisují nebo definují frázi nebo slovo.
+
+\startsubsection 
+   [title={Popisy}]
+
+U popisů rozlišujeme mezi {\em title} a jeho vysvětlením nebo rozvedením. Nový popis můžeme vytvořit pomocí:
+
+\PlaceMacro{definedescription}\type{\definedescription [Name] [Configuration]}
+
+kde {\em Name} je název, pod kterým bude tato nová konstrukce známá, a Configuration určuje, jak bude naše nová konstrukce vypadat. Po předchozím příkazu budeme mít nový příkaz a prostředí s názvem, který jsme si zvolili. Tedy:
+
+\type{\definedescription [Concept]}
+
+vytvoří příkazy:
+
+\starttyping 
+  \Concept{Název}  
+  \startConcept {Title} ... \stopConcept
+  \stoptyping
+
+Příkaz použijeme pro případ, kdy vysvětlující text názvu tvoří pouze jeden odstavec, a prostředí pro názvy, jejichž popis zabírá více než jeden odstavec. Při použití příkazu se za vysvětlující text titulu bude považovat odstavec, který následuje bezprostředně za ním. Při použití prostředí však bude veškerý obsah formátován s příslušným odsazením, aby bylo zřejmé, jak souvisí s nadpisem.
+
+Například:
+
+\starttyping
+\definedescription 
+  [Concept] [alternative=left, width=1cm, headstyle=bold]
+
+\Concept{Kontextualizovat}
+
+Umístěte něco do určitého kontextu nebo napište text pomocí systému pro sazbu \ConTeXt. Schopnost správně zařadit text do kontextu v jakékoli situaci je považována za známku inteligence a zdravého rozumu.
+
+\stoptyping
+
+Tím se získá následující výsledek:
+
+\startcolor[red]
+
+\definedescription 
+[Concept] 
+[alternative=left, width=3cm, headstyle=bold]
+
+\Concept{Kontextualizovat}
+
+Umístěte něco do určitého kontextu nebo napište text pomocí systému pro sazbu \ConTeXt. Schopnost správně zařadit text do kontextu v jakékoli situaci je považována za známku inteligence a zdravého rozumu.  
+
+\stopcolor
+
+Stejně jako v případě \ConTeXt lze vzhled, který bude mít naše nová konstrukce, určit při jejím vytváření pomocí argumentu {\em Konfigurace} nebo později pomocí \tex{setupdescriptioní}:
+
+\PlaceMacro{setupdescription}\type{\setupdescription [Name] [Configuration]}
+
+kde {\em Název} je název našeho nového popisu a {\em Konfigurace} určuje, jak bude vypadat. Mezi různými možnými konfiguracemi vyzdvihnu např:
+
+\startitemize
+
+\item {\tt alternative}: Tato možnost zásadně ovlivňuje vzhled konstrukce. Určuje umístění nadpisu ve vztahu k jeho popisu. Její možné hodnoty jsou {\tt left, right, inmargin, inleft, inright, margin, leftmargin, rightmargin, innermargin, outermargin, serried, hanging}, jejich názvy jsou dostatečně jasné, abyste si udělali představu o výsledku, i když v případě pochybností je nejlepší provést test, abyste zjistili, jak to vypadá.
+
+\item {\tt width}: určuje šířku rámečku, do kterého bude napsán nadpis. V závislosti na hodnotě {\tt alternative} bude tato vzdálenost také součástí odsazení, s nímž bude napsán vysvětlující text.
+
+\item {\tt distance}: určuje vzdálenost mezi nadpisem a vysvětlením.
+
+\item {\tt headstyle, headcolor, headcommand}: ovlivňuje vzhled samotného nadpisu: Styl ({\tt headstyle}) a barva ({\tt headcolor}). Pomocí headcommand můžeme uvést příkaz, kterému bude text nadpisu předán jako argument. Například: {\tt headcommand=\backslash WORD} zajistí, že text nadpisu bude psán velkými písmeny.
+
+\item {\tt style, color}: řídí vzhled popisného textu nadpisu.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection 
+[title={Výčty}]
+
+Výčty jsou číslované textové prvky strukturované na několika úrovních. Každý prvek začíná názvem, který se ve výchozím nastavení skládá z názvu struktury a jejího čísla, ačkoli název můžeme změnit pomocí volby {\tt text}. Jsou docela podobné popisům, i když se v tom liší:
+
+\startitemize
+
+\item Všechny prvky výčtu mají stejný název.
+
+\item Proto se od sebe liší svým číslováním.  
+
+\stopitemize
+
+Tato struktura může být velmi užitečná například při psaní vzorců, úloh nebo cvičení v učebnici, kdy je třeba zajistit jejich správné číslování a jednotné formátování.
+
+Vytvoříme výčet s
+
+\PlaceMacro{defineenumeration}\type{\defineenumeration [Name] [Configuration]}
+
+kde {\em Název} je název nové konstrukce a {\em Konfigurace} určuje, jak bude vypadat. 
+
+V následujícím příkladu:
+
+\starttyping 
+  \defineenumeration 
+  [Exercise] 
+  [alternative=top, before=\blank, after=\blank, between=\blank]
+  \stoptyping
+
+Vytvořili jsme novou strukturu s názvem {\em Cvičení} a jak už to u výčtů bývá, budeme mít k dispozici následující nové příkazy:
+
+\starttyping 
+  \Exercise
+   \startExercise
+ \stoptyping
+
+Příkaz se používá pouze pro jeden odstavec {\em cvičení} a prostředí pro více odstavců {\em cvičení}. Protože však výčty mohou být až čtyřúrovňové, budou vytvořeny i následující příkazy a prostředí:
+
+\starttyping
+  \subExercise
+  \startsubExercise
+  \stopsubExercise
+  \subsubExercise
+  \startsubsubExercise
+  \stopsubsubExercise
+  \subsubsubExercise
+  \startsubsubsubExercise
+  \stopsubsubsubExercise
+\stoptyping
+
+A k ovládání číslování slouží následující doplňkové příkazy:
+
+\startitemize
+
+\item \tex{setEnumerationName}: nastaví aktuální hodnotu číslování.
+
+\item \tex{resetEnumerationame}: nastaví čítač výčtu na nulu.
+
+\item \tex{nextEnumerationName}: zvýší čítač výčtu o jedna.
+
+\stopitemize
+
+Vzhled výčtů lze určit v okamžiku jejich vytvoření nebo později pomocí \tex{setupenumeration}, jehož formát je:
+
+\PlaceMacro{setupenumeration}\type{\setupenumeration [Name] [Configuration]}.
+
+Pro každý výčet můžeme nakonfigurovat každou jeho úroveň zvlášť. Tak například  \tex{setupenumeration [subExercise] [Configuration]} ovlivní druhou úroveň výčtu s názvem \quotation{Exercise}.
+
+Možnosti a hodnoty konfigurovatelné pomocí \tex{setupenumeration} jsou podobné jako v \tex{setupdescription}.
+
+\stopsubsection
+
+\stopsection
+
+\startsection 
+[ 
+reference=sec:FramesLines, 
+title={Čáry a rámce}, 
+]
+
+V referenční příručce \ConTeXt\ se píše, že \TeX\ má obrovské možnosti správy textu, ale je velmi slabý ve správě grafických informací. Dovolím si nesouhlasi: je pravda, že pro práci s řádky a rámečky nejsou možnosti \ConTeXt{}u (vlastně \TeX{}u) tak ohromující jako při sazbě textu. Ale pokračovat v tvrzení, že systém je v tomto ohledu slabý, je podle mě poněkud přitažené za vlasy. Nevím o žádné funkci s řádky a rámečky, kterou by jiné systémy pro sazbu dokumentů uměly a kterou by \ConTeXt\ nedokázal vygenerovat. A pokud \ConTeXt\ zkombinujeme s MetaPostem nebo s TiKZ (\ConTeXt\ má pro to rozšiřující modul), pak jsou možnosti omezeny pouze naší představivostí.
+
+V následujících částech se však omezím na vysvětlení, jak vytvářet jednoduché vodorovné a svislé čáry a rámečky kolem slov, vět nebo odstavců.
+
+\startsubsection 
+   [title={Jednoduché čáry}]
+
+Nejjednodušší způsob kreslení vodorovné čáry je pomocí příkazu \PlaceMacro{hairline}\tex{hairline}, který vytvoří vodorovnou čáru zabírající celou šířku normálního textového řádku.
+
+Na řádku, kde se nachází řádek generovaný příkazem \tex{hairline}, nesmí být žádný text. Abychom mohli vygenerovat řádek, který může koexistovat s textem na stejném řádku, potřebujeme příkaz \PlaceMacro{thinrule}\tex{thinrule}. Tento druhý příkaz použije celou šířku řádku. Proto bude mít v izolovaném odstavci stejný účinek jako \tex{hairline}, zatímco v opačném případě \tex{thinrule} vytvoří stejnou horizontální expanzi jako \tex{hfill} (viz \in{section}[sec:horizontal space2]), ale místo aby vyplnil horizontální prostor bílým místem (jako \tex{hfill}), vyplní jej řádkem.
+
+\startDoubleExample
+\starttyping
+Na levé straně\thinrule\\
+\thinrule Na pravé straně\\
+Na obou\thinrule stranách\\
+\thinrule vystředěno\thinrule
+\stoptyping
+
+Na levé straně\thinrule\\
+\thinrule Na pravé straně\\
+Na obou\thinrule stranách\\
+\thinrule vystředěno\thinrule
+
+
+\stopDoubleExample
+
+Pomocí příkazu \PlaceMacro{thinrules}\tex{thinrules} můžeme vygenerovat několik řádků. Například \tex{thinrules[n=2]} vygeneruje dva po sobě jdoucí řádky, každý o šířce normálního řádku. Řádky vygenerované příkazem \tex{thinrules} lze také konfigurovat, a to buď ve vlastním volání příkazu s uvedením konfigurace jako jednoho z jeho argumentů, nebo obecně příkazem \tex{setupthinrules}. Konfigurace zahrnuje tloušťku čáry ({\tt rulethickness}), její barvu ({\tt color}), barvu pozadí ({\tt background}), mezeru mezi řádky ({\tt interlinespace}) atd.
+
+\startSmallPrint
+
+  Řadu možností ponechám bez vysvětlení. Čtenář si je může prohlédnout v {\tt setup-cs.pdf}. (viz \v{sekci}[sec:qrc-setup-cs]). Některé možnosti se od jiných liší pouze nuancemi (tj. není mezi nimi téměř žádný rozdíl) a myslím, že je rychlejší, když se čtenář pokusí {\em vidět} rozdíl, než abych se ho snažil sdělit slovy. Například: Tloušťka čáry, kterou jsem právě řekl, závisí na volbě {\tt rulethickness}. Ovlivňují ji však také volby {\tt height} a {\tt depth}.
+
+\stopSmallPrint
+
+Menší čáry lze generovat pomocí příkazů \PlaceMacro{hl}\tex{hl} a \PlaceMacro{vl}\tex{vl}. První příkaz generuje vodorovnou čáru a druhý svislou čáru. Oba příkazy přijímají jako parametr číslo, které nám umožňuje vypočítat délku čáry. V příkazu \tex{hl} číslo měří délku v {\em ems} (v příkazu není třeba uvádět jednotku měření) a v příkazu \tex{vl} se argument vztahuje k aktuální výšce čáry.
+
+\tex{hl[3]} tedy generuje vodorovnou čáru o délce 3 ems a \tex{vl[3]} generuje svislou čáru o výšce odpovídající třem čarám. Nezapomeňte, že indikátor měření čáry musí být vložen mezi hranaté závorky, nikoli mezi závorky kudrnaté. V obou příkazech je argument nepovinný. Pokud není zadán, předpokládá se hodnota 1.
+
+\PlaceMacro{fillinline}\tex{fillinline} je další příkaz pro vytvoření vodorovných čar přesné délky. Podporuje více konfigurací, ve kterých můžeme kromě některých dalších funkcí uvést (nebo předem určit pomocí \PlaceMacro{setupfillinlines}\tex{setupfillinlines}) šířku (volba {\tt width}).
+
+Zvláštností tohoto příkazu je, že text, který je napsán vpravo, se umístí na levou stranu řádku a oddělí jej od řádku potřebným bílým místem, aby zabíral celý řádek. Například:
+
+\starttyping
+\fillinline[width=6cm] Název 
+\stoptyping
+
+vygeneruje
+
+\startcolor[red] \fillinline[width=6cm] {Name}
+
+\stopcolor
+
+\startSmallPrint
+
+  Domnívám se, že tato podivná operace je způsobena tím, že toto makro bylo navrženo pro psaní formulářů, kde je za textem vodorovná čára, na kterou \Conjecture je třeba něco napsat. Ve skutečnosti samotný název příkazu {\tt fillinline} znamená vyplnit řádek.
+
+\stopSmallPrint
+
+Kromě šířky čáry můžeme nastavit i její okraj ({\tt margin}), vzdálenost ({\tt distance}), tloušťku ({\tt rulethickness}) a barvu ({\tt color}).
+
+Téměř totožný s \tex{fillinline} je \tex{fillinrules}, i když tento příkaz umožňuje vložit více než jeden řádek (volba \MyKey{n}).
+
+\type{\fillinrules [Configuration] {Text} {Text}}
+
+kde tři argumenty jsou nepovinné.
+
+\stopsubsection
+
+\startsubsection 
+[title={Čáry spojené s textem}]
+
+Ačkoli některé z příkazů, které jsme právě viděli, mohou generovat řádky, které koexistují s textem na stejném řádku, tyto příkazy se ve skutečnosti zaměřují na rozložení řádku. Pro psaní řádků spojených s určitým textem má \ConTeXt\ příkazy:
+
+\startitemize
+
+\item, která generuje text mezi řádky.
+
+\item, která generuje čáry pod textem (podtržení), nad textem (překrytí) nebo přes text (přeškrtnutí).
+
+\stopitemize
+
+Pro generování textu mezi řádky je obvyklý příkaz \PlaceMacro{textrule}\tex{textrule}. Tento příkaz nakreslí čáru přes celou šířku stránky a text, který bere jako parametr, zapíše na levou stranu (ale ne na okraj). Například:
+
+\startDoubleExample
+\starttyping
+\textrule{text příkladu}
+\stoptyping
+\ 
+
+\textrule{Příklad textu}
+
+\stopDoubleExample
+
+\startSmallPrint
+
+  Předpokládá se, že \tex{textrule} umožňuje volitelný první argument se třemi možnými hodnotami: {\tt top}, {\tt middle} a \Doubt{\tt bottom}. Po několika testech se mi však nepodařilo zjistit, jaký účinek tyto volby mají.
+
+\stopSmallPrint
+
+Podobné prostředí jako \tex{texrule} je \PlaceMacro{starttextrule}\tex{starttextrule}, které kromě vložení řádku s textem na začátek prostředí vloží vodorovnou čáru na jeho konec. Formát tohoto příkazu je:
+
+\type{\starttextrule[Configuration]{Text na řádku} ... \stoptextrule} %
+
+\tex{textrule} i \text{starttextrule} lze konfigurovat pomocí \PlaceMacro{setuptextrule}\tex{setuptextrule}.
+
+Pro kreslení čar pod, nad nebo přes text se používají následující příkazy:
+
+\PlaceMacro{underbar}\PlaceMacro{underbars}\PlaceMacro{overbar}
+\PlaceMacro{overbars}\PlaceMacro{overstrike}\PlaceMacro{overstrikes}
+\starttyping 
+\underbar{Text}  
+\underbars{Text}  
+\overbar{Text}  
+\overbars{Text} 
+ \overstrike{Text} 
+  \overstrikes{Text}
+  \stoptyping
+
+Jak vidíme, pro každý typ řádku (pod, nad nebo přes text) existují dva příkazy. Verze příkazu v jednotném čísle nakreslí jedinou čáru pod, přes nebo skrz celý text, který je brán jako argument, zatímco verze příkazu v množném čísle nakreslí čáru pouze přes slova, ale nikoli přes bílé místo.
+
+Tyto příkazy nejsou vzájemně kompatibilní, to znamená, že dva z nich nelze použít na stejný text. Pokud se o to pokusíme, bude mít vždy přednost poslední z nich. Na druhou stranu lze \tex{underbar} vnořit a podtrhnout to, co již bylo podtrženo.
+
+\startSmallPrint
+
+  Referenční příručka upozorňuje, že \tex{underbar} vypíná spojování slov v textu, která jsou jeho argumentem. Není mi jasné, zda se toto tvrzení vztahuje pouze na \tex{underbar} nebo na šest příkazů, které zkoumáme.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\startsubsection [title={Orámovaná slova nebo texty}]
+
+K obklopení textu rámečkem nebo mřížkou používáme:
+
+\startitemize
+
+\item Příkazy \PlaceMacro{framed}\tex{framed} nebo \PlaceMacro{inframed}\tex{inframed}, pokud je text relativně krátký a nezabírá více než jeden řádek.
+
+\item Prostředí \PlaceMacro{startframedtext}\tex{startframedtext} pro delší texty.
+
+\stopitemize
+
+Rozdíl mezi \tex{zarámovaný} a \tex{nezarámovaný} spočívá v bodě, ze kterého je rámeček vykreslen. V \tex{frame} se rámeček kreslí směrem nahoru od ideální čáry, zvané základní čára, na které písmena spočívají, ale některá písmena procházejí směrem dolů. V \tex{inframed} se rámeček kreslí rovněž směrem nahoru, a to od nejnižšího možného bodu na čáře. Například:
+
+\startDoubleExample
+\starttyping
+Tady jsou \framed{dva} dobré
+\inframed{rámečky}.
+\stoptyping
+
+Zde jsou \framed{dva} dobré
+\inframed{rámečky}.
+
+\stopDoubleExample
+
+Oba, ohraničený i zarámovaný text, lze přizpůsobit pomocí \PlaceMacro{setupframed}\tex{setupframed} a \tex{startframedtext} se přizpůsobuje pomocí \PlaceMacro{setupframedtext}\tex{setupframedtext}. Možnosti přizpůsobení obou příkazů jsou dosti podobné. Umožňují nám určit rozměry rámečku ({\tt height, width, depth}), tvar rohů ({\tt framecorner}), které mohou být {\tt rectangular} nebo kulaté ({\tt round}), barvu rámečku ({\tt framecolor}), tloušťku čáry ({\tt framethickness}), zarovnání obsahu ({\tt align}), barvu textu ({\tt foregroundcolor}), barvu pozadí ({\tt background} a {\tt backgroundcolor}) atd.
+
+Pro \tex{startframedtext} existuje také zdánlivě zvláštní vlastnost: {\tt frame=off}, která způsobí, že se rámeček nevykreslí (ačkoli je stále přítomen, ale neviditelný). Tato vlastnost existuje proto, že vzhledem k tomu, že rámeček kolem odstavce je nedělitelný, je běžné, že celý odstavec je uzavřen v prostředí {\tt framedtext} s vypnutou možností vykreslování rámečku, aby se zajistilo, že v odstavci nebudou vloženy žádné zlomy stránek.
+
+Můžeme také vytvořit vlastní verzi těchto příkazů pomocí \PlaceMacro{defineframed}\tex{defineframed} a \PlaceMacro{defineframedtext}\tex{defineframedtext}.
+
+\stopsubsection
+
+\stopsection
+
+\startsection 
+[ 
+reference=sec:buffer, 
+title={Další zajímavá prostředí a stavby},
+ ]
+
+  V \ConTeXt\ je ještě mnoho prostředí, o kterých jsem se nezmínil, nebo jen velmi okrajově. Jako příklad uvedu:
+
+\startitemize 
+
+\item {\tt\bf buffer}\PlaceMacro{startbuffer}\PlaceMacro{getbuffer} {\em Buffery} jsou fragmenty textu uložené v paměti pro pozdější opětovné použití. {\em buffer} je definován někde v dokumentu pomocí \cmd{startbuffer[BufferName] ... \backslash stopbuffer} a lze jej libovolně často načítat na jiném místě dokumentu pomocí \tex{getbuffer[BufferName]}.
+
+\item {\tt\bf chemical}\PlaceMacro{startchemical} 
+Toto prostředí nám umožňuje umístit do něj chemické vzorce. Jestliže \TeX\ vyniká, kromě mnoha jiných věcí, svou schopností správně psát texty s matematickými vzorci, \ConTeXt\ se od počátku snažil rozšířit tuto schopnost na chemické vzorce a má toto prostředí, kde jsou povoleny příkazy a struktury pro psaní chemických vzorců.
+
+\item {\tt\bf kombinace}\PlaceMacro{startcombination}  
+Toto prostředí nám umožňuje kombinovat několik plovoucích prvků na jedné stránce. Je užitečné zejména pro zarovnání různých propojených externích obrázků v našem dokumentu.
+
+\item {\tt\bf formula}\PlaceMacro{startformula}  
+Jedná se o prostředí určené k psaní matematických vzorců.
+
+\item {\tt\bf hiding}\PlaceMacro{starthiding}  
+Text uložený v tomto prostředí nebude zkompilován, a proto se neobjeví ve výsledném dokumentu. To je užitečné pro dočasné zakázání kompilace určitých fragmentů ve zdrojovém souboru. Toho samého dosáhnete označením jednoho nebo více řádků jako komentář. Pokud je však fragment, který chceme zakázat, relativně dlouhý, je efektivnější než označit desítky či stovky řádků zdrojového souboru jako komentář vložit na začátek fragmentu příkaz \tex{starthiding} a na jeho konec \tex{stophiding}. 
+
+\item {\tt\bf legend}\PlaceMacro{startlegend} 
+V matematickém kontextu \TeX\ používá jiná pravidla, takže nelze psát normální text. Někdy je však vzorec doprovázen popisem prvků, které jsou v něm použity. K tomuto účelu slouží prostředí \tex{startlegend}, které nám umožňuje umístit normální text do matematického kontextu.
+
+\item {\tt\bf linecorrection}\PlaceMacro{startlinecorrection}  
+Obvykle \ConTeXt\ správně spravuje svislou mezeru mezi řádky, ale občas se může stát, že řádek bude obsahovat něco, co ho zkreslí. To se stává hlavně u řádků, které mají fragmenty orámované pomocí \tex{framed}. V takových případech toto prostředí upraví řádkování tak, aby odstavec vypadal správně.
+
+\item {\tt\bf mode}\PlaceMacro{startmode}  
+Toto prostředí je určeno k zahrnutí fragmentů do zdrojového souboru, které budou zkompilovány pouze v případě, že je aktivní příslušný režim. Použití {\em modes} není předmětem tohoto úvodu, ale je to velmi zajímavý nástroj, pokud chceme mít možnost generovat několik verzí s různými formáty z jednoho zdrojového souboru. Doplňujícím prostředím k tomuto prostředí je \PlaceMacro{startnotmode}\tex{startnotmode}.
+
+\item {\tt\bf opposite}\PlaceMacro{startopposite}  
+Toto prostředí se používá pro sazbu textů, pokud spolu obsah levé a pravé stránky souvisí.
+
+\item {\tt\bf quotation}\PlaceMacro{startquotation}  
+Velmi podobné prostředí jako {\tt narrower}, určené pro vkládání středně dlouhých doslovných citací. Prostředí zajišťuje, že text uvnitř je citován a že okraje jsou zvětšeny tak, aby odstavec s citací na stránce vizuálně vynikl. Je však třeba poznamenat, že podle obvyklého stylu blokových uvozovek v angličtině by neměly být žádné úvodní a závěrečné uvozovky -- což činí tento příkaz nebo prostředí méně užitečným.
+
+\item {\tt\bf standardmakeup}\PlaceMacro{startstandardmakeup}  
+Toto prostředí je určeno ke generování stránek s názvem dokumentu, což je poměrně běžné u akademických dokumentů určité délky, jako jsou doktorské práce, magisterské práce apod.
+
+\stopitemize
+
+Chcete-li se seznámit s některým z těchto prostředí (nebo s dalšími, která jsem nezmínil), doporučuji následující kroky:
+
+\startitemize[n]
+
+\item Informace o prostředí najdete v referenční příručce \ConTeXt. V této příručce nejsou uvedena všechna prostředí, ale o každé položce z výše uvedeného seznamu se v ní něco píše.
+
+\item Napište testovací dokument, ve kterém je použito prostředí.
+
+\item Vyhledejte v oficiálním seznamu příkazů \ConTeXt{}u (viz \in{section}[sec:qrc-setup-cs]) konfigurační volby pro dané prostředí a pak je vyzkoušejte, abyste zjistili, co přesně dělají.  
+
+\stopitemize
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% coding: utf-8-unix
+%%% TeX-master: "../introCTX.mkiv"
+%%% End:
+%%% vim:set filetype=context tw=75 : %%%
