@@ -1,8 +1,809 @@
+%%% Soubor: b05_Pages.mkiv%%% Autor: Joaquín Ataz-López%%% Začátek: květen 2020%%% Uzavřeno: květen 2020%%% Obsah: Tato kapitola míchá dvě věci: rozložení stránky,%%% což je globální vzhled dokumentu a příkazy%%% týkající se stránkování, což je konkrétní vzhled a%%% a možná by mohly být v kapitole 11. Jeho obsah%%% vychází hlavně z referenční příručky z roku 2013%%%, i když jsem také konzultoval wiki.%%%%%% Upraveno pomocí: Emacs + AuTeX - A občas s vim + context-plugin%%%
 
+\environment ../introCTX_env.mkiv
 
---------------------
-Czech version
---------------------
+\startcomponent b05_Pages.mkiv
 
-TO BE DONE!
---------------------
+\startchapter
+  [
+    reference=cap:pages,
+    title=Stránky a~dokumentové\\ stránkování,
+    bookmark=Stránky a~stránkování dokumentu,
+  ]
+
+\TocChap
+
+\ConTeXt\ transformuje zdrojový dokument na správně formátovaný {\em pages}. To, jak tyto stránky vypadají, jak je rozmístěn text a~prázdná místa a~jaké prvky obsahují, to vše je zásadní pro dobrou sazbu. Tato kapitola je věnována všem těmto otázkám a~některým dalším záležitostem souvisejícím se stránkováním.
+
+\startsection
+  [
+    reference=sec:papersize,
+    title=Velikost stránky,
+  ]
+
+\startsubsection
+  [
+    reference=sec:pagesize,
+    title=Nastavení velikosti stránky,
+  ]
+\PlaceMacro{setuppapersize}
+
+\ConTeXt\ standardně předpokládá, že dokumenty budou velikosti A4, což je evropský standard. Můžeme nastavit jinou velikost pomocí \tex{setuppapersize}, což je typický příkaz nalezený v~preambule dokumentu. {\em Normální} syntaxe tohoto příkazu je:
+
+\type{\setuppapersize[LogicalPage][PhysicalPage]}
+
+kde oba argumenty mají symbolická jména.\footnote{Připomeňme, že v\in{section}[sec:syntax] jsem uvedl, že volby používané \ConTeXt{}ovými příkazy jsou v~zásadě dvojího druhu: symbolická jména, jejichž význam je \ConTeXt{}u již známý, neboli proměnná, které musíme explicitně přiřadit nějakou hodnotu.} První argument, který jsem nazval {\em LogicalPage}, představuje velikost stránky, kterou je třeba vzít v~úvahu při sazbě; a~druhý argument, {\em PhysicalPage}, představuje velikost stránky, na kterou se bude tisknout. Normálně jsou obě velikosti stejné a~druhý argument lze pak vynechat; v~některých případech se však mohou tyto dvě velikosti lišit, jako například při tisku knižních listů o~8 nebo 16 stranách (běžná tisková technika, zejména u~akademických knih přibližně do 60. let 20. století). V~těchto případech nám \ConTeXt\ umožňuje rozlišit obě velikosti; a~pokud je myšlenka, že se má na jeden list papíru vytisknout několik stránek, můžeme také určit schéma skládání, které se má dodržet, pomocí příkazu \tex{setuparranging} (který nebude v~tomto úvodu vysvětlen).
+
+Pro velikost sazby můžeme uvést kteroukoli z~předdefinovaných velikostí používaných papírenským průmyslem (nebo námi). To zahrnuje:
+
+  \startitemize
+
+  \item Jakákoli řada A, B a~C definovaná normou ISO-216 (od A0 do A10, od B0 do B10 a~od C0 do C10), obecně používaná v~Evropě.
+
+  \item Jakákoli ze standardních velikostí v~USA: dopis, účetní kniha, bulvární tisk, právní, folio, výkonný.
+
+  \item Jakákoli z~velikostí RA a~RSA definovaných standardem ISO-217.
+
+  \item Velikosti G5 a~E5 definované švýcarským standardem SIS-014711 (pro doktorské práce).
+
+  \item Pro obálky: libovolná z~velikostí definovaných severoamerickou normou (obálka 9 až obálka 14) nebo normou ISO-269 (C6/C5, DL, E4).
+
+  \item CD, pro obaly CD.
+
+  \item S3 – S6, S8, SM, SW pro velikosti obrazovky v~dokumentech, které nejsou určeny k~tisku, ale k~zobrazení na obrazovce.
+
+  \stopitemize
+
+  Spolu s~velikostí papíru můžeme pomocí \tex{setuppapersize} označit orientaci stránky: \quotation{portrait} (vertikální) nebo \quotation{landscape} (horizontální).
+
+\startSmallPrint
+
+  Další možnosti, které \tex{setuppapersize} umožňuje, podle wiki \ConTeXt, jsou \MyKey{rotated}, \MyKey{90}, \MyKey{180}, \MyKey{270}, \MyKey{mirrored} a~\MyKey{negative}. V~mých vlastních testech jsem si všiml pouze některých znatelných změn u~\MyKey{rotated}, který invertuje stránku, i~když to není přesně inverze. Číselné hodnoty mají vytvářet ekvivalentní stupeň rotace, samy o~sobě nebo v~kombinaci s~\MyKey{rotated}, ale nepodařilo se mi je přimět \Doubt fungovat. Ani jsem přesně nezjistil, k~čemu slouží \MyKey{mirrored} a~\MyKey{negative}.
+
+\stopSmallPrint
+
+Druhý argument \tex{setuppapersize}, který jsem již řekl, lze vynechat, pokud se velikost tisku neliší od velikosti sazby, může nabývat stejných hodnot jako první, což znamená velikost papíru a~orientaci. Může také vzít \MyKey{oversized} jako hodnotu, která --podle \ConTeXt\ wiki -- přidá centimetr a~půl do každého rohu papíru.
+
+\startSmallPrint
+
+  Podle wiki existují další možné hodnoty pro druhý argument: \MyKey{undersized}, \MyKey{doublesized} a~\MyKey{doubleoversized}. Ale v~mých vlastních testech jsem nezaznamenal žádnou změnu po použití některého z~nich; ani oficiální definice příkazu (viz \in{section}[sec:qrc-setup-cs]) tyto možnosti nezmiňuje.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\startsubsection
+  [title=Používání nestandardních velikostí stránek]
+
+Pokud chceme použít nestandardní velikost stránky, můžeme udělat dvě věci:
+
+\startitemize[n]
+
+\item Použít alternativní syntaxi \tex{setuppapersize}, která nám umožňuje zavést výšku a~šířku papíru jako rozměry.
+
+\item Definovat naši vlastní velikost stránky, přiřadit jí název a~použít ji, jako by to byla standardní velikost papíru.
+
+\stopitemize
+
+\subsubsubject{Alternativní syntaxe \tex{setuppapersize}}
+
+Kromě syntaxe, kterou jsme již viděli, nám \tex{setuppapersize} umožňuje použít tuto jinou:
+
+\type{\setuppapersize}[Name][Options]
+
+kde {\em Name} je volitelný argument, který představuje jméno přiřazené velikosti papíru pomocí \tex{definepapersize} (na což se podíváme dále), a~{\em Options} jsou toho druhu, kde přiřazujeme explicitní hodnotu. Mezi povolenými možnostmi můžeme zdůraznit následující:
+
+\startitemize
+
+\item {\tt\bf width, height}, které reprezentují šířku a~výšku stránky.
+
+\item {\tt\bf page, paper}. První odkazuje na velikost stránky, která má být vysázena, a~druhá na velikost stránky, na kterou se má fyzicky tisknout. To znamená, že \MyKey{page} je ekvivalentní prvnímu argumentu \tex{setuppapersize} ve své normální syntaxi (vysvětleno výše) a~\MyKey{paper} druhému argumentu. Tyto možnosti mohou nabývat stejných hodnot, které byly uvedeny dříve (A4, S3 atd.).
+
+\item {\tt\bf scale}, označuje faktor měřítka pro stránku.
+
+\item {\tt\bf topspace, backspace, offset,} další vzdálenosti.
+
+\stopitemize
+
+\subsubsubject{Definování přizpůsobené velikosti stránky}
+
+K~definování přizpůsobené velikosti stránky používáme příkaz \tex{definepapersize}, jehož syntaxe je
+
+\PlaceMacro{definepapersize}\type{\definepapersize[Name][Options]}
+
+kde {\em Name} odkazuje na název přidělený nové velikosti a~{\em Options} může být:
+
+\startitemize
+
+\item Jakákoli z~povolených hodnot pro \tex{setuppapersize} v~jeho normální syntaxi (A4, A3, B5, CD atd.).
+
+\item Měření šířky (papíru), výšky (papíru) a~ofsetu (posunu) nebo škálované hodnoty (\MyKey{scale}).
+
+\stopitemize
+
+Co není možné, je smíchat hodnoty povolené pro \tex{setuppapersize} s~měřeními nebo měřítkovými faktory. Je to proto, že v~prvním případě jsou možnosti symbolická slova a~ve druhém jsou proměnné s~explicitní hodnotou; a~v~\ConTeXt{}u, jak jsem již řekl, není možné kombinovat oba druhy voleb.
+
+Když použijeme \tex{definepapersize} k~označení velikosti papíru, která se shoduje s~některými standardními rozměry, ve skutečnosti namísto definování nové velikosti papíru, co děláme, je definování nového názvu pro již existující velikost papíru. To může být užitečné, pokud chceme kombinovat velikost papíru s~orientací. Můžeme tedy například psát
+
+\starttyping
+\definepapersize[vertical][A4, portrait]
+\definepapersize[horizontal][A4, landscape]
+\stoptyping
+
+\stopsubsection
+
+\startsubsection
+  [title=Změna velikosti stránky v~libovolném bodě dokumentu]
+
+Ve většině případů mají dokumenty pouze jednu velikost stránky, a~proto je \tex{setuppapersize} typickým příkazem, který zařazujeme do preambule a~v~každém dokumentu jej používáme pouze jednou. V~některých případech však může být nutné změnit velikost v~určitém bodě dokumentu; například, pokud je od určitého bodu zahrnuta příloha, ve které jsou listy na šířku.
+
+V~takových případech můžeme použít \tex{setuppapersize} přesně tam, kde chceme, aby ke změně došlo. Ale protože by se velikost okamžitě změnila, abychom se vyhnuli neočekávaným výsledkům, normálně bychom před \tex{setuppapersize} vložili vynucený konec stránky.
+
+Pokud potřebujeme změnit velikost stránky pouze pro jednotlivou stránku, místo abychom dvakrát použili \tex{setuppapersize}, jednou pro změnu na novou velikost a~podruhé pro návrat na původní velikost, můžeme použít \PlaceMacro{adaptpapersize}\tex{adaptpapersize}, které změní velikost stránky a~o~stránku později automaticky resetuje hodnotu před jejím voláním. A~stejně jako jsme to udělali s~\tex{setuppapersize}, před použitím \tex{adaptpapersize} bychom měli vložit vynucený konec stránky.
+
+\stopsubsection
+
+\startsubsection
+  [title=Přizpůsobení velikosti stránky jejímu obsahu]
+
+V~\ConTeXt{}u jsou tři prostředí, která generují stránky přesné velikosti pro uložení jejich obsahu. Jsou to \PlaceMacro{startMPpage}\tex{startMPpage},\PlaceMacro{startpagefigure}\tex{startpagefigure} a\PlaceMacro{startTEXpage}\tex{startTEXpage}. První generuje stránku, která obsahuje grafiku vygenerovanou MetaPostem, jazykem grafického designu, který se integruje s~\ConTeXt{}em, ale kterým se v~tomto úvodu nebudu zabývat. Druhý dělá totéž s~obrázkem a~možná nějakým textem pod ním. Vyžaduje dva argumenty: první identifikuje soubor obsahující obrázek. Tomu se budu věnovat v~kapitole věnované externím obrázkům. Třetí (\tex{startTEXpage}) obsahuje text, který je jejím obsahem na stránce. Jeho syntaxe je:
+
+\type{\startTEXpage[Options] ... \stopTEXpage}
+
+kde možnosti mohou být kterékoli z~následujících:
+
+\startitemize
+
+\item {\tt\bf strut}. Nejsem si jistý užitečností této možnosti. V~terminologii \ConTeXt{}u je {\em strut} znak postrádající šířku, ale s~maximální výškou a~\Doubt hloubkou, ale nechápu, co to má společného s~celkovou užitečnost tohoto příkazu. Podle wiki tato možnost umožňuje hodnoty \MyKey{yes}, \MyKey{no},\MyKey{global} a~\MyKey{local}, přičemž výchozí hodnota je \MyKey{no}.
+
+\item {\tt\bf align}. Označuje zarovnání textu. Může to být \MyKey{normal},\MyKey{flushleft}, \MyKey{flushright}, \MyKey{middle}, \MyKey{high}, \MyKey{low} nebo \MyKey{lohi}.
+
+\item {\tt\bf offset} k~označení množství prázdného místa kolem textu. Může to být \MyKey{none}, \MyKey{overlay}, pokud je požadován efekt překrytí, nebo skutečný rozměr.
+
+\item {\tt\bf width, height} kde můžeme uvést šířku a~výšku stránky nebo hodnotu \MyKey{fit}, takže šířka a~výška jsou ty, které požaduje text, který je součástí prostředí.
+
+\item {\tt\bf frame}, který je ve výchozím nastavení \MyKey{off}, ale může mít hodnotu \MyKey{on}, pokud chceme text na stránce ohraničit.
+
+\stopitemize
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:page-elements,
+    title=Prvky na stránce,
+  ]
+
+\ConTeXt\ rozpoznává různé prvky na stránkách, jejichž rozměry lze konfigurovat pomocí \tex{setuplayout}. Okamžitě se na to podíváme, ale předtím by bylo nejlepší popsat každý prvek stránky a~uvést název, podle kterého \tex{setuplayout} každý z~nich zná:
+
+\startitemize
+
+\item {\bf Edges:} bílé místo kolem textové oblasti. Ačkoli je většina textových procesorů nazývá \quotation{margins}, použití \ConTeXt{}ové terminologie je vhodnější, protože nám umožňuje rozlišovat mezi hranami jako takovými, kde není žádný text (ačkoli v~elektronických dokumentech mohou být navigační tlačítka a~podobně), a~okraji, kde mohou být jisté textové prvky někdy umístěny, jako například poznámky na okraji.
+
+  \startitemize
+
+  \item Výška horní hrany je řízena dvěma měřeními: samotní hornou hranou (\MyKey{top}) a~vzdáleností mezi horní hranou a~záhlavím (\MyKey{topdistance}). Součet těchto dvou měření se nazývá \MyKey{topspace}.
+
+  \item Velikost levé a~pravé hrany závisí na měření \MyKey{leftedge} \MyKey{rightedge}. Pokud chceme, aby byly obě stejně dlouhé, můžeme je nakonfigurovat současně pomocí volby \MyKey{edge}.
+
+    U~dokumentů určených pro oboustranný tisk nehovoříme o~levé a~pravé hraně, ale o~vnitřní a~vnější; první je hrana nejblíže místu, kde budou listy sešity, tj. levá hrana na lichých stránkách a~pravá hrana na sudých stránkách. Vnější hrana je opakem vnitřní hrany.
+
+  \item Výška spodní hrany se nazývá \MyKey{bottom}.
+
+  \stopitemize
+
+  % V dokumentech určených k tisku na papír nemohou okraje nikdy % obsahovat text. Ale v dokumentech určených pro % zobrazení na obrazovce mohou hrany hostit některé % prvky, jako jsou navigační tlačítka a podobně.
+
+\item {\bf Margins} správně nazvané. \ConTeXt\ volá pouze postranní okraje (levý a~pravý). Okraje jsou umístěny mezi hranou a~hlavní textovou oblastí a~jsou určeny k~umístění určitých textových prvků, jako jsou například poznámky na okraji, názvy oddílů nebo jejich čísla.
+
+  Rozměry, které řídí velikost okraje, jsou:
+
+  \startitemize
+
+  \item {\tt\bf margin}: používá se, když chceme současně nastavit okraje na stejnou velikost.
+
+  \item {\tt\bf leftmargin, rightmargin}: nastaví velikost levého a~pravého okraje.
+
+  \item {\tt\bf edgedistance}: Vzdálenost mezi hranou a~okrajem.
+
+  \item {\tt\bf leftedgedistance, rightedgeddance}: Vzdálenost mezi hranou a~levým a~pravým okrajem.
+
+  \item {\tt\bf margindistance}: Vzdálenost mezi okrajem a~oblastí hlavního textu.
+
+  \item {\tt\bf leftmargindistance, rightmargindistance}: Vzdálenost mezi oblastí hlavního textu a~pravým a~levým okrajem.
+
+  \item {\tt\bf backspace}: tato míra představuje prostor mezi levým rohem papíru a~začátkem oblasti hlavního textu. Proto se skládá ze součtu \MyKey{leftedge} + \MyKey{leftedgedistance} + \MyKey{leftmargin} + \MyKey{leftmargindistance}.
+  \stopitemize
+
+\item {\bf Header and footer:} Záhlaví a~zápatí stránky jsou dvě oblasti, které jsou umístěny v~horní nebo dolní části psané oblasti stránky. Obvykle obsahují informace, které pomáhají text uvádět do kontextu, např. číslo stránky, jméno autora, název díla, název kapitoly nebo oddílu atd. V\ConTeXt{}u jsou tyto oblasti na stránce ovlivněny následujícími rozměry:
+
+  \startitemize
+
+  \item {\tt\bf header}: Výška záhlaví.
+
+  \item {\tt\bf footer}: Výška zápatí
+
+  \item {\tt\bf headerdistance}: Vzdálenost mezi záhlavím a~hlavní textovou oblastí stránky.
+
+  \item {\tt\bf footerdistance}: Vzdálenost mezi zápatím a~hlavní textovou oblastí stránky.
+
+  \item {\tt\bf topdistance, bottomdistance}: Oba výše uvedené. Jsou to vzdálenosti mezi horní hranou a~záhlavím nebo dolní hranou a~zápatím.
+
+  \stopitemize
+
+\item {\bf Main text area}: toto je nejširší oblast na stránce, která obsahuje text dokumentu. Její velikost závisí na proměnných \MyKey{width} a~\MyKey{textheight}. Proměnná \MyKey{height} zase měří součet \MyKey{header}, \MyKey{headerdistance}, \MyKey{textheight}, \MyKey{footerdistance} a~\MyKey{footer}.
+
+\stopitemize
+
+\placefigure
+  [here]
+  [img:page layout]
+  {Plochy a~rozměry na stránce}
+  {\externalfigure[PageLayout.png][width=.8\textwidth]}
+
+Všechny tyto oblasti můžeme vidět v~\in{image}[img:page layout] spolu s~názvy přiřazenými odpovídajícím měřením a~šipkami označujícími jejich rozsah. Tloušťka šipek spolu s~velikostí názvů šipek má odrážet důležitost každé z~těchto vzdáleností pro rozvržení stránky. Když se podíváme pozorně, uvidíme, že tento obrázek ukazuje, že stránka může být reprezentována jako tabulka s~9 řádky a~9 sloupci, nebo, pokud nebereme v~úvahu separační hodnoty mezi různými oblastmi, bude tam pět řádků a~pět sloupců přičemž text může být pouze ve třech řádcích a~třech sloupcích. Průsečík prostředního řádku s~prostředním sloupcem tvoří hlavní textovou oblast a~normálně zabírá většinu stránky.
+
+Ve fázi rozvržení našeho dokumentu můžeme vidět všechna měření stránky pomocí \PlaceMacro{showsetups}\tex{showsetups}. Chcete-li vidět hlavní obrysy distribuce textu indikované vizuálně na stránce, můžeme použít \PlaceMacro{showframe}\tex{showframe}; a~pomocí \PlaceMacro{showlayout}\tex{showlayout} můžeme získat kombinaci předchozích dvou příkazů.
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:pagelayout,
+    title=Rozvržení stránky (\tex{setuplayout}),
+  ]
+\PlaceMacro{setuplayout}
+
+\startsubsection
+  [
+    reference=sec:setuplayout,
+    title=Přiřazení velikosti různým komponentám stránky,
+  ]
+
+Návrh stránky zahrnuje přiřazení konkrétních velikostí příslušným oblastem stránky. To se provádí pomocí \tex{setuplayout}. Tento příkaz nám umožňuje změnit kteroukoli z~kót uvedených v~předchozí části. Jeho syntaxe je následující:
+
+\type{\setuplayout [Name] [Options]}
+
+kde {\em Name} je volitelný argument používaný pouze pro případ, kdy jsme navrhli více rozvržení (viz \in{section}[sec:definelayout]), a~možnosti jsou, kromě jiných, které uvidíme později, kterékoli z~výše zmíněných měření. Mějte však na paměti, že tato měření jsou vzájemně propojená, protože součet komponent ovlivňujících šířku a~těch, které ovlivňují výšku, se musí shodovat se šířkou a~výškou stránky. V~zásadě to bude znamenat, že při změně horizontální délky musíme upravit zbývající horizontální délky; a~totéž při nastavování vertikální délky.
+
+Ve výchozím nastavení \ConTeXt\ provádí automatické úpravy rozměrů pouze v~některých případech, které na druhou stranu nejsou v~jeho dokumentaci uvedeny žádným úplným nebo systematickým způsobem. Provedením několika testů jsem byl například schopen ověřit, že ruční zvýšení nebo snížení výšky záhlaví nebo zápatí způsobí úpravu v~\MyKey{textheight}; ruční změna některých okrajů však automaticky neupraví (podle mých testů) šířku textu (\MyKey{width}). To je důvod, proč nejúčinnějším způsobem, jak negenerovat žádnou nekonzistenci mezi velikostí stránky (nastavenou pomocí \tex{setuppapersize}) a~velikostí jejích příslušných komponent, je:
+
+\startitemize
+
+\item Pokud jde o~horizontální měření:
+
+  \startitemize
+
+  \item Úpravou \MyKey{backspace} (zahrnuje \MyKey{leftedge} a~\MyKey{leftmargin}).
+
+  \item Úpravou \MyKey{width} (šířka textu) nikoli pomocí rozměrů, ale pomocí hodnot \MyKey{fit} nebo \MyKey{middle}:
+
+    \startitemize
+
+    \item {\tt fit} vypočítá šířku textu na základě šířky zbytku vodorovných složek stránky.
+
+    \item {\tt middle} dělá totéž, ale nejprve srovná pravý a~levý okraj.
+
+    \stopitemize
+
+  \stopitemize
+
+\item Pokud jde o~vertikální měření:
+
+  \startitemize
+
+  \item Úpravou \MyKey{topspace}.
+
+  \item Úpravou hodnot \MyKey{fit} nebo \MyKey{middle} na \MyKey{height}. Ty fungují stejně jako v~případě šířky. První vypočítá výšku na základě zbytku komponent a~druhý nejprve srovná horní a~dolní okraje a~poté vypočítá výšku textu.
+
+  \item Jakmile je \MyKey{výška} upravena, úpravou výšky záhlaví nebo zápatí, je-li to nutné, s~vědomím, že v~takových případech bude \MyKey{textheight} automaticky přenastaven.
+
+  \stopitemize
+
+\item Další možností pro nepřímé určení výšky hlavní textové oblasti je uvedení počtu řádků, které se do ní mají vejít (s~ohledem na aktuální meziřádkový prostor a~velikost písma). To je důvod, proč \tex{setuplayout} obsahuje volbu \MyKey{lines}.
+
+\stopitemize
+
+\subsubsubject{Umístění logické stránky na fyzickou stránku}
+
+V~případě, že velikost logické stránky není stejná jako velikost fyzické stránky (viz \in{section}[sec:pagesize]), \tex{setuplayout} nám umožňuje nakonfigurovat některé další možnosti ovlivňující umístění logické stránky na fyzické stránce:
+
+\startitemize
+
+\item {\tt\bf location}: Tato volba určuje místo, kam bude stránka umístěna na fyzické stránce. Jeho možné hodnoty jsou left, middle, right, top, bottom, singlesided, doublesided nebo duplex.
+
+\item {\tt\bf scale}: Označuje faktor měřítka pro stránku před jejím umístěním na fyzickou stránku.
+
+\item {\tt\bf marking}: Vytiskne na stránku vizuální značky označující, kde má být papír oříznut.
+
+\item {\tt\bf horoffset, veroffset, clipoffset, cropoffset, trimoffset, bleedoffset, artoffset}: Série měření indikujících různá posunutí na fyzické stránce. Většina z~nich je vysvětlena v~referenční příručce z~roku 2013.
+
+\stopitemize
+
+Tyto volby \tex{setuplayout} musí být kombinovány s~indikacemi z~\PlaceMacro{setuparranging}\tex{setuparranging}, které indikují, jak logické stránky mají být seřazeny na fyzickém listu papíru. Tyto příkazy v~tomto úvodu vysvětlovat nebudu, protože jsem na nich neprováděl žádné testy.
+
+\subsubsubject{Zjištění šířky a~výšky textové oblasti}
+
+Příkazy \PlaceMacro{textwidth}\tex{textwidth} a\PlaceMacro{textheight}\tex{textheight} vrací šířku a~výšku textové oblasti. Hodnoty, které tyto příkazy nabízejí, nelze přímo zobrazit v~konečném dokumentu, ale lze je použít pro jiné příkazy k~nastavení jejich šířky nebo výšky. Takže například, abychom uvedli, že chceme obrázek, jehož šířka bude 60~\% šířky řádku, musíme jako hodnotu obrázku uvést \MyKey{width}: \MyKey{width=0.6\backslash textwidth}.
+
+\stopsubsection
+
+\startsubsection
+  [title=Přizpůsobení rozvržení stránky]
+\PlaceMacro{adaptlayout}
+
+Může se stát, že naše rozvržení stránky na konkrétní stránce produkuje nežádoucí výsledek; jako například poslední stránka kapitoly s~pouze jedním nebo dvěma řádky, což není ani typograficky, ani esteticky žádoucí. K~vyřešení těchto případů poskytuje \ConTeXt\ příkaz \tex{adaptlayout}, který nám umožňuje změnit velikost textové oblasti na jedné nebo více stránkách. Tento příkaz je určen k~použití pouze v~případě, že jsme již dokončili psaní našeho dokumentu a~provádíme jen malé poslední úpravy. Proto je jeho přirozené umístění v~preambuli dokumentu. Syntaxe příkazu je:
+
+\type{\adaptlayout [Pages] [Options]}
+
+kde {\em Pages} odkazuje na číslo stránky nebo stránek, jejichž rozložení chceme změnit. Je to volitelný argument, který se má použít pouze tehdy, když je v~preambuli umístěn \tex{adaptlayout}. Můžeme označit pouze jednu stránku nebo několik stránek, přičemž čísla oddělíme čárkami. Pokud vynecháte tento první argument, \tex{adaptlayout} ovlivní výhradně stránku, na které příkaz najde.
+
+Pokud jde o~možnosti, mohou to být:
+
+\startitemize
+
+\item {\tt\bf height}: Umožňuje nám určit jako rozměry výšku, kterou by daná stránka měla mít. Můžeme uvést absolutní výšku (např. „19cm“) nebo relativní výšku (např. „+1cm“, „-0.7cm“).
+
+\item {\tt\bf lines}: Můžeme zahrnout počet řádků, které se mají přidat nebo odečíst. Chcete-li přidat řádky, před hodnotou je + a~pro odečítání řádků je znak $-$ (nejen pomlčka).
+
+\stopitemize
+
+Vezměte v~úvahu, že když změníme počet řádků na stránce, může to ovlivnit stránkování zbytku dokumentu. Proto se doporučuje použít \tex{adaptlayout} až na konci, kdy dokument nebude mít další změny, a~to v~preambuli. Poté přejdeme na první stránku, kterou si přejeme upravit, provedeme a~zkontrolujeme jak to ovlivní stránky, které následují; pokud to ovlivní tak, že je třeba upravit další stránku, přidáme její číslo a~zkompilujeme znovu a~tak dále.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:definelayout,
+    title=Použití více rozložení stránky,
+  ]
+\PlaceMacro{definelayout}
+
+Pokud potřebujeme použít různá rozvržení v~různých částech dokumentu, nejlepší způsob je začít definováním rozvržení {\em obecného} a~poté různých alternativních, které mění pouze rozměry, které se musí lišit. Tato alternativní uspořádání zdědí všechny vlastnosti obecného uspořádání, které se nezmění jako součást jeho definice. Pro specifikaci alternativního rozvržení a~pojmenování, kterým jej můžeme později zavolat, použijeme příkaz \tex{definelayout}, jehož obecná syntaxe je:
+
+\type{\definelayout [Name/Number] [Configuration]}
+
+kde {\em Name/Number} je název spojený s~novým designem nebo číslo stránky, kde bude nové rozvržení automaticky aktivováno, a~{\em Configuration} bude obsahovat aspekty rozvržení, které si přejeme změnit ve srovnání s~celkovým rozložením.
+
+Když je nové rozvržení spojeno s~názvem, pro jeho volání na konkrétním místě v~dokumentu používáme:
+
+\type{\setuplayout [LayoutName]}
+
+a~pro návrat k~obecnému rozložení:
+
+\type{\setuplayout [reset]}
+
+Na druhou stranu, pokud bylo nové rozvržení spojeno s~konkrétním číslem stránky, bude automaticky aktivováno, když je stránka dosažena. Jakmile je však aktivován, pro návrat k~obecnému návrhu to budeme muset výslovně uvést, i~když to můžeme {\em semi-automatizovat}. Pokud například chceme použít rozvržení výhradně na stránky 1 a~2, můžeme do preambule dokumentu napsat:
+
+\starttyping
+\definelayout[1][...]
+\definelayout[3][reset]
+\stoptyping
+
+Účinek těchto příkazů bude takový, že se na straně 1 aktivuje rozvržení definované v~prvním řádku a~na straně 3 se aktivuje další rozvržení, jehož funkcí je pouze návrat k~obecnému rozvržení.
+
+Pomocí \tex{definelayout[even]} vytvoříme rozvržení, které se aktivuje na všech sudých stránkách; a~s~\tex{definelayout[odd]} bude rozložení použito na všechny liché stránky.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:pages-other-matters,
+    title=Další záležitosti související s~rozložením stránky,
+  ]
+
+\startsubsubsection
+  [
+    reference=sec:double-sided,
+    title=Rozlišení mezi lichými a~sudými stránkami,
+  ]
+
+U~oboustranně tištěných dokumentů se často stává, že záhlaví, číslování stránek a~boční okraje se u~lichých a~sudých stránek liší. Sudé stránky se také nazývají stránky levé ruky (verso) a~liché stránky, pravé stránky (recto). V~těchto případech je také obvyklé, že se mění terminologie týkající se okrajů a~hovoříme o~okrajích vnitřních a~vnějších. První je umístěn v~nejbližším bodě k~místu, kde budou stránky sešívány, a~druhý na opačné straně. Na lichých stránkách, vnitřní okraj odpovídá levému okraji a~na sudých stránkách odpovídá vnitřní okraj pravému okraji.
+
+\tex{setuplayout} nemá žádnou možnost, která by nám výslovně umožňovala sdělit, že chceme rozlišovat mezi rozložením pro liché a~sudé stránky. Je to proto, že pro \ConTeXt\ je rozdíl mezi oběma druhy stránek nastaven jinou volbou: \tex{setuppagenumbering}, kterou uvidíme v~\in{section}[sec:numpages]. Jakmile je toto nastaveno, \ConTeXt\ předpokládá, že stránka popsaná pomocí \tex{setuplayout} byla lichá stránka, a~sestaví sudou stránku použitím převrácených hodnot pro lichou stránku: specifikace platné pro lichou stránku vlevo, platí na sudé stránce vpravo; a~naopak: to, co platí pro lichou stránku vpravo, platí pro sudou stránku vlevo.
+
+\stopsubsubsection
+
+\startsubsubsection
+  [
+    reference=sec:pages-columns,
+    title=Stránky s~více než jedním sloupcem,
+  ]
+
+Pomocí \tex{setuplayout} můžeme také vidět, že text našeho dokumentu je distribuován ve dvou nebo více sloupcích, jako to dělají například noviny a~některé časopisy. To je řízeno volbou \MyKey{columns}, jejíž hodnota musí být celé číslo. Pokud je zde více než jeden sloupec, je vzdálenost mezi sloupci indikována volbou \MyKey{columndistance}.
+
+Tato možnost je určena pro dokumenty, ve kterých je veškerý text (nebo jeho většina) rozložen do více sloupců. Pokud v~dokumentu, který je převážně jednosloupcový, chceme, aby konkrétní část měla dva nebo tři sloupce, nemusíme měnit rozvržení stránky, ale jednoduše použijeme prostředí \MyKey{columns} (viz \in{section} [sec:multiplecolumns]).
+
+\stopsubsubsection
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:numpages,
+    title=Číslování stránek,
+  ]
+
+\ConTeXt\ standardně používá pro číslování stránek arabská čísla a~číslo se zobrazuje uprostřed záhlaví. Ke změně těchto vlastností má \ConTeXt\ různé postupy, které podle mého názoru v~této věci zbytečně komplikují.
+
+Za prvé, základní charakteristiky číslování jsou řízeny dvěma různými příkazy:\PlaceMacro{setuppagenumbering}\tex{setuppagenumbering} a\PlaceMacro{setupuserpagenumber}\tex{setupuserpagenumber}.
+
+\type{\setuppagenumbering} umožňuje následující možnosti:
+
+\startitemize
+
+\item {\tt\bf alternative}: Tato možnost řídí, zda je dokument navržen tak, aby záhlaví a~zápatí byly na všech stránkách totožné (\MyKey{singlesided}), nebo zda rozlišují liché a~sudé stránky (\MyKey{doublesided}). Když tato možnost nabývá druhé hodnoty, automaticky se ovlivní hodnoty rozvržení stránky zavedené pomocí \MyKey{setup\-layout}, takže se předpokládá, že to, co je uvedeno v~\MyKey{setup\-layout}, se vztahuje pouze na liché stránky, a~proto to, co je zadáno pro levý okraj, se ve skutečnosti vztahuje k~vnitřnímu okraji (který je na sudých stránkách vpravo) a~to, co je zadáno pro pravou stranu, se ve skutečnosti vztahuje k~vnějšímu okraji, který je na sudých stránkách vlevo.
+
+\item {\tt\bf state}: Označuje, zda bude či nebude zobrazeno číslo stránky. Umožňuje dvě hodnoty: start (bude zobrazeno číslo stránky) a~stop (čísla stránek budou potlačena). Název těchto hodnot (start a~stop) by nás mohl vést k~domněnce, že když máme \MyKey{state=stop}, stránky přestanou být číslovány, a~když \MyKey{state=start}, číslování začne znovu. Ale není tomu tak: tyto hodnoty ovlivňují pouze to, zda je číslo stránky zobrazeno nebo ne.
+
+\item {\tt\bf location}: označuje, kde budou čísla zobrazeny. Normálně musíme v~této možnosti uvést dvě hodnoty oddělené čárkou. Nejprve musíme určit, zda chceme číslo stránky v~záhlaví (\MyKey{header}) nebo v~zápatí (\MyKey{footer}), a~potom, kde v~záhlaví nebo zápatí: může to být \MyKey{left}, \MyKey{middle}, \MyKey{right}, \MyKey{inleft}, \MyKey{inright}, \MyKey{margin},\MyKey{inmargin}, \MyKey{atmargin} nebo \MyKey{marginedge}. Například: pro zobrazení číslování zarovnaného vpravo v~zápatí bychom měli uvést \MyKey{location=\{footer,right\}}. Podívejte se na druhou stranu, jak jsme tuto možnost obklopili složenými závorkami, aby \ConTeXt\ mohl správně interpretovat oddělovací čárku.
+
+\item {\tt\bf style}: označuje velikost a~styl písma, který se má použít pro čísla stránek.
+
+\item {\tt\bf color}: označuje barvu, která se má použít na číslo stránky.
+
+\item {\tt\bf left}: vybere příkaz nebo text, který se má provést, vlevo od čísla stránky.
+
+\item {\tt\bf right}: vybere příkaz nebo text, který se má provést, vpravo od čísla stránky.
+
+\item {\tt\bf command}: vybere příkaz, kterému bude předáno číslo stránky jako parametr.
+
+\item {\tt\bf width}: udává šířku, kterou zabírá číslo stránky.
+
+\item {\tt\bf strut}: Tím si nejsem tak jistý. V~mých testech, když \MyKey{strut=no}, číslo se vytiskne přesně na horní hranu záhlaví nebo na spodní část zápatí, zatímco když \MyKey{strut=yes} (výchozí hodnota) je mezi číslem a~hranou mezera.
+
+\stopitemize
+
+\type{\setupuserpagenumber}, umožňuje tyto další možnosti:
+
+\startitemize
+
+\item {\tt\bf numberconversion}: řídí druh číslování, které může být arabskými čísly (\MyKey{n}, \MyKey{numbers}), malými písmeny (\MyKey{a},\MyKey{characters}), velkými písmeny (\MyKey{A},\MyKey{Characters}), kapitálkami (\MyKey{KA}), malými římskymi čísly (\MyKey{i}, \MyKey{r},\MyKey{romannumerals}), velkými římskymi čísly (\MyKey{I}, \MyKey{R},\MyKey{Romannumerals}) nebo kapitálkami římskych čísel (\MyKey{KR}).
+
+\item {\tt\bf number}: označuje číslo, které má být přiřazeno první stránce, na základě kterého bude vypočítán zbytek.
+
+\item {\tt\bf numberorder}: pokud tomu přiřadíme \MyKey{reverse} jako hodnotu, číslování stránek bude v~sestupném pořadí; to znamená, že poslední stránka bude 1, předposlední 2 atd.
+
+\item {\tt\bf way}: umožňuje nám určit, jak bude číslování probíhat. Může to být: byblock, bychapter, bysection, bysubsection atd.
+
+\item {\tt\bf prefix}: umožňuje nám označit předponu k~číslům stránek.
+
+\item {\tt\bf numberconversionset}: Vysvětleno dále.
+
+\stopitemize
+
+Kromě těchto dvou příkazů je nutné vzít v~úvahu také ovládání čísel zahrnujících makrostrukturu dokumentu (viz \in{section}[sec:macrostructure]). Z~tohoto pohledu nám \PlaceMacro{defineconversionset}\tex{defineconversionset} umožňuje označit pro každý z~bloků makrostruktury jiný druh číslování. Například:
+
+\vbox{\starttyping
+\defineconversionset
+  [frontpart:pagenumber][][romannumerals]
+
+\defineconversionset
+  [bodypart:pagenumber][][numbers]
+
+\defineconversionset
+  [appendixpart:pagenumber][][Characters]
+
+\stoptyping}
+
+uvidíte, že první blok v~našem dokumentu (frontmatter) je očíslován malými římskými číslicemi, centrální blok (bodymatter) arabskými čísly a~přílohy velkými písmeny.
+
+K~získání čísla stránky můžeme použít následující příkazy:
+
+\startitemize
+
+\item \PlaceMacro{userpagenumber}\tex{userpagenumber}: vrátí číslo stránky tak, jak bylo nakonfigurováno pomocí \tex{setuppagenumbering} a~pomocí\tex{setupuserpagenumber}.
+
+\item \PlaceMacro{pagenumber}\tex{pagenumber}: vrátí stejné číslo jako předchozí příkaz, ale stále v~arabských číslech.
+
+\item \PlaceMacro{realpagenumber}\tex{realpagenumber}: vrátí skutečné číslo stránky v~arabských číslech bez zohlednění kterékoliv z~těchto specifikací.
+
+\stopitemize
+
+Chcete-li získat číslo poslední stránky v~dokumentu, existují tři příkazy, které jsou paralelní s~předchozími. Jsou to: \PlaceMacro{lastuserpagenumber}\tex{lastuserpagenumber},\PlaceMacro{lastpagenumber}\tex{lastpagenumber} a~\PlaceMacro{lastrealpagenumber}\tex{lastrealpagenumber}.
+
+\stopsection
+
+\startsection
+  [title=Vynucené nebo navrhované konce stránek]
+
+\startsubsection
+  [title=Příkaz \tex{page}]
+\PlaceMacro{page}
+
+Algoritmus pro distribuci textu v~\ConTeXt{}u je poměrně složitý a~je založen na množství výpočtů a~vnitřních proměnných, které programu říkají, kde je nejlepší možný bod pro zavedení zalomení aktuální stránky z~hlediska typografické správnosti. Příkaz \tex{page} nám umožňuje ovlivnit tento algoritmus:
+
+\startitemize[a]
+
+\item Navrhováním určitých bodů jako nejlepšího nebo nejnevhodnějšího místa pro vložení konce stránky.
+
+  \startitemize[packed]
+
+  \item {\tt\bf no}: označuje, že místo, kde se příkaz nachází, není vhodným kandidátem pro vložení konce stránky, takže pokud je to možné, zalomení by mělo být provedeno na jiném místě dokumentu. \item {\tt\bf preference}: říká \ConTeXt{}u, že místo, kde narazí na příkaz, je {\em dobré místo} pro pokus o~zalomení stránky, i~když to tam nevynutí.
+
+  \item {\tt\bf bigpreference}: označuje, že místo, kde se setká s~příkazem, je {\em velmi dobré místo} pro pokus o~zalomení stránky, ale také to nejde tak daleko, že by ho vynutilo.
+
+  \stopitemize
+
+  Všimněte si, že tyto tři možnosti nevynucují ani nezabraňují zalomení stránky, ale pouze říkají \ConTeXt{}u, že při hledání nejlepšího místa pro zalomení stránky by měl vzít v~úvahu to, co je uvedeno v~tomto příkazu. Nakonec však o~místě, kde dojde k~zalomení stránky, bude nadále rozhodovat \ConTeXt.
+
+\item Vynucení přerušení stránky v~určitém bodě; v~tomto případě můžeme také uvést, kolik stránek by se mělo zalomit, stejně jako určité vlastnosti stránek, které mají být vloženy.
+
+  \startitemize[packed]
+
+  \item {\tt\bf yes}: vynutit přerušení stránky v~tomto bodě.
+
+  \item {\tt\bf makeup}: podobně jako \MyKey{yes}, ale nucené přerušení je okamžité, bez předchozího umístění jakýchkoli plovoucích objektů, jejichž umístění čeká na vyřízení (viz \in{section}[sec:floating objects]).
+
+  \item {\tt\bf empty}: vloží do dokumentu zcela prázdnou stránku.
+  
+  \item {\tt\bf even}: vlož tolik stránek, kolik je potřeba, aby byla další stránka sudá.
+  
+  \item {\tt\bf odd}: vlož tolik stránek, kolik je potřeba, aby byla další stránka lichá.
+  
+  \item {\tt\bf left, right}: podobné dvěma předchozím možnostem, ale použitelné pouze pro oboustranně tištěné dokumenty s~různými záhlavími, zápatími nebo okraji v~závislosti na tom, zda je stránka lichá nebo sudá.
+  
+  \item {\tt\bf quadruple}: vložte počet stránek potřebný k~tomu, aby další stránka byla násobkem 4.
+  
+  \stopitemize
+
+\stopitemize
+
+Kromě těchto voleb, které specificky řídí stránkování, \tex{page} obsahuje další volby, které ovlivňují způsob, jakým tento příkaz funguje. Zejména volba \MyKey{disable}, která způsobí, že \ConTeXt\ bude ignorovat příkazy \tex{page}, které odtamtud najde, a~volba\MyKey{reset}, která vyvolá opačný efekt a~obnoví účinnost budoucích \tex{page} příkazů.
+
+\stopsubsection
+
+\startsubsection
+  [title=Spojení určitých řádků nebo odstavců, aby se zabránilo vložení konce stránky mezi ně]
+
+Někdy, pokud chceme zabránit zalomení stránky mezi několika odstavci, může být použití příkazu \tex{page} pracné, protože by musel být zapsán na každém místě, kde by bylo možné zalomení stránky vložit. Jednodušší postup je umístit materiál, který chceme nechat na stejné stránce do toho, co \TeX\ nazývá {\em vertical box}.
+
+\startSmallPrint
+
+  Na začátku tohoto dokumentu (na \at{page}[ref:boxes]) jsem uvedl, že interně je vše {\em box} pro \TeX. Pojem box je v~\TeX{}u základní pro jakýkoli druh {\em pokročilých} operací; ale jeho řízení je příliš složité na to, aby bylo zahrnuto do tohoto úvodu. To je důvod, proč se o~boxech zmiňuji jen občas.
+
+\stopSmallPrint
+
+Jednou vytvořené boxy v~\TeX{}u jsou nedělitelné, což znamená, že nemůžeme vložit konec stránky, který by rozdělil box na dvě části. To je důvod, proč, pokud vložíme materiál, který chceme mít pohromadě, do neviditelného boxu, vyhneme se vložení zalomení stránky, které by tento materiál rozdělilo. Příkaz k~tomu je \PlaceMacro{vbox}\tex{vbox}, jehož syntaxe je
+
+\type{\vbox{Material}}
+
+kde {\em Material} je text, který chceme zachovat pohromadě.
+
+Některá prostředí \ConTeXt{}u umístí svůj obsah do boxu. Například \MyKey{framedtext}, takže pokud zarámujeme materiál, který chceme mít pohromadě v~tomto prostředí, a~také uvidíme, že rám je neviditelný (což uděláme s~volbou {\tt frame=off}), dosáhneme stejné věci.
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:headerfooter,
+    title=Záhlaví a~zápatí,
+  ]
+
+\startsubsection
+  [title=Příkazy pro stanovení obsahu záhlaví a~zápatí]
+\PlaceMacro{setupheadertexts}\PlaceMacro{setupfootertexts}
+
+Pokud jsme v~rozvržení stránky přiřadili záhlaví a~zápatí určitou velikost, můžeme do nich zahrnout text pomocí příkazů \tex{setupheadertexts} a~\tex{setupfootertexts}. Oba příkazy jsou podobné, jediný rozdíl je v~tom, že první aktivuje obsah záhlaví a~druhý obsah zápatí. Oba mají jeden až pět argumentů.
+
+\startitemize[n]
+
+\item Při použití s~jedním argumentem bude obsahovat text záhlaví nebo zápatí, který bude umístěn uprostřed stránky. Příklad: \tex{setupfootertexts[pagenumber]} zapíše číslo stránky do středu zápatí.
+
+\item Při použití se dvěma argumenty bude obsah prvního argumentu umístěn na levou stranu záhlaví nebo zápatí a~obsah druhého argumentu na pravou stranu. Například \tex{setupheadertexts[Preface][pagenumber]} vysází záhlaví stránky, ve kterém je slovo \quotation{preface} napsáno na levé straně a~číslo stránky je vytištěno na pravé straně.
+
+\item Pokud použijeme tři argumenty, první bude označovat {\em oblast}, ve které mají být vytištěny další dva. {\em Oblastí} mám na mysli {\em oblasti} stránky uvedené v\in{section}[sec:page-elements], jinými slovy: hrana, okraj, záhlaví...Další dva argumenty obsahují text, který se má umístit na levou hranu nebo okraj, nebo na pravou hranu nebo okraj.
+
+\stopitemize
+
+Použití se čtyřmi nebo pěti argumenty je ekvivalentní použití se dvěma nebo třemi argumenty v~případech, kdy se rozlišuje mezi sudými a~lichými stránkami, k~čemuž dochází, jak víme, když \MyKey{alternative=doublesided} s~nastavením \tex{setuppagenumbering}. V~tomto případě jsou přidány dva možné argumenty, které odrážejí obsah levé a~pravé strany sudých stránek.
+
+Důležitou charakteristikou těchto dvou příkazů je, že když jsou použity se dvěma argumenty, předchozí centrální záhlaví nebo zápatí (pokud existovalo) není přepsáno, což nám umožňuje napsat jiný text do každé oblasti, pokud nejprve napíšeme centrální text (volání příkazu s~jediným argumentem) a~poté napíšeme texty pro obě strany (volání znovu, nyní se dvěma argumenty). Pokud tedy například napíšeme následující příkazy
+
+\starttyping
+\setupheadertexts[and]
+\setupheadertexts[Tweedledum][Tweedledee]
+\stoptyping
+
+První příkaz napíše \quotation{and} do středu záhlaví a~druhý napíše \quotation{Tweedledum} nalevo a~\quotation{Tweedledee} napravo, přičemž středová oblast zůstane nedotčená, protože nebyla objednána k~přepsání. Výsledné záhlaví se nyní zobrazí jako
+
+\color[maincolor] {Tweedledum \hfill and \hfill Tweedledee}
+
+\startSmallPrint
+
+  Vysvětlení fungování těchto příkazů, které jsem právě uvedl, je můj závěr po mnoha testech. Vysvětlení těchto příkazů v~\ConTeXt\ {\em exkurzi} je založeno na verzi s~pěti argumenty; a~ten v~referenční příručce z~roku 2013 je založen na verzi se třemi argumenty. Myslím, že můj \Conjecture je jasnější. Na druhou stranu jsem neviděl vysvětlení, proč volání druhého příkazu nepřepíše předchozí volání, ale takhle to funguje, když do záhlaví nebo zápatí napíšeme nejprve centrální položku a~poté ty na obě strany. Pokud ale položky napíšeme prvně na jednu ze stran do záhlaví/zápatí, následné volání příkazu k~zápisu centrální položky smaže předchozí záhlaví nebo zápatí. Proč? Nemám ponětí. Myslím, že tyto malé detaily představují zbytečné komplikace a~měly by být jasně vysvětleny v~oficiální dokumentaci.
+
+\stopSmallPrint
+
+Kromě toho můžeme jako skutečný obsah záhlaví nebo zápatí označit jakoukoli kombinaci textu a~příkazů. Ale také následující hodnoty:
+
+\startitemize
+
+\item {\tt\bf date, currentdate}: zapíše (kterýkoli z~nich) aktuální datum.
+
+\item {\tt\bf pagenumber}: zapíše číslo stránky.
+
+\item {\tt\bf part, chapter, section...}: zapíše název odpovídající části, kapitole, sekci... nebo jakémukoli strukturálnímu členění.
+
+\item {\tt\bf partnumber, chapternumber, sectionnumbere...}: zapíše číslo dílu, kapitoly, sekce... nebo jakéhokoli strukturálního členění.
+
+\stopitemize
+
+  {\bf Pozor:} Tato symbolická jména ({\tt date, currentdate, pagenumber, chapter, chapternumber} atd.) jsou jako taková interpretována pouze tehdy, je-li samotný symbolický název jediným obsahem argumentu; ale pokud přidáme nějaký další text nebo příkaz pro formátování, budou tato slova interpretována doslovně, a~tak například když napíšeme \tex{setupheadertexts[chapternumber]}, dostaneme číslo aktuální kapitoly; ale pokud napíšeme \tex{setupheadertexts[{Chapter chapternumber}]}, skončíme s: \quotation{Chapter~chapternumber}. V~těchto případech, kdy obsahem příkazu není pouze symbolické slovo, musíme:
+
+  \startitemize
+
+  \item Pro {\tt date, currentdate} a~{\tt pagenumber} nepoužívejte symbolické slovo, ale příkaz se stejným názvem (\tex{date}, \tex{currentdate} nebo \PlaceMacro{pagenumber}\tex{pagenumber}).
+
+  \item Pro {\tt part, partnumber, chapter, chapternumber} atd. použijte příkaz \PlaceMacro{getmarking}\tex{getmarking[Mark]}, který vrátí obsah {\em Mark}, který je požadován. Takže například \tex{getmarking[chapter]} vrátí název aktuální kapitoly, zatímco \tex{getmarking[chapternumber]} vrátí číslo aktuální kapitoly.
+
+  \stopitemize
+
+  Chcete-li zakázat záhlaví a~zápatí na konkrétní stránce, použijte příkaz \PlaceMacro{noheaderandfooterlines}\tex{noheaderandfooterlines}, který funguje výhradně na stránce, kde se nachází. Pokud chceme smazat pouze číslo stránky na konkrétní stránce, musíme použít příkaz \tex{page[blank]}.
+
+\stopsubsection
+
+\startsubsection
+  [title=Formátování záhlaví a~zápatí]
+\PlaceMacro{setupheader}\PlaceMacro{setupfooter}
+
+Konkrétní formát, ve kterém je zobrazen text záhlaví nebo zápatí, lze uvést v~argumentech pro \tex{setupheadertexts} nebo\tex{setupfootertexts} pomocí odpovídajících příkazů formátu. Můžeme to však také konfigurovat globálně pomocí \tex{setupheader} a~\tex{setupfooter}, které umožňují následující možnosti:
+
+\startitemize
+
+\item {\tt\bf state}: umožňuje následující hodnoty: {\tt start, stop, empty, high, none, normal} nebo {\tt nomarking}.
+
+\item {\tt\bf style, leftstyle, rightstyle}: konfigurace stylu textu záhlaví a~zápatí. {\tt style} ovlivňuje všechny stránky, {\tt leftstyle} sudé stránky a~{\tt rightstyle} liché stránky.
+
+\item {\tt\bf color, leftcolor, rightcolor}: barva záhlaví nebo zápatí. Může ovlivnit všechny stránky (volba {\tt color}) nebo pouze sudé stránky ({\tt leftcolor}) nebo liché stránky ({\tt rightcolor}).
+
+\item {\tt\bf width, leftwidth, rightwidth}: šířka všech záhlaví a~zápatí ({\tt width}) nebo záhlaví/zápatí na sudých stránkách ({\tt leftwidth}) nebo na lichých ({\tt rightwidth}).
+
+\item {\tt\bf before}: příkaz, který se má provést před zápisem záhlaví nebo zápatí.
+
+\item {\tt\bf after}: příkaz, který se má provést po napsání záhlaví nebo zápatí.
+
+\item {\tt\bf strut}: pokud \quotation{yes}, vytvoří se vertikální oddělovací prostor mezi záhlavím a~hranou. Když je to \quotation{no}, záhlaví nebo zápatí jde k~hranám horní nebo dolní oblasti hran.
+
+\stopitemize
+
+% \subsection{Text v horním a dolním okraji}
+
+% Pokud si vzpomeneme na to, co jsem vysvětlil v \in{section}[sec:elementospag]% ohledně prvků stránky, řekl jsem, že horní a dolní % hrany stránky ({\tt top} a {\tt bottom} v % \Terminologi ConTeXt{}u) v zásadě nesmí obsahovat text. Není to však absolutní pravidlo, protože zejména v elektronických dokumentech určených k zobrazení na obrazovce může být % užitečné zahrnout do těchto oblastí některé textové prvky. To je důvod, proč v nich % \ConTeXt\ povoluje textový obsah
+
+\stopsubsection
+
+\startsubsection
+  [title=Definování konkrétních záhlaví a~zápatí a~jejich propojení s~příkazy sekce]
+\PlaceMacro{definetext}
+
+Systém záhlaví a~zápatí \ConTeXt{}u nám umožňuje automaticky změnit text v~záhlaví nebo zápatí, když změníme kapitoly nebo sekce; nebo když měníme stránky, pokud jsme nastavili různá záhlaví nebo zápatí pro liché a~sudé stránky. Co ale neumožňuje, je rozlišovat mezi první stránkou (dokumentu nebo kapitoly nebo oddílu) a~zbytkem stránek. Abychom toho dosáhli, musíme:
+
+\startitemize[n, packed]
+
+\item Definovat konkrétní záhlaví nebo zápatí.
+\item Propojit jej se sekcí, na kterou se vztahuje.
+
+\stopitemize
+
+Definice konkrétních záhlaví nebo zápatí se provádí pomocí příkazu\tex{definetext}, jehož syntaxe je:
+
+\vbox{\starttyping
+\definetext
+  [Name] [Type]
+  [Content1] [Content2] [Content3]
+  [Content4] [Content5]
+\stoptyping}
+
+kde {\em Name} je jméno přiřazené záhlaví nebo zápatí, se kterým se zabýváme; {\em Type} může být {\tt header} nebo {\tt footer} v~závislosti na tom, který z~těchto dvou definujeme a~zbývajících pět argumentů obsahuje obsah, který chceme pro nové záhlaví nebo zápatí, podobně jako jsme viděli funkce \PlaceMacro{setupheadertexts}\tex{setupheadertexts} a\PlaceMacro{setupfootertexts}\tex{setupfootertexts}. Jakmile to uděláme, musíme propojit nové záhlaví nebo zápatí s~nějakou konkrétní sekcí pomocí \tex{setuphead} pomocí voleb {\em header} a~{\tt footer} (které nejsou vysvětleny v~\in{Chapter}[cap:structure]).
+
+Následující příklad tedy skryje záhlaví na první stránce každé kapitoly a~jako zápatí se zobrazí vystředěné číslo stránky:
+
+\starttyping
+\definetext[ChapterFirstPage] [footer] [pagenumber]
+\setuphead
+  [chapter]
+  [header=high, footer=ChapterFirstPage]
+\stoptyping
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:margintext,
+    title=Vložení textových prvků na hrany a~okraje stránky,
+  ]
+
+Horní a~spodní hrana a~pravý a~levý okraj obvykle neobsahují žádný text. \ConTeXt\ tam však umožňuje umístění některých textových prvků. Pro tento účel jsou k~dispozici zejména následující příkazy:
+
+\startitemize
+
+\item \PlaceMacro{setuptoptexts}\tex{setuptoptexts}: umožňuje umístit text na horní hranu stránky (nad oblast záhlaví).
+
+\item \PlaceMacro{setupbottomtexts}\tex{setupbottomtexts}: umožňuje umístit text na spodní hranu stránky (pod oblast zápatí).
+
+\item \PlaceMacro{margintext}\tex{margintext},
+  \PlaceMacro{atleftmargin}\tex{atleftmargin},
+  \PlaceMacro{atrightmargin}\tex{atrightmargin},
+  \PlaceMacro{ininner}\tex{ininner},
+  \PlaceMacro{ininneredge}\tex{ininneredge},
+  \PlaceMacro{ininnermargin}\tex{ininnermargin},
+  \PlaceMacro{inleft}\tex{inleft},
+  \PlaceMacro{inleftedge}\tex{inleftedge},
+  \PlaceMacro{inleftmargin}\tex{inleftmargin},
+  \PlaceMacro{inmargin}\tex{inmargin},
+  \PlaceMacro{inother}\tex{inother},
+  \PlaceMacro{inouter}\tex{inouter},
+  \PlaceMacro{inouteredge}\tex{inouteredge},
+  \PlaceMacro{inoutermargin} \tex{inoutermargin},
+  \PlaceMacro{inright}\tex{inright},
+  \PlaceMacro{inrightedge}\tex{inrightedge},
+  \PlaceMacro{inrightmargin}\tex{inrightmargin}: umožňují nám umístit text na boční hrany a~okraje dokumentu.
+
+\stopitemize
+
+První dva příkazy fungují přesně jako \tex{setupheadertexts} a~\tex{setupfootertexts} a~formát těchto textů lze dokonce předem nakonfigurovat pomocí \tex{setuptop} a~\tex{setupbottom} podobně, jak to umožňuje \tex{setupheader} ke konfiguraci textů pro \tex{setupheadertexts}. K~tomu všemu odkazuji na to, co jsem již řekl v~\in{section}[sec:headerfooter]. Jediný malý detail, který je třeba dodat je, že text nastavený pro \tex{setuptoptexts} nebo \tex{setupbottomtexts} nebude viditelný, pokud v~rozložení stránky nebylo vyhrazeno místo pro horní ({\tt top}) nebo spodní ({\tt bottom}) hranu. Viz \in{section}[sec:setuplayout].
+
+Pokud jde o~příkazy zaměřené na umístění textu na okraje dokumentu, všechny mají podobnou syntaxi:
+
+\type{\CommandName[Reference][Configuration]{Text}}
+
+kde {\em Reference} a~{\em Configuration} jsou volitelné argumenty; první se používá pro případné křížové odkazy a~druhý umožňuje nastavit okrajový text. Poslední argument, uzavřený do složených závorek, obsahuje text, který má být umístěn na okraj.
+
+Z~těchto příkazů je obecnějším příkazem \tex{margintext}, protože umožňuje umístit text na jakýkoli okraj nebo boční hranu stránky. Zbývající příkazy, jak naznačuje jejich název, umístí text na samotný okraj (pravý nebo levý, vnitřní nebo vnější) nebo na hranu (pravou nebo levou, vnitřní nebo vnější). Tyto příkazy úzce souvisejí s~rozložením stránky, protože pokud například použijeme \tex{inrightedge}, ale nevyhradíme žádné místo v~rozložení stránky pro pravou hranu, nic se nezobrazí.
+
+Možnosti konfigurace pro \tex{margintext} jsou následující:
+
+\startitemize
+
+\item {\tt\bf location}: označuje do jakého okraje bude text umístěn. Může to být {\tt left}, {\tt right} nebo v~oboustranných dokumentech {\tt outer} nebo {\tt inner}. Ve výchozím nastavení je to {\tt left} v~jednostranných dokumentech a~{\tt outer} v~oboustranných.
+
+\item {\tt\bf width}: šířka dostupná pro tisk textu. Ve výchozím nastavení se použije celá šířka okraje.
+
+\item {\tt\bf margin}: udává, zda bude text umístěn v~{\tt okraji} samotném nebo v~{\tt hraně}.
+
+\item {\tt\bf align}: zarovnání textu. Jsou zde použity stejné hodnoty jako v~\in{\tex{setupalign}}[sec:setupalign].
+
+\item {\tt\bf line}: umožňuje nám označit počet řádků posunutí textu na okraji. Takže {\tt line=1} přemístí text o~jeden řádek níže a~{\tt line=-1} o~jeden řádek výše.
+
+\item {\tt\bf style}: příkaz nebo příkazy pro označení stylu textu, který se má umístit na okraje.
+
+\item {\tt\bf color}: barva textu na okraji.
+
+\item {\tt\bf command}: název příkazu, kterému bude jako argument předán text, který má být umístěn na okraj. Tento příkaz bude proveden před napsáním textu. Například, pokud chceme kolem textu nakreslit rámeček, můžeme použít \MyKey{[command=\backslash framed]\{Text\}}.
+
+\stopitemize
+
+Zbývající příkazy umožňují stejné možnosti, kromě {\tt location} a~{\tt margin}. Zejména příkazy \tex{atrightmargin} a~\tex{atleftmargin} umístí text zcela připojený k~tělu stránky. Můžeme vytvořit oddělovací prostor pomocí možnosti {\tt distance}, kterou jsem nezmínil, když jsem mluvil o~\tex{margintext}, protože jsem v~testech neviděl žádný vliv na tento příkaz.
+
+\startSmallPrint
+
+  Kromě výše uvedených možností tyto příkazy také podporují další možnosti ({\tt strut, anchor, method, category, scope, option, hoffset, voffset, dy, bottomspace, threshold a~stack}), které jsem nezmínil, protože jsou nezdokumentovány \Doubt a~upřímně, nejsem si moc jistý, k~čemu jsou. Ty s~názvy jako {\em distance} můžeme hádat, ale zbytek? Wiki zmiňuje pouze volbu {\tt stack} s~tím, že se používá k~emulaci příkazu \tex{marginpars} v~\LaTeX{}u, ale to se mi nezdá příliš jasné.
+
+\stopSmallPrint
+
+Příkaz \PlaceMacro{setupmargindata}\tex{setupmargindata} nám umožňuje globálně konfigurovat texty na každém okraji. Tak například
+
+\type{\setupmargindata[right][style=slanted]}
+
+zajistí, že všechny texty na pravém okraji budou psány šikmo.
+
+Můžeme také vytvořit vlastní přizpůsobený příkaz pomocí
+
+\PlaceMacro{definemargindata}\type{\definemargindata[Name][Configuration]}
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Místní proměnné:%%% režim: ConTeXt%%% režim: auto-fill%%% kódování: utf-8-unix%%% TeX-master: "../introCTX.mkiv"%%% Konec: %%% vim:set filetype=context tw=72 : %%%

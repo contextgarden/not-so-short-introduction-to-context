@@ -1,8 +1,773 @@
+%%% Soubor: b08_Lists.mkiv%%% Autor: Joaquín Ataz-López%%% Zahájeno: červenec 2020%%% Uzavřeno: červenec 2020%%% Obsah: Původně měla být tato kapitola součástí kapitoly 12% (prvky a struktury dokumentů). Ale viděl jsem, že na jedné straně indexy ovlivnily dokument globálně a na druhé straně, pokud bych to zahrnul do kapitoly 12, byl by neúměrně dlouhý. Kapitola byla napsána v % rekordním času (tři nebo čtyři dny), což je znamení, že už % začínám důvěrněji rozumět ConTeXtu.%%%% Upraveno pomocí: Emacs + AuTeX - A občas vim + context-plugin%%%
 
+\environment ../introCTX_env.mkiv
 
---------------------
-Czech version
---------------------
+\startcomponent b08_Lists.mkiv
 
-TO BE DONE!
---------------------
+\startchapter
+  [
+    reference=cap:toc,
+    title={Obsah, rejstříky, seznamy},
+    bookmark={Obsah, rejstříky, seznamy},
+  ]
+
+\TocChap
+
+Obsah a~rejstřík jsou globálním aspektem dokumentu. Téměř všechny dokumenty budou mít obsah, zatímco pouze některé dokumenty budou mít rejstřík. Pro mnoho jazyků (ale ne pro angličtinu) spadají obsah i~rejstřík pod obecný termín \quote{index}. Pro čtenáře angličtiny bude obsah obvykle na začátku (dokumentu nebo možná v~některých případech také na začátku kapitol) a~rejstřík bude na konci.
+
+Obojí znamená konkrétní aplikaci mechanismu pro interní odkazy, jehož vysvětlení je zahrnuto v~\in{section}[sec:references].
+
+\startsection
+  [
+    reference=sec:content,
+    title=Obsah,
+  ]
+
+\startsubsection
+  [title=Celkový pohled na obsah]
+
+V~předchozí kapitole jsme zkoumali příkazy, které umožňují vytvořit strukturu dokumentu tak, jak byl napsán. Tato sekce se zaměřuje na obsah a~rejstřík, které nějakým způsobem {\em odrážejí} strukturu dokumentu. Obsah je velmi užitečný pro získání představy o~dokumentu jako celku (pomáhá kontextualizovat informace) a~pro vyhledání přesného místa, kde by se konkrétní pasáž mohla nacházet. Knihy s~velmi složitou strukturou, s~mnoha oddíly a~pododdíly s~různou úrovní hloubky, zdá se, vyžadují jiný druh obsahu, protože málo podrobný (možná pouze s~prvními dvěma nebo třemi úrovněmi oddílů) hodně pomáhá získat celkovou představu o~obsahu dokumentu, ale není příliš užitečný pro lokalizaci konkrétní pasáže; Na rozdíl od velmi podrobného obsahu na druhé straně, kde je snadné minout les pro stromy a~ztratit celkový pohled na dokument. To je důvod, proč někdy knihy s~obzvláště složitou strukturou obsahují více než jeden obsah: jeden na začátku není příliš podrobný s~hlavními částmi a~podrobnější obsah na začátku každé kapitoly a~také možná rejstřík na konci.
+
+Všechny tyto mohou být generovány \ConTeXt{}em automaticky a~relativně snadno. Můžeme:
+
+\startitemize
+
+  \item Vygenerovat úplný nebo částečný obsah v~libovolném místě dokumentu.
+
+  \item Rozhodnout o~obsahu obou.
+
+  \item Konfigurovat jejich vzhled do posledního detailu.
+
+  \item Zahrnout do obsahu hypertextové odkazy, které nám umožní přejít přímo do příslušné sekce.
+
+\stopitemize
+
+Ve skutečnosti je tato poslední možnost standardně zahrnuta ve všech tabulkách obsahu za předpokladu, že byla v~dokumentu povolena funkce interaktivity. Viz v~tomto ohledu \in{section}[sec:interactivity].
+
+Vysvětlení toho v~referenční příručce \ConTeXt{}u je podle mého názoru poněkud matoucí, což je podle mně způsobeno tím, že je popsáno příliš mnoho informací najednou. Mechanismus pro vytváření obsahu v~\ConTeXt{}u má mnoho částí; a~pro text, který se je snaží vysvětlit všechny najednou, je obtížné být srozumitelným. Zvláště pro čtenáře, který je na scéně nový. Naproti tomu vysvětlení v\goto{wiki}[(https://wiki.contextgarden.net/Table_of_Contents#Page_numbering_in_ToC)] je prakticky omezeno na příklady: velmi užitečné pro učení {\em triků}, ale nedostatečné -- myslím -- pro pochopení mechanismu a~toho, jak to funguje. to je důvod, proč strategie, kterou jsem se rozhodl použít k~vysvětlení věcí v~tomto úvodu, začíná předpokladem něčeho, co není striktně pravdivé (nebo není úplně pravda): že v~\ConTeXt{}u je něco, co se nazývá {\em obsah}. Začneme tím, že jsou vysvětleny {\em normální} příkazy pro generování obsahu, a~když jsou tyto příkazy a~jejich konfigurace dobře známé, myslím, že toto je chvíle pro představení – i~když spíše na teoretické než na praktičtější úrovni – informace o~těch částech mechanismu, které byly do té doby vynechány. Znalost těchto dodatečných {\em částí} nám umožňuje vytvářet mnohem více přizpůsobené tabulky obsahu než ty, které můžeme nazývat {\em normálními} vytvořené pomocí příkazů vysvětlených až do tohoto bodu; ve většině případů to však nebudeme muset dělat.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:completecontent,
+    title=Zcela automatický obsah s~názvem,
+  ]
+
+Základní příkazy pro generování automaticky generovaného obsahu z~očíslovaných částí dokumentu ({\tt part}, {\tt chapter}, {\tt section} atd.) jsou \PlaceMacro{completecontent}\tex{completecontent} a~\PlaceMacro{placecontent}\tex{placecontent}. Hlavní rozdíl mezi těmito dvěma příkazy je ten, že první přidává do obsahu {\em název}; aby tak učinil, vloží bezprostředně před obsah {\em nečíslovanou kapitolu}, jejíž výchozí název je Obsah.
+
+Proto \tex{completecontent}:
+
+\startitemize
+
+  \item Vloží do místa, kde je nalezen, novou nečíslovanou kapitolu s~názvem \quotation{Obsah}.
+
+  \startSmallPrint
+
+    Připomínáme, že v~\ConTeXt{}u je příkaz používaný ke generování nečíslované sekce na stejné úrovni jako kapitoly \tex{title} (viz \in{section}[sec:sectiontypes]). Proto ve skutečnosti \tex{completecontent} nevkládá {\em Kapitolu} (\tex{chapter}), ale {\em Název} (\tex{title}). Neřekl jsem to, protože se domnívám, že pro čtenáře může být matoucí používat zde názvy nečíslovaných příkazů sekce, protože výraz {\em Název} má také širší význam a~pro čtenáře je snadné neidentifikovat to s~konkrétní úrovní dělení, na kterou odkazujeme.
+
+  \stopSmallPrint
+
+  \item Tato {\em kapitola} (ve skutečnosti \tex{title}) je formátována přesně stejně jako ostatní nečíslované kapitoly v~dokumentu; který ve výchozím nastavení obsahuje konec stránky.
+
+  \item Obsah se vytiskne hned za názvem.
+
+\stopitemize
+
+Zpočátku je vygenerovaný obsah {\em kompletní}, jak můžeme odvodit z~názvu příkazu, který jej generuje (\tex{completecontent}). Ale na jedné straně můžeme omezit úroveň hloubky obsahu, jak je vysvětleno v~\in{section}[sec:placecontent], a~na druhé straně, protože tento příkaz je {\em citlivý} na místo, kde se nachází v~zdrojovém souboru (viz, co je dále řečeno o~\tex{placecontent}), pokud \tex{completecontent} není nalezen na začátku dokumentu, je možné, že vygenerovaný obsah není úplný; a~v~některých místech zdrojového souboru je dokonce možné, že je příkaz zjevně ignorován. Pokud k~tomu dojde, řešením je vyvolat příkaz s~volbou \MyKey{criterium=all}. Pokud jde o~tuto volbu, viz také \in{section}[sec:placecontent].
+
+Ke změně výchozího názvu přiřazeného k~obsahu použijeme příkaz \PlaceMacro{setupheadtext}\tex{setupheadtext}, jehož syntaxe je:
+
+  \type{\setupheadtext[Language][Element=Name]}
+
+kde {\em Language} je nepovinné a~odkazuje na jazykový identifikátor používaný \ConTeXt{}em (viz \in{section}[sec:langdoc]) a~{\em Element} odkazuje na element, jehož jméno chceme změnit (\MyKey {content} v~případě obsahu) a~{\em Name} je jméno nebo název, který chceme dát našemu obsahu. Například
+
+  \type{\setupheadtext[cs][content=Obsah]}
+
+zajistí, že obsah generovaný \tex{completecontent} bude mít název\quotation{Obsah} namísto \quotation{Table of Contents}.
+
+Navíc \tex{completecontent} umožňuje stejné konfigurační možnosti jako \tex{placecontent}, na jejichž vysvětlení odkazuji (další část).
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:placecontent,
+    title=Automatický obsah bez názvu,
+  ]
+
+Obecný příkaz pro vložení obsahu bez názvu, generovaný automaticky z~příkazů pro dělení dokumentu, je\tex{placecontent}, jehož syntaxe je:
+
+\type{\placecontent[Options]}
+
+Obsah bude v~zásadě obsahovat absolutně všechny očíslované sekce, i~když jeho hloubku můžeme omezit příkazem\PlaceMacro{setupcombinedlist}\tex{setupcombinedlist} (o~kterém budeme hovořit dále). Takže například:
+
+\type{\setupcombinedlist[content][list={chapter,section}]}
+
+omezí obsah obsahu na kapitoly a~oddíly.
+
+Zvláštností tohoto příkazu je, že je citlivý na své umístění ve zdrojovém souboru. To je velmi snadné vysvětlit na několika příkladech, ale mnohem obtížnější, pokud chceme přesně specifikovat, jak příkaz funguje a~které nadpisy jsou v~jakém případě zahrnuty do obsahu. Začněme tedy příklady:
+
+\startitemize
+
+  \item \tex{placecontent} umístěný na začátku dokumentu, před příkazem první sekce (část, kapitola nebo oddíl, podle situace) vygeneruje úplný obsah.
+
+  \startSmallPrint
+
+    Nejsem si opravdu jistý, že obsah generovaný ve výchozím nastavení je {\em kompletní}, domnívám se, že obsahuje dostatek úrovní sekcí, aby byl ve většině případů úplný; ale mám podezření, že to nepřekročí osmou úroveň dělení. V~každém případě, jak je uvedeno výše, můžeme upravit úroveň dělení, kterou obsah dosáhne pomocí
+
+    \type{\setupcombinedlist[content][list={chapter, section, subsection, ...}]}
+
+  \stopSmallPrint
+
+  \item Naproti tomu stejný příkaz umístěný uvnitř části, kapitoly nebo oddílu bude generovat výhradně obsah obsahu tohoto prvku, nebo jinými slovy kapitoly, oddíly a~další nižší úrovně dělení konkrétní části, nebo oddíly (a~další úrovně) konkrétní kapitoly, nebo pododdíly konkrétního oddílu.
+
+\stopitemize
+
+Pokud jde o~technické a~podrobné vysvětlení, abychom správně porozuměli výchozímu fungování \tex{placecontent}, je nezbytné si uvědomit, že různé sekce jsou ve skutečnosti {\em prostředí} pro \ConTeXt\ Mark~IV, které začínají \tex{startSectionType} a~končí \tex{stopSectionType} a~mohou být obsaženy v~jiných nižších příkazech sekce. Takže když to vezmeme v~úvahu, můžeme říci, že \tex{placecontent} ve výchozím nastavení generuje obsah, který bude obsahovat pouze:
+
+\startitemize
+
+  \item Prvky, které patří do {\em prostředí} (úroveň oddílu), kde je umístěn příkaz. To znamená, že příkaz po umístění do kapitoly nebude obsahovat oddíly nebo pododdíly z~jiných kapitol.
+
+  \item Prvky, které mají úroveň dělení nižší než úroveň odpovídající bodu, kde je umístěn příkaz. To znamená, že pokud je příkaz v~kapitole, jsou zahrnuty pouze oddíly, pododdíly a~další nižší úrovně; ale pokud je příkaz v~oddílu, bude rozdělen tak, aby byl obsah na úrovni pododdílu.
+
+\stopitemize
+
+Kromě toho je pro vygenerování obsahu nutné, aby byl \tex{placecontent} nalezen {\em před} prvním oddílem kapitoly, ve které se nachází, nebo před prvním pododdílem odddílu, ve které se nachází, atd.
+
+\startSmallPrint
+
+  Nejsem si jistý, zda mé vysvětlení výše bylo jasné. Snad na poněkud podrobnějším příkladu než na předchozích příkladech lépe pochopíme, co tím myslím: představme si následující strukturu dokumentu:
+
+\vbox{ \startitemize[packed]
+
+  \item Kapitola 1
+
+    \startitemize[packed]
+
+    \item Oddíl 1.1
+
+    \item Oddíl 1.2
+
+      \startitemize[packed]
+
+      \item Pododdíl 1.2.1
+
+      \item Pododdíl 1.2.2
+
+      \item Pododdíl 1.2.3
+
+      \stopitemize
+
+    \item Oddíl 1.3
+
+    \item Oddíl 1.4
+
+    \stopitemize
+
+  \item Kapitola 2
+
+  \stopitemize}
+
+  Takže: \tex{placecontent} umístěný před Kapitolou 1 vygeneruje úplný obsah, podobný tomu, který generuje \tex{completecontent}, ale bez názvu. Ale pokud je příkaz umístěn v~Kapitole 1 a~před oddílem 1.1, bude obsah obsahovat pouze kapitolu; a~pokud je umístěn na začátku oddílu 1.2, obsah bude pouze obsahem tohoto oddílu. Ale pokud je příkaz umístěn například mezi oddíly 1.1 a~1.2, bude ignorován. Bude také ignorován, pokud je umístěn na konec oddílu nebo na konec dokumentu.
+
+\stopSmallPrint
+
+To vše se samozřejmě vztahuje pouze na případ, kdy příkaz nezahrnuje možnosti. Zejména volba {\tt criterium} změní toto výchozí chování.
+
+Z~možností, které \tex{placecontent} umožňuje, vysvětlím pouze dvě z~nich, ty nejdůležitější pro nastavení obsahu, a~navíc jediné, které jsou (částečně) zdokumentovány v~referenční příručce \ConTeXt{}u. Volba {\tt criterium}, která ovlivňuje obsah obsahu ve vztahu k~místu ve zdrojovém souboru, kde je umístěn příkaz; a~možnost {\tt alternative}, která ovlivňuje obecné rozložení obsahu, který se má vygenerovat.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:criteriumlist,
+    title={Prvky k~začlenění do obsahu: volba {\tt criterium}},
+  ]
+
+Výchozí chování \tex{placecontent} ve vztahu k~pozici příkazu ve zdrojovém souboru bylo vysvětleno výše. Volba {\tt criterium} toto chování mění. Mimo jiné může nabývat následujících hodnot:
+
+\startitemize
+
+  \item {\tt all}: obsah bude kompletní, bez ohledu na místo ve zdrojovém souboru, kde se příkaz nachází.
+
+  \item {\tt previous}: obsah bude obsahovat pouze příkazy oddílu (na úrovni, na které se nacházíme), které {\em předchází} \tex{placecontent}. Tato možnost je určena pro obsahy, které se zapisují na konec příslušného dokumentu nebo oddílu.
+
+  \item {\tt part, chapter, section, subsection...}: znamená, že obsah by měl být omezen na uvedenou úroveň dělení.
+
+  \item {\tt component}: ve vícesouborových projektech (viz \in{section}[sec-projects]) bude vygenerován pouze obsah odpovídající {\em komponentě}, kde je příkaz \tex{placecontent} nebo \tex{completecontent} nalezen.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:alternativelist,
+    title={Rozvržení obsahu: {\tt alternativní} možnost},
+  ]
+
+Možnost {\tt alternative} řídí celkové rozložení obsahu. Její hlavní hodnoty můžete vidět v~\in{table}[tbl:contentalternatives].
+
+\placetable
+  [here]
+  [tbl:contentalternatives]
+  {\tfx Způsoby formátování obsahu}
+{\switchtobodyfont[small]
+\starttabulate[|c|l|l|]
+\HL
+\NC {\bf alternative}
+\NC {\bf Obsah položek obsahu}
+\NC {\bf Poznámky}
+\NR
+\HL
+\NC a
+\NC Číslo -- Název -- Strana
+\NC Jeden řádek na položku
+\NR
+\NC b
+\NC Číslo -- Název -- Mezery -- Strana
+\NC Jeden řádek na položku
+\NR
+\NC c
+\NC Číslo -- Název -- Vodící tečky -- Strana
+\NC Jeden řádek na položku\NR
+\NC d
+\NC Číslo -- Název -- Strana
+\NC Průběžný obsah
+\NR
+\NC e
+\NC Název
+\NC Orámován
+\NR
+\NC f
+\NC Název
+\NC Zarovnán doleva,
+\NR
+\NC\NC\NC zarovnán doprava nebo na střed
+\NR
+\NC g
+\NC Název\NC Zarovnán na střed
+\NR
+\HL
+\stoptabulate}
+
+První čtyři alternativní hodnoty poskytují veškeré informace o~každé sekci (její číslo, název a~číslo stránky, kde začíná), a~jsou proto vhodné pro papírové i~elektronické dokumenty. Poslední tři alternativy nás informují pouze o~názvu, takže jsou vhodné pouze pro elektronické dokumenty, kde není nutné znát číslo stránky, kde sekce začíná, za předpokladu, že obsah na něj obsahuje hypertextový odkaz, což je v~\ConTeXt{}u výchozí nastavení.
+
+Dále se domnívám, že pro skutečné pochopení rozdílů mezi různými alternativami je nejlepší, aby si čtenář vygeneroval testovací dokument, kde je může podrobně analyzovat.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:setuplist,
+    title=Formát položek obsahu,
+  ]
+  \PlaceMacro{setuplist}
+
+Viděli jsme, že možnost {\tt alternative} v~\tex{placecontent} nebo\tex{completecontent} nám umožňuje ovládat obecné {\em rozvržení} obsahu, tj. jaké informace budou zobrazeny pro každý nadpis a~zda budou či nebudou jednotlivé nadpisy oddělovány zalomením řádku. Konečné úpravy každé položky obsahu se provádějí pomocí příkazu\tex{setuplist}, jehož syntaxe je následující:
+
+\type{\setuplist[Element][Configuration]}
+
+kde {\em Element} odkazuje na určitý druh sekce. Může to být {\tt part}, {\tt chapter}, {\tt section} atd. Můžeme také konfigurovat více než jeden prvek současně a~oddělit je čárkami. {\em Configuration} má až 54 možností, přičemž mnoho z~nich, jako obvykle, není výslovně zdokumentováno; ale to nebrání těm, které jsou zdokumentovány, nebo těm, které nejsou dostatečně jasné, aby umožnily úplnou úpravu obshu.
+
+Nyní vysvětlím nejdůležitější možnosti, seskupím je podle jejich užitečnosti, ale než se do nich pustíme, pamatujme, že položka obsahu, v~závislosti na hodnotě {\tt alternative}, může mít až tři různé složky: Číslo sekce, název sekce a~číslo stránky. Možnosti konfigurace nám umožňují konfigurovat různé komponenty globálně nebo samostatně:
+
+\startitemize
+
+  \item {\em Zahrnutí (nebo ne) různých komponent}: Pokud jsme zvolili alternativu, která kromě názvu obsahuje číslo sekce a~číslo stránky (alternativy \quote{a} \quote{b} \quote{c} nebo \quote{d}), možnosti {\tt headnumber=no} nebo {\tt pagenumber=no} znamenají, že pro konkrétní úroveň, kterou konfigurujeme, se číslo sekce ({\tt headnumber}) nebo číslo stránky ({\tt pagenumber}) nezobrazuje.
+
+  \item {\em Barva a~styl}: Již víme, že položka, která generuje konkrétní sekci v~obsahu, může mít (v~závislosti na alternativě) až tři různé součásti: číslo sekce, nadpis a~číslo stránky. Můžeme společně označit styl a~barvu pro tři komponenty pomocí možností {\tt style} a~{\tt color}, nebo to udělat jednotlivě pro každou komponentu pomocí {\tt numberstyle, textstyle} nebo {\tt pagestyle} (pro styl) a~{\tt numbercolor, textcolor} nebo {\tt pagecolor} pro barvu.
+
+  Chcete-li ovládat vzhled každé položky, kromě stylu samotného, můžeme použít nějaký příkaz na celou položku nebo na jeden z~jejích různých prvků. K~tomu existují možnosti {\tt command}, {\tt numbercommand}, {\tt pagecommand} a~{\tt textcommand}. Zde uvedený příkaz může být standardní příkaz \ConTeXt{}u nebo příkaz, který jsme sami vytvořili. Číslo sekce, text názvu a~číslo stránky budou předány jako argument volbě {\tt command}, zatímco název oddílu bude předán jako argument {\tt textcommand} a~číslo stránky {\tt pagecommand}. Takže například následující věta zajistí, že názvy oddílů budou napsány (falešnými) malými kapitálkami:
+
+  \starttyping
+
+    \setuplist[section][textcommand=\Cap]
+
+  \stoptyping
+
+  \item {\em Oddělení ostatních prvků obsahu}: Volby {\tt before} a~{\tt after} nám umožňují označit příkazy, které budou provedeny před ({\tt before}) a~po ({\tt after}) vysázení položky obsahu. Normálně se tyto příkazy používají k~nastavení buď mezery nebo nějakého oddělovacího prvku mezi předchozími a~následujícími položkami.
+
+  \item {\em Odsazení prvku}: nastavte s~volbou {\tt margin}, která nám umožňuje nastavit míru levého odsazení, které budou mít položky úrovně, kterou konfigurujeme.
+
+  \item {\em Hypertextové odkazy vložené do obsahu}: Ve výchozím nastavení obsahují položky rejstříku hypertextový odkaz na stránku dokumentu, kde daná sekce začíná. Pomocí možnosti {\tt interaction} můžeme tuto funkci zakázat ({\tt interaction=no}) nebo omezit část položky rejstříku, kde bude hypertextový odkaz, což může být číslo sekce ({\tt interaction=number} nebo {\tt interaction=sectionnumber}), název sekce ({\tt interaction=text} nebo {\tt interaction=title}) nebo číslo stránky ({\tt interaction=page} nebo {\tt interaction=pagenumber}).
+
+  \item {\em Další aspekty}:
+
+  \startitemize
+
+    \item {\tt width}: určuje vzdálenost mezi číslem a~názvem sekce. Může to být rozměr nebo klíčové slovo {\tt fit}, které nastavuje přesnou šířku čísla sekce.
+
+    \item {\tt symbol}: umožňuje nahrazení čísla sekce {\em symbolem}. Jsou podporovány tři možné hodnoty: {\tt one}, {\tt two} a~{\tt three}. Hodnota {\tt none} pro tuto možnost odstraní číslo sekce z~obsahu.
+
+    \item {\tt numberalign}: označuje zarovnání prvků číslování; může být left, right, middle, flushright, flushleft.
+
+  \stopitemize
+
+\stopitemize
+
+Mezi mnoha možnostmi konfigurace obsahu není žádná, která by nám umožňovala přímo ovlivňovat vzdálenost mezi řádky. Ve výchozím nastavení to bude příkaz, který se vztahuje na dokument jako celek. Často je však vhodnější, aby řádky v~obsahu byly o~něco {\em těsnější} než zbytek dokumentu. Abychom toho dosáhli, měli bychom uzavřít příkaz, který generuje obsah (\tex{placecontent} nebo\tex{completecontent}) ve skupině, kde jsou nastaveny jiné meziřádkové mezery. Například:
+
+\starttyping
+\start
+  \setupinterlinespace[small]
+  \placecontent
+\stop
+\stoptyping
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:manual adjustments,
+    title=Ruční úpravy obsahu,
+  ]
+
+Již jsme vysvětlili dva základní příkazy pro generování tabulek obsahu (\tex{placecontent} a~\tex{completecontent}) a~také jejich možnosti. Pomocí těchto dvou příkazů jsou obsahy automaticky generovány, sestavovány z~existujících očíslovaných sekcí v~dokumentu nebo v~bloku nebo segmentu dokumentu, na který se obsah vztahuje. Nyní vysvětlím určitá {\em nastavení}, která můžeme provést, aby obsah obsahu nebyl tak {\em automatický}. Z~toho vyplývá:
+
+\startitemize
+
+  \item Možnost zahrnout také některé nečíslované názvy sekcí do obsahu.
+
+  \item Možnost ručního odeslání konkrétní položky, která neodpovídá přítomnosti očíslované sekce, do obsahu.
+
+  \item Možnost vyloučit určitou očíslovanou sekci z~obsahu.
+
+  \item Možnost, že název určité sekce uvedený v~obsahu se přesně neshoduje s~názvem obsaženým v~těle dokumentu.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsubsection
+  [
+    reference=sec:toc with unnumbered secs,
+    title=Zahrnování nečíslovaných sekcí v~obsahu,
+  ]
+
+Mechanismus, kterým \ConTeXt\ vytváří obsah, je nastavený tak, že jsou automaticky zahrnuty všechny očíslované sekce, což, jak jsem již řekl (viz\in{section}[sec:title parts]) závisí na těchto dvou ({\tt number} a~{\tt incrementnumber}) možnostech, které můžeme změnit pomocí \tex{setuphead} pro každý druh sekce. Bylo tam také vysvětleno, že typ sekce, kde {\tt incrementnumber=yes} a~{\tt number=no} bude vnitřně, ale ne externě číslovaná sekce.
+
+Pokud tedy chceme, aby určitý typ nečíslované sekce -- například {\tt title} -- byl zahrnut do obsahu, musíme změnit hodnotu možnosti {\tt incrementnumber} pro tento typ sekce a~nastavit ji na {\tt yes} a~pak zahrnout tento typ sekce mezi ty, které se mají zobrazit v~obsahu, což se provede, jak je vysvětleno výše, pomocí \tex{setupcombinedlist}:
+
+\starttyping
+  \setuphead
+    [title]
+    [incrementnumber=yes]
+
+ \setupcombinedlist
+   [content]
+   [list={chapter, title, section, subsection, subsubsection}]
+\stoptyping
+
+Pak můžeme, pokud si to přejeme, naformátovat tuto položku pomocí \tex{setuplist} přesně stejným způsobem jako kterýkoli z~ostatních; například:
+
+\type{\setuplist[title][style=bold]}
+
+{\bf Poznámka:} Právě vysvětlený postup bude zahrnovat všechny výskyty příslušného nečíslovaného typu sekce v~našem dokumentu (v~našem příkladu sekce typu {\tt title}). Pokud si přejeme zahrnout pouze konkrétní výskyt tohoto typu sekce do obsahu, je vhodnější tak učinit postupem vysvětleným níže.
+
+\stopsubsubsection
+
+\startsubsubsection
+  [
+    reference=sec:manualtoc,
+    title=Ruční přidávání položek do obsahu,
+  ]
+
+Z~libovolného místa ve zdrojovém souboru můžeme odeslat buď položku (simulující existenci sekce, která ve skutečnosti neexistuje), nebo příkaz do obsahu.
+
+Chcete-li odeslat položku, která simuluje existenci sekce, která ve skutečnosti neexistuje, použijte \PlaceMacro{writetolist}\tex{writetolist}, jehož syntaxe je:
+
+\type{\writetolist[SectionType][Options]{Number}{Text}}
+
+ve kterém
+
+\startitemize
+
+  \item První argument označuje úroveň, kterou musí mít tato položka sekce v~obsahu: {\tt chapter}, {\tt section}, {\tt subsection} atd.
+
+  \item Druhý argument, který je volitelný, umožňuje tuto položku konfigurovat určitým způsobem. Pokud je ručně odeslaný vstup vynechán, bude zformátován stejně jako všechny položky úrovně označené prvním argumentem; i~když musím podotknout, že v~mých testech se mi to nepodařilo zprovoznit.
+
+  \startSmallPrint
+
+    Jak v~oficiálním \ConTeXt{}ovém seznamu příkazů (viz \in{section}[sec:qrc-setup-en]), tak na wiki je nám řečeno, že tento argument umožňuje \Doubt stejné hodnoty jako \tex{setuplist}, což je příkaz, který nám umožňuje formátovat různé položky obsahu. Ale trvám na tom, že v~mých testech se mi nepodařilo žádným způsobem změnit vzhled položky obsahu odeslané ručně.
+
+  \stopSmallPrint
+
+  \item Třetí argument má odrážet číslování, které má prvek odeslaný do \Doubt obsahu, ale ani to se mi nepodařilo při mých testech uvést do provozu.
+
+  \item Poslední argument obsahuje text, který má být odeslán do obsahu.
+
+\stopitemize
+
+To je užitečné například v~případě, že chceme poslat konkrétní nečíslovanou sekci, ale pouze tu do obsahu. V~\in{section}[sec:toc with unnumberedsecs] je vysvetleno, jak dostat celou kategorii nečíslovaných sekcí k~odeslání do obsahu; ale pokud na něj chceme poslat pouze konkrétní výskyt typu sekce, je pohodlnější použít příkaz \tex{writetolist}. A~tak například, pokud chceme, aby část našeho dokumentu obsahující bibliografii nebyla číslovaná, ale přesto byla zahrnuta do obsahu, napíšeme:
+
+\starttyping
+\subject{Bibliografie}
+\writetolist[section]{}{Bibliografie}
+\stoptyping
+
+Podívejte se, jak používáme nečíslovanou verzi {\tt section}, což je {\tt subject}, pro sekci, ale posíláme ji do indexu ručně, jako by to byla očíslovaná sekce ({\tt section}).
+
+Dalším příkazem určeným k~ručnímu ovlivnění obsahu je \PlaceMacro{writebetweenlist}\tex{writebetweenlist}, který se používá k~odeslání nikoli samotné položky, ale {\em příkazu} do obsahu, z~určitého místa v~dokumentu. Pokud například chceme zahrnout řádek mezi dvě položky v~obsahu, můžeme kdykoli v~dokumentu, který se nachází mezi dvěma příslušnými oddíly, napsat následující:
+
+\type{\writebetweenlist[section]{\hrule}}
+
+\stopsubsubsection
+
+\startsubsubsection
+  [title=Vyloučení z~obsahu konkrétní sekce patřící k~typu sekce, který je součástí obsahu]
+
+Obsah je vytvořen z~{\em typu sekcí} stanovených, jak již víme, volbou {\tt list} z~\tex{setupcombinedlist}, takže pokud se v~obsahu musí objevit určitý {\em typ sekce}, neexistuje způsob, jak z~něj vyloučit konkrétní sekci, kterou z~jakýchkoli důvodů nechceme v~obsahu.
+
+Normálně, pokud nechceme, aby se tam objevila sekce, co bychom udělali, je použít její {\em neočíslovaný ekvivalent}, například {\tt title} namísto {\tt chapter}, {\tt subject} místo {\tt section} atd. Tyto sekce se neodesílají do obsahu a~ani nejsou číslovány.
+
+Pokud však z~nějakého důvodu chceme, aby určitá sekce byla očíslována, ale neobjevila se v~obsahu, i~když jiné typy tohoto druhu ano, můžeme použít {\em trik}, který spočívá ve vytvoření nového typu sekce, který je klonem daného úseku. Například:
+
+\starttyping
+\definehead[MojePodsekce][subsection]
+\section{První sekce}
+\subsection{První podsekce}
+\MojePodsekce{Druhá podsekce}
+\subsection{Třetí podsekce}
+\stoptyping
+
+Tímto se zajistí, že při vkládání sekce typu {\tt MojePodsekce} se zvýší počítadlo podsekcí, protože tato sekce je {\em klon} podsekcí, ale obsah se nezmění, protože ve výchozím nastavení neobsahuje typy {\tt MojePodsekce}.
+
+\stopsubsubsection
+
+\startsubsubsection
+  [title=Text názvu sekce, který se liší v~obsahu od názvu v~těle dokumentu]
+
+Pokud nechceme, aby byl název konkrétní sekce obsažený v~obsahu totožný s~názvem zobrazeným v~těle dokumentu, máme k~dispozici dva postupy:
+
+\startitemize
+
+  \item Vytvoření sekce nikoli s~tradiční syntaxí (\type{SectionType{Title}}), ale pomocí \tex{SectionType [Options]} nebo pomocí \tex{startSectionType [Options]} a~přiřadit text, který chceme napsat v~obsahu k~volbě {\tt list} (viz \in{section}[sec:sectionsyntax]).
+
+  \item Při psaní názvu příslušné sekce do těla dokumentu použijte příkaz \tex{nolist}: tento příkaz způsobí, že text, který bere jako argument, bude v~obsahu nahrazen třemi tečkami. Například:
+
+\starttyping\chapter [title={\nolist{Přibližný a~mírně se opakující} úvod do reality zjevného}]\stoptyping
+
+  by \ConTeXt\ vysázel jako název kapitoly v~těle dokumentu \quotation{Přibližný a~mírně se opakující úvod do reality zjevného}, ale do obsahu by poslal následující text \quotation{... úvod do reality zjevného}.
+
+  \startSmallPrint
+
+    {\bf Pozor:} To, na co jsem právě poukázal ohledně příkazu \tex{nolist}, je uvedeno jak v~referenční příručce \ConTeXt{u}, tak na \goto{wiki}[url(https://wiki.contextgarden.net/Command/nolist)]. Mně to však vyhazuje chybu při kompilaci, která mi říká, že příkaz \tex{nolist} není definován.
+
+  \stopSmallPrint
+
+\stopitemize
+
+\stopsubsubsection
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:lists,
+    title={Seznamy, kombinované seznamy a~obsah na základě seznamu},
+  ]
+
+Interně pro \ConTeXt\ není obsah nic jiného než {\em kombinovaný seznam}, který, jak jeho název napovídá, sestává z~kombinace jednoduchých seznamů. Základní pojem, ze kterého \ConTeXt\ staví obsah, je tedy seznam. Několik seznamů je sloučeno pro vytvoření obsahu. Ve výchozím nastavení \ConTeXt\ obsahuje předdefinovaný kombinovaný seznam nazvaný \MyKey{content} a~to je to, s~čím dosud zkoumané příkazy pracují: \tex{placecontent} a\tex{completecontent}.
+
+\startsubsection
+  [title=Seznamy v~\ConTeXt{u}]
+
+V~\ConTeXt{u} je {\em seznam} řada číslovaných prvků, o~kterých je třeba si zapamatovat tři věci:
+
+\startitemize[n]
+
+  \item Číslo.
+
+  \item Jméno nebo název.
+
+  \item Stránka, kde je nalezen.
+
+\stopitemize
+
+To se děje s~očíslovanými sekcemi; ale také s~dalšími prvky dokumentu, jako jsou obrázky, tabulky atd. Obecně se jedná o~ty prvky, pro které existuje příkaz, jehož název začíná \tex{place}, který je umístí jako \tex{placetable}, \tex{placefigure}, atd.
+
+Ve všech těchto případech \ConTeXt\ automaticky vygeneruje seznam různých časů, kdy se typ příslušného prvku objevil, jeho číslo, název a~stránku. Tak například existuje seznam kapitol, nazvaný {\tt chapter}, pro další ze sekcí nazvaný {\tt section}; ale také další pro tabulky (nazvaný {\tt table}) nebo pro obrázky (nazvaný {\tt figure}). Seznamy generované automaticky \ConTeXt{em} se vždy nazývají stejně jako položka, kterou ukládají.
+
+Automaticky se vygeneruje i~seznam, pokud vytvoříme např. nový typ číslované sekce: při jeho vytváření budeme implicitně vytvářet i~seznam, který je ukládá. A~pokud pro nečíslovanou sekci ve výchozím nastavení nastavíme možnost {\tt incrementnumber=yes}, čímž se stane očíslovanou sekcí, implicitně také vytvoříme seznam s~tímto názvem.
+
+Spolu s~implicitními seznamy (automaticky definovanými \ConTeXt{em}) můžeme vytvářet vlastní seznamy pomocí \tex{definelist}, jehož syntaxe je
+
+\PlaceMacro{definelist}\type{\definelist[ListName][Configuration]}
+
+Položky v~seznamu jsou přidány:
+
+\startitemize
+
+  \item V~seznamech předdefinovaných \ConTeXt{em} nebo jím vytvořených jako výsledek vytvoření nového plovoucího objektu (viz \in{section}[sec:definefloat]), automaticky pokaždé, když je do dokumentu vložena položka ze seznamu, buď oddělovacím příkazem nebo příkazem \tex{placeWhatever} pro jiné typy seznamů, například: \tex{placefigure}, vloží do dokumentu libovolný obrázek, ale také vloží odpovídající položku do seznamu.
+
+  \item Ručně v~libovolném seznamu pomocí \tex{writetolist[ListName]}, jak již bylo vysvětleno v~\in{subsection}[sec:manualtoc] v~\in{section}[sec:manual adjustments]. K~dispozici je také příkaz \tex{writebetweenlist}. V~té části to bylo také vysvětleno.
+
+\stopitemize
+
+Jakmile je seznam vytvořen a~všechny jeho položky jsou v~něm zahrnuty, tři základní příkazy, které se k~němu vztahují, jsou \tex{setuplist},\PlaceMacro{placelist}\tex{placelist} a\PlaceMacro{completelist}\tex{completelist}. První nám umožňuje konfigurovat, jak seznam vypadá; poslední dva vloží daný seznam na místo v~dokumentu, kde je najde. Rozdíl mezi \tex{placelist} a~\tex{completelist} je podobný jako rozdíl mezi \tex{placecontent} a~\tex{completecontent} (viz sekce\in{}[sec:completecontent] a~\in{}[sec:placecontent]).
+
+Takže například,
+
+\type{\placelist[section]}
+
+vloží seznam sekcí včetně hypertextového odkazu na ně, pokud je povolena interaktivita dokumentu a~pokud v~\tex{setuplist} nemáme nastaveno {\tt interaction=no}. Seznam sekcí není úplně stejný jako obsah založený na sekcích: myšlenka obsahu obvykle zahrnuje i~nižší úrovně (podsekce, podpodsekce atd.). Ale seznam sekcí bude obsahovat pouze sekce samotné.
+
+Syntaxe těchto příkazů je:
+
+\type{\placelist[ListName][Options]}
+
+\type{\setuplist[ListName][Configuration]}
+
+Možnosti \tex{setuplist} již byly vysvětleny v~\in{section}[sec:setuplist] a~možnosti pro \tex{placelist} jsou stejné jako pro \tex{placecontent} (viz \in{section}[sec:placecontent]).
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:variouslists,
+    title={Seznamy nebo indexy obrázků, tabulek a~dalších položek},
+  ]
+
+Z~toho, co bylo dosud řečeno, je vidět, že protože \ConTeXt\ automaticky vytváří seznam obrázků umístěných v~dokumentu pomocí příkazu\tex{placefigure}, generování seznamu nebo rejstříku obrázků na určitém místě v~našem dokumentu je stejně jednoduché jako použití příkazu \tex{placelist[figure]}. A~pokud chceme vygenerovat seznam s~názvem (podobný tomu, co získáme pomocí \tex{completecontent}), můžeme to udělat pomocí \tex{completelist[figure]}. Podobně můžeme postupovat s~dalšími čtyřmi předdefinovanými druhy plovoucích objektů v~\ConTeXt{u}: tabulkami (\MyKey{table}), grafikami (\MyKey{graphic}), {\em intermezzy} (\MyKey{intermezzo}) a~chemickými vzorci (\MyKey{chemical}), ačkoli pro konkrétní případy, \ConTeXt\ již obsahuje příkaz, který je generuje bez názvu: (\PlaceMacro{placelistoffigures}\tex{placelistoffigures},\PlaceMacro{placelistoftables}\tex{placelistoftables}, \PlaceMacro{placelistofgraphics}\tex{placelistofgraphics},\PlaceMacro{placelistofintermezzi}\tex{placelistofintermezzi} a\PlaceMacro{placelistofchemicals}\tex{placelistofchemicals}) a~další, který je generuje s~názvem:(\PlaceMacro{completelistoffigures}\tex{completelistoffigures},\PlaceMacro{completelistoftables}\tex{completelistoftables},\PlaceMacro{completelistofgraphics}\tex{completelistofgraphics},\PlaceMacro{completelistofintermezzi}\tex{completelistofintermezzi} a\PlaceMacro{completelistofchemicals}\tex{completelistofchemicals}), podobným způsobem jako \tex{completecontent}.
+
+Stejně tak pro plovoucí objekty, které jsme sami vytvořili (viz\in{section}[sec:definefloat]), se automaticky vytvoří \tex{placelistof<FloatName>} a\tex{completelistof<FloatName>}.
+
+Pro seznamy, které jsme vytvořili pomocí \tex{definelist}, můžeme vytvořit index pomocí \tex{placelist[ListName]} nebo pomocí \tex{completelist[ListName]}.
+
+\stopsubsection
+
+\startsubsection
+  [title=Kombinované seznamy]
+
+Kombinovaný seznam je, jak jeho název napovídá, seznam, který kombinuje položky z~různých dříve definovaných seznamů. Ve výchozím nastavení \ConTeXt\ definuje kombinovaný seznam pro tabulky obsahu, jejichž název je \MyKey{content}, ale můžeme vytvořit další kombinované seznamy pomocí \PlaceMacro{definecombinedlist}\tex{definecombinedlist}, jehož syntaxe je:
+
+\type{\definecombinedlist[Name][Lists][Options]}
+
+kde
+
+\startitemize
+
+  \item {\em Name}: je název, který bude mít nový kombinovaný seznam.
+
+  \item {\em Lists}: odkazuje na názvy seznamů, které mají být kombinovány, oddělené čárkami.
+
+  \item {\em Options}: Možnosti konfigurace pro seznam. Mohou být uvedeny v~době definování seznamu, nebo pravděpodobně nejlépe, když je seznam vyvolán. Hlavní možnosti (které již byly vysvětleny) jsou {\tt criterium} (\in{subsection}[sec:criteriumlist] v~\in{section} [sec:placecontent]) a~{\tt alternative} (v~\in{subsection}[sec:alternativelist] ve stejné sekci).
+
+\stopitemize
+
+Vedlejším efektem vytvoření kombinovaného seznamu pomocí \tex{definecombinedlist} je, že také vytvoří příkaz nazvaný\tex{placeListName}, který slouží k~vyvolání seznamu, to znamená: k~jeho zahrnutí do výstupního souboru. Takže například,
+
+\type{definecombinedlist[obsah]}
+
+vytvoří příkaz \tex{placeobsah}; a
+
+\type{definecombinedlist[content]}
+
+vytvoří příkaz \tex{placecontent}
+
+Ale počkat, \tex{placecontent}! Není to příkaz, který se používá k~vytvoření {\em normálního} obsahu? Skutečně: to znamená, že standardní obsah je ve skutečnosti \ConTeXt{em} vytvořen pomocí následujícího příkazu:
+
+\starttyping
+\definecombinedlist
+  [content]
+  [part, chapter, section, subsection, subsubsection, subsubsubsection, subsubsubsubsection]
+\stoptyping
+
+Jakmile je náš kombinovaný seznam definován, můžeme jej nakonfigurovat (nebo překonfigurovat) pomocí \tex{setupcombinedlist}, který umožňuje již vysvětlené možnosti {\tt criterium} (viz \in{subsection}[sec:criteriumlist] v~\in{section}[sec:placecontent]) a~{\tt alternative} (viz\in{subsection}[sec:alternativelist] ve stejné sekci), stejně jako možnost {\tt list} sloužící ke {\em změně} zahrnutých seznamů v~kombinovaném seznamu.
+
+\startSmallPrint
+
+  Oficiální seznam příkazů \ConTeXt{u} (viz \in{section}[sec:qrc-setup-en]) nezmiňuje volbu {\tt list} mezi možnostmi povolenými pro \tex{setupcombinedlist}, ale používá se na několika příkladech použití tohoto příkazu na wiki (která jej navíc nezmiňuje ani na stránce věnované tomuto příkazu). Také jsem zkontroloval, že tato možnost funguje.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [title=Index]
+
+\startsubsection
+  [title=Generování indexu]
+
+Předmětový rejstřík se skládá ze seznamu významných termínů, obvykle umístěném na konci dokumentu, označujícího stránky, kde lze daný předmět nalézt.
+
+Když byly knihy sázeny ručně, bylo generování předmětového rejstříku složitým a~také únavným úkolem. Jakákoli změna stránkování by mohla ovlivnit všechny položky v~rejstříku. Nebyly proto příliš běžné. Dnes však počítačové mechanismy pro sazbu znamenají, že i~když tento úkol bude pravděpodobně i~nadále zdlouhavý, již není tak složitý, protože pro počítačový systém není tak obtížné udržovat aktuální seznam dat spojených s~položkou rejstříku.
+
+K~vytvoření předmětového rejstříku potřebujeme:
+
+\startitemize[n]
+
+  \item Určit která slova, termíny nebo koncepty mají být jeho součástí. To je úkol, který může udělat pouze autor.
+
+  \item Zkontrolovat, ve kterých bodech dokumentu se každý záznam v~budoucím rejstříku objeví. I~když, abychom byli přesní, více než {\em kontrolovat} místa ve zdrojovém souboru, kde se diskutuje o~konceptu nebo problému, co děláme, když pracujeme s~\ConTeXt{em}, je {\em označit} tato místa vložením příkazu, který pak poslouží k~automatickému vygenerování indexu. Toto je ta zdlouhavá část.
+
+  \item Nakonec vygenerujeme a~naformátujeme index umístěním na místo v~dokumentu, které si zvolíme. Tohle je v~\ConTeXt{u} docela jednoduché a~vyžaduje pouze jeden příkaz: \tex{placeindex}.
+
+\stopitemize
+
+\subsubsection{Předchozí definice položek v~rejstříku a~označení bodů ve zdrojovém souboru, které na ně odkazují}
+
+Základní práce je ve druhém kroku. Je pravda, že počítačové systémy to také usnadňují v~tom smyslu, že můžeme provést globální textové vyhledávání, abychom našli místa ve zdrojovém souboru, kde se o~konkrétním předmětu jedná. Ale také bychom se neměli slepě spoléhat na takové textové vyhledávání: dobrý předmětový rejstřík musí být schopen odhalit každé místo, kde se diskutuje o~konkrétním předmětu, i~když se tak děje bez použití {\em standardního} termínu pro jeho odkazování.
+
+Chcete-li {\em označit} skutečný bod ve zdrojovém souboru a~přiřadit jej ke slovu, termínu nebo myšlence, které se objeví v~indexu, použijeme příkaz \PlaceMacro{index}\tex{index}, jehož syntaxe je následující:
+
+\type{\index[Alphabetical]{Index entry}}
+
+kde {\em Alphabetical} je volitelný argument, který se používá k~označení alternativního textu k~textu samotné položky rejstříku, aby bylo možné řadit podle abecedy, a~{\em Index entry} je text, který se objeví v~rejstříku, spojený s~touto značkou. Můžeme také použít funkce formátování, které chceme použít, a~pokud se v~textu objeví vyhrazené znaky, musí být zapsány obvyklým \ConTeXt{ovým} způsobem.
+
+\startSmallPrint
+
+  Možnost seřadit položku rejstříku podle abecedy jiným způsobem, než jak je ve skutečnosti napsána, je velmi užitečná. Vzpomeňte si například na tento dokument, pokud chci vygenerovat záznam v~rejstříku pro všechny odkazy na příkaz \tex{TeX}. Například sekvence \type{\index{\backslash TeX}} vypíše příkaz nikoli podle \quote{t} v~\quote{TeX}, ale mezi symboly, protože výraz zaslaný do indexu začíná znakem obrácené lomítko. To se provede napsáním \type{\index[tex]{\backslash TeX}}.
+
+\stopSmallPrint
+
+{\em Položky indexu} budou ty, které chceme. Aby byl předmětový rejstřík skutečně užitečný, musíme se trochu více snažit při zodpovězení otázky: jaké pojmy bude čtenář dokumentu s~největší pravděpodobností hledat; takže například může být lepší definovat položku jako \quotation{nemoc, Hodgkins} než ji definovat jako \quotation{Hodgkinova nemoc}, protože obsáhlejším termínem je \quotation{nemoc}.
+
+\startSmallPrint
+
+  Podle konvence jsou položky v~předmětovém rejstříku vždy psány malými písmeny, pokud se nejedná o~vlastní jména.
+
+\stopSmallPrint
+
+Pokud má rejstřík několik úrovní hloubky (jsou povoleny až tři) pro přiřazení konkrétní položky rejstříku ke konkrétní úrovni, použije se znak \quote{+} následovně:
+
+\starttyping
+\index{Položka 1+Položka 2}
+\index{Položka 1+Položka 2+Položka 3}
+\stoptyping
+
+V~prvním případě jsme definovali položku druhé úrovně nazvanou {\em Položka 2}, která bude podpoložkou {\em Položky 1}. Ve druhém případě jsme definovali položku třetí úrovně nazvanou {\em Položka 3}, která bude podpoložkou {\em Položky 2}, což je zase podpoložkou {\em Položky 1}. Například
+
+\vbox{
+\starttyping
+Můj \index{pes}pes je \index{pes+chrt}chrt zvaný Rocket.
+Nemá rád \index{kočka+toulavé}toulavé kočky.
+\stoptyping}
+
+Některé podrobnosti výše stojí za zmínku:
+
+\startitemize
+
+  \item Příkaz \tex{index} je obvykle umístěn {\em před} slovem, se kterým je spojen, a~normálně od něj není oddělen mezerou. Tím se zajistí, že příkaz bude na stejné stránce jako slovo, ke kterému je připojen:
+
+  \startitemize
+
+      \item Pokud by je oddělovala mezera, mohla by existovat možnost, že by \ConTeXt\ zvolil právě tuto mezeru pro zalomení řádku, což by také mohlo skončit jako konec stránky a~v~takovém případě by byl příkaz na jedné stránce a~slovo, se kterým je spojeno na další stránce.
+
+    \item Pokud by příkaz měl následovat {\em za} slovem, bylo by možné, aby toto slovo bylo rozděleno na slabiky a~mezi dvě jeho slabiky by se vložilo zalomení řádku, což by také znamenalo konec stránky a~v~takovém případě by příkaz ukazoval na další stránku začínající slovem, na které ukazuje.
+
+  \stopitemize
+
+  \item Podívejte se, jak jsou termíny druhé úrovně zavedeny ve druhém a~třetím vzhledu příkazu.
+
+  \item Také zkontrolujte, jak při třetím použití příkazu \tex{index}, ačkoli slovo, které se v~textu objeví, je \quotation{kočky}, termín, který bude odeslán do indexu, je \quotation{kočka}.
+
+  \item Konečně: podívejte se, jak byly tři položky pro předmětový rejstřík zapsány na pouhé dva řádky. Už jsem zmínil, že označení přesných míst ve zdrojovém souboru je zdlouhavé. Nyní dodám, že označit jich příliš mnoho je kontraproduktivní. Příliš rozsáhlý rejstřík není v~žádném případě výhodnější než stručnější, ve kterém jsou všechny informace relevantní. Proto jsem již dříve řekl, že rozhodnutí, která slova vygenerují záznam v~rejstříku, by mělo být výsledkem vědomého rozhodnutí autora.
+
+\stopitemize
+
+Pokud chceme, aby byl náš rejstřík skutečně užitečný, termíny, které se používají jako synonyma, musí být v~rejstříku seskupeny pod jeden hlavní termín. Ale protože je možné, aby čtenář v~rejstříku vyhledával informace podle kteréhokoli z~jiných hesel, je běžné, že rejstřík obsahuje položky, které odkazují na jiné položky. Například předmětový rejstřík příručky občanského práva by mohl být něco jako
+
+\startframedtext[frame=off]
+
+  smluvní invalidita\\
+  \qquad viz {\em neplatnost}.
+
+\stopframedtext
+
+Toho nedosáhneme pomocí příkazu \tex{index}, ale pomocí \PlaceMacro{seeindex}\tex{seeindex}, jehož formát je:
+
+\type{\seeindex [Alphabetical] {Entry1} {Entry2}}
+
+kde {\em Entry1} je záznam rejstříku, který bude odkazovat na druhý; a~{\em Entry2} je referenční cíl. V~našem předchozím příkladu bychom museli napsat:
+
+\starttyping
+\seeindex{smluvní invalidita}{neplatnost}
+\stoptyping
+
+V~\tex{seeindex} můžeme také použít znak \quote{+} k~označení podúrovní pro kterýkoli z~jeho dvou argumentů v~hranatých závorkách.
+
+\subsubsection{Generování konečného indexu}
+
+Jakmile označíme všechny položky pro index v~našem zdrojovém souboru, skutečné vygenerování indexu se provede pomocí příkazů \PlaceMacro{placeindex}\tex{placeindex} nebo\PlaceMacro{completeindex}\tex{completeindex}. Tyto dva příkazy prohledají zdrojový soubor pro příkazy \tex{index} a~vygenerují seznam všech položek, které by měl mít index, s~přidružením termínu k~číslu stránky odpovídajícímu tomu, kde nalezl příkaz \tex{index}. Potom abecedně seřadí seznam výrazů, které se objevují v~rejstříku, sloučí případy, kdy se stejný výraz vyskytuje více než jednou, a~nakonec vloží správně formátovaný výsledek do konečného dokumentu.
+
+Rozdíl mezi \tex{placeindex} a~\tex{completeindex} je podobný rozdílu mezi \tex{content} a~\tex{completecontent} (viz\in{section}[sec:completecontent]): \tex{placeindex} je omezen na generování rejstříku a~jeho vkládání, zatímco \tex{completeindex} nejdříve vloží do finálního dokumentu novou kapitolu, která se standardně nazývá \quotation{Index}, do které bude index vysázen.
+
+\stopsubsection
+
+\startsubsection
+  [title=Formátování předmětového rejstříku]
+  \PlaceMacro{setupregister}
+
+Předmětové rejstříky jsou konkrétní aplikací obecnější struktury, kterou \ConTeXt\ volá \quotation{\em register}; proto je index formátován příkazem:
+
+\type{\setupregister[index][Configuration]}
+
+Pomocí tohoto příkazu můžeme:
+
+\startitemize
+
+  \starthead Určit, jak bude index vypadat s~jeho různými prvky. Konkrétně:\stophead %\head nefunguje pouze s LMTX
+
+  \startitemize
+
+    \item Záhlaví rejstříku, což jsou obvykle písmena abecedy. Ve výchozím nastavení jsou tato písmena malá. Pomocí {\tt alternative=A} je můžeme nastavit jako velká písmena.
+
+    \item Samotné položky a~jejich číslo stránky. Vzhled závisí na možnostech {\tt textstyle, textcolor, textcommand} a~{\tt deeptextcommand} pro položku a~{\tt pagestyle, pagecolor} a~{\tt pagecommand} pro číslo stránky. Pomocí {\tt pagenumber=no} můžeme také vygenerovat předmětový rejstřík bez čísel stránek (i~když nevím, jestli by to mohlo být užitečné).
+
+    \item Volba {\tt distance} měří šířku oddělení mezi názvem položky a~čísly stránek; ale také měří velikost odsazení pro podpoložky.
+
+  \stopitemize
+
+  Mylsím si, že názvy možností {\tt style}, {\tt textstyle}, {\tt pagestyle}, {\tt color}, {\tt textcolor} a~{\tt pagecolor} jsou dostatečně jasné, aby nám řekly, co každá z~nich dělá. Pro {\tt command}, {\tt pagecommand}, {\tt textcommand} a~{\tt deeptextcommand} odkazuji na vysvětlení pro podobně pojmenované možnosti v~\in{section}[sec:titlestyle], týkající se konfigurace příkazů sekcí.
+
+  \item Chcete-li nastavit obecný vzhled indexu, který mimo jiné zahrnuje příkazy, které se mají provést před ({\tt before}) nebo za ({\tt after}) indexem, počet sloupců, které musí mít ({\tt n}), zda mají být sloupce stejné nebo ne ({\tt balance}), zarovnání položek ({\tt align}) atd.
+
+\stopitemize
+
+\stopsubsection
+
+\startsubsection
+  [title=Vytváření dalších indexů]
+  \PlaceMacro{defineregister}\PlaceMacro{setupregister}
+
+Vysvětlil jsem předmětový rejstřík, jako by v~dokumentu byl možný pouze jeden takový rejstřík; ale pravdou je, že dokumenty mohou mít tolik indexů, kolik chcete. Může existovat například rejstřík osobních jmen, který shromažďuje jména osob zmíněných v~dokumentu s~uvedením místa, kde jsou citováni. Ty jsou stále jakýmsi indexem. V~právním textu bychom také mohli vytvořit speciální rejstřík pro zmínky o~občanském zákoníku; nebo v~dokumentu, jako je tento, rejstřík maker v~něm vysvětlených atd.
+
+K~vytvoření dalšího indexu v~našem dokumentu použijeme příkaz\tex{defineregister}, jehož syntaxe je:
+
+\type{\defineregister [IndexName] [Configuration]}
+
+kde {\em IndexName} je název, který bude mít nový index, a~{\em Configuration} řídí, jak funguje. Je také možné konfigurovat index později pomocí
+
+\type{\setupregister [IndexName] [Configuration]}
+
+Jakmile bude vytvořen nově pojmenovaný index {\em IndexName}, budeme mít k~dispozici příkaz \tex{IndexName} pro označení položek, které tento index bude mít, podobným způsobem, jako jsou položky označeny pomocí \tex{index}. Příkaz \text{seeIndexName} nám také umožňuje vytvářet položky, které odkazují na jiné položky.
+
+Například: mohli bychom vytvořit index \ConTeXt{ových} příkazů v~tomto dokumentu pomocí příkazu:
+
+\type{\defineregister[macro]}
+
+to by vytvořilo příkaz \tex{macro}. To mi umožňuje označit všechny odkazy na příkazy \ConTeXt{u} jako položku rejstříku a~poté vygenerovat index pomocí \tex{placemacro} nebo \tex{completemacro}.
+
+\startSmallPrint
+
+  Vytvoření nového indexu umožňuje příkazu \tex{IndexName} označit jeho položky a~příkazy \tex{placeIndexName} a~\tex{completeIndexName} pro generování indexu. Ale tyto dva poslední příkazy jsou ve skutečnosti zkratky dvou obecnějších příkazů aplikovaných na dotyčný index. Tedy \tex{placeIndexName} je ekvivalentní \tex{placeregister[IndexName]} a~\tex{completeIndexName} je ekvivalentní \tex{completeregister[IndexName]}.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Místní proměnné:%%% režim: ConTeXt%%% režim: automatické vyplňování%%% kódování: utf-8-unix%%% TeX-master: "../introCTX.mkiv"%%% Konec: %%% vim:set filetype=context tw=72 : %%%
