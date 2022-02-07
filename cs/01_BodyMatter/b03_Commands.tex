@@ -1,8 +1,1625 @@
+% -*- coding: utf-8 -*-
+%%% File:        b03_Commands.mkiv
+%%% Author:      Joaquín Ataz-López
+%%% Begun:       April 2020
+%%% Concluded:   April 2020
 
+% Contents:    This is the central chapter for understanding the essence
+%              of ConTeXt. Some of its contents are based on TeX.  The
+%              use of reserved characters and the distinction between
+%              control symbols and control words. Knuth insists on the
+%              difference, but neither the ConTeXt documentation, nor in
+%              general, LaTeX documentation do so (despite a brief
+%              reference in Kopka). Yet I believe the distinction is
+%              important for understanding why, in TeX the command names
+%              cannot mix letters and non-letters.  As for the
+%              explanation of commands, there are decisions on
+%              «start-stop» constructions that I still hesitate to call
+%              «environments». But at times they also do so in the wiki.
+%              I am satisfied, on the other hand, with my explanation of
+%              \setup + \define using the \framed command as an example.
+%              Amon other additional concepts I would have also liked to
+%              introduce counters, but I have not found any documentation
+%              on the name of the main counters in ConTeXt. For example I
+%              have done various tests manipulating chapter counters by
+%              hand and.... zilch! Rien de rien. Nothing. This
+%              information, central for controlling ConTeXt, should be
+%              made explicit somewhere           lugar.
 
---------------------
-Czech version
---------------------
+%%% Edited with: Emacs + AuTeX - And at times with vim + context-plugin
+%%%
 
-TO BE DONE!
---------------------
+\environment ../introCTX_env.mkiv
+
+\startcomponent b03_Commands.mkiv
+
+\startchapter
+  [
+    reference=cap:commands,
+    title=Příkazy a další základní koncepty\\ \ConTeXt{}u,
+    bookmark=Commands and other fundamental concepts of ConTeXt,
+  ]
+
+\TocChap
+
+Již jsme si ukázali, že ve zdrojovém souboru, stejně jako v textu,
+obsaženém v našeho budoucím formátovaném dokumentu, najdeme instrukce
+potřebné k tomu, abychom \ConTeXt{u} sdělili jak chceme, aby náš
+rukopis vypadal po zpracování. Tyto instrukce můžeme nazývat
+\quotation{příkazy}, \quotation{makra} nebo \quotation{řídící sekvence}.
+
+\startSmallPrint
+
+  Z hlediska vnitřního fungování \ConTeXt{}u (resp. fungování \TeX{}u)
+  je rozdíl mezi {\em primitivy} a {\em makry}. Primitiva jsou
+  jednoduché instrukce, které nemohou být rozděleny na další jednodušší
+  instrukce. Makra jsou instrukce, které lze rozdělit na další jednodušší
+  instrukce, které lze případně rozložit na další instrukce, a tak dále
+  a tak dále. Většina instrukcí \ConTeXt{}u jsou ve skutečnosti makra.
+  Z pohledu programátora je mezi makry a primitivy důležitý rozdíl.
+  Z pohledu uživatele však tento rozdíl tak důležitý není: v obou
+  případech máme k dispozici instrukce, které budou provedeny, aniž
+  bychom se museli starat o to, jak fungují na vnitřní úrovni. Proto se
+  v dokumentaci \ConTeXt{}u běžně hovoří o {\em příkazu}, v případě kdy
+  jde o sdělení z pohledu uživatele a o {\em makru} v případě, když jde
+  o sdělení pro programátora. Jelikož v tomto návodu zohledňujeme
+  primárně uživatelský pohled, budu používat oba termíny jako synonyma.
+
+  Pomocí {\em příkazů} rozkazujeme \ConTeXt{}u něco udělat; {\em
+  řídíme} tak, s jejich pomocí, běh programu. Proto když \cap{Knuth}, otec
+  \TeX{}u, hovoří o primitivech nebo makrech, používá termín {\em řídící
+  sekvence}. Domnívám se, že to je nejpřesnější termín ze všech
+  zmíněných. Budu ho používat v případech, kdy bude třeba rozlišit mezi
+  {\em řídícími znaky} a {\em řídícími slovy}.
+
+\stopSmallPrint
+
+Instrukce \ConTeXt{}u jsou dvou základních typů: vyhrazené znaky
+a příkazy, které se tak ostatně jmenují.
+
+\startsection
+  [
+    reference=sec:reserved characters,
+    title=Vyhrazené znaky \ConTeXt{}u,
+  ]
+
+Když \ConTeXt\ čte zdrojový soubor, který je složený pouze z textových znaků (protože se jedná o
+čistě textový soubor), musí nějak rozlišit, co je skutečný text, který má být formátován,
+a co jsou instrukce, které má provést. Vyhrazené znaky \ConTeXt{}u
+umožňují toto rozlišení. \ConTeXt\ v zásadě předpokládá, že že každý znak ve zdrojovém
+souboru je text, který má být zpracován, pokud se nejedná o jeden z 11 znaků rezervovaných
+znaků, které se považují za instrukce.
+Pouze 11 instrukcí? Ne. Existuje pouze 11 vyhrazených znaků; ale protože jeden z nich
+\quotation{{\tt\backslash}}, mění bezprostředně následující znak, nebo znaky, na instrukci,
+je skutečně možný počet příkazů je neomezený. \ConTeXt má přibližně 3000 příkazů (sečteme-li
+příkazy pouze pro Mark II, pro Mark IV a příkazy společné pro obě verze).
+
+Vyhrazené znaky jsou následující:
+
+{
+  \switchtobodyfont[25pt]
+  \midaligned{\cmd{ \% \{ \} \# \lettertilde\ \| \$ \_ \letterhat\ \&}}
+}
+
+\ConTeXt\ je interpetuje následujícím způsobem:
+
+\semitable{\backslash}
+
+Tento znak je pro nás nejdůležitější ze všech: naznačuje, že to, co
+následuje bezprostředně za ním, nesmí být interpretováno jako text,
+ale jako instrukce. Říká se mu \quotation{Escape znak} nebo \quotation{Escape
+sekvence} (i když nemá nic společného s klávesou \quotation{Esc}, kterou najdete na většině
+klávesnic).\footnote{V počítačové terminologii se klíč, který ovlivňuje interpretaci
+následujícího znaku, nazývá {\em escape znak}. Naproti tomu klávesa escape na klávesnicích
+se tak nazývá proto, že generuje tzv. znak 27 v kódu ASCII, který se v tomto
+kódování používá jako znak escape. Dnes se používá klávesy Escape spojeno spíše
+s myšlenkou zrušení probíhající akce.}
+
+\semitable{\%}
+
+Říká \ConTeXt{}u, že to, co následuje až do konce řádku, je komentář.
+který nesmí být zpracován ani zahrnut do konečného formátovaného souboru.
+Zavedení komentářů do zdrojového souboru je velmi užitečné. Komentář
+může pomoci vysvětlit, proč bylo něco provedeno určitým způsobem, a to
+je velmi užitečné v dokončených zdrojových souborech s ohledem na pozdější revize.
+kdy si někdy nemůžeme vzpomenout, proč jsme udělali to, co jsme udělali; nebo to také může
+pomoci jako připomínka něčeho, co bychom mohli potřebovat revidovat.
+Může být dokonce použita jako pomůcka k nalezení příčiny určité chyby ve
+zdrojovém souboru, protože umístěním značky komentáře na začátek řádku,
+vyloučíme tento řádek z kompilace a můžeme zjistit, zda to byl právě on.
+řádek byl příčinou chyby; lze jej také použít k uložení dvou
+různých verzí téhož makra, a tak získat různé výsledky.
+nebo zabránit zkompilování úryvku, u něhož si nejsme jisti, že ho chceme
+smazat, protože je možné, že jej budeme chtít do souboru vrátit... atd.
+Jakmile jsme otevřeli možnost, že náš zdrojový soubor obsahuje text,
+který neuvidí nikdo jiný než my sami, je naše použití tohoto znaku omezeno
+pouze naší vlastní představivostí. Přiznám se, že toto je jedwn z nástrojů,
+které mi nejvíce chybí, když jediným prostředkem pro psaní textu je textový procesor.
+
+\semitable{\{}
+
+Tento znak zahajuje skupinu. Skupiny jsou bloky textu ovlivněné
+určitými funkcemi. Budeme o nich hovořit v \in{section}[sec:groups].
+
+\semitable{\}}
+
+Tento znak ukončuje skupinu dříve otevřenou pomocí {\tt \{}.
+
+\semitable{\#}
+
+Tento znak se používá pro definování maker. Odkazuje na argumenty makroa.
+Viz \in{section}[sec:define] dálev kapitole.
+
+\semitable{\lettertilde}
+
+Vloží do dokumentu nezlomitenou mezeru, což znamená, že dvě slova oddělená
+znakem \type{~} zůstanou na stejném řádku. O této instrukci a o tom, kde
+by měla být použita více v \in{section}[sec:lettertilde].
+
+\semitable{\|}
+
+Tento znak se používá ve složených slovech s oddělovačem. Tato slova mohou být
+rozdělena na slabiky pouze v první části složeného slova. Viz
+\in{section}[sec:compound words].
+
+\semitable{\$}
+
+Tento znak je přepínačem matematického režimu. Nastavuje tento režim, pokud
+nebyl nastevn, a ukončuje jej, pokud nastaven byl. V matematickém režimu
+\ConTeXt\ používá některá písma a pravidla, která se liší od běžných,
+s cílem optimalizovat zápis matematických vzorců. Přestože
+psaní matematiky je velmi důležitým použitím \ConTeXt{}u, nebudu se mu
+v tomto úvodu věnovat. Abych byl přesný: necítím se na to.
+
+\semitable{\_}
+
+Tento znak se používá v matematickém módu a indikuje, že následující znaky
+jsou spodním indexem. Například, pro zápis $x_1$, použijeme \type{$x_1$}.
+
+\semitable{\letterhat}
+
+Tento znak se používá v matematickém módu a indikuje, že následující znaky
+jsou spodním indexem. Například, pro zápis $(x+i)^{n^3}$ použijeme
+\type{$(x+i)^{n^3}$}.
+
+\semitable{\&}
+
+V dokumentaci \ConTeXt{}u se píše, že se jedná o vyhrazené znak,
+ale neuvádí se proč. V obyčejném \TeX{}u má tento znak
+v podstatě dvě použití: používá se k zarovnání sloupců v prostředí
+základních tabulek a v matematickém kontextu tak, aby to, co následuje, bylo
+považováno za normální text. Je uveden i v úvodní příručce \quotation{\ConTeXt\
+Mark~IV, an Excursion}, ačkoli se neuvádí, k čemu slouží. A jsou uvedeny
+příklady jeho použití v matematických vzorcích, i když ne toho druhu, jakým je
+v používán vběžném \TeX{}u, ale k zarovnání sloupců v rámci \Doubt komplexních
+funkcí. Jelikož jsem spíš spisovatel, nemám pocit, že bych mohl provádět
+další testy, abych zjistil, jaké je přesné použití tohoto vyhrazeného znaku a
+k čemu slouží.
+
+Lze předpokládat, že při výběru vyhrazených znaků byly zvoleny ty,
+které jsou dostupné na většině klávesnic, ale současně nejsou často používány
+v běžném textu.
+Nicméně se může stát, byť ne příliš často, že některý z nich budeme potřebovat
+v textu použít. Například když budeme chtít napsat, že něco stojí
+100 dolarů (\$100), nebo že ve Španělsku procento řidičů starších 65 let v roce
+2018 činilo 16\,\%. V těchto případech nemůžeme psát vyhrazený znak přímo,
+ale použít {\em příkaz}, který vypíše ve výsledném dokumentu vyhrazený znak samotný.
+Příkaz pro každý z vyhrazených znaků najdete \in{table}[Reserved characters].
+
+\placetable
+  [here]
+  [Vyhrazené znaky]
+  {\tfx Psaní vyhrazených znaků}
+{\starttabulate[|c|l|]
+  \HL
+  \NC {\bf Vyhrazený znak} \NC {\bf Příkaz, který jej vygeneruje}\NR
+  \HL
+  \NC{\tt
+    \backslash}\NC\PlaceMacro{backslash}\tex{backslash}\NR\macro{reserved characters+\backslash backslash}
+  \NC{\tt \%}\NC{\cmd{\%}}\NR\macro{reserved characters+\backslash \%}
+  \NC{\tt \{}\NC\cmd{\{}\NR\macro{reserved characters+\backslash \{}
+  \NC{\tt \}}\NC\cmd{\}}\NR\macro{reserved characters+\backslash \}}
+  \NC{\tt \#}\NC\cmd{\#}\NR\macro{reserved characters+\backslash \#}
+  \NC{\tt \lettertilde}\NC\PlaceMacro{lettertilde}\tex{lettertilde}\NR\macro{reserved characters+\backslash lettertilde}
+  \NC{\tt \|}\NC\cmd{\|}\NR\macro{reserved characters+\backslash \|}
+  \NC{\tt \$}\NC\cmd{\$}\NR\macro{reserved characters+\backslash \$}
+  \NC{\tt \_}\NC\cmd{\_}\NR\macro{reserved characters+\backslash \_}
+  \NC{\tt \letterhat}\NC\PlaceMacro{letterhat}\tex{letterhat}\NR\macro{reserved characters+\backslash letterhat}
+  \NC{\tt \&}\NC\cmd{\&}\macro{reserved characters+\backslash \&}\NR
+  \HL
+\stoptabulate}
+
+Dalším způsobem, jak dostat vyhrazené znaky do výstupu, je použití
+příkazu \tex{type}. Tento příkaz odešle to, co převezme jako
+argument, bez jakéhokoli zpracování či interpretace. V konečném
+dokumentu je text, zapsaný v příkazu \tex{type}, zobrazen neproporciálním
+písmem typickým pro počítačové terminály a psací stroje.
+
+\startSmallPrint
+
+  Normálně bychom text, který má \tex{type} zobrazit, zapsali do
+  složených závorek. Pokud však tento text sám o sobě obsahuje
+  složené závorky, musíme místo nich zapsat text
+  mezi dva stejné znaky, které nejsou součástí textu, který
+  je argumentem příkazu \tex{type}. Například: \cmd{type*\{*},
+  or \cmd{type+\}+}.
+
+\stopSmallPrint
+
+Pokud omylem použijeme některý z vyhrazených znaků přímo, jinak než k účelu,
+ke kterému je určen (protože jsme zapomněli, že se jedná o vyhrazený znak a
+nelze jej použít jako normální znak), mohou se stát tři věci:
+
+\startitemize[n]
+
+  \item Nejčastěji dojde v průběhu zpracovnání k chybě.
+
+  \item Výsledek bude jiný, než jsme čekali. Speciálně k tomu dochází v případě
+  \MyKey{\lettertilde} a \MyKey{\%}. V prvním případě bude v textu místo
+  znaku \MyKey{\lettertilde}, který očekáváme, jen mezera. V druhém případě nebude
+  v textu nic, co bylo na na stejném řádku za znakem \MyKey{\%}. I nesprávné použití
+  \quotation{{\tt\backslash}} může způsobit nečekaný výstup. To v případě,
+  kdy za ním následuje znak nebo text, který \ConTeXt\ \quotation{umí}.
+  Nicméně nesprávné použití \quotation{{\tt\backslash}} obvykle způsobí chybu
+  při zpracování.
+
+  \item Nedojde k problému. U vyhrazených znaků, které se používají v prostředí
+  matematických výrazů ({\tt _ ^ &}), pokud jsou použity mimo toto prostředí
+  jsou zpracovány jako běžné znaky.
+
+  \startSmallPrint
+
+    Bod 3 je můj závěr. Pravdou je, že jsem nikde v dokumentaci \ConTeXt{}u
+    nenašel uvedeno, že tytto třei znaky mohou být uvedeny \Conjecture{} přímo.
+    Nicméně při svých testech jsem při jejich použití nenarazil na žádnou chybu.
+    Narozdíl od \LaTeX{}u například.
+
+  \stopSmallPrint
+
+\stopitemize
+
+\stopsection
+
+\startsection
+  [
+    title=Samotné příkazy,
+    reference=sec:commands themselves,
+  ]
+
+Samotné příklady začínají vždy znakem \quotation{{\tt\backslash}}.
+V závislosti na tom, co následuje bezprostředně za ním, rozlišujeme:
+
+\startitemize[a]
+
+  \item {\bf Řídící znaky.} Řídící znak začíná escape znakem
+  (\quotation{{\tt\backslash}}) a skládá se výhradně z jiných znaků,
+  než z písmen. Jako například \quotation{\tex{,}},
+  \quotation{\tex{1}}, \quotation{\tex{'}} nebo \quotation{\type{\%}}. Jakýkoliv
+  znak nebo symbol, který není písmenem v doslovném slova smyslu, může být řídícími
+  znakem. Včetně čísel, interpuknčních znamének nebo dokonce mezer.
+  V tomto dokumentu, pokud potřebuji zviditelnit mezeru (bílý znak) tam,
+  kde je potřeba její přítomnost zdůraznit, používám symbol \textvisiblespace.
+  Ve skutečnosti je \quotation{\cmd{\textvisiblespace}} (zpětné lomítko
+  následované mezerou) běžne používaný řídící znak, jak brzy uvidíme.
+
+  \startSmallPrint\reference[note:invisible space]{}
+
+    Mezera, nebo tzv. bílý znak, je \quotation{neviditelný} znak, což
+    je, v dokumentu jako je tento, problém. Protože někdy potřebujeme
+    jasně zobrazit, že ve zdrojovém souboru má být mezera zapsána. {\sc
+    Knuth} si byl tohoto problému vědom a v jeho knize \quotation{The
+    \TeX Book} zavedl zvyk zobrazovat významné mezery pomocí symbolu
+    \quotation{\textvisiblespace}. Takže pokud je například třeba,
+    aby ve zdrojovém souboru byla zapsána dvě slova oddělená dvěmi mezerami,
+    můžeme to zapsat jako \quotation{slovo1\textvisiblespace\textvisiblespace slovo2}.
+
+  \stopSmallPrint
+
+  \item {\bf Řídící slova.} Pokud je bezprostředně za zpětným lomítkem
+  písmeno, příkazem je {\em řídící slovo}. Tato skupina příkazů je nejpočetnější.
+  Její vlastností je, že jméno příkazu může být tvořeno pouze písmeny.
+  Čísla, interpukční znaménka, ani jiné symboly nejsou ve jméně příkazu povolena.
+  Pouze malá a velké písmena. A je třeba mít na paměti, \ConTeXt\ rozlišuje
+  mezi malými a velkými písmeny. Což znamená, že příkazy \tex{mycommand} and
+  \tex{MyCommand} jsou dva různé příkazy. Na druhou stranu příkazy \tex{MyCommand1}
+  a \tex{MyCommand2} budou vyhodnoceny jako shodné, protože znaky \quote{1}
+  a \quote{2} nejsou písmena a nejsou tudíž zpracovány jako součást názvu příkazu.
+
+  \startSmallPrint
+
+    Referenční příručka \ConTeXt{}u neobsahuje popis pravidel
+    pro tvorbu jmen příkazů. Stejně tak žádný z dalších \quotation{manuálů}
+    zahrnutých v \Conjecture\suite-. To co uvádím v předchozím odstavci
+    vychází z toho, co platí v \TeX{}u (kde tedy, mimochodem, nejsou znaky
+    s interpukncí, které nejsou součástí anglické abecedy, zahrnuty
+    mezi \quotation{písmena}). Tato pravidla také nabízí dobré vysvětlení
+    mizení mezery za názvem příkazu.
+
+  \stopSmallPrint
+
+\stopitemize
+
+Když \ConTeXt\ čte zdrojový soubor a narazí na escape znak (\quotation{{\tt\backslash}})
+ví, že bude následovat příkaz. Pak přečte první nasledující znak. Pokud to není písmeno,
+znamená to, že příkaz je řídicí symbol a skládá se pouze z tohoto prvního symbolu.
+Ale na druhou stranu, pokud první znak po escape sekvenci je písmeno, pak pokračuje
+\ConTeXt\ ve čtení dalších znaků do doby, než narazí na první znak, který není písmenem.
+V tom okamžiku ví, že jméno příkazu skončilo. To je důvod, proč názvy příkazů,
+které jsou řídicími slovy, nemohou obsahovat znaky, které nejsou písmeny.
+
+Pokud je \quotation{ne-písmenný} znak na konci příkazu mezera předpokládá se,
+že není součástí jména příkazu, ale že je v kódu jenom proto, aby oddělila
+jméno příkazu od zbytku textu. Takže \ConTeXt\ tuto mezeru zahodí.
+Výsledný efekt překvapuje \ConTeXt{}ové začátečníky. Protože ve výstupu je
+výsledek příkazu spojen s následujícím textem.
+Například, tyto dvě věty:
+
+{\switchtobodyfont[small]
+\starttyping
+Znát \TeX pomůže, pokud se chcete naučit \ConTeXt.
+Znát \TeX, jakkoliv to není nezbytné, pomůže, pokud se chcete naučit \ConTeXt
+\stoptyping
+}
+
+dopadne ve výstupu takto:
+
+{
+\tfx\color[red]{Znát \TeX pomůže, pokud se chcete naučit \ConTeXt.\\ %
+Znát \TeX, jakkoliv to není nezbytné, pomůže, pokud se chcete naučit \ConTeXt.%
+}\footnote{{\bf Poznámka:} v případech, kdy chci demonstrovat zapsaný kód
+zdrojového souboru a výsledek ve výstupu, používám v tomto dokumentu dva způsoby:
+buď jsou zdroj a výstup zapsány vedle sebe ve dvousloupcovém odstavci, nebo je zdrojový
+kód zapsán \color[puprple]{fialovou barvou}, kterou je obecně používána pro
+zápis příklazů \ConTeXt{}u, a výsledný výstup je zobrazen červeně.}}
+
+Všimněte si, že v prvním případě je slovo \quotation{\TeX} spojeno s následujícím
+slovem. Ve druhém případě tomu tak není. Je to tím, že v prvním případě je prvním
+\quotation{ne-písmenným} znakem mezera, kterou \ConTeXt\ potlačí, protože
+předpokládá, že jen značí konec příkazz. Ve druhém případě je tím znakem čárka, jejíž
+výstup potlačen není.
+
+A tento problém nevyřeší přidání mezery navíc. Tedy například zápis:
+
+\color[darkmagenta]{{\tt Znát \backslash TeX\textvisiblespace\textvisiblespace
+pomůže, pokud se chcete naučit \backslash ConTeXt}}\footnote{Pro vysvětlení symbolu \quotation{\textvisiblespace} viz poznámku na \at{straně}[note:invisible space].}.
+
+není řešením, protože jiné pravidlo \ConTeXt{}u (které je vysvětleno v
+ \in{kapitole}[sec:spaces]) je takové, že prázdný znak pohltí všechny následující
+ prázdné znaky a tabelátory. Tento problém, naštěstí, nenastává příliš často a řešením
+ je to, aby první \quotation{ne-písmenný} znak za názvem příkazu nebyla mezera.
+ A kandidáti na takový znak jsou dva:
+
+\startitemize[1]
+
+  \item Vyhrazený znak \MyKey{\{\}}. Ten, jak jsme si řekli, zahajuje skupinu.
+  A znak \MyKey{\}} skupinu uzavírá. Takže posloupnost znaků \MyKey{\{\}}
+  představuje prázdnou skupinu. Ta se nijak neprojeví ve výsledném dokumentu,
+  ale pomůže \ConTeXt{}u odlišit konec jména příkazu. Je také možné vytvořit
+  skupinu obsahující příkaz, například \quotation{\{\tex{TeX}\}}. Ani v jednom
+  případě není prvním \quotation{ne-písmenným} znakem za jménem příkazu mezera.
+
+  \item Řídící znak \quotation{\cmd{\textvisiblespace}} (zpětné
+  lomítko následované mezerou - viz poznámku na \at{str.}[note:invisible space]).
+  Tento řídící znak vloží do výstupu mezeru. Pro správné pochopení logiky
+  \ConTeXt{}u stojí za to podívat se v klidu na to, co se děje, když po sobě
+  následuje řídící sloco (například \tex{TeX}) a řídící znak
+  (např. \quotation{\cmd{\textvisiblespace}}):
+
+  \startitemize[2, packed]
+
+    \item \ConTeXt\ zaregistruje znak \backslash\ následovaný
+    \quote{T}. Tudíž ví, že jde o řídící slovo a pokračuje ve čtení další
+    znaků, dokud nenarazí na \quotation{ne-písmenný} znak. K tomu dojde,
+    když narazí nad další znak \backslash\, uvozující kontrolní znak.
+
+    \item Jakmile zjistí, že jméno příkazu je \tex{TeX}, zpracuje příkaz
+    a vytiskne \TeX\ do výsledného dokumentu. Poté se vrátí do bodu, kde
+    skončil a přešte další znak následující za druhým zpětným lomítkem.
+
+    \item Zjistí, že následuje mezera, tedy \quotation{ne-písmenný} znak.
+    A to znamená, že jde o žídící znak, který už je přečtený. Tudíž
+    zapíše do výsledného souboru mezeru.
+
+    \item Nakonec se vrátí zpět ke čtení zdrojového souboru a pokračuje dál.
+
+  \stopitemize
+
+\stopitemize
+
+Tento mechanismus jsem podrobně vysvětlil, protože vypuštění mezer
+často překvapuje nováčky. Je však třeba poznamenat, že tento problém je
+relativně málo častý. Protože řídící slova se obvykle nezapisují do výsledného
+dokumentu, ale ovlivňují jeho formát a struktur. Naproti tomu řídící znaky
+obvykle do výsledného dokumentu zapisují.
+
+\startSmallPrint
+
+  Třetím způsobem, jak se vyhnout problému s prázdným znakem. A tím je definice
+  vlastního příkazu, který již bude obsahovat \quotation{ne-písmenný} znak na konci
+  názvu. Například zápis:
+
+  \type{\def\txt-{\TeX}}
+
+vytvoří příkaz nazvaný \tex{txt}, který udělé to stejné, jako příkaz
+\tex{TeX} a funguje správně jen v případě, že je volán s pomlčkou na konci
+\tex{txt-}. Pomlčka není, technicky, součástí jména příkazu, ale ten nebude
+fungovat, pokud nebude uvedena. Má to co dělat s mechanismem definice maker
+v \TeX{}u a ta je příliš komplikovaná na to, abych ji vysvětloval zde.
+Ale funguje to: jakmile je příkaz definován, pokaždé, když použijeme \tex{txt-},
+\ConTeXt\ jej nahradí \tex{TeX} a odstraní pomlčku, ale vnitřně podle ní pozná
+konec jména příkazu. Takže následující mezera nebude vynechán.
+
+Tento \quote{trik} nebude správně fungovat v příkazu \tex{define}, což je specifický
+příkaz \ConTeXt{}u pro definic maker.
+
+\stopSmallPrint
+
+\stopsection
+
+\startsection
+  [title=Rozsah působnosti příkazů]
+
+\startsubsection
+  [
+    reference=sec:command scope,
+    title=Příkazy vyžadující a nevyžadující specifikaci rozsahu,
+  ]
+
+Mnoho příkazů \ConTeXt{}u, zejména ty, které ovlivňují formátování
+(tučné písmo, kurzíva, malá písmena atd.), nastavují určité chování do doby,
+dokud se neobjeví jiný příkaz, který ji zakáže nebo který nastaví jinou funkci,
+která s ní není kompatibilní. Například příkaz \tex{bf} povoluje tučné písmo a
+zůstane aktivní, dokud nenarazí na {\em nekompatibilní} příkaz, jako např.
+\tex{tf} nebo \tex{it}.
+
+Tyto typy příkazů nepotřebují žádné argumenty, protože nejsou určeny pouze pro
+určitý text. Jejich funkce je limitována pouze na {\em nastavení} nějaké vlastnosti
+(tučné písmo, kurzíva, bezpatkové písmo, určitá velikost písma atd.).
+
+When these commands are executed within a {\em group} (see
+\in{section}[sec:groups]), they also lose their effectiveness when the
+group they are executed in is closed. Therefore, often in order to make
+these commands affect only a portion of text, what is done is to
+generate a group containing that command and the text we want it to
+affect. A group is created by enclosing it between curly brackets.
+Therefore, the following text
+
+Pokud jsou tyto příkazy prováděny v rámci skupiny (viz \in{kapitolu}[sec:groups]),
+končí jejich účinek také v okamžiku, kdy skončí skupina, v níž jsou prováděny.
+Proto se často, aby tyto příkazy ovlivnily pouze část textu, dělá to, že se vytvoří
+skupina, která obsahuje daný příkaz. Takto text
+
+\startDoubleExample
+
+\starttyping
+V {\it The \TeX Book}, {\sc Knuth}
+vysvětluje vše, co potřebujete
+vědět o \TeX{}u.
+\stoptyping
+
+V {\it The \TeX Book}, {\sc Knuth} vysvětluje vše, co potřebujete
+vědět o \TeX{}u.
+
+\stopDoubleExample
+
+vytváří dvě skupiny. Jedna definuje rozsah příkazu \tex{it} (kurzíva)
+a druhá příkazu \tex{sc} (kapitálky).
+
+Naopak potom existují příkazy, které kvůli svému účinku
+nebo z jiných důvodů vyžadují výslovné uvedení toho, na jaký text mají být
+aplikovány. V těchto případech je text, který má být příkazem ovlivněn,
+uveden ve složených závorkách {\em bezprostředně za příkazem}. Jako příklad
+můžeme uvést příkaz \tex{framed}: tento příkaz vykreslí rámeček kolem textu, který
+je uveden jako argument. Například:
+
+{\tfx\type{\framed{Tweedledum and Tweedledee}}}
+
+vygeneruje\blank
+
+\example{\framed{Tweedledum and Tweedledee}}
+
+Všimněte si, že ačkoli se v první skupině příkazů (těch, které vyžadují argument)
+někdy k určení rozsahu působnosti používají složené závorky, nejsou nutné k tomu,
+aby příkaz fungoval. Příkaz je určen k použití od místa, kde se objeví.
+Při určování jeho rozsahu  působnosti pomocí je příkaz umístěn {\em uvnitř těchto závorek}.
+V druhém přáadě závorky rámují text, na který se má příkaz vztahovat, a jsou uvedeny
+až {\em za příkazem}.
+
+U příkazu \tex{framed} je zřejmé, že efekt, který způsobí, potřebuje argument
+-- text, na který má být aplikován.
+V principu ale záleželo na programátorovi, o který typ příkazu půjde.
+Například příkazy \tex{it} a \tex{color} dělají podobnou věc: nastavují nějakou
+vlastnost (formát nebo barvu. Ale z rozhodnutí vývojářů se první používá bez
+argumentu a druhý s argumentem.
+
+\stopsubsection
+
+\startsubsection
+  [title=Příkazy vyžadující výslovné označení místa, kde začínají a končí (prostředí)]
+
+Existují určité příkazy, které určují svůj rozsah přesným uvedením
+bodu, ve kterém začíná jejich platnost, a bodu, ve kterém končí.
+Tyto příkazy se tedy vyskytují ve dvojicích: jeden označuje začátek
+platnosti a druhý konec. \quotation{start}, za kterým následuje
+názvem příkazu, se používá k označení začátku akce, a \quotation{stop},
+následovaný názvem příkazu, k označení konce. Takže například příkaz
+\MyKey{itemize} je představován \tex{startitemize} na začátku platnosti
+a \tex{stopitemize} označujícím její konec.
+
+V oficiální dokumentaci \ConTeXt{}u nemají tyto párové příkazy žádné speciální
+označení. Referenční příručka je označuje jednoduše jako
+\quotation{start ... stop}. Někdy jsou nazývány jako {\em prostředí},
+což je ale název, který používá \LaTeX\ pro podobnou konstrukci.
+Nevýhodou tohoto označení je také to, že v \ConTeXt{}u je termín
+\quotation{prostředí} používán pro něco jiného (speciální druh souboru,
+o kterém bude řeč u vícesouborových projektů v \in{kapitole}[sec-projects]).
+Přesto, jelikož pojem prostředí je jasný a srozumitelný, a z kontextu
+bude vždy zřejmé, zda je řeč o {\em příkazech prostředí} ne {\em souborech prostředí},
+budu toto označení používat.
+
+Prostředí se tedy skládají z příkazu, který je otevírá nebo spouští, a
+příkazu, který je uzavírá nebo ukončuje. Pokud zdrojový soubor obsahuje
+příkaz pro otevření prostředí, který není později uzavřen, bude obvykle
+vygenerována chyba.\footnote{I když ne vždy; záleží na prostředí a na
+zbytku dokumentu. \ConTeXt\ se v tomto liší od \LaTeX{}u, který je při
+kontrole mnohem striktnějšíin this regard, which is much
+stricter.}
+Tento druh chyb obtížnější nalézt, protože chyba může vzniknout
+daleko za místem, kde se příkaz k otevření vyskytuje. Někdy lze v \MyKey{.log}
+souboru nalézt řádek, na kterém začíná nesprávně uzavřené prostředí.
+Jindy se ale chyba neuzavření prostředí znamená, že \ConTeXt\ špatně
+interpretuje určitou pasáž a ne v tomto chybném prostředí, což znamená,
+že \MyKey{.log} soubor v totmo případě nepomůže zjistit, jde je problém.
+
+Prostředí mohou být vnořená, což znamená, že další prostředí může být otevřeno
+v rámci existujícího prostředí. Je však nutné dodržet hierarchii a vnořené
+prostředí musí být uzavřeno uvnitř prostředí, ve kterém bylo otevřeno.
+Jinými slovy pořadí uzavírání prostředí musí odpovídat pořadí jejich otevírání
+(v opačném pořadí). Domnívám se, že by to mělo být zřejmé z následujícího
+příkladu:
+
+{\switchtobodyfont[small]
+\startframedtext
+\starttyping
+\startSomething
+  ...
+  \startSomethingElse
+    ...
+    \startAnotherSomethingElse
+      ...
+    \stopAnotherSomethingElse
+  \stopSomethingElse
+\stopSomething
+\stoptyping
+\stopframedtext
+}
+
+V příkladu je vidět, že prostředí \MyKey{AnotherSomethingElse}
+bylo otevřeno uvnitř prostředí  \MyKey{SomethingElse} a musí
+v něm být také uzavřeno. V opačném případě vznikne při zpracování
+chyba.
+
+Obecně lze říci, že příkazy koncipované jako prostředí jsou takové,
+které jsou určeny k definici nějaké vlastnosti na text o velikosti
+minimálně odstavce. Například prostředí \MyKey{narrower}, které mění
+okraje, má smysl pouze v případě, že se jedná o odstavec. Nebo
+prostředí \MyKey{framedtext}, které orámuje jeden nebo více
+odstavců. Toto druhé prostředí nám může pomoci pochopit, proč některé
+příkazy jsou navrženy jako prostředí a jiné jako jednotlivé příkazy:
+pokud chceme orámovat jedno nebo více slov na stejném řádku, použijeme příkaz
+\tex{framed}, ale pokud chceme orámovat celý odstavec (nebo několik odstavců),
+použijeme příkaz pak použijeme prostředí \MyKey{framedtext}.
+
+Dále je třeba pochopit, že text umístěný v nějakém prostředí, současně
+vytváří {\em skupinu} (viz \in{kapitolu}[sec:groups]). A tedy pokud
+je uvnitř prostředí aktivován nějaký příkaz, aplikuje se pouze na
+zbývající část tohoto prostředí a jeho účinek končí s koncem prostředí.
+A \ConTeXt\ má, de facto, nepojmenované {\em prostředí} začínající
+příkazem \tex{start} (bez dalšího textu, prostě {\em start}. Proto
+ho nazývám {\em nepojmenované prostředí}) a končí příkazem \tex{stop}.
+Předpokládám, že jeho jediná funkce je vytvořit skupin.
+
+\startSmallPrint
+
+  V dokumentaci \Conjecture\ConTeXt\ jsem se nikde nedočetl,
+  že by jedním z efektů prostředí bylo i skupinování jejich obsahu.
+  Ale je to výsledek mých testů z řadou předdefinovaných prostředí,
+  byť musím přiznat, že nebyly zdaleka vyčerpávající. Zkrátka jsem
+  vyzkoušel nějaká náhodně vybraná prostředí.
+  Moje testy nicméně ukázaly, že je tato skutečnost platná jen pro
+  některá předdefinovaná prostředí. Prostředí vytvořená příkazem
+  \tex{definestartstop} (popsaná v \in{kapitole}[sec:startstop])
+  nevytváří skupiny, pokud do vytvoření prostředí nezahrneme i vytvoření
+  skupiny (viz \in{kapitolu}[sec:groups]).
+
+  Také chování prostředí, které nazývám {\em nepojmenované} (\tex{start})
+  je pouze mým předpokladem. Skupinu vytváří, ale jestli má i jiné využití
+  nevím. Je to jeden z příkazů, nezdokumentovaných v referenční příručce.
+
+\stopSmallPrint
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    title=Parametry provádění příkazů,
+    reference=sec:command options,
+  ]
+
+\startsubsection
+  [title=Příkazy, které mohou fungovat několika různými způsoby]
+
+Řada příkazů může fungovat více než jedním způsobem. V takových případech
+existuje vždy výchozí chování, který lze změnit pomocí parametrů požadovné
+operace uvedených v hranatých závorkách za názvem příkazu.
+
+Dobrým příkladem toho, co jsem právě uvedl, je \tex{framed},
+zmíněném v předchozí kapitole. Tento příkaz vykreslí rámeček
+kolem textu, který bere jako argument. Ve výchozím nastavení má rámeček
+výšku a šířku dle textu, na který je aplikován. Můžeme však uvést i
+jinou výšku a šířku. Můžeme tak vidět rozdíl mezi tím, jak
+funguje ve výchozím nastavení \tex{framed}:
+
+\startDoubleExample
+
+  \type{\framed{Tweedledum}}
+
+  \framed{Tweedledum}
+
+\stopDoubleExample
+
+a při upraveném spuštění:
+
+\startDoubleExample
+
+\starttyping
+\framed
+  [width=3cm, height=1cm]
+  {Tweedledum}
+\stoptyping
+
+\framed
+  [width=3cm, height=1cm]
+  {Tweedledum}
+
+\stopDoubleExample
+
+Ve druhém příkladu jsme v hranatých závorkách uvedli konkrétní šířku a
+výšku rámečku, který obklopuje text v předanáém argumentu. Uvnitř závorek
+jsou uvedeny různé možnosti odděleny čárkou. Prázdné znaky a dokonce i
+zalomení řádků (pokud nejde o dvojité odřádkování) nejsou zohledňovány.
+Takže například další čtyři varianty příkazu vedou k naprosto stejnému
+výsledku:
+
+{\switchtobodyfont[small]
+\startframedtext
+\starttyping
+\framed[width=3cm,height=1cm]{Tweedledum}
+
+\framed[width=3cm,    height=1cm]{Tweedledum}
+
+\framed
+  [width=3cm, height=1cm]
+  {Tweedledum}
+
+\framed
+  [width=3cm,
+    height=1cm]
+  {Tweedledum}
+
+\stoptyping
+\stopframedtext
+}
+
+Je myslím zřejmé, že poslední varianta je nejlépe čitelná. Na první pohled vidíme
+kolik parametrů existuje a jak se používají. V příkladu, jako je tento, s
+pouze dvěma možnostmi, by se to možná nemuselo zdát tak důležit, ale v případech,
+kdy existuje dlouhý seznam parametrů, je pro uživatele pochopit, co má být vysledkem
+v \ConTeXt{}u, pokud je každý zapsán na vlastní řádek. I odhalení případné chyby
+je v takovém případě snazší. Proto je tento formát (nebo podobný) pro
+zápisu příkazů uživateli "preferován".
+
+Pokud jde o syntaxi konfiguračních voleb, podívejte se dále do \in{kapitoly}[sec:syntax].
+
+\stopsubsection
+
+\startsubsection
+  [title=Příkazy upravující chování jiných\\příkazů (\cmd{setupSomething})]
+
+Ukázali jsme si, že příkazy, které podporují parametry, mají vždy definovány
+jejich výchozí hodnoty, tj. své výchozí chování. Pokud jeden z těchto
+příkazů voláme několikrát a chtěli bychom změnit toto výchozí chování pro všechna
+volání místo toho, abychom jej měnili při každém volání, existuje snažší a eketivnější
+způsob, jak to udělat. K tomuto účelu je skoro vždy k dispozici příkaz, jehož název
+začíná \tex{setup}, a následuje název přílazu, jehož výchozí nastavení chceme změnit.
+
+I v tomto případě můžeme jako dobrý příklad použí příkaz  \tex{framed}. Pokud tedy
+máme v dokumentu spoustu rámečků, u nichž potřebujeme použít přesný rozměr, můžeme
+nastavit chování příkazu \tex{framed} pomocí příkazu \tex{setupframed}. Takže
+
+{\switchtobodyfont[small]
+\starttyping
+\setupframed
+  [
+    width=3cm,
+    height=1cm
+  ]
+\stoptyping
+}
+
+zajistí, že pokaždé, když použijeme příkaz \tex{framed} bez dalších parametrů,
+vygeneruje rámeček široký 3 cm a vysoký 1 cm, bez toho, abychom mu to muselo pokaždé
+nastavovat.
+
+\ConTeXt\ obsahuje okolo 300 příkazů umožňujících definovat chování jiných příkazů.
+Můžeme tak konfigurovat výchozí chování rámečků (\tex{framed}), výčtů (\MyKey{itemize}),
+názvů kapitol (\tex{chapter}), částí (\tex{section}), atd.
+
+\stopsubsection
+
+\startsubsection
+  [title=Vytváření vlastních variant konfigurovatelných příkazů (\cmd{defineSomething})]
+
+Když bychom pokračovali s příkladem příkazu \tex{framed}, tak je obvyklé,
+že v dokumentu používáme různé typy rámečků a každý má jiné rozměry. Bylo
+by tedy idální, kdybychom si mohli {\em předdefinovat} různé varianty
+a nastavení  \tex{framed} a pojmenovat je. A následně používat tyto pojmenované
+varianty. To lze v \ConTeXt{}u provést pomocí příkazu \tex{defineframed} se syntaxí:
+
+\type{\defineframed[Jmeno][Nastaveni]}
+
+kde {\em Jmeno} je naše vlastní pojmenování konkrétní varianty nastavení daného
+typu rámečku a {\em Nastaveni} je konkértní nastavení parametrů pro tuto variantu.
+
+Výsledkem bude, že uvedená konfigurace bude spojena se jménem, které jsme
+vytvořili a bude fungovat tak, jako by to byl nový příkaz. Přičemž jej můžeme
+použít v jakémkoli místě, kde bychom mohli použít původní příkaz \tex{framed}.
+
+Tato možnost samozřejmě existuje nejen konkrétně pro příkaz \tex{framed},
+ale pro spoustu příkazů, které mají svou \tex{setup} variantu. Kombinace
+\tex{defineSomething} + \tex{setupSomething} je mechanismus který dává \ConTeXt{}u
+jeho extrémní sílu a flexibilitu. Pokud bychom podrobně zkoumali, co přesně
+vykonání příkazu \tex{defineSomething} dělá, zjistilo bychom následující:
+
+\startitemize[packed]
+
+  \item Nejprve vytvoří kopii konkrétního příkaz se všemi jeho dostupnými parametry.
+
+  \item Následně spojí tuto kopii s požadovaným jménem.
+
+  \item A nakonec nastaví požadované výchozí chování, odlišné od původního příkazu.
+
+\stopitemize
+
+V příkladu, který jsme si uvedli, jsme konfigurovali náš speciální rámeček současně
+s jeho definicí. Můžeme jej však také nejprve vytvořit a nakonfigurovat později.
+Protože, jak jsem již uvedl, jakmile je klon vytvořen, lze jej použít všude tam, kde by
+mohl být použit původnípříkaz. Pokud jsme tedy například vytvořili rámeček s názvem
+\MyKey{MySpecialFrame}, můžeme jej nakonfigurovat pomocí \tex{setupframed} s uvedením
+konkrétního jména rámečku. V tomto případě příkaz \tex{setup} přijme nový argument
+s názvem rámečku, který má být nakonfigurován:
+
+{\switchtobodyfont[small]
+\vbox{\starttyping
+\defineframed[MySpecialFrame]
+
+\setupframed
+  [MySpecialFrame]
+  [ ... ]
+\stoptyping
+}}
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:syntax,
+    title={Shrnutí syntaxe příkazů,\\ jejich parametrůoptions a použití hranatých a složených závorek při jejich volání},
+  ]
+  % this section is especially dedicated to LaTeX users, so
+  % they can understand the different use of such brackets.
+
+Shrneme-li si to, co jsme dosud viděli, vidíme, že v \ConTeXt{u}
+
+\startitemize
+
+  \item Příkazy, jako takové, začínají vždy znakem \quotation{{\tt\backslash}}.
+
+  \item Některé příkazy mohou mít jeden nebo více argumentů.
+
+  \item Parametry, které sdělují příkazu {\em jak} má proběhnout nebo
+  jinak ovlivňují to, jak se chová, se uvádějí v hranatých závorkách.
+
+  \item Parametry určující na kterou část textu má být příkaz aplikován
+  se uvádějí ve složených závorkách.
+
+  \startSmallPrint
+
+    Pokud se příkaz provádí pouze na jednom znaku, jako například
+    v případě příkazu \tex{buildtextcedilla} (jen pro vysvětlení
+    -- the \quote{ç} se často užívá v katalánštině), složené závorky
+    kolem parametru (textu) můžeme vynechat: příkaz se provede
+    na prvním znaku, který není mezera.
+
+  \stopSmallPrint
+
+  \item Některé parametry mohou být nepovinné, v takovém případě je můžeme
+  vynechat. Nikdy však nemůžeme měnit pořadí argumentů, které příkaz očekává.
+
+\stopitemize
+
+  Parametry předáváne v hranatých závorkách mohou být několika typů.
+  Zejména:
+
+\startitemize
+
+  \item Mohou nabývat pouze jediné hodnoty, kterou bude téměř vždy jedno
+    slovo nebo fráze
+
+  \item Mohou nabývat více hodnot. V takovém případě může jít o:
+
+  \startitemize
+
+    \item Jedno slovo - symbolické označení (jehož význam \ConTeXt\ zná),
+    míru nebo rozměr, číslo, název jiného příkazu apod.
+
+    \item Názvy proměnných, které musí mít přiřazenu hodnotu. V takovém
+    případě definice příkazu (viz \in{kapitolu}[sec:qrc-setup-en]) vždy
+    uvádí, jaký typ hodnoty každý parametr očekává.
+
+    \startitemize
+
+      \item Pokud je očekávanou hodnotou text, může obsahovat i prázdné
+      znaky nebo další příkazy. V těchto případech je někdy vhodné zapsat
+      hodnotu ve složených závorkách.
+
+      \item Pokud je očekávanou hodnotou parametru příkaz, můžeme obvykle
+      jako hodnotu uvést více než jeden příkaz. Někdy je potřeba všechny
+      takto předávané příkazy uzavřít do složených závorek. Do složených
+      závorek je třeba pramatr zapsat i v případě, že předáváný příka
+      obsahuje paramtery v hranatých závorkách.
+
+    \stopitemize
+
+  \stopitemize
+
+  Pokud je do parametru předáváno více hodnout, vždy se oddělují čárkami.
+  Bílé znaky a konce řádků (ale ne dvojnásobné) jsou pro zpracování
+  vynechávány. Stejně tak jsou vynechávány prézdné znaky a jednoduché
+  konce řádků mezi jednotlivými parametry.
+
+  \item Závěrem je dobré říci, že v \ConTeXt{}u se nikdy nestane, že by
+  příkaz měl parametry jak typu jednoho slova, tak s očekávanou hodnou
+  nebo proměnnou. Jinými slovy můžeme najítpříkazy jako
+
+  \type{\command[Option1, Option2, ...]}
+
+  a jiné jako
+
+  \type{\command[Variable1=value, Variable2=value, ...]}
+
+  ale nikdy nenajdeme kombinaci
+
+  \type{\command[Option1, Variable1=value, ...]}
+
+\stopitemize
+
+\stopsection
+
+\startsection
+  [
+    title=Oficiální seznam příkazů \ConTeXt{}u,
+    reference=sec:qrc-setup-en
+  ]
+  % This section is written only to be able to refer to it each
+  % time there is mention of an "official list" of
+  % commands.
+
+Mezi dokumentací \ConTeXt{}u je zvláště důležitý dokument se seznamem
+všech příkazů, kde je u každého z nich uvedeno, kolik argumentů
+očekávají a jakého druhu, a také různé předpokládané volby a jejich
+povolené hodnoty. Tento dokument se nazývá \MyKey{setup|-|en.pdf} a
+je automaticky generován pro každou novou verzi \ConTeXt{}u. Najdete
+ho v adresáři
+\MyKey{tex/texmf|-|context/doc/context/documents/general/qrcs}.
+
+\startSmallPrint
+
+  Ve skutečnosti má  \MyKey{qrc} sedm verzí tohoto dokumentu, jednu
+  pro každý z jazyků, které mají rozhraní \ConTeXt{}u: německy, česky,
+  francouzsky, holandsky, anglicky, italsky a rumunsky. Pro každý z těchto
+  jazyků jsou v adresáři dva dokumenty: jeden s názvem \MyKey{setup-LangCode}
+  (kde LangCode je písmenný kód pro identifikaci dvou mezinárodních jazyků)
+  a druhý dokument s názvem \MyKey{setup-mapping-LangCode}. Tento druhý
+  dokument obsahuje seznam příkazů v abecedním pořadí a uvádí pouze prototyp
+  příkazu bez dalších informací o hodnotách argumentů.
+
+\stopSmallPrint
+
+Tento dokument je zásadní pro učení se \ConTeXt{}u, protože v něm můžeme
+zjistit, zda určitý příkaz existuje, nebo ne. Speciálně je pak dobré mít
+na paměti kombinaci{\sc command} (or {\sc environment})
++ setup {\sc command} + define{\sc command}.
+Například pokud víme, že se prázdný řádek vloží příkazem \tex{blank},
+můžeme v dokumentu snadno zjistit, zda existuje i příkaz \tex{setupblank},
+kterým můžeme modifikovat jeho výchozí chování a příkaz \tex{defineblank},
+kterým můžeme vytvořit jeho pojmenované varianty.
+
+\startSmallPrint
+
+  \MyKey{setup-en.pdf} je tedy základem pro učení se ConTEXtu. Ale já
+  bych byl opravdu raději, kdyby nám především řekl, zda daný příkaz
+  funguje pouze v  Mark~II nebo Mark~IV a zejména pak, kdyby místo pouhého
+  výčtu parametrů a jejich typů obsahoval i informace, k čemu tyto parametry
+  slouží. Tím by se značně omezily nedostatky dokumentace \ConTeXt{}u.
+  Existují i příkazy, které umožňují použití volitelných argumenty,
+  které ale v tomto úvodu ani nezmiňuji, protože nevím, k čemu slouží.
+  A jelikož jsou nepovinné, není nutné se o nich zmiňovat.
+  A to je nesmírně frustrující.
+
+\stopSmallPrint
+
+\stopsection
+
+\startsection
+  [
+    reference=sec:definingcommands,
+    title=Definování nových příkazů,
+  ]
+
+\startsubsection
+  [
+    reference=sec:define,
+    title=Základní postup definování\\ nových příkazů,
+  ]
+\PlaceMacro{define}
+
+We have just seen how, with \tex{defineSomething} we can clone a
+pre-existing command and develop a new version of it from there, that
+will function, to all intents and purposes, as a new command.
+Již jsme si ukázalo, jak můžeme pomocí \tex{defineSomething}
+klonovat existující příkazy a vytvořit z nich novou verzi, která bude
+fungovat, ve všech ohledech, jako nový příkaz.
+
+Vedle této možnosti, která je dostupná pouze pro některé specifické
+příkazy (docela dost, ale ne všechny), má \ConTeXt\ obecný mechanismus
+pro definování nových příkazů, který je mimořádně výkonný. I když v některých
+případech použití také poměrně složitý. V textu, který je jako je tento
+určený začátečníkům, považuji za nejlepší představit jej tím, že začneme
+některými z jeho jednodušších použití. Nejjednodušší ze všech je
+spojení nějakáho slova (názvu) s úryvkem textu. Takže pokaždé, když
+použijete vybrané slovo, bude nahrazeno textem, který je s ním spojen.
+To nám na jedné straně umožní ušetřit spoustu času při psaní, a na druhé
+straně to, jako další výhoda, snižuje možnost udělat při psaní chyby.
+Současně tím dosáhneme toho, že bude daný text zapsán vždy stejným způsobem.
+
+Představme si například, že píšeme pojednání o aliteracích v latinských
+textech, kde často citujeme latinskou větu \quotation{{\em O Tite tute
+Tati tibi tanta tyranne tulisti}} (O Tite Tati, ty tyrane, tolik jsi
+toho na sebe přivolal!). Je to poměrně dlouhá věta, v níž dvě slova
+jsou vlastními jmény a začínají velkými písmeny, a kde, přiznejme si,
+jakkoli můžeme mít latinskou poezii rádi, při jejím zápisu snadno
+"zakopneme". V tomto případě jsme mohli jednoduše vložit do úvodu
+našeho zdrojového souboru:
+
+{\tfx \type{\define\Tite{\quotation{O Tite tute Tati tibi tanta tyranne tulisti}}}}
+
+Na základě takové definice bude pokaždé, když se v našem zdrojovém
+souboru objeví příkaz \tex{Tite}, nahrazen uvedenou větou a bude také
+v uvozovkách, stejně jako v původní definici, což nám umožní zajistit,
+že způsob, jakým se tato věta objeví, bude vždy stejný. Mohli bychom ji
+také napsat kurzívou, větší velikostí písma... jak chceme. Důležité je,
+že ji musíme napsat jen jednou a v celém textu bude reprodukována přesně
+tak, jak byla napsána, tak často, jak budeme chtít. Mohli bychom také
+vytvořit dvě verze příkazu, nazvané \tex{Tite} a \tex{tite}, podle toho,
+zda je třeba větu napsat velkými písmeny, nebo ne. Náhradní text může
+být čistě text nebo může obsahovat příkazy nebo tvořit matematické výrazy
+v nichž se často chybuje (alespoň v mém případě). Například pokud se má
+v našem textu pravidelně objevovat výraz $(x_1,\ldots,x_n)$, mohli bychom
+
+{\tfx\type{\define\xvec{$(x_1,\ldots,x_n)$}}}
+
+takže vždy, když se v textu objeví \tex{xvec}, bude nahrazen uvedeným
+výrazem.
+
+Základní syntaxe příkazu \tex{define} je následující:
+
+\type{\define[PocetParametru]\NazevPrikazu{TextProNahrazeni}}
+
+% {\ttx \color[maincolor]{\backslash define[{\em
+%         NumArguments}]\backslash {\em CommandName}\{{\em
+%       TextoReplace}\}}}
+
+kde
+
+\startitemize[packed]
+
+  \item {\tt\bf PocetParametru} definuje, kolik parametrů příkaz má.
+  Pokud nemá žádné, jako ve výše uvedených příkladech, můžeme tuto
+  část vynechat.
+
+  \item {\tt\bf NazevPrikazu} je název nového příkazu. Ten musí
+  odpovídat obecnému providlu pro názvy příkazů. Tj. může jít
+  buď o jeden znak, který není písmenem anglické abecedy, nebo
+  o jedno nebo více písmen základní anglické abecedy (a-zA-Z).
+
+  \item {\tt\bf TextProNahrazeni} obsahuje to, čím bude nahrazeno
+  ve výstupu uméno příkazu, kdykoliv se ve zdrojovém textu objeví.
+
+\stopitemize
+
+Možnost zadávat nové příkazy s argumenty v jejich definici dává
+tomuto mechanismu velkou flexibilitu, protože umožňuje nahradit
+text proměnnou, předanou v parametru.
+
+Představme si, například, že chceme nadefinovat příkaz, který
+vytvoří úvod obchodního dopisu. Hodně jednoduchá verze může být::
+
+{\switchtobodyfont[small]
+\starttyping
+\define\\ZahlaviDopisu{
+  \rightaligned{Eda Pádlo}\par
+  \rightaligned{konzultant}\par
+  Horní Věrolomná, \date\par
+  Vážený pane,\par
+  }
+\stoptyping
+}
+
+but it would be preferable to have a version of the command that would
+write the name of the recipient in the header. This would require the
+use of a parameter that communicates the name of the recipient to the
+new command. This would require redefining the command as follows:
+ale bylo by vhodnější mít verzi příkazu, která by zapisovala i jméno
+příjemce v záhlaví. To by vyžaduje použití parametru, kterým novému
+příkazu předáme jméno příjemce. Příkaz můžeme předefinovat takto:
+
+{\switchtobodyfont[small]
+\starttyping
+\define[1]\ZahlaviDopisu{
+  \rightaligned{Eda Pádlo}\par
+  \rightaligned{konzultant}\par
+  Horní Věrolomná, \date\par
+  Vážený pane #1,\par
+  }
+\stoptyping
+}
+
+Všimněte si, že jsme v definici provedli dvě změny. Především jsme mezi
+klíčové slovo \tex{define} a název příkazu vložili jedničku do hranatých
+závorek ([1]). Tím říkáme \ConTeXt{}u, že příkaz, který definujeme, bude
+mít jeden argument. Dále jsme v posledním řádku definice příkazu napsali
+\quotation{{\tt Vážený pane \#1,}}, přičemž jsme použili vyhrazený znak
+\MyKey{\#}. To znamená, že v místě náhradního textu, kde se objeví
+\MyKey{\#1}, bude vložen obsah prvního argumentu. Pokud by měl příkaz dva
+parametry, \MyKey{\#1} by odkazovalo na první parametr a \MyKey{\#2} na
+druhý. Aby bylo možné příkaz zavolat (ve zdrojovém souboru), za názvem
+příkazu, musí být argumenty uvedeny ve složených závorkácg (každý
+argument s vlastními). Příkaz, který jsme právě definovali, by tedy měl
+být v textu našeho zdrojového souboru volán následujícím způsobem:
+
+\type{\ZahlaviDopisu{Jméno příjemce}}
+
+% {\ttx \color[maincolor]{\backslash LetterHeading\{{\em Addressee
+% name}\} }}
+
+Například tey: \cmd{ZahlaviDopisu\{Nevěřící Tomáši\}}.
+
+Předchozí funkci bychom mohli ještě vylepšit, protože předpokládá, že
+dopis bude odeslán muži (vloží \quotation{Vážený pane} Takže bychom
+mohli přidat další parametr, který by rozlišoval mezi oslovením muže
+a ženy. Například tedy:
+{\switchtobodyfont[small]
+\starttyping
+\define[1]\ZahlaviDopisu{
+  \rightaligned{Eda Pádlo}\par
+  \rightaligned{konzultant}\par
+  Horní Věrolomná, \date\par
+  #1\ #2,\par
+  }
+\stoptyping
+}
+
+takže by potom volání vypadalo například takto
+
+{\tfx\type{\ZahlaviDopisu{Vážená paní}{Liduško Muzikantová}}}
+
+although this is not very elegant (from a programming point of view). It
+would be preferable for symbolic values to be defined for the first
+argument (man/woman; 0/1; m/f) so that the macro itself would choose the
+appropriate text according to this value. But explaining how to achieve
+this requires us to get into more depth than I think the novice reader
+can understand at this stage.
+ačkoli to není příliš elegantní (z programátorského hlediska). Vhodnější
+by to bylo, aby byly pro první argument definovány symbolické hodnoty
+(muz/zena; 0/1; m/f), takže makro by následně samo vybralo vhodný text
+podle této hodnoty. Vysvětlení, jak toho dosáhnout, však vyžaduje,
+abychom se dostali do větší hloubky než si myslím, že začínající
+čtenář může v této fázi pochopit.
+
+\stopsubsection
+
+\startsubsection
+  [
+    reference=sec:startstop,
+    title=Vytváření nových prostředí,
+  ]
+
+\PlaceMacro{definestartstop}
+
+K vytvoření nového prostředí nabízí\ConTeXt\ příkat
+\tex{definestartstop} s následující syntaxí:
+
+\type{\definestartstop[Jmeno][Kongfigurace]}
+
+% {\ttx \color[maincolor]{\backslash definestartstop[{\em Name}][{\em
+% Options}]}}
+
+\startSmallPrint
+
+  V {\em oficiální} definici \tex{definestartstop} (viz \in{kapitolu}
+  [sec:qrc-setup-en]) je další parametr, který jsem výše neuvedl,
+  protože je nepovinný a nepodařilo se mi zjistit, k čemu \Doubt slouží.
+  Nevysvětluje ho ani úvodní \ConTeXt\ \quotation{Excursion}, ani neúplná
+  referenční příručka. Předpokládal jsem, že tento argument (který
+  se musí zadat mezi název a konfiguraci) by mohl být názvem nějakého
+  existujícího prostředí, které by mohlo sloužit jako výchozí model
+  pro nové prostředí. Ale mé testy ukázaly, že tento předpoklad byl
+  mylný. Podíval jsem se do poštovní konference \ConTeXt\ a neviděl
+  jsem žádné použití tohoto parametru.
+\stopSmallPrint
+
+kde
+
+\startitemize
+
+  \item {\bf Jmeno} je jmeno definovaného prostředí.
+
+  \item {\bf Konfigurace} nám dovoluje nastavit chování nového prostředí.
+  K dispozici máme následující hodnoty:
+
+  \startitemize
+
+    \item {\tt before} -- Příkazy, které mají být provedeny před zahájením
+    prostředí.
+
+    \item {\tt after} -- Příkazy, které mají být provedeny po ukončení
+    prostředí.
+
+    \item {\tt style} -- Styl, který má být textu v prostředí nastaven.
+
+    \item {\tt setups} -- Sada příkazů vytvářená pomocí
+      \PlaceMacro{startsetups}\tex{startsetups ... \stopsetups}. Tyto
+      příkazy a jejich užití nebudu v tomto dokumentu vysvětlovat.
+
+    \item {\tt color, inbetween, left, right} -- Nedokumentované možnosti,
+    které se mi nepodařilo \Doubt zprovoznit. Co některé dělají se dá
+    odhadovat z jejich názvu, například barva, ale z více testů, které jsem
+    provedl, vyplývá, že při zadání různých hodnot tohoto parametru,
+    nevidím v prostředí žádnou změnu.
+
+  \stopitemize
+
+\stopitemize
+
+Příklad definice prostředí:
+
+{\switchtobodyfont[small]
+\starttyping
+\definestartstop
+  [TextWithBar]
+  [before=\startmarginrule\noindentation,
+    after=\stopmarginrule,
+    style=\ss\sl
+  ]
+
+\starttext
+
+První dva základní zákony lidské hlouposti jednoznačně říkají že:
+
+\startTextWithBar
+
+  \startitemize[n,broad]
+
+    \item Vždy a nevyhnutelně podceňujeme počet existujících hloupých jedinců.
+
+    \item Pravděpodobnost, že daná osoba je hloupá, je nezávislá na na jiných
+    vlastnostech téže osoby.
+
+  \stopitemize
+
+\stopTextWithBar
+
+\stoptext
+\stoptyping
+}
+
+Výsledek bude:
+
+\definestartstop
+  [TextWithBar]
+  [before=\startmarginrule\noindentation,
+    after=\stopmarginrule,
+    style=\sl,
+  ]
+
+\startframedtext[frame=off]
+
+  \color[red]{První dva základní zákony lidské hlouposti jednoznačně říkají že:
+
+\startTextWithBar
+
+\startitemize[n,broad]
+
+  \item Vždy a nevyhnutelně podceňujeme počet existujících hloupých jedinců.
+
+  \item Pravděpodobnost, že daná osoba je hloupá, je nezávislá na na jiných
+    vlastnostech téže osoby.
+
+\stopitemize
+
+\stopTextWithBar}
+\stopframedtext
+
+Pokud chceme, aby naše nové prostředí bylo současně skupinou
+(\in{kapitola}[sec:groups]), tj. aby jakákoli změna normálního fungování
+\ConTeXt{}u, ke které v něm dojde, skončila při opuštění prostředí, musíme
+do parametru \MyKey{before} uvést příkaz \PlaceMacro{bgroup}\tex{bgroup}
+a do parametru \MyKey{after} příkaz \PlaceMacro{egroup}\tex{egroup}.
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [title=Další základní concepty]
+
+Kromě příkazů existují i další pojmy, které jsou zásadní pro pochopení
+logiky fungování \ConTeXt{}u. Některé z nich, díky své složitosti, nejsou
+vhodné pro úvod, a proto se jimi nebudeme zabývat. Dva z nich ale nyní
+prozkoumáme podrobněji: skupiny a rozměry.
+
+\startsubsection
+  [reference=sec:groups, title=Skupiny]
+
+Skupina je přesně ohraničený fragment zdrojového souboru, který \ConTeXt\
+používá jako {\em pracovní jednotku} (co to znamená, je vysvětleno níže).
+Každá skupina má explixitně uvedený začátek a konec. Skupina začíná
+
+\startitemize[packed]
+
+  \item Vyhrazeným znakem \MyKey{\{} nebo příkazem
+    \PlaceMacro{bgroup}\tex{bgroup}.
+
+  \item Příkazem \PlaceMacro{begingroup}\tex{begingroup}
+
+  \item Příkazem \PlaceMacro{start}\tex{start}
+
+  \item Zahájením některých prostředí (příkaz \tex{startSomething}).
+
+  \item Zahájením prostředí matematiky (rezervovaným znakem «\$»).
+
+\stopitemize
+
+a je ukončena
+
+\startitemize[packed]
+
+  \item Vyhrazeným znakem \MyKey{\}} nebo příkazem
+    \PlaceMacro{egroup}\tex{egroup}.
+
+  \item Příkazem \PlaceMacro{endgroup}\tex{endgroup}
+
+  \item Příkazem \PlaceMacro{stop}\tex{stop}
+
+  \item Ukončením prostředí (příkaz \tex{stopSomething}).
+
+  \item Ukončením prostředí matematiky (rezervovaným znakem «\$»).
+
+\stopitemize
+
+Skupiny generují automaticky také některé příkazy, například \tex{hbox},
+\tex{vbox} (obecně příkazy spojené s vytvářením boxů)\footnote{Pojem
+{\em box} je také jeden z obecných pojmů \ConTeXt{}u, ale jeho vysvětlení
+není součístí tohoto úvodz}. Mimo tyto případy (skupiny automaticky
+generované určitými příkazy), musí být vždy způsob
+uzavření skupiny v souladu se způsobem jejího otevření. To znamená,
+že skupina která je zahájená znakem \MyKey{\{}, musí končit znakem \MyKey{\}}
+a skupina zahájená příkazem \tex{begingroup} musí být končit příkazem
+\tex{endgroup}. Toto pravidlo má pouze jednu výjimku, a to že skupina
+začínající \MyKey{\{} může končit pomocí \tex{egroup} a naopak (kombinace
+\tex{bgroup} a \MyKey{\}}). Což znamená, že dvojice \MyKey{\{} a \tex{bgroup}
+a dvojice \MyKey{\}} a \tex{egroup} jsou vzájemně zcela nahraditelné.
+
+\startSmallPrint
+
+  Příkazy \PlaceMacro{bgroup}\tex{bgroup} a \PlaceMacro{egroup}\tex{egroup}
+  byly navrženy tak, aby bylo možné definovat příkazy pro otevření skupiny
+  a jiné pro její uzavření. Proto z vnitřních důvodů syntaxe \TeX{}u
+  nebylo možné tyto skupiny otevírat a zavírat pomocí složených závorek,
+  protože by to generovalo nepárové složené závorky a při kompilaci vžd
+  končilo chybou.
+
+  Naproti tomu příkazy \PlaceMacro{begingroup}\tex{begingroup} a
+  \PlaceMacro{endgroup}\tex{endgroup} nejsou zaměnitelné
+  se složenými závorkami nebo příkazy \tex{bgroup  ... \egroup}.
+  Skupina započatá příkazem \tex{begingroup} musí být uzavřena pomocí
+  \tex{endgroup}. Tyto poslední příkazy byly navrženy tak, aby
+  umožňovaly důkladnější kontrolu chyb. Běžní uživatelé je obecně nemusí
+  používat.
+
+\stopSmallPrint
+
+Můžeme mít i vnořené skupiny (skupina v jiné skupině). V takovém případě
+musí být pořadí uzavírání skupin odpovídat jejich otevírání.
+Tj. každá podskupina musí být uzavřena v rámci skupiny, ve které začala.
+Mohou existovat i prázdné skupiny generované pomocí  \MyKey{\{\}}.
+Prázdná skupina nemá na výsledný dokument žádný vliv, ale může být
+užitečná například pro označení konce názvu příkazu.
+
+Hlavním účelem skupin je zapouzdření jejich obsahu: definice, formáty
+a přiřazení hodnot, které jsou provedeny v rámci skupiny, jsou
+zpravidla \quotation{zapomenuty}, jakmile skupinu opustíme. Pokud
+tedy chceme, aby \ConTeXt\ dočasně změnil svůj běžný způsob fungování,
+je nejefektivnějším způsobem vytvořit skupinu a v jejím rámci toto
+fungování změnit. Jakmile apk skupinu opustíme, všechny hodnoty a
+formáty se obnoví do stavu před zahájením skupiny. Několik příkladů
+jsme již viděli: \tex{it}, \tex{bf}, \tex{sc}. To se však neděje
+pouze u formátovacích příkazů. Skupina určitým způsobem
+ {\em izoluje} svůj obsah, takže jakákoli změna v kterékoli z mnoha
+vnitřních proměnných, které \ConTeXt\ neustále spravuje, zůstane platná
+jen tak dlouho, dokud se nacházíme ve skupině, v níž byla tato změna
+provedena. Stejně tak příkaz definovaný v rámci skupiny nebude
+znám mimo ni.
+
+Takže pokud vyzkoušíme následující příklad
+
+\starttyping
+\define\A{B}
+\A
+{
+  \define\A{C}
+  \A
+}
+\A
+\stoptyping
+
+uvidíme, že při prvním spuštění příkazu \tex{A} odpovídá výsledek
+jeho původní definici (\quote{B}). Poté jsme vytvořili skupinu a
+předefinovali v ní příkaz \tex{A}. Spustíme-li jej nyní v rámci
+skupiny, příkaz poskytne výsledek dle nové definice (v uvedeném
+příkladu tedy \quote{C}). Ale když opustíme skupinu, ve které
+byl příkaz \quote{B}. Redefinice příkazu provedená ve skupině
+je skutečně  \quote{zapomenuta}, jakmile ji opustíme.
+
+Další použití nachází skupin u příkazů nebo instrukcí, které jsou
+určeny výhradně pro znak, který je za nimi napsán. V tomto případě,
+pokud chceme, aby se příkaz vztahoval na více než jeden znak,
+musíme znaky, na které chceme, aby se příkaz nebo instrukce
+vztahovaly, uzavřít do skupiny. Tak například rezervovaný znak
+\MyKey{\letterhat}, který, jak již víme, při použití uvnitř
+matematického prostředí převede následující znak na horní index.
+Pokud tedy napíšeme například \MyKey{\$4^2x\$}, dostaneme
+\quotation{$4^2x$ }. Pokud však napíšeme \MyKey{\$4^\{2x\}\$},
+\quotation{$4^{2x}$}.
+
+A konečně: třetím použitím skupiny je případ, kdy  \ConTeXt{}u sdělujeme,
+že to, co je ve skupině uzavřeno, musí být považováno za jeden celek.
+To je důvod, proč jem dříve (\in{kapitola}[sec:syntax]) uváděl, že v některých
+případech je lepší příkazy předávané jako parametr jiného příkazu
+uzavřít do složených závorek.
+\stopsubsection
+
+\startsubsection
+  [reference=sec:dimensions, title=Rozměry]
+
+Ačkoli bychom mohli \ConTeXt\ používat bez obav o rozměry, nemohli
+bychom využít všech jeho možnosti, bez zvážení úráce s nimo. Protože
+typografická dokonalost dosažená \TeX{}em a jeho odvozeninami spočívá,
+do značné míry, ve velké pozornosti, kterou systém vnitřně věnuje
+rozměrům. Své rozměry maji znaky, mezery mezi slovy, řádky nebo odstavci,
+samotné řádky, okraje, záhlaví i zápatí. Téměř pro každý prvek na
+stránce, který nás napasne, existuje nějaký rozměr.
+
+V \ConTeXt{}u jsou rozměry specifikovány desetinným číslem následovaným
+jednotkou. Jednotky, které lze používat, jsou uvedeny
+v \in{tabulce}[tbl:measurements].
+
+\placetable
+  [here]
+  [tbl:measurements]
+  {Rozměrové jednotky použitelné v \ConTeXt{}u}
+{\starttabulate[|l|c|l|]
+  \NC {\bf Náezv} \NC {\bf Označení v \ConTeXt{}u}\NC {\bf Ekvivalent}\NR
+\NC Palec\NC in\NC 1 in $=$ 2.54 cm\NR
+\NC Centimetr\NC cm\NC 2.54 cm $=$ 1 inch\NR
+\NC Milimetr\NC mm\NC 100 mm $=$ 1 cm\NR
+\NC Bod\NC pt\NC 72.27 pt $=$ 1 inch\NR
+\NC Big point\NC bp\NC 72 bp $=$ 1 inch\NR
+\NC Scaled point\NC sp\NC 65536 sp $=$ 1 point\NR
+\NC Pica\NC pc\NC 1 pc $=$ 12 points\NR
+\NC Didot\NC dd\NC 1157 dd $=$ 1238 points\NR
+\NC Cicero\NC cc\NC 1 cc $=$ 12 didots\NR
+\NC\NC em\NR
+\NC\NC ex\NR
+\stoptabulate
+}
+
+První tři jednotky v \in{tabulce}[tbl:measurements] jsou standardní
+délkové míry. První z nich je používána v některých částech anglicky
+mluvícího světa, zbylé mimo něj. Zbývající jednotky pocházejí ze
+světa typografie. Poslední dvě, pro které jsem neuvedl žádný ekvivalent,
+jsou relativní měrné jednotky založené na na základě aktuálního písma.
+1 \quotation{em} se rovná šířce písmene \quotation{M} a \quotation{ex}
+výšce písmene \quotation{x}. Použití měr vztahujících se k velikosti
+písma umožňuje vytvářet makra, která vypadají stejně dobře, ať už je
+v daném okamžiku použit jakýkoli zdroj. Proto se obecně doporučuje jejich
+používání.
+
+Až na velice málo vyjímek můžeme použít jakoukoliv z uvedených měrných
+jedotek a \ConTeXt\ si je vnitřně převede. Kdykoli však uvádíme rozměr,
+je to povinně uvést i měrnou jednotku. A to i v případě, kdy jde o rozměr
+velikosti  \quotation{0}. Musíme uvést např. \quote{0pt} nebo \quote{0cm}.
+Mezi číslem a názvem jednotky můžeme, ale nemusíme nechat prázdné místo.
+Pokud má jednotka desetinnou část, můžeme použít oddělovač desetinných
+míst, buď (.), nebo čárku (,).
+
+Rozměry a míry se obvykle používají jako volitelné parametry příkazů.
+Můžeme však také přímo přiřadit hodnotu nějaké interní míře \ConTeXt{}u,
+pokud známe její název. Například odsazení prvního řádku běžného odstavce
+je interně řízeno \ConTeXt{}em pomocí proměnné nazvané
+\PlaceMacro{parindent}\tex{parindent}. Přiřazením hodnoty do této proměnné
+změníme rozměr, který \ConTeXt\ bude od tohoto okamžiku používat. A tak
+například, pokud chceme odstranit např. odsazení prvního řádku stačí,
+když do našeho zdrojového souboru zapíšeme text:
+
+\type{\parindent=0pt}
+
+Můžeme také psát \tex{parindent 0pt} (bez rovnítka)
+nebo \tex{parindent0pt} bez mezery mezi názvem rozměru a přiřazovanou
+hodnotou.
+
+However, assigning a value directly to an internal measure is considered
+\quotation{inelegant}. In general, it is recommended to use the commands
+that control that variable, and to do so in the preamble of the source
+file. The opposite results in source files that are very difficult to
+debug because not all the configuration commands are in the same place,
+and it is really difficult to obtain a certain consistency in
+typographical characteristics.
+
+Nicméně přiřazení hodnoty přímo internímu rozmětu je považováno za
+\quotation{neelegantní}. Obecně se doporučuje používat příkazy, které
+danou proměnnou ovládají, v úvodu zdrojového souboru.
+Nedodržení tohoto pravidla vede ke zdrojovém kódu, který se velmi obtížně
+ladí, protože ne všechny konfigurační příkazy jsou na stejném místě, a pak
+hodně obtížné dosáhnout konzistence v ve vztahu k typografickým
+vlastnostem.
+
+Některé rozměry používané \ConTeXt{}em jsou \quotation{pružné}. To znamená,
+že v závislosti na situaci mohou nabývat různých hodnot. Tyto rozměry
+se nastavují s pomocí následující syntaxe:
+
+\type{\MeasureName plus MaxIncrement minus MaxDecrease}
+
+% {\tt\backslash {\em MeasureName} plus {\em MaxIncrement} minus
+%   {\em MinDecrease}}
+
+Například
+
+\type{\parskip 3pt plus 2pt minus 1pt}
+
+Tímto příkazem říkáme \ConTeXt{}u, že {\em normální} hodnota
+\PlaceMacro{parskip}\tex{parskip} (definující vertikální vzdálenost
+mezi odstavci) je 3 body. Ale pokud to aktuální situace na stránce
+vyžaduje, může být až 5 bodů (3 plus 2) nebo jen 2 body (3 mínus 1).
+Výsledné rozhodnutí tak necháváme na \ConTeXt{}u s tím, že víme,
+že výsledná vzdálenost bude mezi 2 a 5 body.
+
+\stopsubsection
+
+\stopsection
+
+\startsection
+  [title=\ConTeXt\ pro samouky]
+
+  % Section added at the last moment, when I realised that I myself
+  % had become so imbued with the spirit of ConTeXt that I was able to
+  % guess the existence of certain commands.
+
+Obrovské množství příkazů a možností \ConTeXt{}u se ukazuje jako skutečně
+ohromující a může v nás vyvolat pocit, že se s ním nikdy nenaučíme dobře
+pracovat. Tento dojem je ale mylný, protože jednou z výhod \ConTeXt{}u
+je jednotný způsob, jakým pracuje se všemi svými strukturami. Stačí se
+tak dobře naučit několik málo kostrukcí a víceméně víme, k čemu slouží
+ty zbývající. A když budeme potřebovat použít nějakou novou vlastnost,
+bude relativně snadné naučit se ji používat. Proto chápu tento úvod,
+jako jakési {\em školení}, které vás připraví na to, abyste mohli
+vyrazit na vlastní průzkum.
+
+Abyste mohli vytvořit dokument v \ConTeXt{}u, mělo by vám stačit znát
+těchto pět základních věcí (můžeme je nazývat \ConTeXt{}í {\em
+Top Five}):
+
+\startitemize[n]
+
+  \item Vědět, jak vytvořit zdrojový soubor nebo projekt. Popsáno je to
+  v \in{kapitole}[cap:sourcefile].
+
+  \item Umět nastavit hlavní font a znát základní příkazy pro změnu fontu
+  a barvy - viz (\in{kapitolu}[sec:fontscol]).
+
+  \item Znát základní příkazy pro definici struktury dokumentu, jako jsou
+  části, kapitoly, podkapitoly poad. To vše vysvětluje
+  \in{kapitola}[cap:structure].
+
+  \item Možná také vědět něco o tom, jak procovat s prostředím {\em itemize},
+  což vysvětluje do detailů \in{kapitola}[sec:itemize].
+
+  \item ...a něco málo dalšího.
+
+\stopitemize
+
+For the rest, all we need to know is that it is possible. Certainly no
+one will use a utility if they do not know that it exists. Many of them
+are explained in this introduction; but, above all, we can repeatedly
+watch how \ConTeXt\ always acts when faced with a certain type of
+construction:
+
+O ostatním stačí vědět, že je to možné. Určitě nikdo nebude používat
+nástroje, o kterých neví, že existují. Mnoho z nich je vysvětleno v tomto
+úvodu, především však můžeme opakovaně vidět, jak se \ConTeXt\ chová
+u většiny těchto nástrojů:
+
+\startitemize
+
+  \item Za prvé bude existovat příkaz, který něco umožní.
+
+  \item Za druhé, skoro vždy zde bude i příkaz, který nám umožní
+  nastavit a definovat výchozí chování v dané situaci. Tento příkaz
+  zaříná \tex{setup} a obvykle odpovídá názvu nastavovaného příkazu.
+
+  \item A nakonec je obvykle i možnost nadefinovat si nový příkaz
+  pro spouštění dané úlohy s různými nastaveními.
+
+\stopitemize
+
+Chcete-li zjistit, zda tyto příkazy existují, vyhledejte si oficiální
+seznam příkazů (viz \in{kapitolu}[sec:qrc-setup-en]), kde najdete také
+parametry, které příkaz má. A přestože se na první pohled mohou zdát názvy
+těchto parametrů poněkud záhadné, brzy zjistíte, že jsou parametry, které
+se opakují v mnoha dalších příkazech a ve všech fungují stejně nebo
+velmi podobně. Pokud máte pochybnosti o tom, co některý parametr dělá
+nebo jak funguje, stačí si vygenerovat dokument a vyzkoušet jej. Můžete
+se také podívat do bohaté dokumentace \ConTeXt{}u. Jak je ve světě
+svobodného softwaru obvyklé, \suite- obsahuje, mimo jiné, zdrojové kódy
+téměř veškeré své dokumentace. Nástroj jako \MyKey{grep} (pro systémy
+GNU Linux) vám může pomoci vyhledat, zda příkaz nebo volba, u které
+máte pochybnosti, je použit v některém z těchto zdrojových souborů.
+Takže můžete mít k dispozici i příklad použití.
+
+Takto jsem výuku \ConTeXt{}u koncipoval: v tomto \quotation{úvodu} je do
+podrobna vysvětleno pět (ve skutečnosti čtyři) základních konceptů, na které
+kladu důraz, a řada dalších. Při čtení by se vám měl v hlavě poskládat
+jasný obraz posloupnosti: {\em příkaz, který něco provádí} -- {\em příkaz,
+který jej konfiguruje} -- {\em příkaz který nám umožní vytvořit
+podobný příkaz}. Naučíme se také některé ještě něco o hlavní strukturách
+\ConTeXt{}u a ukážeme si, k čemu slouží.
+
+\stopsection
+
+\stopchapter
+
+\stopcomponent
+
+%%% Local Variables:
+%%% mode: ConTeXt
+%%% mode: auto-fill
+%%% TeX-master: "../introCTX.mkiv"
+%%% coding: utf-8-unix
+%%% End:
+%%% vim:set filetype=context tw=72 : %%%
+}
