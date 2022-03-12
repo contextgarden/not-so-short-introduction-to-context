@@ -24,9 +24,9 @@ order to increase the potential audience, a member of the [ntg-context mailing l
 |----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|
 | [<img src="ru/introCTX_rus.png" width="200">](ru/introCTX_rus.pdf)   | [<img src="sr/introCTX_srb.png" width="200">](sr/introCTX_srb.pdf)   | [<img src="es/introCTX_esp.png" width="200">](es/introCTX_esp.pdf)   |
 
-| [French v2.0alpha](fr2/introCTX_fra.pdf)                             |
-|----------------------------------------------------------------------|
-| [<img src="fr2/introCTX_fra.png" width="200">](fr2/introCTX_fra.pdf) |
+| [French v2.0alpha](fr2/introCTX_fra.pdf)                             |                                                                      |                                                                      |
+|----------------------------------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------|
+| [<img src="fr2/introCTX_fra.png" width="200">](fr2/introCTX_fra.pdf) |                                                                      |                                                                      |
 
 
 ## Author
