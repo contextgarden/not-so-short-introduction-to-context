@@ -166,7 +166,7 @@ Si, par erreur, nous utilisons directement un des caractères réservés autreme
 
   \item Le plus souvent, une erreur est générée lors de la compilation.
 
-  \item Nous obtenons un résultat inattendu. Cela se produit surtout avec \MyKey{\lettertilde} et \MyKey{\%} ; dans le premier cas, au lieu du \MyKey{\lettertilde} attendu dans le document final, un espace blanc sera inséré ; et dans le second cas, tout ce qui se trouve après \MyKey{\%} sur la même ligne ne sera pas pris en compte par \ConTeXt\ qui le considèrera comme commentaire. L'utilisation incorrecte de la \quotation{{\tt\backslash}} peut également produire un résultat inattendu si elle ou les caractères qui la suivent immédiatement constituent une commande connue de \ConTeXt\. Cependant, le plus souvent, lorsque nous utilisons incorrectement la \quotation{\tt\backslash}, nous obtenons une erreur de compilation.
+  \item Nous obtenons un résultat inattendu. Cela se produit surtout avec \MyKey{\lettertilde} et \MyKey{\%} ; dans le premier cas, au lieu du \MyKey{\lettertilde} attendu dans le document final, un espace blanc sera inséré ; et dans le second cas, tout ce qui se trouve après \MyKey{\%} sur la même ligne ne sera pas pris en compte par \ConTeXt\ qui le considèrera comme commentaire. L'utilisation incorrecte de la \quotation{{\tt\backslash}} peut également produire un résultat inattendu si elle ou les caractères qui la suivent immédiatement constituent une commande connue de \ConTeXt. Cependant, le plus souvent, lorsque nous utilisons incorrectement la \quotation{\tt\backslash}, nous obtenons une erreur de compilation.
 
   \item Aucun problème ne se produit : Cela se produit avec trois des caractères réservés utilisés principalement en mathématiques ({\tt _ ^ &}) : s'ils sont utilisés en dehors de cet environnement, ils sont traités comme des caractères normaux.
   \startSmallPrint
@@ -687,6 +687,7 @@ Sur la base d'une telle définition, chaque fois que la commande \tex{Tite} appa
 Le texte de remplacement peut être du texte pur, ou inclure des commandes, ou encore former des expressions mathématiques dans lesquelles il y a plus de chances de faire des fautes de frappe (du moins pour moi). Par exemple, si l'expression $(x_1,\ldots,x_n)$ doit apparaître régulièrement dans notre texte, nous pouvons créer une commande pour la représenter. Par exemple
 
 \placefigure [force,here,none] [] {}{
+\startDemoI
 \define\xvec{$(x_1,\ldots,x_n)$}
 \stopDemoI}
 
@@ -846,7 +847,7 @@ Si nous voulons que notre nouvel environnement soit un groupe (\in{section}[sec:
 \startsection
   [title=Autres concepts fondamentaux]
 
-  Il existe d'autres notions, autres que les commandes, qui sont fondamentales pour comprendre la logique du fonctionnement de \ConTeXt\. Certaines d'entre elles, en raison de leur complexité, ne sont pas appropriées pour une introduction et ne seront donc pas abordées dans ce document ; mais il y a deux notions qu'il convient d'examiner maintenant : les groupes et les dimensions.
+  Il existe d'autres notions, autres que les commandes, qui sont fondamentales pour comprendre la logique du fonctionnement de \ConTeXt. Certaines d'entre elles, en raison de leur complexité, ne sont pas appropriées pour une introduction et ne seront donc pas abordées dans ce document ; mais il y a deux notions qu'il convient d'examiner maintenant : les groupes et les dimensions.
 
 
 \startsubsection
@@ -1051,7 +1052,7 @@ Pour le reste, tout ce dont nous avons besoin, c'est de savoir que c'est possibl
 
 \stopitemize
 
-Pour savoir si ces commandes existent ou non, consultez la liste officielle des commandes (voir \in{section}[sec:qrc-setup-fr]), qui nous informera également des options de configuration que ces commandes prennent en charge. Bien qu'à première vue, les noms de ces options puissent sembler cryptiques, nous verrons rapidement que certaines options sont répétées dans de nombreuses commandes et qu'elles fonctionnent de la même manière ou de manière très similaire dans toutes ces commandes. Si nous avons des doutes sur ce que fait une option, ou sur son fonctionnement, il suffira de générer un document et de le tester. Nous pouvons également consulter l'abondante documentation de \ConTeXt\. Comme il est courant dans le monde des logiciels libres, \suite- inclut les sources de presque toute sa documentation dans la distribution. Un utilitaire comme \MyKey{grep} (pour les systèmes GNU Linux) peut nous aider à rechercher si la commande ou l'option sur laquelle nous avons des doutes est utilisée dans l'un de ces fichiers sources afin d'avoir un exemple sous la main.
+Pour savoir si ces commandes existent ou non, consultez la liste officielle des commandes (voir \in{section}[sec:qrc-setup-fr]), qui nous informera également des options de configuration que ces commandes prennent en charge. Bien qu'à première vue, les noms de ces options puissent sembler cryptiques, nous verrons rapidement que certaines options sont répétées dans de nombreuses commandes et qu'elles fonctionnent de la même manière ou de manière très similaire dans toutes ces commandes. Si nous avons des doutes sur ce que fait une option, ou sur son fonctionnement, il suffira de générer un document et de le tester. Nous pouvons également consulter l'abondante documentation de \ConTeXt. Comme il est courant dans le monde des logiciels libres, \suite- inclut les sources de presque toute sa documentation dans la distribution. Un utilitaire comme \MyKey{grep} (pour les systèmes GNU Linux) peut nous aider à rechercher si la commande ou l'option sur laquelle nous avons des doutes est utilisée dans l'un de ces fichiers sources afin d'avoir un exemple sous la main.
 
 C'est ainsi que l'apprentissage de \ConTeXt\ a été conçu : l'introduction explique en détail les cinq (en réalité quatre) aspects que j'ai mis en évidence, et bien d'autres encore : au fil de la lecture, une image claire de la séquence se formera dans notre esprit : {\em une commande pour exécuter la tâche} -- {\em une seconde commande pour configurer le comportement de la première} -- {\em une troisième commande pour créer un commande similaire à la première à partir d'un clône}. Nous apprendrons également certaines des principales structures de \ConTeXt, et nous saurons à quoi elles servent.
 
