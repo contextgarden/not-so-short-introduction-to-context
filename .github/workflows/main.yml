@@ -11,13 +11,19 @@ jobs:
 
       - name: Download ConTeXt and Compile
         run: |
+          WORKSPACE=`pwd`
           wget -O context.zip http://lmtx.pragma-ade.nl/install-lmtx/context-linux-64.zip
           unzip context.zip -d context
           cd context/
           sh install.sh >/dev/null
           cd tex/texmf-linux-64/bin
           CTXPATH=`pwd`
+          export PATH=$CTXPATH:$PATH
           declare -A languages=(["cs"]="cs" ["en"]="eng" ["es"]="esp" ["fr"]="fra" ["fr2"]="fra" ["ru"]="rus" ["sr"]="srb")
+          export OSFONTDIR=$WORKSPACE/sr/fonts:$OSFONTDIR
+          echo "OSFONTDIR : $OSFONTDIR"
+          mtxrun --generate              > /dev/null
+          mtxrun --script font --reload  > /dev/null
           for lang in "${!languages[@]}"
           do
           start=`date +%s`
@@ -28,10 +34,10 @@ jobs:
           if [[ "$lang" == "fr" || "$lang" == "fr2" || "$lang" == "cs" ]]; then
           extension="tex"
           fi
-          echo "Screen version..."
-          $CTXPATH/context --mode=screen "introCTX_${tlang}.${extension}" --result="introCTX_${tlang}_s" > /dev/null
-          echo "Paper version..."
-          $CTXPATH/context               "introCTX_${tlang}.${extension}" --result="introCTX_${tlang}_p" > /dev/null
+          echo "Screen version... avec $CTXPATH/mtxrun --mode=screen"
+          $CTXPATH/mtxrun --autogenerate --script context --autopdf --mode=screen "introCTX_${tlang}.${extension}" --result="introCTX_${tlang}_s" > /dev/null
+          echo "Paper version... avec $CTXPATH/mtxrun"
+          $CTXPATH/mtxrun --autogenerate --script context --autopdf               "introCTX_${tlang}.${extension}" --result="introCTX_${tlang}_p" > /dev/null
           end=`date +%s`
           echo Execution time was `expr $end - $start` seconds.
           done
