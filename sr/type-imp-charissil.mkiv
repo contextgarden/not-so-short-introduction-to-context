@@ -1,0 +1,54 @@
+%D \module
+%D   [     file=type-imp-charissil,
+%D      version=2010.09.14,
+%D        title=\CONTEXT\ Typescript Macros,
+%D     subtitle=Charis SIL Font Definitions,
+%D       author=Wolfgang Schuster,
+%D         date=\currentdate,
+%D    copyright=Wolfgang Schuster,
+%D      license=GNU General Public License]
+
+%C Copyright (C) 2010 Wolfgang Schuster
+%C
+%C This program is free software: you can redistribute it and/or modify
+%C it under the terms of the GNU General Public License as published by
+%C the Free Software Foundation, either version 3 of the License, or
+%C (at your option) any later version.
+%C
+%C This program is distributed in the hope that it will be useful,
+%C but WITHOUT ANY WARRANTY; without even the implied warranty of
+%C MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%C GNU General Public License for more details.
+%C
+%C You should have received a copy of the GNU General Public License
+%C along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+\loadtypescriptfile[plex]
+\starttypescriptcollection [charissil]
+
+\starttypescript [\s!serif] [charissil]
+    \definefontsynonym [CharisSIL-Regular]    [\s!file:CharisSIL-Regular]  [\s!features=\s!default]
+    \definefontsynonym [CharisSIL-Italic]     [\s!file:CharisSIL-Italic]  [\s!features=\s!default]
+    \definefontsynonym [CharisSIL-Bold]       [\s!file:CharisSIL-Bold]  [\s!features=\s!default]
+    \definefontsynonym [CharisSIL-BoldItalic] [\s!file:CharisSIL-BoldItalic] [\s!features=\s!default]
+\stoptypescript
+
+\starttypescript [\s!serif] [charissil]
+    \setups[\s!font:\s!fallback:\s!serif]
+    \definefontsynonym [\s!Serif]           [CharisSIL-Regular]    [\s!features=\s!default]
+    \definefontsynonym [\s!SerifItalic]     [CharisSIL-Italic]     [\s!features=\s!default]
+    \definefontsynonym [\s!SerifBold]       [CharisSIL-Bold]       [\s!features=\s!default]
+    \definefontsynonym [\s!SerifBoldItalic] [CharisSIL-BoldItalic] [\s!features=\s!default]
+\stoptypescript
+
+\starttypescript [charissil]
+    \definetypeface [charissil] [rm] [\s!serif] [charissil] [\s!default]
+    \definetypeface [charissil] [ss] [\s!sans]  [plex]    [\s!default] [\s!rscale=0.95]%\v!auto]
+    \definetypeface [charissil] [tt] [\s!mono]  [plex]    [\s!default] [\s!rscale=0.95]%\v!auto]
+    \definetypeface [charissil] [mm] [\s!math]  [modern]    [\s!default]
+    \quittypescriptscanning
+\stoptypescript
+
+\stoptypescriptcollection
+
+\endinput

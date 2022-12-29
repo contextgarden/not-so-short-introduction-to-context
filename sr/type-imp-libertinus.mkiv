@@ -1,0 +1,90 @@
+%D \module
+%D   [       file=type-imp-libertinus,
+%D        version=2016.08.18,
+%D          title=\CONTEXT\ Typescript Macros,
+%D       subtitle=Libertine fonts,
+%D         author=Hans Hagen,
+%D           date=\currentdate,
+%D      copyright={PRAGMA ADE \& \CONTEXT\ Development Team}]
+%C
+%C This module is part of the \CONTEXT\ macro||package and is
+%C therefore copyrighted by \PRAGMA. See mreadme.pdf for
+%C details.
+
+%D This typescript (submitted by by Henri Menke) is a follow up on libertine
+%D which is no longer maintained cq.\ developed further. We probably need to
+%D come up with some goodie file to fix a couple of things in the math font.
+
+% \definefontfeature[math-text]        [collapseitalics=yes]
+% \definefontfeature[math-script]      [collapseitalics=yes]
+% \definefontfeature[math-scriptscript][collapseitalics=yes]
+
+\loadtypescriptfile[plex]
+
+\starttypescriptcollection[libertinus]
+
+    \starttypescript [\s!serif] [libertinus]
+        \definefontsynonym [LibertinusSerif-Regular]     [\s!file:libertinusserif-regular]
+        \definefontsynonym [LibertinusSerif-Italic]      [\s!file:libertinusserif-italic]
+        \definefontsynonym [LibertinusSerif-Slanted]     [\s!file:libertinusserif-italic]
+        \definefontsynonym [LibertinusSerif-Bold]        [\s!file:libertinusserif-bold]
+        \definefontsynonym [LibertinusSerif-BoldItalic]  [\s!file:libertinusserif-bolditalic]
+        \definefontsynonym [LibertinusSerif-BoldSlanted] [\s!file:libertinusserif-bolditalic]
+    \stoptypescript
+
+    \starttypescript [\s!serif] [libertinus] [\s!name]
+        \setups[\s!font:\s!fallback:\s!serif]
+        \definefontsynonym [\s!Serif]            [LibertinusSerif-Regular]     [\s!features=\s!default]
+        \definefontsynonym [\s!SerifItalic]      [LibertinusSerif-Italic]      [\s!features=\s!default]
+        \definefontsynonym [\s!SerifSlanted]     [LibertinusSerif-Slanted]     [\s!features=\s!default]
+        \definefontsynonym [\s!SerifBold]        [LibertinusSerif-Bold]        [\s!features=\s!default]
+        \definefontsynonym [\s!SerifBoldItalic]  [LibertinusSerif-BoldItalic]  [\s!features=\s!default]
+        \definefontsynonym [\s!SerifBoldSlanted] [LibertinusSerif-BoldSlanted] [\s!features=\s!default]
+        \definefontsynonym [SerifCaps]           [LibertinusSerif-Regular]     [\s!features=\s!smallcaps]
+    \stoptypescript
+
+    \starttypescript [\s!sans] [libertinus]
+        \setups[\s!font:\s!fallback:\s!sans]
+        \definefontsynonym [LibertinusSans-Regular]     [\s!file:libertinussans-regular]
+        \definefontsynonym [LibertinusSans-Italic]      [\s!file:libertinussans-italic]
+        \definefontsynonym [LibertinusSans-Slanted]     [\s!file:libertinussans-italic]
+        \definefontsynonym [LibertinusSans-Bold]        [\s!file:libertinussans-bold]
+        \definefontsynonym [LibertinusSans-BoldItalic]  [\s!file:libertinussans-bold]
+        \definefontsynonym [LibertinusSans-BoldSlanted] [\s!file:libertinussans-bold]
+    \stoptypescript
+
+    \starttypescript [\s!sans] [libertinus] [\s!name]
+        \setups[\s!font:\s!fallback:\s!sans]
+        \definefontsynonym [\s!Sans]           [LibertinusSans-Regular]     [\s!features=\s!default]
+        \definefontsynonym [\s!SansBold]       [LibertinusSans-Bold]        [\s!features=\s!default]
+        \definefontsynonym [\s!SansItalic]     [LibertinusSans-Italic]      [\s!features=\s!default]
+        \definefontsynonym [\s!SansSlanted]    [LibertinusSans-Slanted]     [\s!features=\s!default]
+        \definefontsynonym [\s!SansBoldItalic] [LibertinusSans-BoldSlanted] [\s!features=\s!default]
+        \definefontsynonym [SansCaps]          [LibertinusSans-Regular]     [\s!features=\s!smallcaps]
+    \stoptypescript
+
+    \starttypescript [\s!mono] [libertinus]
+        \setups[\s!font:\s!fallback:\s!mono]
+        \definefontsynonym [LibertinusMono-Regular] [\s!file:libertinusmono-regular]
+    \stoptypescript
+
+    \starttypescript [\s!mono] [libertinus] [\s!name]
+        \setups[\s!font:\s!fallback:\s!mono]
+        \definefontsynonym [\s!Mono] [LibertinusMono-Regular] [\s!features=\s!none]
+    \stoptypescript
+
+    \starttypescript [\s!math] [libertinus] [\s!name]
+        \loadfontgoodies[libertinus-math]
+        \definefontsynonym[\s!MathRoman    ] [\s!file:libertinusmath-regular.otf] [\s!features={\s!math\mathsizesuffix,mathextra},\s!goodies=libertinus-math.lfg]
+        \definefontsynonym[\s!MathRomanBold] [\s!file:libertinusmath-regular.otf] [\s!features={\s!math\mathsizesuffix,mathextra},\s!goodies=libertinus-math.lfg]
+    \stoptypescript
+
+    \starttypescript [libertinus]
+        \definetypeface [libertinus] [\s!rm] [\s!serif] [libertinus] [\s!default]
+        \definetypeface [libertinus] [\s!ss] [\s!sans]  [libertinus] [\s!default]
+        \definetypeface [libertinus] [\s!tt] [\s!mono]  [plex] [\s!default] [\s!rscale=0.85]
+        \definetypeface [libertinus] [\s!mm] [\s!math]  [libertinus] [\s!default]
+        \quittypescriptscanning
+    \stoptypescript
+
+\stoptypescriptcollection

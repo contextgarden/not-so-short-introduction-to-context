@@ -12,15 +12,24 @@
 \startenvironment introCTX_env.mkiv
 
   \mainlanguage[sr] % Главни језик = српски
-  %\setuplanguage[sr][patterns={sr, en}] % Учитавамо шаблоне растављања на крају реда и за енглески
-
-\usetypescript[garamondprem]
-\setupbodyfont[garamondprem, 12pt] % Главни фонт (тела) документа
-%                                     % garamondprem should be avoided because not available for everybody
-% \setupbodyfont[dejavu,8pt]          % proposition : switch to dejavu
-
-
-
+  \definefontfeature
+  [default]
+  [mode=node,ccmp=yes,calt=no,
+   liga=yes,dlig=no,hlig=no,
+   kern=yes,mark=yes,mkmk=yes,
+   onum=no,pnum=yes,salt=no,itlc=yes,
+   locl=yes,cv84=yes,%]
+   script=cyrl,language=srb,]
+  %\usetypescript[libertinus]
+  %\setupbodyfont[libertinus, 12pt] % Главни фонт (тела) документа
+  %\usetypescript[garamondprem]
+  %\setupbodyfont[garamondprem, 12pt] % Главни фонт (тела) документа
+  %\usetypescriptfile[type-imp-charissil]
+  \usetypescript[charissil]
+  \setupbodyfont[charissil, 10pt] % Главни фонт (тела) документа
+  %\usetypescriptfile[type-imp-dejavu]
+  %\usetypescript[dejavu]
+  %\setupbodyfont[dejavu, 10pt] % Главни фонт (тела) документа
 
   % Распоред странице
 
@@ -101,13 +110,14 @@
       before={\ \godown[4cm]},
       header=high,
       footer=ChapterFirstPage,
+      align={nothyphenated,verytolerant},
     ]
 
   \setuphead
     [title, chapter]
     [
       style={\switchtobodyfont[30pt]\bf},
-      align=flushright,
+      align=
       before={\blank[5*big, force]},
       after={\blank[2*big]},
       color=maincolor,
@@ -115,6 +125,7 @@
       commandbefore={\blank[small]},
       header=high,
       footer=ChapterFirstPage,
+      align={flushright,nothyphenated,verytolerant},
     ]
 
   \setuphead
@@ -125,6 +136,7 @@
       after=\blank,
       color=maincolor,
       sectionsegments=2:3,
+      align={flushleft,nothyphenated,verytolerant},
     ]
 
   \setuphead
@@ -135,6 +147,7 @@
       after=\blank,
       color=maincolor,
       sectionsegments=2:4,
+      align={flushleft,nothyphenated,verytolerant},
     ]
 
   \define[1]\PlacePoint{#1.} 
@@ -147,6 +160,7 @@
       style=\bfa,
       color=black,
       numbercommand=,
+      align={flushleft,nothyphenated,verytolerant},
     ]
 
   \setuphead
@@ -283,10 +297,3 @@
   \setuplanguage[en][spacing=packed]% Ово спречава додатни размак након тачке, јер то више није ’de rigeur’ у енглеском штампаном материјалу.
 
 \stopenvironment
-
-%%% Local Variables:
-%%% mode: ConTeXt
-%%% mode: auto-fill
-%%% TeX-master: "introCTX.mkiv"
-%%% coding: utf-8-unix
-%%% End:

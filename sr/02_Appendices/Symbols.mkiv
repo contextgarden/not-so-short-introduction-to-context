@@ -1,35 +1,34 @@
-%%% File:       Symbols.mkiv
-%%% Author:     Joaquín Ataz-López
-%%% Begun:      April 2020
-%%% Concluded:  July 2020
-%%% Contents:   Овај додатак је почео као део поглавља посвећеног писању
-%%%             изворног фајла. Почео сам да додајем команде које генеришу
-%%%             карактере који обично нису доступни на тастатури. Али
-%%%             ускоро сам схватио да A) нисам имао ниједну поуздану
-%%%             команду за генерисање карактера која ће радити у систему
-%%%             ConTeXt и Б) Чак и да је остала недовршена, вредело је
-%%%             направити листу команду које сам лично проверио у уверио се
-%%%             да раде. Али како је листа расла, поглавље у којем би се
-%%%             налазила постало би сувише велико. Зато сам одлучио да је
-%%%             поставим у додатак чија је предност да се лако проналази.
-%%%             У уводу сам оставио само команде за генерисање дијакритика
-%%%             и грчких слова, а остатак сам поставио у додатак. Све
-%%%             команде које су овде наведене сам лично проверио. Ипак сам
-%%%             свестан да је начин на који су каталогизоване отворен за
-%%%             дебату: то је проблем слабог познавања математике.
+%%% Фајл:     Symbols.mkiv
+%%% Аутор:    Joaquín Ataz-López
+%%% Започето: Април 2020
+%%% Завршено: Јул 2020
+%%% Садржај:  Овај додатак је почео као део поглавља посвећеног писању
+%%%	      изворног фајла. Почео сам да додајем команде које генеришу
+%%%	      карактере који обично нису доступни на тастатури. Али ускоро
+%%%	      сам схватио да A) нисам имао ниједну поуздану команду за
+%%%	      генерисање карактера која ће радити у систему ConTeXt и Б)
+%%%	      Чак и да је остала недовршена, вредело је направити листу
+%%%	      команду које сам лично проверио у уверио се да раде. Али како
+%%%	      је листа расла, поглавље у којем би се налазила постало би
+%%%	      сувише велико. Зато сам одлучио да је поставим у додатак чија
+%%%	      је предност да се лако проналази.  У уводу сам оставио само
+%%%	      команде за генерисање дијакритика и грчких слова, а остатак
+%%%	      сам поставио у додатак. Све команде које су овде наведене сам
+%%%	      лично проверио. Ипак сам свестан да је начин на који су
+%%%	      каталогизоване отворен за дебату: то је проблем слабог
+%%%	      познавања математике.
 %%%
-%%% Edited: Emacs + AuTeX - And at times vim + context-plugin
+%%% Уређивано са: Emacs + AuTeX - и повремено са vim + context-plugin
 %%%
 
-\environment introCTX_env.mkiv
+% \environment introCTX_env.mkiv
 
 \startcomponent Symbols.mkiv
 
 \startchapter
   [
     reference=app:symbols,
-    title={Команде за генерисање\\математичких и\\осталих симбола},
-    bookmark={Команде за генерисање математичких и осталих симбола},
+    title={Команде за генерисање математичких и осталих симбола},
   ]
 
 У табелама које следе можете пронаћи команде које генеришу различите
@@ -44,7 +43,7 @@
 осталих, груписао сам их према одређеним препознатљивим облицима
 (троуглови, квадрати, звездице, ромбови, стрелице, тачке). Остатак симбола,
 који се {\em вероватно} користе у математици, поређао сам азбучно (према
-команду која их генерише).
+команди која их генерише).
 
 Још важније, табеле нису потпуне. Сигуран сам да постоји још много симбола
 које \ConTeXt\ може да генерише, мада нисам пронашао никакав документ или
@@ -58,7 +57,7 @@
 {\smallbodyfont
 
 \subsubsubject{Симболи валута и за правну употребу}
-
+{\switchtobodyfont[modern]
 \starttabulate[|l|l|l|l|l|l|]
 \HL
 \NC\copyright\NC{\tt\backslash copyright}
@@ -79,11 +78,12 @@
 \NR
 \HL
 \stoptabulate
-
+}
 \page[preference]
 
 \subsubsubject{Троуглови, кругови, квадрати и остали облици}
 
+{\switchtobodyfont[modern]
 \starttabulate[|l|l|l|l|l|l|]
 \HL
 \NC\triangle\NC{\tt\backslash triangle}
@@ -111,11 +111,11 @@
 \NC\boxtimes\NC{\tt\backslash boxtimes}
 \NR
 \NC\blacktriangleright\NC{\tt\backslash blacktriangleright}
-\NC$\bigoplus$\NC{\tt\backslash bigoplus}
+\NC$\bigoplus$\NC{\tt\$\backslash bigoplus\$}
 \NC\ast\NC{\tt\backslash ast}
 \NR
 \NC\blacktriangle\NC{\tt\backslash blacktriangle}
-\NC$\bigotimes$\NC{\tt\backslash bigotimes}
+\NC$\bigotimes$\NC{\tt\$\backslash bigotimes\$}
 \NC\maltese\NC{\tt\backslash maltese}
 \NR
 \NC\triangleq\NC{\tt\backslash triangleq}
@@ -140,9 +140,10 @@
 \NR
 \HL
 \stoptabulate
-
+}
 \subsubsubject{Стрелице:}
 
+{\switchtobodyfont[modern]
 \starttabulate[|l|l|l|l|l|l|]
 \HL
 \NC\leftarrow\NC{\tt\backslash leftarrow, \backslash gets}
@@ -243,9 +244,11 @@
 \NR
 \HL
 \stoptabulate
+}
 
 \subsubsubject{Интерпункција}
 
+{\switchtobodyfont[modern]
 \starttabulate[|l|l|l|l|l|l|]
 \HL
 \NC\because\NC{\tt\backslash because}
@@ -270,9 +273,11 @@
 \NR
 \HL
 \stoptabulate
+}
 
 \subsubsubject{Симболи углавном за математичку употребу:}
 
+{\switchtobodyfont[modern]
 \starttabulate[|l|l|l|l|l|l|]
 \HL
 \NC\aleph\NC{\tt\backslash aleph}
@@ -288,16 +293,16 @@
 \NC\barwedge\NC{\tt\backslash barwedge}
 \NR
 \NC\between\NC{\tt\backslash between}
-\NC$\bigcap$\NC{\tt\backslash bigcap}
-\NC$\bigcup$\NC{\tt\backslash bigcup}
+\NC$\bigcap$\NC{\tt\$\backslash bigcap\$}
+\NC$\bigcup$\NC{\tt\$\backslash bigcup\$}
 \NR
-\NC$\bigsqcup$\NC{\tt\backslash bigsqcup}
-\NC$\biguplus$\NC{\tt\backslash biguplus}
-\NC$\bigvee$\NC{\tt\backslash bigvee}
+\NC$\bigsqcup$\NC{\tt\$\backslash bigsqcup\$}
+\NC$\biguplus$\NC{\tt\$\backslash biguplus\$}
+\NC$\bigvee$\NC{\tt\$\backslash bigvee\$}
 \NR
-\NC$\bigwedge$\NC{\tt\backslash bigwedge}
-\NC\bot\NC{\tt\backslash bot}
-\NC\bowtie\NC{\tt\backslash bowtie}
+\NC$\bigwedge$\NC{\tt\$\backslash bigwedge\$}
+\NC$\bot$\NC{\tt\$\backslash bot\$}
+\NC$\bowtie$\NC{\tt\$\backslash bowtie\$}
 \NR
 \NC\Bumpeq\NC{\tt\backslash Bumpeq}
 \NC$\cap$\NC{\tt\$\backslash cap\$}
@@ -307,7 +312,7 @@
 \NC\complement\NC{\tt\backslash complement}
 \NC\cong\NC{\tt\backslash cong}
 \NR
-\NC$\coprod$\NC{\tt\backslash coprod}
+\NC$\coprod$\NC{\tt\$\backslash coprod\$}
 \NC\cup\NC{\tt\backslash cup}
 \NC\Cup\NC{\tt\backslash Cup}
 \NR
@@ -367,9 +372,9 @@
 \NC\heartsuit\NC{\tt\backslash heartsuit}
 \NC\hslash\NC{\tt\backslash hslash}
 \NR
-\NC$\iiiint$\NC{\tt\backslash iiiint}
-\NC$\Im$\NC{\tt\backslash Im}
-\NC$\imath$\NC{\tt\backslash imath}
+\NC$\iiiint$\NC{\tt\$\backslash iiiint\$}
+\NC\Im\NC{\tt\backslash Im}
+\NC\imath\NC{\tt\backslash imath}
 \NR
 \NC$\in$\NC{\tt\$\backslash in\$}
 \NC\infty\NC{\tt\backslash infty}
@@ -377,7 +382,7 @@
 \NR
 \NC\intercal\NC{\tt\backslash intercal}
 \NC\jmath\NC{\tt\backslash jmath}
-\NC\land\NC{\tt\backslash land}
+\NC\land\NC{\tt\backslash land} 
 \NR
 \NC\leftthreetimes\NC{\tt\backslash leftthreetimes}
 \NC\leq\NC{\tt\backslash leq, \backslash le}
@@ -464,7 +469,7 @@
 \NC\precsim\NC{\tt\backslash precsim}
 \NR
 \NC\prime\NC{\tt\backslash prime}
-\NC$\prod$\NC{\tt\backslash prod}
+\NC$\prod$\NC{\tt\$\backslash prod\$}
 \NC\propto\NC{\tt\backslash propto}
 \NR
 \NC\Re\NC{\tt\backslash Re}
@@ -499,7 +504,7 @@
 \NC\succnsim\NC{\tt\backslash succnsim}
 \NC\succsim\NC{\tt\backslash succsim}
 \NR
-\NC$\sum$\NC{\tt\backslash sum}
+\NC$\sum$\NC{\tt\$\backslash sum\$}
 \NC$\supset$\NC{\tt\$\backslash supset\$}
 \NC\Supset\NC{\tt\backslash Supset}
 \NR
@@ -528,8 +533,11 @@
 \NR
 \HL
 \stoptabulate
+}
 
 \subsubsubject{Остали симболи}
+
+{\switchtobodyfont[modern]
 \starttabulate[|l|l|l|l|l|l|]
 \HL
 \NC\P\NC{\tt\backslash P}
@@ -547,7 +555,7 @@
 \HL
 \stoptabulate
 }
-
+}
 \stopchapter
 
 \stopcomponent

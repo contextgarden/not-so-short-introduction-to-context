@@ -1,16 +1,17 @@
 %%% vim:set filetype=context tw=72 : %%%
-%%% File:      introCTX.mkiv
-%%% Title:     A not so short introduction to ConTeXt Mark IV
-%%% Author:    Joaquín Ataz-López
-%%% Begun:     March 2020
-%%% Concluded: August 2020
+%%% Фајл:     introCTX.mkiv
+%%% Наслов:   Не баш кратак увод у ConTeXt Mark IV
+%%% Аутор:    Joaquín Ataz-López
+%%% Започето: Март 2020
+%%% Довршено: Август 2020
 %%%
-%%% Edited with: Emacs + AuTeX - And at times with vim + context-plugin
+%%% Уређивано са: Emacs + AuTeX - и повремено са vim + context-plugin
 %%%
+
 
 \environment introCTX_env.mkiv
 
-\startproduct introCTX.mkiv
+\startproduct introCTX_srb.mkiv
 
   % Датум када су унете последње измене:
   \def\RevisionDate{\date[d=2, m=1, y=2021]}
@@ -26,49 +27,49 @@
   % преамбули
   \placebookmarks[chapter, section, subsection, subsubsection]
 
-  \component 00_FrontMatter/a01_TitlePage.mkiv
-  \component 00_FrontMatter/a02_Preface.mkiv
+ \component 00_FrontMatter/a01_TitlePage.mkiv
+ \component 00_FrontMatter/a02_Preface.mkiv
 
-  % Први део: Шта је ConTeXt
-  \startpart
-    [title=Шта је \ConTeXt\ и како се користи]
+ % Први део: Шта је ConTeXt
+ \startpart
+   [title=Шта је \ConTeXt\ и како се користи]
 
-    % Почињемо подешавање заглавља и подножја за овај део
+   % Почињемо подешавање заглавља и подножја за овај део
 
-    \setupheadertexts
-      [{\tfx\getmarking[chapter]}]
+   \setupheadertexts
+     [{\tfx\getmarking[chapter]}]
 
-    \setupheadertexts
-      [{\tfx Поглавље \getmarking[chapternumber]}]
-      [{\tfx\hbox to 2em{\hss\pagenumber}}]
+   \setupheadertexts
+     [{\tfx Поглавље \getmarking[chapternumber]}]
+     [{\tfx\hbox to 2em{\hss\pagenumber}}]
 
-      % Бројач поглавља постављамо на нулу.
-      \setupheadnumber[chapter][0]
+     % Бројач поглавља постављамо на нулу.
+     \setupheadnumber[chapter][0]
 
-      % Chapters making up this part
-      \component 01_BodyMatter/b01_Introduction.mkiv
-      \component 01_BodyMatter/b02_FirstDoc.mkiv
-      \component 01_BodyMatter/b03_Commands.mkiv
-      \component 01_BodyMatter/b04_SourceFile.mkiv
+     % Поглавља која чине овај део
+     \component 01_BodyMatter/b01_Introduction.mkiv
+     \component 01_BodyMatter/b02_FirstDoc.mkiv
+     \component 01_BodyMatter/b03_Commands.mkiv
+     \component 01_BodyMatter/b04_SourceFile.mkiv
 
-  \stoppart
+ \stoppart
 
-  % Други део: Глобални аспекти
-  \startpart
-    [title=Глобални аспекти документа]
+ % Други део: Глобални аспекти
+ \startpart
+   [title=Глобални аспекти документа]
 
-    % Поново подешавам бројач поглавља, јер га је команда part вратила на
-    % нулу. Нисам открио како да наведем да би поглавља требало да
-    % наставе набрајање кроз комплетан документ.
-    \setupheadnumber[chapter][4]
+   % Поново подешавам бројач поглавља, јер га је команда part вратила на
+   % нулу. Нисам открио како да наведем да би поглавља требало да
+   % наставе набрајање кроз комплетан документ.
+   \setupheadnumber[chapter][4]
 
-    \component 01_BodyMatter/b05_Pages.mkiv
-    \component 01_BodyMatter/b06_Fonts.mkiv
-    \component 01_BodyMatter/b07_Structure.mkiv
-    \component 01_BodyMatter/b08_Lists.mkiv
-    \component 01_BodyMatter/b09_References.mkiv
+   \component 01_BodyMatter/b05_Pages.mkiv
+   \component 01_BodyMatter/b06_Fonts.mkiv
+   \component 01_BodyMatter/b07_Structure.mkiv
+   \component 01_BodyMatter/b08_Lists.mkiv
+   \component 01_BodyMatter/b09_References.mkiv
 
-  \stoppart
+ \stoppart
 
   % Трећи део: Специфична питања
   \startpart
@@ -104,11 +105,4 @@
      \component 02_Appendices/Macros.mkiv
 
  \stoppart
-
 \stopproduct
-
-%%% Local Variables:
-%%% mode: ConTeXt
-%%% mode: auto-fill
-%%% coding: utf-8-unix
-%%% End:

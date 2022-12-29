@@ -1,14 +1,14 @@
-%%% File:      Macros.mkiv
-%%% Author:    Joaquín Ataz-López
-%%% Begun:     August 2020
-%%% Concluded: August 2020
-%%% Contents:  Садржи листу ConTeXt (и TeX) команди
-%%%            које се помињу у документу. 
+%%% Фајл:     Macros.mkiv
+%%% Аутор:    Joaquín Ataz-López
+%%% Започето: Август 2020
+%%% Довршено: Август 2020
+%%% Садржај:  Садржи листу ConTeXt (и TeX) команди које се помињу у  
+%%%           документу. 
 %%%
-%%% Edited with: Emacs + AuTeX - And at times vim + context-plugin
+%%% Уређивано са: Emacs + AuTeX - и повремено са vim + context-plugin
 %%%
 
-\environment introCTX_env.mkiv
+% \environment introCTX_env.mkiv
 
 \startcomponent Macros.mkiv
 
@@ -26,9 +26,9 @@
   \startitemize
 
   \item \tex{stopНешто} која затвара конструкцију претходно отворену са
-  \tex{startНешто}, осим ако текст не каже нешто посебно у вези \tex{stop}
-  команде, или ако се третира на месту које се разликује од оног на којем
-  се налази одговарајућа \tex{start} команда.
+  \tex{startНешто}, осим ако текст не каже нешто посебно у вези са
+  \tex{stop} командом, или ако се третира на месту које се разликује од
+  оног на којем се налази одговарајућа \tex{start} команда.
 
   \item Команде намењене генерисању симбола, све су наведене у \in{додатку}[app:symbols].
     
@@ -40,8 +40,7 @@
 
   \blank\midaligned{* * *}\blank
   
-  \placemacro
-
+  \placemacro[method=ch]
 
 \stopcomponent
 

@@ -2,9 +2,10 @@ WORKSPACE=`pwd`
 
 declare -A languages=(["cs"]="cs" ["en"]="eng" ["es"]="esp" ["fr"]="fra" ["fr2"]="fra" ["ru"]="rus" ["sr"]="srb")
 
-declare -A languages=(["cs"]="cs" ["en"]="eng" ["es"]="esp"  ["ru"]="rus" ["sr"]="srb")
-
-
+export OSFONTDIR=$WORKSPACE/sr/fonts:$OSFONTDIR
+echo $OSFONTDIR
+mtxrun --generate              > /dev/null
+mtxrun --script font --reload  > /dev/null
 
 for lang in "${!languages[@]}"
 do
