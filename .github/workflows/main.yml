@@ -28,10 +28,10 @@ jobs:
           if [[ "$lang" == "fr" || "$lang" == "fr2" || "$lang" == "cs" ]]; then
           extension="tex"
           fi
-          echo "Screen version..."
-          $CTXPATH/context --mode=screen "introCTX_${tlang}.${extension}" --result="introCTX_${tlang}_s" > /dev/null
-          echo "Paper version..."
-          $CTXPATH/context               "introCTX_${tlang}.${extension}" --result="introCTX_${tlang}_p" > /dev/null
+          echo "Screen version... avec $CTXPATH/mtxrun --mode=screen"
+          $CTXPATH/mtxrun --autogenerate --script context --autopdf --mode=screen "introCTX_${tlang}.${extension}" --result="introCTX_${tlang}_s" > /dev/null
+          echo "Paper version... avec $CTXPATH/mtxrun"
+          $CTXPATH/mtxrun --autogenerate --script context --autopdf               "introCTX_${tlang}.${extension}" --result="introCTX_${tlang}_p" > /dev/null
           end=`date +%s`
           echo Execution time was `expr $end - $start` seconds.
           done
