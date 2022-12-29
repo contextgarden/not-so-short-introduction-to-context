@@ -7,25 +7,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: GitHub Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Download ConTeXt and Compile
         run: |
-          wget -O context.zip http://lmtx.pragma-ade.nl/install-lmtx/context-linux-64.zip 
+          wget -O context.zip http://lmtx.pragma-ade.nl/install-lmtx/context-linux-64.zip
           unzip context.zip -d context
           cd context/
           sh install.sh >/dev/null
           cd tex/texmf-linux-64/bin
           CTXPATH=`pwd`
-          declare -A languages=(["en"]="eng" ["es"]="esp" ["ru"]="rus" ["fr"]="fra" ["fr2"]="fra")
+          declare -A languages=(["cs"]="cs" ["en"]="eng" ["es"]="esp" ["fr"]="fra" ["fr2"]="fra" ["ru"]="rus" ["sr"]="srb")
           for lang in "${!languages[@]}"
           do
+          start=`date +%s`
           cd $GITHUB_WORKSPACE/$lang
-          echo "Compiling $lang version..."
+          echo "==================== Compiling '$lang' version ===================="
           tlang=${languages[$lang]}
           extension="mkiv"
-          if [[ $tlang == "fra" ]]; then
+          if [[ "$lang" == "fr" || "$lang" == "fr2" || "$lang" == "cs" ]]; then
           extension="tex"
           fi
-          $CTXPATH/context "introCTX_$tlang.$extension" >/dev/null
+          echo "Screen version..."
+          $CTXPATH/context --mode=screen "introCTX_${tlang}.${extension}" --result="introCTX_${tlang}_s" > /dev/null
+          echo "Paper version..."
+          $CTXPATH/context               "introCTX_${tlang}.${extension}" --result="introCTX_${tlang}_p" > /dev/null
+          end=`date +%s`
+          echo Execution time was `expr $end - $start` seconds.
           done

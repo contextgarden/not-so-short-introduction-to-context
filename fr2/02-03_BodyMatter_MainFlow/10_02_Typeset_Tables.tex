@@ -11,8 +11,8 @@
 
 \TocChap
 
-
 % **** Subsubsection fusionner
+
 \startsubsection[title={Fusionner des cellules}]
 Chaque cellule peut prendre les paramètres {\tt nc} et {\tt nr} auxquels nous affectons des valeurs entières qui indiquent le nombre de cellule fusionnées, respectivement horizontalement (cell) et verticalement (row). Voyez plutôt~:
 
@@ -45,6 +45,7 @@ Chaque cellule peut prendre les paramètres {\tt nc} et {\tt nr} auxquels nous a
 
 
 % **** Subsubsection configure
+
 \startsubsection[title={Configurer le tableau~: préciser les éléments à configurer}]
 
 La configuration d'un tableau se fait à plusieurs niveaux. Il est possible de configurer l'ensemble du tableau, une seule ou un ensemble de lignes, une seule ou un ensemble de colonnes, ou bien une seule ou un ensemble de cellules. Certaines options s'appliquent à l'ensemble du tableau, d'autre à des éléments particuliers. La commande clé est \tex{setuptable}.
@@ -64,7 +65,7 @@ Pour information {\tt option=stretch} fait en sorte que le tableau occupera l'en
 \bTR \bTH A \eTH \bTH B \eTH \bTH C \eTH \bTH D \eTH \eTR
 \bTR \bTD 1 \eTD \bTD 2 \eTD \bTD 3 \eTD \bTD 4 \eTD \eTR
 \bTR \bTD 5 \eTD \bTD 6 \eTD \bTD 7 \eTD \bTD 8 \eTD \eTR
-\eTABLE 
+\eTABLE
 \stopDemoHN}
 \placefigure [force,here,none]
   []
@@ -75,7 +76,7 @@ Pour information {\tt option=stretch} fait en sorte que le tableau occupera l'en
 \bTR \bTH A \eTH \bTH B \eTH \bTH C \eTH \bTH D \eTH \eTR
 \bTR \bTD 1 \eTD \bTD 2 \eTD \bTD 3 \eTD \bTD 4 \eTD \eTR
 \bTR \bTD 5 \eTD \bTD 6 \eTD \bTD 7 \eTD \bTD 8 \eTD \eTR
-\eTABLE 
+\eTABLE
 \stopDemoHN}
 
 Le paramétrage peut être passé directement à la commande de création d'environnement d'une ligne ou bien d'une cellule~:
@@ -86,31 +87,37 @@ Le paramétrage peut être passé directement à la commande de création d'envi
 {\startDemoHN
 \bTABLE
 \bTR \bTH A \eTH \bTH B \eTH \bTH C \eTH \bTH D \eTH \eTR
-\bTR[color=darkred] 
+\bTR[color=darkred]
      \bTD 1 \eTD \bTD 2 \eTD \bTD 3 \eTD \bTD 4 \eTD \eTR
-\bTR \bTD 5 \eTD \bTD[color=darkgreen] 6 
+\bTR \bTD 5 \eTD \bTD[color=darkgreen] 6
                         \eTD \bTD 7 \eTD \bTD 8 \eTD \eTR
-\eTABLE 
+\eTABLE
 \stopDemoHN}
 
 
 \tex{setuptable} permet aussi de configurer des lignes et des colonnes particulières
 
 \startitemize[n]
+
+%-----------------------
+
 \item le premier argument permet justement d'indiquer si l'on souhaite configurer des lignes {\tt r} (row) ou des colonnes {\tt c} (column)
 
 \placefigure [force,here,none]
   []
   {}
 {\startDemoI
-\setupTABLE[row]   [n][option1,option2,...] 
+\setupTABLE[row]   [n][option1,option2,...]
 \setupTABLE[column][n][option1,option2,...]
 ou
-\setupTABLE[r]     [n][option1,option2,...] 
+\setupTABLE[r]     [n][option1,option2,...]
 \setupTABLE[c]     [n][option1,option2,...]
 \stopDemoI}
 
+%-----------------------
+
 \item Le second argument peut prendre plusieurs valeurs.
+
 \startitemize
 \item {\tt \bf n }~: Un entier indiquant le numéro de la ligne ou de la colonne que l'on souhaite modifier, ou bien une liste d'entiers séparés par une virgule si l'on souhaite en modifier plusieurs~: {\tt [3]} modifie la troisième ligne / colonne et {\tt [2,7,8]} affecte les deuxième, septième et huitième.
 
@@ -118,19 +125,21 @@ ou
 \item {\tt \bf last}~: modifie la dernière ligne.
 \item {\tt \bf odd}~: modifie toutes les lignes impaires.
 \item {\tt \bf even}~: modifie toutes les lignes paires.
-\item {\tt \bf each}~: modifie toutes les lignes. 
+\item {\tt \bf each}~: modifie toutes les lignes.
 \stopitemize
 
-Et pour finir \tex{setuptable} permet aussi de configurer des cellules particulières
+%-----------------------
 
+\item Et pour finir \tex{setuptable} permet aussi de configurer des cellules particulières
 
 \placefigure [force,here,none]
   []
   {}
 {\startDemoI
-\setupTABLE[numéro de colonne][numéro de ligne][option1,option2] 
+\setupTABLE[numéro de colonne][numéro de ligne][option1,option2]
 \stopDemoI}
 
+\stopitemize
 
 \placefigure [force,here,none]
   []
@@ -144,7 +153,7 @@ Et pour finir \tex{setuptable} permet aussi de configurer des cellules particuli
 \bTR \bTD 2.1 \eTD \bTD 2.2 \eTD \bTD 2.3 \eTD \bTD 2.4 \eTD \eTR
 \bTR \bTD 3.1 \eTD \bTD 3.2 \eTD \bTD 3.3 \eTD \bTD 3.4 \eTD \eTR
 \bTR \bTD 4.1 \eTD \bTD 4.2 \eTD \bTD 4.3 \eTD \bTD 4.4 \eTD \eTR
-\eTABLE 
+\eTABLE
 \stopDemoHN}
 
 \stopsubsubsection
@@ -157,17 +166,17 @@ Les possibilités de configuration sont très nombreuses et sont assez proche de
 
 \startitemize[n]
 
+%-----------------------
+
 \item{\tt\bf align} alignement du texte. Les 4 options peuvent être combinées en les entourant d'accolades et en les séparant par des virgules.
 
 \startitemize[packed]
-
 \item{\tt\bf flushleft} pour aligner le texte à gauche
 \item{\tt\bf middle} pour aligner le texte au centre
 \item{\tt\bf flushright} pour aligner à droite
 \item{\tt\bf inner,outer} pour aligner vers la marge interne ou externe.
 \item{\tt\bf lohi,high,low} permet de centrer verticalement le contenu de la cellule.
 \stopitemize
-
 
 \placefigure [force,here,none]
   []
@@ -180,15 +189,16 @@ Les possibilités de configuration sont très nombreuses et sont assez proche de
 \bTR \bTD Texte 2.1 \eTD \bTD Texte     \eTD \bTD Texte 2.3 \eTD \bTD Texte \eTD \eTR
 \bTR \bTD Texte 3.1 \eTD \bTD Texte 3.2 \eTD \bTD Texte 3.3 \eTD \bTD Texte \eTD \eTR
 \bTR \bTD Texte 4.1 \eTD \bTD Texte 4.2 \eTD \bTD Texte 4.3 \eTD \bTD Texte \eTD \eTR
-\eTABLE 
+\eTABLE
 \stopDemoHW}
 
-\stophead
+%-----------------------
 
 \item{\bf Hauteur et largeur}
+
 \startitemize[packed]
 \item{\tt\bf width=dimension}  règle la largeur des colonnes.
-\item{\tt\bf height=dimension} règle la hauteur des lignes. 
+\item{\tt\bf height=dimension} règle la hauteur des lignes.
 \stopitemize
 
 \placefigure [force,here,none]
@@ -203,10 +213,13 @@ Les possibilités de configuration sont très nombreuses et sont assez proche de
 \bTR \bTD Texte 2.1 \eTD \bTD Texte 2.2 \eTD \bTD Texte 2.3 \eTD \bTD Texte 2.4 \eTD \eTR
 \bTR \bTD Texte 3.1 \eTD \bTD Texte 3.2 \eTD \bTD Texte 3.3 \eTD \bTD Texte 3.4 \eTD \eTR
 \bTR \bTD Texte 4.1 \eTD \bTD Texte 4.2 \eTD \bTD Texte 4.3 \eTD \bTD Texte 4.4 \eTD \eTR
-\eTABLE 
+\eTABLE
 \stopDemoHW}
 
+%-----------------------
+
 \item{\bf Filets (ou traits)} Il est possible de sélectionner quelle partie du cadre d'une cellule, d'une ligne ou d'une colonne nous souhaitons afficher.
+
 \startitemize[packed]
 \item{\tt\bf frame=on/off}~: par défaut frame vaut on et donc un cadre entoure la cellule.
 \item{\tt\bf topframe=on/off}~: dessine ou non le trait du haut de la cellule.
@@ -230,11 +243,12 @@ Les possibilités de configuration sont très nombreuses et sont assez proche de
 \bTR \bTD Texte 2.1 \eTD \bTD Texte 2.2 \eTD \bTD Texte 2.3 \eTD \bTD Texte 2.4 \eTD \eTR
 \bTR \bTD Texte 3.1 \eTD \bTD Texte 3.2 \eTD \bTD Texte 3.3 \eTD \bTD Texte 3.4 \eTD \eTR
 \bTR \bTD Texte 4.1 \eTD \bTD Texte 4.2 \eTD \bTD Texte 4.3 \eTD \bTD Texte 4.4 \eTD \eTR
-\eTABLE 
+\eTABLE
 \stopDemoHW}
 
+%-----------------------
 
-\item{\bf Style et couleurs}, les options de style et de couleur sont~: 
+\item{\bf Style et couleurs}, les options de style et de couleur sont~:
 
 \startitemize[packed]
 \item{\tt\bf color=nom de la couleur}~: colorie le texte et le cadre~;
@@ -243,7 +257,6 @@ Les possibilités de configuration sont très nombreuses et sont assez proche de
 \item{\tt\bf framecolor=nom de la couleur}~: la couleur des filets.
 \item{\tt\bf style=commande de style}~: la couleur des filets.
 \stopitemize
-
 
 \placefigure [force,here,none]
   []
@@ -259,8 +272,10 @@ Les possibilités de configuration sont très nombreuses et sont assez proche de
 \bTR \bTD Texte 2.1 \eTD \bTD Texte 2.2 \eTD \bTD Texte 2.3 \eTD \bTD Texte 2.4 \eTD \eTR
 \bTR \bTD Texte 3.1 \eTD \bTD Texte 3.2 \eTD \bTD Texte 3.3 \eTD \bTD Texte 3.4 \eTD \eTR
 \bTR \bTD Texte 4.1 \eTD \bTD Texte 4.2 \eTD \bTD Texte 4.3 \eTD \bTD Texte 4.4 \eTD \eTR
-\eTABLE 
+\eTABLE
 \stopDemoHW}
+
+%-----------------------
 
 \item{\bf Distance et marge}
 
@@ -284,11 +299,12 @@ Les possibilités de configuration sont très nombreuses et sont assez proche de
 \bTR \bTD Texte 2.1 \eTD \bTD Texte 2.2 \eTD \bTD Texte 2.3 \eTD \bTD Texte 2.4 \eTD \eTR
 \bTR \bTD Texte 3.1 \eTD \bTD Texte 3.2 \eTD \bTD Texte 3.3 \eTD \bTD Texte 3.4 \eTD \eTR
 \bTR \bTD Texte 4.1 \eTD \bTD Texte 4.2 \eTD \bTD Texte 4.3 \eTD \bTD Texte 4.4 \eTD \eTR
-\eTABLE} 
+\eTABLE}
 \stopDemoHW}
 
+%-----------------------
+
 \item{\tt\bf loffset,boffset,roffset,toffset} indique la marge à gauche, bas, droite, haut des cellules de la sélection.
-\stopitemize
 
 \placefigure [force,here,none]
   []
@@ -305,9 +321,11 @@ Les possibilités de configuration sont très nombreuses et sont assez proche de
 \eTABLE
 \stopDemoHW}
 
+\stopitemize
+
 \stopsubsubsection
 
-% **** Subsection Exemple
+%**** Subsection Exemple
 
 \startsubsection[title={Quelques exemples}]
 
@@ -320,11 +338,11 @@ Il est possible de ranger tous les éléments de configuration dans un \MyKey{se
 \startsetups SetupMaTable
 \setupTABLE [frame=off,framecolor=darkred,option=stretch,
              offset=1mm,align=flushright,rulethickness=2pt]
-\setupTABLE [r] [first] 
+\setupTABLE [r] [first]
             [foregroundcolor=darkred,style={\ss\bf},
              bottomframe=on,rulethickness=1pt]
 \setupTABLE [1] [1] [bottomframe=off]
-\setupTABLE [c] [first] 
+\setupTABLE [c] [first]
             [style={\ss\bf}, loffset=5mm, width=3cm,align=flushleft]
 \setupTABLE [r] [last]
             [bottomframe=on]
@@ -332,7 +350,7 @@ Il est possible de ranger tous les éléments de configuration dans un \MyKey{se
 
 \bTABLE[option=stretch]
 \setups{SetupMaTable}
-\bTR \bTD \eTD 
+\bTR \bTD \eTD
 \bTD France         \eTD \bTD Royaume-Uni    \eTD
 \bTD Suède          \eTD \bTD Allemagne      \eTD
 \eTR
