@@ -192,7 +192,7 @@ La syntaxe de cette commande est la suivante :
 
 \placefigure [force,here,none] [] {}{
 \startDemoI
-\placefigure[Options] [Etiquette] {Titre} {CommandeInsererImage}
+\placefigure[Options] [Etiquette] {Titre} {CommandeInsérerImage}
 \stopDemoI}
 
 Elle hérite de la commande \tex{placefloat}.
@@ -205,11 +205,11 @@ The various arguments have the following meanings:
 
 \item {\em Options} sont un ensemble d'indications qui font généralement référence à l'endroit où placer l'image. Comme ces options sont les mêmes dans cette commande et dans d'autres, je les expliquerai ensemble plus tard (dans \in{section}[sec:placingobjects]). Pour l'instant, je vais utiliser l'option {\tt here} à titre d'exemple. Elle indique à \ConTeXt\ que, dans la mesure du possible, il doit placer l'image exactement à l'endroit du document où se trouve la commande qui l'insère.
 
-\item {\em Etiquette} est une chaîne de texte permettant de se référer en interne à cet objet afin de pouvoir y faire référence (voir \in{section}[sec:references]).
+\item {\em Étiquette} est une chaîne de texte permettant de se référer en interne à cet objet afin de pouvoir y faire référence (voir \in{section}[sec:references]).
 
 \item {\em Titre} est le texte du titre à ajouter à l'image.
 
-\item {\em CommandeInsererImage} est la commande qui insère l'image (on peut aussi juste mettre... du texte.)
+\item {\em CommandeInsérerImage} est la commande qui insère l'image (on peut aussi juste mettre... du texte.)
 
 \stopitemize
 
@@ -516,7 +516,7 @@ Le format de \tex{placetable} est similaire à ce que nous avons vu pour
 
 \placefigure [force,here,none] [] {}{
 \startDemoI
-\placetable[Options] [Etiquette] {Titre} {CommandeInsererImage}
+\placetable[Options] [Etiquette] {Titre} {CommandeInsérerImage}
 \stopDemoI}
 
 Je renvoie aux sections \in{}[sec:placingobjects] et \in{}[sec:confcaptions] concernant les options relatives au placement des tables et à la configuration du titre. Parmi les options, il y en a une, cependant, qui semble être conçue exclusivement pour les tableaux. Il s'agit de l'option \MyKey{split} qui, lorsqu'elle est définie, autorise \ConTeXt\ à étendre le tableau sur deux pages ou plus, auquel cas le tableau ne peut plus être un objet flottant simple.
