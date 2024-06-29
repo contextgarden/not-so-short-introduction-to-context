@@ -15,7 +15,9 @@ jobs:
           wget -O context.zip http://lmtx.pragma-ade.nl/install-lmtx/context-linux-64.zip
           unzip context.zip -d context
           cd context/
+          echo "==================== sh install.sh ===================="
           sh install.sh >/dev/null
+          echo "==================== sh install.sh done ===================="
           cd tex/texmf-linux-64/bin
           CTXPATH=`pwd`
           export PATH=$CTXPATH:$PATH
