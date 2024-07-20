@@ -11,6 +11,8 @@ jobs:
 
       - name: Download ConTeXt and Compile
         run: |
+          sudo apt update
+          sudo apt upgrade
           sudo apt install context
           WORKSPACE=`pwd`
           wget -O context.zip http://lmtx.pragma-ade.nl/install-lmtx/context-linux-64.zip
