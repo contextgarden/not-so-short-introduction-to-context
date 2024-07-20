@@ -17,6 +17,7 @@ jobs:
           cd context/
           echo "==================== sh install.sh ===================="
           sh install.sh >/dev/null
+          echo "should be OK here"
           echo "==================== sh install.sh done ===================="
           cd tex/texmf-linux-64/bin
           CTXPATH=`pwd`
