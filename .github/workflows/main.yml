@@ -22,7 +22,8 @@ jobs:
           cd tex/texmf-linux-64/bin
           CTXPATH=`pwd`
           export PATH=$CTXPATH:$PATH
-          declare -A languages=(["cs"]="cs" ["en"]="eng" ["es"]="esp" ["fr"]="fra" ["fr2"]="fra" ["ru"]="rus" ["sr"]="srb")
+          : # declare -A languages=(["cs"]="cs" ["en"]="eng" ["es"]="esp" ["fr"]="fra" ["fr2"]="fra" ["ru"]="rus" ["sr"]="srb")*
+          declare -A languages=(["cs"]="cs" ["en"]="eng" ["es"]="esp" ["ru"]="rus" ["sr"]="srb")
           export OSFONTDIR=$WORKSPACE/sr/fonts:$OSFONTDIR
           echo "OSFONTDIR : $OSFONTDIR"
           mtxrun --generate              > /dev/null
