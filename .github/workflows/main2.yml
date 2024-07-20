@@ -1,0 +1,39 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: GitHub Checkout
+        uses: actions/checkout@v4
+
+      - name: Download ConTeXt and Compile
+        run: |
+          sudo apt update
+          sudo apt upgrade
+          sudo apt install context
+          : # declare -A languages=(["cs"]="cs" ["en"]="eng" ["es"]="esp" ["fr"]="fra" ["fr2"]="fra" ["ru"]="rus" ["sr"]="srb")*
+          declare -A languages=(["cs"]="cs" ["en"]="eng" ["es"]="esp" ["ru"]="rus" ["sr"]="srb")
+          export OSFONTDIR=$WORKSPACE/sr/fonts:$OSFONTDIR
+          echo "OSFONTDIR : $OSFONTDIR"
+          mtxrun --generate              > /dev/null
+          mtxrun --script font --reload  > /dev/null
+          for lang in "${!languages[@]}"
+          do
+          start=`date +%s`
+          cd $GITHUB_WORKSPACE/$lang
+          echo "==================== Compiling '$lang' version ===================="
+          tlang=${languages[$lang]}
+          extension="mkiv"
+          if [[ "$lang" == "fr" || "$lang" == "fr2" || "$lang" == "cs" ]]; then
+          extension="tex"
+          fi
+          echo "Screen version... avec mtxrun --mode=screen"
+          mtxrun --autogenerate --script context --autopdf --mode=screen "introCTX_${tlang}.${extension}" --result="introCTX_${tlang}_s" > /dev/null
+          echo "Paper version... avec mtxrun"
+          mtxrun --autogenerate --script context --autopdf               "introCTX_${tlang}.${extension}" --result="introCTX_${tlang}_p" > /dev/null
+          end=`date +%s`
+          echo Execution time was `expr $end - $start` seconds.
+          done
