@@ -16,7 +16,7 @@ jobs:
           unzip context.zip -d context
           cd context/
           echo "==================== sh install.sh ===================="
-          sh install.sh >/dev/null
+          sh install.sh
           echo "should be OK here"
           echo "==================== sh install.sh done ===================="
           cd tex/texmf-linux-64/bin
