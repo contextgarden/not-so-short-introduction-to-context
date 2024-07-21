@@ -14,7 +14,7 @@ jobs:
           sudo apt update
           sudo apt upgrade
           sudo apt install context
-          declare -A languages=(["cs"]="cs" ["en"]="eng" ["es"]="esp" ["fr"]="fra" ["fr2"]="fra" ["ru"]="rus" ["sr"]="srb")*
+          declare -A languages=(["cs"]="cs" ["en"]="eng" ["es"]="esp" ["fr"]="fra" ["fr2"]="fra" ["ru"]="rus" ["sr"]="srb")
           export OSFONTDIR=$WORKSPACE/sr/fonts:$OSFONTDIR
           echo "OSFONTDIR : $OSFONTDIR"
           mtxrun --generate              > /dev/null
